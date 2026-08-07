@@ -8,12 +8,12 @@
       "q": "A team claims federated learning makes their system private because raw data never leaves the client. The gap in that argument is",
       "q_vi": "Một nhóm khẳng định học liên kết làm hệ của họ riêng tư vì dữ liệu thô không rời máy khách. Lỗ hổng trong lập luận đó là",
       "choices": [
-        "Gradients are a function of the data and can be inverted to reconstruct samples",
-        "Federated learning always sends raw data in the first round",
         "The server can read the client's disk directly",
-        "Model weights are not transmitted at all"
+        "Model weights are not transmitted at all",
+        "Federated learning always sends raw data in the first round",
+        "Gradients are a function of the data and can be inverted to reconstruct samples"
       ],
-      "answer": 0,
+      "answer": 3,
       "why": "Not moving the data is a necessary step, not a privacy guarantee. Without secure aggregation or a differential privacy budget, the uploaded update still leaks.",
       "why_vi": "Không chuyển dữ liệu đi mới là điều kiện cần, chưa phải bảo đảm riêng tư. Không có tổng hợp an toàn hay ngân sách riêng tư vi phân thì bản cập nhật tải lên vẫn rò rỉ.",
       "level": 3
@@ -24,9 +24,9 @@
       "q_vi": "Hiện tượng trôi mô hình cục bộ với dữ liệu không đồng phân bố biểu hiện thành",
       "choices": [
         "Local models diverging from each other, so their average is worse than any of them on its own task",
+        "Gradients becoming exactly zero",
         "The server running out of memory",
-        "Clients refusing to join the round",
-        "Gradients becoming exactly zero"
+        "Clients refusing to join the round"
       ],
       "answer": 0,
       "why": "Each client optimises its own skewed objective. Averaging points that moved in different directions lands somewhere useful for nobody, which is why proximal terms and control variates exist.",
@@ -53,12 +53,12 @@
       "q": "Reporting an accuracy figure for a differentially private model without stating epsilon is a problem because",
       "q_vi": "Báo độ chính xác của mô hình có riêng tư vi phân mà không nêu epsilon là vấn đề vì",
       "choices": [
-        "Accuracy can be raised arbitrarily by weakening the privacy guarantee",
-        "Epsilon determines the model architecture",
         "Epsilon is needed to compute the loss function",
-        "Without epsilon the model cannot be trained"
+        "Accuracy can be raised arbitrarily by weakening the privacy guarantee",
+        "Without epsilon the model cannot be trained",
+        "Epsilon determines the model architecture"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "Privacy and utility sit on one curve. A number without its privacy budget is a point without an axis, and a reviewer cannot compare it with anything.",
       "why_vi": "Riêng tư và độ hữu dụng nằm trên cùng một đường cong. Con số không kèm ngân sách riêng tư là một điểm không có trục, phản biện không so được với bất cứ thứ gì.",
       "level": 3
@@ -68,12 +68,12 @@
       "q": "In most federated deployments the real bottleneck is",
       "q_vi": "Trong phần lớn triển khai liên kết, nút thắt thật sự là",
       "choices": [
-        "The number of communication rounds and the bytes each one costs",
         "The floating point speed of the server",
-        "The size of the test set",
-        "The choice of activation function"
+        "The choice of activation function",
+        "The number of communication rounds and the bytes each one costs",
+        "The size of the test set"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "Clients are often on slow, intermittent uplinks. This is why quantisation, sparsification and doing more local epochs per round all matter more than raw compute.",
       "why_vi": "Máy khách thường nằm trên đường lên chậm và chập chờn. Vì vậy lượng tử hoá, thưa hoá và tăng số epoch cục bộ mỗi vòng đều quan trọng hơn tốc độ tính toán thuần.",
       "level": 2
@@ -84,8 +84,8 @@
       "q_vi": "Tổng hợp an toàn cho phép máy chủ biết được",
       "choices": [
         "Only the sum of the client updates, not any individual update",
-        "Every individual update in plaintext",
         "The raw training data of each client",
+        "Every individual update in plaintext",
         "Nothing at all about the updates"
       ],
       "answer": 0,
@@ -100,8 +100,8 @@
       "choices": [
         "The whole round to wait, so the slowest client sets the pace",
         "The global model to diverge immediately",
-        "A privacy leak",
-        "Duplicate updates on the server"
+        "Duplicate updates on the server",
+        "A privacy leak"
       ],
       "answer": 0,
       "why": "This is why practical systems either drop late clients or move to asynchronous aggregation, both of which introduce their own bias.",
@@ -113,12 +113,12 @@
       "q": "A surrogate model is worth building when",
       "q_vi": "Xây mô hình thay thế là đáng làm khi",
       "choices": [
-        "Each evaluation of the true objective is so expensive that the optimiser cannot afford many of them",
         "The objective function is already cheap and convex",
-        "The dataset is fully labelled",
-        "The problem has only one variable"
+        "Each evaluation of the true objective is so expensive that the optimiser cannot afford many of them",
+        "The problem has only one variable",
+        "The dataset is fully labelled"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "The surrogate trades a little accuracy for orders of magnitude in speed. If the true objective is cheap, the approximation only adds error for nothing.",
       "why_vi": "Mô hình thay thế đánh đổi một chút độ chính xác lấy tốc độ nhanh hơn nhiều bậc. Nếu hàm mục tiêu vốn đã rẻ thì xấp xỉ chỉ thêm sai số mà chẳng được gì.",
       "level": 2
@@ -128,12 +128,12 @@
       "q": "Personalised federated learning exists because",
       "q_vi": "Học liên kết cá nhân hoá tồn tại vì",
       "choices": [
-        "One global model can be worse for each client than a model adapted to that client's distribution",
-        "Clients cannot run inference locally",
+        "Global models are always faster to train",
         "The server needs to reduce its storage",
-        "Global models are always faster to train"
+        "One global model can be worse for each client than a model adapted to that client's distribution",
+        "Clients cannot run inference locally"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "When distributions differ enough, the average model is a compromise nobody wanted. Personalisation keeps the shared knowledge but restores the local fit.",
       "why_vi": "Khi các phân bố khác nhau đủ nhiều, mô hình trung bình là một thoả hiệp không ai mong. Cá nhân hoá giữ phần tri thức chung nhưng trả lại độ khớp cục bộ.",
       "level": 3
@@ -142,10 +142,1365 @@
       "id": "qf-10",
       "q": "A malicious client submitting crafted updates to bend the global model is performing",
       "q_vi": "Máy khách xấu gửi cập nhật đã dàn dựng để bẻ mô hình toàn cục đang thực hiện",
-      "choices": ["Model poisoning", "Gradient inversion", "Secure aggregation", "Split learning"],
-      "answer": 0,
+      "choices": [
+        "Secure aggregation",
+        "Model poisoning",
+        "Gradient inversion",
+        "Split learning"
+      ],
+      "answer": 1,
       "why": "Gradient inversion is the opposite direction of attack: the server attacking the client's privacy rather than the client attacking the model.",
       "why_vi": "Đảo ngược gradient là hướng tấn công ngược lại: máy chủ tấn công quyền riêng tư của máy khách, chứ không phải máy khách tấn công mô hình.",
+      "level": 2
+    },
+    {
+      "id": "qf-11",
+      "q": "FedProx adds a proximal term to the local objective in order to",
+      "q_vi": "FedProx thêm số hạng gần vào hàm mục tiêu cục bộ nhằm",
+      "choices": [
+        "Encrypt the update before it is uploaded",
+        "Guarantee that no client can be identified from its update",
+        "Reduce the number of bytes each client sends",
+        "Penalise how far a client's weights move away from the global model during local training"
+      ],
+      "answer": 3,
+      "why": "The proximal term is a regulariser on distance to the global point, so it limits drift. It is an optimisation fix and says nothing about confidentiality or bandwidth.",
+      "why_vi": "Số hạng gần là phần chính quy hoá theo khoảng cách tới điểm toàn cục, nên nó hạn chế độ trôi. Đây là cách sửa về mặt tối ưu, không nói gì về bảo mật hay băng thông.",
+      "level": 2
+    },
+    {
+      "id": "qf-12",
+      "q": "SCAFFOLD differs from FedProx mainly because it",
+      "q_vi": "SCAFFOLD khác FedProx chủ yếu ở chỗ nó",
+      "choices": [
+        "Estimates and subtracts the direction bias of each client instead of only shrinking the step",
+        "Requires every client to hold identically distributed data",
+        "Runs entirely without a server",
+        "Compresses updates before upload"
+      ],
+      "answer": 0,
+      "why": "FedProx damps movement in every direction equally. SCAFFOLD keeps control variates that identify which direction a client is biased in and cancels exactly that, at the price of extra state and uplink.",
+      "why_vi": "FedProx hãm chuyển động đều theo mọi hướng. SCAFFOLD giữ biến kiểm soát để nhận ra máy khách đang lệch theo hướng nào rồi triệt tiêu đúng hướng đó, đổi lại phải lưu thêm trạng thái và tốn thêm đường lên.",
+      "level": 3
+    },
+    {
+      "id": "qf-13",
+      "q": "Clients in a cohort run very different numbers of local steps because their datasets differ in size. Plain FedAvg on these updates leads to",
+      "q_vi": "Các máy khách trong một nhóm chạy số bước cục bộ rất khác nhau vì kích thước dữ liệu khác nhau. FedAvg thuần trên các cập nhật này dẫn tới",
+      "choices": [
+        "Convergence to the optimum of a different, implicitly reweighted objective",
+        "Gradients that become exactly zero after a few rounds",
+        "Exactly the same solution as centralised training",
+        "An immediate cryptographic failure of the aggregation"
+      ],
+      "answer": 0,
+      "why": "Clients that take more steps move further, so their objective gets more weight than the sample counts intended. FedNova normalises by the number of local steps precisely to restore the intended objective.",
+      "why_vi": "Máy khách chạy nhiều bước hơn sẽ đi xa hơn, nên hàm mục tiêu của nó được cân nặng hơn mức mà số mẫu quy định. FedNova chuẩn hoá theo số bước cục bộ chính là để trả lại đúng hàm mục tiêu ban đầu.",
+      "level": 3
+    },
+    {
+      "id": "qf-14",
+      "q": "In the FedOpt family, the averaged client delta is treated as",
+      "q_vi": "Trong họ thuật toán FedOpt, phần chênh lệch trung bình từ các máy khách được coi là",
+      "choices": [
+        "A validation signal for early stopping",
+        "A replacement for the client learning rate",
+        "A ciphertext to be decrypted",
+        "A pseudo gradient fed to a server side optimiser such as Adam"
+      ],
+      "answer": 3,
+      "why": "The server treats the aggregate as if it were a gradient step and can then apply momentum or adaptivity across rounds. It is not a security object and it does not replace local optimisation.",
+      "why_vi": "Máy chủ coi kết quả tổng hợp như một bước gradient, nhờ đó áp được quán tính hay tính thích nghi qua các vòng. Nó không phải đối tượng bảo mật và không thay thế bước tối ưu cục bộ.",
+      "level": 2
+    },
+    {
+      "id": "qf-15",
+      "q": "A team switches the server step from plain addition to FedAdam and accuracy on a heavily skewed split improves. The most likely reason is",
+      "q_vi": "Một nhóm đổi bước cập nhật ở máy chủ từ phép cộng thuần sang FedAdam và độ chính xác trên phần chia lệch mạnh tăng lên. Lý do khả dĩ nhất là",
+      "choices": [
+        "Adam removes the need for local training entirely",
+        "Per coordinate adaptive scaling handles the very uneven update magnitudes that heterogeneity produces",
+        "Adam encrypts the aggregated update",
+        "Adam reduces the number of clients needed per round to one"
+      ],
+      "answer": 1,
+      "why": "Skew makes some coordinates receive consistent signal and others receive noisy, sporadic signal. Adaptive per coordinate steps rescale these, which plain averaging cannot do.",
+      "why_vi": "Sự lệch phân bố khiến một số toạ độ nhận tín hiệu nhất quán còn số khác nhận tín hiệu ồn và thất thường. Bước thích nghi theo từng toạ độ co giãn lại các mức này, còn phép trung bình thuần thì không làm được.",
+      "level": 3
+    },
+    {
+      "id": "qf-16",
+      "q": "Raising local epochs from one to ten typically",
+      "q_vi": "Tăng số epoch cục bộ từ một lên mười thường",
+      "choices": [
+        "Increases the number of rounds needed",
+        "Cuts both the number of rounds and the amount of drift",
+        "Has no effect on the final model",
+        "Cuts the number of rounds needed but increases client drift under non identical data"
+      ],
+      "answer": 3,
+      "why": "More local work means more progress per round, which is why it saves communication. It also means each client travels further toward its own optimum, so the averages get harder to combine.",
+      "why_vi": "Làm nhiều hơn ở cục bộ nghĩa là mỗi vòng tiến xa hơn, nhờ đó tiết kiệm truyền thông. Nhưng cũng nghĩa là mỗi máy khách đi xa hơn về phía tối ưu riêng, khiến việc gộp trung bình khó hơn.",
+      "level": 2
+    },
+    {
+      "id": "qf-17",
+      "q": "Clustered federated learning is the right response when",
+      "q_vi": "Học liên kết theo cụm là cách phản ứng đúng khi",
+      "choices": [
+        "The server has too little storage",
+        "Clients fall into a few distinct distribution groups that no single model serves well",
+        "The uplink is faster than the downlink",
+        "All clients share the same distribution but differ in speed"
+      ],
+      "answer": 1,
+      "why": "Clustering assumes structure in the heterogeneity, several modes rather than a continuum. If distributions are identical the clusters carry no information and you have just split your data for nothing.",
+      "why_vi": "Cách gom cụm giả định tính không đồng nhất có cấu trúc, tức có vài kiểu rõ rệt chứ không phải một dải liên tục. Nếu các phân bố giống nhau thì cụm không mang thông tin gì, bạn chỉ chia nhỏ dữ liệu một cách vô ích.",
+      "level": 2
+    },
+    {
+      "id": "qf-18",
+      "q": "Hierarchical federated learning inserts edge aggregators mainly to",
+      "q_vi": "Học liên kết phân cấp chèn thêm bộ tổng hợp ở biên chủ yếu để",
+      "choices": [
+        "Absorb most aggregation locally so fewer rounds must cross the expensive backhaul",
+        "Give the cloud server access to raw client data",
+        "Make every client train on the same data",
+        "Remove the need for any aggregation rule"
+      ],
+      "answer": 0,
+      "why": "The edge tier does many cheap local rounds and forwards one summary upward. It changes where communication is spent, not what the clients hold.",
+      "why_vi": "Tầng biên chạy nhiều vòng cục bộ rẻ tiền rồi chỉ chuyển lên một bản tóm tắt. Nó thay đổi chỗ tiêu tốn truyền thông, chứ không thay đổi dữ liệu mà máy khách nắm.",
+      "level": 2
+    },
+    {
+      "id": "qf-19",
+      "q": "Removing the central server and using peer to peer averaging changes the threat model because",
+      "q_vi": "Bỏ máy chủ trung tâm và dùng trung bình ngang hàng làm thay đổi mô hình đe doạ vì",
+      "choices": [
+        "Attacks become mathematically impossible",
+        "Clients no longer need to compute gradients",
+        "No party can observe any model parameters at all",
+        "There is no single point that sees every update, but each peer now sees its neighbours' models directly"
+      ],
+      "answer": 3,
+      "why": "Decentralisation removes the honest but curious server, yet it hands neighbours a direct view of each other. You have redistributed the exposure, not eliminated it.",
+      "why_vi": "Phi tập trung loại bỏ máy chủ trung thực nhưng tò mò, đổi lại trao cho các hàng xóm cái nhìn trực tiếp vào nhau. Bạn đã phân bổ lại mức phơi nhiễm chứ không xoá bỏ nó.",
+      "level": 3
+    },
+    {
+      "id": "qf-20",
+      "q": "In federated distillation, what crosses the network is",
+      "q_vi": "Trong chưng cất liên kết, thứ đi qua mạng là",
+      "choices": [
+        "The full optimiser state of every client",
+        "Encrypted copies of the client datasets",
+        "Soft predictions on a shared reference set rather than model weights",
+        "The raw training images of each client"
+      ],
+      "answer": 2,
+      "why": "Because only outputs are exchanged, clients may run different architectures and the payload no longer scales with model size. Raw data still never moves.",
+      "why_vi": "Vì chỉ trao đổi đầu ra nên các máy khách có thể dùng kiến trúc khác nhau và lượng dữ liệu gửi đi không còn tỉ lệ với kích thước mô hình. Dữ liệu thô vẫn không hề di chuyển.",
+      "level": 3
+    },
+    {
+      "id": "qf-21",
+      "q": "In asynchronous federated learning the server applies an update computed from a model that is fifty versions old. The main risk is",
+      "q_vi": "Trong học liên kết bất đồng bộ, máy chủ áp một cập nhật được tính từ mô hình đã cũ năm mươi phiên bản. Rủi ro chính là",
+      "choices": [
+        "The update cannot be decrypted",
+        "The client's data is exposed to the server",
+        "The model size grows with every stale update",
+        "The stale update pushes the model back toward a region it has already left"
+      ],
+      "answer": 3,
+      "why": "A stale gradient is a correct direction for the wrong point. Practical systems discount updates by their staleness or refuse them beyond a threshold.",
+      "why_vi": "Gradient cũ là hướng đi đúng nhưng cho một điểm đã không còn nữa. Hệ thực tế giảm trọng số cập nhật theo độ cũ, hoặc từ chối hẳn nếu vượt ngưỡng.",
+      "level": 3
+    },
+    {
+      "id": "qf-22",
+      "q": "Server momentum in federated learning accumulates",
+      "q_vi": "Quán tính phía máy chủ trong học liên kết tích luỹ",
+      "choices": [
+        "The raw gradients of individual clients",
+        "The privacy budget spent so far",
+        "The number of bytes transmitted",
+        "Aggregated updates across rounds to smooth the global trajectory"
+      ],
+      "answer": 3,
+      "why": "Momentum lives at the round level and averages out the sampling noise from partial participation. It never touches individual client gradients, which the server may not even see under secure aggregation.",
+      "why_vi": "Quán tính nằm ở mức vòng và làm trung bình bớt nhiễu lấy mẫu do tham gia một phần. Nó không đụng tới gradient của từng máy khách, những thứ mà dưới tổng hợp an toàn máy chủ còn chẳng thấy.",
+      "level": 2
+    },
+    {
+      "id": "qf-23",
+      "q": "One client holds ninety percent of all the data. Weighting the average by sample count means",
+      "q_vi": "Một máy khách nắm chín mươi phần trăm toàn bộ dữ liệu. Lấy trung bình theo trọng số số mẫu sẽ khiến",
+      "choices": [
+        "The aggregation becomes numerically unstable",
+        "All clients contribute exactly equally",
+        "The global model is essentially that client's model, and the small clients gain little",
+        "The small clients dominate the result"
+      ],
+      "answer": 2,
+      "why": "Weighting by data size is unbiased for the pooled objective but it is not fair across participants. If the small clients joined to get a model that works for them, the pooled objective is the wrong target.",
+      "why_vi": "Trọng số theo lượng dữ liệu là không thiên lệch với hàm mục tiêu gộp, nhưng không công bằng giữa các bên tham gia. Nếu các máy khách nhỏ tham gia để có mô hình chạy tốt cho họ, thì hàm mục tiêu gộp là đích sai.",
+      "level": 3
+    },
+    {
+      "id": "qf-24",
+      "q": "Split learning differs from federated learning in that",
+      "q_vi": "Học chia tầng khác học liên kết ở chỗ",
+      "choices": [
+        "The client sends its raw data to the server",
+        "The client sends intermediate activations every batch instead of a model update every round",
+        "There is no neural network involved",
+        "The server does no computation at all"
+      ],
+      "answer": 1,
+      "why": "Split learning cuts the network, so traffic is per batch activations and gradients, and the client never holds the full model. That is a different privacy and bandwidth profile, not the same protocol.",
+      "why_vi": "Học chia tầng cắt mạng làm đôi, nên lưu lượng là kích hoạt và gradient theo từng lô, và máy khách không bao giờ giữ trọn mô hình. Đó là hồ sơ riêng tư và băng thông khác, không phải cùng một giao thức.",
+      "level": 2
+    },
+    {
+      "id": "qf-25",
+      "q": "Before vertical federated learning can start, the parties must first",
+      "q_vi": "Trước khi học liên kết theo chiều dọc bắt đầu, các bên trước hết phải",
+      "choices": [
+        "Agree on identical feature sets",
+        "Train separate models to convergence",
+        "Align which records refer to the same subject, ideally through private set intersection",
+        "Merge their datasets on one server"
+      ],
+      "answer": 2,
+      "why": "Vertical means different features about the same subjects, so you need to know which rows correspond. Doing that naively by exchanging identifier lists leaks the membership of every non matching record, which is what private set intersection avoids.",
+      "why_vi": "Chiều dọc nghĩa là các đặc trưng khác nhau về cùng chủ thể, nên phải biết hàng nào ứng với hàng nào. Làm việc đó một cách ngây thơ bằng cách trao đổi danh sách định danh sẽ lộ sự có mặt của mọi bản ghi không khớp, đây chính là điều giao tập riêng tư tránh được.",
+      "level": 3
+    },
+    {
+      "id": "qf-26",
+      "q": "A paper reports that its personalised method beats FedAvg, evaluating each client's fine tuned model on that client's own test split. What must also be checked",
+      "q_vi": "Một bài báo nói phương pháp cá nhân hoá của họ thắng FedAvg, đánh giá mô hình đã tinh chỉnh của mỗi máy khách trên phần kiểm thử của chính máy đó. Điều còn phải kiểm là",
+      "choices": [
+        "Whether purely local training with no federation reaches the same score",
+        "Whether the model was quantised",
+        "Whether the learning rate was decayed",
+        "Whether the server used enough memory"
+      ],
+      "answer": 0,
+      "why": "Local test splits reward local fitting, and a model trained only on the client's data is the natural baseline. If it matches the personalised method, the federation contributed nothing.",
+      "why_vi": "Tập kiểm thử cục bộ vốn ưu ái việc khớp cục bộ, và mô hình chỉ huấn luyện trên dữ liệu của chính máy khách là mốc so sánh tự nhiên. Nếu nó ngang bằng phương pháp cá nhân hoá thì phần liên kết chẳng đóng góp gì.",
+      "level": 3
+    },
+    {
+      "id": "qf-27",
+      "q": "FedAvg reduces to ordinary distributed SGD when",
+      "q_vi": "FedAvg suy biến thành SGD phân tán thông thường khi",
+      "choices": [
+        "The server adds momentum",
+        "Only one client participates per round",
+        "Every client participates and performs exactly one local step per round",
+        "Clients perform many local epochs per round"
+      ],
+      "answer": 2,
+      "why": "With a single local step and full participation, the average of the updates is the average of the gradients, which is the synchronous distributed SGD step. Everything interesting about FedAvg comes from doing more than one local step.",
+      "why_vi": "Với đúng một bước cục bộ và toàn bộ cùng tham gia, trung bình các cập nhật chính là trung bình các gradient, tức bước SGD phân tán đồng bộ. Mọi điều thú vị của FedAvg đều đến từ việc chạy nhiều hơn một bước cục bộ.",
+      "level": 3
+    },
+    {
+      "id": "qf-28",
+      "q": "Sampling only one percent of clients each round rather than all of them",
+      "q_vi": "Mỗi vòng chỉ lấy mẫu một phần trăm số máy khách thay vì tất cả sẽ",
+      "choices": [
+        "Eliminates client drift",
+        "Removes the need for a privacy budget",
+        "Makes the aggregate biased no matter how sampling is done",
+        "Adds variance to the aggregate but keeps it unbiased if the sampling is uniform"
+      ],
+      "answer": 3,
+      "why": "Uniform sampling gives an unbiased estimate of the full average, and the cost shows up as extra variance per round. Bias appears only when eligibility correlates with the data, for example when only fast devices are ever picked.",
+      "why_vi": "Lấy mẫu đều cho ước lượng không thiên lệch của trung bình đầy đủ, cái giá phải trả là phương sai mỗi vòng tăng lên. Thiên lệch chỉ xuất hiện khi điều kiện đủ tư cách tương quan với dữ liệu, ví dụ chỉ thiết bị nhanh mới được chọn.",
+      "level": 3
+    },
+    {
+      "id": "qf-29",
+      "q": "Federated convergence bounds almost always assume a limit on gradient dissimilarity. What that assumption encodes is",
+      "q_vi": "Các cận hội tụ trong học liên kết gần như luôn giả định độ bất tương đồng gradient bị chặn. Giả định này diễn tả",
+      "choices": [
+        "How far a client's local gradient may point away from the global gradient",
+        "How much noise the privacy mechanism adds",
+        "How many bytes each update takes",
+        "How many clients may be malicious"
+      ],
+      "answer": 0,
+      "why": "It is the formal handle on heterogeneity, and every rate degrades as the constant grows. It is not a statement about bandwidth, privacy noise or adversaries, each of which needs its own assumption.",
+      "why_vi": "Đây là cách nắm bắt hình thức tính không đồng nhất, và mọi tốc độ hội tụ đều xấu đi khi hằng số này tăng. Nó không nói gì về băng thông, nhiễu riêng tư hay kẻ địch, mỗi thứ đó cần giả định riêng.",
+      "level": 3
+    },
+    {
+      "id": "qf-30",
+      "q": "Clients each hold only two of the ten classes. This is an example of",
+      "q_vi": "Mỗi máy khách chỉ nắm hai trong mười lớp. Đây là ví dụ của",
+      "choices": [
+        "Quantity skew",
+        "Concept shift",
+        "Label skew",
+        "Feature skew"
+      ],
+      "answer": 2,
+      "why": "The class proportions differ, which is label skew. Feature skew would mean the same class looking different across clients, and concept shift would mean the same input carrying different labels.",
+      "why_vi": "Tỉ lệ các lớp khác nhau, đó là lệch nhãn. Lệch đặc trưng là cùng một lớp nhưng trông khác nhau giữa các máy khách, còn lệch khái niệm là cùng một đầu vào lại mang nhãn khác nhau.",
+      "level": 1
+    },
+    {
+      "id": "qf-31",
+      "q": "Two hospitals label borderline cases differently, so identical scans receive opposite labels. This is",
+      "q_vi": "Hai bệnh viện gán nhãn các ca ranh giới khác nhau, nên ảnh chụp giống hệt lại nhận nhãn trái ngược. Đây là",
+      "choices": [
+        "Quantity skew",
+        "A communication bottleneck",
+        "A straggler problem",
+        "Concept shift"
+      ],
+      "answer": 3,
+      "why": "The mapping from input to label itself differs across clients, so no single decision boundary fits both. Harmonising the labelling protocol is a data problem, not something a smarter aggregation rule can fix.",
+      "why_vi": "Chính ánh xạ từ đầu vào sang nhãn đã khác nhau giữa các máy khách, nên không một biên quyết định nào khớp được cả hai. Thống nhất lại quy trình gán nhãn là bài toán dữ liệu, không phải thứ mà một quy tắc tổng hợp khôn hơn sửa được.",
+      "level": 2
+    },
+    {
+      "id": "qf-32",
+      "q": "Averaging batch normalisation statistics across clients with different input distributions is a problem because",
+      "q_vi": "Lấy trung bình thống kê chuẩn hoá theo lô giữa các máy khách có phân bố đầu vào khác nhau là vấn đề vì",
+      "choices": [
+        "Batch normalisation has no learnable parameters",
+        "Batch normalisation cannot be computed on a client device",
+        "The statistics are encrypted and cannot be averaged",
+        "The averaged running mean and variance match no client's actual inputs"
+      ],
+      "answer": 3,
+      "why": "Those buffers describe a distribution, and the average of several distributions is not the distribution of any of them. This is why practical systems keep normalisation statistics local or switch to group normalisation.",
+      "why_vi": "Các bộ đệm đó mô tả một phân bố, mà trung bình của nhiều phân bố không phải phân bố của bất kỳ cái nào. Vì vậy hệ thực tế giữ thống kê chuẩn hoá ở cục bộ hoặc chuyển sang chuẩn hoá theo nhóm.",
+      "level": 3
+    },
+    {
+      "id": "qf-33",
+      "q": "Full participation of every client in every round is unrealistic in cross device settings because",
+      "q_vi": "Việc mọi máy khách tham gia đủ mọi vòng là phi thực tế trong bối cảnh chéo thiết bị vì",
+      "choices": [
+        "The aggregation rule cannot handle more than ten clients",
+        "There are millions of devices and most are offline, busy or on metered data at any moment",
+        "The global model would become too small",
+        "Privacy law forbids more than a few participants"
+      ],
+      "answer": 1,
+      "why": "Availability, not algorithmic capacity, is the binding constraint. Cross silo settings with a handful of institutions can genuinely run full participation, which is part of what separates the two regimes.",
+      "why_vi": "Ràng buộc thật là khả năng sẵn sàng, không phải năng lực thuật toán. Bối cảnh chéo tổ chức với vài đơn vị hoàn toàn có thể cho tất cả cùng tham gia, đó là một phần khác biệt giữa hai chế độ.",
+      "level": 2
+    },
+    {
+      "id": "qf-34",
+      "q": "The number of communication rounds and the number of local epochs trade against each other because",
+      "q_vi": "Số vòng truyền thông và số epoch cục bộ đánh đổi lẫn nhau vì",
+      "choices": [
+        "Rounds and epochs are the same quantity under a different name",
+        "Local epochs consume the privacy budget of the server",
+        "The server can only handle a fixed total number of gradients",
+        "More local work per round means fewer rounds are needed, but each round's updates are harder to average"
+      ],
+      "answer": 3,
+      "why": "It is a genuine trade, and the best setting depends on how heterogeneous the clients are. Under identical distributions you can push local epochs high with little penalty, under strong skew you cannot.",
+      "why_vi": "Đây là đánh đổi thật, điểm tối ưu phụ thuộc mức không đồng nhất giữa các máy khách. Nếu phân bố giống nhau bạn có thể đẩy số epoch cục bộ lên cao mà ít bị phạt, còn khi lệch mạnh thì không.",
+      "level": 2
+    },
+    {
+      "id": "qf-35",
+      "q": "A convergence rate in a federated paper tells you",
+      "q_vi": "Tốc độ hội tụ trong một bài báo về học liên kết cho bạn biết",
+      "choices": [
+        "How many clients are malicious",
+        "How fast the error bound shrinks as the number of rounds grows",
+        "How many bytes each round costs",
+        "The final accuracy on the test set"
+      ],
+      "answer": 1,
+      "why": "It is an asymptotic statement about a bound, under stated assumptions. It does not predict a test accuracy, and a better rate can still lose in practice if its constants are large.",
+      "why_vi": "Đó là phát biểu tiệm cận về một cận, dưới các giả định đã nêu. Nó không dự đoán độ chính xác kiểm thử, và tốc độ tốt hơn vẫn có thể thua trong thực tế nếu hằng số của nó lớn.",
+      "level": 1
+    },
+    {
+      "id": "qf-36",
+      "q": "Cross silo federated learning differs from cross device mainly in that",
+      "q_vi": "Học liên kết chéo tổ chức khác chéo thiết bị chủ yếu ở chỗ",
+      "choices": [
+        "Privacy no longer matters",
+        "There is no aggregation step",
+        "Data is identically distributed by construction",
+        "There are few, reliable, persistently identified participants bound by contracts"
+      ],
+      "answer": 3,
+      "why": "Reliability and stable identity change what is possible: full participation, stateful algorithms, and audits. Heterogeneity remains severe in cross silo cases, sometimes worse than on phones.",
+      "why_vi": "Độ tin cậy và danh tính ổn định làm thay đổi những gì khả thi, như cho tất cả cùng tham gia, dùng thuật toán có trạng thái, và kiểm toán được. Tính không đồng nhất vẫn nặng trong ca chéo tổ chức, đôi khi còn nặng hơn trên điện thoại.",
+      "level": 2
+    },
+    {
+      "id": "qf-37",
+      "q": "Under local differential privacy, noise is added",
+      "q_vi": "Với riêng tư vi phân cục bộ, nhiễu được thêm vào",
+      "choices": [
+        "By each client before anything leaves the device",
+        "Only to the test set",
+        "By a trusted third party after decryption",
+        "By the server after aggregation"
+      ],
+      "answer": 0,
+      "why": "That is exactly what makes it local: no party downstream has to be trusted. The price is that the noise from every client accumulates, so utility is far worse than the central model at the same epsilon.",
+      "why_vi": "Đó chính là điều làm nó mang tính cục bộ, không bên nào ở phía sau cần được tin. Cái giá là nhiễu của mọi máy khách cộng dồn lại, nên độ hữu dụng tệ hơn hẳn mô hình trung tâm ở cùng mức epsilon.",
+      "level": 2
+    },
+    {
+      "id": "qf-38",
+      "q": "A system reports central differential privacy with a small epsilon. The trust assumption hidden in that claim is",
+      "q_vi": "Một hệ thống công bố dùng riêng tư vi phân trung tâm với epsilon nhỏ. Giả định về niềm tin bị giấu trong tuyên bố đó là",
+      "choices": [
+        "The aggregator sees the un noised updates and is trusted not to misuse or leak them",
+        "No party ever sees any data, including the aggregator",
+        "The clients must trust each other but not the server",
+        "The guarantee holds even if the aggregator is compromised"
+      ],
+      "answer": 0,
+      "why": "Central privacy protects the released output, not the input to the aggregator. If that machine is breached before the noise is added, the guarantee says nothing, which is why central privacy is often paired with secure aggregation or an enclave.",
+      "why_vi": "Riêng tư trung tâm bảo vệ đầu ra được công bố, không bảo vệ đầu vào của bộ tổng hợp. Nếu máy đó bị xâm nhập trước lúc thêm nhiễu thì bảo đảm không nói được gì, vì vậy riêng tư trung tâm thường đi kèm tổng hợp an toàn hoặc vùng cách ly phần cứng.",
+      "level": 3
+    },
+    {
+      "id": "qf-39",
+      "q": "The noise scale in the Gaussian mechanism is set by",
+      "q_vi": "Mức nhiễu trong cơ chế Gauss được đặt theo",
+      "choices": [
+        "The number of parameters in the model",
+        "The accuracy the authors want to report",
+        "The batch size only",
+        "The sensitivity of the query and the target epsilon and delta"
+      ],
+      "answer": 3,
+      "why": "Sensitivity bounds how much one record can move the output, and the target guarantee fixes how much that movement must be masked. Model size affects utility, not the noise calibration rule.",
+      "why_vi": "Độ nhạy chặn mức mà một bản ghi có thể làm dịch chuyển đầu ra, còn mục tiêu bảo đảm quy định phải che mức dịch chuyển đó bao nhiêu. Kích thước mô hình ảnh hưởng độ hữu dụng, không ảnh hưởng quy tắc hiệu chỉnh nhiễu.",
+      "level": 2
+    },
+    {
+      "id": "qf-40",
+      "q": "The practical difference between the Laplace and Gaussian mechanisms is that",
+      "q_vi": "Khác biệt thực dụng giữa cơ chế Laplace và cơ chế Gauss là",
+      "choices": [
+        "Gaussian works only on discrete data",
+        "Laplace adds no noise at all",
+        "Laplace gives pure privacy with delta zero, while Gaussian accepts a small delta and composes better over many steps",
+        "Laplace requires a trusted aggregator and Gaussian does not"
+      ],
+      "answer": 2,
+      "why": "The delta term is a small probability that the guarantee simply fails, and accepting it buys much tighter accounting across thousands of iterations. Both mechanisms work in either trust model.",
+      "why_vi": "Số hạng delta là xác suất nhỏ mà ở đó bảo đảm đơn giản là hỏng, chấp nhận nó đổi lại việc kế toán chặt hơn nhiều qua hàng nghìn bước lặp. Cả hai cơ chế đều dùng được trong bất kỳ mô hình niềm tin nào.",
+      "level": 3
+    },
+    {
+      "id": "qf-41",
+      "q": "The moments accountant is used because",
+      "q_vi": "Kế toán moment được dùng vì",
+      "choices": [
+        "Naive composition over thousands of noisy steps reports an epsilon far larger than the true privacy loss",
+        "It speeds up training on the client",
+        "It encrypts the gradients",
+        "It removes the need to add noise"
+      ],
+      "answer": 0,
+      "why": "Tracking the moment generating function of the loss gives a much tighter bound than summing per step budgets. Loose accounting does not make you less private, it just makes you report a number nobody can use.",
+      "why_vi": "Theo dõi hàm sinh moment của mất mát cho cận chặt hơn nhiều so với cộng dồn ngân sách từng bước. Kế toán lỏng không làm bạn kém riêng tư đi, nó chỉ khiến bạn báo ra con số không ai dùng được.",
+      "level": 3
+    },
+    {
+      "id": "qf-42",
+      "q": "In DP-SGD, per example gradient clipping exists in order to",
+      "q_vi": "Trong DP-SGD, việc cắt chuẩn gradient theo từng mẫu tồn tại để",
+      "choices": [
+        "Prevent clients from dropping out",
+        "Bound the sensitivity so a finite amount of noise suffices",
+        "Speed up the backward pass",
+        "Reduce the model size"
+      ],
+      "answer": 1,
+      "why": "Without clipping, one outlier example could move the gradient arbitrarily far and no finite noise would mask it. Clipping is what makes the whole calibration well defined.",
+      "why_vi": "Không cắt chuẩn thì một mẫu ngoại lai có thể kéo gradient đi xa tuỳ ý và không lượng nhiễu hữu hạn nào che nổi. Cắt chuẩn chính là thứ làm cho toàn bộ phép hiệu chỉnh có nghĩa.",
+      "level": 2
+    },
+    {
+      "id": "qf-43",
+      "q": "A team clips every client update to a fixed norm and reports the system as differentially private. The flaw is",
+      "q_vi": "Một nhóm cắt mọi cập nhật của máy khách về một chuẩn cố định rồi công bố hệ thống là có riêng tư vi phân. Sai sót ở đây là",
+      "choices": [
+        "Clipping must be applied by the server, not the client",
+        "Clipping destroys the model, so no guarantee is needed",
+        "Clipping alone bounds sensitivity but adds no randomness, so there is no guarantee without calibrated noise",
+        "Clipping already provides pure privacy with delta zero"
+      ],
+      "answer": 2,
+      "why": "Clipping is one of two ingredients. A deterministic bounded function still reveals its exact output, and differential privacy is a statement about randomised outputs.",
+      "why_vi": "Cắt chuẩn mới là một trong hai thành phần. Hàm tất định dù bị chặn vẫn để lộ đúng đầu ra của nó, trong khi riêng tư vi phân là phát biểu về đầu ra có ngẫu nhiên hoá.",
+      "level": 3
+    },
+    {
+      "id": "qf-44",
+      "q": "Privacy amplification by subsampling works because",
+      "q_vi": "Khuếch đại riêng tư nhờ lấy mẫu con có tác dụng vì",
+      "choices": [
+        "The server forgets the data between rounds",
+        "Smaller batches make gradients more accurate",
+        "Any given record is usually not in the batch at all, so most releases carry no information about it",
+        "Subsampling adds extra noise to each gradient"
+      ],
+      "answer": 2,
+      "why": "The uncertainty about whether a record even participated compounds with the mechanism noise. This is why federated systems that sample a tiny fraction of clients per round can report far tighter budgets.",
+      "why_vi": "Sự bất định về việc một bản ghi có tham gia hay không cộng hưởng với nhiễu của cơ chế. Vì thế các hệ liên kết chỉ lấy mẫu một phần rất nhỏ máy khách mỗi vòng có thể báo ngân sách chặt hơn nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qf-45",
+      "q": "The shuffle model sits between local and central privacy because the shuffler",
+      "q_vi": "Mô hình xáo trộn nằm giữa riêng tư cục bộ và trung tâm vì bộ xáo trộn",
+      "choices": [
+        "Stores every client's raw data for auditing",
+        "Breaks the link between a message and its sender without seeing the message content in the clear",
+        "Adds all the noise centrally after decrypting everything",
+        "Removes the need for any noise at all"
+      ],
+      "answer": 1,
+      "why": "Anonymity of the sender amplifies weaker local noise into a much better overall guarantee. It is still a trust assumption, just a narrower one than trusting a full aggregator.",
+      "why_vi": "Việc ẩn danh người gửi khuếch đại lượng nhiễu cục bộ yếu thành bảo đảm tổng thể tốt hơn nhiều. Đây vẫn là một giả định niềm tin, chỉ là hẹp hơn so với tin trọn một bộ tổng hợp.",
+      "level": 3
+    },
+    {
+      "id": "qf-46",
+      "q": "The main weakness of k-anonymity compared to differential privacy is that",
+      "q_vi": "Điểm yếu chính của ẩn danh k so với riêng tư vi phân là",
+      "choices": [
+        "It provides a formal bound on information leakage",
+        "It cannot be applied to tabular data",
+        "It requires far more noise than differential privacy",
+        "It is a property of the released table, so it breaks when an attacker joins external data or when a group shares one sensitive value"
+      ],
+      "answer": 3,
+      "why": "Syntactic guarantees assume what the adversary knows. Differential privacy makes no such assumption, which is why linkage and homogeneity attacks defeat one and not the other.",
+      "why_vi": "Các bảo đảm mang tính cú pháp phải giả định trước kẻ tấn công biết gì. Riêng tư vi phân không cần giả định đó, vì vậy tấn công liên kết dữ liệu và tấn công đồng nhất phá được cái này mà không phá được cái kia.",
+      "level": 2
+    },
+    {
+      "id": "qf-47",
+      "q": "Secure multiparty computation gives the guarantee that",
+      "q_vi": "Tính toán nhiều bên an toàn cho bảo đảm rằng",
+      "choices": [
+        "The computation is faster than doing it in the clear",
+        "The parties learn the agreed output and nothing else about each other's inputs",
+        "The output itself reveals nothing about any input",
+        "No party needs to communicate"
+      ],
+      "answer": 1,
+      "why": "The guarantee is about the process, not the result. If the agreed output happens to leak, for example a sum over two parties where one knows its own term, cryptography does not help and you still need differential privacy.",
+      "why_vi": "Bảo đảm nằm ở quá trình, không nằm ở kết quả. Nếu chính đầu ra đã rò rỉ, ví dụ tổng của hai bên mà một bên biết phần của mình, thì mật mã không cứu được và bạn vẫn cần riêng tư vi phân.",
+      "level": 3
+    },
+    {
+      "id": "qf-48",
+      "q": "For federated aggregation, additive homomorphic encryption is usually preferred over fully homomorphic encryption because",
+      "q_vi": "Trong tổng hợp liên kết, mã hoá đồng cấu cộng thường được ưa hơn mã hoá đồng cấu đầy đủ vì",
+      "choices": [
+        "The additive scheme needs no keys",
+        "Aggregation only needs addition, and the additive scheme is dramatically cheaper",
+        "The fully homomorphic scheme cannot add numbers",
+        "The additive scheme also hides the aggregate from everyone"
+      ],
+      "answer": 1,
+      "why": "Match the tool to the operation. Fully homomorphic encryption supports arbitrary circuits at a cost that aggregation simply does not need to pay.",
+      "why_vi": "Chọn công cụ khớp với phép toán cần làm. Mã hoá đồng cấu đầy đủ hỗ trợ mạch tính toán tuỳ ý với cái giá mà bài toán tổng hợp đơn giản là không cần trả.",
+      "level": 2
+    },
+    {
+      "id": "qf-49",
+      "q": "Running aggregation inside a trusted execution environment shifts the trust assumption onto",
+      "q_vi": "Chạy khâu tổng hợp bên trong môi trường thực thi tin cậy chuyển giả định niềm tin sang",
+      "choices": [
+        "Nobody, since enclaves are provably secure",
+        "The hardware vendor and the correctness of the enclave against side channel attacks",
+        "The network operator carrying the traffic",
+        "The clients, who must now trust each other"
+      ],
+      "answer": 1,
+      "why": "An enclave replaces trust in the operator with trust in silicon and its attestation chain. That is often a good trade, but a long line of side channel results shows it is not the same as a cryptographic proof.",
+      "why_vi": "Vùng cách ly thay niềm tin vào người vận hành bằng niềm tin vào con chip và chuỗi chứng thực của nó. Đó thường là đánh đổi tốt, nhưng một loạt kết quả tấn công kênh phụ cho thấy nó không tương đương một chứng minh mật mã.",
+      "level": 3
+    },
+    {
+      "id": "qf-50",
+      "q": "A vendor argues that because secure aggregation is deployed, no differential privacy is needed. The hole in that argument is",
+      "q_vi": "Một nhà cung cấp lập luận rằng vì đã triển khai tổng hợp an toàn nên không cần riêng tư vi phân. Lỗ hổng trong lập luận đó là",
+      "choices": [
+        "The aggregate itself can still leak about individuals, especially with few clients or across many rounds",
+        "Secure aggregation reveals every individual update anyway",
+        "Secure aggregation slows the training down too much",
+        "Differential privacy and secure aggregation cannot be combined"
+      ],
+      "answer": 0,
+      "why": "Cryptography controls who sees what, differential privacy controls what the visible result implies. Observing the sum over many overlapping cohorts can isolate a contribution even when no single update was ever exposed.",
+      "why_vi": "Mật mã kiểm soát ai thấy được gì, riêng tư vi phân kiểm soát kết quả nhìn thấy được hàm ý điều gì. Quan sát tổng qua nhiều nhóm chồng lấn có thể cô lập được phần đóng góp của một bên, dù chưa cập nhật riêng lẻ nào bị lộ.",
+      "level": 3
+    },
+    {
+      "id": "qf-51",
+      "q": "A model trained with strong differential privacy still predicts that people from a certain postcode default more often. This is",
+      "q_vi": "Một mô hình huấn luyện với riêng tư vi phân mạnh vẫn dự đoán rằng người ở một mã bưu chính nhất định hay vỡ nợ hơn. Điều này",
+      "choices": [
+        "A sign that secure aggregation was not used",
+        "Impossible if epsilon is small enough",
+        "Proof that the privacy accounting was wrong",
+        "Consistent with the guarantee, which protects individual records and not group level patterns"
+      ],
+      "answer": 3,
+      "why": "Differential privacy promises that your presence or absence barely changes the output. It never promised that the model would fail to learn statistical facts about a population, which is the whole point of training it.",
+      "why_vi": "Riêng tư vi phân hứa rằng bạn có mặt hay không cũng gần như không đổi đầu ra. Nó chưa bao giờ hứa mô hình sẽ không học được các sự thật thống kê về một quần thể, vốn là lý do người ta huấn luyện nó.",
+      "level": 3
+    },
+    {
+      "id": "qf-52",
+      "q": "A paper says each round satisfies differential privacy with epsilon equal to one, and trains for a thousand rounds. What should be reported",
+      "q_vi": "Một bài báo nói mỗi vòng thoả riêng tư vi phân với epsilon bằng một, và huấn luyện một nghìn vòng. Thứ cần được báo cáo là",
+      "choices": [
+        "Only the per round epsilon, since rounds are independent",
+        "The epsilon of the final round alone",
+        "The total budget over all rounds, computed with a composition accountant",
+        "The smallest per round epsilon observed"
+      ],
+      "answer": 2,
+      "why": "Privacy loss accumulates across releases from the same data. A per round figure quoted alone hides a total that may be an order of magnitude larger and effectively meaningless.",
+      "why_vi": "Mất mát riêng tư tích luỹ qua các lần công bố trên cùng dữ liệu. Con số theo từng vòng nêu riêng lẻ sẽ che đi tổng số có thể lớn hơn cả bậc và trên thực tế không còn ý nghĩa gì.",
+      "level": 3
+    },
+    {
+      "id": "qf-53",
+      "q": "Client level differential privacy is stronger than example level because the neighbouring datasets differ by",
+      "q_vi": "Riêng tư vi phân ở mức máy khách mạnh hơn mức mẫu vì hai tập dữ liệu kề nhau khác nhau ở",
+      "choices": [
+        "One model parameter",
+        "One record within one client",
+        "One entire client and all of its records",
+        "One round of training"
+      ],
+      "answer": 2,
+      "why": "Hiding a whole participant is a much larger perturbation to mask, so it needs far more noise and hurts utility more. Quoting example level epsilon while implying participant level protection is a common overstatement.",
+      "why_vi": "Che giấu trọn một bên tham gia là mức nhiễu loạn lớn hơn nhiều, nên cần nhiều nhiễu hơn và làm giảm độ hữu dụng nhiều hơn. Nêu epsilon ở mức mẫu nhưng ngụ ý bảo vệ ở mức người tham gia là kiểu nói quá rất hay gặp.",
+      "level": 3
+    },
+    {
+      "id": "qf-54",
+      "q": "In an epsilon and delta guarantee, delta is best understood as",
+      "q_vi": "Trong bảo đảm gồm epsilon và delta, delta được hiểu đúng nhất là",
+      "choices": [
+        "A second, looser value of epsilon",
+        "The number of records in the dataset",
+        "A small probability that the epsilon bound simply does not hold",
+        "The variance of the added noise"
+      ],
+      "answer": 2,
+      "why": "Delta is a failure probability, which is why it should be set well below one over the dataset size. A delta of one percent on a million records would permit a mechanism that leaks ten thousand of them outright.",
+      "why_vi": "Delta là xác suất thất bại, vì thế nó phải được đặt nhỏ hơn hẳn nghịch đảo kích thước tập dữ liệu. Delta bằng một phần trăm trên một triệu bản ghi sẽ cho phép một cơ chế làm lộ thẳng mười nghìn bản ghi.",
+      "level": 2
+    },
+    {
+      "id": "qf-55",
+      "q": "A team removes names and identity numbers from its client data and calls the result anonymous. The problem is",
+      "q_vi": "Một nhóm xoá tên và số định danh khỏi dữ liệu máy khách rồi gọi kết quả là ẩn danh. Vấn đề là",
+      "choices": [
+        "The remaining quasi identifiers can be linked with outside data to re identify people",
+        "Names are the only identifying information in any dataset",
+        "Removing identifiers makes the model untrainable",
+        "Anonymisation requires encrypting the data at rest"
+      ],
+      "answer": 0,
+      "why": "Re identification through linkage is a long documented failure of this approach. It is the reason formal definitions moved from what was removed to what an output reveals.",
+      "why_vi": "Tái định danh nhờ liên kết dữ liệu ngoài là thất bại đã được ghi nhận từ lâu của cách làm này. Đó cũng là lý do các định nghĩa hình thức chuyển từ chỗ xoá cái gì sang chỗ đầu ra để lộ cái gì.",
+      "level": 2
+    },
+    {
+      "id": "qf-56",
+      "q": "Adding differential privacy noise to a federated model tends to hurt",
+      "q_vi": "Thêm nhiễu riêng tư vi phân vào mô hình liên kết thường gây thiệt hại nhiều nhất cho",
+      "choices": [
+        "All clients and classes equally",
+        "Rare classes and small clients most, because their signal is weakest relative to the noise",
+        "Only the largest clients",
+        "Only the server side evaluation"
+      ],
+      "answer": 1,
+      "why": "Noise is added at a fixed scale while the underlying signal is not. Groups with little data see their contribution drowned out, so a privacy mechanism can quietly become a fairness problem.",
+      "why_vi": "Nhiễu được thêm ở mức cố định trong khi tín hiệu bên dưới thì không. Các nhóm ít dữ liệu bị nhấn chìm phần đóng góp, nên một cơ chế riêng tư có thể lặng lẽ biến thành vấn đề công bằng.",
+      "level": 3
+    },
+    {
+      "id": "qf-57",
+      "q": "The right way to present a private model's results is",
+      "q_vi": "Cách trình bày đúng kết quả của một mô hình có riêng tư là",
+      "choices": [
+        "The number of noisy steps taken",
+        "A curve of accuracy against the privacy budget, with the non private point as the ceiling",
+        "The epsilon alone, without accuracy",
+        "A single accuracy number at the epsilon that looked best"
+      ],
+      "answer": 1,
+      "why": "One point on a two dimensional trade cannot be compared with another method's point at a different budget. The curve plus the non private ceiling is what tells a reader what privacy actually cost.",
+      "why_vi": "Một điểm trên đánh đổi hai chiều không so được với điểm của phương pháp khác ở ngân sách khác. Đường cong kèm trần không riêng tư mới cho người đọc biết riêng tư thực sự tốn bao nhiêu.",
+      "level": 2
+    },
+    {
+      "id": "qf-58",
+      "q": "A membership inference attack tries to determine",
+      "q_vi": "Tấn công suy luận thành viên cố xác định",
+      "choices": [
+        "The architecture of the model",
+        "How many clients joined each round",
+        "The learning rate used during training",
+        "Whether a specific record was part of the training set"
+      ],
+      "answer": 3,
+      "why": "The attacker exploits the fact that models behave differently on data they memorised. Architecture and hyperparameters are separate targets, addressed by model extraction rather than membership attacks.",
+      "why_vi": "Kẻ tấn công khai thác việc mô hình phản ứng khác nhau trên dữ liệu nó đã ghi nhớ. Kiến trúc và siêu tham số là mục tiêu khác, thuộc về tấn công trích xuất mô hình chứ không phải suy luận thành viên.",
+      "level": 1
+    },
+    {
+      "id": "qf-59",
+      "q": "An attacker learns that one hospital's dataset is eighty percent male, without identifying any patient. This is",
+      "q_vi": "Kẻ tấn công biết được tập dữ liệu của một bệnh viện có tám mươi phần trăm là nam, mà không nhận diện được bệnh nhân nào. Đây là",
+      "choices": [
+        "A membership inference attack",
+        "A property inference attack",
+        "A Sybil attack",
+        "A backdoor attack"
+      ],
+      "answer": 1,
+      "why": "The target is a statistic about the client's data rather than any individual record. Record level differential privacy does not stop it, because no single record needs to be exposed.",
+      "why_vi": "Mục tiêu là một thống kê về dữ liệu của máy khách chứ không phải bản ghi cá nhân nào. Riêng tư vi phân ở mức bản ghi không chặn được, vì không cần bản ghi đơn lẻ nào bị lộ.",
+      "level": 2
+    },
+    {
+      "id": "qf-60",
+      "q": "Model inversion recovers",
+      "q_vi": "Đảo ngược mô hình phục hồi",
+      "choices": [
+        "The random seed of the initialisation",
+        "A representative input for a class or an individual by optimising against the model",
+        "The list of clients that participated",
+        "The exact training script used"
+      ],
+      "answer": 1,
+      "why": "The attack searches input space for whatever the model responds to most strongly. It reconstructs something that looks like the training data, not the training pipeline.",
+      "why_vi": "Tấn công này dò trong không gian đầu vào để tìm thứ mà mô hình phản ứng mạnh nhất. Nó dựng lại thứ trông giống dữ liệu huấn luyện, không phải dựng lại quy trình huấn luyện.",
+      "level": 1
+    },
+    {
+      "id": "qf-61",
+      "q": "A defender checks that the global model's accuracy on the main task is unchanged and concludes there was no poisoning. The flaw is",
+      "q_vi": "Bên phòng thủ kiểm thấy độ chính xác của mô hình toàn cục trên nhiệm vụ chính không đổi rồi kết luận không có đầu độc. Sai sót là",
+      "choices": [
+        "Accuracy cannot be measured on a global model",
+        "Poisoning always raises accuracy",
+        "The main task and the backdoor task are always the same",
+        "A backdoor is designed to leave main task accuracy intact and to fire only on triggered inputs"
+      ],
+      "answer": 3,
+      "why": "Stealth is the attack's design goal, so the metric being watched is exactly the one it preserves. Detecting it requires probing with triggers or inspecting the updates themselves.",
+      "why_vi": "Tính lén lút là mục tiêu thiết kế của tấn công, nên đúng chỉ số đang được canh chừng lại là chỉ số nó giữ nguyên. Muốn phát hiện phải dò bằng mồi kích hoạt hoặc soi chính các bản cập nhật.",
+      "level": 3
+    },
+    {
+      "id": "qf-62",
+      "q": "In a Sybil attack against federated learning, the adversary",
+      "q_vi": "Trong tấn công Sybil nhắm vào học liên kết, kẻ tấn công",
+      "choices": [
+        "Registers many fake clients so its updates outweigh the honest ones",
+        "Slows down the network to cause stragglers",
+        "Steals the server's private key",
+        "Reconstructs training data from gradients"
+      ],
+      "answer": 0,
+      "why": "Robust aggregation rules assume the malicious fraction is a minority, so manufacturing identities attacks that assumption directly. Client authentication, not a better median, is the real countermeasure.",
+      "why_vi": "Các quy tắc tổng hợp bền vững giả định phần xấu chỉ là thiểu số, nên chế ra danh tính giả là đánh thẳng vào giả định đó. Biện pháp thật là xác thực máy khách, không phải một phép trung vị khôn hơn.",
+      "level": 1
+    },
+    {
+      "id": "qf-63",
+      "q": "Coordinate wise median aggregation replaces the mean with",
+      "q_vi": "Tổng hợp bằng trung vị theo toạ độ thay phép trung bình bằng",
+      "choices": [
+        "The maximum value across clients",
+        "The sum of all client updates",
+        "A weighted mean using data sizes",
+        "The median computed separately in every parameter dimension"
+      ],
+      "answer": 3,
+      "why": "The median ignores how extreme an outlier is, only how many there are, which is what makes it resistant. Weighted means offer no such resistance since one huge value still moves the result.",
+      "why_vi": "Trung vị không quan tâm giá trị ngoại lai lớn cỡ nào, chỉ quan tâm có bao nhiêu cái, đó là lý do nó kháng được. Trung bình có trọng số không có tính kháng đó vì một giá trị cực lớn vẫn kéo kết quả đi.",
+      "level": 1
+    },
+    {
+      "id": "qf-64",
+      "q": "Krum performs poorly on strongly non identically distributed clients because",
+      "q_vi": "Krum hoạt động kém trên các máy khách có phân bố rất khác nhau vì",
+      "choices": [
+        "It requires the server to decrypt every update",
+        "It needs all clients to participate in every round",
+        "It cannot be computed in high dimensions",
+        "It assumes honest updates cluster together, and heterogeneity makes honest updates far apart"
+      ],
+      "answer": 3,
+      "why": "The rule picks whichever update sits closest to its neighbours, so it will reject an honest but unusual client while accepting an attacker that mimics the crowd. Robustness and heterogeneity pull in opposite directions here.",
+      "why_vi": "Quy tắc này chọn cập nhật nằm gần các hàng xóm nhất, nên nó sẽ loại một máy khách trung thực nhưng khác thường, trong khi chấp nhận kẻ tấn công biết bắt chước đám đông. Ở đây tính bền vững và tính không đồng nhất kéo về hai phía ngược nhau.",
+      "level": 2
+    },
+    {
+      "id": "qf-65",
+      "q": "The trimmed mean aggregation rule",
+      "q_vi": "Quy tắc tổng hợp trung bình cắt tỉa",
+      "choices": [
+        "Keeps only the single most typical update",
+        "Removes clients that respond slowly",
+        "Drops a fixed fraction of the largest and smallest values per coordinate, then averages the rest",
+        "Averages all updates but scales them down"
+      ],
+      "answer": 2,
+      "why": "It sits between the mean and the median, trading some robustness for the extra information in the surviving values. Keeping only one update is Krum, and dropping slow clients is a scheduling decision, not an aggregation rule.",
+      "why_vi": "Nó nằm giữa trung bình và trung vị, đánh đổi một phần tính bền vững để lấy thêm thông tin từ các giá trị còn lại. Chỉ giữ đúng một cập nhật là Krum, còn loại máy khách chậm là quyết định lập lịch chứ không phải quy tắc tổng hợp.",
+      "level": 1
+    },
+    {
+      "id": "qf-66",
+      "q": "Deploying robust aggregation together with secure aggregation is awkward because",
+      "q_vi": "Triển khai tổng hợp bền vững cùng lúc với tổng hợp an toàn là chuyện khó xử vì",
+      "choices": [
+        "Secure aggregation only works with a single client",
+        "Robust aggregation requires plaintext data, not just plaintext updates",
+        "The two use incompatible network protocols",
+        "Robust rules need to inspect individual updates, which secure aggregation deliberately hides"
+      ],
+      "answer": 3,
+      "why": "One mechanism protects clients from the server, the other protects the server from clients, and they want opposite visibility. Reconciling them requires extra cryptographic machinery such as verifiable or multi party robust aggregation.",
+      "why_vi": "Một cơ chế bảo vệ máy khách trước máy chủ, cơ chế kia bảo vệ máy chủ trước máy khách, và chúng cần mức nhìn thấy ngược nhau. Muốn dung hoà phải thêm bộ máy mật mã như tổng hợp bền vững có kiểm chứng hoặc chạy nhiều bên.",
+      "level": 2
+    },
+    {
+      "id": "qf-67",
+      "q": "An anomaly detector on client updates keeps flagging one rural clinic in a hospital federation. The most likely explanation is",
+      "q_vi": "Bộ phát hiện dị thường trên cập nhật liên tục đánh dấu một phòng khám vùng nông thôn trong liên minh bệnh viện. Cách giải thích khả dĩ nhất là",
+      "choices": [
+        "Its network connection is too slow",
+        "Its data is genuinely different from the others, and the detector cannot separate unusual from malicious",
+        "Its model architecture is different",
+        "It is certainly running a poisoning attack"
+      ],
+      "answer": 1,
+      "why": "Outlier detection on updates measures deviation, and heterogeneity produces deviation for entirely honest reasons. Acting on the flag alone excludes exactly the minority sites the federation was meant to include.",
+      "why_vi": "Phát hiện ngoại lai trên cập nhật đo độ lệch, mà tính không đồng nhất tạo ra độ lệch vì những lý do hoàn toàn lương thiện. Cứ theo cờ báo mà xử lý sẽ loại đúng những cơ sở thiểu số mà liên minh vốn muốn bao gồm.",
+      "level": 2
+    },
+    {
+      "id": "qf-68",
+      "q": "Norm bounding as a defence works by",
+      "q_vi": "Phòng thủ bằng giới hạn chuẩn hoạt động theo cách",
+      "choices": [
+        "Clipping every update to a maximum norm so no client can move the model far in one round",
+        "Encrypting updates so they cannot be modified",
+        "Increasing the learning rate for trusted clients",
+        "Rejecting clients with unusual data distributions"
+      ],
+      "answer": 0,
+      "why": "It caps the damage per round rather than identifying who is malicious, which is why it composes well with the differential privacy clipping step. It does not stop a patient attacker that stays under the cap for many rounds.",
+      "why_vi": "Nó chặn mức thiệt hại mỗi vòng thay vì chỉ ra ai là kẻ xấu, vì thế nó kết hợp tốt với bước cắt chuẩn của riêng tư vi phân. Nó không chặn được kẻ tấn công kiên nhẫn chịu nằm dưới ngưỡng qua nhiều vòng.",
+      "level": 1
+    },
+    {
+      "id": "qf-69",
+      "q": "A free rider in a federation",
+      "q_vi": "Bên hưởng lợi không đóng góp trong một liên minh",
+      "choices": [
+        "Attacks the aggregation protocol cryptographically",
+        "Refuses to download the global model",
+        "Uploads noise or the unchanged model to receive the global model without contributing",
+        "Trains on far more data than anyone else"
+      ],
+      "answer": 2,
+      "why": "It is an incentive problem, not a security exploit, and it is why contribution measurement and reward schemes exist. Its updates may look perfectly well behaved to a robustness check.",
+      "why_vi": "Đây là vấn đề khuyến khích chứ không phải lỗ hổng bảo mật, và vì vậy mới có các cơ chế đo đóng góp và trả thưởng. Cập nhật của nó có thể trông rất ngoan trước một phép kiểm tính bền vững.",
+      "level": 1
+    },
+    {
+      "id": "qf-70",
+      "q": "A Byzantine client is one that",
+      "q_vi": "Máy khách Byzantine là máy khách",
+      "choices": [
+        "May send arbitrary values, possibly coordinated with other attackers and adapted to the defence",
+        "Simply crashes and stops responding",
+        "Holds data from a different distribution",
+        "Has slower hardware than the others"
+      ],
+      "answer": 0,
+      "why": "The Byzantine model is the worst case assumption, stronger than crash faults and stronger than mere heterogeneity. Confusing an unusual honest client with a Byzantine one is a standard mistake in defence design.",
+      "why_vi": "Mô hình Byzantine là giả định tình huống xấu nhất, mạnh hơn lỗi dừng và mạnh hơn chuyện chỉ khác phân bố. Nhầm một máy khách trung thực nhưng khác thường với máy khách Byzantine là lỗi kinh điển khi thiết kế phòng thủ.",
+      "level": 1
+    },
+    {
+      "id": "qf-71",
+      "q": "A robust aggregation rule with a breakdown point of one third means that",
+      "q_vi": "Một quy tắc tổng hợp bền vững có ngưỡng sụp đổ bằng một phần ba nghĩa là",
+      "choices": [
+        "It reduces communication by one third",
+        "It guarantees accuracy within one third of the optimum",
+        "It tolerates any number of malicious clients up to a third of the rounds",
+        "Beyond roughly a third malicious clients, the output can be pushed anywhere"
+      ],
+      "answer": 3,
+      "why": "The breakdown point is a threshold on the corrupted fraction, past which no bound holds at all. Reporting robustness without saying at what fraction it was tested leaves the claim untestable.",
+      "why_vi": "Ngưỡng sụp đổ là mức chặn trên tỉ lệ bị bóp méo, vượt qua nó thì không còn cận nào đúng nữa. Công bố tính bền vững mà không nói đã thử ở tỉ lệ nào thì tuyên bố đó không kiểm chứng được.",
+      "level": 2
+    },
+    {
+      "id": "qf-72",
+      "q": "A server keeps a small clean validation set and rejects any client update that lowers validation accuracy. A weakness of this defence is",
+      "q_vi": "Máy chủ giữ một tập kiểm định sạch nhỏ và loại mọi cập nhật của máy khách làm giảm độ chính xác kiểm định. Điểm yếu của cách phòng thủ này là",
+      "choices": [
+        "It requires all clients to be online at once",
+        "Honest clients whose distribution differs from the validation set will be rejected as well",
+        "It cannot be computed without decrypting the raw data",
+        "Validation accuracy never changes between rounds"
+      ],
+      "answer": 1,
+      "why": "The validation set defines what counts as an improvement, so it silently becomes the target distribution. Under heterogeneity that filters out the very clients that bring new information.",
+      "why_vi": "Tập kiểm định định nghĩa thế nào là cải thiện, nên nó lặng lẽ trở thành phân bố đích. Trong bối cảnh không đồng nhất, cách đó lọc bỏ đúng những máy khách mang lại thông tin mới.",
+      "level": 2
+    },
+    {
+      "id": "qf-73",
+      "q": "A production system only invites devices that are charging, idle and on unmetered wifi. The statistical consequence is",
+      "q_vi": "Một hệ chạy thật chỉ mời những thiết bị đang sạc, đang rảnh và dùng wifi không tính cước. Hệ quả thống kê là",
+      "choices": [
+        "The model becomes larger than the device memory",
+        "The privacy budget is exhausted faster",
+        "The updates become impossible to aggregate",
+        "The training population is a biased sample of users, so the model fits the well connected best"
+      ],
+      "answer": 3,
+      "why": "Eligibility criteria correlate with wealth, geography and usage patterns. The gain in reliability is real, but it must be reported alongside who never got to contribute.",
+      "why_vi": "Các tiêu chí đủ tư cách tương quan với mức thu nhập, vị trí địa lý và thói quen sử dụng. Lợi ích về độ tin cậy là có thật, nhưng phải báo cáo kèm theo việc ai đã không bao giờ được đóng góp.",
+      "level": 2
+    },
+    {
+      "id": "qf-74",
+      "q": "On device constraints that decide whether local training may run include",
+      "q_vi": "Các ràng buộc trên thiết bị quyết định huấn luyện cục bộ có chạy được hay không gồm",
+      "choices": [
+        "The choice of loss function",
+        "The number of layers in the server model only",
+        "The size of the server's test set",
+        "Battery level, thermal headroom, memory and metered data caps"
+      ],
+      "answer": 3,
+      "why": "These are hard physical and billing limits that a scheduler must respect before any algorithmic consideration. Loss functions and test sets do not determine whether a phone is allowed to train at all.",
+      "why_vi": "Đây là các giới hạn vật lý và cước phí cứng mà bộ lập lịch phải tôn trọng trước mọi cân nhắc thuật toán. Hàm mất mát hay tập kiểm thử không quyết định một chiếc điện thoại có được phép huấn luyện hay không.",
+      "level": 1
+    },
+    {
+      "id": "qf-75",
+      "q": "Tagging every broadcast global model with a version number lets the server",
+      "q_vi": "Gắn số phiên bản cho mọi mô hình toàn cục được phát đi cho phép máy chủ",
+      "choices": [
+        "Remove the need for aggregation",
+        "Measure how stale an arriving update is and weight or reject it accordingly",
+        "Guarantee that every client trains for the same number of epochs",
+        "Encrypt the model before broadcasting"
+      ],
+      "answer": 1,
+      "why": "Versioning is the bookkeeping that makes asynchronous and partially available systems manageable. It says nothing about confidentiality or about how much local work each client did.",
+      "why_vi": "Đánh phiên bản là phần ghi sổ giúp quản lý được hệ bất đồng bộ và hệ có thiết bị lúc có lúc không. Nó không nói gì về bảo mật, cũng không nói gì về khối lượng công việc cục bộ của từng máy khách.",
+      "level": 1
+    },
+    {
+      "id": "qf-76",
+      "q": "Freezing the backbone and training only a small adapter on each client mainly reduces",
+      "q_vi": "Đóng băng phần thân mạng và chỉ huấn luyện một bộ điều hợp nhỏ ở mỗi máy khách chủ yếu làm giảm",
+      "choices": [
+        "The size of each client's dataset",
+        "The privacy budget consumed",
+        "The number of clients needed per round",
+        "The number of parameters that must be uploaded each round"
+      ],
+      "answer": 3,
+      "why": "Only the trainable part travels, so uplink cost drops with the adapter size rather than the model size. It does not change how many clients you need or how much privacy each release costs.",
+      "why_vi": "Chỉ phần huấn luyện được mới phải truyền đi, nên chi phí đường lên giảm theo kích thước bộ điều hợp chứ không theo kích thước mô hình. Nó không đổi số máy khách cần có, cũng không đổi mức riêng tư mà mỗi lần công bố tiêu tốn.",
+      "level": 1
+    },
+    {
+      "id": "qf-77",
+      "q": "Aggressive gradient sparsification without error feedback loses accuracy because",
+      "q_vi": "Thưa hoá gradient quá mạnh mà không có phản hồi sai số làm mất độ chính xác vì",
+      "choices": [
+        "Sparsification adds noise that violates the privacy budget",
+        "The server cannot decode a sparse vector",
+        "Small but consistently signed components are discarded every round and never accumulate",
+        "Sparse updates cannot be averaged"
+      ],
+      "answer": 2,
+      "why": "A component that is always small but always in the same direction matters over hundreds of rounds, and top selection throws it away each time. Error feedback stores the residual so it eventually crosses the threshold.",
+      "why_vi": "Một thành phần luôn nhỏ nhưng luôn cùng dấu vẫn có ý nghĩa qua hàng trăm vòng, thế mà cách chọn phần lớn nhất lại vứt nó đi mỗi lần. Phản hồi sai số lưu phần dư lại để cuối cùng nó cũng vượt được ngưỡng.",
+      "level": 3
+    },
+    {
+      "id": "qf-78",
+      "q": "Devices on poor networks drop out mid round more often than others. The effect on the model is",
+      "q_vi": "Thiết bị ở vùng mạng kém rớt giữa vòng thường xuyên hơn các thiết bị khác. Ảnh hưởng lên mô hình là",
+      "choices": [
+        "A cryptographic failure of secure aggregation",
+        "An increase in the privacy budget spent",
+        "A systematic bias, because the missing updates are not a random sample of the population",
+        "Only a slowdown, since the aggregate stays unbiased"
+      ],
+      "answer": 2,
+      "why": "Missing at random would only cost variance. Here the dropout correlates with the very conditions the model needs to handle, so the aggregate drifts toward the well connected users.",
+      "why_vi": "Nếu thiếu một cách ngẫu nhiên thì chỉ tốn thêm phương sai. Ở đây việc rớt tương quan với chính hoàn cảnh mà mô hình cần xử lý, nên kết quả tổng hợp trôi dần về phía người dùng có mạng tốt.",
+      "level": 3
+    },
+    {
+      "id": "qf-79",
+      "q": "Quantisation and sparsification reduce uplink cost in different ways because",
+      "q_vi": "Lượng tử hoá và thưa hoá giảm chi phí đường lên theo cách khác nhau vì",
+      "choices": [
+        "Quantisation sends every entry at lower precision, while sparsification sends only some entries",
+        "Both send the full update but compress the header",
+        "Quantisation drops entries and sparsification lowers precision",
+        "Neither changes the number of bytes sent"
+      ],
+      "answer": 0,
+      "why": "One shrinks the width of each number, the other shrinks how many numbers there are, and the two combine. Mixing up which is which leads to nonsense compression ratios in a results table.",
+      "why_vi": "Một cách thu hẹp độ rộng của từng con số, cách kia thu hẹp số lượng con số, và hai cách kết hợp được với nhau. Lẫn lộn hai khái niệm này sẽ cho ra tỉ lệ nén vô nghĩa trong bảng kết quả.",
+      "level": 1
+    },
+    {
+      "id": "qf-80",
+      "q": "Uplink compression is usually prioritised over downlink compression because",
+      "q_vi": "Nén đường lên thường được ưu tiên hơn nén đường xuống vì",
+      "choices": [
+        "Consumer and mobile connections upload far more slowly than they download",
+        "Downlink traffic is not billed",
+        "The server cannot compress what it broadcasts",
+        "The downlink model is always smaller than the update"
+      ],
+      "answer": 0,
+      "why": "The asymmetry is a property of the access network, not of the algorithm. The broadcast model and the uploaded update are the same size, which is exactly why the slower direction dominates the round time.",
+      "why_vi": "Sự bất đối xứng nằm ở mạng truy nhập chứ không nằm ở thuật toán. Mô hình phát xuống và bản cập nhật tải lên có cùng kích thước, đó chính là lý do hướng chậm hơn quyết định thời gian của cả vòng.",
+      "level": 1
+    },
+    {
+      "id": "qf-81",
+      "q": "A model that fits comfortably on a server GPU may still be unusable in cross device federated learning because",
+      "q_vi": "Một mô hình vừa vặn thoải mái trên GPU máy chủ vẫn có thể không dùng được trong học liên kết chéo thiết bị vì",
+      "choices": [
+        "The aggregation rule cannot handle large vectors",
+        "Large models cannot be encrypted",
+        "The privacy budget grows with model size",
+        "Local training needs activations and optimiser state in device memory, several times the model size"
+      ],
+      "answer": 3,
+      "why": "Inference memory and training memory are different orders of magnitude on a phone. A model that runs fine for prediction may be impossible to fine tune locally.",
+      "why_vi": "Bộ nhớ để suy luận và bộ nhớ để huấn luyện trên điện thoại chênh nhau nhiều bậc. Mô hình chạy dự đoán rất ổn vẫn có thể không tài nào tinh chỉnh được ngay trên máy.",
+      "level": 1
+    },
+    {
+      "id": "qf-82",
+      "q": "Hospitals training a shared diagnostic model is a typical example of",
+      "q_vi": "Các bệnh viện cùng huấn luyện một mô hình chẩn đoán chung là ví dụ điển hình của",
+      "choices": [
+        "Split learning",
+        "Cross device federated learning",
+        "Cross silo federated learning",
+        "Gossip averaging"
+      ],
+      "answer": 2,
+      "why": "There are few participants, each with substantial data, stable identity and legal agreements. Cross device would mean millions of intermittent phones, a completely different engineering problem.",
+      "why_vi": "Số bên tham gia ít, mỗi bên có lượng dữ liệu đáng kể, danh tính ổn định và có thoả thuận pháp lý. Chéo thiết bị nghĩa là hàng triệu điện thoại lúc có lúc không, một bài toán kỹ thuật hoàn toàn khác.",
+      "level": 1
+    },
+    {
+      "id": "qf-83",
+      "q": "A bank holds transaction history and a telecom holds mobility data about the same customers. Training jointly on both is",
+      "q_vi": "Một ngân hàng nắm lịch sử giao dịch còn một nhà mạng nắm dữ liệu di chuyển của cùng nhóm khách hàng. Cùng huấn luyện trên cả hai là",
+      "choices": [
+        "Vertical federated learning, which needs entity alignment first",
+        "Split learning, since the model is cut in half",
+        "Gossip averaging over a peer graph",
+        "Horizontal federated learning, which needs no alignment"
+      ],
+      "answer": 0,
+      "why": "Different features about the same subjects is the vertical case by definition. Horizontal would be two banks with the same fields about different customers, and it needs no record matching.",
+      "why_vi": "Các đặc trưng khác nhau về cùng chủ thể chính là định nghĩa của trường hợp chiều dọc. Chiều ngang sẽ là hai ngân hàng có cùng trường dữ liệu về những khách hàng khác nhau, và không cần khớp bản ghi.",
+      "level": 2
+    },
+    {
+      "id": "qf-84",
+      "q": "Base stations training traffic prediction models federatively are usually motivated by",
+      "q_vi": "Việc các trạm gốc huấn luyện mô hình dự báo lưu lượng theo kiểu liên kết thường xuất phát từ",
+      "choices": [
+        "The impossibility of centralised training on such data",
+        "A requirement that every base station run a different architecture",
+        "The cost and latency of hauling raw telemetry to a central site, as much as by privacy",
+        "Privacy law alone, since telemetry is personal data in every jurisdiction"
+      ],
+      "answer": 2,
+      "why": "At the network edge the binding constraint is often bandwidth and reaction time rather than regulation. Assuming privacy is always the motive leads to designs that optimise the wrong objective.",
+      "why_vi": "Ở biên mạng, ràng buộc thật thường là băng thông và thời gian phản ứng chứ không phải quy định pháp lý. Mặc định rằng động cơ luôn là riêng tư sẽ dẫn tới thiết kế tối ưu sai mục tiêu.",
+      "level": 2
+    },
+    {
+      "id": "qf-85",
+      "q": "A company argues it needs no legal basis under data protection law because it uses federated learning. The error is",
+      "q_vi": "Một công ty lập luận rằng họ không cần cơ sở pháp lý theo luật bảo vệ dữ liệu vì đã dùng học liên kết. Sai lầm là",
+      "choices": [
+        "Data protection law applies only to cloud training",
+        "Personal data is still being processed on the device, and the model update may itself be personal data",
+        "The law only covers data stored in Europe",
+        "Federated learning is explicitly banned by the regulation"
+      ],
+      "answer": 1,
+      "why": "Processing includes computation wherever it happens, and an update derived from one person's data can carry information about them. Federated learning supports data minimisation, it does not replace a lawful basis.",
+      "why_vi": "Xử lý bao gồm cả việc tính toán ở bất kỳ đâu, và một bản cập nhật dẫn xuất từ dữ liệu của một người vẫn có thể mang thông tin về người đó. Học liên kết hỗ trợ nguyên tắc tối thiểu hoá dữ liệu, nó không thay thế được cơ sở pháp lý.",
+      "level": 3
+    },
+    {
+      "id": "qf-86",
+      "q": "A user exercises the right to erasure. Deleting their local file is insufficient because",
+      "q_vi": "Một người dùng thực hiện quyền được xoá dữ liệu. Chỉ xoá tệp cục bộ của họ là chưa đủ vì",
+      "choices": [
+        "The server keeps a backup of every raw dataset",
+        "Erasure requests apply only to centralised systems",
+        "Local files are stored encrypted and cannot be deleted",
+        "Their data already influenced the global weights through earlier rounds"
+      ],
+      "answer": 3,
+      "why": "The model is a lossy but real record of what it was trained on. This is exactly the gap that federated unlearning tries to close, and there is no free way to close it.",
+      "why_vi": "Mô hình là một dạng ghi nhận có mất mát nhưng có thật về những gì nó đã học. Đây chính là khoảng trống mà gỡ học liên kết cố lấp, và không có cách nào lấp mà không tốn kém.",
+      "level": 2
+    },
+    {
+      "id": "qf-87",
+      "q": "Unlearning one client's contribution in federated learning is harder than in centralised training because",
+      "q_vi": "Gỡ học phần đóng góp của một máy khách trong học liên kết khó hơn so với huấn luyện tập trung vì",
+      "choices": [
+        "The privacy budget forbids retraining",
+        "Federated models have more parameters",
+        "The client's data is encrypted and cannot be identified",
+        "Its update was mixed into every later round, and the server may not have kept the per client updates"
+      ],
+      "answer": 3,
+      "why": "The influence propagates through the whole training trajectory, and secure aggregation may have destroyed the record needed to reverse it. That is why practical answers rely on checkpoints and partial replay.",
+      "why_vi": "Ảnh hưởng lan qua toàn bộ quỹ đạo huấn luyện, và tổng hợp an toàn có thể đã xoá mất chính thứ cần để đảo ngược. Vì vậy các lời giải thực dụng phải dựa vào điểm lưu và chạy lại một phần.",
+      "level": 3
+    },
+    {
+      "id": "qf-88",
+      "q": "Rolling back to a checkpoint from before a client first joined and replaying the remaining rounds",
+      "q_vi": "Quay lui về điểm lưu từ trước khi một máy khách tham gia lần đầu rồi chạy lại các vòng còn lại",
+      "choices": [
+        "Gives an exact removal but costs most of the training compute again",
+        "Is free, since the later updates are already stored",
+        "Requires the removed client to participate in the replay",
+        "Leaves the removed client's influence fully intact"
+      ],
+      "answer": 0,
+      "why": "Exactness is the appeal and cost is the price, which is why approximate unlearning methods exist. It clearly does not leave the influence intact, since that contribution never enters the replayed trajectory.",
+      "why_vi": "Tính chính xác là điểm hấp dẫn, cái giá là chi phí tính toán, vì thế mới có các phương pháp gỡ học gần đúng. Nó rõ ràng không để nguyên ảnh hưởng, vì phần đóng góp đó không hề đi vào quỹ đạo chạy lại.",
+      "level": 2
+    },
+    {
+      "id": "qf-89",
+      "q": "The data minimisation principle asks a system to",
+      "q_vi": "Nguyên tắc tối thiểu hoá dữ liệu yêu cầu hệ thống",
+      "choices": [
+        "Collect and retain only what the stated purpose actually requires",
+        "Delete the trained model after every round",
+        "Compress all stored data as much as possible",
+        "Keep data only on servers inside one country"
+      ],
+      "answer": 0,
+      "why": "It is about purpose and necessity, not about file size or location. Federated learning is attractive precisely because it lets you keep the purpose while collecting less.",
+      "why_vi": "Nguyên tắc này nói về mục đích và mức cần thiết, không nói về dung lượng tệp hay nơi lưu. Học liên kết hấp dẫn chính vì nó cho phép giữ được mục đích trong khi thu thập ít hơn.",
+      "level": 1
+    },
+    {
+      "id": "qf-90",
+      "q": "A federated paper evaluates only on a balanced test set held by the server. What this hides is",
+      "q_vi": "Một bài báo về học liên kết chỉ đánh giá trên tập kiểm thử cân bằng do máy chủ giữ. Cách làm đó che giấu",
+      "choices": [
+        "How the model performs on each client's own skewed distribution, which is what users actually experience",
+        "The total number of communication rounds",
+        "The size of the model in megabytes",
+        "The learning rate schedule"
+      ],
+      "answer": 0,
+      "why": "A balanced set describes a distribution no participant faces, so it flatters the global average. Per client evaluation is what reveals whether the federation helped everyone or only the majority.",
+      "why_vi": "Tập cân bằng mô tả một phân bố mà không bên tham gia nào gặp phải, nên nó tô hồng con số trung bình toàn cục. Đánh giá theo từng máy khách mới cho thấy liên minh giúp tất cả hay chỉ giúp phe đa số.",
+      "level": 2
+    },
+    {
+      "id": "qf-91",
+      "q": "After a change, mean client accuracy rises but the variance across clients rises more. The honest reading is",
+      "q_vi": "Sau một thay đổi, độ chính xác trung bình trên các máy khách tăng nhưng phương sai giữa các máy khách tăng nhiều hơn. Cách đọc trung thực là",
+      "choices": [
+        "Every client improved, just by different amounts",
+        "Variance across clients has no interpretation",
+        "Some clients improved a lot while others got worse, so the change may be a regression for part of the federation",
+        "The mean is the only number that matters"
+      ],
+      "answer": 2,
+      "why": "A mean cannot distinguish everyone improving from a few improving a great deal. Reporting the spread, or the worst case client, is what makes the claim checkable.",
+      "why_vi": "Giá trị trung bình không phân biệt được giữa việc mọi người cùng tốt lên và việc vài bên tốt lên rất nhiều. Báo thêm độ phân tán, hoặc máy khách tệ nhất, mới làm tuyên bố kiểm chứng được.",
+      "level": 2
+    },
+    {
+      "id": "qf-92",
+      "q": "Worst case client accuracy is often the deciding metric because",
+      "q_vi": "Độ chính xác của máy khách tệ nhất thường là chỉ số quyết định vì",
+      "choices": [
+        "It is easier to compute than the mean",
+        "Regulators require it explicitly",
+        "It is always equal to the mean under non identical data",
+        "A participant will leave the federation if the shared model is worse for it than training alone"
+      ],
+      "answer": 3,
+      "why": "Participation is voluntary, so the weakest outcome sets the incentive to stay. It is neither easier to compute nor equal to the mean, and no regulation names it.",
+      "why_vi": "Việc tham gia là tự nguyện, nên kết quả yếu nhất quyết định động cơ ở lại. Nó không dễ tính hơn trung bình, cũng không bằng trung bình, và không quy định nào nêu đích danh nó.",
+      "level": 1
+    },
+    {
+      "id": "qf-93",
+      "q": "A results table reports final global accuracy for each method and nothing else. The most important missing column is",
+      "q_vi": "Một bảng kết quả chỉ báo độ chính xác toàn cục cuối cùng của từng phương pháp và không gì khác. Cột thiếu quan trọng nhất là",
+      "choices": [
+        "The communication cost, in rounds and bytes, needed to reach that accuracy",
+        "The date the experiment was run",
+        "The name of the deep learning framework used",
+        "The number of lines of code"
+      ],
+      "answer": 0,
+      "why": "In federated learning accuracy is bought with communication, so a method that wins after ten times the traffic has not won. Framework and code size do not change what the comparison means.",
+      "why_vi": "Trong học liên kết, độ chính xác được mua bằng truyền thông, nên phương pháp thắng sau khi tốn gấp mười lần lưu lượng thì chưa gọi là thắng. Tên thư viện hay số dòng mã không làm thay đổi ý nghĩa của phép so sánh.",
+      "level": 2
+    },
+    {
+      "id": "qf-94",
+      "q": "Participation bias in a deployed federated system means that",
+      "q_vi": "Thiên lệch do tham gia trong một hệ liên kết đã triển khai nghĩa là",
+      "choices": [
+        "The aggregation weights were computed incorrectly",
+        "The model reflects the clients that were able to join, not the population the product serves",
+        "The test set was shuffled improperly",
+        "Clients deliberately submit biased updates"
+      ],
+      "answer": 1,
+      "why": "It is a sampling problem created by eligibility rules and device availability, and no aggregation weight fixes it. It is distinct from poisoning, where the bias is intentional.",
+      "why_vi": "Đây là vấn đề lấy mẫu do các quy tắc đủ tư cách và khả năng sẵn sàng của thiết bị tạo ra, không trọng số tổng hợp nào sửa được. Nó khác với đầu độc, nơi thiên lệch là cố ý.",
+      "level": 2
+    },
+    {
+      "id": "qf-95",
+      "q": "Measuring how much each client contributed by removing it and retraining is accurate but",
+      "q_vi": "Đo mức đóng góp của từng máy khách bằng cách bỏ nó ra rồi huấn luyện lại thì chính xác nhưng",
+      "choices": [
+        "It violates differential privacy by definition",
+        "It costs a full retraining per client, so approximations are used in practice",
+        "It gives the same value for every client",
+        "It cannot be done when clients hold different data"
+      ],
+      "answer": 1,
+      "why": "Exact leave one out accounting scales linearly with the number of clients, which is hopeless at cross device scale. Gradient based influence estimates and sampled Shapley values are the usual compromise.",
+      "why_vi": "Cách bỏ ra từng bên một cách chính xác có chi phí tỉ lệ tuyến tính với số máy khách, điều này bất khả thi ở quy mô chéo thiết bị. Ước lượng ảnh hưởng dựa trên gradient và giá trị Shapley lấy mẫu là cách dung hoà thường dùng.",
+      "level": 2
+    },
+    {
+      "id": "qf-96",
+      "q": "An incentive mechanism in a federation exists to",
+      "q_vi": "Cơ chế khuyến khích trong một liên minh tồn tại để",
+      "choices": [
+        "Make honest contribution more rewarding than free riding for a rational participant",
+        "Encrypt the updates before aggregation",
+        "Detect gradient inversion attacks",
+        "Reduce the number of communication rounds"
+      ],
+      "answer": 0,
+      "why": "It is an economics tool aimed at participation, not a cryptographic or algorithmic one. Confusing it with a security defence leaves both the incentives and the threats unaddressed.",
+      "why_vi": "Đây là công cụ kinh tế nhắm vào việc tham gia, không phải công cụ mật mã hay thuật toán. Nhầm nó với một biện pháp bảo mật sẽ bỏ ngỏ cả phần khuyến khích lẫn phần đe doạ.",
+      "level": 1
+    },
+    {
+      "id": "qf-97",
+      "q": "In decentralised federated learning over a peer graph, convergence speed depends strongly on",
+      "q_vi": "Trong học liên kết phi tập trung trên đồ thị ngang hàng, tốc độ hội tụ phụ thuộc mạnh vào",
+      "choices": [
+        "The number of parameters in the model only",
+        "Whether the clients use the same random seed",
+        "How well connected the communication graph is, since information must diffuse across it",
+        "The order in which clients were registered"
+      ],
+      "answer": 2,
+      "why": "A sparse or nearly disconnected graph lets clusters drift apart before information reaches them. This is the decentralised counterpart of partial participation variance in the server based setting.",
+      "why_vi": "Đồ thị thưa hoặc gần như rời rạc sẽ để các cụm trôi ra xa nhau trước khi thông tin kịp lan tới. Đây là phiên bản phi tập trung của phương sai do tham gia một phần trong bối cảnh có máy chủ.",
+      "level": 2
+    },
+    {
+      "id": "qf-98",
+      "q": "Communication cost in a federated experiment should be reported as",
+      "q_vi": "Chi phí truyền thông trong một thí nghiệm liên kết nên được báo cáo dưới dạng",
+      "choices": [
+        "Wall clock time on the server",
+        "Bytes only, since rounds do not matter",
+        "Rounds only, since bytes are fixed by the model",
+        "Rounds together with bytes per round, since compression changes one without the other"
+      ],
+      "answer": 3,
+      "why": "A method can halve the rounds and triple the payload, and quoting either number alone hides the trade. Server wall clock says nothing about the client links that actually limit the system.",
+      "why_vi": "Một phương pháp có thể giảm nửa số vòng nhưng tăng gấp ba lượng dữ liệu mỗi vòng, nêu riêng một con số sẽ che mất đánh đổi đó. Thời gian chạy trên máy chủ không nói gì về đường truyền của máy khách, thứ thật sự giới hạn hệ thống.",
+      "level": 1
+    },
+    {
+      "id": "qf-99",
+      "q": "The privacy budget epsilon is best described as",
+      "q_vi": "Ngân sách riêng tư epsilon được mô tả đúng nhất là",
+      "choices": [
+        "The number of clients allowed per round",
+        "The fraction of parameters that are kept private",
+        "A bound on how much the output distribution may change when one record is added or removed",
+        "The amount of noise added to each gradient"
+      ],
+      "answer": 2,
+      "why": "Epsilon is the guarantee, and the noise scale is only the means of achieving it for a given sensitivity. Smaller epsilon means a stronger promise, which is why the direction is easy to state backwards.",
+      "why_vi": "Epsilon là bảo đảm, còn mức nhiễu chỉ là phương tiện để đạt bảo đảm đó với một độ nhạy cho trước. Epsilon nhỏ hơn nghĩa là lời hứa mạnh hơn, đây là chỗ người ta rất hay nói ngược chiều.",
+      "level": 1
+    },
+    {
+      "id": "qf-100",
+      "q": "The most informative baseline to place beside a federated result is",
+      "q_vi": "Mốc so sánh cung cấp nhiều thông tin nhất để đặt cạnh một kết quả liên kết là",
+      "choices": [
+        "A model trained on a public dataset only",
+        "A randomly initialised model with no training",
+        "Centralised training on the pooled data as an upper bound, and purely local training as a lower bound",
+        "The same method run with a different random seed"
+      ],
+      "answer": 2,
+      "why": "Those two numbers bracket what federation can possibly buy, so the gap tells the reader whether the effort was worth it. A different seed measures variance, not value, and cannot bound anything.",
+      "why_vi": "Hai con số đó kẹp lấy phần lợi ích mà liên kết có thể mang lại, nên khoảng cách giữa chúng cho người đọc biết công sức bỏ ra có đáng hay không. Đổi hạt giống ngẫu nhiên chỉ đo phương sai chứ không đo giá trị, và không kẹp được gì cả.",
       "level": 2
     }
   ]

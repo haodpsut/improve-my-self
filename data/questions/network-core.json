@@ -9,9 +9,9 @@
       "q_vi": "Một phiên truyền tệp chỉ đứng khi đường đi qua một đường hầm nhất định, còn gói ping nhỏ vẫn thông. Nguyên nhân khả dĩ nhất là",
       "choices": [
         "An MTU mismatch with blocked fragmentation messages",
-        "A DNS misconfiguration",
         "An expired TLS certificate",
-        "A duplicate MAC address"
+        "A duplicate MAC address",
+        "A DNS misconfiguration"
       ],
       "answer": 0,
       "why": "Small packets fit, large ones need fragmentation, and if the notification message is filtered the sender never learns to shrink them. The connection opens and then hangs.",
@@ -23,12 +23,12 @@
       "q": "Which statement about TCP and UDP is correct?",
       "q_vi": "Phát biểu nào về TCP và UDP là đúng?",
       "choices": [
-        "TCP guarantees ordered delivery, UDP does not guarantee delivery at all",
-        "UDP is always faster because it compresses the payload",
         "TCP does not perform congestion control",
-        "UDP provides encryption by default"
+        "UDP provides encryption by default",
+        "UDP is always faster because it compresses the payload",
+        "TCP guarantees ordered delivery, UDP does not guarantee delivery at all"
       ],
-      "answer": 0,
+      "answer": 3,
       "why": "The difference is guarantees, not compression or encryption. UDP looks faster because it skips retransmission and ordering, which is a trade off, not free speed.",
       "why_vi": "Khác biệt nằm ở các bảo đảm, không phải nén hay mã hoá. UDP trông nhanh hơn vì nó bỏ qua truyền lại và sắp thứ tự, đó là đánh đổi chứ không phải nhanh miễn phí.",
       "level": 1
@@ -38,12 +38,12 @@
       "q": "QUIC removes head-of-line blocking that hurt HTTP/2 because",
       "q_vi": "QUIC loại bỏ nghẽn đầu hàng đợi vốn làm khó HTTP/2 vì",
       "choices": [
-        "Each stream is independently ordered above an unordered transport",
+        "It compresses all streams into one",
         "It disables retransmission entirely",
-        "It uses one TCP connection per request",
-        "It compresses all streams into one"
+        "Each stream is independently ordered above an unordered transport",
+        "It uses one TCP connection per request"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "HTTP/2 multiplexed streams over a single ordered TCP byte stream, so one lost segment stalled everything. QUIC keeps ordering per stream instead.",
       "why_vi": "HTTP/2 ghép nhiều luồng lên một dòng byte TCP có thứ tự, nên chỉ cần mất một đoạn là kẹt hết. QUIC giữ thứ tự riêng cho từng luồng.",
       "level": 3
@@ -54,8 +54,8 @@
       "q_vi": "Điều khiển tắc nghẽn khác điều khiển luồng ở chỗ",
       "choices": [
         "Congestion control protects the network, flow control protects the receiver",
-        "They are two names for the same mechanism",
         "Flow control operates at the physical layer",
+        "They are two names for the same mechanism",
         "Congestion control only applies to UDP"
       ],
       "answer": 0,
@@ -68,12 +68,12 @@
       "q": "Bufferbloat makes latency worse because",
       "q_vi": "Phình bộ đệm làm độ trễ xấu đi vì",
       "choices": [
-        "Oversized queues delay packets instead of signalling congestion by dropping them",
-        "It reduces the link bandwidth",
+        "It forces the use of UDP",
         "It corrupts packet checksums",
-        "It forces the use of UDP"
+        "It reduces the link bandwidth",
+        "Oversized queues delay packets instead of signalling congestion by dropping them"
       ],
-      "answer": 0,
+      "answer": 3,
       "why": "Loss is how the network tells the sender to slow down. A huge buffer hides that signal and converts it into queueing delay.",
       "why_vi": "Mất gói chính là cách mạng báo cho bên gửi chậm lại. Bộ đệm quá lớn giấu tín hiệu đó đi và biến nó thành độ trễ hàng đợi.",
       "level": 3
@@ -82,7 +82,12 @@
       "id": "qn-6",
       "q": "Which device makes forwarding decisions using IP prefixes?",
       "q_vi": "Thiết bị nào ra quyết định chuyển tiếp dựa trên tiền tố IP?",
-      "choices": ["Router", "Switch", "Hub", "Repeater"],
+      "choices": [
+        "Router",
+        "Switch",
+        "Repeater",
+        "Hub"
+      ],
       "answer": 0,
       "why": "Switches forward on link layer addresses within one segment. Routers look at the network layer and choose a next hop between networks.",
       "why_vi": "Bộ chuyển mạch chuyển tiếp theo địa chỉ tầng liên kết trong một phân đoạn. Bộ định tuyến nhìn tầng mạng và chọn chặng kế tiếp giữa các mạng.",
@@ -93,12 +98,12 @@
       "q": "The essential idea of software-defined networking is",
       "q_vi": "Ý tưởng cốt lõi của mạng định nghĩa bằng phần mềm là",
       "choices": [
-        "Separating the control plane from the data plane so forwarding is programmed centrally",
         "Replacing all hardware with virtual machines",
         "Encrypting every packet in the network",
+        "Separating the control plane from the data plane so forwarding is programmed centrally",
         "Removing routing protocols from the internet"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "The decision logic moves to a controller with a global view, while the switches keep doing fast forwarding.",
       "why_vi": "Phần logic ra quyết định chuyển sang bộ điều khiển có tầm nhìn toàn cục, còn thiết bị chuyển mạch vẫn lo việc chuyển tiếp nhanh.",
       "level": 2
@@ -108,12 +113,12 @@
       "q": "BGP is described as a path vector protocol because it advertises",
       "q_vi": "BGP được gọi là giao thức vector đường đi vì nó quảng bá",
       "choices": [
-        "Reachable prefixes together with the sequence of autonomous systems to cross",
-        "The full link state map of the internet",
         "Only the hop count to each destination",
-        "The bandwidth of every link on the path"
+        "Reachable prefixes together with the sequence of autonomous systems to cross",
+        "The bandwidth of every link on the path",
+        "The full link state map of the internet"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "Carrying the AS path is what lets BGP detect loops and apply policy, which distance vector and link state protocols do not provide at that scale.",
       "why_vi": "Việc mang theo chuỗi hệ tự trị giúp BGP phát hiện vòng lặp và áp chính sách, thứ mà giao thức vector khoảng cách hay trạng thái liên kết không làm được ở quy mô đó.",
       "level": 3
@@ -123,12 +128,12 @@
       "q": "A CDN reduces user-perceived latency mainly by",
       "q_vi": "Mạng phân phối nội dung giảm độ trễ mà người dùng cảm nhận chủ yếu nhờ",
       "choices": [
-        "Serving content from a cache physically close to the user",
         "Increasing the origin server's CPU speed",
-        "Compressing the TCP headers",
-        "Switching the client to UDP"
+        "Switching the client to UDP",
+        "Serving content from a cache physically close to the user",
+        "Compressing the TCP headers"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "Propagation delay is bounded by distance and the speed of light. The only reliable fix is shortening the distance.",
       "why_vi": "Trễ lan truyền bị chặn bởi khoảng cách và tốc độ ánh sáng. Cách sửa đáng tin duy nhất là rút ngắn khoảng cách.",
       "level": 2
@@ -138,14 +143,1364 @@
       "q": "NAT complicates peer-to-peer applications because",
       "q_vi": "NAT gây khó cho ứng dụng ngang hàng vì",
       "choices": [
-        "Hosts behind it have no globally reachable address for inbound connections",
         "It encrypts the payload",
-        "It reduces the MTU to 512 bytes",
-        "It blocks all UDP traffic by design"
+        "It blocks all UDP traffic by design",
+        "Hosts behind it have no globally reachable address for inbound connections",
+        "It reduces the MTU to 512 bytes"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "Address translation is built around outbound flows. Without a mapping already created, an incoming connection has nowhere to land, which is why hole punching and relays exist.",
       "why_vi": "Biên dịch địa chỉ được dựng quanh các luồng đi ra. Nếu chưa có ánh xạ sẵn thì kết nối đi vào không biết đáp vào đâu, vì vậy mới sinh ra kỹ thuật đục lỗ và máy chủ trung chuyển.",
+      "level": 3
+    },
+    {
+      "id": "qn-11",
+      "q": "How does a switch fill its MAC address table?",
+      "q_vi": "Switch điền bảng địa chỉ vật lý bằng cách nào?",
+      "choices": [
+        "It asks the default gateway for the list of hosts",
+        "It records the source address of every frame together with the port it arrived on",
+        "It reads the destination address of every frame and stores it",
+        "It receives the table from the DHCP server at boot"
+      ],
+      "answer": 1,
+      "why": "Learning must come from the source field, because that is the only address the switch knows for certain belongs behind that port. The destination address tells the switch where the frame wants to go, which is exactly the thing it is still trying to learn.",
+      "why_vi": "Việc học phải dựa vào trường địa chỉ nguồn, vì đó là địa chỉ duy nhất switch biết chắc nằm sau cổng đó. Địa chỉ đích chỉ cho biết khung muốn đi đâu, mà đó lại chính là thứ switch đang cần học.",
+      "level": 1
+    },
+    {
+      "id": "qn-12",
+      "q": "Two switches are connected by two cables and the whole segment collapses under broadcast traffic. The reason a layer two loop is so destructive is that",
+      "q_vi": "Hai switch nối với nhau bằng hai sợi cáp và cả phân đoạn mạng sập vì lưu lượng quảng bá. Vòng lặp ở tầng hai gây hậu quả nặng như vậy vì",
+      "choices": [
+        "The routers stop advertising the prefix once they see duplicates",
+        "Ethernet frames have a very small maximum size",
+        "The switches run out of MAC table entries within seconds",
+        "Ethernet frames carry no hop counter, so a looping broadcast circulates forever and multiplies"
+      ],
+      "answer": 3,
+      "why": "IP survives loops because the time to live field eventually reaches zero. The Ethernet header has no such field, so each pass through the loop makes more copies until the links saturate. MAC table churn is a symptom, not the cause.",
+      "why_vi": "IP sống sót qua vòng lặp nhờ trường thời gian sống rồi cũng về không. Tiêu đề Ethernet không có trường nào như vậy, nên mỗi lần chạy vòng lại sinh thêm bản sao cho tới khi đường truyền nghẹt. Bảng địa chỉ bị đảo liên tục chỉ là triệu chứng, không phải nguyên nhân.",
+      "level": 2
+    },
+    {
+      "id": "qn-13",
+      "q": "Four one gigabit links are bonded into one logical link, yet a single large file transfer never exceeds about one gigabit per second. The explanation is",
+      "q_vi": "Bốn liên kết một gigabit được gộp thành một liên kết logic, nhưng một phiên truyền tệp lớn vẫn không vượt quá khoảng một gigabit mỗi giây. Lý do là",
+      "choices": [
+        "The bonding driver only activates one link and keeps the rest as spares",
+        "TCP cannot use more than one gigabit per second per connection",
+        "Aggregation hashes each flow onto one member link to preserve packet order",
+        "The switch has to fragment every frame across the four links"
+      ],
+      "answer": 2,
+      "why": "If a bundle striped packets of one flow across members, they would arrive out of order and wreck the receiver's reassembly and congestion control. So the hash keeps a flow on one member, and aggregate gain only shows with many flows. Active and standby is a different mode, and it would not be described as a four link bundle.",
+      "why_vi": "Nếu một bó chia gói của cùng một luồng ra nhiều thành viên thì gói sẽ tới lệch thứ tự, phá hỏng việc ghép lại và điều khiển tắc nghẽn ở bên nhận. Vì thế hàm băm giữ nguyên một luồng trên một thành viên, lợi ích cộng dồn chỉ thấy khi có nhiều luồng. Chế độ chính và dự phòng là chuyện khác, và người ta không gọi đó là bó bốn liên kết.",
+      "level": 2
+    },
+    {
+      "id": "qn-14",
+      "q": "What ends a broadcast domain?",
+      "q_vi": "Cái gì kết thúc một miền quảng bá?",
+      "choices": [
+        "A router interface or a VLAN boundary",
+        "Any switch port",
+        "A network cable longer than one hundred metres",
+        "The maximum transmission unit of the link"
+      ],
+      "answer": 0,
+      "why": "A switch forwards broadcasts out of every port in the VLAN, so it extends the domain rather than ending it. Only a device that makes a network layer decision, or a VLAN tag that separates the fabric, stops the broadcast.",
+      "why_vi": "Switch đẩy khung quảng bá ra mọi cổng trong cùng VLAN, tức là nó nới rộng miền chứ không kết thúc. Chỉ thiết bị ra quyết định ở tầng mạng, hoặc nhãn VLAN tách hạ tầng, mới chặn được quảng bá.",
+      "level": 1
+    },
+    {
+      "id": "qn-15",
+      "q": "An IPv6 packet is larger than the MTU of the next link. The router will",
+      "q_vi": "Một gói IPv6 lớn hơn MTU của liên kết kế tiếp. Bộ định tuyến sẽ",
+      "choices": [
+        "Strip the extension headers to make it fit",
+        "Drop it and return a packet too big message so the source resizes",
+        "Fragment it and let the destination reassemble the pieces",
+        "Buffer it until a link with a larger MTU becomes available"
+      ],
+      "answer": 1,
+      "why": "Fragmenting in the middle of the path was removed in version six precisely because it is expensive for routers and fragile under loss. The responsibility moved to the source, which is why the notification message must not be filtered.",
+      "why_vi": "Việc phân mảnh ở giữa đường đã bị bỏ trong phiên bản sáu chính vì nó tốn kém cho bộ định tuyến và dễ hỏng khi mất gói. Trách nhiệm chuyển về phía nguồn, vì vậy thông điệp báo lỗi tuyệt đối không được chặn.",
+      "level": 2
+    },
+    {
+      "id": "qn-16",
+      "q": "Why is IPv6 more dependent on ICMP reaching the source than IPv4 was?",
+      "q_vi": "Vì sao IPv6 phụ thuộc vào việc ICMP về được tới nguồn nhiều hơn IPv4?",
+      "choices": [
+        "Routers never fragment, so path MTU discovery is the only way the source learns the right size",
+        "IPv6 replaced the routing table with ICMP messages",
+        "IPv6 has no checksum in the transport layer",
+        "IPv6 addresses are too long to fit in a normal frame"
+      ],
+      "answer": 0,
+      "why": "In version four a router could silently fragment an oversized packet, so a filtered control message merely hurt efficiency. In version six the same filtering produces a black hole for large packets, because the source is never told to shrink them.",
+      "why_vi": "Ở phiên bản bốn, bộ định tuyến có thể lặng lẽ phân mảnh gói quá cỡ, nên chặn thông điệp điều khiển chỉ làm giảm hiệu quả. Ở phiên bản sáu, cũng việc chặn đó tạo ra hố đen cho gói lớn, vì nguồn không bao giờ được báo là phải thu nhỏ gói.",
+      "level": 3
+    },
+    {
+      "id": "qn-17",
+      "q": "Which mechanism lets an IPv6 host build its own address from information a router advertises, with no server keeping any state?",
+      "q_vi": "Cơ chế nào cho phép máy IPv6 tự dựng địa chỉ từ thông tin bộ định tuyến quảng bá, không cần máy chủ nào giữ trạng thái?",
+      "choices": [
+        "SLAAC",
+        "ARP",
+        "NAT64",
+        "DHCPv6 in stateful mode"
+      ],
+      "answer": 0,
+      "why": "Stateless autoconfiguration combines the advertised prefix with a locally generated interface identifier. Stateful DHCPv6 also assigns addresses but a server records the lease, which is the opposite of stateless.",
+      "why_vi": "Tự cấu hình không trạng thái ghép tiền tố được quảng bá với phần định danh giao diện do máy tự sinh. DHCPv6 có trạng thái cũng cấp địa chỉ nhưng máy chủ phải ghi lại bản thuê, ngược hẳn với không trạng thái.",
+      "level": 1
+    },
+    {
+      "id": "qn-18",
+      "q": "A client has only IPv6 and needs to reach a server that has only IPv4. The usual answer is",
+      "q_vi": "Một máy khách chỉ có IPv6 và cần truy cập máy chủ chỉ có IPv4. Cách làm thông thường là",
+      "choices": [
+        "The server must publish an AAAA record pointing at its IPv4 address",
+        "DNS64 synthesises an IPv6 answer and NAT64 translates the traffic at the boundary",
+        "The router rewrites the IPv6 header into an IPv4 header hop by hop along the whole path",
+        "The client falls back to broadcasting on the local segment"
+      ],
+      "answer": 1,
+      "why": "The pair works because the synthesised address embeds the version four address inside a known prefix, so the translator can recover it. Putting a version four address in an AAAA record is not valid, the record types have different address lengths.",
+      "why_vi": "Cặp cơ chế này chạy được vì địa chỉ tổng hợp nhúng địa chỉ phiên bản bốn vào trong một tiền tố đã biết, nhờ đó bộ biên dịch khôi phục lại được. Đặt địa chỉ phiên bản bốn vào bản ghi AAAA là không hợp lệ, hai loại bản ghi có độ dài địa chỉ khác nhau.",
+      "level": 2
+    },
+    {
+      "id": "qn-19",
+      "q": "The time to live field in the IP header exists mainly to",
+      "q_vi": "Trường thời gian sống trong tiêu đề IP tồn tại chủ yếu để",
+      "choices": [
+        "Tell caches how long the content stays fresh",
+        "Set the priority of the packet in router queues",
+        "Measure the bandwidth of the path",
+        "Stop packets from circulating forever when a routing loop appears"
+      ],
+      "answer": 3,
+      "why": "The counter drops by one at each router and the packet dies at zero, so a transient loop costs a burst of wasted capacity instead of a permanent meltdown. The freshness meaning belongs to DNS records and HTTP caches, which use a different field with a similar name.",
+      "why_vi": "Bộ đếm giảm một đơn vị ở mỗi bộ định tuyến và gói chết khi về không, nên vòng lặp tạm thời chỉ tốn một đợt băng thông chứ không làm mạng sập vĩnh viễn. Ý nghĩa về độ tươi của dữ liệu thuộc về bản ghi DNS và bộ đệm HTTP, chúng dùng một trường khác trùng tên gọi.",
+      "level": 1
+    },
+    {
+      "id": "qn-20",
+      "q": "Traceroute discovers the hops on a path by",
+      "q_vi": "Traceroute tìm ra các chặng trên đường đi bằng cách",
+      "choices": [
+        "Asking the destination for a copy of its routing table",
+        "Sending probes with increasing time to live and reading the time exceeded replies",
+        "Broadcasting a discovery frame on every segment along the way",
+        "Reading the AS path attribute carried in the packet"
+      ],
+      "answer": 1,
+      "why": "Each probe is engineered to expire one hop further along, and the router that discards it identifies itself in the error message. No router ever ships its routing table to a random host, and packets do not carry an AS path.",
+      "why_vi": "Mỗi gói thăm dò được đặt sao cho hết hạn xa thêm một chặng, và bộ định tuyến huỷ nó sẽ tự xưng danh trong thông điệp báo lỗi. Không bộ định tuyến nào gửi bảng định tuyến cho một máy lạ, và gói tin cũng không mang theo chuỗi hệ tự trị.",
+      "level": 2
+    },
+    {
+      "id": "qn-21",
+      "q": "A traceroute shows hop six at two hundred milliseconds while hops seven, eight and the destination all answer in thirty milliseconds. The correct reading is",
+      "q_vi": "Kết quả traceroute cho thấy chặng sáu mất hai trăm mili giây, còn chặng bảy, chặng tám và đích đều trả lời trong ba mươi mili giây. Cách đọc đúng là",
+      "choices": [
+        "Hop six is slow at generating its own replies, transit through it is fine",
+        "Hop six has a smaller MTU than its neighbours",
+        "Hop six is congested and is delaying all traffic passing through it",
+        "The path splits and hop six is on a longer route"
+      ],
+      "answer": 0,
+      "why": "A router answers a probe from its control processor, which is deliberately low priority, while forwarded packets go through the fast path. If later hops are fast, the traffic clearly passed hop six quickly, so the number only measures how busy that router's management path is.",
+      "why_vi": "Bộ định tuyến trả lời gói thăm dò bằng bộ xử lý điều khiển, phần này bị đặt ưu tiên thấp có chủ ý, còn gói chuyển tiếp đi theo đường nhanh. Nếu các chặng sau vẫn nhanh thì rõ ràng lưu lượng đã qua chặng sáu rất nhanh, con số kia chỉ đo mức bận của phần quản trị trên thiết bị đó.",
+      "level": 3
+    },
+    {
+      "id": "qn-22",
+      "q": "Ping reports zero loss all day, yet users report stalls during large downloads. What does the ping result actually prove?",
+      "q_vi": "Ping báo không mất gói suốt cả ngày, nhưng người dùng vẫn kêu bị đứng khi tải tệp lớn. Kết quả ping đó thực ra chứng minh được điều gì?",
+      "choices": [
+        "Only that the path works at a very low rate with small packets",
+        "That the maximum transmission unit is correct end to end",
+        "That the link has no congestion at any load",
+        "That the application layer is at fault"
+      ],
+      "answer": 0,
+      "why": "A probe of a few dozen bytes once per second never fills a queue and never triggers the loss or delay that appears at line rate. To see the behaviour under load you have to create load, which is what a throughput test does.",
+      "why_vi": "Gói thăm dò vài chục byte mỗi giây không bao giờ làm đầy hàng đợi, nên không kích hoạt được mất gói hay tăng trễ vốn chỉ xuất hiện khi chạy hết tốc độ đường truyền. Muốn thấy hành vi khi tải nặng thì phải tạo ra tải nặng, đó là việc của công cụ đo thông lượng.",
+      "level": 2
+    },
+    {
+      "id": "qn-23",
+      "q": "The biggest practical drawback of IP fragmentation is that",
+      "q_vi": "Nhược điểm thực tế lớn nhất của phân mảnh IP là",
+      "choices": [
+        "Fragmentation encrypts the payload and hides it from firewalls",
+        "Losing a single fragment destroys the entire original datagram",
+        "Fragments are always delivered out of order",
+        "Only the first fragment can carry data"
+      ],
+      "answer": 1,
+      "why": "Reassembly happens only at the destination and it is all or nothing, so a path with one percent fragment loss behaves far worse than one percent packet loss. Fragments are not inherently reordered, and every fragment after the first still carries payload, it just lacks the transport header.",
+      "why_vi": "Việc ghép lại chỉ xảy ra ở đích và theo kiểu được tất cả hoặc không gì cả, nên đường truyền mất một phần trăm số mảnh sẽ tệ hơn hẳn so với mất một phần trăm số gói. Mảnh không tự nhiên bị đảo thứ tự, và các mảnh sau mảnh đầu vẫn chở dữ liệu, chỉ là không có tiêu đề tầng giao vận.",
+      "level": 1
+    },
+    {
+      "id": "qn-24",
+      "q": "A sender uses a sixty four kilobyte window on a path with a one hundred millisecond round trip time and a gigabit bottleneck. The throughput of one connection is about",
+      "q_vi": "Bên gửi dùng cửa sổ sáu mươi tư kilobyte trên đường có trễ khứ hồi một trăm mili giây, nút cổ chai một gigabit. Thông lượng của một kết nối vào khoảng",
+      "choices": [
+        "Five megabits per second",
+        "One gigabit per second",
+        "Fifty megabits per second",
+        "Five hundred megabits per second"
+      ],
+      "answer": 0,
+      "why": "Throughput is bounded by the window divided by the round trip time, so sixty five thousand bytes in one tenth of a second is roughly five megabits per second. The link rate is irrelevant here because the sender is window limited, not bandwidth limited.",
+      "why_vi": "Thông lượng bị chặn bởi kích thước cửa sổ chia cho trễ khứ hồi, tức khoảng sáu mươi lăm nghìn byte trong một phần mười giây, ra chừng năm megabit mỗi giây. Tốc độ đường truyền không quan trọng ở đây vì bên gửi bị giới hạn bởi cửa sổ chứ không bởi băng thông.",
+      "level": 2
+    },
+    {
+      "id": "qn-25",
+      "q": "Continuing that case, the correct fix for a window limited transfer over a long path is",
+      "q_vi": "Vẫn tình huống đó, cách sửa đúng cho phiên truyền bị giới hạn bởi cửa sổ trên đường dài là",
+      "choices": [
+        "Increase the retransmission timeout",
+        "Reduce the maximum transmission unit so packets travel faster",
+        "Enable window scaling and let the buffers grow to the bandwidth delay product",
+        "Switch the application to UDP"
+      ],
+      "answer": 2,
+      "why": "The window field is only sixteen bits, so without the scaling option the ceiling is sixty five kilobytes no matter how fat the pipe is. Smaller packets add header overhead rather than speed, and the timeout is not what limits the rate here.",
+      "why_vi": "Trường cửa sổ chỉ có mười sáu bit, nên nếu không bật tuỳ chọn nhân cửa sổ thì trần vẫn là sáu mươi lăm kilobyte dù ống có to đến đâu. Gói nhỏ hơn chỉ làm tăng chi phí tiêu đề chứ không nhanh hơn, còn thời hạn truyền lại không phải thứ giới hạn tốc độ ở đây.",
+      "level": 2
+    },
+    {
+      "id": "qn-26",
+      "q": "During slow start the congestion window",
+      "q_vi": "Trong pha khởi động chậm, cửa sổ tắc nghẽn",
+      "choices": [
+        "Roughly doubles each round trip until a threshold or a loss stops it",
+        "Shrinks steadily until the first acknowledgement arrives",
+        "Stays fixed at the receiver window",
+        "Grows by one segment per round trip from the very start"
+      ],
+      "answer": 0,
+      "why": "Every acknowledgement in this phase lets the sender release two more segments, which is exponential growth per round trip. The additive growth of one segment per round trip belongs to the congestion avoidance phase that follows.",
+      "why_vi": "Trong pha này, mỗi báo nhận cho phép bên gửi tung thêm hai đoạn, tức tăng theo cấp số nhân sau mỗi vòng khứ hồi. Kiểu tăng thêm một đoạn mỗi vòng là của pha tránh tắc nghẽn đi sau đó.",
+      "level": 1
+    },
+    {
+      "id": "qn-27",
+      "q": "On a path with a very deep buffer, a loss based algorithm such as CUBIC gives high throughput but terrible latency, while BBR keeps latency low. The reason is",
+      "q_vi": "Trên đường có bộ đệm rất sâu, thuật toán dựa vào mất gói như CUBIC cho thông lượng cao nhưng độ trễ tệ, còn BBR giữ độ trễ thấp. Lý do là",
+      "choices": [
+        "BBR uses a smaller maximum transmission unit",
+        "CUBIC disables the receiver window and floods the link",
+        "A loss based algorithm must fill the buffer before it gets its congestion signal",
+        "BBR retransmits fewer packets so the queue stays empty"
+      ],
+      "answer": 2,
+      "why": "Loss is the only signal a loss based scheme trusts, so it keeps pushing until the queue overflows, and a deep queue means a long delay before that happens. A rate model based on the estimated bottleneck bandwidth and the minimum round trip time stops growing before the queue builds up.",
+      "why_vi": "Thuật toán dựa vào mất gói chỉ tin vào tín hiệu mất gói, nên nó cứ đẩy tới khi hàng đợi tràn, mà hàng đợi càng sâu thì càng lâu mới tràn. Mô hình theo tốc độ, ước lượng băng thông nút cổ chai và trễ khứ hồi nhỏ nhất, dừng tăng trước khi hàng đợi kịp dâng lên.",
+      "level": 3
+    },
+    {
+      "id": "qn-28",
+      "q": "A request and response application that writes a small header then a small body sees a stall of tens of milliseconds on every exchange. The classic culprit is",
+      "q_vi": "Một ứng dụng kiểu hỏi đáp, ghi ra một tiêu đề nhỏ rồi một thân nhỏ, bị đứng vài chục mili giây ở mỗi lượt trao đổi. Thủ phạm kinh điển là",
+      "choices": [
+        "Nagle's algorithm interacting with the delayed acknowledgement timer",
+        "A routing loop between the two endpoints",
+        "A duplicate MAC address on the server segment",
+        "An expired certificate being revalidated each time"
+      ],
+      "answer": 0,
+      "why": "The sender holds the second small write until the first is acknowledged, while the receiver holds the acknowledgement waiting for data to piggyback on. Neither side is broken, they are simply waiting for each other until a timer fires, which is why the delay is a suspiciously round number.",
+      "why_vi": "Bên gửi giữ lại lần ghi nhỏ thứ hai cho tới khi lần đầu được báo nhận, còn bên nhận lại giữ báo nhận để chờ có dữ liệu ghép chung. Không bên nào hỏng cả, hai bên chỉ đang chờ nhau cho tới khi một bộ định thời hết hạn, vì vậy độ trễ luôn là một con số tròn đáng ngờ.",
+      "level": 3
+    },
+    {
+      "id": "qn-29",
+      "q": "Selective acknowledgement improves recovery because it lets the sender",
+      "q_vi": "Báo nhận chọn lọc cải thiện việc phục hồi vì nó cho phép bên gửi",
+      "choices": [
+        "Skip the lost data entirely and continue",
+        "Acknowledge data before it has been received",
+        "Retransmit only the missing blocks instead of everything after the gap",
+        "Increase the congestion window during recovery"
+      ],
+      "answer": 2,
+      "why": "Without this option a cumulative acknowledgement can only say how far the contiguous data reaches, so a sender that loses several segments in one window often resends data that already arrived. Nothing here allows skipping data, the stream still has to be delivered complete and in order.",
+      "why_vi": "Không có tuỳ chọn này thì báo nhận tích luỹ chỉ nói được dữ liệu liền mạch tới đâu, nên bên gửi mất vài đoạn trong cùng một cửa sổ thường gửi lại cả những phần đã tới. Ở đây không có chuyện bỏ qua dữ liệu, dòng byte vẫn phải tới đủ và đúng thứ tự.",
+      "level": 2
+    },
+    {
+      "id": "qn-30",
+      "q": "A busy server shows tens of thousands of sockets in TIME_WAIT. What does that tell you?",
+      "q_vi": "Một máy chủ bận cho thấy hàng chục nghìn socket ở trạng thái TIME_WAIT. Điều đó cho bạn biết gì?",
+      "choices": [
+        "The kernel has run out of ephemeral ports for inbound traffic",
+        "The application is leaking file descriptors",
+        "The server is the side closing connections first",
+        "The clients are refusing to close their connections"
+      ],
+      "answer": 2,
+      "why": "That state is held only by the endpoint that sends the first close, so it waits out any straggling duplicates before the port pair can be reused. It is normal accounting rather than a leak, and inbound connections do not consume ephemeral ports on the server.",
+      "why_vi": "Trạng thái này chỉ do phía gửi lệnh đóng trước giữ, nó chờ cho hết các gói tới muộn rồi mới cho tái dùng cặp cổng. Đây là chuyện ghi sổ bình thường chứ không phải rò rỉ, và kết nối đi vào không tiêu tốn cổng tạm của máy chủ.",
+      "level": 3
+    },
+    {
+      "id": "qn-31",
+      "q": "Three duplicate acknowledgements arrive for the same sequence number. A modern TCP sender will",
+      "q_vi": "Ba báo nhận trùng cùng một số thứ tự vừa tới. Một bên gửi TCP hiện đại sẽ",
+      "choices": [
+        "Reset the connection and start again",
+        "Double the congestion window to push through the gap",
+        "Wait for the retransmission timer, since duplicates are not proof of loss",
+        "Retransmit the missing segment immediately without waiting for the timeout"
+      ],
+      "answer": 3,
+      "why": "Repeated duplicates mean later segments are arriving, so the path is alive and only one piece is missing, which is enough evidence to resend early. Waiting for the timer would waste hundreds of milliseconds, and the window is reduced after the loss, not doubled.",
+      "why_vi": "Báo nhận trùng lặp lại nghĩa là các đoạn sau vẫn đang tới, tức đường truyền còn sống và chỉ thiếu một mảnh, chừng đó đủ căn cứ để gửi lại sớm. Chờ bộ định thời sẽ phí hàng trăm mili giây, còn cửa sổ thì bị giảm sau mất gói chứ không nhân đôi.",
+      "level": 2
+    },
+    {
+      "id": "qn-32",
+      "q": "The advantage of explicit congestion notification over plain dropping is that",
+      "q_vi": "Ưu điểm của báo tắc nghẽn tường minh so với việc huỷ gói là",
+      "choices": [
+        "It works even when only one of the two endpoints supports it",
+        "The sender learns about congestion without any data being lost",
+        "It increases the capacity of the bottleneck link",
+        "It removes the need for a congestion window"
+      ],
+      "answer": 1,
+      "why": "Marking carries the same warning as a drop but the packet still arrives, so no retransmission and no recovery stall is needed. It changes nothing about capacity, and both endpoints plus the queue have to agree to use it.",
+      "why_vi": "Đánh dấu mang cùng lời cảnh báo như huỷ gói nhưng gói vẫn tới nơi, nên không phải truyền lại và không bị khựng trong lúc phục hồi. Nó không làm thay đổi dung lượng đường truyền, và cả hai điểm cuối cùng với hàng đợi đều phải đồng ý dùng thì mới chạy.",
+      "level": 2
+    },
+    {
+      "id": "qn-33",
+      "q": "Live voice and video usually run over UDP because",
+      "q_vi": "Thoại và hình trực tiếp thường chạy trên UDP vì",
+      "choices": [
+        "TCP cannot carry more than one stream at a time",
+        "A retransmitted packet would arrive too late to be played anyway",
+        "UDP compresses audio better than TCP",
+        "UDP packets are given higher priority by routers"
+      ],
+      "answer": 1,
+      "why": "The player has a playout deadline, so data that misses it is worthless and the reliability machinery only adds delay and jitter. Routers do not favour one transport protocol, and neither transport does any compression.",
+      "why_vi": "Bộ phát có mốc thời gian phát ra, dữ liệu tới trễ hơn mốc đó thì vô dụng, nên bộ máy bảo đảm tin cậy chỉ thêm trễ và thêm rung pha. Bộ định tuyến không ưu ái giao thức giao vận nào, và cả hai giao thức đều không nén gì cả.",
+      "level": 1
+    },
+    {
+      "id": "qn-34",
+      "q": "Why can a zone apex such as example.com not be a CNAME?",
+      "q_vi": "Vì sao đỉnh vùng tên miền như example.com không thể là bản ghi CNAME?",
+      "choices": [
+        "The apex is limited to a single A record by the protocol",
+        "CNAME records are only valid for mail servers",
+        "A CNAME cannot coexist with other records, and the apex must hold SOA and NS records",
+        "CNAME chains are limited to one level of indirection"
+      ],
+      "answer": 2,
+      "why": "An alias means every query for that name follows the alias, which conflicts with the mandatory authority records that must live at the apex. This is why providers invented flattening tricks instead of simply allowing it.",
+      "why_vi": "Bí danh nghĩa là mọi truy vấn cho tên đó đều đi theo bí danh, điều này xung đột với các bản ghi thẩm quyền bắt buộc phải nằm ở đỉnh vùng. Vì vậy các nhà cung cấp mới nghĩ ra mẹo làm phẳng thay vì cho phép thẳng.",
+      "level": 3
+    },
+    {
+      "id": "qn-35",
+      "q": "Which record type tells the internet where to deliver mail for a domain?",
+      "q_vi": "Loại bản ghi nào cho internet biết phải chuyển thư của một tên miền tới đâu?",
+      "choices": [
+        "MX",
+        "TXT",
+        "PTR",
+        "AAAA"
+      ],
+      "answer": 0,
+      "why": "The mail exchanger record names the host and its preference value. Text records are often used for mail policy such as sender authentication, but they never carry the delivery target itself.",
+      "why_vi": "Bản ghi máy chủ trao đổi thư nêu tên máy và giá trị ưu tiên. Bản ghi văn bản hay dùng cho chính sách thư như xác thực người gửi, nhưng nó không bao giờ mang địa chỉ nhận thư.",
+      "level": 1
+    },
+    {
+      "id": "qn-36",
+      "q": "You will move a service to a new address next Saturday. The right DNS preparation is",
+      "q_vi": "Thứ bảy tuần tới bạn sẽ chuyển dịch vụ sang địa chỉ mới. Cách chuẩn bị DNS đúng là",
+      "choices": [
+        "Delete the record an hour before the move so nothing is cached",
+        "Lower the record lifetime at the moment you change the address",
+        "Raise the record lifetime so resolvers refresh more eagerly",
+        "Lower the record lifetime a day or two beforehand, then restore it after the move"
+      ],
+      "answer": 3,
+      "why": "Caches already hold the old value with the old lifetime, so a change made at cutover time only takes effect after that old lifetime expires. Shortening it in advance is what makes the switch quick, and deleting the record just causes an outage.",
+      "why_vi": "Các bộ đệm đã giữ giá trị cũ kèm thời gian sống cũ, nên sửa ngay lúc chuyển đổi thì phải chờ hết thời gian sống cũ mới có tác dụng. Rút ngắn từ trước mới làm cho việc chuyển nhanh, còn xoá bản ghi thì chỉ gây gián đoạn.",
+      "level": 2
+    },
+    {
+      "id": "qn-37",
+      "q": "In a normal lookup, which part is recursive and which is iterative?",
+      "q_vi": "Trong một lần tra cứu bình thường, phần nào là đệ quy và phần nào là lặp?",
+      "choices": [
+        "The client asks the resolver recursively, and the resolver queries root and authoritative servers iteratively",
+        "Both the client and the resolver work iteratively",
+        "The client queries iteratively and the resolver answers recursively to the root",
+        "Both steps are recursive, which is why lookups are slow"
+      ],
+      "answer": 0,
+      "why": "The client wants one final answer and delegates the whole job, which is the recursive part. The servers up the tree answer with referrals rather than doing the work, so the resolver walks down the delegation chain one step at a time.",
+      "why_vi": "Máy khách muốn một câu trả lời cuối cùng và giao trọn công việc, đó là phần đệ quy. Các máy chủ phía trên trả lời bằng chỉ dẫn chứ không làm thay, nên máy phân giải phải đi xuống theo chuỗi uỷ quyền từng bước một.",
+      "level": 2
+    },
+    {
+      "id": "qn-38",
+      "q": "Encrypting DNS with DoH or DoT protects you from",
+      "q_vi": "Mã hoá DNS bằng DoH hoặc DoT bảo vệ bạn khỏi",
+      "choices": [
+        "Malware running on your own machine",
+        "A compromised authoritative server returning a wrong address",
+        "The resolver operator knowing which names you look up",
+        "Observers on the network path reading or rewriting your queries"
+      ],
+      "answer": 3,
+      "why": "The encryption covers the hop between you and the resolver, which is exactly where interception and tampering used to be trivial. The resolver terminates that channel, so it still sees every name, and nothing here validates the data at the source, that is the job of signed records.",
+      "why_vi": "Mã hoá chỉ bao phủ chặng giữa bạn và máy phân giải, đúng chỗ mà trước đây việc nghe lén và sửa nội dung là quá dễ. Máy phân giải là điểm kết thúc kênh đó nên vẫn thấy hết các tên, và cơ chế này cũng không kiểm chứng dữ liệu tại nguồn, việc đó thuộc về bản ghi có chữ ký.",
+      "level": 2
+    },
+    {
+      "id": "qn-39",
+      "q": "Randomising the query identifier and the source port makes cache poisoning harder because",
+      "q_vi": "Ngẫu nhiên hoá mã truy vấn và cổng nguồn khiến việc đầu độc bộ đệm khó hơn vì",
+      "choices": [
+        "A forged reply must match both fields before the real answer arrives",
+        "It makes the resolver ignore all answers from outside its own network",
+        "It forces the attacker to control a router on the path",
+        "It encrypts the query so the attacker cannot read the name"
+      ],
+      "answer": 0,
+      "why": "An off path attacker has to guess the whole tuple in a race against the legitimate answer, and adding sixteen bits of port entropy multiplies the number of forgeries needed by tens of thousands. It is a probability defence, not encryption, and an attacker on the path is not stopped by it at all.",
+      "why_vi": "Kẻ tấn công ngoài đường đi phải đoán trúng cả bộ giá trị trong một cuộc đua với câu trả lời thật, thêm mười sáu bit ngẫu nhiên ở cổng làm số lần giả mạo cần thiết tăng lên hàng chục nghìn lần. Đây là phòng thủ theo xác suất chứ không phải mã hoá, và kẻ nằm ngay trên đường đi thì không bị nó cản chút nào.",
+      "level": 3
+    },
+    {
+      "id": "qn-40",
+      "q": "The difference between an A record and an AAAA record is",
+      "q_vi": "Khác biệt giữa bản ghi A và bản ghi AAAA là",
+      "choices": [
+        "A is authoritative and AAAA is cached",
+        "A is for servers and AAAA is for clients",
+        "AAAA is an alias for four A records",
+        "A holds an IPv4 address and AAAA holds an IPv6 address"
+      ],
+      "answer": 3,
+      "why": "The name comes from the address being four times longer, one hundred twenty eight bits instead of thirty two. Both are ordinary address records with the same caching rules and the same authority.",
+      "why_vi": "Tên gọi bắt nguồn từ việc địa chỉ dài gấp bốn lần, một trăm hai mươi tám bit thay vì ba mươi hai bit. Cả hai đều là bản ghi địa chỉ thông thường, cùng quy tắc lưu đệm và cùng mức thẩm quyền.",
+      "level": 1
+    },
+    {
+      "id": "qn-41",
+      "q": "A monitoring dashboard shows a spike of four hundred and four responses. Before blaming the servers you should note that",
+      "q_vi": "Bảng theo dõi cho thấy số phản hồi bốn trăm linh bốn tăng vọt. Trước khi đổ lỗi cho máy chủ, cần lưu ý rằng",
+      "choices": [
+        "Only five hundred class codes are logged by servers",
+        "Any code above three hundred means the connection failed",
+        "The four hundred class always means the server crashed",
+        "The four hundred class says the request was at fault, so look at what the clients are asking for"
+      ],
+      "answer": 3,
+      "why": "The first digit is the whole point of the scheme, four means the client side of the exchange is wrong and five means the server failed while trying. A wave of missing resources usually points at a bad deploy of links or a scanner, not at a dying backend.",
+      "why_vi": "Chữ số đầu chính là ý nghĩa của cả hệ mã, bốn nghĩa là phía yêu cầu sai còn năm nghĩa là máy chủ hỏng trong lúc xử lý. Một đợt tài nguyên không tìm thấy thường là do triển khai sai đường dẫn hoặc do máy quét, chứ không phải máy chủ sắp chết.",
+      "level": 1
+    },
+    {
+      "id": "qn-42",
+      "q": "You redirect a path with a three hundred and one, then change your mind a week later and users still land on the old target. The reason is",
+      "q_vi": "Bạn chuyển hướng một đường dẫn bằng mã ba trăm linh một, một tuần sau đổi ý nhưng người dùng vẫn bị đưa về đích cũ. Lý do là",
+      "choices": [
+        "Three hundred and one responses cannot be changed once published",
+        "The client is ignoring the cache control header on the new response",
+        "A permanent redirect is cached aggressively by browsers and is hard to withdraw",
+        "The browser never caches redirects, so it must be a proxy fault"
+      ],
+      "answer": 2,
+      "why": "Permanent means the client is entitled to remember the mapping and never ask again, which is exactly what makes it dangerous for anything you may revert. A temporary redirect is the safe choice while you are still deciding.",
+      "why_vi": "Vĩnh viễn nghĩa là máy khách có quyền nhớ ánh xạ đó và không hỏi lại nữa, đúng chỗ đó làm nó nguy hiểm với những thay đổi có thể phải lùi lại. Chuyển hướng tạm thời mới là lựa chọn an toàn khi bạn còn đang cân nhắc.",
+      "level": 2
+    },
+    {
+      "id": "qn-43",
+      "q": "A client times out waiting for a response and wants to retry automatically. Which request is safe to repeat as it is?",
+      "q_vi": "Một máy khách hết thời gian chờ phản hồi và muốn thử lại tự động. Yêu cầu nào lặp lại nguyên trạng là an toàn?",
+      "choices": [
+        "Any request that carries a body",
+        "A PUT that writes a full resource at a known address",
+        "Any request the server has already started processing",
+        "A POST that appends a new order to a collection"
+      ],
+      "answer": 1,
+      "why": "Repeating a write of the same resource to the same address leaves the same final state, so a duplicate costs nothing. Appending creates a new item each time, which is how retries turn into duplicate orders unless the application adds its own idempotency key.",
+      "why_vi": "Lặp lại việc ghi cùng một tài nguyên vào cùng một địa chỉ vẫn cho trạng thái cuối như nhau, nên bản trùng không gây hại. Thao tác thêm mới thì mỗi lần tạo một mục mới, đó là cách mà việc thử lại biến thành đơn hàng trùng, trừ khi ứng dụng tự thêm khoá chống trùng.",
+      "level": 2
+    },
+    {
+      "id": "qn-44",
+      "q": "A browser sends an OPTIONS request before the real call. This preflight happens because",
+      "q_vi": "Trình duyệt gửi một yêu cầu OPTIONS trước lời gọi thật. Bước tiền kiểm này xảy ra vì",
+      "choices": [
+        "The server is running HTTP/2 and must negotiate a stream",
+        "The client needs to fetch the TLS certificate first",
+        "The request uses a method or a header outside the small set considered simple",
+        "The response body is larger than the maximum transmission unit"
+      ],
+      "answer": 2,
+      "why": "The browser asks permission before sending anything that could have a side effect the old web could not produce, such as a custom header or a delete. A plain GET with ordinary headers is sent directly and only the reading of the response is gated.",
+      "why_vi": "Trình duyệt xin phép trước khi gửi những gì có thể gây tác dụng phụ mà web thời cũ không tạo được, ví dụ một tiêu đề tự đặt hay một lệnh xoá. Một lệnh GET thường với tiêu đề thông thường thì gửi thẳng, chỉ việc đọc phản hồi mới bị chặn.",
+      "level": 2
+    },
+    {
+      "id": "qn-45",
+      "q": "A team says their API is safe because the CORS policy only allows their own origin. The flaw in that reasoning is",
+      "q_vi": "Một nhóm nói API của họ an toàn vì chính sách CORS chỉ cho phép nguồn gốc của chính họ. Chỗ sai trong lập luận đó là",
+      "choices": [
+        "The rule protects the server but not the database",
+        "The rule is enforced by browsers, so any non browser client ignores it entirely",
+        "The rule only applies to responses larger than one megabyte",
+        "The rule can be disabled by adding a cookie to the request"
+      ],
+      "answer": 1,
+      "why": "The mechanism exists to stop one site's script from reading another site's responses in a user's browser, and it does that well. It says nothing to a command line tool or a script on a server, which never asks permission, so authentication and authorisation still have to be enforced server side.",
+      "why_vi": "Cơ chế này sinh ra để ngăn mã của trang này đọc phản hồi của trang khác ngay trong trình duyệt người dùng, và nó làm tốt việc đó. Nó chẳng nói gì với một công cụ dòng lệnh hay một script chạy trên máy chủ, vì chúng không hề xin phép, nên xác thực và phân quyền vẫn phải làm ở phía máy chủ.",
+      "level": 3
+    },
+    {
+      "id": "qn-46",
+      "q": "Marking a session cookie HttpOnly",
+      "q_vi": "Đánh dấu một cookie phiên là HttpOnly có tác dụng",
+      "choices": [
+        "Stops page scripts from reading it, limiting the damage of an injected script",
+        "Prevents the cookie from being sent to any other path",
+        "Encrypts the cookie value on the wire",
+        "Makes the cookie expire when the browser closes"
+      ],
+      "answer": 0,
+      "why": "The flag removes the cookie from the scripting interface, so stolen session identifiers become much harder to exfiltrate. Encryption on the wire is what the secure flag plus TLS give you, and scope and lifetime are separate attributes.",
+      "why_vi": "Cờ này gỡ cookie khỏi giao diện dành cho script, nên định danh phiên bị đánh cắp khó tuồn ra ngoài hơn nhiều. Việc mã hoá trên đường truyền là do cờ chỉ gửi qua kênh an toàn cùng với TLS đảm nhận, còn phạm vi và thời hạn là các thuộc tính riêng.",
+      "level": 1
+    },
+    {
+      "id": "qn-47",
+      "q": "Reusing one connection for many HTTP requests helps most because it avoids",
+      "q_vi": "Dùng lại một kết nối cho nhiều yêu cầu HTTP có lợi nhất vì tránh được",
+      "choices": [
+        "Sending the request headers more than once",
+        "Repeating the handshakes and climbing out of slow start every time",
+        "The need for a routing table lookup on each packet",
+        "The cost of resolving the hostname for every object"
+      ],
+      "answer": 1,
+      "why": "A fresh connection pays a transport handshake, usually a security handshake, and then starts with a tiny congestion window, which dominates the cost of a small object. Name resolution is already cached, and headers are still sent on every request either way.",
+      "why_vi": "Kết nối mới phải trả giá cho bắt tay tầng giao vận, thường thêm bắt tay bảo mật, rồi lại bắt đầu với cửa sổ tắc nghẽn tí hon, đó mới là phần chi phí lớn nhất khi tải một đối tượng nhỏ. Việc phân giải tên đã được lưu đệm sẵn, còn tiêu đề thì cách nào cũng phải gửi ở mỗi yêu cầu.",
+      "level": 2
+    },
+    {
+      "id": "qn-48",
+      "q": "TLS one point three offers early data on resumption. The catch is that",
+      "q_vi": "TLS phiên bản một chấm ba cho phép gửi dữ liệu sớm khi nối lại phiên. Điểm phải đánh đổi là",
+      "choices": [
+        "Early data disables certificate validation on that connection",
+        "Early data forces the server to reuse the previous session key forever",
+        "Early data is sent without any encryption at all",
+        "Early data can be replayed by an attacker, so it suits only idempotent requests"
+      ],
+      "answer": 3,
+      "why": "The client sends before the handshake completes, so the server cannot yet prove freshness and a captured message can be sent again. Nothing about it is unencrypted, and the risk is replay rather than a loss of authentication.",
+      "why_vi": "Máy khách gửi trước khi bắt tay xong, nên máy chủ chưa thể chứng minh dữ liệu là mới, một thông điệp bị bắt lại có thể được phát lại. Dữ liệu này không hề bị gửi trần, rủi ro nằm ở việc phát lại chứ không phải mất xác thực.",
+      "level": 3
+    },
+    {
+      "id": "qn-49",
+      "q": "A site loads fine in a desktop browser but a command line client and an old phone both report an unknown certificate authority. The most likely cause is",
+      "q_vi": "Một trang web mở tốt trên trình duyệt máy tính nhưng công cụ dòng lệnh và một điện thoại cũ đều báo không biết nhà cấp chứng thư. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "The private key does not match the certificate",
+        "The site is using a self signed certificate that browsers trust automatically",
+        "The certificate has expired but browsers ignore expiry",
+        "The server does not send the intermediate certificate and the browser fetched it on its own"
+      ],
+      "answer": 3,
+      "why": "Browsers often repair an incomplete chain by downloading the missing link or using a cached copy, so they hide the misconfiguration. Simpler clients validate only what the server sent, which is why they are the ones that complain. A key mismatch or a self signed certificate would fail in the browser too.",
+      "why_vi": "Trình duyệt thường tự vá chuỗi thiếu bằng cách tải mắt xích còn lại hoặc dùng bản đã lưu, nên nó che mất lỗi cấu hình. Các máy khách đơn giản chỉ kiểm đúng những gì máy chủ gửi, vì thế chúng mới là bên kêu. Nếu khoá không khớp hay chứng thư tự ký thì trình duyệt cũng hỏng ngay.",
+      "level": 3
+    },
+    {
+      "id": "qn-50",
+      "q": "TLS gives you confidentiality, integrity and server authentication. What it does not give you is",
+      "q_vi": "TLS mang lại tính bí mật, tính toàn vẹn và xác thực máy chủ. Thứ nó không mang lại là",
+      "choices": [
+        "Any guarantee that the server behind the certificate is honest or available",
+        "Protection against an eavesdropper reading the payload",
+        "Proof that you reached the hostname you asked for",
+        "Detection of a modified byte in the stream"
+      ],
+      "answer": 0,
+      "why": "The certificate binds a name to a key, nothing more, so a phishing site with a valid certificate is still a phishing site. The other three properties are exactly what the protocol was designed to deliver.",
+      "why_vi": "Chứng thư chỉ ràng buộc một tên miền với một khoá, không hơn, nên một trang lừa đảo có chứng thư hợp lệ thì vẫn là trang lừa đảo. Ba tính chất còn lại đúng là những gì giao thức được thiết kế để bảo đảm.",
+      "level": 1
+    },
+    {
+      "id": "qn-51",
+      "q": "Hosting several TLS sites on one IP address needs server name indication because",
+      "q_vi": "Đặt nhiều trang TLS trên cùng một địa chỉ IP cần tới chỉ dẫn tên máy chủ vì",
+      "choices": [
+        "The client cannot resolve two names to one address without it",
+        "The router needs the hostname to forward the packet correctly",
+        "The server must choose a certificate before it can read the encrypted request",
+        "Certificates cannot contain more than one hostname"
+      ],
+      "answer": 2,
+      "why": "The certificate is presented during the handshake, long before the host header inside the request becomes readable, so the name has to travel in the clear part of the hello. Multiple names in one certificate is an alternative solution, not an impossibility.",
+      "why_vi": "Chứng thư được đưa ra ngay trong lúc bắt tay, rất lâu trước khi tiêu đề tên máy nằm trong yêu cầu đọc được, nên tên phải đi trong phần chưa mã hoá của bản tin chào. Việc gộp nhiều tên vào một chứng thư là giải pháp thay thế chứ không phải điều bất khả.",
+      "level": 2
+    },
+    {
+      "id": "qn-52",
+      "q": "RIP is unusable in a large network mainly because",
+      "q_vi": "RIP không dùng được cho mạng lớn chủ yếu vì",
+      "choices": [
+        "It cannot carry subnet masks in any version",
+        "Its metric is hop count and anything beyond fifteen hops counts as unreachable",
+        "It requires every router to hold the full topology in memory",
+        "It only runs over serial links"
+      ],
+      "answer": 1,
+      "why": "The tiny diameter limit plus slow convergence after a failure is what pushed operators to link state protocols. Holding a full topology map is a property of link state protocols, not of this one, and later versions do carry masks.",
+      "why_vi": "Giới hạn đường kính quá nhỏ cộng với hội tụ chậm sau sự cố là lý do các nhà mạng chuyển sang giao thức trạng thái liên kết. Việc giữ bản đồ tô-pô đầy đủ là đặc tính của giao thức trạng thái liên kết chứ không phải của nó, và các phiên bản sau đã mang được mặt nạ mạng.",
+      "level": 1
+    },
+    {
+      "id": "qn-53",
+      "q": "The structural difference between a link state and a distance vector protocol is",
+      "q_vi": "Khác biệt về cấu trúc giữa giao thức trạng thái liên kết và giao thức vector khoảng cách là",
+      "choices": [
+        "Link state runs only inside one autonomous system while distance vector runs only between them",
+        "Link state uses hop count while distance vector uses bandwidth",
+        "Link state needs no routing table because it floods every packet",
+        "Link state floods topology and each router computes paths itself, distance vector shares computed distances with neighbours"
+      ],
+      "answer": 3,
+      "why": "Because every router in an area holds the same map, a link state protocol converges quickly and cannot form the counting to infinity loops that plague distance vector. BGP is a path vector protocol running between autonomous systems, so the claim that link state runs only inside one autonomous system does not hold.",
+      "why_vi": "Vì mọi bộ định tuyến trong một vùng đều giữ cùng một bản đồ, giao thức trạng thái liên kết hội tụ nhanh và không sinh ra vòng đếm tới vô cùng vốn hành hạ kiểu vector khoảng cách. BGP là giao thức vector đường đi chạy giữa các hệ tự trị, nên phương án nói giao thức trạng thái liên kết chỉ chạy trong một hệ tự trị là không đúng.",
+      "level": 2
+    },
+    {
+      "id": "qn-54",
+      "q": "IS-IS is often chosen in large carrier cores because",
+      "q_vi": "IS-IS hay được chọn cho lõi mạng nhà cung cấp lớn vì",
+      "choices": [
+        "It converges without any flooding of topology information",
+        "It is the only protocol that supports equal cost paths",
+        "It replaces BGP for exchanging routes between operators",
+        "It runs directly over the link layer, so carrying new address families needs no redesign"
+      ],
+      "answer": 3,
+      "why": "Not depending on IP for its own transport is what let it absorb version six by adding a new type of advertisement rather than a parallel process. Equal cost multipath is available in OSPF as well, and interdomain routing remains BGP's job.",
+      "why_vi": "Việc không phụ thuộc vào IP để tự vận chuyển là lý do nó tiếp nhận phiên bản sáu chỉ bằng cách thêm một loại bản tin, thay vì phải chạy một tiến trình song song. Chia tải trên nhiều đường cùng giá thì OSPF cũng có, còn định tuyến giữa các miền vẫn là việc của BGP.",
+      "level": 2
+    },
+    {
+      "id": "qn-55",
+      "q": "An operator wants some customer traffic to take a longer physical route to keep a link free. MPLS helps because",
+      "q_vi": "Nhà mạng muốn một phần lưu lượng khách hàng đi đường vật lý dài hơn để chừa trống một liên kết. MPLS giúp được vì",
+      "choices": [
+        "It reprograms the interior routing protocol to report false costs",
+        "It compresses the IP header so more packets fit",
+        "Forwarding follows a label placed by the ingress router, not the shortest path the routing protocol computed",
+        "It increases the capacity of the congested link"
+      ],
+      "answer": 2,
+      "why": "Once traffic is classified at the edge and given a label, the core switches on that label, so the path is chosen by policy instead of by the metric. Faking link costs is the crude alternative and it moves everything, not just the flows you wanted to move.",
+      "why_vi": "Khi lưu lượng đã được phân loại ở biên và gắn nhãn, phần lõi chuyển mạch theo nhãn đó, nên đường đi do chính sách quyết định chứ không do độ đo. Bịa giá liên kết là cách thô sơ thay thế, và nó dời cả mọi thứ chứ không riêng luồng bạn muốn dời.",
+      "level": 3
+    },
+    {
+      "id": "qn-56",
+      "q": "A network learns the same prefix from a customer, from a settlement free peer and from a transit provider. Standard policy is to prefer",
+      "q_vi": "Một nhà mạng học được cùng một tiền tố từ khách hàng, từ đối tác ngang hàng miễn phí và từ nhà cung cấp chuyển tiếp. Chính sách chuẩn là ưu tiên",
+      "choices": [
+        "The provider route, because providers have better connectivity",
+        "Whichever route arrived first, to keep the table stable",
+        "The customer route, then the peer, then the provider",
+        "The route with the shortest AS path regardless of who sent it"
+      ],
+      "answer": 2,
+      "why": "Customers pay you, peers are free and providers charge you, so the ranking follows the money before it follows any technical metric. Path length only breaks ties inside a preference class, which is why internet paths often look longer than the map suggests.",
+      "why_vi": "Khách hàng trả tiền cho bạn, đối tác ngang hàng thì miễn phí, còn nhà cung cấp thì thu tiền của bạn, nên thứ tự ưu tiên chạy theo dòng tiền trước khi chạy theo bất kỳ độ đo kỹ thuật nào. Độ dài đường đi chỉ dùng để phân định trong cùng một mức ưu tiên, vì vậy đường đi trên internet trông thường dài hơn bản đồ gợi ý.",
+      "level": 3
+    },
+    {
+      "id": "qn-57",
+      "q": "An attacker announces a slash twenty four inside a victim's slash sixteen. Traffic is diverted even though the victim's AS path is shorter because",
+      "q_vi": "Kẻ tấn công quảng bá một khối chéo hai bốn nằm trong khối chéo mười sáu của nạn nhân. Lưu lượng bị lái đi dù chuỗi hệ tự trị của nạn nhân ngắn hơn, vì",
+      "choices": [
+        "The victim's announcement is withdrawn automatically on conflict",
+        "Forwarding uses the longest matching prefix before any path attribute is considered",
+        "BGP always prefers the most recently received announcement",
+        "The shorter AS path is only used for outbound traffic"
+      ],
+      "answer": 1,
+      "why": "Prefix length is a property of the forwarding lookup, so a more specific route wins in the data plane no matter how unattractive its attributes are in the control plane. This is why filtering and route origin validation matter more than tuning path attributes.",
+      "why_vi": "Độ dài tiền tố là chuyện của phép tra cứu chuyển tiếp, nên tuyến cụ thể hơn luôn thắng ở mặt phẳng dữ liệu, bất kể thuộc tính của nó xấu tới đâu ở mặt phẳng điều khiển. Vì vậy lọc tuyến và kiểm chứng nguồn gốc quan trọng hơn việc chỉnh các thuộc tính đường đi.",
+      "level": 3
+    },
+    {
+      "id": "qn-58",
+      "q": "The difference between peering and transit is that",
+      "q_vi": "Khác biệt giữa kết nối ngang hàng và mua chuyển tiếp là",
+      "choices": [
+        "Peering uses OSPF while transit uses BGP",
+        "Peers exchange only their own and their customers' routes, a transit provider sells reachability to everywhere",
+        "Peering happens inside one autonomous system and transit between two",
+        "Peering is always free while transit is always encrypted"
+      ],
+      "answer": 1,
+      "why": "The distinction is about which routes are shared and who pays, not about the protocol. Both relationships are built with BGP and both cross autonomous system boundaries.",
+      "why_vi": "Sự phân biệt nằm ở chỗ chia sẻ những tuyến nào và ai trả tiền, không nằm ở giao thức. Cả hai quan hệ đều dựng bằng BGP và đều đi qua ranh giới hệ tự trị.",
+      "level": 1
+    },
+    {
+      "id": "qn-59",
+      "q": "One thousand viewers watch the same live stream. Compared with unicast, multicast saves capacity mainly",
+      "q_vi": "Một nghìn người xem cùng một luồng trực tiếp. So với truyền đơn hướng, truyền tới nhóm tiết kiệm dung lượng chủ yếu",
+      "choices": [
+        "On the last mile to each viewer, since each viewer receives less data",
+        "By compressing the stream once for all receivers",
+        "By reducing the number of packets each viewer must acknowledge",
+        "On the source link and the shared core, since copies are made only where paths diverge"
+      ],
+      "answer": 3,
+      "why": "Every receiver still gets the full stream on its own access link, so nothing is saved there. What changes is that the source sends one copy and the network replicates at branch points instead of the source sending a thousand copies through the same core links.",
+      "why_vi": "Mỗi người xem vẫn nhận đủ luồng trên đường truy nhập của mình nên chỗ đó không tiết kiệm được gì. Cái khác là nguồn chỉ gửi một bản và mạng nhân bản tại điểm rẽ nhánh, thay vì nguồn đẩy một nghìn bản qua cùng những liên kết lõi.",
+      "level": 2
+    },
+    {
+      "id": "qn-60",
+      "q": "IPv6 removed broadcast entirely. Neighbour discovery instead uses",
+      "q_vi": "IPv6 bỏ hẳn quảng bá. Việc phát hiện hàng xóm thay vào đó dùng",
+      "choices": [
+        "A broadcast on the link local prefix",
+        "Solicited node multicast, so only a small set of hosts is interrupted",
+        "A DHCPv6 lookup for every neighbour",
+        "A unicast query to the default gateway"
+      ],
+      "answer": 1,
+      "why": "Address resolution in version four woke every host on the segment. Version six derives a multicast group from the low bits of the target address, so on a busy segment almost no unrelated host has to process the request.",
+      "why_vi": "Việc phân giải địa chỉ ở phiên bản bốn đánh thức mọi máy trên phân đoạn. Phiên bản sáu suy ra một nhóm nhận từ các bit thấp của địa chỉ đích, nên trên phân đoạn đông máy thì gần như không máy nào không liên quan phải xử lý yêu cầu đó.",
+      "level": 2
+    },
+    {
+      "id": "qn-61",
+      "q": "A subscriber behind carrier grade NAT cannot host a game server even after forwarding the port on the home router. The reason is",
+      "q_vi": "Một thuê bao nằm sau NAT quy mô nhà mạng không thể chạy máy chủ trò chơi dù đã mở cổng trên bộ định tuyến ở nhà. Lý do là",
+      "choices": [
+        "A second translation upstream shares the public address with many subscribers, and the home router does not control it",
+        "The operator blocks all traffic on ports above one thousand and twenty four",
+        "The subscriber's address is IPv6 only",
+        "The home router forwards the port only for outbound traffic"
+      ],
+      "answer": 0,
+      "why": "Port forwarding works at the boundary the customer owns, but the public address now sits on the operator's translator that hundreds of customers share. Nobody can allocate that public port to a single subscriber without an explicit control protocol or a static mapping.",
+      "why_vi": "Mở cổng chỉ có tác dụng ở biên mà khách hàng sở hữu, còn địa chỉ công cộng giờ nằm trên bộ biên dịch của nhà mạng, nơi hàng trăm khách hàng dùng chung. Không ai cấp cổng công cộng đó riêng cho một thuê bao nếu không có giao thức điều khiển tường minh hoặc một ánh xạ tĩnh.",
+      "level": 2
+    },
+    {
+      "id": "qn-62",
+      "q": "Two WebRTC clients connect fine most of the time but one pair always falls back to a relay. The likely cause is",
+      "q_vi": "Hai máy khách WebRTC phần lớn kết nối trực tiếp được, nhưng một cặp luôn phải rơi về máy trung chuyển. Nguyên nhân khả dĩ là",
+      "choices": [
+        "One side sits behind a translator that allocates a new port per destination, so the learned mapping is useless",
+        "One side has disabled encryption and the other requires it",
+        "The relay server has a shorter path than the direct one",
+        "One side is using IPv6 and the other IPv4"
+      ],
+      "answer": 0,
+      "why": "Hole punching works by learning the external address and port for one destination and reusing it for the peer. If the mapping is bound to the destination, the peer sees a port that no longer exists, so only a relay remains. A mixed address family is real but is normally handled by gathering candidates in both families.",
+      "why_vi": "Kỹ thuật đục lỗ dựa vào việc học địa chỉ và cổng bên ngoài ứng với một đích rồi dùng lại cho bên kia. Nếu ánh xạ bị gắn theo đích thì bên kia nhìn thấy một cổng không còn tồn tại, chỉ còn cách đi qua máy trung chuyển. Chuyện lệch họ địa chỉ là có thật nhưng thường được xử lý bằng cách thu thập ứng viên ở cả hai họ.",
+      "level": 3
+    },
+    {
+      "id": "qn-63",
+      "q": "After a VPN is deployed, small requests work but some HTTPS sites hang forever. The standard remedy is",
+      "q_vi": "Sau khi triển khai VPN, các yêu cầu nhỏ vẫn chạy nhưng vài trang HTTPS treo mãi. Cách chữa tiêu chuẩn là",
+      "choices": [
+        "Disable TLS on the tunnel to reduce the packet size",
+        "Switch the tunnel from UDP to TCP",
+        "Clamp the advertised segment size so the tunnel header overhead is accounted for",
+        "Increase the retransmission timeout on the clients"
+      ],
+      "answer": 2,
+      "why": "Each encapsulation layer steals bytes from the usable payload, so packets sized for the original link no longer fit and the discovery message is often filtered. Adjusting the segment size announced in the handshake makes both ends choose packets that fit without relying on control messages. Running a reliable tunnel inside a reliable transport usually makes things worse.",
+      "why_vi": "Mỗi lớp bọc thêm lại lấy mất vài byte của phần tải dùng được, nên gói có kích thước hợp với đường truyền gốc không còn lọt, mà thông điệp dò tìm thì hay bị chặn. Chỉnh kích thước đoạn công bố trong lúc bắt tay khiến cả hai đầu tự chọn gói vừa vặn mà không phải trông chờ vào thông điệp điều khiển. Chạy một đường hầm tin cậy bên trong một giao vận tin cậy thường còn tệ hơn.",
+      "level": 3
+    },
+    {
+      "id": "qn-64",
+      "q": "IPsec tunnel mode differs from transport mode in that it",
+      "q_vi": "Chế độ đường hầm của IPsec khác chế độ giao vận ở chỗ nó",
+      "choices": [
+        "Encapsulates the entire original packet inside a new IP header, hiding the inner addresses",
+        "Works without any key exchange",
+        "Encrypts only the header and leaves the payload readable",
+        "Requires the two endpoints to be on the same subnet"
+      ],
+      "answer": 0,
+      "why": "Wrapping the whole packet is what lets two gateways protect traffic between whole networks whose internal addresses never appear on the public path. Transport mode protects the payload between two hosts and keeps the original header, which is why it cannot hide topology.",
+      "why_vi": "Việc bọc trọn gói gốc là thứ cho phép hai cổng biên bảo vệ lưu lượng giữa hai mạng mà địa chỉ bên trong không bao giờ lộ ra đường công cộng. Chế độ giao vận bảo vệ phần tải giữa hai máy trạm và giữ nguyên tiêu đề gốc, vì vậy nó không giấu được tô-pô.",
+      "level": 2
+    },
+    {
+      "id": "qn-65",
+      "q": "A stateful firewall allows a web reply back to a client without any inbound rule because",
+      "q_vi": "Tường lửa có trạng thái cho phản hồi web đi ngược về máy khách mà không cần luật chiều vào nào, vì",
+      "choices": [
+        "It disables filtering once a connection is established anywhere",
+        "It remembers the outbound flow and matches the reply against that entry",
+        "It trusts all traffic coming from port eighty",
+        "It rewrites the destination address of every inbound packet"
+      ],
+      "answer": 1,
+      "why": "The connection table is the whole point, it distinguishes a legitimate reply from an unsolicited connection that happens to use the same port numbers. Trusting a source port would be a stateless rule and is exactly the weakness that state tracking removed.",
+      "why_vi": "Bảng kết nối chính là điểm mấu chốt, nó phân biệt phản hồi hợp lệ với một kết nối tự đến chỉ tình cờ dùng cùng số cổng. Tin vào cổng nguồn là luật phi trạng thái, đúng cái điểm yếu mà việc theo dõi trạng thái sinh ra để khắc phục.",
+      "level": 1
+    },
+    {
+      "id": "qn-66",
+      "q": "Choosing a layer seven load balancer over a layer four one buys you",
+      "q_vi": "Chọn cân bằng tải tầng bảy thay cho tầng bốn đem lại cho bạn",
+      "choices": [
+        "The ability to balance traffic that is encrypted end to end without any key",
+        "Lower latency, because content inspection is done in hardware",
+        "Automatic protection against distributed denial of service",
+        "Routing decisions based on request content, at the cost of terminating and re-establishing the session"
+      ],
+      "answer": 3,
+      "why": "Reading the path or the host header requires terminating the connection, which adds processing and puts the balancer in the security path since it must hold the certificate. A layer four device just forwards and is cheaper but blind.",
+      "why_vi": "Muốn đọc đường dẫn hay tiêu đề tên máy thì phải kết thúc kết nối, việc này tốn thêm xử lý và đặt bộ cân bằng vào đường bảo mật vì nó phải giữ chứng thư. Thiết bị tầng bốn chỉ chuyển tiếp nên rẻ hơn nhưng mù thông tin.",
+      "level": 2
+    },
+    {
+      "id": "qn-67",
+      "q": "A gRPC service behind a layer four load balancer is scaled from four to eight pods, but the four new pods receive almost no traffic. The cause is",
+      "q_vi": "Một dịch vụ gRPC đứng sau bộ cân bằng tải tầng bốn được nâng từ bốn lên tám bản chạy, nhưng bốn bản mới gần như không nhận được lưu lượng. Nguyên nhân là",
+      "choices": [
+        "gRPC refuses to use more than four backends",
+        "The load balancer hashes on the destination address, which never changes",
+        "The new pods failed their health checks silently",
+        "Balancing happens once per connection and the long lived connections were pinned to the original pods"
+      ],
+      "answer": 3,
+      "why": "A layer four balancer picks a backend at connection setup, and a multiplexed protocol keeps that connection open for hours, so all the requests inside it stay where they started. The fix is per request balancing, either a layer seven proxy or client side balancing, not more replicas.",
+      "why_vi": "Bộ cân bằng tầng bốn chọn máy đích ngay lúc mở kết nối, mà giao thức ghép kênh lại giữ kết nối đó hàng giờ, nên mọi yêu cầu bên trong vẫn ở nguyên chỗ cũ. Cách sửa là cân bằng theo từng yêu cầu, dùng proxy tầng bảy hoặc cho máy khách tự cân bằng, chứ không phải thêm bản chạy.",
+      "level": 3
+    },
+    {
+      "id": "qn-68",
+      "q": "Random early detection drops a few packets before the buffer is full in order to",
+      "q_vi": "Phát hiện sớm ngẫu nhiên huỷ vài gói trước khi bộ đệm đầy nhằm",
+      "choices": [
+        "Reduce the number of acknowledgements the receiver must send",
+        "Signal a few senders early and avoid all flows backing off together after a tail drop burst",
+        "Free memory on the router for control plane processes",
+        "Guarantee that high priority traffic never queues"
+      ],
+      "answer": 1,
+      "why": "When a full buffer drops a whole burst, many connections cut their windows at the same instant and the link empties then refills in waves. Dropping probabilistically and early spreads the signal over time and keeps the average queue short. Priority handling is a separate scheduling question.",
+      "why_vi": "Khi bộ đệm đầy và huỷ nguyên một chùm, nhiều kết nối cùng lúc cắt cửa sổ, đường truyền lúc trống lúc đầy theo từng đợt. Huỷ sớm theo xác suất trải tín hiệu đó ra theo thời gian và giữ hàng đợi trung bình ngắn. Việc ưu tiên lưu lượng là bài toán lập lịch khác.",
+      "level": 3
+    },
+    {
+      "id": "qn-69",
+      "q": "CoDel is easier to deploy than a threshold based queue manager because it",
+      "q_vi": "CoDel dễ triển khai hơn bộ quản lý hàng đợi theo ngưỡng vì nó",
+      "choices": [
+        "Measures how long packets wait rather than how many are queued, so it needs no tuning for the link rate",
+        "Works only on links slower than ten megabits per second",
+        "Never drops packets, it only reorders them",
+        "Requires both endpoints to negotiate support first"
+      ],
+      "answer": 0,
+      "why": "A queue of one hundred packets means nothing until you know the drain rate, which is why length based thresholds must be retuned for every link. Time in the queue is directly the quantity users feel, so one target works across very different rates.",
+      "why_vi": "Hàng đợi một trăm gói chẳng nói lên điều gì cho tới khi biết tốc độ rút hàng, vì thế ngưỡng theo độ dài phải chỉnh lại cho từng đường truyền. Thời gian nằm chờ chính là đại lượng người dùng cảm nhận, nên một ngưỡng mục tiêu dùng được cho nhiều tốc độ rất khác nhau.",
+      "level": 2
+    },
+    {
+      "id": "qn-70",
+      "q": "Adding fair queueing to a home router helps a video call during a large upload because",
+      "q_vi": "Thêm hàng đợi công bằng vào bộ định tuyến ở nhà giúp cuộc gọi video trong lúc đang tải lên tệp lớn, vì",
+      "choices": [
+        "Video packets are automatically marked as high priority by the codec",
+        "The upload is paused automatically while the call is active",
+        "The call gets its own queue and no longer waits behind the upload's packets",
+        "The uplink capacity increases when queues are separated"
+      ],
+      "answer": 2,
+      "why": "With one shared queue a bulk transfer keeps it full and every interactive packet inherits that whole backlog as delay. Separate queues served in turn mean the thin flow waits only for its own small share. Nothing pauses the upload and no capacity is created.",
+      "why_vi": "Với một hàng đợi dùng chung, phiên tải lớn luôn giữ cho hàng đợi đầy và mọi gói tương tác phải chịu nguyên phần tồn đọng đó thành độ trễ. Tách hàng đợi và phục vụ luân phiên thì luồng nhỏ chỉ phải chờ đúng phần của mình. Không có gì tạm dừng phiên tải lên và cũng không có dung lượng nào sinh thêm.",
+      "level": 2
+    },
+    {
+      "id": "qn-71",
+      "q": "A customer link is limited to one hundred megabits per second. A shaper and a policer differ in that",
+      "q_vi": "Một đường thuê bao bị giới hạn ở một trăm megabit mỗi giây. Bộ định hình và bộ giám sát khác nhau ở chỗ",
+      "choices": [
+        "The shaper drops the excess and the policer buffers it",
+        "The shaper works on inbound traffic only and the policer on outbound only",
+        "The shaper buffers the excess and delays it, the policer drops or remarks it immediately",
+        "The shaper changes the link speed while the policer changes the priority"
+      ],
+      "answer": 2,
+      "why": "Both enforce the same average rate but pay for it differently, one with delay and one with loss. That is why a shaper is usually kinder to bursty TCP traffic while a policer is cheaper and is what a provider applies at its own edge.",
+      "why_vi": "Cả hai đều ép cùng một tốc độ trung bình nhưng trả giá khác nhau, một bên bằng độ trễ, một bên bằng mất gói. Vì thế bộ định hình thường tử tế hơn với lưu lượng TCP dạng chùm, còn bộ giám sát thì rẻ hơn và là thứ nhà mạng đặt ở biên của họ.",
+      "level": 2
+    },
+    {
+      "id": "qn-72",
+      "q": "A link is saturated all day. Configuring quality of service on it will",
+      "q_vi": "Một đường truyền bị bão hoà cả ngày. Cấu hình chất lượng dịch vụ trên đó sẽ",
+      "choices": [
+        "Reduce the propagation delay of the path",
+        "Eliminate packet loss for all traffic classes",
+        "Decide who suffers, not remove the shortage",
+        "Increase the usable capacity of the link"
+      ],
+      "answer": 2,
+      "why": "Every scheduling scheme is a way of allocating a fixed resource, so protecting voice means starving something else. If the link is short of capacity at all times, the honest answer is more capacity, not a cleverer queue.",
+      "why_vi": "Mọi cơ chế lập lịch đều là cách phân bổ một tài nguyên cố định, nên bảo vệ thoại đồng nghĩa bỏ đói thứ khác. Nếu đường truyền lúc nào cũng thiếu dung lượng thì câu trả lời trung thực là tăng dung lượng, không phải nghĩ ra hàng đợi khéo hơn.",
+      "level": 1
+    },
+    {
+      "id": "qn-73",
+      "q": "In a reactive OpenFlow deployment, the first packet of every new flow is slower than the rest because",
+      "q_vi": "Trong một triển khai OpenFlow kiểu phản ứng, gói đầu tiên của mỗi luồng mới chậm hơn các gói sau vì",
+      "choices": [
+        "The switch must recompute the spanning tree for each flow",
+        "The first packet is always fragmented by the controller",
+        "It is sent to the controller, which computes a rule and installs it before forwarding resumes",
+        "The controller encrypts the first packet of every flow"
+      ],
+      "answer": 2,
+      "why": "With no matching entry the switch has to ask, and that round trip plus rule installation is pure added latency on the first packet. Installing rules proactively removes the penalty at the cost of a much larger flow table.",
+      "why_vi": "Không có mục nào khớp thì switch buộc phải hỏi, và vòng trao đổi đó cộng với thời gian cài luật là độ trễ cộng thêm nguyên vẹn cho gói đầu tiên. Cài luật sẵn theo kiểu chủ động thì bỏ được phần phạt này nhưng đổi lại bảng luồng phình to hơn nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qn-74",
+      "q": "The controller of an SDN network crashes. Existing traffic keeps flowing. The correct interpretation is",
+      "q_vi": "Bộ điều khiển của một mạng SDN sập. Lưu lượng đang chạy vẫn thông. Cách hiểu đúng là",
+      "choices": [
+        "The rules are erased immediately when the control channel drops",
+        "The switches fall back to running BGP among themselves",
+        "The data plane still matches the rules already installed, but nothing new can be programmed",
+        "The controller was never in the path, so its failure has no consequence at all"
+      ],
+      "answer": 2,
+      "why": "Separating the planes means forwarding survives the controller, which is why the outage looks harmless at first. The damage shows up as soon as a link fails or a new flow needs a rule, since there is nobody left to react.",
+      "why_vi": "Tách hai mặt phẳng nghĩa là việc chuyển tiếp vẫn sống khi bộ điều khiển chết, vì vậy ban đầu sự cố trông vô hại. Thiệt hại lộ ra ngay khi một liên kết hỏng hoặc một luồng mới cần luật, vì lúc đó không còn ai phản ứng.",
+      "level": 3
+    },
+    {
+      "id": "qn-75",
+      "q": "A fat tree is built from many identical small switches rather than a few huge ones because",
+      "q_vi": "Người ta dựng tô-pô cây béo từ nhiều switch nhỏ giống nhau thay vì vài switch khổng lồ vì",
+      "choices": [
+        "It removes the need for any routing protocol in the datacentre",
+        "It allows the network to run without any oversubscription accounting",
+        "Small switches have lower latency per port than large ones",
+        "Aggregate capacity is kept equal at every level, giving full bisection bandwidth from cheap commodity parts"
+      ],
+      "answer": 3,
+      "why": "The design turns a bandwidth problem into a replication problem, so the network scales by adding more of the same cheap box. Latency per hop actually goes up slightly because there are more hops, the win is cost and scalability.",
+      "why_vi": "Thiết kế này biến bài toán băng thông thành bài toán nhân bản, mạng mở rộng bằng cách thêm chính loại thiết bị rẻ đó. Độ trễ mỗi chặng thực ra nhích lên vì số chặng nhiều hơn, cái được là chi phí và khả năng mở rộng.",
+      "level": 1
+    },
+    {
+      "id": "qn-76",
+      "q": "A datacentre fabric has four equal cost uplinks. Monitoring shows one at ninety percent while the others sit near twenty percent. The likely explanation is",
+      "q_vi": "Một hạ tầng trung tâm dữ liệu có bốn đường lên cùng giá. Giám sát cho thấy một đường ở chín mươi phần trăm còn các đường kia chỉ quanh hai mươi phần trăm. Giải thích khả dĩ là",
+      "choices": [
+        "Hashing is per flow and a few very large flows landed on the same member",
+        "Three of the uplinks are administratively down",
+        "The switch is round robining packets and reordering them",
+        "The routing protocol failed to install three of the four paths"
+      ],
+      "answer": 0,
+      "why": "Multipath forwarding balances flows, not bytes, so a handful of elephant flows can collide on one member no matter how many paths exist. If paths were missing the other links would carry nothing at all, and round robin would show even utilisation together with heavy reordering.",
+      "why_vi": "Chuyển tiếp đa đường cân bằng theo luồng chứ không theo số byte, nên vài luồng khổng lồ vẫn có thể rơi trúng cùng một thành viên dù có bao nhiêu đường đi nữa. Nếu thiếu đường thì các liên kết kia không tải gì cả, còn nếu chia vòng tròn thì mức tải sẽ đều nhưng kèm theo đảo thứ tự nặng.",
+      "level": 3
+    },
+    {
+      "id": "qn-77",
+      "q": "A distributed store issues one query that forty servers answer at the same instant, and throughput collapses. This pattern is",
+      "q_vi": "Một hệ lưu trữ phân tán phát một truy vấn mà bốn mươi máy chủ cùng trả lời một lúc, và thông lượng sụp đổ. Kiểu này gọi là",
+      "choices": [
+        "Incast, where synchronised responses overrun the switch buffer serving the requester",
+        "Head of line blocking inside a single TCP stream",
+        "A broadcast storm caused by a layer two loop",
+        "Bufferbloat, caused by buffers that are too large on the access link"
+      ],
+      "answer": 0,
+      "why": "The responses are synchronised by the request, so they arrive as one burst at the port facing the client and the shallow buffer there cannot hold them. Bufferbloat is the opposite problem, buffers that are too deep, and no loop or single stream is involved.",
+      "why_vi": "Các phản hồi bị đồng bộ bởi chính truy vấn nên chúng dồn tới cùng lúc ở cổng hướng về máy hỏi, và bộ đệm nông ở đó không chứa nổi. Phình bộ đệm là vấn đề ngược lại, bộ đệm quá sâu, và ở đây không có vòng lặp cũng không phải chuyện một luồng đơn.",
+      "level": 3
+    },
+    {
+      "id": "qn-78",
+      "q": "In a datacentre where round trip times are around one hundred microseconds, a default minimum retransmission timeout of two hundred milliseconds is harmful because",
+      "q_vi": "Trong trung tâm dữ liệu có trễ khứ hồi cỡ một trăm micro giây, thời hạn truyền lại tối thiểu mặc định hai trăm mili giây gây hại vì",
+      "choices": [
+        "It prevents the congestion window from ever leaving slow start",
+        "The timer overflows and the connection resets",
+        "One lost packet idles the connection for roughly two thousand round trip times",
+        "It causes the receiver to discard in order data"
+      ],
+      "answer": 2,
+      "why": "The timer was sized for wide area paths, so on a fabric that is three orders of magnitude faster it turns a single loss into a visible stall. This is why datacentre stacks lower the minimum and lean on marking and fast recovery instead of timeouts.",
+      "why_vi": "Bộ định thời này được đặt cho đường truyền diện rộng, nên trên một hạ tầng nhanh hơn ba bậc độ lớn thì chỉ một lần mất gói cũng thành khoảng đứng nhìn thấy rõ. Vì vậy các chồng giao thức trong trung tâm dữ liệu hạ mức tối thiểu xuống và dựa vào đánh dấu tắc nghẽn cùng phục hồi nhanh thay cho việc chờ hết hạn.",
+      "level": 3
+    },
+    {
+      "id": "qn-79",
+      "q": "A cached response has expired. The cheapest correct next step for the client is",
+      "q_vi": "Một phản hồi trong bộ đệm đã hết hạn. Bước tiếp theo đúng và rẻ nhất cho máy khách là",
+      "choices": [
+        "Ask the origin to extend the lifetime of the stored copy",
+        "Download the full object again to be safe",
+        "Send a conditional request with the stored validator and accept a not modified reply",
+        "Delete the entry and stop caching that resource"
+      ],
+      "answer": 2,
+      "why": "Expiry only means the copy can no longer be used without checking, not that it is wrong. A conditional request costs a few hundred bytes of headers and usually returns a short reply confirming the stored body is still good.",
+      "why_vi": "Hết hạn chỉ có nghĩa là không được dùng bản lưu mà không kiểm tra lại, chứ không có nghĩa bản đó sai. Một yêu cầu có điều kiện chỉ tốn vài trăm byte tiêu đề và thường nhận về một phản hồi ngắn xác nhận nội dung đang lưu vẫn dùng được.",
+      "level": 2
+    },
+    {
+      "id": "qn-80",
+      "q": "The difference between no-cache and no-store in a cache control header is",
+      "q_vi": "Khác biệt giữa no-cache và no-store trong tiêu đề điều khiển bộ đệm là",
+      "choices": [
+        "No-cache applies to browsers and no-store to proxies",
+        "No-cache allows storing but requires revalidation before reuse, no-store forbids keeping a copy at all",
+        "No-store allows storing in memory but not on disk",
+        "They are two spellings of the same directive"
+      ],
+      "answer": 1,
+      "why": "The names are misleading, the first still lets a cache keep the response and reuse it after a successful check. Only the second is the right choice for sensitive data that must never sit on disk in a shared proxy.",
+      "why_vi": "Tên gọi dễ gây nhầm, chỉ thị thứ nhất vẫn cho phép bộ đệm giữ lại phản hồi và dùng lại sau khi kiểm tra thành công. Chỉ chỉ thị thứ hai mới đúng cho dữ liệu nhạy cảm, thứ không được phép nằm lại trên đĩa của một proxy dùng chung.",
+      "level": 2
+    },
+    {
+      "id": "qn-81",
+      "q": "A CDN starts serving one user's personalised page to everyone. The most likely configuration mistake is",
+      "q_vi": "Một mạng phân phối nội dung bắt đầu trả trang cá nhân hoá của một người cho tất cả mọi người. Lỗi cấu hình khả dĩ nhất là",
+      "choices": [
+        "The response was marked publicly cacheable without varying on the identifying header",
+        "The cache lifetime was set too short",
+        "The CDN was configured to compress the response",
+        "The origin server sent the page over plain HTTP"
+      ],
+      "answer": 0,
+      "why": "A shared cache keys on the URL, so if the response depends on a cookie or an authorisation header it must either be marked private or declared to vary on that header. A short lifetime would only shrink the window of exposure, it would not prevent it.",
+      "why_vi": "Bộ đệm dùng chung lấy khoá theo địa chỉ tài nguyên, nên nếu phản hồi phụ thuộc vào cookie hay tiêu đề xác thực thì phải đánh dấu là riêng tư hoặc khai báo là thay đổi theo tiêu đề đó. Thời gian sống ngắn chỉ thu hẹp khoảng thời gian lộ chứ không ngăn được.",
+      "level": 3
+    },
+    {
+      "id": "qn-82",
+      "q": "In WebRTC, the difference between a STUN server and a TURN server is",
+      "q_vi": "Trong WebRTC, khác biệt giữa máy chủ STUN và máy chủ TURN là",
+      "choices": [
+        "STUN is used by the caller and TURN by the callee",
+        "STUN encrypts the media and TURN signs it",
+        "STUN works over TCP only and TURN over UDP only",
+        "STUN only tells a client its public address, TURN carries the media when a direct path fails"
+      ],
+      "answer": 3,
+      "why": "The first is a cheap reflection service used during candidate gathering, the second is a relay that costs real bandwidth for every minute of the call. That cost difference is why deployments try hard to avoid falling back to the relay.",
+      "why_vi": "Cái đầu là dịch vụ phản chiếu rất rẻ, dùng trong lúc thu thập ứng viên, cái sau là máy trung chuyển tốn băng thông thật cho từng phút gọi. Chính khác biệt chi phí đó khiến các hệ thống cố hết sức để không phải rơi về máy trung chuyển.",
+      "level": 1
+    },
+    {
+      "id": "qn-83",
+      "q": "Enlarging the jitter buffer in a voice client",
+      "q_vi": "Tăng bộ đệm chống rung pha trong ứng dụng thoại sẽ",
+      "choices": [
+        "Improves audio quality without any trade off",
+        "Reduces the bandwidth the call consumes",
+        "Removes the need for packet loss concealment",
+        "Smooths out variable arrival times but adds mouth to ear delay"
+      ],
+      "answer": 3,
+      "why": "The buffer works by holding audio long enough that late packets still arrive before their playout instant, and that holding time is delay the listener feels. Beyond about one hundred and fifty milliseconds one way, conversation turn taking starts to break down.",
+      "why_vi": "Bộ đệm này chạy được nhờ giữ âm thanh đủ lâu để gói tới muộn vẫn kịp trước thời điểm phát, và khoảng giữ đó chính là độ trễ người nghe cảm nhận. Vượt quá chừng một trăm năm mươi mili giây một chiều thì nhịp nói qua nói lại bắt đầu hỏng.",
+      "level": 2
+    },
+    {
+      "id": "qn-84",
+      "q": "gRPC is built on HTTP/2 mainly because it needs",
+      "q_vi": "gRPC dựng trên HTTP/2 chủ yếu vì nó cần",
+      "choices": [
+        "A transport that guarantees delivery without acknowledgements",
+        "The ability to send requests without any headers",
+        "Many concurrent calls and streams multiplexed over a single connection, plus trailers to carry the final status",
+        "Automatic encryption that HTTP/1.1 cannot provide"
+      ],
+      "answer": 2,
+      "why": "Older HTTP forced either one call at a time per connection or a pool of connections, which is expensive for a service mesh with thousands of calls per second. Trailers matter because a streaming call cannot know its final status until the stream ends. Encryption comes from TLS in both versions.",
+      "why_vi": "HTTP đời cũ bắt phải làm từng lời gọi một trên mỗi kết nối, hoặc phải mở cả một bể kết nối, quá tốn với một lưới dịch vụ có hàng nghìn lời gọi mỗi giây. Phần đuôi tiêu đề quan trọng vì một lời gọi dạng luồng chưa thể biết trạng thái cuối cho tới khi luồng kết thúc. Việc mã hoá là do TLS lo, ở phiên bản nào cũng vậy.",
+      "level": 2
+    },
+    {
+      "id": "qn-85",
+      "q": "Compared with NTP over the internet, PTP on a controlled network typically achieves",
+      "q_vi": "So với NTP chạy trên internet, PTP trên mạng được kiểm soát thường đạt",
+      "choices": [
+        "The same accuracy but with less traffic",
+        "Lower accuracy but far simpler configuration",
+        "Sub microsecond accuracy instead of a few milliseconds",
+        "Accuracy that does not depend on the network at all"
+      ],
+      "answer": 2,
+      "why": "The gain is roughly three orders of magnitude and it comes from timestamping in the network interface hardware and from switches that account for their own queueing delay. It is not simpler, it requires supporting equipment on every hop.",
+      "why_vi": "Mức cải thiện cỡ ba bậc độ lớn, đến từ việc gắn nhãn thời gian ngay trong phần cứng card mạng và từ các switch tự khai báo phần trễ hàng đợi của chính mình. Nó không đơn giản hơn, nó đòi thiết bị hỗ trợ ở mọi chặng.",
+      "level": 1
+    },
+    {
+      "id": "qn-86",
+      "q": "A machine syncs its clock over a link whose upstream delay is fifty milliseconds and downstream delay is ten milliseconds. Its clock will be",
+      "q_vi": "Một máy đồng bộ đồng hồ qua một đường có trễ chiều lên năm mươi mili giây và chiều xuống mười mili giây. Đồng hồ của nó sẽ",
+      "choices": [
+        "Unable to synchronise at all until the path becomes symmetric",
+        "Correct, because the protocol measures each direction separately",
+        "Offset by roughly twenty milliseconds, because the offset estimate assumes the two directions are equal",
+        "Offset by forty milliseconds, the full difference between the two directions"
+      ],
+      "answer": 2,
+      "why": "The classic four timestamp formula can only measure the round trip, so it splits it in half and any asymmetry leaks into the result as half the difference. This is exactly why the precision protocol timestamps in hardware and why satellite links make poor time sources.",
+      "why_vi": "Công thức bốn nhãn thời gian kinh điển chỉ đo được vòng khứ hồi nên nó chia đôi, và mọi bất đối xứng rò vào kết quả đúng bằng một nửa độ chênh. Đây chính là lý do giao thức thời gian chính xác phải gắn nhãn bằng phần cứng, và cũng là lý do đường vệ tinh làm nguồn thời gian rất tệ.",
+      "level": 3
+    },
+    {
+      "id": "qn-87",
+      "q": "A transparent clock in a PTP capable switch works by",
+      "q_vi": "Đồng hồ trong suốt trên switch hỗ trợ PTP hoạt động bằng cách",
+      "choices": [
+        "Giving timing messages the highest queue priority and nothing more",
+        "Measuring how long the message was held inside the switch and writing that residence time into the packet",
+        "Dropping timing messages that arrive out of order",
+        "Regenerating the timing message from its own local clock"
+      ],
+      "answer": 1,
+      "why": "Queueing delay inside a switch is variable and would otherwise appear as pure error at the receiver. Recording it lets the client subtract it exactly. Priority queueing reduces the variation but never eliminates it, which is why it is not enough on its own.",
+      "why_vi": "Trễ hàng đợi bên trong switch thay đổi thất thường và nếu không xử lý sẽ hiện ra thành sai số thuần tuý ở bên nhận. Ghi lại con số đó cho phép máy khách trừ đi chính xác. Ưu tiên hàng đợi làm giảm biến động chứ không xoá bỏ được, vì vậy chỉ ưu tiên thôi là chưa đủ.",
+      "level": 2
+    },
+    {
+      "id": "qn-88",
+      "q": "A ping of eighty milliseconds tells you",
+      "q_vi": "Một lệnh ping cho kết quả tám mươi mili giây cho bạn biết",
+      "choices": [
+        "The available bandwidth on the path",
+        "That each direction takes exactly forty milliseconds",
+        "The sum of both directions, which may be split very unevenly",
+        "The one way delay towards the destination"
+      ],
+      "answer": 2,
+      "why": "The measurement is inherently a round trip, and paths are often asymmetric in both route and load, so halving it is a guess rather than a measurement. Nothing in the result says anything about capacity.",
+      "why_vi": "Phép đo này bản chất là khứ hồi, mà đường đi thường bất đối xứng cả về tuyến lẫn về tải, nên chia đôi là phỏng đoán chứ không phải phép đo. Kết quả cũng không nói gì về dung lượng đường truyền.",
+      "level": 1
+    },
+    {
+      "id": "qn-89",
+      "q": "When measuring a link with iperf, using UDP rather than TCP is appropriate when you want to",
+      "q_vi": "Khi đo một đường truyền bằng iperf, chọn UDP thay vì TCP là hợp lý khi bạn muốn",
+      "choices": [
+        "Measure the round trip time precisely",
+        "Offer a rate you choose and observe the loss and jitter it produces",
+        "Find the highest throughput the path can sustain automatically",
+        "Avoid loading the link while measuring it"
+      ],
+      "answer": 1,
+      "why": "With the reliable transport the sending rate is decided by congestion control, so the result answers what a well behaved application would get. With datagrams you set the rate yourself, which is how you characterise a link but also how you can easily overload it and read the resulting loss as if it were a link fault.",
+      "why_vi": "Với giao vận tin cậy thì tốc độ phát do điều khiển tắc nghẽn quyết định, nên kết quả trả lời câu hỏi một ứng dụng cư xử đúng mực sẽ đạt được bao nhiêu. Với gói dữ liệu thì chính bạn đặt tốc độ, đó là cách để mô tả đặc tính đường truyền nhưng cũng rất dễ làm quá tải rồi đọc mất gói sinh ra như thể đường truyền có lỗi.",
+      "level": 2
+    },
+    {
+      "id": "qn-90",
+      "q": "Capturing packets at both ends of a connection rather than only at the sender lets you",
+      "q_vi": "Bắt gói ở cả hai đầu kết nối thay vì chỉ ở phía gửi cho phép bạn",
+      "choices": [
+        "Tell whether a segment was lost in the network or never actually left the sender",
+        "Measure the CPU load of the intermediate routers",
+        "Decrypt the TLS payload without any key",
+        "Reconstruct the routing table of every hop"
+      ],
+      "answer": 0,
+      "why": "One capture only shows what one side believes. Two captures turn a guess into an observation, because a segment present in the sender's trace and absent from the receiver's is loss, while a segment missing from both is an application or stack problem.",
+      "why_vi": "Một bản bắt gói chỉ cho thấy điều một phía tin là đúng. Hai bản biến phỏng đoán thành quan sát, vì đoạn có trong bản của bên gửi mà không có trong bản của bên nhận là mất gói, còn đoạn thiếu ở cả hai bản là lỗi của ứng dụng hoặc của chồng giao thức.",
+      "level": 1
+    },
+    {
+      "id": "qn-91",
+      "q": "Flow records exported by routers are useful for capacity planning because they",
+      "q_vi": "Bản ghi luồng do bộ định tuyến xuất ra hữu ích cho việc quy hoạch dung lượng vì chúng",
+      "choices": [
+        "Replace the need for any interface counters",
+        "Contain the full payload of every packet for later analysis",
+        "Summarise who talked to whom and how much, at a volume you can store for months",
+        "Provide microsecond accurate timing for each packet"
+      ],
+      "answer": 2,
+      "why": "The trade is deliberate, you lose packet level detail and gain the ability to keep a long history of traffic matrices. Storing every payload for months is neither affordable nor legal in most settings.",
+      "why_vi": "Đây là đánh đổi có chủ ý, bạn mất chi tiết mức gói và đổi lại giữ được lịch sử dài về ma trận lưu lượng. Lưu toàn bộ nội dung gói trong nhiều tháng thì vừa không kham nổi chi phí vừa không hợp lệ ở phần lớn bối cảnh.",
+      "level": 1
+    },
+    {
+      "id": "qn-92",
+      "q": "A capture shows the client sending the same segment again and again with doubling gaps, and no reply of any kind. This points to",
+      "q_vi": "Bản bắt gói cho thấy máy khách gửi đi gửi lại cùng một đoạn với khoảng cách tăng gấp đôi mỗi lần, và không có phản hồi nào cả. Điều này cho thấy",
+      "choices": [
+        "The connection is being throttled by a shaper",
+        "The client has selective acknowledgement disabled",
+        "The server is applying flow control with a zero window",
+        "The packets are being discarded somewhere, or the return path is broken"
+      ],
+      "answer": 3,
+      "why": "Exponential backoff with complete silence means the sender has no information at all, which is the signature of a black hole rather than of any negotiated slowdown. A zero window would still produce window probe replies, and a shaper would delay packets rather than silence the other direction.",
+      "why_vi": "Lùi theo cấp số nhân kèm im lặng hoàn toàn nghĩa là bên gửi không nhận được chút thông tin nào, đó là dấu hiệu của hố đen chứ không phải của một sự giảm tốc có thoả thuận. Cửa sổ bằng không thì vẫn có phản hồi cho gói dò cửa sổ, còn bộ định hình chỉ làm chậm gói chứ không làm câm chiều ngược lại.",
+      "level": 3
+    },
+    {
+      "id": "qn-93",
+      "q": "IPv4 address exhaustion was driven mainly by",
+      "q_vi": "Việc cạn kiệt địa chỉ IPv4 chủ yếu do",
+      "choices": [
+        "The switch from classful to classless allocation",
+        "Routers reserving most addresses for their own use",
+        "A thirty two bit space meeting billions of connected devices",
+        "Address translation consuming addresses faster than it saves them"
+      ],
+      "answer": 2,
+      "why": "Four billion addresses looked limitless in the early design and stopped being enough once every phone and sensor wanted one. Classless allocation and translation were responses that slowed the depletion down, not causes of it.",
+      "why_vi": "Bốn tỷ địa chỉ trông như vô tận ở thời thiết kế ban đầu, và hết đủ ngay khi mỗi chiếc điện thoại và mỗi cảm biến đều muốn có một cái. Cấp phát không phân lớp và biên dịch địa chỉ là các phản ứng làm chậm quá trình cạn, không phải nguyên nhân.",
+      "level": 1
+    },
+    {
+      "id": "qn-94",
+      "q": "Addresses in ranges such as ten dot something and one hundred and ninety two dot one hundred and sixty eight dot something are",
+      "q_vi": "Các dải địa chỉ như mười chấm và một trăm chín mươi hai chấm một trăm sáu mươi tám chấm là",
+      "choices": [
+        "Reserved for routers and unusable by hosts",
+        "Allocated by the registries to large operators only",
+        "Reserved for private use and not routed on the public internet",
+        "Valid publicly but always slower than other ranges"
+      ],
+      "answer": 2,
+      "why": "They can be reused by every organisation precisely because no provider will carry them, which is why anything leaving the site must be translated. They are ordinary addresses inside the site with no performance penalty of their own.",
+      "why_vi": "Chúng được mọi tổ chức dùng lại chính vì không nhà mạng nào chở chúng, và vì thế mọi thứ đi ra khỏi cơ quan đều phải biên dịch. Bên trong cơ quan chúng là địa chỉ bình thường, không hề chậm hơn vì bản thân dải địa chỉ.",
+      "level": 1
+    },
+    {
+      "id": "qn-95",
+      "q": "How many usable host addresses does a slash twenty six IPv4 subnet provide?",
+      "q_vi": "Một mạng con IPv4 chéo hai sáu cho bao nhiêu địa chỉ máy trạm dùng được?",
+      "choices": [
+        "Sixty four",
+        "One hundred and twenty six",
+        "Sixty two",
+        "Thirty"
+      ],
+      "answer": 2,
+      "why": "Six host bits give sixty four addresses, and the all zeros network address and the all ones broadcast address cannot be assigned to an interface. Sixty four is the size of the block, not the number of hosts you can use.",
+      "why_vi": "Sáu bit dành cho máy trạm cho sáu mươi tư địa chỉ, trong đó địa chỉ toàn bit không của mạng và địa chỉ toàn bit một để quảng bá không gán cho giao diện được. Sáu mươi tư là kích thước khối chứ không phải số máy dùng được.",
+      "level": 1
+    },
+    {
+      "id": "qn-96",
+      "q": "A routing table holds both a slash sixteen and a slash twenty four covering the destination. The router forwards using",
+      "q_vi": "Bảng định tuyến có cả một tuyến chéo mười sáu và một tuyến chéo hai bốn cùng bao địa chỉ đích. Bộ định tuyến sẽ chuyển tiếp theo",
+      "choices": [
+        "The slash sixteen, because a larger block is more stable",
+        "Both, alternating packets between them",
+        "The slash twenty four, because the longest matching prefix wins",
+        "Whichever route was learned first"
+      ],
+      "answer": 2,
+      "why": "The lookup always picks the most specific match, which is what makes it possible to punch a small exception into a large aggregate. Age and block size play no part in the forwarding decision itself.",
+      "why_vi": "Phép tra cứu luôn chọn tuyến khớp cụ thể nhất, chính điều đó cho phép chọc một ngoại lệ nhỏ vào giữa một khối lớn. Tuổi của tuyến và kích thước khối không tham gia vào quyết định chuyển tiếp.",
+      "level": 1
+    },
+    {
+      "id": "qn-97",
+      "q": "ARP spoofing is possible on a plain switched LAN because",
+      "q_vi": "Giả mạo ARP thực hiện được trên một mạng cục bộ chuyển mạch thông thường vì",
+      "choices": [
+        "The protocol runs over UDP and can be blocked by a firewall",
+        "The protocol has no authentication, so any host may claim any address",
+        "Hosts accept replies only from the DHCP server",
+        "Switches forward ARP replies only to the router"
+      ],
+      "answer": 1,
+      "why": "A reply is believed simply because it arrived, and hosts even accept unsolicited announcements, so an attacker can insert itself between two machines. Defences such as port security or inspection are added on top precisely because the protocol itself checks nothing.",
+      "why_vi": "Một bản trả lời được tin chỉ vì nó vừa tới, thậm chí máy trạm còn chấp nhận cả thông báo không ai hỏi, nên kẻ tấn công tự chen được vào giữa hai máy. Các biện pháp như khoá cổng hay soi bản tin phải thêm vào từ bên ngoài chính vì bản thân giao thức không kiểm tra gì cả.",
+      "level": 1
+    },
+    {
+      "id": "qn-98",
+      "q": "Two devices on a segment were given the same IPv4 address. The typical symptom is",
+      "q_vi": "Hai thiết bị trên cùng phân đoạn bị đặt trùng địa chỉ IPv4. Triệu chứng điển hình là",
+      "choices": [
+        "A total and permanent loss of connectivity for the whole segment",
+        "Packets being fragmented at every hop",
+        "Intermittent connectivity as the neighbours' address caches flip between two hardware addresses",
+        "The DHCP server refusing all new leases"
+      ],
+      "answer": 2,
+      "why": "Both machines answer address resolution requests, so whichever replied most recently owns the traffic until the other replies again. That is why the fault looks random and often follows whichever device was rebooted last, rather than looking like a clean outage.",
+      "why_vi": "Cả hai máy đều trả lời yêu cầu phân giải địa chỉ, nên máy nào vừa trả lời sau cùng thì chiếm lấy lưu lượng cho tới khi máy kia trả lời tiếp. Vì thế lỗi trông rất ngẫu nhiên và hay bám theo thiết bị vừa khởi động lại, chứ không giống một sự cố dứt khoát.",
+      "level": 3
+    },
+    {
+      "id": "qn-99",
+      "q": "Clients on a remote VLAN get no address although the DHCP server is healthy. The missing piece is usually",
+      "q_vi": "Máy khách trên một VLAN ở xa không nhận được địa chỉ dù máy chủ DHCP vẫn khoẻ. Thứ còn thiếu thường là",
+      "choices": [
+        "A firewall rule allowing outbound TCP from the clients",
+        "A static route from the clients to the server",
+        "A relay agent on the router, since the initial request is a broadcast that routers do not forward",
+        "A larger address pool on the server"
+      ],
+      "answer": 2,
+      "why": "A client with no address can only shout on its own segment, and a router by design stops broadcasts. The relay turns that broadcast into a unicast towards the server and records the originating subnet so the right pool is chosen. A static route cannot help a host that has no address yet.",
+      "why_vi": "Máy khách chưa có địa chỉ thì chỉ có thể hô lên trong phân đoạn của mình, mà bộ định tuyến vốn được thiết kế để chặn quảng bá. Bộ tiếp chuyển biến bản tin quảng bá đó thành bản tin đơn hướng gửi tới máy chủ và ghi lại mạng con xuất phát để chọn đúng dải cấp. Một tuyến tĩnh không cứu được máy còn chưa có địa chỉ.",
+      "level": 2
+    },
+    {
+      "id": "qn-100",
+      "q": "After a second internet link is added, some sessions establish and then die. The likely cause is",
+      "q_vi": "Sau khi thêm một đường internet thứ hai, một số phiên mở được rồi chết. Nguyên nhân khả dĩ là",
+      "choices": [
+        "The routing protocol installed both routes with equal cost",
+        "The second link has a different maximum transmission unit",
+        "The provider is rate limiting the new link",
+        "Traffic leaves by one link and returns by the other, so a stateful firewall sees a reply with no matching state"
+      ],
+      "answer": 3,
+      "why": "Connection tracking only works if both directions cross the same device, and asymmetric routing breaks exactly that assumption, which is why the handshake may pass while later packets are dropped. Equal cost routes are normal and harmless as long as state is shared or the paths are pinned per flow.",
+      "why_vi": "Việc theo dõi kết nối chỉ chạy được nếu cả hai chiều cùng đi qua một thiết bị, mà định tuyến bất đối xứng phá đúng giả định đó, vì vậy bắt tay có thể qua được còn các gói sau thì bị huỷ. Hai tuyến cùng giá là chuyện bình thường và vô hại, miễn là trạng thái được chia sẻ hoặc mỗi luồng bị ghim vào một đường.",
       "level": 3
     }
   ]

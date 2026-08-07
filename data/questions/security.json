@@ -8,12 +8,12 @@
       "q": "An anomaly-based IDS reports 99.5% detection but analysts ignore its alerts. The most likely reason is",
       "q_vi": "Một hệ phát hiện xâm nhập theo bất thường báo tỉ lệ phát hiện 99,5% nhưng người phân tích lờ cảnh báo của nó. Lý do khả dĩ nhất là",
       "choices": [
-        "The false positive rate is high enough that most alerts are benign",
-        "The detection rate was computed on the training set",
+        "The signatures are out of date",
         "The system cannot log events",
-        "The signatures are out of date"
+        "The false positive rate is high enough that most alerts are benign",
+        "The detection rate was computed on the training set"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "With a low base rate of real attacks, even a small false positive rate buries the true alerts. Detection rate alone never describes an operational detector.",
       "why_vi": "Khi tấn công thật vốn hiếm, chỉ cần tỉ lệ báo động giả nhỏ cũng đủ chôn vùi các cảnh báo thật. Riêng tỉ lệ phát hiện không bao giờ mô tả được một bộ phát hiện đang vận hành.",
       "level": 3
@@ -23,12 +23,12 @@
       "q": "The essential difference between signature-based and anomaly-based detection is",
       "q_vi": "Khác biệt cốt lõi giữa phát hiện theo dấu hiệu và theo bất thường là",
       "choices": [
-        "Signatures match known attacks precisely, anomaly detection flags deviation from normal",
         "Signatures work only on encrypted traffic",
-        "Anomaly detection needs no training data",
-        "Signatures detect zero-days better"
+        "Signatures detect zero-days better",
+        "Signatures match known attacks precisely, anomaly detection flags deviation from normal",
+        "Anomaly detection needs no training data"
       ],
-      "answer": 0,
+      "answer": 2,
       "why": "Signatures cannot see what has never been catalogued, which is exactly what a zero-day is. Anomaly methods can, and pay for it in false alarms.",
       "why_vi": "Dấu hiệu không thấy được thứ chưa từng được lập danh mục, mà đó chính là định nghĩa lỗ hổng chưa có bản vá. Phương pháp bất thường thấy được, và trả giá bằng báo động giả.",
       "level": 2
@@ -38,12 +38,12 @@
       "q": "Zero trust architecture is built on the assumption that",
       "q_vi": "Kiến trúc tin cậy bằng không dựa trên giả định rằng",
       "choices": [
-        "No network location is inherently trustworthy, so every request is verified",
         "The internal network is safe once the perimeter holds",
-        "Encryption alone is sufficient security",
-        "Users never make mistakes"
+        "No network location is inherently trustworthy, so every request is verified",
+        "Users never make mistakes",
+        "Encryption alone is sufficient security"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "It replaces the castle and moat model. Being inside the corporate network grants nothing by itself, which is what stops lateral movement after one host falls.",
       "why_vi": "Nó thay thế mô hình thành trì và hào nước. Việc đang ở trong mạng nội bộ tự nó không cấp quyền gì, nhờ vậy chặn được di chuyển ngang sau khi một máy bị chiếm.",
       "level": 2
@@ -54,9 +54,9 @@
       "q_vi": "Một biện pháp phòng thủ được đề xuất mà không nêu mô hình mối đe dọa. Vấn đề cốt lõi là",
       "choices": [
         "There is no way to say what it defends against, so it cannot be evaluated",
-        "It will be too slow in practice",
+        "It will violate privacy regulations",
         "It cannot be implemented in software",
-        "It will violate privacy regulations"
+        "It will be too slow in practice"
       ],
       "answer": 0,
       "why": "Security claims are relative to an adversary. Without specifying what the attacker knows and can do, both success and failure are undefined.",
@@ -68,12 +68,12 @@
       "q": "An adversarial example is dangerous because",
       "q_vi": "Mẫu đối kháng nguy hiểm vì",
       "choices": [
+        "It only works on unencrypted networks",
         "A perturbation invisible to a human flips the model's decision",
-        "It deletes the model weights",
         "It requires physical access to the server",
-        "It only works on unencrypted networks"
+        "It deletes the model weights"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "Human review does not catch it, because to a human nothing changed. That breaks the usual assumption that a person can audit the input.",
       "why_vi": "Người kiểm tra không bắt được, vì với mắt người thì không có gì thay đổi. Điều đó phá vỡ giả định thường thấy rằng con người có thể soi lại đầu vào.",
       "level": 2
@@ -84,9 +84,9 @@
       "q_vi": "Lừa đảo qua mã QR khó phát hiện hơn lừa đảo qua email chủ yếu vì",
       "choices": [
         "The destination URL is not visible before the user acts on it",
-        "QR codes cannot be scanned by security tools",
+        "It bypasses TLS",
         "It only targets mobile devices",
-        "It bypasses TLS"
+        "QR codes cannot be scanned by security tools"
       ],
       "answer": 0,
       "why": "The usual defence is teaching people to inspect a link. A QR code removes exactly that step, and printed codes also sit outside the mail gateway's reach.",
@@ -98,12 +98,12 @@
       "q": "A provenance graph is used in intrusion detection to",
       "q_vi": "Đồ thị nguồn gốc được dùng trong phát hiện xâm nhập để",
       "choices": [
+        "Generate firewall rules automatically",
         "Reconstruct causal chains between processes, files and connections",
-        "Encrypt the audit log",
         "Compress network traffic captures",
-        "Generate firewall rules automatically"
+        "Encrypt the audit log"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "Individual events are meaningless. Linking them causally is what turns a stream of syscalls into an attack story you can reason about.",
       "why_vi": "Từng sự kiện riêng lẻ không có nghĩa. Nối chúng theo quan hệ nhân quả mới biến dòng lời gọi hệ thống thành một câu chuyện tấn công có thể lập luận được.",
       "level": 3
@@ -114,9 +114,9 @@
       "q_vi": "Cặp nào ghép đúng mục tiêu an ninh với cơ chế?",
       "choices": [
         "Integrity with a cryptographic hash or digital signature",
-        "Confidentiality with a checksum",
+        "Integrity with rate limiting",
         "Availability with symmetric encryption",
-        "Integrity with rate limiting"
+        "Confidentiality with a checksum"
       ],
       "answer": 0,
       "why": "Hashes and signatures detect modification, which is integrity. Encryption serves confidentiality, and rate limiting serves availability.",
@@ -128,12 +128,12 @@
       "q": "A gradient inversion attack in federated learning shows that",
       "q_vi": "Tấn công đảo ngược gradient trong học liên kết cho thấy",
       "choices": [
+        "Encryption is unnecessary in federated settings",
         "Uploading gradients instead of data is not automatically private",
-        "Federated learning cannot converge",
         "Clients must share their raw data",
-        "Encryption is unnecessary in federated settings"
+        "Federated learning cannot converge"
       ],
-      "answer": 0,
+      "answer": 1,
       "why": "Gradients are a function of the input and can be inverted to recover recognisable samples. This is why secure aggregation and differential privacy are added on top.",
       "why_vi": "Gradient là hàm của đầu vào và có thể bị đảo ngược để khôi phục các mẫu nhận ra được. Vì vậy người ta phải thêm tổng hợp an toàn và riêng tư vi phân lên trên.",
       "level": 3
@@ -145,12 +145,1437 @@
       "choices": [
         "An attacker will choose inputs the model was never evaluated on",
         "Clean accuracy is always lower than robust accuracy",
-        "Security datasets are always balanced",
-        "Accuracy cannot be measured on encrypted traffic"
+        "Accuracy cannot be measured on encrypted traffic",
+        "Security datasets are always balanced"
       ],
       "answer": 0,
       "why": "Security is an adversarial setting, so the relevant number is performance under the attack, not on the average sample. Robust accuracy is normally much lower.",
       "why_vi": "An ninh là môi trường đối kháng, nên con số đáng quan tâm là hiệu năng khi bị tấn công, không phải trên mẫu trung bình. Độ chính xác bền vững thường thấp hơn nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qsec-11",
+      "q": "Compared with AES in counter mode, AES-GCM additionally provides",
+      "q_vi": "So với AES ở chế độ đếm, AES ở chế độ GCM cung cấp thêm điều gì",
+      "choices": [
+        "Detection of any modification of the ciphertext, through an authentication tag",
+        "Compression of the plaintext before encryption",
+        "A key twice as long",
+        "Freedom from having to use a unique nonce"
+      ],
+      "answer": 0,
+      "why": "GCM is an authenticated mode, so a tampered ciphertext fails the tag check instead of decrypting to attacker chosen garbage. It still requires a unique nonce, in fact more strictly than counter mode alone.",
+      "why_vi": "GCM là chế độ có xác thực, nên bản mã bị sửa sẽ trượt bước kiểm thẻ thay vì giải ra rác do kẻ tấn công chọn. Nó vẫn đòi nonce duy nhất, thậm chí còn khắt khe hơn chế độ đếm thuần.",
+      "level": 1
+    },
+    {
+      "id": "qsec-12",
+      "q": "A service encrypts messages with AES-GCM using one long lived key and a counter that resets to zero every time the process restarts. The most serious consequence is",
+      "q_vi": "Một dịch vụ mã hoá thông điệp bằng AES-GCM với một khoá dùng lâu dài và bộ đếm bị đặt lại về không mỗi lần tiến trình khởi động lại. Hậu quả nghiêm trọng nhất là",
+      "choices": [
+        "Two messages under the same nonce leak the relation between their plaintexts, and repeated reuse can expose the authentication key itself",
+        "Legitimate receivers can no longer decrypt older ciphertexts",
+        "The ciphertext grows longer than the plaintext",
+        "Performance drops because the counter has to be recomputed"
+      ],
+      "answer": 0,
+      "why": "In a counter based mode the keystream is a function of key and nonce, so reusing the pair XORs two plaintexts together. In GCM the damage goes further, because forgeries against the authentication tag become possible.",
+      "why_vi": "Trong chế độ dựa trên bộ đếm, dòng khoá là hàm của khoá và nonce, nên dùng lại cặp đó khiến hai bản rõ bị XOR với nhau. Với GCM thiệt hại còn xa hơn, vì kẻ tấn công có thể giả mạo được thẻ xác thực.",
+      "level": 3
+    },
+    {
+      "id": "qsec-13",
+      "q": "A code review flags that the initialization vector is stored in clear text next to the ciphertext. The correct response is",
+      "q_vi": "Một buổi soát mã cảnh báo rằng vector khởi tạo được lưu ở dạng rõ ngay cạnh bản mã. Phản hồi đúng là",
+      "choices": [
+        "The vector should be derived from the user's password",
+        "The vector should be reused so it does not need storing at all",
+        "This is a serious leak and the vector must be encrypted as well",
+        "This is normal, the vector must be unique but is not required to be secret"
+      ],
+      "answer": 3,
+      "why": "Uniqueness, not secrecy, is what the initialization vector must guarantee, and the receiver needs it to decrypt. Reusing it to avoid storage is the actual dangerous idea in this list.",
+      "why_vi": "Điều mà vector khởi tạo phải bảo đảm là tính duy nhất chứ không phải tính bí mật, và bên nhận cần nó để giải mã. Ý tưởng dùng lại nó cho khỏi phải lưu mới đúng là ý nguy hiểm trong danh sách này.",
+      "level": 2
+    },
+    {
+      "id": "qsec-14",
+      "q": "A session token is encrypted with AES-CBC and carries no authentication tag. An attacker who can flip bits in the stored ciphertext",
+      "q_vi": "Một mã phiên được mã hoá bằng AES-CBC và không kèm thẻ xác thực. Kẻ tấn công có thể lật bit trong bản mã đã lưu thì",
+      "choices": [
+        "Will always trigger a decryption error the server can catch",
+        "Can alter the decrypted plaintext in controlled ways, and the server will treat the result as a valid token",
+        "Can do nothing, because they do not hold the key",
+        "Can recover the key from a single modified block"
+      ],
+      "answer": 1,
+      "why": "Encryption without authentication provides secrecy but not integrity, and chaining modes give the attacker predictable control over parts of the plaintext. The server has no way to notice, which is why authenticated encryption is the default advice.",
+      "why_vi": "Mã hoá mà không xác thực chỉ cho tính bí mật chứ không cho tính toàn vẹn, và các chế độ nối khối cho kẻ tấn công quyền điều khiển đoán trước được lên một phần bản rõ. Máy chủ không có cách nào nhận ra, vì vậy lời khuyên mặc định là dùng mã hoá có xác thực.",
+      "level": 3
+    },
+    {
+      "id": "qsec-15",
+      "q": "A message authentication code is used to",
+      "q_vi": "Mã xác thực thông điệp được dùng để",
+      "choices": [
+        "Compress a message before transmission",
+        "Hide the content of a message from an eavesdropper",
+        "Guarantee the message will be delivered",
+        "Prove the message was not altered and came from a holder of the shared key"
+      ],
+      "answer": 3,
+      "why": "A code of this kind serves integrity and origin authenticity. Confidentiality is a separate goal that needs encryption, and delivery is a networking concern entirely.",
+      "why_vi": "Loại mã này phục vụ tính toàn vẹn và tính xác thực nguồn gốc. Tính bí mật là mục tiêu riêng và cần mã hoá, còn việc chuyển tới nơi hoàn toàn là chuyện của mạng.",
+      "level": 1
+    },
+    {
+      "id": "qsec-16",
+      "q": "Why is HMAC preferred over simply hashing the secret key concatenated with the message?",
+      "q_vi": "Vì sao nên dùng HMAC thay vì chỉ băm khoá bí mật nối với thông điệp?",
+      "choices": [
+        "HMAC produces a shorter tag",
+        "On common hash designs the naive construction lets an attacker append data and compute a valid tag without knowing the key",
+        "The naive construction cannot process binary data",
+        "HMAC runs faster on modern processors"
+      ],
+      "answer": 1,
+      "why": "Hashes built from an iterated compression function expose an internal state that can be extended, so the naive keyed hash is forgeable. HMAC's nested structure is designed precisely to close that.",
+      "why_vi": "Các hàm băm dựng từ hàm nén lặp làm lộ một trạng thái trong có thể nối dài tiếp, nên cách băm khoá thô sơ có thể bị giả mạo. Cấu trúc lồng của HMAC sinh ra đúng là để bịt chỗ đó.",
+      "level": 3
+    },
+    {
+      "id": "qsec-17",
+      "q": "Two peers run a Diffie-Hellman exchange with no signatures and no certificates. The result is",
+      "q_vi": "Hai bên thực hiện trao đổi khoá Diffie Hellman mà không có chữ ký, cũng không có chứng thư. Kết quả là",
+      "choices": [
+        "A shared secret safe against any attacker",
+        "A shared secret that must be transmitted over the network to be usable",
+        "No shared secret at all",
+        "A shared secret safe against a passive listener but not against an active attacker sitting in the path"
+      ],
+      "answer": 3,
+      "why": "Key agreement solves secrecy against eavesdropping, not identity. An attacker in the middle can complete one exchange with each side and relay, so authentication has to be added on top.",
+      "why_vi": "Thoả thuận khoá giải quyết tính bí mật trước kẻ nghe lén, chứ không giải quyết danh tính. Kẻ đứng giữa có thể hoàn tất một lần trao đổi với mỗi bên rồi chuyển tiếp, nên phải bổ sung phần xác thực lên trên.",
+      "level": 2
+    },
+    {
+      "id": "qsec-18",
+      "q": "An organisation is told to enable forward secrecy. The concrete benefit is",
+      "q_vi": "Một đơn vị được khuyến nghị bật tính bí mật chuyển tiếp. Lợi ích cụ thể là",
+      "choices": [
+        "One session key can be reused across many connections",
+        "Clients no longer need to validate certificates",
+        "Faster handshakes for returning clients",
+        "Traffic captured today stays unreadable even if the server's long term private key is stolen next year"
+      ],
+      "answer": 3,
+      "why": "Ephemeral per session keys are discarded after use, so there is nothing left for a future key theft to unlock. Certificate validation is still required, since forward secrecy says nothing about who you are talking to.",
+      "why_vi": "Khoá tạm thời của từng phiên bị bỏ đi sau khi dùng, nên về sau có mất khoá cũng chẳng còn gì để mở. Việc kiểm chứng thư vẫn bắt buộc, vì tính bí mật chuyển tiếp không nói gì về chuyện bạn đang nói chuyện với ai.",
+      "level": 2
+    },
+    {
+      "id": "qsec-19",
+      "q": "A browser cannot reach the revocation status service for a certificate and proceeds with the connection anyway. This behaviour means",
+      "q_vi": "Trình duyệt không liên hệ được dịch vụ tra trạng thái thu hồi của một chứng thư và vẫn kết nối tiếp. Hành vi đó có nghĩa là",
+      "choices": [
+        "Revocation is still enforced as long as the certificate has not expired",
+        "The certificate is automatically treated as revoked",
+        "Certificate pinning is in effect",
+        "An attacker able to block the status check also neutralises revocation for a stolen certificate"
+      ],
+      "answer": 3,
+      "why": "A check that fails open is a check an attacker can simply remove, and an attacker positioned to use a stolen certificate is usually positioned to drop that traffic too. This is why stapling and short lived certificates are preferred.",
+      "why_vi": "Phép kiểm mà hỏng thì cho qua chính là phép kiểm mà kẻ tấn công chỉ cần chặn là xong, và kẻ đủ vị trí để dùng chứng thư ăn cắp thường cũng đủ vị trí để chặn luồng đó. Vì vậy người ta ưu tiên đính kèm trạng thái và cấp chứng thư hạn ngắn.",
+      "level": 3
+    },
+    {
+      "id": "qsec-20",
+      "q": "A mobile application pins the server's certificate. The main operational risk this creates is",
+      "q_vi": "Một ứng dụng di động ghim chứng thư của máy chủ. Rủi ro vận hành chính mà việc này tạo ra là",
+      "choices": [
+        "Traffic can no longer be encrypted end to end",
+        "Every installed client stops working when the server rotates its key, until the app itself is updated",
+        "The application becomes vulnerable to a rogue certificate authority",
+        "The server has to disable forward secrecy"
+      ],
+      "answer": 1,
+      "why": "Pinning is exactly a refusal to accept any other key, which is the point against a rogue authority and also the failure mode on rotation. Teams handle it by pinning a backup key or by pinning higher in the chain.",
+      "why_vi": "Ghim chứng thư chính là việc từ chối mọi khoá khác, đó vừa là điểm mạnh trước cơ quan chứng thực bị lạm dụng vừa là kiểu hỏng khi xoay khoá. Cách xử lý thường thấy là ghim thêm một khoá dự phòng, hoặc ghim ở mức cao hơn trong chuỗi.",
+      "level": 3
+    },
+    {
+      "id": "qsec-21",
+      "q": "Which is the right way to store user passwords?",
+      "q_vi": "Cách nào là cách đúng để lưu mật khẩu người dùng?",
+      "choices": [
+        "Base64 encoding of the password",
+        "A deliberately slow, salted function such as bcrypt or argon2",
+        "AES encryption of the password under a server key",
+        "SHA-256 of the password, since it is a cryptographic hash"
+      ],
+      "answer": 1,
+      "why": "The threat is offline guessing after a database leak, so the defence is to make each guess expensive. A fast hash lets an attacker try billions per second, and reversible encryption means one key leak exposes every password in clear.",
+      "why_vi": "Mối đe dọa là dò ngoại tuyến sau khi cơ sở dữ liệu bị rò, nên cách phòng là làm mỗi lần đoán trở nên đắt. Hàm băm nhanh cho kẻ tấn công thử hàng tỉ lần mỗi giây, còn mã hoá đảo ngược được thì chỉ cần lộ một khoá là lộ toàn bộ mật khẩu ở dạng rõ.",
+      "level": 1
+    },
+    {
+      "id": "qsec-22",
+      "q": "Adding a unique random salt to each password hash primarily",
+      "q_vi": "Thêm muối ngẫu nhiên riêng cho từng bản băm mật khẩu chủ yếu để",
+      "choices": [
+        "Remove the need for a slow hash function",
+        "Make each individual guess against one password take longer",
+        "Prevent one precomputed table from cracking many accounts, and hide the fact that two users chose the same password",
+        "Encrypt the password so it can be recovered later"
+      ],
+      "answer": 2,
+      "why": "Salt attacks precomputation and cross account reuse, not per guess cost. The per guess cost comes from the work factor of bcrypt or argon2, which is why both are needed together.",
+      "why_vi": "Muối đánh vào việc tính sẵn và việc dùng chung mật khẩu giữa các tài khoản, chứ không làm tăng chi phí cho mỗi lần đoán. Chi phí mỗi lần đoán đến từ hệ số công của bcrypt hoặc argon2, vì vậy phải có cả hai.",
+      "level": 2
+    },
+    {
+      "id": "qsec-23",
+      "q": "A pepper differs from a salt because",
+      "q_vi": "Tiêu khác muối ở chỗ",
+      "choices": [
+        "The pepper is unique per user while the salt is shared by everyone",
+        "The pepper is kept outside the database, so a leak of the database alone still leaves the hashes hard to attack",
+        "The pepper replaces the hash function",
+        "The pepper has to be sent to the client"
+      ],
+      "answer": 1,
+      "why": "Both are extra input to the hash, but the storage location is what matters. Salt is public and per user, pepper is secret and lives in a key store or an environment the database dump does not include.",
+      "why_vi": "Cả hai đều là đầu vào phụ cho hàm băm, nhưng điểm quan trọng là nơi cất giữ. Muối là công khai và riêng cho từng người, còn tiêu là bí mật và nằm trong kho khoá hoặc trong môi trường mà bản kết xuất cơ sở dữ liệu không chứa.",
+      "level": 3
+    },
+    {
+      "id": "qsec-24",
+      "q": "Argon2 is configured with a large memory cost. The purpose is",
+      "q_vi": "Argon2 được cấu hình với chi phí bộ nhớ lớn. Mục đích là",
+      "choices": [
+        "To reduce the advantage of massively parallel cracking hardware, which is limited by memory rather than by arithmetic",
+        "To make the hash output longer",
+        "To make verification on the server as cheap as possible",
+        "To let an administrator recover the password when needed"
+      ],
+      "answer": 0,
+      "why": "Graphics processors and custom chips win on raw arithmetic but have little memory per core, so a memory hard function narrows their edge. Cheap verification is the opposite of what a password hash should aim for.",
+      "why_vi": "Bộ xử lý đồ hoạ và chip chuyên dụng thắng ở phép tính thuần nhưng lại rất ít bộ nhớ trên mỗi lõi, nên hàm ngốn bộ nhớ thu hẹp lợi thế của chúng. Việc kiểm tra thật rẻ lại đi ngược đúng mục tiêu của một hàm băm mật khẩu.",
+      "level": 2
+    },
+    {
+      "id": "qsec-25",
+      "q": "A server compares a submitted authentication tag with the expected one using a normal comparison that stops at the first differing byte. The weakness is",
+      "q_vi": "Máy chủ so sánh thẻ xác thực do người dùng gửi với thẻ mong đợi bằng phép so sánh thông thường, dừng ngay tại byte đầu tiên khác nhau. Điểm yếu là",
+      "choices": [
+        "Response time reveals how many leading bytes were correct, so a valid tag can be built one byte at a time",
+        "The comparison can return a false match",
+        "The comparison consumes too much memory",
+        "The tag will be silently truncated"
+      ],
+      "answer": 0,
+      "why": "The secret leaks through timing rather than through the protocol, which is a classic side channel. The fix is a comparison whose duration does not depend on the data.",
+      "why_vi": "Bí mật rò ra qua thời gian chứ không qua giao thức, đây là kênh bên kinh điển. Cách sửa là dùng phép so sánh có thời gian chạy không phụ thuộc dữ liệu.",
+      "level": 3
+    },
+    {
+      "id": "qsec-26",
+      "q": "The essential difference between hashing a value and encrypting it is",
+      "q_vi": "Khác biệt cốt lõi giữa băm một giá trị và mã hoá nó là",
+      "choices": [
+        "Encryption always yields a fixed length output",
+        "Hashing requires a shared secret",
+        "Hashing is stronger than encryption in every case",
+        "Hashing is one way with no key that reverses it, while encryption is designed to be reversed by a key holder"
+      ],
+      "answer": 3,
+      "why": "The two serve different goals, integrity and secrecy respectively. Fixed length output is a property of hashing, not of encryption, and that is the trap in this question.",
+      "why_vi": "Hai thứ phục vụ hai mục tiêu khác nhau, lần lượt là toàn vẹn và bí mật. Kết quả có độ dài cố định là tính chất của hàm băm chứ không phải của mã hoá, đó chính là cái bẫy của câu này.",
+      "level": 1
+    },
+    {
+      "id": "qsec-27",
+      "q": "A team claims the application is secure because all traffic uses TLS. The gap in that claim is",
+      "q_vi": "Một nhóm khẳng định ứng dụng đã an toàn vì mọi lưu lượng đều dùng TLS. Lỗ hổng trong khẳng định đó là",
+      "choices": [
+        "TLS only works on internal networks",
+        "TLS does not encrypt the payload",
+        "TLS cannot be used together with certificates",
+        "TLS protects data in transit only, and says nothing about a compromised endpoint, a malicious client or a flaw in the application logic"
+      ],
+      "answer": 3,
+      "why": "Transport security removes one attacker position, the network path. Injection, broken access control and a compromised device are all untouched by it.",
+      "why_vi": "An toàn tầng truyền chỉ loại bỏ một vị trí của kẻ tấn công, đó là đường mạng. Tiêm mã, kiểm soát truy nhập hỏng và thiết bị bị chiếm đều nằm ngoài tầm với của nó.",
+      "level": 2
+    },
+    {
+      "id": "qsec-28",
+      "q": "A database is encrypted at rest and the decryption key sits in a file on the same server, readable by the database process. This control mainly protects against",
+      "q_vi": "Một cơ sở dữ liệu được mã hoá khi lưu trữ, còn khoá giải mã nằm trong một tệp trên chính máy chủ đó và tiến trình cơ sở dữ liệu đọc được. Biện pháp này chủ yếu chống được",
+      "choices": [
+        "Someone who obtains the physical disk or a raw storage snapshot",
+        "An attacker who compromises the application",
+        "An insider holding a database login",
+        "SQL injection in the application layer"
+      ],
+      "answer": 0,
+      "why": "Anything that runs with the database process reads the data already decrypted, so the control is invisible to application level attacks. It is real protection only against media that leaves the running system.",
+      "why_vi": "Mọi thứ chạy cùng tiến trình cơ sở dữ liệu đều đọc được dữ liệu đã giải mã sẵn, nên biện pháp này vô hình trước tấn công ở tầng ứng dụng. Nó chỉ bảo vệ thật đối với phương tiện lưu trữ rời khỏi hệ đang chạy.",
+      "level": 3
+    },
+    {
+      "id": "qsec-29",
+      "q": "The main argument for rotating encryption keys on a schedule is",
+      "q_vi": "Lập luận chính cho việc xoay khoá mã hoá theo định kỳ là",
+      "choices": [
+        "Keys become mathematically weaker as time passes",
+        "It removes the need for access control on the key store",
+        "It makes the algorithm run faster",
+        "It bounds how much data and how much time a single undetected key leak can cover"
+      ],
+      "answer": 3,
+      "why": "Rotation is a containment measure, not a mathematical one. A key does not decay, but the probability that it has quietly leaked grows with every day it stays in use.",
+      "why_vi": "Xoay khoá là biện pháp khoanh vùng thiệt hại chứ không phải chuyện toán học. Khoá không mục đi, nhưng xác suất nó đã lặng lẽ bị rò tăng lên theo từng ngày còn được dùng.",
+      "level": 2
+    },
+    {
+      "id": "qsec-30",
+      "q": "An attacker gains administrative access to a server whose signing key lives inside a hardware security module. The realistic outcome is",
+      "q_vi": "Kẻ tấn công chiếm được quyền quản trị trên máy chủ có khoá ký nằm trong mô đun bảo mật phần cứng. Kết cục thực tế là",
+      "choices": [
+        "They can do nothing at all",
+        "They can sign arbitrary data for as long as they hold access, but cannot walk away with the key",
+        "They can extract the private key and keep using it forever",
+        "The module erases everything it has previously signed"
+      ],
+      "answer": 1,
+      "why": "The module protects the key material, not the usage. That is still worth a lot, because the damage ends when access ends instead of continuing silently after eviction.",
+      "why_vi": "Mô đun bảo vệ chất liệu khoá chứ không bảo vệ việc sử dụng. Điều đó vẫn rất đáng giá, vì thiệt hại chấm dứt khi quyền truy nhập bị cắt, thay vì âm thầm kéo dài mãi sau đó.",
+      "level": 2
+    },
+    {
+      "id": "qsec-31",
+      "q": "A port scan run against your own address range is best described as",
+      "q_vi": "Một lần quét cổng chạy trên chính dải địa chỉ của bạn được mô tả đúng nhất là",
+      "choices": [
+        "A method for decrypting traffic",
+        "A way to inventory which services are really listening, useful to attackers and defenders alike",
+        "An attack that must always be blocked",
+        "A denial of service technique"
+      ],
+      "answer": 1,
+      "why": "The technique is neutral, only the intent differs. Defenders scan themselves precisely because the listening set drifts away from the documented one.",
+      "why_vi": "Kỹ thuật này trung tính, chỉ khác nhau ở ý định. Bên phòng thủ tự quét chính mình đúng vì tập dịch vụ đang lắng nghe luôn trôi khỏi tài liệu ghi chép.",
+      "level": 1
+    },
+    {
+      "id": "qsec-32",
+      "q": "After a workstation is compromised by malware, good network segmentation mostly",
+      "q_vi": "Sau khi một máy trạm bị mã độc chiếm, việc tách phân đoạn mạng tốt chủ yếu",
+      "choices": [
+        "Removes the malware from the workstation",
+        "Prevents the malware from arriving in the first place",
+        "Guarantees the incident stays below the reporting threshold",
+        "Limits which other systems that host can reach, slowing lateral movement"
+      ],
+      "answer": 3,
+      "why": "Segmentation acts after the first compromise, not before it. Its value is measured in how few systems the intruder can touch from where they landed.",
+      "why_vi": "Tách phân đoạn phát huy tác dụng sau khi máy đầu tiên bị chiếm, không phải trước đó. Giá trị của nó đo bằng việc kẻ xâm nhập chạm được tới càng ít hệ thống càng tốt tính từ chỗ họ vừa đặt chân.",
+      "level": 1
+    },
+    {
+      "id": "qsec-33",
+      "q": "Two application servers sit in the same VLAN and can talk to each other freely. Microsegmentation would change this by",
+      "q_vi": "Hai máy chủ ứng dụng nằm cùng một VLAN và nói chuyện với nhau thoải mái. Vi phân đoạn sẽ thay đổi điều đó bằng cách",
+      "choices": [
+        "Encrypting the traffic between them",
+        "Enforcing an identity based policy per workload, so sharing a subnet no longer implies permission",
+        "Placing an intrusion detection sensor at the internet edge",
+        "Moving one of them onto a different physical switch"
+      ],
+      "answer": 1,
+      "why": "The point is to decouple reachability from network location. Encryption would keep the conversation private but would not stop it, and an edge sensor never sees this traffic at all.",
+      "why_vi": "Điểm mấu chốt là tách khả năng liên lạc ra khỏi vị trí trong mạng. Mã hoá chỉ giữ kín cuộc trao đổi chứ không chặn nó, còn cảm biến ở biên thì không hề nhìn thấy luồng này.",
+      "level": 3
+    },
+    {
+      "id": "qsec-34",
+      "q": "An access control list contains a permit any rule placed above a specific deny rule. The effect is",
+      "q_vi": "Một danh sách kiểm soát truy nhập có luật cho phép tất cả đặt phía trên một luật từ chối cụ thể. Hệ quả là",
+      "choices": [
+        "The deny rule never takes effect, because evaluation stops at the first matching rule",
+        "The deny rule applies only to encrypted traffic",
+        "The list is rejected as invalid",
+        "Both rules apply and the traffic ends up denied"
+      ],
+      "answer": 0,
+      "why": "Order is semantics in a rule list, which is why review has to read the list top down rather than check that a rule exists. A present but unreachable rule is a very common audit finding.",
+      "why_vi": "Thứ tự chính là ngữ nghĩa trong một danh sách luật, vì vậy khi rà soát phải đọc từ trên xuống thay vì chỉ kiểm xem luật có tồn tại hay không. Luật có mặt nhưng không bao giờ tới lượt là phát hiện rất hay gặp khi kiểm toán.",
+      "level": 2
+    },
+    {
+      "id": "qsec-35",
+      "q": "ARP spoofing succeeds on a local segment because",
+      "q_vi": "Giả mạo ARP thành công trên một phân đoạn mạng nội bộ là vì",
+      "choices": [
+        "The switch does not support encryption",
+        "Users choose weak passwords",
+        "DNS records were misconfigured",
+        "The protocol has no way to verify who owns an address, so any host may answer"
+      ],
+      "answer": 3,
+      "why": "The weakness is in the protocol design, so the countermeasures live in the switch, through dynamic inspection and port security. Passwords and encryption address entirely different problems.",
+      "why_vi": "Điểm yếu nằm ngay trong thiết kế giao thức, nên biện pháp đối phó nằm ở thiết bị chuyển mạch, qua kiểm tra động và khoá cổng. Mật khẩu và mã hoá giải quyết những vấn đề hoàn toàn khác.",
+      "level": 1
+    },
+    {
+      "id": "qsec-36",
+      "q": "A resolver is poisoned so a bank's name maps to an attacker's address. A client using TLS with proper certificate validation will",
+      "q_vi": "Một máy phân giải bị đầu độc khiến tên miền của ngân hàng trỏ về địa chỉ của kẻ tấn công. Máy khách dùng TLS và kiểm chứng thư đúng cách sẽ",
+      "choices": [
+        "Be protected only if a virtual private network is also used",
+        "Detect the poisoning and repair the resolver cache",
+        "Fail the connection, because the attacker cannot present a valid certificate for that name, although availability is still lost",
+        "Connect normally and leak the credentials"
+      ],
+      "answer": 2,
+      "why": "Name resolution is not authenticated but the certificate check is, so confidentiality and integrity survive while reachability does not. The danger is a user who clicks through the warning.",
+      "why_vi": "Việc phân giải tên không được xác thực nhưng bước kiểm chứng thư thì có, nên tính bí mật và toàn vẹn còn nguyên còn khả năng truy cập thì mất. Nguy hiểm nằm ở người dùng bấm bỏ qua cảnh báo.",
+      "level": 3
+    },
+    {
+      "id": "qsec-37",
+      "q": "A prefix belonging to your organisation is being announced by another network. Which control actually addresses this?",
+      "q_vi": "Một dải địa chỉ của đơn vị bạn đang được một mạng khác quảng bá. Biện pháp nào thực sự xử lý được chuyện này?",
+      "choices": [
+        "Publishing route origin authorisations and having upstream providers validate them",
+        "Rotating all server certificates",
+        "Blocking ICMP at the network edge",
+        "Enabling TLS 1.3 on all servers"
+      ],
+      "answer": 0,
+      "why": "The problem lives in the routing layer, so the fix has to live there too, by making an unauthorised origin invalid. Encryption keeps content private while the traffic still goes to the wrong place, and a hijack is also a denial of service.",
+      "why_vi": "Vấn đề nằm ở tầng định tuyến nên cách sửa cũng phải nằm ở đó, bằng cách làm cho nguồn quảng bá trái phép trở thành không hợp lệ. Mã hoá chỉ giữ kín nội dung trong khi lưu lượng vẫn đi nhầm chỗ, và việc chiếm quyền định tuyến còn là một dạng từ chối dịch vụ.",
+      "level": 3
+    },
+    {
+      "id": "qsec-38",
+      "q": "Reflection attacks depend on forged source addresses. The measure that removes the root cause is",
+      "q_vi": "Tấn công phản xạ dựa vào địa chỉ nguồn giả mạo. Biện pháp xoá được nguyên nhân gốc là",
+      "choices": [
+        "Every victim buying more bandwidth",
+        "Every network filtering outbound packets whose source address does not belong to it",
+        "Blocking UDP everywhere",
+        "Shutting down public DNS resolvers"
+      ],
+      "answer": 1,
+      "why": "Filtering at the origin network is the only step that stops the forgery itself, but it has to be done by networks that are not the victim. The other options are either mitigation at the target or collateral damage to legitimate services.",
+      "why_vi": "Lọc ngay tại mạng phát đi là bước duy nhất chặn được chính hành vi giả mạo, nhưng bên phải làm lại không phải là nạn nhân. Các phương án còn lại hoặc chỉ giảm nhẹ ở phía đích, hoặc gây thiệt hại lây cho dịch vụ hợp lệ.",
+      "level": 2
+    },
+    {
+      "id": "qsec-39",
+      "q": "An attacker prefers a protocol with a high amplification factor because",
+      "q_vi": "Kẻ tấn công chuộng giao thức có hệ số khuếch đại cao vì",
+      "choices": [
+        "It is harder to trace than TCP",
+        "It removes the need to spoof the source address",
+        "A small request sent from limited upstream bandwidth produces a much larger response aimed at the victim",
+        "It encrypts the attack traffic"
+      ],
+      "answer": 2,
+      "why": "Amplification converts the attacker's modest capacity into a flood the victim must absorb. Spoofing is still required, since without it the replies go back to the attacker.",
+      "why_vi": "Khuếch đại biến năng lực khiêm tốn của kẻ tấn công thành trận lụt mà nạn nhân phải hứng. Vẫn phải giả mạo địa chỉ nguồn, vì nếu không thì hồi đáp dội ngược về chính kẻ tấn công.",
+      "level": 2
+    },
+    {
+      "id": "qsec-40",
+      "q": "Telemetry shows one host making thousands of DNS queries per hour for long random looking subdomains of a single domain. The most likely explanation is",
+      "q_vi": "Dữ liệu quan trắc cho thấy một máy phát ra hàng nghìn truy vấn DNS mỗi giờ, đều là các tên miền con dài và trông ngẫu nhiên của cùng một tên miền. Cách giải thích khả dĩ nhất là",
+      "choices": [
+        "Normal content delivery network behaviour",
+        "A misconfigured time server",
+        "A port scan coming in from the internet",
+        "Data being carried out through DNS, because other outbound paths are blocked"
+      ],
+      "answer": 3,
+      "why": "The query names themselves are the payload, which is why they look random and why the volume is high. Content delivery lookups reuse a small set of names and do not grow without bound.",
+      "why_vi": "Chính tên truy vấn là phần dữ liệu mang đi, vì thế chúng trông ngẫu nhiên và số lượng rất lớn. Truy vấn của mạng phân phối nội dung dùng đi dùng lại một nhóm tên nhỏ và không tăng vô hạn.",
+      "level": 2
+    },
+    {
+      "id": "qsec-41",
+      "q": "The root cause of SQL injection is",
+      "q_vi": "Nguyên nhân gốc của tiêm mã SQL là",
+      "choices": [
+        "Missing encryption on the database connection",
+        "The database software being out of date",
+        "Using a relational database instead of a document store",
+        "User supplied data becoming part of the command text, so it can change what the query means"
+      ],
+      "answer": 3,
+      "why": "The flaw is a confusion between data and code, which is why the same pattern reappears in command execution and template rendering. Patching the database never removes it.",
+      "why_vi": "Lỗi ở chỗ lẫn lộn giữa dữ liệu và mã lệnh, vì vậy cùng khuôn mẫu đó lặp lại ở chỗ thực thi lệnh hệ thống và ở chỗ dựng mẫu. Vá cơ sở dữ liệu không bao giờ xoá được lỗi này.",
+      "level": 1
+    },
+    {
+      "id": "qsec-42",
+      "q": "Four measures are proposed against SQL injection. Which one removes the vulnerability class rather than merely raising the effort?",
+      "q_vi": "Bốn biện pháp được đề xuất để chống tiêm mã SQL. Biện pháp nào xoá bỏ cả lớp lỗ hổng chứ không chỉ làm kẻ tấn công tốn công hơn?",
+      "choices": [
+        "A web application firewall loaded with injection signatures",
+        "Parameterized statements that send query structure and values separately",
+        "Rejecting any input containing the words select or union",
+        "Escaping quote characters in user input"
+      ],
+      "answer": 1,
+      "why": "Parameterisation makes it impossible for a value to be parsed as syntax, so correctness no longer depends on catching every dangerous character. Escaping and blocked word lists both fail on encodings and contexts nobody anticipated, and a firewall is a filter in front of a bug that is still there.",
+      "why_vi": "Tham số hoá khiến một giá trị không thể bị phân tích thành cú pháp, nên tính đúng đắn không còn phụ thuộc vào việc bắt cho hết ký tự nguy hiểm. Cách thoát ký tự và danh sách từ cấm đều gãy trước những kiểu mã hoá và ngữ cảnh không ai lường trước, còn tường lửa chỉ là bộ lọc đặt trước một lỗi vẫn nằm nguyên đó.",
+      "level": 3
+    },
+    {
+      "id": "qsec-43",
+      "q": "Stored cross-site scripting is generally worse than the reflected form because",
+      "q_vi": "Kịch bản chéo trang dạng lưu trữ thường nguy hiểm hơn dạng phản chiếu vì",
+      "choices": [
+        "It bypasses TLS",
+        "It cannot be fixed by output encoding",
+        "It fires for every visitor of the affected page, with no per victim delivery step needed",
+        "It runs with higher browser privileges"
+      ],
+      "answer": 2,
+      "why": "The reflected form needs the victim to follow a crafted link, which is a social step that can fail. The stored form waits on the server and hits everyone who loads the page, including administrators.",
+      "why_vi": "Dạng phản chiếu cần nạn nhân bấm vào một đường liên kết dựng sẵn, đó là bước tác động tâm lý và có thể thất bại. Dạng lưu trữ nằm chờ trên máy chủ và trúng mọi người mở trang, kể cả quản trị viên.",
+      "level": 1
+    },
+    {
+      "id": "qsec-44",
+      "q": "A team blocks the literal string script tag on input in order to stop cross-site scripting. The main flaw is",
+      "q_vi": "Một nhóm chặn chuỗi thẻ script ở đầu vào để ngăn kịch bản chéo trang. Sai lầm chính là",
+      "choices": [
+        "Encoding output is impossible in modern frameworks",
+        "The filter breaks the database schema",
+        "Input filtering is too slow to run per request",
+        "Script can enter through many other contexts, attributes and encodings, so the safe fix is encoding on output for the context where the value actually lands"
+      ],
+      "answer": 3,
+      "why": "The browser decides what is executable based on where the value is placed, not on whether one keyword appeared. Encoding at the sink handles attribute, URL and script contexts consistently, and a content security policy sits behind it as a second layer.",
+      "why_vi": "Trình duyệt quyết định cái gì chạy được dựa trên chỗ mà giá trị được đặt vào, chứ không dựa trên việc có xuất hiện một từ khoá nào đó hay không. Mã hoá ngay tại điểm xuất xử lý nhất quán các ngữ cảnh thuộc tính, địa chỉ và kịch bản, còn chính sách nội dung đứng phía sau làm lớp thứ hai.",
+      "level": 3
+    },
+    {
+      "id": "qsec-45",
+      "q": "A banking endpoint accepts a transfer over POST, requires a session cookie and runs over TLS. Which addition actually prevents cross-site request forgery?",
+      "q_vi": "Một điểm cuối chuyển tiền nhận yêu cầu POST, đòi cookie phiên và chạy trên TLS. Bổ sung nào thực sự ngăn được giả mạo yêu cầu chéo trang?",
+      "choices": [
+        "Requiring an unguessable token bound to the session, or marking the session cookie so browsers do not attach it to cross site requests",
+        "Hiding the endpoint behind an unusual address",
+        "Forcing a longer TLS key",
+        "Checking that the user agent string belongs to a known browser"
+      ],
+      "answer": 0,
+      "why": "The forged request is perfectly authenticated, because the browser attaches the cookie by itself, so the missing element is proof that the site's own page issued it. TLS, obscure paths and user agent checks all leave that gap untouched.",
+      "why_vi": "Yêu cầu giả mạo vẫn được xác thực hoàn hảo, vì trình duyệt tự đính kèm cookie, nên thứ còn thiếu là bằng chứng rằng chính trang của bạn đã phát ra yêu cầu đó. TLS, đường dẫn khó đoán và việc kiểm chuỗi trình duyệt đều không chạm tới khoảng trống ấy.",
+      "level": 3
+    },
+    {
+      "id": "qsec-46",
+      "q": "An image resizing service downloads whatever URL the user submits. The strongest fix against server-side request forgery is",
+      "q_vi": "Một dịch vụ đổi cỡ ảnh sẽ tải về bất kỳ địa chỉ nào người dùng gửi lên. Cách sửa mạnh nhất trước giả mạo yêu cầu phía máy chủ là",
+      "choices": [
+        "Requiring the user to be authenticated before submitting a URL",
+        "Blocking any URL that contains the literal internal metadata address",
+        "Resolving the name first and allowing only an explicit list of destinations, with the fetch made from a network that has no route to internal services",
+        "Limiting the downloaded image to one megabyte"
+      ],
+      "answer": 2,
+      "why": "A denied list loses to redirects, alternative address encodings and names that resolve to internal space after the check. An allowed destination list plus network isolation makes the internal target unreachable no matter how the URL is written.",
+      "why_vi": "Danh sách cấm luôn thua trước chuyển hướng, trước các cách viết địa chỉ khác nhau và trước tên miền phân giải về dải nội bộ sau khi đã kiểm. Danh sách đích cho phép kèm cách ly mạng khiến mục tiêu nội bộ không thể chạm tới, bất kể địa chỉ được viết ra sao.",
+      "level": 3
+    },
+    {
+      "id": "qsec-47",
+      "q": "The riskiest part of a file upload feature is usually",
+      "q_vi": "Phần rủi ro nhất của tính năng tải tệp lên thường là",
+      "choices": [
+        "Allowing files larger than one megabyte",
+        "Storing user files in a location the web server will serve, and possibly interpret, under the application's own origin",
+        "Preserving the original upload timestamp",
+        "Letting users choose the display name of the file"
+      ],
+      "answer": 1,
+      "why": "Serving attacker content from your own origin turns an upload into stored scripting, and an interpreted path turns it into code execution. Size and display names are hygiene issues by comparison.",
+      "why_vi": "Phục vụ nội dung của kẻ tấn công từ chính nguồn gốc của bạn biến một lần tải lên thành kịch bản chéo trang dạng lưu trữ, còn nếu đường dẫn đó được diễn dịch thì thành thực thi mã. So với chuyện đó, kích thước và tên hiển thị chỉ là vấn đề vệ sinh.",
+      "level": 2
+    },
+    {
+      "id": "qsec-48",
+      "q": "A service accepts a serialized object graph from clients and reconstructs it. The reason this is dangerous is",
+      "q_vi": "Một dịch vụ nhận đồ thị đối tượng đã tuần tự hoá từ phía khách rồi dựng lại. Điều nguy hiểm ở đây là",
+      "choices": [
+        "The object graph cannot be logged",
+        "Serialized data is always larger than JSON",
+        "Rebuilding objects can invoke constructors and setters of classes present in the runtime, giving a path to code execution before any validation runs",
+        "Serialization discards character encoding information"
+      ],
+      "answer": 2,
+      "why": "The attacker chooses which types get instantiated, and the side effects happen during the load itself, so validating afterwards is already too late. The usual fix is a data only format plus an explicit list of permitted types.",
+      "why_vi": "Kẻ tấn công chọn được kiểu nào sẽ được khởi tạo, và các tác dụng phụ xảy ra ngay trong lúc nạp, nên kiểm tra sau đó thì đã muộn. Cách sửa thường dùng là chuyển sang định dạng chỉ chứa dữ liệu, kèm danh sách kiểu được phép.",
+      "level": 3
+    },
+    {
+      "id": "qsec-49",
+      "q": "A build has started pulling a package with an internal name from a public registry. The fix that addresses the mechanism is",
+      "q_vi": "Một quy trình dựng bản bắt đầu kéo về gói mang tên nội bộ nhưng lấy từ kho công khai. Cách sửa đúng vào cơ chế là",
+      "choices": [
+        "Running the build on a faster machine",
+        "Renaming the internal package",
+        "Reviewing the source code of that package once",
+        "Scoping internal names and configuring the client so those names resolve only against the private registry, with versions pinned by a lock file"
+      ],
+      "answer": 3,
+      "why": "The bug is in name resolution, where a public copy can outrank an internal one, so the cure is to make resolution unambiguous. Renaming only postpones the problem until someone registers the new name.",
+      "why_vi": "Lỗi nằm ở bước phân giải tên, chỗ mà bản công khai có thể được ưu tiên hơn bản nội bộ, nên cách chữa là làm cho việc phân giải không còn mập mờ. Đổi tên chỉ hoãn vấn đề lại cho tới khi có người đăng ký cái tên mới.",
+      "level": 2
+    },
+    {
+      "id": "qsec-50",
+      "q": "A critical flaw is announced in a widely used library. An accurate software bill of materials mainly helps by",
+      "q_vi": "Một lỗ hổng nghiêm trọng được công bố trong thư viện dùng rất rộng rãi. Bản kê thành phần phần mềm chính xác giúp chủ yếu ở chỗ",
+      "choices": [
+        "Proving the vendor is legally liable",
+        "Answering within minutes which of your builds actually contain the affected version",
+        "Patching the affected systems automatically",
+        "Preventing the flaw from being exploited"
+      ],
+      "answer": 1,
+      "why": "The expensive part of such a day is the inventory question, not the patch itself. A bill of materials turns days of guessing into a query, which directly shortens the exposure window.",
+      "why_vi": "Phần tốn kém của một ngày như vậy là câu hỏi kiểm kê chứ không phải bản vá. Bản kê thành phần biến nhiều ngày mò mẫm thành một câu truy vấn, và điều đó rút ngắn trực tiếp cửa sổ phơi nhiễm.",
+      "level": 1
+    },
+    {
+      "id": "qsec-51",
+      "q": "An API key was committed to a repository and the commit has since been removed from the branch. The action still required is",
+      "q_vi": "Một khoá API bị đưa vào kho mã và cam kết đó đã được gỡ khỏi nhánh. Việc vẫn bắt buộc phải làm là",
+      "choices": [
+        "Revoking that key and issuing a new one, because it has to be assumed already read",
+        "Adding the file to the ignore list",
+        "Nothing, since the commit no longer appears in the history",
+        "Making the repository private"
+      ],
+      "answer": 0,
+      "why": "Clones, forks, caches and scanning bots may all hold the value, and rewriting history cannot reach any of them. Once a secret has been published anywhere, rotation is the only control that restores the guarantee.",
+      "why_vi": "Các bản sao, bản rẽ nhánh, bộ nhớ đệm và các máy quét tự động đều có thể đang giữ giá trị đó, và việc viết lại lịch sử không với tới được chỗ nào trong số ấy. Khi một bí mật đã lộ ra ngoài, xoay khoá là biện pháp duy nhất khôi phục được sự bảo đảm.",
+      "level": 2
+    },
+    {
+      "id": "qsec-52",
+      "q": "The OWASP Top Ten is best used as",
+      "q_vi": "Danh sách mười rủi ro của OWASP nên được dùng như",
+      "choices": [
+        "A complete checklist that certifies an application as secure",
+        "A legally binding compliance standard",
+        "A list of specific vulnerable products",
+        "An awareness list of common risk categories, useful for training and triage but not exhaustive"
+      ],
+      "answer": 3,
+      "why": "It describes categories that occur often, which makes it a good teaching and prioritisation tool. Treating it as a finish line leaves out everything specific to your own design and business logic.",
+      "why_vi": "Nó mô tả các nhóm rủi ro hay gặp, nên là công cụ tốt để dạy và để sắp thứ tự ưu tiên. Coi nó như vạch đích sẽ bỏ sót mọi thứ riêng có trong thiết kế và trong nghiệp vụ của bạn.",
+      "level": 1
+    },
+    {
+      "id": "qsec-53",
+      "q": "A user changes the account identifier in a request address and sees another customer's invoice. The defect is",
+      "q_vi": "Một người dùng đổi mã tài khoản trong địa chỉ yêu cầu và xem được hoá đơn của khách hàng khác. Khiếm khuyết ở đây là",
+      "choices": [
+        "A denial of service condition",
+        "A failure of authentication",
+        "Missing server side authorisation, since the identity was known but the right to that specific object was never checked",
+        "Weak encryption of the address"
+      ],
+      "answer": 2,
+      "why": "Authentication worked, the system knew exactly who was asking. What is absent is the per object check that this identity owns that invoice, and no amount of address obfuscation replaces it.",
+      "why_vi": "Xác thực vẫn chạy tốt, hệ thống biết chính xác ai đang hỏi. Thứ thiếu là bước kiểm theo từng đối tượng xem danh tính này có sở hữu hoá đơn kia không, và không cách làm rối địa chỉ nào thay thế được bước đó.",
+      "level": 2
+    },
+    {
+      "id": "qsec-54",
+      "q": "Authentication and authorisation differ in that",
+      "q_vi": "Xác thực và cấp quyền khác nhau ở chỗ",
+      "choices": [
+        "Authorisation always happens before authentication",
+        "Authentication applies to machines and authorisation applies to people",
+        "Authentication establishes who you are, authorisation decides what that identity is allowed to do",
+        "They are two names for the same check"
+      ],
+      "answer": 2,
+      "why": "One answers who, the other answers may they. Most broken access control findings are systems that answered the first question well and never asked the second.",
+      "why_vi": "Một bên trả lời câu hỏi ai, bên kia trả lời câu hỏi có được phép không. Phần lớn các phát hiện về kiểm soát truy nhập hỏng là những hệ trả lời rất tốt câu đầu và không bao giờ hỏi câu sau.",
+      "level": 1
+    },
+    {
+      "id": "qsec-55",
+      "q": "Login attempts arrive from thousands of addresses, one or two per account, using passwords leaked from an unrelated site. The control that helps most is",
+      "q_vi": "Các lượt đăng nhập đến từ hàng nghìn địa chỉ, mỗi tài khoản chỉ một hai lần, dùng mật khẩu rò rỉ từ một trang khác. Biện pháp giúp được nhiều nhất là",
+      "choices": [
+        "Switching the password hash to argon2",
+        "Checking submitted credentials against known breached password sets and requiring a second factor",
+        "Rate limiting attempts per source address",
+        "Forcing a longer minimum password length for new accounts"
+      ],
+      "answer": 1,
+      "why": "The passwords are already correct, so the attack never needs many tries per account and never touches your hash. Per address rate limiting is defeated by the very distribution described, while a second factor breaks the reuse chain outright.",
+      "why_vi": "Mật khẩu vốn đã đúng, nên đòn này không cần thử nhiều lần trên mỗi tài khoản và cũng không đụng gì tới hàm băm của bạn. Giới hạn tốc độ theo địa chỉ bị chính sự phân tán nói trên vô hiệu hoá, còn yếu tố thứ hai cắt đứt hẳn chuỗi dùng lại mật khẩu.",
+      "level": 2
+    },
+    {
+      "id": "qsec-56",
+      "q": "A design keeps its algorithm secret and treats that secrecy as the main protection. The standard objection is",
+      "q_vi": "Một thiết kế giữ kín thuật toán và coi sự bí mật đó là lớp bảo vệ chính. Phản bác chuẩn mực là",
+      "choices": [
+        "Security should rest on the key, because the design will eventually leak and cannot be rotated once it does",
+        "Secrecy makes patent protection impossible",
+        "Secret algorithms always run more slowly",
+        "Open algorithms are required by law"
+      ],
+      "answer": 0,
+      "why": "A key is a small secret you can replace cheaply, while a design is a large secret you cannot. Public review also finds flaws that a closed team will not, which is why open algorithms with secret keys became the norm.",
+      "why_vi": "Khoá là bí mật nhỏ và thay được với chi phí thấp, còn thiết kế là bí mật lớn và không thay được. Việc công khai để cộng đồng soi cũng tìm ra những lỗi mà một nhóm kín sẽ bỏ qua, đó là lý do mô hình thuật toán công khai kèm khoá bí mật trở thành chuẩn mực.",
+      "level": 2
+    },
+    {
+      "id": "qsec-57",
+      "q": "Rewriting a network parser in a memory safe language mainly",
+      "q_vi": "Viết lại bộ phân tích gói tin bằng ngôn ngữ an toàn bộ nhớ chủ yếu",
+      "choices": [
+        "Makes the parser faster",
+        "Removes an entire class of memory corruption defects, while logic flaws remain",
+        "Guarantees the parser now has no bugs",
+        "Replaces the need for input validation"
+      ],
+      "answer": 1,
+      "why": "The change eliminates overflows and use after free by construction, which historically dominate remote code execution in parsers. It does nothing about accepting a malformed message that the logic then mishandles.",
+      "why_vi": "Thay đổi này loại bỏ tràn bộ nhớ và dùng lại vùng đã giải phóng ngay từ trong thiết kế, đó là nhóm lỗi lâu nay chiếm phần lớn các ca thực thi mã từ xa ở bộ phân tích. Nó không giúp gì cho trường hợp nhận vào một thông điệp dị dạng rồi phần lô gic xử lý sai.",
+      "level": 1
+    },
+    {
+      "id": "qsec-58",
+      "q": "A service has address space layout randomisation enabled but also a bug that prints a raw pointer in an error message. The effect on the randomisation is",
+      "q_vi": "Một dịch vụ đã bật ngẫu nhiên hoá không gian địa chỉ nhưng lại có lỗi in ra một con trỏ thô trong thông báo lỗi. Tác động lên cơ chế ngẫu nhiên hoá là",
+      "choices": [
+        "The leak reveals the load base, so the layout is recovered and the probabilistic barrier disappears",
+        "The randomisation only covers the stack, so the leak is irrelevant",
+        "None, since a pointer is meaningless without a key",
+        "The randomisation becomes stronger because the address keeps changing"
+      ],
+      "answer": 0,
+      "why": "Randomisation raises the cost of guessing an address, and one disclosed pointer replaces guessing with arithmetic. This is why memory disclosure bugs are rated far more seriously than their direct impact suggests.",
+      "why_vi": "Ngẫu nhiên hoá chỉ làm việc đoán địa chỉ trở nên đắt đỏ, và chỉ cần một con trỏ bị lộ là việc đoán biến thành phép cộng trừ. Vì vậy các lỗi làm rò rỉ bộ nhớ luôn bị xếp nghiêm trọng hơn nhiều so với tác động trực tiếp của chúng.",
+      "level": 3
+    },
+    {
+      "id": "qsec-59",
+      "q": "Marking the stack non executable forces an attacker to",
+      "q_vi": "Đánh dấu ngăn xếp là không thực thi buộc kẻ tấn công phải",
+      "choices": [
+        "Find a memory disclosure bug first",
+        "Give up entirely",
+        "Reuse code that already exists inside the process rather than running injected bytes",
+        "Attack the network layer instead"
+      ],
+      "answer": 2,
+      "why": "The bit blocks running data as code, not corrupting memory, so control flow hijacking continues by chaining existing instruction sequences. Treating the bit as a complete cure is the common misreading.",
+      "why_vi": "Bit này chặn việc chạy dữ liệu như mã chứ không chặn việc làm hỏng bộ nhớ, nên hành vi cướp luồng điều khiển vẫn tiếp diễn bằng cách xâu chuỗi các đoạn lệnh sẵn có. Hiểu nhầm phổ biến là coi bit đó như một liều thuốc chữa dứt điểm.",
+      "level": 2
+    },
+    {
+      "id": "qsec-60",
+      "q": "Secure boot verified every stage and the machine started clean. Two hours later it is compromised through a web application flaw. This shows that",
+      "q_vi": "Khởi động an toàn đã kiểm mọi giai đoạn và máy khởi động sạch. Hai giờ sau máy bị chiếm qua một lỗ hổng ứng dụng web. Điều đó cho thấy",
+      "choices": [
+        "The firmware signature must have been forged",
+        "Secure boot establishes a trustworthy starting state and says nothing about what happens at runtime",
+        "Secure boot was misconfigured",
+        "Secure boot only applies to virtual machines"
+      ],
+      "answer": 1,
+      "why": "The control answers one question, whether the code that started is the code you intended. Runtime compromise is a different question that needs application hardening and endpoint monitoring.",
+      "why_vi": "Biện pháp này trả lời đúng một câu hỏi, là mã đã khởi động có phải mã bạn muốn hay không. Việc bị chiếm lúc đang chạy là câu hỏi khác, cần gia cố ứng dụng và giám sát điểm cuối.",
+      "level": 2
+    },
+    {
+      "id": "qsec-61",
+      "q": "A trusted execution environment is chosen so the cloud provider cannot read the workload. The residual risk that must still be stated is",
+      "q_vi": "Môi trường thực thi tin cậy được chọn để nhà cung cấp đám mây không đọc được tải công việc. Rủi ro còn lại vẫn phải nêu rõ là",
+      "choices": [
+        "The provider can simply read enclave memory using administrator rights",
+        "Encryption cannot be used inside the enclave",
+        "Micro architectural side channels remain, and a malicious host still controls scheduling, paging and every message crossing the boundary",
+        "The enclave cannot perform any input or output"
+      ],
+      "answer": 2,
+      "why": "The hardware removes direct memory reads but not the host's position around the enclave, and shared caches have repeatedly leaked secrets. A claim of confidential computing without naming the side channel assumption is incomplete.",
+      "why_vi": "Phần cứng loại bỏ việc đọc bộ nhớ trực tiếp nhưng không loại bỏ vị trí của máy chủ bao quanh vùng cách ly, và bộ nhớ đệm dùng chung đã nhiều lần làm rò bí mật. Một khẳng định về tính toán bảo mật mà không nêu giả định về kênh bên thì chưa đầy đủ.",
+      "level": 3
+    },
+    {
+      "id": "qsec-62",
+      "q": "Treating a container as an isolation boundary equivalent to a virtual machine is risky because",
+      "q_vi": "Coi bao chứa là ranh giới cách ly tương đương máy ảo là rủi ro vì",
+      "choices": [
+        "Containers share the host kernel, so one kernel flaw crosses a boundary that a hypervisor would still hold",
+        "Containers cannot run untrusted code at all",
+        "Containers do not support network policy",
+        "Containers always run as the root user"
+      ],
+      "answer": 0,
+      "why": "The shared kernel is the whole architectural difference, and the system call surface is large. Hardened runtimes and lightweight virtual machines exist precisely to restore that boundary for untrusted workloads.",
+      "why_vi": "Nhân dùng chung chính là toàn bộ khác biệt về kiến trúc, và bề mặt lời gọi hệ thống thì rất rộng. Các môi trường chạy đã gia cố và máy ảo siêu nhẹ ra đời đúng để khôi phục lại ranh giới đó cho tải công việc không đáng tin.",
+      "level": 2
+    },
+    {
+      "id": "qsec-63",
+      "q": "A deployment runs a container with the privileged flag and the host root filesystem mounted read write. The correct assessment is",
+      "q_vi": "Một bản triển khai chạy bao chứa với cờ đặc quyền và gắn hệ tệp gốc của máy chủ ở chế độ đọc ghi. Đánh giá đúng là",
+      "choices": [
+        "It is safe as long as the container has no network access",
+        "Acceptable if the image comes from a trusted registry",
+        "The container is effectively root on the host, so there is no security boundary left to speak of",
+        "The risk is limited to that container's own filesystem"
+      ],
+      "answer": 2,
+      "why": "Those two settings hand over the capabilities and the filesystem that the boundary was supposed to withhold. Trust in the image is irrelevant once any flaw inside it inherits full host control.",
+      "why_vi": "Hai thiết lập đó trao lại đúng các quyền hạn và hệ tệp mà ranh giới lẽ ra phải giữ. Việc tin tưởng ảnh máy trở nên vô nghĩa khi mọi lỗi bên trong nó đều thừa hưởng toàn quyền trên máy chủ.",
+      "level": 2
+    },
+    {
+      "id": "qsec-64",
+      "q": "Separation of duties exists to ensure that",
+      "q_vi": "Nguyên tắc tách quyền tồn tại để bảo đảm rằng",
+      "choices": [
+        "No single person can both initiate and approve a sensitive action",
+        "Logs are stored in two different places",
+        "Administrators never take holidays",
+        "Every employee holds the same permissions"
+      ],
+      "answer": 0,
+      "why": "The point is that fraud or a single compromised account needs a second party to succeed. It is an organisational control, and it also catches honest mistakes before they reach production.",
+      "why_vi": "Điểm mấu chốt là gian lận hoặc một tài khoản bị chiếm phải cần thêm một bên nữa mới thành công. Đây là biện pháp về tổ chức, và nó còn chặn được cả những sai sót ngay tình trước khi lên môi trường thật.",
+      "level": 1
+    },
+    {
+      "id": "qsec-65",
+      "q": "A low privileged account can overwrite the binary that a service running as root launches at boot. This is a privilege escalation path because",
+      "q_vi": "Một tài khoản quyền thấp có thể ghi đè lên tệp nhị phân mà dịch vụ chạy dưới quyền quản trị gọi lúc khởi động. Đây là con đường leo thang đặc quyền vì",
+      "choices": [
+        "The service is written in an unsafe language",
+        "The account can decide what code the high privileged context will execute, without needing any software vulnerability at all",
+        "The boot process is not encrypted",
+        "Services running as root always trust their arguments"
+      ],
+      "answer": 1,
+      "why": "This is a permissions defect rather than a memory bug, so no exploit development is involved and no patch will fix it. Escalation paths of this shape are why file system permission audits matter as much as patching.",
+      "why_vi": "Đây là lỗi phân quyền chứ không phải lỗi bộ nhớ, nên không cần viết mã khai thác nào và cũng không bản vá nào chữa được. Chính những con đường leo thang kiểu này khiến việc rà soát quyền trên hệ tệp quan trọng ngang với việc vá lỗi.",
+      "level": 3
+    },
+    {
+      "id": "qsec-66",
+      "q": "A service account is granted full administrator rights because narrowing the permissions would take too long. The concrete cost is",
+      "q_vi": "Một tài khoản dịch vụ được cấp toàn quyền quản trị vì việc thu hẹp quyền sẽ mất quá nhiều thời gian. Cái giá cụ thể là",
+      "choices": [
+        "The service will run more slowly",
+        "The account will expire sooner than planned",
+        "Whoever compromises that service inherits full administrative control, so one application flaw becomes an estate wide incident",
+        "The account can no longer be audited"
+      ],
+      "answer": 2,
+      "why": "Privilege sets the ceiling on damage from any single compromise, which is the entire content of least privilege. The cost is not paid at deployment time, it is paid on the day something goes wrong.",
+      "why_vi": "Mức đặc quyền quy định trần thiệt hại của bất kỳ vụ xâm phạm nào, đó chính là toàn bộ nội dung của nguyên tắc đặc quyền tối thiểu. Cái giá không trả lúc triển khai, nó được trả vào ngày có chuyện.",
+      "level": 2
+    },
+    {
+      "id": "qsec-67",
+      "q": "MITRE ATT&CK is best described as",
+      "q_vi": "ATT&CK của MITRE được mô tả đúng nhất là",
+      "choices": [
+        "A commercial threat intelligence feed",
+        "A structured catalogue of tactics and techniques observed in real intrusions, used to describe behaviour and map coverage",
+        "A certification programme for security analysts",
+        "A scanner that finds vulnerabilities"
+      ],
+      "answer": 1,
+      "why": "It is a shared vocabulary for what attackers do, which lets detection engineering, reporting and gap analysis speak the same language. It finds nothing by itself.",
+      "why_vi": "Đó là bộ từ vựng chung cho những gì kẻ tấn công làm, nhờ vậy việc xây dựng phát hiện, việc báo cáo và việc phân tích khoảng trống cùng nói một ngôn ngữ. Bản thân nó không tìm ra thứ gì cả.",
+      "level": 1
+    },
+    {
+      "id": "qsec-68",
+      "q": "A team reports coverage of 180 ATT&CK techniques with one detection rule each. The number is weak evidence because",
+      "q_vi": "Một nhóm báo cáo đã phủ 180 kỹ thuật trong ATT&CK, mỗi kỹ thuật một luật phát hiện. Con số đó là bằng chứng yếu vì",
+      "choices": [
+        "Coverage ought to be measured in alerts per day",
+        "ATT&CK techniques are not observable in logs",
+        "A technique can be carried out in many ways, so one narrow rule can be bypassed while the map still shows the box as covered",
+        "Coverage should be reported per tactic rather than per technique"
+      ],
+      "answer": 2,
+      "why": "Counting rules measures effort, not detection, and a rule matching one tool's default string covers almost nothing of the technique. The honest measure is whether an executed variant actually raises the alert.",
+      "why_vi": "Đếm số luật là đo công sức chứ không đo khả năng phát hiện, và một luật chỉ khớp chuỗi mặc định của một công cụ thì gần như không phủ được kỹ thuật đó. Thước đo trung thực là chạy thử một biến thể xem cảnh báo có thực sự kêu hay không.",
+      "level": 3
+    },
+    {
+      "id": "qsec-69",
+      "q": "The argument for detecting at an early kill chain stage is that",
+      "q_vi": "Lập luận cho việc phát hiện ở giai đoạn sớm của chuỗi tiêu diệt là",
+      "choices": [
+        "Later stages produce no log entries",
+        "Early stages are always automated",
+        "Intervening before the objective is reached prevents the damage, while a detection at the exfiltration stage merely documents it",
+        "Early stages are inherently easier to detect than later ones"
+      ],
+      "answer": 2,
+      "why": "The model is about where an interruption still changes the outcome. Early stages are in fact often harder to see, which is exactly why coverage across several stages is needed.",
+      "why_vi": "Mô hình này nói về chỗ mà việc cắt ngang còn thay đổi được kết cục. Thực tế giai đoạn sớm thường khó thấy hơn, và đó chính là lý do cần phủ nhiều giai đoạn cùng lúc.",
+      "level": 1
+    },
+    {
+      "id": "qsec-70",
+      "q": "Blocking the file hashes and addresses listed in a threat report gives limited durable value because",
+      "q_vi": "Chặn các mã băm tệp và địa chỉ liệt kê trong một báo cáo mối đe dọa mang lại giá trị lâu dài hạn chế vì",
+      "choices": [
+        "Blocking addresses breaks routing",
+        "Hashes cannot be computed at line rate",
+        "Threat reports are usually inaccurate",
+        "The attacker can recompile or rent new infrastructure in minutes, whereas a detection built on their behaviour survives that change"
+      ],
+      "answer": 3,
+      "why": "These indicators are the cheapest things for an adversary to change, so blocking them buys hours. Detections keyed to tooling and behaviour force the attacker to rebuild their method, which costs them far more.",
+      "why_vi": "Đây là những dấu vết mà đối thủ thay đổi rẻ nhất, nên chặn chúng chỉ mua được vài giờ. Các phép phát hiện bám vào công cụ và hành vi buộc kẻ tấn công phải dựng lại cách làm, và điều đó tốn kém hơn nhiều.",
+      "level": 2
+    },
+    {
+      "id": "qsec-71",
+      "q": "Threat hunting differs from alert triage in that",
+      "q_vi": "Săn mối đe dọa khác với xử lý cảnh báo ở chỗ",
+      "choices": [
+        "Hunting uses signatures while triage uses anomalies",
+        "Hunting requires no telemetry",
+        "Hunting starts from a hypothesis about attacker behaviour and searches data where no alert ever fired",
+        "Hunting is performed only after an incident has been declared"
+      ],
+      "answer": 2,
+      "why": "Triage is reactive and bounded by what the rules already catch, so it cannot find what the rules miss. Hunting exists to explore that blind area, and its output is usually a new detection rule.",
+      "why_vi": "Xử lý cảnh báo là phản ứng lại và bị giới hạn trong những gì luật đã bắt được, nên không tìm ra thứ mà luật bỏ sót. Săn mối đe dọa sinh ra để dò vào vùng mù đó, và sản phẩm của nó thường là một luật phát hiện mới.",
+      "level": 1
+    },
+    {
+      "id": "qsec-72",
+      "q": "One in a million network events is malicious. A detector catches every attack and has a false positive rate of 0.1%. Among roughly one thousand alerts raised over a million events, how many are real?",
+      "q_vi": "Cứ một triệu sự kiện mạng thì có một sự kiện độc hại. Một bộ phát hiện bắt được toàn bộ tấn công và có tỉ lệ báo động giả 0,1%. Trong khoảng một nghìn cảnh báo phát ra trên một triệu sự kiện, có bao nhiêu cảnh báo là thật?",
+      "choices": [
+        "Exactly 100",
+        "About 1",
+        "About 500",
+        "About 999"
+      ],
+      "answer": 1,
+      "why": "A million events produce one true alert and about a thousand false ones, so precision is roughly one in a thousand. Perfect recall and a small error rate still give an unusable queue when the base rate is this low.",
+      "why_vi": "Một triệu sự kiện sinh ra một cảnh báo đúng và khoảng một nghìn cảnh báo sai, nên độ chuẩn xác chỉ chừng một phần nghìn. Bắt được hết tấn công và tỉ lệ sai rất nhỏ vẫn cho ra một hàng đợi không dùng nổi khi tỉ lệ nền thấp tới mức này.",
+      "level": 3
+    },
+    {
+      "id": "qsec-73",
+      "q": "An analyst queue is dominated by false positives. Which change reduces the workload most?",
+      "q_vi": "Hàng đợi của người phân tích ngập trong báo động giả. Thay đổi nào giảm được nhiều khối lượng công việc nhất?",
+      "choices": [
+        "Adding two more detection rules of similar quality",
+        "Retraining the model on more benign traffic only",
+        "Cutting the false positive rate by a factor of ten",
+        "Raising the detection rate from 99% to 99.9%"
+      ],
+      "answer": 2,
+      "why": "The queue length is set by the false alarm rate multiplied by the enormous benign volume, so dividing that rate divides the work. The extra 0.9% of recall changes the count by a fraction of one alert.",
+      "why_vi": "Độ dài hàng đợi được quyết định bởi tỉ lệ báo động giả nhân với khối lượng lưu lượng lành tính khổng lồ, nên chia nhỏ tỉ lệ đó là chia nhỏ công việc. Phần 0,9% độ bao phủ tăng thêm chỉ làm số cảnh báo thay đổi chưa tới một đơn vị.",
+      "level": 3
+    },
+    {
+      "id": "qsec-74",
+      "q": "On traffic where attacks make up 0.01% of events, a detector shows an excellent area under the ROC curve while analysts still drown in alerts. The better summary is",
+      "q_vi": "Trên luồng lưu lượng mà tấn công chỉ chiếm 0,01% số sự kiện, một bộ phát hiện cho diện tích dưới đường cong ROC rất đẹp trong khi người phân tích vẫn chết ngập trong cảnh báo. Cách tóm tắt tốt hơn là",
+      "choices": [
+        "Accuracy over the whole dataset",
+        "The precision and recall pair, or the precision recall curve, since the ROC view is dominated by the huge benign class",
+        "The training loss",
+        "The number of distinct signatures loaded"
+      ],
+      "answer": 1,
+      "why": "False positive rate is normalised by a benign class so large that a tiny rate is still a flood, and ROC therefore looks flattering. Precision states directly what fraction of the analyst's day is wasted.",
+      "why_vi": "Tỉ lệ báo động giả được chia cho một lớp lành tính lớn tới mức một tỉ lệ nhỏ xíu vẫn là cả trận lụt, nên biểu đồ ROC trông rất đẹp mắt. Độ chuẩn xác nói thẳng ra bao nhiêu phần thời gian trong ngày của người phân tích bị phí.",
+      "level": 3
+    },
+    {
+      "id": "qsec-75",
+      "q": "Mean time to detect matters because",
+      "q_vi": "Thời gian trung bình để phát hiện quan trọng vì",
+      "choices": [
+        "It determines the licence cost of the detection platform",
+        "It is required by every compliance framework",
+        "Every hour before detection is time the intruder spends expanding access and staging data",
+        "It is the only metric that cannot be gamed"
+      ],
+      "answer": 2,
+      "why": "Damage accumulates with dwell time, so the same intrusion caught on day one and on day ninety are entirely different incidents. It is also very easy to game, by counting only the intrusions you eventually found.",
+      "why_vi": "Thiệt hại tích lũy theo thời gian kẻ xâm nhập nằm im trong hệ, nên cùng một vụ mà bắt được ở ngày thứ nhất và ở ngày thứ chín mươi là hai sự cố hoàn toàn khác nhau. Chỉ số này cũng rất dễ bị bóp méo, chỉ cần đếm riêng những vụ cuối cùng đã tìm ra.",
+      "level": 1
+    },
+    {
+      "id": "qsec-76",
+      "q": "After an intrusion, the local logs on the affected host show nothing unusual. The most useful conclusion is",
+      "q_vi": "Sau một vụ xâm nhập, nhật ký cục bộ trên máy bị ảnh hưởng không cho thấy điều gì bất thường. Kết luận hữu ích nhất là",
+      "choices": [
+        "The host was not actually compromised",
+        "An attacker with administrative rights can edit local logs, so absence of evidence there proves nothing and off host copies must be examined",
+        "The detection platform failed and should be replaced",
+        "The logging level was set too high"
+      ],
+      "answer": 1,
+      "why": "Any log the attacker can write is a log the attacker can rewrite, which is why records are shipped off the machine as they are produced. Reasoning from a clean local log is reasoning from a document your adversary may have edited.",
+      "why_vi": "Nhật ký nào kẻ tấn công ghi được thì cũng viết lại được, vì vậy bản ghi phải được đẩy ra khỏi máy ngay khi sinh ra. Lập luận dựa trên nhật ký cục bộ sạch sẽ là lập luận dựa trên tài liệu mà đối thủ có thể đã sửa.",
+      "level": 2
+    },
+    {
+      "id": "qsec-77",
+      "q": "An intrusion detection dataset was built by capturing attack traffic in a laboratory and benign traffic on a campus network. A model reaching 99.9% on it may really be",
+      "q_vi": "Một bộ dữ liệu phát hiện xâm nhập được dựng bằng cách bắt lưu lượng tấn công trong phòng thí nghiệm và lưu lượng lành tính trên mạng của trường. Một mô hình đạt 99,9% trên đó thực chất có thể chỉ đang",
+      "choices": [
+        "Learning capture artefacts such as address ranges, timing and header defaults that separate the two sources, rather than attack behaviour",
+        "Overfitting the number of packets per flow",
+        "Limited by label noise in the benign class",
+        "Underfitting because the classes are imbalanced"
+      ],
+      "answer": 0,
+      "why": "Class and capture environment are confounded, so a trivial shortcut separates the labels perfectly and the score says nothing about attacks. The test is whether the model still works on benign and malicious traffic drawn from the same environment.",
+      "why_vi": "Nhãn lớp bị trộn lẫn với môi trường thu thập, nên một lối tắt tầm thường cũng tách được hai nhãn hoàn hảo và điểm số chẳng nói gì về tấn công. Phép thử là xem mô hình có còn chạy được khi cả lưu lượng lành tính lẫn độc hại đều lấy từ cùng một môi trường hay không.",
+      "level": 3
+    },
+    {
+      "id": "qsec-78",
+      "q": "Two alerts are both rated critical by the tool. Deciding which to work first should mainly consider",
+      "q_vi": "Hai cảnh báo đều được công cụ xếp mức nghiêm trọng cao nhất. Việc quyết định xử lý cái nào trước chủ yếu nên cân nhắc",
+      "choices": [
+        "Whether the affected asset is genuinely reachable and what it holds, so exposure and impact set the order",
+        "Which alert carries the longer description",
+        "Which rule has fired more often in the past",
+        "Which alert arrived first"
+      ],
+      "answer": 0,
+      "why": "Tool severity describes the finding in the abstract, while priority is severity combined with your own exposure and asset value. A critical alert on an isolated test machine can wait behind a medium one on a payment service.",
+      "why_vi": "Mức nghiêm trọng do công cụ gán mô tả phát hiện một cách trừu tượng, còn thứ tự ưu tiên là mức nghiêm trọng kết hợp với mức phơi nhiễm và giá trị tài sản của chính bạn. Một cảnh báo nghiêm trọng trên máy thử nghiệm bị cô lập hoàn toàn có thể xếp sau một cảnh báo trung bình trên dịch vụ thanh toán.",
+      "level": 2
+    },
+    {
+      "id": "qsec-79",
+      "q": "A noisy rule generates four hundred alerts a day, all benign so far. The responsible action is",
+      "q_vi": "Một luật ồn ào sinh ra bốn trăm cảnh báo mỗi ngày, tới nay đều lành tính. Cách xử lý có trách nhiệm là",
+      "choices": [
+        "Route those alerts to a folder nobody reads",
+        "Raise its severity so analysts finally pay attention",
+        "Understand which benign activity triggers it and narrow the condition, while keeping the malicious case detectable",
+        "Disable the rule and move on"
+      ],
+      "answer": 2,
+      "why": "Both disabling and quietly redirecting the alerts create a blind spot that nobody records, which is worse than the noise because it looks like coverage. Tuning keeps the detection while removing the known benign cause.",
+      "why_vi": "Tắt hẳn luật hoặc lặng lẽ đẩy cảnh báo đi nơi khác đều tạo ra một vùng mù mà không ai ghi nhận, và như thế còn tệ hơn tiếng ồn vì trên giấy tờ nó vẫn trông như đã phủ. Tinh chỉnh giữ lại khả năng phát hiện đồng thời loại bỏ nguyên nhân lành tính đã biết.",
+      "level": 2
+    },
+    {
+      "id": "qsec-80",
+      "q": "Endpoint detection and response adds to classic antivirus mainly",
+      "q_vi": "So với phần mềm diệt vi rút cổ điển, phát hiện và ứng phó trên điểm cuối bổ sung chủ yếu là",
+      "choices": [
+        "A larger signature database",
+        "Behavioural telemetry plus the ability to investigate and contain a host afterwards, not only to block a known file",
+        "Faster file scanning",
+        "Protection for network devices"
+      ],
+      "answer": 1,
+      "why": "The shift is from a verdict on a file to a recorded history of process, file and network activity you can query after the fact. That history is what lets responders answer what else did it touch.",
+      "why_vi": "Bước chuyển ở đây là từ việc phán xét một tệp sang việc lưu lại lịch sử hoạt động của tiến trình, tệp và mạng để truy vấn về sau. Chính lịch sử đó cho phép người ứng phó trả lời được câu hỏi nó còn chạm vào những gì.",
+      "level": 1
+    },
+    {
+      "id": "qsec-81",
+      "q": "The most convincing evidence that a given detection actually works is",
+      "q_vi": "Bằng chứng thuyết phục nhất cho thấy một phép phát hiện thực sự chạy được là",
+      "choices": [
+        "Someone executed the technique in your own environment and the expected alert fired end to end",
+        "The rule has never produced a false positive",
+        "The rule was written by an experienced analyst",
+        "The vendor lists the technique in its coverage matrix"
+      ],
+      "answer": 0,
+      "why": "Only an executed test exercises the whole path, from telemetry being collected to the alert reaching a human. A rule with no false positives is at least as likely to be broken as to be precise.",
+      "why_vi": "Chỉ một phép thử được chạy thật mới đi hết cả đường dẫn, từ chỗ dữ liệu quan trắc được thu về cho tới lúc cảnh báo đến tay con người. Một luật không hề có báo động giả thì khả năng nó hỏng cũng cao ngang khả năng nó chính xác.",
+      "level": 3
+    },
+    {
+      "id": "qsec-82",
+      "q": "During an active intrusion, wiping and rebuilding the first compromised host immediately can be harmful because",
+      "q_vi": "Trong lúc vụ xâm nhập còn đang diễn ra, việc xoá sạch và dựng lại ngay máy đầu tiên bị chiếm có thể gây hại vì",
+      "choices": [
+        "The software licence key would be lost",
+        "The attacker would be alerted by the reboot",
+        "Rebuilding takes too long",
+        "It destroys the evidence needed to find the attacker's other footholds"
+      ],
+      "answer": 3,
+      "why": "Without knowing how they got in and where else they are, you rebuild into the same compromise. Containment that preserves the disk and memory image first is what makes eradication complete.",
+      "why_vi": "Nếu chưa biết họ vào bằng đường nào và còn đang ở những đâu, bạn dựng lại máy để rồi bị chiếm y như cũ. Khoanh vùng theo hướng giữ lại ảnh đĩa và ảnh bộ nhớ trước mới làm cho bước loại bỏ trở nên trọn vẹn.",
+      "level": 2
+    },
+    {
+      "id": "qsec-83",
+      "q": "Central log collection helps detection mostly because",
+      "q_vi": "Việc thu nhật ký tập trung giúp cho khâu phát hiện chủ yếu vì",
+      "choices": [
+        "It removes the need for endpoint agents",
+        "It compresses logs and saves disk space",
+        "It encrypts the logs at rest",
+        "It lets an event on one system be correlated with events on others, and keeps a copy the attacker cannot edit"
+      ],
+      "answer": 3,
+      "why": "A single failed login means nothing, the same failure across two hundred accounts is a campaign, and correlation is only possible once the records sit together. The off host copy is the second, equally important reason.",
+      "why_vi": "Một lần đăng nhập hỏng thì chẳng nói lên gì, nhưng cùng kiểu hỏng đó trên hai trăm tài khoản là một chiến dịch, và chỉ khi các bản ghi nằm chung một chỗ mới đối chiếu được. Bản sao đặt ngoài máy là lý do thứ hai và cũng quan trọng ngang thế.",
+      "level": 1
+    },
+    {
+      "id": "qsec-84",
+      "q": "A tabletop exercise ends with the team unable to say who is allowed to disconnect a production system. The value of the exercise was",
+      "q_vi": "Một buổi diễn tập trên bàn kết thúc mà cả nhóm không nói được ai có quyền ngắt kết nối một hệ thống đang chạy thật. Giá trị của buổi diễn tập đó là",
+      "choices": [
+        "It exposed a decision gap that would have cost hours during a real incident, which is exactly what such exercises are for",
+        "It proved that the backups work",
+        "It measured the mean time to detect",
+        "Nothing, since no real incident took place"
+      ],
+      "answer": 0,
+      "why": "Technical readiness fails most often at an authority question, not at a tooling question. Finding that gap in a meeting room costs a morning, finding it at three in the morning costs the outage.",
+      "why_vi": "Sự sẵn sàng về kỹ thuật hay đổ vỡ ở câu hỏi ai có thẩm quyền chứ không phải ở câu hỏi dùng công cụ nào. Phát hiện khoảng trống đó trong phòng họp tốn một buổi sáng, phát hiện nó lúc ba giờ đêm thì phải trả bằng cả thời gian ngừng dịch vụ.",
+      "level": 2
+    },
+    {
+      "id": "qsec-85",
+      "q": "The difference between data poisoning and an evasion attack is",
+      "q_vi": "Khác biệt giữa đầu độc dữ liệu và tấn công né tránh là",
+      "choices": [
+        "Evasion requires access to the training set",
+        "Poisoning corrupts the model during training, evasion crafts inputs at inference time against a model that is already fixed",
+        "Poisoning applies only to images and evasion only to text",
+        "Poisoning is always caught by a validation set"
+      ],
+      "answer": 1,
+      "why": "The two differ in when the attacker acts and therefore in which defences apply, data provenance for one and input hardening for the other. A validation set drawn from the same poisoned pool will not reveal anything.",
+      "why_vi": "Hai đòn khác nhau ở thời điểm kẻ tấn công ra tay, và do đó khác nhau ở nhóm biện pháp đối phó, một bên là kiểm soát nguồn gốc dữ liệu, bên kia là gia cố đầu vào. Tập kiểm định lấy ra từ chính kho dữ liệu đã bị đầu độc sẽ không lộ ra điều gì.",
+      "level": 1
+    },
+    {
+      "id": "qsec-86",
+      "q": "A supplier delivers a model that scores exactly as promised on your held out test set. This does not rule out a backdoor because",
+      "q_vi": "Một nhà cung cấp giao mô hình đạt đúng điểm đã hứa trên tập kiểm tra riêng của bạn. Điều đó chưa loại trừ được cửa hậu vì",
+      "choices": [
+        "Test sets are usually too small",
+        "Accuracy metrics are unreliable in general",
+        "A backdoor is designed to leave normal behaviour intact and to activate only on a trigger your test set does not contain",
+        "Backdoors change the size of the model file"
+      ],
+      "answer": 2,
+      "why": "The clean score and the backdoor are engineered to coexist, so a passing test is exactly what a successful backdoor looks like. Finding one needs trigger search, activation analysis or provenance over the training pipeline.",
+      "why_vi": "Điểm sạch và cửa hậu được thiết kế để cùng tồn tại, nên một bài kiểm đạt chính là dáng vẻ của một cửa hậu thành công. Muốn tìm ra thì phải dò dấu hiệu kích hoạt, phân tích trạng thái kích hoạt bên trong, hoặc truy nguồn gốc toàn bộ quy trình huấn luyện.",
+      "level": 3
+    },
+    {
+      "id": "qsec-87",
+      "q": "A public prediction interface returns the full confidence vector for every query. Compared with returning only the top label, the extra risk is",
+      "q_vi": "Một giao diện dự đoán công khai trả về đầy đủ vector độ tin cậy cho mọi truy vấn. So với chỉ trả về nhãn cao nhất, rủi ro tăng thêm là",
+      "choices": [
+        "The richer output per query makes extracting a working copy of the model, and inferring training set membership, substantially cheaper",
+        "The model becomes less accurate",
+        "Higher bandwidth cost",
+        "Clients can no longer cache results"
+      ],
+      "answer": 0,
+      "why": "Confidence values carry information about the decision surface, so each query teaches the attacker more and fewer queries are needed. Both extraction and membership inference get easier at once.",
+      "why_vi": "Giá trị độ tin cậy mang thông tin về mặt phân tách quyết định, nên mỗi truy vấn dạy cho kẻ tấn công nhiều hơn và cần ít truy vấn hơn. Cả việc sao chép mô hình lẫn việc suy luận thành viên đều dễ đi cùng lúc.",
+      "level": 2
+    },
+    {
+      "id": "qsec-88",
+      "q": "Membership inference works better against a model that",
+      "q_vi": "Suy luận thành viên hiệu quả hơn khi nhắm vào mô hình mà",
+      "choices": [
+        "Was trained purely on public data",
+        "Memorised its training set, so confidence on training samples is visibly higher than on unseen ones",
+        "Uses a smaller number of parameters",
+        "Was trained with differential privacy"
+      ],
+      "answer": 1,
+      "why": "The attack reads the gap between behaviour on seen and unseen data, and that gap is what overfitting creates. Regularisation and differential privacy both shrink it, at some cost in accuracy.",
+      "why_vi": "Đòn này đọc chính khoảng chênh giữa cách mô hình cư xử với dữ liệu đã thấy và dữ liệu chưa thấy, mà khoảng chênh đó do khớp quá mức sinh ra. Điều chuẩn hoá và riêng tư vi phân đều thu hẹp nó lại, đổi lại mất một phần độ chính xác.",
+      "level": 3
+    },
+    {
+      "id": "qsec-89",
+      "q": "After adversarial training, clean accuracy fell from 94% to 88% while accuracy under attack rose from 3% to 52%. The honest reading is",
+      "q_vi": "Sau khi huấn luyện đối kháng, độ chính xác trên dữ liệu sạch giảm từ 94% xuống 88% còn độ chính xác khi bị tấn công tăng từ 3% lên 52%. Cách đọc trung thực là",
+      "choices": [
+        "The training failed, because clean accuracy dropped",
+        "A real trade was made, and whether it is worth taking depends on whether this deployment actually faces an adversary",
+        "The model is now fully robust",
+        "The clean accuracy drop proves the attack used was too weak"
+      ],
+      "answer": 1,
+      "why": "Both numbers moved and both matter, so the decision is a deployment decision rather than a modelling one. Calling 52% robust is also wrong, since roughly half the attacked inputs still succeed.",
+      "why_vi": "Cả hai con số đều dịch chuyển và cả hai đều đáng kể, nên đây là quyết định về triển khai chứ không phải quyết định về mô hình. Gọi mức 52% là bền vững cũng sai, vì gần một nửa số đầu vào bị tấn công vẫn thành công.",
+      "level": 3
+    },
+    {
+      "id": "qsec-90",
+      "q": "A defence reports 90% accuracy against a standard gradient based attack. Before believing it, the first thing to check is",
+      "q_vi": "Một cơ chế phòng thủ báo đạt 90% độ chính xác trước một đòn tấn công dựa trên gradient theo chuẩn thông thường. Trước khi tin con số đó, việc đầu tiên phải kiểm là",
+      "choices": [
+        "Whether the number is averaged over several seeds",
+        "Whether training used more epochs than the baseline",
+        "Whether the test set has more than ten thousand samples",
+        "Whether the defence merely obscures gradients, which is tested by attacking it with methods that do not use gradients and with the defence fully known to the attacker"
+      ],
+      "answer": 3,
+      "why": "Many published defences only broke the optimiser, so the attack failed while the model stayed just as vulnerable. Only an adaptive evaluation, where the attacker knows the defence, distinguishes real robustness from a broken measuring instrument.",
+      "why_vi": "Rất nhiều cơ chế phòng thủ từng công bố chỉ làm hỏng bộ tối ưu, khiến đòn tấn công thất bại trong khi mô hình vẫn yếu y như cũ. Chỉ có đánh giá thích ứng, tức là kẻ tấn công biết rõ cơ chế phòng thủ, mới phân biệt được độ bền vững thật với một cái thước đã gãy.",
+      "level": 3
+    },
+    {
+      "id": "qsec-91",
+      "q": "A paper claims 70% robust accuracy and gives no further detail. The claim is not interpretable because",
+      "q_vi": "Một bài báo khẳng định đạt 70% độ chính xác bền vững mà không nói gì thêm. Khẳng định đó không diễn giải được vì",
+      "choices": [
+        "Robust accuracy can never exceed clean accuracy",
+        "Robustness must always be reported as a curve",
+        "The dataset was probably not public",
+        "No perturbation norm, no perturbation budget and no assumption about attacker knowledge were stated"
+      ],
+      "answer": 3,
+      "why": "Robustness is defined relative to a threat model, so the same model can be 90% or 5% robust depending on the budget chosen. Without those three items the number cannot be compared with anything.",
+      "why_vi": "Độ bền vững được định nghĩa tương đối với một mô hình mối đe dọa, nên cùng một mô hình có thể là 90% hay 5% tuỳ ngân sách nhiễu được chọn. Thiếu ba thông tin đó thì con số không so được với bất cứ thứ gì.",
+      "level": 2
+    },
+    {
+      "id": "qsec-92",
+      "q": "An assistant with tool access summarises a web page that contains a sentence telling it to ignore its instructions and send a file elsewhere. The structural fix is",
+      "q_vi": "Một trợ lý có quyền dùng công cụ tóm tắt một trang web, trong trang đó có câu bảo nó bỏ qua chỉ dẫn cũ và gửi tệp đi nơi khác. Cách sửa mang tính cấu trúc là",
+      "choices": [
+        "Using a larger model",
+        "Filtering that particular phrase out of retrieved content",
+        "Instructing the model in its system prompt never to obey web pages",
+        "Treating retrieved content as data with no authority, and gating every tool action through a policy enforced outside the model"
+      ],
+      "answer": 3,
+      "why": "The model cannot reliably separate instruction from content, so the guarantee has to live in the surrounding system through least privilege tools, allowed destinations and confirmation for actions that matter. Prompt wording and phrase filters are guidance the next phrasing walks around.",
+      "why_vi": "Mô hình không tách được một cách đáng tin cậy đâu là chỉ dẫn đâu là nội dung, nên sự bảo đảm phải nằm ở hệ thống bao quanh, qua công cụ có đặc quyền tối thiểu, danh sách đích cho phép và bước xác nhận cho các hành động quan trọng. Cách viết chỉ dẫn và bộ lọc cụm từ chỉ là lời khuyên, và cách diễn đạt kế tiếp sẽ đi vòng qua.",
+      "level": 2
+    },
+    {
+      "id": "qsec-93",
+      "q": "Loading a third party model checkpoint in a format that can execute code while being loaded is risky because",
+      "q_vi": "Nạp một tệp trọng số mô hình của bên thứ ba ở định dạng có thể thực thi mã ngay trong lúc nạp là rủi ro vì",
+      "choices": [
+        "The format cannot store metadata",
+        "The checkpoint may not fit in memory",
+        "The load step runs attacker chosen code before any inference happens, so the model itself does not have to be malicious for the file to be",
+        "The weights may have been quantised incorrectly"
+      ],
+      "answer": 2,
+      "why": "This is the machine learning version of insecure deserialization, and it lands on a machine that usually holds credentials and data. The mitigation is a format that stores tensors only, plus checksums and provenance on the artefact.",
+      "why_vi": "Đây chính là phiên bản học máy của lỗi giải tuần tự hoá không an toàn, và nó rơi xuống một máy thường chứa sẵn thông tin đăng nhập và dữ liệu. Cách giảm thiểu là dùng định dạng chỉ lưu tensor, kèm mã kiểm và thông tin nguồn gốc của tệp.",
+      "level": 2
+    },
+    {
+      "id": "qsec-94",
+      "q": "A CVE identifier and a CVSS score differ in that",
+      "q_vi": "Mã định danh CVE và điểm CVSS khác nhau ở chỗ",
+      "choices": [
+        "Both are assigned only by the affected vendor",
+        "The identifier names one specific flaw, while the score rates how severe that flaw is in the abstract",
+        "The identifier rates severity and the score names the flaw",
+        "The score is unique per flaw while the identifier is not"
+      ],
+      "answer": 1,
+      "why": "One is a name, the other is a rating, and confusing them leads teams to treat a score as if it described their own environment. The score can also be recomputed with local context, the identifier never changes.",
+      "why_vi": "Một bên là cái tên, bên kia là mức đánh giá, và việc lẫn lộn hai thứ khiến các nhóm coi điểm số như thể nó mô tả chính môi trường của họ. Điểm số còn có thể tính lại theo bối cảnh cục bộ, còn mã định danh thì không bao giờ đổi.",
+      "level": 1
+    },
+    {
+      "id": "qsec-95",
+      "q": "Two findings on your estate score 9.8 and 6.5. Patching the 6.5 first can be the correct decision when",
+      "q_vi": "Hai phát hiện trên hệ thống của bạn được chấm 9,8 và 6,5. Vá cái 6,5 trước có thể là quyết định đúng khi",
+      "choices": [
+        "The 9.8 affects a host with no network path from any untrusted network, while the 6.5 sits on an internet facing service with a public exploit",
+        "The 9.8 was published more recently",
+        "The 6.5 has a longer description",
+        "No fix has been released yet for the 6.5"
+      ],
+      "answer": 0,
+      "why": "The score describes the flaw, risk describes the flaw in your context, and reachability plus exploit availability usually dominate. Ordering purely by score routinely puts effort where an attacker cannot go.",
+      "why_vi": "Điểm số mô tả bản thân lỗ hổng, còn rủi ro mô tả lỗ hổng đó trong bối cảnh của bạn, và thường thì khả năng tiếp cận cộng với việc đã có mã khai thác công khai mới là yếu tố quyết định. Xếp thứ tự thuần theo điểm số hay dẫn tới dồn công sức vào nơi kẻ tấn công không tới được.",
+      "level": 2
+    },
+    {
+      "id": "qsec-96",
+      "q": "A vendor publishes a fix together with a detailed advisory. Exploitation attempts often rise sharply in the following days because",
+      "q_vi": "Một nhà cung cấp công bố bản vá kèm thông báo chi tiết. Số lượt khai thác thường tăng vọt trong những ngày sau đó vì",
+      "choices": [
+        "Scanners stop working once a patch is released",
+        "The vulnerability becomes more severe after publication",
+        "Vendors deliberately delay releasing the fix",
+        "The advisory and the patch difference together tell attackers exactly where the flaw is and how to reach it"
+      ],
+      "answer": 3,
+      "why": "A patch is a public description of the bug written in code, so the disclosure that protects informed defenders also arms attackers against everyone slow to install it. Shrinking the exposure window is therefore an operational priority, not a paperwork task.",
+      "why_vi": "Bản vá chính là mô tả công khai của lỗi viết bằng mã, nên việc công bố vừa bảo vệ những người phòng thủ nắm thông tin vừa trang bị cho kẻ tấn công nhắm vào ai cài chậm. Vì thế rút ngắn cửa sổ phơi nhiễm là ưu tiên vận hành chứ không phải việc giấy tờ.",
+      "level": 2
+    },
+    {
+      "id": "qsec-97",
+      "q": "A critical fix cannot be applied for two weeks because of a change freeze. The right interim step is",
+      "q_vi": "Một bản vá nghiêm trọng chưa cài được trong hai tuần vì đang trong kỳ đóng băng thay đổi. Bước tạm thời đúng đắn là",
+      "choices": [
+        "Restricting network access to the affected service and adding targeted detection for exploitation attempts",
+        "Lowering the recorded severity so the item fits the freeze policy",
+        "Removing the system from the asset inventory",
+        "Accepting the risk quietly until the freeze ends"
+      ],
+      "answer": 0,
+      "why": "Compensating controls reduce reachability and raise the chance of noticing an attempt, which is exactly what the missing patch was buying. The other options change the paperwork rather than the exposure.",
+      "why_vi": "Biện pháp bù đắp làm giảm khả năng tiếp cận và tăng khả năng phát hiện một lượt thử, đó đúng là thứ mà bản vá còn thiếu đang phải gánh. Các phương án còn lại chỉ thay đổi giấy tờ chứ không thay đổi mức phơi nhiễm.",
+      "level": 2
+    },
+    {
+      "id": "qsec-98",
+      "q": "Coordinated disclosure means",
+      "q_vi": "Tiết lộ có trách nhiệm nghĩa là",
+      "choices": [
+        "Never publishing anything about the flaw",
+        "Reporting privately to the vendor and agreeing a publication date that balances user safety against pressure to fix",
+        "Publishing full exploitation details immediately so users can react",
+        "Selling the finding to the highest bidder"
+      ],
+      "answer": 1,
+      "why": "The deadline is the part that makes it work, since without it a vendor can leave users exposed indefinitely. Immediate full publication protects nobody who has not yet received a patch.",
+      "why_vi": "Chính cái mốc thời gian mới làm cho cơ chế này hoạt động, vì không có nó thì nhà cung cấp có thể để người dùng phơi nhiễm vô thời hạn. Công bố đầy đủ ngay lập tức không bảo vệ được ai chưa kịp nhận bản vá.",
+      "level": 1
+    },
+    {
+      "id": "qsec-99",
+      "q": "An organisation backs up nightly to a network share that every server mounts using domain credentials. Against ransomware this design is",
+      "q_vi": "Một đơn vị sao lưu hằng đêm vào một thư mục chia sẻ mà mọi máy chủ đều gắn bằng tài khoản của miền. Trước mã độc tống tiền, thiết kế này là",
+      "choices": [
+        "Adequate, because the backup is recent",
+        "Weak only if the backup is not compressed",
+        "Weak, because the same credentials that encrypt the servers can also reach and destroy the backup",
+        "Adequate as long as the share sits on a different subnet"
+      ],
+      "answer": 2,
+      "why": "Modern ransomware looks for backups first, so a copy reachable with the compromised credentials is part of the same failure domain. Immutability or an offline copy is what makes the backup survive.",
+      "why_vi": "Mã độc tống tiền hiện nay tìm bản sao lưu trước tiên, nên một bản sao mà chính tài khoản đã bị chiếm với tới được thì vẫn nằm trong cùng một vùng hỏng. Thứ giúp bản sao lưu sống sót là tính bất biến hoặc một bản để ngoại tuyến.",
+      "level": 3
+    },
+    {
+      "id": "qsec-100",
+      "q": "A system may lose at most 15 minutes of data and may be down for at most 4 hours. This states",
+      "q_vi": "Một hệ thống chỉ được phép mất tối đa 15 phút dữ liệu và chỉ được ngừng tối đa 4 giờ. Điều đó phát biểu",
+      "choices": [
+        "A recovery point objective of 4 hours and a recovery time objective of 15 minutes",
+        "A recovery point objective of 15 minutes and a recovery time objective of 4 hours",
+        "An availability target of 99.9%",
+        "A mean time to detect of 15 minutes"
+      ],
+      "answer": 1,
+      "why": "The recovery point objective is about data loss and drives backup frequency, the recovery time objective is about downtime and drives standby capacity. Swapping them leads to buying the wrong architecture entirely.",
+      "why_vi": "Mục tiêu điểm phục hồi nói về lượng dữ liệu mất và quyết định tần suất sao lưu, còn mục tiêu thời gian phục hồi nói về thời gian ngừng và quyết định năng lực dự phòng. Đảo hai thứ này sẽ dẫn tới mua nhầm hẳn kiến trúc.",
+      "level": 1
+    },
+    {
+      "id": "qsec-101",
+      "q": "Backups have completed successfully every night for a year and no restore has ever been attempted. The correct statement is",
+      "q_vi": "Các bản sao lưu chạy thành công mỗi đêm suốt một năm và chưa lần nào thử phục hồi. Phát biểu đúng là",
+      "choices": [
+        "The backups are proven, since no job has reported an error",
+        "A restore test would only waste production capacity",
+        "Job success rate is the standard measure of recoverability",
+        "What has been verified is that a job finished, not that the data is usable, and that gap gets discovered during the worst possible week"
+      ],
+      "answer": 3,
+      "why": "The job status measures the writer, while recoverability is a property of the reader, and the two fail independently through wrong scope, unreadable media or a missing decryption key. Only a periodic restore into a clean environment tests the thing you actually need.",
+      "why_vi": "Trạng thái của công việc sao lưu đo phía ghi, còn khả năng phục hồi là tính chất của phía đọc, và hai bên hỏng độc lập với nhau vì chọn sai phạm vi, vì phương tiện không đọc nổi hoặc vì thiếu khoá giải mã. Chỉ có phục hồi thử định kỳ vào một môi trường sạch mới kiểm đúng thứ bạn thật sự cần.",
+      "level": 3
+    },
+    {
+      "id": "qsec-102",
+      "q": "A risk register lists a scenario as low likelihood with catastrophic impact. Treating it as low priority just because it is unlikely ignores that",
+      "q_vi": "Sổ rủi ro ghi một kịch bản là khả năng xảy ra thấp nhưng tác động thảm khốc. Xếp nó vào ưu tiên thấp chỉ vì ít khả năng xảy ra là bỏ qua việc",
+      "choices": [
+        "Likelihood estimates are always wrong",
+        "Risk registers should only track high likelihood items",
+        "Impact is easier to measure than likelihood",
+        "Expected loss combines both factors, so a catastrophic outcome can dominate the register even at low probability"
+      ],
+      "answer": 3,
+      "why": "Ranking by likelihood alone discards half the definition of risk, and the scenarios that end organisations are precisely the rare and severe ones. Such entries usually deserve a recovery plan rather than a preventive control alone.",
+      "why_vi": "Xếp hạng chỉ theo khả năng xảy ra là vứt đi một nửa định nghĩa của rủi ro, mà những kịch bản khiến cả tổ chức sụp đổ lại đúng là loại hiếm gặp và nặng nề. Các mục như vậy thường cần một kế hoạch phục hồi chứ không chỉ một biện pháp phòng ngừa.",
+      "level": 2
+    },
+    {
+      "id": "qsec-103",
+      "q": "An organisation passed its audit and was breached three weeks later. The most useful lesson is",
+      "q_vi": "Một đơn vị vừa vượt qua kỳ đánh giá thì ba tuần sau bị xâm nhập. Bài học hữu ích nhất là",
+      "choices": [
+        "The breach must have used a zero-day",
+        "The auditor was incompetent",
+        "An audit samples stated controls at one point in time, while an adversary probes the whole estate continuously",
+        "Certification schemes carry no value at all"
+      ],
+      "answer": 2,
+      "why": "The two activities answer different questions, one about documented conformance and one about actual resistance. Concluding that certification is worthless is the opposite overcorrection, since the baseline still removes common failures.",
+      "why_vi": "Hai hoạt động này trả lời hai câu hỏi khác nhau, một bên về sự phù hợp trên giấy tờ, một bên về khả năng chống đỡ thật. Kết luận rằng chứng nhận là vô giá trị lại là kiểu sửa quá tay theo chiều ngược lại, vì bộ nền tảng đó vẫn loại được nhiều lỗi phổ biến.",
+      "level": 2
+    },
+    {
+      "id": "qsec-104",
+      "q": "Cyber insurance within a security programme is",
+      "q_vi": "Bảo hiểm an ninh mạng trong một chương trình an ninh là",
+      "choices": [
+        "A control that reduces the chance of a breach",
+        "A replacement for backups",
+        "A substitute for incident response planning",
+        "A way to transfer part of the financial loss, which does not lower the likelihood of an incident"
+      ],
+      "answer": 3,
+      "why": "Insurance is risk transfer, sitting alongside avoidance, reduction and acceptance. Insurers increasingly require the technical controls anyway, so it complements the programme rather than replacing any part of it.",
+      "why_vi": "Bảo hiểm là hình thức chuyển giao rủi ro, đứng cạnh các hướng né tránh, giảm thiểu và chấp nhận. Bên bảo hiểm ngày càng đòi hỏi phải có sẵn các biện pháp kỹ thuật, nên nó bổ sung cho chương trình chứ không thay thế phần nào cả.",
+      "level": 1
+    },
+    {
+      "id": "qsec-105",
+      "q": "A phishing simulation reports that the click rate fell from 12% to 4% after training. Before calling the programme a success, you should ask",
+      "q_vi": "Một đợt mô phỏng lừa đảo báo tỉ lệ bấm vào đường liên kết giảm từ 12% xuống 4% sau khi đào tạo. Trước khi kết luận chương trình thành công, cần hỏi",
+      "choices": [
+        "Whether the click rate was measured during business hours",
+        "Whether the two campaigns were of comparable difficulty, and whether the reporting rate and time to report improved, since one convincing message reaching one person is still enough",
+        "Whether the mail gateway was disabled during the test",
+        "Whether the training was delivered in person"
+      ],
+      "answer": 1,
+      "why": "An easier second campaign produces the same drop with no learning, so the comparison is only meaningful at matched difficulty. Click rate also cannot reach zero, which is why the operationally useful measure is how fast someone reports the message.",
+      "why_vi": "Một đợt thứ hai dễ hơn cũng cho ra mức giảm y hệt mà chẳng ai học được gì, nên phép so sánh chỉ có nghĩa khi độ khó tương đương. Tỉ lệ bấm cũng không bao giờ về được không, vì thế thước đo hữu ích trong vận hành là bao lâu thì có người báo lại thư đó.",
       "level": 3
     }
   ]

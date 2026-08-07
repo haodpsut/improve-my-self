@@ -330,6 +330,563 @@
       "def_en": "A logical network built on top of another network, with its own addressing and paths.",
       "def_vi": "Mạng logic dựng trên nền một mạng khác, có cách đánh địa chỉ và đường đi riêng.",
       "tags": ["architecture"]
+    },
+    {
+      "id": "n-ethernet",
+      "en": "Ethernet",
+      "vi": "Chuẩn mạng cục bộ có dây",
+      "def_en": "The dominant family of link layer standards for wired local networks, defining frame format, addressing and physical signalling.",
+      "def_vi": "Họ chuẩn tầng liên kết phổ biến nhất cho mạng cục bộ có dây, quy định định dạng khung, cách đánh địa chỉ và tín hiệu vật lý.",
+      "say": "Almost every wired link in the building is still Ethernet underneath.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-csma-cd",
+      "en": "CSMA/CD",
+      "vi": "Nghe sóng mang và phát hiện xung đột",
+      "def_en": "The legacy shared medium access method where a station listens before sending and aborts when it detects a collision.",
+      "def_vi": "Phương pháp truy nhập môi trường chung thời cũ, trạm nghe trước khi phát và ngừng ngay khi phát hiện xung đột.",
+      "say": "Collision detection stopped mattering once every port became full duplex.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-stp",
+      "en": "Spanning Tree Protocol",
+      "vi": "Giao thức cây khung",
+      "def_en": "A link layer protocol that blocks redundant ports so a switched topology with loops behaves like a loop free tree.",
+      "def_vi": "Giao thức tầng liên kết, chặn bớt cổng dư thừa để tô-pô chuyển mạch có vòng vẫn hoạt động như một cây không vòng.",
+      "say": "Without a spanning tree a single loop turns the whole segment into a broadcast storm.",
+      "tags": ["link", "switching"]
+    },
+    {
+      "id": "n-mac-table",
+      "en": "MAC address table",
+      "vi": "Bảng địa chỉ vật lý của switch",
+      "def_en": "The table a switch builds by learning source addresses, mapping each hardware address to the port where it was last seen.",
+      "def_vi": "Bảng mà switch tự học từ địa chỉ nguồn, ánh xạ mỗi địa chỉ phần cứng sang cổng vừa nhìn thấy nó gần nhất.",
+      "tags": ["link", "switching"]
+    },
+    {
+      "id": "n-broadcast-domain",
+      "en": "Broadcast domain",
+      "vi": "Miền quảng bá",
+      "def_en": "The set of interfaces that receive a link layer broadcast, bounded by routers and by VLAN boundaries.",
+      "def_vi": "Tập các giao diện cùng nhận một khung quảng bá tầng liên kết, giới hạn bởi bộ định tuyến và ranh giới VLAN.",
+      "say": "A switch extends the broadcast domain, a router terminates it.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-link-aggregation",
+      "en": "Link aggregation",
+      "vi": "Gộp nhiều liên kết vật lý",
+      "def_en": "Bundling several physical links into one logical link, with flows hashed onto members so a single flow keeps its ordering.",
+      "def_vi": "Gộp nhiều liên kết vật lý thành một liên kết logic, các luồng được băm vào từng thành viên nên một luồng vẫn giữ đúng thứ tự.",
+      "say": "Aggregating four links does not give one flow four times the throughput.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-ipv6",
+      "en": "IPv6",
+      "vi": "Giao thức internet phiên bản sáu",
+      "def_en": "The network layer protocol with one hundred twenty eight bit addresses, a fixed header, extension headers and no router fragmentation.",
+      "def_vi": "Giao thức tầng mạng dùng địa chỉ dài một trăm hai mươi tám bit, tiêu đề cố định, có tiêu đề mở rộng và bộ định tuyến không phân mảnh gói.",
+      "say": "In version six the router never fragments, the source must size the packet itself.",
+      "tags": ["network", "ipv6"]
+    },
+    {
+      "id": "n-slaac",
+      "en": "SLAAC",
+      "vi": "Tự cấu hình địa chỉ không trạng thái",
+      "def_en": "The IPv6 mechanism where a host forms its own address from a prefix advertised by the router, without a server keeping state.",
+      "def_vi": "Cơ chế của IPv6 cho phép máy trạm tự tạo địa chỉ từ tiền tố mà bộ định tuyến quảng bá, không cần máy chủ giữ trạng thái.",
+      "tags": ["network", "ipv6"]
+    },
+    {
+      "id": "n-dual-stack",
+      "en": "Dual stack",
+      "vi": "Chạy song song hai phiên bản IP",
+      "def_en": "Running IPv4 and IPv6 at the same time on the same host or network, letting each connection pick whichever family works.",
+      "def_vi": "Chạy đồng thời IPv4 và IPv6 trên cùng một máy hoặc cùng một mạng, mỗi kết nối chọn họ địa chỉ nào dùng được.",
+      "say": "Dual stack is the least painful transition, but you pay for it by operating two networks.",
+      "tags": ["network", "ipv6"]
+    },
+    {
+      "id": "n-nat64",
+      "en": "NAT64 and DNS64",
+      "vi": "Cầu nối IPv6 sang IPv4",
+      "def_en": "A translation pair letting an IPv6 only client reach an IPv4 only server, with DNS64 synthesising an IPv6 answer that NAT64 then translates.",
+      "def_vi": "Cặp cơ chế biên dịch giúp máy chỉ có IPv6 truy cập máy chủ chỉ có IPv4, DNS64 tổng hợp câu trả lời IPv6 rồi NAT64 biên dịch lưu lượng.",
+      "tags": ["network", "ipv6"]
+    },
+    {
+      "id": "n-icmp",
+      "en": "ICMP",
+      "vi": "Giao thức thông báo điều khiển internet",
+      "def_en": "The signalling protocol IP uses to report errors and reachability, carrying messages such as destination unreachable and time exceeded.",
+      "def_vi": "Giao thức báo hiệu của IP, dùng để báo lỗi và tình trạng tới được, mang các thông điệp như không tới được đích hay hết thời gian sống.",
+      "say": "Blocking every control message is how a firewall breaks path discovery without anyone noticing.",
+      "tags": ["network", "diagnostics"]
+    },
+    {
+      "id": "n-ttl",
+      "en": "TTL (Time To Live)",
+      "vi": "Số chặng còn sống của gói tin",
+      "def_en": "A hop counter in the IP header, decremented by each router, that discards a packet when it reaches zero to kill routing loops.",
+      "def_vi": "Bộ đếm chặng trong tiêu đề IP, mỗi bộ định tuyến trừ đi một, gói bị huỷ khi về không để triệt vòng lặp định tuyến.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-fragmentation",
+      "en": "IP fragmentation",
+      "vi": "Phân mảnh gói IP",
+      "def_en": "Splitting a packet that exceeds a link MTU into smaller pieces reassembled only at the destination, which costs efficiency and loses everything if one fragment is dropped.",
+      "def_vi": "Chia gói lớn hơn MTU của liên kết thành các mảnh nhỏ, chỉ ghép lại tại đích, cách này kém hiệu quả và mất một mảnh là hỏng cả gói.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-pmtud",
+      "en": "Path MTU discovery",
+      "vi": "Dò kích thước gói lớn nhất của đường đi",
+      "def_en": "Sending packets with the do not fragment bit and learning the smallest MTU along the path from the returned ICMP messages.",
+      "def_vi": "Gửi gói kèm cờ cấm phân mảnh rồi dựa vào thông điệp ICMP trả về để biết MTU nhỏ nhất trên đường đi.",
+      "say": "Path discovery fails silently when someone filters the packet too big message.",
+      "tags": ["network", "diagnostics"]
+    },
+    {
+      "id": "n-sliding-window",
+      "en": "Sliding window",
+      "vi": "Cửa sổ trượt",
+      "def_en": "The mechanism that lets a sender keep several unacknowledged segments in flight, with the window sliding forward as acknowledgements arrive.",
+      "def_vi": "Cơ chế cho phép bên gửi giữ nhiều đoạn chưa được báo nhận trên đường, cửa sổ trượt về phía trước khi báo nhận về tới.",
+      "say": "Throughput is roughly the window size divided by the round trip time.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-slow-start",
+      "en": "Slow start",
+      "vi": "Khởi động chậm",
+      "def_en": "The opening phase of TCP congestion control where the congestion window doubles each round trip until a threshold or a loss stops it.",
+      "def_vi": "Pha đầu của điều khiển tắc nghẽn TCP, cửa sổ tắc nghẽn nhân đôi sau mỗi vòng khứ hồi cho tới khi chạm ngưỡng hoặc gặp mất gói.",
+      "say": "Slow start is not slow, it grows exponentially, it merely starts small.",
+      "tags": ["transport", "congestion"]
+    },
+    {
+      "id": "n-cubic",
+      "en": "CUBIC",
+      "vi": "Thuật toán tắc nghẽn dựa trên mất gói",
+      "def_en": "The default loss based congestion control on Linux, growing the window along a cubic curve of time since the last reduction.",
+      "def_vi": "Thuật toán điều khiển tắc nghẽn mặc định trên Linux, dựa vào mất gói, tăng cửa sổ theo đường cong bậc ba tính từ lần giảm gần nhất.",
+      "tags": ["transport", "congestion"]
+    },
+    {
+      "id": "n-bbr",
+      "en": "BBR",
+      "vi": "Điều khiển tắc nghẽn theo băng thông và trễ",
+      "def_en": "A congestion control that estimates the bottleneck bandwidth and the minimum round trip time and paces to that rate instead of waiting for loss.",
+      "def_vi": "Thuật toán điều khiển tắc nghẽn ước lượng băng thông nút cổ chai và trễ khứ hồi nhỏ nhất rồi phát đúng tốc độ đó, thay vì chờ tới khi mất gói.",
+      "say": "Because it models the bottleneck, it keeps queues short on paths with deep buffers.",
+      "tags": ["transport", "congestion"]
+    },
+    {
+      "id": "n-nagle",
+      "en": "Nagle's algorithm",
+      "vi": "Thuật toán gom gói nhỏ của Nagle",
+      "def_en": "A TCP rule that holds small writes until the previous data is acknowledged, reducing tiny packet overhead but adding delay for interactive traffic.",
+      "def_vi": "Quy tắc trong TCP giữ lại các lần ghi nhỏ cho tới khi dữ liệu trước được báo nhận, giảm chi phí gói tí hon nhưng làm tăng trễ cho lưu lượng tương tác.",
+      "say": "Interactive applications usually disable it with the no delay socket option.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-rto",
+      "en": "Retransmission timeout",
+      "vi": "Thời hạn chờ trước khi truyền lại",
+      "def_en": "The timer, derived from the smoothed round trip time and its variance, after which TCP assumes a segment is lost and resends it.",
+      "def_vi": "Bộ định thời tính từ trễ khứ hồi làm trơn và độ biến động của nó, hết hạn thì TCP coi như đoạn đã mất và gửi lại.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-sack",
+      "en": "Selective acknowledgement",
+      "vi": "Báo nhận chọn lọc",
+      "def_en": "A TCP option letting the receiver report exactly which blocks arrived, so the sender retransmits only the missing pieces.",
+      "def_vi": "Tuỳ chọn của TCP cho phép bên nhận báo chính xác những khối đã tới, nhờ vậy bên gửi chỉ truyền lại phần còn thiếu.",
+      "say": "With selective acknowledgement the sender stops retransmitting data that already arrived.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-time-wait",
+      "en": "TIME_WAIT state",
+      "vi": "Trạng thái chờ sau khi đóng kết nối",
+      "def_en": "The state the side closing a TCP connection first holds for twice the maximum segment lifetime, so late duplicates cannot confuse a new connection on the same port pair.",
+      "def_vi": "Trạng thái mà bên chủ động đóng kết nối TCP giữ trong hai lần tuổi thọ đoạn tối đa, để gói đến muộn không làm lẫn với kết nối mới trên cùng cặp cổng.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-ecn",
+      "en": "ECN (Explicit Congestion Notification)",
+      "vi": "Báo tắc nghẽn tường minh",
+      "def_en": "Marking packets instead of dropping them so the sender learns about congestion without losing data.",
+      "def_vi": "Đánh dấu gói thay vì huỷ gói, để bên gửi biết có tắc nghẽn mà không phải mất dữ liệu.",
+      "say": "Marking is a cheaper congestion signal than dropping, provided both ends negotiate it.",
+      "tags": ["transport", "qos"]
+    },
+    {
+      "id": "n-dns-record-types",
+      "en": "DNS record types",
+      "vi": "Các loại bản ghi DNS",
+      "def_en": "The typed entries in a zone, including A and AAAA for addresses, CNAME for aliases, MX for mail routing and TXT for arbitrary text such as policy records.",
+      "def_vi": "Các mục có kiểu trong vùng tên miền, gồm A và AAAA cho địa chỉ, CNAME cho bí danh, MX cho định tuyến thư và TXT cho văn bản tuỳ ý như bản ghi chính sách.",
+      "tags": ["dns", "application"]
+    },
+    {
+      "id": "n-dns-recursion",
+      "en": "Recursive and iterative resolution",
+      "vi": "Phân giải đệ quy và phân giải lặp",
+      "def_en": "A resolver answers the client recursively, doing the whole job, while it queries the root and authoritative servers iteratively, following referrals one step at a time.",
+      "def_vi": "Máy phân giải trả lời máy khách theo kiểu đệ quy, làm trọn công việc, còn khi hỏi máy chủ gốc và máy chủ thẩm quyền thì nó hỏi theo kiểu lặp, đi từng bước theo chỉ dẫn.",
+      "say": "The client asks once, the resolver may ask four or five servers behind the scenes.",
+      "tags": ["dns"]
+    },
+    {
+      "id": "n-dns-ttl",
+      "en": "DNS TTL",
+      "vi": "Thời gian sống của bản ghi DNS",
+      "def_en": "The lifetime a record may be cached, which controls how quickly a change propagates and how much load reaches the authoritative servers.",
+      "def_vi": "Khoảng thời gian một bản ghi được phép lưu đệm, quyết định thay đổi lan nhanh hay chậm và mức tải dồn về máy chủ thẩm quyền.",
+      "say": "Lower the record lifetime a day before the migration, not on the day itself.",
+      "tags": ["dns"]
+    },
+    {
+      "id": "n-doh",
+      "en": "DoH and DoT",
+      "vi": "DNS qua HTTPS và qua TLS",
+      "def_en": "Two ways of carrying DNS inside an encrypted channel, one over HTTPS on the web port and one over TLS on its own port, hiding queries from the path.",
+      "def_vi": "Hai cách chở DNS trong kênh mã hoá, một chạy trên HTTPS ở cổng web và một chạy trên TLS ở cổng riêng, giấu truy vấn khỏi những nút trên đường.",
+      "tags": ["dns", "security"]
+    },
+    {
+      "id": "n-dns-poisoning",
+      "en": "DNS cache poisoning",
+      "vi": "Đầu độc bộ đệm DNS",
+      "def_en": "Injecting a forged answer into a resolver's cache so later clients are sent to an attacker controlled address.",
+      "def_vi": "Chèn câu trả lời giả vào bộ đệm của máy phân giải, khiến các máy khách sau đó bị dẫn tới địa chỉ do kẻ tấn công kiểm soát.",
+      "tags": ["dns", "security"]
+    },
+    {
+      "id": "n-http-status",
+      "en": "HTTP status codes",
+      "vi": "Mã trạng thái HTTP",
+      "def_en": "Three digit codes grouped by class, where two hundred means success, three hundred redirection, four hundred a client fault and five hundred a server fault.",
+      "def_vi": "Mã ba chữ số chia theo nhóm, hai trăm là thành công, ba trăm là chuyển hướng, bốn trăm là lỗi phía máy khách và năm trăm là lỗi phía máy chủ.",
+      "say": "A four hundred class code says the request was wrong, not that the server broke.",
+      "tags": ["http", "application"]
+    },
+    {
+      "id": "n-http-method",
+      "en": "HTTP methods and idempotence",
+      "vi": "Phương thức HTTP và tính lặp lại an toàn",
+      "def_en": "Verbs such as GET, PUT, POST and DELETE, where safe methods change nothing and idempotent methods give the same result when repeated.",
+      "def_vi": "Các động từ như GET, PUT, POST và DELETE, trong đó phương thức an toàn không thay đổi gì còn phương thức lặp lại được cho cùng kết quả khi gọi nhiều lần.",
+      "tags": ["http", "application"]
+    },
+    {
+      "id": "n-cookie",
+      "en": "Cookie",
+      "vi": "Mẩu dữ liệu phiên lưu ở trình duyệt",
+      "def_en": "A small piece of state a server asks the browser to store and return on later requests, carrying attributes such as domain, path, secure and same site.",
+      "def_vi": "Mẩu trạng thái nhỏ mà máy chủ nhờ trình duyệt lưu rồi gửi lại ở các yêu cầu sau, kèm các thuộc tính như miền, đường dẫn, chỉ gửi qua kênh an toàn và phạm vi cùng trang.",
+      "tags": ["http", "application"]
+    },
+    {
+      "id": "n-cors",
+      "en": "CORS",
+      "vi": "Chia sẻ tài nguyên giữa các nguồn gốc",
+      "def_en": "A browser enforced mechanism where a server uses response headers to say which other origins may read its responses.",
+      "def_vi": "Cơ chế do trình duyệt áp đặt, máy chủ dùng tiêu đề phản hồi để cho biết những nguồn gốc nào khác được phép đọc phản hồi của nó.",
+      "say": "The rule is enforced in the browser, so it never protects the server by itself.",
+      "tags": ["http", "security"]
+    },
+    {
+      "id": "n-keep-alive",
+      "en": "Keep-alive and connection reuse",
+      "vi": "Giữ kết nối để dùng lại",
+      "def_en": "Holding a TCP connection open across several HTTP requests so later requests skip the handshake and the slow start ramp.",
+      "def_vi": "Giữ một kết nối TCP mở qua nhiều yêu cầu HTTP, nhờ đó các yêu cầu sau không phải bắt tay lại và không phải leo lại từ pha khởi động chậm.",
+      "tags": ["http", "transport"]
+    },
+    {
+      "id": "n-tls-handshake",
+      "en": "TLS handshake",
+      "vi": "Bắt tay TLS",
+      "def_en": "The exchange that agrees a cipher suite, authenticates the server certificate and derives session keys, taking one round trip in version one point three.",
+      "def_vi": "Chuỗi trao đổi để thống nhất bộ mã, xác thực chứng thư máy chủ và sinh khoá phiên, chỉ mất một vòng khứ hồi ở phiên bản một chấm ba.",
+      "say": "Version one point three cut the handshake down to a single round trip.",
+      "tags": ["security", "tls"]
+    },
+    {
+      "id": "n-certificate-chain",
+      "en": "Certificate chain",
+      "vi": "Chuỗi chứng thư số",
+      "def_en": "The ordered list from a server certificate through intermediate authorities up to a root the client already trusts.",
+      "def_vi": "Danh sách có thứ tự đi từ chứng thư của máy chủ qua các nhà cấp trung gian lên tới một gốc mà máy khách đã tin sẵn.",
+      "say": "Most certificate errors in production are a missing intermediate, not an expired leaf.",
+      "tags": ["security", "tls"]
+    },
+    {
+      "id": "n-rip",
+      "en": "RIP",
+      "vi": "Giao thức định tuyến vector khoảng cách",
+      "def_en": "An early distance vector protocol using hop count as its only metric, limited to fifteen hops and slow to converge after a failure.",
+      "def_vi": "Giao thức vector khoảng cách đời đầu, chỉ dùng số chặng làm độ đo, giới hạn mười lăm chặng và hội tụ chậm sau sự cố.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-isis",
+      "en": "IS-IS",
+      "vi": "Giao thức trạng thái liên kết chạy trực tiếp trên tầng liên kết",
+      "def_en": "A link state interior gateway protocol similar in spirit to OSPF but carried directly over the link layer, which makes it address family agnostic.",
+      "def_vi": "Giao thức định tuyến nội miền theo trạng thái liên kết, tinh thần giống OSPF nhưng chạy thẳng trên tầng liên kết nên không phụ thuộc họ địa chỉ.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-mpls",
+      "en": "MPLS",
+      "vi": "Chuyển mạch nhãn đa giao thức",
+      "def_en": "Forwarding based on a short label pushed onto the packet, letting operators build engineered paths and virtual private networks over one core.",
+      "def_vi": "Chuyển tiếp dựa trên nhãn ngắn gắn vào gói, giúp nhà mạng dựng đường đi có tính toán và mạng riêng ảo trên cùng một lõi.",
+      "say": "Label switching decouples the forwarding path from the shortest path the routing protocol picked.",
+      "tags": ["routing", "architecture"]
+    },
+    {
+      "id": "n-autonomous-system",
+      "en": "Autonomous system",
+      "vi": "Hệ tự trị",
+      "def_en": "A set of prefixes under one routing policy, identified by an AS number, which is the unit BGP reasons about.",
+      "def_vi": "Tập các tiền tố nằm dưới cùng một chính sách định tuyến, được nhận diện bằng số hiệu hệ tự trị, đây là đơn vị mà BGP làm việc.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-peering-transit",
+      "en": "Peering and transit",
+      "vi": "Kết nối ngang hàng và mua chuyển tiếp",
+      "def_en": "Two commercial relations between networks, where peers exchange only their own and their customers' routes for free, while a transit provider sells reachability to the whole internet.",
+      "def_vi": "Hai quan hệ thương mại giữa các nhà mạng, bên ngang hàng chỉ trao đổi miễn phí tuyến của mình và của khách hàng mình, còn bên bán chuyển tiếp bán khả năng tới toàn bộ internet.",
+      "say": "Money, not distance, explains most of the odd paths you see in the routing table.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-multicast",
+      "en": "Multicast",
+      "vi": "Truyền tới một nhóm nhận",
+      "def_en": "Sending one copy of a packet that the network replicates only where paths to interested receivers diverge.",
+      "def_vi": "Gửi một bản duy nhất của gói tin, mạng chỉ nhân bản tại những điểm mà đường tới các máy nhận quan tâm rẽ nhánh.",
+      "say": "One stream leaves the source and the network makes the copies.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-cgnat",
+      "en": "Carrier grade NAT",
+      "vi": "Biên dịch địa chỉ ở quy mô nhà mạng",
+      "def_en": "A second layer of address translation inside the operator network so many subscribers share one public address, which breaks inbound reachability and complicates abuse tracing.",
+      "def_vi": "Lớp biên dịch địa chỉ thứ hai đặt trong mạng nhà cung cấp, nhiều thuê bao dùng chung một địa chỉ công cộng, khiến kết nối đi vào không còn khả thi và việc truy vết lạm dụng khó hơn.",
+      "tags": ["network", "nat"]
+    },
+    {
+      "id": "n-nat-mapping-types",
+      "en": "NAT mapping behaviour",
+      "vi": "Các kiểu ánh xạ của NAT",
+      "def_en": "How a translator reuses a mapping, from endpoint independent, which lets any external host reply, to address and port dependent, often called symmetric, which defeats simple hole punching.",
+      "def_vi": "Cách một bộ biên dịch dùng lại ánh xạ, từ kiểu không phụ thuộc điểm cuối, cho phép mọi máy ngoài trả lời, tới kiểu phụ thuộc cả địa chỉ và cổng, thường gọi là đối xứng, làm hỏng kỹ thuật đục lỗ đơn giản.",
+      "tags": ["network", "nat"]
+    },
+    {
+      "id": "n-vpn-tunnel",
+      "en": "VPN tunnel",
+      "vi": "Đường hầm mạng riêng ảo",
+      "def_en": "Carrying packets of one network inside packets of another, usually encrypted, so remote sites behave as if they shared a link.",
+      "def_vi": "Chở gói của mạng này bên trong gói của mạng khác, thường có mã hoá, để các điểm ở xa hoạt động như thể dùng chung một đường truyền.",
+      "say": "Every tunnel header you add eats into the usable payload size.",
+      "tags": ["security", "network"]
+    },
+    {
+      "id": "n-ipsec",
+      "en": "IPsec",
+      "vi": "Bộ giao thức bảo mật tầng mạng",
+      "def_en": "A suite that authenticates and encrypts IP packets, in transport mode for host to host and tunnel mode for gateway to gateway.",
+      "def_vi": "Bộ giao thức xác thực và mã hoá gói IP, chế độ giao vận dùng giữa hai máy trạm và chế độ đường hầm dùng giữa hai cổng biên.",
+      "tags": ["security", "network"]
+    },
+    {
+      "id": "n-stateful-firewall",
+      "en": "Stateful firewall",
+      "vi": "Tường lửa có trạng thái",
+      "def_en": "A filter that tracks connections so return traffic of an allowed outbound flow is permitted without a separate inbound rule.",
+      "def_vi": "Bộ lọc theo dõi từng kết nối, nhờ vậy lưu lượng trả về của một luồng đi ra đã cho phép sẽ được đi qua mà không cần luật chiều vào riêng.",
+      "say": "The state table is what lets you allow replies without opening the port to the world.",
+      "tags": ["security"]
+    },
+    {
+      "id": "n-l7-load-balancer",
+      "en": "Layer four and layer seven load balancing",
+      "vi": "Cân bằng tải tầng bốn và tầng bảy",
+      "def_en": "A layer four balancer forwards by address and port without reading the payload, while a layer seven balancer terminates the session and routes on content such as the path or host header.",
+      "def_vi": "Bộ cân bằng tầng bốn chuyển tiếp theo địa chỉ và cổng mà không đọc nội dung, còn bộ cân bằng tầng bảy kết thúc phiên rồi định tuyến theo nội dung như đường dẫn hay tên máy chủ.",
+      "say": "Reading the request buys you smarter routing and costs you a full session termination.",
+      "tags": ["qos", "architecture"]
+    },
+    {
+      "id": "n-red",
+      "en": "RED (Random Early Detection)",
+      "vi": "Phát hiện sớm ngẫu nhiên",
+      "def_en": "An active queue management scheme that drops or marks packets probabilistically as the average queue grows, before the buffer is full.",
+      "def_vi": "Cơ chế quản lý hàng đợi chủ động, huỷ hoặc đánh dấu gói theo xác suất khi hàng đợi trung bình tăng lên, trước lúc bộ đệm đầy.",
+      "tags": ["qos", "aqm"]
+    },
+    {
+      "id": "n-codel",
+      "en": "CoDel",
+      "vi": "Quản lý hàng đợi theo thời gian chờ",
+      "def_en": "An active queue management algorithm that watches how long packets sit in the queue and starts dropping when the minimum sojourn time stays above a target.",
+      "def_vi": "Thuật toán quản lý hàng đợi chủ động, theo dõi thời gian gói nằm trong hàng đợi và bắt đầu huỷ khi thời gian chờ nhỏ nhất vẫn vượt ngưỡng mục tiêu.",
+      "say": "It measures delay rather than queue length, so it works without tuning for the link rate.",
+      "tags": ["qos", "aqm"]
+    },
+    {
+      "id": "n-fair-queueing",
+      "en": "Fair queueing",
+      "vi": "Hàng đợi công bằng theo luồng",
+      "def_en": "Giving each flow its own queue and serving them in turn so one bulk transfer cannot starve interactive traffic.",
+      "def_vi": "Cấp cho mỗi luồng một hàng đợi riêng và phục vụ luân phiên, nhờ vậy một phiên tải lớn không bỏ đói lưu lượng tương tác.",
+      "tags": ["qos", "aqm"]
+    },
+    {
+      "id": "n-traffic-shaping",
+      "en": "Shaping and policing",
+      "vi": "Định hình và giám sát lưu lượng",
+      "def_en": "Two ways to enforce a rate, where a shaper buffers excess traffic and delays it, while a policer simply drops or remarks whatever exceeds the contract.",
+      "def_vi": "Hai cách ép tốc độ, bộ định hình đệm phần vượt quá rồi cho đi chậm lại, còn bộ giám sát huỷ thẳng hoặc hạ mức ưu tiên phần vượt cam kết.",
+      "say": "Shaping trades delay for loss, policing does the opposite.",
+      "tags": ["qos"]
+    },
+    {
+      "id": "n-openflow",
+      "en": "OpenFlow",
+      "vi": "Giao thức điều khiển bảng luồng",
+      "def_en": "The southbound protocol letting a controller install match and action rules in the flow tables of a switch.",
+      "def_vi": "Giao thức hướng nam, cho phép bộ điều khiển cài các luật so khớp và hành động vào bảng luồng của thiết bị chuyển mạch.",
+      "tags": ["sdn", "architecture"]
+    },
+    {
+      "id": "n-fat-tree",
+      "en": "Fat tree topology",
+      "vi": "Tô-pô cây béo trong trung tâm dữ liệu",
+      "def_en": "A multi rooted Clos topology where aggregate capacity stays constant at every level, giving full bisection bandwidth from cheap identical switches.",
+      "def_vi": "Tô-pô Clos nhiều gốc, tổng dung lượng giữ nguyên ở mọi tầng, nhờ vậy đạt băng thông chia đôi đầy đủ chỉ với các switch giống nhau và rẻ.",
+      "say": "Every level has the same aggregate capacity, so nothing narrows as you go up.",
+      "tags": ["datacenter", "architecture"]
+    },
+    {
+      "id": "n-ecmp",
+      "en": "ECMP",
+      "vi": "Chia tải trên nhiều đường có cùng giá",
+      "def_en": "Spreading traffic over several equal cost paths by hashing header fields, which keeps each flow on one path so packets do not reorder.",
+      "def_vi": "Trải lưu lượng lên nhiều đường có cùng giá bằng cách băm các trường tiêu đề, mỗi luồng vẫn đi trọn một đường nên gói không bị đảo thứ tự.",
+      "say": "Because the hash is per flow, one elephant flow can still congest a single link.",
+      "tags": ["datacenter", "routing"]
+    },
+    {
+      "id": "n-incast",
+      "en": "TCP incast",
+      "vi": "Hiện tượng dồn về một nút thu",
+      "def_en": "A datacentre collapse pattern where many servers answer one request at once, the top of rack buffer overflows and throughput falls to almost nothing during timeouts.",
+      "def_vi": "Kiểu sụp đổ trong trung tâm dữ liệu, nhiều máy chủ cùng trả lời một yêu cầu, bộ đệm switch đầu tủ tràn và thông lượng tụt gần bằng không trong lúc chờ hết thời hạn truyền lại.",
+      "tags": ["datacenter", "transport"]
+    },
+    {
+      "id": "n-http-caching",
+      "en": "HTTP caching",
+      "vi": "Lưu đệm trong HTTP",
+      "def_en": "Storing responses and revalidating them using headers such as cache control, entity tag and if none match, so unchanged content costs a small conditional request.",
+      "def_vi": "Lưu lại phản hồi rồi kiểm tra lại bằng các tiêu đề như điều khiển bộ đệm, thẻ thực thể và điều kiện không khớp, nhờ vậy nội dung chưa đổi chỉ tốn một yêu cầu điều kiện nhỏ.",
+      "say": "A conditional request that returns not modified costs headers only, not the body.",
+      "tags": ["http", "application"]
+    },
+    {
+      "id": "n-webrtc",
+      "en": "WebRTC",
+      "vi": "Truyền thông thời gian thực trong trình duyệt",
+      "def_en": "A browser stack for real time audio, video and data, using ICE with STUN and TURN to find a path through address translators.",
+      "def_vi": "Bộ giao thức trong trình duyệt cho âm thanh, hình ảnh và dữ liệu thời gian thực, dùng ICE cùng STUN và TURN để tìm đường xuyên qua các bộ biên dịch địa chỉ.",
+      "say": "When hole punching fails the session falls back to a relay and the cost goes up.",
+      "tags": ["application", "realtime"]
+    },
+    {
+      "id": "n-grpc",
+      "en": "gRPC",
+      "vi": "Gọi thủ tục từ xa trên nền HTTP/2",
+      "def_en": "A remote procedure call framework over HTTP/2 using binary schemas, with unary and streaming calls multiplexed on one connection.",
+      "def_vi": "Khung gọi thủ tục từ xa chạy trên HTTP/2, dùng lược đồ nhị phân, các lời gọi đơn và lời gọi luồng được ghép kênh trên cùng một kết nối.",
+      "tags": ["application"]
+    },
+    {
+      "id": "n-ntp",
+      "en": "NTP",
+      "vi": "Giao thức đồng bộ thời gian mạng",
+      "def_en": "A protocol that keeps clocks aligned by exchanging timestamps and estimating the offset, typically reaching a few milliseconds over the internet.",
+      "def_vi": "Giao thức giữ đồng hồ khớp nhau bằng cách trao đổi nhãn thời gian rồi ước lượng độ lệch, trên internet thường đạt sai số vài mili giây.",
+      "tags": ["timing", "application"]
+    },
+    {
+      "id": "n-ptp",
+      "en": "PTP",
+      "vi": "Giao thức thời gian chính xác",
+      "def_en": "A synchronisation protocol using hardware timestamps and transparent clocks in the switches, reaching sub microsecond accuracy on a controlled network.",
+      "def_vi": "Giao thức đồng bộ dùng nhãn thời gian phần cứng và đồng hồ trong suốt đặt ở thiết bị chuyển mạch, đạt sai số dưới một micro giây trên mạng được kiểm soát.",
+      "say": "The accuracy comes from timestamping in hardware, not from a better algorithm.",
+      "tags": ["timing"]
+    },
+    {
+      "id": "n-ping",
+      "en": "Ping",
+      "vi": "Lệnh đo thông và trễ khứ hồi",
+      "def_en": "A tool that sends ICMP echo requests to measure reachability and round trip time, though many devices deprioritise or block the replies.",
+      "def_vi": "Công cụ gửi yêu cầu vọng ICMP để đo khả năng tới được và trễ khứ hồi, tuy nhiên nhiều thiết bị hạ ưu tiên hoặc chặn hẳn phản hồi.",
+      "tags": ["tooling", "diagnostics"]
+    },
+    {
+      "id": "n-iperf",
+      "en": "iperf",
+      "vi": "Công cụ đo thông lượng",
+      "def_en": "An active measurement tool that generates TCP or UDP traffic between two endpoints to measure achievable throughput, jitter and loss.",
+      "def_vi": "Công cụ đo chủ động, sinh lưu lượng TCP hoặc UDP giữa hai điểm cuối để đo thông lượng đạt được, độ rung pha và tỷ lệ mất gói.",
+      "say": "Run it in both directions, because many access links are far from symmetric.",
+      "tags": ["tooling", "diagnostics"]
+    },
+    {
+      "id": "n-tcpdump",
+      "en": "Packet capture",
+      "vi": "Bắt gói tin",
+      "def_en": "Recording frames off an interface with a filter expression, which shows exactly what left and what arrived rather than what the application believed.",
+      "def_vi": "Ghi lại khung tin ngay tại giao diện mạng kèm biểu thức lọc, cho thấy đúng cái gì đã đi ra và cái gì đã tới, thay vì tin vào điều ứng dụng tưởng.",
+      "say": "Capture on both ends, otherwise you cannot tell loss from a sender that never sent.",
+      "tags": ["tooling", "diagnostics"]
+    },
+    {
+      "id": "n-netflow",
+      "en": "Flow records",
+      "vi": "Bản ghi luồng lưu lượng",
+      "def_en": "Per flow summaries exported by routers, giving volumes and endpoints over time without storing packet payloads.",
+      "def_vi": "Bản tóm tắt theo từng luồng do bộ định tuyến xuất ra, cho biết khối lượng và các điểm cuối theo thời gian mà không phải lưu nội dung gói.",
+      "tags": ["tooling", "measurement"]
+    },
+    {
+      "id": "n-ipv4-exhaustion",
+      "en": "IPv4 exhaustion",
+      "vi": "Cạn kiệt địa chỉ IPv4",
+      "def_en": "The depletion of the thirty two bit address space, which pushed operators towards address translation, address markets and the move to version six.",
+      "def_vi": "Tình trạng cạn không gian địa chỉ ba mươi hai bit, đẩy các nhà mạng sang biên dịch địa chỉ, mua bán địa chỉ và chuyển dần sang phiên bản sáu.",
+      "say": "The address space ran out years ago, translation only bought us time.",
+      "tags": ["network", "ipv6"]
     }
   ]
 }

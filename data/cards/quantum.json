@@ -211,6 +211,877 @@
       "def_vi": "Khẳng định phương pháp lượng tử vượt cổ điển, chỉ có nghĩa khi có đối chứng cổ điển được khớp điều kiện.",
       "say": "Without a tuned classical baseline the speedup claim is not evidence.",
       "tags": ["evaluation"]
+    },
+    {
+      "id": "q-state-vector",
+      "en": "State vector",
+      "vi": "Vector trạng thái",
+      "def_en": "A unit vector in a complex Hilbert space that fully describes a pure quantum state.",
+      "def_vi": "Vector đơn vị trong không gian Hilbert phức, mô tả đầy đủ một trạng thái thuần.",
+      "say": "For n qubits the state vector carries two to the power n complex amplitudes.",
+      "tags": [
+        "formalism"
+      ]
+    },
+    {
+      "id": "q-bra-ket",
+      "en": "Bra ket notation",
+      "vi": "Ký hiệu bra ket",
+      "def_en": "Dirac notation writing a state as a ket and its conjugate transpose as a bra, so an inner product reads as a bracket.",
+      "def_vi": "Ký hiệu Dirac viết trạng thái thành ket, còn liên hợp chuyển vị của nó thành bra, nên tích trong đọc ra thành một cặp ngoặc.",
+      "say": "The overlap between the two states is just the inner product of the bra and the ket.",
+      "tags": [
+        "formalism",
+        "notation"
+      ]
+    },
+    {
+      "id": "q-density-matrix",
+      "en": "Density matrix",
+      "vi": "Ma trận mật độ",
+      "def_en": "A positive semidefinite operator of unit trace that describes any state, pure or mixed, including one half of an entangled pair.",
+      "def_vi": "Toán tử nửa xác định dương có vết bằng một, mô tả được mọi trạng thái, thuần hay trộn, kể cả một nửa của cặp rối.",
+      "tags": [
+        "formalism"
+      ]
+    },
+    {
+      "id": "q-pure-mixed",
+      "en": "Pure state versus mixed state",
+      "vi": "Trạng thái thuần và trạng thái trộn",
+      "def_en": "A pure state is described by one state vector, a mixed state is a classical probability mixture of several pure states.",
+      "def_vi": "Trạng thái thuần được mô tả bằng một vector trạng thái duy nhất, còn trạng thái trộn là hỗn hợp xác suất cổ điển của nhiều trạng thái thuần.",
+      "say": "Purity, the trace of rho squared, equals one exactly when the state is pure.",
+      "tags": [
+        "formalism"
+      ]
+    },
+    {
+      "id": "q-bloch-sphere",
+      "en": "Bloch sphere",
+      "vi": "Mặt cầu Bloch",
+      "def_en": "A geometric picture in which a single qubit state is a point on or inside a unit sphere.",
+      "def_vi": "Cách hình dung hình học, trong đó trạng thái một qubit là một điểm trên mặt cầu đơn vị hoặc nằm bên trong nó.",
+      "say": "Pure states live on the surface of the Bloch sphere, mixed states strictly inside it.",
+      "tags": [
+        "formalism"
+      ]
+    },
+    {
+      "id": "q-unitary",
+      "en": "Unitary operator",
+      "vi": "Toán tử unita",
+      "def_en": "An invertible norm preserving operator, the only kind of evolution a closed quantum system can undergo.",
+      "def_vi": "Toán tử khả nghịch bảo toàn chuẩn, là dạng tiến hoá duy nhất mà một hệ lượng tử kín có thể trải qua.",
+      "tags": [
+        "formalism",
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-pauli",
+      "en": "Pauli matrices",
+      "vi": "Ma trận Pauli",
+      "def_en": "The three Hermitian two by two matrices X, Y and Z that generate single qubit rotations and form a basis for qubit operators.",
+      "def_vi": "Ba ma trận Hermit cỡ hai nhân hai gồm X, Y và Z, sinh ra các phép quay một qubit và tạo thành cơ sở cho toán tử của qubit.",
+      "say": "We expand the noise channel in the Pauli basis to get an error budget.",
+      "tags": [
+        "formalism"
+      ]
+    },
+    {
+      "id": "q-hadamard",
+      "en": "Hadamard gate",
+      "vi": "Cổng Hadamard",
+      "def_en": "The gate that turns a basis state into an equal superposition, sending zero to plus and one to minus.",
+      "def_vi": "Cổng biến trạng thái cơ sở thành chồng chập đều, đưa không thành cộng và một thành trừ.",
+      "say": "A layer of Hadamards prepares the uniform superposition over every bit string.",
+      "tags": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-cnot",
+      "en": "CNOT gate",
+      "vi": "Cổng CNOT",
+      "def_en": "A two qubit gate that flips the target when the control is one, the usual way to create entanglement.",
+      "def_vi": "Cổng hai qubit, lật qubit đích khi qubit điều khiển bằng một, đây là cách thông dụng để tạo rối.",
+      "tags": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-phase-gate",
+      "en": "Phase gate",
+      "vi": "Cổng pha",
+      "def_en": "A diagonal gate that adds a relative phase to the one component while leaving the zero component untouched.",
+      "def_vi": "Cổng chéo, thêm một pha tương đối cho thành phần một và giữ nguyên thành phần không.",
+      "tags": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-t-gate",
+      "en": "T gate",
+      "vi": "Cổng T",
+      "def_en": "The eighth root of unity phase gate, the non Clifford ingredient that makes a gate set universal and that dominates fault tolerant cost.",
+      "def_vi": "Cổng pha ứng với căn bậc tám của đơn vị, là thành phần nằm ngoài nhóm Clifford giúp tập cổng trở nên phổ quát và chiếm phần lớn chi phí của mạch chịu lỗi.",
+      "say": "In a fault tolerant resource estimate we count T gates, not total gates.",
+      "tags": [
+        "circuit",
+        "qec"
+      ]
+    },
+    {
+      "id": "q-clifford",
+      "en": "Clifford group",
+      "vi": "Nhóm Clifford",
+      "def_en": "The gates that map Pauli operators to Pauli operators, which the Gottesman Knill theorem shows are efficiently simulable classically.",
+      "def_vi": "Nhóm cổng biến toán tử Pauli thành toán tử Pauli, mà định lý Gottesman Knill chứng minh là mô phỏng được hiệu quả trên máy cổ điển.",
+      "say": "A circuit of Clifford gates alone is classically simulable, so it cannot demonstrate advantage.",
+      "tags": [
+        "circuit",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-universal-gate-set",
+      "en": "Universal gate set",
+      "vi": "Tập cổng phổ quát",
+      "def_en": "A finite set of gates whose finite products approximate any unitary to any desired accuracy.",
+      "def_vi": "Tập cổng hữu hạn mà các tích hữu hạn của chúng xấp xỉ được mọi toán tử unita tới độ chính xác tuỳ ý.",
+      "tags": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-circuit-depth",
+      "en": "Circuit depth",
+      "vi": "Độ sâu mạch",
+      "def_en": "The number of sequential gate layers in a circuit, which sets how long the state has to stay coherent.",
+      "def_vi": "Số lớp cổng nối tiếp trong mạch, quyết định trạng thái phải giữ được tính kết hợp trong bao lâu.",
+      "say": "We keep the depth under the coherence budget, otherwise the output is just noise.",
+      "tags": [
+        "circuit",
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-circuit-width",
+      "en": "Circuit width",
+      "vi": "Bề rộng mạch",
+      "def_en": "The number of qubits a circuit holds at once, ancillas included.",
+      "def_vi": "Số qubit mà mạch dùng cùng lúc, tính cả các qubit phụ trợ.",
+      "tags": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-qft",
+      "en": "Quantum Fourier transform",
+      "vi": "Biến đổi Fourier lượng tử",
+      "def_en": "The quantum version of the discrete Fourier transform, implemented with a gate count polynomial in the number of qubits.",
+      "def_vi": "Phiên bản lượng tử của biến đổi Fourier rời rạc, cài đặt được với số cổng đa thức theo số qubit.",
+      "say": "The transform is fast, but its output amplitudes cannot be read out one by one.",
+      "tags": [
+        "algorithm",
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-phase-estimation",
+      "en": "Quantum phase estimation",
+      "vi": "Ước lượng pha lượng tử",
+      "def_en": "A subroutine writing the eigenphase of a unitary into an ancilla register, the engine inside Shor and HHL.",
+      "def_vi": "Thủ tục con ghi pha riêng của một toán tử unita vào thanh ghi phụ trợ, là động cơ nằm bên trong Shor và HHL.",
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-born-rule",
+      "en": "Born rule",
+      "vi": "Quy tắc Born",
+      "def_en": "The rule that an outcome occurs with probability equal to the squared magnitude of its amplitude.",
+      "def_vi": "Quy tắc nói rằng một kết quả xuất hiện với xác suất bằng bình phương độ lớn của biên độ tương ứng.",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "q-amplitude",
+      "en": "Probability amplitude",
+      "vi": "Biên độ xác suất",
+      "def_en": "The complex coefficient attached to a basis state, whose squared magnitude gives that outcome its probability.",
+      "def_vi": "Hệ số phức gắn với một trạng thái cơ sở, bình phương độ lớn của nó cho xác suất của kết quả đó.",
+      "say": "Interference works by making the amplitudes of the wrong answers cancel.",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "q-shot-noise",
+      "en": "Shot noise",
+      "vi": "Nhiễu lấy mẫu",
+      "def_en": "Statistical error in an expectation value estimated from finitely many circuit repetitions, falling only as one over the square root of the shot count.",
+      "def_vi": "Sai số thống kê của giá trị kỳ vọng ước lượng từ số lần chạy mạch hữu hạn, chỉ giảm theo một trên căn bậc hai của số lần chạy.",
+      "say": "Halving the error bar costs four times as many shots.",
+      "tags": [
+        "hardware",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-oracle",
+      "en": "Oracle",
+      "vi": "Bộ tiên tri",
+      "def_en": "A black box unitary that marks or evaluates instances, whose use is counted in queries rather than in physical gates.",
+      "def_vi": "Toán tử unita dạng hộp đen, đánh dấu hoặc tính giá trị cho từng trường hợp, được đếm theo số lần truy vấn chứ không theo số cổng vật lý.",
+      "say": "A query complexity result means little until you price the oracle in real gates.",
+      "tags": [
+        "algorithm",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-deutsch-jozsa",
+      "en": "Deutsch Jozsa algorithm",
+      "vi": "Thuật toán Deutsch Jozsa",
+      "def_en": "A textbook algorithm deciding in a single query whether a promised function is constant or balanced.",
+      "def_vi": "Thuật toán kinh điển, chỉ cần một truy vấn để quyết định hàm được hứa là hằng hay cân bằng.",
+      "say": "Deutsch Jozsa is a teaching example, its promise problem has no practical use.",
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-bernstein-vazirani",
+      "en": "Bernstein Vazirani algorithm",
+      "vi": "Thuật toán Bernstein Vazirani",
+      "def_en": "An algorithm recovering a hidden bit string from one query to a linear function oracle, where classical methods need one query per bit.",
+      "def_vi": "Thuật toán lấy được chuỗi bit ẩn chỉ với một truy vấn tới bộ tiên tri của hàm tuyến tính, trong khi cách cổ điển cần một truy vấn cho mỗi bit.",
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-simon",
+      "en": "Simon's algorithm",
+      "vi": "Thuật toán Simon",
+      "def_en": "An algorithm finding the hidden period of a two to one function with exponentially fewer queries than any classical method, the direct ancestor of Shor.",
+      "def_vi": "Thuật toán tìm chu kỳ ẩn của hàm hai vào một, dùng số truy vấn ít hơn theo hàm mũ so với mọi cách cổ điển, và là tiền thân trực tiếp của Shor.",
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-grover-iterations",
+      "en": "Optimal Grover iteration count",
+      "vi": "Số lần lặp Grover tối ưu",
+      "def_en": "About pi over four times the square root of N over M rotations, beyond which the success probability starts falling again.",
+      "def_vi": "Khoảng pi trên bốn nhân căn của N chia M lần lặp, vượt quá mốc đó thì xác suất thành công lại giảm xuống.",
+      "say": "Running extra Grover iterations over rotates the state and hurts the success probability.",
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-amplitude-amplification",
+      "en": "Amplitude amplification",
+      "vi": "Khuếch đại biên độ",
+      "def_en": "The generalisation of Grover that boosts the amplitude of a marked subspace prepared by an arbitrary routine.",
+      "def_vi": "Dạng tổng quát của Grover, khuếch đại biên độ của không gian con được đánh dấu do một thủ tục chuẩn bị bất kỳ tạo ra.",
+      "tags": [
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-hhl",
+      "en": "HHL algorithm",
+      "vi": "Thuật toán HHL",
+      "def_en": "A quantum linear system routine whose exponential advantage holds only under sparsity, low condition number and cheap state preparation, and whose output is a quantum state rather than the solution vector.",
+      "def_vi": "Thủ tục giải hệ tuyến tính lượng tử, lợi thế hàm mũ chỉ đúng khi ma trận thưa, số điều kiện nhỏ và việc chuẩn bị trạng thái rẻ, còn đầu ra là một trạng thái lượng tử chứ không phải vector nghiệm.",
+      "say": "HHL gives a state proportional to the solution, and reading it out costs back the advantage.",
+      "tags": [
+        "algorithm",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-vqe",
+      "en": "VQE (Variational Quantum Eigensolver)",
+      "vi": "Bộ giải trị riêng lượng tử biến phân",
+      "def_en": "A hybrid routine minimising the measured energy of a parameterised state in order to estimate a ground state energy.",
+      "def_vi": "Thủ tục lai, cực tiểu hoá năng lượng đo được của trạng thái có tham số để ước lượng năng lượng trạng thái cơ bản.",
+      "tags": [
+        "algorithm",
+        "qml"
+      ]
+    },
+    {
+      "id": "q-boson-sampling",
+      "en": "Boson sampling",
+      "vi": "Lấy mẫu boson",
+      "def_en": "A sampling task with photons in a linear interferometer, believed hard classically but not solving any useful computational problem.",
+      "def_vi": "Bài toán lấy mẫu với photon trong giao thoa kế tuyến tính, được tin là khó với máy cổ điển nhưng không giải quyết bài toán tính toán hữu ích nào.",
+      "tags": [
+        "algorithm",
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-quantum-advantage",
+      "en": "Quantum advantage",
+      "vi": "Ưu thế lượng tử",
+      "def_en": "A demonstration that a device performs some task faster than the best known classical method, a boundary that improved classical algorithms keep pushing back.",
+      "def_vi": "Chứng minh một thiết bị làm được nhiệm vụ nào đó nhanh hơn cách cổ điển tốt nhất đã biết, ranh giới này liên tục bị các thuật toán cổ điển mới đẩy lùi.",
+      "say": "Several advantage claims were matched by classical simulation within a year of publication.",
+      "tags": [
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-classical-catch-up",
+      "en": "Classical catch up",
+      "vi": "Sự đuổi kịp của thuật toán cổ điển",
+      "def_en": "The recurring pattern in which a new classical algorithm or a better simulation reproduces a result previously claimed as quantum advantage.",
+      "def_vi": "Hiện tượng lặp đi lặp lại khi một thuật toán cổ điển mới hoặc cách mô phỏng tốt hơn tái lập được kết quả từng được coi là ưu thế lượng tử.",
+      "say": "State any advantage against the best classical method available at the time of writing.",
+      "tags": [
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-superconducting-qubit",
+      "en": "Superconducting qubit",
+      "vi": "Qubit siêu dẫn",
+      "def_en": "A qubit made from a Josephson junction circuit at millikelvin temperature, fast to operate but short lived.",
+      "def_vi": "Qubit làm từ mạch có tiếp giáp Josephson ở nhiệt độ cỡ mili Kelvin, thao tác nhanh nhưng thời gian sống ngắn.",
+      "say": "Superconducting gates run in tens of nanoseconds, which is what keeps the depth budget usable.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-trapped-ion",
+      "en": "Trapped ion qubit",
+      "vi": "Qubit ion bị bẫy",
+      "def_en": "A qubit stored in the internal levels of an ion held by electromagnetic fields, with long coherence and all to all coupling but slow gates.",
+      "def_vi": "Qubit lưu trong các mức nội tại của ion bị giữ bằng trường điện từ, thời gian kết hợp dài và ghép cặp toàn phần, nhưng cổng chạy chậm.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-photonic-qubit",
+      "en": "Photonic qubit",
+      "vi": "Qubit quang tử",
+      "def_en": "A qubit carried by a photon mode, natural for communication but hard to make interact deterministically.",
+      "def_vi": "Qubit mang bởi một mode photon, rất hợp cho truyền thông nhưng khó cho tương tác một cách tất định.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-neutral-atom",
+      "en": "Neutral atom qubit",
+      "vi": "Qubit nguyên tử trung hoà",
+      "def_en": "A qubit encoded in a neutral atom held by optical tweezers, with reconfigurable layouts and Rydberg mediated interactions.",
+      "def_vi": "Qubit mã hoá trong nguyên tử trung hoà giữ bằng nhíp quang, bố trí sắp xếp lại được và tương tác qua trạng thái Rydberg.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-quantum-dot",
+      "en": "Quantum dot spin qubit",
+      "vi": "Qubit spin chấm lượng tử",
+      "def_en": "A spin qubit in a semiconductor nanostructure, attractive because it may reuse existing chip fabrication.",
+      "def_vi": "Qubit spin trong cấu trúc nano bán dẫn, hấp dẫn vì có thể tận dụng dây chuyền chế tạo chip sẵn có.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-t1",
+      "en": "T1 relaxation time",
+      "vi": "Thời gian hồi phục T1",
+      "def_en": "The time constant for a qubit to decay from the excited state towards the ground state, an energy loss process.",
+      "def_vi": "Hằng số thời gian để qubit rơi từ trạng thái kích thích về trạng thái cơ bản, đây là quá trình mất năng lượng.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-t2",
+      "en": "T2 dephasing time",
+      "vi": "Thời gian mất pha T2",
+      "def_en": "The time constant for the relative phase of a superposition to randomise, always bounded above by twice T1.",
+      "def_vi": "Hằng số thời gian để pha tương đối của chồng chập bị ngẫu nhiên hoá, luôn bị chặn trên bởi hai lần T1.",
+      "say": "Phase information dies before energy does, so T2 is usually the binding constraint.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-gate-error-rate",
+      "en": "Gate error rate",
+      "vi": "Tỉ lệ lỗi cổng",
+      "def_en": "The average probability that one application of a gate leaves the state wrong, typically far worse for two qubit gates.",
+      "def_vi": "Xác suất trung bình để một lần dùng cổng làm sai trạng thái, thường tệ hơn nhiều với cổng hai qubit.",
+      "say": "Two qubit error rates dominate the budget, single qubit gates are almost free.",
+      "tags": [
+        "hardware",
+        "metric"
+      ]
+    },
+    {
+      "id": "q-connectivity",
+      "en": "Qubit connectivity",
+      "vi": "Kết nối giữa các qubit",
+      "def_en": "Which pairs of physical qubits a device can couple directly, a constraint that forces extra swap operations.",
+      "def_vi": "Những cặp qubit vật lý mà thiết bị ghép được trực tiếp, ràng buộc này buộc phải thêm thao tác hoán đổi.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-transpilation",
+      "en": "Transpilation",
+      "vi": "Biên dịch mạch về cổng gốc",
+      "def_en": "Rewriting a circuit into the native gates and layout of a device, which inflates depth through inserted swap operations.",
+      "def_vi": "Viết lại mạch theo tập cổng và cách bố trí gốc của thiết bị, việc này làm phình độ sâu vì phải chèn thêm phép hoán đổi.",
+      "say": "The logical circuit was shallow, the transpiled one came out three times deeper.",
+      "tags": [
+        "hardware",
+        "circuit"
+      ]
+    },
+    {
+      "id": "q-crosstalk",
+      "en": "Crosstalk",
+      "vi": "Xuyên âm giữa các qubit",
+      "def_en": "Unwanted interaction in which operating one qubit disturbs its neighbours, making errors correlated rather than independent.",
+      "def_vi": "Tương tác không mong muốn khi thao tác trên một qubit làm nhiễu các qubit lân cận, khiến lỗi trở nên tương quan chứ không độc lập.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-calibration-drift",
+      "en": "Calibration drift",
+      "vi": "Trôi hiệu chuẩn",
+      "def_en": "The slow change in device parameters that stops yesterday calibration, and yesterday results, from reproducing today.",
+      "def_vi": "Sự thay đổi chậm của tham số thiết bị, khiến hiệu chuẩn của hôm qua và kết quả của hôm qua không lặp lại được vào hôm nay.",
+      "say": "We re ran the benchmark after recalibration and the numbers moved, so we report both runs.",
+      "tags": [
+        "hardware",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-readout-error",
+      "en": "Readout error",
+      "vi": "Lỗi đọc kết quả đo",
+      "def_en": "Misclassification at the measurement stage, where a zero is recorded as a one or the reverse, partly correctable by classical post processing.",
+      "def_vi": "Nhầm lẫn ở khâu đo, khi không bị ghi thành một hoặc ngược lại, có thể bù một phần bằng xử lý hậu kỳ cổ điển.",
+      "tags": [
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-repetition-code",
+      "en": "Repetition code",
+      "vi": "Mã lặp",
+      "def_en": "The simplest code, spreading one logical bit over several physical qubits to catch bit flips, but blind to phase flips.",
+      "def_vi": "Mã đơn giản nhất, trải một bit logic lên nhiều qubit vật lý để bắt lỗi lật bit, nhưng mù trước lỗi lật pha.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-shor-code",
+      "en": "Shor code",
+      "vi": "Mã Shor",
+      "def_en": "The first code correcting an arbitrary single qubit error, using nine physical qubits to protect one logical qubit.",
+      "def_vi": "Mã đầu tiên sửa được lỗi tuỳ ý trên một qubit, dùng chín qubit vật lý để bảo vệ một qubit logic.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-surface-code",
+      "en": "Surface code",
+      "vi": "Mã bề mặt",
+      "def_en": "A topological code on a two dimensional lattice needing only nearest neighbour checks, the leading candidate thanks to its relatively high threshold.",
+      "def_vi": "Mã tôpô trên lưới hai chiều, chỉ cần kiểm tra giữa các qubit kề nhau, hiện là ứng viên hàng đầu nhờ ngưỡng lỗi khá cao.",
+      "say": "The surface code buys a high threshold at the price of thousands of physical qubits per logical one.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-error-threshold",
+      "en": "Error threshold",
+      "vi": "Ngưỡng lỗi",
+      "def_en": "The physical error rate below which enlarging the code reduces the logical error rate instead of raising it.",
+      "def_vi": "Mức lỗi vật lý mà nếu ở dưới đó, mở rộng mã sẽ làm giảm lỗi logic thay vì làm tăng.",
+      "say": "Above threshold, a bigger code is a worse code.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-logical-qubit",
+      "en": "Logical qubit",
+      "vi": "Qubit logic",
+      "def_en": "One protected qubit encoded across many physical qubits, whose error rate can be driven far below the physical rate.",
+      "def_vi": "Một qubit được bảo vệ, mã hoá trên nhiều qubit vật lý, mức lỗi của nó có thể ép xuống thấp hơn hẳn mức lỗi vật lý.",
+      "say": "Ask how many logical qubits the machine has, not how many physical ones.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-syndrome-measurement",
+      "en": "Syndrome measurement",
+      "vi": "Phép đo hội chứng lỗi",
+      "def_en": "Measuring stabiliser checks to learn which error occurred without learning, and thereby destroying, the encoded information.",
+      "def_vi": "Đo các phép kiểm ổn định để biết lỗi nào đã xảy ra mà không đọc, và do đó không phá, thông tin đã mã hoá.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-error-mitigation",
+      "en": "Error mitigation",
+      "vi": "Giảm nhẹ lỗi",
+      "def_en": "Post processing that reduces bias in an estimated observable without protecting the state, at a sampling cost growing exponentially with circuit volume.",
+      "def_vi": "Xử lý hậu kỳ nhằm giảm độ chệch của đại lượng đo được mà không bảo vệ trạng thái, cái giá là số lần lấy mẫu tăng theo hàm mũ với thể tích mạch.",
+      "say": "Mitigation is a stopgap, it does not scale the way correction does.",
+      "tags": [
+        "qec",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-zne",
+      "en": "Zero noise extrapolation",
+      "vi": "Ngoại suy nhiễu bằng không",
+      "def_en": "Deliberately amplifying noise, measuring the observable at several noise levels, and extrapolating back to the zero noise point.",
+      "def_vi": "Cố ý khuếch đại nhiễu, đo đại lượng quan sát ở nhiều mức nhiễu rồi ngoại suy ngược về điểm nhiễu bằng không.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-magic-state-distillation",
+      "en": "Magic state distillation",
+      "vi": "Chưng cất trạng thái ma thuật",
+      "def_en": "Producing high quality non Clifford resource states from many noisy copies, usually the dominant cost of a fault tolerant computation.",
+      "def_vi": "Tạo trạng thái tài nguyên ngoài nhóm Clifford với chất lượng cao từ nhiều bản sao nhiễu, thường là chi phí lớn nhất của tính toán chịu lỗi.",
+      "tags": [
+        "qec"
+      ]
+    },
+    {
+      "id": "q-angle-encoding",
+      "en": "Angle encoding",
+      "vi": "Mã hoá góc",
+      "def_en": "Loading each feature as a rotation angle on a qubit, cheap in depth but limited to as many features as there are rotations.",
+      "def_vi": "Nạp mỗi đặc trưng thành một góc quay trên qubit, rẻ về độ sâu nhưng số đặc trưng bị giới hạn theo số phép quay.",
+      "tags": [
+        "qml"
+      ]
+    },
+    {
+      "id": "q-amplitude-encoding",
+      "en": "Amplitude encoding",
+      "vi": "Mã hoá biên độ",
+      "def_en": "Packing a vector of length two to the n into the amplitudes of n qubits, compact in qubits but expensive in state preparation depth.",
+      "def_vi": "Đóng một vector dài hai mũ n vào biên độ của n qubit, gọn về số qubit nhưng tốn về độ sâu chuẩn bị trạng thái.",
+      "say": "Amplitude encoding is compact on paper and expensive on hardware.",
+      "tags": [
+        "qml"
+      ]
+    },
+    {
+      "id": "q-quantum-kernel",
+      "en": "Quantum kernel",
+      "vi": "Nhân lượng tử",
+      "def_en": "Using the overlap between encoded states as a similarity measure inside an otherwise classical kernel method.",
+      "def_vi": "Dùng độ chồng lấp giữa các trạng thái đã mã hoá làm độ tương tự bên trong một phương pháp nhân vốn là cổ điển.",
+      "tags": [
+        "qml"
+      ]
+    },
+    {
+      "id": "q-expressibility",
+      "en": "Expressibility",
+      "vi": "Khả năng biểu diễn",
+      "def_en": "How widely an ansatz can spread over the state space, which rises with depth and tends to hurt trainability.",
+      "def_vi": "Mức độ mà một ansatz phủ rộng được không gian trạng thái, tăng theo độ sâu và thường làm hại khả năng huấn luyện.",
+      "tags": [
+        "qml"
+      ]
+    },
+    {
+      "id": "q-trainability",
+      "en": "Trainability",
+      "vi": "Khả năng huấn luyện",
+      "def_en": "Whether an optimiser can actually find good parameters, limited by vanishing gradients, shot noise and hardware error.",
+      "def_vi": "Việc bộ tối ưu có thực sự tìm được tham số tốt hay không, bị giới hạn bởi gradient tiêu biến, nhiễu lấy mẫu và lỗi phần cứng.",
+      "say": "Expressibility and trainability pull in opposite directions.",
+      "tags": [
+        "qml",
+        "challenge"
+      ]
+    },
+    {
+      "id": "q-io-bottleneck",
+      "en": "Input output bottleneck",
+      "vi": "Nút cổ chai nạp và đọc dữ liệu",
+      "def_en": "The cost of loading classical data in and reading classical results out, which often erases the theoretical advantage of a quantum routine.",
+      "def_vi": "Chi phí nạp dữ liệu cổ điển vào và đọc kết quả cổ điển ra, thường xoá sạch lợi thế lý thuyết của một thủ tục lượng tử.",
+      "say": "If loading the data already costs order N, an order log N inner routine saves you nothing.",
+      "tags": [
+        "qml",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-qram",
+      "en": "QRAM",
+      "vi": "Bộ nhớ truy cập ngẫu nhiên lượng tử",
+      "def_en": "A hypothetical device giving fast superposed access to a classical memory, assumed by many speedup proofs and not yet built at scale.",
+      "def_vi": "Thiết bị giả định cho phép truy cập chồng chập nhanh vào bộ nhớ cổ điển, nhiều chứng minh tăng tốc giả thiết là có nó nhưng chưa ai dựng được ở quy mô thật.",
+      "tags": [
+        "qml",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-tensor-network",
+      "en": "Tensor network",
+      "vi": "Mạng tensor",
+      "def_en": "A factorised representation of a high dimensional array as a network of small tensors, letting classical machines simulate weakly entangled quantum systems.",
+      "def_vi": "Cách biểu diễn phân rã một mảng nhiều chiều thành mạng các tensor nhỏ, cho phép máy cổ điển mô phỏng hệ lượng tử rối yếu.",
+      "say": "Tensor network simulation is how several advantage claims were later matched classically.",
+      "tags": [
+        "inspired"
+      ]
+    },
+    {
+      "id": "q-mps",
+      "en": "Matrix product state",
+      "vi": "Trạng thái tích ma trận",
+      "def_en": "A one dimensional tensor network whose bond dimension bounds how much entanglement it can represent.",
+      "def_vi": "Mạng tensor một chiều, chiều liên kết của nó chặn lượng rối mà nó biểu diễn được.",
+      "tags": [
+        "inspired"
+      ]
+    },
+    {
+      "id": "q-dequantization",
+      "en": "Dequantization",
+      "vi": "Khử lượng tử hoá",
+      "def_en": "Building a classical algorithm with comparable scaling to a quantum one, once the sampling access the quantum routine assumed is granted classically too.",
+      "def_vi": "Xây thuật toán cổ điển có độ phức tạp tương đương thuật toán lượng tử, sau khi cấp cho phía cổ điển đúng kiểu truy cập lấy mẫu mà phía lượng tử đã giả thiết.",
+      "say": "Tang showed the recommendation system speedup came from the access model, not from quantum mechanics.",
+      "tags": [
+        "inspired",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-ising-model",
+      "en": "Ising model",
+      "vi": "Mô hình Ising",
+      "def_en": "A model of spins taking values plus or minus one with pairwise couplings, whose ground state encodes many hard optimisation problems.",
+      "def_vi": "Mô hình các spin nhận giá trị cộng một hoặc trừ một với tương tác từng cặp, trạng thái cơ bản của nó mã hoá được nhiều bài toán tối ưu khó.",
+      "tags": [
+        "inspired",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-qubo",
+      "en": "QUBO",
+      "vi": "Tối ưu nhị phân bậc hai không ràng buộc",
+      "def_en": "The binary variable form equivalent to the Ising model, the standard input format for annealers and for many inspired solvers.",
+      "def_vi": "Dạng biến nhị phân tương đương mô hình Ising, là định dạng đầu vào chuẩn cho máy ủ và cho nhiều bộ giải lấy cảm hứng lượng tử.",
+      "say": "We fold the constraints into penalty terms to get a QUBO.",
+      "tags": [
+        "inspired",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "q-simulated-annealing",
+      "en": "Simulated annealing",
+      "vi": "Ủ mô phỏng",
+      "def_en": "A classical stochastic search accepting worsening moves with a probability lowered over time, the default baseline for any annealing claim.",
+      "def_vi": "Tìm kiếm ngẫu nhiên cổ điển, chấp nhận bước đi xấu hơn với xác suất giảm dần theo thời gian, là đối chứng mặc định cho mọi tuyên bố về ủ.",
+      "tags": [
+        "inspired",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "q-bb84",
+      "en": "BB84 protocol",
+      "vi": "Giao thức BB84",
+      "def_en": "The first key distribution protocol, encoding random bits in randomly chosen conjugate bases and keeping only the rounds where the bases agreed.",
+      "def_vi": "Giao thức phân phối khoá đầu tiên, mã hoá bit ngẫu nhiên trong các cơ sở liên hợp chọn ngẫu nhiên, chỉ giữ lại những vòng mà hai bên chọn trùng cơ sở.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-e91",
+      "en": "E91 protocol",
+      "vi": "Giao thức E91",
+      "def_en": "An entanglement based key protocol where a Bell inequality violation certifies that no eavesdropper holds a copy of the correlations.",
+      "def_vi": "Giao thức khoá dựa trên rối, ở đó việc vi phạm bất đẳng thức Bell chứng nhận không kẻ nghe lén nào giữ được bản sao của các tương quan.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-key-sifting",
+      "en": "Key sifting",
+      "vi": "Sàng khoá",
+      "def_en": "The public discussion step where the two parties discard every round whose bases or detections did not match.",
+      "def_vi": "Bước trao đổi công khai, hai bên bỏ đi mọi vòng có cơ sở hoặc kết quả phát hiện không khớp.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-qber",
+      "en": "Quantum bit error rate",
+      "vi": "Tỉ lệ lỗi bit lượng tử",
+      "def_en": "The fraction of mismatched bits in the sifted key, used to bound how much information an eavesdropper could hold.",
+      "def_vi": "Tỉ lệ bit sai trong khoá đã sàng, dùng để chặn trên lượng thông tin mà kẻ nghe lén có thể nắm.",
+      "say": "Above roughly eleven percent error the protocol aborts instead of distilling a key.",
+      "tags": [
+        "security",
+        "metric"
+      ]
+    },
+    {
+      "id": "q-privacy-amplification",
+      "en": "Privacy amplification",
+      "vi": "Chưng cất khoá riêng",
+      "def_en": "Hashing a longer partially exposed key down to a shorter one about which the eavesdropper knows almost nothing.",
+      "def_vi": "Băm một khoá dài đã lộ một phần thành khoá ngắn hơn mà kẻ nghe lén gần như không biết gì.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-quantum-repeater",
+      "en": "Quantum repeater",
+      "vi": "Bộ lặp lượng tử",
+      "def_en": "A node extending entanglement over long distance by joining short links, since quantum signals cannot be amplified by copying.",
+      "def_vi": "Nút mạng kéo dài rối qua quãng xa bằng cách nối các đoạn ngắn, vì tín hiệu lượng tử không thể khuếch đại bằng cách sao chép.",
+      "tags": [
+        "security",
+        "hardware"
+      ]
+    },
+    {
+      "id": "q-entanglement-swapping",
+      "en": "Entanglement swapping",
+      "vi": "Đổi chỗ rối",
+      "def_en": "A Bell measurement on the inner halves of two entangled pairs, leaving the outer halves entangled although they never met.",
+      "def_vi": "Phép đo Bell trên hai nửa bên trong của hai cặp rối, làm hai nửa bên ngoài trở nên rối dù chưa từng gặp nhau.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-teleportation",
+      "en": "Quantum teleportation",
+      "vi": "Dịch chuyển trạng thái lượng tử",
+      "def_en": "Transferring an unknown state using a shared entangled pair plus two classical bits, which is exactly why it never beats the speed of light.",
+      "def_vi": "Chuyển một trạng thái chưa biết nhờ cặp rối chung cộng thêm hai bit cổ điển, chính vì vậy nó không bao giờ vượt tốc độ ánh sáng.",
+      "say": "Teleportation moves the state, it does not move matter and it still needs a classical message.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-rate-distance-limit",
+      "en": "Rate distance limit",
+      "vi": "Giới hạn tốc độ theo khoảng cách",
+      "def_en": "The bound tying secret key rate to channel transmittance, which caps repeaterless links and forces relays over long distance.",
+      "def_vi": "Giới hạn buộc tốc độ khoá bí mật theo độ truyền qua của kênh, nó chặn trần các liên kết không có bộ lặp và buộc phải dùng trạm chuyển tiếp ở cự ly xa.",
+      "tags": [
+        "security",
+        "metric"
+      ]
+    },
+    {
+      "id": "q-lattice-crypto",
+      "en": "Lattice based cryptography",
+      "vi": "Mật mã dựa trên lưới",
+      "def_en": "Post quantum schemes whose security rests on hard lattice problems such as learning with errors, the basis of the main NIST selections.",
+      "def_vi": "Các hệ hậu lượng tử dựa vào bài toán lưới khó như học có lỗi, nền tảng của những lựa chọn chính từ NIST.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-code-based-crypto",
+      "en": "Code based cryptography",
+      "vi": "Mật mã dựa trên mã sửa sai",
+      "def_en": "Post quantum encryption built on the hardness of decoding random linear codes, long studied and conservative but with very large keys.",
+      "def_vi": "Mật mã hậu lượng tử dựa trên độ khó của việc giải mã mã tuyến tính ngẫu nhiên, được nghiên cứu lâu và an toàn thận trọng nhưng khoá rất lớn.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-multivariate-crypto",
+      "en": "Multivariate cryptography",
+      "vi": "Mật mã đa biến",
+      "def_en": "Schemes based on solving systems of multivariate polynomial equations, giving short signatures but with a history of broken proposals.",
+      "def_vi": "Các hệ dựa trên việc giải hệ phương trình đa thức nhiều biến, cho chữ ký ngắn nhưng lịch sử có nhiều đề xuất bị phá.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-hash-based-signature",
+      "en": "Hash based signature",
+      "vi": "Chữ ký dựa trên hàm băm",
+      "def_en": "Signatures whose security reduces to properties of a hash function alone, the most conservative post quantum option though often stateful.",
+      "def_vi": "Chữ ký mà độ an toàn quy về tính chất của riêng một hàm băm, đây là lựa chọn hậu lượng tử thận trọng nhất dù nhiều sơ đồ phải giữ trạng thái.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-nist-pqc",
+      "en": "NIST post quantum standardisation",
+      "vi": "Chuẩn hoá hậu lượng tử của NIST",
+      "def_en": "The public process that selected and standardised post quantum key establishment and signature schemes for general use.",
+      "def_vi": "Quy trình công khai chọn và chuẩn hoá các sơ đồ thiết lập khoá và chữ ký hậu lượng tử cho sử dụng phổ thông.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-harvest-now",
+      "en": "Harvest now decrypt later",
+      "vi": "Thu hoạch bây giờ, giải mã sau",
+      "def_en": "The attack of recording encrypted traffic today so it can be decrypted once a capable quantum computer exists.",
+      "def_vi": "Kiểu tấn công ghi lại lưu lượng đã mã hoá từ hôm nay để giải mã khi có máy tính lượng tử đủ mạnh.",
+      "say": "Data with a ten year secrecy requirement is already at risk today.",
+      "tags": [
+        "security"
+      ]
     }
   ]
 }
