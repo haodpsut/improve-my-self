@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "id": "federated",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qf-1",
+      "q": "A team claims federated learning makes their system private because raw data never leaves the client. The gap in that argument is",
+      "q_vi": "Một nhóm khẳng định học liên kết làm hệ của họ riêng tư vì dữ liệu thô không rời máy khách. Lỗ hổng trong lập luận đó là",
+      "choices": [
+        "Gradients are a function of the data and can be inverted to reconstruct samples",
+        "Federated learning always sends raw data in the first round",
+        "The server can read the client's disk directly",
+        "Model weights are not transmitted at all"
+      ],
+      "answer": 0,
+      "why": "Not moving the data is a necessary step, not a privacy guarantee. Without secure aggregation or a differential privacy budget, the uploaded update still leaks.",
+      "why_vi": "Không chuyển dữ liệu đi mới là điều kiện cần, chưa phải bảo đảm riêng tư. Không có tổng hợp an toàn hay ngân sách riêng tư vi phân thì bản cập nhật tải lên vẫn rò rỉ.",
+      "level": 3
+    },
+    {
+      "id": "qf-2",
+      "q": "Client drift under non-IID data appears as",
+      "q_vi": "Hiện tượng trôi mô hình cục bộ với dữ liệu không đồng phân bố biểu hiện thành",
+      "choices": [
+        "Local models diverging from each other, so their average is worse than any of them on its own task",
+        "The server running out of memory",
+        "Clients refusing to join the round",
+        "Gradients becoming exactly zero"
+      ],
+      "answer": 0,
+      "why": "Each client optimises its own skewed objective. Averaging points that moved in different directions lands somewhere useful for nobody, which is why proximal terms and control variates exist.",
+      "why_vi": "Mỗi máy khách tối ưu hàm mục tiêu lệch của riêng nó. Lấy trung bình các điểm đã đi theo hướng khác nhau sẽ rơi vào chỗ không phục vụ được ai, vì vậy mới có số hạng gần và biến kiểm soát.",
+      "level": 3
+    },
+    {
+      "id": "qf-3",
+      "q": "In horizontal federated learning, clients share",
+      "q_vi": "Trong học liên kết theo chiều ngang, các máy khách dùng chung",
+      "choices": [
+        "The same feature space but different samples",
+        "The same samples but different features",
+        "Both the same features and the same samples",
+        "Neither features nor samples"
+      ],
+      "answer": 0,
+      "why": "Think of many hospitals recording the same measurements on different patients. The vertical case is the mirror image: same patients, different measurements held by different institutions.",
+      "why_vi": "Hình dung nhiều bệnh viện cùng ghi một bộ chỉ số nhưng trên các bệnh nhân khác nhau. Trường hợp chiều dọc là ảnh gương: cùng bệnh nhân, các chỉ số khác nhau nằm ở các đơn vị khác nhau.",
+      "level": 2
+    },
+    {
+      "id": "qf-4",
+      "q": "Reporting an accuracy figure for a differentially private model without stating epsilon is a problem because",
+      "q_vi": "Báo độ chính xác của mô hình có riêng tư vi phân mà không nêu epsilon là vấn đề vì",
+      "choices": [
+        "Accuracy can be raised arbitrarily by weakening the privacy guarantee",
+        "Epsilon determines the model architecture",
+        "Epsilon is needed to compute the loss function",
+        "Without epsilon the model cannot be trained"
+      ],
+      "answer": 0,
+      "why": "Privacy and utility sit on one curve. A number without its privacy budget is a point without an axis, and a reviewer cannot compare it with anything.",
+      "why_vi": "Riêng tư và độ hữu dụng nằm trên cùng một đường cong. Con số không kèm ngân sách riêng tư là một điểm không có trục, phản biện không so được với bất cứ thứ gì.",
+      "level": 3
+    },
+    {
+      "id": "qf-5",
+      "q": "In most federated deployments the real bottleneck is",
+      "q_vi": "Trong phần lớn triển khai liên kết, nút thắt thật sự là",
+      "choices": [
+        "The number of communication rounds and the bytes each one costs",
+        "The floating point speed of the server",
+        "The size of the test set",
+        "The choice of activation function"
+      ],
+      "answer": 0,
+      "why": "Clients are often on slow, intermittent uplinks. This is why quantisation, sparsification and doing more local epochs per round all matter more than raw compute.",
+      "why_vi": "Máy khách thường nằm trên đường lên chậm và chập chờn. Vì vậy lượng tử hoá, thưa hoá và tăng số epoch cục bộ mỗi vòng đều quan trọng hơn tốc độ tính toán thuần.",
+      "level": 2
+    },
+    {
+      "id": "qf-6",
+      "q": "Secure aggregation lets the server learn",
+      "q_vi": "Tổng hợp an toàn cho phép máy chủ biết được",
+      "choices": [
+        "Only the sum of the client updates, not any individual update",
+        "Every individual update in plaintext",
+        "The raw training data of each client",
+        "Nothing at all about the updates"
+      ],
+      "answer": 0,
+      "why": "Clients mask their updates with pairwise terms that cancel in the sum. The server gets exactly the aggregate it needs and nothing more.",
+      "why_vi": "Các máy khách che cập nhật bằng những số hạng theo cặp, triệt tiêu nhau khi cộng lại. Máy chủ nhận đúng tổng nó cần và không có gì hơn.",
+      "level": 3
+    },
+    {
+      "id": "qf-7",
+      "q": "A straggler in a synchronous federated round causes",
+      "q_vi": "Một máy khách chậm trong vòng liên kết đồng bộ gây ra",
+      "choices": [
+        "The whole round to wait, so the slowest client sets the pace",
+        "The global model to diverge immediately",
+        "A privacy leak",
+        "Duplicate updates on the server"
+      ],
+      "answer": 0,
+      "why": "This is why practical systems either drop late clients or move to asynchronous aggregation, both of which introduce their own bias.",
+      "why_vi": "Vì vậy hệ thực tế hoặc bỏ máy tới trễ, hoặc chuyển sang tổng hợp bất đồng bộ, và cả hai cách đều tự tạo ra thiên lệch riêng.",
+      "level": 2
+    },
+    {
+      "id": "qf-8",
+      "q": "A surrogate model is worth building when",
+      "q_vi": "Xây mô hình thay thế là đáng làm khi",
+      "choices": [
+        "Each evaluation of the true objective is so expensive that the optimiser cannot afford many of them",
+        "The objective function is already cheap and convex",
+        "The dataset is fully labelled",
+        "The problem has only one variable"
+      ],
+      "answer": 0,
+      "why": "The surrogate trades a little accuracy for orders of magnitude in speed. If the true objective is cheap, the approximation only adds error for nothing.",
+      "why_vi": "Mô hình thay thế đánh đổi một chút độ chính xác lấy tốc độ nhanh hơn nhiều bậc. Nếu hàm mục tiêu vốn đã rẻ thì xấp xỉ chỉ thêm sai số mà chẳng được gì.",
+      "level": 2
+    },
+    {
+      "id": "qf-9",
+      "q": "Personalised federated learning exists because",
+      "q_vi": "Học liên kết cá nhân hoá tồn tại vì",
+      "choices": [
+        "One global model can be worse for each client than a model adapted to that client's distribution",
+        "Clients cannot run inference locally",
+        "The server needs to reduce its storage",
+        "Global models are always faster to train"
+      ],
+      "answer": 0,
+      "why": "When distributions differ enough, the average model is a compromise nobody wanted. Personalisation keeps the shared knowledge but restores the local fit.",
+      "why_vi": "Khi các phân bố khác nhau đủ nhiều, mô hình trung bình là một thoả hiệp không ai mong. Cá nhân hoá giữ phần tri thức chung nhưng trả lại độ khớp cục bộ.",
+      "level": 3
+    },
+    {
+      "id": "qf-10",
+      "q": "A malicious client submitting crafted updates to bend the global model is performing",
+      "q_vi": "Máy khách xấu gửi cập nhật đã dàn dựng để bẻ mô hình toàn cục đang thực hiện",
+      "choices": ["Model poisoning", "Gradient inversion", "Secure aggregation", "Split learning"],
+      "answer": 0,
+      "why": "Gradient inversion is the opposite direction of attack: the server attacking the client's privacy rather than the client attacking the model.",
+      "why_vi": "Đảo ngược gradient là hướng tấn công ngược lại: máy chủ tấn công quyền riêng tư của máy khách, chứ không phải máy khách tấn công mô hình.",
+      "level": 2
+    }
+  ]
+}
