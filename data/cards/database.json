@@ -1,0 +1,1360 @@
+{
+  "schema": 1,
+  "id": "database",
+  "updated": "2026-08-08",
+  "cards": [
+    {
+      "id": "db-relation",
+      "en": "Relation (table)",
+      "vi": "Quan hệ, tức bảng dữ liệu",
+      "def_en": "A set of tuples that share the same named and typed attributes, exposed in SQL as a table.",
+      "def_vi": "Tập các bộ cùng chung một danh sách thuộc tính có tên và có kiểu, trong SQL hiện ra thành một bảng.",
+      "say": "Each relation should describe exactly one kind of thing.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-tuple",
+      "en": "Tuple (row)",
+      "vi": "Bộ, tức một dòng dữ liệu",
+      "def_en": "One element of a relation, holding a single value for every attribute of that relation.",
+      "def_vi": "Một phần tử của quan hệ, mang đúng một giá trị cho mỗi thuộc tính của quan hệ đó.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-attribute",
+      "en": "Attribute (column)",
+      "vi": "Thuộc tính, tức một cột",
+      "def_en": "A named component of a relation with a declared data type and an optional set of constraints.",
+      "def_vi": "Thành phần có tên của quan hệ, được khai báo kiểu dữ liệu và có thể kèm ràng buộc.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-domain",
+      "en": "Domain",
+      "vi": "Miền giá trị",
+      "def_en": "The set of values an attribute is allowed to take, narrowed further by type and constraints.",
+      "def_vi": "Tập giá trị mà một thuộc tính được phép nhận, thu hẹp thêm bởi kiểu dữ liệu và ràng buộc.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-schema",
+      "en": "Schema",
+      "vi": "Lược đồ cơ sở dữ liệu",
+      "def_en": "The structural description of tables, columns, types, keys and constraints, kept separate from the data itself.",
+      "def_vi": "Mô tả cấu trúc gồm bảng, cột, kiểu, khoá và ràng buộc, tách khỏi bản thân dữ liệu.",
+      "say": "Every change to the schema has to go through a migration file.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-primary-key",
+      "en": "Primary key",
+      "vi": "Khoá chính",
+      "def_en": "The chosen candidate key that identifies each row uniquely and can never be null.",
+      "def_vi": "Khoá dự tuyển được chọn để định danh duy nhất mỗi dòng và không bao giờ được rỗng.",
+      "say": "The primary key is the student code, not the full name.",
+      "tags": ["keys"]
+    },
+    {
+      "id": "db-candidate-key",
+      "en": "Candidate key",
+      "vi": "Khoá dự tuyển",
+      "def_en": "Any minimal set of attributes that uniquely identifies a row, so removing any attribute breaks uniqueness.",
+      "def_vi": "Tập thuộc tính tối thiểu định danh duy nhất một dòng, bỏ bớt thuộc tính nào cũng mất tính duy nhất.",
+      "tags": ["keys"]
+    },
+    {
+      "id": "db-composite-key",
+      "en": "Composite key",
+      "vi": "Khoá gồm nhiều cột",
+      "def_en": "A key built from two or more columns, common on junction tables that pair two entities.",
+      "def_vi": "Khoá tạo từ hai cột trở lên, hay gặp ở bảng nối ghép hai thực thể với nhau.",
+      "say": "The composite key here is class id plus student id.",
+      "tags": ["keys"]
+    },
+    {
+      "id": "db-foreign-key",
+      "en": "Foreign key",
+      "vi": "Khoá ngoại",
+      "def_en": "A column or set of columns whose values must match an existing key in another table, or be null.",
+      "def_vi": "Cột hoặc nhóm cột mà giá trị phải khớp một khoá đang tồn tại ở bảng khác, hoặc để rỗng.",
+      "say": "The foreign key is what stops us from creating an enrolment for a class that was deleted.",
+      "tags": ["keys"]
+    },
+    {
+      "id": "db-natural-key",
+      "en": "Natural key",
+      "vi": "Khoá tự nhiên",
+      "def_en": "A key drawn from real world data such as a citizen number or a course code.",
+      "def_vi": "Khoá lấy từ dữ liệu thực tế như số căn cước hay mã học phần.",
+      "tags": ["keys"]
+    },
+    {
+      "id": "db-surrogate-key",
+      "en": "Surrogate key",
+      "vi": "Khoá thay thế",
+      "def_en": "A meaningless generated identifier used as primary key so business rules can change without rewriting keys.",
+      "def_vi": "Định danh sinh ra, không mang nghĩa nghiệp vụ, dùng làm khoá chính để quy tắc nghiệp vụ đổi mà không phải sửa khoá.",
+      "say": "We keep a surrogate key and put a unique constraint on the business code.",
+      "tags": ["keys"]
+    },
+    {
+      "id": "db-functional-dependency",
+      "en": "Functional dependency",
+      "vi": "Phụ thuộc hàm",
+      "def_en": "A rule saying that one set of attributes determines another, written X determines Y.",
+      "def_vi": "Quy tắc nói rằng một tập thuộc tính xác định tập khác, viết là X xác định Y.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-transitive-dependency",
+      "en": "Transitive dependency",
+      "vi": "Phụ thuộc bắc cầu",
+      "def_en": "A non key attribute that depends on another non key attribute rather than on the key itself.",
+      "def_vi": "Thuộc tính không khoá phụ thuộc vào một thuộc tính không khoá khác thay vì phụ thuộc vào chính khoá.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-partial-dependency",
+      "en": "Partial dependency",
+      "vi": "Phụ thuộc bộ phận",
+      "def_en": "A non key attribute that depends on only part of a composite key instead of the whole key.",
+      "def_vi": "Thuộc tính không khoá chỉ phụ thuộc vào một phần của khoá ghép chứ không vào toàn bộ khoá.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-1nf",
+      "en": "First normal form",
+      "vi": "Dạng chuẩn một",
+      "def_en": "Every attribute holds a single atomic value, so no repeating groups and no lists packed into one column.",
+      "def_vi": "Mỗi thuộc tính chỉ chứa một giá trị nguyên tử, không có nhóm lặp và không nhét danh sách vào một cột.",
+      "say": "Storing three phone numbers in one column breaks first normal form.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-2nf",
+      "en": "Second normal form",
+      "vi": "Dạng chuẩn hai",
+      "def_en": "In first normal form and free of partial dependencies on a composite key.",
+      "def_vi": "Đã ở dạng chuẩn một và không còn phụ thuộc bộ phận vào khoá ghép.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-3nf",
+      "en": "Third normal form",
+      "vi": "Dạng chuẩn ba",
+      "def_en": "In second normal form with no transitive dependency, so every non key attribute depends on the key alone.",
+      "def_vi": "Đã ở dạng chuẩn hai và không còn phụ thuộc bắc cầu, mọi thuộc tính không khoá chỉ phụ thuộc vào khoá.",
+      "say": "Keeping the department name next to the department code breaks third normal form.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-bcnf",
+      "en": "Boyce Codd normal form",
+      "vi": "Dạng chuẩn Boyce Codd",
+      "def_en": "A stricter form where the left side of every non trivial functional dependency is a superkey.",
+      "def_vi": "Dạng chặt hơn, trong đó vế trái của mọi phụ thuộc hàm không tầm thường đều là siêu khoá.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-denormalization",
+      "en": "Denormalization",
+      "vi": "Phi chuẩn hoá có chủ ý",
+      "def_en": "Deliberately duplicating data to cut join cost, accepting that the copies must now be kept in step.",
+      "def_vi": "Cố tình nhân bản dữ liệu để giảm chi phí phép nối, chấp nhận phải tự giữ cho các bản sao khớp nhau.",
+      "say": "We denormalised the credit total onto the transcript row because the report ran too slowly.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-update-anomaly",
+      "en": "Update anomaly",
+      "vi": "Dị thường khi cập nhật",
+      "def_en": "A fact stored in many rows so an update that misses one copy leaves the database contradicting itself.",
+      "def_vi": "Một sự kiện lưu ở nhiều dòng, chỉ cần cập nhật sót một bản sao là cơ sở dữ liệu tự mâu thuẫn.",
+      "tags": ["normalization"]
+    },
+    {
+      "id": "db-one-to-many",
+      "en": "One to many relationship",
+      "vi": "Quan hệ một nhiều",
+      "def_en": "One parent row is referenced by many child rows, implemented by a foreign key on the child side.",
+      "def_vi": "Một dòng cha được nhiều dòng con tham chiếu, cài đặt bằng khoá ngoại đặt ở phía con.",
+      "say": "One lecturer teaches many sections, so the foreign key lives on the section table.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-many-to-many",
+      "en": "Many to many relationship",
+      "vi": "Quan hệ nhiều nhiều",
+      "def_en": "Rows on both sides may reference many rows on the other side, which no single foreign key can express.",
+      "def_vi": "Hai phía đều có thể tham chiếu nhiều dòng của phía kia, một khoá ngoại đơn lẻ không diễn tả nổi.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-junction-table",
+      "en": "Junction table",
+      "vi": "Bảng nối",
+      "def_en": "A table holding one row per pair, turning a many to many relationship into two one to many relationships.",
+      "def_vi": "Bảng chứa mỗi cặp một dòng, biến quan hệ nhiều nhiều thành hai quan hệ một nhiều.",
+      "say": "The enrolment table is a junction table carrying the grade as an extra column.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-referential-integrity",
+      "en": "Referential integrity",
+      "vi": "Toàn vẹn tham chiếu",
+      "def_en": "The guarantee that every foreign key value points at a row that really exists.",
+      "def_vi": "Bảo đảm rằng mọi giá trị khoá ngoại đều trỏ tới một dòng thực sự tồn tại.",
+      "say": "Referential integrity is enforced by the engine, not by hoping the application behaves.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-on-delete-cascade",
+      "en": "On delete cascade",
+      "vi": "Xoá dây chuyền",
+      "def_en": "A foreign key action that deletes the child rows automatically when the parent row is removed.",
+      "def_vi": "Hành vi khoá ngoại tự xoá các dòng con khi dòng cha bị xoá.",
+      "say": "Cascade is convenient until somebody deletes a term and takes six thousand grades with it.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-on-delete-restrict",
+      "en": "On delete restrict",
+      "vi": "Chặn xoá khi còn tham chiếu",
+      "def_en": "A foreign key action that refuses to delete the parent while any child row still references it.",
+      "def_vi": "Hành vi khoá ngoại từ chối xoá dòng cha khi vẫn còn dòng con tham chiếu tới nó.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-on-delete-set-null",
+      "en": "On delete set null",
+      "vi": "Đặt rỗng khi cha bị xoá",
+      "def_en": "A foreign key action that clears the reference in the child rows instead of deleting or blocking them.",
+      "def_vi": "Hành vi khoá ngoại xoá trắng tham chiếu ở dòng con thay vì xoá dòng con hay chặn thao tác.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-soft-delete",
+      "en": "Soft delete",
+      "vi": "Xoá mềm bằng cờ đánh dấu",
+      "def_en": "Marking a row as removed with a flag or timestamp instead of deleting it, which every later query must respect.",
+      "def_vi": "Đánh dấu dòng là đã xoá bằng một cờ hoặc mốc thời gian thay vì xoá thật, mọi truy vấn sau đó đều phải tôn trọng dấu này.",
+      "say": "Soft delete moves the problem into every query you forget to filter.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-check-constraint",
+      "en": "Check constraint",
+      "vi": "Ràng buộc kiểm tra",
+      "def_en": "A boolean condition the engine evaluates on every insert and update, rejecting rows that fail it.",
+      "def_vi": "Điều kiện logic mà hệ thống kiểm tra ở mỗi lần chèn và cập nhật, loại bỏ dòng không thoả.",
+      "say": "A check constraint keeps the grade between zero and ten without any application code.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-unique-constraint",
+      "en": "Unique constraint",
+      "vi": "Ràng buộc duy nhất",
+      "def_en": "A rule that no two rows may share the same value in the listed columns, backed by an index.",
+      "def_vi": "Quy tắc không cho hai dòng trùng giá trị ở các cột đã liệt kê, được hỗ trợ bằng chỉ mục.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-not-null",
+      "en": "Not null constraint",
+      "vi": "Ràng buộc không rỗng",
+      "def_en": "A declaration that a column must always carry a value, so absence becomes impossible rather than merely unlikely.",
+      "def_vi": "Khai báo buộc cột luôn phải có giá trị, khiến chuyện thiếu dữ liệu là bất khả thi chứ không chỉ hiếm gặp.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-null",
+      "en": "Null",
+      "vi": "Giá trị rỗng",
+      "def_en": "A marker meaning the value is unknown or not applicable, which is not the same as zero or an empty string.",
+      "def_vi": "Dấu hiệu cho biết giá trị chưa biết hoặc không áp dụng được, khác hẳn số không hay chuỗi rỗng.",
+      "say": "Null is not a value, it is the absence of one.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-three-valued-logic",
+      "en": "Three valued logic",
+      "vi": "Logic ba trạng thái",
+      "def_en": "SQL conditions evaluate to true, false or unknown, and only rows that evaluate to true are returned.",
+      "def_vi": "Điều kiện trong SQL cho ra đúng, sai hoặc chưa biết, và chỉ những dòng cho kết quả đúng mới được trả về.",
+      "say": "Comparing anything with null gives unknown, so the row quietly disappears from the result.",
+      "tags": ["constraints"]
+    },
+    {
+      "id": "db-is-distinct-from",
+      "en": "IS DISTINCT FROM",
+      "vi": "Phép so sánh coi rỗng là một giá trị",
+      "def_en": "A comparison that treats null as a comparable value, so two nulls count as equal and never yield unknown.",
+      "def_vi": "Phép so sánh coi rỗng như một giá trị so được, hai giá trị rỗng được xem là bằng nhau và không trả về chưa biết.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-erd",
+      "en": "Entity relationship diagram",
+      "vi": "Sơ đồ thực thể quan hệ",
+      "def_en": "A picture of entities, their attributes and the cardinality of the links between them.",
+      "def_vi": "Hình vẽ các thực thể, thuộc tính của chúng và số lượng liên kết giữa chúng.",
+      "tags": ["relational"]
+    },
+    {
+      "id": "db-inner-join",
+      "en": "Inner join",
+      "vi": "Phép nối trong",
+      "def_en": "Returns only the pairs of rows that satisfy the join condition on both sides.",
+      "def_vi": "Chỉ trả về các cặp dòng thoả điều kiện nối ở cả hai phía.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-left-join",
+      "en": "Left outer join",
+      "vi": "Phép nối ngoài trái",
+      "def_en": "Keeps every row of the left table and fills the right side with nulls when no match exists.",
+      "def_vi": "Giữ mọi dòng của bảng trái, phía phải điền rỗng khi không có dòng khớp.",
+      "say": "Use a left join when you need students with no enrolment to still appear.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-right-join",
+      "en": "Right outer join",
+      "vi": "Phép nối ngoài phải",
+      "def_en": "Keeps every row of the right table, the mirror image of a left join and usually rewritten as one.",
+      "def_vi": "Giữ mọi dòng của bảng phải, là ảnh gương của nối trái và thường được viết lại thành nối trái.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-full-outer-join",
+      "en": "Full outer join",
+      "vi": "Phép nối ngoài đầy đủ",
+      "def_en": "Keeps unmatched rows from both sides, padding the missing side with nulls.",
+      "def_vi": "Giữ các dòng không khớp ở cả hai phía, bên thiếu được điền rỗng.",
+      "say": "A full outer join is how we reconciled the old payroll export against the new one.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-cross-join",
+      "en": "Cross join",
+      "vi": "Phép nối tích Descartes",
+      "def_en": "Pairs every row of one table with every row of the other, producing the product of both row counts.",
+      "def_vi": "Ghép mọi dòng của bảng này với mọi dòng của bảng kia, cho ra tích số dòng của cả hai.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-semi-join",
+      "en": "Semi join",
+      "vi": "Nửa nối",
+      "def_en": "Returns rows of the left table that have at least one match, without duplicating them per match.",
+      "def_vi": "Trả về các dòng bảng trái có ít nhất một dòng khớp, không nhân bản dòng theo số lần khớp.",
+      "say": "Rewriting that join as an exists clause removed the duplicate rows entirely.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-anti-join",
+      "en": "Anti join",
+      "vi": "Nối phủ định",
+      "def_en": "Returns rows of the left table that have no match on the right, typically written with not exists.",
+      "def_vi": "Trả về các dòng bảng trái không có dòng nào khớp ở bảng phải, thường viết bằng mệnh đề not exists.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-not-in-null-trap",
+      "en": "NOT IN null trap",
+      "vi": "Bẫy rỗng của toán tử NOT IN",
+      "def_en": "If the subquery of a not in list yields any null, the whole condition is never true and the result is empty.",
+      "def_vi": "Nếu truy vấn con của not in cho ra một giá trị rỗng, cả điều kiện không bao giờ đúng và kết quả rỗng.",
+      "say": "That query returned nothing because one row in the subquery was null.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-lateral-join",
+      "en": "Lateral join",
+      "vi": "Nối ngang theo từng dòng",
+      "def_en": "A join whose right side may reference columns of the left row, useful for taking the top few per group.",
+      "def_vi": "Phép nối cho phép vế phải tham chiếu cột của dòng bên trái, tiện khi lấy vài bản ghi đầu của mỗi nhóm.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-fan-out",
+      "en": "Join fan out",
+      "vi": "Nhân dòng do phép nối",
+      "def_en": "Row multiplication when a one to many join is followed by a sum, silently inflating the aggregate.",
+      "def_vi": "Hiện tượng nhân dòng khi nối một nhiều rồi cộng tổng, làm số liệu tổng hợp phồng lên mà không báo lỗi.",
+      "say": "The tuition total was double because the join fanned out over two payment rows.",
+      "tags": ["joins"]
+    },
+    {
+      "id": "db-group-by",
+      "en": "GROUP BY",
+      "vi": "Gộp nhóm",
+      "def_en": "Collapses rows sharing the grouping expressions into one output row per group.",
+      "def_vi": "Gom các dòng có cùng biểu thức nhóm thành một dòng kết quả cho mỗi nhóm.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-having",
+      "en": "HAVING",
+      "vi": "Lọc sau khi gộp nhóm",
+      "def_en": "Filters groups after aggregation, unlike a where clause which filters rows before grouping.",
+      "def_vi": "Lọc trên nhóm sau khi đã tổng hợp, khác mệnh đề where vốn lọc dòng trước khi gộp nhóm.",
+      "say": "Move that condition from having into where so fewer rows reach the aggregation.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-aggregate-null",
+      "en": "Aggregates and null",
+      "vi": "Hàm tổng hợp gặp giá trị rỗng",
+      "def_en": "Aggregates skip nulls, so an average over a column with missing values divides by fewer rows than expected.",
+      "def_vi": "Hàm tổng hợp bỏ qua giá trị rỗng, nên trung bình trên cột thiếu dữ liệu chia cho ít dòng hơn ta tưởng.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-count-star",
+      "en": "COUNT(*) cost",
+      "vi": "Chi phí của phép đếm dòng",
+      "def_en": "In Postgres an exact count must visit rows for visibility, so counting a large table is not free.",
+      "def_vi": "Trong Postgres, đếm chính xác phải duyệt các dòng để xét khả kiến, nên đếm bảng lớn không hề rẻ.",
+      "say": "That page is slow because it counts every matching row just to render the pager.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-window-function",
+      "en": "Window function",
+      "vi": "Hàm cửa sổ",
+      "def_en": "Computes a value across a set of related rows while keeping every input row in the output.",
+      "def_vi": "Tính giá trị trên một tập dòng liên quan mà vẫn giữ nguyên từng dòng đầu vào ở kết quả.",
+      "say": "A window function gives you the running total without collapsing the rows.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-partition-by",
+      "en": "PARTITION BY",
+      "vi": "Chia khung cho hàm cửa sổ",
+      "def_en": "Splits the rows into independent windows so the function restarts for each group.",
+      "def_vi": "Chia các dòng thành những khung độc lập để hàm cửa sổ tính lại từ đầu ở mỗi nhóm.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-row-number",
+      "en": "ROW_NUMBER and RANK",
+      "vi": "Đánh số và xếp hạng trong cửa sổ",
+      "def_en": "Row number always gives distinct positions while rank repeats a position for ties and then skips.",
+      "def_vi": "Row number luôn cho vị trí khác nhau, còn rank lặp vị trí khi bằng điểm rồi nhảy cách.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-correlated-subquery",
+      "en": "Correlated subquery",
+      "vi": "Truy vấn con tương quan",
+      "def_en": "A subquery that references a column of the outer query, so it is conceptually evaluated per outer row.",
+      "def_vi": "Truy vấn con có tham chiếu cột của truy vấn ngoài, về mặt khái niệm phải tính lại cho từng dòng ngoài.",
+      "say": "The planner can often flatten a correlated subquery into a join, but do not count on it.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-cte",
+      "en": "Common table expression",
+      "vi": "Biểu thức bảng chung",
+      "def_en": "A named temporary result defined in a with clause, used to give a long query readable steps.",
+      "def_vi": "Kết quả tạm có tên, khai báo trong mệnh đề with, dùng để chia truy vấn dài thành các bước dễ đọc.",
+      "say": "Splitting that monster into three common table expressions made the bug obvious.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-recursive-cte",
+      "en": "Recursive CTE",
+      "vi": "Truy vấn đệ quy",
+      "def_en": "A with recursive query that repeatedly feeds its own output back in, used to walk trees and graphs.",
+      "def_vi": "Truy vấn with recursive liên tục nạp lại kết quả của chính nó, dùng để duyệt cây và đồ thị.",
+      "say": "We used a recursive query to expand the whole prerequisite chain of a course.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-union-all",
+      "en": "UNION versus UNION ALL",
+      "vi": "Hợp có loại trùng và hợp giữ trùng",
+      "def_en": "Union removes duplicate rows and therefore sorts or hashes, while union all just concatenates.",
+      "def_vi": "Union loại dòng trùng nên phải sắp xếp hoặc băm, còn union all chỉ ghép nối thẳng.",
+      "say": "Switch to union all when you already know the two sides cannot overlap.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-except",
+      "en": "EXCEPT and INTERSECT",
+      "vi": "Phép hiệu và phép giao tập",
+      "def_en": "Set operators returning rows present in the first query only, or present in both.",
+      "def_vi": "Toán tử tập hợp trả về dòng chỉ có ở truy vấn đầu, hoặc dòng có mặt ở cả hai.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-order-by-stability",
+      "en": "Unstable ORDER BY",
+      "vi": "Sắp xếp không xác định",
+      "def_en": "Rows with equal sort keys may come back in any order, so pagination needs a tiebreaker column.",
+      "def_vi": "Các dòng có khoá sắp xếp bằng nhau có thể trả về theo thứ tự bất kỳ, nên phân trang cần thêm cột phá hoà.",
+      "say": "Add the identifier as a tiebreaker or page two will repeat rows from page one.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-limit-offset",
+      "en": "Offset pagination",
+      "vi": "Phân trang bằng bước nhảy",
+      "def_en": "Skipping rows with an offset, which still reads and discards everything before the requested page.",
+      "def_vi": "Bỏ qua các dòng bằng offset, nhưng vẫn phải đọc rồi vứt bỏ toàn bộ phần trước trang cần lấy.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-keyset-pagination",
+      "en": "Keyset pagination",
+      "vi": "Phân trang bằng con trỏ",
+      "def_en": "Fetching the next page by asking for rows after the last key seen, so cost stays flat at any depth.",
+      "def_vi": "Lấy trang tiếp bằng cách hỏi các dòng nằm sau khoá cuối đã thấy, nên chi phí không tăng theo độ sâu.",
+      "say": "Page nine hundred is as fast as page one once you switch to keyset pagination.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-upsert",
+      "en": "Insert on conflict",
+      "vi": "Chèn có xử lý xung đột",
+      "def_en": "An insert that updates or ignores the row when it collides with a unique constraint, done atomically.",
+      "def_vi": "Câu chèn tự chuyển sang cập nhật hoặc bỏ qua khi đụng ràng buộc duy nhất, thực hiện nguyên tử.",
+      "say": "Insert on conflict do update is safer than checking first and then inserting.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-returning",
+      "en": "RETURNING clause",
+      "vi": "Trả dữ liệu ngay sau khi ghi",
+      "def_en": "Gets the written rows back from an insert, update or delete without a second round trip.",
+      "def_vi": "Lấy lại các dòng vừa ghi từ lệnh chèn, cập nhật hay xoá mà không cần thêm một lượt đi về.",
+      "say": "Use returning to read the generated identifier in the same statement.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-view",
+      "en": "View",
+      "vi": "Khung nhìn",
+      "def_en": "A stored query that behaves like a table and is executed fresh every time it is referenced.",
+      "def_vi": "Truy vấn được lưu lại, dùng như một bảng và được chạy lại mỗi lần được tham chiếu.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-materialized-view",
+      "en": "Materialized view",
+      "vi": "Khung nhìn vật chất hoá",
+      "def_en": "A view whose result is stored on disk, fast to read but stale until it is refreshed.",
+      "def_vi": "Khung nhìn có kết quả lưu xuống đĩa, đọc nhanh nhưng dữ liệu cũ cho tới khi được làm mới.",
+      "say": "The dashboard reads a materialized view refreshed every fifteen minutes.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-generated-column",
+      "en": "Generated column",
+      "vi": "Cột sinh tự động",
+      "def_en": "A column whose value is computed from other columns by the engine rather than supplied by the client.",
+      "def_vi": "Cột có giá trị do hệ thống tính từ các cột khác thay vì do ứng dụng gửi lên.",
+      "tags": ["sql"]
+    },
+    {
+      "id": "db-btree",
+      "en": "B tree index",
+      "vi": "Chỉ mục cây B",
+      "def_en": "The default balanced tree index supporting equality, range scans and ordered retrieval.",
+      "def_vi": "Chỉ mục cây cân bằng mặc định, hỗ trợ so bằng, quét khoảng và lấy dữ liệu theo thứ tự.",
+      "say": "A B tree index also serves the sort, which is why the plan skipped the sort node.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-hash-index",
+      "en": "Hash index",
+      "vi": "Chỉ mục băm",
+      "def_en": "An index that supports equality only, since hashing destroys the ordering of the key.",
+      "def_vi": "Chỉ mục chỉ hỗ trợ so bằng, vì phép băm phá bỏ thứ tự của khoá.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-composite-index-order",
+      "en": "Composite index column order",
+      "vi": "Thứ tự cột trong chỉ mục nhiều cột",
+      "def_en": "A multi column index helps queries that use a leading prefix of its columns, not an arbitrary subset.",
+      "def_vi": "Chỉ mục nhiều cột chỉ giúp cho truy vấn dùng phần đầu liên tiếp của danh sách cột, không phải nhóm cột tuỳ ý.",
+      "say": "Filtering on the second column alone will not use that index at all.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-partial-index",
+      "en": "Partial index",
+      "vi": "Chỉ mục một phần",
+      "def_en": "An index built over the subset of rows matching a predicate, so it stays small and cheap to maintain.",
+      "def_vi": "Chỉ mục chỉ dựng trên tập con các dòng thoả một điều kiện, nhờ vậy nhỏ và rẻ khi bảo trì.",
+      "say": "We index only the rows still pending, which is under one percent of the table.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-expression-index",
+      "en": "Expression index",
+      "vi": "Chỉ mục trên biểu thức",
+      "def_en": "An index on the result of a function or expression, needed when the query filters on that expression.",
+      "def_vi": "Chỉ mục dựng trên kết quả của một hàm hay biểu thức, cần khi truy vấn lọc theo chính biểu thức đó.",
+      "say": "Wrapping the column in a function disables the plain index unless you build an expression index.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-covering-index",
+      "en": "Covering index",
+      "vi": "Chỉ mục phủ",
+      "def_en": "An index carrying every column the query needs, so the engine never has to fetch the table row.",
+      "def_vi": "Chỉ mục chứa đủ mọi cột mà truy vấn cần, nhờ đó hệ thống không phải đọc thêm dòng trong bảng.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-index-only-scan",
+      "en": "Index only scan",
+      "vi": "Quét chỉ trong chỉ mục",
+      "def_en": "A plan that answers entirely from the index, in Postgres only when the visibility map says the pages are clean.",
+      "def_vi": "Kế hoạch trả lời hoàn toàn từ chỉ mục, trong Postgres chỉ xảy ra khi bản đồ khả kiến cho biết trang đã sạch.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-gin-index",
+      "en": "GIN index",
+      "vi": "Chỉ mục ngược cho giá trị nhiều thành phần",
+      "def_en": "An inverted index for values containing many items, such as text search vectors, arrays and JSON documents.",
+      "def_vi": "Chỉ mục ngược cho các giá trị chứa nhiều thành phần như vector tìm kiếm, mảng và tài liệu JSON.",
+      "tags": ["index"]
+    },
+    {
+      "id": "db-selectivity",
+      "en": "Selectivity",
+      "vi": "Độ chọn lọc",
+      "def_en": "The fraction of rows a predicate keeps, the single most important input to index usefulness.",
+      "def_vi": "Tỷ lệ dòng còn lại sau một điều kiện lọc, là yếu tố quan trọng nhất quyết định chỉ mục có ích hay không.",
+      "say": "An index on a column with only two distinct values buys you almost nothing.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-cardinality-estimate",
+      "en": "Cardinality estimate",
+      "vi": "Ước lượng số dòng",
+      "def_en": "The planner guess of how many rows a step will produce, which drives every later choice in the plan.",
+      "def_vi": "Con số dòng mà bộ lập kế hoạch dự đoán cho mỗi bước, chi phối mọi lựa chọn phía sau trong kế hoạch.",
+      "say": "The estimate said twelve rows and the actual was ninety thousand, so the nested loop was hopeless.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-seq-scan",
+      "en": "Sequential scan",
+      "vi": "Quét tuần tự",
+      "def_en": "Reading the whole table in physical order, which is the cheapest plan when a large fraction of rows qualify.",
+      "def_vi": "Đọc toàn bộ bảng theo thứ tự vật lý, là cách rẻ nhất khi phần lớn số dòng đều thoả điều kiện.",
+      "say": "A sequential scan is not automatically a bug, sometimes it is the right plan.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-index-scan",
+      "en": "Index scan",
+      "vi": "Quét theo chỉ mục",
+      "def_en": "Walking the index to find matching keys, then fetching each row from the heap.",
+      "def_vi": "Đi trong chỉ mục để tìm khoá khớp rồi lấy từng dòng tương ứng ở vùng dữ liệu.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-bitmap-scan",
+      "en": "Bitmap heap scan",
+      "vi": "Quét theo bản đồ bit",
+      "def_en": "Collecting matching row locations into a bitmap first, then reading the heap pages in physical order.",
+      "def_vi": "Gom vị trí các dòng khớp vào một bản đồ bit trước, rồi đọc các trang dữ liệu theo thứ tự vật lý.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-nested-loop",
+      "en": "Nested loop join",
+      "vi": "Nối lồng vòng lặp",
+      "def_en": "For each row of the outer side, probe the inner side, excellent for few outer rows and disastrous for many.",
+      "def_vi": "Với mỗi dòng bên ngoài lại dò bên trong, rất tốt khi ít dòng ngoài và thảm hoạ khi nhiều dòng ngoài.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-hash-join",
+      "en": "Hash join",
+      "vi": "Nối bằng bảng băm",
+      "def_en": "Builds a hash table on the smaller input then probes it once per row of the larger input.",
+      "def_vi": "Dựng bảng băm từ đầu vào nhỏ rồi dò một lần cho mỗi dòng của đầu vào lớn.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-merge-join",
+      "en": "Merge join",
+      "vi": "Nối trộn hai dòng đã sắp",
+      "def_en": "Joins two inputs already sorted on the join key by walking both in step.",
+      "def_vi": "Nối hai đầu vào đã sắp theo khoá nối bằng cách đi song song trên cả hai.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-explain-analyze",
+      "en": "EXPLAIN ANALYZE",
+      "vi": "Chạy thật rồi in kế hoạch kèm số đo",
+      "def_en": "Executes the query and reports the real timings and row counts beside the estimates.",
+      "def_vi": "Chạy thật truy vấn rồi báo thời gian và số dòng thực tế đặt cạnh con số ước lượng.",
+      "say": "Always compare the estimated rows against the actual rows before blaming the index.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-statistics",
+      "en": "Table statistics",
+      "vi": "Thống kê bảng",
+      "def_en": "Sampled histograms and distinct value counts the planner uses to estimate selectivity.",
+      "def_vi": "Biểu đồ tần suất lấy mẫu và số giá trị khác nhau, dùng để bộ lập kế hoạch ước lượng độ chọn lọc.",
+      "say": "After a bulk load, run analyze or the planner is working from yesterday's shape of the data.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-sargable",
+      "en": "Sargable predicate",
+      "vi": "Điều kiện dùng được chỉ mục",
+      "def_en": "A condition written so the engine can seek in an index, with the column left bare on one side.",
+      "def_vi": "Điều kiện viết sao cho hệ thống tìm được trong chỉ mục, với cột đứng trần ở một vế.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-n-plus-one",
+      "en": "N plus one query problem",
+      "vi": "Lỗi một truy vấn cộng N truy vấn",
+      "def_en": "Fetching a list then issuing one extra query per element, usually produced by lazy loading in an ORM.",
+      "def_vi": "Lấy một danh sách rồi phát thêm một truy vấn cho mỗi phần tử, thường do nạp lười trong ORM sinh ra.",
+      "say": "The page fired four hundred queries because the relation was loaded lazily.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-write-amplification",
+      "en": "Write amplification",
+      "vi": "Khuếch đại ghi",
+      "def_en": "One logical row change causing many physical writes, since every index on the table must be updated too.",
+      "def_vi": "Một thay đổi logic trên dòng kéo theo nhiều lần ghi vật lý, vì mọi chỉ mục của bảng cũng phải cập nhật.",
+      "say": "Nine indexes on that table means every insert writes ten structures.",
+      "tags": ["perf"]
+    },
+    {
+      "id": "db-bloat",
+      "en": "Table bloat",
+      "vi": "Bảng phồng do bản cũ",
+      "def_en": "Dead row versions still occupying pages after updates and deletes, making scans read more than they need.",
+      "def_vi": "Các phiên bản dòng đã chết vẫn chiếm chỗ trong trang sau khi cập nhật và xoá, khiến việc quét đọc thừa.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-vacuum",
+      "en": "Vacuum",
+      "vi": "Dọn phiên bản dòng đã chết",
+      "def_en": "The maintenance process that marks dead tuple space reusable and refreshes the visibility map.",
+      "def_vi": "Tiến trình bảo trì đánh dấu chỗ của bộ đã chết là dùng lại được và làm mới bản đồ khả kiến.",
+      "say": "A long open transaction blocks vacuum from cleaning anything newer than it.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-transaction",
+      "en": "Transaction",
+      "vi": "Giao dịch",
+      "def_en": "A group of statements that either all take effect or none do, seen by others as a single step.",
+      "def_vi": "Nhóm câu lệnh hoặc có hiệu lực toàn bộ hoặc không câu nào, người khác nhìn vào chỉ thấy một bước.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-atomicity",
+      "en": "Atomicity",
+      "vi": "Tính nguyên tử",
+      "def_en": "The all or nothing property, so a failure halfway leaves no partial change behind.",
+      "def_vi": "Tính chất hoặc tất cả hoặc không gì, hỏng giữa chừng thì không để lại thay đổi dở dang.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-consistency",
+      "en": "Consistency",
+      "vi": "Tính nhất quán",
+      "def_en": "Every committed transaction moves the database from one state that satisfies all constraints to another.",
+      "def_vi": "Mỗi giao dịch đã xác nhận đưa cơ sở dữ liệu từ một trạng thái thoả mọi ràng buộc sang trạng thái cũng thoả.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-isolation",
+      "en": "Isolation",
+      "vi": "Tính cô lập",
+      "def_en": "How much concurrent transactions are allowed to see of each other, chosen per level rather than absolute.",
+      "def_vi": "Mức độ các giao dịch chạy song song được phép nhìn thấy nhau, chọn theo từng mức chứ không tuyệt đối.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-durability",
+      "en": "Durability",
+      "vi": "Tính bền vững",
+      "def_en": "Once a commit is acknowledged the change survives a crash, which is what the write ahead log guarantees.",
+      "def_vi": "Khi đã báo xác nhận thì thay đổi sống sót qua sự cố, đó chính là điều nhật ký ghi trước bảo đảm.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-wal",
+      "en": "Write ahead log",
+      "vi": "Nhật ký ghi trước",
+      "def_en": "A sequential record of changes written and flushed before the data pages, the basis of recovery and replication.",
+      "def_vi": "Bản ghi tuần tự các thay đổi, được ghi và đẩy xuống đĩa trước trang dữ liệu, là nền của khôi phục và nhân rộng.",
+      "say": "Both crash recovery and streaming replication read from the same write ahead log.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-read-uncommitted",
+      "en": "Read uncommitted",
+      "vi": "Mức đọc chưa xác nhận",
+      "def_en": "The weakest level in the standard, allowing dirty reads, although Postgres treats it as read committed.",
+      "def_vi": "Mức yếu nhất trong chuẩn, cho phép đọc bẩn, tuy nhiên Postgres coi mức này như đọc đã xác nhận.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-read-committed",
+      "en": "Read committed",
+      "vi": "Mức đọc đã xác nhận",
+      "def_en": "Each statement sees a snapshot taken at its own start, so two reads in one transaction can differ.",
+      "def_vi": "Mỗi câu lệnh nhìn thấy ảnh chụp lấy lúc chính nó bắt đầu, nên hai lần đọc trong một giao dịch có thể khác nhau.",
+      "say": "Read committed is the default, and it does not protect a read then write sequence.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-repeatable-read",
+      "en": "Repeatable read",
+      "vi": "Mức đọc lặp lại được",
+      "def_en": "All statements share one snapshot from the transaction start, so repeated reads agree with each other.",
+      "def_vi": "Mọi câu lệnh dùng chung một ảnh chụp lấy từ lúc mở giao dịch, nên các lần đọc lặp lại đều khớp nhau.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-serializable",
+      "en": "Serializable",
+      "vi": "Mức khả tuần tự",
+      "def_en": "The result must match some serial order of the transactions, which in Postgres means some will abort and retry.",
+      "def_vi": "Kết quả phải trùng với một thứ tự chạy tuần tự nào đó, ở Postgres nghĩa là sẽ có giao dịch bị huỷ và phải chạy lại.",
+      "say": "If you ask for serializable you must write the retry loop as well.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-dirty-read",
+      "en": "Dirty read",
+      "vi": "Đọc bẩn",
+      "def_en": "Reading a value written by a transaction that has not committed and may still roll back.",
+      "def_vi": "Đọc phải giá trị do một giao dịch chưa xác nhận ghi ra và có thể còn bị huỷ.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-non-repeatable-read",
+      "en": "Non repeatable read",
+      "vi": "Đọc không lặp lại",
+      "def_en": "Reading the same row twice in one transaction and getting different values because someone committed in between.",
+      "def_vi": "Đọc cùng một dòng hai lần trong một giao dịch mà ra giá trị khác, vì có người xác nhận thay đổi ở giữa.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-phantom-read",
+      "en": "Phantom read",
+      "vi": "Đọc ảo",
+      "def_en": "Re running the same range query and finding new rows that another transaction inserted and committed.",
+      "def_vi": "Chạy lại đúng truy vấn khoảng đó và thấy thêm dòng mới do giao dịch khác chèn vào rồi xác nhận.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-write-skew",
+      "en": "Write skew",
+      "vi": "Dị thường ghi lệch",
+      "def_en": "Two transactions each read a condition, each write a different row, and together break an invariant neither broke alone.",
+      "def_vi": "Hai giao dịch cùng đọc một điều kiện, mỗi bên ghi một dòng khác nhau, gộp lại phá vỡ bất biến mà riêng lẻ không bên nào phá.",
+      "say": "Write skew is exactly the case snapshot isolation does not catch.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-lost-update",
+      "en": "Lost update",
+      "vi": "Mất cập nhật",
+      "def_en": "Two sessions read a value, compute from it and write back, so the second silently overwrites the first.",
+      "def_vi": "Hai phiên cùng đọc một giá trị, tính toán rồi ghi lại, phiên sau âm thầm đè mất kết quả của phiên trước.",
+      "say": "Read the counter, add one, write it back, and you have just lost an update.",
+      "tags": ["isolation"]
+    },
+    {
+      "id": "db-mvcc",
+      "en": "Multiversion concurrency control",
+      "vi": "Điều khiển đồng thời nhiều phiên bản",
+      "def_en": "Keeping several versions of a row so readers never block writers and writers never block readers.",
+      "def_vi": "Giữ nhiều phiên bản của một dòng để bên đọc không chặn bên ghi và bên ghi không chặn bên đọc.",
+      "say": "Under multiversion control your long report does not hold up the enrolment form.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-row-lock",
+      "en": "Row level lock",
+      "vi": "Khoá mức dòng",
+      "def_en": "An exclusive hold on specific rows taken by an update or an explicit select for update.",
+      "def_vi": "Quyền giữ độc quyền trên những dòng cụ thể, do lệnh cập nhật hoặc lệnh select for update tạo ra.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-select-for-update",
+      "en": "SELECT FOR UPDATE",
+      "vi": "Đọc và giữ khoá để ghi",
+      "def_en": "Reads rows and locks them so the read then write sequence cannot be interleaved by another session.",
+      "def_vi": "Đọc các dòng và khoá luôn, để chuỗi đọc rồi ghi không bị phiên khác chen vào giữa.",
+      "say": "Lock the seat count row for update before you decide whether a seat is free.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-advisory-lock",
+      "en": "Advisory lock",
+      "vi": "Khoá tư vấn",
+      "def_en": "An application defined lock keyed by a number, tied to no table and enforced only by cooperating code.",
+      "def_vi": "Khoá do ứng dụng tự định nghĩa theo một con số, không gắn với bảng nào và chỉ có hiệu lực nếu các bên cùng tuân thủ.",
+      "say": "We take an advisory lock so only one worker runs the nightly import.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-deadlock",
+      "en": "Deadlock",
+      "vi": "Khoá chết",
+      "def_en": "Two transactions each holding what the other needs, broken by the engine aborting one of them.",
+      "def_vi": "Hai giao dịch mỗi bên giữ đúng thứ bên kia cần, hệ thống phá thế bí bằng cách huỷ một trong hai.",
+      "say": "Lock the rows in a fixed order and most deadlocks disappear.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-retry",
+      "en": "Transaction retry",
+      "vi": "Thử lại giao dịch",
+      "def_en": "Catching a serialization or deadlock error and running the whole transaction again from the start.",
+      "def_vi": "Bắt lỗi khả tuần tự hoặc khoá chết rồi chạy lại toàn bộ giao dịch từ đầu.",
+      "say": "A retry only works if the transaction has no side effect outside the database.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-savepoint",
+      "en": "Savepoint",
+      "vi": "Điểm lưu trong giao dịch",
+      "def_en": "A marker inside a transaction allowing a partial rollback without discarding everything done so far.",
+      "def_vi": "Mốc đánh dấu bên trong giao dịch, cho phép quay lui một phần mà không bỏ hết những gì đã làm.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-idempotency-key",
+      "en": "Idempotency key",
+      "vi": "Khoá chống lặp thao tác",
+      "def_en": "A client supplied unique token stored with the operation so a retried request cannot apply twice.",
+      "def_vi": "Mã duy nhất do phía gọi gửi lên và lưu cùng thao tác, để một yêu cầu gửi lại không bị áp dụng hai lần.",
+      "say": "Without an idempotency key a timeout and a retry will charge the student twice.",
+      "tags": ["txn"]
+    },
+    {
+      "id": "db-primary-replica",
+      "en": "Primary and replica",
+      "vi": "Bản chính và bản sao",
+      "def_en": "One node accepts writes and ships its log to followers that serve reads.",
+      "def_vi": "Một nút nhận ghi và chuyển nhật ký sang các nút theo sau để phục vụ đọc.",
+      "tags": ["replication"]
+    },
+    {
+      "id": "db-replication-lag",
+      "en": "Replication lag",
+      "vi": "Độ trễ nhân rộng",
+      "def_en": "The delay between a commit on the primary and its visibility on a replica, usually small and occasionally not.",
+      "def_vi": "Khoảng trễ từ lúc xác nhận ở bản chính tới lúc thấy được ở bản sao, thường nhỏ và thỉnh thoảng thì không.",
+      "say": "Replication lag jumped to nine seconds during the bulk grade import.",
+      "tags": ["replication"]
+    },
+    {
+      "id": "db-read-your-writes",
+      "en": "Read your own writes",
+      "vi": "Đọc lại chính mình vừa ghi",
+      "def_en": "The guarantee that a user immediately sees the change they just made, which naive replica reads break.",
+      "def_vi": "Bảo đảm rằng người dùng thấy ngay thay đổi mình vừa thực hiện, đọc từ bản sao một cách ngây thơ sẽ phá bảo đảm này.",
+      "say": "Route the read to the primary for a few seconds after a write from that same user.",
+      "tags": ["replication"]
+    },
+    {
+      "id": "db-sync-replication",
+      "en": "Synchronous replication",
+      "vi": "Nhân rộng đồng bộ",
+      "def_en": "The primary waits for a replica to confirm the log before acknowledging the commit, trading latency for safety.",
+      "def_vi": "Bản chính chờ bản sao xác nhận đã nhận nhật ký rồi mới báo xác nhận, đánh đổi độ trễ lấy an toàn.",
+      "tags": ["replication"]
+    },
+    {
+      "id": "db-failover",
+      "en": "Failover",
+      "vi": "Chuyển vai khi sự cố",
+      "def_en": "Promoting a replica to primary after a failure, which can lose recent commits if replication was asynchronous.",
+      "def_vi": "Nâng một bản sao lên làm bản chính sau sự cố, có thể mất các xác nhận gần nhất nếu nhân rộng là bất đồng bộ.",
+      "tags": ["replication"]
+    },
+    {
+      "id": "db-sharding",
+      "en": "Sharding",
+      "vi": "Phân mảnh dữ liệu",
+      "def_en": "Splitting rows across independent databases so each holds only part of the data and part of the load.",
+      "def_vi": "Chia các dòng ra nhiều cơ sở dữ liệu độc lập, mỗi nơi chỉ giữ một phần dữ liệu và một phần tải.",
+      "say": "Sharding buys write throughput and costs you cross shard joins.",
+      "tags": ["scaling"]
+    },
+    {
+      "id": "db-shard-key",
+      "en": "Shard key",
+      "vi": "Khoá phân mảnh",
+      "def_en": "The column deciding which shard a row lives on, hard to change later and easy to choose badly.",
+      "def_vi": "Cột quyết định dòng nằm ở mảnh nào, rất khó đổi về sau và rất dễ chọn sai.",
+      "tags": ["scaling"]
+    },
+    {
+      "id": "db-hot-shard",
+      "en": "Hot shard",
+      "vi": "Mảnh quá tải",
+      "def_en": "One shard taking a disproportionate share of traffic because the key distributes the load unevenly.",
+      "def_vi": "Một mảnh gánh phần lưu lượng lớn bất thường vì khoá phân mảnh chia tải không đều.",
+      "tags": ["scaling"]
+    },
+    {
+      "id": "db-partitioning",
+      "en": "Table partitioning",
+      "vi": "Chia vùng bảng",
+      "def_en": "Splitting one logical table into physical parts inside the same database, commonly by time range.",
+      "def_vi": "Chia một bảng logic thành nhiều phần vật lý trong cùng cơ sở dữ liệu, thường theo khoảng thời gian.",
+      "say": "Partition the audit log by month so dropping old data is instant.",
+      "tags": ["scaling"]
+    },
+    {
+      "id": "db-partition-pruning",
+      "en": "Partition pruning",
+      "vi": "Cắt bớt vùng không cần đọc",
+      "def_en": "The planner skipping partitions that cannot contain matching rows, which only works if the key is in the filter.",
+      "def_vi": "Bộ lập kế hoạch bỏ qua các vùng chắc chắn không chứa dòng khớp, chỉ hiệu quả khi khoá chia vùng nằm trong điều kiện lọc.",
+      "tags": ["scaling"]
+    },
+    {
+      "id": "db-connection-pool",
+      "en": "Connection pool",
+      "vi": "Bể kết nối dùng chung",
+      "def_en": "A shared set of open connections reused by many requests, since each Postgres connection is a real process.",
+      "def_vi": "Tập kết nối mở sẵn dùng chung cho nhiều yêu cầu, vì mỗi kết nối Postgres là một tiến trình thật.",
+      "say": "Serverless functions without a pooler will exhaust the connection limit fast.",
+      "tags": ["scaling"]
+    },
+    {
+      "id": "db-migration",
+      "en": "Schema migration",
+      "vi": "Di trú lược đồ",
+      "def_en": "A versioned, ordered script that changes the schema, kept in the repository next to the code it serves.",
+      "def_vi": "Kịch bản có đánh phiên bản và thứ tự để đổi lược đồ, lưu trong kho mã nguồn cạnh phần mã mà nó phục vụ.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-backward-compatible-migration",
+      "en": "Backward compatible migration",
+      "vi": "Di trú tương thích ngược",
+      "def_en": "A change the old application version can still run against, which is what makes zero downtime deploys possible.",
+      "def_vi": "Thay đổi mà bản ứng dụng cũ vẫn chạy được, đó là điều kiện để triển khai không phải dừng dịch vụ.",
+      "say": "Deploy the schema change first and the code that needs it second.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-expand-contract",
+      "en": "Expand and contract",
+      "vi": "Mở rộng rồi thu hẹp",
+      "def_en": "Renaming safely by adding the new column, writing both, backfilling, switching reads, then dropping the old one.",
+      "def_vi": "Cách đổi tên an toàn: thêm cột mới, ghi cả hai, nạp bù dữ liệu, chuyển đọc sang cột mới rồi mới bỏ cột cũ.",
+      "say": "You cannot rename a column live, you expand and then contract over two releases.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-backfill",
+      "en": "Backfill",
+      "vi": "Nạp bù dữ liệu cũ",
+      "def_en": "Filling a new column for existing rows in batches, so one huge update does not lock the table for minutes.",
+      "def_vi": "Điền dữ liệu cho cột mới trên các dòng cũ theo từng lô, để một lệnh cập nhật khổng lồ không khoá bảng hàng phút.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-lock-timeout",
+      "en": "Lock timeout",
+      "vi": "Hạn chờ lấy khoá",
+      "def_en": "A limit on how long a statement waits for a lock, so a migration fails fast instead of queueing all traffic behind it.",
+      "def_vi": "Giới hạn thời gian một câu lệnh chờ lấy khoá, để lệnh di trú hỏng sớm thay vì bắt toàn bộ lưu lượng xếp hàng phía sau.",
+      "say": "Set a short lock timeout before the migration so it never blocks the whole system.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-create-index-concurrently",
+      "en": "Create index concurrently",
+      "vi": "Tạo chỉ mục không khoá ghi",
+      "def_en": "Building an index without blocking writes, at the cost of two table passes and a possible invalid index on failure.",
+      "def_vi": "Dựng chỉ mục mà không chặn ghi, đổi lại phải quét bảng hai lượt và có thể để lại chỉ mục hỏng nếu thất bại.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-backup",
+      "en": "Backup",
+      "vi": "Sao lưu",
+      "def_en": "A copy of the data kept elsewhere, which only counts as a backup once a restore has actually been tested.",
+      "def_vi": "Bản sao dữ liệu giữ ở nơi khác, chỉ được coi là sao lưu khi việc khôi phục đã thực sự được thử.",
+      "say": "An untested backup is a hope, not a backup.",
+      "tags": ["backup"]
+    },
+    {
+      "id": "db-pitr",
+      "en": "Point in time recovery",
+      "vi": "Khôi phục tới một thời điểm",
+      "def_en": "Restoring a base backup then replaying the log up to a chosen instant, for example just before a bad delete.",
+      "def_vi": "Khôi phục bản sao nền rồi phát lại nhật ký tới đúng một thời điểm chọn trước, ví dụ ngay trước lệnh xoá nhầm.",
+      "say": "Point in time recovery is the only thing that saves you from a wrong delete at ten in the morning.",
+      "tags": ["backup"]
+    },
+    {
+      "id": "db-rpo-rto",
+      "en": "Recovery point and recovery time",
+      "vi": "Mốc mất dữ liệu và thời gian khôi phục",
+      "def_en": "How much data you can afford to lose and how long you can afford to be down, two separate targets.",
+      "def_vi": "Bạn chịu được mất bao nhiêu dữ liệu và chịu được ngừng bao lâu, đó là hai mục tiêu tách biệt.",
+      "tags": ["backup"]
+    },
+    {
+      "id": "db-restore-drill",
+      "en": "Restore drill",
+      "vi": "Diễn tập khôi phục",
+      "def_en": "Periodically restoring a backup into a scratch environment and checking the row counts and a few known records.",
+      "def_vi": "Định kỳ khôi phục bản sao vào môi trường tạm rồi kiểm số dòng và vài bản ghi đã biết trước.",
+      "tags": ["backup"]
+    },
+    {
+      "id": "db-encryption-at-rest",
+      "en": "Encryption at rest",
+      "vi": "Mã hoá khi lưu trữ",
+      "def_en": "Encrypting the stored files, which protects a stolen disk but not a query run with valid credentials.",
+      "def_vi": "Mã hoá các tệp lưu trên đĩa, bảo vệ được ổ đĩa bị lấy cắp nhưng không ngăn được truy vấn có thông tin đăng nhập hợp lệ.",
+      "say": "Encryption at rest does nothing against a leaked database password.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-pii",
+      "en": "Personal data",
+      "vi": "Dữ liệu cá nhân",
+      "def_en": "Information identifying a living person, which brings retention limits and deletion duties into the schema design.",
+      "def_vi": "Thông tin định danh một người còn sống, kéo theo giới hạn lưu trữ và nghĩa vụ xoá phải tính ngay khi thiết kế lược đồ.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-right-to-erasure",
+      "en": "Right to erasure",
+      "vi": "Quyền được xoá dữ liệu",
+      "def_en": "The duty to remove a person data on request, which reaches backups, replicas and every downstream copy.",
+      "def_vi": "Nghĩa vụ xoá dữ liệu của một người khi họ yêu cầu, chạm tới cả bản sao lưu, bản sao và mọi bản dẫn xuất phía sau.",
+      "say": "Erasure requests are the reason we stopped copying personal fields into the reporting store.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-audit-log",
+      "en": "Audit log table",
+      "vi": "Bảng nhật ký kiểm toán",
+      "def_en": "An append only record of who changed what and when, written by triggers or by the application layer.",
+      "def_vi": "Bản ghi chỉ thêm, lưu ai đã đổi gì và vào lúc nào, viết bằng trigger hoặc bằng tầng ứng dụng.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "db-document-store",
+      "en": "Document store",
+      "vi": "Kho tài liệu",
+      "def_en": "A database keeping self contained documents, good when the whole object is read together and rarely joined.",
+      "def_vi": "Cơ sở dữ liệu lưu các tài liệu khép kín, hợp khi cả đối tượng luôn được đọc cùng lúc và hiếm khi phải nối.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-key-value-store",
+      "en": "Key value store",
+      "vi": "Kho khoá giá trị",
+      "def_en": "A store offering lookup by key only, extremely fast and unable to answer any question you did not key for.",
+      "def_vi": "Kho chỉ cho tra theo khoá, cực nhanh và không trả lời nổi bất kỳ câu hỏi nào bạn chưa đánh khoá sẵn.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-time-series-db",
+      "en": "Time series database",
+      "vi": "Cơ sở dữ liệu chuỗi thời gian",
+      "def_en": "A store tuned for append heavy timestamped measurements, with downsampling and retention built in.",
+      "def_vi": "Kho tối ưu cho phép ghi thêm liên tục các số đo có mốc thời gian, có sẵn hạ mẫu và chính sách lưu giữ.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-vector-search",
+      "en": "Vector similarity search",
+      "vi": "Tìm kiếm theo vector tương đồng",
+      "def_en": "Finding the nearest embeddings to a query vector, usually approximate because exact search is too slow at scale.",
+      "def_vi": "Tìm các vector nhúng gần nhất với vector truy vấn, thường là gần đúng vì tìm chính xác quá chậm khi dữ liệu lớn.",
+      "say": "The recall of approximate search drops as you push the index for speed.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-full-text-search",
+      "en": "Full text search",
+      "vi": "Tìm kiếm toàn văn",
+      "def_en": "Matching documents by normalised words rather than substrings, with stemming, stop words and ranking.",
+      "def_vi": "Đối sánh tài liệu theo từ đã chuẩn hoá thay vì theo chuỗi con, có tách gốc từ, từ dừng và xếp hạng kết quả.",
+      "say": "A leading wildcard search is not full text search, it is a sequential scan in disguise.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-jsonb",
+      "en": "JSONB column",
+      "vi": "Cột JSON nhị phân trong Postgres",
+      "def_en": "A parsed binary JSON type that can be indexed and queried, useful for genuinely variable attributes.",
+      "def_vi": "Kiểu JSON nhị phân đã phân tích cú pháp, đánh chỉ mục và truy vấn được, hợp cho các thuộc tính thực sự biến động.",
+      "say": "Do not put a well known field in JSON just to avoid writing a migration.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-eventual-consistency",
+      "en": "Eventual consistency",
+      "vi": "Nhất quán cuối cùng",
+      "def_en": "Replicas converge given enough quiet time, so a read right after a write may return the older value.",
+      "def_vi": "Các bản sao rồi sẽ hội tụ nếu có đủ thời gian yên tĩnh, nên đọc ngay sau khi ghi có thể ra giá trị cũ.",
+      "tags": ["nosql"]
+    },
+    {
+      "id": "db-etl",
+      "en": "Extract transform load",
+      "vi": "Trích xuất, biến đổi rồi nạp",
+      "def_en": "Cleaning and reshaping data before it lands in the warehouse, so only the modelled form is stored.",
+      "def_vi": "Làm sạch và định hình lại dữ liệu trước khi đưa vào kho, nên chỉ dạng đã mô hình hoá được lưu lại.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-elt",
+      "en": "Extract load transform",
+      "vi": "Trích xuất, nạp rồi biến đổi",
+      "def_en": "Loading raw data first and transforming inside the warehouse, which keeps the raw form available to re run.",
+      "def_vi": "Nạp dữ liệu thô trước rồi biến đổi ngay trong kho, nhờ vậy vẫn giữ được bản thô để chạy lại khi cần.",
+      "say": "We moved to load first because every transform rule changed twice a semester.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-data-warehouse",
+      "en": "Data warehouse",
+      "vi": "Kho dữ liệu phân tích",
+      "def_en": "A separate analytical store modelled for reporting, so heavy queries never touch the operational database.",
+      "def_vi": "Kho phân tích riêng, mô hình hoá cho báo cáo, để những truy vấn nặng không đụng tới cơ sở dữ liệu vận hành.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-star-schema",
+      "en": "Star schema",
+      "vi": "Lược đồ hình sao",
+      "def_en": "One central fact table referencing several denormalized dimension tables, optimised for readable analytics.",
+      "def_vi": "Một bảng sự kiện trung tâm tham chiếu vài bảng chiều đã phi chuẩn hoá, tối ưu cho phân tích dễ đọc.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-fact-table",
+      "en": "Fact table",
+      "vi": "Bảng sự kiện",
+      "def_en": "The table of measurable events at a stated grain, such as one row per student per course per term.",
+      "def_vi": "Bảng chứa các sự kiện đo được ở một mức chi tiết đã tuyên bố, ví dụ mỗi dòng là một sinh viên một học phần một học kỳ.",
+      "say": "State the grain of the fact table in one sentence before you write any column.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-dimension-table",
+      "en": "Dimension table",
+      "vi": "Bảng chiều",
+      "def_en": "The descriptive table you slice facts by, holding attributes such as programme, faculty and term.",
+      "def_vi": "Bảng mô tả dùng để cắt lát dữ liệu sự kiện, chứa các thuộc tính như chương trình, khoa và học kỳ.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-scd2",
+      "en": "Slowly changing dimension type two",
+      "vi": "Chiều thay đổi chậm kiểu hai",
+      "def_en": "Keeping history by adding a new dimension row with validity dates instead of overwriting the old attributes.",
+      "def_vi": "Giữ lịch sử bằng cách thêm dòng chiều mới kèm khoảng hiệu lực thay vì ghi đè lên thuộc tính cũ.",
+      "say": "If you overwrite the old faculty name, last year report changes overnight.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-cdc",
+      "en": "Change data capture",
+      "vi": "Bắt thay đổi dữ liệu",
+      "def_en": "Streaming inserts, updates and deletes out of the log so downstream systems follow without polling.",
+      "def_vi": "Đẩy các thao tác chèn, cập nhật, xoá ra từ nhật ký để hệ thống phía sau theo kịp mà không phải hỏi liên tục.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-record-linkage",
+      "en": "Record linkage",
+      "vi": "Đối chiếu bản ghi",
+      "def_en": "Deciding that two records from different systems describe the same person, without a shared identifier.",
+      "def_vi": "Xác định hai bản ghi ở hai hệ thống khác nhau cùng mô tả một người, khi không có định danh chung.",
+      "say": "Matching on name and birth date alone gave us eleven false pairs out of a thousand.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-deduplication",
+      "en": "Deduplication",
+      "vi": "Khử bản ghi trùng",
+      "def_en": "Collapsing rows that represent the same thing, which needs a survivorship rule saying which value wins.",
+      "def_vi": "Gộp các dòng cùng chỉ một đối tượng, việc này cần quy tắc chọn giá trị nào được giữ lại.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-data-quality",
+      "en": "Data quality check",
+      "vi": "Kiểm chất lượng dữ liệu",
+      "def_en": "Automated assertions on freshness, uniqueness, null rate and range, run on every load and failing loudly.",
+      "def_vi": "Các khẳng định tự động về độ mới, tính duy nhất, tỷ lệ rỗng và khoảng giá trị, chạy mỗi lần nạp và báo lỗi rõ ràng.",
+      "say": "The load is not done until the quality checks pass, otherwise you publish garbage on time.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-character-encoding",
+      "en": "Character encoding",
+      "vi": "Bảng mã ký tự",
+      "def_en": "The mapping from bytes to characters, where guessing wrong turns Vietnamese diacritics into unreadable symbols.",
+      "def_vi": "Ánh xạ từ byte sang ký tự, đoán sai một cái là dấu tiếng Việt biến thành ký hiệu không đọc nổi.",
+      "say": "The old export was in a Windows code page, not in Unicode, which is why every name broke.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-mojibake",
+      "en": "Mojibake",
+      "vi": "Chữ hỏng do sai bảng mã",
+      "def_en": "Garbled text produced by decoding bytes with the wrong encoding, sometimes recoverable by re decoding correctly.",
+      "def_vi": "Văn bản hỏng do giải mã byte bằng bảng mã sai, đôi khi cứu được bằng cách giải mã lại cho đúng.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-collation",
+      "en": "Collation",
+      "vi": "Quy tắc so sánh và sắp chữ",
+      "def_en": "The rule deciding string ordering and case sensitivity, which changes both sort results and index validity.",
+      "def_vi": "Quy tắc quyết định thứ tự chuỗi và có phân biệt hoa thường hay không, ảnh hưởng cả kết quả sắp xếp lẫn tính hợp lệ của chỉ mục.",
+      "say": "A collation change means every text index has to be rebuilt.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-staging-table",
+      "en": "Staging table",
+      "vi": "Bảng trung chuyển",
+      "def_en": "A landing table holding raw imported rows as text, so parsing failures can be inspected instead of lost.",
+      "def_vi": "Bảng hứng dữ liệu nhập vào ở dạng văn bản thô, để những dòng phân tích lỗi còn xem lại được thay vì mất luôn.",
+      "say": "Load everything as text into staging first, then cast and validate in a second pass.",
+      "tags": ["dataeng"]
+    },
+    {
+      "id": "db-legacy-extraction",
+      "en": "Legacy backup extraction",
+      "vi": "Bóc dữ liệu từ bản sao lưu cũ",
+      "def_en": "Restoring an old system backup into a throwaway instance to read its schema and export tables, rather than guessing.",
+      "def_vi": "Khôi phục bản sao lưu của hệ cũ vào một máy dùng một lần để đọc lược đồ và xuất bảng, thay vì ngồi đoán.",
+      "say": "We restored the old personnel backup into a disposable instance just to read the schema.",
+      "tags": ["dataeng"]
+    }
+  ]
+}

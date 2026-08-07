@@ -1,0 +1,1270 @@
+{
+  "schema": 1,
+  "id": "software",
+  "updated": "2026-08-08",
+  "cards": [
+    {
+      "id": "sw-layered-architecture",
+      "en": "Layered architecture",
+      "vi": "Kiến trúc phân tầng",
+      "def_en": "A structure that stacks presentation, application, domain and infrastructure so each layer only talks to the one below it.",
+      "def_vi": "Cấu trúc xếp chồng tầng trình bày, tầng ứng dụng, tầng miền và tầng hạ tầng, mỗi tầng chỉ gọi xuống tầng ngay dưới.",
+      "say": "We keep the scheduling rules in the domain layer so the web layer stays thin.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-hexagonal-architecture",
+      "en": "Hexagonal architecture",
+      "vi": "Kiến trúc lục giác",
+      "def_en": "A design where the business core sits in the middle and every external system reaches it through an explicit port.",
+      "def_vi": "Thiết kế đặt lõi nghiệp vụ ở giữa, mọi hệ thống bên ngoài đi vào lõi qua một cổng khai báo rõ ràng.",
+      "say": "In a hexagonal design the database is just one adapter among many.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-port-and-adapter",
+      "en": "Port and adapter",
+      "vi": "Cổng và bộ chuyển tiếp",
+      "def_en": "A port is an interface the core owns; an adapter is the concrete code that speaks to a real database, queue or HTTP client.",
+      "def_vi": "Cổng là giao diện do lõi sở hữu, bộ chuyển tiếp là mã cụ thể nói chuyện với cơ sở dữ liệu, hàng đợi hoặc máy khách HTTP thật.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-dependency-rule",
+      "en": "Dependency rule",
+      "vi": "Nguyên tắc phụ thuộc",
+      "def_en": "Source code dependencies point inward only: the domain never imports the framework, the framework imports the domain.",
+      "def_vi": "Phụ thuộc trong mã nguồn chỉ hướng vào trong, tầng miền không bao giờ nhập khung nền, khung nền mới nhập tầng miền.",
+      "say": "If the domain imports the ORM you have already broken the dependency rule.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-dependency-inversion",
+      "en": "Dependency inversion",
+      "vi": "Đảo ngược phụ thuộc",
+      "def_en": "High level policy declares the interface it needs and low level detail implements it, so the detail depends on the policy.",
+      "def_vi": "Tầng chính sách khai báo giao diện nó cần, tầng chi tiết hiện thực giao diện đó, nhờ vậy chi tiết phụ thuộc vào chính sách.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-domain-model",
+      "en": "Domain model",
+      "vi": "Mô hình miền nghiệp vụ",
+      "def_en": "Types and rules that express the real problem, such as a semester, a credit or a conflict between two class sessions.",
+      "def_vi": "Các kiểu dữ liệu và quy tắc diễn đạt bài toán thật, ví dụ học kỳ, tín chỉ hay xung đột giữa hai buổi học.",
+      "say": "The rule that a lecturer cannot teach two rooms at once belongs in the domain model.",
+      "tags": ["kien-truc", "nghiep-vu"]
+    },
+    {
+      "id": "sw-anemic-domain-model",
+      "en": "Anemic domain model",
+      "vi": "Mô hình miền rỗng ruột",
+      "def_en": "Objects that carry only fields while all the rules live in service classes, which spreads one rule across many files.",
+      "def_vi": "Đối tượng chỉ mang trường dữ liệu còn quy tắc nằm hết trong lớp dịch vụ, khiến một quy tắc bị rải ra nhiều tệp.",
+      "tags": ["kien-truc", "chat-luong"]
+    },
+    {
+      "id": "sw-business-logic-leak",
+      "en": "Business logic leak",
+      "vi": "Rò rỉ nghiệp vụ ra hạ tầng",
+      "def_en": "A rule that ends up encoded in a SQL query, a route handler or a UI component instead of the domain layer.",
+      "def_vi": "Một quy tắc bị viết lẫn vào câu truy vấn SQL, hàm xử lý tuyến đường hoặc thành phần giao diện thay vì nằm ở tầng miền.",
+      "say": "The eligibility check leaked into three different route handlers.",
+      "tags": ["kien-truc", "chat-luong"]
+    },
+    {
+      "id": "sw-modular-monolith",
+      "en": "Modular monolith",
+      "vi": "Nguyên khối có mô đun",
+      "def_en": "One deployable unit split into modules with enforced boundaries, giving separation without network calls between parts.",
+      "def_vi": "Một đơn vị triển khai duy nhất chia thành mô đun có ranh giới cưỡng chế, tách bạch mà không phải gọi qua mạng.",
+      "say": "A modular monolith gives you most of the boundaries and none of the network failures.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-microservice",
+      "en": "Microservice",
+      "vi": "Dịch vụ nhỏ",
+      "def_en": "A separately deployed service owning its own data and released on its own schedule, at the cost of network and operational complexity.",
+      "def_vi": "Dịch vụ triển khai riêng, tự sở hữu dữ liệu và phát hành theo lịch riêng, đổi lại là phức tạp về mạng và vận hành.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-distributed-monolith",
+      "en": "Distributed monolith",
+      "vi": "Nguyên khối phân tán",
+      "def_en": "Services that must be deployed together and share a database, so you pay the network cost without gaining independence.",
+      "def_vi": "Các dịch vụ buộc phải triển khai cùng lúc và dùng chung cơ sở dữ liệu, trả giá về mạng mà không thu được tính độc lập.",
+      "say": "If two services must ship in the same release you built a distributed monolith.",
+      "tags": ["kien-truc", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-bounded-context",
+      "en": "Bounded context",
+      "vi": "Ngữ cảnh có ranh giới",
+      "def_en": "A boundary inside which one term has exactly one meaning, so admissions and accreditation may each define a student differently.",
+      "def_vi": "Ranh giới mà bên trong nó một thuật ngữ chỉ có một nghĩa, nên tuyển sinh và kiểm định có thể định nghĩa sinh viên khác nhau.",
+      "tags": ["kien-truc", "nghiep-vu"]
+    },
+    {
+      "id": "sw-service-boundary",
+      "en": "Service boundary",
+      "vi": "Ranh giới dịch vụ",
+      "def_en": "The line along which a system is cut; a good cut follows how the business changes, not how the code files are grouped.",
+      "def_vi": "Đường cắt hệ thống, đường cắt tốt đi theo nhịp thay đổi của nghiệp vụ chứ không theo cách gom tệp mã nguồn.",
+      "say": "Cut along the things that change together, not along the technical layers.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-transaction-boundary",
+      "en": "Transaction boundary",
+      "vi": "Biên giới giao dịch",
+      "def_en": "The scope inside which writes commit or roll back together; it cannot stretch across two databases without extra machinery.",
+      "def_vi": "Phạm vi mà các thao tác ghi cùng xác nhận hoặc cùng hoàn tác, phạm vi này không kéo qua hai cơ sở dữ liệu nếu không có cơ chế bổ sung.",
+      "say": "Splitting that service would put one transaction boundary across two databases.",
+      "tags": ["kien-truc", "du-lieu"]
+    },
+    {
+      "id": "sw-saga",
+      "en": "Saga",
+      "vi": "Chuỗi bù trừ",
+      "def_en": "A sequence of local transactions where each step has a compensating action, used when one atomic transaction is impossible.",
+      "def_vi": "Chuỗi giao dịch cục bộ mà mỗi bước có một hành động bù trừ, dùng khi không thể có một giao dịch nguyên tử duy nhất.",
+      "tags": ["kien-truc", "du-lieu"]
+    },
+    {
+      "id": "sw-two-phase-commit",
+      "en": "Two phase commit",
+      "vi": "Xác nhận hai pha",
+      "def_en": "A protocol where a coordinator asks every participant to prepare and then to commit; it blocks when the coordinator dies.",
+      "def_vi": "Giao thức trong đó một bộ điều phối yêu cầu mọi bên chuẩn bị rồi mới xác nhận, nó bị treo khi bộ điều phối chết giữa chừng.",
+      "tags": ["kien-truc", "du-lieu"]
+    },
+    {
+      "id": "sw-eventual-consistency",
+      "en": "Eventual consistency",
+      "vi": "Nhất quán sau cùng",
+      "def_en": "Replicas converge to the same value if updates stop, but a read right after a write may still return the old value.",
+      "def_vi": "Các bản sao sẽ hội tụ về cùng giá trị nếu ngừng cập nhật, nhưng một lượt đọc ngay sau lượt ghi vẫn có thể trả về giá trị cũ.",
+      "say": "The dashboard is eventually consistent, so expect a lag of a few seconds.",
+      "tags": ["kien-truc", "du-lieu"]
+    },
+    {
+      "id": "sw-event-driven-architecture",
+      "en": "Event driven architecture",
+      "vi": "Kiến trúc hướng sự kiện",
+      "def_en": "Components publish facts about what happened and other components react, which decouples senders from receivers in time.",
+      "def_vi": "Các thành phần công bố sự việc đã xảy ra và thành phần khác phản ứng, cách này tách người gửi khỏi người nhận về mặt thời gian.",
+      "tags": ["kien-truc", "su-kien"]
+    },
+    {
+      "id": "sw-message-queue",
+      "en": "Message queue",
+      "vi": "Hàng đợi thông điệp",
+      "def_en": "A buffer that holds work until a consumer is ready, absorbing bursts and letting the producer answer without waiting.",
+      "def_vi": "Bộ đệm giữ công việc cho tới khi bên tiêu thụ sẵn sàng, hấp thụ đợt tải dồn và cho bên sản xuất trả lời mà không phải chờ.",
+      "say": "We push the transcript export to a queue and answer in under one second.",
+      "tags": ["su-kien", "van-hanh"]
+    },
+    {
+      "id": "sw-dead-letter-queue",
+      "en": "Dead letter queue",
+      "vi": "Hàng đợi thư chết",
+      "def_en": "A side queue that collects messages which failed after all retries, so a poison message cannot block the main queue forever.",
+      "def_vi": "Hàng đợi phụ gom các thông điệp thất bại sau mọi lần thử lại, để một thông điệp độc không chặn hàng đợi chính mãi mãi.",
+      "tags": ["su-kien", "van-hanh"]
+    },
+    {
+      "id": "sw-idempotency",
+      "en": "Idempotency",
+      "vi": "Tính bất biến khi lặp lại",
+      "def_en": "Running the same operation twice leaves the same state as running it once, which is what makes retries safe.",
+      "def_vi": "Chạy cùng một thao tác hai lần cho ra trạng thái giống như chạy một lần, đó chính là điều làm cho việc thử lại an toàn.",
+      "say": "Make the handler idempotent and retries stop being scary.",
+      "tags": ["su-kien", "du-lieu"]
+    },
+    {
+      "id": "sw-idempotency-key",
+      "en": "Idempotency key",
+      "vi": "Khoá chống lặp",
+      "def_en": "A client supplied identifier stored with the result, so a repeated request returns the first result instead of doing the work again.",
+      "def_vi": "Định danh do máy khách gửi kèm và lưu cùng kết quả, nhờ đó yêu cầu lặp lại trả về kết quả lần đầu thay vì làm lại việc.",
+      "say": "Send an idempotency key with every payment request.",
+      "tags": ["su-kien", "web"]
+    },
+    {
+      "id": "sw-at-least-once",
+      "en": "At least once delivery",
+      "vi": "Giao ít nhất một lần",
+      "def_en": "The broker keeps retrying until it sees an acknowledgement, so a message can arrive more than once.",
+      "def_vi": "Bộ môi giới cứ thử lại cho tới khi thấy tín hiệu xác nhận, vì vậy một thông điệp có thể tới nhiều hơn một lần.",
+      "tags": ["su-kien"]
+    },
+    {
+      "id": "sw-exactly-once-illusion",
+      "en": "Exactly once delivery",
+      "vi": "Giao đúng một lần",
+      "def_en": "A guarantee that does not exist end to end over an unreliable network; systems approximate it with at least once plus idempotent handlers.",
+      "def_vi": "Bảo đảm không tồn tại từ đầu tới cuối trên mạng không tin cậy, các hệ thống chỉ mô phỏng nó bằng giao ít nhất một lần cộng bộ xử lý bất biến.",
+      "say": "Exactly once processing is achievable, exactly once delivery is not.",
+      "tags": ["su-kien", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-outbox-pattern",
+      "en": "Transactional outbox",
+      "vi": "Hộp thư đi trong giao dịch",
+      "def_en": "Writing the event into the same database transaction as the state change, then publishing it from that table by a separate worker.",
+      "def_vi": "Ghi sự kiện vào cùng giao dịch cơ sở dữ liệu với thay đổi trạng thái, rồi để một tiến trình riêng công bố sự kiện từ bảng đó.",
+      "tags": ["su-kien", "du-lieu"]
+    },
+    {
+      "id": "sw-cqrs",
+      "en": "CQRS (Command Query Responsibility Segregation)",
+      "vi": "Tách đường ghi khỏi đường đọc",
+      "def_en": "Using one model for writes and a different, often denormalised model for reads, when the two workloads pull in opposite directions.",
+      "def_vi": "Dùng một mô hình cho ghi và một mô hình khác, thường phi chuẩn hoá, cho đọc, khi hai loại tải kéo về hai hướng ngược nhau.",
+      "tags": ["kien-truc", "du-lieu"]
+    },
+    {
+      "id": "sw-backpressure",
+      "en": "Backpressure",
+      "vi": "Áp lực ngược",
+      "def_en": "A signal that tells a fast producer to slow down when the consumer cannot keep up, instead of letting the buffer grow without limit.",
+      "def_vi": "Tín hiệu bảo bên sản xuất nhanh phải chậm lại khi bên tiêu thụ không theo kịp, thay vì để bộ đệm phình ra vô hạn.",
+      "say": "Without backpressure the queue just grows until memory runs out.",
+      "tags": ["su-kien", "van-hanh"]
+    },
+    {
+      "id": "sw-strangler-fig",
+      "en": "Strangler fig migration",
+      "vi": "Thay thế dần hệ cũ",
+      "def_en": "Routing traffic feature by feature from an old system to a new one until nothing is left on the old path.",
+      "def_vi": "Chuyển lưu lượng theo từng tính năng từ hệ cũ sang hệ mới cho tới khi không còn gì chạy trên đường cũ.",
+      "say": "We moved the timetable module first and left payroll on the old system.",
+      "tags": ["kien-truc", "van-hanh"]
+    },
+    {
+      "id": "sw-conway-law",
+      "en": "Conway's law",
+      "vi": "Định luật Conway",
+      "def_en": "A system's structure mirrors the communication structure of the teams that build it.",
+      "def_vi": "Cấu trúc hệ thống phản chiếu cấu trúc trao đổi của các nhóm xây dựng nó.",
+      "tags": ["kien-truc", "to-chuc"]
+    },
+    {
+      "id": "sw-anti-corruption-layer",
+      "en": "Anti corruption layer",
+      "vi": "Lớp chống nhiễm mô hình",
+      "def_en": "A translation layer that converts a legacy or vendor model into your own terms so their concepts do not spread through your code.",
+      "def_vi": "Lớp phiên dịch chuyển mô hình của hệ cũ hoặc của nhà cung cấp sang thuật ngữ của bạn, để khái niệm của họ không lan vào mã của bạn.",
+      "tags": ["kien-truc"]
+    },
+    {
+      "id": "sw-rest",
+      "en": "REST",
+      "vi": "Kiến trúc REST",
+      "def_en": "An architectural style where addressable resources are manipulated through a uniform set of HTTP methods and representations.",
+      "def_vi": "Phong cách kiến trúc trong đó tài nguyên có địa chỉ được thao tác qua một tập phương thức và biểu diễn HTTP thống nhất.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-resource-naming",
+      "en": "Resource naming",
+      "vi": "Quy ước đặt tên tài nguyên",
+      "def_en": "Paths name nouns in the plural and the method carries the verb, so the action lives in the method rather than the URL.",
+      "def_vi": "Đường dẫn đặt tên bằng danh từ số nhiều còn động từ nằm ở phương thức, nhờ vậy hành động nằm ở phương thức chứ không ở địa chỉ.",
+      "say": "Use a delete on the enrolment resource, not a path that ends with remove.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-status-code",
+      "en": "HTTP status code",
+      "vi": "Mã trạng thái HTTP",
+      "def_en": "A three digit signal grouping outcomes into success, redirection, client error and server error, which clients and proxies act on.",
+      "def_vi": "Tín hiệu ba chữ số gom kết quả thành thành công, chuyển hướng, lỗi phía máy khách và lỗi phía máy chủ, máy khách và máy chủ trung gian đều dựa vào đó.",
+      "say": "Returning two hundred with an error body defeats every retry policy.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-safe-method",
+      "en": "Safe method",
+      "vi": "Phương thức an toàn",
+      "def_en": "A method that does not change server state, such as GET or HEAD, which is why proxies may cache and prefetch it freely.",
+      "def_vi": "Phương thức không làm đổi trạng thái máy chủ, ví dụ GET hoặc HEAD, vì vậy máy chủ trung gian được phép nhớ đệm và nạp trước thoải mái.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-idempotent-method",
+      "en": "Idempotent method",
+      "vi": "Phương thức lặp không đổi",
+      "def_en": "A method whose repetition leaves the same state, such as PUT and DELETE, while POST is generally not idempotent.",
+      "def_vi": "Phương thức lặp lại vẫn cho cùng trạng thái, ví dụ PUT và DELETE, còn POST thì thường không có tính đó.",
+      "say": "A put with the same body twice is fine, a post with the same body twice is not.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-offset-pagination",
+      "en": "Offset pagination",
+      "vi": "Phân trang bằng số trang",
+      "def_en": "Skipping a count of rows to reach a page; it is simple but drifts when rows are inserted and gets slow at deep offsets.",
+      "def_vi": "Bỏ qua một số dòng để tới trang cần lấy, cách này đơn giản nhưng lệch khi có dòng chèn thêm và chậm dần khi trang ở sâu.",
+      "tags": ["web", "du-lieu"]
+    },
+    {
+      "id": "sw-cursor-pagination",
+      "en": "Cursor pagination",
+      "vi": "Phân trang bằng con trỏ",
+      "def_en": "Asking for rows after a stable sort key, which keeps pages consistent under concurrent writes and stays fast at any depth.",
+      "def_vi": "Yêu cầu các dòng nằm sau một khoá sắp xếp ổn định, cách này giữ trang nhất quán khi có ghi đồng thời và luôn nhanh ở mọi độ sâu.",
+      "say": "Switch the student list to cursor pagination before it reaches ten thousand rows.",
+      "tags": ["web", "du-lieu"]
+    },
+    {
+      "id": "sw-api-versioning",
+      "en": "API versioning",
+      "vi": "Đánh phiên bản giao diện lập trình",
+      "def_en": "Publishing a new contract alongside the old one so existing clients keep working while new clients adopt the change.",
+      "def_vi": "Công bố hợp đồng mới song song với hợp đồng cũ để máy khách hiện có vẫn chạy trong khi máy khách mới dùng thay đổi.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-breaking-change",
+      "en": "Breaking change",
+      "vi": "Thay đổi phá vỡ tương thích",
+      "def_en": "Any change that makes a previously valid client request fail, such as removing a field or tightening validation.",
+      "def_vi": "Mọi thay đổi làm một yêu cầu hợp lệ trước đây trở nên hỏng, ví dụ bỏ một trường hoặc siết chặt kiểm tra đầu vào.",
+      "say": "Adding an optional field is safe, making it required is a breaking change.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-cors",
+      "en": "CORS (Cross Origin Resource Sharing)",
+      "vi": "Chia sẻ tài nguyên khác nguồn",
+      "def_en": "A browser rule where the server must explicitly allow a foreign origin to read the response; it protects the user, not the server.",
+      "def_vi": "Quy tắc của trình duyệt buộc máy chủ phải cho phép rõ ràng một nguồn khác đọc phản hồi, cơ chế này bảo vệ người dùng chứ không bảo vệ máy chủ.",
+      "say": "Cross origin resource sharing is a browser rule, so a script on the server ignores it.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-preflight-request",
+      "en": "Preflight request",
+      "vi": "Yêu cầu thăm dò",
+      "def_en": "An OPTIONS call the browser sends before a non simple cross origin request to ask which methods and headers are allowed.",
+      "def_vi": "Lượt gọi OPTIONS mà trình duyệt gửi trước một yêu cầu khác nguồn không đơn giản, để hỏi phương thức và tiêu đề nào được phép.",
+      "tags": ["web"]
+    },
+    {
+      "id": "sw-session-cookie",
+      "en": "Session cookie",
+      "vi": "Cookie phiên",
+      "def_en": "An opaque identifier the browser sends back automatically, with the real session state kept on the server where it can be revoked.",
+      "def_vi": "Một định danh không mang nghĩa mà trình duyệt tự gửi lại, còn trạng thái phiên thật nằm trên máy chủ nên có thể thu hồi được.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-samesite",
+      "en": "SameSite attribute",
+      "vi": "Thuộc tính SameSite",
+      "def_en": "A cookie flag controlling whether the browser attaches the cookie to requests started by another site, which blunts cross site forgery.",
+      "def_vi": "Cờ của cookie quyết định trình duyệt có gắn cookie vào yêu cầu do trang khác khởi tạo hay không, giúp giảm tấn công giả mạo yêu cầu chéo.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-httponly",
+      "en": "HttpOnly cookie",
+      "vi": "Cookie chặn truy cập từ mã kịch bản",
+      "def_en": "A cookie that JavaScript cannot read, so a script injection cannot simply copy the session identifier out of the page.",
+      "def_vi": "Cookie mà JavaScript không đọc được, nên một lượt tiêm mã không thể chép định danh phiên ra khỏi trang.",
+      "say": "Keep the session cookie http only and same site strict.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-jwt",
+      "en": "JWT (JSON Web Token)",
+      "vi": "Thẻ JSON có chữ ký",
+      "def_en": "A signed set of claims the server can verify without a lookup, which makes it fast to check and hard to take back.",
+      "def_vi": "Tập khẳng định có chữ ký mà máy chủ xác thực được không cần tra cứu, nên kiểm rất nhanh nhưng rất khó thu hồi.",
+      "say": "A JSON web token is valid until it expires, whatever you do on the server.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-token-revocation",
+      "en": "Token revocation",
+      "vi": "Thu hồi thẻ truy cập",
+      "def_en": "Invalidating a credential before it expires, which requires server side state such as a deny list or a short lifetime plus refresh.",
+      "def_vi": "Vô hiệu một chứng chỉ trước khi nó hết hạn, việc này đòi hỏi trạng thái phía máy chủ như danh sách chặn, hoặc hạn rất ngắn kèm cơ chế làm mới.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-refresh-token",
+      "en": "Refresh token",
+      "vi": "Thẻ làm mới",
+      "def_en": "A long lived credential stored safely and exchanged for short lived access tokens, so a stolen access token expires quickly.",
+      "def_vi": "Chứng chỉ sống lâu được cất giữ an toàn và đem đổi lấy thẻ truy cập sống ngắn, nhờ vậy thẻ truy cập bị đánh cắp cũng mau hết hạn.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-oauth2",
+      "en": "OAuth 2.0",
+      "vi": "Khung uỷ quyền OAuth",
+      "def_en": "A delegation framework letting a user grant an application limited access to a resource without handing over the password.",
+      "def_vi": "Khung uỷ quyền cho phép người dùng cấp cho một ứng dụng quyền truy cập giới hạn vào tài nguyên mà không phải đưa mật khẩu.",
+      "say": "OAuth answers what this app may do, not who the person is.",
+      "tags": ["bao-mat", "web"]
+    },
+    {
+      "id": "sw-oidc",
+      "en": "OpenID Connect",
+      "vi": "Lớp định danh trên OAuth",
+      "def_en": "An identity layer on top of OAuth that adds an identity token describing who signed in and when.",
+      "def_vi": "Lớp định danh đặt trên OAuth, bổ sung một thẻ định danh mô tả ai đã đăng nhập và vào lúc nào.",
+      "tags": ["bao-mat", "web"]
+    },
+    {
+      "id": "sw-csrf",
+      "en": "Cross site request forgery",
+      "vi": "Giả mạo yêu cầu chéo trang",
+      "def_en": "An attack where another site triggers a state changing request that rides on the victim's automatically attached cookie.",
+      "def_vi": "Kiểu tấn công trong đó một trang khác kích hoạt yêu cầu làm đổi trạng thái, ăn theo cookie được trình duyệt tự gắn của nạn nhân.",
+      "say": "Cross site request forgery only works because the browser sends the cookie for you.",
+      "tags": ["bao-mat", "web"]
+    },
+    {
+      "id": "sw-rate-limiting",
+      "en": "Rate limiting",
+      "vi": "Giới hạn tốc độ",
+      "def_en": "Capping how many requests a caller may make in a window, to protect capacity and to make brute force expensive.",
+      "def_vi": "Giới hạn số yêu cầu mà một bên gọi được phép gửi trong một khoảng thời gian, để bảo vệ năng lực xử lý và làm cho dò quét trở nên tốn kém.",
+      "tags": ["web", "van-hanh"]
+    },
+    {
+      "id": "sw-token-bucket",
+      "en": "Token bucket",
+      "vi": "Thùng thẻ",
+      "def_en": "A limiter that refills allowances at a steady rate and lets unused allowance accumulate, so short bursts pass but the average holds.",
+      "def_vi": "Bộ giới hạn nạp lượt cho phép theo tốc độ đều và cho phép tích luỹ lượt chưa dùng, nhờ vậy đợt dồn ngắn vẫn lọt mà mức trung bình vẫn giữ.",
+      "tags": ["web", "van-hanh"]
+    },
+    {
+      "id": "sw-etag",
+      "en": "ETag",
+      "vi": "Nhãn phiên bản tài nguyên",
+      "def_en": "A version marker returned with a resource so the client can ask for it only if it changed, or write only if nobody else did.",
+      "def_vi": "Dấu phiên bản trả kèm tài nguyên, để máy khách chỉ tải lại khi tài nguyên đổi, hoặc chỉ ghi khi chưa ai ghi trước.",
+      "tags": ["web", "du-lieu"]
+    },
+    {
+      "id": "sw-cache-control",
+      "en": "Cache control header",
+      "vi": "Tiêu đề điều khiển nhớ đệm",
+      "def_en": "The directive telling browsers and edge caches how long a response may be reused and whether it is private to one user.",
+      "def_vi": "Chỉ thị nói cho trình duyệt và bộ nhớ đệm biên biết phản hồi được dùng lại bao lâu và có riêng cho một người dùng hay không.",
+      "say": "One wrong cache control header can serve one student's grades to another.",
+      "tags": ["web", "bao-mat"]
+    },
+    {
+      "id": "sw-webhook",
+      "en": "Webhook",
+      "vi": "Móc gọi ngược",
+      "def_en": "An outbound HTTP call a system makes when something happens, which the receiver must treat as possibly duplicated and out of order.",
+      "def_vi": "Lượt gọi HTTP đi ra khi có sự việc xảy ra, bên nhận phải coi nó có thể trùng lặp và sai thứ tự.",
+      "tags": ["web", "su-kien"]
+    },
+    {
+      "id": "sw-bff",
+      "en": "Backend for frontend",
+      "vi": "Máy chủ phục vụ riêng cho giao diện",
+      "def_en": "A thin server layer shaped for one client, which lets the page fetch one composed payload instead of five separate calls.",
+      "def_vi": "Lớp máy chủ mỏng đo ni cho một loại máy khách, giúp trang chỉ tải một khối dữ liệu đã ghép thay vì gọi năm lần riêng lẻ.",
+      "tags": ["web", "kien-truc"]
+    },
+    {
+      "id": "sw-openapi",
+      "en": "OpenAPI specification",
+      "vi": "Đặc tả OpenAPI",
+      "def_en": "A machine readable description of an HTTP contract, used to generate clients, validate requests and detect breaking changes.",
+      "def_vi": "Bản mô tả hợp đồng HTTP mà máy đọc được, dùng để sinh mã máy khách, kiểm tra yêu cầu và phát hiện thay đổi phá vỡ tương thích.",
+      "tags": ["web", "cong-cu"]
+    },
+    {
+      "id": "sw-ssr",
+      "en": "Server side rendering",
+      "vi": "Kết xuất phía máy chủ",
+      "def_en": "Building the HTML on the server for each request, which gives fresh personalised markup at the cost of server work per view.",
+      "def_vi": "Dựng HTML trên máy chủ cho từng yêu cầu, cách này cho nội dung mới và cá nhân hoá nhưng tốn công máy chủ cho mỗi lượt xem.",
+      "say": "Render the grade page on the server because it differs for every user.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-csr",
+      "en": "Client side rendering",
+      "vi": "Kết xuất phía máy khách",
+      "def_en": "Shipping a mostly empty document plus JavaScript that fetches data and builds the page in the browser.",
+      "def_vi": "Gửi một tài liệu gần như rỗng kèm JavaScript, mã này tải dữ liệu và dựng trang ngay trong trình duyệt.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-ssg",
+      "en": "Static site generation",
+      "vi": "Sinh trang tĩnh",
+      "def_en": "Producing HTML at build time so every visitor gets a file from the edge with no server work at request time.",
+      "def_vi": "Sinh HTML lúc dựng bản, nhờ vậy mọi khách truy cập nhận một tệp từ biên mà máy chủ không phải làm gì lúc có yêu cầu.",
+      "say": "The public curriculum pages are static, so they cost us nothing to serve.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-isr",
+      "en": "Incremental static regeneration",
+      "vi": "Sinh lại trang tĩnh theo yêu cầu",
+      "def_en": "Serving a cached static page while rebuilding it in the background after a chosen interval, mixing static speed with periodic freshness.",
+      "def_vi": "Phục vụ trang tĩnh đã nhớ đệm rồi dựng lại ở nền sau một khoảng thời gian chọn trước, kết hợp tốc độ tĩnh với độ tươi định kỳ.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-hydration",
+      "en": "Hydration",
+      "vi": "Gắn tương tác vào trang đã kết xuất",
+      "def_en": "Attaching event handlers and state to server rendered HTML in the browser, so markup that looks ready is not yet interactive.",
+      "def_vi": "Gắn bộ xử lý sự kiện và trạng thái vào HTML đã kết xuất sẵn ngay trong trình duyệt, nên trang trông đã xong mà chưa bấm được.",
+      "say": "The page looks ready but nothing responds until hydration finishes.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-hydration-mismatch",
+      "en": "Hydration mismatch",
+      "vi": "Lệch nội dung khi gắn tương tác",
+      "def_en": "An error where the browser rebuilds different markup than the server sent, typically because the render used time, randomness or window state.",
+      "def_vi": "Lỗi khi trình duyệt dựng ra nội dung khác với nội dung máy chủ gửi, thường vì lúc kết xuất có dùng thời gian, số ngẫu nhiên hoặc trạng thái cửa sổ.",
+      "tags": ["ket-xuat", "loi"]
+    },
+    {
+      "id": "sw-islands",
+      "en": "Partial hydration",
+      "vi": "Gắn tương tác từng mảnh",
+      "def_en": "Hydrating only the interactive parts of a page and leaving the rest as plain HTML, which cuts the JavaScript the browser must run.",
+      "def_vi": "Chỉ gắn tương tác cho những phần cần tương tác và để phần còn lại là HTML thuần, cách này giảm lượng JavaScript trình duyệt phải chạy.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-streaming-ssr",
+      "en": "Streaming rendering",
+      "vi": "Kết xuất theo luồng",
+      "def_en": "Sending HTML in chunks as it becomes ready so the shell paints early while slow sections arrive later.",
+      "def_vi": "Gửi HTML theo từng mảnh khi mảnh đó sẵn sàng, nhờ vậy khung trang hiện sớm còn phần chậm tới sau.",
+      "say": "Stream the shell first and let the slow report table arrive later.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-data-waterfall",
+      "en": "Data waterfall",
+      "vi": "Thác nước dữ liệu",
+      "def_en": "A chain where each fetch only starts after the previous one returns, so total latency is the sum instead of the maximum.",
+      "def_vi": "Chuỗi mà lượt tải sau chỉ bắt đầu khi lượt trước trả về, nên tổng độ trễ là phép cộng chứ không phải giá trị lớn nhất.",
+      "say": "Three nested fetches turned a fast page into a two second waterfall.",
+      "tags": ["ket-xuat", "hieu-nang"]
+    },
+    {
+      "id": "sw-server-component",
+      "en": "Server component",
+      "vi": "Thành phần chạy trên máy chủ",
+      "def_en": "A component that runs only on the server, may read the database directly and sends no code for itself to the browser.",
+      "def_vi": "Thành phần chỉ chạy trên máy chủ, có thể đọc thẳng cơ sở dữ liệu và không gửi mã của chính nó xuống trình duyệt.",
+      "tags": ["ket-xuat"]
+    },
+    {
+      "id": "sw-code-splitting",
+      "en": "Code splitting",
+      "vi": "Chia nhỏ gói mã",
+      "def_en": "Breaking the bundle so a route downloads only the code it needs, instead of paying for every screen on the first visit.",
+      "def_vi": "Chia nhỏ gói mã để một tuyến đường chỉ tải phần mã nó cần, thay vì trả giá cho mọi màn hình ngay lần vào đầu tiên.",
+      "tags": ["ket-xuat", "hieu-nang"]
+    },
+    {
+      "id": "sw-ttfb",
+      "en": "Time to first byte",
+      "vi": "Thời gian tới byte đầu tiên",
+      "def_en": "How long the browser waits before the first byte of the response arrives, dominated by server and network work.",
+      "def_vi": "Khoảng thời gian trình duyệt chờ trước khi byte đầu tiên của phản hồi tới nơi, chủ yếu do công việc của máy chủ và mạng.",
+      "tags": ["hieu-nang"]
+    },
+    {
+      "id": "sw-lcp",
+      "en": "Largest contentful paint",
+      "vi": "Thời điểm vẽ khối nội dung lớn nhất",
+      "def_en": "The moment the biggest visible element finishes rendering, used as a proxy for when the page feels loaded.",
+      "def_vi": "Thời điểm phần tử nhìn thấy lớn nhất vẽ xong, dùng làm đại lượng thay thế cho cảm giác trang đã tải xong.",
+      "say": "Our largest contentful paint sits at two point five seconds on a mid range phone.",
+      "tags": ["hieu-nang"]
+    },
+    {
+      "id": "sw-cls",
+      "en": "Cumulative layout shift",
+      "vi": "Độ xô lệch bố cục tích luỹ",
+      "def_en": "A score for how much visible content jumps during load, usually caused by images or fonts without reserved space.",
+      "def_vi": "Điểm số đo mức nội dung nhảy chỗ trong lúc tải, thường do ảnh hoặc phông chữ chưa được chừa sẵn chỗ.",
+      "tags": ["hieu-nang"]
+    },
+    {
+      "id": "sw-inp",
+      "en": "Interaction to next paint",
+      "vi": "Độ trễ từ thao tác tới khung hình kế",
+      "def_en": "How long the page takes to show a visual response after a user interaction, which exposes a blocked main thread.",
+      "def_vi": "Thời gian trang hiện phản hồi thị giác sau một thao tác của người dùng, chỉ số này phơi bày luồng chính bị chặn.",
+      "tags": ["hieu-nang"]
+    },
+    {
+      "id": "sw-client-cache",
+      "en": "Client side cache",
+      "vi": "Bộ nhớ đệm phía máy khách",
+      "def_en": "A store of already fetched server data in the browser, keyed so several components can share one request.",
+      "def_vi": "Kho lưu dữ liệu máy chủ đã tải sẵn trong trình duyệt, có khoá để nhiều thành phần dùng chung một lượt gọi.",
+      "tags": ["trang-thai"]
+    },
+    {
+      "id": "sw-stale-while-revalidate",
+      "en": "Stale while revalidate",
+      "vi": "Dùng bản cũ trong lúc làm mới nền",
+      "def_en": "Showing the cached value immediately while a background request checks for a newer one and swaps it in.",
+      "def_vi": "Hiện ngay giá trị đã nhớ đệm trong khi một lượt gọi nền kiểm tra bản mới hơn rồi thay vào.",
+      "say": "We show the cached list first and revalidate in the background.",
+      "tags": ["trang-thai"]
+    },
+    {
+      "id": "sw-optimistic-update",
+      "en": "Optimistic update",
+      "vi": "Cập nhật lạc quan",
+      "def_en": "Painting the expected result before the server confirms it, which needs a rollback path for when the write fails.",
+      "def_vi": "Vẽ ngay kết quả kỳ vọng trước khi máy chủ xác nhận, cách này bắt buộc phải có đường hoàn tác khi lượt ghi thất bại.",
+      "say": "An optimistic update without a rollback path is just a lie on screen.",
+      "tags": ["trang-thai", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-cache-invalidation",
+      "en": "Cache invalidation",
+      "vi": "Vô hiệu bộ nhớ đệm",
+      "def_en": "Deciding when a cached value stops being trustworthy, which is hard because the cache cannot see writes it did not make.",
+      "def_vi": "Quyết định khi nào giá trị đã nhớ đệm hết đáng tin, việc này khó vì bộ nhớ đệm không thấy được các lượt ghi không do nó tạo ra.",
+      "tags": ["trang-thai"]
+    },
+    {
+      "id": "sw-optimistic-locking",
+      "en": "Optimistic locking",
+      "vi": "Khoá lạc quan",
+      "def_en": "Letting two editors work in parallel and rejecting the second write if the row version changed since it was read.",
+      "def_vi": "Cho hai người sửa song song rồi từ chối lượt ghi thứ hai nếu phiên bản của dòng đã đổi kể từ lúc đọc.",
+      "say": "Optimistic locking is right when conflicts are rare and cheap to redo.",
+      "tags": ["du-lieu", "trang-thai"]
+    },
+    {
+      "id": "sw-pessimistic-locking",
+      "en": "Pessimistic locking",
+      "vi": "Khoá bi quan",
+      "def_en": "Taking a lock before editing so nobody else can touch the row, trading throughput and deadlock risk for certainty.",
+      "def_vi": "Giữ khoá trước khi sửa để không ai khác đụng vào dòng đó, đánh đổi thông lượng và rủi ro kẹt khoá lấy sự chắc chắn.",
+      "tags": ["du-lieu", "trang-thai"]
+    },
+    {
+      "id": "sw-race-condition",
+      "en": "Race condition",
+      "vi": "Điều kiện tranh chấp",
+      "def_en": "A defect whose outcome depends on the timing of concurrent operations, which is why it hides in tests and appears under load.",
+      "def_vi": "Lỗi mà kết quả phụ thuộc vào thời điểm của các thao tác đồng thời, vì thế nó ẩn trong lúc kiểm thử và lộ ra khi tải cao.",
+      "say": "Two enrolments landed at the same millisecond and the seat count went negative.",
+      "tags": ["du-lieu", "loi"]
+    },
+    {
+      "id": "sw-deadlock",
+      "en": "Deadlock",
+      "vi": "Kẹt khoá vòng tròn",
+      "def_en": "Two transactions each holding a lock the other needs, so neither can proceed until the database aborts one of them.",
+      "def_vi": "Hai giao dịch mỗi bên giữ một khoá mà bên kia cần, không bên nào đi tiếp được cho tới khi cơ sở dữ liệu huỷ một bên.",
+      "tags": ["du-lieu", "loi"]
+    },
+    {
+      "id": "sw-transaction-isolation",
+      "en": "Transaction isolation level",
+      "vi": "Mức cô lập giao dịch",
+      "def_en": "How much concurrent transactions may see of each other, from read committed up to serialisable, trading anomalies against throughput.",
+      "def_vi": "Mức mà các giao dịch đồng thời được phép nhìn thấy nhau, từ đọc đã xác nhận cho tới tuần tự hoá, đánh đổi hiện tượng bất thường với thông lượng.",
+      "tags": ["du-lieu"]
+    },
+    {
+      "id": "sw-connection-pool",
+      "en": "Connection pool",
+      "vi": "Bể kết nối",
+      "def_en": "A reusable set of database connections; on serverless platforms every instance can open its own pool and exhaust the server.",
+      "def_vi": "Tập kết nối cơ sở dữ liệu dùng lại được, trên nền tảng không máy chủ mỗi thực thể có thể mở bể riêng và làm cạn kết nối của máy chủ.",
+      "say": "Each serverless instance opened its own pool and the database hit the connection limit.",
+      "tags": ["du-lieu", "van-hanh"]
+    },
+    {
+      "id": "sw-n-plus-one",
+      "en": "N plus one query",
+      "vi": "Truy vấn lặp theo từng dòng",
+      "def_en": "Fetching a list and then issuing one more query per row, so latency grows with the size of the list.",
+      "def_vi": "Lấy một danh sách rồi phát thêm một truy vấn cho mỗi dòng, khiến độ trễ tăng theo kích thước danh sách.",
+      "say": "The page ran one query for the list and forty more for the rows.",
+      "tags": ["du-lieu", "hieu-nang"]
+    },
+    {
+      "id": "sw-database-index",
+      "en": "Database index",
+      "vi": "Chỉ mục cơ sở dữ liệu",
+      "def_en": "A secondary structure that speeds up matching rows at the cost of slower writes and more storage.",
+      "def_vi": "Cấu trúc phụ giúp tìm dòng khớp nhanh hơn, đổi lại ghi chậm hơn và tốn thêm dung lượng.",
+      "tags": ["du-lieu", "hieu-nang"]
+    },
+    {
+      "id": "sw-background-job",
+      "en": "Background job",
+      "vi": "Công việc nền",
+      "def_en": "Work moved out of the request path so a slow export or email does not hold the user's connection open.",
+      "def_vi": "Công việc được đưa ra khỏi đường xử lý yêu cầu, để một lượt xuất báo cáo hay gửi thư chậm không giữ kết nối của người dùng.",
+      "tags": ["van-hanh", "su-kien"]
+    },
+    {
+      "id": "sw-scheduled-job",
+      "en": "Scheduled job",
+      "vi": "Công việc theo lịch",
+      "def_en": "A task run on a timer, which needs a guard because two instances can fire at the same minute after a redeploy.",
+      "def_vi": "Tác vụ chạy theo hẹn giờ, cần có chốt bảo vệ vì hai thực thể có thể cùng nổ vào một phút sau khi triển khai lại.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-retry-backoff",
+      "en": "Exponential backoff",
+      "vi": "Giãn thời gian thử lại theo hàm mũ",
+      "def_en": "Waiting longer after each failed attempt, with random jitter, so a struggling service is not hammered by synchronised retries.",
+      "def_vi": "Chờ lâu hơn sau mỗi lần thất bại, kèm nhiễu ngẫu nhiên, để một dịch vụ đang yếu không bị các lượt thử lại đồng pha dập tiếp.",
+      "say": "Add jitter, otherwise every client retries at the same second.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-retry-storm",
+      "en": "Retry storm",
+      "vi": "Bão thử lại",
+      "def_en": "A failure amplified when every client retries at once, turning a brief hiccup into a sustained outage.",
+      "def_vi": "Sự cố bị khuếch đại khi mọi máy khách cùng thử lại một lúc, biến một trục trặc ngắn thành gián đoạn kéo dài.",
+      "tags": ["van-hanh", "loi"]
+    },
+    {
+      "id": "sw-circuit-breaker",
+      "en": "Circuit breaker",
+      "vi": "Cầu dao ngắt mạch",
+      "def_en": "A guard that stops calling a failing dependency for a while, so the caller fails fast instead of piling up timeouts.",
+      "def_vi": "Chốt bảo vệ tạm ngừng gọi một phụ thuộc đang hỏng, để bên gọi hỏng nhanh thay vì chất đống các lượt chờ hết giờ.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-test-pyramid",
+      "en": "Test pyramid",
+      "vi": "Kim tự tháp kiểm thử",
+      "def_en": "A mix with many fast unit tests, fewer integration tests and a thin layer of end to end tests, chosen by cost and stability.",
+      "def_vi": "Cách phối trộn gồm nhiều bài kiểm đơn vị chạy nhanh, ít bài kiểm tích hợp hơn và một lớp mỏng kiểm đầu cuối, chọn theo chi phí và độ ổn định.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-unit-test",
+      "en": "Unit test",
+      "vi": "Kiểm thử đơn vị",
+      "def_en": "A test of one piece of logic in isolation, fast enough to run on every save but blind to wiring between parts.",
+      "def_vi": "Bài kiểm một mảnh logic tách riêng, đủ nhanh để chạy mỗi lần lưu tệp nhưng mù trước cách các mảnh nối với nhau.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-integration-test",
+      "en": "Integration test",
+      "vi": "Kiểm thử tích hợp",
+      "def_en": "A test that exercises real collaborators such as the database or the HTTP layer, catching wiring and schema mistakes.",
+      "def_vi": "Bài kiểm chạy với các thành phần thật như cơ sở dữ liệu hoặc tầng HTTP, bắt được lỗi nối dây và lỗi lược đồ.",
+      "say": "Run the enrolment test against a real database, not a mock.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-end-to-end-test",
+      "en": "End to end test",
+      "vi": "Kiểm thử đầu cuối",
+      "def_en": "A test driving the real user flow through a browser, the most faithful and the slowest and flakiest of the levels.",
+      "def_vi": "Bài kiểm điều khiển luồng người dùng thật qua trình duyệt, trung thực nhất nhưng cũng chậm và chập chờn nhất.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-test-double",
+      "en": "Test double",
+      "vi": "Bản thế thân",
+      "def_en": "Any stand in for a real dependency during a test, including stubs, fakes and mocks, each with a different purpose.",
+      "def_vi": "Bất kỳ vật thay thế nào cho một phụ thuộc thật trong lúc kiểm thử, gồm bản trả lời sẵn, bản mô phỏng và bản giả lập, mỗi loại một mục đích.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-stub",
+      "en": "Stub",
+      "vi": "Bản trả lời sẵn",
+      "def_en": "A double that returns canned answers so the test can reach a chosen branch, without asserting on how it was called.",
+      "def_vi": "Vật thay thế trả về câu trả lời dọn sẵn để bài kiểm đi tới nhánh mong muốn, không khẳng định gì về cách nó bị gọi.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-mock",
+      "en": "Mock",
+      "vi": "Bản giả lập có kỳ vọng",
+      "def_en": "A double that records calls so the test can assert an interaction happened, which couples the test to the implementation.",
+      "def_vi": "Vật thay thế ghi lại các lượt gọi để bài kiểm khẳng định một tương tác đã xảy ra, cách này gắn bài kiểm vào cách hiện thực.",
+      "say": "Too many mocks and the test only proves the code calls itself.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-fake",
+      "en": "Fake",
+      "vi": "Bản mô phỏng chạy được",
+      "def_en": "A working but simplified implementation, such as an in memory repository, which behaves like the real thing for most cases.",
+      "def_vi": "Bản hiện thực chạy được nhưng đơn giản hoá, ví dụ kho dữ liệu trong bộ nhớ, hành xử giống thật trong phần lớn tình huống.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-regression-test",
+      "en": "Regression test",
+      "vi": "Kiểm thử hồi quy",
+      "def_en": "A test written from a real defect so that the same bug cannot come back unnoticed.",
+      "def_vi": "Bài kiểm viết ra từ một lỗi có thật, để đúng lỗi đó không thể quay lại mà không ai hay.",
+      "say": "Every bug fix ships with the test that would have caught it.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-snapshot-test",
+      "en": "Snapshot test",
+      "vi": "Kiểm thử ảnh chụp",
+      "def_en": "A test comparing output against a stored copy; it detects change but not correctness, and gets rubber stamped when it fails.",
+      "def_vi": "Bài kiểm so kết quả với một bản lưu sẵn, nó phát hiện thay đổi chứ không phát hiện đúng sai, và hay bị bấm chấp nhận cho qua khi báo lỗi.",
+      "say": "The snapshot was updated together with the bug, so it passed happily.",
+      "tags": ["kiem-thu", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-code-coverage",
+      "en": "Code coverage",
+      "vi": "Độ phủ mã",
+      "def_en": "The share of lines or branches a test run executes; it can prove code was reached but never that the assertion checked anything.",
+      "def_vi": "Tỷ lệ dòng hoặc nhánh mà một lượt kiểm thử chạy qua, nó chứng minh mã được chạy tới chứ không chứng minh khẳng định có kiểm gì.",
+      "say": "You can hit ninety percent coverage with no assertions at all.",
+      "tags": ["kiem-thu", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-property-based-test",
+      "en": "Property based test",
+      "vi": "Kiểm thử theo tính chất",
+      "def_en": "Stating an invariant and letting the tool generate many inputs to break it, then shrinking any failure to a minimal case.",
+      "def_vi": "Phát biểu một bất biến rồi để công cụ sinh nhiều đầu vào nhằm phá nó, sau đó rút gọn ca thất bại về dạng nhỏ nhất.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-fixture",
+      "en": "Test fixture",
+      "vi": "Dữ liệu mẫu cho kiểm thử",
+      "def_en": "The known starting data a test builds on; shared mutable fixtures are a common source of order dependent failures.",
+      "def_vi": "Dữ liệu khởi đầu đã biết mà bài kiểm dựa vào, dữ liệu mẫu dùng chung và sửa được là nguồn gây lỗi phụ thuộc thứ tự rất hay gặp.",
+      "tags": ["kiem-thu"]
+    },
+    {
+      "id": "sw-flaky-test",
+      "en": "Flaky test",
+      "vi": "Bài kiểm chập chờn",
+      "def_en": "A test that passes and fails on the same code, usually from timing, shared state or real network calls; it destroys trust in the suite.",
+      "def_vi": "Bài kiểm lúc đạt lúc trượt trên cùng đoạn mã, thường do thời gian, trạng thái dùng chung hoặc gọi mạng thật, nó phá huỷ niềm tin vào cả bộ kiểm.",
+      "say": "A flaky test teaches the team to ignore red builds.",
+      "tags": ["kiem-thu", "van-hanh"]
+    },
+    {
+      "id": "sw-contract-test",
+      "en": "Contract test",
+      "vi": "Kiểm thử hợp đồng",
+      "def_en": "A test run on both sides of an interface to check that the provider still satisfies what the consumer relies on.",
+      "def_vi": "Bài kiểm chạy ở cả hai phía của một giao diện, để kiểm bên cung cấp còn thoả mãn những gì bên tiêu thụ dựa vào.",
+      "tags": ["kiem-thu", "web"]
+    },
+    {
+      "id": "sw-technical-debt",
+      "en": "Technical debt",
+      "vi": "Nợ kỹ thuật",
+      "def_en": "The future cost of a shortcut taken today; it is only debt if you intend to pay it, otherwise it is just a mess.",
+      "def_vi": "Chi phí tương lai của một lối tắt hôm nay, nó chỉ là nợ khi bạn có ý định trả, còn không thì đó chỉ là sự bừa bộn.",
+      "say": "We took that shortcut on purpose and wrote down what it will cost.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-refactoring",
+      "en": "Refactoring",
+      "vi": "Tái cấu trúc mã",
+      "def_en": "Changing internal structure without changing observable behaviour, which is only safe when tests pin that behaviour down.",
+      "def_vi": "Thay đổi cấu trúc bên trong mà không đổi hành vi quan sát được, việc này chỉ an toàn khi có bài kiểm ghim chặt hành vi đó.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-single-responsibility",
+      "en": "Single responsibility principle",
+      "vi": "Nguyên tắc trách nhiệm đơn",
+      "def_en": "A module should have one reason to change, meaning one group of stakeholders whose requests can force it to be rewritten.",
+      "def_vi": "Một mô đun chỉ nên có một lý do để thay đổi, tức chỉ một nhóm bên liên quan mà yêu cầu của họ buộc nó phải viết lại.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-coupling",
+      "en": "Coupling",
+      "vi": "Mức ghép nối",
+      "def_en": "How strongly one module depends on the details of another; tight coupling makes small changes ripple across files.",
+      "def_vi": "Mức một mô đun phụ thuộc vào chi tiết của mô đun khác, ghép nối chặt làm cho thay đổi nhỏ lan ra nhiều tệp.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-cohesion",
+      "en": "Cohesion",
+      "vi": "Độ gắn kết",
+      "def_en": "How closely the things inside one module belong together; high cohesion means the file has a single clear job.",
+      "def_vi": "Mức các thành phần bên trong một mô đun thuộc về nhau, gắn kết cao nghĩa là tệp đó có một nhiệm vụ rõ ràng duy nhất.",
+      "say": "Aim for high cohesion inside a module and loose coupling between modules.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-naming",
+      "en": "Intention revealing name",
+      "vi": "Tên nói rõ ý định",
+      "def_en": "A name stating what the value means in the business, so the reader does not need to trace the code to understand it.",
+      "def_vi": "Tên nói rõ giá trị đó nghĩa là gì trong nghiệp vụ, để người đọc không phải lần theo mã mới hiểu.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-comment-why",
+      "en": "Comment the why",
+      "vi": "Chú thích nói vì sao",
+      "def_en": "A comment should record the reason and the constraint behind the code, because the code already states what it does.",
+      "def_vi": "Chú thích nên ghi lý do và ràng buộc đứng sau đoạn mã, vì bản thân mã đã nói nó làm gì rồi.",
+      "say": "This comment should say why we round up, not that we round up.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-code-review",
+      "en": "Code review",
+      "vi": "Đọc và duyệt mã",
+      "def_en": "A reading of proposed changes for correctness, clarity and risk, most useful when the change is small enough to hold in the head.",
+      "def_vi": "Việc đọc các thay đổi đề xuất để xét tính đúng, tính rõ ràng và rủi ro, hiệu quả nhất khi thay đổi đủ nhỏ để nắm hết trong đầu.",
+      "tags": ["chat-luong", "quy-trinh"]
+    },
+    {
+      "id": "sw-premature-abstraction",
+      "en": "Premature abstraction",
+      "vi": "Trừu tượng hoá quá sớm",
+      "def_en": "Extracting a shared piece from two similar cases that later diverge, leaving an abstraction full of flags nobody can remove.",
+      "def_vi": "Rút chung một mảnh từ hai ca giống nhau mà về sau lại khác nhau, để lại một trừu tượng đầy cờ điều kiện không ai gỡ nổi.",
+      "say": "Two similar blocks are cheaper than one wrong abstraction.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-dead-code",
+      "en": "Dead code",
+      "vi": "Mã chết",
+      "def_en": "Code no execution path reaches, which still costs review time, misleads readers and shows up in search results.",
+      "def_vi": "Đoạn mã không đường thực thi nào chạm tới, nó vẫn tốn thời gian duyệt, làm người đọc hiểu sai và vẫn hiện ra khi tìm kiếm.",
+      "tags": ["chat-luong"]
+    },
+    {
+      "id": "sw-ci",
+      "en": "Continuous integration",
+      "vi": "Tích hợp liên tục",
+      "def_en": "Merging work into the shared branch often and proving it with an automated build and test run each time.",
+      "def_vi": "Gộp công việc vào nhánh chung thường xuyên và mỗi lần đều chứng minh bằng một lượt dựng bản và chạy kiểm tự động.",
+      "tags": ["van-hanh", "quy-trinh"]
+    },
+    {
+      "id": "sw-cd",
+      "en": "Continuous delivery",
+      "vi": "Chuyển giao liên tục",
+      "def_en": "Keeping the main branch always releasable so shipping becomes a business decision rather than an engineering event.",
+      "def_vi": "Giữ nhánh chính luôn ở trạng thái phát hành được, để việc ra bản trở thành quyết định nghiệp vụ chứ không phải một sự kiện kỹ thuật.",
+      "tags": ["van-hanh", "quy-trinh"]
+    },
+    {
+      "id": "sw-blue-green",
+      "en": "Blue green deployment",
+      "vi": "Triển khai xanh đỏ",
+      "def_en": "Running two full environments and switching traffic in one step, which makes rollback a switch back rather than a redeploy.",
+      "def_vi": "Chạy hai môi trường đầy đủ rồi chuyển lưu lượng trong một bước, nhờ vậy quay lui chỉ là gạt về chứ không phải triển khai lại.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-canary-release",
+      "en": "Canary release",
+      "vi": "Thả từng phần",
+      "def_en": "Sending a small share of traffic to the new version and watching its error and latency signals before widening.",
+      "def_vi": "Đẩy một phần nhỏ lưu lượng sang phiên bản mới và theo dõi tín hiệu lỗi cùng độ trễ trước khi mở rộng.",
+      "say": "Give the new version five percent of traffic for one hour first.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-feature-flag",
+      "en": "Feature flag",
+      "vi": "Cờ tính năng",
+      "def_en": "A runtime switch separating deployment from release, so code can ship dark and be turned on for a chosen group.",
+      "def_vi": "Công tắc lúc chạy tách việc triển khai khỏi việc phát hành, mã có thể lên bản ở trạng thái tắt rồi bật cho một nhóm chọn trước.",
+      "say": "Deploy on Tuesday, release on Friday, with one flag in between.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-rollback",
+      "en": "Rollback",
+      "vi": "Quay lui bản phát hành",
+      "def_en": "Returning to the previous known good version; it only works if the database change shipped with it is still compatible.",
+      "def_vi": "Quay về phiên bản tốt đã biết trước đó, việc này chỉ chạy được nếu thay đổi cơ sở dữ liệu đi kèm vẫn còn tương thích.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-migration",
+      "en": "Database migration",
+      "vi": "Di trú cơ sở dữ liệu",
+      "def_en": "A versioned, ordered change to the schema kept in the repository so every environment reaches the same shape.",
+      "def_vi": "Thay đổi lược đồ có đánh phiên bản và có thứ tự, giữ trong kho mã để mọi môi trường đều tới cùng một hình dạng.",
+      "tags": ["du-lieu", "van-hanh"]
+    },
+    {
+      "id": "sw-expand-contract",
+      "en": "Expand and contract migration",
+      "vi": "Di trú theo lối mở rộng rồi thu hẹp",
+      "def_en": "Adding the new column, writing to both, backfilling, moving reads, then dropping the old one in a later release.",
+      "def_vi": "Thêm cột mới, ghi vào cả hai nơi, lấp dữ liệu cũ, chuyển đường đọc, rồi mới bỏ cột cũ ở một bản phát hành sau.",
+      "say": "Never rename a column in one step, expand first and contract later.",
+      "tags": ["du-lieu", "van-hanh"]
+    },
+    {
+      "id": "sw-backward-compatible-schema",
+      "en": "Backward compatible schema change",
+      "vi": "Thay đổi lược đồ tương thích ngược",
+      "def_en": "A change the previous application version still runs against, which is what lets you roll back code without restoring data.",
+      "def_vi": "Thay đổi mà phiên bản ứng dụng trước đó vẫn chạy được, chính điều này cho phép quay lui mã mà không phải phục hồi dữ liệu.",
+      "tags": ["du-lieu", "van-hanh"]
+    },
+    {
+      "id": "sw-observability",
+      "en": "Observability",
+      "vi": "Khả năng quan sát hệ thống",
+      "def_en": "How well you can answer new questions about a running system from its output, without shipping new code to find out.",
+      "def_vi": "Mức bạn trả lời được câu hỏi mới về hệ thống đang chạy chỉ từ dữ liệu nó phát ra, không phải triển khai mã mới để dò.",
+      "say": "We could see that it was slow but not which query, so observability failed us.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-structured-log",
+      "en": "Structured logging",
+      "vi": "Nhật ký có cấu trúc",
+      "def_en": "Emitting log lines as key and value records rather than prose, so they can be filtered and aggregated instead of grepped.",
+      "def_vi": "Ghi nhật ký dạng bản ghi khoá và giá trị thay vì câu văn, nhờ vậy lọc và tổng hợp được chứ không phải dò bằng tìm chuỗi.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-metric",
+      "en": "Metric",
+      "vi": "Chỉ số đo",
+      "def_en": "A numeric time series aggregated over many events, cheap to keep for a long time but unable to explain a single request.",
+      "def_vi": "Chuỗi số theo thời gian, tổng hợp từ nhiều sự kiện, rẻ để lưu lâu nhưng không giải thích được một yêu cầu cụ thể.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-distributed-tracing",
+      "en": "Distributed tracing",
+      "vi": "Truy vết phân tán",
+      "def_en": "Following one request across services as a tree of timed spans, which shows where the time actually went.",
+      "def_vi": "Lần theo một yêu cầu đi qua nhiều dịch vụ dưới dạng cây các đoạn có mốc thời gian, cho thấy thời gian thực sự đã đi đâu.",
+      "say": "The trace showed eighty percent of the time sitting in one database call.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-span",
+      "en": "Span",
+      "vi": "Đoạn truy vết",
+      "def_en": "One timed unit of work inside a trace, carrying a parent link and attributes such as the route or the query name.",
+      "def_vi": "Một đơn vị công việc có mốc thời gian trong một truy vết, mang liên kết tới đoạn cha và các thuộc tính như tuyến đường hay tên truy vấn.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-correlation-id",
+      "en": "Correlation identifier",
+      "vi": "Định danh liên kết yêu cầu",
+      "def_en": "An identifier attached at the edge and passed along, so every log line from one user action can be gathered later.",
+      "def_vi": "Định danh gắn ở biên rồi truyền đi khắp nơi, nhờ vậy về sau gom được mọi dòng nhật ký sinh ra từ một thao tác của người dùng.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-percentile-latency",
+      "en": "Latency percentile",
+      "vi": "Phân vị độ trễ",
+      "def_en": "A tail figure such as the ninety fifth or ninety ninth percentile, which reveals the slow experiences an average hides.",
+      "def_vi": "Con số ở phần đuôi như phân vị chín mươi lăm hay chín mươi chín, nó phơi bày những lượt chậm mà giá trị trung bình che mất.",
+      "say": "The mean looked fine while one in twenty users waited four seconds.",
+      "tags": ["van-hanh", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-symptom-alert",
+      "en": "Symptom based alert",
+      "vi": "Cảnh báo dựa trên triệu chứng",
+      "def_en": "An alert on what the user feels, such as failed requests or slow pages, rather than on an internal cause that may be harmless.",
+      "def_vi": "Cảnh báo dựa vào điều người dùng cảm nhận, ví dụ yêu cầu hỏng hay trang chậm, thay vì dựa vào một nguyên nhân nội bộ có thể vô hại.",
+      "say": "Page me when students cannot enrol, not when the processor hits eighty percent.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-slo",
+      "en": "Service level objective",
+      "vi": "Mục tiêu mức dịch vụ",
+      "def_en": "A target for a reliability indicator over a window, agreed in advance so arguments about good enough happen before the incident.",
+      "def_vi": "Mục tiêu đặt cho một chỉ báo độ tin cậy trong một khoảng thời gian, thống nhất từ trước để tranh luận thế nào là đủ tốt diễn ra trước sự cố.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-sli",
+      "en": "Service level indicator",
+      "vi": "Chỉ báo mức dịch vụ",
+      "def_en": "The measured quantity behind an objective, such as the share of requests served under three hundred milliseconds.",
+      "def_vi": "Đại lượng đo được đứng sau một mục tiêu, ví dụ tỷ lệ yêu cầu được phục vụ dưới ba trăm mili giây.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-error-budget",
+      "en": "Error budget",
+      "vi": "Ngân sách lỗi",
+      "def_en": "The allowed unreliability left under an objective, spent on releases and risk, and exhausted budgets stop risky changes.",
+      "def_vi": "Phần kém tin cậy còn được phép dưới một mục tiêu, dùng cho các bản phát hành và rủi ro, hết ngân sách thì dừng các thay đổi mạo hiểm.",
+      "say": "We burned the whole error budget in one bad week.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-health-check",
+      "en": "Health check",
+      "vi": "Điểm kiểm tình trạng",
+      "def_en": "An endpoint the platform polls to decide whether an instance should receive traffic; a shallow one can report healthy while broken.",
+      "def_vi": "Điểm cuối mà nền tảng gọi để quyết định một thực thể có nên nhận lưu lượng hay không, kiểm hời hợt có thể báo khoẻ trong khi đã hỏng.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-graceful-shutdown",
+      "en": "Graceful shutdown",
+      "vi": "Tắt êm",
+      "def_en": "Stopping new work, finishing in flight requests and closing connections before the process exits, so a deploy drops no request.",
+      "def_vi": "Ngừng nhận việc mới, làm nốt các yêu cầu đang chạy và đóng kết nối trước khi tiến trình thoát, để một lượt triển khai không đánh rơi yêu cầu nào.",
+      "tags": ["van-hanh"]
+    },
+    {
+      "id": "sw-runbook",
+      "en": "Runbook",
+      "vi": "Sổ tay xử lý sự cố",
+      "def_en": "A short document telling whoever is on call what to check and what to do for a specific alert.",
+      "def_vi": "Tài liệu ngắn chỉ cho người trực biết phải kiểm gì và làm gì với một cảnh báo cụ thể.",
+      "tags": ["van-hanh", "quy-trinh"]
+    },
+    {
+      "id": "sw-postmortem",
+      "en": "Blameless postmortem",
+      "vi": "Rà soát sự cố không quy tội",
+      "def_en": "A written review of an incident focused on the conditions that made the mistake likely, not on who typed the command.",
+      "def_vi": "Bản rà soát sự cố tập trung vào những điều kiện khiến sai lầm dễ xảy ra, chứ không nhắm vào ai đã gõ lệnh.",
+      "tags": ["van-hanh", "quy-trinh"]
+    },
+    {
+      "id": "sw-env-secret",
+      "en": "Environment variable secret",
+      "vi": "Bí mật trong biến môi trường",
+      "def_en": "Configuration injected at deploy time and kept out of the repository, so the same build can run in staging and production.",
+      "def_vi": "Cấu hình được nạp vào lúc triển khai và không nằm trong kho mã, nhờ vậy cùng một bản dựng chạy được ở môi trường thử và môi trường thật.",
+      "say": "If the key is in the repository history, rotate it, do not just delete it.",
+      "tags": ["bao-mat", "van-hanh"]
+    },
+    {
+      "id": "sw-secret-rotation",
+      "en": "Secret rotation",
+      "vi": "Xoay vòng bí mật",
+      "def_en": "Replacing credentials on a schedule and after any exposure, which requires the system to accept two valid keys during the change.",
+      "def_vi": "Thay chứng chỉ theo lịch và sau mỗi lần lộ, việc này đòi hỏi hệ thống chấp nhận hai khoá hợp lệ trong lúc chuyển đổi.",
+      "tags": ["bao-mat", "van-hanh"]
+    },
+    {
+      "id": "sw-input-validation",
+      "en": "Input validation at the boundary",
+      "vi": "Kiểm đầu vào ở biên",
+      "def_en": "Parsing untrusted input into a typed value once at the edge, so the inside of the system works with data known to be well formed.",
+      "def_vi": "Phân tích đầu vào không tin cậy thành giá trị có kiểu ngay tại biên, để bên trong hệ thống chỉ làm việc với dữ liệu đã biết là đúng dạng.",
+      "say": "Validate at the boundary and the core can stop guessing.",
+      "tags": ["bao-mat", "kien-truc"]
+    },
+    {
+      "id": "sw-client-side-validation",
+      "en": "Client side validation",
+      "vi": "Kiểm đầu vào phía máy khách",
+      "def_en": "Checks in the browser that improve the user experience but provide no security, because a caller can skip the page entirely.",
+      "def_vi": "Các phép kiểm trong trình duyệt giúp trải nghiệm tốt hơn nhưng không có giá trị an ninh, vì bên gọi có thể bỏ qua hẳn trang web.",
+      "tags": ["bao-mat", "niem-tin-sai"]
+    },
+    {
+      "id": "sw-least-privilege",
+      "en": "Least privilege",
+      "vi": "Quyền tối thiểu",
+      "def_en": "Giving each account and service only the access it needs, so one leaked credential exposes a small blast radius.",
+      "def_vi": "Chỉ cấp cho mỗi tài khoản và dịch vụ đúng quyền nó cần, để một chứng chỉ bị lộ chỉ mở ra một phạm vi thiệt hại nhỏ.",
+      "tags": ["bao-mat"]
+    },
+    {
+      "id": "sw-parameterised-query",
+      "en": "Parameterised query",
+      "vi": "Truy vấn tham số hoá",
+      "def_en": "Sending values separately from the statement so user text can never be parsed as SQL, which is the real fix for injection.",
+      "def_vi": "Gửi giá trị tách khỏi câu lệnh để văn bản của người dùng không bao giờ bị phân tích thành SQL, đây mới là cách chữa thật cho lỗi tiêm mã.",
+      "say": "Escaping is a patch, parameter binding is the fix.",
+      "tags": ["bao-mat", "du-lieu"]
+    },
+    {
+      "id": "sw-xss",
+      "en": "Cross site scripting",
+      "vi": "Tiêm mã kịch bản vào trang",
+      "def_en": "Injecting script that runs in another user's page, usually because untrusted text was inserted as markup rather than as text.",
+      "def_vi": "Tiêm mã kịch bản chạy trong trang của người dùng khác, thường vì văn bản không tin cậy bị chèn vào dưới dạng mã đánh dấu thay vì dạng văn bản.",
+      "tags": ["bao-mat"]
+    },
+    {
+      "id": "sw-supply-chain",
+      "en": "Software supply chain",
+      "vi": "Chuỗi cung ứng phần mềm",
+      "def_en": "Everything your build pulls in, where one compromised transitive package runs with the same rights as your own code.",
+      "def_vi": "Toàn bộ những gì bản dựng kéo vào, ở đó một gói phụ thuộc gián tiếp bị chiếm quyền sẽ chạy với đúng quyền của mã do bạn viết.",
+      "say": "We install about nine hundred packages to ship one page.",
+      "tags": ["bao-mat", "van-hanh"]
+    },
+    {
+      "id": "sw-lockfile",
+      "en": "Lockfile",
+      "vi": "Tệp khoá phiên bản",
+      "def_en": "A record of the exact dependency versions resolved once, so every machine and every build installs the same tree.",
+      "def_vi": "Bản ghi các phiên bản phụ thuộc chính xác đã giải một lần, để mọi máy và mọi lượt dựng đều cài cùng một cây phụ thuộc.",
+      "tags": ["bao-mat", "cong-cu"]
+    },
+    {
+      "id": "sw-audit-log",
+      "en": "Audit log",
+      "vi": "Nhật ký kiểm toán",
+      "def_en": "An append only record of who changed what and when, kept separately from application logs because it is evidence.",
+      "def_vi": "Bản ghi chỉ thêm mới, lưu ai đã đổi gì và vào lúc nào, giữ tách khỏi nhật ký ứng dụng vì nó là chứng cứ.",
+      "say": "For an accreditation system the audit trail matters as much as the data.",
+      "tags": ["bao-mat", "nghiep-vu"]
+    },
+    {
+      "id": "sw-row-level-security",
+      "en": "Row level security",
+      "vi": "Bảo mật ở mức dòng",
+      "def_en": "Enforcing in the database which rows an identity may see, so a forgotten filter in application code cannot leak data.",
+      "def_vi": "Cưỡng chế ngay trong cơ sở dữ liệu việc một danh tính được thấy dòng nào, để một bộ lọc bị quên trong mã ứng dụng không làm lộ dữ liệu.",
+      "tags": ["bao-mat", "du-lieu"]
+    },
+    {
+      "id": "sw-defence-in-depth",
+      "en": "Defence in depth",
+      "vi": "Phòng thủ nhiều lớp",
+      "def_en": "Placing independent controls so that one failed check is not the only thing standing between an attacker and the data.",
+      "def_vi": "Đặt nhiều lớp kiểm soát độc lập, để một phép kiểm hỏng không phải là thứ duy nhất chắn giữa kẻ tấn công và dữ liệu.",
+      "tags": ["bao-mat"]
+    }
+  ]
+}

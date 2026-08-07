@@ -1,0 +1,1927 @@
+{
+  "schema": 1,
+  "id": "software",
+  "updated": "2026-08-08",
+  "questions": [
+    {
+      "id": "qsw-1",
+      "q": "Your domain layer imports the ORM types directly. The most concrete cost of this is",
+      "q_vi": "Tầng miền nghiệp vụ của bạn nhập thẳng các kiểu của ORM. Cái giá cụ thể nhất của việc này là",
+      "choices": [
+        "The rules can no longer be tested without a database or migrated to another store",
+        "The queries become slower because the ORM adds an extra translation step",
+        "The bundle grows because the ORM ships to the browser with the domain",
+        "The transactions stop being atomic since the ORM manages its own session"
+      ],
+      "answer": 0,
+      "why": "The dependency rule is about what you can change and test in isolation. Once the rules know the persistence types, every test and every future store change drags the database along.",
+      "why_vi": "Nguyên tắc phụ thuộc nói về thứ bạn có thể đổi và kiểm tra một cách tách biệt. Khi quy tắc đã biết kiểu dữ liệu lưu trữ, mọi bài kiểm và mọi lần đổi kho lưu trữ đều phải kéo cơ sở dữ liệu theo.",
+      "level": 2
+    },
+    {
+      "id": "qsw-2",
+      "q": "A three person team is asked to split a working timetable system into six services. The strongest argument against doing it now is",
+      "q_vi": "Một nhóm ba người được yêu cầu tách hệ xếp thời khoá biểu đang chạy tốt thành sáu dịch vụ. Lý lẽ mạnh nhất để chưa làm ngay là",
+      "choices": [
+        "Microservices require a different language per service, which the team does not know",
+        "Modules inside one deployable unit already give boundaries without network failure modes",
+        "Splitting always reduces throughput because serialisation costs dominate every call",
+        "A single database cannot support more than one application connecting to it"
+      ],
+      "answer": 1,
+      "why": "Separation is a code boundary question. Deployment separation adds partial failure, versioning and operational load that a small team pays for daily.",
+      "why_vi": "Sự tách bạch là câu chuyện ranh giới trong mã. Tách theo triển khai còn thêm lỗi cục bộ, chuyện phiên bản và gánh nặng vận hành mà nhóm nhỏ phải trả mỗi ngày.",
+      "level": 3
+    },
+    {
+      "id": "qsw-3",
+      "q": "Two services must always be released together and they read the same tables. This is best described as",
+      "q_vi": "Hai dịch vụ luôn phải phát hành cùng lúc và cùng đọc chung một số bảng. Tình trạng này gọi đúng nhất là",
+      "choices": [
+        "A shared kernel, which is the recommended pattern for related domains",
+        "A layered architecture where the data layer is correctly reused by both",
+        "A distributed monolith, paying network cost without independent release",
+        "An event driven system whose consumers happen to share a schema"
+      ],
+      "answer": 2,
+      "why": "The whole point of separate deployment is releasing independently. Shared tables plus lockstep releases means you kept the coupling and added the network.",
+      "why_vi": "Ý nghĩa của việc triển khai riêng là phát hành độc lập. Dùng chung bảng và phát hành đồng thời nghĩa là bạn giữ nguyên sự ràng buộc và thêm cả đường mạng vào.",
+      "level": 3
+    },
+    {
+      "id": "qsw-4",
+      "q": "An enrolment must update the seat count and the student debt, which now live in two databases. The realistic design is",
+      "q_vi": "Một lượt ghi danh phải cập nhật số chỗ còn lại và công nợ sinh viên, hai thứ nay nằm ở hai cơ sở dữ liệu. Thiết kế thực tế là",
+      "choices": [
+        "Open one transaction in each database and commit both inside a try block",
+        "Disable durability on one side so the two writes finish at the same moment",
+        "Wrap both calls in a retry loop until the two states happen to agree",
+        "A sequence of local commits with compensating actions when a later step fails"
+      ],
+      "answer": 3,
+      "why": "A transaction boundary does not stretch across databases. Either you introduce a coordination protocol or you accept local commits plus compensation, which is the saga approach.",
+      "why_vi": "Biên giới giao dịch không kéo qua hai cơ sở dữ liệu. Hoặc bạn đưa vào một giao thức điều phối, hoặc chấp nhận xác nhận cục bộ kèm hành động bù trừ, tức là lối chuỗi bù trừ.",
+      "level": 2
+    },
+    {
+      "id": "qsw-5",
+      "q": "A vendor promises exactly once delivery for their message broker. The accurate reading of that promise is",
+      "q_vi": "Một nhà cung cấp hứa hàng đợi của họ giao đúng một lần. Cách hiểu chính xác về lời hứa đó là",
+      "choices": [
+        "It holds only when producer and consumer share one physical machine",
+        "It holds because acknowledgements are sent before the message is processed",
+        "It holds for any consumer as long as retries are disabled on the client",
+        "It means duplicates are hidden by deduplication, so handlers still must be idempotent"
+      ],
+      "answer": 3,
+      "why": "Over a network you can lose the acknowledgement, not just the message, so the sender cannot tell delivery from lost confirmation. Every practical system is at least once with deduplication on top.",
+      "why_vi": "Trên mạng bạn có thể mất chính tín hiệu xác nhận chứ không chỉ mất thông điệp, nên bên gửi không phân biệt được đã giao với mất xác nhận. Mọi hệ thực tế đều là giao ít nhất một lần rồi chống trùng ở trên.",
+      "level": 2
+    },
+    {
+      "id": "qsw-6",
+      "q": "What does an idempotency key on a payment request actually do?",
+      "q_vi": "Khoá chống lặp gắn vào một yêu cầu thanh toán thực sự làm gì?",
+      "choices": [
+        "It signs the request body so the server can detect tampering in transit",
+        "It lets the server return the stored first result instead of charging twice",
+        "It reserves a slot in the queue so the request is processed before others",
+        "It encrypts the amount field so an observer cannot read the transaction"
+      ],
+      "answer": 1,
+      "why": "The key names the attempt, not the message. The server records the outcome against that key and replays it, which is what makes a retry after a timeout safe.",
+      "why_vi": "Khoá này đặt tên cho lần thử chứ không phải cho thông điệp. Máy chủ lưu kết quả theo khoá đó rồi phát lại, nhờ vậy thử lại sau khi hết giờ chờ trở nên an toàn.",
+      "level": 1
+    },
+    {
+      "id": "qsw-7",
+      "q": "A dead letter queue exists mainly so that",
+      "q_vi": "Hàng đợi thư chết tồn tại chủ yếu để",
+      "choices": [
+        "A message that fails forever stops blocking the delivery of everything behind it",
+        "Messages are compressed and archived once they exceed the retention window",
+        "Consumers can subscribe to a second copy of the stream for analytics use",
+        "Producers get an acknowledgement even when no consumer is currently online"
+      ],
+      "answer": 0,
+      "why": "One message that always throws will otherwise be retried at the head of the queue indefinitely. Moving it aside keeps throughput while preserving the evidence.",
+      "why_vi": "Một thông điệp lúc nào cũng gây lỗi sẽ bị thử lại mãi ở đầu hàng đợi. Đẩy nó sang bên giữ được thông lượng mà vẫn giữ lại bằng chứng để xem xét.",
+      "level": 1
+    },
+    {
+      "id": "qsw-8",
+      "q": "Why does the transactional outbox write the event into the same database transaction as the state change?",
+      "q_vi": "Vì sao mẫu hộp thư đi ghi sự kiện vào cùng giao dịch cơ sở dữ liệu với thay đổi trạng thái?",
+      "choices": [
+        "Because writing to a broker inside a transaction is faster than writing a table",
+        "Because the broker needs the transaction identifier to order the events",
+        "Because the database can then replay the event stream after a restore",
+        "Because otherwise the row can commit while the publish call fails, losing the event"
+      ],
+      "answer": 3,
+      "why": "The dangerous case is a successful commit followed by a failed publish, which leaves the world believing nothing happened. One atomic write removes that gap and a separate worker ships the row.",
+      "why_vi": "Ca nguy hiểm là xác nhận ghi thành công rồi lượt công bố thất bại, khiến bên ngoài tin rằng chưa có gì xảy ra. Một lượt ghi nguyên tử xoá khe hở đó, còn tiến trình riêng lo việc gửi đi.",
+      "level": 3
+    },
+    {
+      "id": "qsw-9",
+      "q": "Users report that a record they just saved is missing from the list for a few seconds. The list is served from a read replica. The cause is",
+      "q_vi": "Người dùng báo bản ghi vừa lưu không thấy trong danh sách trong vài giây. Danh sách được phục vụ từ bản sao chỉ đọc. Nguyên nhân là",
+      "choices": [
+        "Replication lag, so a read after write can still see the older state",
+        "A missing index on the list query, which makes the new row sort last",
+        "Connection pooling, which sends the read to a stale cached connection",
+        "The write transaction never committed and was silently rolled back"
+      ],
+      "answer": 0,
+      "why": "Replicas converge only after the change propagates. If the user must see their own write immediately, that read has to be routed to the primary.",
+      "why_vi": "Bản sao chỉ hội tụ sau khi thay đổi lan tới. Nếu người dùng bắt buộc phải thấy ngay thứ mình vừa ghi, lượt đọc đó phải được đưa về máy chính.",
+      "level": 2
+    },
+    {
+      "id": "qsw-10",
+      "q": "A worker consumes slower than the producer publishes and memory keeps climbing. What is missing?",
+      "q_vi": "Tiến trình tiêu thụ chậm hơn tốc độ bên sản xuất phát ra và bộ nhớ cứ tăng dần. Thứ đang thiếu là",
+      "choices": [
+        "A backpressure signal that slows the producer when the queue grows",
+        "A larger buffer so the consumer has more room to catch up later",
+        "A second acknowledgement mode so messages are confirmed twice",
+        "A shorter retention period so old messages expire out of the queue"
+      ],
+      "answer": 0,
+      "why": "Buffering only moves the moment of failure. The system needs a way to push the constraint back to the source, otherwise the queue grows until something dies.",
+      "why_vi": "Tăng bộ đệm chỉ dời thời điểm sụp đổ. Hệ thống cần cách đẩy ràng buộc ngược về nguồn, nếu không hàng đợi cứ phình cho tới khi có thứ gì đó chết.",
+      "level": 2
+    },
+    {
+      "id": "qsw-11",
+      "q": "In a hexagonal design, who owns the interface that the Postgres repository implements?",
+      "q_vi": "Trong thiết kế lục giác, ai sở hữu giao diện mà kho dữ liệu Postgres hiện thực?",
+      "choices": [
+        "The infrastructure module, since it knows the storage capabilities best",
+        "The framework, which generates it from the schema during the build",
+        "The domain core, which declares the operations it needs in its own terms",
+        "The controller layer, because it is the one that triggers persistence"
+      ],
+      "answer": 2,
+      "why": "The core states what it needs and the adapter conforms. If the storage side owns the interface, the arrows point outward again and you are back to a layered dependency on the database.",
+      "why_vi": "Lõi nói nó cần gì còn bộ chuyển tiếp phải theo. Nếu phía lưu trữ sở hữu giao diện thì mũi tên lại hướng ra ngoài, và bạn quay về chỗ tầng miền phụ thuộc cơ sở dữ liệu.",
+      "level": 2
+    },
+    {
+      "id": "qsw-12",
+      "q": "All your entities are plain field bags and every rule lives in a service class. The practical consequence is",
+      "q_vi": "Mọi thực thể của bạn chỉ là túi đựng trường dữ liệu và mọi quy tắc nằm trong lớp dịch vụ. Hệ quả thực tế là",
+      "choices": [
+        "One business rule gets duplicated across services and drifts out of step",
+        "Serialisation to JSON becomes slower because getters must be invoked",
+        "The database schema must be regenerated whenever a service is added",
+        "Dependency injection stops working because services hold no state"
+      ],
+      "answer": 0,
+      "why": "With no home for the rule, each new use case reimplements it. The copies diverge quietly and you discover it when two screens disagree about the same student.",
+      "why_vi": "Không có chỗ trú cho quy tắc thì mỗi ca sử dụng mới lại viết lại nó. Các bản sao lệch nhau âm thầm, và bạn phát hiện ra khi hai màn hình nói khác nhau về cùng một sinh viên.",
+      "level": 2
+    },
+    {
+      "id": "qsw-13",
+      "q": "In the admissions module a student means an applicant, in the accreditation module it means a graduate cohort member. The correct response is",
+      "q_vi": "Ở phân hệ tuyển sinh, sinh viên nghĩa là thí sinh, còn ở phân hệ kiểm định nó nghĩa là thành viên khoá tốt nghiệp. Cách xử lý đúng là",
+      "choices": [
+        "Force one shared student table so the two modules cannot disagree",
+        "Rename one of them so the word student is used by only one module",
+        "Keep separate models per context and translate explicitly at the boundary",
+        "Add a type column and branch on it inside every query in both modules"
+      ],
+      "answer": 2,
+      "why": "One term with two meanings is a sign of two contexts, not of a naming mistake. Merging them creates a table of nullable columns that satisfies neither side.",
+      "why_vi": "Một thuật ngữ mang hai nghĩa là dấu hiệu của hai ngữ cảnh chứ không phải lỗi đặt tên. Gộp lại sẽ sinh ra một bảng đầy cột rỗng mà không bên nào dùng thoải mái.",
+      "level": 2
+    },
+    {
+      "id": "qsw-14",
+      "q": "You must integrate a legacy human resources system whose data model is strange. An anti corruption layer is meant to",
+      "q_vi": "Bạn phải tích hợp một hệ nhân sự cũ có mô hình dữ liệu kỳ quặc. Lớp chống nhiễm mô hình có mục đích",
+      "choices": [
+        "Cache their responses so their slow server is queried less often",
+        "Validate their payloads against a schema before the data is stored",
+        "Retry their endpoints on failure so their instability stays invisible",
+        "Translate their concepts into yours so their model does not spread inward"
+      ],
+      "answer": 3,
+      "why": "The risk is conceptual, not just technical. Without translation, their field names and their assumptions end up in your domain and outlive the integration.",
+      "why_vi": "Rủi ro nằm ở khái niệm chứ không chỉ ở kỹ thuật. Không phiên dịch thì tên trường và giả định của họ sẽ chui vào miền của bạn và sống lâu hơn cả lần tích hợp.",
+      "level": 3
+    },
+    {
+      "id": "qsw-15",
+      "q": "Moving an old system one feature at a time while both run in parallel is called",
+      "q_vi": "Việc chuyển hệ cũ sang hệ mới theo từng tính năng trong khi cả hai cùng chạy song song được gọi là",
+      "choices": [
+        "A strangler fig migration, replacing the old path piece by piece",
+        "A blue green deployment, switching all traffic in a single step",
+        "A canary release, exposing one version to a fraction of users",
+        "A shadow deployment, mirroring traffic without serving responses"
+      ],
+      "answer": 0,
+      "why": "The distinguishing feature is that scope moves gradually and the old system shrinks. The other techniques all concern releasing one version of the same system.",
+      "why_vi": "Nét phân biệt là phạm vi dịch chuyển dần và hệ cũ teo lại. Các kỹ thuật còn lại đều nói về cách phát hành một phiên bản của cùng một hệ thống.",
+      "level": 1
+    },
+    {
+      "id": "qsw-16",
+      "q": "Splitting reads onto a separate denormalised model is worth it mainly when",
+      "q_vi": "Việc tách đường đọc sang một mô hình phi chuẩn hoá riêng chỉ đáng làm khi",
+      "choices": [
+        "The team wants a cleaner folder structure with commands and queries apart",
+        "The write model has grown too many columns to fit in a single table",
+        "The database supports replication so the read side is free of extra cost",
+        "The reporting queries and the write rules genuinely demand different shapes"
+      ],
+      "answer": 3,
+      "why": "The split buys you a shape optimised per workload and charges you with synchronisation and staleness. Without conflicting shapes you pay the cost and gain nothing.",
+      "why_vi": "Việc tách mua cho bạn hình dạng tối ưu theo từng loại tải và bắt bạn trả bằng đồng bộ và độ trễ dữ liệu. Không có xung đột về hình dạng thì bạn trả giá mà chẳng được gì.",
+      "level": 3
+    },
+    {
+      "id": "qsw-17",
+      "q": "Conway's law predicts that",
+      "q_vi": "Định luật Conway dự đoán rằng",
+      "choices": [
+        "Adding people to a late project makes the project even later than before",
+        "The system's interfaces will mirror how the building teams communicate",
+        "Complexity grows quadratically with the number of modules in a codebase",
+        "The cost of fixing a defect rises with each phase it survives undetected"
+      ],
+      "answer": 1,
+      "why": "It is an observation about organisations, not about effort or defects. If three teams own one service, that service will grow three seams.",
+      "why_vi": "Đây là nhận xét về tổ chức, không phải về công sức hay khiếm khuyết. Nếu ba nhóm cùng sở hữu một dịch vụ, dịch vụ đó sẽ mọc ra ba đường nối.",
+      "level": 1
+    },
+    {
+      "id": "qsw-18",
+      "q": "A saga differs from a database transaction in that",
+      "q_vi": "Chuỗi bù trừ khác một giao dịch cơ sở dữ liệu ở chỗ",
+      "choices": [
+        "It locks all participating rows until the last step has been confirmed",
+        "It never fails, because each step is retried until it eventually succeeds",
+        "It runs entirely inside one connection and therefore commits atomically",
+        "Intermediate states are visible and undo is a new business action"
+      ],
+      "answer": 3,
+      "why": "There is no rollback in a saga, only a compensating step that other participants can already have seen. That visibility is a business decision, not a technical detail.",
+      "why_vi": "Chuỗi bù trừ không có hoàn tác, chỉ có bước bù mà các bên khác có thể đã nhìn thấy trạng thái giữa chừng. Sự nhìn thấy đó là quyết định nghiệp vụ chứ không phải chi tiết kỹ thuật.",
+      "level": 3
+    },
+    {
+      "id": "qsw-19",
+      "q": "Two phase commit is avoided in most web systems because",
+      "q_vi": "Xác nhận hai pha bị tránh trong phần lớn hệ thống web vì",
+      "choices": [
+        "Participants stay blocked holding locks if the coordinator disappears",
+        "It requires all participants to run the same database engine version",
+        "It cannot be used when more than two services take part in the write",
+        "It provides weaker guarantees than eventual consistency in practice"
+      ],
+      "answer": 0,
+      "why": "The prepared state is durable but undecided, so a coordinator failure leaves rows locked with nobody able to resolve them. The availability cost is what kills it.",
+      "why_vi": "Trạng thái đã chuẩn bị thì bền nhưng chưa quyết, nên bộ điều phối chết sẽ để lại các dòng bị khoá mà không ai giải được. Cái giá về tính sẵn sàng mới là thứ giết nó.",
+      "level": 3
+    },
+    {
+      "id": "qsw-20",
+      "q": "Your consumer sends an email and the broker guarantees at least once delivery. Users report duplicate emails after a network blip. The fix is",
+      "q_vi": "Bên tiêu thụ của bạn gửi thư điện tử và hàng đợi bảo đảm giao ít nhất một lần. Người dùng báo nhận thư trùng sau một trục trặc mạng. Cách sửa là",
+      "choices": [
+        "Turn off retries in the broker so a message is delivered only once",
+        "Acknowledge the message before doing the work so it is never redelivered",
+        "Increase the visibility timeout so the second delivery arrives much later",
+        "Record a processed marker per message identifier before sending the email"
+      ],
+      "answer": 3,
+      "why": "Retries are the safety mechanism, so removing them trades duplicates for silent loss. Acknowledging early does the same. The handler has to become idempotent.",
+      "why_vi": "Thử lại chính là cơ chế an toàn, bỏ nó đi tức là đổi thư trùng lấy mất thư âm thầm. Xác nhận sớm cũng vậy. Bộ xử lý phải trở thành bất biến khi lặp lại.",
+      "level": 2
+    },
+    {
+      "id": "qsw-21",
+      "q": "A webhook receiver assumes events arrive in the order they were produced. This assumption fails because",
+      "q_vi": "Bên nhận móc gọi ngược giả định các sự kiện tới đúng thứ tự phát sinh. Giả định này sai vì",
+      "choices": [
+        "Retries and parallel delivery can put a later event ahead of an earlier one",
+        "Providers deliberately shuffle events to prevent replay style attacks",
+        "HTTP has no way to express a timestamp inside the request headers",
+        "The receiver processes events in a thread pool that reverses the order"
+      ],
+      "answer": 0,
+      "why": "A failed first attempt is retried after the next event has already gone out, and multiple senders run in parallel. The receiver must use a version or a timestamp and ignore stale updates.",
+      "why_vi": "Lần gửi đầu thất bại sẽ được thử lại sau khi sự kiện kế đã đi rồi, lại thêm nhiều luồng gửi chạy song song. Bên nhận phải dùng số phiên bản hoặc mốc thời gian và bỏ qua cập nhật cũ.",
+      "level": 3
+    },
+    {
+      "id": "qsw-22",
+      "q": "Publishing events instead of calling services directly removes",
+      "q_vi": "Việc phát sự kiện thay vì gọi thẳng dịch vụ khác giúp loại bỏ",
+      "choices": [
+        "Temporal coupling, but not the shared understanding of the event shape",
+        "The need for both sides to agree on the meaning of the payload fields",
+        "All coupling, since the publisher no longer knows any consumer exists",
+        "The requirement to handle failures, which the broker now owns entirely"
+      ],
+      "answer": 0,
+      "why": "The publisher stops waiting for the consumer, which is real decoupling in time. The contract simply moves into the event schema, where changing a field still breaks people.",
+      "why_vi": "Bên phát thôi phải chờ bên nhận, đó là tách rời thật về mặt thời gian. Nhưng hợp đồng chỉ dời vào lược đồ sự kiện, và đổi một trường ở đó vẫn làm hỏng việc của người khác.",
+      "level": 3
+    },
+    {
+      "id": "qsw-23",
+      "q": "The most useful criterion for placing a service boundary is",
+      "q_vi": "Tiêu chí hữu ích nhất để đặt ranh giới dịch vụ là",
+      "choices": [
+        "Grouping code by technical kind so controllers and models stay together",
+        "Splitting whenever a file exceeds an agreed number of lines of code",
+        "Following which parts of the business change together and are owned together",
+        "Separating the parts written by different developers during the first release"
+      ],
+      "answer": 2,
+      "why": "Boundaries exist to localise change. Cutting by technical kind guarantees that one business change touches every service at once.",
+      "why_vi": "Ranh giới sinh ra để khoanh vùng thay đổi. Cắt theo loại kỹ thuật thì bảo đảm một thay đổi nghiệp vụ sẽ động vào mọi dịch vụ cùng lúc.",
+      "level": 2
+    },
+    {
+      "id": "qsw-24",
+      "q": "A circuit breaker in front of a failing dependency mainly protects",
+      "q_vi": "Cầu dao ngắt mạch đặt trước một phụ thuộc đang hỏng chủ yếu bảo vệ",
+      "choices": [
+        "The caller, whose threads would otherwise pile up waiting on timeouts",
+        "The network, by reducing the number of packets sent during an outage",
+        "The data, by rolling back writes that the dependency failed to accept",
+        "The user session, by keeping the authentication token alive during errors"
+      ],
+      "answer": 0,
+      "why": "The failure mode being prevented is exhaustion on your own side. Fail fast frees the resources that would otherwise be blocked in a slow call.",
+      "why_vi": "Kiểu sự cố được ngăn chặn là cạn tài nguyên ở chính phía bạn. Hỏng nhanh giúp giải phóng tài nguyên vốn sẽ bị kẹt trong một lượt gọi chậm.",
+      "level": 1
+    },
+    {
+      "id": "qsw-25",
+      "q": "A brief database hiccup turns into a thirty minute outage because every client retried immediately. The missing ingredient was",
+      "q_vi": "Một trục trặc ngắn của cơ sở dữ liệu biến thành ba mươi phút gián đoạn vì mọi máy khách thử lại ngay lập tức. Thứ còn thiếu là",
+      "choices": [
+        "Randomised delay growing after each attempt, so retries spread out",
+        "A longer request timeout so the first attempt would have succeeded",
+        "A larger connection pool so more retries could be served in parallel",
+        "An immediate second attempt, which usually succeeds after a transient fault"
+      ],
+      "answer": 0,
+      "why": "Synchronised retries recreate the original load spike at exactly the moment the system is weakest. Growing delays plus jitter break the synchronisation.",
+      "why_vi": "Các lượt thử lại đồng pha tái tạo đúng đỉnh tải ban đầu vào lúc hệ thống yếu nhất. Giãn thời gian tăng dần kèm nhiễu ngẫu nhiên sẽ phá vỡ sự đồng pha đó.",
+      "level": 3
+    },
+    {
+      "id": "qsw-26",
+      "q": "The rule deciding whether a lecturer may be assigned appears in three route handlers with small differences. The right move is",
+      "q_vi": "Quy tắc quyết định một giảng viên có được phân công hay không xuất hiện ở ba hàm xử lý tuyến đường với khác biệt nhỏ. Nước đi đúng là",
+      "choices": [
+        "Copy the strictest version into the other two handlers to align them",
+        "Add a shared middleware that runs before each of the three handlers",
+        "Enforce it with a database trigger so no handler can bypass the rule",
+        "Move the decision into one domain function the handlers all call"
+      ],
+      "answer": 3,
+      "why": "The rule is business knowledge and it needs one home that can be tested directly. Middleware and triggers are placements that make the rule harder to read and to unit test.",
+      "why_vi": "Quy tắc này là tri thức nghiệp vụ và cần một chỗ trú duy nhất có thể kiểm thử trực tiếp. Đặt ở lớp trung gian hay ở bẫy cơ sở dữ liệu chỉ làm nó khó đọc và khó kiểm đơn vị hơn.",
+      "level": 2
+    },
+    {
+      "id": "qsw-27",
+      "q": "Returning HTTP two hundred with an error message in the body is harmful because",
+      "q_vi": "Trả về mã HTTP hai trăm kèm thông báo lỗi trong phần thân là có hại vì",
+      "choices": [
+        "The response body cannot contain structured error details in that case",
+        "Browsers refuse to parse a JSON body attached to a success response",
+        "Every proxy, retry policy and dashboard now counts the failure as success",
+        "It breaks content negotiation because the media type no longer matches"
+      ],
+      "answer": 2,
+      "why": "The status line is the machine readable part. Once it lies, alerting, caching and client retry logic all make decisions on false information.",
+      "why_vi": "Dòng trạng thái mới là phần dành cho máy đọc. Khi nó nói dối, hệ cảnh báo, bộ nhớ đệm và logic thử lại của máy khách đều ra quyết định trên thông tin sai.",
+      "level": 2
+    },
+    {
+      "id": "qsw-28",
+      "q": "Which pair of HTTP methods is idempotent by specification?",
+      "q_vi": "Cặp phương thức HTTP nào có tính lặp không đổi theo đặc tả?",
+      "choices": [
+        "PUT and DELETE, because repeating them leaves the same resource state",
+        "POST and PATCH, because both send the changed fields in the body",
+        "POST and PUT, because both create the resource when it is missing",
+        "PATCH and DELETE, because both need an existing resource to work on"
+      ],
+      "answer": 0,
+      "why": "Idempotency is about the state after repetition, not about the payload. Deleting twice still leaves the resource gone, while posting twice usually creates two rows.",
+      "why_vi": "Tính lặp không đổi nói về trạng thái sau khi lặp lại chứ không nói về dữ liệu gửi kèm. Xoá hai lần thì tài nguyên vẫn mất, còn gửi POST hai lần thường tạo ra hai dòng.",
+      "level": 1
+    },
+    {
+      "id": "qsw-29",
+      "q": "A paginated list ordered by creation time shows a duplicated row on page two while new rows keep arriving. The cause is",
+      "q_vi": "Danh sách phân trang sắp theo thời gian tạo hiện một dòng lặp lại ở trang hai trong khi vẫn có dòng mới được thêm. Nguyên nhân là",
+      "choices": [
+        "The client cached page one and merged it with a newer page two response",
+        "The sort key has ties, so equal timestamps are ordered differently each query",
+        "Skipping a fixed number of rows shifts the window when rows are inserted",
+        "The database read the second page from a replica that lagged behind"
+      ],
+      "answer": 2,
+      "why": "With an offset, the meaning of row number twenty one changes as soon as anything is inserted before it. Anchoring on the last seen key removes the drift.",
+      "why_vi": "Với cách bỏ qua số dòng, ý nghĩa của dòng thứ hai mươi mốt đổi ngay khi có dòng nào chèn vào phía trước. Neo theo khoá cuối cùng đã thấy sẽ xoá được sự trôi này.",
+      "level": 3
+    },
+    {
+      "id": "qsw-30",
+      "q": "Cursor pagination still returns unstable pages. The most likely remaining mistake is",
+      "q_vi": "Phân trang bằng con trỏ vẫn trả về các trang không ổn định. Sai sót còn lại khả dĩ nhất là",
+      "choices": [
+        "The page size is too large for the database to return in one round trip",
+        "The cursor is sent in the body instead of being sent as a query parameter",
+        "The cursor is not encoded, so clients can read the underlying identifier",
+        "The sort key is not unique, so rows with equal values can be skipped"
+      ],
+      "answer": 3,
+      "why": "A cursor is a position in a total order. If the ordering key repeats, there is no single position after a value and rows fall between pages.",
+      "why_vi": "Con trỏ là một vị trí trong một thứ tự toàn phần. Nếu khoá sắp xếp bị lặp giá trị thì không có vị trí duy nhất sau một giá trị, và có dòng rơi vào giữa hai trang.",
+      "level": 3
+    },
+    {
+      "id": "qsw-31",
+      "q": "Which change to a public API is breaking?",
+      "q_vi": "Thay đổi nào sau đây với một giao diện lập trình công khai là phá vỡ tương thích?",
+      "choices": [
+        "Adding a new optional query parameter with a sensible default value",
+        "Adding a new field to the response object that old clients ignore",
+        "Making a previously optional request field required for validation",
+        "Adding a new endpoint under a path that no client currently calls"
+      ],
+      "answer": 2,
+      "why": "The test is whether a request that used to succeed now fails. Tightening validation invalidates existing callers even though nothing was removed.",
+      "why_vi": "Phép thử là một yêu cầu trước đây thành công nay có hỏng không. Siết chặt kiểm tra làm hỏng các bên gọi hiện có dù chẳng bỏ đi thứ gì.",
+      "level": 2
+    },
+    {
+      "id": "qsw-32",
+      "q": "The same request works from a terminal client but fails in the browser with a cross origin error. This tells you",
+      "q_vi": "Cùng một yêu cầu chạy được từ máy khách dòng lệnh nhưng lỗi khác nguồn trên trình duyệt. Điều này cho bạn biết",
+      "choices": [
+        "The restriction is enforced by the browser to protect the logged in user",
+        "The server rejects requests that carry no browser user agent header",
+        "The transport layer security certificate is not trusted by that browser",
+        "The endpoint requires a session cookie that the terminal client omitted"
+      ],
+      "answer": 0,
+      "why": "The policy lives in the browser and exists because the browser attaches the user's credentials automatically. It is not a server side firewall.",
+      "why_vi": "Chính sách này nằm ở trình duyệt và tồn tại vì trình duyệt tự động gắn thông tin đăng nhập của người dùng. Nó không phải tường lửa phía máy chủ.",
+      "level": 3
+    },
+    {
+      "id": "qsw-33",
+      "q": "A browser sends an OPTIONS request before a cross origin PUT. That extra request exists to",
+      "q_vi": "Trình duyệt gửi một yêu cầu OPTIONS trước lượt PUT khác nguồn. Yêu cầu thêm này để",
+      "choices": [
+        "Measure the round trip time so the client can set a suitable timeout",
+        "Ask permission before a state changing call is actually delivered",
+        "Fetch the schema of the endpoint so the payload can be validated",
+        "Negotiate compression so the following request body can be smaller"
+      ],
+      "answer": 1,
+      "why": "A PUT with a custom header is not a request a plain form could make, so the browser checks first rather than letting the side effect happen and then hiding the response.",
+      "why_vi": "Lượt PUT kèm tiêu đề tuỳ biến không phải thứ một biểu mẫu thường gửi được, nên trình duyệt hỏi trước thay vì để tác dụng phụ xảy ra rồi mới giấu phản hồi.",
+      "level": 2
+    },
+    {
+      "id": "qsw-34",
+      "q": "A colleague argues that a signed token is a full replacement for server sessions. The strongest objection is",
+      "q_vi": "Một đồng nghiệp cho rằng thẻ có chữ ký thay thế hoàn toàn phiên phía máy chủ. Phản bác mạnh nhất là",
+      "choices": [
+        "Signature verification costs more processor time than a session lookup",
+        "Tokens cannot carry the roles and permissions a session normally holds",
+        "Tokens are readable by anyone, so no user data can ever be put inside",
+        "A disabled account keeps full access until the token reaches its expiry"
+      ],
+      "answer": 3,
+      "why": "The property that removes the lookup is exactly the property that removes revocation. Any real fix reintroduces server state, such as a deny list or very short lifetimes with refresh.",
+      "why_vi": "Chính tính chất giúp bỏ được lượt tra cứu cũng là tính chất làm mất khả năng thu hồi. Mọi cách chữa thật đều đưa trạng thái phía máy chủ trở lại, như danh sách chặn hoặc hạn rất ngắn kèm làm mới.",
+      "level": 3
+    },
+    {
+      "id": "qsw-35",
+      "q": "Why pair a short lived access token with a longer lived refresh token?",
+      "q_vi": "Vì sao ghép một thẻ truy cập sống ngắn với một thẻ làm mới sống lâu?",
+      "choices": [
+        "To keep the exposure window small while avoiding a login every few minutes",
+        "To allow the client to work offline until the refresh token has expired",
+        "To let the server verify two independent signatures on each request",
+        "To store user permissions in one token and user identity in the other"
+      ],
+      "answer": 0,
+      "why": "The access token travels constantly, so it should die quickly. The refresh token is used rarely, can be stored more carefully and is the thing you revoke.",
+      "why_vi": "Thẻ truy cập đi lại liên tục nên phải chết nhanh. Thẻ làm mới ít dùng, cất giữ cẩn thận hơn và chính nó mới là thứ bạn thu hồi.",
+      "level": 2
+    },
+    {
+      "id": "qsw-36",
+      "q": "An internal accreditation tool must let an administrator force a user to sign out immediately. The simplest design that satisfies this is",
+      "q_vi": "Một công cụ kiểm định nội bộ phải cho quản trị viên buộc một người dùng đăng xuất ngay lập tức. Thiết kế đơn giản nhất thoả mãn yêu cầu đó là",
+      "choices": [
+        "Signed tokens with a five minute lifetime and no server side records",
+        "Signed tokens stored in local storage so the client can delete them",
+        "Signed tokens plus a client side timer that clears them on inactivity",
+        "An opaque session identifier whose record the server can delete at once"
+      ],
+      "answer": 3,
+      "why": "Immediate revocation needs state the server controls. Anything the client can be asked to delete is not a control, because a stolen credential is no longer in the client's hands.",
+      "why_vi": "Thu hồi tức thì đòi hỏi trạng thái do máy chủ nắm. Bất cứ thứ gì phải nhờ máy khách xoá đều không phải cơ chế kiểm soát, vì chứng chỉ bị đánh cắp đâu còn nằm trong tay máy khách.",
+      "level": 3
+    },
+    {
+      "id": "qsw-37",
+      "q": "Setting a session cookie to same site strict reduces which risk?",
+      "q_vi": "Đặt cookie phiên ở chế độ same site strict giúp giảm rủi ro nào?",
+      "choices": [
+        "A script injected into your own page reading the cookie value",
+        "An attacker on the same network reading the cookie in transit",
+        "A brute force attack guessing the session identifier by enumeration",
+        "Another site triggering a state changing request with your cookie"
+      ],
+      "answer": 3,
+      "why": "The attribute controls whether the browser attaches the cookie to requests initiated elsewhere. It does nothing about scripts inside your own origin or about transport security.",
+      "why_vi": "Thuộc tính này quyết định trình duyệt có gắn cookie vào yêu cầu khởi phát từ nơi khác hay không. Nó không giúp gì trước mã kịch bản trong chính nguồn của bạn hay trước an toàn đường truyền.",
+      "level": 2
+    },
+    {
+      "id": "qsw-38",
+      "q": "Storing the session token in local storage instead of an http only cookie mainly increases exposure to",
+      "q_vi": "Cất thẻ phiên trong bộ nhớ cục bộ thay vì cookie chặn mã kịch bản chủ yếu làm tăng nguy cơ trước",
+      "choices": [
+        "Any injected script on the page, which can read and exfiltrate it",
+        "Network observers, since local storage is transmitted without encryption",
+        "Cross site request forgery, because the value is attached automatically",
+        "Server side template injection, which can render the value into the page"
+      ],
+      "answer": 0,
+      "why": "The http only flag exists precisely to put the credential out of reach of page scripts. Local storage is readable by any code running in the origin.",
+      "why_vi": "Cờ chặn mã kịch bản sinh ra đúng để đặt chứng chỉ ra ngoài tầm với của mã trong trang. Bộ nhớ cục bộ thì bất kỳ mã nào chạy trong cùng nguồn đều đọc được.",
+      "level": 2
+    },
+    {
+      "id": "qsw-39",
+      "q": "An endpoint checks the session cookie carefully but has no anti forgery token. It is still vulnerable because",
+      "q_vi": "Một điểm cuối kiểm cookie phiên rất kỹ nhưng không có thẻ chống giả mạo. Nó vẫn có lỗ hổng vì",
+      "choices": [
+        "The cookie can be replayed by anyone who captures a single request",
+        "Session cookies expire on the server and not inside the browser store",
+        "The browser attaches the cookie even when another site starts the request",
+        "Cookies are sent as plain headers that any page on the internet can read"
+      ],
+      "answer": 2,
+      "why": "Authentication answers who you are, not who asked. The forgery token proves the request came from your own page, which the cookie alone can never show.",
+      "why_vi": "Xác thực trả lời bạn là ai chứ không trả lời ai đã yêu cầu. Thẻ chống giả mạo chứng minh yêu cầu xuất phát từ chính trang của bạn, điều mà riêng cookie không bao giờ cho thấy.",
+      "level": 3
+    },
+    {
+      "id": "qsw-40",
+      "q": "The difference between OAuth and OpenID Connect is that",
+      "q_vi": "Khác biệt giữa OAuth và OpenID Connect là",
+      "choices": [
+        "OAuth grants access to a resource, the connect layer states who signed in",
+        "OAuth is used by browsers while the connect layer is used by mobile apps",
+        "OAuth encrypts the tokens whereas the connect layer only signs them",
+        "OAuth works with passwords while the connect layer requires certificates"
+      ],
+      "answer": 0,
+      "why": "One is delegated authorisation and the other adds an identity token on top. Treating an access token as proof of identity is the classic mistake.",
+      "why_vi": "Một bên là uỷ quyền truy cập, bên kia bổ sung thêm thẻ định danh ở trên. Coi thẻ truy cập như bằng chứng danh tính là lỗi kinh điển.",
+      "level": 1
+    },
+    {
+      "id": "qsw-41",
+      "q": "A token bucket limiter allows a short burst above the average rate because",
+      "q_vi": "Bộ giới hạn kiểu thùng thẻ cho phép một đợt dồn ngắn vượt tốc độ trung bình vì",
+      "choices": [
+        "It measures usage over a sliding window that ignores the newest requests",
+        "Unused allowance accumulates up to a cap and can be spent at once",
+        "It counts only failed requests, so successful bursts are never charged",
+        "It resets its counter at fixed intervals, which doubles the edge capacity"
+      ],
+      "answer": 1,
+      "why": "The bucket stores permission that was not used. That is what distinguishes it from a fixed window, which is also the source of the doubling artefact at window edges.",
+      "why_vi": "Thùng chứa giữ lại phần cho phép chưa dùng. Đó là điểm phân biệt nó với cửa sổ cố định, cũng chính là nơi sinh ra hiện tượng nhân đôi ở mép cửa sổ.",
+      "level": 2
+    },
+    {
+      "id": "qsw-42",
+      "q": "Rate limiting purely by client address hurts legitimate users mostly when",
+      "q_vi": "Giới hạn tốc độ chỉ theo địa chỉ máy khách gây thiệt cho người dùng hợp lệ nhất là khi",
+      "choices": [
+        "The clients are mobile devices that change address as they move around",
+        "A whole campus shares one outbound address behind network translation",
+        "The requests arrive over a protocol version that reuses one connection",
+        "The service is deployed to several regions with independent counters"
+      ],
+      "answer": 1,
+      "why": "One address then represents thousands of people, so a single heavy user locks out everyone. Limits usually need to key on the authenticated identity as well.",
+      "why_vi": "Khi đó một địa chỉ đại diện cho hàng nghìn người, nên chỉ một người dùng nặng tay là khoá cửa cả trường. Giới hạn thường phải khoá theo cả danh tính đã xác thực.",
+      "level": 3
+    },
+    {
+      "id": "qsw-43",
+      "q": "Two staff open the same curriculum record and both save. The second save silently overwrites the first. The standard fix is",
+      "q_vi": "Hai cán bộ mở cùng một hồ sơ chương trình đào tạo và cả hai cùng lưu. Lượt lưu sau âm thầm đè lên lượt trước. Cách sửa chuẩn là",
+      "choices": [
+        "Save only the fields the user actually touched in the form",
+        "Reject the write if the row version differs from the one that was read",
+        "Take an exclusive lock on the row as soon as the form is opened",
+        "Write both versions and let a later reviewer merge them by hand"
+      ],
+      "answer": 1,
+      "why": "The lost update happens because the second writer never learned the row changed. Comparing a version on write turns the silent overwrite into a visible conflict.",
+      "why_vi": "Mất cập nhật xảy ra vì người ghi thứ hai không hề biết dòng đã đổi. So sánh số phiên bản lúc ghi biến việc đè âm thầm thành một xung đột nhìn thấy được.",
+      "level": 3
+    },
+    {
+      "id": "qsw-44",
+      "q": "One student's timetable page was briefly served to another user. The most likely cause is",
+      "q_vi": "Trang thời khoá biểu của một sinh viên bị phục vụ nhầm cho người khác trong chốc lát. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "The session cookie was issued without the http only attribute set",
+        "The identifier in the path was guessable and someone tried a nearby number",
+        "The database returned rows from an uncommitted transaction of another user",
+        "A personalised response was marked cacheable and stored by a shared cache"
+      ],
+      "answer": 3,
+      "why": "Anything on the shared path from origin to browser will happily reuse a response you declared public. Per user responses must be marked private or not cached at all.",
+      "why_vi": "Mọi thứ nằm trên đường chung từ máy chủ tới trình duyệt đều sẵn lòng dùng lại phản hồi mà bạn khai là công khai. Phản hồi riêng cho từng người phải được đánh dấu riêng tư hoặc không nhớ đệm.",
+      "level": 3
+    },
+    {
+      "id": "qsw-45",
+      "q": "A team implements deletion as a GET request on a link. What breaks first?",
+      "q_vi": "Một nhóm hiện thực chức năng xoá bằng yêu cầu GET trên một liên kết. Thứ hỏng trước tiên là",
+      "choices": [
+        "Prefetching and crawling delete records nobody asked to remove",
+        "The browser refuses to follow the link because it has no request body",
+        "The deletion cannot be authorised since GET requests carry no cookies",
+        "The response cannot report an error because GET must return a document"
+      ],
+      "answer": 0,
+      "why": "Safe methods are treated as free to repeat, so browsers, proxies and scanners follow them on their own. The rule is not decoration, other software depends on it.",
+      "why_vi": "Phương thức an toàn được coi là lặp lại thoải mái, nên trình duyệt, máy chủ trung gian và trình quét tự đi theo. Quy ước này không phải trang trí, phần mềm khác dựa vào nó.",
+      "level": 3
+    },
+    {
+      "id": "qsw-46",
+      "q": "Which path follows resource naming conventions best?",
+      "q_vi": "Đường dẫn nào tuân thủ quy ước đặt tên tài nguyên tốt nhất?",
+      "choices": [
+        "A path ending in create student combined with the POST method",
+        "A path naming students in the plural with the method carrying the verb",
+        "A path ending in get student list combined with the GET method",
+        "A path naming one action per verb with a query parameter for the type"
+      ],
+      "answer": 1,
+      "why": "The uniform interface already supplies the verb. Repeating it in the path creates two vocabularies that eventually disagree.",
+      "why_vi": "Giao diện thống nhất đã cung cấp sẵn động từ. Nhắc lại nó trong đường dẫn tạo ra hai bộ từ vựng mà sớm muộn sẽ mâu thuẫn nhau.",
+      "level": 1
+    },
+    {
+      "id": "qsw-47",
+      "q": "Your webhook endpoint sometimes receives the same event twice. The correct handling is",
+      "q_vi": "Điểm cuối nhận móc gọi ngược của bạn thỉnh thoảng nhận cùng một sự kiện hai lần. Cách xử lý đúng là",
+      "choices": [
+        "Reply with an error the second time so the sender stops retrying it",
+        "Compare the payload with the previous body and drop exact duplicates",
+        "Store the event identifier and treat an already seen one as a success",
+        "Process both and rely on the database to reject the duplicate row"
+      ],
+      "answer": 2,
+      "why": "Duplicates are normal in at least once delivery, so the receiver owns deduplication. Answering with an error only makes the sender retry harder.",
+      "why_vi": "Trùng lặp là chuyện bình thường khi giao ít nhất một lần, nên bên nhận phải tự lo việc chống trùng. Trả về lỗi chỉ khiến bên gửi thử lại hăng hơn.",
+      "level": 2
+    },
+    {
+      "id": "qsw-48",
+      "q": "When a client exceeds a rate limit, the most useful response is",
+      "q_vi": "Khi một máy khách vượt giới hạn tốc độ, phản hồi hữu ích nhất là",
+      "choices": [
+        "A too many requests status together with how long to wait",
+        "A forbidden status so the client stops retrying the endpoint",
+        "A server error status so the failure appears on the service dashboard",
+        "A redirect to a queue page that refreshes itself every few seconds"
+      ],
+      "answer": 0,
+      "why": "The client needs to know both that it was throttled and when to come back. A forbidden or server error status sends it down the wrong recovery path.",
+      "why_vi": "Máy khách cần biết cả việc mình bị chặn tốc độ lẫn thời điểm nên quay lại. Trả về mã cấm hoặc mã lỗi máy chủ sẽ đẩy nó đi theo hướng phục hồi sai.",
+      "level": 1
+    },
+    {
+      "id": "qsw-49",
+      "q": "A backend for frontend layer is introduced mainly to",
+      "q_vi": "Lớp máy chủ phục vụ riêng cho giao diện được đưa vào chủ yếu để",
+      "choices": [
+        "Give each client one composed response instead of several chained calls",
+        "Hide the database credentials that the browser would otherwise receive",
+        "Allow the frontend team to deploy without coordinating with anyone else",
+        "Replace the shared services so each screen owns its own business rules"
+      ],
+      "answer": 0,
+      "why": "The layer exists to shape and aggregate for one client. It should not accumulate business rules, otherwise it becomes a second domain nobody maintains.",
+      "why_vi": "Lớp này sinh ra để định dạng và gộp dữ liệu cho một loại máy khách. Nó không nên tích tụ quy tắc nghiệp vụ, nếu không sẽ thành một miền thứ hai chẳng ai bảo trì.",
+      "level": 1
+    },
+    {
+      "id": "qsw-50",
+      "q": "A machine readable API description is most valuable because it",
+      "q_vi": "Bản mô tả giao diện lập trình mà máy đọc được có giá trị nhất vì nó",
+      "choices": [
+        "Documents the endpoints in a format that reviewers find easy to read",
+        "Lets tools generate clients and detect contract changes automatically",
+        "Guarantees that the running server matches whatever was written down",
+        "Removes the need for integration tests between the two sides of the call"
+      ],
+      "answer": 1,
+      "why": "The value is in the automation, not the prose. Nothing in the format keeps the implementation honest unless the description is generated from or checked against the code.",
+      "why_vi": "Giá trị nằm ở phần tự động hoá chứ không ở văn bản. Bản thân định dạng không giữ cho phần hiện thực trung thực, trừ khi bản mô tả được sinh ra từ mã hoặc được đối chiếu với mã.",
+      "level": 1
+    },
+    {
+      "id": "qsw-51",
+      "q": "A server rendered page appears instantly but buttons do nothing for a second. This gap is explained by",
+      "q_vi": "Một trang kết xuất từ máy chủ hiện ra ngay nhưng các nút không phản hồi trong khoảng một giây. Khoảng trống đó được giải thích bởi",
+      "choices": [
+        "The stylesheet arriving after the markup, which delays the paint of controls",
+        "The server holding the connection open until every database query returns",
+        "The service worker intercepting the first navigation and replaying it later",
+        "Handlers being attached only after the page script has loaded and run"
+      ],
+      "answer": 3,
+      "why": "Markup arrives long before behaviour does. Until the script has downloaded, parsed and attached state, what you see is a picture of an interface.",
+      "why_vi": "Phần nội dung tới trước phần hành vi rất lâu. Trước khi mã kịch bản tải xong, phân tích xong và gắn trạng thái, thứ bạn thấy chỉ là bức ảnh của một giao diện.",
+      "level": 2
+    },
+    {
+      "id": "qsw-52",
+      "q": "A page throws a hydration mismatch warning only in production. The most likely cause is",
+      "q_vi": "Một trang báo cảnh báo lệch nội dung khi gắn tương tác, và chỉ xảy ra ở môi trường thật. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "The production build minifies class names differently from the development build",
+        "The rendered output depends on the current time or on a random value",
+        "The content delivery network compresses the markup before it reaches the client",
+        "The production database contains more rows than the development database"
+      ],
+      "answer": 1,
+      "why": "Server and client must derive the same markup from the same inputs. Anything that differs between the two runs, such as a clock or a random seed, produces a mismatch.",
+      "why_vi": "Máy chủ và máy khách phải dựng ra cùng một nội dung từ cùng đầu vào. Bất cứ thứ gì khác nhau giữa hai lượt chạy, như đồng hồ hay hạt ngẫu nhiên, đều gây lệch.",
+      "level": 3
+    },
+    {
+      "id": "qsw-53",
+      "q": "Which page is the poorest candidate for build time static generation?",
+      "q_vi": "Trang nào là ứng viên tệ nhất cho việc sinh trang tĩnh lúc dựng bản?",
+      "choices": [
+        "A public list of programmes that the office updates a few times per year",
+        "A documentation page whose content lives in files inside the repository",
+        "An archive of past announcements grouped by academic year and faculty",
+        "A dashboard showing the marks of the signed in student"
+      ],
+      "answer": 3,
+      "why": "Static output is one file for everyone. As soon as the content depends on who is asking, it must be produced per request or fetched by the client after load.",
+      "why_vi": "Trang tĩnh là một tệp dùng chung cho mọi người. Ngay khi nội dung phụ thuộc vào người đang hỏi, nó phải được sinh theo từng yêu cầu hoặc được máy khách tải sau khi trang lên.",
+      "level": 1
+    },
+    {
+      "id": "qsw-54",
+      "q": "Regenerating a static page on an interval instead of on every request means",
+      "q_vi": "Sinh lại trang tĩnh theo chu kỳ thay vì theo từng yêu cầu nghĩa là",
+      "choices": [
+        "Some visitors will read a version that is already out of date",
+        "The first visitor after each change always pays a full rebuild cost",
+        "The page can no longer be served from a location close to the reader",
+        "Every update to the underlying data triggers an immediate new build"
+      ],
+      "answer": 0,
+      "why": "The interval is exactly the staleness you are accepting in exchange for serving a file instead of running a render. That is the trade, and it must be a business decision.",
+      "why_vi": "Chính khoảng chu kỳ đó là mức dữ liệu cũ mà bạn chấp nhận để đổi lấy việc phục vụ một tệp thay vì chạy kết xuất. Đó là đánh đổi, và phải do nghiệp vụ quyết.",
+      "level": 2
+    },
+    {
+      "id": "qsw-55",
+      "q": "Streaming the response helps a report page mainly because",
+      "q_vi": "Kết xuất theo luồng giúp một trang báo cáo chủ yếu vì",
+      "choices": [
+        "The total time to compute the slow report section is reduced noticeably",
+        "The browser can render the sections in a different order than they arrive",
+        "The server needs less memory since the whole document is never assembled",
+        "The header and navigation can paint while the slow section is still running"
+      ],
+      "answer": 3,
+      "why": "Streaming does not make the slow query faster, it stops that query from holding the entire page hostage. The perceived improvement comes from ordering, not from throughput.",
+      "why_vi": "Kết xuất theo luồng không làm truy vấn chậm nhanh lên, nó chỉ ngăn truy vấn đó bắt cả trang làm con tin. Cảm giác nhanh hơn đến từ thứ tự chứ không từ thông lượng.",
+      "level": 2
+    },
+    {
+      "id": "qsw-56",
+      "q": "A page makes three fetches where each one needs the previous result. Total latency is",
+      "q_vi": "Một trang thực hiện ba lượt tải mà lượt sau cần kết quả của lượt trước. Tổng độ trễ sẽ là",
+      "choices": [
+        "The largest of the three, since the browser opens them on one connection",
+        "The average of the three, because the requests overlap partially in time",
+        "Independent of the three, since the render is blocked by parsing anyway",
+        "The sum of the three, because none of them can start any earlier"
+      ],
+      "answer": 3,
+      "why": "Sequential dependency turns parallel work into a chain. The cure is to lift the independent fetches so they start together, or to fetch on the server where the hops are cheap.",
+      "why_vi": "Sự phụ thuộc tuần tự biến công việc song song thành một chuỗi. Cách chữa là kéo các lượt tải độc lập lên để chúng khởi động cùng lúc, hoặc tải ở máy chủ nơi mỗi chặng rất rẻ.",
+      "level": 3
+    },
+    {
+      "id": "qsw-57",
+      "q": "Moving a component to run only on the server changes what for the browser?",
+      "q_vi": "Chuyển một thành phần sang chỉ chạy trên máy chủ làm thay đổi điều gì với trình duyệt?",
+      "choices": [
+        "It receives the same code but executes it inside a restricted sandbox",
+        "It receives the component library twice, once compiled and once as source",
+        "It receives a smaller bundle because that component ships no code at all",
+        "It receives the data earlier but still downloads the component to hydrate"
+      ],
+      "answer": 2,
+      "why": "The component's own code stays on the server, so the client pays only for the markup and for whatever is genuinely interactive.",
+      "why_vi": "Mã của chính thành phần đó ở lại máy chủ, nên máy khách chỉ trả giá cho phần nội dung và cho những phần thật sự cần tương tác.",
+      "level": 2
+    },
+    {
+      "id": "qsw-58",
+      "q": "Code splitting improves the first visit because",
+      "q_vi": "Chia nhỏ gói mã cải thiện lần truy cập đầu tiên vì",
+      "choices": [
+        "The compiler can optimise smaller files more aggressively than one large file",
+        "The visitor downloads only the code the current route actually needs",
+        "The browser caches every chunk permanently after the first navigation",
+        "The server can compress many small files better than one combined file"
+      ],
+      "answer": 1,
+      "why": "The saving comes from not shipping screens the visitor has not opened. Split too finely and you trade one large download for many round trips instead.",
+      "why_vi": "Phần tiết kiệm đến từ việc không gửi những màn hình mà khách chưa mở. Chia quá vụn thì bạn lại đổi một lượt tải lớn lấy rất nhiều chặng đi về.",
+      "level": 1
+    },
+    {
+      "id": "qsw-59",
+      "q": "Time to first byte is good but the largest content paints late. You should look at",
+      "q_vi": "Thời gian tới byte đầu tiên thì tốt nhưng khối nội dung lớn nhất lại vẽ muộn. Bạn nên xem xét",
+      "choices": [
+        "The database, because the query behind the first byte is clearly the bottleneck",
+        "The origin region, because the server is placed far from most of your readers",
+        "The connection setup, because the handshake dominates before any byte arrives",
+        "The client work after arrival, such as blocking scripts, fonts and images"
+      ],
+      "answer": 3,
+      "why": "A healthy first byte tells you the server and network already did their part. Everything after that is parsing, resource discovery and rendering in the browser.",
+      "why_vi": "Byte đầu tiên tốt nghĩa là máy chủ và mạng đã làm xong phần của mình. Mọi thứ sau đó là phân tích, phát hiện tài nguyên và vẽ trang ngay trong trình duyệt.",
+      "level": 3
+    },
+    {
+      "id": "qsw-60",
+      "q": "Content jumps down the page just as an image finishes loading. The fix is",
+      "q_vi": "Nội dung bị đẩy tụt xuống đúng lúc một tấm ảnh tải xong. Cách sửa là",
+      "choices": [
+        "Reserve the space by declaring the intrinsic dimensions of the image",
+        "Load the image earlier by moving its tag to the top of the document",
+        "Delay the text rendering until every image on the page has arrived",
+        "Serve the image in a modern format so that it downloads much faster"
+      ],
+      "answer": 0,
+      "why": "The shift happens because the layout was computed without knowing the size. Loading faster shrinks the window but does not remove the cause.",
+      "why_vi": "Xô lệch xảy ra vì bố cục được tính khi chưa biết kích thước. Tải nhanh hơn chỉ thu hẹp khoảng thời gian chứ không xoá được nguyên nhân.",
+      "level": 2
+    },
+    {
+      "id": "qsw-61",
+      "q": "Clicks feel sluggish even though the network panel shows nothing pending. The usual explanation is",
+      "q_vi": "Các cú bấm cảm giác ì ạch dù bảng theo dõi mạng không còn yêu cầu nào đang chờ. Cách giải thích thường gặp là",
+      "choices": [
+        "The server takes long to answer but the browser hides the pending request",
+        "The style recalculation runs on a background thread that is starved of memory",
+        "The response arrives compressed and decompression blocks the network layer",
+        "A long task on the main thread delays the next visual update"
+      ],
+      "answer": 3,
+      "why": "Responsiveness is a main thread question. One heavy synchronous computation between the input and the next frame is enough to make the interface feel broken.",
+      "why_vi": "Độ nhạy là câu chuyện của luồng chính. Chỉ cần một phép tính đồng bộ nặng chen giữa thao tác và khung hình kế tiếp là đủ làm giao diện có cảm giác hỏng.",
+      "level": 3
+    },
+    {
+      "id": "qsw-62",
+      "q": "Rendering entirely in the browser costs you most obviously in",
+      "q_vi": "Kết xuất hoàn toàn trong trình duyệt khiến bạn phải trả giá rõ nhất ở",
+      "choices": [
+        "Correctness, because the same component can produce two different trees",
+        "The delay before any real content appears on a slow device or network",
+        "Security, since the business rules must now be shipped to every visitor",
+        "Memory, because the whole document tree is duplicated during the render"
+      ],
+      "answer": 1,
+      "why": "Nothing meaningful is on screen until the script has arrived and run. That penalty falls hardest on the users with the weakest devices and connections.",
+      "why_vi": "Không có nội dung thật nào lên màn hình trước khi mã kịch bản tới nơi và chạy xong. Hình phạt đó rơi nặng nhất vào người dùng có thiết bị và đường truyền yếu nhất.",
+      "level": 2
+    },
+    {
+      "id": "qsw-63",
+      "q": "The team measures page speed only on their own laptops on the office network. The blind spot is",
+      "q_vi": "Nhóm chỉ đo tốc độ trang trên máy tính xách tay của mình trong mạng văn phòng. Điểm mù ở đây là",
+      "choices": [
+        "The measurement tool reports different units than the monitoring dashboard",
+        "The build used in the office is not the same build that reaches production",
+        "The experience of slower devices and networks, where the tail actually lives",
+        "The server load, since a single laptop cannot generate a realistic request rate"
+      ],
+      "answer": 2,
+      "why": "Fast hardware on a fast link hides exactly the cases that hurt. Field data from real sessions is what tells you how the distribution looks.",
+      "why_vi": "Máy mạnh cộng đường truyền nhanh che đúng những ca gây đau. Dữ liệu thu từ phiên thật ngoài đời mới cho biết phân bố trông ra sao.",
+      "level": 2
+    },
+    {
+      "id": "qsw-64",
+      "q": "Showing a cached list immediately and refreshing it in the background is a good default because",
+      "q_vi": "Hiện ngay danh sách đã nhớ đệm rồi làm mới ở nền là lựa chọn mặc định tốt vì",
+      "choices": [
+        "It removes the need to invalidate the cache when a mutation succeeds",
+        "It reduces the number of requests, since the background call replaces the first",
+        "It guarantees the user never reads a value older than the last mutation",
+        "The interface stays useful while correctness catches up a moment later"
+      ],
+      "answer": 3,
+      "why": "The pattern trades a short window of staleness for the absence of spinners. It is a good default only where a slightly old value is harmless.",
+      "why_vi": "Cách này đổi một khoảng ngắn dữ liệu cũ lấy việc không phải hiện vòng xoay chờ. Nó chỉ là mặc định tốt ở chỗ mà giá trị cũ một chút không gây hại.",
+      "level": 2
+    },
+    {
+      "id": "qsw-65",
+      "q": "An optimistic update is applied and the server later rejects the write. Without extra work the user sees",
+      "q_vi": "Một cập nhật lạc quan được áp dụng rồi máy chủ từ chối lượt ghi. Nếu không xử lý thêm, người dùng sẽ thấy",
+      "choices": [
+        "An error dialog while the underlying cache quietly reverts to the old value",
+        "A screen that keeps showing a change which was never actually saved",
+        "The page reloading itself because the mutation observer detected a conflict",
+        "The old value restored automatically, since the cache never trusted the guess"
+      ],
+      "answer": 1,
+      "why": "The optimistic value is a guess written into the client state. If nothing rolls it back, the interface confidently displays something the database does not contain.",
+      "why_vi": "Giá trị lạc quan là một phỏng đoán đã ghi vào trạng thái máy khách. Nếu không có gì hoàn tác nó, giao diện sẽ tự tin hiển thị thứ mà cơ sở dữ liệu không hề có.",
+      "level": 3
+    },
+    {
+      "id": "qsw-66",
+      "q": "After a successful create, the list screen still shows the old rows. The most likely cause is",
+      "q_vi": "Sau khi tạo mới thành công, màn hình danh sách vẫn hiện các dòng cũ. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "The create request was sent to a different origin than the list request",
+        "The list query was never marked as invalid after the mutation succeeded",
+        "The database has not yet committed the insert when the list is refetched",
+        "The list component was unmounted and rebuilt from an outdated snapshot"
+      ],
+      "answer": 1,
+      "why": "A client cache does not know that a write affects a given query. Something must name the affected keys, either the mutation itself or a shared tag.",
+      "why_vi": "Bộ nhớ đệm phía máy khách không tự biết một lượt ghi ảnh hưởng tới truy vấn nào. Phải có thứ gì đó nêu tên các khoá bị ảnh hưởng, hoặc chính lượt ghi hoặc một nhãn dùng chung.",
+      "level": 2
+    },
+    {
+      "id": "qsw-67",
+      "q": "Optimistic locking is preferable to pessimistic locking when",
+      "q_vi": "Khoá lạc quan tốt hơn khoá bi quan khi",
+      "choices": [
+        "Conflicts are rare and redoing the work after a rejection is cheap",
+        "The transaction is long and involves several external service calls",
+        "Many writers edit the same row constantly throughout the working day",
+        "The database does not support row level locks in the chosen engine"
+      ],
+      "answer": 0,
+      "why": "Optimistic control costs nothing when there is no conflict and costs a retry when there is. Under constant contention that becomes an endless stream of failed writes.",
+      "why_vi": "Kiểm soát lạc quan không tốn gì khi không có xung đột và tốn một lượt làm lại khi có. Nếu tranh chấp liên tục thì nó biến thành một dòng bất tận các lượt ghi hỏng.",
+      "level": 2
+    },
+    {
+      "id": "qsw-68",
+      "q": "A seat counter goes negative under load although the code checks availability before inserting. The root cause is",
+      "q_vi": "Bộ đếm chỗ trống tụt xuống âm khi tải cao dù mã có kiểm còn chỗ trước khi chèn. Nguyên nhân gốc là",
+      "choices": [
+        "The counter column uses a signed type that wraps around at its lower bound",
+        "The application cached the count and forgot to refresh it after each insert",
+        "The transaction was opened with an isolation level lower than read committed",
+        "The check and the write are two steps, so another request slips in between"
+      ],
+      "answer": 3,
+      "why": "Reading then writing is not atomic unless the database makes it so. The dependable fix is a conditional update or a constraint the database itself enforces.",
+      "why_vi": "Đọc rồi ghi không phải thao tác nguyên tử trừ khi cơ sở dữ liệu làm cho nó nguyên tử. Cách chữa đáng tin là một lượt cập nhật có điều kiện hoặc một ràng buộc do chính cơ sở dữ liệu cưỡng chế.",
+      "level": 3
+    },
+    {
+      "id": "qsw-69",
+      "q": "Two jobs deadlock nightly while updating the same two tables. The cheapest reliable fix is",
+      "q_vi": "Hai tác vụ nền kẹt khoá vòng tròn hằng đêm khi cùng cập nhật hai bảng. Cách sửa rẻ và đáng tin nhất là",
+      "choices": [
+        "Raise the lock timeout so one of them waits long enough to proceed",
+        "Move both jobs to a replica so their locks no longer meet each other",
+        "Split each job into smaller transactions that commit after every row",
+        "Have both jobs touch the tables in the same agreed order"
+      ],
+      "answer": 3,
+      "why": "A cycle needs two different orderings to exist. Removing the cycle is structural, while longer timeouts only change how long you wait before one side is killed.",
+      "why_vi": "Vòng kẹt chỉ tồn tại khi có hai thứ tự khác nhau. Xoá vòng là cách sửa mang tính cấu trúc, còn kéo dài thời gian chờ chỉ đổi độ lâu trước khi một bên bị huỷ.",
+      "level": 3
+    },
+    {
+      "id": "qsw-70",
+      "q": "A page listing forty students issues forty one queries. This pattern is called",
+      "q_vi": "Một trang liệt kê bốn mươi sinh viên phát ra bốn mươi mốt truy vấn. Kiểu này gọi là",
+      "choices": [
+        "A cartesian join, where the number of rows multiplies across two tables",
+        "An n plus one, where each row of a list triggers its own extra query",
+        "A full table scan, where the planner ignores the index on the join column",
+        "A connection leak, where each query opens a connection it never returns"
+      ],
+      "answer": 1,
+      "why": "The cost grows with the size of the list, which is why it passes review on ten test rows and collapses on real data. The cure is loading the related rows in one query.",
+      "why_vi": "Chi phí tăng theo kích thước danh sách, vì thế nó qua được vòng duyệt với mười dòng thử và sụp đổ trên dữ liệu thật. Cách chữa là nạp các dòng liên quan trong một truy vấn.",
+      "level": 1
+    },
+    {
+      "id": "qsw-71",
+      "q": "After moving to a serverless platform the database reports too many connections. The reason is",
+      "q_vi": "Sau khi chuyển sang nền tảng không máy chủ, cơ sở dữ liệu báo quá nhiều kết nối. Lý do là",
+      "choices": [
+        "Serverless functions keep transactions open longer than a normal server does",
+        "The platform disables connection reuse to guarantee isolation between requests",
+        "The database rejects connections that arrive from more than one address",
+        "Each instance keeps its own pool and instances multiply with traffic"
+      ],
+      "answer": 3,
+      "why": "Pooling assumes one long lived process. When the platform can start many short lived ones, the pool must move outside the function into a shared proxy.",
+      "why_vi": "Cơ chế bể kết nối giả định có một tiến trình sống lâu. Khi nền tảng có thể khởi tạo rất nhiều tiến trình sống ngắn, bể phải được đưa ra ngoài hàm, vào một máy chủ trung gian dùng chung.",
+      "level": 3
+    },
+    {
+      "id": "qsw-72",
+      "q": "Adding an index to speed up a report has which cost?",
+      "q_vi": "Thêm chỉ mục để tăng tốc một báo cáo phải trả cái giá nào?",
+      "choices": [
+        "Every insert and update must maintain it, and it consumes storage",
+        "The planner must rewrite every existing query to make use of it",
+        "Reads on other columns of the same table become measurably slower",
+        "The table can no longer be altered without dropping the index first"
+      ],
+      "answer": 0,
+      "why": "An index is a second copy of part of the data kept in order. Reads get cheaper, writes get more expensive, and unused indexes are pure cost.",
+      "why_vi": "Chỉ mục là bản sao thứ hai của một phần dữ liệu được giữ theo thứ tự. Đọc rẻ đi, ghi đắt lên, còn chỉ mục không ai dùng thì chỉ toàn là chi phí.",
+      "level": 1
+    },
+    {
+      "id": "qsw-73",
+      "q": "A transaction is opened, then an external payment gateway is called inside it, then it commits. The danger is",
+      "q_vi": "Một giao dịch được mở, rồi bên trong nó gọi tới cổng thanh toán bên ngoài, sau đó mới xác nhận. Nguy hiểm ở chỗ",
+      "choices": [
+        "The gateway can read uncommitted rows through the open database connection",
+        "The commit will fail because a network call resets the transaction state",
+        "The gateway response cannot be stored inside the same transaction anyway",
+        "Locks and a connection are held for as long as the remote call takes"
+      ],
+      "answer": 3,
+      "why": "A remote call can take seconds or hang entirely, and everything behind that lock waits with it. The remote work belongs outside the transaction, reconciled afterwards.",
+      "why_vi": "Lượt gọi từ xa có thể mất vài giây hoặc treo hẳn, và mọi thứ đứng sau khoá đó phải chờ theo. Phần việc từ xa nên nằm ngoài giao dịch rồi đối soát lại sau.",
+      "level": 3
+    },
+    {
+      "id": "qsw-74",
+      "q": "Exporting a large transcript archive should move to a background job because",
+      "q_vi": "Việc xuất một kho bảng điểm lớn nên chuyển sang công việc nền vì",
+      "choices": [
+        "Background workers can query the database with higher privileges than the web layer",
+        "The request would otherwise occupy a connection and risk a gateway timeout",
+        "Only a background worker is allowed to write files to persistent storage",
+        "The export can then run without any transaction, which makes it much faster"
+      ],
+      "answer": 1,
+      "why": "Long work in the request path burns the resources that serve everyone else and is capped by proxy timeouts you do not control. Answering with a job identifier decouples the two.",
+      "why_vi": "Việc dài nằm trong đường xử lý yêu cầu đốt đúng tài nguyên đang phục vụ mọi người khác, lại bị chặn bởi thời gian chờ của máy chủ trung gian mà bạn không điều khiển được. Trả về một mã công việc sẽ tách hai thứ đó ra.",
+      "level": 1
+    },
+    {
+      "id": "qsw-75",
+      "q": "A nightly job ran twice after a deployment and sent duplicate notices. The durable fix is",
+      "q_vi": "Một tác vụ chạy đêm đã chạy hai lần sau một lượt triển khai và gửi thông báo trùng. Cách sửa bền vững là",
+      "choices": [
+        "Shift the schedule so it never fires during a deployment window",
+        "Keep only one instance of the application running during the night",
+        "Log the start time so operators can detect the duplicate run next morning",
+        "Claim the run in the database first so the second attempt finds it taken"
+      ],
+      "answer": 3,
+      "why": "Any timer can fire on two instances, so the guard has to be a shared piece of state. Scheduling tricks reduce the odds without removing the failure mode.",
+      "why_vi": "Bất kỳ bộ hẹn giờ nào cũng có thể nổ trên hai thực thể, nên chốt bảo vệ phải là một mẩu trạng thái dùng chung. Mẹo về lịch chỉ giảm xác suất chứ không xoá được kiểu sự cố.",
+      "level": 3
+    },
+    {
+      "id": "qsw-76",
+      "q": "A dashboard paginates with a total row count computed on every page request. On a large table this",
+      "q_vi": "Một bảng điều khiển phân trang kèm tổng số dòng được tính lại ở mỗi lượt xin trang. Trên bảng lớn, điều này",
+      "choices": [
+        "Fails silently because the count and the page can disagree by a few rows",
+        "Prevents the planner from using the index that serves the ordered page",
+        "Costs a full scan for a number the user rarely needs to be exact",
+        "Forces the query to run at a stricter isolation level than the page query"
+      ],
+      "answer": 2,
+      "why": "Counting matching rows means visiting them. An approximate count or a simple has more indicator gives the user what they actually use for a fraction of the cost.",
+      "why_vi": "Đếm số dòng khớp nghĩa là phải đi qua chúng. Một con số xấp xỉ hoặc chỉ báo còn trang sau cho người dùng đúng thứ họ thật sự dùng với chi phí nhỏ hơn nhiều.",
+      "level": 2
+    },
+    {
+      "id": "qsw-77",
+      "q": "A team adds a deleted flag instead of removing rows. A consequence they must plan for is",
+      "q_vi": "Một nhóm thêm cờ đã xoá thay vì xoá dòng thật. Hệ quả họ buộc phải tính tới là",
+      "choices": [
+        "Foreign keys stop working because the referenced row is no longer present",
+        "Every query and unique constraint must now account for the flag",
+        "Backups grow beyond what the storage layer can compress efficiently",
+        "The database can no longer reuse the space freed by removed records"
+      ],
+      "answer": 1,
+      "why": "The row is still there, so a forgotten condition shows deleted data and a plain unique index blocks reusing an old code. Soft deletion is a schema wide decision.",
+      "why_vi": "Dòng vẫn còn đó, nên một điều kiện bị quên sẽ hiện dữ liệu đã xoá, còn chỉ mục duy nhất thông thường sẽ chặn việc dùng lại một mã cũ. Xoá mềm là quyết định ảnh hưởng toàn lược đồ.",
+      "level": 2
+    },
+    {
+      "id": "qsw-78",
+      "q": "Under read committed isolation, running the same query twice inside one transaction can",
+      "q_vi": "Ở mức cô lập đọc đã xác nhận, chạy cùng một truy vấn hai lần trong một giao dịch có thể",
+      "choices": [
+        "Return an error because the snapshot is invalidated by concurrent writes",
+        "Return different rows, because other transactions committed in between",
+        "Return the same rows, since the snapshot is fixed when the transaction opens",
+        "Return rows that no transaction has committed anywhere in the system"
+      ],
+      "answer": 1,
+      "why": "Read committed fixes the snapshot per statement, not per transaction. If you need the two reads to agree, you must ask for a stricter level or lock the rows.",
+      "why_vi": "Mức đọc đã xác nhận cố định ảnh chụp theo từng câu lệnh chứ không theo giao dịch. Nếu cần hai lượt đọc khớp nhau, bạn phải yêu cầu mức chặt hơn hoặc khoá các dòng đó.",
+      "level": 3
+    },
+    {
+      "id": "qsw-79",
+      "q": "After signing out and signing in as another user, the app briefly shows the previous user's data. The likely bug is",
+      "q_vi": "Sau khi đăng xuất rồi đăng nhập bằng tài khoản khác, ứng dụng hiện thoáng qua dữ liệu của người trước. Lỗi khả dĩ là",
+      "choices": [
+        "The sign out request was answered before the server destroyed the session",
+        "The new session token was issued before the old one had fully expired",
+        "The browser restored the previous page from its back forward cache",
+        "The client cache was not cleared, so old entries survive the identity change"
+      ],
+      "answer": 3,
+      "why": "Cached entries are keyed by query, not by user, unless you make identity part of the key or wipe the store on sign out. This is a common data exposure in single page applications.",
+      "why_vi": "Các mục đã nhớ đệm được khoá theo truy vấn chứ không theo người dùng, trừ khi bạn đưa danh tính vào khoá hoặc xoá sạch kho khi đăng xuất. Đây là kiểu lộ dữ liệu rất hay gặp ở ứng dụng một trang.",
+      "level": 3
+    },
+    {
+      "id": "qsw-80",
+      "q": "A cached query for timetable data ignores the semester parameter in its key. The visible symptom is",
+      "q_vi": "Một truy vấn thời khoá biểu đã nhớ đệm bỏ sót tham số học kỳ trong khoá. Triệu chứng nhìn thấy là",
+      "choices": [
+        "Switching semester keeps showing the schedule of the previous one",
+        "Every semester change triggers a full refetch of the entire dataset",
+        "The cache grows without bound because each request creates a new entry",
+        "The request fails validation because the parameter never reaches the server"
+      ],
+      "answer": 0,
+      "why": "The key defines identity for the cache. Leaving a parameter out means two different questions share one answer, and the first one wins.",
+      "why_vi": "Khoá chính là thứ định danh trong bộ nhớ đệm. Bỏ sót một tham số nghĩa là hai câu hỏi khác nhau dùng chung một câu trả lời, và câu hỏi tới trước thắng.",
+      "level": 2
+    },
+    {
+      "id": "qsw-81",
+      "q": "A migration adds a column and backfills forty million rows in one statement during deployment. The risk is",
+      "q_vi": "Một lượt di trú thêm một cột và lấp dữ liệu cho bốn mươi triệu dòng trong một câu lệnh ngay lúc triển khai. Rủi ro là",
+      "choices": [
+        "The new column will hold the default value only after the next restart",
+        "The migration tool cannot record the version until the statement finishes",
+        "The long write holds locks and blocks the application for the whole run",
+        "The backfill cannot be repeated because migrations only run a single time"
+      ],
+      "answer": 2,
+      "why": "Schema and data changes have very different durations. Backfills belong in batched background work so the deploy itself stays short and reversible.",
+      "why_vi": "Đổi lược đồ và đổi dữ liệu có độ dài rất khác nhau. Việc lấp dữ liệu nên chạy nền theo từng lô để bản triển khai vẫn ngắn và vẫn quay lui được.",
+      "level": 3
+    },
+    {
+      "id": "qsw-82",
+      "q": "The safe way to rename a column that a running application uses is",
+      "q_vi": "Cách an toàn để đổi tên một cột mà ứng dụng đang chạy vẫn dùng là",
+      "choices": [
+        "Rename it and deploy the application change in the same release window",
+        "Create a view with the old name so existing queries keep working forever",
+        "Rename it during a maintenance window while the application is stopped",
+        "Add the new column, write to both, migrate readers, then drop the old one"
+      ],
+      "answer": 3,
+      "why": "Between two deployments both versions of the code are live. Only an additive step keeps the old version working, which is also what makes a rollback possible.",
+      "why_vi": "Giữa hai lượt triển khai, cả hai phiên bản mã đều đang chạy. Chỉ có bước thêm mới giữ cho phiên bản cũ vẫn chạy được, và đó cũng chính là thứ cho phép quay lui.",
+      "level": 3
+    },
+    {
+      "id": "qsw-83",
+      "q": "A release is rolled back but the application still fails, because the migration in that release",
+      "q_vi": "Một bản phát hành đã được quay lui nhưng ứng dụng vẫn hỏng, vì lượt di trú trong bản đó",
+      "choices": [
+        "Dropped a column that the previous version of the code still reads",
+        "Was applied twice, leaving two copies of the same table in the schema",
+        "Ran inside a transaction that the rollback procedure could not undo",
+        "Changed the migration version number that the old code checks at startup"
+      ],
+      "answer": 0,
+      "why": "Rolling back code does not roll back data. Destructive steps must wait until no deployed version depends on the old shape, which is usually a release later.",
+      "why_vi": "Quay lui mã không quay lui dữ liệu. Các bước phá huỷ phải chờ tới khi không còn phiên bản nào đang chạy phụ thuộc vào hình dạng cũ, thường là sau đó một bản phát hành.",
+      "level": 3
+    },
+    {
+      "id": "qsw-84",
+      "q": "Someone claims migrations only ever need to run forwards. The practical objection is",
+      "q_vi": "Có người cho rằng di trú chỉ cần chạy một chiều tiến. Phản bác thực tế là",
+      "choices": [
+        "Databases refuse to apply a migration whose predecessor was never recorded",
+        "Reproducing an environment requires replaying the history in both directions",
+        "You still need a plan to restore service when a change turns out to be wrong",
+        "Forward only migrations cannot be expressed for indexes and constraints"
+      ],
+      "answer": 2,
+      "why": "The claim is defensible for schema history but it is not a recovery plan. Whether by a compensating migration or by expand and contract, you must be able to get back to a working state.",
+      "why_vi": "Lập luận đó chấp nhận được với lịch sử lược đồ nhưng nó không phải kế hoạch phục hồi. Dù bằng một lượt di trú bù hay bằng lối mở rộng rồi thu hẹp, bạn vẫn phải quay về được trạng thái chạy được.",
+      "level": 2
+    },
+    {
+      "id": "qsw-85",
+      "q": "Your build pipeline runs tests on every pull request but branches live for three weeks. What is missing from continuous integration?",
+      "q_vi": "Đường ống dựng bản của bạn chạy kiểm thử ở mỗi yêu cầu gộp mã nhưng các nhánh sống tới ba tuần. Điều gì còn thiếu so với tích hợp liên tục?",
+      "choices": [
+        "The automated tests, which must run on the shared branch and not on the branch",
+        "The frequent merging into the shared branch, which is the point of the practice",
+        "The deployment step, without which integration cannot be called continuous",
+        "The manual review, which should happen before the pipeline is allowed to run"
+      ],
+      "answer": 1,
+      "why": "The pipeline is the tool, not the practice. Long lived branches accumulate exactly the conflicts that frequent integration exists to prevent.",
+      "why_vi": "Đường ống chỉ là công cụ chứ không phải bản thân thực hành. Nhánh sống lâu tích tụ đúng những xung đột mà việc tích hợp thường xuyên sinh ra để ngăn.",
+      "level": 2
+    },
+    {
+      "id": "qsw-86",
+      "q": "The difference between a blue green deployment and a canary release is",
+      "q_vi": "Khác biệt giữa triển khai xanh đỏ và thả từng phần là",
+      "choices": [
+        "Blue green needs two databases while a canary release shares a single one",
+        "Blue green switches all traffic at once, a canary exposes a small share first",
+        "Blue green applies to stateless services while a canary suits stateful ones",
+        "Blue green requires a load balancer while a canary is done inside the process"
+      ],
+      "answer": 1,
+      "why": "One is an atomic cutover with a fast way back, the other is a graduated exposure that lets you observe before committing. They answer different questions and can be combined.",
+      "why_vi": "Một bên là chuyển đổi dứt điểm kèm đường lui nhanh, bên kia là mở dần để quan sát trước khi cam kết. Chúng trả lời hai câu hỏi khác nhau và có thể dùng chung.",
+      "level": 1
+    },
+    {
+      "id": "qsw-87",
+      "q": "A feature flag lets you",
+      "q_vi": "Cờ tính năng cho phép bạn",
+      "choices": [
+        "Skip the review step for changes that are still hidden behind the flag",
+        "Deploy code on one day and turn the behaviour on for users on another",
+        "Avoid writing tests until the feature is finally enabled for everyone",
+        "Merge unfinished work without any risk of it running in production"
+      ],
+      "answer": 1,
+      "why": "The flag separates the technical act of shipping from the business act of releasing. It does not excuse review or testing, and code behind a flag still runs in production.",
+      "why_vi": "Cờ này tách hành động kỹ thuật là đưa mã lên khỏi hành động nghiệp vụ là phát hành. Nó không miễn cho bạn việc duyệt hay kiểm thử, và mã sau cờ vẫn đang chạy trong môi trường thật.",
+      "level": 1
+    },
+    {
+      "id": "qsw-88",
+      "q": "The test pyramid recommends many unit tests and few end to end tests because",
+      "q_vi": "Kim tự tháp kiểm thử khuyên viết nhiều bài kiểm đơn vị và ít bài kiểm đầu cuối vì",
+      "choices": [
+        "Unit tests find more defect categories than the slower levels above them",
+        "End to end tests cannot be automated reliably in any browser engine",
+        "Unit tests are the only level that can run inside a continuous pipeline",
+        "The higher levels cost more to run and to keep, so you buy them sparingly"
+      ],
+      "answer": 3,
+      "why": "It is an economic argument about feedback speed and maintenance, not a claim that the lower levels catch more. A thin top layer still matters because only it proves the parts are wired together.",
+      "why_vi": "Đây là lập luận kinh tế về tốc độ phản hồi và chi phí bảo trì, không phải khẳng định tầng dưới bắt được nhiều lỗi hơn. Lớp mỏng trên đỉnh vẫn quan trọng vì chỉ nó chứng minh các mảnh đã được nối đúng.",
+      "level": 1
+    },
+    {
+      "id": "qsw-89",
+      "q": "A module reports ninety percent line coverage yet ships an obvious bug. The most likely explanation is",
+      "q_vi": "Một mô đun báo độ phủ dòng chín mươi phần trăm nhưng vẫn ra bản kèm một lỗi rõ ràng. Cách giải thích khả dĩ nhất là",
+      "choices": [
+        "The tests execute the lines but assert almost nothing about the result",
+        "The coverage tool counts lines from dependencies as part of the module",
+        "The build measured coverage before the last commit had been included",
+        "The bug lives in the ten percent of lines the suite never reaches at all"
+      ],
+      "answer": 0,
+      "why": "Coverage records that a line ran, nothing more. A test that calls a function and checks no output raises the number without checking behaviour.",
+      "why_vi": "Độ phủ chỉ ghi nhận một dòng đã chạy, không hơn. Một bài kiểm gọi hàm rồi không xét kết quả vẫn làm con số tăng mà chẳng kiểm hành vi nào.",
+      "level": 2
+    },
+    {
+      "id": "qsw-90",
+      "q": "A snapshot test failed, the developer accepted the new snapshot, and the bug shipped. The lesson is that",
+      "q_vi": "Một bài kiểm ảnh chụp báo trượt, lập trình viên chấp nhận ảnh mới, và lỗi vẫn ra bản. Bài học là",
+      "choices": [
+        "Snapshots must be regenerated on every commit to stay meaningful over time",
+        "Snapshot tests should assert on the whole page rather than on one component",
+        "Snapshots detect change without knowing which changes are wrong",
+        "Snapshot files belong outside the repository so they cannot be edited casually"
+      ],
+      "answer": 2,
+      "why": "The oracle is a previously accepted output, so the test can only ask whether something moved. Correctness still needs an assertion that states what the value ought to be.",
+      "why_vi": "Chuẩn để đối chiếu chỉ là kết quả từng được chấp nhận, nên bài kiểm chỉ hỏi được là có gì thay đổi hay không. Tính đúng vẫn cần một khẳng định nói rõ giá trị phải là gì.",
+      "level": 3
+    },
+    {
+      "id": "qsw-91",
+      "q": "A service has full unit coverage with every collaborator mocked, yet the feature is broken in staging. What did the tests not check?",
+      "q_vi": "Một dịch vụ có độ phủ đơn vị đầy đủ với mọi cộng tác viên đều bị giả lập, vậy mà tính năng vẫn hỏng ở môi trường thử. Các bài kiểm đã không kiểm điều gì?",
+      "choices": [
+        "Whether the mocked calls were made in the order the code declares",
+        "Whether the code handles the exceptions its own mocks were told to raise",
+        "Whether the real collaborators behave the way the mocks were told to",
+        "Whether the coverage tool included the mocked modules in its report"
+      ],
+      "answer": 2,
+      "why": "A mock encodes your belief about the dependency. If that belief is wrong, the test agrees with the code and both are wrong together, which is why some tests must touch the real thing.",
+      "why_vi": "Bản giả lập mã hoá niềm tin của bạn về phụ thuộc đó. Nếu niềm tin sai thì bài kiểm đồng tình với mã và cả hai cùng sai, vì thế phải có một số bài kiểm chạm vào thứ thật.",
+      "level": 3
+    },
+    {
+      "id": "qsw-92",
+      "q": "A column was renamed in the database but not in one query string. Which test level catches this?",
+      "q_vi": "Một cột được đổi tên trong cơ sở dữ liệu nhưng một câu truy vấn chưa đổi theo. Tầng kiểm thử nào bắt được lỗi này?",
+      "choices": [
+        "A unit test with a mocked repository asserting the query text",
+        "A property based test generating random column names to try",
+        "A snapshot test comparing the serialised query against a stored copy",
+        "An integration test running the query against a real database"
+      ],
+      "answer": 3,
+      "why": "Only a real database can reject an unknown column. Any double you write encodes the same assumption the broken code makes.",
+      "why_vi": "Chỉ cơ sở dữ liệu thật mới từ chối một cột không tồn tại. Mọi vật thay thế do bạn viết đều mã hoá đúng giả định mà đoạn mã hỏng đang mắc phải.",
+      "level": 2
+    },
+    {
+      "id": "qsw-93",
+      "q": "The worst damage caused by a flaky test is that",
+      "q_vi": "Thiệt hại tệ nhất do một bài kiểm chập chờn gây ra là",
+      "choices": [
+        "The team learns to rerun the pipeline instead of reading a red result",
+        "The pipeline takes longer because failed jobs must be executed twice",
+        "The coverage report fluctuates and cannot be compared between builds",
+        "The flaky assertion eventually hides a genuine performance regression"
+      ],
+      "answer": 0,
+      "why": "The cost is not the wasted minutes, it is the loss of the signal. Once red means maybe, a real failure passes through unnoticed.",
+      "why_vi": "Cái giá không nằm ở vài phút lãng phí mà ở việc mất tín hiệu. Khi màu đỏ chỉ còn nghĩa là có thể, một lỗi thật sẽ đi lọt mà không ai để ý.",
+      "level": 2
+    },
+    {
+      "id": "qsw-94",
+      "q": "Property based testing is most valuable when",
+      "q_vi": "Kiểm thử theo tính chất có giá trị nhất khi",
+      "choices": [
+        "The output is easy to precompute for every input you intend to try",
+        "You can state an invariant that must hold for all valid inputs",
+        "The function under test has exactly one branch and no external calls",
+        "The team wants example based cases written automatically from the code"
+      ],
+      "answer": 1,
+      "why": "You give the tool a rule rather than a table, and it hunts for a counterexample and shrinks it. Without a stateable invariant there is nothing for it to falsify.",
+      "why_vi": "Bạn đưa cho công cụ một quy tắc thay vì một bảng ví dụ, nó sẽ săn phản ví dụ rồi rút gọn lại. Không phát biểu được bất biến thì chẳng có gì để nó bác bỏ.",
+      "level": 3
+    },
+    {
+      "id": "qsw-95",
+      "q": "The suite passes when run as a whole but one test fails when run alone. The likely cause is",
+      "q_vi": "Cả bộ kiểm chạy chung thì đạt nhưng một bài chạy riêng lại trượt. Nguyên nhân khả dĩ là",
+      "choices": [
+        "The runner applies a shorter timeout when only one test is selected",
+        "The test asserts on a value computed from the current wall clock time",
+        "The test depends on data another test created before it",
+        "The test opens a database connection the runner closes between files"
+      ],
+      "answer": 2,
+      "why": "Order dependence hides inside shared mutable fixtures. Each test should build the state it needs, otherwise the suite is a single test wearing many names.",
+      "why_vi": "Sự phụ thuộc thứ tự ẩn trong dữ liệu mẫu dùng chung và sửa được. Mỗi bài kiểm nên tự dựng trạng thái mình cần, nếu không cả bộ chỉ là một bài kiểm mang nhiều tên.",
+      "level": 3
+    },
+    {
+      "id": "qsw-96",
+      "q": "A regression test is best described as",
+      "q_vi": "Kiểm thử hồi quy được mô tả đúng nhất là",
+      "choices": [
+        "A performance test comparing the current release with the previous one",
+        "A test rerun before each release to confirm the whole system still works",
+        "A test written from a defect that actually happened in production",
+        "A statistical test fitting observed failure counts against a baseline model"
+      ],
+      "answer": 2,
+      "why": "It pins one specific mistake so that it cannot return silently. Rerunning the suite is just running tests, the regression part is the origin of the case.",
+      "why_vi": "Nó ghim chặt một sai lầm cụ thể để sai lầm đó không quay lại âm thầm. Chạy lại cả bộ kiểm chỉ là chạy kiểm thử, phần hồi quy nằm ở nguồn gốc của ca kiểm.",
+      "level": 1
+    },
+    {
+      "id": "qsw-97",
+      "q": "A contract test between two services exists to",
+      "q_vi": "Kiểm thử hợp đồng giữa hai dịch vụ tồn tại để",
+      "choices": [
+        "Measure the latency the consumer observes when calling the provider",
+        "Replace the integration environment where both services run together",
+        "Verify the provider still returns what the consumer depends on",
+        "Ensure both sides use identical libraries for serialising the payload"
+      ],
+      "answer": 2,
+      "why": "It captures the consumer's actual expectations and runs them against the provider, so a breaking change is caught in the provider's own pipeline rather than in production.",
+      "why_vi": "Nó ghi lại kỳ vọng thật của bên tiêu thụ rồi chạy chúng với bên cung cấp, nhờ vậy thay đổi phá vỡ tương thích bị bắt ngay trong đường ống của bên cung cấp chứ không phải ngoài môi trường thật.",
+      "level": 1
+    },
+    {
+      "id": "qsw-98",
+      "q": "Adding many end to end tests instead of integration tests typically leads to",
+      "q_vi": "Viết thật nhiều bài kiểm đầu cuối thay cho kiểm tích hợp thường dẫn tới",
+      "choices": [
+        "Slow feedback and failures that do not point to the broken component",
+        "Faster feedback but weaker guarantees about the behaviour of the browser",
+        "Better isolation, since each test drives only one component at a time",
+        "Lower maintenance, because the interface changes less often than the code"
+      ],
+      "answer": 0,
+      "why": "A failure at the top says something is wrong somewhere along a long path. That is valuable in small quantities and unaffordable as the main strategy.",
+      "why_vi": "Một lượt trượt ở tầng trên chỉ nói rằng có gì đó sai đâu đó trên một chặng đường dài. Điều đó quý khi dùng ít và không kham nổi khi lấy làm chiến lược chính.",
+      "level": 2
+    },
+    {
+      "id": "qsw-99",
+      "q": "Tests run against a seed database of ten tidy rows. The risk this creates is",
+      "q_vi": "Các bài kiểm chạy trên cơ sở dữ liệu mẫu gồm mười dòng gọn gàng. Rủi ro sinh ra là",
+      "choices": [
+        "The suite becomes slow because seeding runs before every single test case",
+        "Real data with missing fields and odd cases never meets the code",
+        "The seed data must be regenerated whenever a migration adds a column",
+        "The database engine chooses a different plan than it would in production"
+      ],
+      "answer": 1,
+      "why": "Clean fixtures test the path the author already imagined. Production holds records from a previous system, half filled forms and duplicated names that never appear in the seed.",
+      "why_vi": "Dữ liệu mẫu sạch chỉ kiểm đúng con đường mà người viết đã hình dung. Ngoài thực tế có bản ghi từ hệ cũ, biểu mẫu điền dở và tên trùng nhau, những thứ không bao giờ xuất hiện trong dữ liệu mẫu.",
+      "level": 2
+    },
+    {
+      "id": "qsw-100",
+      "q": "Which situation is genuinely technical debt rather than simply poor work?",
+      "q_vi": "Tình huống nào thật sự là nợ kỹ thuật chứ không đơn giản là làm ẩu?",
+      "choices": [
+        "A module nobody understands because its author left without documenting it",
+        "A copy of the same validation rule sitting in four different files",
+        "A shortcut taken knowingly, written down, with a plan to repay it",
+        "A dependency left three major versions behind because upgrading looks risky"
+      ],
+      "answer": 2,
+      "why": "The metaphor only works when the borrowing is deliberate and the interest is visible. Unmanaged mess has no repayment plan and therefore no schedule to argue about.",
+      "why_vi": "Phép ẩn dụ chỉ đúng khi việc vay là có chủ ý và phần lãi nhìn thấy được. Sự bừa bộn không ai quản thì chẳng có kế hoạch trả nợ, nên cũng chẳng có lịch nào để bàn.",
+      "level": 1
+    },
+    {
+      "id": "qsw-101",
+      "q": "Refactoring a scheduling algorithm is only safe when",
+      "q_vi": "Tái cấu trúc thuật toán xếp lịch chỉ an toàn khi",
+      "choices": [
+        "The change is small enough that a careful reader can verify it by eye",
+        "The team agrees the new structure is cleaner than the previous one",
+        "The refactoring is done in a branch that nobody else is working on",
+        "Tests pin the observable behaviour before the structure is touched"
+      ],
+      "answer": 3,
+      "why": "Refactoring is defined by behaviour staying the same, so you need a way to know that it did. Without that, you are rewriting and hoping.",
+      "why_vi": "Tái cấu trúc được định nghĩa bằng việc hành vi giữ nguyên, nên bạn phải có cách biết là nó đã giữ nguyên. Không có cách đó thì bạn chỉ đang viết lại rồi cầu may.",
+      "level": 2
+    },
+    {
+      "id": "qsw-102",
+      "q": "The single responsibility principle says a module should have one reason to change. That reason is best understood as",
+      "q_vi": "Nguyên tắc trách nhiệm đơn nói một mô đun chỉ nên có một lý do để thay đổi. Lý do đó nên hiểu là",
+      "choices": [
+        "One group of stakeholders whose requests can force it to be rewritten",
+        "One public function, since more than one entry point means more than one job",
+        "One class per file, so that a change never touches two declarations at once",
+        "One layer of the architecture, so domain and infrastructure never mix in it"
+      ],
+      "answer": 0,
+      "why": "The principle is about who asks for change, not about counting functions or files. A report module that serves both the finance office and the accreditation office has two reasons.",
+      "why_vi": "Nguyên tắc này nói về ai là người yêu cầu thay đổi, không phải đếm hàm hay đếm tệp. Một mô đun báo cáo phục vụ cả phòng tài chính lẫn bộ phận kiểm định là đã có hai lý do.",
+      "level": 2
+    },
+    {
+      "id": "qsw-103",
+      "q": "A well designed module has",
+      "q_vi": "Một mô đun được thiết kế tốt sẽ có",
+      "choices": [
+        "High coupling to its callers and low cohesion in its internal parts",
+        "High cohesion inside and loose coupling to the rest of the system",
+        "Low cohesion inside and low coupling, since both should be minimised",
+        "High cohesion and high coupling, so related modules evolve together"
+      ],
+      "answer": 1,
+      "why": "Things that belong together live together, and what crosses the boundary is kept thin. Minimising both is impossible, because a module with nothing inside it has nothing to be cohesive about.",
+      "why_vi": "Những gì thuộc về nhau thì ở cùng nhau, còn phần đi qua ranh giới phải mỏng. Không thể giảm cả hai, vì một mô đun rỗng ruột thì chẳng có gì để mà gắn kết.",
+      "level": 1
+    },
+    {
+      "id": "qsw-104",
+      "q": "Which comment earns its place in the code?",
+      "q_vi": "Chú thích nào xứng đáng có mặt trong mã?",
+      "choices": [
+        "One restating the loop condition in words for readers new to the language",
+        "One listing the author and the date on which the function was created",
+        "One explaining why the value is rounded up, citing the regulation",
+        "One describing each parameter using the same words as its own name"
+      ],
+      "answer": 2,
+      "why": "The code already says what happens. The reason and its source cannot be recovered from the code, and that is exactly what the next reader will need.",
+      "why_vi": "Bản thân mã đã nói điều gì đang xảy ra. Lý do và nguồn gốc của nó thì không thể lần ra từ mã, mà đó lại đúng là thứ người đọc sau cần.",
+      "level": 1
+    },
+    {
+      "id": "qsw-105",
+      "q": "Two report generators looked similar, were merged into one function, and it now carries seven boolean parameters. The lesson is",
+      "q_vi": "Hai bộ sinh báo cáo trông giống nhau, được gộp thành một hàm, và giờ hàm đó mang bảy tham số đúng sai. Bài học là",
+      "choices": [
+        "The parameters should have been grouped into a single options object",
+        "The two callers should have been merged as well to remove the branching",
+        "The shared function should have been split by report type at the top",
+        "Code that looks alike is not always the same rule seen from two sides"
+      ],
+      "answer": 3,
+      "why": "Flags accumulate when one abstraction is forced to serve two purposes that only looked alike. Repeating yourself is often cheaper than an abstraction that has to be negotiated.",
+      "why_vi": "Các cờ điều kiện tích tụ khi một trừu tượng bị ép phục vụ hai mục đích vốn chỉ trông giống nhau. Lặp lại đôi chút thường rẻ hơn một trừu tượng mà lần nào cũng phải thương lượng.",
+      "level": 3
+    },
+    {
+      "id": "qsw-106",
+      "q": "A pull request touching sixty files gets approved in two minutes. The most useful process change is",
+      "q_vi": "Một yêu cầu gộp mã động vào sáu mươi tệp được duyệt trong hai phút. Thay đổi quy trình hữu ích nhất là",
+      "choices": [
+        "Require a second approver so two people share the responsibility",
+        "Add a checklist the reviewer must complete before approving anything",
+        "Split the work so each change is small enough to be read properly",
+        "Measure review time and alert when an approval arrives too quickly"
+      ],
+      "answer": 2,
+      "why": "Nobody reads sixty files carefully, so the failure is in the size of the batch. More reviewers or more ceremony on an unreadable change just spreads the rubber stamp.",
+      "why_vi": "Không ai đọc kỹ nổi sáu mươi tệp, nên chỗ hỏng nằm ở kích thước lô thay đổi. Thêm người duyệt hay thêm thủ tục trên một thay đổi không đọc nổi chỉ làm việc bấm cho qua lan rộng hơn.",
+      "level": 2
+    },
+    {
+      "id": "qsw-107",
+      "q": "Keeping unreachable code in the repository is harmful because",
+      "q_vi": "Giữ lại đoạn mã không còn chạy tới trong kho mã là có hại vì",
+      "choices": [
+        "It is loaded into memory at startup and slows the process down",
+        "It appears in searches and reviews, and readers assume it still matters",
+        "It prevents the compiler from optimising the modules around it",
+        "It breaks coverage reporting by counting lines that can never run"
+      ],
+      "answer": 1,
+      "why": "The cost is human attention. Version control already remembers the code, so the safe move is to delete it and trust the history.",
+      "why_vi": "Cái giá phải trả là sự chú ý của con người. Hệ quản lý phiên bản đã nhớ hộ đoạn mã đó rồi, nên nước đi an toàn là xoá đi và tin vào lịch sử.",
+      "level": 1
+    },
+    {
+      "id": "qsw-108",
+      "q": "Which variable name is best in an enrolment module?",
+      "q_vi": "Tên biến nào là tốt nhất trong một phân hệ ghi danh?",
+      "choices": [
+        "A short name plus a comment underneath explaining what it holds",
+        "A name encoding the type so the reader knows what is stored inside",
+        "A name that states what the value means in the enrolment process",
+        "A name matching the database column exactly, whatever that column is called"
+      ],
+      "answer": 2,
+      "why": "The reader wants to know what the value means in the domain. Type prefixes and column names describe the storage, which is the part the code already shows.",
+      "why_vi": "Người đọc muốn biết giá trị đó nghĩa là gì trong nghiệp vụ. Tiền tố kiểu dữ liệu hay tên cột chỉ mô tả nơi lưu trữ, mà phần đó thì mã đã cho thấy rồi.",
+      "level": 1
+    },
+    {
+      "id": "qsw-109",
+      "q": "Structured logs beat free text logs mainly because",
+      "q_vi": "Nhật ký có cấu trúc hơn nhật ký văn xuôi chủ yếu vì",
+      "choices": [
+        "They occupy less disk space than the equivalent sentences would",
+        "They can be filtered and aggregated by field without fragile parsing",
+        "They are written asynchronously and therefore never block the request",
+        "They are the only format that log collectors are able to ingest"
+      ],
+      "answer": 1,
+      "why": "Once a value is a field, you can count it, group by it and alert on it. Sentences force everyone downstream to reinvent a parser that breaks with the next message change.",
+      "why_vi": "Khi một giá trị đã là một trường, bạn đếm được, gom nhóm được và cảnh báo trên nó được. Câu văn thì buộc mọi khâu phía sau tự chế một bộ phân tích, và nó vỡ ngay khi thông điệp đổi.",
+      "level": 1
+    },
+    {
+      "id": "qsw-110",
+      "q": "Your dashboard shows a rise in latency but not which step is slow. What you are missing is",
+      "q_vi": "Bảng điều khiển cho thấy độ trễ tăng nhưng không cho biết bước nào chậm. Thứ bạn đang thiếu là",
+      "choices": [
+        "More metrics, one counter per function that the service exposes",
+        "A longer retention window so older aggregates can be compared",
+        "Per request traces broken into timed spans across the services",
+        "A second dashboard sampling the same metric at a finer interval"
+      ],
+      "answer": 2,
+      "why": "Aggregates answer how much and how often, never which one. Following a single slow request through its spans is what turns a number into a cause.",
+      "why_vi": "Số liệu tổng hợp trả lời bao nhiêu và bao lâu một lần, không bao giờ trả lời cái nào. Lần theo một yêu cầu chậm qua từng đoạn truy vết mới biến con số thành nguyên nhân.",
+      "level": 3
+    },
+    {
+      "id": "qsw-111",
+      "q": "A correlation identifier is generated at the edge so that",
+      "q_vi": "Định danh liên kết yêu cầu được sinh ở biên để",
+      "choices": [
+        "The load balancer can route the follow up calls to the same instance",
+        "Every log line produced by one user action can be gathered together",
+        "The client can retry safely because the server recognises the repeat",
+        "Each request gets a unique cache key that avoids collisions between users"
+      ],
+      "answer": 1,
+      "why": "It exists for reconstruction after the fact. It is not a routing key and not an idempotency key, although teams often confuse the three.",
+      "why_vi": "Nó tồn tại để dựng lại câu chuyện sau khi việc đã xảy ra. Nó không phải khoá định tuyến cũng không phải khoá chống lặp, dù nhiều nhóm hay nhầm lẫn cả ba.",
+      "level": 1
+    },
+    {
+      "id": "qsw-112",
+      "q": "Which alert is most likely to be worth waking someone at night?",
+      "q_vi": "Cảnh báo nào đáng đánh thức người trực lúc nửa đêm nhất?",
+      "choices": [
+        "Processor usage on the application server has passed eighty percent",
+        "A deployment has finished and the new version is now live in production",
+        "The rate of failed enrolment requests has been rising for ten minutes",
+        "A background worker restarted after an unhandled exception was thrown"
+      ],
+      "answer": 2,
+      "why": "Alert on what the user suffers. High processor use may be perfectly healthy, and a restart that nobody noticed is a ticket for the morning, not an emergency.",
+      "why_vi": "Hãy cảnh báo theo thứ người dùng phải chịu. Bộ xử lý bận có thể hoàn toàn bình thường, còn một lượt khởi động lại mà không ai thấy thì để sáng mai xử lý chứ không phải khẩn cấp.",
+      "level": 2
+    },
+    {
+      "id": "qsw-113",
+      "q": "Average response time looks stable while complaints increase. The measurement mistake is",
+      "q_vi": "Thời gian phản hồi trung bình trông ổn định trong khi lời phàn nàn tăng lên. Sai lầm trong đo đạc là",
+      "choices": [
+        "The mean is computed over a window that is too short to be stable",
+        "The mean is dominated by the fast majority and hides a slow tail",
+        "The mean includes failed requests, which finish faster than successful ones",
+        "The mean is measured on the server and excludes the network round trip"
+      ],
+      "answer": 1,
+      "why": "One user in twenty waiting four seconds barely moves the average. Percentiles expose that population, and those are the users who write to you.",
+      "why_vi": "Một trong hai mươi người phải chờ bốn giây gần như không làm dịch chuyển giá trị trung bình. Các phân vị mới phơi bày nhóm đó, và chính họ là người viết thư phàn nàn.",
+      "level": 2
+    },
+    {
+      "id": "qsw-114",
+      "q": "Agreeing a service level objective before an incident is valuable because",
+      "q_vi": "Thống nhất mục tiêu mức dịch vụ trước khi có sự cố là việc có giá trị vì",
+      "choices": [
+        "It commits the team to a number that the platform vendor must guarantee",
+        "It defines what counts as good enough while nobody is under pressure",
+        "It replaces the need to alert, since the objective is checked automatically",
+        "It shifts responsibility for reliability from the team to the operations group"
+      ],
+      "answer": 1,
+      "why": "During an outage every discussion about acceptable behaviour is distorted. An objective set calmly turns that argument into a measurement.",
+      "why_vi": "Trong lúc sự cố, mọi tranh luận về mức chấp nhận được đều bị bóp méo. Một mục tiêu đặt ra lúc bình tĩnh biến cuộc tranh luận đó thành một phép đo.",
+      "level": 3
+    },
+    {
+      "id": "qsw-115",
+      "q": "A team has consumed its entire error budget in the first week of the quarter. The intended response is",
+      "q_vi": "Một nhóm đã tiêu hết ngân sách lỗi ngay trong tuần đầu của quý. Phản ứng đúng ý đồ là",
+      "choices": [
+        "Raise the objective so that the remaining failures fit inside the budget",
+        "Continue as planned, since the budget resets at the start of next quarter",
+        "Stop the alerting until the underlying reliability problem has been fixed",
+        "Pause risky releases and spend the effort on reliability instead"
+      ],
+      "answer": 3,
+      "why": "The budget is a spending limit that converts an argument about priorities into a rule agreed in advance. Moving the target is how the mechanism gets hollowed out.",
+      "why_vi": "Ngân sách này là hạn mức chi tiêu, nó biến cuộc tranh cãi về ưu tiên thành một luật đã thoả thuận từ trước. Dời mục tiêu chính là cách làm rỗng ruột cơ chế đó.",
+      "level": 3
+    },
+    {
+      "id": "qsw-116",
+      "q": "Instances report healthy while every request fails. The health check probably",
+      "q_vi": "Các thực thể báo tình trạng khoẻ trong khi mọi yêu cầu đều hỏng. Điểm kiểm tình trạng nhiều khả năng",
+      "choices": [
+        "Only proves the process is running, not that its dependencies work",
+        "Runs too often, so the platform throttles it and keeps the last result",
+        "Is served by a different port than the one carrying user traffic",
+        "Returns a cached response written when the instance first started up"
+      ],
+      "answer": 0,
+      "why": "A check that returns a constant answers a question nobody asked. It should exercise at least the critical dependencies, while staying cheap enough to run continuously.",
+      "why_vi": "Một phép kiểm luôn trả về hằng số chỉ trả lời câu hỏi không ai hỏi. Nó nên chạm tới ít nhất các phụ thuộc quan trọng, mà vẫn đủ rẻ để chạy liên tục.",
+      "level": 3
+    },
+    {
+      "id": "qsw-117",
+      "q": "During every deployment a few requests fail with a connection reset. The missing piece is",
+      "q_vi": "Mỗi lượt triển khai lại có vài yêu cầu hỏng kèm lỗi đứt kết nối. Mảnh còn thiếu là",
+      "choices": [
+        "A longer client timeout so the retry lands on the new instance instead",
+        "A larger number of instances so the deployment touches a smaller share",
+        "Draining, where the instance finishes current work before it exits",
+        "A health check interval shorter than the time the deployment takes"
+      ],
+      "answer": 2,
+      "why": "The old process is killed while it is still holding conversations. It must stop accepting new work, finish what it has and only then exit.",
+      "why_vi": "Tiến trình cũ bị giết trong lúc vẫn đang dở dang các cuộc trao đổi. Nó phải ngừng nhận việc mới, làm nốt việc đang có rồi mới được thoát.",
+      "level": 2
+    },
+    {
+      "id": "qsw-118",
+      "q": "A runbook attached to an alert should contain",
+      "q_vi": "Sổ tay xử lý gắn kèm một cảnh báo nên chứa",
+      "choices": [
+        "The design rationale of the service and the history of its architecture",
+        "What this alert actually means and which checks to run first on it",
+        "The full list of every alert the service is currently able to produce",
+        "The contact details of everyone who has ever worked on the component"
+      ],
+      "answer": 1,
+      "why": "The reader is half asleep and under time pressure. Background reading belongs elsewhere, and the runbook should get them to the first useful action quickly.",
+      "why_vi": "Người đọc đang nửa tỉnh nửa mê và bị sức ép thời gian. Phần kiến thức nền để chỗ khác, còn sổ tay phải đưa họ tới hành động hữu ích đầu tiên thật nhanh.",
+      "level": 1
+    },
+    {
+      "id": "qsw-119",
+      "q": "A postmortem is called blameless mainly so that",
+      "q_vi": "Bản rà soát sự cố được gọi là không quy tội chủ yếu để",
+      "choices": [
+        "Nobody has to write down what actually happened during the incident",
+        "The organisation avoids the legal consequences of an admitted mistake",
+        "People report what they really did, exposing the conditions that misled them",
+        "The team can close the incident quickly without proposing any follow up"
+      ],
+      "answer": 2,
+      "why": "If naming a person is the outcome, the truth stops arriving and you lose the only data you had. The target is the system that made the error easy to make.",
+      "why_vi": "Nếu kết quả cuối cùng là gọi tên một cá nhân thì sự thật ngừng chảy tới và bạn mất luôn dữ liệu duy nhất mình có. Mục tiêu là hệ thống đã khiến sai lầm dễ xảy ra.",
+      "level": 2
+    },
+    {
+      "id": "qsw-120",
+      "q": "An API key was committed to the repository last month and then deleted in a later commit. The correct response is",
+      "q_vi": "Một khoá truy cập đã bị đưa vào kho mã tháng trước rồi bị xoá ở một lượt ghi sau. Cách xử lý đúng là",
+      "choices": [
+        "Rotate the key, because the old value still exists in the history",
+        "Add the file to the ignore list so it cannot be committed again",
+        "Restrict repository access to the members of the current team",
+        "Rewrite the branch history so the commit no longer appears in the log"
+      ],
+      "answer": 0,
+      "why": "Every clone and every mirror already has it. Once a secret leaves your control the only real remedy is to make the old value useless.",
+      "why_vi": "Mọi bản sao và mọi bản nhân bản đều đã có nó. Khi một bí mật rời khỏi tầm kiểm soát của bạn, cách chữa thật duy nhất là làm cho giá trị cũ trở nên vô dụng.",
+      "level": 2
+    },
+    {
+      "id": "qsw-121",
+      "q": "Form validation in the browser should be treated as",
+      "q_vi": "Việc kiểm tra biểu mẫu trong trình duyệt nên được coi là",
+      "choices": [
+        "A security control, since the user cannot modify the running page easily",
+        "A replacement for server checks whenever the client is a trusted internal app",
+        "A convenience for the user that the server must repeat anyway",
+        "A performance optimisation that reduces the load on the database server"
+      ],
+      "answer": 2,
+      "why": "Anyone can call your endpoint without opening the page at all. The browser check improves the experience, the boundary check protects the data.",
+      "why_vi": "Ai cũng có thể gọi thẳng điểm cuối của bạn mà không cần mở trang. Phép kiểm trong trình duyệt cải thiện trải nghiệm, còn phép kiểm ở biên mới bảo vệ dữ liệu.",
+      "level": 1
+    },
+    {
+      "id": "qsw-122",
+      "q": "The application connects to Postgres with the owner account. The problem this creates is",
+      "q_vi": "Ứng dụng kết nối tới Postgres bằng tài khoản chủ sở hữu. Vấn đề nó tạo ra là",
+      "choices": [
+        "Connections are slower because the owner account is audited more heavily",
+        "One injection or one mistaken statement can drop or read everything",
+        "Migrations can no longer be applied by a separate deployment account",
+        "The connection pool cannot be shared between two different services"
+      ],
+      "answer": 1,
+      "why": "Least privilege is about limiting the damage of the failure you did not predict. A runtime account that cannot drop tables removes an entire class of outcomes.",
+      "why_vi": "Quyền tối thiểu là để giới hạn thiệt hại của sự cố mà bạn không lường trước. Một tài khoản lúc chạy không có quyền xoá bảng sẽ loại bỏ hẳn một lớp hậu quả.",
+      "level": 1
+    },
+    {
+      "id": "qsw-123",
+      "q": "Your project depends on twelve packages, which install nine hundred more. The security consequence is",
+      "q_vi": "Dự án của bạn phụ thuộc mười hai gói, và chúng kéo theo chín trăm gói khác. Hệ quả về an ninh là",
+      "choices": [
+        "Only the twelve direct dependencies can execute code during installation",
+        "The extra packages are isolated from your code unless you import them",
+        "Any one of them can run with the same rights as your own code",
+        "The risk is limited to build time, since production ships compiled output"
+      ],
+      "answer": 2,
+      "why": "The runtime does not distinguish direct from transitive. A compromised package deep in the tree sits in the same process with the same access to your environment.",
+      "why_vi": "Môi trường chạy không phân biệt phụ thuộc trực tiếp với phụ thuộc gián tiếp. Một gói bị chiếm quyền nằm sâu trong cây vẫn ở cùng tiến trình và có cùng quyền truy cập môi trường của bạn.",
+      "level": 2
+    },
+    {
+      "id": "qsw-124",
+      "q": "A lockfile is committed to the repository so that",
+      "q_vi": "Tệp khoá phiên bản được đưa vào kho mã để",
+      "choices": [
+        "The package manager can skip resolution and install a known tree",
+        "Developers are prevented from adding any new dependency to the project",
+        "The build server can install packages without network access at all",
+        "Security advisories are applied automatically to every pinned version"
+      ],
+      "answer": 0,
+      "why": "It makes the dependency tree reproducible, so the build on your machine and the build in the pipeline are the same. It pins versions, it does not patch them.",
+      "why_vi": "Nó làm cho cây phụ thuộc tái lập được, để bản dựng trên máy bạn và bản dựng trong đường ống là một. Nó ghim phiên bản chứ không vá phiên bản.",
+      "level": 1
+    },
+    {
+      "id": "qsw-125",
+      "q": "The reliable defence against SQL injection is",
+      "q_vi": "Cách phòng thủ đáng tin trước lỗi tiêm mã SQL là",
+      "choices": [
+        "Removing quotes and semicolons from the input before building the query",
+        "Sending values as parameters so they are never parsed as statement text",
+        "Rejecting any input that contains a keyword used by the query language",
+        "Limiting the length of every field so a full statement cannot be injected"
+      ],
+      "answer": 1,
+      "why": "Filtering tries to guess what a parser will do with a string. Binding removes the question entirely, because the value never reaches the parser as code.",
+      "why_vi": "Lọc đầu vào là cố đoán xem bộ phân tích sẽ làm gì với một chuỗi. Ràng buộc tham số xoá hẳn câu hỏi đó, vì giá trị không bao giờ tới bộ phân tích dưới dạng mã lệnh.",
+      "level": 2
+    },
+    {
+      "id": "qsw-126",
+      "q": "A multi tenant application forgot the faculty filter in one query. Row level security would have helped because",
+      "q_vi": "Một ứng dụng dùng chung cho nhiều đơn vị bị quên bộ lọc theo khoa ở một truy vấn. Bảo mật ở mức dòng sẽ giúp được vì",
+      "choices": [
+        "The query planner rejects any statement that omits an indexed predicate",
+        "The application framework would raise a warning about the missing filter",
+        "The database applies the restriction whatever the application forgets",
+        "The rows of other faculties are stored in a physically separate table"
+      ],
+      "answer": 2,
+      "why": "It moves the guarantee to the layer that cannot be bypassed by a new query someone writes in a hurry. The application filter becomes an optimisation rather than the only defence.",
+      "why_vi": "Nó chuyển sự bảo đảm xuống tầng mà một truy vấn mới viết vội không thể đi vòng qua. Bộ lọc ở ứng dụng khi đó chỉ còn là tối ưu chứ không phải lớp phòng thủ duy nhất.",
+      "level": 3
+    },
+    {
+      "id": "qsw-127",
+      "q": "In an accreditation system the audit log should be",
+      "q_vi": "Trong hệ thống kiểm định chất lượng, nhật ký kiểm toán nên là",
+      "choices": [
+        "Rotated with the application logs to keep the storage footprint predictable",
+        "Editable by administrators so that mistaken entries can be corrected later",
+        "Append only and stored where the application cannot rewrite it",
+        "Derived from the application logs when an auditor eventually asks for it"
+      ],
+      "answer": 2,
+      "why": "It is evidence, and evidence that the audited party can rewrite is worthless. Reconstructing it later from operational logs means it did not exist when it mattered.",
+      "why_vi": "Đây là chứng cứ, mà chứng cứ do chính bên bị kiểm sửa được thì vô giá trị. Dựng lại nó về sau từ nhật ký vận hành nghĩa là lúc cần nó đã không tồn tại.",
+      "level": 2
+    },
+    {
+      "id": "qsw-128",
+      "q": "Defence in depth means that",
+      "q_vi": "Phòng thủ nhiều lớp nghĩa là",
+      "choices": [
+        "Every request is checked repeatedly by the same rule at each layer",
+        "The perimeter is hardened enough that inner checks become unnecessary",
+        "Independent controls are placed so one failed check is not the last one",
+        "Security decisions are concentrated in one component that is audited often"
+      ],
+      "answer": 2,
+      "why": "The value comes from independence. Repeating the same check with the same assumption fails everywhere at once, and a single audited chokepoint is one bug away from total exposure.",
+      "why_vi": "Giá trị nằm ở tính độc lập. Lặp lại cùng một phép kiểm với cùng giả định thì hỏng đồng loạt ở mọi nơi, còn dồn hết vào một điểm được kiểm tra kỹ thì chỉ cách sự lộ toàn bộ đúng một lỗi.",
+      "level": 2
+    }
+  ]
+}
