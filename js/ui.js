@@ -50,7 +50,10 @@ export function emptyState(text) {
  * nen luon in kem tong so co that trong bo.
  */
 export function sizePicker(current, choices, total, unit) {
-  const opts = choices.map((n) => {
+  // Neu gia tri dang chay khong nam trong danh sach thi chen no vao, neu khong
+  // trinh duyet se chon muc dau tien va o chon se noi sai cai dang thuc chay.
+  const list = choices.includes(current) ? choices : [...choices, current].sort((a, b) => a - b);
+  const opts = list.map((n) => {
     const label = n === 0 ? `tất cả ${total}` : `${n}`;
     const disabled = n !== 0 && n > total ? ' disabled' : '';
     return `<option value="${n}"${n === current ? ' selected' : ''}${disabled}>${label}</option>`;
@@ -58,7 +61,7 @@ export function sizePicker(current, choices, total, unit) {
   return `
     <label class="size-pick">
       <span>mỗi lượt</span>
-      <select id="size-sel">${opts}</select>
+      <span class="sel-wrap"><select id="size-sel">${opts}</select></span>
       <span class="size-total">trong tổng ${total} ${esc(unit)}</span>
     </label>`;
 }

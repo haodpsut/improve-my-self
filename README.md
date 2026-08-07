@@ -169,5 +169,9 @@ Ba điều dễ làm hỏng cả ngân hàng câu hỏi mà mắt thường khô
 
 ## Phím tắt
 
-Học khái niệm: `space` lật thẻ, `1` học lại, `2` còn ngập ngừng, `3` thuộc.
+Học khái niệm: `←` và `→` lùi hoặc tiến mà không chấm, `space` lật thẻ, `1` học lại,
+`2` còn ngập ngừng, `3` thuộc.
 Trắc nghiệm: `1` đến `4` chọn đáp án, `enter` sang câu kế.
+
+Hai phím mũi tên chỉ để đi lại trong lượt, chúng không đụng vào lịch ôn. Lịch ôn chỉ đổi khi bạn
+bấm một trong ba nút chấm.

@@ -9,8 +9,10 @@ function blank() {
 }
 
 // Co mot luot hoc. Khong phai so the trong bo, ma la so the lay ra moi lan.
-const DEFAULT_SIZE = { learn: 20, quiz: 12, speak: 12 };
+// Moi gia tri mac dinh PHAI nam trong SIZE_CHOICES, neu khong o chon se roi ve
+// muc dau tien va hien thi sai cai dang thuc chay.
 export const SIZE_CHOICES = [10, 20, 30, 50, 0]; // 0 nghia la lay het
+const DEFAULT_SIZE = { learn: 20, quiz: 10, speak: 10 };
 
 let state = load();
 

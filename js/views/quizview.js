@@ -129,7 +129,8 @@ export async function renderQuiz(app, deckId) {
     app.querySelector('#btn-next')?.addEventListener('click', () => { index += 1; draw(); });
 
     keyHandler = (ev) => {
-      if (ev.target.matches('input, textarea')) return;
+      // document khong co ham matches, goi thang se nem loi va nuot moi phim tat.
+      if (typeof ev.target?.matches === 'function' && ev.target.matches('input, textarea, select')) return;
       const n = Number(ev.key);
       if (n >= 1 && n <= q.choices.length) choose(n - 1);
       else if (ev.key === 'Enter' && answered) { index += 1; draw(); }

@@ -17,6 +17,7 @@ export async function renderLearn(app, deckId) {
   const graded = { good: 0, hard: 0, again: 0 };
 
   function done() {
+    keyHandler = null; // man hinh ket thuc khong nhan phim tat cua phien hoc
     app.innerHTML = `
       ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: `#/deck/${deckId}` }, { label: 'Học khái niệm' }])}
       <div class="done-hero">
@@ -78,6 +79,8 @@ export async function renderLearn(app, deckId) {
       </div>
 
       <div class="btn-row">
+        <button class="btn btn-nav" id="btn-prev" ${index === 0 ? 'disabled' : ''} title="Thẻ trước, không chấm">←</button>
+        <button class="btn btn-nav" id="btn-next" title="Thẻ sau, không chấm">→</button>
         ${canSpeak() ? `<button class="btn" id="btn-say">🔊 Nghe</button>` : ''}
         <button class="btn" id="btn-flip">${flipped ? 'Lật lại' : 'Lật thẻ'}</button>
         <span class="spacer" style="flex:1"></span>
@@ -85,7 +88,10 @@ export async function renderLearn(app, deckId) {
         <button class="btn btn-hard" id="g-hard" ${flipped ? '' : 'disabled'}>Còn ngập ngừng</button>
         <button class="btn btn-good" id="g-good" ${flipped ? '' : 'disabled'}>Thuộc</button>
       </div>
-      <p class="flash-hint" style="margin-top:12px">Phím tắt: <code>space</code> lật · <code>1</code> học lại · <code>2</code> ngập ngừng · <code>3</code> thuộc</p>
+      <p class="flash-hint" style="margin-top:12px">
+        Phím tắt: <code>←</code> <code>→</code> lùi và tiến mà không chấm ·
+        <code>space</code> lật · <code>1</code> học lại · <code>2</code> ngập ngừng · <code>3</code> thuộc
+      </p>
     `;
 
     app.querySelector('#size-sel')?.addEventListener('change', (e) => {
@@ -115,9 +121,25 @@ export async function renderLearn(app, deckId) {
     app.querySelector('#g-hard')?.addEventListener('click', () => grade('hard'));
     app.querySelector('#g-good')?.addEventListener('click', () => grade('good'));
 
+    // Di chuyen qua lai ma KHONG cham diem, de xem lai the vua roi hoac bo qua
+    // the chua muon danh gia. Lich on chi doi khi nguoi hoc bam mot nut cham.
+    const go = (delta) => {
+      const next = index + delta;
+      if (next < 0 || next > queue.length) return;
+      index = next;
+      flipped = false;
+      draw();
+    };
+    app.querySelector('#btn-prev')?.addEventListener('click', () => go(-1));
+    app.querySelector('#btn-next')?.addEventListener('click', () => go(1));
+
     keyHandler = (ev) => {
-      if (ev.target.matches('input, textarea')) return;
+      // ev.target co the la document, va document khong co ham matches,
+      // goi thang se nem loi va nuot luon moi phim tat.
+      if (typeof ev.target?.matches === 'function' && ev.target.matches('input, textarea, select')) return;
       if (ev.code === 'Space') { ev.preventDefault(); flip(); }
+      else if (ev.key === 'ArrowLeft') { ev.preventDefault(); go(-1); }
+      else if (ev.key === 'ArrowRight') { ev.preventDefault(); go(1); }
       else if (ev.key === '1') grade('again');
       else if (ev.key === '2') grade('hard');
       else if (ev.key === '3') grade('good');
