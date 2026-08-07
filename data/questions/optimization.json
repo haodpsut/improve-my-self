@@ -8,9 +8,9 @@
       "q": "Your solver returns an objective value better than the theoretical optimum. The first thing to suspect is",
       "q_vi": "Bộ giải của bạn trả về giá trị mục tiêu tốt hơn cả nghiệm tối ưu lý thuyết. Điều đầu tiên cần nghi ngờ là",
       "choices": [
-        "The solver found a new mathematical result",
-        "The objective function is convex",
-        "The random seed was too small",
+        "The solver has discovered a new mathematical result that beats the known bound",
+        "The objective function is convex, so descent can pass below the stated bound",
+        "The random seed was too small, so the search landed in an unusually lucky region",
         "A constraint is not actually being enforced, so the solution is infeasible"
       ],
       "answer": 3,
@@ -24,9 +24,9 @@
       "q_vi": "Trong bài toán lồi, một cực tiểu địa phương là",
       "choices": [
         "Also the global minimum",
-        "Only global if the problem is linear",
-        "Never the global minimum",
-        "Undefined"
+        "Global only if f is linear",
+        "Never a global minimum",
+        "Undefined unless f is smooth"
       ],
       "answer": 0,
       "why": "This is the reason convexity matters so much in practice. It removes the dependence on initialisation entirely.",
@@ -39,9 +39,9 @@
       "q_vi": "Bạn khẳng định bài toán của mình là khó NP. Một chứng minh hợp lệ đòi hỏi",
       "choices": [
         "A polynomial time reduction from a known NP-hard problem to yours",
-        "Showing the objective is non-convex",
-        "Showing your solver is slow on large instances",
-        "Showing the search space is large"
+        "Showing that the objective is non-convex on the feasible set",
+        "Showing that your solver slows down sharply on large instances",
+        "Showing that the search space grows exponentially with the input"
       ],
       "answer": 0,
       "why": "A big search space or a slow heuristic proves nothing about complexity class. The reduction must go from the known hard problem to yours, not the other way round.",
@@ -53,9 +53,9 @@
       "q": "Relaxing the integrality constraints of a minimisation MILP gives",
       "q_vi": "Nới lỏng ràng buộc nguyên của một bài quy hoạch nguyên hỗn hợp cực tiểu sẽ cho",
       "choices": [
-        "The exact optimum",
+        "Exactly the true integer optimum",
         "A lower bound on the true optimum",
-        "An infeasible solution",
+        "A bound only if it is integral",
         "An upper bound on the true optimum"
       ],
       "answer": 1,
@@ -69,9 +69,9 @@
       "q_vi": "Một siêu thuật giải hội tụ rất nhanh về một điểm duy nhất nhiều khả năng đang gặp vấn đề",
       "choices": [
         "Premature convergence from too little exploration",
-        "A convex objective",
-        "Excessive exploration",
-        "An infeasible starting point"
+        "A convex objective with a single basin",
+        "Excessive exploration of the whole space",
+        "An infeasible starting point for the population"
       ],
       "answer": 0,
       "why": "The population collapses onto the first decent region it finds. The fix is a mechanism that keeps diversity alive, not a faster update rule.",
@@ -83,10 +83,10 @@
       "q": "Little's law states that in steady state",
       "q_vi": "Định luật Little phát biểu rằng ở trạng thái dừng",
       "choices": [
-        "Queue length grows linearly with time",
-        "Delay equals bandwidth divided by load",
+        "The queue length grows linearly with time as long as the server stays busy",
+        "Average delay equals the bandwidth divided by the offered load, whatever the discipline",
         "Average number in system equals arrival rate times average time in system",
-        "Utilisation equals service rate divided by arrival rate"
+        "Utilisation equals the service rate divided by the arrival rate at all loads"
       ],
       "answer": 2,
       "why": "It holds for almost any queueing discipline, which is what makes it so useful: you can get one of the three quantities from the other two.",
@@ -99,9 +99,9 @@
       "q_vi": "Tuổi thông tin khác độ trễ ở chỗ nó đo",
       "choices": [
         "How stale the freshest available update is at the receiver",
-        "The variance of packet delay",
-        "The time a single packet spends in the network",
-        "The number of packets lost per second"
+        "The variance of the packet delay, also called jitter",
+        "The time a single packet spends inside the network end to end",
+        "The number of packets lost per second on the bottleneck link"
       ],
       "answer": 0,
       "why": "Sending very frequently causes queueing and raises staleness, while sending rarely also raises it. That is why the curve is U-shaped and neither delay nor throughput captures it.",
@@ -113,10 +113,10 @@
       "q": "Reporting the Pareto front instead of a single weighted sum is preferable because",
       "q_vi": "Báo cáo cả biên Pareto thay vì một tổng có trọng số duy nhất thì tốt hơn vì",
       "choices": [
-        "It removes the need for constraints",
+        "It removes the need for constraints, since the front encodes them",
         "It shows the full trade off rather than one arbitrary preference",
-        "It always yields a better objective value",
-        "It makes the problem convex"
+        "It always yields a better value on every objective at once",
+        "It turns a nonconvex problem into a convex one just by construction"
       ],
       "answer": 1,
       "why": "A weighting hides the decision inside the coefficients. The front lets the reader choose the operating point and see the cost of each choice.",
@@ -128,9 +128,9 @@
       "q": "Two methods differ by 0.4% mean accuracy over five seeds, with a standard deviation of 1.2%. The correct conclusion is",
       "q_vi": "Hai phương pháp lệch nhau 0,4% độ chính xác trung bình qua năm hạt giống, với độ lệch chuẩn 1,2%. Kết luận đúng là",
       "choices": [
-        "The standard deviation is irrelevant to the comparison",
-        "More epochs would settle the question",
-        "The first method is better and should be reported as such",
+        "The standard deviation is irrelevant here, since both means came from the same five seeds",
+        "More epochs would settle the question, since the gap would then grow",
+        "The first method is better, and the gap should be reported as a real improvement",
         "The difference is within run to run noise and cannot be claimed as an improvement"
       ],
       "answer": 3,
@@ -143,9 +143,9 @@
       "q": "You observe that a new initialiser and a new algorithm together beat the baseline. The confound risk is that",
       "q_vi": "Bạn thấy bộ khởi tạo mới cùng thuật toán mới gộp lại thắng đối chứng. Rủi ro nhiễu nhân quả là",
       "choices": [
-        "The baseline was trained too long",
-        "The objective was non-convex",
-        "The test set was too large",
+        "The baseline was trained for far too long and overfitted the training data",
+        "The objective is non-convex, so no comparison between the two is meaningful",
+        "The test set was too large, so any measured gain is inflated by the extra samples",
         "The gain may come entirely from the initialiser, not from the algorithm"
       ],
       "answer": 3,
@@ -158,10 +158,10 @@
       "q": "A set is convex exactly when",
       "q_vi": "Một tập là lồi đúng khi",
       "choices": [
-        "Every function defined on it is convex",
-        "Its boundary is smooth everywhere",
+        "Every function defined on the set turns out to be convex there",
+        "Its boundary is smooth everywhere, with no corners at all",
         "The segment joining any two of its points lies entirely inside the set",
-        "It contains the origin"
+        "It contains the origin and stays unchanged when scaled by any positive factor"
       ],
       "answer": 2,
       "why": "Convexity is a statement about segments, nothing else. Smoothness of the boundary is irrelevant, a polyhedron has corners and is still convex.",
@@ -174,8 +174,8 @@
       "q_vi": "Với hàm lồi khả vi, điều kiện bậc nhất nói rằng đồ thị",
       "choices": [
         "Lies below every tangent hyperplane",
-        "Crosses each tangent exactly twice",
-        "Touches the horizontal axis at the minimum",
+        "Crosses each tangent line exactly twice",
+        "Touches the horizontal axis at its minimum",
         "Lies above every tangent hyperplane"
       ],
       "answer": 3,
@@ -188,8 +188,8 @@
       "q": "For a convex function f and a random variable X, Jensen's inequality gives",
       "q_vi": "Với hàm lồi f và biến ngẫu nhiên X, bất đẳng thức Jensen cho",
       "choices": [
-        "The mean of f(X) equals f of the mean of X for any f",
-        "The inequality holds only when f is linear",
+        "The mean of f(X) equals f of the mean of X for every f",
+        "The inequality holds only when f is linear in X",
         "The mean of f(X) is at most f of the mean of X",
         "The mean of f(X) is at least f of the mean of X"
       ],
@@ -204,7 +204,7 @@
       "q_vi": "Với hàm lồi có điểm gãy, một điểm là cực tiểu toàn cục đúng khi",
       "choices": [
         "The Hessian at that point is positive definite",
-        "The gradient at that point equals zero",
+        "The gradient at that point is exactly zero",
         "The point lies on the boundary of the domain",
         "Zero belongs to the subdifferential at that point"
       ],
@@ -218,9 +218,9 @@
       "q": "The subgradient method with a constant step size",
       "q_vi": "Phương pháp dưới gradient với bước cố định",
       "choices": [
-        "Requires the objective to be differentiable",
-        "Converges quadratically near the optimum",
-        "Decreases the objective at every single iteration",
+        "Requires the objective to be differentiable at each iterate that it visits",
+        "Converges quadratically as soon as the iterates come close to the optimum",
+        "Decreases the objective at every single iteration, like gradient descent",
         "Is not a descent method and only reaches a neighbourhood of the optimum"
       ],
       "answer": 3,
@@ -234,7 +234,7 @@
       "q_vi": "Chiếu một điểm lên tập lồi đóng thì",
       "choices": [
         "Is defined only for linear subspaces",
-        "Always lands on a vertex",
+        "Always lands on a vertex of the set",
         "May give several equally near points",
         "Gives exactly one nearest point"
       ],
@@ -250,7 +250,7 @@
       "choices": [
         "All of its sublevel sets are convex",
         "It has exactly one stationary point",
-        "Its Hessian is positive definite",
+        "Its Hessian is positive definite everywhere",
         "It is a sum of convex functions"
       ],
       "answer": 0,
@@ -263,9 +263,9 @@
       "q": "Which statement about quasiconvex functions is correct?",
       "q_vi": "Phát biểu nào về hàm tựa lồi là đúng?",
       "choices": [
-        "A quasiconvex function cannot be minimised numerically",
-        "Quasiconvexity implies convexity",
-        "Every local minimum is global, just as for convex functions",
+        "A quasiconvex function cannot be minimised by any numerical method",
+        "Quasiconvexity implies convexity of the function itself",
+        "Every local minimum is global here, exactly as for convex functions",
         "Sublevel sets are convex, yet a local minimum need not be global"
       ],
       "answer": 3,
@@ -278,9 +278,9 @@
       "q": "Strong convexity of the objective buys you",
       "q_vi": "Tính lồi mạnh của hàm mục tiêu mang lại",
       "choices": [
-        "Convergence in one step from any starting point",
-        "Immunity to a badly chosen step size",
-        "A guarantee that all constraints are linear",
+        "Convergence in one single step from any starting point whatsoever",
+        "Immunity to a badly chosen step size, since any positive step converges",
+        "A guarantee that every constraint in the problem is linear",
         "A unique minimiser and a linear convergence rate for gradient descent"
       ],
       "answer": 3,
@@ -293,9 +293,9 @@
       "q": "If the gradient is Lipschitz with constant L, gradient descent is guaranteed to decrease the objective when the step size is",
       "q_vi": "Nếu gradient Lipschitz với hằng số L, bước gradient chắc chắn làm hàm mục tiêu giảm khi độ dài bước",
       "choices": [
-        "At least L",
+        "At least L, never less",
         "At most one over L",
-        "Equal to the number of variables",
+        "Exactly L, no smaller",
         "Any positive number"
       ],
       "answer": 1,
@@ -308,9 +308,9 @@
       "q": "The unit ball of any valid norm is",
       "q_vi": "Quả cầu đơn vị của một chuẩn hợp lệ bất kỳ là",
       "choices": [
-        "An unbounded set",
-        "Convex only in two dimensions",
-        "Convex only for the Euclidean norm",
+        "A convex cone",
+        "Nonconvex in l1",
+        "A finite set",
         "A convex set"
       ],
       "answer": 3,
@@ -323,9 +323,9 @@
       "q": "The Fenchel conjugate of a function is",
       "q_vi": "Hàm liên hợp Fenchel của một hàm thì",
       "choices": [
-        "Convex only when the original function is convex",
-        "Equal to the original function",
-        "Defined only for differentiable functions",
+        "Convex only when the original function is itself convex",
+        "Equal to the original function up to a change of sign",
+        "Defined only for functions that are differentiable",
         "Always convex, even when the original function is not"
       ],
       "answer": 3,
@@ -339,9 +339,9 @@
       "q_vi": "Bài quy hoạch bậc hai có ma trận mục tiêu nửa xác định dương thì",
       "choices": [
         "Convex, so any local optimum is global",
-        "Not solvable in polynomial time",
-        "Equivalent to a linear program",
-        "Nonconvex in general"
+        "Not solvable in polynomial time in general",
+        "Equivalent to a linear program after scaling",
+        "Nonconvex whenever it has constraints"
       ],
       "answer": 0,
       "why": "Positive semidefiniteness is exactly the convexity test for a quadratic form, and convex quadratic programs are solved in polynomial time by interior point methods. Convexity does not collapse the problem into a linear program.",
@@ -353,10 +353,10 @@
       "q": "Which containment between problem classes is correct?",
       "q_vi": "Quan hệ bao hàm nào giữa các lớp bài toán là đúng?",
       "choices": [
-        "Second order cone programs and linear programs are disjoint classes",
+        "Second order cone programs and linear programs are disjoint classes, so neither one contains the other",
         "Every linear program is a second order cone program, and every second order cone program is a semidefinite program",
-        "Every semidefinite program is a linear program",
-        "Semidefinite programs are a special case of quadratic programs"
+        "Every semidefinite program is really a linear program once the matrix variable is vectorised",
+        "Semidefinite programs are a special case of quadratic programs, so they are never harder"
       ],
       "answer": 1,
       "why": "The hierarchy widens from linear to conic quadratic to semidefinite, each class expressing the previous one. Reading the chain backwards is the common error and would make every semidefinite program cheap.",
@@ -369,9 +369,9 @@
       "q_vi": "Bạn giải bài nới lỏng nửa xác định của một bài bậc hai không lồi rồi báo giá trị tối ưu của nó như hiệu năng hệ thống đạt được. Sai lầm ở chỗ",
       "choices": [
         "The relaxation only gives a bound, achievable only if the optimal matrix has rank one",
-        "The relaxation is always exact, so only the reported solution vector is wrong",
-        "Semidefinite programs cannot be solved numerically",
-        "Semidefinite relaxation applies only to problems with binary variables"
+        "The relaxation is always exact for quadratic problems, so only the solution vector is wrong",
+        "Semidefinite programs cannot be solved numerically, so the value reported is arbitrary",
+        "Semidefinite relaxation applies only to problems where every variable takes binary values"
       ],
       "answer": 0,
       "why": "Dropping the rank one constraint enlarges the feasible set, so the value is a bound on what any real transmit vector can do. You must either verify rank one or randomise a feasible solution and report that instead.",
@@ -383,9 +383,9 @@
       "q": "A geometric program becomes convex after",
       "q_vi": "Bài quy hoạch hình học trở thành lồi sau khi",
       "choices": [
-        "Replacing each posynomial by its linear Taylor expansion",
-        "Squaring both sides of every constraint",
-        "Relaxing all integer variables",
+        "Replacing every posynomial by its first order Taylor expansion at the current point",
+        "Squaring both sides of each constraint to clear the fractional exponents",
+        "Relaxing all integer variables and rounding the solution at the end",
         "A logarithmic change of variables together with taking the log of the objective"
       ],
       "answer": 3,
@@ -398,9 +398,9 @@
       "q": "The Dinkelbach transform maximises a ratio by",
       "q_vi": "Biến đổi Dinkelbach cực đại một tỉ số bằng cách",
       "choices": [
-        "Fixing the denominator at its average value",
-        "Taking the logarithm of the ratio and dropping the denominator",
-        "Maximising the numerator and minimising the denominator as two separate problems",
+        "Fixing the denominator at the average value it takes over the feasible set and maximising the numerator",
+        "Taking the logarithm of the ratio and dropping the denominator, which becomes an additive constant",
+        "Maximising the numerator and minimising the denominator as two separate problems, then combining them",
         "Solving a sequence of problems maximising numerator minus a parameter times denominator, updating that parameter to its root"
       ],
       "answer": 3,
@@ -415,8 +415,8 @@
       "choices": [
         "The constraint holds with at least a specified probability",
         "The constraint holds in every realisation of the uncertainty",
-        "The uncertainty follows a uniform distribution",
-        "The expected value of the constraint function is exactly zero"
+        "The uncertainty follows a uniform distribution on its support",
+        "The constraint function has expected value exactly zero"
       ],
       "answer": 0,
       "why": "The whole point is to allow a small violation probability, which is why outage targets are written this way. Requiring the constraint in every realisation is the robust formulation, a different and more conservative model.",
@@ -429,9 +429,9 @@
       "q_vi": "Mở rộng tập bất định trong bài toán bền vững sẽ",
       "choices": [
         "Protects against more scenarios while lowering the nominal objective value",
-        "Makes a convex problem nonconvex",
-        "Improves both the worst case and the nominal performance",
-        "Leaves the optimal value unchanged"
+        "Turns a convex robust counterpart into a nonconvex problem",
+        "Improves the worst case and the nominal performance at the same time",
+        "Leaves the optimal value unchanged, because only the data move"
       ],
       "answer": 0,
       "why": "A bigger set means more constraints to satisfy at once, so the achievable value can only get worse under the nominal data. A paper that shows robustness with no loss is usually hiding an uncertainty set that binds nowhere.",
@@ -444,9 +444,9 @@
       "q_vi": "Trong quy hoạch ngẫu nhiên hai giai đoạn, các biến điều chỉnh là",
       "choices": [
         "Decided after the uncertainty is revealed, correcting the first stage decision",
-        "The worst case values of the random data",
-        "The dual multipliers of the first stage constraints",
-        "Fixed before any information about the uncertainty arrives"
+        "The worst case realisations of the random data, chosen by an adversary before stage one",
+        "The dual multipliers attached to the first stage constraints, read off after the solve",
+        "Fixed before any information about the uncertainty has arrived, like the first stage"
       ],
       "answer": 0,
       "why": "The two stage structure exists precisely to model decisions taken with hindsight. Treating them as here and now variables collapses the model and overstates how well the plan performs.",
@@ -458,9 +458,9 @@
       "q": "The simplex method searches",
       "q_vi": "Phương pháp đơn hình tìm kiếm trên",
       "choices": [
-        "The interior of the feasible region along a central path",
+        "The interior of the region along a path",
         "Only points with integer coordinates",
-        "Randomly sampled points of the feasible set",
+        "Randomly sampled feasible points",
         "Vertices of the feasible polyhedron"
       ],
       "answer": 3,
@@ -474,9 +474,9 @@
       "q_vi": "Phát biểu nào về thuật toán quy hoạch tuyến tính là chính xác?",
       "choices": [
         "The simplex method is exponential in the worst case while interior point methods run in polynomial time",
-        "Both are exponential, which is why linear programming is NP-hard",
-        "The simplex method is polynomial while interior point methods are exponential",
-        "Both are polynomial, which is why the simplex method is preferred"
+        "Both are exponential in the worst case, which is why linear programming is NP-hard",
+        "The simplex method runs in polynomial time while interior point methods are exponential",
+        "Both run in polynomial time, which is why the simplex method is preferred in practice"
       ],
       "answer": 0,
       "why": "Constructed instances force the simplex method through exponentially many vertices, yet it is fast on realistic data. Linear programming itself is in P, so calling it NP-hard is wrong regardless of which algorithm you use.",
@@ -489,9 +489,9 @@
       "q_vi": "Phương pháp điểm trong giữ mọi bước lặp nằm hẳn trong miền khả thi nhờ",
       "choices": [
         "Adding a barrier term that blows up at the boundary",
-        "Projecting each iterate onto the nearest vertex",
+        "Projecting each iterate onto the nearest vertex of the polytope",
         "Capping the step size at one over the number of constraints",
-        "Rounding infeasible components down to zero"
+        "Rounding every infeasible component down to zero"
       ],
       "answer": 0,
       "why": "The barrier makes the boundary infinitely expensive, and its weight is reduced along the central path. Projecting onto vertices would be the opposite idea and is what simplex does in spirit.",
@@ -503,10 +503,10 @@
       "q": "Projected gradient descent is practical mainly when",
       "q_vi": "Gradient chiếu chỉ thực dụng chủ yếu khi",
       "choices": [
-        "The feasible set is finite",
+        "The feasible set contains only a finite number of points",
         "The projection onto the feasible set is cheap to compute",
-        "The objective happens to be linear",
-        "The gradient is unavailable"
+        "The objective function happens to be linear",
+        "The gradient is unavailable, so finite differences are used"
       ],
       "answer": 1,
       "why": "Every iteration pays for one projection, so a set like a box or a simplex is fine while a general polytope is not. A linear objective would send the method straight to the boundary and is not what makes it usable.",
@@ -519,9 +519,9 @@
       "q_vi": "Phương pháp gradient gần kề được thiết kế cho hàm mục tiêu dạng",
       "choices": [
         "A smooth term plus a nonsmooth term whose proximal operator is easy",
-        "Two smooth terms added together",
-        "Any nonconvex objective, with a global guarantee",
-        "A linear objective with integer variables"
+        "Two smooth terms added together, each with an inexpensive gradient",
+        "Any nonconvex objective at all, with a guarantee of global optimality",
+        "A linear objective together with integer variables"
       ],
       "answer": 0,
       "why": "The split lets the gradient handle the smooth part while the proximal operator handles the kinks, as soft thresholding does for a sparsity penalty. Two smooth terms need no splitting at all.",
@@ -533,10 +533,10 @@
       "q": "ADMM is attractive for a problem that",
       "q_vi": "ADMM hấp dẫn với bài toán mà",
       "choices": [
-        "Cannot be written with any coupling constraint",
+        "Cannot be split at all, since every constraint couples all of the variables",
         "Splits into blocks, each easy to optimise while the others are held fixed",
-        "Contains only integer variables",
-        "Has a strictly convex quadratic objective and no constraints at all"
+        "Contains only integer variables, so every subproblem is a small enumeration",
+        "Has a strictly convex quadratic objective and no constraints of any kind at all"
       ],
       "answer": 1,
       "why": "The method earns its keep when a coupling constraint is the only thing tying easy blocks together, and the multiplier update restores that coupling. An unconstrained smooth problem is better served by plain gradient descent.",
@@ -548,9 +548,9 @@
       "q": "Benders decomposition works by",
       "q_vi": "Phân rã Benders vận hành bằng cách",
       "choices": [
-        "Relaxing the integrality constraints once and rounding the result",
-        "Splitting the constraint matrix by rows and averaging the block solutions",
-        "Adding new variables to a restricted problem when a pricing subproblem finds one worth adding",
+        "Relaxing the integrality constraints once and rounding the resulting fractional solution",
+        "Splitting the constraint matrix by rows and averaging the solutions of the blocks",
+        "Adding new variables to a restricted problem whenever a pricing subproblem finds one worth adding",
         "Solving a master problem over the complicating variables and adding cuts generated from the subproblem"
       ],
       "answer": 3,
@@ -565,8 +565,8 @@
       "choices": [
         "Applies only to problems whose variables are all integer",
         "Adds variables to a restricted problem rather than constraints",
-        "Requires the problem to be nonconvex",
-        "Adds constraints rather than variables"
+        "Requires the problem to be nonconvex before it can start",
+        "Adds constraints rather than variables, tightening the relaxation"
       ],
       "answer": 1,
       "why": "The two are duals of each other, columns on one side and rows on the other. Mixing them up is the usual slip when a paper claims to generate columns while actually separating valid inequalities.",
@@ -579,9 +579,9 @@
       "q_vi": "Nhánh cận chỉ được phép cắt bỏ một nút một cách an toàn nếu",
       "choices": [
         "The bound computed at that node is valid for every solution below it",
-        "The relaxation at that node happens to be integral",
-        "The incumbent is already known to be optimal",
-        "The node has already been visited twice"
+        "The relaxation solved at that node happens to come out integral",
+        "The incumbent is already known to be optimal for the whole tree",
+        "The node has already been explored twice during the search"
       ],
       "answer": 0,
       "why": "Pruning trades away a whole subtree on the strength of the bound, so an invalid bound silently discards the optimum. An integral relaxation lets you update the incumbent, it is not the condition for pruning in general.",
@@ -593,10 +593,10 @@
       "q": "A cut added inside branch and cut must",
       "q_vi": "Một lát cắt thêm vào trong nhánh cắt bắt buộc phải",
       "choices": [
-        "Be tangent to the objective at the incumbent solution",
-        "Remove at least one integer feasible point so that the tree shrinks",
+        "Be tangent to the objective function at the incumbent solution, so the bound tightens",
+        "Cut off at least one integer feasible point so that the enumeration tree becomes smaller",
         "Remove part of the fractional relaxation while keeping every integer feasible point",
-        "Be generated only at the root node of the tree"
+        "Be generated only at the root node, because a cut added deeper invalidates the bound"
       ],
       "answer": 2,
       "why": "Validity means no integer feasible point is lost, otherwise the search can return a solution that is not optimal or miss feasibility entirely. Cutting integer points is exactly the bug that produces objective values better than the true optimum.",
@@ -608,9 +608,9 @@
       "q": "The Lagrangian dual function of a problem is",
       "q_vi": "Hàm đối ngẫu Lagrange của một bài toán thì",
       "choices": [
-        "Convex in the multipliers",
-        "Linear in the multipliers",
-        "Concave only when the primal problem is convex",
+        "Convex in the multipliers, because it is a supremum of affine functions of them",
+        "Linear in the multipliers, because the Lagrangian is linear in each of them",
+        "Concave only when the primal problem is itself convex",
         "Concave in the multipliers even when the primal problem is nonconvex"
       ],
       "answer": 3,
@@ -623,10 +623,10 @@
       "q": "In successive convex approximation of a minimisation problem, the convex surrogate must",
       "q_vi": "Trong xấp xỉ lồi liên tiếp cho bài toán cực tiểu, hàm lồi thay thế bắt buộc phải",
       "choices": [
-        "Lower bound the true objective everywhere",
-        "Be an exact reformulation of the original objective",
+        "Lower bound the true objective everywhere, so that each step stays safe",
+        "Be an exact convex reformulation of the original objective, with the same set of optima",
         "Upper bound the true objective everywhere and coincide with it at the current iterate",
-        "Agree with the true objective in its gradient only"
+        "Match the true objective only at the current iterate, with no bound elsewhere"
       ],
       "answer": 2,
       "why": "The upper bound property is what makes each step decrease the true objective, and tightness at the current point is what keeps the sequence meaningful. A surrogate that dips below the true function can be minimised while the real objective rises.",
@@ -640,8 +640,8 @@
       "choices": [
         "A KKT point of the original nonconvex problem",
         "The global optimum of the original problem",
-        "A feasible point with no optimality property at all",
-        "The optimum of the very first surrogate"
+        "A feasible point with no optimality property",
+        "The optimum of the very first surrogate built"
       ],
       "answer": 0,
       "why": "The guarantee is stationarity, not global optimality, and different starting points give different limits. Claiming a global optimum from a successive convex approximation scheme is one of the fastest ways to lose a referee.",
@@ -653,9 +653,9 @@
       "q": "The Frank Wolfe method avoids projections by",
       "q_vi": "Phương pháp Frank Wolfe tránh phép chiếu bằng cách",
       "choices": [
-        "Using a proximal operator in place of the projection",
-        "Ignoring the constraints and clipping the result at the end",
-        "Restricting the feasible set to a box",
+        "Replacing the projection by a proximal operator that is cheaper to evaluate",
+        "Ignoring the constraints while iterating and clipping the final iterate back into the set",
+        "Restricting the feasible set to a box so that no projection is ever needed",
         "Minimising a linear model over the feasible set and stepping towards the vertex it returns"
       ],
       "answer": 3,
@@ -668,9 +668,9 @@
       "q": "The class NP consists of decision problems for which",
       "q_vi": "Lớp NP gồm các bài toán quyết định mà",
       "choices": [
-        "A solution can be found in polynomial time",
-        "Only randomised algorithms can work",
-        "No algorithm exists at all",
+        "A solution can be found in polynomial time by some algorithm",
+        "Only randomised algorithms can solve them in practice today",
+        "No algorithm exists at all, whatever running time is allowed",
         "A claimed yes answer can be verified in polynomial time"
       ],
       "answer": 3,
@@ -684,9 +684,9 @@
       "q_vi": "Một bài toán là NP đầy đủ khi nó",
       "choices": [
         "Both in NP and NP-hard",
-        "NP-hard but provably outside NP",
+        "NP-hard but outside NP",
         "In NP but not NP-hard",
-        "Solvable in polynomial time by a randomised algorithm"
+        "Solvable in polynomial time"
       ],
       "answer": 0,
       "why": "Completeness needs membership plus hardness, which is why proving it takes two separate arguments. Many optimisation problems are NP-hard yet not NP-complete because they are not decision problems in NP.",
@@ -698,9 +698,9 @@
       "q": "Which statement is true?",
       "q_vi": "Phát biểu nào đúng?",
       "choices": [
-        "NP-hard and NP-complete are two names for the same class",
-        "Every NP-hard problem is in NP by definition",
-        "An NP-hard problem has no verifiable certificate for any instance",
+        "NP-hard and NP-complete name the same class",
+        "Every NP-hard problem lies in NP by definition",
+        "An NP-hard problem has no certificate at all",
         "An NP-hard problem need not belong to NP"
       ],
       "answer": 3,
@@ -714,9 +714,9 @@
       "q_vi": "Bạn chứng minh độ khó bằng cách quy dẫn bài của mình trong thời gian đa thức về bài người bán hàng. Thực ra bạn đã chứng minh được gì?",
       "choices": [
         "Only that your problem is no harder than that one, which is not a hardness proof",
-        "That the travelling salesman problem is easy",
-        "That your problem is NP-hard",
-        "That your problem is NP-complete"
+        "That the travelling salesman problem must itself be easy to solve",
+        "That your problem is NP-hard, since the target problem is NP-hard",
+        "That your problem is NP-complete, because the reduction itself runs in polynomial time"
       ],
       "answer": 0,
       "why": "A reduction from A to B says B is at least as hard as A, so pointing your problem at a hard target proves an upper bound on difficulty. The hardness proof needs the arrow reversed, mapping the known hard problem into yours.",
@@ -728,10 +728,10 @@
       "q": "co-NP is the class of problems for which",
       "q_vi": "Đồng NP là lớp các bài toán mà",
       "choices": [
-        "Every instance can be settled by brute force",
+        "Every instance is decided by a polynomial time algorithm",
         "A yes answer has a certificate verifiable in polynomial time",
         "A no answer has a certificate verifiable in polynomial time",
-        "No certificate of any kind can exist"
+        "No certificate of any kind can exist for either answer"
       ],
       "answer": 2,
       "why": "The classes differ in which answer carries the short proof, and it is not known whether they coincide. Proving that a formula is unsatisfiable, for instance, has no known short certificate, which is why that problem sits in co-NP rather than NP.",
@@ -743,10 +743,10 @@
       "q": "An algorithm with approximation ratio two for a minimisation problem guarantees a cost at most twice the optimum",
       "q_vi": "Thuật toán có tỉ số xấp xỉ bằng hai cho bài toán cực tiểu bảo đảm chi phí không quá hai lần nghiệm tối ưu",
       "choices": [
-        "On average over a distribution of instances",
-        "On the instances that were tested",
+        "Only on average",
+        "Only on tested inputs",
         "On every instance",
-        "In running time rather than in objective value"
+        "Only in running time"
       ],
       "answer": 2,
       "why": "An approximation ratio is a worst case guarantee proved for all inputs, which is why it is so much stronger than an empirical average. A measured average gap on a benchmark is evidence, not a ratio.",
@@ -758,10 +758,10 @@
       "q": "An inapproximability result forbids any polynomial algorithm from beating a certain ratio unless P equals NP, yet your heuristic lands within one percent of optimum on your test set. The correct reading is",
       "q_vi": "Một kết quả không xấp xỉ được cấm mọi thuật toán đa thức vượt qua một tỉ số nhất định trừ khi P bằng NP, thế mà thuật giải của bạn chỉ cách nghiệm tối ưu một phần trăm trên bộ dữ liệu thử. Cách hiểu đúng là",
       "choices": [
-        "The bound applies to average instances, so your result does contradict it",
+        "The bound applies to average instances, so your result contradicts it",
         "Your instances are not from the hard family, so there is no contradiction",
-        "The inapproximability result must contain an error",
-        "Your heuristic has effectively proved that P equals NP"
+        "The inapproximability result must contain an error somewhere",
+        "Your heuristic has effectively shown that P equals NP after all"
       ],
       "answer": 1,
       "why": "Inapproximability is a worst case statement built on adversarial constructions that rarely resemble real data. The honest write up says the empirical gap is small on this family, not that the theory is beaten.",
@@ -774,9 +774,9 @@
       "q_vi": "Thuật toán ngẫu nhiên kiểu Monte Carlo khác kiểu Las Vegas ở chỗ nó",
       "choices": [
         "Runs in bounded time but may return a wrong answer with small probability",
-        "Needs a quantum computer to run",
-        "Is always correct but has a random running time",
-        "Uses no randomness at all"
+        "Needs a quantum computer in order to run, since the randomness must be physical",
+        "Is always correct, but its running time is random rather than bounded in advance",
+        "Uses no randomness at all and follows a fixed deterministic rule throughout"
       ],
       "answer": 0,
       "why": "Monte Carlo trades correctness for a time bound, Las Vegas trades a time bound for correctness. Always correct with a random running time is the description of Las Vegas, the distractor most people pick.",
@@ -788,10 +788,10 @@
       "q": "A problem is fixed parameter tractable in a parameter k when it can be solved in time",
       "q_vi": "Một bài toán là dễ theo tham số k khi giải được trong thời gian",
       "choices": [
-        "Exponential in the input size for every fixed k",
-        "Polynomial in the input size only when k equals the input size",
+        "Exponential in the input size for every fixed value of k, with no polynomial factor",
+        "Polynomial in the input size only when k equals the input size itself",
         "Some function of k times a polynomial in the input size whose degree does not depend on k",
-        "The input size raised to a power that grows with k"
+        "The input size raised to a power that grows with the parameter k itself"
       ],
       "answer": 2,
       "why": "The whole point is that the blow up is confined to k while the dependence on the input size stays a fixed polynomial. Letting the exponent grow with k gives the weaker class where the algorithm becomes useless as soon as k is moderate.",
@@ -804,9 +804,9 @@
       "q_vi": "Bài toán của bạn khó NP, thế mà bạn giải chính xác được những trường hợp mười nghìn nút. Phản biện hỏi vì sao. Câu trả lời đúng là",
       "choices": [
         "Hardness is a worst case statement, and structured real instances can be far easier",
-        "The hardness proof must contain an error",
+        "The hardness proof must contain an error that nobody has spotted",
         "NP-hardness applies only to decision problems, so it does not concern our optimisation",
-        "Ten thousand nodes is small enough for brute force"
+        "Ten thousand nodes is small enough that brute force finishes quickly on modern hardware"
       ],
       "answer": 0,
       "why": "Worst case hardness never forbids fast solutions on a restricted family, and sparsity or structure often collapses the search. Brute force at that size is out of the question, and hardness does carry over to the optimisation version through its decision form.",
@@ -818,9 +818,9 @@
       "q": "A Nash equilibrium is a strategy profile in which",
       "q_vi": "Cân bằng Nash là bộ chiến lược mà ở đó",
       "choices": [
-        "Every player receives the same payoff",
+        "Every player receives exactly the same payoff",
         "No player can improve by changing strategy alone",
-        "The total payoff of all players is maximised",
+        "The sum of the payoffs of all players is maximised",
         "One player dictates the outcome for the others"
       ],
       "answer": 1,
@@ -833,9 +833,9 @@
       "q": "The prisoner's dilemma shows that a Nash equilibrium",
       "q_vi": "Thế lưỡng nan của người tù cho thấy một cân bằng Nash",
       "choices": [
-        "Requires the players to communicate first",
-        "Is always Pareto efficient",
-        "Never exists in a finite game",
+        "Requires the players to communicate with each other beforehand",
+        "Is always Pareto efficient as soon as the players have reached it",
+        "Never exists in a game where each player has finitely many strategies",
         "Can be worse for every player than another available outcome"
       ],
       "answer": 3,
@@ -851,7 +851,7 @@
         "At least one equilibrium in mixed strategies",
         "At least one equilibrium in pure strategies",
         "An equilibrium only when the payoffs are symmetric",
-        "Exactly one equilibrium"
+        "Exactly one equilibrium, whatever the payoffs are"
       ],
       "answer": 0,
       "why": "Randomisation is what makes existence work, and matching pennies has no pure equilibrium at all. Uniqueness is a much stronger property that needs extra structure such as strict concavity of the payoffs.",
@@ -863,10 +863,10 @@
       "q": "In a Stackelberg game",
       "q_vi": "Trong trò chơi Stackelberg",
       "choices": [
-        "Both players move at the same time",
+        "Both players move at the same time without commitment",
         "The leader commits first and the follower best responds",
-        "The follower commits first and the leader responds",
-        "Neither player has a payoff function"
+        "The follower commits first and the leader then best responds",
+        "Neither player has a payoff function to maximise"
       ],
       "answer": 1,
       "why": "The value of the model is the commitment, which lets the leader anticipate the response and shape it. Simultaneous moves would be the ordinary Nash setting instead.",
@@ -878,9 +878,9 @@
       "q": "In a sealed bid second price auction, bidding your true valuation is",
       "q_vi": "Trong đấu giá kín trả theo giá thứ hai, đặt đúng giá trị thật của mình là",
       "choices": [
-        "Equivalent to bidding zero",
-        "Never optimal",
-        "Optimal only if you already know the other bids",
+        "Equivalent to bidding zero every time",
+        "Never optimal, since you should shade down",
+        "Optimal only if you know the other bids",
         "A dominant strategy, whatever the others do"
       ],
       "answer": 3,
@@ -893,9 +893,9 @@
       "q": "Users of your pricing scheme obtain a better allocation by overstating their demand. This means the mechanism",
       "q_vi": "Người dùng trong cơ chế định giá của bạn có được suất tốt hơn khi khai vống nhu cầu. Điều đó nghĩa là cơ chế",
       "choices": [
-        "Is incentive compatible but merely inefficient",
-        "Has no Nash equilibrium",
-        "Violates a price of anarchy bound",
+        "Is incentive compatible, yet inefficient in the final allocation that it produces",
+        "Has no Nash equilibrium at all, so no allocation of the resource can be stable",
+        "Violates a price of anarchy bound, so the loss against the optimum is unbounded",
         "Is not incentive compatible, so the reported demands cannot be used as data"
       ],
       "answer": 3,
@@ -909,9 +909,9 @@
       "q_vi": "Giá của sự vô chính phủ được định nghĩa là",
       "choices": [
         "The social cost of the worst equilibrium divided by the optimal social cost",
-        "The computational cost of finding an equilibrium",
-        "The best equilibrium cost divided by the worst equilibrium cost",
-        "The difference between the leader and follower payoffs"
+        "The computational cost of finding an equilibrium in the game",
+        "The cost of the best equilibrium divided by the cost of the worst equilibrium",
+        "The difference between the payoff of the leader and the payoff of the follower"
       ],
       "answer": 0,
       "why": "It measures how much selfish behaviour can cost against a central planner, and the worst equilibrium is used because a system cannot choose which one it lands in. The ratio of the best equilibrium to the optimum is the price of stability, a different and gentler quantity.",
@@ -923,10 +923,10 @@
       "q": "A process is Markov when the next state depends on",
       "q_vi": "Một quá trình là Markov khi trạng thái kế tiếp phụ thuộc vào",
       "choices": [
-        "The initial state alone",
+        "The initial state alone, no matter what has happened since",
         "The current state alone, not on the earlier history",
-        "The whole trajectory so far",
-        "The time index alone"
+        "The entire trajectory visited up to that moment",
+        "The time index alone, not on the state"
       ],
       "answer": 1,
       "why": "The present state must summarise everything the future needs, which is why enlarging the state is the standard fix when memory matters. Depending on the full trajectory is exactly what the Markov property rules out.",
@@ -938,8 +938,8 @@
       "q": "A finite Markov chain converges to a unique stationary distribution from any starting state when it is",
       "q_vi": "Xích Markov hữu hạn hội tụ về một phân bố dừng duy nhất từ mọi trạng thái xuất phát khi nó",
       "choices": [
-        "Symmetric in its transition matrix",
-        "Reducible into several closed classes",
+        "Symmetric and doubly stochastic",
+        "Reducible into closed classes",
         "Irreducible and aperiodic",
         "Periodic with period two"
       ],
@@ -954,9 +954,9 @@
       "q_vi": "Trong quá trình Poisson, thời gian giữa hai lần đến liên tiếp",
       "choices": [
         "Exponentially distributed and memoryless",
-        "Normally distributed around the mean",
-        "Deterministic and equal to the mean",
-        "Uniformly distributed on an interval"
+        "Normally distributed around its mean value",
+        "Deterministic and always equal to the mean",
+        "Uniformly distributed on a bounded interval"
       ],
       "answer": 0,
       "why": "Memorylessness is what makes the whole M/M analysis tractable, since the residual time until the next arrival never depends on how long you have waited. A deterministic gap would be a D arrival process, a different model.",
@@ -968,10 +968,10 @@
       "q": "The PASTA property states that",
       "q_vi": "Tính chất PASTA phát biểu rằng",
       "choices": [
-        "Arrivals always find the system empty",
+        "Arrivals always find the system empty when it is stable",
         "Poisson arrivals observe the system in its time average state",
-        "Service times must be exponential for the queue to be stable",
-        "The average queue length equals the arrival rate"
+        "Service times must be exponential, otherwise the queue cannot be stable",
+        "The average queue length is equal to the arrival rate itself"
       ],
       "answer": 1,
       "why": "It is the bridge that lets you use time averages as the distribution seen by an arriving customer, which is not true for a general arrival process. With deterministic arrivals, for instance, a customer can systematically see an atypical state.",
@@ -984,9 +984,9 @@
       "q_vi": "Hàng đợi M/M/1 ổn định khi",
       "choices": [
         "The arrival rate is strictly below the service rate",
-        "The arrival rate exactly equals the service rate",
-        "Customers are served in first come first served order",
-        "The service rate is below the arrival rate"
+        "The arrival rate is exactly equal to the service rate",
+        "Customers are served first come first served",
+        "The service rate stays strictly below the arrival rate"
       ],
       "answer": 0,
       "why": "At equality the queue is null recurrent and the mean number in system already diverges, so stability needs a strict inequality. The service discipline does not affect stability at all in this model.",
@@ -999,9 +999,9 @@
       "q_vi": "Trong hàng đợi M/M/1 với tốc độ đến lambda và tốc độ phục vụ mu, thời gian trung bình một khách ở trong hệ là",
       "choices": [
         "One divided by mu minus lambda",
-        "One divided by mu",
+        "One divided by mu alone",
         "Mu divided by mu minus lambda",
-        "Lambda divided by mu"
+        "Lambda over mu minus lambda"
       ],
       "answer": 0,
       "why": "The service time alone is one over mu, and the extra term comes from waiting behind others, so the two rates appear as a difference. As lambda approaches mu the expression blows up, which matches the observed collapse near saturation.",
@@ -1013,9 +1013,9 @@
       "q": "When the utilisation of an M/M/1 queue rises from 0.8 to 0.9, the mean number in the system",
       "q_vi": "Khi hệ số sử dụng của hàng đợi M/M/1 tăng từ 0,8 lên 0,9, số phần tử trung bình trong hệ",
       "choices": [
-        "Rises by about twelve percent, matching the rise in load",
-        "Falls because the server is kept busier",
-        "Stays the same because the queue is still stable",
+        "Rises by about twelve percent, matching the load",
+        "Falls, because the server is kept busier now",
+        "Stays the same, since the queue is still stable",
         "More than doubles, going from four to nine"
       ],
       "answer": 3,
@@ -1028,10 +1028,10 @@
       "q": "Splitting traffic across c separate single server queues instead of one queue served by c servers of the same total capacity",
       "q_vi": "Chia tải ra c hàng đợi một máy phục vụ riêng biệt thay vì một hàng đợi chung do c máy phục vụ với cùng tổng năng lực",
       "choices": [
-        "Decreases mean waiting time",
+        "Decreases mean waiting time, since each separate line is shorter",
         "Increases mean waiting time, because idle capacity cannot help a busy line",
-        "Leaves mean waiting time unchanged",
-        "Makes the system unstable"
+        "Leaves the mean waiting time unchanged, because total capacity is identical",
+        "Makes the system unstable, because each server now sees the whole offered load"
       ],
       "answer": 1,
       "why": "In the split system a server can sit idle while customers wait in another line, and that wasted capacity shows up as extra delay. Stability is the same in both designs since the total capacity is unchanged.",
@@ -1043,10 +1043,10 @@
       "q": "The Pollaczek Khinchine formula shows that in an M/G/1 queue the mean waiting time depends on",
       "q_vi": "Công thức Pollaczek Khinchine cho thấy trong hàng đợi M/G/1, thời gian chờ trung bình phụ thuộc vào",
       "choices": [
-        "The arrival process only",
-        "The number of servers in the system",
+        "The arrival process alone, because the service times average out over the long run",
+        "The number of servers in the system, since adding servers is the only way to cut the wait",
         "The second moment of the service time, so variability hurts even at a fixed mean",
-        "The mean service time only"
+        "The mean service time alone, whatever the variance around that mean"
       ],
       "answer": 2,
       "why": "Two service distributions with identical means but different variances give very different waits, which is why bursty service is punished. Assuming the mean is enough is the modelling error behind many optimistic delay claims.",
@@ -1059,9 +1059,9 @@
       "q_vi": "Cường độ tải là",
       "choices": [
         "Offered load divided by total service capacity",
-        "The number of customers currently in the system",
+        "The number of customers now in the system",
         "The variance of the arrival process",
-        "Total service capacity divided by offered load"
+        "Total service capacity divided by the offered load"
       ],
       "answer": 0,
       "why": "Written this way it must stay below one for stability, and it also equals the fraction of time a single server is busy. The inverted ratio would put the stability threshold above one and confuse every subsequent formula.",
@@ -1074,9 +1074,9 @@
       "q_vi": "Trong hệ một máy phục vụ bảo toàn công việc, chuyển từ ai đến trước phục vụ trước sang phục vụ theo ưu tiên sẽ",
       "choices": [
         "Redistributes waiting time between classes without changing a weighted sum of the waits",
-        "Makes the system unstable",
-        "Reduces the total amount of work in the system",
-        "Raises the effective service capacity"
+        "Makes the system unstable, even though the offered load and the service capacity are unchanged",
+        "Reduces the total amount of unfinished work in the system, because urgent jobs leave sooner",
+        "Raises the effective service capacity of the server, since switching overhead disappears"
       ],
       "answer": 0,
       "why": "The conservation law says the server never idles while work remains, so scheduling can only decide who waits. A paper claiming that a smarter scheduler cut everyone's delay at fixed load is claiming free capacity.",
@@ -1089,8 +1089,8 @@
       "q_vi": "Định lý phần thưởng đổi mới biểu diễn tốc độ dài hạn dưới dạng",
       "choices": [
         "The expected reward per cycle divided by the expected cycle length",
-        "The largest reward observed across all cycles",
-        "The expected reward divided by the number of cycles simulated",
+        "The largest reward observed across all cycles of the process",
+        "The expected total reward divided by the number of cycles simulated",
         "The expected reward per cycle times the expected cycle length"
       ],
       "answer": 0,
@@ -1103,10 +1103,10 @@
       "q": "You report a steady state queue length from a discrete event simulation that starts empty, without discarding a warm up period. Your estimate is",
       "q_vi": "Bạn báo cáo chiều dài hàng đợi ở trạng thái dừng từ mô phỏng sự kiện rời rạc khởi động với hệ rỗng, không bỏ giai đoạn quá độ. Ước lượng của bạn",
       "choices": [
-        "Unbiased, since the average covers the whole run",
+        "Unbiased, since the average is taken over the entire run",
         "Biased high, because the queue grows without bound at the start",
         "Biased low, because the early nearly empty period is averaged in",
-        "Unusable only when the queue is unstable"
+        "Unusable only when the queue is unstable, and fine otherwise"
       ],
       "answer": 2,
       "why": "The initial transient contains states far below the stationary distribution and those samples pull the mean down, most severely at high utilisation where the transient is longest. Averaging over the whole run does not cancel a systematic bias, it only dilutes it.",
@@ -1118,8 +1118,8 @@
       "q": "You build a confidence interval from consecutive queue length samples taken inside one simulation run. This tends to",
       "q_vi": "Bạn dựng khoảng tin cậy từ các mẫu chiều dài hàng đợi lấy liên tiếp trong cùng một lần chạy mô phỏng. Việc này thường",
       "choices": [
-        "Overstate the uncertainty, because the samples are autocorrelated",
-        "Be exact as long as the queue is stable",
+        "Overstate the uncertainty, because the samples are autocorrelated in time",
+        "Be exact as long as the queue remains stable throughout the whole run",
         "Understate the uncertainty, because the samples are autocorrelated",
         "Give the right width, since the samples are identically distributed"
       ],
@@ -1135,8 +1135,8 @@
       "choices": [
         "There is no difference between them",
         "The measurements are normally distributed",
-        "The sample size is large enough",
-        "The new method is better than the old one"
+        "The sample size is large enough to test",
+        "The new method is better than the old"
       ],
       "answer": 0,
       "why": "The null is the position you try to refute, so it carries the claim of no effect. Normality is an assumption of a particular test, not the hypothesis being tested.",
@@ -1149,9 +1149,9 @@
       "q_vi": "Giá trị p bằng 0,03 nghĩa là",
       "choices": [
         "Data at least this extreme would appear three percent of the time if the null hypothesis were true",
-        "There is a three percent chance that the null hypothesis is true",
-        "There is a ninety seven percent chance that the effect is real",
-        "The effect is three percent in size"
+        "There is a three percent chance that the null hypothesis is true, given the data observed",
+        "There is a ninety seven percent chance that the effect is real, so the finding is confirmed",
+        "The measured effect is three percent in size, whatever the sample happened to be"
       ],
       "answer": 0,
       "why": "The probability is computed assuming the null, so it cannot be a probability about the null. Turning it around requires a prior and gives a posterior, which is a different calculation entirely.",
@@ -1163,9 +1163,9 @@
       "q": "A test returns p equal to 0.06 against a threshold of 0.05. The honest report is",
       "q_vi": "Phép kiểm cho p bằng 0,06 với ngưỡng 0,05. Cách báo cáo trung thực là",
       "choices": [
-        "The two methods are proven equivalent",
-        "The threshold should be raised to 0.1 for this experiment",
-        "The difference is significant once the value is rounded",
+        "The two methods are proven equivalent, because the test failed to reject the null hypothesis",
+        "The threshold should be raised to 0.1 for this experiment, since 0.06 is very close to the line",
+        "The difference is significant once the p value is rounded, since 0.06 rounds down to 0.05",
         "The evidence is weak, so the difference is not established, which is not the same as proving equality"
       ],
       "answer": 3,
@@ -1178,10 +1178,10 @@
       "q": "You run twenty independent comparisons at the five percent level and no real effect exists anywhere. The chance of getting at least one significant result is about",
       "q_vi": "Bạn chạy hai mươi phép so sánh độc lập ở mức năm phần trăm và thực tế không có hiệu ứng nào. Xác suất thu được ít nhất một kết quả có ý nghĩa là khoảng",
       "choices": [
-        "One percent",
+        "About one percent",
         "One hundred percent",
         "Sixty four percent",
-        "Five percent"
+        "Exactly five percent"
       ],
       "answer": 2,
       "why": "The chance of no false positive is 0.95 raised to the twentieth power, roughly 0.36, so at least one appears about two times out of three. Reading the five percent as if it applied to the whole family of tests is the error that a correction is meant to fix.",
@@ -1193,8 +1193,8 @@
       "q": "The Bonferroni correction controls false positives by",
       "q_vi": "Hiệu chỉnh Bonferroni kiểm soát dương tính giả bằng cách",
       "choices": [
-        "Increasing the sample size until every test passes",
-        "Discarding the least significant test from the family",
+        "Increasing the sample size until each test reaches significance",
+        "Discarding the least significant test from the whole family",
         "Multiplying the effect size by the number of tests",
         "Dividing the significance threshold by the number of tests"
       ],
@@ -1208,9 +1208,9 @@
       "q": "With a very large sample, a difference can be statistically significant and still",
       "q_vi": "Với mẫu rất lớn, một khác biệt có thể có ý nghĩa thống kê mà vẫn",
       "choices": [
-        "Be impossible to detect by any test",
-        "Be automatically causal",
-        "Be independent of the null hypothesis",
+        "Be impossible to detect by any statistical test, no matter how large the sample becomes",
+        "Be automatically causal, since a large sample removes any confounding",
+        "Be independent of the sample size, since significance already accounts for it",
         "Be far too small to matter in practice, which is why effect size must be reported"
       ],
       "answer": 3,
@@ -1224,9 +1224,9 @@
       "q_vi": "Tính lực kiểm định sau thí nghiệm từ cỡ hiệu ứng quan sát được thì",
       "choices": [
         "Adds no information, since it is a monotone function of the p value you already have",
-        "Proves that the study was adequately powered",
-        "Corrects for multiple comparisons",
-        "Is the standard way to justify a small sample"
+        "Proves that the study was adequately powered, because the observed effect was detected",
+        "Corrects for the multiple comparisons that were made across the whole family of tests",
+        "Is the standard way of justifying a small sample size after the experiment has been run"
       ],
       "answer": 0,
       "why": "Observed power is determined by the p value, so a nonsignificant result always yields low observed power and the argument goes in a circle. Power must be computed before the study, from the smallest effect you would care about.",
@@ -1239,9 +1239,9 @@
       "q_vi": "Bạn có năm lần chạy cho mỗi phương pháp, kết quả lệch rõ và có một điểm ngoại lai. Phép kiểm hợp lý là",
       "choices": [
         "A rank based test such as Wilcoxon",
-        "No test at all, just compare the means",
-        "A t test, since it is robust to everything",
-        "A chi squared test on the raw measurements"
+        "No test at all, just the means",
+        "A t test, which is robust to anything",
+        "A chi squared test on the values"
       ],
       "answer": 0,
       "why": "Rank tests need no normality assumption and an outlier moves a rank far less than it moves a mean. The t test is robust to mild departures at large sample sizes, which is exactly the condition you do not have here.",
@@ -1253,8 +1253,8 @@
       "q": "The bootstrap estimates uncertainty by",
       "q_vi": "Phương pháp bootstrap ước lượng độ bất định bằng cách",
       "choices": [
-        "Averaging over the hyperparameter grid",
-        "Rerunning the experiment on different hardware",
+        "Averaging results over the hyperparameter grid",
+        "Rerunning the whole experiment on different hardware",
         "Assuming the data follow a normal distribution",
         "Resampling the observed data with replacement many times"
       ],
@@ -1268,9 +1268,9 @@
       "q": "For the same data, a prediction interval for the next observation is",
       "q_vi": "Trên cùng bộ dữ liệu, khoảng dự báo cho quan sát kế tiếp thì",
       "choices": [
-        "Undefined unless the sample is large",
-        "Identical to the confidence interval for the mean",
-        "Narrower than the confidence interval for the mean",
+        "Undefined for the next observation, since only a large sample would make the interval meaningful",
+        "Identical to the confidence interval for the mean, because both are computed from the same data",
+        "Narrower than the confidence interval for the mean, because a single draw carries less uncertainty",
         "Wider than the confidence interval for the mean, since it also carries individual variation"
       ],
       "answer": 3,
@@ -1283,10 +1283,10 @@
       "q": "Observing that two quantities move together establishes",
       "q_vi": "Quan sát thấy hai đại lượng cùng biến động chỉ cho thấy",
       "choices": [
-        "Nothing at all about the data",
+        "Nothing at all about the data, since a correlation is a meaningless number on its own",
         "Association, which may come from a common cause or from how the sample was selected",
-        "That one of them causes the other",
-        "That neither one causes the other"
+        "That one of the two quantities is certainly causing the other one to move as it does",
+        "That neither quantity can be causing the other, so it is coincidence"
       ],
       "answer": 1,
       "why": "An association is real data, the causal reading is the extra claim that needs an intervention or a design that rules out alternatives. It also does not prove the absence of causation, only that the evidence is silent on direction.",
@@ -1298,10 +1298,10 @@
       "q": "You run thirty seeds and report the best one as your result. This is",
       "q_vi": "Bạn chạy ba mươi hạt giống rồi báo cáo cái tốt nhất làm kết quả. Đó là",
       "choices": [
-        "Standard practice for stochastic algorithms",
-        "Valid because the baseline was also run with a single seed",
+        "Standard practice for stochastic algorithms, since everyone in the field reports the best run",
+        "Valid, because the baseline was also run with one seed chosen the same way",
         "Selective reporting, since the maximum of thirty draws is not the expected performance",
-        "Acceptable as long as the chosen seed is stated in the paper"
+        "Acceptable as long as the chosen seed is stated in the paper so others can repeat it"
       ],
       "answer": 2,
       "why": "The maximum of a sample is biased upward by construction, and the bias grows with the number of runs, so the number cannot be reproduced by anyone drawing one seed. Reporting the seed makes the run repeatable without making the claim honest.",
@@ -1313,10 +1313,10 @@
       "q": "Preregistration means fixing",
       "q_vi": "Tiền đăng ký nghĩa là chốt trước",
       "choices": [
-        "The random seeds before running the experiments",
+        "The random seeds and the hardware before any of the experiments are launched",
         "The hypotheses, metrics and analysis plan before looking at any result",
-        "The figures before the data are collected",
-        "The target journal before writing the paper"
+        "The figures and the tables before a single data point has been collected",
+        "The target journal and the page limit before a single word of the paper is written"
       ],
       "answer": 1,
       "why": "The point is to remove the freedom to choose the analysis after seeing which choice looks best. Fixing seeds is good practice for reproducibility but leaves every analysis decision open.",
@@ -1329,8 +1329,8 @@
       "q_vi": "Đối ngẫu yếu đúng",
       "choices": [
         "Only when Slater's condition is satisfied",
-        "Only for linear programs",
-        "Only for convex problems",
+        "Only for linear programs, never for others",
+        "Only for convex problems with a smooth objective",
         "For every optimisation problem, convex or not"
       ],
       "answer": 3,
@@ -1343,9 +1343,9 @@
       "q": "Slater's condition, the existence of a strictly feasible point in a convex problem, guarantees",
       "q_vi": "Điều kiện Slater, tức tồn tại một điểm khả thi chặt trong bài toán lồi, bảo đảm",
       "choices": [
-        "That the problem is really a linear program",
-        "A unique optimal solution",
-        "That the objective is strongly convex",
+        "A unique optimum",
+        "A linear feasible set",
+        "Strong convexity of f",
         "A zero duality gap"
       ],
       "answer": 3,
@@ -1359,9 +1359,9 @@
       "q_vi": "Bạn giải bài đối ngẫu Lagrange của một bài không lồi rồi báo giá trị của nó như nghiệm tối ưu của hệ. Sai lầm là",
       "choices": [
         "There may be a positive duality gap, so the dual value is only a bound",
-        "The dual is nonconvex and therefore cannot be solved",
-        "The dual of a nonconvex problem does not exist",
-        "For a minimisation problem the dual value always exceeds the primal optimum"
+        "The dual is nonconvex, so it cannot be solved reliably at all",
+        "The dual of a nonconvex problem does not exist in the first place",
+        "In a minimisation problem the dual value exceeds the primal optimum"
       ],
       "answer": 0,
       "why": "Without convexity the gap can be strictly positive, so the dual value is unattainable and reporting it overstates performance. The dual is always concave and always solvable, which is exactly why it is tempting to misuse it this way.",
@@ -1373,9 +1373,9 @@
       "q": "The KKT conditions are",
       "q_vi": "Điều kiện KKT thì",
       "choices": [
-        "Never necessary at an optimum",
-        "Always sufficient for global optimality",
-        "Applicable only to unconstrained problems",
+        "Never necessary at an optimum of a constrained problem, only sufficient in special cases",
+        "Always sufficient for global optimality, whatever the structure of the problem may be",
+        "Applicable only to unconstrained problems, where they reduce to a vanishing gradient",
         "Necessary at an optimum under a constraint qualification, and sufficient as well when the problem is convex"
       ],
       "answer": 3,
@@ -1389,9 +1389,9 @@
       "q_vi": "Bù trừ lỏng chặt nói rằng tại nghiệm tối ưu",
       "choices": [
         "Every inactive inequality constraint carries a zero multiplier",
-        "Every multiplier is strictly positive",
-        "Every constraint is active",
-        "The gradient of the objective is zero"
+        "Every multiplier is strictly positive at the optimal point found",
+        "Every constraint in the problem is active at the point in question",
+        "The gradient of the objective vanishes there, as in the unconstrained case"
       ],
       "answer": 0,
       "why": "A constraint that is not binding exerts no price, which is what makes multipliers readable as shadow prices of the binding resources. Requiring all constraints to be active would describe a very special corner point, not the general case.",
@@ -1403,10 +1403,10 @@
       "q": "Your method is tuned over a grid of a hundred configurations while the baseline runs at its default settings. The comparison",
       "q_vi": "Phương pháp của bạn được dò trên lưới một trăm cấu hình còn đối chứng chạy với thiết lập mặc định. Phép so sánh này",
       "choices": [
-        "Is fair provided both methods use the same dataset",
-        "Is fair, since the defaults are what the original authors recommended",
+        "Is fair, provided that both of the methods are run on the very same dataset",
+        "Is fair, since the defaults are exactly what the original authors recommended",
         "Carries no evidence, because the tuning budget differs between the two",
-        "Is fair as long as the grid is reported in the paper"
+        "Is fair as long as the whole grid is reported in the paper"
       ],
       "answer": 2,
       "why": "What you measured is the value of a hundred fold search, which the baseline never received, so the algorithmic contribution is not separated from the tuning. Reporting the grid makes the experiment reproducible without making it a fair test.",
@@ -1418,10 +1418,10 @@
       "q": "Two solvers are compared at a fixed iteration count, but one iteration of yours costs five times more. The fair comparison",
       "q_vi": "Hai bộ giải được so ở cùng số vòng lặp, nhưng một vòng lặp của bạn tốn gấp năm lần. Phép so sánh công bằng",
       "choices": [
-        "Runs your method on the faster machine",
+        "Runs your method on a faster machine so the extra cost per iteration disappears",
         "Equalises wall clock time or another common budget instead of the iteration count",
-        "Reports only the final objective value and ignores the cost",
-        "Keeps the iteration count, since an iteration is the natural unit"
+        "Reports only the final objective value and ignores the running cost entirely",
+        "Keeps the iteration count, because an iteration is the natural unit of algorithmic progress"
       ],
       "answer": 1,
       "why": "An iteration is not a unit of resource, so equal iterations hand your method five times the compute. The usual presentation is objective against time or against oracle calls, with the per iteration cost stated.",
@@ -1433,10 +1433,10 @@
       "q": "In distributed optimisation over a network of devices, the quantity that usually decides whether a method is deployable is",
       "q_vi": "Trong tối ưu phân tán trên mạng thiết bị, đại lượng thường quyết định một phương pháp có triển khai được hay không là",
       "choices": [
-        "The number of floating point operations at each node",
+        "The number of floating point operations that each node must carry out locally",
         "The number of communication rounds, since messaging dominates the cost",
-        "The number of local variables per node",
-        "The size of the convex hull of the data"
+        "The number of local variables that each node has to keep in its own memory",
+        "The size of the convex hull of the data that the nodes hold between them"
       ],
       "answer": 1,
       "why": "Links are slow and often metered while local compute is comparatively cheap, so a method needing many rounds fails in practice even with light local steps. This is why papers in this area plot accuracy against rounds rather than against iterations.",
@@ -1449,9 +1449,9 @@
       "q_vi": "Hằng số Big M chọn quá nhỏ trong mô hình nguyên hỗn hợp sẽ",
       "choices": [
         "Silently removes feasible solutions, possibly including the optimum",
-        "Only slows the solver down without changing the answer",
-        "Has no effect on the model at all",
-        "Weakens the relaxation while keeping all solutions"
+        "Only slows the solver down, without changing the reported answer",
+        "Has no effect on the model at all, since it is only a constant",
+        "Weakens the linear relaxation while keeping every feasible solution intact"
       ],
       "answer": 0,
       "why": "Too small a constant turns a switch into a real bound on the variable, so configurations that should be allowed become infeasible and the reported optimum can be worse than the truth. Too large a constant is the opposite failure, a weak relaxation and a slow solve with the solution set intact.",
@@ -1463,9 +1463,9 @@
       "q": "Replacing a bilinear term by its McCormick envelope gives",
       "q_vi": "Thay một số hạng song tuyến bằng bao McCormick của nó sẽ cho",
       "choices": [
-        "An exact reformulation of the original problem",
-        "A problem more constrained than the original one",
-        "A nonconvex reformulation of the same problem",
+        "An exact reformulation of the original bilinear problem, with the same optimal value",
+        "A problem more tightly constrained than the original, so its value is pessimistic",
+        "A nonconvex reformulation of exactly the same problem, with the bilinear terms left intact",
         "A relaxation whose optimum bounds the true one, exact only if the envelope is tight at that solution"
       ],
       "answer": 3,
@@ -1478,10 +1478,10 @@
       "q": "Scalarising two objectives with weights can never reach Pareto points that lie",
       "q_vi": "Gộp hai mục tiêu bằng trọng số không bao giờ chạm tới được các điểm Pareto nằm",
       "choices": [
-        "At the two extremes of the front",
+        "At the two extreme ends of the front",
         "On the convex part of the front",
         "On a nonconvex part of the front",
-        "Anywhere, because weighting is arbitrary"
+        "Anywhere, since weights are arbitrary"
       ],
       "answer": 2,
       "why": "A weight vector defines a supporting line, and a dent in the front is never supported by any such line, so those solutions are invisible whatever weights you sweep. The extreme points are exactly the ones the sweep does reach, at weights near zero and one.",
@@ -1494,9 +1494,9 @@
       "q_vi": "Hàm mục tiêu của thuật toán của bạn giảm đơn điệu qua các vòng lặp trên một bài không lồi. Điều đó cho thấy",
       "choices": [
         "Only that the objective sequence converges, which says nothing about global optimality",
-        "That the global optimum has been reached",
-        "That the problem was convex after all",
-        "That the step size was chosen optimally"
+        "That the global optimum has been reached, since no further descent is possible",
+        "That the problem was really convex all along, despite how it was written",
+        "That the step size was chosen optimally for this particular problem"
       ],
       "answer": 0,
       "why": "A monotone sequence bounded below converges, and that is the whole content of the observation, since a different starting point can settle at a different value. The honest test is to run many starting points and report the spread of limits.",

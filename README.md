@@ -19,15 +19,30 @@ npx serve .          # hoặc: python -m http.server 8000
 Rồi mở `http://localhost:3000`. Đưa lên Vercel thì chọn framework **Other**, không có lệnh build,
 thư mục gốc là thư mục này.
 
-## Kiểm dữ liệu trước khi đẩy lên
+## Hai cổng kiểm, chạy trước khi đẩy lên
 
 ```bash
-node tools/check-data.mjs
+npm run qa        # chạy cả hai, hoặc chạy riêng từng cái bên dưới
 ```
 
-Cổng này bắt: id trùng, thẻ thiếu mặt trước hoặc thiếu nghĩa tiếng Việt, chỉ số đáp án nằm ngoài
-khoảng, lựa chọn trắc nghiệm trùng nhau, và cụm khoá luyện nói không nằm trong câu mẫu. Nó cũng
-cảnh báo khi thẻ chưa có nhãn hoặc còn dấu gạch dài trong văn xuôi. Sai thì trả mã thoát khác 0.
+**`node tools/check-data.mjs` bắt lỗi cấu trúc.** Id trùng, thẻ thiếu mặt trước hoặc thiếu nghĩa
+tiếng Việt, chỉ số đáp án nằm ngoài khoảng, lựa chọn trắc nghiệm trùng nhau, cụm khoá luyện nói
+không nằm trong câu mẫu. Cảnh báo khi thẻ chưa có nhãn hoặc còn dấu gạch dài trong văn xuôi.
+
+**`node tools/qa.mjs` bắt lỗi chất lượng**, tức những đường người học đoán được mà không cần biết
+gì. Nó chặn khi:
+
+- Đáp án đúng dồn về một vị trí quá 40 phần trăm, vì khi đó cứ chọn vị trí đó là ăn điểm.
+- Đáp án đúng dồn về một hạng độ dài quá 40 phần trăm, vì khi đó đoán theo độ dài là ăn điểm. Cả
+  hai lỗi này đều đã từng xảy ra thật trong kho: có lúc 100 phần trăm đáp án nằm ở vị trí A, và có
+  lúc 88 phần trăm đáp án là phương án dài nhất.
+- Giải thích tham chiếu theo vị trí phương án, kiểu "phương án cuối", vì chỉ cần ai đó hoán vị lựa
+  chọn là lời giải thích thành sai.
+- Hai thẻ cùng mặt trước, hai câu cùng đề bài, hai lựa chọn cùng nội dung, lựa chọn kết thúc lửng.
+
+Cả hai cổng trả mã thoát khác 0 khi có lỗi. Cả hai đều đã được thử ngược bằng lỗi gieo sẵn: gieo
+sáu loại lỗi vào một bản sao thì `qa.mjs` bắt đủ sáu. Một cổng báo sạch mà chưa từng bị thử ngược
+thì không chứng minh được điều gì.
 
 ## Cấu trúc dữ liệu
 
@@ -126,7 +141,21 @@ dùng khi đổi máy hoặc trước khi xoá dữ liệu duyệt web.
 2. Thêm một mục vào mảng `decks` của `data/manifest.json`, gồm `id`, `file`, `title`, `icon`,
    `lang` (`en-vi` hoặc `ru-vi`), `blurb`, `color`, `group`.
 3. Muốn có câu hỏi hiểu bản chất thì thêm `data/questions/<id>.json` và một mục vào `quizzes`.
-4. Chạy `node tools/check-data.mjs`, rồi commit.
+4. Chạy `npm run qa`, rồi commit.
+
+## Khi soạn câu trắc nghiệm mới
+
+Ba điều dễ làm hỏng cả ngân hàng câu hỏi mà mắt thường không thấy:
+
+- **Đừng để đáp án đúng luôn ở vị trí đầu.** Rất dễ mắc khi soạn tuần tự, và người học nhận ra sau
+  chừng mười câu.
+- **Đừng để đáp án đúng luôn là phương án dài nhất.** Đây là lỗi khó thấy hơn: đáp án đúng viết cho
+  chính xác nên tự nhiên dài, còn phương án nhiễu viết cụt. Phương án nhiễu phải dài tương đương, và
+  dài ra bằng nội dung thật, tức thêm một cơ chế sai hoặc một điều kiện sai, không phải thêm chữ đệm.
+- **Đừng viết giải thích tham chiếu theo vị trí.** Viết "phương án nói rằng độ trễ giảm" chứ đừng
+  viết "phương án thứ ba".
+
+`npm run qa` bắt cả ba.
 
 ## Phím tắt
 

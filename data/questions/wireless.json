@@ -9,9 +9,9 @@
       "q_vi": "Một ô có thông lượng trung bình cao nhưng người dùng than cuộc gọi video hay đứng hình. Chỉ số nào giải thích tốt nhất?",
       "choices": [
         "Jitter",
-        "Spectral efficiency",
-        "Peak data rate",
-        "Cell radius"
+        "Ec/No",
+        "Doppler",
+        "Uptime"
       ],
       "answer": 0,
       "why": "Average throughput can be high while the delay of individual packets swings wildly. Real time media breaks on delay variation, not on average rate.",
@@ -24,9 +24,9 @@
       "q_vi": "Vì sao triển khai sóng milimet cần nhiều trạm gốc hơn hẳn so với dải dưới 6 GHz cho cùng một diện tích?",
       "choices": [
         "Higher frequencies suffer greater path loss and are blocked by ordinary obstacles",
-        "Millimetre wave radios cannot use beamforming",
-        "Millimetre wave carriers have narrower bandwidth",
-        "Regulators cap the transmit power at millimetre wave"
+        "Millimetre wave radios cannot form directional beams, so the array gain is lost",
+        "Millimetre wave carriers are narrower, so each site can only cover a small radius",
+        "Regulators cap millimetre wave transmit power far below the sub-6 GHz allowance"
       ],
       "answer": 0,
       "why": "Free space loss grows with frequency and millimetre waves barely diffract, so walls, foliage and even a human body break the link. Bandwidth is actually much wider there.",
@@ -53,10 +53,10 @@
       "q": "Massive MIMO improves capacity mainly because",
       "q_vi": "Massive MIMO tăng dung lượng chủ yếu vì",
       "choices": [
-        "It removes the need for channel coding",
-        "It raises the transmit power of each antenna",
+        "It removes the need for channel coding, since the large array averages every fade away completely",
+        "It raises the transmit power of each antenna element in proportion to the array size",
         "Many antennas let the cell serve several users on the same time-frequency resource",
-        "It shortens the symbol duration"
+        "It shortens the symbol duration, so many more symbols can be packed into each and every slot"
       ],
       "answer": 2,
       "why": "The gain is spatial multiplexing: with enough antennas and good channel knowledge, spatially separated users share the same resource block.",
@@ -83,10 +83,10 @@
       "q": "A link works at 64-QAM but fails at 256-QAM under the same conditions. The most direct explanation is",
       "q_vi": "Một tuyến chạy được ở 64-QAM nhưng hỏng ở 256-QAM trong cùng điều kiện. Giải thích trực tiếp nhất là",
       "choices": [
-        "256-QAM requires two antennas",
+        "256-QAM requires at least two transmit antennas, so a link with a single antenna cannot carry it",
         "Higher order constellations pack points closer, so they need a higher signal to noise ratio",
-        "256-QAM uses a wider bandwidth",
-        "256-QAM is not supported in TDD"
+        "256-QAM occupies a wider bandwidth, so the extra noise collected pushes the link into errors",
+        "256-QAM is defined only for FDD carriers and is not supported by the TDD frame structure at all"
       ],
       "answer": 1,
       "why": "Every step up in constellation order shrinks the distance between neighbouring points, so the same noise level now causes decision errors.",
@@ -98,9 +98,9 @@
       "q": "Network slicing differs from simple QoS prioritisation because a slice",
       "q_vi": "Cắt lát mạng khác với việc chỉ ưu tiên QoS ở chỗ mỗi lát",
       "choices": [
-        "Cannot be created or removed while the network runs",
-        "Only applies to the radio interface",
-        "Requires dedicated physical hardware",
+        "Cannot be created or removed while the network is running, unlike a QoS profile",
+        "Only applies to the radio interface, leaving transport and core completely untouched",
+        "Requires dedicated physical hardware for every tenant, from the radio site to the core",
         "Is an isolated end to end virtual network with its own resources and management"
       ],
       "answer": 3,
@@ -114,9 +114,9 @@
       "q_vi": "Trong triển khai bị giới hạn bởi nhiễu, tăng công suất phát của mọi trạm gốc sẽ",
       "choices": [
         "Improve throughput proportionally to the power increase",
-        "Eliminate inter-cell interference",
+        "Remove inter-cell interference by burying it under the signal",
         "Leave the signal to interference ratio roughly unchanged",
-        "Reduce the required bandwidth"
+        "Cut the bandwidth needed, since each hertz then carries more bits"
       ],
       "answer": 2,
       "why": "Both the wanted signal and the interference scale together, so the ratio that actually decides the rate barely moves. This is why coordination beats brute force.",
@@ -128,10 +128,10 @@
       "q": "Open RAN's main promise is",
       "q_vi": "Lời hứa chính của Open RAN là",
       "choices": [
-        "A new air interface faster than 5G NR",
+        "A new air interface whose waveform is faster than the one used by 5G NR",
         "Open interfaces between RAN components so operators can mix vendors",
-        "Free use of licensed spectrum",
-        "Removing the need for a core network"
+        "Royalty free access to licensed spectrum for any operator that deploys it",
+        "Removing the need for a core network by folding its functions into the radio"
       ],
       "answer": 1,
       "why": "Open RAN is about disaggregation and standardised interfaces, not about a new radio waveform.",
@@ -143,10 +143,10 @@
       "q": "A reconfigurable intelligent surface helps mainly by",
       "q_vi": "Bề mặt phản xạ thông minh giúp ích chủ yếu nhờ",
       "choices": [
-        "Amplifying the signal with onboard power amplifiers",
-        "Decoding and re-encoding the data",
+        "Amplifying the incident signal with its own onboard power amplifiers before it is re-radiated",
+        "Decoding the incoming data, correcting the errors and re-encoding it before it is forwarded",
         "Reflecting the incident wave with controlled phases to build a useful path around blockage",
-        "Generating its own carrier frequency"
+        "Generating its own carrier frequency, so the reflected copy arrives on a cleaner tone than before"
       ],
       "answer": 2,
       "why": "A passive surface adds no power. It changes the phase of each element so reflections add constructively at the receiver, which is why it is called a smart reflector rather than a relay.",
@@ -159,9 +159,9 @@
       "q_vi": "Một chiến dịch đo kênh báo trải trễ hiệu dụng một micro giây. Dạng sóng của bạn chiếm 20 MHz. Điều đó hàm ý gì?",
       "choices": [
         "The channel is frequency selective, so equalisation or a multicarrier waveform is needed",
-        "Doppler will be the dominant impairment",
-        "The channel varies too fast in time to be estimated",
-        "The channel is flat, so a single tap equaliser is enough"
+        "Doppler will be the dominant impairment here, since the delay spread also sets the coherence time",
+        "The channel varies far too fast in time to be estimated with the pilot density that is available",
+        "The channel is flat across the occupied band, so a single tap equaliser is enough"
       ],
       "answer": 0,
       "why": "Coherence bandwidth is roughly the inverse of the delay spread, here about one megahertz, far narrower than the twenty megahertz signal. Doppler concerns time variation and cannot be inferred from a delay spread figure.",
@@ -173,9 +173,9 @@
       "q": "A link on a high speed train suffers rising intercarrier interference. Which change addresses the root cause?",
       "q_vi": "Một tuyến trên tàu cao tốc bị nhiễu giữa các sóng mang con tăng dần. Thay đổi nào xử lý đúng gốc rễ?",
       "choices": [
-        "Raise the modulation order",
-        "Extend the cyclic prefix",
-        "Narrow the subcarrier spacing to pack more tones",
+        "Raise the modulation order so that fewer symbols carry the same payload",
+        "Extend the cyclic prefix so the guard interval absorbs the Doppler shift",
+        "Narrow the subcarrier spacing to pack more tones into the same band",
         "Increase the subcarrier spacing and make the time domain pilots denser"
       ],
       "answer": 3,
@@ -189,9 +189,9 @@
       "q_vi": "Mô hình nào phù hợp với tuyến có một thành phần trực tiếp trội cùng nhiều tia tán xạ?",
       "choices": [
         "Rician fading",
-        "Log normal shadowing",
+        "Shadow fading",
         "Rayleigh fading",
-        "Free space path loss"
+        "Free space loss"
       ],
       "answer": 0,
       "why": "Rician fading is defined by the ratio between the dominant component and the scattered power. Rayleigh assumes no dominant component at all, and shadowing is a large scale effect rather than an envelope model.",
@@ -218,9 +218,9 @@
       "q": "Why does the cyclic prefix preserve subcarrier orthogonality on a dispersive channel?",
       "q_vi": "Vì sao tiền tố tuần hoàn giữ được tính trực giao giữa các sóng mang con trên kênh tán xạ?",
       "choices": [
-        "It lets the receiver measure and compensate the Doppler shift",
+        "It gives the receiver a repeated copy of the tail from which the Doppler shift is measured and removed",
         "It makes the channel act as a circular convolution, so each subcarrier sees a single complex gain",
-        "It lowers the peak to average power ratio of the symbol",
+        "It lowers the peak to average power ratio of the symbol, so the amplifier stays linear",
         "It adds redundant bits that the decoder uses to correct the resulting errors"
       ],
       "answer": 1,
@@ -233,10 +233,10 @@
       "q": "In a large rural cell the block error rate stops improving no matter how much transmit power you add. The cyclic prefix is shorter than the measured delay spread. What is the symptom you are seeing?",
       "q_vi": "Ở một ô nông thôn rộng, tỉ lệ lỗi khối không cải thiện thêm dù tăng bao nhiêu công suất phát. Tiền tố tuần hoàn ngắn hơn trải trễ đo được. Bạn đang chứng kiến hiện tượng gì?",
       "choices": [
-        "A pure carrier frequency offset problem",
+        "A pure carrier frequency offset, which no amount of extra transmit power can ever compensate for",
         "An irreducible error floor caused by interference between symbols and between subcarriers",
-        "An increase in the peak to average power ratio",
-        "A slow but steady loss of signal to noise ratio"
+        "A rise in the peak to average power ratio that drives the power amplifier into hard compression",
+        "A slow but steady loss of signal to noise ratio as the receiver drifts out of frequency lock"
       ],
       "answer": 1,
       "why": "When energy spills past the prefix, part of the previous symbol leaks into the current one and orthogonality is lost, producing self interference that grows with the signal itself. Adding power raises the interference by the same amount, so an error floor appears.",
@@ -250,8 +250,8 @@
       "choices": [
         "Quadrature amplitude modulation has a constant envelope",
         "Many independently modulated subcarriers occasionally add in phase",
-        "The subcarriers are not perfectly orthogonal in practice",
-        "The cyclic prefix duplicates energy at the start of each symbol"
+        "The subcarriers are never perfectly orthogonal in practice, so they leak power",
+        "The cyclic prefix duplicates energy at the start of every single symbol"
       ],
       "answer": 1,
       "why": "The time domain sample is a sum of many random tones, so by the central limit argument it behaves like a Gaussian variable with rare large peaks. The cyclic prefix copies existing samples and does not create new peaks, and quadrature amplitude modulation is not constant envelope at all.",
@@ -263,9 +263,9 @@
       "q": "Why does 5G NR offer DFT-s-OFDM as an uplink option alongside plain OFDM?",
       "q_vi": "Vì sao 5G NR cung cấp DFT-s-OFDM làm tuỳ chọn đường lên bên cạnh OFDM thường?",
       "choices": [
-        "It supports more simultaneous users per resource block",
-        "It removes the need for a cyclic prefix",
-        "It achieves higher spectral efficiency than OFDM at the same signal to noise ratio",
+        "It supports far more simultaneous users inside one resource block, since each user then occupies fewer tones",
+        "It removes the need for a cyclic prefix entirely, because the extra transform already absorbs the channel echoes",
+        "It achieves a higher spectral efficiency than plain OFDM at the same signal to noise ratio and the same bandwidth",
         "Its lower peak to average power ratio lets a power limited device transmit closer to its amplifier limit"
       ],
       "answer": 3,
@@ -279,9 +279,9 @@
       "q_vi": "Bạn chuyển một triển khai từ khoảng cách sóng mang con 15 kHz sang 60 kHz. Cái giá chính phải trả là gì?",
       "choices": [
         "The cyclic prefix shortens proportionally, so tolerance to delay spread falls",
-        "Subcarrier orthogonality is lost",
-        "The slot duration becomes four times longer",
-        "The peak data rate drops by a factor of four"
+        "Subcarrier orthogonality is lost, because the tones no longer complete whole cycles",
+        "The slot lasts four times longer, so scheduling decisions arrive far less often",
+        "The peak data rate drops by a factor of four, since fewer subcarriers fit the band"
       ],
       "answer": 0,
       "why": "Symbol duration and cyclic prefix scale inversely with subcarrier spacing, so a four times wider spacing leaves a four times shorter guard interval and suits only small cells. The slot actually becomes four times shorter, which is why the choice is made for latency and Doppler robustness.",
@@ -293,7 +293,7 @@
       "q": "In OFDM, subcarriers are orthogonal because the spacing equals",
       "q_vi": "Trong OFDM, các sóng mang con trực giao với nhau vì khoảng cách giữa chúng bằng",
       "choices": [
-        "Half the total channel bandwidth",
+        "One half of the total channel bandwidth",
         "The reciprocal of the delay spread",
         "The reciprocal of the cyclic prefix duration",
         "The reciprocal of the useful symbol duration"
@@ -308,10 +308,10 @@
       "q": "Why did 3GPP choose polar codes for 5G control information rather than reusing the data channel code?",
       "q_vi": "Vì sao 3GPP chọn mã cực cho thông tin điều khiển 5G thay vì dùng lại mã của kênh dữ liệu?",
       "choices": [
-        "Polar codes decode faster than any other family at long block lengths",
-        "The data channel code cannot be rate matched",
+        "Polar codes decode faster than any other family, which matters most at the long block lengths of data",
+        "The data channel code cannot be rate matched to the many small payload sizes that control signalling uses",
         "At the very short block lengths of control messages, list decoding of polar codes with a check code performs better",
-        "Polar codes need no cyclic redundancy check"
+        "Polar codes need no cyclic redundancy check at all, which saves the overhead that a very short message cannot afford"
       ],
       "answer": 2,
       "why": "Control payloads are tens of bits, where sparse graph codes lose their asymptotic advantage while successive cancellation list decoding aided by a check code stays strong. Polar codes in fact rely on that check code both for early termination and for selecting the surviving path.",
@@ -324,9 +324,9 @@
       "q_vi": "So với mã turbo, ưu điểm thực tế của mã LDPC trên kênh dữ liệu 5G là gì?",
       "choices": [
         "Belief propagation parallelises heavily, giving high throughput with a low error floor",
-        "They work without any parity bits",
-        "They need no interleaver of any kind, unlike every other code",
-        "They always require fewer decoding iterations than turbo codes"
+        "They correct errors without sending any parity bits, so no bandwidth goes to redundancy",
+        "They need no interleaver of any kind, unlike turbo codes whose whole design depends on one",
+        "They always require fewer decoding iterations than a turbo decoder at the same code rate"
       ],
       "answer": 0,
       "why": "The sparse graph lets many check nodes update at once, which is what makes multi gigabit decoders feasible, and well designed graphs avoid the error floors that plague turbo codes. Any code that corrects errors necessarily transmits parity.",
@@ -339,9 +339,9 @@
       "q_vi": "Phần dư tăng dần tốt hơn kiểu kết hợp lặp lại vì mỗi lần phát lại",
       "choices": [
         "Carries new parity bits, so the effective code rate of the combined attempt falls",
-        "Uses a higher transmit power than the first attempt",
-        "Repeats the same bits, which doubles the received energy",
-        "Switches to a different modulation order automatically"
+        "Uses a higher transmit power than the first attempt, so the receiver collects more energy",
+        "Repeats exactly the same bits, which simply doubles the energy collected for that block",
+        "Switches automatically to a different modulation order that the receiver detects blindly"
       ],
       "answer": 0,
       "why": "Sending fresh parity gives both energy accumulation and true coding gain, whereas chase combining only accumulates energy on identical bits. The price is a bigger soft buffer and more complex scheduling.",
@@ -353,9 +353,9 @@
       "q": "A URLLC service has a deadline shorter than one HARQ round trip. What is the sound design response?",
       "q_vi": "Một dịch vụ URLLC có hạn chót ngắn hơn một vòng khứ hồi HARQ. Cách thiết kế hợp lý là gì?",
       "choices": [
-        "Configure more parallel HARQ processes",
-        "Move the service to a longer transmission time interval",
-        "Increase the maximum number of retransmissions",
+        "Configure many more parallel HARQ processes, so that several retransmission attempts always stay in flight at once",
+        "Move the service to a longer transmission time interval, so that every single attempt can carry more redundancy",
+        "Raise the maximum number of retransmissions allowed, so that the residual error probability keeps falling further",
         "Transmit at a lower code rate with blind repetitions so the first attempt already meets the reliability target"
       ],
       "answer": 3,
@@ -370,8 +370,8 @@
       "choices": [
         "Source coding removes redundancy while channel coding adds it back in a controlled form",
         "Source coding protects against errors while channel coding compresses",
-        "Both remove redundancy but at different layers",
-        "Channel coding only applies to analogue signals"
+        "Both remove redundancy, but source coding works on bits and channel coding on symbols",
+        "Channel coding applies only to analogue signals while source coding applies to digital ones"
       ],
       "answer": 0,
       "why": "Compression strips predictable structure so fewer bits are sent, and channel coding then inserts structured parity so errors can be corrected. Their roles are exactly opposite, which is why Shannon separated the two theorems.",
@@ -383,8 +383,8 @@
       "q": "You double the bandwidth of a noise limited link while keeping total transmit power fixed. Capacity",
       "q_vi": "Bạn tăng gấp đôi băng thông của một tuyến bị giới hạn bởi tạp âm nhưng giữ nguyên tổng công suất phát. Dung lượng sẽ",
       "choices": [
-        "Falls, because wider bands always suffer more path loss",
-        "Doubles exactly, since capacity is proportional to bandwidth",
+        "Falls, because a wider band always suffers greater path loss at its upper edge",
+        "Doubles exactly, since capacity is strictly proportional to the occupied bandwidth",
         "Rises by less than a factor of two, because the noise power doubles as well",
         "Stays unchanged, since the signal to noise ratio falls by half"
       ],
@@ -398,10 +398,10 @@
       "q": "Spectral efficiency is measured in",
       "q_vi": "Hiệu suất phổ được đo bằng đơn vị",
       "choices": [
-        "Decibels relative to one milliwatt",
+        "Decibels above one milliwatt",
         "Bits per second per hertz",
-        "Bits per joule",
-        "Symbols per second"
+        "Bits per joule of energy",
+        "Symbols per second per cell"
       ],
       "answer": 1,
       "why": "It normalises the delivered rate by the occupied bandwidth. Bits per joule is energy efficiency, which usually moves in the opposite direction.",
@@ -414,9 +414,9 @@
       "q_vi": "Đổ nước cho độ lợi lớn nhất so với chia đều công suất khi",
       "choices": [
         "The signal to noise ratio is low and the subchannel gains differ sharply",
-        "All subchannels have the same gain",
-        "The number of subchannels is very large",
-        "The signal to noise ratio is very high"
+        "All the subchannels happen to have exactly the same gain and noise level",
+        "The number of subchannels is very large, so the water level is finely resolved",
+        "The signal to noise ratio is very high and the subchannel gains differ sharply"
       ],
       "answer": 0,
       "why": "At low signal to noise ratio the optimal solution abandons the weak subchannels entirely, which uniform allocation cannot do. At high signal to noise ratio the water level dwarfs the gain differences and the two allocations converge.",
@@ -430,7 +430,7 @@
       "choices": [
         "The near device drowns the far one, so power control equalises the received levels",
         "The near device suffers first, because it is closer to the noise source",
-        "The far device wins because it transmits at higher power",
+        "The far device wins the contest, because power control makes it transmit at a higher level",
         "Nothing happens, since the receiver separates them by frequency"
       ],
       "answer": 0,
@@ -443,10 +443,10 @@
       "q": "Closed loop power control differs from open loop control because it",
       "q_vi": "Điều khiển công suất vòng kín khác vòng hở ở chỗ nó",
       "choices": [
-        "Runs once at connection setup and never changes",
+        "Runs once at connection setup and is never revised for the rest of the session",
         "Uses commands derived from the quality actually measured at the receiver",
         "Relies only on the path loss the device estimates from downlink signals",
-        "Applies only to the downlink"
+        "Applies only to the downlink, since the device cannot act on such commands"
       ],
       "answer": 1,
       "why": "The closed loop corrects residual error using feedback from the far end, which catches interference and hardware effects that the device cannot estimate on its own. Estimating path loss from downlink measurements is precisely the open loop part.",
@@ -458,10 +458,10 @@
       "q": "A two by two MIMO link at very low signal to noise ratio performs worse with two streams than with one. Why?",
       "q_vi": "Một tuyến MIMO hai nhân hai ở tỉ số tín hiệu trên nhiễu rất thấp lại chạy hai luồng kém hơn một luồng. Vì sao?",
       "choices": [
-        "The receiver cannot estimate two channels at once",
+        "The receiver cannot estimate two separate channels at once when the pilot energy is this low, so both streams are lost",
         "Splitting power between streams halves the energy each stream gets, and at low SNR the rate is nearly linear in power",
-        "Two streams need twice the bandwidth",
-        "Spatial multiplexing is forbidden below a standardised threshold"
+        "Two spatial streams occupy twice the bandwidth, so the collected noise power doubles and the rate falls",
+        "Spatial multiplexing is forbidden by the standard below a signal to noise threshold that this link misses"
       ],
       "answer": 1,
       "why": "In the low signal to noise regime the logarithm behaves almost linearly, so two half power streams give roughly the same sum rate as one full power stream while paying more overhead and losing array gain. At high signal to noise ratio the logarithm flattens and multiplexing wins.",
@@ -473,10 +473,10 @@
       "q": "A four by four MIMO link in a long corridor with a strong line of sight reports rank one behaviour. What explains it?",
       "q_vi": "Một tuyến MIMO bốn nhân bốn trong hành lang dài có tầm nhìn thẳng mạnh lại chỉ đạt hạng một. Giải thích thế nào?",
       "choices": [
-        "Line of sight always increases the number of usable streams",
+        "A line of sight component always adds usable streams, so the report must be a measurement error",
         "The dominant path makes the channel matrix ill conditioned, so the columns are nearly parallel",
-        "The transmit power is too high for four streams",
-        "The receiver antennas are too far apart"
+        "The transmit power is too high for four streams, so the receiver front end runs into compression",
+        "The receive antennas are spaced too far apart, so their signals decorrelate completely"
       ],
       "answer": 1,
       "why": "Spatial multiplexing needs rich scattering to give the channel matrix several strong singular values. A single dominant path leaves one large singular value and tiny others, so only beamforming gain remains available.",
@@ -488,9 +488,9 @@
       "q": "A zero forcing precoder performs poorly at cell edge while an MMSE precoder holds up. The reason is that zero forcing",
       "q_vi": "Bộ tiền mã hoá cưỡng bức về không chạy kém ở biên ô trong khi bộ MMSE vẫn trụ được. Lý do là cưỡng bức về không",
       "choices": [
-        "Ignores the channel state information entirely",
+        "Ignores the channel state information entirely and precodes from the codebook index alone",
         "Cancels interference exactly, which amplifies noise when the channel is nearly singular",
-        "Needs more antennas than users to work at all",
+        "Needs strictly more transmit antennas than served users, which the cell edge case violates",
         "Cannot be used together with orthogonal frequency division multiplexing"
       ],
       "answer": 1,
@@ -503,10 +503,10 @@
       "q": "Why is downlink precoding easier to obtain in TDD than in FDD?",
       "q_vi": "Vì sao lấy được thông tin để tiền mã hoá đường xuống trong TDD dễ hơn trong FDD?",
       "choices": [
-        "TDD systems always have more antennas",
-        "TDD channels change more slowly than FDD channels",
+        "TDD base stations are always built with many more antenna elements than FDD ones",
+        "TDD channels change more slowly than FDD ones, so an older estimate stays valid longer",
         "TDD can reuse uplink pilots thanks to channel reciprocity on the same frequency",
-        "FDD does not allow any feedback from the device"
+        "FDD does not allow the device to feed back any channel report to the network"
       ],
       "answer": 2,
       "why": "The propagation channel is the same in both directions on one frequency, so uplink sounding reveals the downlink channel. In frequency division duplex the two bands fade independently, so the device must measure and feed back a quantised report.",
@@ -518,10 +518,10 @@
       "q": "In a massive MIMO simulation the signal to interference ratio saturates as the array grows from one hundred to five hundred antennas. What is the most likely cause?",
       "q_vi": "Trong mô phỏng MIMO quy mô lớn, tỉ số tín hiệu trên nhiễu bão hoà khi dàn ăng-ten tăng từ 100 lên 500 phần tử. Nguyên nhân khả dĩ nhất là gì?",
       "choices": [
-        "Insufficient transmit power per antenna",
+        "The transmit power per antenna element is too low once the array grows that large",
         "The thermal noise floor rising with the number of antennas",
         "Pilot contamination from neighbouring cells reusing the same pilot sequences",
-        "The cyclic prefix becoming too short"
+        "The cyclic prefix becomes too short for the extra delay spread the array introduces"
       ],
       "answer": 2,
       "why": "When the same pilot is reused nearby, the estimated channel is a mixture that includes the interferer, so the beam is partly aimed at the wrong user and the leakage grows with the array exactly as fast as the wanted signal. Noise, by contrast, is averaged away as antennas are added.",
@@ -548,10 +548,10 @@
       "q": "Channel hardening in massive MIMO means that",
       "q_vi": "Hiện tượng kênh cứng lại trong MIMO quy mô lớn nghĩa là",
       "choices": [
-        "The coherence time grows with the number of antennas",
+        "The coherence time of the channel grows with the number of antennas, so each estimate stays valid longer",
         "The effective channel gain becomes almost deterministic, so opportunistic scheduling gains shrink",
-        "The channel becomes harder to estimate as antennas are added",
-        "Deep fades become more frequent"
+        "The channel becomes harder to estimate as antennas are added, since each pilot serves more branches",
+        "Deep fades become more frequent, so the scheduler must react far more often than before"
       ],
       "answer": 1,
       "why": "Averaging over many antennas concentrates the effective gain around its mean, so the fluctuations that multiuser diversity exploits mostly disappear. That is a benefit for stable rate allocation but it removes the scheduling gain that fading used to offer.",
@@ -564,9 +564,9 @@
       "q_vi": "Một hệ thử nghiệm MIMO quy mô lớn TDD dùng tiền mã hoá dựa trên tính thuận nghịch chạy kém xa mô phỏng. Bước hiệu chuẩn chuỗi vô tuyến đã bị bỏ qua. Vì sao điều đó quan trọng?",
       "choices": [
         "Only the propagation channel is reciprocal, while the transmit and receive hardware responses differ",
-        "Reciprocity holds only above six gigahertz",
-        "Calibration is what synchronises the frame timing",
-        "Without calibration the cyclic prefix is misaligned"
+        "Reciprocity holds only above six gigahertz, so a testbed operating in a lower band cannot rely on it at all",
+        "Calibration is what synchronises the frame timing between the antenna array and all the served devices",
+        "Without any calibration the cyclic prefix ends up misaligned between the antennas of the array itself"
       ],
       "answer": 0,
       "why": "The measured uplink channel includes the receive chain of the base station and the transmit chain of the device, while the downlink uses the other pair, so an unknown gain and phase offset per antenna corrupts the precoder. Frame timing and prefix alignment are separate synchronisation issues.",
@@ -578,10 +578,10 @@
       "q": "In downlink power domain NOMA with a strong and a weak user, the strong user",
       "q_vi": "Trong NOMA miền công suất đường xuống với một người dùng mạnh và một người dùng yếu, người dùng mạnh sẽ",
       "choices": [
-        "Receives the larger share of the transmit power",
+        "Receives the larger share of the transmit power, since it can use a higher rate",
         "Decodes its own signal directly and treats the other as noise",
         "Decodes the weak user's signal first, subtracts it, then decodes its own",
-        "Must use a lower modulation order than the weak user"
+        "Must use a lower modulation order than the weak user to keep the pairing stable"
       ],
       "answer": 2,
       "why": "More power is deliberately given to the weak user so that its signal can be decoded first by whoever has the better channel, then removed. The weak user simply treats the remaining low power signal as noise.",
@@ -593,7 +593,7 @@
       "q": "NOMA brings almost no gain over orthogonal access in one particular case. Which?",
       "q_vi": "NOMA gần như không cho độ lợi so với truy nhập trực giao trong một trường hợp. Đó là trường hợp nào?",
       "choices": [
-        "When the total transmit power is high",
+        "When the total transmit power of the cell is very high",
         "When the paired users have nearly equal channel gains",
         "When the users request very different data rates",
         "When one user is at the cell edge and the other at the centre"
@@ -608,9 +608,9 @@
       "q": "The hardest obstacle to in band full duplex is",
       "q_vi": "Trở ngại khó nhất của song công hoàn toàn trong cùng băng tần là",
       "choices": [
-        "The impossibility of synchronising the two directions",
-        "The lack of suitable antennas above six gigahertz",
-        "Regulations that forbid simultaneous transmission and reception",
+        "The impossibility of synchronising the two directions when they share a single carrier frequency",
+        "The lack of antenna designs that work above six gigahertz in both directions at the same time",
+        "Regulations that forbid transmitting and receiving on the same channel at exactly the same time",
         "Self interference that can be a hundred decibels stronger than the wanted received signal"
       ],
       "answer": 3,
@@ -638,10 +638,10 @@
       "q": "The main benefit of mini slot scheduling is that",
       "q_vi": "Lợi ích chính của lập lịch theo khe con là",
       "choices": [
-        "It doubles the number of subcarriers available",
-        "It removes the need for HARQ feedback",
+        "It doubles the number of subcarriers available inside the same resource block",
+        "It removes the need for HARQ feedback, since each mini slot is self contained",
         "Transmission can begin at any symbol instead of waiting for the next slot boundary",
-        "It raises the peak spectral efficiency of the cell"
+        "It raises the peak spectral efficiency of the cell by cutting the pilot overhead per byte"
       ],
       "answer": 2,
       "why": "Cutting the alignment delay is exactly what a critical packet needs, and the price is more control overhead per delivered byte. Peak spectral efficiency actually falls because the overhead is amortised over fewer symbols.",
@@ -653,10 +653,10 @@
       "q": "Why does 5G NR let a device operate on a narrow bandwidth part instead of the whole carrier?",
       "q_vi": "Vì sao 5G NR cho phép thiết bị hoạt động trên một phần băng thông hẹp thay vì cả sóng mang?",
       "choices": [
-        "A narrower bandwidth increases the achievable peak rate",
+        "A narrower bandwidth raises the achievable peak rate by concentrating the power",
         "A narrower bandwidth lets the device use a lower sampling rate and save power",
-        "It removes interference from neighbouring cells",
-        "It is required in order to support carrier aggregation"
+        "It removes interference from neighbouring cells, since fewer tones are exposed",
+        "It is required in order to support carrier aggregation across several bands"
       ],
       "answer": 1,
       "why": "Radio frequency and baseband power scale with the bandwidth the device must digitise, so a sleepy or cheap device can stay on a small part. The peak rate obviously falls, and switching a bandwidth part costs a short interruption.",
@@ -668,10 +668,10 @@
       "q": "Why does a millimetre wave base station transmit a burst of many synchronisation signal blocks?",
       "q_vi": "Vì sao trạm gốc sóng milimet phát cả một chùm nhiều khối tín hiệu đồng bộ?",
       "choices": [
-        "Each block serves a different network slice",
-        "Each block carries a different part of the system information",
+        "Each block belongs to a different network slice, so the device selects the one that its service needs",
+        "Each block carries a different fragment of the system information, which the device then reassembles",
         "Each block goes out in a different beam direction so that narrow beams still cover the whole cell",
-        "Repetition is needed to reach the target block error rate"
+        "Repetition is needed because a single block would never reach the target block error rate on its own"
       ],
       "answer": 2,
       "why": "Initial access happens before the network knows where the device is, so the cell must sweep its beams in time and let the device report the best index. The blocks carry the same content, and slices play no role at this stage.",
@@ -683,7 +683,7 @@
       "q": "In the four step random access procedure, what actually resolves a collision between two devices that chose the same preamble?",
       "q_vi": "Trong thủ tục truy nhập ngẫu nhiên bốn bước, cái gì thực sự giải quyết va chạm giữa hai thiết bị chọn trùng chuỗi mở đầu?",
       "choices": [
-        "The preamble itself, since preambles are unique per device",
+        "The preamble itself, since each device is assigned a preamble that no other one uses",
         "The random access response, which is addressed to a single device",
         "The base station scheduler, which never grants the same resource twice",
         "The contention resolution message that echoes back the identity of only one of them"
@@ -698,9 +698,9 @@
       "q": "The RRC inactive state was introduced mainly to",
       "q_vi": "Trạng thái RRC không hoạt động được đưa ra chủ yếu để",
       "choices": [
-        "Allow the device to switch off its receiver completely for hours",
-        "Reserve dedicated resources for the device while it is silent",
-        "Let the device transmit user data without any grant",
+        "Let the device switch its receiver off completely for many hours at a time without being paged",
+        "Reserve dedicated radio resources for the device for as long as it stays silent on the link",
+        "Let the device send user data with no grant and with no preceding signalling exchange at all",
         "Keep the device context stored so a bursty application can resume with little signalling"
       ],
       "answer": 3,
@@ -728,10 +728,10 @@
       "q": "An enterprise wants factory traffic to stay on site and never traverse the operator core. Which deployment choice delivers that?",
       "q_vi": "Một doanh nghiệp muốn lưu lượng nhà máy ở lại tại chỗ và không bao giờ đi qua lõi của nhà mạng. Lựa chọn triển khai nào đáp ứng được?",
       "choices": [
-        "Increase the priority of the factory bearer",
+        "Raise the priority of the factory bearer so that its packets always leave the operator core first",
         "Place a local user plane function on the factory site while control functions stay central",
-        "Assign the factory a dedicated radio carrier",
-        "Give every machine a static address"
+        "Assign the factory a dedicated radio carrier that no other subscriber in the area is allowed to use",
+        "Give every machine on the site a static address so that its traffic never leaves the local subnet"
       ],
       "answer": 1,
       "why": "The user plane function is the packet anchor, so putting it on premises breaks the traffic out locally while the control plane stays in the operator network. A dedicated carrier or a higher priority changes the radio treatment, not the path the packets take.",
@@ -743,10 +743,10 @@
       "q": "Control and user plane separation matters for edge deployments because it lets you",
       "q_vi": "Việc tách mặt phẳng điều khiển và người dùng quan trọng với triển khai biên vì nó cho phép",
       "choices": [
-        "Encrypt the user plane without encrypting the control plane",
-        "Remove the need for a session management function",
+        "Encrypt the user plane at the edge site while leaving the control plane traffic in the clear",
+        "Remove the need for any session management function, since the forwarding decision is now local",
         "Move the packet forwarding close to the user while keeping the control functions centralised",
-        "Run the control plane on cheaper hardware than the user plane"
+        "Run the control plane on much cheaper hardware than the user plane forwarding requires"
       ],
       "answer": 2,
       "why": "The two planes then scale and are placed independently, which is exactly what shortens the data path without multiplying control instances. Session management is still required to program the distributed forwarding nodes.",
@@ -761,7 +761,7 @@
         "Radar cannot operate on the same antenna array as a communication system",
         "The waveform properties that make sensing accurate are not the ones that maximise data rate",
         "Sensing works only in line of sight while communication works only without it",
-        "Sensing requires licensed spectrum while communication does not"
+        "Sensing requires licensed spectrum, whereas communication can be carried in unlicensed bands as well"
       ],
       "answer": 1,
       "why": "Good range and Doppler resolution favour deterministic wideband structures with a low ambiguity sidelobe level, while capacity favours signals that look random. Balancing the two on one waveform is the whole research problem, and shared arrays are entirely feasible.",
@@ -775,8 +775,8 @@
       "choices": [
         "The impossibility of using orthogonal frequency division multiplexing",
         "Fronthaul capacity and tight phase synchronisation between distributed access points",
-        "The loss of frequency reuse across the coverage area",
-        "The need for larger transmit power at each access point"
+        "The loss of frequency reuse across the whole coverage area, since every point is served",
+        "The need for a much larger transmit power at every one of the distributed access points"
       ],
       "answer": 1,
       "why": "Joint coherent service means channel estimates and payload must be shared and the radios must keep a common phase reference, which is a heavy transport and clocking requirement. Each access point in fact transmits at lower power than a macro site.",
@@ -788,10 +788,10 @@
       "q": "Beyond ordinary spreading loss, what limits terahertz links in particular?",
       "q_vi": "Ngoài suy hao lan truyền thông thường, cái gì đặc biệt hạn chế tuyến terahertz?",
       "choices": [
-        "The impossibility of building antennas that small",
+        "The impossibility of manufacturing antennas that are small enough to resonate at those wavelengths",
         "Molecular absorption peaks, mainly from water vapour, that carve unusable notches in the band",
-        "Ionospheric reflection that sends the energy back to space",
-        "Regulatory prohibition of frequencies above one hundred gigahertz"
+        "Reflection from the ionosphere, which sends most of the radiated energy back out towards space",
+        "A regulatory prohibition on any civil use of the frequencies that lie above one hundred gigahertz"
       ],
       "answer": 1,
       "why": "Absorption lines add tens or hundreds of decibels per kilometre in specific sub bands, so usable windows sit between the peaks and range collapses in humid air. Small antennas are easy at those wavelengths, they simply capture very little energy each.",
@@ -803,10 +803,10 @@
       "q": "What changes most fundamentally when a system is designed as a semantic communication system?",
       "q_vi": "Điều gì thay đổi căn bản nhất khi một hệ thống được thiết kế theo hướng truyền thông ngữ nghĩa?",
       "choices": [
-        "The physical layer no longer needs channel coding",
+        "The physical layer no longer needs channel coding, since the meaning survives the bit errors",
         "Success is measured by task performance at the receiver rather than by bit error rate",
-        "Bandwidth ceases to be a constraint",
-        "The transmitter no longer needs to know the channel"
+        "Bandwidth ceases to be a constraint, because meaning is carried by a single symbol",
+        "The transmitter no longer needs to know the channel, since the decoder infers it"
       ],
       "answer": 1,
       "why": "The design goal moves from reproducing every bit to preserving whatever the receiving task actually needs, which lets the encoder discard information a classical system would have protected. Coding, channel knowledge and bandwidth limits all remain in force.",
@@ -818,10 +818,10 @@
       "q": "Wi-Fi uses collision avoidance rather than the collision detection of classic Ethernet because",
       "q_vi": "Wi-Fi dùng cơ chế tránh va chạm thay vì phát hiện va chạm như Ethernet cổ điển vì",
       "choices": [
-        "Collisions never actually happen on a wireless medium",
-        "Radio frames are too short for detection to be worthwhile",
+        "Collisions never actually happen on a wireless medium, since fading separates frames",
+        "Radio frames are too short for a collision to be detected before they have ended",
         "A radio cannot hear a weak incoming frame while its own transmitter is running",
-        "The standard forbids listening during transmission"
+        "The standard forbids a station from listening while its own transmitter is running"
       ],
       "answer": 2,
       "why": "The self interference is many orders of magnitude above the received signal, so the station is deaf while it transmits and can only infer a collision from a missing acknowledgement. That is why the protocol spends effort avoiding collisions in advance.",
@@ -833,10 +833,10 @@
       "q": "An access point reports excellent signal levels from two clients, yet both suffer heavy retransmissions. The clients sit on opposite sides of a thick wall. What is the likely cause?",
       "q_vi": "Một điểm truy nhập báo mức tín hiệu rất tốt từ hai máy khách, nhưng cả hai đều phải phát lại rất nhiều. Hai máy nằm hai bên một bức tường dày. Nguyên nhân khả dĩ là gì?",
       "choices": [
-        "The access point is overloaded and drops frames",
+        "The access point is overloaded and starts dropping frames from both of the clients before it acknowledges them",
         "They are hidden nodes to each other, so carrier sensing fails and their frames collide at the access point",
-        "The wall attenuates the signal to the access point",
-        "The clients are using incompatible modulation schemes"
+        "The wall attenuates the path towards the access point, so both of the uplinks arrive well below the noise floor",
+        "The two clients negotiated incompatible modulation schemes, so the access point is unable to decode either one"
       ],
       "answer": 1,
       "why": "Each client senses an idle medium because it cannot hear the other, so both transmit and the collision happens only at the receiver. The signal levels to the access point are good, which rules out attenuation on those links.",
@@ -848,10 +848,10 @@
       "q": "Why is enabling RTS/CTS for all frames usually a bad idea?",
       "q_vi": "Vì sao bật RTS và CTS cho mọi khung thường là ý tồi?",
       "choices": [
-        "It prevents the use of aggregation",
-        "It disables acknowledgements",
+        "It prevents frame aggregation, since every aggregate would need its own handshake",
+        "It disables acknowledgements, because the clear to send already confirms receipt",
         "For short frames the handshake costs more airtime than the collisions it prevents",
-        "It only works if every station uses the same data rate"
+        "It only works when every station in the cell uses exactly the same data rate"
       ],
       "answer": 2,
       "why": "The exchange is worth its overhead only when a collision would waste a long frame, which is why a length threshold is configurable. Acknowledgements and aggregation continue to work normally.",
@@ -864,9 +864,9 @@
       "q_vi": "Điểm hấp dẫn chính của băng tần 6 GHz với Wi-Fi là",
       "choices": [
         "Wide contiguous channels free of legacy devices that would force protection mechanisms",
-        "Longer range at the same transmit power",
-        "Exemption from any regulatory power limit",
-        "Better wall penetration than 2.4 GHz"
+        "Longer range at the same transmit power, since a lightly loaded band needs less margin",
+        "Exemption from regulatory power limits, so an access point may transmit as hard as it likes",
+        "Better penetration through walls than 2.4 GHz, so fewer access points are needed"
       ],
       "answer": 0,
       "why": "Because only new devices operate there, the band supports very wide channels without the compatibility overhead of older generations. Higher frequency means worse penetration and shorter range, and power limits are actually stricter, especially outdoors.",
@@ -879,9 +879,9 @@
       "q_vi": "Hoạt động đa liên kết trong Wi-Fi 7 có thể cấu hình theo hướng độ tin cậy thay vì thông lượng. Ở chế độ đó nó",
       "choices": [
         "Sends the same traffic over two bands so a busy or faded band does not stall the flow",
-        "Aggregates the capacity of both bands into one larger pipe",
+        "Aggregates the capacity of both bands into one larger pipe for every associated client",
         "Uses one band for control frames and the other for data frames only",
-        "Switches bands only when the current one fails completely"
+        "Switches over to the other band only once the current one has failed completely"
       ],
       "answer": 0,
       "why": "Duplicating across links attacks the tail of the latency distribution, since the two bands rarely stall at the same instant. Aggregating capacity is the throughput oriented mode, and pure failover reacts too late to help the tail.",
@@ -893,10 +893,10 @@
       "q": "Why is the highest modulation order of Wi-Fi 7 usable only very close to the access point?",
       "q_vi": "Vì sao bậc điều chế cao nhất của Wi-Fi 7 chỉ dùng được khi ở rất gần điểm truy nhập?",
       "choices": [
-        "It requires a wider channel than the regulations allow at distance",
+        "It requires a channel wider than the regulations permit as soon as the client moves away from the access point",
         "Its constellation points are so dense that it needs a very high signal to noise ratio and low phase noise",
-        "It is limited by the duty cycle rules of the band",
-        "It works only with a single spatial stream"
+        "It is limited by the duty cycle rules of that band, which bite much harder as soon as the client moves further away",
+        "It works only with a single spatial stream, so range and rate can never both be had at one and the same time"
       ],
       "answer": 1,
       "why": "Each extra bit per symbol demands roughly six more decibels, and transmitter impairments such as phase noise and non linearity set a practical ceiling. Channel width and stream count are independent settings.",
@@ -909,9 +909,9 @@
       "q_vi": "Nâng hệ số trải của LoRa từ bảy lên mười hai dẫn tới điều gì?",
       "choices": [
         "Improves sensitivity and range, but lengthens airtime and cuts the number of messages allowed",
-        "Increases the data rate while keeping the range constant",
-        "Improves sensitivity and shortens airtime at the same time",
-        "Has no effect on the link budget, only on the channel used"
+        "Increases the data rate while leaving the range and the entire link budget exactly as before",
+        "Improves sensitivity and shortens airtime at the same time, since each chirp carries more bits",
+        "Has no effect on the link budget at all and only changes which sub band the device occupies"
       ],
       "answer": 0,
       "why": "A longer chirp accumulates more energy per symbol, which buys sensitivity, but the symbol lasts far longer so the data rate drops and duty cycle limits bite much sooner. Sensitivity and airtime cannot improve together.",
@@ -923,10 +923,10 @@
       "q": "Compared with LoRa, the distinctive property of NB-IoT is that it",
       "q_vi": "So với LoRa, đặc điểm riêng của NB-IoT là",
       "choices": [
-        "Uses a wider channel and therefore reaches higher data rates",
+        "Uses a much wider channel and therefore reaches data rates that a LoRa link could never come close to",
         "Runs in licensed spectrum, so the operator can manage interference and offer a quality commitment",
-        "Is immune to the coverage problems of deep indoor locations",
-        "Needs no base station infrastructure at all"
+        "Is immune to the coverage problems of deep indoor locations, thanks to its very narrow carrier width",
+        "Needs no base station infrastructure at all, since the devices form a mesh network among themselves"
       ],
       "answer": 1,
       "why": "Licensed operation is the structural difference, since it removes the uncontrolled interference and duty cycle rules of shared bands. The carrier is in fact very narrow, and deep indoor coverage is bought with many repetitions rather than being automatic.",
@@ -938,10 +938,10 @@
       "q": "Why is a firmware update over the air difficult on most LPWAN deployments?",
       "q_vi": "Vì sao cập nhật phần mềm qua mạng lại khó với phần lớn triển khai LPWAN?",
       "choices": [
-        "The protocol supports uplink only and has no downlink at all",
+        "The protocol carries uplink traffic only and has no downlink channel through which a firmware image could be pushed",
         "Downlink capacity is tiny and gateways are bound by duty cycle limits, so a large image takes a very long time",
-        "The devices have no way to authenticate the new image",
-        "Sensors do not have enough memory to store any firmware"
+        "The devices have no way to authenticate a new firmware image, so any update at all would open an obvious attack path",
+        "The sensors have far too little memory to hold a second firmware image alongside the one that is already running"
       ],
       "answer": 1,
       "why": "These networks are designed around rare short uplinks, and the same regulation that limits a sensor also limits the gateway, which then has to serve thousands of devices. Downlink does exist, it is simply scarce.",
@@ -953,10 +953,10 @@
       "q": "Time difference of arrival positioning requires",
       "q_vi": "Định vị bằng sai khác thời gian đến đòi hỏi",
       "choices": [
-        "A direct line of sight to exactly two receivers",
+        "A clear line of sight from the target to exactly two of the receiving stations at every instant",
         "The receiving stations to share a common time reference, while the target clock stays unknown",
-        "At least one receiver equipped with an antenna array",
-        "The target and every receiver to share one clock"
+        "At least one of the receiving stations to be equipped with a calibrated antenna array",
+        "The target and every one of the receiving stations to run from a single common clock"
       ],
       "answer": 1,
       "why": "Taking a difference cancels the unknown transmit instant, which is precisely why the method tolerates an unsynchronised target but not unsynchronised anchors. Angle estimation is what needs an array, and two hyperbolas in general give an ambiguity that needs a third receiver.",
@@ -969,9 +969,9 @@
       "q_vi": "Đo cự ly bằng thời gian khứ hồi hấp dẫn cho định vị trong nhà vì nó",
       "choices": [
         "Avoids the need for a common clock between the anchor and the device",
-        "Is immune to multipath propagation",
-        "Requires only one anchor for a two dimensional fix",
-        "Works without any transmission from the device"
+        "Is completely immune to multipath, since the echoes cancel on the return trip",
+        "Requires only a single anchor to produce a two dimensional position fix",
+        "Works without any transmission from the device, which saves its battery"
       ],
       "answer": 0,
       "why": "Measuring the two way delay and subtracting the known turnaround time removes every clock offset, leaving only drift over a very short interval. Multipath still biases the estimate, and a two dimensional fix still needs several anchors.",
@@ -985,8 +985,8 @@
       "choices": [
         "Zero mean, because reflections are symmetric around the true value",
         "Positively biased, because the first detectable path is longer than the direct distance",
-        "Negatively biased, because reflections arrive earlier",
-        "Independent of the geometry of the obstacles"
+        "Negatively biased, because the reflected paths reach the receiver ahead of the direct one",
+        "Independent of the geometry of the obstacles, so a fixed offset removes the error"
       ],
       "answer": 1,
       "why": "Blocked direct energy means the earliest detectable arrival has travelled around the obstacle, so it can only be longer than the straight line. That one sided bias is why robust estimators try to identify and down weight such measurements rather than just averaging them.",
@@ -999,8 +999,8 @@
       "q_vi": "Định vị theo góc đến kém dần theo khoảng cách vì",
       "choices": [
         "The received power falls below the noise floor at any distance",
-        "The array can no longer be calibrated at long range",
-        "The wavelength changes with distance",
+        "The array can no longer be calibrated once the target sits beyond the near field",
+        "The wavelength seen by the array changes with distance, so the phases drift",
         "A fixed angular error translates into a position error proportional to the range"
       ],
       "answer": 3,
@@ -1014,9 +1014,9 @@
       "q_vi": "Bạn kéo dài chu kỳ thu không liên tục để tiết kiệm pin. Hệ quả trực tiếp là gì?",
       "choices": [
         "A downlink packet arriving during sleep waits until the next on duration, so latency rises",
-        "The device loses synchronisation with the cell",
-        "The cell must reserve more resources for that device",
-        "Uplink throughput falls proportionally"
+        "The device loses synchronisation with the cell and has to run random access again",
+        "The cell must reserve extra resources for that device in order to cover the whole sleep window",
+        "Uplink throughput falls in proportion to the fraction of time the device sleeps"
       ],
       "answer": 0,
       "why": "The network can only page or grant during the monitored window, so the sleep interval becomes part of the delay budget. The device stays synchronised and the cell reserves nothing extra, since it simply schedules less often.",
@@ -1028,9 +1028,9 @@
       "q": "A drive test shows strong RSRP but poor RSRQ across a whole sector. What should you suspect first?",
       "q_vi": "Một chuyến đo trên đường cho thấy RSRP mạnh nhưng RSRQ kém trên cả một sector. Bạn nên nghi ngờ điều gì trước tiên?",
       "choices": [
-        "The device being too far from the site",
-        "Insufficient base station transmit power",
-        "A faulty antenna that attenuates the reference signal",
+        "The device sitting too far from the site to receive the reference signal",
+        "Insufficient transmit power on the reference signal of that base station",
+        "A faulty antenna line that attenuates the reference signal in that sector",
         "Interference or heavy load raising the total received power in the band"
       ],
       "answer": 3,
@@ -1043,9 +1043,9 @@
       "q": "In a lightly loaded rural cell with no neighbours on the same frequency, SINR and SNR are nearly equal because",
       "q_vi": "Ở một ô nông thôn tải nhẹ, không có ô lân cận cùng tần số, SINR và SNR gần bằng nhau vì",
       "choices": [
-        "Thermal noise disappears when the load is low",
-        "SINR is defined only for loaded cells",
-        "Interference and noise are the same physical quantity",
+        "Thermal noise disappears once the traffic load is low, so only the interference remains",
+        "SINR is defined only for loaded cells, so it falls back to plain SNR when the cell is idle",
+        "Interference and noise are the same physical quantity measured in two different ways",
         "The interference term is negligible, so only thermal noise remains in the denominator"
       ],
       "answer": 3,
@@ -1058,10 +1058,10 @@
       "q": "A device moving at speed reports good channel quality, yet the first transmission fails far more often than the target. The most likely cause is",
       "q_vi": "Một thiết bị đang di chuyển báo chất lượng kênh tốt, nhưng lần phát đầu lại hỏng nhiều hơn hẳn mức mục tiêu. Nguyên nhân khả dĩ nhất là",
       "choices": [
-        "The transport block is too small for the allocated resources",
-        "The device is reporting a quality index it does not support",
+        "The transport block that was chosen is too small for the resources allocated, so padding wastes most of the grant",
+        "The device is reporting a channel quality index that its own receiver category does not actually support at all",
         "The reported quality is already stale by the time it is used, so the scheduler picks too aggressive a scheme",
-        "The scheduler is deliberately ignoring the report"
+        "The scheduler is deliberately ignoring the reported index and is using a fixed internal table of rates instead"
       ],
       "answer": 2,
       "why": "Between measurement, reporting and transmission the channel has moved, and at high speed the coherence time can be shorter than that loop. The mismatch is a timing problem, not a signalling error, which is why an outer loop correction is needed.",
@@ -1073,10 +1073,10 @@
       "q": "Why do schedulers deliberately target about ten percent block error rate on the first transmission instead of aiming for almost none?",
       "q_vi": "Vì sao bộ lập lịch cố ý nhắm tỉ lệ lỗi khối khoảng mười phần trăm ở lần phát đầu thay vì hướng tới gần như không lỗi?",
       "choices": [
-        "Receivers cannot measure error rates smaller than ten percent",
+        "Receivers cannot measure an error rate any smaller than ten percent within a useful averaging window",
         "Retransmissions recover the failures cheaply, so the throughput optimum sits at a nonzero error rate",
-        "A lower error rate would require more antennas",
-        "The standard forbids operating below that error rate"
+        "A lower error rate would demand far more antennas than a typical handset is able to carry",
+        "The standard forbids operating below that error rate, in order to keep the HARQ buffers busy"
       ],
       "answer": 1,
       "why": "Pushing the first attempt to near zero errors means always choosing a very conservative scheme, which wastes capacity on the many occasions when the channel was fine. Since a failed block is repaired by combining with a retransmission, the average rate peaks when a fraction of first attempts fail.",
@@ -1089,9 +1089,9 @@
       "q_vi": "Vòng ngoài của thích ứng đường truyền hoạt động bằng cách",
       "choices": [
         "Adding a slowly adapted offset to the reported quality until the measured error rate meets its target",
-        "Increasing the transmit power until the errors stop",
-        "Requesting more frequent quality reports from the device",
-        "Switching the device to a different frequency band"
+        "Increasing the transmit power in small steps until the measured block error rate finally stops climbing",
+        "Requesting far more frequent channel quality reports from the device until the estimate finally settles",
+        "Switching the device over to a different frequency band whenever the reported quality begins to look biased"
       ],
       "answer": 0,
       "why": "The offset absorbs every systematic bias in the report, whether it comes from device implementation, from ageing of the measurement or from an interference pattern the device could not see. Reporting more often costs uplink capacity and still does not correct a bias.",
@@ -1103,10 +1103,10 @@
       "q": "Outage probability on a fading channel is",
       "q_vi": "Xác suất gián đoạn trên kênh pha đinh là",
       "choices": [
-        "The probability that a packet is lost in the core network",
+        "The probability that a packet is lost somewhere in the core network before delivery",
         "The probability that the instantaneous channel cannot support the target rate",
-        "The fraction of time the base station is switched off",
-        "The long term average of the achievable rate"
+        "The fraction of time the base station is switched off to save energy at night",
+        "The long term average of the rate that the fading channel can actually deliver"
       ],
       "answer": 1,
       "why": "It is a statement about the tail of the fading distribution, which is why it is the natural metric when no coding can average across fades. An average rate says nothing about how often the link falls below a usable level.",
@@ -1119,9 +1119,9 @@
       "q_vi": "Ở cùng tốc độ xe, vì sao vấn đề Doppler ở 28 GHz nặng hơn ở 2 GHz?",
       "choices": [
         "The Doppler shift is proportional to the carrier frequency, so it grows by the same factor as the carrier",
-        "Doppler depends on bandwidth, which is larger at millimetre wave",
-        "Higher frequencies have longer symbols, which are more sensitive",
-        "Millimetre wave receivers use less accurate oscillators"
+        "Doppler grows with the occupied bandwidth, and a millimetre wave carrier is far wider than a sub-6 GHz one",
+        "Higher carrier frequencies use longer symbols, which are far more sensitive to a channel that moves",
+        "Millimetre wave receivers are built around local oscillators that are far less accurate"
       ],
       "answer": 0,
       "why": "The shift equals speed divided by wavelength, so a fourteen times higher carrier gives a fourteen times larger shift and a fourteen times shorter coherence time. Bandwidth does not enter the expression at all.",
@@ -1136,7 +1136,7 @@
         "Increase the transmit power of both cells",
         "Increase the hysteresis margin and the time to trigger",
         "Reduce the measurement reporting interval",
-        "Disable handover for that device"
+        "Disable handover for that device until it stops moving"
       ],
       "answer": 1,
       "why": "Ping-pong happens because the trigger fires on noise around a crossing point, so requiring a clear margin held for a while filters those fluctuations out. More power on both sides keeps them equally strong, and faster reporting only makes the oscillation quicker.",
@@ -1148,9 +1148,9 @@
       "q": "Conditional handover helps most in which situation?",
       "q_vi": "Chuyển giao có điều kiện giúp ích nhiều nhất trong tình huống nào?",
       "choices": [
-        "When the device has no valid security context",
-        "When the target cell is heavily loaded",
-        "When the two cells belong to different operators",
+        "When the device does not yet hold a valid security context for the target cell",
+        "When the target cell is heavily loaded and must admit the device anyway",
+        "When the two cells belong to different operators sharing the same site",
         "When the serving link can collapse before the handover command would arrive"
       ],
       "answer": 3,
@@ -1163,9 +1163,9 @@
       "q": "Beam failure recovery differs from handover in that it",
       "q_vi": "Khôi phục hỏng búp sóng khác chuyển giao ở chỗ nó",
       "choices": [
-        "Requires a new security key derivation",
+        "Requires a fresh security key derivation before the link can be used again",
         "Switches to another beam of the same cell without changing the serving cell",
-        "Always moves the device to a neighbouring cell",
+        "Always moves the device to a neighbouring cell on a different frequency",
         "Is executed by the core network rather than the radio layer"
       ],
       "answer": 1,
@@ -1178,10 +1178,10 @@
       "q": "A vendor reports that frequency selective scheduling brings no gain in their trial. Which explanation is consistent with that?",
       "q_vi": "Một hãng báo rằng lập lịch chọn lọc theo tần số không mang lại độ lợi nào trong thử nghiệm của họ. Giải thích nào nhất quán với kết quả đó?",
       "choices": [
-        "The traffic consisted of very large packets",
+        "The traffic consisted of very large packets, which fill the whole band and leave nothing to place",
         "Only wideband quality reports were configured, so the scheduler could not see which subbands were good",
-        "The devices supported too many spatial layers",
-        "The cell was using too wide a bandwidth"
+        "The devices supported too many spatial layers, so the scheduler ran out of orthogonal precoders",
+        "The cell was configured with too wide a bandwidth for the scheduler to search all of its subbands in time"
       ],
       "answer": 1,
       "why": "The gain comes from placing each user where its own channel peaks, which requires per subband reports and a channel that really is selective. A single wideband number averages the peaks away, leaving nothing for the scheduler to exploit.",
@@ -1193,9 +1193,9 @@
       "q": "The fraction of resources that must be spent on pilots grows when",
       "q_vi": "Tỉ lệ tài nguyên phải dành cho chuỗi hoa tiêu tăng lên khi",
       "choices": [
-        "The cell radius is reduced",
-        "The modulation order is lowered",
-        "The transmit power is reduced",
+        "The cell radius is reduced, so more devices share the same reference signals",
+        "The modulation order is lowered, so each symbol carries fewer payload bits",
+        "The transmit power is reduced, so the pilots need more repetitions to be seen",
         "The coherence time and coherence bandwidth of the channel both shrink"
       ],
       "answer": 3,
@@ -1209,9 +1209,9 @@
       "q_vi": "Vì sao xen kẽ kết hợp với mã hoá giúp ích nhiều hơn hẳn trên kênh pha đinh nhanh so với kênh pha đinh chậm?",
       "choices": [
         "Only a fast channel offers several independent fading states within one codeword, giving real time diversity",
-        "Interleavers work only above a minimum Doppler frequency",
-        "Slow fading channels always have a longer delay spread",
-        "Fast fading channels have a higher average signal to noise ratio"
+        "Interleavers only begin to work above a minimum Doppler frequency that the symbol duration sets",
+        "Slowly fading channels always come with a longer delay spread, which the interleaver cannot touch",
+        "Fast fading channels carry a higher average signal to noise ratio, so the decoder has more margin"
       ],
       "answer": 0,
       "why": "A code can only repair errors it sees as scattered, and that requires the codeword to span several independent channel realisations. In slow fading the whole codeword can sit inside one deep fade, where no amount of interleaving creates diversity that the channel did not provide.",
@@ -1223,9 +1223,9 @@
       "q": "In coded OFDM, a deep null on a few subcarriers is survivable because",
       "q_vi": "Trong OFDM có mã hoá, một hố sâu ở vài sóng mang con vẫn qua được vì",
       "choices": [
-        "The null is cancelled by the fast Fourier transform",
-        "The cyclic prefix restores the energy of the nulled subcarriers",
-        "The receiver reallocates those bits to other subcarriers automatically",
+        "The null is cancelled by the fast Fourier transform, which spreads it over every tone",
+        "The cyclic prefix restores the energy of the nulled subcarriers from the previous symbol",
+        "The receiver automatically reallocates the affected bits onto the healthy subcarriers",
         "The codeword spans many subcarriers, so the lost bits are recovered from the healthy ones"
       ],
       "answer": 3,
@@ -1238,9 +1238,9 @@
       "q": "A configured grant on the uplink lowers latency mainly because it",
       "q_vi": "Cấp phát cấu hình sẵn trên đường lên giảm độ trễ chủ yếu vì nó",
       "choices": [
-        "Reserves a dedicated carrier for the device",
-        "Increases the transmit power available to the device",
-        "Allows a higher modulation order to be used",
+        "Reserves a dedicated carrier for the device that no one else may schedule on",
+        "Increases the transmit power the device may use for its first transmission",
+        "Allows a higher modulation order than a dynamically granted transmission",
         "Removes the scheduling request and grant exchange before the data can be sent"
       ],
       "answer": 3,
@@ -1254,9 +1254,9 @@
       "q_vi": "Trong kiến trúc hướng dịch vụ của 5G, các chức năng mạng giao tiếp với nhau bằng cách",
       "choices": [
         "Exposing and consuming services over a common interface, with discovery through a repository function",
-        "Fixed point to point reference points defined for each pair",
-        "Sharing a single central database of session state",
-        "Broadcasting state changes to every other function"
+        "Fixed point to point reference points that the standard defines for every possible pair of functions",
+        "Sharing a single central database that holds the session state for every function in the core",
+        "Broadcasting every state change to all other functions, which then filter what concerns them"
       ],
       "answer": 0,
       "why": "Producers register and consumers discover them, which is what makes functions replaceable and independently scalable. The rigid pairwise reference points are exactly the older model that this design replaced.",
@@ -1269,9 +1269,9 @@
       "q_vi": "Gộp sóng mang và kết nối kép khác nhau ở chỗ kết nối kép",
       "choices": [
         "Involves two nodes with independent schedulers, so it tolerates a slower link between them",
-        "Requires the two carriers to use the same numerology",
-        "Can only combine carriers within one frequency band",
-        "Is limited to two carriers while aggregation is not"
+        "Requires the two carriers to share the same numerology and exactly the same frame timing",
+        "Can only combine carriers that sit within a single frequency band, unlike aggregation",
+        "Is limited to two carriers, while carrier aggregation can combine any number of them"
       ],
       "answer": 0,
       "why": "Aggregation assumes one scheduler with tight coordination across carriers, which forces the carriers to sit in the same node. Splitting into two schedulers relaxes the latency requirement between them, which is precisely what allows a radio node and a distant node to serve the device together.",
@@ -1283,10 +1283,10 @@
       "q": "Two neighbouring TDD operators use different uplink and downlink slot patterns on adjacent channels. What new impairment appears?",
       "q_vi": "Hai nhà mạng TDD lân cận dùng cấu hình khe đường lên và đường xuống khác nhau trên hai kênh kề nhau. Suy giảm mới nào xuất hiện?",
       "choices": [
-        "Increased delay spread on both networks",
-        "A rise in the peak to average power ratio",
+        "An increase in delay spread on both networks, because the two slot patterns interleave in time",
+        "A rise in the peak to average power ratio, because two patterns overlap in the same band",
         "Base station to base station and device to device interference, which is far stronger than the usual case",
-        "Loss of channel reciprocity in both networks"
+        "A loss of channel reciprocity in both networks, so neither one can rely on uplink sounding again"
       ],
       "answer": 2,
       "why": "When one network transmits downlink while the other receives uplink, a high powered base station shines directly into another base station receiver, often over a line of sight rooftop path. This is why TDD networks in the same band are normally synchronised to a common pattern.",
@@ -1298,10 +1298,10 @@
       "q": "Why is massive MIMO far easier to realise in TDD than in FDD?",
       "q_vi": "Vì sao MIMO quy mô lớn dễ hiện thực trong TDD hơn hẳn trong FDD?",
       "choices": [
-        "TDD channels have longer coherence time",
-        "FDD does not support antenna arrays",
+        "TDD channels have a longer coherence time, so the pilots can be sent much less often",
+        "FDD does not support antenna arrays larger than a handful of elements per sector",
         "The pilot cost scales with the number of users rather than with the number of antennas",
-        "TDD systems are allowed higher transmit power"
+        "TDD systems are allowed a higher transmit power, which pays for the extra antennas"
       ],
       "answer": 2,
       "why": "With reciprocity the base station learns the whole array response from uplink pilots sent by the few served users, so adding antennas costs no extra training. In frequency division duplex the downlink must be sounded from every antenna and the report fed back, which grows with the array and quickly becomes unaffordable.",
@@ -1329,9 +1329,9 @@
       "q_vi": "Một dàn ăng-ten sóng milimet băng rộng lái bằng bộ dịch pha cho kết quả tốt ở giữa dải nhưng kém ở hai rìa. Chuyện gì đang xảy ra?",
       "choices": [
         "Beam squint, because a fixed phase corresponds to a different delay at each frequency",
-        "The amplifier is saturating at the band edges",
-        "The analogue to digital converter clips the edge tones",
-        "The cyclic prefix is too short for the edge subcarriers"
+        "The power amplifier saturates at the band edges, where the signal peaks are largest",
+        "The analogue to digital converter clips the edge tones, which carry the most energy",
+        "The cyclic prefix is too short for the edge subcarriers, which have longer symbols"
       ],
       "answer": 0,
       "why": "Correct steering requires a true time delay across the aperture, and a phase shifter only matches that delay at one frequency, so the beam points slightly differently at each edge of a wide band. The cure is true time delay elements or splitting the band into narrower sub bands.",
@@ -1345,7 +1345,7 @@
       "choices": [
         "Adding one more antenna element to the array",
         "Doubling the transmit power of every device",
-        "Halving the cell radius",
+        "Halving the radius of every cell in the area",
         "Doubling the bandwidth of the carrier"
       ],
       "answer": 1,
@@ -1358,8 +1358,8 @@
       "q": "The thermal noise power in a one hundred megahertz band at room temperature, before adding any noise figure, is close to",
       "q_vi": "Công suất tạp âm nhiệt trong dải 100 MHz ở nhiệt độ phòng, chưa cộng hệ số tạp âm, xấp xỉ bằng",
       "choices": [
-        "Minus one hundred and twenty decibel milliwatts",
-        "Minus one hundred and seventy four decibel milliwatts",
+        "Minus one hundred decibel milliwatts",
+        "Minus one seventy four decibel milliwatts",
         "Minus seventy four decibel milliwatts",
         "Minus ninety four decibel milliwatts"
       ],
@@ -1373,9 +1373,9 @@
       "q": "Pushing a link towards very high spectral efficiency generally",
       "q_vi": "Đẩy một tuyến truyền tới hiệu suất phổ rất cao nói chung sẽ",
       "choices": [
-        "Leaves energy efficiency unchanged",
-        "Improves energy efficiency at the same time",
-        "Reduces the required signal to noise ratio",
+        "Leaves the energy efficiency unchanged, since the two figures are measured in unrelated units",
+        "Improves energy efficiency at the same time, because fewer symbols are needed per delivered bit",
+        "Reduces the signal to noise ratio the link needs, since each symbol carries more information",
         "Costs disproportionately more energy per delivered bit, because rate grows only logarithmically with power"
       ],
       "answer": 3,
@@ -1388,7 +1388,7 @@
       "q": "In 5G NR, numerology index one corresponds to a subcarrier spacing of",
       "q_vi": "Trong 5G NR, hệ tham số chỉ số một tương ứng với khoảng cách sóng mang con bằng",
       "choices": [
-        "One hundred and twenty kilohertz",
+        "Ten kilohertz",
         "Fifteen kilohertz",
         "Thirty kilohertz",
         "Sixty kilohertz"
@@ -1403,10 +1403,10 @@
       "q": "An extended cyclic prefix is worth its overhead when",
       "q_vi": "Tiền tố tuần hoàn mở rộng đáng để trả phí tổn khi",
       "choices": [
-        "The traffic consists mainly of small packets",
+        "The traffic consists mainly of small packets, which would otherwise have to be padded out",
         "The deployment has a long delay spread, such as a large cell or a single frequency broadcast area",
-        "The carrier frequency is very high",
-        "The devices move at very high speed"
+        "The carrier frequency is very high, so the phase noise of the oscillator has to be absorbed",
+        "The devices move at very high speed, so the guard interval has to cover the Doppler shift"
       ],
       "answer": 1,
       "why": "The prefix must cover the channel echoes, so only a long delay spread justifies spending more symbol time on a guard interval. High speed is a Doppler problem, which calls for wider subcarrier spacing rather than a longer prefix.",
@@ -1418,10 +1418,10 @@
       "q": "Even with perfect TDD reciprocity, predicting downlink SINR from uplink measurements stays imperfect. Why?",
       "q_vi": "Ngay cả khi tính thuận nghịch TDD hoàn hảo, dự đoán SINR đường xuống từ đo đạc đường lên vẫn không chính xác. Vì sao?",
       "choices": [
-        "Reciprocity holds only for the amplitude and not for the phase",
+        "Reciprocity holds for the amplitude of the channel but never for its phase, which must be fed back",
         "Reciprocity applies to the desired channel, but the interference comes from different sources in each direction",
-        "The uplink measurement is always older than the downlink transmission",
-        "Uplink and downlink use different modulation schemes"
+        "The uplink measurement is always older than the downlink transmission that gets built from it",
+        "Uplink and downlink use different modulation schemes, so their measured quality cannot be compared"
       ],
       "answer": 1,
       "why": "On the uplink the base station is disturbed by distant devices, while on the downlink the device is disturbed by neighbouring base stations, so the two interference fields have nothing in common. Reciprocity is a property of the propagation channel, not of who is transmitting around it.",
@@ -1433,10 +1433,10 @@
       "q": "In FDD multiuser MIMO, what usually caps the achievable sum rate as the number of paired users grows?",
       "q_vi": "Trong MIMO đa người dùng theo FDD, cái gì thường chặn tổng tốc độ đạt được khi số người dùng ghép cặp tăng lên?",
       "choices": [
-        "The core network cannot route that many sessions",
+        "The core network cannot route that many parallel sessions towards a single radio cell",
         "Quantised channel feedback leaves residual inter user interference that grows with the number of streams",
-        "The base station runs out of transmit antennas immediately",
-        "Devices cannot measure more than one channel at a time"
+        "The base station runs out of transmit antennas as soon as a few users have been paired",
+        "Devices cannot measure more than one channel at a time, so the pairing report is incomplete"
       ],
       "answer": 1,
       "why": "A codebook describes the channel only approximately, and the precoder built from it cannot null what it does not know, so the leakage between users becomes the dominant term at high signal to noise ratio. That is why feedback resolution has to grow together with the ambition of the pairing.",
@@ -1448,10 +1448,10 @@
       "q": "In a TDD massive MIMO cell, coverage is usually limited by the uplink. The structural reason is that",
       "q_vi": "Trong một ô MIMO quy mô lớn dùng TDD, vùng phủ thường bị giới hạn bởi đường lên. Lý do mang tính cấu trúc là",
       "choices": [
-        "The uplink has no channel coding",
-        "The uplink uses a higher carrier frequency",
+        "The uplink carries no channel coding, so every error has to be repaired by HARQ",
+        "The uplink is placed on a higher carrier frequency than the downlink of the same cell",
         "The device has far less transmit power and far fewer antennas than the base station",
-        "Uplink slots are always shorter than downlink slots"
+        "Uplink slots are always shorter than downlink slots, so less energy is collected"
       ],
       "answer": 2,
       "why": "The downlink enjoys both a large power amplifier and a big array gain, while the uplink is carried by a handset battery, so the two directions do not reach equally far. Receive combining at the base station helps but does not fully close the gap.",
@@ -1463,10 +1463,10 @@
       "q": "An uplink is coverage limited at the cell edge. Which measure genuinely helps without changing the device?",
       "q_vi": "Một đường lên bị giới hạn vùng phủ ở biên ô. Biện pháp nào thực sự giúp được mà không phải đổi thiết bị?",
       "choices": [
-        "Increase the downlink transmit power of the base station",
-        "Widen the uplink bandwidth allocation of that device",
+        "Increase the downlink transmit power of the base station that serves the cell edge",
+        "Widen the uplink bandwidth allocated to that device so it can send more energy",
         "Add receive antennas at the base station and lower the code rate with repetitions",
-        "Configure a higher order modulation for the uplink"
+        "Configure a higher order modulation on the uplink so fewer symbols are needed"
       ],
       "answer": 2,
       "why": "More receive branches raise the collected energy and a lower rate needs less energy per bit, both of which act on the limiting direction. Raising downlink power or the modulation order does nothing for a power starved uplink, and spreading the same limited power over a wider allocation makes the received density worse.",
@@ -1480,7 +1480,7 @@
       "choices": [
         "Eighteen decibels",
         "Thirty six decibels",
-        "Six decibels",
+        "Twelve decibels",
         "Sixty three decibels"
       ],
       "answer": 0,
@@ -1493,9 +1493,9 @@
       "q": "A device reports the highest channel quality index and is scheduled every slot, yet its measured throughput is low and its buffer is almost always empty. What do you conclude?",
       "q_vi": "Một thiết bị báo chỉ số chất lượng kênh cao nhất và được lập lịch mỗi khe, nhưng thông lượng đo được lại thấp và bộ đệm gần như luôn rỗng. Bạn kết luận gì?",
       "choices": [
-        "The channel quality report is unreliable",
-        "The radio scheduler is misconfigured for this device",
-        "The device is limited by its modulation capability",
+        "The channel quality report is unreliable and should be corrected by an outer loop",
+        "The radio scheduler is misconfigured and keeps granting far more resources than requested",
+        "The device is limited by the highest modulation order that its category is allowed to use",
         "The bottleneck is not the radio link, since the application is not offering enough traffic"
       ],
       "answer": 3,

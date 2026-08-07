@@ -1,0 +1,212 @@
+#!/usr/bin/env node
+// Cong QA dong bo. Chay: node tools/qa.mjs
+//
+// Khac voi check-data.mjs, cong nay khong chi kiem tinh hop le cua du lieu.
+// No kiem nhung duong ma nguoi hoc co the DOAN ma khong can biet gi,
+// va nhung dau hieu cho thay van ban bi hong am tham.
+//
+// Chay ca hai truoc khi day len: check-data.mjs bat loi cau truc,
+// qa.mjs bat loi chat luong.
+
+import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+
+const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+const fail = [];
+const warn = [];
+
+async function readJSON(rel) {
+  const abs = path.join(ROOT, rel);
+  if (!existsSync(abs)) { fail.push(`${rel}: không tồn tại`); return null; }
+  try { return JSON.parse(await readFile(abs, 'utf8')); }
+  catch (e) { fail.push(`${rel}: JSON hỏng, ${e.message}`); return null; }
+}
+
+const norm = (s) => String(s || '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, ' ').replace(/\s+/g, ' ').trim();
+const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+
+// Cac tu that su khong the dung cuoi cau. Luu y tieng Anh cho phep ket cau bang
+// gioi tu ("the path it travels on"), nen khong duoc liet ke gioi tu o day,
+// neu khong se bao dong gia hang loat.
+const DANGLING = /\b(?:and|or|but|because|which|than|the|a|an|its|their|our|your)\s*$/i;
+
+const manifest = await readJSON('data/manifest.json');
+if (!manifest) { console.error('Không đọc được manifest.'); process.exit(1); }
+
+/* ---------------------------------------------------------------
+   1. Bo the
+   --------------------------------------------------------------- */
+const cardRows = [];
+const allCardIds = new Set();
+
+for (const deck of manifest.decks || []) {
+  const file = await readJSON(deck.file);
+  if (!file) continue;
+  const cards = file.cards || [];
+  const heads = new Map();
+  let withSay = 0;
+
+  for (const c of cards) {
+    if (allCardIds.has(c.id)) fail.push(`${deck.file}: id thẻ trùng trên toàn kho, "${c.id}"`);
+    allCardIds.add(c.id);
+
+    const head = deck.lang === 'ru-vi' ? c.ru : c.en;
+    const key = norm(head);
+    if (heads.has(key)) fail.push(`${deck.file}: hai thẻ cùng mặt trước "${head}" (${heads.get(key)} và ${c.id})`);
+    heads.set(key, c.id);
+
+    if (c.say) {
+      withSay += 1;
+      // Cau doc thanh tieng ma con chu so thi may doc sai nhip.
+      if (/\d/.test(c.say)) warn.push(`${deck.file}: thẻ "${c.id}" có chữ số trong câu đọc thành tiếng, nên viết thành chữ`);
+      if (DANGLING.test(c.say.trim())) fail.push(`${deck.file}: thẻ "${c.id}" câu ví dụ kết thúc lửng`);
+    }
+    if (norm(c.vi) === norm(head)) warn.push(`${deck.file}: thẻ "${c.id}" nghĩa tiếng Việt trùng mặt trước`);
+  }
+
+  cardRows.push({ deck: deck.id, n: cards.length, say: withSay, sayPct: pct(withSay, cards.length) });
+  if (!cards.length) fail.push(`${deck.file}: bộ thẻ rỗng`);
+}
+
+/* ---------------------------------------------------------------
+   2. Ngan hang cau hoi: cac duong doan mo
+   --------------------------------------------------------------- */
+const qRows = [];
+
+for (const quiz of manifest.quizzes || []) {
+  const file = await readJSON(quiz.file);
+  if (!file) continue;
+  const qs = file.questions || [];
+  if (qs.length < 100) warn.push(`${quiz.file}: mới có ${qs.length} câu, mốc đặt ra là 100`);
+
+  const posCount = [0, 0, 0, 0];
+  const rankCount = [0, 0, 0, 0];
+  let ties = 0;
+  const stems = new Map();
+
+  for (const q of qs) {
+    const ch = q.choices || [];
+    if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= ch.length) {
+      fail.push(`${quiz.file}: câu "${q.id}" chỉ số đáp án ngoài khoảng`);
+      continue;
+    }
+    posCount[Math.min(q.answer, 3)] += 1;
+
+    const len = ch.map((c) => String(c).length);
+    const sorted = [...len].sort((a, b) => b - a);
+    rankCount[Math.min(sorted.indexOf(len[q.answer]), 3)] += 1;
+    if (new Set(len).size !== len.length) ties += 1;
+
+    const stem = norm(q.q);
+    if (stems.has(stem)) fail.push(`${quiz.file}: hai câu cùng đề bài, "${q.id}" và "${stems.get(stem)}"`);
+    stems.set(stem, q.id);
+
+    for (const c of ch) {
+      const s = String(c).trim();
+      if (!s) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn rỗng`);
+      if (DANGLING.test(s)) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn kết thúc lửng, "${s.slice(-45)}"`);
+    }
+    if (new Set(ch.map(norm)).size !== ch.length) {
+      fail.push(`${quiz.file}: câu "${q.id}" có hai lựa chọn giống nhau về nội dung`);
+    }
+    // Giai thich tro theo vi tri se sai ngay khi ai do hoan vi lua chon.
+    if (/(the (first|second|third|last|final) (option|choice))|(phương án|lựa chọn) (đầu|hai|thứ hai|thứ ba|cuối)/i.test(`${q.why} ${q.why_vi}`)) {
+      fail.push(`${quiz.file}: câu "${q.id}" giải thích tham chiếu theo vị trí phương án`);
+    }
+  }
+
+  const n = qs.length || 1;
+  const posPct = posCount.map((v) => pct(v, n));
+  const rankPct = rankCount.map((v) => pct(v, n));
+
+  // Ba duong doan mo, moi duong deu bien bai trac nghiem thanh vo nghia.
+  const maxPos = Math.max(...posPct);
+  if (maxPos > 40) fail.push(`${quiz.id}: đáp án dồn về một vị trí, ${maxPos} phần trăm, cứ chọn vị trí đó là đúng`);
+  const maxRank = Math.max(...rankPct);
+  if (maxRank > 40) fail.push(`${quiz.id}: đáp án dồn về một hạng độ dài, ${maxRank} phần trăm, đoán theo độ dài là ăn điểm`);
+  if (pct(ties, n) > 25) warn.push(`${quiz.id}: ${pct(ties, n)} phần trăm số câu có hai lựa chọn dài bằng nhau, phép đo hạng kém tin cậy`);
+
+  qRows.push({ id: quiz.deck, n: qs.length, pos: posPct.join('/'), rank: rankPct.join('/'), maxPos, maxRank });
+}
+
+/* ---------------------------------------------------------------
+   3. Bo luyen noi
+   --------------------------------------------------------------- */
+const sRows = [];
+
+for (const set of manifest.speaking || []) {
+  const file = await readJSON(set.file);
+  if (!file) continue;
+  const drills = file.drills || [];
+  if (drills.length < 100) warn.push(`${set.file}: mới có ${drills.length} tình huống, mốc đặt ra là 100`);
+
+  const ids = new Set();
+  let keyless = 0;
+  let wordSum = 0;
+
+  for (const d of drills) {
+    if (ids.has(d.id)) fail.push(`${set.file}: id tình huống trùng, "${d.id}"`);
+    ids.add(d.id);
+    if (!d.target) { fail.push(`${set.file}: tình huống "${d.id}" thiếu câu mẫu`); continue; }
+
+    const words = String(d.target).trim().split(/\s+/).length;
+    wordSum += words;
+    if (words > 60) warn.push(`${set.file}: tình huống "${d.id}" câu mẫu dài ${words} từ, khó bật ra`);
+
+    const t = String(d.target).toLowerCase();
+    const keys = Array.isArray(d.keys) ? d.keys : [];
+    if (!keys.length) keyless += 1;
+    for (const k of keys) {
+      // Cum khoa khong nam trong cau mau thi bai do khong bao gio dat diem toi da.
+      if (!t.includes(String(k).toLowerCase())) {
+        fail.push(`${set.file}: tình huống "${d.id}" cụm khoá "${k}" không nằm trong câu mẫu`);
+      }
+    }
+    if (/\d/.test(d.target) || /\d/.test(d.prompt || '')) {
+      warn.push(`${set.file}: tình huống "${d.id}" còn chữ số, máy đọc lên sẽ lệch nhịp`);
+    }
+    if (!d.tip) warn.push(`${set.file}: tình huống "${d.id}" chưa có lời nhắc`);
+  }
+
+  if (drills.length && pct(keyless, drills.length) > 20) {
+    warn.push(`${set.file}: ${pct(keyless, drills.length)} phần trăm tình huống không có cụm khoá nào, phần chấm chỉ còn dựa vào trùng từ`);
+  }
+  sRows.push({ id: set.id, n: drills.length, avgWords: Math.round(wordSum / (drills.length || 1)) });
+}
+
+/* ---------------------------------------------------------------
+   Bao cao
+   --------------------------------------------------------------- */
+const line = (s) => console.log(s);
+
+line('\nBỘ THẺ');
+line('  bộ              thẻ   có câu đọc');
+for (const r of cardRows) line(`  ${r.deck.padEnd(15)}${String(r.n).padStart(4)}${(r.sayPct + '%').padStart(12)}`);
+line(`  tổng cộng      ${String(cardRows.reduce((a, r) => a + r.n, 0)).padStart(4)}`);
+
+line('\nNGÂN HÀNG CÂU HỎI  (vị trí và hạng độ dài, lý tưởng 25/25/25/25)');
+line('  bộ              câu   vị trí A/B/C/D      hạng dài 1/2/3/4');
+for (const r of qRows) line(`  ${r.id.padEnd(15)}${String(r.n).padStart(4)}   ${r.pos.padEnd(18)} ${r.rank}`);
+line(`  tổng cộng      ${String(qRows.reduce((a, r) => a + r.n, 0)).padStart(4)}`);
+
+line('\nLUYỆN NÓI');
+line('  bộ              tình huống   độ dài câu mẫu trung bình');
+for (const r of sRows) line(`  ${r.id.padEnd(15)}${String(r.n).padStart(10)}${String(r.avgWords + ' từ').padStart(22)}`);
+line(`  tổng cộng      ${String(sRows.reduce((a, r) => a + r.n, 0)).padStart(10)}`);
+
+if (warn.length) {
+  line(`\nCẢNH BÁO (${warn.length})`);
+  warn.slice(0, 30).forEach((w) => line('  ! ' + w));
+  if (warn.length > 30) line(`  … còn ${warn.length - 30} cảnh báo nữa`);
+}
+
+if (fail.length) {
+  line(`\nKHÔNG ĐẠT (${fail.length})`);
+  fail.slice(0, 50).forEach((f) => line('  x ' + f));
+  if (fail.length > 50) line(`  … còn ${fail.length - 50} lỗi nữa`);
+  line('');
+  process.exit(1);
+}
+
+line('\nQA đồng bộ: đạt.\n');

@@ -10,8 +10,8 @@
       "choices": [
         "Quadratic",
         "Exponential",
-        "No speedup at all",
-        "Linear"
+        "Logarithmic",
+        "Constant"
       ],
       "answer": 0,
       "why": "It reduces the number of queries from order N to order square root of N. Exponential speedup is Shor's territory, and only for structured problems like factoring.",
@@ -23,9 +23,9 @@
       "q": "The no-cloning theorem is what makes quantum key distribution secure because",
       "q_vi": "Định lý không sao chép làm cho phân phối khoá lượng tử an toàn vì",
       "choices": [
-        "Quantum signals travel faster than light",
-        "The key is longer than any classical key",
-        "Quantum states cannot be measured at all",
+        "Entangled photons travel faster than light, so an interceptor can never reach the key in time",
+        "The shared key is far longer than any classical key, so a brute force search cannot finish",
+        "Quantum states cannot be measured at all, so an interceptor has no way to learn anything",
         "An eavesdropper cannot copy the state, so any measurement disturbs it detectably"
       ],
       "answer": 3,
@@ -39,9 +39,9 @@
       "q_vi": "Cao nguyên gradient phẳng trong mạch lượng tử biến phân nghĩa là",
       "choices": [
         "Gradients vanish exponentially with qubit count, so the optimiser gets no signal",
-        "The circuit produces the wrong answer deterministically",
-        "The hardware has run out of qubits",
-        "The classical optimiser diverges to infinity"
+        "The circuit returns a deterministically wrong answer because the ansatz was compiled badly",
+        "The device has run out of free qubits, so the ansatz cannot be widened any further",
+        "The classical optimiser diverges to infinity because the cost function is unbounded below"
       ],
       "answer": 0,
       "why": "The cost landscape flattens as the state space grows, so the gradient estimate is buried in shot noise. It is a scaling obstacle, not a bug.",
@@ -53,10 +53,10 @@
       "q": "A paper claims a quantum-inspired optimiser beats classical baselines. What must the reader check first?",
       "q_vi": "Một bài báo tuyên bố bộ tối ưu lấy cảm hứng lượng tử vượt các đối chứng cổ điển. Người đọc phải kiểm gì trước tiên?",
       "choices": [
-        "Whether the code runs on quantum hardware",
+        "Whether the code was executed on real quantum hardware rather than on a simulator",
         "Whether the classical baselines were tuned under a matched evaluation budget",
-        "Whether the authors used at least ten qubits",
-        "Whether the objective function is convex"
+        "Whether the authors used at least ten qubits, since fewer cannot show any effect",
+        "Whether the objective function is convex, since only then is the optimum unique"
       ],
       "answer": 1,
       "why": "Most reported advantages evaporate once the baseline gets the same number of function evaluations and a fair hyperparameter search. A quantum-inspired method runs classically, so there is no excuse for an untuned comparison.",
@@ -68,10 +68,10 @@
       "q": "Entanglement is best described as",
       "q_vi": "Rối lượng tử được mô tả đúng nhất là",
       "choices": [
-        "Two qubits having identical values",
-        "Two particles exchanging signals faster than light",
+        "Two qubits that always carry identical values whenever either one is measured",
+        "Two particles exchanging signals faster than light, which fixes the second outcome",
         "A joint state that cannot be factorised into independent states of the parts",
-        "A classical correlation between random variables"
+        "An ordinary classical correlation between two random variables prepared together"
       ],
       "answer": 2,
       "why": "Non-factorisability is the definition. It creates correlations stronger than any classical model allows, but it carries no usable signal on its own.",
@@ -84,9 +84,9 @@
       "q_vi": "Mật mã hậu lượng tử là",
       "choices": [
         "Classical algorithms believed to resist attack by a quantum computer",
-        "Encryption performed on a quantum computer",
-        "Cryptography that will only exist after quantum computers arrive",
-        "Key distribution using entangled photons"
+        "Encryption carried out on a quantum computer rather than a classical one",
+        "Cryptography that can only exist once quantum computers arrive",
+        "Key distribution over entangled photon pairs on a dedicated fibre link"
       ],
       "answer": 0,
       "why": "It runs on ordinary hardware today. The point is that its hardness assumptions, such as lattice problems, survive Shor's algorithm.",
@@ -98,10 +98,10 @@
       "q": "In the NISQ era, circuit depth is limited primarily by",
       "q_vi": "Trong kỷ nguyên NISQ, độ sâu mạch bị giới hạn chủ yếu bởi",
       "choices": [
-        "The speed of the classical control computer",
+        "The clock speed of the classical control computer that issues the pulses",
         "Decoherence and gate error accumulating faster than the computation completes",
-        "The size of the input dataset",
-        "The number of available programming languages"
+        "The size of the input dataset, since each record needs its own circuit layer",
+        "The small number of compilers able to target the device instruction set"
       ],
       "answer": 1,
       "why": "Each gate adds error and the state loses coherence with time. Without full error correction there is a hard ceiling on how long a circuit can be useful.",
@@ -114,9 +114,9 @@
       "q_vi": "Quy tắc dịch tham số được dùng để",
       "choices": [
         "Compute exact gradients of a parameterised circuit by evaluating it at shifted angles",
-        "Compress the circuit into fewer gates",
-        "Correct readout errors on the measurement",
-        "Initialise the circuit parameters randomly"
+        "Compress a parameterised circuit into fewer gates by merging neighbouring rotations",
+        "Correct readout errors by shifting the measured counts using a calibration matrix",
+        "Initialise circuit parameters at random angles drawn from a uniform distribution"
       ],
       "answer": 0,
       "why": "Backpropagation through a quantum device is not possible, so the gradient is obtained from extra circuit evaluations rather than from an internal chain rule.",
@@ -128,10 +128,10 @@
       "q": "Which claim about quantum reinforcement learning is currently defensible?",
       "q_vi": "Khẳng định nào về học tăng cường lượng tử hiện nay là bảo vệ được?",
       "choices": [
-        "It guarantees an exponential speedup on any environment",
+        "A variational policy guarantees an exponential speedup on any environment with discrete actions",
         "A variational circuit can represent a policy with fewer trainable parameters on some small tasks",
-        "It removes the exploration versus exploitation trade off",
-        "It always converges faster than classical reinforcement learning"
+        "Encoding the policy in amplitudes removes the exploration versus exploitation trade off",
+        "A quantum agent always converges in fewer episodes than classical reinforcement learning does"
       ],
       "answer": 1,
       "why": "Parameter efficiency on small benchmarks is a measurable, modest claim. Universal speedup claims have no evidence and are the first thing a reviewer will attack.",
@@ -143,9 +143,9 @@
       "q": "A qubit in superposition, when measured in the computational basis, yields",
       "q_vi": "Một qubit ở trạng thái chồng chập, khi đo trong cơ sở tính toán, cho ra",
       "choices": [
-        "Both zero and one simultaneously",
-        "A continuous real value",
-        "The full state vector",
+        "Both zero and one at once, which is why the register holds two answers",
+        "A continuous real value equal to the amplitude on the state one",
+        "The full state vector, from which every amplitude can be read off",
         "A single classical bit, with probability given by the squared amplitudes"
       ],
       "answer": 3,
@@ -159,9 +159,9 @@
       "q_vi": "Vì sao nói chồng chập của n qubit thử hết hai mũ n khả năng song song rồi trả về đáp án là sai?",
       "choices": [
         "Measurement returns a single bit string, so the parallelism helps only when interference concentrates amplitude on the right answer",
-        "Because a quantum register can only hold one basis state at a time",
-        "Because superposition collapses before the first gate can act",
-        "Because two to the n branches is fewer than a classical computer would examine"
+        "Because a quantum register can hold only one basis state at a time, so the branches are never really there to interfere with each other",
+        "Because the superposition collapses as soon as the first gate is applied, leaving nothing behind but an ordinary classical register of bits",
+        "Because two to the n branches is fewer than the number of cases an ordinary classical computer would have to examine in the first place"
       ],
       "answer": 0,
       "why": "The register really does carry every branch, but read out gives one sample drawn by the Born rule. The whole difficulty of algorithm design is arranging destructive interference on the wrong branches, which almost never works out.",
@@ -173,9 +173,9 @@
       "q": "A team reports a Grover based search that beats a classical scan over a million stored records. What deserves the first question?",
       "q_vi": "Một nhóm báo cáo tìm kiếm bằng Grover vượt phép quét cổ điển trên một triệu bản ghi đã lưu. Cần đặt câu hỏi đầu tiên về điều gì?",
       "choices": [
-        "Whether the qubits were superconducting or trapped ion",
-        "Whether the classical scan was written in a compiled language",
-        "Whether they used enough shots per circuit",
+        "Whether the qubits were superconducting or trapped ion, since only ions hold a million records",
+        "Whether the classical scan was written in a compiled language rather than an interpreted one",
+        "Whether enough shots per circuit were taken for the marked state to appear reliably",
         "Whether the oracle that marks the target can be built without already reading the whole dataset"
       ],
       "answer": 3,
@@ -188,10 +188,10 @@
       "q": "What happens if you run more than the optimal number of Grover iterations?",
       "q_vi": "Chuyện gì xảy ra nếu chạy quá số lần lặp Grover tối ưu?",
       "choices": [
-        "The circuit stops being unitary",
+        "The circuit stops being unitary once the rotation passes a quarter turn",
         "The success probability oscillates back down, so extra work gives a worse answer",
-        "Nothing changes, the marked state is a fixed point",
-        "The success probability keeps rising towards one"
+        "Nothing changes, because the marked state is a fixed point of the iteration",
+        "The success probability keeps rising towards one, so more iterations are safer"
       ],
       "answer": 1,
       "why": "Each iteration is a rotation in a two dimensional plane. Past the optimal angle the state rotates away from the marked subspace again, so more iterations actively hurt.",
@@ -203,9 +203,9 @@
       "q": "A quantum machine learning paper reports higher accuracy than a classical model. Which detail most threatens the claim?",
       "q_vi": "Một bài báo học máy lượng tử báo cáo độ chính xác cao hơn mô hình cổ điển. Chi tiết nào đe doạ tuyên bố đó nhất?",
       "choices": [
-        "The dataset was a public benchmark",
-        "Both sides were trained with the same optimiser",
-        "The quantum circuit used only four qubits",
+        "The dataset was a public benchmark rather than one collected by the authors",
+        "Both sides were trained with the same optimiser and the same learning rate",
+        "The quantum circuit used only four qubits, too few for the features",
         "The classical model had far fewer parameters and no hyperparameter search"
       ],
       "answer": 3,
@@ -218,9 +218,9 @@
       "q": "HHL solves a linear system in time polylogarithmic in the dimension. Why does that rarely become a practical speedup?",
       "q_vi": "HHL giải hệ tuyến tính với thời gian đa thức của log số chiều. Vì sao điều đó hiếm khi thành tăng tốc thực tế?",
       "choices": [
-        "Because no unitary can encode a matrix",
-        "Because the required error correction already exists but is too cheap to matter",
-        "Because HHL only works for two by two matrices",
+        "Because no unitary operation can encode a general matrix, so the linear system cannot be represented on a quantum device at all",
+        "Because the error correction that the routine depends on already exists and is far too cheap to change anything in the accounting",
+        "Because the routine is only defined for two by two matrices, and nobody has ever managed to extend it beyond that special case",
         "The output is a quantum state, and preparing the input and extracting the solution can each cost time linear in the dimension"
       ],
       "answer": 3,
@@ -233,10 +233,10 @@
       "q": "What did Tang's dequantization results establish?",
       "q_vi": "Kết quả khử lượng tử hoá của Tang chứng minh điều gì?",
       "choices": [
-        "That quantum computers cannot perform linear algebra",
+        "That quantum computers cannot perform linear algebra faster than a classical machine under any access model, so the whole family of routines was withdrawn",
         "Given the same sampling access assumptions, classical algorithms match the scaling of several quantum recommendation and linear algebra routines",
-        "That every quantum circuit can be simulated efficiently on a classical computer",
-        "That the quantum recommendation experiments were measured incorrectly"
+        "That every quantum circuit can be simulated efficiently on an ordinary classical computer, so the case for building the hardware disappears entirely",
+        "That the quantum recommendation experiments had been measured incorrectly, so every one of the timings reported in the original paper was wrong by a wide margin"
       ],
       "answer": 1,
       "why": "The exponential gap came from the assumed data access model, not from quantum mechanics. Once a classical algorithm is granted the same sampling access, it keeps pace.",
@@ -248,10 +248,10 @@
       "q": "An optimiser that borrows amplitude style updates but runs entirely on a CPU should be described as",
       "q_vi": "Một bộ tối ưu mượn cách cập nhật kiểu biên độ nhưng chạy hoàn toàn trên CPU thì nên gọi là",
       "choices": [
-        "A quantum algorithm executed in simulation",
+        "A quantum algorithm executed in simulation, so the reported timings are hardware timings",
         "Quantum inspired, with any speedup claim measured against strong classical baselines",
-        "Equivalent to running on a quantum annealer",
-        "A post quantum method"
+        "Equivalent to running on a quantum annealer, since both minimise the same objective",
+        "A post quantum method, because it is safe against attack by a future quantum computer"
       ],
       "answer": 1,
       "why": "No quantum device is involved, so calling it quantum misleads the reader. Because it is classical, there is no excuse for comparing it only against weak classical competitors.",
@@ -263,10 +263,10 @@
       "q": "What does a matched evaluation budget mean when comparing a variational quantum optimiser with a classical one?",
       "q_vi": "Khớp ngân sách đánh giá nghĩa là gì khi so bộ tối ưu lượng tử biến phân với bộ tối ưu cổ điển?",
       "choices": [
-        "Both report their results using the same metric",
+        "Both methods report their results using the same accuracy metric on the same held out test split, so the numbers line up",
         "Both get the same number of objective evaluations or the same wall clock time, and both get a hyperparameter search",
-        "Both run on hardware from the same vendor",
-        "Both are launched with the same random seed"
+        "Both methods run on hardware supplied by the same vendor, so the clock speeds and memory limits are comparable across the runs",
+        "Both methods are launched from the same random seed so that every run can be reproduced, which rules out luck as an explanation"
       ],
       "answer": 1,
       "why": "Budget means the compute the method is allowed to spend, tuning included. A shared seed or a shared metric is good practice but says nothing about how much search each side was allowed.",
@@ -278,10 +278,10 @@
       "q": "What does Grover's algorithm imply for a symmetric cipher such as AES?",
       "q_vi": "Thuật toán Grover kéo theo hệ quả gì cho mật mã đối xứng như AES?",
       "choices": [
-        "It only applies if the cipher is linear",
-        "It breaks AES outright, the way Shor breaks RSA",
+        "It applies only when the cipher is linear, so a well designed block cipher is untouched",
+        "It breaks AES outright the way Shor breaks RSA, so symmetric ciphers must be retired",
         "It roughly halves the effective key length, so doubling the key size restores the security margin",
-        "It has no effect at all on symmetric ciphers"
+        "It has no effect at all on symmetric ciphers, since key search is a structured problem"
       ],
       "answer": 2,
       "why": "Exhaustive key search is unstructured, so Grover cuts the exponent in half. Shor style structural attacks do not apply to a well designed block cipher, so the answer is a bigger key rather than a new cipher.",
@@ -294,9 +294,9 @@
       "q_vi": "Vì sao nhiều thí nghiệm chứng minh ưu thế lượng tử bị phản bác sau khi công bố?",
       "choices": [
         "Improved classical algorithms and tensor network simulations later reproduced the sampled distributions in comparable time",
-        "The measurements were found to have been fabricated",
-        "Sampling tasks are not permitted to count as computation",
-        "The devices had not been cooled to the stated temperature"
+        "The reported measurements were later found to have been fabricated by members of the experimental team and the papers were retracted",
+        "Sampling tasks are not permitted to count as computation, so the results were ruled out of scope by the committee that reviewed them",
+        "The devices had not been cooled to the stated temperature, so the quoted gate fidelities were void and the whole run was invalid"
       ],
       "answer": 0,
       "why": "The claim is always relative to the best classical method known at the time, which is a moving target. The experiments themselves generally stood, it was the classical side that improved.",
@@ -308,10 +308,10 @@
       "q": "A vendor claims their annealer solved a scheduling problem a thousand times faster. Which check matters most?",
       "q_vi": "Một hãng tuyên bố máy ủ của họ giải bài toán xếp lịch nhanh gấp nghìn lần. Kiểm tra nào quan trọng nhất?",
       "choices": [
-        "Whether the problem was expressed as a QUBO",
+        "Whether the scheduling problem was expressed as a QUBO before it was sent to the annealer hardware",
         "Whether a tuned classical solver was run on the same instances to the same solution quality",
-        "Whether the annealer had more than a thousand qubits",
-        "Whether the annealing schedule was linear"
+        "Whether the annealer carried more than a thousand qubits, since fewer cannot hold the problem",
+        "Whether the annealing schedule was linear rather than tuned for the instance family"
       ],
       "answer": 1,
       "why": "A speed number is meaningless without a fixed solution quality and a competent opponent. Qubit count, problem format and schedule shape describe the device, not the comparison.",
@@ -323,10 +323,10 @@
       "q": "Why is error mitigation not a route to large scale quantum computation?",
       "q_vi": "Vì sao giảm nhẹ lỗi không phải con đường tới tính toán lượng tử quy mô lớn?",
       "choices": [
-        "It consumes more physical qubits than error correction does",
-        "It only applies to circuits made of Clifford gates",
+        "It consumes far more physical qubits per logical qubit than error correction does, so it scales worse with circuit size",
+        "It applies only to circuits built from Clifford gates, which a classical computer can already simulate efficiently on its own",
         "Its sampling overhead grows exponentially with circuit volume, so accuracy soon costs an unaffordable number of shots",
-        "It biases the answer in a way that can never be characterised"
+        "It biases the answer in a way that can never be characterised, so the output of the whole procedure is unusable even in principle"
       ],
       "answer": 2,
       "why": "Mitigation trades variance for bias removal, and the variance blows up as circuits grow. Correction instead keeps the logical error rate low at a polynomial qubit overhead, which is what scaling requires.",
@@ -338,9 +338,9 @@
       "q": "Which statement about quantum computers and encryption is accurate?",
       "q_vi": "Phát biểu nào về máy tính lượng tử và mã hoá là chính xác?",
       "choices": [
-        "Only quantum key distribution can protect data against them",
-        "Quantum computers have no bearing on cryptography",
-        "A quantum computer breaks every known cipher",
+        "Only quantum key distribution can protect data against them, so every link must be rebuilt with photonic hardware at both ends",
+        "Quantum computers have no bearing on cryptography, since Shor's algorithm has never run on a real device anywhere in the world",
+        "A large quantum computer breaks every known cipher, so all of today's encrypted traffic becomes readable the moment the first such machine is switched on",
         "A large fault tolerant machine would break RSA and elliptic curve schemes, while symmetric ciphers with longer keys and post quantum schemes survive"
       ],
       "answer": 3,
@@ -354,9 +354,9 @@
       "q_vi": "Vì sao quảng cáo tăng tốc chỉ bằng số truy vấn bộ tiên tri lại gây hiểu lầm?",
       "choices": [
         "Real runtime depends on how many physical gates one oracle call costs, and on the error correction overhead around it",
-        "Query counts ignore qubit count, which is the only cost that matters",
-        "Classical algorithms are not allowed to use oracles",
-        "Oracle queries cannot be counted precisely"
+        "Query counts ignore qubit count, which is the only cost that decides whether a circuit can be executed in any meaningful way",
+        "Classical algorithms are not allowed to use an oracle, so the two cost models can never be placed side by side",
+        "Oracle queries cannot be counted precisely, because the compiler rewrites the circuit before execution into a different gate set"
       ],
       "answer": 0,
       "why": "Query complexity is a model, not a runtime. An oracle whose circuit is enormous can wipe out a square root query advantage entirely.",
@@ -368,10 +368,10 @@
       "q": "The state space of n qubits has dimension two to the n. Does that give a quantum computer exponential storage?",
       "q_vi": "Không gian trạng thái của n qubit có số chiều hai mũ n. Điều đó có cho máy tính lượng tử dung lượng lưu trữ hàm mũ không?",
       "choices": [
-        "No, because the amplitudes are restricted to integers",
-        "Yes, but only while the qubits remain entangled",
+        "No, because the amplitudes are restricted to integer values and cannot store real data",
+        "Yes, but only for as long as every qubit in the register stays entangled",
         "No, because at most n classical bits can be recovered from n qubits by measurement",
-        "Yes, arbitrary classical data can be written in and read back out"
+        "Yes, arbitrary classical data can be written in and read back out again on demand"
       ],
       "answer": 2,
       "why": "The amplitudes are not accessible. The Holevo bound limits recoverable classical information to one bit per qubit, so exponential dimension is not exponential memory.",
@@ -383,9 +383,9 @@
       "q": "A variational algorithm converges in fifty optimiser iterations while the classical method takes ten thousand. What is missing from that comparison?",
       "q_vi": "Một thuật toán biến phân hội tụ sau năm mươi vòng tối ưu, còn phương pháp cổ điển cần mười nghìn vòng. Phép so sánh đó thiếu gì?",
       "choices": [
-        "The classical method should simply have been stopped earlier",
-        "Nothing is missing, iteration count is the accepted measure",
-        "The quantum method should report qubit count instead of iterations",
+        "The classical method should simply have been stopped earlier, since its objective value had already stopped improving",
+        "Nothing is missing, because iteration count is the accepted unit of work in optimisation papers of this kind",
+        "The quantum method should have reported qubit count instead, since that sets the runtime far more directly than iterations do",
         "Each quantum iteration needs many thousands of circuit shots, so an iteration is not a comparable unit of work"
       ],
       "answer": 3,
@@ -398,10 +398,10 @@
       "q": "Why does a twenty qubit demonstration rarely support a claim of scalable advantage?",
       "q_vi": "Vì sao thí nghiệm trên hai mươi qubit hiếm khi đủ để tuyên bố có ưu thế mở rộng được?",
       "choices": [
-        "Gates below fifty qubits are too noisy to run at all",
+        "Gates acting on fewer than fifty qubits are far too noisy to run at all, so no conclusion of any kind can be drawn from such a run",
         "A twenty qubit circuit is exactly simulable on a laptop, so advantage must rest on asymptotic argument or far larger experiments",
-        "Twenty qubits cannot carry entanglement",
-        "Simulators are not accepted as baselines"
+        "Twenty qubits cannot carry enough entanglement to matter, so the circuit is classical by construction and can be written out by hand",
+        "Simulators are not accepted as baselines by reviewers, so the comparison has to wait until far larger hardware becomes available to run it"
       ],
       "answer": 1,
       "why": "At that size the classical competitor is trivial and wins outright. Anything called an advantage there is a statement about convenience, not about complexity.",
@@ -413,10 +413,10 @@
       "q": "Which phrasing of a NISQ result is defensible under review?",
       "q_vi": "Cách phát biểu kết quả NISQ nào là bảo vệ được trước phản biện?",
       "choices": [
-        "Quantum hardware will soon replace classical solvers for this task",
-        "Our results prove an exponential quantum speedup for optimisation",
+        "Quantum hardware will soon replace classical solvers for this task, as the published vendor roadmaps show",
+        "Our results prove an exponential quantum speedup for optimisation, confirmed on twenty qubit hardware runs",
         "On these instances and under this budget the circuit matched the baseline with fewer parameters, with no claim of asymptotic speedup",
-        "The method is faster because the state space is exponentially large"
+        "The method is faster because the state space is exponentially large, so every candidate is tested at once by the circuit within a single pass"
       ],
       "answer": 2,
       "why": "A bounded empirical statement can be checked and reproduced. The other three extrapolate far beyond the experiment, and the one about an exponentially large state space repeats the parallelism fallacy.",
@@ -429,9 +429,9 @@
       "q_vi": "Cần dùng ma trận mật độ thay cho vector trạng thái khi nào?",
       "choices": [
         "The system is a classical mixture, or is one part of an entangled pair",
-        "The system has more than one qubit",
-        "The gates applied are not unitary",
-        "The amplitudes happen to be complex"
+        "The system holds more than one qubit, since vectors describe single qubits",
+        "The gates applied to the system are not unitary, like a measurement",
+        "The amplitudes happen to be complex rather than purely real numbers"
       ],
       "answer": 0,
       "why": "Both situations lack a single defining state vector. Multiple qubits and complex amplitudes are perfectly fine in the state vector picture.",
@@ -443,10 +443,10 @@
       "q": "If the trace of rho squared equals one, the state is",
       "q_vi": "Nếu vết của rho bình phương bằng một thì trạng thái đó",
       "choices": [
-        "Maximally mixed",
-        "Necessarily separable and classical",
+        "Mixed",
+        "Separable",
         "Pure",
-        "Necessarily entangled"
+        "Entangled"
       ],
       "answer": 2,
       "why": "Purity equals one exactly for a pure state, and drops below one for any mixture. Purity says nothing about entanglement of a multi qubit state as a whole.",
@@ -459,9 +459,9 @@
       "q_vi": "Trạng thái một qubit trộn cực đại nằm ở đâu trên mặt cầu Bloch?",
       "choices": [
         "At the centre",
-        "Nowhere, mixed states have no Bloch representation",
-        "Anywhere on the equator",
-        "At the north pole"
+        "Nowhere at all",
+        "On the equator",
+        "At the poles"
       ],
       "answer": 0,
       "why": "The Bloch vector length measures purity, and it is zero for the maximally mixed state. Mixed states are represented, they simply lie inside the sphere.",
@@ -473,9 +473,9 @@
       "q": "Two state vectors differ only by an overall phase factor. Physically they are",
       "q_vi": "Hai vector trạng thái chỉ khác nhau một thừa số pha toàn cục. Về mặt vật lý chúng là",
       "choices": [
-        "The same state only when the phase factor is real",
+        "The same state, but only when the overall phase factor is real",
         "Different states with different measurement statistics",
-        "Orthogonal states",
+        "Orthogonal states, because the phase makes them independent",
         "The same state, since no measurement can distinguish them"
       ],
       "answer": 3,
@@ -489,9 +489,9 @@
       "q_vi": "Vì sao mọi cổng lượng tử đều phải là unita?",
       "choices": [
         "Evolution of a closed system preserves total probability and is reversible",
-        "Because measurement is itself a unitary operation",
-        "Because it makes all gates commute with one another",
-        "Because unitary matrices are the easiest ones to build in hardware"
+        "Because measurement is itself a unitary step and gates must match it",
+        "Because unitarity is what makes all gates commute with one another",
+        "Because unitary matrices are the easiest ones to build in real hardware today"
       ],
       "answer": 0,
       "why": "Norm preservation is exactly the statement that probabilities still sum to one. Measurement is the non unitary step, and unitaries generally do not commute.",
@@ -503,10 +503,10 @@
       "q": "Applying the Hadamard gate twice to any single qubit state gives",
       "q_vi": "Tác động cổng Hadamard hai lần lên một trạng thái một qubit bất kỳ sẽ cho",
       "choices": [
-        "The state one",
-        "The state rotated by a further ninety degrees each time",
+        "The state one, whatever the input state happened to be",
+        "The state rotated by another ninety degrees each time",
         "The original state, because the gate is its own inverse",
-        "A maximally mixed state"
+        "A maximally mixed state, since the phase has been lost"
       ],
       "answer": 2,
       "why": "H squared is the identity. Nothing is lost because the gate is unitary and no measurement took place.",
@@ -518,10 +518,10 @@
       "q": "Which circuit turns the state zero zero into a Bell state?",
       "q_vi": "Mạch nào biến trạng thái không không thành trạng thái Bell?",
       "choices": [
-        "A Hadamard on each of the two qubits",
-        "A CNOT on its own",
+        "A Hadamard on each of the two qubits, then a measurement of both",
+        "A single CNOT gate on its own, with the first qubit as control",
         "A Hadamard on the first qubit, then a CNOT controlled by that qubit",
-        "A phase gate followed by a measurement"
+        "A phase gate on the first qubit followed by a measurement of it"
       ],
       "answer": 2,
       "why": "The Hadamard creates the superposition and the CNOT correlates the two qubits. A CNOT alone acting on a basis state produces another basis state, and two Hadamards give a product state.",
@@ -533,10 +533,10 @@
       "q": "Why do fault tolerant resource estimates count T gates separately from other gates?",
       "q_vi": "Vì sao khi ước tính tài nguyên cho tính toán chịu lỗi, người ta đếm riêng cổng T?",
       "choices": [
-        "T gates are not reversible, unlike the rest",
+        "T gates are not reversible, unlike the rest of the gate set, so they must be counted apart when the resources are added up",
         "Clifford gates are cheap in the surface code while each T gate needs magic state distillation, which dominates the cost",
-        "T gates are the only gates that cause decoherence",
-        "Clifford gates cannot be implemented fault tolerantly at all"
+        "T gates are the only gates that cause decoherence, so their number sets the coherence budget of the circuit that is being run",
+        "Clifford gates cannot be implemented fault tolerantly at all, so only T gates can be counted towards the total cost of the algorithm"
       ],
       "answer": 1,
       "why": "Cliffords can be handled transversally or by tracking frames, so they are nearly free. The non Clifford T gate is what forces expensive resource state factories.",
@@ -548,9 +548,9 @@
       "q": "A circuit built only from Hadamard, phase and CNOT gates with computational basis measurement",
       "q_vi": "Một mạch chỉ gồm cổng Hadamard, cổng pha và CNOT, kết thúc bằng phép đo trong cơ sở tính toán, thì",
       "choices": [
-        "Needs exponential classical memory to simulate",
-        "Is already universal for quantum computation",
-        "Cannot generate any entanglement",
+        "Needs exponential classical memory to simulate, so it already demonstrates an advantage over classical machines",
+        "Is already universal for quantum computation, so any quantum algorithm at all can be compiled into it",
+        "Cannot generate any entanglement between the qubits, which is why its output is classically reproducible",
         "Can be simulated efficiently on a classical computer, so it alone cannot show quantum advantage"
       ],
       "answer": 3,
@@ -564,9 +564,9 @@
       "q_vi": "Vì sao độ sâu mạch, chứ không phải tổng số cổng, mới là đại lượng đem so với thời gian kết hợp?",
       "choices": [
         "Depth counts sequential layers, and it is elapsed time that decoherence acts on",
-        "Gates in the same layer take longer than gates in different layers",
-        "Total gate count cannot be measured on hardware",
-        "Depth is simply another name for the number of qubits"
+        "Gates placed in the same layer take longer to execute than gates in different layers",
+        "Total gate count cannot be measured on hardware, whereas depth is reported directly",
+        "Depth is simply another name for the number of qubits the circuit occupies"
       ],
       "answer": 0,
       "why": "Gates in one layer run in parallel, so a wide shallow circuit finishes quickly. Total gate count still matters for accumulated gate error, but it is depth that maps onto wall clock time.",
@@ -578,10 +578,10 @@
       "q": "Why does the quantum Fourier transform not give a fast Fourier transform of classical data?",
       "q_vi": "Vì sao biến đổi Fourier lượng tử không cho ta một phép biến đổi Fourier nhanh trên dữ liệu cổ điển?",
       "choices": [
-        "The transform is not a unitary operation",
-        "The transform is slower than the classical fast Fourier transform",
+        "The transform is not a unitary operation, so it cannot be run as a circuit at all",
+        "The transform is slower than the classical fast Fourier transform when run on inputs of the same length",
         "The transformed coefficients live in amplitudes that cannot be read out, only sampled from",
-        "The transform only accepts real valued inputs"
+        "The transform accepts only real valued inputs, so complex signals are excluded"
       ],
       "answer": 2,
       "why": "You would need the amplitudes themselves, and measurement returns one index at a time with Born rule probabilities. That is why the transform is useful only inside algorithms that ask a question about the spectrum rather than for the spectrum.",
@@ -593,9 +593,9 @@
       "q": "Quantum phase estimation returns",
       "q_vi": "Ước lượng pha lượng tử trả về cái gì?",
       "choices": [
-        "The entire spectrum of any matrix in one run",
-        "The ground state of a Hamiltonian directly",
-        "A complete classical description of the input state",
+        "The entire spectrum of any matrix in a single run, with no eigenstate needing to be prepared at the input",
+        "The ground state of a Hamiltonian directly, without any variational optimisation of the circuit parameters at all",
+        "A complete classical description of the input state, including all of its amplitudes and their relative phases",
         "An estimate of the eigenphase of a unitary, given an eigenstate and enough ancilla qubits for the wanted precision"
       ],
       "answer": 3,
@@ -623,10 +623,10 @@
       "q": "To halve the statistical error bar on an estimated expectation value you must",
       "q_vi": "Để giảm một nửa thanh sai số thống kê của giá trị kỳ vọng ước lượng được, ta phải",
       "choices": [
-        "Halve the circuit depth",
+        "Halve the depth of the measured circuit",
         "Take about four times as many shots",
-        "Take twice as many shots",
-        "Double the number of qubits"
+        "Take about twice as many shots",
+        "Double the number of qubits used"
       ],
       "answer": 1,
       "why": "The standard error falls as one over the square root of the shot count. This is why shot budgets, not gate counts alone, decide the runtime of variational methods.",
@@ -638,10 +638,10 @@
       "q": "Measuring a qubit in the X basis rather than the Z basis is done by",
       "q_vi": "Muốn đo một qubit trong cơ sở X thay vì cơ sở Z thì làm thế nào?",
       "choices": [
-        "Changing the gain of the readout amplifier",
+        "Changing the gain of the readout amplifier before the measurement",
         "Applying a Hadamard gate just before the computational basis measurement",
-        "Measuring twice and averaging the two results",
-        "Applying a T gate just before the measurement"
+        "Measuring the qubit twice and averaging the two recorded outcomes",
+        "Applying a T gate just before the computational basis measurement"
       ],
       "answer": 1,
       "why": "Hardware measures in one fixed basis, so a basis change is done by rotating the state first. The Hadamard is exactly the rotation mapping X eigenstates onto Z eigenstates.",
@@ -654,9 +654,9 @@
       "q_vi": "Thuật toán Deutsch Jozsa chủ yếu có giá trị dạy học vì",
       "choices": [
         "Its promise, that the function is either constant or balanced, almost never holds in practice, and randomised classical methods settle it in a few queries anyway",
-        "It cannot be implemented on any real hardware",
-        "It needs an impractical number of qubits",
-        "It returns the wrong answer with high probability"
+        "It cannot be implemented on any real hardware, because the promised oracle would have to be built by hand for every function of interest",
+        "It needs an impractical number of qubits, since the entire truth table must be loaded into the register before the first gate runs",
+        "It returns the wrong answer with high probability, so the outcome has to be checked classically after every run, which wipes out any advantage the algorithm might have had"
       ],
       "answer": 0,
       "why": "The exponential separation is against deterministic classical algorithms only. Allow a small error probability classically and the gap collapses to a constant number of queries.",
@@ -669,7 +669,7 @@
       "q_vi": "Bernstein Vazirani lấy lại chuỗi ẩn n bit bằng",
       "choices": [
         "n queries, where a classical method needs two to the n",
-        "About the square root of n queries",
+        "About the square root of n queries, where a classical method needs n",
         "Log n queries, where a classical method needs n squared",
         "One oracle query, where a classical method needs n queries"
       ],
@@ -683,9 +683,9 @@
       "q": "Simon's algorithm matters historically because",
       "q_vi": "Thuật toán Simon có ý nghĩa lịch sử vì",
       "choices": [
-        "It was the first algorithm ever run on real hardware",
-        "It removes the need for an oracle in quantum algorithms",
-        "It proves that factoring lies in the class P",
+        "It was the first quantum algorithm ever run on real hardware, which set the experimental agenda for the decade that followed",
+        "It removes the need for an oracle, so quantum algorithms finally became implementable on the hardware of the day",
+        "It proves that integer factoring lies in the complexity class P, a result that Shor later confirmed on real hardware",
         "It gave the first exponential query separation based on period finding, the idea Shor turned into factoring"
       ],
       "answer": 3,
@@ -698,8 +698,8 @@
       "q": "For an unstructured search over N items with exactly one marked item, the optimal number of Grover iterations is about",
       "q_vi": "Với bài toán tìm kiếm không cấu trúc trên N phần tử và đúng một phần tử được đánh dấu, số lần lặp Grover tối ưu vào khoảng",
       "choices": [
-        "The logarithm of N",
-        "N over two",
+        "About the logarithm of N over two",
+        "Roughly N divided by two overall",
         "Pi over four times the square root of N",
         "The square root of N times the logarithm of N"
       ],
@@ -713,10 +713,10 @@
       "q": "If the number of marked items M grows, the number of Grover iterations needed",
       "q_vi": "Nếu số phần tử được đánh dấu M tăng lên thì số lần lặp Grover cần thiết",
       "choices": [
-        "Becomes undefined",
-        "Stays exactly the same",
+        "Becomes undefined, as the rotation angle is not fixed",
+        "Stays exactly the same, since M does not enter the count",
         "Decreases, roughly as the square root of N divided by M",
-        "Increases linearly with M"
+        "Increases linearly with M, as each target needs its own pass"
       ],
       "answer": 2,
       "why": "More marked states give a larger initial overlap, so fewer rotations are needed. Knowing M matters, since running the standard iteration count with unknown M can overshoot the optimum.",
@@ -728,10 +728,10 @@
       "q": "Amplitude amplification generalises Grover by",
       "q_vi": "Khuếch đại biên độ tổng quát hoá Grover bằng cách",
       "choices": [
-        "Allowing several measurements during one run",
+        "Allowing several intermediate measurements during a single run",
         "Replacing the uniform superposition step with any state preparation routine",
-        "Turning the quadratic speedup into an exponential one",
-        "Removing the need for an oracle entirely"
+        "Turning the quadratic speedup into an exponential one for structured data",
+        "Removing the need for an oracle, since the preparation marks the target"
       ],
       "answer": 1,
       "why": "The reflection about the prepared state works for any preparation unitary, not just a layer of Hadamards. The speedup stays quadratic.",
@@ -743,10 +743,10 @@
       "q": "The variational principle underpins VQE because",
       "q_vi": "Nguyên lý biến phân là nền tảng của VQE vì",
       "choices": [
-        "Energy measurements on hardware are free of noise",
-        "Any parameterised circuit is guaranteed to reach the exact ground state",
+        "Energy measurements on hardware are free of noise once a large enough number of shots is taken",
+        "Any parameterised circuit is guaranteed to contain the exact ground state somewhere in its range",
         "The measured energy of any trial state is an upper bound on the true ground state energy",
-        "The classical optimiser is guaranteed to find the global minimum"
+        "The classical optimiser is guaranteed to find the global minimum of the energy landscape every time"
       ],
       "answer": 2,
       "why": "The bound is what makes a lower measured energy meaningful progress. It gives no guarantee that the ansatz contains the ground state or that the optimiser will find the best parameters.",
@@ -759,9 +759,9 @@
       "q_vi": "Trong QAOA, tăng số lớp xen kẽ p sẽ",
       "choices": [
         "Improves the achievable approximation ratio in principle, while deepening the circuit and worsening both noise and the optimisation landscape",
-        "Removes the need for the classical optimiser",
-        "Reduces the number of qubits the problem needs",
-        "Always improves the measured result on real hardware"
+        "Removes the need for the classical optimiser, because deeper layers drive the angles to their optimal values without any search",
+        "Reduces the number of qubits the problem needs, because each added layer encodes more of the problem variables onto every qubit than the one before it",
+        "Always improves the measured result on real hardware, since the approximation ratio rises with every layer and the accumulated noise never catches up with it"
       ],
       "answer": 0,
       "why": "In the noiseless limit QAOA approaches the optimum as p grows. On hardware the accumulated error and the harder parameter search usually make results peak at small p and then degrade.",
@@ -773,10 +773,10 @@
       "q": "Boson sampling is studied because",
       "q_vi": "Người ta nghiên cứu lấy mẫu boson vì",
       "choices": [
-        "It factors integers faster than Shor's algorithm",
-        "It is a universal model of quantum computation",
+        "It factors integers faster than Shor's algorithm, using interference between indistinguishable photons in a linear network",
+        "It is a universal model of quantum computation, so any circuit compiles into a photonic network of beam splitters",
         "It is a plausible route to a hardness argument for a sampling task, even though it solves no useful computational problem",
-        "It works without any interference between photons"
+        "It works without any interference between photons, which is why the hardware is comparatively simple to build and to operate"
       ],
       "answer": 2,
       "why": "The output distribution involves matrix permanents, which are hard to compute classically. That makes it evidence about complexity, not a machine anyone can point at a real task.",
@@ -788,9 +788,9 @@
       "q": "Running Shor's algorithm on a cryptographically relevant integer would require",
       "q_vi": "Chạy thuật toán Shor trên một số nguyên đủ lớn để có ý nghĩa mật mã sẽ đòi hỏi",
       "choices": [
-        "A sufficiently large quantum annealer",
-        "About two thousand noisy physical qubits with no error correction",
-        "No error correction, since the algorithm is self correcting",
+        "A sufficiently large quantum annealer running a long annealing schedule",
+        "About two thousand noisy physical qubits, with no error correction needed",
+        "No error correction at all, since the period finding step is self correcting",
         "Millions of physical qubits under error correction, far beyond current devices"
       ],
       "answer": 3,
@@ -804,9 +804,9 @@
       "q_vi": "Phần lượng tử trong thuật toán Shor thực chất tính cái gì?",
       "choices": [
         "The period of a modular exponentiation function, from which the factors follow by classical number theory",
-        "Only the discrete logarithm, never a factorisation",
-        "A brute force search over all possible divisors",
-        "The prime factors directly, by trial division carried out in superposition"
+        "Only the discrete logarithm, which is then converted into a factorisation classically with no extra quantum work",
+        "A brute force search over all possible divisors, sped up by amplitude amplification",
+        "The prime factors directly, by carrying out trial division on every candidate at once"
       ],
       "answer": 0,
       "why": "Period finding is the only step that needs a quantum computer, and phase estimation plus the Fourier transform deliver it. The reduction from period to factors is ordinary classical mathematics.",
@@ -818,10 +818,10 @@
       "q": "Superconducting qubits are operated at millikelvin temperatures because",
       "q_vi": "Qubit siêu dẫn phải hoạt động ở nhiệt độ cỡ mili Kelvin vì",
       "choices": [
-        "The control lasers only function at low temperature",
+        "The control lasers used to drive the gates only function at millikelvin temperature",
         "Thermal energy at higher temperature would excite the qubit out of its computational states",
-        "Cold metal conducts electricity faster",
-        "Cooling increases the number of qubits on the chip"
+        "Cold metal conducts electricity faster, so the gate pulses arrive sooner",
+        "Cooling raises the number of qubits that can be packed onto a single chip"
       ],
       "answer": 1,
       "why": "The qubit level spacing is tiny, so the environment must be far colder than that energy scale. Superconducting devices are controlled by microwaves, not lasers.",
@@ -833,9 +833,9 @@
       "q": "Compared with superconducting qubits, trapped ion qubits typically offer",
       "q_vi": "So với qubit siêu dẫn, qubit ion bị bẫy thường cho",
       "choices": [
-        "Operation with no calibration required",
-        "Faster gates but much shorter coherence",
-        "Identical performance at a lower cost",
+        "Operation with no calibration required, because ions are identical to one another",
+        "Much faster gates, at the price of far shorter coherence times",
+        "Identical performance at a lower cost, since no refrigerator is needed",
         "Longer coherence and all to all connectivity, at the price of much slower gates"
       ],
       "answer": 3,
@@ -850,8 +850,8 @@
       "choices": [
         "T2 equals T1 by definition",
         "T2 is at most twice T1",
-        "T2 and T1 are unrelated quantities",
-        "T2 is always greater than twice T1"
+        "T2 is unrelated to T1",
+        "T2 always exceeds twice T1"
       ],
       "answer": 1,
       "why": "Energy relaxation destroys phase information as well, so it caps the dephasing time. In practice pure dephasing pushes T2 well below that ceiling.",
@@ -863,8 +863,8 @@
       "q": "In current devices the dominant contribution to circuit error is usually",
       "q_vi": "Trên các thiết bị hiện nay, phần đóng góp lớn nhất vào lỗi của mạch thường là",
       "choices": [
-        "Bugs in the classical control software",
-        "Error while qubits sit idle",
+        "Classical software bugs",
+        "Idle qubit decay",
         "Single qubit gate error",
         "Two qubit gate error"
       ],
@@ -878,9 +878,9 @@
       "q": "Limited qubit connectivity hurts a circuit because",
       "q_vi": "Kết nối hạn chế giữa các qubit làm hại mạch vì",
       "choices": [
-        "It forces the gates to become non unitary",
-        "It makes entanglement between distant qubits impossible in principle",
-        "It reduces the number of usable qubits to one",
+        "It forces some of the gates to become non unitary, which the compiler must repair after the routing pass",
+        "It makes entanglement between physically distant qubits impossible to create, even in principle",
+        "It reduces the number of usable qubits to the size of the largest fully connected group on the chip",
         "The compiler inserts swap gates to bring interacting qubits together, adding depth and error"
       ],
       "answer": 3,
@@ -893,10 +893,10 @@
       "q": "Readout error can be partly undone by",
       "q_vi": "Lỗi đọc kết quả đo có thể bù một phần bằng cách",
       "choices": [
-        "Rewriting the program in a different language",
-        "Simply taking more shots",
+        "Rewriting the program in a language whose compiler emits cleaner pulses to the chip",
+        "Simply taking more shots, since the bias averages away over many runs",
         "Calibrating a confusion matrix and inverting it during classical post processing",
-        "Increasing the circuit depth"
+        "Increasing the circuit depth so the state is refreshed before readout"
       ],
       "answer": 2,
       "why": "Readout error is a classical labelling error with a measurable confusion matrix. More shots reduce statistical noise but not the systematic bias.",
@@ -908,9 +908,9 @@
       "q": "Crosstalk is troublesome for error correction because",
       "q_vi": "Xuyên âm gây rắc rối cho việc sửa lỗi vì",
       "choices": [
-        "It slows down the classical decoder software",
-        "It affects only the readout stage",
-        "It makes gates run faster than specified",
+        "It slows down the classical decoder software, which then cannot keep up with the stream of syndrome data the code produces",
+        "It affects only the readout stage, so the syndrome bits are noisy while the data qubits stay clean throughout the entire run",
+        "It makes gates run faster than specified, so the pulses overshoot their intended rotation angle, which corrupts the data qubits nearby",
         "It makes errors correlated across neighbouring qubits, breaking the independent error assumption behind threshold estimates"
       ],
       "answer": 3,
@@ -923,10 +923,10 @@
       "q": "A benchmark run on a cloud quantum device gives different numbers a week later. The most likely explanation is",
       "q_vi": "Chạy lại cùng một phép đo chuẩn trên thiết bị lượng tử đám mây sau một tuần lại cho con số khác. Giải thích khả dĩ nhất là",
       "choices": [
-        "A change in the mathematical definition of the gates",
+        "A change in the mathematical definition of the gates being applied on that platform",
         "Calibration drift and recalibration of the device between the two runs",
-        "The dataset having been shuffled differently",
-        "Nondeterminism in the classical optimiser only"
+        "The dataset having been shuffled into a different order that week",
+        "Nondeterminism in the classical optimiser and nothing else"
       ],
       "answer": 1,
       "why": "Device parameters drift and are retuned regularly, so hardware results carry a date. This is why honest papers report the calibration data and repeat runs across days.",
@@ -938,10 +938,10 @@
       "q": "Photonic qubits are the natural carrier for quantum communication because",
       "q_vi": "Qubit quang tử là vật mang tự nhiên cho truyền thông lượng tử vì",
       "choices": [
-        "Photons are exempt from the no cloning theorem",
-        "Photons can be stored indefinitely without loss",
+        "Photons are exempt from the no cloning theorem, so they can be copied at a repeater",
+        "Photons can be stored indefinitely in fibre without any loss of signal",
         "Photons travel well in fibre or free space and couple only weakly to the environment",
-        "Photons interact deterministically with one another"
+        "Photons interact deterministically with one another, which makes gates easy"
       ],
       "answer": 2,
       "why": "Weak coupling is exactly what makes them good messengers and bad computers. Making photons interact needs measurement based tricks or nonlinear media, which is the hard part.",
@@ -953,10 +953,10 @@
       "q": "A practical attraction of neutral atom platforms is that",
       "q_vi": "Một ưu điểm thực tế của nền tảng nguyên tử trung hoà là",
       "choices": [
-        "They need no laser control at all",
-        "They have no measurement error",
+        "They need no laser control of any kind, since the atoms are held in place by static magnetic fields",
+        "They have no measurement error, because an atom fluoresces in only one of the two states that are used",
         "Optical tweezers let the qubit layout be rearranged, so connectivity is not frozen by fabrication",
-        "They run at room temperature with no vacuum system"
+        "They run at room temperature with no vacuum system at all, which makes the whole apparatus cheap to build"
       ],
       "answer": 2,
       "why": "Movable atoms give effectively reconfigurable connectivity, which cuts routing overhead. They still need ultrahigh vacuum and elaborate laser systems.",
@@ -969,9 +969,9 @@
       "q_vi": "Qubit spin bán dẫn thu hút đầu tư chủ yếu vì",
       "choices": [
         "They are very small and may reuse existing semiconductor manufacturing lines",
-        "They need no cryogenic cooling",
-        "They require no calibration",
-        "They already have the longest coherence times of any platform"
+        "They need no cryogenic cooling, since silicon works at room temperature",
+        "They require no calibration, because every quantum dot is fabricated alike",
+        "They already have the longest coherence times of any platform in use"
       ],
       "answer": 0,
       "why": "The manufacturing argument is about eventual scale, since a chip could hold enormous numbers of dots. Coherence and uniformity remain harder than for ions.",
@@ -983,9 +983,9 @@
       "q": "The repetition code cannot protect a quantum computation on its own because",
       "q_vi": "Mã lặp tự nó không bảo vệ được một tính toán lượng tử vì",
       "choices": [
-        "It needs an impossibly large number of qubits",
-        "It requires measuring the logical state directly",
-        "It would violate the no cloning theorem",
+        "It needs an impossibly large number of physical qubits",
+        "It requires measuring the logical state at every round",
+        "It would violate the no cloning theorem when encoding",
         "It detects bit flips but is completely blind to phase flips"
       ],
       "answer": 3,
@@ -998,10 +998,10 @@
       "q": "Quantum error correction does not contradict the no cloning theorem because",
       "q_vi": "Sửa lỗi lượng tử không mâu thuẫn với định lý không sao chép vì",
       "choices": [
-        "Cloning is permitted as a special exemption for error correction",
-        "The code reads the logical state out and rewrites it",
+        "Cloning is permitted as a special exemption for error correction, an exception the theorem explicitly carves out",
+        "The code reads the logical state out, corrects it classically and then rewrites it into the register afterwards",
         "The logical information is spread over an entangled code space rather than copied into independent registers",
-        "Errors are classical, so the theorem does not apply"
+        "The errors involved are ordinary classical bit flips, so a theorem about quantum states does not apply to them"
       ],
       "answer": 2,
       "why": "Encoding is a unitary that delocalises information, it is not duplication. Reading the logical state would destroy the superposition, which is precisely what syndrome extraction avoids.",
@@ -1013,10 +1013,10 @@
       "q": "Syndrome measurement is designed so that it",
       "q_vi": "Phép đo hội chứng lỗi được thiết kế sao cho nó",
       "choices": [
-        "Copies the logical qubit before applying the correction",
-        "Reads the logical qubit and then rewrites it correctly",
+        "Copies the logical qubit into an ancilla before the correction is applied",
+        "Reads out the logical qubit and then rewrites the corrected value",
         "Reveals which error occurred without revealing the encoded logical state",
-        "Sacrifices one physical qubit in every round"
+        "Sacrifices one physical qubit in every round, which the code must then replace"
       ],
       "answer": 2,
       "why": "Stabiliser checks commute with the logical operators, so their outcomes carry error information only. Any measurement that learned the logical value would collapse the computation.",
@@ -1030,8 +1030,8 @@
       "choices": [
         "Increasing the code distance reduces the logical error rate",
         "Error mitigation becomes unnecessary in every setting",
-        "The device stops producing errors altogether",
-        "The syndrome can be decoded in constant time"
+        "The device stops producing physical errors altogether",
+        "The syndrome can always be decoded in constant time"
       ],
       "answer": 0,
       "why": "Below threshold the code wins the race between more components and more correction power. It is a statement about scaling, not about a device becoming perfect.",
@@ -1044,9 +1044,9 @@
       "q_vi": "Nếu mức lỗi vật lý nằm trên ngưỡng, việc thêm qubit vật lý cho mỗi qubit logic sẽ",
       "choices": [
         "Makes the logical error rate worse, because more components fail than the code can repair",
-        "Still helps, only more slowly than below threshold",
-        "Converts bit flip errors into phase flip errors",
-        "Has no effect either way"
+        "Still helps the logical error rate, only more slowly than it would below the threshold",
+        "Converts bit flip errors into phase flip errors, which the code then cannot see",
+        "Has no effect either way, since the logical rate is set by the decoder alone"
       ],
       "answer": 0,
       "why": "Above threshold the added failure modes outrun the added correction. This is why hardware error rates must come down first, and buying more qubits does not substitute for that.",
@@ -1058,10 +1058,10 @@
       "q": "The surface code leads the field mainly because",
       "q_vi": "Mã bề mặt dẫn đầu chủ yếu vì",
       "choices": [
-        "It uses the fewest physical qubits of any known code",
+        "It uses the fewest physical qubits per logical qubit of any known code, which is why vendors quote it in their roadmaps",
         "It needs only nearest neighbour checks on a two dimensional grid and tolerates a relatively high physical error rate",
-        "It corrects phase flips only, and those are the only errors that occur",
-        "It needs no syndrome decoding at all"
+        "It corrects phase flips only, and those are the only errors that occur on a planar chip of this kind",
+        "It needs no syndrome decoding at all, since the checks correct the state directly in hardware"
       ],
       "answer": 1,
       "why": "Its layout matches planar chip fabrication, and a threshold near one percent is within reach of real devices. Its weakness is exactly the qubit overhead, which is large.",
@@ -1073,10 +1073,10 @@
       "q": "A company announces a machine with a thousand qubits. What should a careful reader ask?",
       "q_vi": "Một công ty công bố cỗ máy có một nghìn qubit. Người đọc cẩn thận nên hỏi gì?",
       "choices": [
-        "Whether the qubits are superconducting or something else",
-        "How many programming languages the platform supports",
+        "Whether the qubits are superconducting, trapped ion or built on some other platform in the first place",
+        "How many programming languages and software development frameworks the platform currently supports",
         "Whether these are physical qubits, and what the two qubit error rate and logical qubit count are",
-        "How much the machine costs to buy"
+        "How much the machine costs to buy outright and how much floor space it occupies in the data centre that hosts it"
       ],
       "answer": 2,
       "why": "Physical qubit count alone says nothing about usable computation. Error rates and the number of protected logical qubits are what determine which circuits will actually run.",
@@ -1088,10 +1088,10 @@
       "q": "The essential difference between error mitigation and error correction is that",
       "q_vi": "Khác biệt cốt lõi giữa giảm nhẹ lỗi và sửa lỗi là",
       "choices": [
-        "Mitigation requires more physical qubits than correction",
+        "Mitigation requires many more physical qubits per logical qubit than correction does, so it is the costlier of the two",
         "Mitigation repairs the statistics of an observable after the fact, while correction protects the state during the computation",
-        "Correction only handles readout errors",
-        "Mitigation gives exact results while correction gives approximations"
+        "Correction only handles readout errors, while mitigation deals with gate errors during the circuit itself",
+        "Mitigation returns exact results, while correction only ever returns an approximation of the state that was really prepared"
       ],
       "answer": 1,
       "why": "Mitigation never restores a damaged state, it only debiases an estimate over many runs. That is why it cannot support a long computation whose intermediate state matters.",
@@ -1103,10 +1103,10 @@
       "q": "Zero noise extrapolation can mislead when",
       "q_vi": "Ngoại suy nhiễu bằng không có thể đánh lừa khi nào?",
       "choices": [
-        "The device has too few qubits",
-        "The observable being measured is Hermitian",
+        "The device has too few qubits for the amplified circuits to run, so the fit rests on too few points",
+        "The observable being measured is Hermitian, so its expectation value is a real number that the noise cannot shift in either direction",
         "The assumed noise model or the extrapolation form is wrong, in which case the extrapolated value is confidently biased",
-        "The circuit under test is too shallow"
+        "The circuit under test is too shallow, so amplifying the noise leaves the measured result almost unchanged at every point"
       ],
       "answer": 2,
       "why": "The method fits a curve through amplified noise points and extends it beyond the data. A wrong functional form produces a tight error bar around the wrong number, which is worse than no correction.",
@@ -1118,10 +1118,10 @@
       "q": "The nine qubit Shor code demonstrated that",
       "q_vi": "Mã Shor chín qubit đã chứng minh rằng",
       "choices": [
-        "Nine qubits is the proven minimum for any quantum code",
+        "Nine qubits is the proven minimum for any code that corrects an arbitrary error on a single qubit",
         "An arbitrary single qubit error can be corrected by combining bit flip and phase flip protection",
-        "Only bit flip errors ever need correcting",
-        "Error correction requires measuring the logical state"
+        "Only bit flip errors ever need correcting, since phase errors average out",
+        "Error correction requires measuring the logical state directly and then rewriting it at every round"
       ],
       "answer": 1,
       "why": "Concatenating a phase code with a bit flip code covers the whole error basis, and linearity handles continuous errors by discretisation. Smaller codes, such as the five qubit code, were found later.",
@@ -1134,9 +1134,9 @@
       "q_vi": "Cần chưng cất trạng thái ma thuật vì",
       "choices": [
         "Non Clifford gates cannot be applied transversally in the surface code, so they are injected from purified resource states",
-        "The surface code cannot store a logical qubit for long",
-        "Clifford gates are too noisy to implement fault tolerantly",
-        "Measurement can never be made fault tolerant"
+        "The surface code cannot hold a logical qubit for long, so the state must be refreshed regularly from scratch",
+        "Clifford gates are too noisy to implement fault tolerantly, so they are prepared offline instead and injected later",
+        "Measurement can never be made fault tolerant, so the readout is assembled from purified states and injected into the code block"
       ],
       "answer": 0,
       "why": "The Eastin Knill theorem rules out a transversal universal gate set. Distillation buys the missing non Clifford gate at a heavy cost in qubits and time.",
@@ -1148,9 +1148,9 @@
       "q": "Amplitude encoding stores a vector of length two to the n in n qubits. The catch is that",
       "q_vi": "Mã hoá biên độ nhét một vector dài hai mũ n vào n qubit. Điểm gài là",
       "choices": [
-        "It actually needs two to the n qubits",
-        "The amplitudes have to be integers",
-        "It destroys any entanglement in the register",
+        "It actually needs two to the n qubits, because every entry of the vector has to be given a qubit of its own",
+        "The amplitudes are restricted to integers, so real valued features must be rounded",
+        "It destroys any entanglement already present in the register before encoding",
         "The state preparation circuit is generally exponentially deep unless the data has special structure"
       ],
       "answer": 3,
@@ -1163,10 +1163,10 @@
       "q": "Angle encoding is cheap in circuit depth but",
       "q_vi": "Mã hoá góc rẻ về độ sâu mạch nhưng",
       "choices": [
-        "It makes the circuit non unitary",
+        "It makes the circuit non unitary, since a rotation angle taken from data is not reversible by the circuit that encodes it",
         "It spends one rotation per feature, so high dimensional data needs many qubits or aggressive dimensionality reduction",
-        "It cannot represent negative feature values",
-        "It requires a working QRAM"
+        "It cannot represent negative feature values, so the data must be shifted to be positive before the encoding can proceed",
+        "It requires a working QRAM, since each feature has to be fetched from a quantum memory before the rotation can be applied to it"
       ],
       "answer": 1,
       "why": "The feature budget is tied to the number of rotation slots. Papers often hide a principal component step that does most of the modelling work classically.",
@@ -1179,9 +1179,9 @@
       "q_vi": "Phương pháp nhân lượng tử tính cái gì?",
       "choices": [
         "Inner products between encoded states, which are then used inside an otherwise classical kernel algorithm",
-        "The exact decision boundary in a single shot",
-        "The entire training loop on the quantum device",
-        "Gradients of a deep classical neural network"
+        "The exact decision boundary in a single shot, with no training loop needed at all",
+        "The entire training loop on the quantum device, returning the fitted model directly",
+        "Gradients of a deep classical neural network, which are then applied by the optimiser during the following step"
       ],
       "answer": 0,
       "why": "The device supplies a similarity matrix, and a classical solver does the learning. This also means the number of circuit evaluations grows with the square of the dataset size.",
@@ -1194,9 +1194,9 @@
       "q_vi": "Làm sâu thêm một ansatz kiểu hiệu quả phần cứng để tăng khả năng biểu diễn thường sẽ",
       "choices": [
         "Push the circuit towards a random unitary, where gradients vanish exponentially with qubit count",
-        "Reduce the number of shots the training needs",
-        "Increase the typical gradient magnitude",
-        "Guarantee convergence to a global minimum"
+        "Reduce the number of shots the training needs, since the cost landscape becomes much smoother with depth",
+        "Increase the typical gradient magnitude, because more parameters feed into every optimiser update step",
+        "Guarantee convergence to the global minimum, since the ansatz can reach any state that the problem may require"
       ],
       "answer": 0,
       "why": "Approaching a two design is exactly the condition behind barren plateaus. Expressibility and trainability therefore pull against each other.",
@@ -1208,10 +1208,10 @@
       "q": "Which strategy is a recognised way to reduce barren plateaus?",
       "q_vi": "Cách nào là hướng đã được thừa nhận để giảm cao nguyên gradient phẳng?",
       "choices": [
-        "Raising the learning rate of the optimiser",
-        "Adding more randomly initialised entangling layers",
+        "Raising the learning rate of the optimiser so the small gradients still move it",
+        "Adding more randomly initialised entangling layers to enrich the landscape",
         "Using a shallow, problem informed ansatz with structured or layerwise initialisation",
-        "Keeping the same ansatz but using more qubits"
+        "Keeping the same ansatz but adding qubits so the gradient has more directions"
       ],
       "answer": 2,
       "why": "Restricting the circuit to a problem relevant subspace keeps gradients measurable. Random depth and more qubits both make the plateau worse, and a larger step size cannot help when the gradient itself is buried in shot noise.",
@@ -1224,9 +1224,9 @@
       "q_vi": "Nhiều tuyên bố tăng tốc trong học máy lượng tử giả thiết có QRAM. Vì sao đó là vấn đề?",
       "choices": [
         "No scalable QRAM has been built, and constructing one may cost as much as reading the data classically",
-        "QRAM can only store a single bit",
-        "QRAM is a classical device, so it may not be used in a quantum algorithm",
-        "QRAM would violate the no cloning theorem"
+        "A QRAM can only store a single bit, so the data must be reloaded for every query",
+        "A QRAM is a classical device, so it may not be used inside a quantum algorithm at all",
+        "Building a QRAM would violate the no cloning theorem, since the data is duplicated during the fetch operation"
       ],
       "answer": 0,
       "why": "The assumption hides the data loading cost inside a primitive nobody can supply. Any complexity claim that leans on it should say so in the abstract.",
@@ -1238,10 +1238,10 @@
       "q": "For which kind of data is a quantum model most plausibly advantageous?",
       "q_vi": "Với loại dữ liệu nào thì mô hình lượng tử có khả năng mang lợi thế nhất?",
       "choices": [
-        "Large tabular business datasets",
+        "Large tabular business datasets, since their columns map neatly onto qubits one feature at a time",
         "Data produced by a quantum process itself, so that no classical loading step is needed",
-        "Any dataset at all, because the state space is exponentially large",
-        "High resolution natural images"
+        "Any dataset at all, because the exponentially large state space holds it",
+        "High resolution natural images, since amplitudes encode pixels compactly"
       ],
       "answer": 1,
       "why": "Quantum sensors and quantum simulations hand the device a state directly, which removes the input bottleneck. Classical datasets must be encoded, and that cost usually eats the advantage.",
@@ -1253,9 +1253,9 @@
       "q": "In a hybrid loop on cloud hardware, the practical bottleneck is often",
       "q_vi": "Trong vòng lặp lai chạy trên phần cứng đám mây, nút thắt thực tế thường là",
       "choices": [
-        "The arithmetic performed by the classical optimiser",
-        "The size of the source code being uploaded",
-        "The number of CPU cores on the client machine",
+        "The arithmetic the classical optimiser performs between iterations of the loop",
+        "The size of the source code being uploaded with each new job",
+        "The number of CPU cores available on the client machine running the loop",
         "Queueing and the cost of re submitting circuits at every optimiser step"
       ],
       "answer": 3,
@@ -1268,10 +1268,10 @@
       "q": "QUBO and the Ising model are related by",
       "q_vi": "QUBO và mô hình Ising liên hệ với nhau qua",
       "choices": [
-        "The fact that QUBO supports hard constraints while Ising does not",
-        "The fact that QUBO is quantum while Ising is classical",
+        "The fact that QUBO can express hard constraints directly while the Ising model cannot",
+        "The fact that the Ising model is quantum while QUBO is a purely classical encoding",
         "A change of variables between binary values zero and one and spins minus one and plus one",
-        "The fact that they cover different classes of problems"
+        "The fact that the two formulations cover genuinely different classes of problem"
       ],
       "answer": 2,
       "why": "The map is a simple affine substitution, so the two formulations are equivalent. Neither is quantum by itself, both are classical objective functions.",
@@ -1283,10 +1283,10 @@
       "q": "Hard constraints are usually put into a QUBO by",
       "q_vi": "Ràng buộc cứng thường được đưa vào QUBO bằng cách",
       "choices": [
-        "Solving the constraints classically first, which is always possible",
+        "Solving the constraints classically first, which is always possible for a well posed instance and costs almost nothing extra",
         "Adding penalty terms whose weight must be tuned, since too small lets the solver cheat and too large flattens the landscape",
-        "Adding extra variables that carry no cost at all",
-        "Deleting the variables that appear in the constraints"
+        "Adding extra slack variables that carry no cost at all, so the feasible region simply grows to include them",
+        "Deleting the variables that appear in the constraints, which removes the infeasible assignments from the search space at once"
       ],
       "answer": 1,
       "why": "Penalty weighting is a real engineering burden and a frequent source of unfair comparisons, since the classical baseline is often given a worse encoding. If the constraints could always be solved separately the problem would not be hard.",
@@ -1298,9 +1298,9 @@
       "q": "Why is simulated annealing the mandatory baseline for annealing style claims?",
       "q_vi": "Vì sao ủ mô phỏng là đối chứng bắt buộc cho các tuyên bố kiểu ủ?",
       "choices": [
-        "It has no parameters to tune",
-        "It is the fastest known classical solver for every problem",
-        "It also runs on quantum hardware",
+        "It has no parameters to tune, so the comparison cannot be accused of favouring either side",
+        "It is the fastest known classical solver for every combinatorial problem of this kind that anyone has tried",
+        "It also runs on quantum hardware, so the same code can be executed on both machines without any change to the objective",
         "It is the classical method with the same search structure, so beating it is the minimum evidence of an advantage"
       ],
       "answer": 3,
@@ -1313,10 +1313,10 @@
       "q": "Tensor network methods simulate a quantum circuit efficiently when",
       "q_vi": "Phương pháp mạng tensor mô phỏng mạch lượng tử hiệu quả khi",
       "choices": [
-        "The hardware being modelled is perfectly noiseless",
-        "The circuit contains only two qubit gates",
+        "The hardware being modelled is perfectly noiseless, so no mixed states appear anywhere in the simulation",
+        "The circuit contains only two qubit gates, which are the easiest to contract together in any order",
         "The entanglement across any cut of the circuit stays low, so a modest bond dimension suffices",
-        "The circuit is deep and strongly entangling"
+        "The circuit is deep and strongly entangling, so the tensors involved become dense and easy to contract"
       ],
       "answer": 2,
       "why": "Bond dimension has to grow with entanglement entropy, and that is what sets the cost. Low depth or structured circuits are therefore the easy cases for a classical competitor.",
@@ -1328,9 +1328,9 @@
       "q": "Higher hardware noise tends to make classical simulation of a circuit",
       "q_vi": "Nhiễu phần cứng cao hơn thường làm cho việc mô phỏng cổ điển một mạch trở nên",
       "choices": [
-        "Harder, because added randomness increases the complexity",
-        "Impossible in principle",
-        "Completely unaffected",
+        "Harder, because the added randomness increases the complexity of the state",
+        "Impossible in principle, since a mixed state has no tensor description",
+        "Completely unaffected, since the circuit structure has not changed",
         "Easier, because noise reduces the effective entanglement that has to be tracked"
       ],
       "answer": 3,
@@ -1343,10 +1343,10 @@
       "q": "A referee objects to the title Quantum optimisation for network slicing on a paper whose method runs entirely in NumPy. The correct fix is to",
       "q_vi": "Phản biện phản đối tiêu đề Tối ưu lượng tử cho phân lát mạng ở một bài báo mà phương pháp chạy hoàn toàn bằng NumPy. Cách sửa đúng là",
       "choices": [
-        "Run the same code on a circuit simulator and keep calling it quantum",
+        "Run the same code on a circuit simulator and keep the word quantum in the title of the paper",
         "Rename the method quantum inspired and state plainly that no quantum hardware is involved",
-        "Add a paragraph promising hardware experiments in future work",
-        "Cite more quantum computing papers in the introduction"
+        "Add a paragraph promising hardware experiments in the future work section",
+        "Cite a larger number of quantum computing papers in the introduction"
       ],
       "answer": 1,
       "why": "The label has to match what was executed. Running a simulator does not change the fact that the result is a classical computation, and a promise of future hardware does not justify the present claim.",
@@ -1359,9 +1359,9 @@
       "q_vi": "Trong BB84, bước sàng loại bỏ những vòng mà",
       "choices": [
         "The sender and the receiver happened to use different bases",
-        "The photon arrived later than expected",
-        "The detector registered a click",
-        "The two bit values turned out to differ"
+        "The photon arrived later than the expected time window",
+        "The detector registered a click on both channels",
+        "The two retained bit values turned out to differ"
       ],
       "answer": 0,
       "why": "Mismatched bases give uncorrelated results, so those rounds are useless and are announced publicly. Rounds where the bits differ in matched bases are kept and counted, since they measure the error rate.",
@@ -1373,9 +1373,9 @@
       "q": "A rising quantum bit error rate on a QKD link means",
       "q_vi": "Tỉ lệ lỗi bit lượng tử tăng lên trên một liên kết QKD nghĩa là",
       "choices": [
-        "That the detectors are responding too quickly",
-        "That the classical channel has been tampered with",
-        "That the sifted key is longer than necessary",
+        "That the detectors are responding too quickly, so genuine clicks are being double counted as separate detection events",
+        "That the classical channel has been tampered with, since the quantum channel is error free by its very construction",
+        "That the sifted key came out longer than necessary, so more of it should have been discarded during the sifting step",
         "Either eavesdropping or channel imperfection, and the protocol must attribute all of it to a possible eavesdropper"
       ],
       "answer": 3,
@@ -1388,10 +1388,10 @@
       "q": "Privacy amplification works by",
       "q_vi": "Chưng cất khoá riêng hoạt động bằng cách",
       "choices": [
-        "Sending the key twice and comparing the copies",
+        "Sending the key twice over the quantum channel and comparing the two copies bit by bit to find the discrepancies",
         "Hashing a longer partially exposed key down to a shorter key about which the eavesdropper knows almost nothing",
-        "Increasing the photon transmission rate",
-        "Encrypting the key with a second key"
+        "Increasing the photon transmission rate so that the legitimate parties collect more key in the same time window",
+        "Encrypting the sifted key with a second key that was distributed in an earlier session"
       ],
       "answer": 1,
       "why": "A universal hash spreads the adversary's partial knowledge so thin that it becomes negligible. The price is a shorter final key, set by the measured error rate.",
@@ -1403,9 +1403,9 @@
       "q": "QKD still needs a classical channel that is",
       "q_vi": "QKD vẫn cần một kênh cổ điển có tính chất",
       "choices": [
-        "Faster than light",
-        "Physically identical to the quantum channel",
-        "Encrypted with RSA",
+        "Faster than light, otherwise the correction bits arrive after the key is used",
+        "Physically identical to the quantum channel, so one fibre carries both",
+        "Encrypted with RSA, so that the basis announcements stay hidden from anyone",
         "Authenticated, otherwise a man in the middle can impersonate both parties"
       ],
       "answer": 3,
@@ -1418,9 +1418,9 @@
       "q": "Quantum teleportation does not allow faster than light communication because",
       "q_vi": "Dịch chuyển trạng thái lượng tử không cho phép liên lạc nhanh hơn ánh sáng vì",
       "choices": [
-        "The entangled pair decays before the message is complete",
-        "The state is copied rather than moved",
-        "The measurement itself takes too long",
+        "The entangled pair decays before the whole message can be transmitted",
+        "The state is copied rather than moved, so the original still exists",
+        "The Bell measurement itself takes longer than the light travel time",
         "The receiver cannot reconstruct the state until the two classical bits arrive"
       ],
       "answer": 3,
@@ -1434,9 +1434,9 @@
       "q_vi": "Không thể dùng bộ khuếch đại quang để kéo dài liên kết lượng tử vì",
       "choices": [
         "Amplification implies copying an unknown state, which no cloning forbids, so entanglement swapping is used instead",
-        "The amplified signal would be too strong for the detectors",
-        "Amplifiers are too expensive to deploy",
-        "Photons cannot physically enter an amplifier"
+        "The amplified signal would be far too strong for the single photon detectors, which would simply saturate at the far end",
+        "Optical amplifiers are too expensive to deploy at the spacing that a long fibre route would require",
+        "Single photons cannot physically enter an amplifier, because the doped fibre absorbs them entirely before they emerge"
       ],
       "answer": 0,
       "why": "Any device that reliably strengthened an unknown state would be a cloner. Repeaters therefore work by distributing and joining entanglement rather than by boosting the signal.",
@@ -1448,10 +1448,10 @@
       "q": "Entanglement swapping creates entanglement between two nodes that",
       "q_vi": "Đổi chỗ rối tạo ra rối giữa hai nút mà",
       "choices": [
-        "Have already exchanged photons directly",
-        "Share a pre agreed classical secret",
+        "Have already exchanged photons directly, by repeating the exchange several times over the same fibre",
+        "Share a classical secret agreed in advance, which is converted into entanglement",
         "Never interacted, by performing a Bell measurement on the two inner qubits of adjacent pairs",
-        "Are within a metre of each other"
+        "Are within a metre of each other, since the effect does not survive longer links"
       ],
       "answer": 2,
       "why": "The Bell measurement in the middle projects the outer qubits into an entangled state. Chaining this is what lets repeaters cover distances no direct link can.",
@@ -1463,10 +1463,10 @@
       "q": "The repeaterless bound says that the secret key rate of a direct optical link",
       "q_vi": "Giới hạn cho liên kết không bộ lặp nói rằng tốc độ khoá bí mật của một tuyến quang trực tiếp",
       "choices": [
-        "Rises with distance because of dispersion",
-        "Can be raised without limit by using a brighter source",
+        "Rises with distance, because dispersion spreads the pulses further apart and makes each one easier to detect",
+        "Can be pushed up without any limit simply by using a brighter source at the transmitter end of the link",
         "Falls essentially in proportion to channel transmittance, so it decays exponentially with fibre length",
-        "Is independent of the distance covered"
+        "Is independent of the distance covered, since loss only reduces the raw rate and never the fraction of it that survives"
       ],
       "answer": 2,
       "why": "Fibre loss is exponential in length, and the key rate tracks the transmittance. This is exactly why long distance quantum networks need repeaters or satellites.",
@@ -1478,10 +1478,10 @@
       "q": "Harvest now decrypt later is a concern for",
       "q_vi": "Thu hoạch bây giờ, giải mã sau là mối lo với",
       "choices": [
-        "Data that is public anyway",
+        "Data that is already public, since an attacker gains nothing by recording it for later",
         "Data that must stay secret for many years, since ciphertext recorded today can be decrypted later",
-        "Symmetric keys only",
-        "Quantum networks only"
+        "Symmetric keys only, because Grover will halve their effective length as soon as such a machine exists",
+        "Quantum networks only, since ordinary fibre traffic cannot be recorded in bulk"
       ],
       "answer": 1,
       "why": "The attacker needs no quantum computer today, only storage. The migration deadline is therefore set by the required secrecy lifetime, not by the arrival date of the machine.",
@@ -1494,9 +1494,9 @@
       "q_vi": "Các lựa chọn hậu lượng tử chính của NIST cho thiết lập khoá dựa trên",
       "choices": [
         "Hard lattice problems such as learning with errors",
-        "The discrete logarithm over larger groups",
-        "Integer factoring with much larger key sizes",
-        "Quantum key distribution hardware"
+        "The discrete logarithm taken over much larger groups",
+        "Integer factoring with far larger key sizes",
+        "Quantum key distribution hardware on every link"
       ],
       "answer": 0,
       "why": "Lattice assumptions resist both classical and known quantum attacks while keeping keys small enough for protocols. Larger RSA or elliptic curve keys do not help, since Shor scales polynomially in key length.",
@@ -1508,9 +1508,9 @@
       "q": "Hash based signatures are attractive as a conservative option because",
       "q_vi": "Chữ ký dựa trên hàm băm hấp dẫn ở vai trò lựa chọn thận trọng vì",
       "choices": [
-        "They need no source of randomness",
-        "They are the fastest scheme to verify",
-        "They produce the shortest signatures of any family",
+        "They need no source of randomness, so a broken generator cannot compromise them later on",
+        "They are the fastest family to verify, which matters most for firmware signing on constrained devices",
+        "They produce by far the shortest signatures of any of the post quantum families now being standardised",
         "Their security reduces to properties of the hash function alone, although many schemes must track state"
       ],
       "answer": 3,
@@ -1524,9 +1524,9 @@
       "q_vi": "Khi chọn giữa QKD và mật mã hậu lượng tử, kỹ sư cần lưu ý rằng",
       "choices": [
         "Post quantum cryptography is a software change on existing networks, while QKD needs dedicated hardware and trusted relays over long distance",
-        "QKD scales more easily across the public internet",
-        "QKD removes the need for authentication",
-        "Post quantum cryptography has been proven unbreakable"
+        "QKD scales more easily across the public internet, because an ordinary router can simply forward the photons on to the next hop without reading them",
+        "QKD removes the need for authentication, because the laws of physics already identify whoever is sitting at the other end of the link",
+        "Post quantum cryptography has been mathematically proven unbreakable, so once it is deployed the migration question is settled once and for all"
       ],
       "answer": 0,
       "why": "Deployment cost is the deciding practical factor for most organisations. QKD gives a physics based guarantee on a link, but it still needs authentication and it does not route across the ordinary internet.",

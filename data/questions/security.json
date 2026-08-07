@@ -8,10 +8,10 @@
       "q": "An anomaly-based IDS reports 99.5% detection but analysts ignore its alerts. The most likely reason is",
       "q_vi": "Một hệ phát hiện xâm nhập theo bất thường báo tỉ lệ phát hiện 99,5% nhưng người phân tích lờ cảnh báo của nó. Lý do khả dĩ nhất là",
       "choices": [
-        "The signatures are out of date",
-        "The system cannot log events",
+        "The signature database is out of date, so the engine matches nothing current",
+        "The system cannot log the raw events behind its own alerts",
         "The false positive rate is high enough that most alerts are benign",
-        "The detection rate was computed on the training set"
+        "The detection rate was computed on the training set, so alerts arrive late"
       ],
       "answer": 2,
       "why": "With a low base rate of real attacks, even a small false positive rate buries the true alerts. Detection rate alone never describes an operational detector.",
@@ -23,10 +23,10 @@
       "q": "The essential difference between signature-based and anomaly-based detection is",
       "q_vi": "Khác biệt cốt lõi giữa phát hiện theo dấu hiệu và theo bất thường là",
       "choices": [
-        "Signatures work only on encrypted traffic",
-        "Signatures detect zero-days better",
+        "Signatures work only on encrypted traffic, while anomaly detection needs plaintext",
+        "Signatures detect zero-day attacks better because they generalise past catalogued cases",
         "Signatures match known attacks precisely, anomaly detection flags deviation from normal",
-        "Anomaly detection needs no training data"
+        "Anomaly detection needs no training data, since normal behaviour is defined by the vendor"
       ],
       "answer": 2,
       "why": "Signatures cannot see what has never been catalogued, which is exactly what a zero-day is. Anomaly methods can, and pay for it in false alarms.",
@@ -38,10 +38,10 @@
       "q": "Zero trust architecture is built on the assumption that",
       "q_vi": "Kiến trúc tin cậy bằng không dựa trên giả định rằng",
       "choices": [
-        "The internal network is safe once the perimeter holds",
+        "The internal network is safe once the perimeter firewall holds the boundary",
         "No network location is inherently trustworthy, so every request is verified",
-        "Users never make mistakes",
-        "Encryption alone is sufficient security"
+        "Users never make mistakes once they have completed awareness training",
+        "Encryption of every link is sufficient, since verified identity follows from it"
       ],
       "answer": 1,
       "why": "It replaces the castle and moat model. Being inside the corporate network grants nothing by itself, which is what stops lateral movement after one host falls.",
@@ -54,9 +54,9 @@
       "q_vi": "Một biện pháp phòng thủ được đề xuất mà không nêu mô hình mối đe dọa. Vấn đề cốt lõi là",
       "choices": [
         "There is no way to say what it defends against, so it cannot be evaluated",
-        "It will violate privacy regulations",
-        "It cannot be implemented in software",
-        "It will be too slow in practice"
+        "It will violate privacy regulations, because a threat model is legally required",
+        "It cannot be implemented in software without a threat model to compile against",
+        "It will be too slow in practice, because every possible check must be enabled"
       ],
       "answer": 0,
       "why": "Security claims are relative to an adversary. Without specifying what the attacker knows and can do, both success and failure are undefined.",
@@ -68,10 +68,10 @@
       "q": "An adversarial example is dangerous because",
       "q_vi": "Mẫu đối kháng nguy hiểm vì",
       "choices": [
-        "It only works on unencrypted networks",
+        "It only works on networks where traffic is not encrypted end to end",
         "A perturbation invisible to a human flips the model's decision",
-        "It requires physical access to the server",
-        "It deletes the model weights"
+        "It requires physical access to the server that holds the model weights",
+        "It quietly deletes the model weights at inference time"
       ],
       "answer": 1,
       "why": "Human review does not catch it, because to a human nothing changed. That breaks the usual assumption that a person can audit the input.",
@@ -84,9 +84,9 @@
       "q_vi": "Lừa đảo qua mã QR khó phát hiện hơn lừa đảo qua email chủ yếu vì",
       "choices": [
         "The destination URL is not visible before the user acts on it",
-        "It bypasses TLS",
-        "It only targets mobile devices",
-        "QR codes cannot be scanned by security tools"
+        "It bypasses TLS, so the mail gateway cannot inspect the link",
+        "It only targets mobile devices, which run no mail security software",
+        "QR codes cannot be scanned by security tools at any stage"
       ],
       "answer": 0,
       "why": "The usual defence is teaching people to inspect a link. A QR code removes exactly that step, and printed codes also sit outside the mail gateway's reach.",
@@ -98,10 +98,10 @@
       "q": "A provenance graph is used in intrusion detection to",
       "q_vi": "Đồ thị nguồn gốc được dùng trong phát hiện xâm nhập để",
       "choices": [
-        "Generate firewall rules automatically",
+        "Generate firewall rules automatically from observed connection patterns",
         "Reconstruct causal chains between processes, files and connections",
-        "Compress network traffic captures",
-        "Encrypt the audit log"
+        "Compress traffic captures so that long retention becomes affordable",
+        "Encrypt the audit log so an intruder cannot read past events"
       ],
       "answer": 1,
       "why": "Individual events are meaningless. Linking them causally is what turns a stream of syscalls into an attack story you can reason about.",
@@ -114,9 +114,9 @@
       "q_vi": "Cặp nào ghép đúng mục tiêu an ninh với cơ chế?",
       "choices": [
         "Integrity with a cryptographic hash or digital signature",
-        "Integrity with rate limiting",
-        "Availability with symmetric encryption",
-        "Confidentiality with a checksum"
+        "Integrity with rate limiting on the write path of the store",
+        "Availability with symmetric encryption of the data held at rest",
+        "Confidentiality with a checksum appended to every record"
       ],
       "answer": 0,
       "why": "Hashes and signatures detect modification, which is integrity. Encryption serves confidentiality, and rate limiting serves availability.",
@@ -128,10 +128,10 @@
       "q": "A gradient inversion attack in federated learning shows that",
       "q_vi": "Tấn công đảo ngược gradient trong học liên kết cho thấy",
       "choices": [
-        "Encryption is unnecessary in federated settings",
+        "Encryption is unnecessary once only gradients leave the client",
         "Uploading gradients instead of data is not automatically private",
-        "Clients must share their raw data",
-        "Federated learning cannot converge"
+        "Clients must share their raw data for aggregation to converge",
+        "Federated learning cannot converge when clients hold private data"
       ],
       "answer": 1,
       "why": "Gradients are a function of the input and can be inverted to recover recognisable samples. This is why secure aggregation and differential privacy are added on top.",
@@ -144,9 +144,9 @@
       "q_vi": "Chỉ báo cáo độ chính xác trên dữ liệu sạch cho bộ phân loại an ninh là chưa đủ vì",
       "choices": [
         "An attacker will choose inputs the model was never evaluated on",
-        "Clean accuracy is always lower than robust accuracy",
-        "Accuracy cannot be measured on encrypted traffic",
-        "Security datasets are always balanced"
+        "Clean accuracy is always lower than accuracy measured under attack",
+        "Accuracy cannot be measured at all once the traffic is encrypted",
+        "Security datasets are always balanced, which makes accuracy exact"
       ],
       "answer": 0,
       "why": "Security is an adversarial setting, so the relevant number is performance under the attack, not on the average sample. Robust accuracy is normally much lower.",
@@ -159,9 +159,9 @@
       "q_vi": "So với AES ở chế độ đếm, AES ở chế độ GCM cung cấp thêm điều gì",
       "choices": [
         "Detection of any modification of the ciphertext, through an authentication tag",
-        "Compression of the plaintext before encryption",
-        "A key twice as long",
-        "Freedom from having to use a unique nonce"
+        "Compression of the plaintext before encryption, so the ciphertext comes out shorter",
+        "A key twice as long, because the nonce is folded into the key schedule as extra material",
+        "Freedom from having to use a unique nonce, since the tag already absorbs any repeat"
       ],
       "answer": 0,
       "why": "GCM is an authenticated mode, so a tampered ciphertext fails the tag check instead of decrypting to attacker chosen garbage. It still requires a unique nonce, in fact more strictly than counter mode alone.",
@@ -174,9 +174,9 @@
       "q_vi": "Một dịch vụ mã hoá thông điệp bằng AES-GCM với một khoá dùng lâu dài và bộ đếm bị đặt lại về không mỗi lần tiến trình khởi động lại. Hậu quả nghiêm trọng nhất là",
       "choices": [
         "Two messages under the same nonce leak the relation between their plaintexts, and repeated reuse can expose the authentication key itself",
-        "Legitimate receivers can no longer decrypt older ciphertexts",
-        "The ciphertext grows longer than the plaintext",
-        "Performance drops because the counter has to be recomputed"
+        "Legitimate receivers can no longer decrypt older ciphertexts, because the counter no longer matches the value that was used at encryption time",
+        "The ciphertext grows longer than the plaintext every time the process restarts and the counter begins again from zero",
+        "Performance drops sharply, because the counter has to be recomputed from the start of the stream for every message sent"
       ],
       "answer": 0,
       "why": "In a counter based mode the keystream is a function of key and nonce, so reusing the pair XORs two plaintexts together. In GCM the damage goes further, because forgeries against the authentication tag become possible.",
@@ -188,9 +188,9 @@
       "q": "A code review flags that the initialization vector is stored in clear text next to the ciphertext. The correct response is",
       "q_vi": "Một buổi soát mã cảnh báo rằng vector khởi tạo được lưu ở dạng rõ ngay cạnh bản mã. Phản hồi đúng là",
       "choices": [
-        "The vector should be derived from the user's password",
-        "The vector should be reused so it does not need storing at all",
-        "This is a serious leak and the vector must be encrypted as well",
+        "The vector should be derived from the user's password so that it never has to be stored",
+        "The vector should be reused, so that it never has to be stored at all",
+        "This is a serious leak, the vector must be encrypted under the same key",
         "This is normal, the vector must be unique but is not required to be secret"
       ],
       "answer": 3,
@@ -203,10 +203,10 @@
       "q": "A session token is encrypted with AES-CBC and carries no authentication tag. An attacker who can flip bits in the stored ciphertext",
       "q_vi": "Một mã phiên được mã hoá bằng AES-CBC và không kèm thẻ xác thực. Kẻ tấn công có thể lật bit trong bản mã đã lưu thì",
       "choices": [
-        "Will always trigger a decryption error the server can catch",
+        "Will always trigger a decryption error, because the padding check fails on any modified block",
         "Can alter the decrypted plaintext in controlled ways, and the server will treat the result as a valid token",
-        "Can do nothing, because they do not hold the key",
-        "Can recover the key from a single modified block"
+        "Can do nothing at all, because without the key any change to the ciphertext only produces unusable random bytes",
+        "Can recover the encryption key from a single modified block by observing the server's response"
       ],
       "answer": 1,
       "why": "Encryption without authentication provides secrecy but not integrity, and chaining modes give the attacker predictable control over parts of the plaintext. The server has no way to notice, which is why authenticated encryption is the default advice.",
@@ -218,9 +218,9 @@
       "q": "A message authentication code is used to",
       "q_vi": "Mã xác thực thông điệp được dùng để",
       "choices": [
-        "Compress a message before transmission",
-        "Hide the content of a message from an eavesdropper",
-        "Guarantee the message will be delivered",
+        "Compress a message before transmission so the tag replaces redundant bytes",
+        "Hide the content of a message from an eavesdropper who lacks the shared key",
+        "Guarantee the message will be delivered even if the network path fails",
         "Prove the message was not altered and came from a holder of the shared key"
       ],
       "answer": 3,
@@ -233,10 +233,10 @@
       "q": "Why is HMAC preferred over simply hashing the secret key concatenated with the message?",
       "q_vi": "Vì sao nên dùng HMAC thay vì chỉ băm khoá bí mật nối với thông điệp?",
       "choices": [
-        "HMAC produces a shorter tag",
+        "HMAC produces a shorter tag, so less of the internal hash state is exposed to whoever sees the message",
         "On common hash designs the naive construction lets an attacker append data and compute a valid tag without knowing the key",
-        "The naive construction cannot process binary data",
-        "HMAC runs faster on modern processors"
+        "The naive construction cannot process binary data at all, because the key and the message have to be separated by a printable delimiter",
+        "HMAC runs faster on modern processors, since the nested hash calls can be executed in parallel on separate cores"
       ],
       "answer": 1,
       "why": "Hashes built from an iterated compression function expose an internal state that can be extended, so the naive keyed hash is forgeable. HMAC's nested structure is designed precisely to close that.",
@@ -248,9 +248,9 @@
       "q": "Two peers run a Diffie-Hellman exchange with no signatures and no certificates. The result is",
       "q_vi": "Hai bên thực hiện trao đổi khoá Diffie Hellman mà không có chữ ký, cũng không có chứng thư. Kết quả là",
       "choices": [
-        "A shared secret safe against any attacker",
-        "A shared secret that must be transmitted over the network to be usable",
-        "No shared secret at all",
+        "A shared secret that is safe against every attacker, because the secret value itself never crosses the network",
+        "A shared secret that has to be transmitted over the network before either side can encrypt with it",
+        "No shared secret at all, since agreement is impossible without a certificate to bind the public values",
         "A shared secret safe against a passive listener but not against an active attacker sitting in the path"
       ],
       "answer": 3,
@@ -263,9 +263,9 @@
       "q": "An organisation is told to enable forward secrecy. The concrete benefit is",
       "q_vi": "Một đơn vị được khuyến nghị bật tính bí mật chuyển tiếp. Lợi ích cụ thể là",
       "choices": [
-        "One session key can be reused across many connections",
-        "Clients no longer need to validate certificates",
-        "Faster handshakes for returning clients",
+        "One session key can be reused across many connections, which removes the cost of a fresh handshake",
+        "Clients no longer need to validate certificates, because the ephemeral keys authenticate the server",
+        "Handshakes become faster for returning clients, since the previous session key can be resumed directly",
         "Traffic captured today stays unreadable even if the server's long term private key is stolen next year"
       ],
       "answer": 3,
@@ -278,9 +278,9 @@
       "q": "A browser cannot reach the revocation status service for a certificate and proceeds with the connection anyway. This behaviour means",
       "q_vi": "Trình duyệt không liên hệ được dịch vụ tra trạng thái thu hồi của một chứng thư và vẫn kết nối tiếp. Hành vi đó có nghĩa là",
       "choices": [
-        "Revocation is still enforced as long as the certificate has not expired",
-        "The certificate is automatically treated as revoked",
-        "Certificate pinning is in effect",
+        "Revocation is still fully enforced, as long as the certificate itself has not passed its expiry date",
+        "The certificate is automatically treated as revoked, so the connection was in fact refused",
+        "Certificate pinning is in effect, which is why the browser did not need the status service",
         "An attacker able to block the status check also neutralises revocation for a stolen certificate"
       ],
       "answer": 3,
@@ -293,10 +293,10 @@
       "q": "A mobile application pins the server's certificate. The main operational risk this creates is",
       "q_vi": "Một ứng dụng di động ghim chứng thư của máy chủ. Rủi ro vận hành chính mà việc này tạo ra là",
       "choices": [
-        "Traffic can no longer be encrypted end to end",
+        "Traffic can no longer be encrypted end to end, because the pinned certificate replaces the session key",
         "Every installed client stops working when the server rotates its key, until the app itself is updated",
-        "The application becomes vulnerable to a rogue certificate authority",
-        "The server has to disable forward secrecy"
+        "The application becomes exposed to a rogue certificate authority issuing a second certificate",
+        "The server has to disable forward secrecy, because the pinned key has to stay identical across sessions"
       ],
       "answer": 1,
       "why": "Pinning is exactly a refusal to accept any other key, which is the point against a rogue authority and also the failure mode on rotation. Teams handle it by pinning a backup key or by pinning higher in the chain.",
@@ -308,10 +308,10 @@
       "q": "Which is the right way to store user passwords?",
       "q_vi": "Cách nào là cách đúng để lưu mật khẩu người dùng?",
       "choices": [
-        "Base64 encoding of the password",
+        "Base64 encoding of the password before it is written to disk",
         "A deliberately slow, salted function such as bcrypt or argon2",
-        "AES encryption of the password under a server key",
-        "SHA-256 of the password, since it is a cryptographic hash"
+        "AES encryption of the password under a key the server holds",
+        "SHA-256 of the password, since it is a cryptographic hash function"
       ],
       "answer": 1,
       "why": "The threat is offline guessing after a database leak, so the defence is to make each guess expensive. A fast hash lets an attacker try billions per second, and reversible encryption means one key leak exposes every password in clear.",
@@ -323,10 +323,10 @@
       "q": "Adding a unique random salt to each password hash primarily",
       "q_vi": "Thêm muối ngẫu nhiên riêng cho từng bản băm mật khẩu chủ yếu để",
       "choices": [
-        "Remove the need for a slow hash function",
-        "Make each individual guess against one password take longer",
+        "Remove the need for a slow hash function, because the salt already makes every guess expensive",
+        "Make each individual guess against one password take longer, because the salt adds work to every hash computation",
         "Prevent one precomputed table from cracking many accounts, and hide the fact that two users chose the same password",
-        "Encrypt the password so it can be recovered later"
+        "Encrypt the stored password so an administrator can recover it when a user forgets their login"
       ],
       "answer": 2,
       "why": "Salt attacks precomputation and cross account reuse, not per guess cost. The per guess cost comes from the work factor of bcrypt or argon2, which is why both are needed together.",
@@ -338,10 +338,10 @@
       "q": "A pepper differs from a salt because",
       "q_vi": "Tiêu khác muối ở chỗ",
       "choices": [
-        "The pepper is unique per user while the salt is shared by everyone",
+        "The pepper is unique to each user while the salt is one value shared by every account in the table",
         "The pepper is kept outside the database, so a leak of the database alone still leaves the hashes hard to attack",
-        "The pepper replaces the hash function",
-        "The pepper has to be sent to the client"
+        "The pepper replaces the hash function entirely, so no separate password hashing algorithm is needed",
+        "The pepper has to be sent to the client, so that the hash is computed before the password leaves the browser"
       ],
       "answer": 1,
       "why": "Both are extra input to the hash, but the storage location is what matters. Salt is public and per user, pepper is secret and lives in a key store or an environment the database dump does not include.",
@@ -354,9 +354,9 @@
       "q_vi": "Argon2 được cấu hình với chi phí bộ nhớ lớn. Mục đích là",
       "choices": [
         "To reduce the advantage of massively parallel cracking hardware, which is limited by memory rather than by arithmetic",
-        "To make the hash output longer",
-        "To make verification on the server as cheap as possible",
-        "To let an administrator recover the password when needed"
+        "To make the hash output longer, because the size of the digest grows together with the memory that the function is allowed to use",
+        "To make verification on the server as cheap as it possibly can be, so that a busy login endpoint keeps up with peak demand",
+        "To let an administrator recover the password when a user is locked out, by replaying the memory state that was stored"
       ],
       "answer": 0,
       "why": "Graphics processors and custom chips win on raw arithmetic but have little memory per core, so a memory hard function narrows their edge. Cheap verification is the opposite of what a password hash should aim for.",
@@ -369,9 +369,9 @@
       "q_vi": "Máy chủ so sánh thẻ xác thực do người dùng gửi với thẻ mong đợi bằng phép so sánh thông thường, dừng ngay tại byte đầu tiên khác nhau. Điểm yếu là",
       "choices": [
         "Response time reveals how many leading bytes were correct, so a valid tag can be built one byte at a time",
-        "The comparison can return a false match",
-        "The comparison consumes too much memory",
-        "The tag will be silently truncated"
+        "The comparison can return a false match, because stopping early means the remaining bytes are never checked",
+        "The comparison consumes too much memory, since both tags have to be held in cache while it runs",
+        "The tag is silently truncated at the first differing byte, so only a prefix is ever checked"
       ],
       "answer": 0,
       "why": "The secret leaks through timing rather than through the protocol, which is a classic side channel. The fix is a comparison whose duration does not depend on the data.",
@@ -383,9 +383,9 @@
       "q": "The essential difference between hashing a value and encrypting it is",
       "q_vi": "Khác biệt cốt lõi giữa băm một giá trị và mã hoá nó là",
       "choices": [
-        "Encryption always yields a fixed length output",
-        "Hashing requires a shared secret",
-        "Hashing is stronger than encryption in every case",
+        "Encryption always yields a fixed length output, while a hash grows with the size of its input",
+        "Hashing requires a shared secret, which is why two parties must agree on a value before comparing",
+        "Hashing is stronger than encryption in every case, because there is no key that anyone could steal",
         "Hashing is one way with no key that reverses it, while encryption is designed to be reversed by a key holder"
       ],
       "answer": 3,
@@ -398,9 +398,9 @@
       "q": "A team claims the application is secure because all traffic uses TLS. The gap in that claim is",
       "q_vi": "Một nhóm khẳng định ứng dụng đã an toàn vì mọi lưu lượng đều dùng TLS. Lỗ hổng trong khẳng định đó là",
       "choices": [
-        "TLS only works on internal networks",
-        "TLS does not encrypt the payload",
-        "TLS cannot be used together with certificates",
+        "TLS only works on internal networks, so an application published to the internet gains nothing from it",
+        "TLS does not encrypt the payload, it only authenticates the server identity, which means the body of every request still travels in clear text",
+        "TLS cannot be used together with certificates, which means the identity of the server is never established",
         "TLS protects data in transit only, and says nothing about a compromised endpoint, a malicious client or a flaw in the application logic"
       ],
       "answer": 3,
@@ -414,9 +414,9 @@
       "q_vi": "Một cơ sở dữ liệu được mã hoá khi lưu trữ, còn khoá giải mã nằm trong một tệp trên chính máy chủ đó và tiến trình cơ sở dữ liệu đọc được. Biện pháp này chủ yếu chống được",
       "choices": [
         "Someone who obtains the physical disk or a raw storage snapshot",
-        "An attacker who compromises the application",
-        "An insider holding a database login",
-        "SQL injection in the application layer"
+        "An attacker who compromises the application and its database session",
+        "An insider who holds a valid database login and queries the tables",
+        "SQL injection through the application's own query layer"
       ],
       "answer": 0,
       "why": "Anything that runs with the database process reads the data already decrypted, so the control is invisible to application level attacks. It is real protection only against media that leaves the running system.",
@@ -428,9 +428,9 @@
       "q": "The main argument for rotating encryption keys on a schedule is",
       "q_vi": "Lập luận chính cho việc xoay khoá mã hoá theo định kỳ là",
       "choices": [
-        "Keys become mathematically weaker as time passes",
-        "It removes the need for access control on the key store",
-        "It makes the algorithm run faster",
+        "Keys become mathematically weaker as calendar time passes, whether or not they are used",
+        "It removes the need for access control on the key store, since keys are short lived",
+        "It makes the algorithm run faster, because a fresh key has a shorter schedule",
         "It bounds how much data and how much time a single undetected key leak can cover"
       ],
       "answer": 3,
@@ -443,10 +443,10 @@
       "q": "An attacker gains administrative access to a server whose signing key lives inside a hardware security module. The realistic outcome is",
       "q_vi": "Kẻ tấn công chiếm được quyền quản trị trên máy chủ có khoá ký nằm trong mô đun bảo mật phần cứng. Kết cục thực tế là",
       "choices": [
-        "They can do nothing at all",
+        "They can do nothing at all, because the module refuses any request that arrives from a compromised host",
         "They can sign arbitrary data for as long as they hold access, but cannot walk away with the key",
-        "They can extract the private key and keep using it forever",
-        "The module erases everything it has previously signed"
+        "They can export the private key out of the module and keep using it long after being evicted",
+        "The module erases every signature it has previously produced, invalidating past documents"
       ],
       "answer": 1,
       "why": "The module protects the key material, not the usage. That is still worth a lot, because the damage ends when access ends instead of continuing silently after eviction.",
@@ -458,10 +458,10 @@
       "q": "A port scan run against your own address range is best described as",
       "q_vi": "Một lần quét cổng chạy trên chính dải địa chỉ của bạn được mô tả đúng nhất là",
       "choices": [
-        "A method for decrypting traffic",
+        "A method for decrypting the traffic of whichever services happen to answer the probe",
         "A way to inventory which services are really listening, useful to attackers and defenders alike",
-        "An attack that must always be blocked",
-        "A denial of service technique"
+        "An attack that must always be blocked at the firewall, since probing a port is unauthorised access",
+        "A denial of service technique, because the probed services are kept busy answering"
       ],
       "answer": 1,
       "why": "The technique is neutral, only the intent differs. Defenders scan themselves precisely because the listening set drifts away from the documented one.",
@@ -473,9 +473,9 @@
       "q": "After a workstation is compromised by malware, good network segmentation mostly",
       "q_vi": "Sau khi một máy trạm bị mã độc chiếm, việc tách phân đoạn mạng tốt chủ yếu",
       "choices": [
-        "Removes the malware from the workstation",
-        "Prevents the malware from arriving in the first place",
-        "Guarantees the incident stays below the reporting threshold",
+        "Removes the malware from the workstation once the segment has been isolated",
+        "Prevents the malware from arriving, since the segment filters inbound mail",
+        "Guarantees the incident stays below the regulatory reporting threshold",
         "Limits which other systems that host can reach, slowing lateral movement"
       ],
       "answer": 3,
@@ -488,10 +488,10 @@
       "q": "Two application servers sit in the same VLAN and can talk to each other freely. Microsegmentation would change this by",
       "q_vi": "Hai máy chủ ứng dụng nằm cùng một VLAN và nói chuyện với nhau thoải mái. Vi phân đoạn sẽ thay đổi điều đó bằng cách",
       "choices": [
-        "Encrypting the traffic between them",
+        "Encrypting the traffic between them, so neither server can read what the other sends",
         "Enforcing an identity based policy per workload, so sharing a subnet no longer implies permission",
-        "Placing an intrusion detection sensor at the internet edge",
-        "Moving one of them onto a different physical switch"
+        "Placing an intrusion detection sensor at the internet edge to watch the pair of servers",
+        "Moving one of them onto a different physical switch, so the two no longer share a broadcast domain"
       ],
       "answer": 1,
       "why": "The point is to decouple reachability from network location. Encryption would keep the conversation private but would not stop it, and an edge sensor never sees this traffic at all.",
@@ -504,9 +504,9 @@
       "q_vi": "Một danh sách kiểm soát truy nhập có luật cho phép tất cả đặt phía trên một luật từ chối cụ thể. Hệ quả là",
       "choices": [
         "The deny rule never takes effect, because evaluation stops at the first matching rule",
-        "The deny rule applies only to encrypted traffic",
-        "The list is rejected as invalid",
-        "Both rules apply and the traffic ends up denied"
+        "The deny rule applies only to encrypted traffic that the permit rule cannot classify",
+        "The whole list is rejected as invalid, because a permit and a deny overlap",
+        "Both rules are applied and the traffic ends up denied, because a deny always outranks a permit"
       ],
       "answer": 0,
       "why": "Order is semantics in a rule list, which is why review has to read the list top down rather than check that a rule exists. A present but unreachable rule is a very common audit finding.",
@@ -518,9 +518,9 @@
       "q": "ARP spoofing succeeds on a local segment because",
       "q_vi": "Giả mạo ARP thành công trên một phân đoạn mạng nội bộ là vì",
       "choices": [
-        "The switch does not support encryption",
-        "Users choose weak passwords",
-        "DNS records were misconfigured",
+        "The switch does not support encryption on its access ports, so replies travel in clear",
+        "Users choose weak passwords, which lets an outsider join the local segment",
+        "DNS records were misconfigured, so name lookups return the attacker's address",
         "The protocol has no way to verify who owns an address, so any host may answer"
       ],
       "answer": 3,
@@ -533,10 +533,10 @@
       "q": "A resolver is poisoned so a bank's name maps to an attacker's address. A client using TLS with proper certificate validation will",
       "q_vi": "Một máy phân giải bị đầu độc khiến tên miền của ngân hàng trỏ về địa chỉ của kẻ tấn công. Máy khách dùng TLS và kiểm chứng thư đúng cách sẽ",
       "choices": [
-        "Be protected only if a virtual private network is also used",
-        "Detect the poisoning and repair the resolver cache",
+        "Be protected only if a virtual private network is also in use, because the tunnel would carry the lookup to a resolver that is clean",
+        "Detect the poisoning and repair the resolver cache, because the certificate mismatch is reported back upstream",
         "Fail the connection, because the attacker cannot present a valid certificate for that name, although availability is still lost",
-        "Connect normally and leak the credentials"
+        "Connect normally and leak the credentials, since the browser validates the address rather than the name"
       ],
       "answer": 2,
       "why": "Name resolution is not authenticated but the certificate check is, so confidentiality and integrity survive while reachability does not. The danger is a user who clicks through the warning.",
@@ -549,9 +549,9 @@
       "q_vi": "Một dải địa chỉ của đơn vị bạn đang được một mạng khác quảng bá. Biện pháp nào thực sự xử lý được chuyện này?",
       "choices": [
         "Publishing route origin authorisations and having upstream providers validate them",
-        "Rotating all server certificates",
-        "Blocking ICMP at the network edge",
-        "Enabling TLS 1.3 on all servers"
+        "Rotating every server certificate, so the hijacked prefix cannot be used to serve TLS",
+        "Blocking ICMP at the network edge to stop the announcement from propagating",
+        "Enabling TLS 1.3 on all servers, which pins the route back to the true origin"
       ],
       "answer": 0,
       "why": "The problem lives in the routing layer, so the fix has to live there too, by making an unauthorised origin invalid. Encryption keeps content private while the traffic still goes to the wrong place, and a hijack is also a denial of service.",
@@ -563,10 +563,10 @@
       "q": "Reflection attacks depend on forged source addresses. The measure that removes the root cause is",
       "q_vi": "Tấn công phản xạ dựa vào địa chỉ nguồn giả mạo. Biện pháp xoá được nguyên nhân gốc là",
       "choices": [
-        "Every victim buying more bandwidth",
+        "Every likely victim buying enough bandwidth to absorb the reflected traffic",
         "Every network filtering outbound packets whose source address does not belong to it",
-        "Blocking UDP everywhere",
-        "Shutting down public DNS resolvers"
+        "Blocking UDP everywhere on the internet, since reflection needs a connectionless transport",
+        "Shutting down the public DNS resolvers, which are the only reflectors available"
       ],
       "answer": 1,
       "why": "Filtering at the origin network is the only step that stops the forgery itself, but it has to be done by networks that are not the victim. The other options are either mitigation at the target or collateral damage to legitimate services.",
@@ -578,10 +578,10 @@
       "q": "An attacker prefers a protocol with a high amplification factor because",
       "q_vi": "Kẻ tấn công chuộng giao thức có hệ số khuếch đại cao vì",
       "choices": [
-        "It is harder to trace than TCP",
-        "It removes the need to spoof the source address",
+        "It is harder to trace than TCP, because a connectionless exchange leaves behind no state at either end of it",
+        "It removes the need to spoof the source address, since the reflector answers whoever asked",
         "A small request sent from limited upstream bandwidth produces a much larger response aimed at the victim",
-        "It encrypts the attack traffic"
+        "It encrypts the attack traffic, so filtering devices cannot classify the flood by protocol"
       ],
       "answer": 2,
       "why": "Amplification converts the attacker's modest capacity into a flood the victim must absorb. Spoofing is still required, since without it the replies go back to the attacker.",
@@ -593,9 +593,9 @@
       "q": "Telemetry shows one host making thousands of DNS queries per hour for long random looking subdomains of a single domain. The most likely explanation is",
       "q_vi": "Dữ liệu quan trắc cho thấy một máy phát ra hàng nghìn truy vấn DNS mỗi giờ, đều là các tên miền con dài và trông ngẫu nhiên của cùng một tên miền. Cách giải thích khả dĩ nhất là",
       "choices": [
-        "Normal content delivery network behaviour",
-        "A misconfigured time server",
-        "A port scan coming in from the internet",
+        "Normal content delivery network behaviour, since each object gets its own hostname",
+        "A misconfigured time server retrying its lookups against a single domain",
+        "A port scan arriving from the internet against that host's resolver port",
         "Data being carried out through DNS, because other outbound paths are blocked"
       ],
       "answer": 3,
@@ -608,9 +608,9 @@
       "q": "The root cause of SQL injection is",
       "q_vi": "Nguyên nhân gốc của tiêm mã SQL là",
       "choices": [
-        "Missing encryption on the database connection",
-        "The database software being out of date",
-        "Using a relational database instead of a document store",
+        "Missing encryption on the database connection, which lets an attacker rewrite the query in transit",
+        "The database software being out of date, since the parser flaw was fixed in later releases",
+        "Using a relational database instead of a document store, which has no query language",
         "User supplied data becoming part of the command text, so it can change what the query means"
       ],
       "answer": 3,
@@ -623,10 +623,10 @@
       "q": "Four measures are proposed against SQL injection. Which one removes the vulnerability class rather than merely raising the effort?",
       "q_vi": "Bốn biện pháp được đề xuất để chống tiêm mã SQL. Biện pháp nào xoá bỏ cả lớp lỗ hổng chứ không chỉ làm kẻ tấn công tốn công hơn?",
       "choices": [
-        "A web application firewall loaded with injection signatures",
+        "A web application firewall loaded with an up to date set of injection signatures",
         "Parameterized statements that send query structure and values separately",
-        "Rejecting any input containing the words select or union",
-        "Escaping quote characters in user input"
+        "Rejecting any input that contains the words select, union or drop",
+        "Escaping every quote character in user input before building the query"
       ],
       "answer": 1,
       "why": "Parameterisation makes it impossible for a value to be parsed as syntax, so correctness no longer depends on catching every dangerous character. Escaping and blocked word lists both fail on encodings and contexts nobody anticipated, and a firewall is a filter in front of a bug that is still there.",
@@ -638,10 +638,10 @@
       "q": "Stored cross-site scripting is generally worse than the reflected form because",
       "q_vi": "Kịch bản chéo trang dạng lưu trữ thường nguy hiểm hơn dạng phản chiếu vì",
       "choices": [
-        "It bypasses TLS",
-        "It cannot be fixed by output encoding",
+        "It bypasses TLS entirely, so the injected script travels in clear text to every reader of the page",
+        "It cannot be fixed by output encoding, because the payload already sits in the database",
         "It fires for every visitor of the affected page, with no per victim delivery step needed",
-        "It runs with higher browser privileges"
+        "It runs with higher browser privileges, since stored content is trusted by the origin"
       ],
       "answer": 2,
       "why": "The reflected form needs the victim to follow a crafted link, which is a social step that can fail. The stored form waits on the server and hits everyone who loads the page, including administrators.",
@@ -653,9 +653,9 @@
       "q": "A team blocks the literal string script tag on input in order to stop cross-site scripting. The main flaw is",
       "q_vi": "Một nhóm chặn chuỗi thẻ script ở đầu vào để ngăn kịch bản chéo trang. Sai lầm chính là",
       "choices": [
-        "Encoding output is impossible in modern frameworks",
-        "The filter breaks the database schema",
-        "Input filtering is too slow to run per request",
+        "Encoding output is impossible in modern frameworks, which render their templates before the value is known, so filtering the input is the only place left to act",
+        "The filter breaks the database schema, because escaped characters no longer fit the declared column type and the row is silently truncated",
+        "Input filtering is too slow to run on every request, so the check has to move to a batch job that scans stored content later",
         "Script can enter through many other contexts, attributes and encodings, so the safe fix is encoding on output for the context where the value actually lands"
       ],
       "answer": 3,
@@ -669,9 +669,9 @@
       "q_vi": "Một điểm cuối chuyển tiền nhận yêu cầu POST, đòi cookie phiên và chạy trên TLS. Bổ sung nào thực sự ngăn được giả mạo yêu cầu chéo trang?",
       "choices": [
         "Requiring an unguessable token bound to the session, or marking the session cookie so browsers do not attach it to cross site requests",
-        "Hiding the endpoint behind an unusual address",
-        "Forcing a longer TLS key",
-        "Checking that the user agent string belongs to a known browser"
+        "Hiding the endpoint behind a long unusual address, on the assumption that an attacker cannot guess it before the user's session expires",
+        "Forcing a longer TLS key, so that a forged request cannot be assembled inside the encrypted channel at all",
+        "Checking that the user agent string belongs to a known browser, and rejecting the transfer when the value looks unfamiliar"
       ],
       "answer": 0,
       "why": "The forged request is perfectly authenticated, because the browser attaches the cookie by itself, so the missing element is proof that the site's own page issued it. TLS, obscure paths and user agent checks all leave that gap untouched.",
@@ -683,10 +683,10 @@
       "q": "An image resizing service downloads whatever URL the user submits. The strongest fix against server-side request forgery is",
       "q_vi": "Một dịch vụ đổi cỡ ảnh sẽ tải về bất kỳ địa chỉ nào người dùng gửi lên. Cách sửa mạnh nhất trước giả mạo yêu cầu phía máy chủ là",
       "choices": [
-        "Requiring the user to be authenticated before submitting a URL",
-        "Blocking any URL that contains the literal internal metadata address",
+        "Requiring the user to be authenticated before submitting a URL, so that every fetch can be traced back to a named account that agreed to the terms of use",
+        "Blocking any URL that contains the literal internal metadata address, together with every private address range written out in dotted decimal form as well",
         "Resolving the name first and allowing only an explicit list of destinations, with the fetch made from a network that has no route to internal services",
-        "Limiting the downloaded image to one megabyte"
+        "Limiting the downloaded image to one megabyte and rejecting anything larger, since a metadata response is far smaller than any real photograph would be"
       ],
       "answer": 2,
       "why": "A denied list loses to redirects, alternative address encodings and names that resolve to internal space after the check. An allowed destination list plus network isolation makes the internal target unreachable no matter how the URL is written.",
@@ -698,10 +698,10 @@
       "q": "The riskiest part of a file upload feature is usually",
       "q_vi": "Phần rủi ro nhất của tính năng tải tệp lên thường là",
       "choices": [
-        "Allowing files larger than one megabyte",
+        "Allowing files larger than one megabyte, because a big upload keeps a worker thread busy for the whole transfer",
         "Storing user files in a location the web server will serve, and possibly interpret, under the application's own origin",
-        "Preserving the original upload timestamp",
-        "Letting users choose the display name of the file"
+        "Preserving the original upload timestamp, which tells an attacker when the storage directory was last written",
+        "Letting users choose the display name of the file, which makes the storage directory harder to browse"
       ],
       "answer": 1,
       "why": "Serving attacker content from your own origin turns an upload into stored scripting, and an interpreted path turns it into code execution. Size and display names are hygiene issues by comparison.",
@@ -713,10 +713,10 @@
       "q": "A service accepts a serialized object graph from clients and reconstructs it. The reason this is dangerous is",
       "q_vi": "Một dịch vụ nhận đồ thị đối tượng đã tuần tự hoá từ phía khách rồi dựng lại. Điều nguy hiểm ở đây là",
       "choices": [
-        "The object graph cannot be logged",
-        "Serialized data is always larger than JSON",
+        "The object graph cannot be logged in a readable form, so a responder has no record of what the client submitted",
+        "Serialized data is always larger than the equivalent JSON encoding, so a handful of clients can exhaust the server's memory with one crafted request each",
         "Rebuilding objects can invoke constructors and setters of classes present in the runtime, giving a path to code execution before any validation runs",
-        "Serialization discards character encoding information"
+        "Serialization discards character encoding information, which lets a client smuggle a different alphabet past validation"
       ],
       "answer": 2,
       "why": "The attacker chooses which types get instantiated, and the side effects happen during the load itself, so validating afterwards is already too late. The usual fix is a data only format plus an explicit list of permitted types.",
@@ -728,9 +728,9 @@
       "q": "A build has started pulling a package with an internal name from a public registry. The fix that addresses the mechanism is",
       "q_vi": "Một quy trình dựng bản bắt đầu kéo về gói mang tên nội bộ nhưng lấy từ kho công khai. Cách sửa đúng vào cơ chế là",
       "choices": [
-        "Running the build on a faster machine",
-        "Renaming the internal package",
-        "Reviewing the source code of that package once",
+        "Running the build on a machine with no internet route at all, so that any package the build needs has to be committed into the repository first",
+        "Renaming the internal package to something nobody outside the company would think of registering on the public index",
+        "Reviewing the source code of that package once and recording the approval, so that later builds can skip the review",
         "Scoping internal names and configuring the client so those names resolve only against the private registry, with versions pinned by a lock file"
       ],
       "answer": 3,
@@ -743,10 +743,10 @@
       "q": "A critical flaw is announced in a widely used library. An accurate software bill of materials mainly helps by",
       "q_vi": "Một lỗ hổng nghiêm trọng được công bố trong thư viện dùng rất rộng rãi. Bản kê thành phần phần mềm chính xác giúp chủ yếu ở chỗ",
       "choices": [
-        "Proving the vendor is legally liable",
+        "Proving that the vendor is legally liable for having shipped the affected component",
         "Answering within minutes which of your builds actually contain the affected version",
-        "Patching the affected systems automatically",
-        "Preventing the flaw from being exploited"
+        "Patching every affected system automatically as soon as the vendor publishes a fix",
+        "Preventing the flaw from being exploited while the patch is still being tested"
       ],
       "answer": 1,
       "why": "The expensive part of such a day is the inventory question, not the patch itself. A bill of materials turns days of guessing into a query, which directly shortens the exposure window.",
@@ -759,9 +759,9 @@
       "q_vi": "Một khoá API bị đưa vào kho mã và cam kết đó đã được gỡ khỏi nhánh. Việc vẫn bắt buộc phải làm là",
       "choices": [
         "Revoking that key and issuing a new one, because it has to be assumed already read",
-        "Adding the file to the ignore list",
-        "Nothing, since the commit no longer appears in the history",
-        "Making the repository private"
+        "Adding the file to the ignore list so the key cannot be committed a second time",
+        "Nothing further, since the commit no longer appears anywhere in the branch history",
+        "Making the repository private, which removes public access to the whole history"
       ],
       "answer": 0,
       "why": "Clones, forks, caches and scanning bots may all hold the value, and rewriting history cannot reach any of them. Once a secret has been published anywhere, rotation is the only control that restores the guarantee.",
@@ -773,9 +773,9 @@
       "q": "The OWASP Top Ten is best used as",
       "q_vi": "Danh sách mười rủi ro của OWASP nên được dùng như",
       "choices": [
-        "A complete checklist that certifies an application as secure",
-        "A legally binding compliance standard",
-        "A list of specific vulnerable products",
+        "A complete checklist that certifies an application as secure once every item on it passes",
+        "A legally binding compliance standard that auditors are required to test against",
+        "A list of the specific vulnerable products, updated whenever a new flaw is published",
         "An awareness list of common risk categories, useful for training and triage but not exhaustive"
       ],
       "answer": 3,
@@ -788,10 +788,10 @@
       "q": "A user changes the account identifier in a request address and sees another customer's invoice. The defect is",
       "q_vi": "Một người dùng đổi mã tài khoản trong địa chỉ yêu cầu và xem được hoá đơn của khách hàng khác. Khiếm khuyết ở đây là",
       "choices": [
-        "A denial of service condition",
-        "A failure of authentication",
+        "A denial of service condition, since one customer can load the records of another and slow the service",
+        "A failure of authentication, because the system never established which customer was making the request",
         "Missing server side authorisation, since the identity was known but the right to that specific object was never checked",
-        "Weak encryption of the address"
+        "Weak encryption of the address bar, since the identifier can be read and modified directly by the user"
       ],
       "answer": 2,
       "why": "Authentication worked, the system knew exactly who was asking. What is absent is the per object check that this identity owns that invoice, and no amount of address obfuscation replaces it.",
@@ -803,10 +803,10 @@
       "q": "Authentication and authorisation differ in that",
       "q_vi": "Xác thực và cấp quyền khác nhau ở chỗ",
       "choices": [
-        "Authorisation always happens before authentication",
-        "Authentication applies to machines and authorisation applies to people",
+        "Authorisation always runs before authentication, since permissions are attached to the request itself",
+        "Authentication applies to machines while authorisation applies to the people who operate those machines",
         "Authentication establishes who you are, authorisation decides what that identity is allowed to do",
-        "They are two names for the same check"
+        "They are two names for one and the same check, which is performed once when the session is first created"
       ],
       "answer": 2,
       "why": "One answers who, the other answers may they. Most broken access control findings are systems that answered the first question well and never asked the second.",
@@ -818,10 +818,10 @@
       "q": "Login attempts arrive from thousands of addresses, one or two per account, using passwords leaked from an unrelated site. The control that helps most is",
       "q_vi": "Các lượt đăng nhập đến từ hàng nghìn địa chỉ, mỗi tài khoản chỉ một hai lần, dùng mật khẩu rò rỉ từ một trang khác. Biện pháp giúp được nhiều nhất là",
       "choices": [
-        "Switching the password hash to argon2",
+        "Switching the password hash to argon2 with a high memory cost for every stored account",
         "Checking submitted credentials against known breached password sets and requiring a second factor",
-        "Rate limiting attempts per source address",
-        "Forcing a longer minimum password length for new accounts"
+        "Rate limiting login attempts per source address, with a lockout after several failures",
+        "Forcing a longer minimum password length on new accounts and at the next password change"
       ],
       "answer": 1,
       "why": "The passwords are already correct, so the attack never needs many tries per account and never touches your hash. Per address rate limiting is defeated by the very distribution described, while a second factor breaks the reuse chain outright.",
@@ -834,9 +834,9 @@
       "q_vi": "Một thiết kế giữ kín thuật toán và coi sự bí mật đó là lớp bảo vệ chính. Phản bác chuẩn mực là",
       "choices": [
         "Security should rest on the key, because the design will eventually leak and cannot be rotated once it does",
-        "Secrecy makes patent protection impossible",
-        "Secret algorithms always run more slowly",
-        "Open algorithms are required by law"
+        "Keeping the design secret makes patent protection impossible, so the work cannot be defended commercially",
+        "Secret algorithms always run more slowly, because they cannot use the hardware instructions of the platform",
+        "Open algorithms are required by law in every jurisdiction that regulates the export of encryption"
       ],
       "answer": 0,
       "why": "A key is a small secret you can replace cheaply, while a design is a large secret you cannot. Public review also finds flaws that a closed team will not, which is why open algorithms with secret keys became the norm.",
@@ -848,10 +848,10 @@
       "q": "Rewriting a network parser in a memory safe language mainly",
       "q_vi": "Viết lại bộ phân tích gói tin bằng ngôn ngữ an toàn bộ nhớ chủ yếu",
       "choices": [
-        "Makes the parser faster",
+        "Makes the parser faster, since bounds checks replace the manual pointer arithmetic",
         "Removes an entire class of memory corruption defects, while logic flaws remain",
-        "Guarantees the parser now has no bugs",
-        "Replaces the need for input validation"
+        "Guarantees the parser now has no bugs at all, because the compiler rejects unsafe code",
+        "Replaces the need for input validation, since malformed input can no longer be parsed"
       ],
       "answer": 1,
       "why": "The change eliminates overflows and use after free by construction, which historically dominate remote code execution in parsers. It does nothing about accepting a malformed message that the logic then mishandles.",
@@ -864,9 +864,9 @@
       "q_vi": "Một dịch vụ đã bật ngẫu nhiên hoá không gian địa chỉ nhưng lại có lỗi in ra một con trỏ thô trong thông báo lỗi. Tác động lên cơ chế ngẫu nhiên hoá là",
       "choices": [
         "The leak reveals the load base, so the layout is recovered and the probabilistic barrier disappears",
-        "The randomisation only covers the stack, so the leak is irrelevant",
-        "None, since a pointer is meaningless without a key",
-        "The randomisation becomes stronger because the address keeps changing"
+        "The randomisation only covers the stack, so a pointer into the code segment gives away nothing at all",
+        "None at all, since a raw pointer means nothing to anyone who does not also hold the key for the process",
+        "The randomisation becomes stronger, because the address will have changed again by the next restart"
       ],
       "answer": 0,
       "why": "Randomisation raises the cost of guessing an address, and one disclosed pointer replaces guessing with arithmetic. This is why memory disclosure bugs are rated far more seriously than their direct impact suggests.",
@@ -878,10 +878,10 @@
       "q": "Marking the stack non executable forces an attacker to",
       "q_vi": "Đánh dấu ngăn xếp là không thực thi buộc kẻ tấn công phải",
       "choices": [
-        "Find a memory disclosure bug first",
-        "Give up entirely",
+        "Find a memory disclosure bug first, since the stack address is no longer predictable",
+        "Give up entirely, because control flow can no longer be redirected anywhere useful",
         "Reuse code that already exists inside the process rather than running injected bytes",
-        "Attack the network layer instead"
+        "Attack the network layer instead, since memory corruption no longer reaches the process"
       ],
       "answer": 2,
       "why": "The bit blocks running data as code, not corrupting memory, so control flow hijacking continues by chaining existing instruction sequences. Treating the bit as a complete cure is the common misreading.",
@@ -893,10 +893,10 @@
       "q": "Secure boot verified every stage and the machine started clean. Two hours later it is compromised through a web application flaw. This shows that",
       "q_vi": "Khởi động an toàn đã kiểm mọi giai đoạn và máy khởi động sạch. Hai giờ sau máy bị chiếm qua một lỗ hổng ứng dụng web. Điều đó cho thấy",
       "choices": [
-        "The firmware signature must have been forged",
+        "The firmware signature must have been forged, since a verified system cannot be compromised",
         "Secure boot establishes a trustworthy starting state and says nothing about what happens at runtime",
-        "Secure boot was misconfigured",
-        "Secure boot only applies to virtual machines"
+        "Secure boot was misconfigured, because a correct configuration also validates running processes",
+        "Secure boot only applies to virtual machines, so a physical server gains nothing from it"
       ],
       "answer": 1,
       "why": "The control answers one question, whether the code that started is the code you intended. Runtime compromise is a different question that needs application hardening and endpoint monitoring.",
@@ -908,10 +908,10 @@
       "q": "A trusted execution environment is chosen so the cloud provider cannot read the workload. The residual risk that must still be stated is",
       "q_vi": "Môi trường thực thi tin cậy được chọn để nhà cung cấp đám mây không đọc được tải công việc. Rủi ro còn lại vẫn phải nêu rõ là",
       "choices": [
-        "The provider can simply read enclave memory using administrator rights",
-        "Encryption cannot be used inside the enclave",
+        "The provider can simply read enclave memory using administrator rights, because the hypervisor maps every page of the guest",
+        "Encryption cannot be used inside the enclave, so any data the workload writes out leaves the boundary in clear text",
         "Micro architectural side channels remain, and a malicious host still controls scheduling, paging and every message crossing the boundary",
-        "The enclave cannot perform any input or output"
+        "The enclave cannot perform input or output of any kind, so the workload has to be restructured as a batch computation"
       ],
       "answer": 2,
       "why": "The hardware removes direct memory reads but not the host's position around the enclave, and shared caches have repeatedly leaked secrets. A claim of confidential computing without naming the side channel assumption is incomplete.",
@@ -924,9 +924,9 @@
       "q_vi": "Coi bao chứa là ranh giới cách ly tương đương máy ảo là rủi ro vì",
       "choices": [
         "Containers share the host kernel, so one kernel flaw crosses a boundary that a hypervisor would still hold",
-        "Containers cannot run untrusted code at all",
-        "Containers do not support network policy",
-        "Containers always run as the root user"
+        "Containers cannot run untrusted code at all, because the runtime refuses any image from outside the registry",
+        "Containers do not support network policy, so every workload can reach every other workload on the same host",
+        "Containers always run as the root user, because the image format has no way of recording a different account"
       ],
       "answer": 0,
       "why": "The shared kernel is the whole architectural difference, and the system call surface is large. Hardened runtimes and lightweight virtual machines exist precisely to restore that boundary for untrusted workloads.",
@@ -938,10 +938,10 @@
       "q": "A deployment runs a container with the privileged flag and the host root filesystem mounted read write. The correct assessment is",
       "q_vi": "Một bản triển khai chạy bao chứa với cờ đặc quyền và gắn hệ tệp gốc của máy chủ ở chế độ đọc ghi. Đánh giá đúng là",
       "choices": [
-        "It is safe as long as the container has no network access",
-        "Acceptable if the image comes from a trusted registry",
+        "It is safe as long as the container is given no network access, since nothing outside can reach it",
+        "Acceptable if the image comes from a trusted registry and has been scanned before every deployment",
         "The container is effectively root on the host, so there is no security boundary left to speak of",
-        "The risk is limited to that container's own filesystem"
+        "The risk is limited to that container's own filesystem, which is discarded as soon as the container stops"
       ],
       "answer": 2,
       "why": "Those two settings hand over the capabilities and the filesystem that the boundary was supposed to withhold. Trust in the image is irrelevant once any flaw inside it inherits full host control.",
@@ -954,9 +954,9 @@
       "q_vi": "Nguyên tắc tách quyền tồn tại để bảo đảm rằng",
       "choices": [
         "No single person can both initiate and approve a sensitive action",
-        "Logs are stored in two different places",
-        "Administrators never take holidays",
-        "Every employee holds the same permissions"
+        "Logs are stored in two different places, so that one copy always survives",
+        "Two administrators are always on call, so that no request ever waits",
+        "Every employee holds the same permissions across all of the systems"
       ],
       "answer": 0,
       "why": "The point is that fraud or a single compromised account needs a second party to succeed. It is an organisational control, and it also catches honest mistakes before they reach production.",
@@ -968,10 +968,10 @@
       "q": "A low privileged account can overwrite the binary that a service running as root launches at boot. This is a privilege escalation path because",
       "q_vi": "Một tài khoản quyền thấp có thể ghi đè lên tệp nhị phân mà dịch vụ chạy dưới quyền quản trị gọi lúc khởi động. Đây là con đường leo thang đặc quyền vì",
       "choices": [
-        "The service is written in an unsafe language",
+        "The service is written in a language without memory safety, so overwriting the binary corrupts its heap at start up",
         "The account can decide what code the high privileged context will execute, without needing any software vulnerability at all",
-        "The boot process is not encrypted",
-        "Services running as root always trust their arguments"
+        "The boot process is not encrypted, which lets the account read the binary while it is being loaded into memory",
+        "Services running as root always trust the arguments they are given, so a modified binary inherits that trust"
       ],
       "answer": 1,
       "why": "This is a permissions defect rather than a memory bug, so no exploit development is involved and no patch will fix it. Escalation paths of this shape are why file system permission audits matter as much as patching.",
@@ -983,10 +983,10 @@
       "q": "A service account is granted full administrator rights because narrowing the permissions would take too long. The concrete cost is",
       "q_vi": "Một tài khoản dịch vụ được cấp toàn quyền quản trị vì việc thu hẹp quyền sẽ mất quá nhiều thời gian. Cái giá cụ thể là",
       "choices": [
-        "The service will run more slowly",
-        "The account will expire sooner than planned",
+        "The service will run more slowly, because every call is checked against a much larger set of granted permissions",
+        "The account will expire sooner than planned, since administrative rights carry a shorter maximum lifetime",
         "Whoever compromises that service inherits full administrative control, so one application flaw becomes an estate wide incident",
-        "The account can no longer be audited"
+        "The account can no longer be audited, because administrative actions are excluded from the standard log stream"
       ],
       "answer": 2,
       "why": "Privilege sets the ceiling on damage from any single compromise, which is the entire content of least privilege. The cost is not paid at deployment time, it is paid on the day something goes wrong.",
@@ -998,10 +998,10 @@
       "q": "MITRE ATT&CK is best described as",
       "q_vi": "ATT&CK của MITRE được mô tả đúng nhất là",
       "choices": [
-        "A commercial threat intelligence feed",
+        "A commercial threat intelligence feed of indicators, delivered daily and matched against your own network traffic",
         "A structured catalogue of tactics and techniques observed in real intrusions, used to describe behaviour and map coverage",
-        "A certification programme for security analysts",
-        "A scanner that finds vulnerabilities"
+        "A certification programme for security analysts, examining knowledge of intrusion handling and forensic practice",
+        "A scanner that finds vulnerabilities on hosts and ranks them by the techniques an attacker could use"
       ],
       "answer": 1,
       "why": "It is a shared vocabulary for what attackers do, which lets detection engineering, reporting and gap analysis speak the same language. It finds nothing by itself.",
@@ -1013,10 +1013,10 @@
       "q": "A team reports coverage of 180 ATT&CK techniques with one detection rule each. The number is weak evidence because",
       "q_vi": "Một nhóm báo cáo đã phủ 180 kỹ thuật trong ATT&CK, mỗi kỹ thuật một luật phát hiện. Con số đó là bằng chứng yếu vì",
       "choices": [
-        "Coverage ought to be measured in alerts per day",
-        "ATT&CK techniques are not observable in logs",
+        "Coverage ought to be measured in alerts produced per day, since a technique nobody sees is not really covered",
+        "ATT&CK techniques are not observable in logs at all, so any count of covered techniques is simply invented",
         "A technique can be carried out in many ways, so one narrow rule can be bypassed while the map still shows the box as covered",
-        "Coverage should be reported per tactic rather than per technique"
+        "Coverage should be reported per tactic rather than per technique, because tactics are the unit attackers plan with"
       ],
       "answer": 2,
       "why": "Counting rules measures effort, not detection, and a rule matching one tool's default string covers almost nothing of the technique. The honest measure is whether an executed variant actually raises the alert.",
@@ -1028,10 +1028,10 @@
       "q": "The argument for detecting at an early kill chain stage is that",
       "q_vi": "Lập luận cho việc phát hiện ở giai đoạn sớm của chuỗi tiêu diệt là",
       "choices": [
-        "Later stages produce no log entries",
-        "Early stages are always automated",
+        "Later stages produce no log entries, because the attacker has cleared the audit trail before reaching the objective",
+        "Early stages are always automated, so a rule can match them exactly while later stages are driven by hand",
         "Intervening before the objective is reached prevents the damage, while a detection at the exfiltration stage merely documents it",
-        "Early stages are inherently easier to detect than later ones"
+        "Early stages are inherently easier to detect than later ones, since scanning and delivery cross the network edge"
       ],
       "answer": 2,
       "why": "The model is about where an interruption still changes the outcome. Early stages are in fact often harder to see, which is exactly why coverage across several stages is needed.",
@@ -1043,9 +1043,9 @@
       "q": "Blocking the file hashes and addresses listed in a threat report gives limited durable value because",
       "q_vi": "Chặn các mã băm tệp và địa chỉ liệt kê trong một báo cáo mối đe dọa mang lại giá trị lâu dài hạn chế vì",
       "choices": [
-        "Blocking addresses breaks routing",
-        "Hashes cannot be computed at line rate",
-        "Threat reports are usually inaccurate",
+        "Blocking addresses breaks routing for everyone else, because the block has to be applied to whole prefixes rather than to single hosts",
+        "Hashes cannot be computed at line rate on a busy link, so the block list can only be applied once the session has already finished",
+        "Threat reports are usually inaccurate, since the indicators in them are collected from sandboxes rather than from any real intrusion",
         "The attacker can recompile or rent new infrastructure in minutes, whereas a detection built on their behaviour survives that change"
       ],
       "answer": 3,
@@ -1058,10 +1058,10 @@
       "q": "Threat hunting differs from alert triage in that",
       "q_vi": "Săn mối đe dọa khác với xử lý cảnh báo ở chỗ",
       "choices": [
-        "Hunting uses signatures while triage uses anomalies",
-        "Hunting requires no telemetry",
+        "Hunting relies on vendor signatures while triage relies only on the anomaly scores that a model produces",
+        "Hunting requires no telemetry of its own, since the hypothesis is tested against the existing alert queue",
         "Hunting starts from a hypothesis about attacker behaviour and searches data where no alert ever fired",
-        "Hunting is performed only after an incident has been declared"
+        "Hunting is performed only after an incident has been declared, as part of the scoping work that follows"
       ],
       "answer": 2,
       "why": "Triage is reactive and bounded by what the rules already catch, so it cannot find what the rules miss. Hunting exists to explore that blind area, and its output is usually a new detection rule.",
@@ -1073,7 +1073,7 @@
       "q": "One in a million network events is malicious. A detector catches every attack and has a false positive rate of 0.1%. Among roughly one thousand alerts raised over a million events, how many are real?",
       "q_vi": "Cứ một triệu sự kiện mạng thì có một sự kiện độc hại. Một bộ phát hiện bắt được toàn bộ tấn công và có tỉ lệ báo động giả 0,1%. Trong khoảng một nghìn cảnh báo phát ra trên một triệu sự kiện, có bao nhiêu cảnh báo là thật?",
       "choices": [
-        "Exactly 100",
+        "About 100",
         "About 1",
         "About 500",
         "About 999"
@@ -1088,10 +1088,10 @@
       "q": "An analyst queue is dominated by false positives. Which change reduces the workload most?",
       "q_vi": "Hàng đợi của người phân tích ngập trong báo động giả. Thay đổi nào giảm được nhiều khối lượng công việc nhất?",
       "choices": [
-        "Adding two more detection rules of similar quality",
-        "Retraining the model on more benign traffic only",
+        "Adding two further rules of roughly the same quality",
+        "Retraining the model on additional benign traffic only",
         "Cutting the false positive rate by a factor of ten",
-        "Raising the detection rate from 99% to 99.9%"
+        "Raising the detection rate from 99% to 99.9% overall"
       ],
       "answer": 2,
       "why": "The queue length is set by the false alarm rate multiplied by the enormous benign volume, so dividing that rate divides the work. The extra 0.9% of recall changes the count by a fraction of one alert.",
@@ -1103,10 +1103,10 @@
       "q": "On traffic where attacks make up 0.01% of events, a detector shows an excellent area under the ROC curve while analysts still drown in alerts. The better summary is",
       "q_vi": "Trên luồng lưu lượng mà tấn công chỉ chiếm 0,01% số sự kiện, một bộ phát hiện cho diện tích dưới đường cong ROC rất đẹp trong khi người phân tích vẫn chết ngập trong cảnh báo. Cách tóm tắt tốt hơn là",
       "choices": [
-        "Accuracy over the whole dataset",
+        "Overall accuracy measured across the whole dataset, which already accounts for how rare the attack class happens to be",
         "The precision and recall pair, or the precision recall curve, since the ROC view is dominated by the huge benign class",
-        "The training loss",
-        "The number of distinct signatures loaded"
+        "The value of the training loss at the final epoch, since that summarises how well the detector fits the data it was given",
+        "The number of distinct signatures loaded, because broader coverage is what explains the higher alert volume analysts see"
       ],
       "answer": 1,
       "why": "False positive rate is normalised by a benign class so large that a tiny rate is still a flood, and ROC therefore looks flattering. Precision states directly what fraction of the analyst's day is wasted.",
@@ -1118,10 +1118,10 @@
       "q": "Mean time to detect matters because",
       "q_vi": "Thời gian trung bình để phát hiện quan trọng vì",
       "choices": [
-        "It determines the licence cost of the detection platform",
-        "It is required by every compliance framework",
+        "It determines the licence cost of the detection platform, which is billed per hour of delay",
+        "It is required by every compliance framework, which makes it the only reportable number",
         "Every hour before detection is time the intruder spends expanding access and staging data",
-        "It is the only metric that cannot be gamed"
+        "It is the only metric that cannot be gamed, because the clock records it objectively"
       ],
       "answer": 2,
       "why": "Damage accumulates with dwell time, so the same intrusion caught on day one and on day ninety are entirely different incidents. It is also very easy to game, by counting only the intrusions you eventually found.",
@@ -1133,10 +1133,10 @@
       "q": "After an intrusion, the local logs on the affected host show nothing unusual. The most useful conclusion is",
       "q_vi": "Sau một vụ xâm nhập, nhật ký cục bộ trên máy bị ảnh hưởng không cho thấy điều gì bất thường. Kết luận hữu ích nhất là",
       "choices": [
-        "The host was not actually compromised",
+        "The host was not actually compromised, because a real intrusion would always have left traces in the logs it writes locally",
         "An attacker with administrative rights can edit local logs, so absence of evidence there proves nothing and off host copies must be examined",
-        "The detection platform failed and should be replaced",
-        "The logging level was set too high"
+        "The detection platform failed and should be replaced, because a working agent writes a record of every action taken",
+        "The logging level was set too high, so routine events crowded out the entries that would have shown the intrusion"
       ],
       "answer": 1,
       "why": "Any log the attacker can write is a log the attacker can rewrite, which is why records are shipped off the machine as they are produced. Reasoning from a clean local log is reasoning from a document your adversary may have edited.",
@@ -1149,9 +1149,9 @@
       "q_vi": "Một bộ dữ liệu phát hiện xâm nhập được dựng bằng cách bắt lưu lượng tấn công trong phòng thí nghiệm và lưu lượng lành tính trên mạng của trường. Một mô hình đạt 99,9% trên đó thực chất có thể chỉ đang",
       "choices": [
         "Learning capture artefacts such as address ranges, timing and header defaults that separate the two sources, rather than attack behaviour",
-        "Overfitting the number of packets per flow",
-        "Limited by label noise in the benign class",
-        "Underfitting because the classes are imbalanced"
+        "Overfitting the number of packets per flow, since that is the one feature which distinguishes an attack from ordinary use",
+        "Held back by label noise in the benign class, which is the reason the score could not climb any higher than it did",
+        "Underfitting because the two classes are imbalanced, so the model learned the majority class and little else"
       ],
       "answer": 0,
       "why": "Class and capture environment are confounded, so a trivial shortcut separates the labels perfectly and the score says nothing about attacks. The test is whether the model still works on benign and malicious traffic drawn from the same environment.",
@@ -1164,9 +1164,9 @@
       "q_vi": "Hai cảnh báo đều được công cụ xếp mức nghiêm trọng cao nhất. Việc quyết định xử lý cái nào trước chủ yếu nên cân nhắc",
       "choices": [
         "Whether the affected asset is genuinely reachable and what it holds, so exposure and impact set the order",
-        "Which alert carries the longer description",
-        "Which rule has fired more often in the past",
-        "Which alert arrived first"
+        "Which of the two alerts carries the longer description, since a more detailed rule was written with more care",
+        "Which rule has fired more often in the past, since a frequently firing rule covers the more common attack",
+        "Which alert arrived first, since working the queue in strict order keeps the reported handling time honest"
       ],
       "answer": 0,
       "why": "Tool severity describes the finding in the abstract, while priority is severity combined with your own exposure and asset value. A critical alert on an isolated test machine can wait behind a medium one on a payment service.",
@@ -1178,10 +1178,10 @@
       "q": "A noisy rule generates four hundred alerts a day, all benign so far. The responsible action is",
       "q_vi": "Một luật ồn ào sinh ra bốn trăm cảnh báo mỗi ngày, tới nay đều lành tính. Cách xử lý có trách nhiệm là",
       "choices": [
-        "Route those alerts to a folder nobody reads",
-        "Raise its severity so analysts finally pay attention",
+        "Route those alerts into a separate folder that nobody reads, so the main queue stays at a workable length",
+        "Raise its severity so that analysts finally pay attention to the four hundred alerts it produces each day",
         "Understand which benign activity triggers it and narrow the condition, while keeping the malicious case detectable",
-        "Disable the rule and move on"
+        "Disable the rule and move on, since four hundred benign alerts prove the technique is not in use here"
       ],
       "answer": 2,
       "why": "Both disabling and quietly redirecting the alerts create a blind spot that nobody records, which is worse than the noise because it looks like coverage. Tuning keeps the detection while removing the known benign cause.",
@@ -1193,10 +1193,10 @@
       "q": "Endpoint detection and response adds to classic antivirus mainly",
       "q_vi": "So với phần mềm diệt vi rút cổ điển, phát hiện và ứng phó trên điểm cuối bổ sung chủ yếu là",
       "choices": [
-        "A larger signature database",
+        "A much larger signature database, refreshed more often, so that more known malicious files are recognised",
         "Behavioural telemetry plus the ability to investigate and contain a host afterwards, not only to block a known file",
-        "Faster file scanning",
-        "Protection for network devices"
+        "Faster scanning of files on disk, so a full sweep of the endpoint finishes inside the maintenance window",
+        "Protection for network devices such as switches and routers, which classic antivirus cannot be installed on"
       ],
       "answer": 1,
       "why": "The shift is from a verdict on a file to a recorded history of process, file and network activity you can query after the fact. That history is what lets responders answer what else did it touch.",
@@ -1209,9 +1209,9 @@
       "q_vi": "Bằng chứng thuyết phục nhất cho thấy một phép phát hiện thực sự chạy được là",
       "choices": [
         "Someone executed the technique in your own environment and the expected alert fired end to end",
-        "The rule has never produced a false positive",
-        "The rule was written by an experienced analyst",
-        "The vendor lists the technique in its coverage matrix"
+        "The rule has not produced a single false positive since the day it was first deployed",
+        "The rule was written by an experienced analyst who has handled this technique in the field before",
+        "The vendor lists the technique in the coverage matrix published with the product"
       ],
       "answer": 0,
       "why": "Only an executed test exercises the whole path, from telemetry being collected to the alert reaching a human. A rule with no false positives is at least as likely to be broken as to be precise.",
@@ -1223,9 +1223,9 @@
       "q": "During an active intrusion, wiping and rebuilding the first compromised host immediately can be harmful because",
       "q_vi": "Trong lúc vụ xâm nhập còn đang diễn ra, việc xoá sạch và dựng lại ngay máy đầu tiên bị chiếm có thể gây hại vì",
       "choices": [
-        "The software licence key would be lost",
-        "The attacker would be alerted by the reboot",
-        "Rebuilding takes too long",
+        "The software licence key would be lost together with the whole installation",
+        "The attacker would be alerted by the reboot and would change their tooling",
+        "Rebuilding takes far longer than the incident deadline usually allows for",
         "It destroys the evidence needed to find the attacker's other footholds"
       ],
       "answer": 3,
@@ -1238,9 +1238,9 @@
       "q": "Central log collection helps detection mostly because",
       "q_vi": "Việc thu nhật ký tập trung giúp cho khâu phát hiện chủ yếu vì",
       "choices": [
-        "It removes the need for endpoint agents",
-        "It compresses logs and saves disk space",
-        "It encrypts the logs at rest",
+        "It removes the need for endpoint agents, since the collector reads each machine's disk over the network itself",
+        "It compresses the logs and saves disk space, which is the only reason that a long retention period is affordable",
+        "It encrypts the logs at rest, so that an intruder who reaches the collector still cannot read what was recorded there",
         "It lets an event on one system be correlated with events on others, and keeps a copy the attacker cannot edit"
       ],
       "answer": 3,
@@ -1254,9 +1254,9 @@
       "q_vi": "Một buổi diễn tập trên bàn kết thúc mà cả nhóm không nói được ai có quyền ngắt kết nối một hệ thống đang chạy thật. Giá trị của buổi diễn tập đó là",
       "choices": [
         "It exposed a decision gap that would have cost hours during a real incident, which is exactly what such exercises are for",
-        "It proved that the backups work",
-        "It measured the mean time to detect",
-        "Nothing, since no real incident took place"
+        "It proved that the backups work, since restoring a system was part of the scenario the team walked through",
+        "It measured the mean time to detect, because the scenario timed how long the team needed to spot the intrusion",
+        "Nothing, since no real incident took place and no system was actually disconnected during the discussion"
       ],
       "answer": 0,
       "why": "Technical readiness fails most often at an authority question, not at a tooling question. Finding that gap in a meeting room costs a morning, finding it at three in the morning costs the outage.",
@@ -1268,10 +1268,10 @@
       "q": "The difference between data poisoning and an evasion attack is",
       "q_vi": "Khác biệt giữa đầu độc dữ liệu và tấn công né tránh là",
       "choices": [
-        "Evasion requires access to the training set",
+        "Evasion requires access to the training set, whereas poisoning only needs one crafted input at inference time",
         "Poisoning corrupts the model during training, evasion crafts inputs at inference time against a model that is already fixed",
-        "Poisoning applies only to images and evasion only to text",
-        "Poisoning is always caught by a validation set"
+        "Poisoning applies only to image models and evasion only to text models, because of how the features are built",
+        "Poisoning is always caught by a validation set, since corrupted samples lower the score on held out data"
       ],
       "answer": 1,
       "why": "The two differ in when the attacker acts and therefore in which defences apply, data provenance for one and input hardening for the other. A validation set drawn from the same poisoned pool will not reveal anything.",
@@ -1283,10 +1283,10 @@
       "q": "A supplier delivers a model that scores exactly as promised on your held out test set. This does not rule out a backdoor because",
       "q_vi": "Một nhà cung cấp giao mô hình đạt đúng điểm đã hứa trên tập kiểm tra riêng của bạn. Điều đó chưa loại trừ được cửa hậu vì",
       "choices": [
-        "Test sets are usually too small",
-        "Accuracy metrics are unreliable in general",
+        "Held out test sets are usually too small to estimate accuracy inside the margin that a backdoor would shift",
+        "Accuracy metrics are unreliable in general, so any score reported by a supplier should be treated as noise",
         "A backdoor is designed to leave normal behaviour intact and to activate only on a trigger your test set does not contain",
-        "Backdoors change the size of the model file"
+        "A backdoor changes the size of the model file, and the supplier's file matched the size that was agreed"
       ],
       "answer": 2,
       "why": "The clean score and the backdoor are engineered to coexist, so a passing test is exactly what a successful backdoor looks like. Finding one needs trigger search, activation analysis or provenance over the training pipeline.",
@@ -1299,9 +1299,9 @@
       "q_vi": "Một giao diện dự đoán công khai trả về đầy đủ vector độ tin cậy cho mọi truy vấn. So với chỉ trả về nhãn cao nhất, rủi ro tăng thêm là",
       "choices": [
         "The richer output per query makes extracting a working copy of the model, and inferring training set membership, substantially cheaper",
-        "The model becomes less accurate",
-        "Higher bandwidth cost",
-        "Clients can no longer cache results"
+        "The model becomes measurably less accurate, because normalising the full confidence vector costs numerical precision on the top label itself",
+        "A higher bandwidth cost on every call, which lets an attacker push the interface past its monthly quota",
+        "Clients can no longer cache results, since a confidence vector changes slightly between identical queries"
       ],
       "answer": 0,
       "why": "Confidence values carry information about the decision surface, so each query teaches the attacker more and fewer queries are needed. Both extraction and membership inference get easier at once.",
@@ -1313,10 +1313,10 @@
       "q": "Membership inference works better against a model that",
       "q_vi": "Suy luận thành viên hiệu quả hơn khi nhắm vào mô hình mà",
       "choices": [
-        "Was trained purely on public data",
+        "Was trained purely on public data, which the attacker is able to download and compare the outputs against",
         "Memorised its training set, so confidence on training samples is visibly higher than on unseen ones",
-        "Uses a smaller number of parameters",
-        "Was trained with differential privacy"
+        "Uses a smaller number of parameters, since a compact model states each of its decisions more sharply",
+        "Was trained with differential privacy, because the added noise makes the output scores easier to read"
       ],
       "answer": 1,
       "why": "The attack reads the gap between behaviour on seen and unseen data, and that gap is what overfitting creates. Regularisation and differential privacy both shrink it, at some cost in accuracy.",
@@ -1328,10 +1328,10 @@
       "q": "After adversarial training, clean accuracy fell from 94% to 88% while accuracy under attack rose from 3% to 52%. The honest reading is",
       "q_vi": "Sau khi huấn luyện đối kháng, độ chính xác trên dữ liệu sạch giảm từ 94% xuống 88% còn độ chính xác khi bị tấn công tăng từ 3% lên 52%. Cách đọc trung thực là",
       "choices": [
-        "The training failed, because clean accuracy dropped",
+        "The training failed, because clean accuracy dropped and clean inputs are what the system will mostly see",
         "A real trade was made, and whether it is worth taking depends on whether this deployment actually faces an adversary",
-        "The model is now fully robust",
-        "The clean accuracy drop proves the attack used was too weak"
+        "The model is now fully robust, since the accuracy under attack rose by more than an order of magnitude",
+        "The clean accuracy drop proves the attack used during training was too weak to teach anything useful"
       ],
       "answer": 1,
       "why": "Both numbers moved and both matter, so the decision is a deployment decision rather than a modelling one. Calling 52% robust is also wrong, since roughly half the attacked inputs still succeed.",
@@ -1343,9 +1343,9 @@
       "q": "A defence reports 90% accuracy against a standard gradient based attack. Before believing it, the first thing to check is",
       "q_vi": "Một cơ chế phòng thủ báo đạt 90% độ chính xác trước một đòn tấn công dựa trên gradient theo chuẩn thông thường. Trước khi tin con số đó, việc đầu tiên phải kiểm là",
       "choices": [
-        "Whether the number is averaged over several seeds",
-        "Whether training used more epochs than the baseline",
-        "Whether the test set has more than ten thousand samples",
+        "Whether the number was averaged over several random seeds, since a single favourable run can easily overstate what the method achieves",
+        "Whether the training run used more epochs than the baseline it is compared against, which would explain the whole gap without any new defensive mechanism being involved",
+        "Whether the test set holds more than ten thousand samples, because a small evaluation set makes the reported percentage unstable",
         "Whether the defence merely obscures gradients, which is tested by attacking it with methods that do not use gradients and with the defence fully known to the attacker"
       ],
       "answer": 3,
@@ -1358,9 +1358,9 @@
       "q": "A paper claims 70% robust accuracy and gives no further detail. The claim is not interpretable because",
       "q_vi": "Một bài báo khẳng định đạt 70% độ chính xác bền vững mà không nói gì thêm. Khẳng định đó không diễn giải được vì",
       "choices": [
-        "Robust accuracy can never exceed clean accuracy",
-        "Robustness must always be reported as a curve",
-        "The dataset was probably not public",
+        "Robust accuracy can never exceed the clean accuracy, so the figure reported must be a mistake",
+        "Robustness has to be reported as a curve, because a single point is never a valid summary",
+        "The dataset was probably not public, so nobody else is able to reproduce the experiment",
         "No perturbation norm, no perturbation budget and no assumption about attacker knowledge were stated"
       ],
       "answer": 3,
@@ -1373,9 +1373,9 @@
       "q": "An assistant with tool access summarises a web page that contains a sentence telling it to ignore its instructions and send a file elsewhere. The structural fix is",
       "q_vi": "Một trợ lý có quyền dùng công cụ tóm tắt một trang web, trong trang đó có câu bảo nó bỏ qua chỉ dẫn cũ và gửi tệp đi nơi khác. Cách sửa mang tính cấu trúc là",
       "choices": [
-        "Using a larger model",
-        "Filtering that particular phrase out of retrieved content",
-        "Instructing the model in its system prompt never to obey web pages",
+        "Using a larger model, since a stronger system follows its original instructions more reliably under pressure",
+        "Filtering that particular phrase out of retrieved content before the page reaches the model's context window",
+        "Instructing the model in its system prompt never to obey instructions that appear inside a fetched web page",
         "Treating retrieved content as data with no authority, and gating every tool action through a policy enforced outside the model"
       ],
       "answer": 3,
@@ -1388,10 +1388,10 @@
       "q": "Loading a third party model checkpoint in a format that can execute code while being loaded is risky because",
       "q_vi": "Nạp một tệp trọng số mô hình của bên thứ ba ở định dạng có thể thực thi mã ngay trong lúc nạp là rủi ro vì",
       "choices": [
-        "The format cannot store metadata",
-        "The checkpoint may not fit in memory",
+        "The format cannot store metadata about the architecture, so the weights may end up mapped onto the wrong layers while the file is being loaded",
+        "The checkpoint may not fit into memory, and a partial load leaves the process in a state that an attacker can steer",
         "The load step runs attacker chosen code before any inference happens, so the model itself does not have to be malicious for the file to be",
-        "The weights may have been quantised incorrectly"
+        "The weights may have been quantised incorrectly, which silently degrades accuracy on exactly the inputs that matter"
       ],
       "answer": 2,
       "why": "This is the machine learning version of insecure deserialization, and it lands on a machine that usually holds credentials and data. The mitigation is a format that stores tensors only, plus checksums and provenance on the artefact.",
@@ -1403,10 +1403,10 @@
       "q": "A CVE identifier and a CVSS score differ in that",
       "q_vi": "Mã định danh CVE và điểm CVSS khác nhau ở chỗ",
       "choices": [
-        "Both are assigned only by the affected vendor",
+        "Both of them are assigned only by the affected vendor, which decides on the name and the number together",
         "The identifier names one specific flaw, while the score rates how severe that flaw is in the abstract",
-        "The identifier rates severity and the score names the flaw",
-        "The score is unique per flaw while the identifier is not"
+        "The identifier rates the severity while the score is the name under which the flaw has been catalogued",
+        "The score is unique to each flaw, while one identifier may be reused for several unrelated flaws at once"
       ],
       "answer": 1,
       "why": "One is a name, the other is a rating, and confusing them leads teams to treat a score as if it described their own environment. The score can also be recomputed with local context, the identifier never changes.",
@@ -1419,9 +1419,9 @@
       "q_vi": "Hai phát hiện trên hệ thống của bạn được chấm 9,8 và 6,5. Vá cái 6,5 trước có thể là quyết định đúng khi",
       "choices": [
         "The 9.8 affects a host with no network path from any untrusted network, while the 6.5 sits on an internet facing service with a public exploit",
-        "The 9.8 was published more recently",
-        "The 6.5 has a longer description",
-        "No fix has been released yet for the 6.5"
+        "The 9.8 was published only recently, so the vendor advisory for it is still being revised and the fix that was published may still change again",
+        "The 6.5 carries a longer and far more detailed description, which means more is understood about how it can be exploited",
+        "No fix has been released yet for the 6.5, so the remediation work has to start before the vendor publishes anything"
       ],
       "answer": 0,
       "why": "The score describes the flaw, risk describes the flaw in your context, and reachability plus exploit availability usually dominate. Ordering purely by score routinely puts effort where an attacker cannot go.",
@@ -1433,9 +1433,9 @@
       "q": "A vendor publishes a fix together with a detailed advisory. Exploitation attempts often rise sharply in the following days because",
       "q_vi": "Một nhà cung cấp công bố bản vá kèm thông báo chi tiết. Số lượt khai thác thường tăng vọt trong những ngày sau đó vì",
       "choices": [
-        "Scanners stop working once a patch is released",
-        "The vulnerability becomes more severe after publication",
-        "Vendors deliberately delay releasing the fix",
+        "Scanners stop working once a patch has been released, so the attempts were there all along but were simply unseen",
+        "The vulnerability becomes more severe after publication, because the score is recalculated upwards once it is known",
+        "Vendors deliberately delay the fix, which leaves a window that attackers have learned to expect and to watch for",
         "The advisory and the patch difference together tell attackers exactly where the flaw is and how to reach it"
       ],
       "answer": 3,
@@ -1449,9 +1449,9 @@
       "q_vi": "Một bản vá nghiêm trọng chưa cài được trong hai tuần vì đang trong kỳ đóng băng thay đổi. Bước tạm thời đúng đắn là",
       "choices": [
         "Restricting network access to the affected service and adding targeted detection for exploitation attempts",
-        "Lowering the recorded severity so the item fits the freeze policy",
-        "Removing the system from the asset inventory",
-        "Accepting the risk quietly until the freeze ends"
+        "Lowering the recorded severity of the finding, so that the item fits inside the change freeze policy as written",
+        "Removing the system from the asset inventory until the freeze has ended and the patch can finally be applied",
+        "Accepting the risk quietly and coming back to the finding only once the change freeze has finally been lifted"
       ],
       "answer": 0,
       "why": "Compensating controls reduce reachability and raise the chance of noticing an attempt, which is exactly what the missing patch was buying. The other options change the paperwork rather than the exposure.",
@@ -1463,10 +1463,10 @@
       "q": "Coordinated disclosure means",
       "q_vi": "Tiết lộ có trách nhiệm nghĩa là",
       "choices": [
-        "Never publishing anything about the flaw",
+        "Never publishing anything about the flaw, so that attackers are not given a description they could work from",
         "Reporting privately to the vendor and agreeing a publication date that balances user safety against pressure to fix",
-        "Publishing full exploitation details immediately so users can react",
-        "Selling the finding to the highest bidder"
+        "Publishing full exploitation details immediately, so that users can judge the risk and react without waiting",
+        "Selling the finding to the highest bidder, on the basis that the market prices the severity correctly"
       ],
       "answer": 1,
       "why": "The deadline is the part that makes it work, since without it a vendor can leave users exposed indefinitely. Immediate full publication protects nobody who has not yet received a patch.",
@@ -1478,10 +1478,10 @@
       "q": "An organisation backs up nightly to a network share that every server mounts using domain credentials. Against ransomware this design is",
       "q_vi": "Một đơn vị sao lưu hằng đêm vào một thư mục chia sẻ mà mọi máy chủ đều gắn bằng tài khoản của miền. Trước mã độc tống tiền, thiết kế này là",
       "choices": [
-        "Adequate, because the backup is recent",
-        "Weak only if the backup is not compressed",
+        "Adequate, because the nightly backup is recent enough to keep any data loss inside one working day",
+        "Weak only if the backup files are not compressed, since compression is what breaks the encryption",
         "Weak, because the same credentials that encrypt the servers can also reach and destroy the backup",
-        "Adequate as long as the share sits on a different subnet"
+        "Adequate as long as the share sits on a different subnet from the servers that mount it each night"
       ],
       "answer": 2,
       "why": "Modern ransomware looks for backups first, so a copy reachable with the compromised credentials is part of the same failure domain. Immutability or an offline copy is what makes the backup survive.",
@@ -1495,8 +1495,8 @@
       "choices": [
         "A recovery point objective of 4 hours and a recovery time objective of 15 minutes",
         "A recovery point objective of 15 minutes and a recovery time objective of 4 hours",
-        "An availability target of 99.9%",
-        "A mean time to detect of 15 minutes"
+        "An availability target of 99.9%, measured across a rolling twelve month window",
+        "A mean time to detect of 15 minutes and a mean time to respond of 4 hours"
       ],
       "answer": 1,
       "why": "The recovery point objective is about data loss and drives backup frequency, the recovery time objective is about downtime and drives standby capacity. Swapping them leads to buying the wrong architecture entirely.",
@@ -1508,9 +1508,9 @@
       "q": "Backups have completed successfully every night for a year and no restore has ever been attempted. The correct statement is",
       "q_vi": "Các bản sao lưu chạy thành công mỗi đêm suốt một năm và chưa lần nào thử phục hồi. Phát biểu đúng là",
       "choices": [
-        "The backups are proven, since no job has reported an error",
-        "A restore test would only waste production capacity",
-        "Job success rate is the standard measure of recoverability",
+        "The backups are proven to work, because a whole year of nightly jobs has passed without a single one of them reporting an error of any kind",
+        "A restore test would only waste production capacity, which is exactly why the job status is monitored instead",
+        "The job success rate is the standard measure of recoverability, and a year at one hundred percent is strong",
         "What has been verified is that a job finished, not that the data is usable, and that gap gets discovered during the worst possible week"
       ],
       "answer": 3,
@@ -1523,9 +1523,9 @@
       "q": "A risk register lists a scenario as low likelihood with catastrophic impact. Treating it as low priority just because it is unlikely ignores that",
       "q_vi": "Sổ rủi ro ghi một kịch bản là khả năng xảy ra thấp nhưng tác động thảm khốc. Xếp nó vào ưu tiên thấp chỉ vì ít khả năng xảy ra là bỏ qua việc",
       "choices": [
-        "Likelihood estimates are always wrong",
-        "Risk registers should only track high likelihood items",
-        "Impact is easier to measure than likelihood",
+        "Likelihood estimates are always wrong, so the only defensible ranking is the one built on impact alone",
+        "Risk registers should track high likelihood items only, since rare events cannot be planned for usefully",
+        "Impact is easier to measure than likelihood, which makes any ranking that uses probability unreliable",
         "Expected loss combines both factors, so a catastrophic outcome can dominate the register even at low probability"
       ],
       "answer": 3,
@@ -1538,10 +1538,10 @@
       "q": "An organisation passed its audit and was breached three weeks later. The most useful lesson is",
       "q_vi": "Một đơn vị vừa vượt qua kỳ đánh giá thì ba tuần sau bị xâm nhập. Bài học hữu ích nhất là",
       "choices": [
-        "The breach must have used a zero-day",
-        "The auditor was incompetent",
+        "The breach must have used a zero-day, since every control in scope had just been tested and found to be sound",
+        "The auditor was incompetent, because a competent auditor would certainly have found the weakness that the attacker used",
         "An audit samples stated controls at one point in time, while an adversary probes the whole estate continuously",
-        "Certification schemes carry no value at all"
+        "Certification schemes carry no value at all, since passing one clearly did not prevent this intrusion from happening"
       ],
       "answer": 2,
       "why": "The two activities answer different questions, one about documented conformance and one about actual resistance. Concluding that certification is worthless is the opposite overcorrection, since the baseline still removes common failures.",
@@ -1553,9 +1553,9 @@
       "q": "Cyber insurance within a security programme is",
       "q_vi": "Bảo hiểm an ninh mạng trong một chương trình an ninh là",
       "choices": [
-        "A control that reduces the chance of a breach",
-        "A replacement for backups",
-        "A substitute for incident response planning",
+        "A control that reduces the chance of a breach, because the insurer monitors the estate that it covers",
+        "A replacement for backups, since the payout covers the full cost of rebuilding the data that was lost",
+        "A substitute for incident response planning, because the insurer supplies the responders when needed",
         "A way to transfer part of the financial loss, which does not lower the likelihood of an incident"
       ],
       "answer": 3,
@@ -1568,10 +1568,10 @@
       "q": "A phishing simulation reports that the click rate fell from 12% to 4% after training. Before calling the programme a success, you should ask",
       "q_vi": "Một đợt mô phỏng lừa đảo báo tỉ lệ bấm vào đường liên kết giảm từ 12% xuống 4% sau khi đào tạo. Trước khi kết luận chương trình thành công, cần hỏi",
       "choices": [
-        "Whether the click rate was measured during business hours",
+        "Whether the click rate in both campaigns was measured during business hours, since a message that lands overnight is opened later in the day and by a different part of the workforce entirely",
         "Whether the two campaigns were of comparable difficulty, and whether the reporting rate and time to report improved, since one convincing message reaching one person is still enough",
-        "Whether the mail gateway was disabled during the test",
-        "Whether the training was delivered in person"
+        "Whether the click rate is now below the industry average of five percent, since benchmarking against peer organisations is what shows the training worked",
+        "Whether the training was delivered in person rather than online, since attendance is much easier to confirm when people sit in a room together"
       ],
       "answer": 1,
       "why": "An easier second campaign produces the same drop with no learning, so the comparison is only meaningful at matched difficulty. Click rate also cannot reach zero, which is why the operationally useful measure is how fast someone reports the message.",

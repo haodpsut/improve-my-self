@@ -8,10 +8,10 @@
       "q": "Why does a geostationary link feel unusable for interactive gaming while a LEO link does not?",
       "q_vi": "Vì sao tuyến địa tĩnh gần như không dùng được cho chơi game tương tác còn tuyến LEO thì được?",
       "choices": [
-        "Geostationary satellites cannot use beamforming",
+        "Geostationary payloads cannot form spot beams, so every user shares a single wide beam and has to wait for its own scheduling slot",
         "The one way propagation delay at 35 786 km is around 120 ms, so the round trip approaches a quarter of a second",
-        "LEO satellites transmit at higher power",
-        "Geostationary satellites have less bandwidth"
+        "LEO satellites transmit at far higher power, and the stronger carrier lets the receiver decode each frame in less time",
+        "A geostationary transponder carries much less bandwidth, so interactive packets queue behind bulk traffic before sending"
       ],
       "answer": 1,
       "why": "The distance alone fixes the delay, and no amount of bandwidth or power removes it. LEO wins here purely because it is about forty times closer.",
@@ -24,9 +24,9 @@
       "q_vi": "Hệ quả kỹ thuật chính của tốc độ quỹ đạo cao ở vệ tinh LEO là",
       "choices": [
         "Frequent handovers and a large Doppler shift to compensate",
-        "A permanently fixed footprint",
-        "Inability to carry optical payloads",
-        "Higher path loss than geostationary orbit"
+        "A footprint that remains fixed over a single service region",
+        "An inability to host optical inter satellite terminals",
+        "Path loss that is higher than in geostationary orbit"
       ],
       "answer": 0,
       "why": "Visibility lasts only minutes, so sessions must be handed over constantly, and the fast relative motion shifts the carrier frequency enough to break lock if uncompensated.",
@@ -38,9 +38,9 @@
       "q": "Inter-satellite links change the architecture because they allow",
       "q_vi": "Liên kết liên vệ tinh thay đổi kiến trúc vì cho phép",
       "choices": [
-        "Higher transmit power on the downlink",
-        "Elimination of the need for orbital station keeping",
-        "Direct connection to geostationary orbit only",
+        "Raising the downlink transmit power, because the relay amplifier is shared across hops",
+        "Removing the need for station keeping, because neighbours hold formation by radio ranging",
+        "Connecting only upward to geostationary relays, which then feed the traffic to the terrestrial core",
         "Routing traffic through space without returning to a ground gateway at every hop"
       ],
       "answer": 3,
@@ -53,9 +53,9 @@
       "q": "Routing in a LEO constellation is harder than in a terrestrial network mainly because",
       "q_vi": "Định tuyến trong chòm LEO khó hơn mạng mặt đất chủ yếu vì",
       "choices": [
-        "There is no addressing scheme in space",
-        "Satellites have no routing tables",
-        "Packets cannot be buffered in orbit",
+        "No standard addressing scheme exists on board, so every packet has to be tunnelled",
+        "Satellites carry no routing tables and must ask a gateway for each decision",
+        "Packets cannot be buffered on board, so any congestion forces an immediate drop",
         "The topology changes continuously and predictably with orbital motion"
       ],
       "answer": 3,
@@ -68,10 +68,10 @@
       "q": "In a link budget, closing the link with a 3 dB margin means",
       "q_vi": "Trong bài toán cân bằng công suất tuyến, tuyến thông với dự trữ 3 dB nghĩa là",
       "choices": [
-        "The antenna gain is 3 dB",
-        "The link fails half the time",
+        "The receive antenna of the terminal contributes exactly 3 dB of gain to the budget",
+        "The link is expected to fail during half of the available time",
         "The received power exceeds the required threshold by a factor of about two",
-        "The noise figure is 3 dB"
+        "The noise figure of the receiver chain has been fixed at 3 dB"
       ],
       "answer": 2,
       "why": "Three decibels is roughly a factor of two in power. The margin is what absorbs rain fade, pointing error and ageing.",
@@ -83,10 +83,10 @@
       "q": "Low elevation angles degrade a satellite link because",
       "q_vi": "Góc ngẩng thấp làm xấu tuyến vệ tinh vì",
       "choices": [
-        "The satellite reduces its transmit power at low elevation",
+        "The satellite throttles its transmit power near the horizon to protect its thermal budget",
         "The signal traverses a longer slant path through the atmosphere and meets more obstruction",
-        "The Doppler shift disappears",
-        "The frequency band changes automatically"
+        "The Doppler shift vanishes near the horizon, leaving the tracking loop without a reference to lock onto",
+        "The terminal is forced to hop into a lower frequency band where far less bandwidth has been allocated"
       ],
       "answer": 1,
       "why": "A shallow angle means more kilometres of atmosphere and a much higher chance that terrain or buildings sit in the way.",
@@ -98,10 +98,10 @@
       "q": "In SAGIN, what distinguishes the HAPS layer from the satellite layer?",
       "q_vi": "Trong SAGIN, điều gì phân biệt tầng HAPS với tầng vệ tinh?",
       "choices": [
-        "HAPS operates above geostationary orbit",
+        "HAPS flies above geostationary orbit, so a single platform sees an entire hemisphere at once",
         "HAPS operates in the stratosphere at 20 to 50 km and can be repositioned or recovered",
-        "HAPS is purely a ground based concept",
-        "HAPS cannot relay communications"
+        "HAPS is a ground based mast concept, so it only extends the reach of the existing terrestrial cells",
+        "HAPS carries sensing payloads only and cannot relay communications traffic at all"
       ],
       "answer": 1,
       "why": "The altitude gives much lower delay than any orbit and the platform can be moved or landed, which no satellite can do.",
@@ -113,10 +113,10 @@
       "q": "Satellite quantum key distribution is attractive mainly because",
       "q_vi": "Phân phối khoá lượng tử qua vệ tinh hấp dẫn chủ yếu vì",
       "choices": [
-        "Satellites can amplify quantum states without disturbing them",
+        "Onboard quantum repeaters amplify the photon stream without disturbing the encoded state",
         "Free-space loss over vacuum grows far more slowly than fibre attenuation over long distances",
-        "Orbital links are immune to weather",
-        "Photons travel faster in orbit"
+        "Optical downlinks from orbit are immune to cloud and turbulence, unlike buried fibre spans",
+        "Entangled photons travel faster than light once outside the atmosphere, cutting the exchange delay"
       ],
       "answer": 1,
       "why": "Fibre loss is exponential in length, which caps terrestrial links at a few hundred kilometres. Vacuum is the only cheap way to cover thousands. Note that no-cloning forbids amplifying quantum states at all.",
@@ -129,9 +129,9 @@
       "q_vi": "Bộ phát đáp kiểu ống cong khác tải trọng tái sinh ở chỗ nó",
       "choices": [
         "Amplifies and retransmits without decoding the signal, so noise is forwarded too",
-        "Requires an inter-satellite link to work",
-        "Cannot change the carrier frequency",
-        "Decodes and re-encodes every packet in orbit"
+        "Requires an inter-satellite link, since the signal must be relayed twice before it lands",
+        "Cannot translate the carrier frequency, so uplink and downlink have to share one band",
+        "Decodes and re-encodes every packet on board, which strips off the noise it received"
       ],
       "answer": 0,
       "why": "Bent-pipe is simple and transparent to waveform changes, but it relays the noise it receives. Regenerative payloads clean the signal at the cost of onboard complexity.",
@@ -144,9 +144,9 @@
       "q_vi": "Vị trí trạm cổng quan trọng trong hệ LEO vì trạm cổng",
       "choices": [
         "Are where traffic leaves the constellation for the terrestrial internet, so they concentrate load",
-        "Control the orbital altitude of the satellites",
-        "Determine the modulation scheme",
-        "Are the only source of onboard power"
+        "Command the orbital altitude of each satellite, so their spacing is what sets the whole constellation geometry",
+        "Fix the modulation and coding for the entire constellation, which caps the achievable spectral efficiency",
+        "Beam up the only power the satellites receive, so a gateway outage slowly drains the onboard batteries"
       ],
       "answer": 0,
       "why": "Every user flow eventually needs the ground network. Too few gateways, or badly placed ones, create a bottleneck no amount of orbital capacity fixes.",
@@ -158,10 +158,10 @@
       "q": "Two satellites are in circular orbits, one at five hundred fifty kilometres and one at twelve hundred kilometres. What can you say immediately about their periods?",
       "q_vi": "Hai vệ tinh bay quỹ đạo tròn, một cái ở 550 km và một cái ở 1200 km. Có thể kết luận ngay điều gì về chu kỳ của chúng?",
       "choices": [
-        "Nothing can be said, because the period also depends on the satellite mass",
-        "The higher one has the shorter period, because it must travel faster",
+        "Nothing can be said, because the orbital period also depends on the mass of the satellite",
+        "The higher one has the shorter period, because it must travel faster to stay in orbit",
         "The higher one has the longer period, because the period grows with the semi major axis",
-        "They have the same period, because both are in low Earth orbit"
+        "They have the same period, since every low orbit closes in ninety minutes"
       ],
       "answer": 2,
       "why": "Kepler's third law ties the period to the semi major axis alone, and the mass of the satellite cancels out. A higher orbit means a slower speed over a longer path, so the period grows twice over.",
@@ -173,9 +173,9 @@
       "q": "A constellation is built with every plane inclined at fifty three degrees. Which statement about its coverage is correct?",
       "q_vi": "Một chòm vệ tinh được dựng với mọi mặt phẳng nghiêng 53 độ. Phát biểu nào về vùng phủ của nó là đúng?",
       "choices": [
-        "Coverage is uniform from the equator all the way to the poles",
-        "The poles get the best coverage, because the planes converge there",
-        "Inclination sets the orbital period, not the latitude coverage",
+        "Coverage is uniform from the equator all the way to the poles, because each of the inclined planes sweeps through every latitude once per revolution as the Earth turns beneath it",
+        "The poles get the best coverage, because the fifty three degree planes converge above the caps and pile several satellites into one window",
+        "Inclination sets only the orbital period and the ground track spacing, so latitude coverage is decided by altitude and the elevation mask",
         "No satellite ever passes over a latitude higher than fifty three degrees, so high latitude service depends on low elevation passes and fails entirely near the poles"
       ],
       "answer": 3,
@@ -189,9 +189,9 @@
       "q_vi": "Vì sao quỹ đạo đồng bộ mặt trời ở các độ cao thấp thông dụng bắt buộc phải có độ nghiêng lớn hơn 90 độ?",
       "choices": [
         "The node must drift eastward by about one degree per day, and only a retrograde inclination makes the J2 precession go in that direction",
-        "Only a retrograde orbit escapes atmospheric drag",
-        "The Sun moves retrograde relative to the Earth, so the orbit must match it",
-        "Retrograde orbits are cheaper to reach from most launch sites"
+        "Only a retrograde orbit flies against the rotating upper atmosphere, and that extra drag is what holds the plane fixed on the Sun",
+        "The apparent motion of the Sun is retrograde relative to the spin of the Earth, so the plane has to be tilted past ninety degrees",
+        "Retrograde orbits are cheaper to reach from most launch sites, so operators choose them and simply accept the local time drift"
       ],
       "answer": 0,
       "why": "J2 makes the node regress westward for prograde orbits and advance eastward for retrograde ones. Matching the mean motion of the Sun needs eastward drift, hence inclination above ninety degrees. Retrograde launches are in fact more expensive, not cheaper.",
@@ -203,9 +203,9 @@
       "q": "On a geostationary satellite, which station keeping task consumes the most propellant over the mission?",
       "q_vi": "Trên vệ tinh địa tĩnh, nhiệm vụ giữ vị trí nào tiêu tốn nhiều nhiên liệu nhất trong cả vòng đời?",
       "choices": [
-        "Attitude control, because the reaction wheels need constant desaturation",
-        "East west control, because the satellite drifts quickly in longitude",
-        "Drag make up burns, because the residual atmosphere is still significant there",
+        "Attitude control, because the reaction wheels have to be desaturated several times every day",
+        "East west control, because the triaxial shape of the Earth drags the satellite quickly in longitude",
+        "Drag make up burns, because the residual atmosphere still bites at thirty six thousand kilometres",
         "North south control, because lunar and solar attraction keeps tilting the orbital plane"
       ],
       "answer": 3,
@@ -218,10 +218,10 @@
       "q": "A geostationary satellite appears motionless because its orbital period equals",
       "q_vi": "Vệ tinh địa tĩnh trông như đứng yên vì chu kỳ quỹ đạo của nó bằng",
       "choices": [
-        "Exactly twenty four hours of mean solar time",
-        "Half of a solar day",
+        "Exactly twenty four hours of mean solar time, the interval between two successive local noons",
+        "Half of a solar day, so the satellite turns twice while the Earth turns once beneath it",
         "One sidereal day, the time the Earth needs to rotate once relative to the stars",
-        "The orbital period of the Moon around the Earth"
+        "The orbital period of the Moon, which is why the two bodies stay locked to each other"
       ],
       "answer": 2,
       "why": "The Earth turns once relative to the stars in twenty three hours fifty six minutes and four seconds. Using a full solar day would leave a slow but steady drift in longitude.",
@@ -234,9 +234,9 @@
       "q_vi": "Trong chòm Walker star, vì sao liên kết vượt đường ráp thường không được duy trì?",
       "choices": [
         "The two planes there travel in opposite directions, so the relative velocity and the required pointing rate are roughly twice as large as anywhere else",
-        "The seam always lies over the ocean, where there is no traffic to carry",
-        "Regulation forbids transmitting across the one hundred eightieth meridian",
-        "Satellites on the two sides of the seam are assigned different frequency bands"
+        "The seam always falls over open ocean where there is no traffic at all worth carrying, so operators leave those terminals switched off in order to save the onboard power budget",
+        "Radio regulation forbids a transmission from crossing the one hundred eightieth meridian, so the constellation has to break the ring exactly at that longitude",
+        "Satellites on the two sides of the seam are given different frequency bands, so their terminals can never acquire each other even when the range between them is short"
       ],
       "answer": 0,
       "why": "The seam is where ascending and descending planes meet, so closing speeds approach twice the orbital speed and the pointing mechanism cannot follow. The seam is a geometric feature and has nothing to do with the date line as a legal boundary.",
@@ -248,10 +248,10 @@
       "q": "Which inter satellite link is easiest to keep permanently closed, and why?",
       "q_vi": "Liên kết liên vệ tinh nào dễ duy trì liên tục nhất, và vì sao?",
       "choices": [
-        "All three behave the same once the terminals have acquired each other",
+        "All three behave the same once the terminals have acquired each other, because the tracking loop is closed anyway",
         "The intra plane link, because neighbours in the same plane keep an almost constant range and bearing",
-        "The inter plane link, because it is always the shortest of the three",
-        "The cross seam link, because both satellites move at the same speed"
+        "The inter plane link, because neighbouring planes hold a constant separation in longitude",
+        "The cross seam link, because both satellites move at the same speed and so cancel the Doppler"
       ],
       "answer": 1,
       "why": "Satellites in one plane share the same orbit, so their relative geometry barely changes. Inter plane range varies strongly with latitude, and at the seam the two satellites move at the same speed but in opposite directions, which is the worst case rather than the easiest.",
@@ -263,10 +263,10 @@
       "q": "Measurements of a LEO mesh show that inter plane links break repeatedly at high latitude. What is the most likely cause?",
       "q_vi": "Đo đạc trên một lưới LEO cho thấy các liên kết giữa các mặt phẳng liên tục đứt ở vĩ độ cao. Nguyên nhân khả dĩ nhất là gì?",
       "choices": [
-        "The ionosphere absorbs the inter satellite signal at high latitude",
-        "Rain attenuation is stronger over polar regions",
+        "The auroral ionosphere absorbs the inter satellite beam at high latitude, and the loss grows steeply with the level of geomagnetic activity overhead",
+        "Rain attenuation is far stronger over the polar regions, so the fade margin on those inter satellite links is the first to be exhausted",
         "The planes converge as they approach the poles, so the relative angular rate exceeds what the pointing mechanism can follow",
-        "The satellites switch off their transmitters over the poles to save power"
+        "The satellites switch their transmitters off over the poles to save power while the panels sit in eclipse"
       ],
       "answer": 2,
       "why": "Inter satellite links run above the atmosphere, so rain and the ionosphere are irrelevant to them. The pattern of failures follows latitude exactly because the geometry, not the propagation, is what changes there.",
@@ -278,10 +278,10 @@
       "q": "Raising the minimum elevation angle from ten to twenty five degrees in a LEO system has which combined effect?",
       "q_vi": "Nâng góc ngẩng tối thiểu từ 10 lên 25 độ trong hệ LEO gây ra tổ hợp hệ quả nào?",
       "choices": [
-        "Nothing changes except the cost of the terminal antenna",
-        "The orbital period shortens because the useful arc is smaller",
+        "Nothing changes except the cost of the terminal antenna, since the elevation mask is only a software setting in the modem",
+        "The orbital period shortens because the useful arc is smaller, so each satellite comes back around noticeably sooner",
         "Each pass becomes shorter and more satellites are needed for continuous service, but the link margin and the blockage situation both improve",
-        "Passes become longer and fewer satellites are needed"
+        "Each pass becomes longer and fewer satellites are needed, because a steeper geometry keeps the spacecraft in view for more of its orbit"
       ],
       "answer": 2,
       "why": "A higher elevation mask cuts the visible arc, so windows shrink and the constellation must be denser. What you buy is a shorter slant path, less atmosphere and far less blockage from terrain and buildings. The orbital period depends only on altitude and is untouched.",
@@ -293,9 +293,9 @@
       "q": "Revisit time over a given ground point measures",
       "q_vi": "Thời gian lặp lại trên một điểm mặt đất đo cái gì?",
       "choices": [
-        "The time needed to reconfigure the payload between two beams",
-        "How long the satellite stays above the horizon during one pass",
-        "The round trip delay of the link",
+        "The time the payload needs to steer and reconfigure a beam between two cells",
+        "How long the satellite stays above the elevation mask on a single pass",
+        "The round trip delay of the link, measured from the terminal to the gateway",
         "The gap between the end of one visibility window and the start of the next"
       ],
       "answer": 3,
@@ -308,9 +308,9 @@
       "q": "Successive ground tracks of a LEO satellite shift westward on each revolution. What dominates this effect?",
       "q_vi": "Vết dưới vệ tinh LEO lệch dần về phía tây sau mỗi vòng. Yếu tố nào chi phối hiện tượng này?",
       "choices": [
-        "Thrusters steer the satellite slightly westward on each revolution",
-        "Atmospheric drag pulls the satellite westward",
-        "J2 precession moves the plane westward by tens of degrees within one revolution",
+        "The thrusters nudge the satellite slightly westward on each revolution to keep the grid pattern even",
+        "Atmospheric drag pulls the satellite westward, because the upper air lags behind the surface",
+        "J2 precession swings the orbital plane westward by tens of degrees in one revolution",
         "The Earth rotates eastward beneath an orbital plane that stays nearly fixed in inertial space"
       ],
       "answer": 3,
@@ -324,9 +324,9 @@
       "q_vi": "Với vệ tinh ở độ cao 550 km, cự ly xiên ở góc ngẩng 10 độ so với cự ly khi vệ tinh ở thiên đỉnh thì thế nào?",
       "choices": [
         "It is more than three times larger, which adds roughly ten decibels of extra path loss",
-        "It is smaller, because a satellite near the horizon is closer to the observer",
-        "It is about ten per cent larger, which is negligible in the link budget",
-        "It is identical, because the orbital altitude does not change"
+        "It is smaller, because a satellite low on the horizon has come noticeably closer to the observer",
+        "It is about ten per cent larger, which is small enough to ignore in the link budget",
+        "It is identical, because the orbital altitude is fixed and sets the range on its own"
       ],
       "answer": 0,
       "why": "At ten degrees the slant range is around eighteen hundred kilometres against five hundred fifty at zenith, so the free space loss grows by about twenty times the logarithm of three, close to ten decibels. Altitude is fixed but the line of sight is not vertical, which is exactly why the range changes.",
@@ -339,9 +339,9 @@
       "q_vi": "Chuyển một tuyến từ băng Ku sang băng Ka với cùng ăng-ten và cùng cự ly thì suy hao không gian tự do thay đổi ra sao?",
       "choices": [
         "It increases, because free space loss grows with the square of the carrier frequency",
-        "It is unchanged, because free space loss depends only on distance",
-        "It increases only while it is raining",
-        "It decreases, because higher frequencies penetrate the atmosphere better"
+        "It is unchanged, because free space loss is set by the distance and by nothing else",
+        "It increases only while it is raining, since the extra loss at Ka band is purely a rain effect",
+        "It decreases, because a higher carrier spreads less as it crosses the same distance"
       ],
       "answer": 0,
       "why": "The standard formula makes loss proportional to the square of both frequency and distance. In practice a fixed physical aperture also gains with frequency, which is why higher bands can still win overall, but the free space term itself always grows.",
@@ -353,10 +353,10 @@
       "q": "A payload designer doubles the gain of a beam while halving the amplifier power. What happens to the EIRP and to the covered area?",
       "q_vi": "Người thiết kế tải trọng tăng gấp đôi độ lợi của búp sóng và giảm một nửa công suất bộ khuếch đại. Công suất bức xạ đẳng hướng tương đương và diện tích phủ thay đổi thế nào?",
       "choices": [
-        "Both stay the same, because gain and beamwidth are independent quantities",
+        "Both stay the same, because the beamwidth of an aperture is independent of its gain",
         "The EIRP stays the same, but the beam is narrower so the covered area shrinks",
-        "The EIRP doubles and the covered area is unchanged",
-        "The EIRP halves and the covered area doubles"
+        "The EIRP doubles while the covered area is unchanged, since gain alone decides the EIRP",
+        "The EIRP halves and the covered area doubles, because the amplifier alone sets both of them"
       ],
       "answer": 1,
       "why": "EIRP is the product of power and gain, so doubling one and halving the other leaves it fixed. Gain and beamwidth are tied together through the aperture, so a higher gain beam necessarily illuminates less ground.",
@@ -368,10 +368,10 @@
       "q": "A ground terminal is fitted with a quieter low noise amplifier while the dish stays the same size. Which figure improves and what does it buy?",
       "q_vi": "Một trạm mặt đất được thay bộ khuếch đại tạp âm thấp êm hơn trong khi chảo giữ nguyên kích thước. Chỉ tiêu nào cải thiện và nó mang lại điều gì?",
       "choices": [
-        "The EIRP improves, so the uplink becomes stronger",
+        "The EIRP of the terminal improves, so the uplink carrier now arrives noticeably stronger at the satellite front end",
         "The figure of merit G over T improves, so the same satellite EIRP now yields a higher carrier to noise ratio",
-        "The antenna gain increases even though the reflector is unchanged",
-        "The free space path loss decreases, so the received power rises"
+        "The antenna gain increases even though the reflector is unchanged, because gain follows the noise floor",
+        "The free space path loss falls, so a larger share of the transmitted carrier reaches the input"
       ],
       "answer": 1,
       "why": "A quieter amplifier lowers the system noise temperature, which is the denominator of G over T. EIRP describes transmission and is untouched by a receive chain change, and path loss is fixed by geometry and frequency.",
@@ -384,9 +384,9 @@
       "q_vi": "Khi mưa lớn, đường xuống băng Ka xấu đi nhiều hơn mức mà riêng suy hao đo được dự báo. Vì sao?",
       "choices": [
         "The rain layer also emits thermal noise, so the antenna noise temperature rises at the same time as the carrier falls",
-        "The rain shifts the carrier frequency out of the receiver passband",
-        "The satellite automatically reduces its transmit power when it detects rain",
-        "The receiver widens its bandwidth automatically when the signal weakens"
+        "The rain cell shifts the carrier out of the receiver passband, because the falling drops impose a Doppler spread on the wave",
+        "The satellite detects the fade from the beacon return and automatically backs its transmit power off",
+        "The receiver widens its own bandwidth as the signal weakens, which lets extra thermal noise in"
       ],
       "answer": 0,
       "why": "Any lossy medium at physical temperature radiates, so the sky noise temperature climbs towards ambient exactly when the signal is being absorbed. That double penalty is why rain hurts the carrier to noise ratio more than the attenuation figure suggests.",
@@ -398,10 +398,10 @@
       "q": "Uplink power control is a standard remedy for rain fade, yet there is no equivalent remedy on the downlink. What is the reason?",
       "q_vi": "Điều khiển công suất đường lên là cách chống suy hao do mưa thông dụng, nhưng đường xuống lại không có cách tương đương. Lý do là gì?",
       "choices": [
-        "Rain fade simply does not occur on the downlink",
+        "Rain fade does not occur on the downlink, because the wave leaves the rain cell travelling downward and never crosses its full depth",
         "The satellite has a hard power limit and would have to raise power for a whole beam in order to help one terminal sitting under the rain cell",
-        "Regulators forbid any change of downlink power once a satellite is in service",
-        "Downlink frequencies are too low for rain to matter"
+        "Regulators forbid any change of downlink power once the satellite has entered commercial service, so the level stays frozen at the value that was filed",
+        "Downlink frequencies sit far enough below the uplink band that raindrops no longer scatter them, so the fade shows up on the uplink alone and never on the way down"
       ],
       "answer": 1,
       "why": "Onboard amplifiers work near saturation and one beam serves many users, so boosting it wastes power on everyone in clear sky. That is why the downlink defence is adaptive coding and modulation rather than raw power.",
@@ -413,10 +413,10 @@
       "q": "Why would an operator place the feeder links in Ka or Q band while keeping the user links in Ku?",
       "q_vi": "Vì sao nhà khai thác đặt tuyến cấp nguồn ở băng Ka hoặc băng Q còn tuyến người dùng vẫn ở băng Ku?",
       "choices": [
-        "Feeder links carry less traffic, so they need less favourable spectrum",
-        "User terminals cannot physically be built for Ka band",
+        "Feeder links carry far less traffic than the user links, so they can be given the less favourable spectrum",
+        "User terminals cannot physically be built for Ka band, because the surface tolerances of a small reflector at that wavelength are far too tight to manufacture",
         "Gateways are few, so they can afford large antennas and geographic diversity to fight fading, which millions of user terminals cannot",
-        "Rain fade becomes weaker as the frequency rises"
+        "Rain fade becomes weaker as the frequency rises, since the shorter wavelengths slip between the raindrops instead of being scattered by them"
       ],
       "answer": 2,
       "why": "The hard band is given to the part of the network that can be engineered around, and the scarce easy spectrum is saved for the mass market terminals. Feeder links in fact carry the aggregate of all user traffic, so they need more capacity, not less.",
@@ -429,9 +429,9 @@
       "q_vi": "Phân tán trạm cổng theo địa điểm chống được suy hao do mưa vì",
       "choices": [
         "Intense rain cells are small, so two gateways tens of kilometres apart are rarely faded at the same moment",
-        "Rain never falls on more than one gateway in the same country",
-        "Two gateways together radiate twice the power towards the satellite",
-        "The satellite is only able to see one gateway at a time anyway"
+        "Rain never falls on two gateways in the same country at once, because fronts move along a single track",
+        "Two gateways transmitting together put twice the power on the satellite, which covers the fade directly",
+        "The satellite can only see one gateway at a time, so the second site takes over whenever the first fades"
       ],
       "answer": 0,
       "why": "The technique exploits the small spatial correlation of convective rain, so the joint outage probability is far below the product intuition would suggest. Doubling power would not help, because the fade can exceed thirty decibels.",
@@ -443,10 +443,10 @@
       "q": "Using right hand and left hand circular polarisation on the same frequency in the same beam",
       "q_vi": "Dùng đồng thời phân cực tròn phải và phân cực tròn trái trên cùng tần số trong cùng búp sóng sẽ",
       "choices": [
-        "Is not permitted under international regulation",
-        "Halves the bandwidth needed without changing the capacity",
+        "Is not permitted under international regulation, because dual polarisation doubles the flux density on the ground",
+        "Halves the bandwidth that a given service needs and leaves the delivered capacity of the beam exactly where it was before",
         "Roughly doubles capacity, limited by the cross polarisation isolation the hardware and the channel actually achieve",
-        "Doubles capacity with no practical limitation at all"
+        "Doubles the capacity with no practical limit, since orthogonal polarisations never leak into one another"
       ],
       "answer": 2,
       "why": "Two orthogonal polarisations carry two independent streams, but leakage between them acts as self interference, and rain depolarisation makes that leakage worse exactly when the margin is already thin.",
@@ -458,10 +458,10 @@
       "q": "A designer chooses a four colour frequency reuse plan over a two colour plan. What is the trade?",
       "q_vi": "Người thiết kế chọn sơ đồ tái sử dụng tần số bốn màu thay vì hai màu. Đánh đổi ở đây là gì?",
       "choices": [
-        "Each beam receives more spectrum and interference drops at the same time",
-        "Four colours become mandatory as soon as polarisation reuse is used",
+        "Each beam receives more spectrum and the interference from neighbours drops at the same time, so both sides improve",
+        "Four colours become mandatory the moment polarisation reuse is used, because the two schemes must have equal depth",
         "Each beam receives a quarter of the spectrum instead of a half, but interference from neighbouring beams drops substantially",
-        "Nothing changes in interference terms, only the hardware cost"
+        "Nothing changes in interference terms, only the cost of the hardware, since the colours are just a labelling choice"
       ],
       "answer": 2,
       "why": "More colours mean better isolation and less spectrum per beam, so the right choice depends on whether the system is noise limited or interference limited. There is no plan that improves both sides at once.",
@@ -473,9 +473,9 @@
       "q": "A multibeam payload serves a demand map where a few beams carry most of the traffic. Why is beam hopping attractive here?",
       "q_vi": "Một tải trọng đa búp sóng phục vụ bản đồ nhu cầu mà vài búp gánh hầu hết lưu lượng. Vì sao nhảy búp sóng lại hấp dẫn trong tình huống này?",
       "choices": [
-        "It reduces the free space path loss towards the busy beams",
-        "It removes the need for any frequency reuse planning",
-        "It increases the total amount of spectrum available to the satellite",
+        "It reduces the free space path loss towards the busy beams by concentrating the aperture on a smaller area",
+        "It removes the need for any frequency reuse planning, because only one beam is ever radiating at a time",
+        "It increases the total spectrum available to the satellite, since each hop reuses the band from the start",
         "It lets a limited pool of amplifiers dwell longer on the busy beams instead of splitting power equally across beams that are nearly empty"
       ],
       "answer": 3,
@@ -488,10 +488,10 @@
       "q": "An NGSO operator must switch a beam off when the separation angle seen from the Earth station falls below a threshold. What is being protected?",
       "q_vi": "Nhà khai thác phi địa tĩnh phải tắt búp sóng khi góc phân cách nhìn từ trạm mặt đất tụt dưới ngưỡng. Cái gì đang được bảo vệ?",
       "choices": [
-        "The ionosphere, which would be heated by two carriers arriving together",
-        "The low noise amplifier of the Earth station, which would saturate",
+        "The ionosphere, which would be heated locally at the point where two strong carriers arrive along very nearly the same path",
+        "The low noise amplifier of the Earth station, which would saturate on the sum of the two carriers",
         "The geostationary receiver, which would otherwise see the non geostationary satellite inside the main lobe of its antenna",
-        "The non geostationary satellite, which would be blinded by the geostationary downlink"
+        "The non geostationary satellite, whose receiver would otherwise be blinded by the far stronger geostationary downlink arriving from directly behind it"
       ],
       "answer": 2,
       "why": "The in line event puts the moving satellite on the boresight of a fixed antenna, where sidelobe rejection gives no help at all. Regulation places the whole protection duty on the newer non geostationary system.",
@@ -503,10 +503,10 @@
       "q": "The equivalent power flux density limits are defined on an aggregate basis. Why does that matter to a large constellation?",
       "q_vi": "Giới hạn mật độ thông lượng công suất tương đương được định nghĩa theo mức gộp. Vì sao điều đó lại quan trọng với một chòm vệ tinh lớn?",
       "choices": [
-        "The limits apply solely to the gateway link and not to user beams",
-        "Only the nearest satellite is counted, so the size of the constellation is irrelevant",
+        "The limits apply solely to the gateway feeder link and never to the user beams, so a constellation is free to add as many satellites to the shell as the operator wants",
+        "Only the nearest satellite is ever counted towards the limit, so the total size of the constellation makes no difference at all to whether the system complies",
         "Every visible satellite contributes at the same instant, so a design that passes per satellite can still fail once the whole constellation is counted",
-        "Aggregation makes the limit easier to satisfy as the constellation grows"
+        "Aggregation makes the limit easier to satisfy as the constellation grows, because the same interference budget is spread more thinly across every spacecraft in the field of view"
       ],
       "answer": 2,
       "why": "The victim receiver adds up interference from every transmitter in its field of view, so compliance scales with constellation size rather than with a single spacecraft. That is precisely why per satellite arguments do not settle the question.",
@@ -518,9 +518,9 @@
       "q": "In a LEO system with earth moving beams, which handover is the most frequent for a completely stationary user?",
       "q_vi": "Trong hệ LEO dùng búp sóng quét theo vệ tinh, loại chuyển giao nào xảy ra thường xuyên nhất với người dùng đứng yên hoàn toàn?",
       "choices": [
-        "None, because a stationary user never needs a handover",
-        "The inter satellite handover, because satellites change every few minutes",
-        "The intra beam handover, because the assigned carrier changes constantly",
+        "None, because a stationary user keeps the same cell identity for as long as it stays in place",
+        "The inter satellite handover, because the serving spacecraft is replaced every few minutes",
+        "The intra beam handover, because the carrier assigned inside the beam is being rotated constantly by the scheduler",
         "The inter beam handover, because the beam grid sweeps across the ground far faster than satellites rise and set"
       ],
       "answer": 3,
@@ -533,10 +533,10 @@
       "q": "Switching from earth moving beams to earth fixed beams changes the mobility load how?",
       "q_vi": "Chuyển từ búp sóng quét theo vệ tinh sang búp sóng cố định theo mặt đất làm thay đổi gánh nặng di động ra sao?",
       "choices": [
-        "Signalling is unaffected and only the antenna cost changes",
-        "All handovers disappear, including the change of serving satellite",
+        "Signalling is unaffected and only the antenna cost changes, since the cell pattern is the same either way",
+        "All handovers disappear, including the change of serving satellite, because the cell no longer moves",
         "Cell changes inside a single pass disappear, but one heavy handover remains when the serving satellite finally sets",
-        "Handovers become more frequent, because the beams now have to be steered"
+        "Handovers become more frequent, because the beams now have to be steered continuously throughout the whole of the pass"
       ],
       "answer": 2,
       "why": "Earth fixed beams keep the cell identity stable while the satellite moves, so the many small beam changes collapse into one satellite change at the end of the pass. The satellite still sets, so the last handover cannot be avoided.",
@@ -549,9 +549,9 @@
       "q_vi": "Trong tải trọng phi mặt đất kiểu trong suốt, trạm gốc nằm ở đâu và điều đó kéo theo hệ quả gì?",
       "choices": [
         "On the ground, so the radio interface timing procedures must absorb the full satellite round trip",
-        "Split across both, so the timing procedures are unaffected",
-        "On the satellite, so the round trip delay seen by the protocol is halved",
-        "There is no base station function at all in a transparent architecture"
+        "Split across the satellite and the ground, so the timing procedures see no extra delay at all",
+        "On the satellite, so the round trip delay that the protocol timers see is cut in half",
+        "Nowhere, since a transparent architecture has no base station function in it at all"
       ],
       "answer": 0,
       "why": "A transparent payload only translates frequency and amplifies, so every protocol timer sees the whole ground to satellite to ground delay. That is exactly why the standard had to extend timers and rework random access.",
@@ -564,9 +564,9 @@
       "q_vi": "Trong hệ New Radio phi mặt đất, đầu cuối bù trước lượng ứng trước thời gian nhờ vị trí của chính nó và lịch thiên văn phát quảng bá. Nếu không làm vậy thì hỏng ở đâu?",
       "choices": [
         "The random access preamble arrives far outside the reception window, because the propagation delay greatly exceeds the range the terrestrial procedure was designed for",
-        "The satellite loses its own attitude reference",
-        "The terminal becomes unable to decode the synchronisation signal at all",
-        "The Doppler shift falls to zero and the receiver loses frequency lock"
+        "The satellite loses its own attitude reference, because the timing of the uplink carrier is what feeds the star tracker control loop on board the platform, which then drifts",
+        "The terminal becomes unable to decode the downlink synchronisation signal at all, since the frame boundary has moved far outside the search window that the serving cell broadcasts",
+        "The Doppler shift falls all the way to zero at the moment of closest approach, so the receiver loses frequency lock on a carrier that has suddenly stopped drifting altogether"
       ],
       "answer": 0,
       "why": "Downlink synchronisation still works, since the terminal only has to find a signal that is already there. It is the uplink that fails, because the base station expects the preamble inside a window sized for a terrestrial cell.",
@@ -579,9 +579,9 @@
       "q_vi": "Vì sao kiến trúc lưu rồi chuyển tiếp hợp với lưu lượng máy tới máy băng hẹp qua một chòm LEO thưa?",
       "choices": [
         "The application tolerates delays of minutes or hours, so a device can wait for the next pass instead of demanding continuous coverage",
-        "It lets the device transmit in less bandwidth than continuous coverage would need",
-        "It reduces the propagation delay of each individual message",
-        "It removes the need for any ground station in the system"
+        "The device can transmit in far less bandwidth than continuous coverage would demand, because the burst is spread out over the whole interval between passes",
+        "It cuts the propagation delay of each individual message, since the satellite is directly overhead at the moment when the data is sent up",
+        "It removes the need for any ground station, because the constellation delivers the data to the user directly"
       ],
       "answer": 0,
       "why": "Store and forward buys coverage with delay, which is a good bargain only when the data is not time critical. It still needs a ground station to unload the data, and it makes the end to end delay much worse, not better.",
@@ -608,9 +608,9 @@
       "q": "Why is Doppler a far bigger problem for a LEO Ka band system than for a GEO Ku band system?",
       "q_vi": "Vì sao hiệu ứng Doppler là vấn đề lớn hơn nhiều với hệ LEO băng Ka so với hệ GEO băng Ku?",
       "choices": [
-        "Doppler affects only optical links, and Ka band behaves like an optical carrier",
-        "Ka band oscillators are inherently less stable than Ku band ones",
-        "Geostationary satellites do not move at all in any reference frame",
+        "Doppler affects only optical links, and a Ka band carrier sits close enough to the optical range that it behaves in exactly the same way as a laser beam does",
+        "Ka band oscillators are inherently far less stable than Ku band ones, so the residual frequency error grows well beyond the bandwidth that the tracking loop is able to pull in",
+        "Geostationary satellites do not move in any reference frame at all, so their links carry no Doppler term whatsoever and the receiver never has to search in frequency for the carrier",
         "The shift scales with both the radial velocity and the carrier frequency, and low orbit adds kilometres per second while Ka roughly doubles the frequency"
       ],
       "answer": 3,
@@ -623,10 +623,10 @@
       "q": "A LEO system pre compensates a common Doppler term at the gateway and leaves a residual term to each terminal. What justifies that split?",
       "q_vi": "Một hệ LEO bù trước phần Doppler chung tại trạm cổng và để phần dư cho từng đầu cuối tự xử lý. Điều gì biện minh cho cách chia đó?",
       "choices": [
-        "Terminals are not permitted by regulation to change their transmit frequency",
-        "The gateway is the only node in the system with a stable reference oscillator",
+        "Terminals are not permitted by regulation to alter their transmit frequency, so every correction has to be applied at the gateway",
+        "The gateway holds the only stable reference oscillator in the system, and a cheap user terminal has no way at all to measure a frequency offset for itself",
         "The common term follows from the satellite ephemeris and is identical for the whole beam, while the residual depends on where each terminal sits inside the beam",
-        "The residual term is exactly zero for any terminal that is not moving"
+        "The residual term is exactly zero for any terminal that is standing still, so only moving users need to correct anything"
       ],
       "answer": 2,
       "why": "Splitting the correction puts the expensive, ephemeris driven part where it can be computed once for everybody, and leaves the small geometry dependent remainder to the cheap device. A stationary terminal still sees a residual, because the satellite moves relative to it.",
@@ -639,9 +639,9 @@
       "q_vi": "Một sinh viên nạp bộ phần tử hai dòng vào bộ lan truyền số độ chính xác cao và nhận được vị trí lệch với dữ liệu bám. Sai lầm căn bản ở đây là gì?",
       "choices": [
         "Two line element sets carry mean elements defined by their own simplified model, so they are only consistent when propagated with that model",
-        "The element set expressed distances in kilometres while the propagator expected metres",
-        "Numerical propagators cannot handle orbits with near zero eccentricity",
-        "Two line element sets are published only for geostationary objects"
+        "The element set expresses distances in kilometres while the numerical propagator expects metres, so the scale is wrong",
+        "Numerical propagators cannot handle orbits of near zero eccentricity, where the argument of perigee becomes ill defined and the integration diverges",
+        "Two line element sets are published only for geostationary objects, so a low orbit fit is being extrapolated far outside the range in which it was ever valid"
       ],
       "answer": 0,
       "why": "The element set is a fitted parameter vector, not an osculating state, so it only has meaning inside the theory that produced it. Feeding it to a better propagator makes the answer worse, not better, which is the counterintuitive part.",
@@ -654,9 +654,9 @@
       "q_vi": "Vì sao sai số vị trí của dự báo SGP4 lớn dần trong những ngày sau thời điểm gốc của bộ phần tử?",
       "choices": [
         "Unmodelled effects, above all variable atmospheric drag, accumulate while the element set remains a snapshot that never updates itself",
-        "The propagator loses numerical precision after a fixed number of integration steps",
-        "The satellite changes its orbit deliberately every day",
-        "The two line format truncates the epoch to whole days"
+        "The propagator loses numerical precision once it has taken a large number of integration steps, and the rounding error compounds over the days that follow",
+        "The satellite deliberately changes its orbit every day, so any prediction is invalidated by the next manoeuvre",
+        "The two line format truncates the epoch to whole days, so the starting time of the propagation is already wrong by up to twelve full hours"
       ],
       "answer": 0,
       "why": "Drag depends on solar activity and on attitude, neither of which the simple model tracks, so the small residual force integrates into a growing along track error. The format itself carries the epoch to a fraction of a day.",
@@ -669,9 +669,9 @@
       "q_vi": "Khung như Hypatia bổ sung điều gì mà một bộ lan truyền quỹ đạo thuần tuý không có?",
       "choices": [
         "It converts the time varying constellation geometry into a network topology and runs packet level experiments on it",
-        "It computes orbits to higher precision than SGP4 does",
-        "It removes the need to compute any link budget",
-        "It handles the regulatory filing of the constellation"
+        "It computes the orbits themselves to a far higher precision than SGP4 manages over the same span",
+        "It removes the need to compute a link budget, since the capacities arrive with the topology",
+        "It handles the regulatory filing and the coordination of the constellation with its neighbours"
       ],
       "answer": 0,
       "why": "The propagator answers where the satellites are, and the framework answers what the network looks like and how packets fare on it. Those are different questions, and the second is the one a networking paper needs.",
@@ -684,9 +684,9 @@
       "q_vi": "Bạn tự dựng một bộ mô phỏng LEO và muốn thuyết phục phản biện rằng phần hình học là đúng. Phép kiểm nào thuyết phục nhất?",
       "choices": [
         "Reproduce access windows and slant ranges for a real tracked satellite and compare them against an independent tool and against observed tracking data",
-        "Show that the average end to end latency you obtain looks plausible",
-        "Show that your routing algorithm converges in every run",
-        "Show that your code runs faster than the reference tool on the same scenario"
+        "Show that the average end to end latency your simulator reports lands close to the figures publicly quoted for the systems already in commercial operation",
+        "Show that your routing algorithm converges to a stable path in every single run, across a long sequence of random seeds, demand patterns and constellation sizes that you tested",
+        "Show that your code completes exactly the same scenario much faster than the reference tool, while still producing the summary plots that look the same to a reader as before"
       ],
       "answer": 0,
       "why": "Geometry is validated by comparing quantities that have a ground truth, which access times and ranges do. Plausible latency and converging routing can both be produced by a simulator whose geometry is quietly wrong.",
@@ -698,10 +698,10 @@
       "q": "A transparent payload relays a weak uplink to a distant gateway. What happens to the end to end signal to noise ratio?",
       "q_vi": "Tải trọng trong suốt chuyển tiếp một đường lên yếu tới trạm cổng ở xa. Tỉ số tín hiệu trên nhiễu đầu cuối diễn biến ra sao?",
       "choices": [
-        "The onboard amplifier restores the uplink signal to noise ratio before retransmission",
+        "The onboard amplifier restores the uplink signal to noise ratio before the carrier is retransmitted downward, so only the downlink budget then matters",
         "The uplink and downlink noise contributions add in the inverse domain, so the end to end ratio is worse than either link taken alone",
-        "The two noise contributions cancel because the links are statistically independent",
-        "Only the weaker of the two links matters and the other one can be ignored"
+        "The two noise contributions cancel each other on average, because the uplink and the downlink are statistically independent of one another",
+        "Only the weaker of the two links matters, so the stronger one can be dropped from the calculation entirely"
       ],
       "answer": 1,
       "why": "The reciprocals add, so two links that are individually acceptable can combine into one that is not. Taking only the weaker link is the standard approximation people mistake for an exact rule, and it is optimistic by up to three decibels when the two are equal.",
@@ -713,10 +713,10 @@
       "q": "Which capability is available with a regenerative payload but impossible with a transparent one?",
       "q_vi": "Khả năng nào chỉ có ở tải trọng tái sinh mà tải trọng trong suốt không thể làm?",
       "choices": [
-        "Amplifying the received signal before retransmitting it",
-        "Serving several beams from the same satellite",
+        "Amplifying the received signal before it is retransmitted on the downlink carrier",
+        "Serving several separate spot beams from a single satellite at the same time",
         "Using different modulation and coding on the uplink and the downlink, and switching packets onboard",
-        "Changing the carrier frequency between uplink and downlink"
+        "Translating the carrier frequency between the uplink band and the downlink band of a given transponder"
       ],
       "answer": 2,
       "why": "Frequency translation, amplification and multiple beams are all standard on a bent pipe payload. Only decoding the bits lets the satellite choose a new waveform for the second hop or route a packet somewhere else.",
@@ -729,9 +729,9 @@
       "q_vi": "Lập luận chính phản đối việc chạy suy luận học máy nặng trên một vệ tinh LEO nhỏ là gì?",
       "choices": [
         "Power generation and heat rejection are tightly limited, so every watt spent computing competes directly with the transmitter",
-        "International regulation does not permit computation aboard a spacecraft",
-        "Onboard computation would increase the propagation delay of the link",
-        "Radiation makes any digital processing impossible in orbit"
+        "International regulation does not permit computation aboard a spacecraft outside the payload data handling unit",
+        "Onboard computation would add to the propagation delay of the link, since the packet has to wait for the model",
+        "Radiation makes any sustained digital processing impossible in orbit, because upsets corrupt every long calculation"
       ],
       "answer": 0,
       "why": "The binding constraints are the solar array area and the radiator, not the law or the physics of computation. Radiation is a real design problem but it is solved routinely with shielding and fault tolerant design.",
@@ -743,10 +743,10 @@
       "q": "Onboard inference on an Earth observation satellite is worth its power cost only when",
       "q_vi": "Suy luận ngay trên vệ tinh quan sát Trái Đất chỉ đáng với cái giá năng lượng của nó khi",
       "choices": [
-        "The satellite flies in a sun synchronous orbit",
-        "The satellite carries an inter satellite link",
+        "The satellite flies in a sun synchronous orbit, so the illumination stays constant and the model never needs retraining once it has been uploaded to the platform",
+        "The satellite carries an inter satellite link, which is the only path by which an inference result could ever leave the spacecraft at all",
         "The downlink capacity rather than the sensor is the binding constraint, so sending detections instead of raw frames is a genuine saving",
-        "The ground segment has no computing capacity of its own"
+        "The ground segment has no computing capacity of its own, which is the usual situation for an observation mission"
       ],
       "answer": 2,
       "why": "If the downlink can already carry everything the sensor produces, computing in orbit buys nothing and costs power. The value of edge processing is always relative to the bottleneck it relieves.",
@@ -759,9 +759,9 @@
       "q_vi": "Phát biểu nào nắm đúng nhất sự đánh đổi giữa liên kết liên vệ tinh quang và liên kết vô tuyến?",
       "choices": [
         "Optical gives far more capacity and needs no spectrum licence, but demands precise pointing, acquisition and tracking",
-        "Radio links carry more data but consume much more power per bit",
-        "Optical links are unaffected by vibration of the satellite platform",
-        "Optical is easier to point precisely because the beam is very narrow"
+        "Radio links carry more data than optical ones but burn far more direct current power for every delivered bit",
+        "Optical links are unaffected by vibration of the platform, because the detector integrates across many jitter periods anyway",
+        "Optical is easier to point precisely, because a narrow beam produces a stronger error signal for the tracker"
       ],
       "answer": 0,
       "why": "The narrow beam is exactly what makes an optical link both efficient and hard, since a fraction of a degree of jitter breaks it. Radio inter satellite links carry less, not more, and they still need spectrum coordination.",
@@ -773,10 +773,10 @@
       "q": "Optical links work well between satellites but are used cautiously for the satellite to ground direction. What is the main reason?",
       "q_vi": "Tuyến quang chạy tốt giữa các vệ tinh nhưng lại được dùng dè dặt cho hướng vệ tinh xuống mặt đất. Lý do chính là gì?",
       "choices": [
-        "Optical transmitters are not permitted to operate below a certain altitude",
-        "Optical detectors sensitive enough for the link cannot be built for ground use",
+        "Optical transmitters are not permitted to operate towards any point below a fixed altitude, for reasons of eye safety on the ground beneath the beam",
+        "Detectors sensitive enough to close the link cannot be built for ground use, since cooling them is impractical",
         "Clouds block the optical path completely, so the ground segment needs geographic diversity before availability becomes usable",
-        "The atmosphere shifts the optical carrier out of the receiver passband"
+        "The atmosphere shifts the optical carrier out of the narrow receiver passband as the refractive index of the air keeps varying"
       ],
       "answer": 2,
       "why": "A cloud is an opaque obstacle at optical wavelengths, not a fade that more power can overcome, so the only defence is having another site in clear sky. Radio frequency links suffer attenuation from cloud but are not blocked outright.",
@@ -788,9 +788,9 @@
       "q": "Why is even a centimetre sized fragment dangerous in low Earth orbit?",
       "q_vi": "Vì sao ngay cả mảnh vỡ cỡ centimét cũng nguy hiểm ở quỹ đạo Trái Đất thấp?",
       "choices": [
-        "Fragments carry residual propellant that can ignite on contact",
-        "Fragments block the radio link between the satellite and the ground",
-        "Fragments are magnetically attracted towards metallic spacecraft",
+        "Fragments carry residual propellant that can ignite when the piece scrapes across a pressurised surface of the spacecraft",
+        "Fragments drift through the beam and block the radio link between the satellite and its ground station",
+        "Fragments become magnetised in the geomagnetic field and are drawn towards metallic spacecraft structures",
         "Closing speeds reach several kilometres per second, so the kinetic energy is comparable to that of a large projectile"
       ],
       "answer": 3,
@@ -803,9 +803,9 @@
       "q": "The Kessler syndrome is worrying because",
       "q_vi": "Hội chứng Kessler đáng lo vì",
       "choices": [
-        "It affects only orbits above ten thousand kilometres, where nothing can be recovered",
-        "It makes satellites reenter far earlier than their planned lifetime",
-        "It would immediately destroy every geostationary satellite in service",
+        "It affects only the shells above ten thousand kilometres, where no object can ever be recovered and where atmospheric drag never helps to clear away the debris at all",
+        "It makes satellites reenter far earlier than their planned lifetime, because the growing cloud of fragments adds a measurable extra drag term in orbit",
+        "It would destroy every geostationary satellite in service at once, since the fragments all concentrate into the narrow equatorial ring where those orbital slots sit today",
         "Each collision creates fragments that raise the probability of further collisions, so the process can sustain itself even if all launches stopped"
       ],
       "answer": 3,
@@ -818,10 +818,10 @@
       "q": "Regulators have shortened the required post mission disposal horizon from twenty five years to a much smaller number. What drives that change?",
       "q_vi": "Cơ quan quản lý đã rút ngắn thời hạn bắt buộc phải xử lý vệ tinh sau khi hết nhiệm vụ, từ 25 năm xuống một con số nhỏ hơn nhiều. Điều gì thúc đẩy thay đổi đó?",
       "choices": [
-        "Satellites have become significantly heavier than before",
-        "Atmospheric drag has weakened, so objects no longer decay on their own",
+        "Satellites have become significantly heavier than they used to be, so each derelict object now presents a much larger cross section to any spacecraft that passes through the same shell",
+        "Atmospheric drag has weakened over the last decade, so objects at these altitudes no longer decay on their own within any useful time",
         "Constellations now place thousands of satellites into the same shells, so the number of dead objects present at any moment depends directly on how fast each one leaves",
-        "A shorter disposal horizon reduces the cost of launching the satellite"
+        "A shorter disposal horizon reduces the cost of launching the satellite, because less propellant has to be carried up in the first place"
       ],
       "answer": 2,
       "why": "With a high launch rate, the steady state population is the launch rate multiplied by the residence time, so cutting residence time is the only lever that scales. Disposal costs propellant, so it raises rather than lowers the cost of the mission.",
@@ -833,10 +833,10 @@
       "q": "An operator notices its satellites at five hundred kilometres need noticeably more make up propellant this year than last. What is the most plausible explanation?",
       "q_vi": "Nhà khai thác nhận thấy các vệ tinh ở độ cao 500 km năm nay tốn nhiên liệu bù nhiều hơn hẳn năm ngoái. Giải thích khả dĩ nhất là gì?",
       "choices": [
-        "The gravitational parameter of the Earth changed slightly",
-        "The satellites gained mass during the year",
+        "The gravitational parameter of the Earth shifted slightly, so the orbital energy at that altitude changed and the satellites now sit a little lower down",
+        "The satellites gained mass over the year as surface material slowly accreted onto their structures",
         "Rising solar activity heated and expanded the upper atmosphere, so the density and hence the drag at that altitude increased",
-        "The satellites drifted to a lower inclination, where drag is stronger"
+        "The satellites drifted towards a lower inclination, where the residual atmosphere at that altitude turns out to be measurably denser"
       ],
       "answer": 2,
       "why": "Thermospheric density at five hundred kilometres can vary by an order of magnitude over the solar cycle, which is exactly the timescale described. Mass and the gravitational parameter do not change, and inclination has no first order effect on drag.",
@@ -848,10 +848,10 @@
       "q": "Why is the operational life of a classic geostationary satellite usually set by propellant rather than by electronics?",
       "q_vi": "Vì sao tuổi thọ khai thác của vệ tinh địa tĩnh cổ điển thường do nhiên liệu quyết định chứ không do điện tử?",
       "choices": [
-        "Atmospheric drag steadily consumes the propellant reserve",
-        "Radiation destroys the onboard electronics within the first year of service",
+        "Atmospheric drag steadily consumes the propellant reserve over the mission, because the residual thermosphere still reaches out as far as the geostationary belt itself",
+        "Radiation destroys the onboard electronics within the first year of commercial service, so the transponders fail long before the propellant tank is ever the item that runs out",
         "North south control must run without interruption for the whole mission, and once the tank is empty the inclination grows beyond what fixed antennas can follow",
-        "The solar arrays fail abruptly after about five years in orbit"
+        "The solar arrays fail abruptly after about five years in orbit, which caps the useful mission long before the propellant budget ever becomes the binding constraint for the operator"
       ],
       "answer": 2,
       "why": "Electronics are qualified for the full mission and degrade gracefully, while propellant is strictly consumable and inclination control is not optional for terminals that never move. Drag is negligible at that altitude.",
@@ -863,10 +863,10 @@
       "q": "Some geostationary satellites are moved to inclined orbit operation at the end of life. What is being traded?",
       "q_vi": "Một số vệ tinh địa tĩnh được chuyển sang chế độ khai thác quỹ đạo nghiêng vào cuối đời. Đánh đổi ở đây là gì?",
       "choices": [
-        "The satellite is raised to a higher altitude in order to reduce drag",
+        "The satellite is raised into a higher graveyard orbit where drag is lower, so it drifts less and needs no further correction",
         "North south control is abandoned to save propellant, so the satellite traces a figure of eight and only terminals able to track it can still use the service",
-        "The bandwidth is reduced in order to save electrical power",
-        "The service is moved from Ku band to Ka band to free spectrum"
+        "The transponder bandwidth is cut back in order to save electrical power, which lets the ageing solar array carry the load",
+        "The service is shifted from Ku band to Ka band so that the crowded lower band can be released to a newer spacecraft in the same slot"
       ],
       "answer": 1,
       "why": "Giving up inclination control extends life by years because that is where the propellant goes, but the apparent daily motion breaks fixed antenna service. Nothing about altitude, bandwidth or band changes.",
@@ -878,9 +878,9 @@
       "q": "Why is spoofing of satellite navigation signals considered more dangerous than jamming for an unmanned aircraft mission?",
       "q_vi": "Vì sao giả mạo tín hiệu định vị vệ tinh được coi là nguy hiểm hơn gây nghẽn đối với một nhiệm vụ bay không người lái?",
       "choices": [
-        "Spoofing requires far less transmit power than the genuine satellite signal",
-        "Spoofing permanently damages the receiver hardware",
-        "Jamming cannot be detected by any receiver design",
+        "Spoofing needs far less transmit power than the genuine satellite signal, so a jammer is always much easier for the operator to locate and then shut down on the ground",
+        "Spoofing permanently damages the receiver front end, so the vehicle cannot recover its navigation solution at all, even long after the attacker has stopped transmitting",
+        "Jamming cannot be detected by any practical receiver design, whereas a spoofed position fix always fails the plausibility checks in the flight software",
         "Jamming produces an obvious loss of fix that triggers a fallback mode, while spoofing lets the vehicle keep flying confidently on a false position"
       ],
       "answer": 3,
@@ -893,10 +893,10 @@
       "q": "An operator encrypts all user traffic on the space link. Which threat does this leave unaddressed?",
       "q_vi": "Nhà khai thác mã hoá toàn bộ lưu lượng người dùng trên tuyến vũ trụ. Mối đe doạ nào vẫn chưa được xử lý?",
       "choices": [
-        "Replay of recorded frames, provided sequence numbers are included",
-        "Modification of payload data in transit, provided authentication is included",
+        "Replay of recorded frames, since an encrypted frame stays valid whenever it is injected",
+        "Modification of the payload data in transit, because ciphertext can be altered blindly",
         "Traffic analysis, since the timing, the volume and the beam used remain observable to anyone with a receiver",
-        "Passive interception of the message content"
+        "Passive interception of the message content by anybody who happens to own a receiver inside the beam footprint"
       ],
       "answer": 2,
       "why": "Encryption hides what is said, not that something is being said, and a satellite beam is broadcast over a wide area. The other three are exactly what a well built encryption and authentication scheme does cover.",
@@ -909,9 +909,9 @@
       "q_vi": "Vì sao tuyến đo xa, bám và điều khiển là ưu tiên an ninh cao nhất trong hệ thống vệ tinh?",
       "choices": [
         "Compromising it can hand an attacker control of the spacecraft itself, which is unrecoverable, rather than merely exposing user data",
-        "It is the only link in the system that uses encryption at all",
-        "It operates in unlicensed spectrum where anyone may transmit",
-        "It carries the largest volume of traffic in the system"
+        "It is the only link in the whole system that carries encryption, so every other channel is protected by obscurity",
+        "It operates in unlicensed spectrum where any party is free to transmit, so interference cannot be ruled out",
+        "It carries by far the largest volume of traffic in the system, so a breach exposes the most information"
       ],
       "answer": 0,
       "why": "Loss of user confidentiality is serious but bounded, while loss of command authority can end the mission and even create debris. The command link is narrowband and always licensed, so volume and spectrum status are not the point.",
@@ -923,10 +923,10 @@
       "q": "During a fade, an adaptive system drops from sixteen state amplitude and phase keying to quadrature phase shift keying with a low code rate. What is being traded?",
       "q_vi": "Khi gặp suy hao, một hệ thích nghi hạ từ điều chế pha và biên độ 16 trạng thái xuống điều chế pha vuông góc với tỉ lệ mã thấp. Đánh đổi ở đây là gì?",
       "choices": [
-        "Nothing is traded, because the lower mode is superior in every respect",
+        "Nothing is traded, because the more robust mode delivers the same throughput at a lower error rate",
         "Spectral efficiency falls, so the user data rate drops, but the link stays up instead of failing outright",
-        "The occupied bandwidth grows while the data rate is held constant",
-        "The transmit power rises while the data rate is held constant"
+        "The occupied bandwidth grows while the delivered user data rate is held exactly where it was",
+        "The transmit power is raised while the delivered user data rate is held exactly where it was"
       ],
       "answer": 1,
       "why": "The robust mode needs a lower signal to noise ratio and therefore delivers fewer bits in the same bandwidth. Neither the transmit power nor the channel bandwidth changes when the mode is switched.",
@@ -939,9 +939,9 @@
       "q_vi": "Một dịch vụ băng Ka được công bố độ khả dụng 99,5 phần trăm ở vùng nhiệt đới. Con số đó mô tả điều gì?",
       "choices": [
         "The fraction of time the link margin is sufficient to keep the service running, the rest being lost mostly to rain events",
-        "The efficiency of the onboard power amplifier",
-        "The fraction of satellites in the constellation that are healthy",
-        "The fraction of the coverage area that receives any signal at all"
+        "The conversion efficiency of the onboard power amplifier that serves that beam, averaged across the whole year and over every operating point",
+        "The fraction of the satellites in the whole constellation that are healthy enough to carry commercial traffic at any moment",
+        "The fraction of the quoted coverage area in which a terminal receives any usable signal at all"
       ],
       "answer": 0,
       "why": "Availability is a statistic in time, computed from local rain statistics against the design margin. Coverage in space and hardware health are separate figures that happen to be quoted with similar percentages.",
@@ -953,10 +953,10 @@
       "q": "A constellation already provides continuous coverage but customers in large cities report congestion. Which response actually addresses the problem?",
       "q_vi": "Một chòm vệ tinh đã phủ liên tục nhưng khách hàng ở các thành phố lớn vẫn báo nghẽn. Cách xử lý nào thật sự giải quyết được vấn đề?",
       "choices": [
-        "Raise the orbital altitude so each satellite sees a larger area",
-        "Increase the inclination of every plane so more latitudes are served",
+        "Raise the orbital altitude so each satellite sees a larger area and can therefore serve the city for longer on every pass",
+        "Increase the inclination of every plane so that more latitudes are served and the city sees satellites more of the time",
         "Add capacity where the demand sits, through smaller beams, more spectrum or beam hopping, because coverage and capacity are separate design problems",
-        "Lower the minimum elevation angle so more satellites are usable"
+        "Lower the minimum elevation angle so that more satellites become usable at the same time and the offered load can be spread out evenly between them"
       ],
       "answer": 2,
       "why": "Coverage says a link exists, capacity says how much it carries, and congestion is a capacity failure. Raising the altitude or lowering the elevation mask spreads the same resources thinner over more area, which makes the city worse rather than better.",
@@ -968,10 +968,10 @@
       "q": "For an emergency network over a disaster area, why might a stratospheric platform be preferred over a LEO constellation?",
       "q_vi": "Với mạng khẩn cấp trên vùng thảm hoạ, vì sao nền tảng tầng bình lưu có thể được ưu tiên hơn một chòm LEO?",
       "choices": [
-        "A stratospheric platform covers a larger area than any satellite can",
+        "One platform covers a far larger area than any satellite footprint, so a single flight is able to serve the whole of the affected region on its own from the start",
         "One platform gives persistent coverage of exactly that area with negligible propagation delay, and it can be deployed, refuelled and recovered locally",
-        "A stratospheric platform is unaffected by weather",
-        "A stratospheric platform needs no spectrum licence"
+        "A stratospheric platform is completely unaffected by weather, because it cruises well above the layer in which storms, icing and severe turbulence occur over the disaster area",
+        "A stratospheric platform needs no spectrum licence, since it is not a space station under the international radio regulations and flies inside national airspace throughout"
       ],
       "answer": 1,
       "why": "The advantage is persistence over one spot plus local control of the asset, not raw coverage area, which is far smaller than any satellite footprint. Wind and icing are serious operational constraints, and spectrum still has to be licensed.",
@@ -983,10 +983,10 @@
       "q": "Raising a communication drone increases the line of sight probability but degrades another quantity. Which one, and why does an optimum height exist?",
       "q_vi": "Nâng độ cao của thiết bị bay làm nhiệm vụ truyền thông giúp tăng xác suất có tầm nhìn thẳng nhưng làm xấu một đại lượng khác. Đại lượng nào, và vì sao tồn tại độ cao tối ưu?",
       "choices": [
-        "The propagation delay becomes significant above one kilometre",
-        "The Doppler shift grows until the receiver can no longer lock",
+        "The propagation delay, because it becomes a significant part of the frame timing budget as soon as the drone has climbed above one kilometre of altitude over the city",
+        "The Doppler shift, because it grows with altitude until the receiver in the ground terminal is no longer able to hold frequency lock on the carrier",
         "The path loss grows with distance, so coverage improves only up to the height where the extra distance costs more than the blockage relief gains",
-        "The regulatory ceiling is reached, which is the only limit that matters"
+        "The regulatory ceiling, because the altitude cap placed on unmanned flight is the only limit that actually binds in any real deployment over a dense city centre today"
       ],
       "answer": 2,
       "why": "Two opposing effects, better geometry and longer range, produce an interior optimum that depends on the urban density. Delay at these heights is microseconds and a hovering drone has almost no Doppler, so neither can be the binding effect.",
@@ -998,10 +998,10 @@
       "q": "Optimising a drone trajectory for throughput while ignoring the propulsion energy model usually produces",
       "q_vi": "Tối ưu quỹ đạo bay của thiết bị bay để đạt thông lượng cao mà bỏ qua mô hình năng lượng bay thường cho ra",
       "choices": [
-        "A path that is optimal but simply slow to compute",
-        "A path that violates spectrum regulation",
+        "A path that is genuinely optimal for the link but simply too slow to compute over a large service area",
+        "A path that violates spectrum regulation, since the drone would cross several coordination zones in flight",
         "A path that cannot be flown at all, because hovering and sharp turns cost far more energy than the communication payload ever does",
-        "A path identical to the one an energy aware formulation would give"
+        "A path identical to the one an energy aware formulation gives, because propulsion draws a constant power"
       ],
       "answer": 2,
       "why": "Propulsion dominates the energy budget by orders of magnitude, so a trajectory chosen purely for link quality typically exceeds the battery long before the mission ends. The two formulations agree only in degenerate cases.",
@@ -1013,10 +1013,10 @@
       "q": "What makes joint orchestration across a space, air and ground network genuinely hard?",
       "q_vi": "Điều gì làm cho việc điều phối chung trên mạng tích hợp vũ trụ, hàng không và mặt đất thực sự khó?",
       "choices": [
-        "Only the ground layer is capable of running a routing protocol",
-        "The layers use packet formats that are incompatible by definition",
+        "Only the ground layer is able to run a routing protocol, so every path decision has to be taken there and then pushed upward to the aerial layer and the space layer above it",
+        "The three layers use packet formats that are incompatible by definition, so every hop requires a full translation step before the payload can be forwarded onward to the next node",
         "The three layers have very different timescales and mobility patterns, so a control loop tuned for one is either too slow or far too costly for another",
-        "The three layers are physically unable to share any spectrum"
+        "The three layers are physically unable to share any spectrum, so each of them needs a separately allocated band together with its own dedicated hardware chain"
       ],
       "answer": 2,
       "why": "Topology in the space layer changes in minutes, the aerial layer in tens of minutes and the ground layer barely at all, so no single control period fits. Spectrum sharing and common packet formats are engineering choices, not impossibilities.",
@@ -1028,10 +1028,10 @@
       "q": "Why do LEO constellations usually avoid running a conventional link state routing protocol unchanged?",
       "q_vi": "Vì sao các chòm LEO thường tránh chạy nguyên xi một giao thức định tuyến trạng thái liên kết thông thường?",
       "choices": [
-        "The protocol needs a permanent address per node, which cannot be assigned in orbit",
+        "The protocol needs a permanent address for every node, and an address cannot be kept stable while a satellite keeps moving between the planes of the constellation",
         "The topology changes on a schedule known in advance, so flooding updates wastes scarce capacity when the future link set could simply be computed from the ephemeris",
-        "Link state protocols cannot support networks of more than one hundred nodes",
-        "Satellites do not have enough memory to hold a routing table"
+        "Link state protocols cannot support networks with more than about one hundred nodes, which any real constellation exceeds at once",
+        "Satellites do not carry enough memory to hold a routing table for the whole constellation, so the database has to stay on the ground"
       ],
       "answer": 1,
       "why": "The topology is dynamic but deterministic, which is the opposite of the assumption behind reactive flooding. Memory, scale and addressing are all solvable and are not what makes the protocol a poor fit.",
@@ -1043,9 +1043,9 @@
       "q": "For a long intercontinental path, a LEO route over inter satellite links can beat terrestrial fibre in latency. Why?",
       "q_vi": "Trên đường liên lục địa dài, tuyến LEO đi qua các liên kết liên vệ tinh có thể thắng cáp quang mặt đất về độ trễ. Vì sao?",
       "choices": [
-        "Satellites transmit at higher power than fibre amplifiers can provide",
-        "The satellite path is physically shorter than the great circle distance between the endpoints",
-        "Fibre links suffer from Doppler shift that satellites avoid",
+        "Satellites transmit at a far higher power than any fibre amplifier can provide, so the bits are pushed through the link noticeably more quickly from end to end of the route",
+        "The satellite path is physically shorter than the great circle distance between the endpoints, because it cuts straight across the chord of the Earth",
+        "Fibre links suffer a Doppler shift from thermal expansion of the cable, which forces a retiming step at every repeater along the route that the space path avoids completely",
         "Light travels roughly fifty per cent faster in vacuum than in glass fibre, and the orbital path can follow a more direct route than the cable does"
       ],
       "answer": 3,
@@ -1061,7 +1061,7 @@
         "The footprint shrinks and the power density grows",
         "Both the footprint and the power density grow",
         "The footprint grows and the power density falls",
-        "Neither changes, because the antenna pattern is unchanged"
+        "Neither changes, since the pattern is fixed"
       ],
       "answer": 2,
       "why": "A fixed beamwidth projected from further away covers more ground, and the same radiated power spread over a larger area means less power per square metre. That is the basic tension between coverage and link quality.",
@@ -1073,10 +1073,10 @@
       "q": "Why does a constellation at three hundred fifty kilometres need many more satellites for continuous global coverage than one at twelve hundred kilometres?",
       "q_vi": "Vì sao chòm vệ tinh ở 350 km cần nhiều vệ tinh hơn hẳn so với chòm ở 1200 km để phủ toàn cầu liên tục?",
       "choices": [
-        "Lower orbits have longer periods, so each satellite serves fewer users per day",
-        "Lower satellites cannot carry inter satellite links at all",
+        "Lower orbits have longer periods, so each satellite passes over a given region fewer times per day",
+        "Lower satellites cannot carry inter satellite links at all, so the mesh has to be closed through the ground and many more gateways become necessary",
         "The area visible from each satellite shrinks quickly as altitude falls, so more of them are needed to tile the same surface",
-        "Lower satellites are forced to transmit with less power"
+        "Lower satellites are forced to transmit with much less power in order to respect the power flux density limits set for the ground"
       ],
       "answer": 2,
       "why": "The horizon distance grows with altitude, so the served spherical cap shrinks rapidly at low heights, especially once a minimum elevation angle is imposed. Lower orbits have shorter periods, not longer.",
@@ -1088,9 +1088,9 @@
       "q": "Despite needing more satellites, very low orbital shells remain attractive. What is the strongest technical argument for them?",
       "q_vi": "Dù cần nhiều vệ tinh hơn, các lớp quỹ đạo rất thấp vẫn hấp dẫn. Lập luận kỹ thuật mạnh nhất ủng hộ chúng là gì?",
       "choices": [
-        "Lower altitude lengthens the visibility window of each pass",
-        "Lower altitude removes the need for station keeping",
-        "Lower altitude eliminates the Doppler shift",
+        "Lower altitude lengthens the visibility window of each pass, because the satellite then sweeps across a smaller arc of the sky as seen by the ground observer",
+        "Lower altitude removes the need for any station keeping, since the denser air damps out the residual eccentricity and holds the orbit circular without any thruster firing",
+        "Lower altitude eliminates the Doppler shift, because the satellite passes almost straight overhead on every visible pass and the radial velocity therefore stays at zero throughout",
         "Lower altitude cuts both the delay and the path loss, so terminals can be smaller and the same spectrum can be reused more densely across the surface"
       ],
       "answer": 3,
@@ -1103,10 +1103,10 @@
       "q": "A LEO satellite in a non sun synchronous orbit enters eclipse on most revolutions. What is the main design consequence?",
       "q_vi": "Vệ tinh LEO trên quỹ đạo không đồng bộ mặt trời vào bóng tối ở hầu hết các vòng bay. Hệ quả thiết kế chính là gì?",
       "choices": [
-        "The solar arrays must be larger purely because of increased radiation exposure",
+        "The solar arrays must be made larger purely because the radiation dose in shadow degrades the cells faster",
         "The batteries must carry the full load for tens of minutes many times a day, so cycle life rather than raw capacity often drives the design",
-        "The orbit must be raised until the Earth shadow is no longer crossed",
-        "The satellite has to stop transmitting entirely while it is in shadow"
+        "The orbit must be raised until the plane no longer crosses the shadow of the Earth on any revolution at all",
+        "The satellite has to stop transmitting entirely while it is in shadow, so service is available only in daylight"
       ],
       "answer": 1,
       "why": "Around fifteen eclipses per day means tens of thousands of charge cycles over a mission, so battery chemistry and depth of discharge become the limiting choices. Stopping transmission would defeat the purpose of the satellite, and no low orbit escapes the shadow.",
@@ -1118,10 +1118,10 @@
       "q": "Why do some operators choose a dawn to dusk sun synchronous orbit for power hungry payloads?",
       "q_vi": "Vì sao một số nhà khai thác chọn quỹ đạo đồng bộ mặt trời kiểu bình minh tới hoàng hôn cho các tải trọng ngốn điện?",
       "choices": [
-        "The atmosphere is measurably thinner along the terminator, so drag is lower",
+        "The atmosphere is measurably thinner along the terminator, so both the drag and the propellant needed to fight it drop away for a satellite in that plane",
         "The orbital plane stays close to the terminator, so the satellite is in sunlight almost all the time and eclipse periods nearly vanish",
-        "The Doppler shift is smallest in that particular plane",
-        "Ground station time is cheaper at dawn and at dusk"
+        "The Doppler shift seen by a ground terminal is smallest in that particular plane, which relaxes the frequency tracking loop of the receiver",
+        "Ground station time is cheaper at dawn and at dusk, when the shared antennas of the network are least contended"
       ],
       "answer": 1,
       "why": "With the plane edge on to the Sun the array sees continuous illumination, which removes the battery cycle and lets the payload draw power constantly. Atmospheric density and Doppler do not depend on the local time of the plane.",
@@ -1133,9 +1133,9 @@
       "q": "Why does a Molniya orbit serve high latitude users better than a geostationary slot?",
       "q_vi": "Vì sao quỹ đạo Molniya phục vụ người dùng ở vĩ độ cao tốt hơn một vị trí địa tĩnh?",
       "choices": [
-        "A Molniya orbit gives a shorter propagation delay at every point of its path",
-        "A Molniya orbit needs no station keeping of any kind",
-        "A Molniya satellite is effectively geostationary above the pole",
+        "A Molniya orbit keeps the propagation delay shorter than a geostationary one at every point along its path, including the apogee arc",
+        "A Molniya orbit needs no station keeping at all, because the highly eccentric shape is naturally stable under every known perturbation",
+        "A Molniya satellite hangs effectively geostationary above the pole for most of its period, so a fixed antenna up there can be aimed at it once during installation and then simply left alone",
         "The satellite moves slowly near apogee over the northern hemisphere and is seen there at a high elevation angle, whereas a geostationary satellite sits very low on the horizon"
       ],
       "answer": 3,
@@ -1149,9 +1149,9 @@
       "q_vi": "Độ nghiêng của quỹ đạo Molniya được chọn gần 63,4 độ vì tại giá trị đó",
       "choices": [
         "The J2 driven rotation of the line of apsides vanishes, so the apogee stays over the intended hemisphere for years",
-        "The orbit automatically becomes sun synchronous",
-        "Atmospheric drag reaches its minimum value",
-        "The orbital period becomes exactly twelve hours"
+        "The orbit automatically becomes sun synchronous, so the apogee always falls at the same local time",
+        "Atmospheric drag reaches its minimum value, because the perigee then sits above the dense layers",
+        "The orbital period becomes exactly twelve hours, which is what repeats the ground track daily"
       ],
       "answer": 0,
       "why": "The apsidal precession rate carries a factor that changes sign at the critical inclination, so the argument of perigee is frozen. The twelve hour period comes from the semi major axis, not from the inclination.",
@@ -1163,9 +1163,9 @@
       "q": "Two satellites have identical altitude and inclination but a different right ascension of the ascending node. What differs between them?",
       "q_vi": "Hai vệ tinh có cùng độ cao và cùng độ nghiêng nhưng khác xích kinh điểm nút lên. Chúng khác nhau ở chỗ nào?",
       "choices": [
-        "Their ground tracks reach different maximum latitudes",
-        "Their orbital periods differ",
-        "One of them is prograde and the other retrograde",
+        "Their ground tracks reach different maximum latitudes, so one covers the polar caps and the other does not",
+        "Their orbital periods differ, so the two satellites slowly drift apart along the track and lose their relative spacing over the whole mission",
+        "One of them travels prograde while the other travels retrograde, so the two meet head on twice on every revolution and their relative speed is enormous",
         "Their orbital planes are rotated with respect to each other about the Earth axis, so they sweep different longitudes at the same moment"
       ],
       "answer": 3,
@@ -1179,9 +1179,9 @@
       "q_vi": "Vì sao các vệ tinh trong cùng một mặt phẳng quỹ đạo thường được rải đều dọc theo quỹ đạo?",
       "choices": [
         "Even spacing minimises the worst case gap between successive passes over any point beneath that plane",
-        "It is the only arrangement that prevents collisions inside the plane",
-        "It is what makes their orbital periods identical",
-        "The ITU requires even spacing as a licensing condition"
+        "It is the only arrangement that keeps satellites in one plane from colliding with each other",
+        "It is what makes the orbital periods of all the satellites within that one plane identical to each other",
+        "The international regulator requires even spacing as a condition of the frequency licence"
       ],
       "answer": 0,
       "why": "The design objective is the largest gap, not the average one, and even spacing is what minimises it. The periods are already identical because the altitude is shared, and collision safety comes from control accuracy rather than from the nominal pattern.",
@@ -1193,9 +1193,9 @@
       "q": "In Walker notation, what does the phasing parameter control?",
       "q_vi": "Trong ký hiệu Walker, tham số pha điều khiển cái gì?",
       "choices": [
-        "The altitude difference between neighbouring planes",
-        "The inclination shared by all the planes",
-        "The number of planes in the constellation",
+        "The altitude difference between neighbouring planes, which staggers them vertically so that crossing satellites never meet",
+        "The inclination shared by all the planes, which is what fixes the highest latitude the constellation is able to reach",
+        "The number of planes in the constellation, which follows once the total satellite count and the altitude have been chosen",
         "The relative angular offset between satellites in adjacent planes, which decides how the coverage patterns of neighbouring planes interleave"
       ],
       "answer": 3,
@@ -1208,9 +1208,9 @@
       "q": "A paper reports average global coverage of ninety nine per cent for a proposed constellation. Why is that figure weak on its own?",
       "q_vi": "Một bài báo công bố vùng phủ toàn cầu trung bình 99 phần trăm cho chòm vệ tinh đề xuất. Vì sao riêng con số đó là yếu?",
       "choices": [
-        "Coverage should always be quoted per satellite rather than globally",
-        "Ninety nine per cent is below any usable service threshold",
-        "Coverage cannot be computed at all without a full link budget",
+        "Coverage should always be quoted per satellite rather than globally, because a global figure hides how efficiently each spacecraft is being used",
+        "Ninety nine per cent sits below any usable service threshold, since a broadband offer is normally sold at four nines or better in the service level agreement",
+        "Coverage cannot be computed at all without a full link budget, because visibility means nothing until the carrier closes",
         "An average hides where and for how long the gaps fall, and one per cent concentrated over the served region can break the service entirely"
       ],
       "answer": 3,
@@ -1223,10 +1223,10 @@
       "q": "Reporting only the mean end to end latency of a LEO route hides which important effect?",
       "q_vi": "Chỉ báo cáo độ trễ đầu cuối trung bình của tuyến LEO sẽ che mất hiệu ứng quan trọng nào?",
       "choices": [
-        "The mean is always larger than the maximum on an orbital path",
-        "Propagation delay does not contribute to end to end latency in orbit",
+        "The mean is always larger than the maximum on an orbital path, so quoting it overstates what the users of the system actually experience in practice",
+        "Propagation delay contributes nothing to end to end latency in orbit, so the mean reflects the queueing delay alone and nothing else",
         "The latency jumps at every topology change, so the tail and the variation matter far more than the mean for interactive traffic",
-        "The mean cannot be measured inside a simulator"
+        "The mean cannot be measured inside a simulator at all, since the packet timestamps come from the simulated clock"
       ],
       "answer": 2,
       "why": "Path changes every few minutes create step changes and reordering, and it is the tail that congestion control and interactive applications react to. A mean can look excellent while the service feels unstable.",
@@ -1239,9 +1239,9 @@
       "q_vi": "Độ dài dôi của đường định tuyến trong lưới vệ tinh đo cái gì?",
       "choices": [
         "How much longer the routed path is than the straight line distance, which exposes the cost of routing over a discrete grid of links",
-        "The increase in orbital period caused by atmospheric drag",
-        "The physical elongation of the satellite structure under thermal load",
-        "The extra bandwidth consumed by routing signalling"
+        "The increase in the orbital period caused by atmospheric drag acting across the whole mission lifetime",
+        "The physical elongation of the satellite structure under the solar thermal load that it takes on during each revolution of the orbit",
+        "The extra bandwidth consumed by the routing signalling that the constantly changing topology keeps generating between the satellites of the constellation"
       ],
       "answer": 0,
       "why": "Traffic must follow the grid of intra plane and inter plane links rather than a straight line, so the realised delay is always above the theoretical minimum. Path stretch is the number that tells you how much of the promised latency advantage survives.",
@@ -1253,10 +1253,10 @@
       "q": "In a constellation with inter satellite links, traffic still concentrates near a few gateways. What does that tell you?",
       "q_vi": "Trong chòm vệ tinh có liên kết liên vệ tinh, lưu lượng vẫn dồn về vài trạm cổng. Điều đó cho thấy gì?",
       "choices": [
-        "The inter satellite links must be misconfigured",
-        "The routing algorithm is ignoring the inter satellite links entirely",
+        "The inter satellite links must be misconfigured, since a working mesh spreads traffic evenly",
+        "The routing algorithm is ignoring the inter satellite links and quietly falling back to bent pipe paths through the nearest available gateway",
         "Most flows terminate on the terrestrial internet, so inter satellite links move the bottleneck rather than removing it",
-        "The gateways have been given far too much capacity"
+        "The gateways have been given far too much capacity, which attracts flows that could just as easily have stayed up in orbit"
       ],
       "answer": 2,
       "why": "Space routing only helps between two points that are both in space. As long as the content lives on the ground, every flow needs a gateway and the feeder link capacity remains the binding constraint.",
@@ -1268,10 +1268,10 @@
       "q": "A gateway suffers a deep fade and its feeder link drops. In a constellation with inter satellite links, what becomes possible that a bent pipe system cannot do?",
       "q_vi": "Một trạm cổng gặp suy hao sâu và tuyến cấp nguồn rớt. Trong chòm có liên kết liên vệ tinh, điều gì trở nên khả thi mà hệ kiểu ống cong không làm được?",
       "choices": [
-        "The satellite can raise its downlink power without any limit",
-        "The user terminals can connect directly to one another",
+        "The satellite can raise its downlink power without limit, because the faded gateway frees up amplifier headroom",
+        "The user terminals can connect straight to one another, since the mesh lets them bypass the space segment",
         "Traffic can be carried in orbit to another satellite that is serving a different, unaffected gateway",
-        "The affected beam can change to a completely different frequency band"
+        "The affected beam can be moved to a completely different frequency band where the rain attenuation is lower"
       ],
       "answer": 2,
       "why": "Inter satellite links decouple the user beam from the gateway that happens to be underneath, so a fade becomes a routing event rather than an outage. In a bent pipe system the satellite serving the user must also see a working gateway.",
@@ -1283,9 +1283,9 @@
       "q": "In a classic star network of very small aperture terminals over a geostationary satellite, why does terminal to terminal traffic suffer roughly half a second in one direction?",
       "q_vi": "Trong mạng hình sao cổ điển gồm các trạm khẩu độ rất nhỏ qua vệ tinh địa tĩnh, vì sao lưu lượng giữa hai trạm phải chịu khoảng nửa giây cho một chiều?",
       "choices": [
-        "The terminals are forced to use a very slow modulation scheme",
-        "The satellite must translate the signal into a different frequency band between the hops",
-        "The hub adds about half a second of processing delay",
+        "The terminals are forced onto a very slow modulation scheme, and the symbol time accounts for the delay",
+        "The satellite has to translate the signal into a different frequency band between the two hops, and that costs real time",
+        "The hub adds about half a second of processing delay while it demodulates and reframes the traffic",
         "Each direction needs two hops through the satellite, once up to the hub and once back out to the far terminal"
       ],
       "answer": 3,
@@ -1298,9 +1298,9 @@
       "q": "What does an onboard switching payload allow a network of very small aperture terminals to do?",
       "q_vi": "Tải trọng có chuyển mạch trên quỹ đạo cho phép mạng các trạm khẩu độ rất nhỏ làm được điều gì?",
       "choices": [
-        "Use the same frequency for the uplink and the downlink",
-        "Work with no link margin, because the signal is regenerated in orbit",
-        "Operate without any hub at all, including for network management and provisioning",
+        "Use one and the same frequency for the uplink and the downlink of every terminal",
+        "Work with no link margin at all, because the signal is regenerated cleanly in orbit",
+        "Operate with no hub at all, including for the management, provisioning and billing of users",
         "Connect terminal to terminal in a single hop, cutting the delay roughly in half"
       ],
       "answer": 3,
@@ -1313,10 +1313,10 @@
       "q": "Two geostationary satellites are two degrees apart in longitude and share the same band. What limits how small the Earth station antenna may be?",
       "q_vi": "Hai vệ tinh địa tĩnh cách nhau 2 độ kinh và dùng chung băng tần. Điều gì giới hạn kích thước nhỏ nhất của ăng-ten trạm mặt đất?",
       "choices": [
-        "A smaller antenna cannot be pointed accurately enough to hit a two degree target",
+        "A smaller antenna cannot be pointed accurately enough to hit a target only two degrees wide",
         "A smaller antenna has a wider beam, so it cannot separate the two satellites and picks up the neighbour as interference",
-        "A smaller antenna has a lower noise temperature, which raises the interference level",
-        "Regulation fixes a minimum diameter regardless of the actual geometry"
+        "A smaller antenna runs at a lower noise temperature, which lifts the interference level relative to the noise floor of the receiving chain",
+        "Regulation fixes a minimum reflector diameter for that band, regardless of the actual geometry of the geostationary arc involved"
       ],
       "answer": 1,
       "why": "Beamwidth is inversely proportional to aperture, so below a certain size the adjacent satellite falls inside the main lobe on both transmit and receive. Pointing to within two degrees is easy, and the limit is angular discrimination rather than a fixed legal diameter.",
@@ -1329,9 +1329,9 @@
       "q_vi": "Cơ quan quản lý áp một mặt nạ mật độ công suất bức xạ ngoài trục cho các trạm mặt đất phát. Cái đó bảo vệ điều gì?",
       "choices": [
         "Adjacent satellites, which would otherwise receive the sidelobe energy of a poorly designed or mispointed antenna",
-        "Aircraft that might fly through the beam",
-        "The satellite the station is pointing at, which would otherwise be overloaded",
-        "The operating staff, from radiation exposure near the antenna"
+        "Aircraft that might fly straight through the main beam of the transmitting Earth station",
+        "The wanted satellite itself, whose receiver front end would otherwise be driven into overload",
+        "The operating staff, from radiation exposure while they work close to the transmitting antenna"
       ],
       "answer": 0,
       "why": "The mask is an interference rule expressed in the angular domain, and the neighbours along the geostationary arc are the victims it protects. Overload of the wanted satellite and human exposure are governed by entirely separate limits.",
@@ -1343,10 +1343,10 @@
       "q": "Two independent non geostationary constellations overlap in band and altitude. Why is coordination between them harder than between two geostationary systems?",
       "q_vi": "Hai chòm phi địa tĩnh độc lập trùng nhau về băng tần và độ cao. Vì sao điều phối giữa chúng khó hơn giữa hai hệ địa tĩnh?",
       "choices": [
-        "Non geostationary systems are technically unable to switch beams off",
+        "Non geostationary systems are technically unable to switch a beam off, so the only remedy left is to change the frequency plan",
         "Neither system has a fixed position, so the interference geometry keeps changing and the classic rule based on a static angular separation no longer applies",
-        "Non geostationary systems are always assigned the same polarisation",
-        "Neither system is registered with the international regulator"
+        "Non geostationary systems are always assigned the same polarisation, so the usual orthogonality argument cannot be invoked at all",
+        "Neither system is registered with the international regulator, so there is no filing date on which a priority order could rest"
       ],
       "answer": 1,
       "why": "Geostationary coordination rests on the fact that both parties stay at fixed longitudes, which turns protection into a simple angular rule. With two moving constellations the conjunction events are statistical, so the agreement has to be about behaviour over time rather than about geometry.",
@@ -1358,10 +1358,10 @@
       "q": "Direct to smartphone service from low orbit is hard mainly because",
       "q_vi": "Dịch vụ nối thẳng tới điện thoại thông minh từ quỹ đạo thấp khó chủ yếu vì",
       "choices": [
-        "Handsets are physically unable to compensate any Doppler shift",
+        "Handsets are physically unable to compensate any Doppler shift at all, so the carrier drifts straight out of the search window during a pass and the connection is always dropped",
         "The handset has a low gain antenna and a strict power limit, so the satellite must supply enormous beam gain and the achievable spectral efficiency stays low",
-        "Smartphones cannot receive any frequency above one gigahertz",
-        "The propagation delay from low orbit is too large for voice service"
+        "Smartphones cannot receive anything above one gigahertz, so the service is confined to the bands that are already heavily crowded with terrestrial mobile use today",
+        "The propagation delay from low orbit is far too large for voice service, since the round trip already exceeds the conversational budget that the codec and the human ear will tolerate"
       ],
       "answer": 1,
       "why": "The whole link budget has to be closed on the satellite side, since the terminal is fixed by the phone market. Delay from low orbit is a few milliseconds, and handsets already correct Doppler routinely for high speed rail.",
@@ -1373,10 +1373,10 @@
       "q": "To serve handsets, some satellites carry an antenna aperture of tens of metres. Beyond the deployment risk, what does that force on the system design?",
       "q_vi": "Để phục vụ điện thoại, một số vệ tinh mang khẩu độ ăng-ten cỡ hàng chục mét. Ngoài rủi ro triển khai, điều đó buộc thiết kế hệ thống phải gánh thêm gì?",
       "choices": [
-        "The satellite must be moved to a higher orbit to fit the antenna pattern",
+        "The satellite has to be moved into a much higher orbit so that the very narrow pattern still covers a useful area on the ground beneath the spacecraft",
         "The beams become very narrow relative to the coverage area, so many beams must be formed and managed at once and the beam handover rate climbs",
-        "The uplink and the downlink must share a single frequency",
-        "Station keeping is no longer needed because the structure stabilises the attitude"
+        "The uplink and the downlink have to share a single frequency, because one aperture that large cannot be diplexed cleanly",
+        "Station keeping is no longer needed, because the large structure damps the attitude and stabilises the orbit by itself against every perturbation"
       ],
       "answer": 1,
       "why": "Gain and beamwidth are two views of the same aperture, so the gain needed to reach a phone produces cells far smaller than the footprint. That multiplies the beamforming, scheduling and mobility load rather than reducing anything.",
@@ -1388,10 +1388,10 @@
       "q": "The main benefit of splitting one wide beam into many spot beams is",
       "q_vi": "Lợi ích chính của việc chia một búp sóng rộng thành nhiều búp sóng điểm là",
       "choices": [
-        "A lower required orbital altitude",
-        "A larger total footprint on the ground",
+        "A lower orbital altitude for the same covered area on the ground, since the narrow beams do reach further down",
+        "A larger total footprint on the ground than a single wide beam gives from the same orbit",
         "Higher gain in each beam plus the chance to reuse the same frequency in beams that are far enough apart",
-        "A shorter propagation delay to the users"
+        "A shorter propagation delay towards each user, because the beam path is more direct"
       ],
       "answer": 2,
       "why": "Both effects come from the same narrowing of the beam, and together they are what turns a broadcast satellite into a broadband one. The total footprint and the delay are set by the orbit, not by the beam plan.",
@@ -1403,10 +1403,10 @@
       "q": "Which pair of changes both raise the capacity delivered per square kilometre of served area?",
       "q_vi": "Cặp thay đổi nào đều làm tăng dung lượng cung cấp trên mỗi kilômét vuông vùng phục vụ?",
       "choices": [
-        "A lower carrier frequency together with wider beams",
+        "A lower carrier frequency combined with wider beams",
         "Smaller beams together with more aggressive frequency reuse",
-        "A higher orbit together with wider beams",
-        "Fewer gateways together with larger beams"
+        "A higher orbit combined with correspondingly wider beams",
+        "Fewer gateways and correspondingly larger beams"
       ],
       "answer": 1,
       "why": "Capacity density is spectrum multiplied by how many times it is reused per unit area, so shrinking the cell is the direct lever. Every other option makes each beam cover more ground, which dilutes the same spectrum over more users.",
@@ -1418,9 +1418,9 @@
       "q": "As a multibeam system packs its beams more tightly, performance stops improving even when more satellite power is added. What has happened?",
       "q_vi": "Khi hệ đa búp sóng xếp các búp ngày càng sát nhau, hiệu năng ngừng cải thiện dù có tăng thêm công suất vệ tinh. Chuyện gì đã xảy ra?",
       "choices": [
-        "The receivers in the terminals have gone into saturation",
-        "The amplifiers have reached their thermal dissipation limit",
-        "The free space path loss has increased with the number of beams",
+        "The receivers in the terminals have gone into saturation, so extra power no longer reaches the demodulator",
+        "The amplifiers have reached their thermal dissipation limit, so the extra power never actually leaves the spacecraft and the beams see no change at all",
+        "The free space path loss has risen with the number of beams, since each of them now covers a much smaller solid angle on the ground below",
         "The system has become interference limited, so the wanted signal and the interference grow together and their ratio no longer improves"
       ],
       "answer": 3,
@@ -1433,9 +1433,9 @@
       "q": "In a dense city, a LEO operator raises the minimum elevation angle to forty degrees. What is bought and what is paid?",
       "q_vi": "Ở một thành phố dày đặc nhà cao tầng, nhà khai thác LEO nâng góc ngẩng tối thiểu lên 40 độ. Được gì và mất gì?",
       "choices": [
-        "Nothing is paid, because a higher elevation angle is better in every respect",
-        "The link budget worsens but the geographic coverage improves",
-        "The Doppler shift is eliminated at the price of capacity",
+        "Nothing is paid, because a higher elevation angle improves every figure in the link budget at once",
+        "The link budget gets noticeably worse, while the geographic coverage of the constellation improves",
+        "The Doppler shift is eliminated altogether, at the price of a large part of the delivered capacity",
         "Blockage by buildings falls sharply, at the price of shorter usable passes and a need for more satellites simultaneously in view"
       ],
       "answer": 3,
@@ -1449,9 +1449,9 @@
       "q_vi": "Thử nghiệm hiện trường cho thấy thông lượng của một đầu cuối LEO sụt trong một tới hai giây, lặp lại đều đặn vài phút một lần. Giải thích khả dĩ nhất là gì?",
       "choices": [
         "Satellite handover, since the terminal must reacquire the new satellite and the scheduler restarts on the new link",
-        "Solar interference, which occurs several times every hour",
-        "A change in the orbital period of the constellation",
-        "Rain fade, which naturally follows the same period"
+        "Solar interference, which lines the Sun up behind the satellite several times every hour",
+        "A change in the orbital period of the constellation, which shifts the schedule each pass",
+        "Rain fade, which over a moving convective cell naturally follows the same periodic pattern"
       ],
       "answer": 0,
       "why": "The period matches the pass duration, which points at a geometry driven event rather than a weather driven one. Rain is not periodic on a minute scale and solar conjunction happens on two short seasons per year.",
@@ -1463,9 +1463,9 @@
       "q": "Twice a year a geostationary link fails for a few minutes around local noon on several consecutive days. What is happening?",
       "q_vi": "Mỗi năm hai lần, một tuyến địa tĩnh mất dịch vụ vài phút quanh giữa trưa trong vài ngày liên tiếp. Chuyện gì đang xảy ra?",
       "choices": [
-        "The satellite enters eclipse and shuts down its transmitter",
-        "The station reference clock drifts at the equinox",
-        "Atmospheric refraction bends the beam away from the antenna",
+        "The satellite enters eclipse at that hour and shuts its transmitter down to protect the batteries",
+        "The reference clock of the station drifts around the equinox, so the demodulator loses its timing lock every noon",
+        "Atmospheric refraction bends the beam away from the antenna as the air heats up around noon",
         "The Sun lines up behind the satellite as seen from the station, so the receiver is flooded with solar noise"
       ],
       "answer": 3,
@@ -1479,9 +1479,9 @@
       "q_vi": "Nhà khai thác địa tĩnh báo cáo cả giai đoạn vào bóng tối lẫn gián đoạn do Mặt Trời quanh các ngày phân. Hai hiện tượng đó khác nhau thế nào?",
       "choices": [
         "In eclipse the satellite loses sunlight and runs on batteries, while in a sun outage the Earth station points at the Sun and its noise temperature rises",
-        "They are two names for exactly the same event",
-        "Eclipse affects the uplink while sun outage affects the downlink transmit power",
-        "Eclipse lasts a few minutes while sun outage lasts several hours"
+        "They are two names for exactly the same event, described once from the spacecraft that loses its power and once from the ground station that loses the signal it was tracking",
+        "Eclipse degrades only the uplink of the station, while a sun outage forces the satellite to cut back the transmit power of its downlink for the whole duration",
+        "An eclipse lasts only a few minutes, while a sun outage runs on for several hours on each of the days that it affects and takes the whole gateway out of service for that season"
       ],
       "answer": 0,
       "why": "One is a power problem aboard the spacecraft and the other is a noise problem at the ground station, and they happen in the same season because both depend on the Sun crossing the equatorial plane. Eclipse is the longer of the two, lasting up to about seventy minutes, while an outage lasts minutes.",
@@ -1493,9 +1493,9 @@
       "q": "A reviewer asks why a SAGIN paper reports throughput and latency gains without any link budget. What is the substantive objection?",
       "q_vi": "Phản biện hỏi vì sao một bài báo về SAGIN công bố mức cải thiện thông lượng và độ trễ mà không có bài toán cân bằng tuyến nào. Phản đối thực chất ở đây là gì?",
       "choices": [
-        "A link budget would prove that the proposed routing algorithm is optimal",
-        "The link budget is what determines the orbital period used in the simulation",
-        "Journal templates require a link budget section in every satellite paper",
+        "A link budget would be what proves the proposed routing algorithm optimal against the baseline it is compared with",
+        "The link budget is what determines the orbital period assumed in the simulation, so the topology traces are unusable",
+        "Journal templates for satellite papers require a link budget section, so the submission is formally incomplete",
         "Without a link budget the assumed data rates may be physically unreachable, so every reported gain rests on an unverified premise"
       ],
       "answer": 3,
