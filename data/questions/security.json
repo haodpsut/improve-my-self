@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "id": "security",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qsec-1",
+      "q": "An anomaly-based IDS reports 99.5% detection but analysts ignore its alerts. The most likely reason is",
+      "q_vi": "Một hệ phát hiện xâm nhập theo bất thường báo tỉ lệ phát hiện 99,5% nhưng người phân tích lờ cảnh báo của nó. Lý do khả dĩ nhất là",
+      "choices": [
+        "The false positive rate is high enough that most alerts are benign",
+        "The detection rate was computed on the training set",
+        "The system cannot log events",
+        "The signatures are out of date"
+      ],
+      "answer": 0,
+      "why": "With a low base rate of real attacks, even a small false positive rate buries the true alerts. Detection rate alone never describes an operational detector.",
+      "why_vi": "Khi tấn công thật vốn hiếm, chỉ cần tỉ lệ báo động giả nhỏ cũng đủ chôn vùi các cảnh báo thật. Riêng tỉ lệ phát hiện không bao giờ mô tả được một bộ phát hiện đang vận hành.",
+      "level": 3
+    },
+    {
+      "id": "qsec-2",
+      "q": "The essential difference between signature-based and anomaly-based detection is",
+      "q_vi": "Khác biệt cốt lõi giữa phát hiện theo dấu hiệu và theo bất thường là",
+      "choices": [
+        "Signatures match known attacks precisely, anomaly detection flags deviation from normal",
+        "Signatures work only on encrypted traffic",
+        "Anomaly detection needs no training data",
+        "Signatures detect zero-days better"
+      ],
+      "answer": 0,
+      "why": "Signatures cannot see what has never been catalogued, which is exactly what a zero-day is. Anomaly methods can, and pay for it in false alarms.",
+      "why_vi": "Dấu hiệu không thấy được thứ chưa từng được lập danh mục, mà đó chính là định nghĩa lỗ hổng chưa có bản vá. Phương pháp bất thường thấy được, và trả giá bằng báo động giả.",
+      "level": 2
+    },
+    {
+      "id": "qsec-3",
+      "q": "Zero trust architecture is built on the assumption that",
+      "q_vi": "Kiến trúc tin cậy bằng không dựa trên giả định rằng",
+      "choices": [
+        "No network location is inherently trustworthy, so every request is verified",
+        "The internal network is safe once the perimeter holds",
+        "Encryption alone is sufficient security",
+        "Users never make mistakes"
+      ],
+      "answer": 0,
+      "why": "It replaces the castle and moat model. Being inside the corporate network grants nothing by itself, which is what stops lateral movement after one host falls.",
+      "why_vi": "Nó thay thế mô hình thành trì và hào nước. Việc đang ở trong mạng nội bộ tự nó không cấp quyền gì, nhờ vậy chặn được di chuyển ngang sau khi một máy bị chiếm.",
+      "level": 2
+    },
+    {
+      "id": "qsec-4",
+      "q": "A defence is proposed with no stated threat model. The core problem is",
+      "q_vi": "Một biện pháp phòng thủ được đề xuất mà không nêu mô hình mối đe dọa. Vấn đề cốt lõi là",
+      "choices": [
+        "There is no way to say what it defends against, so it cannot be evaluated",
+        "It will be too slow in practice",
+        "It cannot be implemented in software",
+        "It will violate privacy regulations"
+      ],
+      "answer": 0,
+      "why": "Security claims are relative to an adversary. Without specifying what the attacker knows and can do, both success and failure are undefined.",
+      "why_vi": "Mọi khẳng định an ninh đều tương đối với một đối thủ. Không nói rõ kẻ tấn công biết gì và làm được gì thì cả thành công lẫn thất bại đều không xác định.",
+      "level": 3
+    },
+    {
+      "id": "qsec-5",
+      "q": "An adversarial example is dangerous because",
+      "q_vi": "Mẫu đối kháng nguy hiểm vì",
+      "choices": [
+        "A perturbation invisible to a human flips the model's decision",
+        "It deletes the model weights",
+        "It requires physical access to the server",
+        "It only works on unencrypted networks"
+      ],
+      "answer": 0,
+      "why": "Human review does not catch it, because to a human nothing changed. That breaks the usual assumption that a person can audit the input.",
+      "why_vi": "Người kiểm tra không bắt được, vì với mắt người thì không có gì thay đổi. Điều đó phá vỡ giả định thường thấy rằng con người có thể soi lại đầu vào.",
+      "level": 2
+    },
+    {
+      "id": "qsec-6",
+      "q": "Quishing is harder to spot than email phishing mainly because",
+      "q_vi": "Lừa đảo qua mã QR khó phát hiện hơn lừa đảo qua email chủ yếu vì",
+      "choices": [
+        "The destination URL is not visible before the user acts on it",
+        "QR codes cannot be scanned by security tools",
+        "It only targets mobile devices",
+        "It bypasses TLS"
+      ],
+      "answer": 0,
+      "why": "The usual defence is teaching people to inspect a link. A QR code removes exactly that step, and printed codes also sit outside the mail gateway's reach.",
+      "why_vi": "Cách phòng vệ thông thường là dạy người dùng soi đường liên kết. Mã QR xoá đúng bước đó, và mã in ra giấy còn nằm ngoài tầm với của cổng lọc thư.",
+      "level": 2
+    },
+    {
+      "id": "qsec-7",
+      "q": "A provenance graph is used in intrusion detection to",
+      "q_vi": "Đồ thị nguồn gốc được dùng trong phát hiện xâm nhập để",
+      "choices": [
+        "Reconstruct causal chains between processes, files and connections",
+        "Encrypt the audit log",
+        "Compress network traffic captures",
+        "Generate firewall rules automatically"
+      ],
+      "answer": 0,
+      "why": "Individual events are meaningless. Linking them causally is what turns a stream of syscalls into an attack story you can reason about.",
+      "why_vi": "Từng sự kiện riêng lẻ không có nghĩa. Nối chúng theo quan hệ nhân quả mới biến dòng lời gọi hệ thống thành một câu chuyện tấn công có thể lập luận được.",
+      "level": 3
+    },
+    {
+      "id": "qsec-8",
+      "q": "Which pair correctly matches the security goal to the mechanism?",
+      "q_vi": "Cặp nào ghép đúng mục tiêu an ninh với cơ chế?",
+      "choices": [
+        "Integrity with a cryptographic hash or digital signature",
+        "Confidentiality with a checksum",
+        "Availability with symmetric encryption",
+        "Integrity with rate limiting"
+      ],
+      "answer": 0,
+      "why": "Hashes and signatures detect modification, which is integrity. Encryption serves confidentiality, and rate limiting serves availability.",
+      "why_vi": "Hàm băm và chữ ký phát hiện việc bị sửa, tức là toàn vẹn. Mã hoá phục vụ tính bí mật, còn giới hạn tốc độ phục vụ tính sẵn sàng.",
+      "level": 1
+    },
+    {
+      "id": "qsec-9",
+      "q": "A gradient inversion attack in federated learning shows that",
+      "q_vi": "Tấn công đảo ngược gradient trong học liên kết cho thấy",
+      "choices": [
+        "Uploading gradients instead of data is not automatically private",
+        "Federated learning cannot converge",
+        "Clients must share their raw data",
+        "Encryption is unnecessary in federated settings"
+      ],
+      "answer": 0,
+      "why": "Gradients are a function of the input and can be inverted to recover recognisable samples. This is why secure aggregation and differential privacy are added on top.",
+      "why_vi": "Gradient là hàm của đầu vào và có thể bị đảo ngược để khôi phục các mẫu nhận ra được. Vì vậy người ta phải thêm tổng hợp an toàn và riêng tư vi phân lên trên.",
+      "level": 3
+    },
+    {
+      "id": "qsec-10",
+      "q": "Reporting only clean-data accuracy for a security classifier is insufficient because",
+      "q_vi": "Chỉ báo cáo độ chính xác trên dữ liệu sạch cho bộ phân loại an ninh là chưa đủ vì",
+      "choices": [
+        "An attacker will choose inputs the model was never evaluated on",
+        "Clean accuracy is always lower than robust accuracy",
+        "Security datasets are always balanced",
+        "Accuracy cannot be measured on encrypted traffic"
+      ],
+      "answer": 0,
+      "why": "Security is an adversarial setting, so the relevant number is performance under the attack, not on the average sample. Robust accuracy is normally much lower.",
+      "why_vi": "An ninh là môi trường đối kháng, nên con số đáng quan tâm là hiệu năng khi bị tấn công, không phải trên mẫu trung bình. Độ chính xác bền vững thường thấp hơn nhiều.",
+      "level": 3
+    }
+  ]
+}

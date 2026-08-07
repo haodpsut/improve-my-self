@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "id": "ai",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qa-1",
+      "q": "Training accuracy keeps rising while validation accuracy has been falling for twenty epochs. This is",
+      "q_vi": "Độ chính xác trên tập huấn luyện vẫn tăng còn trên tập kiểm định đã giảm suốt hai mươi epoch. Đây là",
+      "choices": ["Overfitting", "Underfitting", "Data leakage", "Vanishing gradient"],
+      "answer": 0,
+      "why": "The model is memorising the training set. Leakage would show the opposite pattern, an unrealistically good validation score.",
+      "why_vi": "Mô hình đang học thuộc tập huấn luyện. Rò rỉ dữ liệu sẽ cho biểu hiện ngược lại, tức điểm kiểm định tốt một cách phi lý.",
+      "level": 1
+    },
+    {
+      "id": "qa-2",
+      "q": "You normalise the whole dataset with its global mean before splitting into train and test. What have you done?",
+      "q_vi": "Bạn chuẩn hoá toàn bộ dữ liệu bằng trung bình toàn cục rồi mới chia tập huấn luyện và kiểm tra. Bạn vừa làm gì?",
+      "choices": [
+        "Leaked test statistics into training, so the reported score is optimistic",
+        "Nothing wrong, this is standard practice",
+        "Reduced the model's capacity",
+        "Introduced a vanishing gradient"
+      ],
+      "answer": 0,
+      "why": "The mean carries information from the test set. Fit the scaler on the training split only, then apply it to the test split.",
+      "why_vi": "Giá trị trung bình đã mang thông tin của tập kiểm tra. Phải khớp bộ chuẩn hoá chỉ trên phần huấn luyện, rồi mới áp lên phần kiểm tra.",
+      "level": 3
+    },
+    {
+      "id": "qa-3",
+      "q": "The Transformer replaced recurrence with",
+      "q_vi": "Transformer thay thế cơ chế hồi quy bằng",
+      "choices": ["Self-attention over the whole sequence", "Deeper convolutions", "Larger embedding tables", "Reinforcement learning"],
+      "answer": 0,
+      "why": "Attention lets every position see every other position in one step, which both removes the sequential bottleneck and shortens the gradient path.",
+      "why_vi": "Cơ chế chú ý cho mỗi vị trí nhìn thấy mọi vị trí khác chỉ trong một bước, vừa xoá nút thắt tuần tự vừa rút ngắn đường đi của gradient.",
+      "level": 1
+    },
+    {
+      "id": "qa-4",
+      "q": "Your new architecture has 3x more parameters than the baseline and scores higher. To make the comparison fair you should",
+      "q_vi": "Kiến trúc mới của bạn có số tham số gấp ba lần đối chứng và cho điểm cao hơn. Để so sánh công bằng, bạn nên",
+      "choices": [
+        "Re-run the baseline scaled to a matched parameter and compute budget",
+        "Report the result as is, since the score is higher",
+        "Reduce the test set size",
+        "Train the baseline for fewer epochs"
+      ],
+      "answer": 0,
+      "why": "Without a matched budget you have shown that more capacity helps, not that your idea helps. This is the single most common reviewer objection.",
+      "why_vi": "Không khớp ngân sách thì bạn mới chứng minh được rằng nhiều tham số hơn thì tốt hơn, chứ chưa chứng minh ý tưởng của bạn tốt. Đây là điểm phản biện hay bắt lỗi nhất.",
+      "level": 3
+    },
+    {
+      "id": "qa-5",
+      "q": "RAG reduces hallucination mainly because",
+      "q_vi": "RAG giảm ảo giác chủ yếu vì",
+      "choices": [
+        "The answer is conditioned on retrieved passages you control, and can be cited",
+        "It retrains the model on every query",
+        "It makes the model larger",
+        "It removes the need for a context window"
+      ],
+      "answer": 0,
+      "why": "The model still generates freely. What changes is that the relevant evidence is placed in context and the output can be checked against it.",
+      "why_vi": "Mô hình vẫn sinh tự do. Cái khác là bằng chứng liên quan được đặt vào ngữ cảnh và đầu ra có thể đối chiếu lại với nó.",
+      "level": 2
+    },
+    {
+      "id": "qa-6",
+      "q": "In-context learning differs from fine-tuning because it",
+      "q_vi": "Học trong ngữ cảnh khác tinh chỉnh ở chỗ nó",
+      "choices": [
+        "Changes behaviour through the prompt without updating any weights",
+        "Requires a labelled dataset of at least ten thousand examples",
+        "Permanently modifies the model",
+        "Only works for classification"
+      ],
+      "answer": 0,
+      "why": "Nothing is stored. Once the prompt is gone the behaviour is gone, which is both its flexibility and its limit.",
+      "why_vi": "Không có gì được lưu lại. Hết câu nhắc là hết hành vi đó, vừa là điểm linh hoạt vừa là giới hạn của nó.",
+      "level": 2
+    },
+    {
+      "id": "qa-7",
+      "q": "An ablation study is used to show",
+      "q_vi": "Nghiên cứu loại bỏ thành phần được dùng để chỉ ra",
+      "choices": [
+        "Which component actually causes the reported improvement",
+        "That the model beats every published baseline",
+        "That the dataset is large enough",
+        "That the code runs without errors"
+      ],
+      "answer": 0,
+      "why": "Beating baselines shows the system works. Only ablation shows why, and it is the evidence that supports any causal claim in the paper.",
+      "why_vi": "Thắng đối chứng chỉ cho thấy hệ chạy được. Chỉ có thí nghiệm loại bỏ mới cho thấy vì sao, và đó là bằng chứng chống đỡ cho mọi khẳng định nhân quả trong bài.",
+      "level": 2
+    },
+    {
+      "id": "qa-8",
+      "q": "A graph neural network is preferable to a plain feed-forward network when",
+      "q_vi": "Mạng nơ-ron đồ thị hợp hơn mạng truyền thẳng thường khi",
+      "choices": [
+        "The relations between entities carry information the model should exploit",
+        "The dataset is very small",
+        "All inputs have exactly the same length",
+        "The task is purely a regression"
+      ],
+      "answer": 0,
+      "why": "If you flatten a graph into a vector you throw away the topology. Message passing keeps it, which is why routing and molecular tasks use it.",
+      "why_vi": "Nếu ép đồ thị thành vector thì bạn vứt bỏ tô-pô. Cơ chế truyền thông điệp giữ được nó, vì vậy các bài toán định tuyến và phân tử hay dùng.",
+      "level": 2
+    },
+    {
+      "id": "qa-9",
+      "q": "You report a single accuracy number from one training run. The core problem is",
+      "q_vi": "Bạn báo cáo một con số độ chính xác duy nhất từ một lần chạy. Vấn đề cốt lõi là",
+      "choices": [
+        "Run to run variance is unknown, so the difference from the baseline may be noise",
+        "The number will be too low",
+        "The model will overfit",
+        "The test set will leak"
+      ],
+      "answer": 0,
+      "why": "Random initialisation and data order alone can move the score by more than most claimed gains. Multiple seeds with a spread are the minimum.",
+      "why_vi": "Chỉ riêng khởi tạo ngẫu nhiên và thứ tự dữ liệu đã có thể làm điểm dao động hơn phần lớn mức cải thiện được công bố. Tối thiểu phải chạy nhiều hạt giống và báo độ tản.",
+      "level": 3
+    },
+    {
+      "id": "qa-10",
+      "q": "Which best describes a hallucination in an LLM?",
+      "q_vi": "Điều nào mô tả đúng nhất hiện tượng ảo giác của mô hình ngôn ngữ lớn?",
+      "choices": [
+        "Fluent, confident output that is factually wrong",
+        "A crash during generation",
+        "Output that repeats the prompt verbatim",
+        "A refusal to answer"
+      ],
+      "answer": 0,
+      "why": "The danger is precisely that it looks like every correct answer the model gives. Confidence carries no information about correctness.",
+      "why_vi": "Nguy hiểm nằm ở chỗ nó trông hệt như mọi câu trả lời đúng khác của mô hình. Mức tự tin không nói lên điều gì về tính đúng.",
+      "level": 1
+    }
+  ]
+}

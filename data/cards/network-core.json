@@ -1,0 +1,335 @@
+{
+  "schema": 1,
+  "id": "network-core",
+  "updated": "2026-08-07",
+  "cards": [
+    {
+      "id": "n-osi",
+      "en": "OSI model",
+      "vi": "Mô hình bảy tầng OSI",
+      "def_en": "A seven layer reference model that splits communication into physical, data link, network, transport, session, presentation and application.",
+      "def_vi": "Mô hình tham chiếu bảy tầng, chia truyền thông thành vật lý, liên kết dữ liệu, mạng, giao vận, phiên, trình diễn và ứng dụng.",
+      "say": "The problem sits at the transport layer, not the physical layer.",
+      "tags": ["model"]
+    },
+    {
+      "id": "n-tcpip",
+      "en": "TCP/IP stack",
+      "vi": "Chồng giao thức TCP/IP",
+      "def_en": "The four layer model actually used on the internet: link, internet, transport and application.",
+      "def_vi": "Mô hình bốn tầng dùng thực tế trên internet: liên kết, liên mạng, giao vận và ứng dụng.",
+      "tags": ["model"]
+    },
+    {
+      "id": "n-encapsulation",
+      "en": "Encapsulation",
+      "vi": "Đóng gói dữ liệu",
+      "def_en": "Wrapping the data of one layer inside the header and payload of the layer below.",
+      "def_vi": "Bọc dữ liệu của một tầng vào phần tiêu đề và tải của tầng dưới.",
+      "tags": ["model"]
+    },
+    {
+      "id": "n-packet",
+      "en": "Packet",
+      "vi": "Gói tin",
+      "def_en": "A formatted unit of data carried by a packet switched network.",
+      "def_vi": "Đơn vị dữ liệu có định dạng, được mạng chuyển mạch gói vận chuyển.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "n-frame",
+      "en": "Frame",
+      "vi": "Khung dữ liệu",
+      "def_en": "The data unit at the link layer, carrying a packet plus link level addressing and checks.",
+      "def_vi": "Đơn vị dữ liệu ở tầng liên kết, chở một gói tin kèm địa chỉ và mã kiểm tra mức liên kết.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "n-mtu",
+      "en": "MTU (Maximum Transmission Unit)",
+      "vi": "Kích thước gói lớn nhất truyền được",
+      "def_en": "The largest payload a link can carry in one frame without fragmentation.",
+      "def_vi": "Tải lớn nhất mà một liên kết chở được trong một khung mà không phải phân mảnh.",
+      "say": "A mismatched maximum transmission unit silently kills large transfers.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "n-tcp",
+      "en": "TCP (Transmission Control Protocol)",
+      "vi": "Giao thức điều khiển truyền dẫn",
+      "def_en": "A connection oriented transport protocol giving reliable, ordered delivery with flow and congestion control.",
+      "def_vi": "Giao thức giao vận hướng kết nối, bảo đảm truyền tin cậy, đúng thứ tự, có điều khiển luồng và tắc nghẽn.",
+      "say": "The transmission control protocol trades latency for reliability.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-udp",
+      "en": "UDP (User Datagram Protocol)",
+      "vi": "Giao thức gói dữ liệu người dùng",
+      "def_en": "A connectionless transport protocol with no delivery guarantee, preferred when latency matters more than loss.",
+      "def_vi": "Giao thức giao vận phi kết nối, không bảo đảm tới nơi, ưu tiên khi độ trễ quan trọng hơn mất gói.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-quic",
+      "en": "QUIC",
+      "vi": "Giao thức giao vận trên nền UDP",
+      "def_en": "A transport protocol running over UDP that merges the handshake with encryption and avoids head of line blocking.",
+      "def_vi": "Giao thức giao vận chạy trên UDP, gộp bắt tay với mã hoá và tránh nghẽn đầu hàng đợi.",
+      "say": "QUIC removes one full round trip from the connection setup.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-handshake",
+      "en": "Three-way handshake",
+      "vi": "Bắt tay ba bước",
+      "def_en": "The SYN, SYN-ACK, ACK exchange that opens a TCP connection.",
+      "def_vi": "Chuỗi trao đổi SYN, SYN-ACK, ACK để mở một kết nối TCP.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-congestion-control",
+      "en": "Congestion control",
+      "vi": "Điều khiển tắc nghẽn",
+      "def_en": "Adjusting the sending rate so the network core is not overloaded.",
+      "def_vi": "Điều chỉnh tốc độ phát để lõi mạng không bị quá tải.",
+      "say": "Congestion control protects the network, flow control protects the receiver.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-flow-control",
+      "en": "Flow control",
+      "vi": "Điều khiển luồng",
+      "def_en": "Stopping a fast sender from overwhelming a slow receiver.",
+      "def_vi": "Ngăn phía phát nhanh làm ngập phía thu chậm.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-head-of-line",
+      "en": "Head-of-line blocking",
+      "vi": "Nghẽn đầu hàng đợi",
+      "def_en": "One stalled item at the front of a queue holding back everything behind it.",
+      "def_vi": "Một phần tử kẹt ở đầu hàng đợi chặn hết những phần tử phía sau.",
+      "tags": ["transport"]
+    },
+    {
+      "id": "n-ip",
+      "en": "IP address",
+      "vi": "Địa chỉ IP",
+      "def_en": "The numeric identifier of an interface on an IP network, in version four or version six format.",
+      "def_vi": "Định danh dạng số của một giao diện trên mạng IP, theo định dạng phiên bản bốn hoặc sáu.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-subnet",
+      "en": "Subnet mask",
+      "vi": "Mặt nạ mạng con",
+      "def_en": "The bit pattern that splits an IP address into its network part and host part.",
+      "def_vi": "Chuỗi bit chia địa chỉ IP thành phần mạng và phần máy trạm.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-cidr",
+      "en": "CIDR",
+      "vi": "Định tuyến liên miền không phân lớp",
+      "def_en": "Writing an address block as a prefix and a length, such as slash twenty four, instead of fixed classes.",
+      "def_vi": "Viết khối địa chỉ dưới dạng tiền tố kèm độ dài, ví dụ chéo hai bốn, thay cho các lớp cố định.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-nat",
+      "en": "NAT (Network Address Translation)",
+      "vi": "Biên dịch địa chỉ mạng",
+      "def_en": "Rewriting addresses at a boundary so many private hosts share one public address.",
+      "def_vi": "Viết lại địa chỉ tại điểm biên để nhiều máy trong mạng riêng dùng chung một địa chỉ công cộng.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-dhcp",
+      "en": "DHCP",
+      "vi": "Giao thức cấp phát địa chỉ động",
+      "def_en": "A protocol that hands out IP addresses and network settings automatically.",
+      "def_vi": "Giao thức tự động cấp địa chỉ IP và các tham số mạng cho máy trạm.",
+      "tags": ["network"]
+    },
+    {
+      "id": "n-dns",
+      "en": "DNS (Domain Name System)",
+      "vi": "Hệ thống tên miền",
+      "def_en": "The distributed directory that resolves human readable names into IP addresses.",
+      "def_vi": "Hệ danh bạ phân tán, chuyển tên dễ đọc thành địa chỉ IP.",
+      "say": "Half of what people call a network outage is really a name resolution failure.",
+      "tags": ["application"]
+    },
+    {
+      "id": "n-arp",
+      "en": "ARP",
+      "vi": "Giao thức phân giải địa chỉ",
+      "def_en": "The protocol that maps an IP address to a link layer hardware address on the same segment.",
+      "def_vi": "Giao thức ánh xạ địa chỉ IP sang địa chỉ phần cứng tầng liên kết trong cùng phân đoạn mạng.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-mac",
+      "en": "MAC address",
+      "vi": "Địa chỉ vật lý",
+      "def_en": "The hardware identifier burned into a network interface.",
+      "def_vi": "Định danh phần cứng gán sẵn cho card mạng.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-switch",
+      "en": "Switch",
+      "vi": "Bộ chuyển mạch",
+      "def_en": "A link layer device that forwards frames only towards the port where the destination lives.",
+      "def_vi": "Thiết bị tầng liên kết, chỉ chuyển khung ra cổng có máy đích.",
+      "tags": ["device"]
+    },
+    {
+      "id": "n-router",
+      "en": "Router",
+      "vi": "Bộ định tuyến",
+      "def_en": "A network layer device that chooses the next hop for a packet between different networks.",
+      "def_vi": "Thiết bị tầng mạng, chọn chặng kế tiếp cho gói tin đi giữa các mạng khác nhau.",
+      "tags": ["device"]
+    },
+    {
+      "id": "n-vlan",
+      "en": "VLAN",
+      "vi": "Mạng cục bộ ảo",
+      "def_en": "A logical partition of one physical switch fabric into separate broadcast domains.",
+      "def_vi": "Chia một hạ tầng chuyển mạch vật lý thành nhiều miền quảng bá tách biệt về mặt logic.",
+      "tags": ["link"]
+    },
+    {
+      "id": "n-bgp",
+      "en": "BGP",
+      "vi": "Giao thức định tuyến giữa các miền",
+      "def_en": "The path vector protocol that exchanges reachability between autonomous systems on the internet.",
+      "def_vi": "Giao thức vector đường đi, trao đổi thông tin tới được giữa các hệ tự trị trên internet.",
+      "say": "A single misconfigured route announcement can black hole a whole country.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-ospf",
+      "en": "OSPF",
+      "vi": "Giao thức định tuyến trạng thái liên kết",
+      "def_en": "A link state interior routing protocol that builds a full topology map and runs shortest path first.",
+      "def_vi": "Giao thức định tuyến nội miền theo trạng thái liên kết, dựng bản đồ tô-pô đầy đủ rồi chạy đường ngắn nhất.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-routing-table",
+      "en": "Routing table",
+      "vi": "Bảng định tuyến",
+      "def_en": "The per device table mapping destination prefixes to next hops.",
+      "def_vi": "Bảng trên mỗi thiết bị, ánh xạ tiền tố đích sang chặng kế tiếp.",
+      "tags": ["routing"]
+    },
+    {
+      "id": "n-sdn",
+      "en": "SDN (Software-Defined Networking)",
+      "vi": "Mạng định nghĩa bằng phần mềm",
+      "def_en": "Separating the control plane from the data plane so a controller programmes forwarding centrally.",
+      "def_vi": "Tách mặt phẳng điều khiển khỏi mặt phẳng dữ liệu, để bộ điều khiển lập trình việc chuyển tiếp tập trung.",
+      "say": "Software defined networking moves the decision out of the box and into a controller.",
+      "tags": ["architecture"]
+    },
+    {
+      "id": "n-nfv",
+      "en": "NFV (Network Function Virtualisation)",
+      "vi": "Ảo hoá chức năng mạng",
+      "def_en": "Running network functions such as firewalls or gateways as software on standard servers.",
+      "def_vi": "Chạy các chức năng mạng như tường lửa hay cổng kết nối dưới dạng phần mềm trên máy chủ phổ thông.",
+      "tags": ["architecture"]
+    },
+    {
+      "id": "n-qos",
+      "en": "QoS (Quality of Service)",
+      "vi": "Chất lượng dịch vụ",
+      "def_en": "Mechanisms that give some traffic classes better delay, loss or rate than others.",
+      "def_vi": "Các cơ chế cho một số lớp lưu lượng được ưu tiên hơn về trễ, mất gói hoặc tốc độ.",
+      "tags": ["qos"]
+    },
+    {
+      "id": "n-load-balancing",
+      "en": "Load balancing",
+      "vi": "Cân bằng tải",
+      "def_en": "Spreading traffic or work across several paths or servers to avoid a hotspot.",
+      "def_vi": "Trải lưu lượng hoặc công việc ra nhiều đường hoặc nhiều máy chủ để tránh điểm nóng.",
+      "tags": ["qos"]
+    },
+    {
+      "id": "n-cdn",
+      "en": "CDN (Content Delivery Network)",
+      "vi": "Mạng phân phối nội dung",
+      "def_en": "A network of caches placed near users so content travels a short distance.",
+      "def_vi": "Mạng các máy chủ đệm đặt gần người dùng, để nội dung chỉ phải đi quãng ngắn.",
+      "tags": ["application"]
+    },
+    {
+      "id": "n-proxy",
+      "en": "Proxy",
+      "vi": "Máy chủ trung gian",
+      "def_en": "An intermediary that forwards requests on behalf of a client or a server.",
+      "def_vi": "Máy trung gian, chuyển tiếp yêu cầu thay cho máy khách hoặc máy chủ.",
+      "tags": ["application"]
+    },
+    {
+      "id": "n-tls",
+      "en": "TLS",
+      "vi": "Bảo mật tầng giao vận",
+      "def_en": "The protocol that authenticates a server and encrypts the traffic above the transport layer.",
+      "def_vi": "Giao thức xác thực máy chủ và mã hoá lưu lượng phía trên tầng giao vận.",
+      "tags": ["security"]
+    },
+    {
+      "id": "n-http2",
+      "en": "HTTP/2 and HTTP/3",
+      "vi": "Các phiên bản HTTP mới",
+      "def_en": "Newer versions of the web protocol adding multiplexed streams, header compression and, in version three, a QUIC transport.",
+      "def_vi": "Các phiên bản mới của giao thức web, thêm luồng ghép kênh, nén tiêu đề, và ở phiên bản ba là nền giao vận QUIC.",
+      "tags": ["application"]
+    },
+    {
+      "id": "n-websocket",
+      "en": "WebSocket",
+      "vi": "Kênh hai chiều thời gian thực",
+      "def_en": "A protocol upgrading an HTTP connection into a persistent two way channel.",
+      "def_vi": "Giao thức nâng một kết nối HTTP thành kênh hai chiều duy trì liên tục.",
+      "tags": ["application"]
+    },
+    {
+      "id": "n-bufferbloat",
+      "en": "Bufferbloat",
+      "vi": "Phình bộ đệm",
+      "def_en": "Excessively large queues that add delay instead of preventing loss.",
+      "def_vi": "Hàng đợi quá lớn, làm tăng trễ thay vì tránh được mất gói.",
+      "tags": ["qos"]
+    },
+    {
+      "id": "n-traceroute",
+      "en": "Traceroute",
+      "vi": "Lệnh dò đường đi gói tin",
+      "def_en": "A diagnostic that reveals the sequence of hops a packet takes towards a destination.",
+      "def_vi": "Công cụ chẩn đoán, cho thấy dãy các chặng mà gói tin đi qua để tới đích.",
+      "tags": ["tooling"]
+    },
+    {
+      "id": "n-p2p",
+      "en": "Peer-to-peer",
+      "vi": "Mạng ngang hàng",
+      "def_en": "An architecture where every node acts as both client and server, with no central point.",
+      "def_vi": "Kiến trúc mà mọi nút vừa là máy khách vừa là máy chủ, không có điểm trung tâm.",
+      "tags": ["architecture"]
+    },
+    {
+      "id": "n-overlay",
+      "en": "Overlay network",
+      "vi": "Mạng phủ",
+      "def_en": "A logical network built on top of another network, with its own addressing and paths.",
+      "def_vi": "Mạng logic dựng trên nền một mạng khác, có cách đánh địa chỉ và đường đi riêng.",
+      "tags": ["architecture"]
+    }
+  ]
+}

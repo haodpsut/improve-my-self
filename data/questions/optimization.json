@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "id": "optimization",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qo-1",
+      "q": "Your solver returns an objective value better than the theoretical optimum. The first thing to suspect is",
+      "q_vi": "Bộ giải của bạn trả về giá trị mục tiêu tốt hơn cả nghiệm tối ưu lý thuyết. Điều đầu tiên cần nghi ngờ là",
+      "choices": [
+        "A constraint is not actually being enforced, so the solution is infeasible",
+        "The solver found a new mathematical result",
+        "The objective function is convex",
+        "The random seed was too small"
+      ],
+      "answer": 0,
+      "why": "Beating a valid bound is impossible. Almost always a constraint was dropped, relaxed by a tolerance or written with the wrong sign.",
+      "why_vi": "Vượt qua một chặn hợp lệ là điều bất khả thi. Gần như luôn là do một ràng buộc bị bỏ, bị nới bằng dung sai, hoặc viết sai dấu.",
+      "level": 3
+    },
+    {
+      "id": "qo-2",
+      "q": "In a convex problem, a local minimum is",
+      "q_vi": "Trong bài toán lồi, một cực tiểu địa phương là",
+      "choices": ["Also the global minimum", "Never the global minimum", "Only global if the problem is linear", "Undefined"],
+      "answer": 0,
+      "why": "This is the reason convexity matters so much in practice. It removes the dependence on initialisation entirely.",
+      "why_vi": "Đây chính là lý do tính lồi quan trọng đến vậy trong thực tế. Nó xoá hoàn toàn sự phụ thuộc vào điểm khởi tạo.",
+      "level": 1
+    },
+    {
+      "id": "qo-3",
+      "q": "You claim your problem is NP-hard. A valid proof requires",
+      "q_vi": "Bạn khẳng định bài toán của mình là khó NP. Một chứng minh hợp lệ đòi hỏi",
+      "choices": [
+        "A polynomial time reduction from a known NP-hard problem to yours",
+        "Showing your solver is slow on large instances",
+        "Showing the search space is large",
+        "Showing the objective is non-convex"
+      ],
+      "answer": 0,
+      "why": "A big search space or a slow heuristic proves nothing about complexity class. The reduction must go from the known hard problem to yours, not the other way round.",
+      "why_vi": "Không gian tìm kiếm lớn hay thuật giải chạy chậm chẳng chứng minh được gì về lớp độ phức tạp. Phép quy dẫn phải đi từ bài toán khó đã biết sang bài của bạn, không phải ngược lại.",
+      "level": 3
+    },
+    {
+      "id": "qo-4",
+      "q": "Relaxing the integrality constraints of a minimisation MILP gives",
+      "q_vi": "Nới lỏng ràng buộc nguyên của một bài quy hoạch nguyên hỗn hợp cực tiểu sẽ cho",
+      "choices": [
+        "A lower bound on the true optimum",
+        "An upper bound on the true optimum",
+        "The exact optimum",
+        "An infeasible solution"
+      ],
+      "answer": 0,
+      "why": "Enlarging the feasible set can only improve the objective, so for minimisation the relaxed value sits at or below the true optimum. That gap is what branch and bound exploits.",
+      "why_vi": "Mở rộng tập khả thi chỉ có thể làm mục tiêu tốt lên, nên với bài cực tiểu, giá trị sau khi nới nằm bằng hoặc thấp hơn nghiệm thật. Chính khoảng cách đó là thứ mà nhánh cận khai thác.",
+      "level": 3
+    },
+    {
+      "id": "qo-5",
+      "q": "A metaheuristic that converges very fast to a single point most likely suffers from",
+      "q_vi": "Một siêu thuật giải hội tụ rất nhanh về một điểm duy nhất nhiều khả năng đang gặp vấn đề",
+      "choices": [
+        "Premature convergence from too little exploration",
+        "Excessive exploration",
+        "An infeasible starting point",
+        "A convex objective"
+      ],
+      "answer": 0,
+      "why": "The population collapses onto the first decent region it finds. The fix is a mechanism that keeps diversity alive, not a faster update rule.",
+      "why_vi": "Quần thể co cụm vào vùng tạm ổn đầu tiên tìm được. Cách sửa là cơ chế giữ được đa dạng, không phải quy tắc cập nhật nhanh hơn.",
+      "level": 2
+    },
+    {
+      "id": "qo-6",
+      "q": "Little's law states that in steady state",
+      "q_vi": "Định luật Little phát biểu rằng ở trạng thái dừng",
+      "choices": [
+        "Average number in system equals arrival rate times average time in system",
+        "Delay equals bandwidth divided by load",
+        "Utilisation equals service rate divided by arrival rate",
+        "Queue length grows linearly with time"
+      ],
+      "answer": 0,
+      "why": "It holds for almost any queueing discipline, which is what makes it so useful: you can get one of the three quantities from the other two.",
+      "why_vi": "Nó đúng với hầu như mọi kỷ luật hàng đợi, và chính điều đó khiến nó hữu dụng: biết hai đại lượng là suy ra được đại lượng thứ ba.",
+      "level": 2
+    },
+    {
+      "id": "qo-7",
+      "q": "Age of information differs from latency because it measures",
+      "q_vi": "Tuổi thông tin khác độ trễ ở chỗ nó đo",
+      "choices": [
+        "How stale the freshest available update is at the receiver",
+        "The time a single packet spends in the network",
+        "The variance of packet delay",
+        "The number of packets lost per second"
+      ],
+      "answer": 0,
+      "why": "Sending very frequently causes queueing and raises staleness, while sending rarely also raises it. That is why the curve is U-shaped and neither delay nor throughput captures it.",
+      "why_vi": "Gửi quá dày gây xếp hàng làm thông tin cũ đi, mà gửi quá thưa cũng làm nó cũ. Vì vậy đường cong có dạng chữ U, và cả độ trễ lẫn thông lượng đều không mô tả được.",
+      "level": 3
+    },
+    {
+      "id": "qo-8",
+      "q": "Reporting the Pareto front instead of a single weighted sum is preferable because",
+      "q_vi": "Báo cáo cả biên Pareto thay vì một tổng có trọng số duy nhất thì tốt hơn vì",
+      "choices": [
+        "It shows the full trade off rather than one arbitrary preference",
+        "It always yields a better objective value",
+        "It removes the need for constraints",
+        "It makes the problem convex"
+      ],
+      "answer": 0,
+      "why": "A weighting hides the decision inside the coefficients. The front lets the reader choose the operating point and see the cost of each choice.",
+      "why_vi": "Một bộ trọng số giấu quyết định vào trong các hệ số. Biên Pareto để người đọc tự chọn điểm vận hành và thấy được cái giá của mỗi lựa chọn.",
+      "level": 2
+    },
+    {
+      "id": "qo-9",
+      "q": "Two methods differ by 0.4% mean accuracy over five seeds, with a standard deviation of 1.2%. The correct conclusion is",
+      "q_vi": "Hai phương pháp lệch nhau 0,4% độ chính xác trung bình qua năm hạt giống, với độ lệch chuẩn 1,2%. Kết luận đúng là",
+      "choices": [
+        "The difference is within run to run noise and cannot be claimed as an improvement",
+        "The first method is better and should be reported as such",
+        "More epochs would settle the question",
+        "The standard deviation is irrelevant to the comparison"
+      ],
+      "answer": 0,
+      "why": "The spread swallows the gap. Either run many more seeds and test properly, or state honestly that the two are indistinguishable.",
+      "why_vi": "Độ tản nuốt trọn khoảng cách. Hoặc chạy thêm nhiều hạt giống và kiểm định đàng hoàng, hoặc nói thẳng là hai bên không phân biệt được.",
+      "level": 3
+    },
+    {
+      "id": "qo-10",
+      "q": "You observe that a new initialiser and a new algorithm together beat the baseline. The confound risk is that",
+      "q_vi": "Bạn thấy bộ khởi tạo mới cùng thuật toán mới gộp lại thắng đối chứng. Rủi ro nhiễu nhân quả là",
+      "choices": [
+        "The gain may come entirely from the initialiser, not from the algorithm",
+        "The baseline was trained too long",
+        "The objective was non-convex",
+        "The test set was too large"
+      ],
+      "answer": 0,
+      "why": "Two changes at once means the causal attribution is undetermined. Give the baseline the same initialiser and rerun before claiming the algorithm did it.",
+      "why_vi": "Đổi hai thứ cùng lúc thì việc quy nhân quả trở nên bất định. Hãy cấp cho đối chứng đúng bộ khởi tạo đó rồi chạy lại, trước khi khẳng định công lao thuộc về thuật toán.",
+      "level": 3
+    }
+  ]
+}

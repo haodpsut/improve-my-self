@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "id": "federated",
+  "updated": "2026-08-07",
+  "cards": [
+    {
+      "id": "f-fl",
+      "en": "Federated learning",
+      "vi": "Học liên kết",
+      "def_en": "Several clients train a shared model under a coordinating server without ever sending their raw data.",
+      "def_vi": "Nhiều máy khách cùng huấn luyện một mô hình chung dưới sự điều phối của máy chủ, mà không gửi dữ liệu thô đi.",
+      "say": "In federated learning the model travels, the data stays put.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "f-fedavg",
+      "en": "FedAvg",
+      "vi": "Thuật toán trung bình liên kết",
+      "def_en": "The baseline algorithm that averages client weight updates in proportion to their data size.",
+      "def_vi": "Thuật toán nền, lấy trung bình cập nhật trọng số của các máy khách theo tỉ lệ lượng dữ liệu.",
+      "tags": ["algorithm"]
+    },
+    {
+      "id": "f-aggregation",
+      "en": "Model aggregation",
+      "vi": "Tổng hợp mô hình",
+      "def_en": "Combining client updates on the server to form the next global model.",
+      "def_vi": "Gộp cập nhật từ các máy khách tại máy chủ để tạo mô hình toàn cục kế tiếp.",
+      "tags": ["algorithm"]
+    },
+    {
+      "id": "f-round",
+      "en": "Communication round",
+      "vi": "Vòng truyền thông",
+      "def_en": "One cycle of broadcasting the global model, local training and uploading updates.",
+      "def_vi": "Một chu kỳ gồm phát mô hình toàn cục, huấn luyện tại chỗ và tải cập nhật lên.",
+      "say": "Communication rounds, not compute, are the bottleneck here.",
+      "tags": ["system"]
+    },
+    {
+      "id": "f-non-iid",
+      "en": "Non-IID data",
+      "vi": "Dữ liệu không đồng phân bố",
+      "def_en": "Client data distributions differ, so they are not independent and identically distributed.",
+      "def_vi": "Phân bố dữ liệu giữa các máy khách khác nhau, nên không độc lập cùng phân bố.",
+      "say": "Under strongly non identically distributed data the global model stops converging.",
+      "tags": ["challenge"]
+    },
+    {
+      "id": "f-client-drift",
+      "en": "Client drift",
+      "vi": "Trôi mô hình cục bộ",
+      "def_en": "Local models diverging from the global one because each trains on its own skewed data.",
+      "def_vi": "Mô hình cục bộ lệch dần khỏi mô hình toàn cục do mỗi máy huấn luyện trên dữ liệu lệch của riêng nó.",
+      "tags": ["challenge"]
+    },
+    {
+      "id": "f-straggler",
+      "en": "Straggler",
+      "vi": "Máy khách chậm trễ",
+      "def_en": "A slow or unreliable client that holds back a synchronous round.",
+      "def_vi": "Máy khách chậm hoặc không ổn định, làm chậm cả một vòng đồng bộ.",
+      "tags": ["challenge"]
+    },
+    {
+      "id": "f-horizontal",
+      "en": "Horizontal federated learning",
+      "vi": "Học liên kết theo chiều ngang",
+      "def_en": "Clients share the same feature space but hold different samples.",
+      "def_vi": "Các máy khách có cùng không gian đặc trưng nhưng nắm các mẫu khác nhau.",
+      "tags": ["taxonomy"]
+    },
+    {
+      "id": "f-vertical",
+      "en": "Vertical federated learning",
+      "vi": "Học liên kết theo chiều dọc",
+      "def_en": "Clients hold different features about the same set of samples.",
+      "def_vi": "Các máy khách nắm các đặc trưng khác nhau về cùng một tập mẫu.",
+      "tags": ["taxonomy"]
+    },
+    {
+      "id": "f-secure-agg",
+      "en": "Secure aggregation",
+      "vi": "Tổng hợp an toàn",
+      "def_en": "A cryptographic protocol letting the server learn the sum of updates without seeing any single one.",
+      "def_vi": "Giao thức mật mã cho phép máy chủ biết tổng các cập nhật mà không thấy được cập nhật riêng lẻ nào.",
+      "tags": ["privacy"]
+    },
+    {
+      "id": "f-dp",
+      "en": "Differential privacy",
+      "vi": "Riêng tư vi phân",
+      "def_en": "A formal guarantee that adding or removing one record barely changes the output distribution.",
+      "def_vi": "Bảo đảm hình thức rằng thêm hay bớt một bản ghi hầu như không đổi phân bố đầu ra.",
+      "say": "We report the privacy budget epsilon alongside every accuracy number.",
+      "tags": ["privacy"]
+    },
+    {
+      "id": "f-privacy-budget",
+      "en": "Privacy budget",
+      "vi": "Ngân sách riêng tư",
+      "def_en": "The parameter epsilon bounding how much total information a mechanism may leak.",
+      "def_vi": "Tham số epsilon giới hạn tổng lượng thông tin mà cơ chế được phép rò rỉ.",
+      "tags": ["privacy"]
+    },
+    {
+      "id": "f-gradient-inversion",
+      "en": "Gradient inversion attack",
+      "vi": "Tấn công đảo ngược gradient",
+      "def_en": "Reconstructing a client's private input from the gradients it uploaded.",
+      "def_vi": "Dựng lại dữ liệu riêng của máy khách từ chính gradient mà nó tải lên.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "f-poisoning",
+      "en": "Model poisoning",
+      "vi": "Đầu độc mô hình",
+      "def_en": "A malicious client submitting crafted updates to corrupt the global model.",
+      "def_vi": "Máy khách xấu gửi lên cập nhật đã dàn dựng để làm hỏng mô hình toàn cục.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "f-personalisation",
+      "en": "Personalisation",
+      "vi": "Cá nhân hoá mô hình",
+      "def_en": "Adapting the shared model to each client instead of forcing one model on everyone.",
+      "def_vi": "Điều chỉnh mô hình chung cho từng máy khách, thay vì ép một mô hình duy nhất cho tất cả.",
+      "tags": ["method"]
+    },
+    {
+      "id": "f-split-learning",
+      "en": "Split learning",
+      "vi": "Học chia tầng",
+      "def_en": "Cutting the network at a layer so the client runs the first part and the server the rest.",
+      "def_vi": "Cắt mạng tại một tầng, máy khách chạy phần đầu còn máy chủ chạy phần còn lại.",
+      "tags": ["method"]
+    },
+    {
+      "id": "f-surrogate",
+      "en": "Surrogate model",
+      "vi": "Mô hình thay thế",
+      "def_en": "A cheap approximation of an expensive simulation or objective, queried in place of the real thing.",
+      "def_vi": "Mô hình xấp xỉ rẻ tiền thay cho mô phỏng hay hàm mục tiêu đắt đỏ, được hỏi thay cho bản gốc.",
+      "say": "The surrogate cuts each evaluation from minutes to milliseconds.",
+      "tags": ["method"]
+    },
+    {
+      "id": "f-communication-cost",
+      "en": "Communication cost",
+      "vi": "Chi phí truyền thông",
+      "def_en": "The total bytes exchanged between clients and server, often the true limit in federated settings.",
+      "def_vi": "Tổng số byte trao đổi giữa máy khách và máy chủ, thường là giới hạn thật của bài toán liên kết.",
+      "tags": ["system"]
+    },
+    {
+      "id": "f-quantisation",
+      "en": "Update quantisation",
+      "vi": "Lượng tử hoá cập nhật",
+      "def_en": "Sending updates at lower numeric precision to cut the uplink volume.",
+      "def_vi": "Gửi cập nhật ở độ chính xác số thấp hơn để giảm dung lượng đường lên.",
+      "tags": ["system"]
+    },
+    {
+      "id": "f-sparsification",
+      "en": "Gradient sparsification",
+      "vi": "Thưa hoá gradient",
+      "def_en": "Uploading only the largest gradient entries and dropping the rest.",
+      "def_vi": "Chỉ tải lên các phần tử gradient lớn nhất và bỏ phần còn lại.",
+      "tags": ["system"]
+    }
+  ]
+}

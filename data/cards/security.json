@@ -1,0 +1,296 @@
+{
+  "schema": 1,
+  "id": "security",
+  "updated": "2026-08-07",
+  "cards": [
+    {
+      "id": "sec-cia",
+      "en": "CIA triad",
+      "vi": "Bộ ba bảo mật",
+      "def_en": "The three core goals of security: confidentiality, integrity and availability.",
+      "def_vi": "Ba mục tiêu cốt lõi của an ninh: bí mật, toàn vẹn và sẵn sàng.",
+      "say": "Every control you add serves confidentiality, integrity or availability.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "sec-threat-model",
+      "en": "Threat model",
+      "vi": "Mô hình mối đe dọa",
+      "def_en": "An explicit statement of who the attacker is, what they can do and what they want.",
+      "def_vi": "Phát biểu rõ ràng kẻ tấn công là ai, làm được gì và muốn gì.",
+      "say": "A defence without a stated threat model cannot be evaluated.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "sec-attack-surface",
+      "en": "Attack surface",
+      "vi": "Bề mặt tấn công",
+      "def_en": "The full set of points where an attacker could try to enter or extract data.",
+      "def_vi": "Toàn bộ các điểm mà kẻ tấn công có thể thử xâm nhập hoặc rút dữ liệu ra.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "sec-vulnerability",
+      "en": "Vulnerability",
+      "vi": "Lỗ hổng",
+      "def_en": "A weakness that can be exploited to violate a security goal.",
+      "def_vi": "Điểm yếu có thể bị khai thác để phá vỡ một mục tiêu an ninh.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "sec-exploit",
+      "en": "Exploit",
+      "vi": "Mã khai thác",
+      "def_en": "A concrete technique or piece of code that turns a vulnerability into an actual compromise.",
+      "def_vi": "Kỹ thuật hoặc đoạn mã cụ thể biến một lỗ hổng thành sự xâm phạm thực sự.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "sec-zero-day",
+      "en": "Zero-day",
+      "vi": "Lỗ hổng chưa có bản vá",
+      "def_en": "A vulnerability exploited before the vendor has released a fix.",
+      "def_vi": "Lỗ hổng bị khai thác trước khi nhà cung cấp kịp phát hành bản vá.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "sec-ids",
+      "en": "IDS (Intrusion Detection System)",
+      "vi": "Hệ phát hiện xâm nhập",
+      "def_en": "A system that inspects traffic or host activity and raises alerts on suspected attacks.",
+      "def_vi": "Hệ thống soi lưu lượng hoặc hoạt động máy chủ và cảnh báo khi nghi có tấn công.",
+      "say": "The intrusion detection system flags it, the analyst decides what it means.",
+      "tags": ["defence"]
+    },
+    {
+      "id": "sec-ips",
+      "en": "IPS (Intrusion Prevention System)",
+      "vi": "Hệ ngăn chặn xâm nhập",
+      "def_en": "A detection system placed inline so it can block the offending traffic, not only report it.",
+      "def_vi": "Hệ phát hiện đặt trên đường truyền, có thể chặn luôn lưu lượng vi phạm chứ không chỉ báo cáo.",
+      "tags": ["defence"]
+    },
+    {
+      "id": "sec-signature",
+      "en": "Signature-based detection",
+      "vi": "Phát hiện theo dấu hiệu",
+      "def_en": "Matching traffic against known attack patterns, precise but blind to anything new.",
+      "def_vi": "Đối chiếu lưu lượng với mẫu tấn công đã biết, chính xác nhưng mù trước cái mới.",
+      "tags": ["defence"]
+    },
+    {
+      "id": "sec-anomaly",
+      "en": "Anomaly-based detection",
+      "vi": "Phát hiện theo bất thường",
+      "def_en": "Learning a baseline of normal behaviour and flagging deviations, which catches novelty but raises false alarms.",
+      "def_vi": "Học mức nền của hành vi bình thường rồi báo động khi lệch, bắt được cái mới nhưng hay báo động giả.",
+      "say": "Anomaly detection buys coverage and pays for it in false positives.",
+      "tags": ["defence"]
+    },
+    {
+      "id": "sec-false-positive",
+      "en": "False positive",
+      "vi": "Báo động giả",
+      "def_en": "A benign event wrongly flagged as an attack, the main reason analysts stop trusting an alert feed.",
+      "def_vi": "Sự kiện lành tính bị báo nhầm là tấn công, lý do chính khiến người phân tích mất tin vào luồng cảnh báo.",
+      "tags": ["metric"]
+    },
+    {
+      "id": "sec-false-negative",
+      "en": "False negative",
+      "vi": "Bỏ sót tấn công",
+      "def_en": "A real attack the detector fails to report.",
+      "def_vi": "Tấn công thật mà bộ phát hiện không báo.",
+      "tags": ["metric"]
+    },
+    {
+      "id": "sec-roc",
+      "en": "ROC curve",
+      "vi": "Đường cong ROC",
+      "def_en": "A plot of detection rate against false alarm rate as the decision threshold moves.",
+      "def_vi": "Đồ thị tỉ lệ phát hiện theo tỉ lệ báo động giả khi ngưỡng quyết định thay đổi.",
+      "tags": ["metric"]
+    },
+    {
+      "id": "sec-firewall",
+      "en": "Firewall",
+      "vi": "Tường lửa",
+      "def_en": "A policy enforcement point that permits or denies traffic crossing a boundary.",
+      "def_vi": "Điểm thực thi chính sách, cho phép hoặc chặn lưu lượng đi qua ranh giới.",
+      "tags": ["defence"]
+    },
+    {
+      "id": "sec-zero-trust",
+      "en": "Zero trust",
+      "vi": "Tin cậy bằng không",
+      "def_en": "An architecture that authenticates and authorises every request, assuming no network location is inherently safe.",
+      "def_vi": "Kiến trúc xác thực và cấp quyền cho từng yêu cầu, coi không vị trí mạng nào là an toàn sẵn.",
+      "say": "Zero trust replaces the perimeter with per request verification.",
+      "tags": ["architecture"]
+    },
+    {
+      "id": "sec-least-privilege",
+      "en": "Least privilege",
+      "vi": "Đặc quyền tối thiểu",
+      "def_en": "Granting each identity only the rights it needs, for only as long as it needs them.",
+      "def_vi": "Chỉ cấp cho mỗi định danh đúng quyền cần dùng, và chỉ trong thời gian cần.",
+      "tags": ["principle"]
+    },
+    {
+      "id": "sec-defence-in-depth",
+      "en": "Defence in depth",
+      "vi": "Phòng thủ nhiều lớp",
+      "def_en": "Stacking independent controls so one failure does not mean full compromise.",
+      "def_vi": "Xếp chồng nhiều lớp kiểm soát độc lập, để một lớp hỏng không dẫn tới mất toàn bộ.",
+      "tags": ["principle"]
+    },
+    {
+      "id": "sec-encryption",
+      "en": "Encryption",
+      "vi": "Mã hoá",
+      "def_en": "Transforming data with a key so only key holders can read it.",
+      "def_vi": "Biến đổi dữ liệu bằng khoá, để chỉ người giữ khoá đọc được.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "sec-symmetric",
+      "en": "Symmetric cryptography",
+      "vi": "Mật mã đối xứng",
+      "def_en": "Both sides use the same secret key, which is fast but needs a way to share the key.",
+      "def_vi": "Hai bên dùng chung một khoá bí mật, nhanh nhưng phải có cách chia khoá.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "sec-asymmetric",
+      "en": "Asymmetric cryptography",
+      "vi": "Mật mã bất đối xứng",
+      "def_en": "A public key encrypts and a private key decrypts, removing the need to share a secret first.",
+      "def_vi": "Khoá công khai để mã hoá, khoá riêng để giải mã, không cần chia bí mật trước.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "sec-hash",
+      "en": "Cryptographic hash",
+      "vi": "Hàm băm mật mã",
+      "def_en": "A one way fingerprint of data, where finding two inputs with the same output should be infeasible.",
+      "def_vi": "Dấu vân tay một chiều của dữ liệu, việc tìm hai đầu vào cùng kết quả phải là bất khả thi.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "sec-signature-digital",
+      "en": "Digital signature",
+      "vi": "Chữ ký số",
+      "def_en": "A value proving who produced a message and that it was not altered.",
+      "def_vi": "Giá trị chứng minh ai tạo ra thông điệp và thông điệp không bị sửa.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "sec-mfa",
+      "en": "Multi-factor authentication",
+      "vi": "Xác thực nhiều yếu tố",
+      "def_en": "Requiring evidence from at least two independent categories, such as a password plus a device.",
+      "def_vi": "Đòi bằng chứng từ ít nhất hai nhóm độc lập, ví dụ mật khẩu cộng thiết bị.",
+      "tags": ["identity"]
+    },
+    {
+      "id": "sec-phishing",
+      "en": "Phishing",
+      "vi": "Lừa đảo giả mạo",
+      "def_en": "Tricking a person into revealing credentials or running code by impersonating a trusted party.",
+      "def_vi": "Đánh lừa người dùng khai thông tin đăng nhập hoặc chạy mã, bằng cách giả danh bên đáng tin.",
+      "say": "The attack starts with a person, not with a protocol.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "sec-quishing",
+      "en": "Quishing",
+      "vi": "Lừa đảo qua mã QR",
+      "def_en": "Phishing delivered through a QR code, which hides the destination from the victim's eye.",
+      "def_vi": "Lừa đảo qua mã QR, che giấu địa chỉ đích khỏi mắt nạn nhân.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "sec-ddos",
+      "en": "DDoS",
+      "vi": "Tấn công từ chối dịch vụ phân tán",
+      "def_en": "Overwhelming a service from many sources so legitimate users cannot reach it.",
+      "def_vi": "Làm ngập dịch vụ từ nhiều nguồn, khiến người dùng hợp lệ không truy cập được.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "sec-mitm",
+      "en": "Man-in-the-middle",
+      "vi": "Tấn công xen giữa",
+      "def_en": "An attacker sitting between two parties, reading or altering traffic while both believe they talk directly.",
+      "def_vi": "Kẻ tấn công đứng giữa hai bên, đọc hoặc sửa lưu lượng trong khi cả hai tưởng đang nói trực tiếp.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "sec-lateral",
+      "en": "Lateral movement",
+      "vi": "Di chuyển ngang trong mạng",
+      "def_en": "Moving from one compromised host to others inside the same network.",
+      "def_vi": "Di chuyển từ một máy đã chiếm được sang các máy khác trong cùng mạng.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "sec-provenance",
+      "en": "Provenance graph",
+      "vi": "Đồ thị nguồn gốc",
+      "def_en": "A graph of system events linking processes, files and sockets, used to reconstruct how an intrusion unfolded.",
+      "def_vi": "Đồ thị các sự kiện hệ thống nối tiến trình, tập tin và kết nối, dùng để dựng lại diễn biến một vụ xâm nhập.",
+      "say": "The provenance graph is how you tell a story from raw audit logs.",
+      "tags": ["forensics"]
+    },
+    {
+      "id": "sec-adversarial",
+      "en": "Adversarial example",
+      "vi": "Mẫu đối kháng",
+      "def_en": "An input perturbed slightly on purpose so a model misclassifies it while a human sees no change.",
+      "def_vi": "Đầu vào bị nhiễu nhẹ có chủ đích để mô hình phân loại sai, còn mắt người không thấy khác biệt.",
+      "say": "The perturbation is invisible to us and decisive for the model.",
+      "tags": ["ai-security"]
+    },
+    {
+      "id": "sec-evasion",
+      "en": "Evasion attack",
+      "vi": "Tấn công né tránh",
+      "def_en": "Modifying an attack so a detector no longer recognises it, without losing the malicious effect.",
+      "def_vi": "Sửa cuộc tấn công để bộ phát hiện không nhận ra nữa, mà vẫn giữ được tác dụng độc hại.",
+      "tags": ["ai-security"]
+    },
+    {
+      "id": "sec-robustness",
+      "en": "Robustness",
+      "vi": "Độ bền vững",
+      "def_en": "How well performance holds up under noise, distribution shift or deliberate attack.",
+      "def_vi": "Mức giữ được hiệu năng khi có nhiễu, khi phân bố dịch chuyển hoặc khi bị tấn công có chủ đích.",
+      "say": "We report accuracy under three noise levels, not just the clean number.",
+      "tags": ["ai-security"]
+    },
+    {
+      "id": "sec-supply-chain",
+      "en": "Supply chain attack",
+      "vi": "Tấn công chuỗi cung ứng",
+      "def_en": "Compromising a dependency or vendor so the malicious code arrives through a trusted channel.",
+      "def_vi": "Xâm phạm một thư viện phụ thuộc hoặc nhà cung cấp, để mã độc đến qua kênh vốn được tin.",
+      "tags": ["attack"]
+    },
+    {
+      "id": "sec-siem",
+      "en": "SIEM",
+      "vi": "Hệ quản lý sự kiện an ninh",
+      "def_en": "A platform that collects logs from everywhere, correlates them and drives alerting.",
+      "def_vi": "Nền tảng thu nhật ký từ khắp nơi, đối chiếu chúng và điều khiển việc cảnh báo.",
+      "tags": ["operations"]
+    },
+    {
+      "id": "sec-incident-response",
+      "en": "Incident response",
+      "vi": "Ứng phó sự cố",
+      "def_en": "The process of detecting, containing, eradicating and recovering from a security event.",
+      "def_vi": "Quy trình phát hiện, khoanh vùng, loại bỏ và khôi phục sau một sự cố an ninh.",
+      "tags": ["operations"]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "id": "quantum",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qq-1",
+      "q": "Grover's algorithm provides which kind of speedup for unstructured search?",
+      "q_vi": "Thuật toán Grover cho mức tăng tốc nào với bài toán tìm kiếm không cấu trúc?",
+      "choices": ["Quadratic", "Exponential", "Linear", "No speedup at all"],
+      "answer": 0,
+      "why": "It reduces the number of queries from order N to order square root of N. Exponential speedup is Shor's territory, and only for structured problems like factoring.",
+      "why_vi": "Nó giảm số lần truy vấn từ bậc N xuống bậc căn N. Tăng tốc theo hàm mũ là lãnh địa của Shor, và chỉ với bài toán có cấu trúc như phân tích thừa số.",
+      "level": 2
+    },
+    {
+      "id": "qq-2",
+      "q": "The no-cloning theorem is what makes quantum key distribution secure because",
+      "q_vi": "Định lý không sao chép làm cho phân phối khoá lượng tử an toàn vì",
+      "choices": [
+        "An eavesdropper cannot copy the state, so any measurement disturbs it detectably",
+        "Quantum signals travel faster than light",
+        "Quantum states cannot be measured at all",
+        "The key is longer than any classical key"
+      ],
+      "answer": 0,
+      "why": "Security rests on physics rather than on computational hardness. The legitimate parties detect the intrusion by comparing error rates on a public channel.",
+      "why_vi": "An toàn dựa vào vật lý chứ không dựa vào độ khó tính toán. Hai bên hợp lệ phát hiện kẻ nghe lén bằng cách so tỉ lệ lỗi qua kênh công khai.",
+      "level": 2
+    },
+    {
+      "id": "qq-3",
+      "q": "A barren plateau in a variational quantum circuit means",
+      "q_vi": "Cao nguyên gradient phẳng trong mạch lượng tử biến phân nghĩa là",
+      "choices": [
+        "Gradients vanish exponentially with qubit count, so the optimiser gets no signal",
+        "The circuit produces the wrong answer deterministically",
+        "The hardware has run out of qubits",
+        "The classical optimiser diverges to infinity"
+      ],
+      "answer": 0,
+      "why": "The cost landscape flattens as the state space grows, so the gradient estimate is buried in shot noise. It is a scaling obstacle, not a bug.",
+      "why_vi": "Mặt phẳng chi phí phẳng dần khi không gian trạng thái lớn lên, nên ước lượng gradient chìm trong nhiễu lấy mẫu. Đây là trở ngại về quy mô, không phải lỗi lập trình.",
+      "level": 3
+    },
+    {
+      "id": "qq-4",
+      "q": "A paper claims a quantum-inspired optimiser beats classical baselines. What must the reader check first?",
+      "q_vi": "Một bài báo tuyên bố bộ tối ưu lấy cảm hứng lượng tử vượt các đối chứng cổ điển. Người đọc phải kiểm gì trước tiên?",
+      "choices": [
+        "Whether the classical baselines were tuned under a matched evaluation budget",
+        "Whether the code runs on quantum hardware",
+        "Whether the authors used at least ten qubits",
+        "Whether the objective function is convex"
+      ],
+      "answer": 0,
+      "why": "Most reported advantages evaporate once the baseline gets the same number of function evaluations and a fair hyperparameter search. A quantum-inspired method runs classically, so there is no excuse for an untuned comparison.",
+      "why_vi": "Phần lớn lợi thế được công bố biến mất khi đối chứng được cấp cùng số lần đánh giá hàm và có dò siêu tham số công bằng. Phương pháp lấy cảm hứng lượng tử chạy trên máy cổ điển, nên không có lý do gì để so với đối chứng chưa tinh chỉnh.",
+      "level": 3
+    },
+    {
+      "id": "qq-5",
+      "q": "Entanglement is best described as",
+      "q_vi": "Rối lượng tử được mô tả đúng nhất là",
+      "choices": [
+        "A joint state that cannot be factorised into independent states of the parts",
+        "Two particles exchanging signals faster than light",
+        "Two qubits having identical values",
+        "A classical correlation between random variables"
+      ],
+      "answer": 0,
+      "why": "Non-factorisability is the definition. It creates correlations stronger than any classical model allows, but it carries no usable signal on its own.",
+      "why_vi": "Không tách được thành tích chính là định nghĩa. Nó tạo ra tương quan mạnh hơn mọi mô hình cổ điển, nhưng bản thân không truyền được tín hiệu dùng được.",
+      "level": 2
+    },
+    {
+      "id": "qq-6",
+      "q": "Post-quantum cryptography refers to",
+      "q_vi": "Mật mã hậu lượng tử là",
+      "choices": [
+        "Classical algorithms believed to resist attack by a quantum computer",
+        "Encryption performed on a quantum computer",
+        "Key distribution using entangled photons",
+        "Cryptography that will only exist after quantum computers arrive"
+      ],
+      "answer": 0,
+      "why": "It runs on ordinary hardware today. The point is that its hardness assumptions, such as lattice problems, survive Shor's algorithm.",
+      "why_vi": "Nó chạy trên phần cứng thường ngay hôm nay. Điểm mấu chốt là các giả thiết độ khó của nó, ví dụ bài toán lưới, vẫn đứng vững trước thuật toán Shor.",
+      "level": 2
+    },
+    {
+      "id": "qq-7",
+      "q": "In the NISQ era, circuit depth is limited primarily by",
+      "q_vi": "Trong kỷ nguyên NISQ, độ sâu mạch bị giới hạn chủ yếu bởi",
+      "choices": [
+        "Decoherence and gate error accumulating faster than the computation completes",
+        "The speed of the classical control computer",
+        "The number of available programming languages",
+        "The size of the input dataset"
+      ],
+      "answer": 0,
+      "why": "Each gate adds error and the state loses coherence with time. Without full error correction there is a hard ceiling on how long a circuit can be useful.",
+      "why_vi": "Mỗi cổng thêm một phần sai số, còn trạng thái mất kết hợp theo thời gian. Chưa có sửa lỗi đầy đủ thì có trần cứng cho độ dài mạch còn hữu ích.",
+      "level": 2
+    },
+    {
+      "id": "qq-8",
+      "q": "The parameter shift rule is used to",
+      "q_vi": "Quy tắc dịch tham số được dùng để",
+      "choices": [
+        "Compute exact gradients of a parameterised circuit by evaluating it at shifted angles",
+        "Initialise the circuit parameters randomly",
+        "Correct readout errors on the measurement",
+        "Compress the circuit into fewer gates"
+      ],
+      "answer": 0,
+      "why": "Backpropagation through a quantum device is not possible, so the gradient is obtained from extra circuit evaluations rather than from an internal chain rule.",
+      "why_vi": "Không thể lan truyền ngược xuyên qua thiết bị lượng tử, nên gradient được lấy từ các lần chạy mạch bổ sung chứ không từ quy tắc chuỗi bên trong.",
+      "level": 3
+    },
+    {
+      "id": "qq-9",
+      "q": "Which claim about quantum reinforcement learning is currently defensible?",
+      "q_vi": "Khẳng định nào về học tăng cường lượng tử hiện nay là bảo vệ được?",
+      "choices": [
+        "A variational circuit can represent a policy with fewer trainable parameters on some small tasks",
+        "It always converges faster than classical reinforcement learning",
+        "It removes the exploration versus exploitation trade off",
+        "It guarantees an exponential speedup on any environment"
+      ],
+      "answer": 0,
+      "why": "Parameter efficiency on small benchmarks is a measurable, modest claim. Universal speedup claims have no evidence and are the first thing a reviewer will attack.",
+      "why_vi": "Tiết kiệm tham số trên các bài kiểm thử nhỏ là khẳng định đo được và khiêm tốn. Tuyên bố tăng tốc phổ quát không có bằng chứng và là thứ phản biện tấn công đầu tiên.",
+      "level": 3
+    },
+    {
+      "id": "qq-10",
+      "q": "A qubit in superposition, when measured in the computational basis, yields",
+      "q_vi": "Một qubit ở trạng thái chồng chập, khi đo trong cơ sở tính toán, cho ra",
+      "choices": [
+        "A single classical bit, with probability given by the squared amplitudes",
+        "Both zero and one simultaneously",
+        "A continuous real value",
+        "The full state vector"
+      ],
+      "answer": 0,
+      "why": "Measurement collapses the state and returns one outcome. The superposition is only visible statistically, across many repetitions.",
+      "why_vi": "Phép đo làm sụp trạng thái và trả về một kết quả. Chồng chập chỉ lộ ra về mặt thống kê, qua nhiều lần lặp lại.",
+      "level": 1
+    }
+  ]
+}

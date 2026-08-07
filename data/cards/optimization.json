@@ -1,0 +1,265 @@
+{
+  "schema": 1,
+  "id": "optimization",
+  "updated": "2026-08-07",
+  "cards": [
+    {
+      "id": "o-objective",
+      "en": "Objective function",
+      "vi": "Hàm mục tiêu",
+      "def_en": "The quantity a problem asks you to maximise or minimise.",
+      "def_vi": "Đại lượng mà bài toán yêu cầu cực đại hoặc cực tiểu.",
+      "say": "We minimise the weighted sum of delay and energy.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "o-constraint",
+      "en": "Constraint",
+      "vi": "Ràng buộc",
+      "def_en": "A condition every admissible solution must satisfy.",
+      "def_vi": "Điều kiện mà mọi nghiệm chấp nhận được đều phải thoả.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "o-feasible",
+      "en": "Feasible solution",
+      "vi": "Nghiệm khả thi",
+      "def_en": "A point that satisfies every constraint, whether or not it is optimal.",
+      "def_vi": "Điểm thoả mọi ràng buộc, bất kể có tối ưu hay không.",
+      "say": "Check feasibility first, because an infeasible optimum means nothing.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "o-convex",
+      "en": "Convex optimisation",
+      "vi": "Tối ưu lồi",
+      "def_en": "A problem with a convex objective over a convex set, where any local minimum is global.",
+      "def_vi": "Bài toán có hàm mục tiêu lồi trên tập lồi, mọi cực tiểu địa phương đều là toàn cục.",
+      "tags": ["class"]
+    },
+    {
+      "id": "o-non-convex",
+      "en": "Non-convex problem",
+      "vi": "Bài toán không lồi",
+      "def_en": "A problem with several local optima, so the starting point and the solver both matter.",
+      "def_vi": "Bài toán có nhiều cực trị địa phương, nên cả điểm xuất phát lẫn bộ giải đều quan trọng.",
+      "tags": ["class"]
+    },
+    {
+      "id": "o-lp",
+      "en": "Linear programming",
+      "vi": "Quy hoạch tuyến tính",
+      "def_en": "Optimising a linear objective subject to linear constraints, solvable in polynomial time.",
+      "def_vi": "Tối ưu hàm mục tiêu tuyến tính với ràng buộc tuyến tính, giải được trong thời gian đa thức.",
+      "tags": ["class"]
+    },
+    {
+      "id": "o-milp",
+      "en": "Mixed-integer programming",
+      "vi": "Quy hoạch nguyên hỗn hợp",
+      "def_en": "Optimisation where some variables must take integer values, which usually makes the problem hard.",
+      "def_vi": "Bài toán tối ưu mà một số biến buộc nguyên, thường khiến bài toán trở nên khó.",
+      "say": "Once the assignment variables become binary the problem is mixed integer.",
+      "tags": ["class"]
+    },
+    {
+      "id": "o-relaxation",
+      "en": "Relaxation",
+      "vi": "Nới lỏng ràng buộc",
+      "def_en": "Dropping or softening a constraint to get an easier problem whose optimum bounds the original.",
+      "def_vi": "Bỏ hoặc làm nhẹ một ràng buộc để có bài toán dễ hơn, nghiệm của nó chặn nghiệm bài gốc.",
+      "tags": ["technique"]
+    },
+    {
+      "id": "o-duality",
+      "en": "Duality",
+      "vi": "Đối ngẫu",
+      "def_en": "Every optimisation problem has a dual whose value bounds the primal, with the gap closing under convexity.",
+      "def_vi": "Mỗi bài toán tối ưu có bài đối ngẫu, giá trị của nó chặn bài gốc, và khoảng cách khép lại khi bài toán lồi.",
+      "tags": ["theory"]
+    },
+    {
+      "id": "o-lagrangian",
+      "en": "Lagrangian multiplier",
+      "vi": "Nhân tử Lagrange",
+      "def_en": "A price attached to a constraint, turning a constrained problem into an unconstrained one.",
+      "def_vi": "Giá gán cho một ràng buộc, biến bài toán có ràng buộc thành bài toán không ràng buộc.",
+      "tags": ["technique"]
+    },
+    {
+      "id": "o-kkt",
+      "en": "KKT conditions",
+      "vi": "Điều kiện KKT",
+      "def_en": "The first order conditions a constrained optimum must satisfy, generalising the zero gradient rule.",
+      "def_vi": "Các điều kiện bậc nhất mà nghiệm tối ưu có ràng buộc phải thoả, tổng quát hoá quy tắc gradient bằng không.",
+      "tags": ["theory"]
+    },
+    {
+      "id": "o-np-hard",
+      "en": "NP-hard",
+      "vi": "Khó NP",
+      "def_en": "At least as hard as every problem in NP, so no polynomial algorithm is known for the general case.",
+      "def_vi": "Khó ít nhất bằng mọi bài toán trong lớp NP, nên chưa có thuật toán đa thức cho trường hợp tổng quát.",
+      "say": "We prove hardness by reduction from a known NP hard problem.",
+      "tags": ["complexity"]
+    },
+    {
+      "id": "o-reduction",
+      "en": "Reduction",
+      "vi": "Phép quy dẫn",
+      "def_en": "Transforming one problem into another in polynomial time, which is how hardness proofs are built.",
+      "def_vi": "Biến bài toán này thành bài toán kia trong thời gian đa thức, cách dựng nên các chứng minh độ khó.",
+      "tags": ["complexity"]
+    },
+    {
+      "id": "o-complexity",
+      "en": "Computational complexity",
+      "vi": "Độ phức tạp tính toán",
+      "def_en": "How the running time or memory grows with the size of the input.",
+      "def_vi": "Cách thời gian chạy hoặc bộ nhớ tăng theo kích thước đầu vào.",
+      "tags": ["complexity"]
+    },
+    {
+      "id": "o-heuristic",
+      "en": "Heuristic",
+      "vi": "Thuật giải kinh nghiệm",
+      "def_en": "A rule that finds a good solution quickly with no guarantee of optimality.",
+      "def_vi": "Quy tắc tìm nhanh một nghiệm tốt, không bảo đảm tối ưu.",
+      "tags": ["method"]
+    },
+    {
+      "id": "o-metaheuristic",
+      "en": "Metaheuristic",
+      "vi": "Siêu thuật giải",
+      "def_en": "A general search strategy such as a genetic algorithm or particle swarm, applied on top of a problem specific evaluation.",
+      "def_vi": "Chiến lược tìm kiếm tổng quát như giải thuật di truyền hay bầy hạt, đặt trên một hàm đánh giá riêng của bài toán.",
+      "tags": ["method"]
+    },
+    {
+      "id": "o-ga",
+      "en": "Genetic algorithm",
+      "vi": "Giải thuật di truyền",
+      "def_en": "A population search using selection, crossover and mutation to improve candidate solutions.",
+      "def_vi": "Tìm kiếm theo quần thể, dùng chọn lọc, lai ghép và đột biến để cải thiện các nghiệm ứng viên.",
+      "tags": ["method"]
+    },
+    {
+      "id": "o-pso",
+      "en": "Particle swarm optimisation",
+      "vi": "Tối ưu bầy hạt",
+      "def_en": "A population method where each candidate moves according to its own best and the swarm's best.",
+      "def_vi": "Phương pháp quần thể, mỗi ứng viên di chuyển theo điểm tốt nhất của nó và của cả bầy.",
+      "tags": ["method"]
+    },
+    {
+      "id": "o-exploration",
+      "en": "Exploration versus exploitation",
+      "vi": "Cân bằng khám phá và khai thác",
+      "def_en": "The trade off between searching new regions and refining the best region found so far.",
+      "def_vi": "Sự đánh đổi giữa dò vùng mới và tinh chỉnh vùng tốt nhất đã tìm được.",
+      "say": "Too much exploitation and the search collapses into a local optimum.",
+      "tags": ["method"]
+    },
+    {
+      "id": "o-convergence",
+      "en": "Convergence",
+      "vi": "Sự hội tụ",
+      "def_en": "The iterates settling towards a fixed point, with a rate that says how fast.",
+      "def_vi": "Dãy lặp tiến dần về một điểm cố định, kèm tốc độ cho biết nhanh chậm.",
+      "tags": ["analysis"]
+    },
+    {
+      "id": "o-pareto",
+      "en": "Pareto front",
+      "vi": "Biên Pareto",
+      "def_en": "The set of solutions where no objective can improve without another getting worse.",
+      "def_vi": "Tập nghiệm mà không thể cải thiện mục tiêu nào nếu không làm xấu mục tiêu khác.",
+      "say": "We report the whole Pareto front instead of one arbitrary weighting.",
+      "tags": ["multiobjective"]
+    },
+    {
+      "id": "o-queueing",
+      "en": "Queueing theory",
+      "vi": "Lý thuyết hàng đợi",
+      "def_en": "The mathematics of waiting lines, relating arrival rate, service rate and delay.",
+      "def_vi": "Toán học về hàng chờ, liên hệ tốc độ đến, tốc độ phục vụ và độ trễ.",
+      "tags": ["stochastic"]
+    },
+    {
+      "id": "o-littles-law",
+      "en": "Little's law",
+      "vi": "Định luật Little",
+      "def_en": "In steady state the average number in a system equals arrival rate times average time in system.",
+      "def_vi": "Ở trạng thái dừng, số phần tử trung bình trong hệ bằng tốc độ đến nhân thời gian trung bình trong hệ.",
+      "tags": ["stochastic"]
+    },
+    {
+      "id": "o-markov",
+      "en": "Markov decision process",
+      "vi": "Quá trình quyết định Markov",
+      "def_en": "A model of sequential decisions where the next state depends only on the current state and action.",
+      "def_vi": "Mô hình ra quyết định tuần tự, trạng thái kế tiếp chỉ phụ thuộc trạng thái và hành động hiện tại.",
+      "tags": ["stochastic"]
+    },
+    {
+      "id": "o-aoi",
+      "en": "Age of information",
+      "vi": "Tuổi thông tin",
+      "def_en": "How stale the freshest received update is, a metric that neither delay nor throughput captures.",
+      "def_vi": "Mức cũ của bản cập nhật mới nhất đã nhận, chỉ số mà cả độ trễ lẫn thông lượng đều không nói lên được.",
+      "say": "Age of information peaks when updates are either too rare or too frequent.",
+      "tags": ["metric"]
+    },
+    {
+      "id": "o-confidence-interval",
+      "en": "Confidence interval",
+      "vi": "Khoảng tin cậy",
+      "def_en": "A range that would contain the true value in a stated fraction of repeated experiments.",
+      "def_vi": "Khoảng chứa giá trị thật trong một tỉ lệ đã nêu của các lần lặp thí nghiệm.",
+      "say": "Report the mean over ten seeds with its confidence interval.",
+      "tags": ["statistics"]
+    },
+    {
+      "id": "o-significance",
+      "en": "Statistical significance",
+      "vi": "Ý nghĩa thống kê",
+      "def_en": "Evidence that an observed difference is unlikely to come from chance alone.",
+      "def_vi": "Bằng chứng cho thấy khác biệt quan sát được khó có thể chỉ do ngẫu nhiên.",
+      "tags": ["statistics"]
+    },
+    {
+      "id": "o-seed",
+      "en": "Random seed",
+      "vi": "Hạt giống ngẫu nhiên",
+      "def_en": "The initial value of a pseudo random generator, which must be varied and reported for results to be credible.",
+      "def_vi": "Giá trị khởi tạo của bộ sinh giả ngẫu nhiên, phải thay đổi và báo cáo thì kết quả mới đáng tin.",
+      "say": "A single seed result is an anecdote, not a measurement.",
+      "tags": ["statistics"]
+    },
+    {
+      "id": "o-confound",
+      "en": "Confounding factor",
+      "vi": "Yếu tố gây nhiễu nhân quả",
+      "def_en": "A hidden variable that moves with your treatment and could explain the effect you claim.",
+      "def_vi": "Biến ẩn thay đổi cùng lúc với can thiệp, có thể giải thích chính hiệu ứng mà bạn khẳng định.",
+      "say": "Unless you control for it, that gain could be a confound.",
+      "tags": ["statistics"]
+    },
+    {
+      "id": "o-sensitivity",
+      "en": "Sensitivity analysis",
+      "vi": "Phân tích độ nhạy",
+      "def_en": "Varying each assumption to see how much the conclusion depends on it.",
+      "def_vi": "Thay đổi từng giả định để xem kết luận phụ thuộc vào nó nhiều tới mức nào.",
+      "tags": ["analysis"]
+    },
+    {
+      "id": "o-upper-bound",
+      "en": "Upper bound",
+      "vi": "Chặn trên",
+      "def_en": "A value the quantity provably cannot exceed, useful for judging how far a heuristic is from optimal.",
+      "def_vi": "Giá trị mà đại lượng chắc chắn không vượt qua, dùng để ước lượng thuật giải cách tối ưu bao xa.",
+      "tags": ["analysis"]
+    }
+  ]
+}

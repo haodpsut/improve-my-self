@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "id": "research",
+  "updated": "2026-08-07",
+  "drills": [
+    {
+      "id": "sp-r1",
+      "situation": "Một đồng nghiệp hỏi đóng góp thật sự của bài bạn là gì.",
+      "prompt": "In one sentence, what is the actual contribution?",
+      "prompt_vi": "Trong một câu, đóng góp thật sự là gì?",
+      "target": "We show that precomputing the orbital topology lets a graph network choose routes that cut handover failures by about a third, without any extra onboard hardware.",
+      "target_vi": "Chúng tôi chỉ ra rằng tính trước tô-pô quỹ đạo cho phép mạng đồ thị chọn tuyến, giảm khoảng một phần ba số lần chuyển giao thất bại, mà không cần thêm phần cứng trên vệ tinh.",
+      "keys": ["we show that"],
+      "tip": "Một câu, có một con số, không có từ đệm. Nếu phải hai câu là bạn chưa rõ đóng góp.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r2",
+      "situation": "Người nghe hỏi vì sao không dùng cách đơn giản hơn.",
+      "prompt": "Why not just use a shortest path algorithm and be done with it?",
+      "prompt_vi": "Sao không dùng luôn thuật toán đường ngắn nhất cho xong?",
+      "target": "We did, and it is our baseline. The problem is that the topology changes every few minutes, so a path computed once is already wrong by the time the packet arrives.",
+      "target_vi": "Chúng tôi có làm, và đó chính là đối chứng. Vấn đề là tô-pô đổi sau vài phút, nên đường tính một lần thì lúc gói tới nơi đã sai rồi.",
+      "keys": ["we did", "baseline"],
+      "tip": "Câu trả lời mạnh nhất luôn là đã thử và đó là đối chứng. Đừng bảo vệ bằng lý thuyết suông.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r3",
+      "situation": "Bạn phải nói ra hạn chế của mình trước khi bị hỏi.",
+      "prompt": "How well does this hold in a real deployment?",
+      "prompt_vi": "Cái này đứng vững tới đâu trong triển khai thật?",
+      "target": "A limitation of this study is that the traffic model is synthetic. We have not validated it against operator traces yet, and that is the next step.",
+      "target_vi": "Một hạn chế của nghiên cứu là mô hình lưu lượng còn tổng hợp. Chúng tôi chưa kiểm chứng với dữ liệu thật của nhà mạng, và đó là bước tiếp theo.",
+      "keys": ["a limitation of this study", "next step"],
+      "tip": "Nói hạn chế trước khiến người nghe tin phần còn lại. Giấu hạn chế thì mất cả bài.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r4",
+      "situation": "Một người khẳng định kết quả của bạn chỉ là do mô hình lớn hơn.",
+      "prompt": "Your model has three times more parameters. Of course it wins.",
+      "prompt_vi": "Mô hình của anh nhiều tham số gấp ba. Thắng là đương nhiên.",
+      "target": "We anticipated that, so we also report a parameter matched version in Table four. The gain drops but it is still there.",
+      "target_vi": "Chúng tôi lường trước điều đó, nên có báo cáo thêm bản khớp số tham số ở Bảng bốn. Mức cải thiện giảm nhưng vẫn còn.",
+      "keys": ["parameter matched", "table"],
+      "tip": "Trả lời đúng câu họ hỏi. Nói thêm baseline khác hoặc phóng to quy mô là trả lời câu KHÁC.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r5",
+      "situation": "Bạn trình bày ý tưởng mới cho nhóm.",
+      "prompt": "What made you look at this problem in the first place?",
+      "prompt_vi": "Ban đầu điều gì khiến anh nhìn vào bài toán này?",
+      "target": "Motivated by an observation in our own logs. Handover failures clustered at low elevation angles, and none of the existing schedulers used that signal.",
+      "target_vi": "Xuất phát từ một quan sát trong chính nhật ký của chúng tôi. Các lần chuyển giao thất bại dồn vào vùng góc ngẩng thấp, mà không bộ lập lịch nào đang dùng tín hiệu đó.",
+      "keys": ["motivated by", "observation"],
+      "tip": "Động cơ nghiên cứu tốt nhất là một quan sát cụ thể, không phải một khoảng trống trong tài liệu.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r6",
+      "situation": "Người phản biện nghi ngờ bạn bịa số.",
+      "prompt": "Can you release the code and the exact seeds behind Figure five?",
+      "prompt_vi": "Anh công bố mã nguồn và đúng các hạt giống dùng cho Hình năm được không?",
+      "target": "Yes. The repository is public and every figure has a script that regenerates it from the raw CSV. I will send you the link today.",
+      "target_vi": "Được. Kho mã đã công khai và mỗi hình đều có script sinh lại từ file CSV gốc. Tôi sẽ gửi anh đường liên kết hôm nay.",
+      "keys": ["yes", "regenerates"],
+      "tip": "Câu trả lời duy nhất chấp nhận được là có, kèm mốc thời gian. Do dự ở đây là mất bài.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r7",
+      "situation": "Bạn phải giải thích tại sao chọn hướng lượng tử.",
+      "prompt": "Is the quantum part actually necessary, or is it decoration?",
+      "prompt_vi": "Phần lượng tử có thật sự cần không, hay chỉ để trang trí?",
+      "target": "It is quantum inspired, so it runs on a classical machine. We keep it because it reduces the number of trainable parameters, and we show the ablation without it.",
+      "target_vi": "Nó là lấy cảm hứng lượng tử, chạy trên máy cổ điển. Chúng tôi giữ vì nó giảm số tham số cần huấn luyện, và có báo cáo thí nghiệm bỏ nó ra.",
+      "keys": ["quantum inspired", "ablation"],
+      "tip": "Nói rõ ranh giới lượng tử thật và lấy cảm hứng lượng tử ngay câu đầu. Mập mờ ở đây là tự bắn vào chân.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r8",
+      "situation": "Bạn muốn từ chối một yêu cầu thí nghiệm quá lớn.",
+      "prompt": "Could you rerun everything on a hundred thousand node topology?",
+      "prompt_vi": "Anh chạy lại toàn bộ trên tô-pô một trăm nghìn nút được không?",
+      "target": "That would take about six weeks of compute, so it falls outside the scope of this revision. We can add a scaling analysis instead, if that addresses the concern.",
+      "target_vi": "Việc đó tốn khoảng sáu tuần tính toán, nên nằm ngoài phạm vi lần sửa này. Chúng tôi có thể thêm phân tích khả năng mở rộng thay thế, nếu điều đó giải quyết được băn khoăn.",
+      "keys": ["outside the scope", "instead"],
+      "tip": "Từ chối phải kèm con số chi phí và một phương án thay thế. Chỉ nói không thì bị đọc là né.",
+      "seconds": 17
+    },
+    {
+      "id": "sp-r9",
+      "situation": "Bạn kể lại một kết quả âm.",
+      "prompt": "So the reinforcement learning agent did not beat the greedy heuristic?",
+      "prompt_vi": "Vậy tác tử học tăng cường không thắng được thuật giải tham lam?",
+      "target": "Correct, and we report it as a negative result. The greedy policy is close to optimal in this regime, which is itself worth knowing.",
+      "target_vi": "Đúng vậy, và chúng tôi báo cáo đó như một kết quả âm. Chính sách tham lam gần tối ưu trong chế độ này, và bản thân điều đó cũng đáng biết.",
+      "keys": ["negative result", "worth knowing"],
+      "tip": "Kết quả âm trung thực có giá trị. Uốn nó thành thắng lợi là chỗ bài báo bắt đầu sụp.",
+      "seconds": 15
+    },
+    {
+      "id": "sp-r10",
+      "situation": "Bạn xin ý kiến về việc chọn tạp chí.",
+      "prompt": "Where are you thinking of submitting this?",
+      "prompt_vi": "Anh định nộp bài này ở đâu?",
+      "target": "We are considering a transactions level venue, but the scope may be closer to a magazine. What would you say the strongest framing is?",
+      "target_vi": "Chúng tôi đang cân nhắc một tạp chí cấp transactions, nhưng phạm vi có thể hợp với dạng magazine hơn. Theo anh cách đóng khung mạnh nhất là gì?",
+      "keys": ["we are considering", "what would you say"],
+      "tip": "Kết bằng câu hỏi mở. Người đối diện sẽ cho bạn thông tin quý hơn nhiều so với việc bạn tự trình bày tiếp.",
+      "seconds": 15
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "id": "network-core",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qn-1",
+      "q": "A file transfer stalls only when the path crosses a particular tunnel, while small pings succeed. The most likely cause is",
+      "q_vi": "Một phiên truyền tệp chỉ đứng khi đường đi qua một đường hầm nhất định, còn gói ping nhỏ vẫn thông. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "An MTU mismatch with blocked fragmentation messages",
+        "A DNS misconfiguration",
+        "An expired TLS certificate",
+        "A duplicate MAC address"
+      ],
+      "answer": 0,
+      "why": "Small packets fit, large ones need fragmentation, and if the notification message is filtered the sender never learns to shrink them. The connection opens and then hangs.",
+      "why_vi": "Gói nhỏ vẫn lọt, gói lớn cần phân mảnh, mà nếu thông báo bị chặn thì bên gửi không bao giờ biết phải thu nhỏ gói. Kết nối mở được rồi treo.",
+      "level": 3
+    },
+    {
+      "id": "qn-2",
+      "q": "Which statement about TCP and UDP is correct?",
+      "q_vi": "Phát biểu nào về TCP và UDP là đúng?",
+      "choices": [
+        "TCP guarantees ordered delivery, UDP does not guarantee delivery at all",
+        "UDP is always faster because it compresses the payload",
+        "TCP does not perform congestion control",
+        "UDP provides encryption by default"
+      ],
+      "answer": 0,
+      "why": "The difference is guarantees, not compression or encryption. UDP looks faster because it skips retransmission and ordering, which is a trade off, not free speed.",
+      "why_vi": "Khác biệt nằm ở các bảo đảm, không phải nén hay mã hoá. UDP trông nhanh hơn vì nó bỏ qua truyền lại và sắp thứ tự, đó là đánh đổi chứ không phải nhanh miễn phí.",
+      "level": 1
+    },
+    {
+      "id": "qn-3",
+      "q": "QUIC removes head-of-line blocking that hurt HTTP/2 because",
+      "q_vi": "QUIC loại bỏ nghẽn đầu hàng đợi vốn làm khó HTTP/2 vì",
+      "choices": [
+        "Each stream is independently ordered above an unordered transport",
+        "It disables retransmission entirely",
+        "It uses one TCP connection per request",
+        "It compresses all streams into one"
+      ],
+      "answer": 0,
+      "why": "HTTP/2 multiplexed streams over a single ordered TCP byte stream, so one lost segment stalled everything. QUIC keeps ordering per stream instead.",
+      "why_vi": "HTTP/2 ghép nhiều luồng lên một dòng byte TCP có thứ tự, nên chỉ cần mất một đoạn là kẹt hết. QUIC giữ thứ tự riêng cho từng luồng.",
+      "level": 3
+    },
+    {
+      "id": "qn-4",
+      "q": "Congestion control and flow control differ in that",
+      "q_vi": "Điều khiển tắc nghẽn khác điều khiển luồng ở chỗ",
+      "choices": [
+        "Congestion control protects the network, flow control protects the receiver",
+        "They are two names for the same mechanism",
+        "Flow control operates at the physical layer",
+        "Congestion control only applies to UDP"
+      ],
+      "answer": 0,
+      "why": "The receiver window is about the endpoint's buffer. The congestion window is about what the path in between can absorb.",
+      "why_vi": "Cửa sổ phía thu nói về bộ đệm của điểm cuối. Cửa sổ tắc nghẽn nói về mức mà đường truyền ở giữa chịu được.",
+      "level": 2
+    },
+    {
+      "id": "qn-5",
+      "q": "Bufferbloat makes latency worse because",
+      "q_vi": "Phình bộ đệm làm độ trễ xấu đi vì",
+      "choices": [
+        "Oversized queues delay packets instead of signalling congestion by dropping them",
+        "It reduces the link bandwidth",
+        "It corrupts packet checksums",
+        "It forces the use of UDP"
+      ],
+      "answer": 0,
+      "why": "Loss is how the network tells the sender to slow down. A huge buffer hides that signal and converts it into queueing delay.",
+      "why_vi": "Mất gói chính là cách mạng báo cho bên gửi chậm lại. Bộ đệm quá lớn giấu tín hiệu đó đi và biến nó thành độ trễ hàng đợi.",
+      "level": 3
+    },
+    {
+      "id": "qn-6",
+      "q": "Which device makes forwarding decisions using IP prefixes?",
+      "q_vi": "Thiết bị nào ra quyết định chuyển tiếp dựa trên tiền tố IP?",
+      "choices": ["Router", "Switch", "Hub", "Repeater"],
+      "answer": 0,
+      "why": "Switches forward on link layer addresses within one segment. Routers look at the network layer and choose a next hop between networks.",
+      "why_vi": "Bộ chuyển mạch chuyển tiếp theo địa chỉ tầng liên kết trong một phân đoạn. Bộ định tuyến nhìn tầng mạng và chọn chặng kế tiếp giữa các mạng.",
+      "level": 1
+    },
+    {
+      "id": "qn-7",
+      "q": "The essential idea of software-defined networking is",
+      "q_vi": "Ý tưởng cốt lõi của mạng định nghĩa bằng phần mềm là",
+      "choices": [
+        "Separating the control plane from the data plane so forwarding is programmed centrally",
+        "Replacing all hardware with virtual machines",
+        "Encrypting every packet in the network",
+        "Removing routing protocols from the internet"
+      ],
+      "answer": 0,
+      "why": "The decision logic moves to a controller with a global view, while the switches keep doing fast forwarding.",
+      "why_vi": "Phần logic ra quyết định chuyển sang bộ điều khiển có tầm nhìn toàn cục, còn thiết bị chuyển mạch vẫn lo việc chuyển tiếp nhanh.",
+      "level": 2
+    },
+    {
+      "id": "qn-8",
+      "q": "BGP is described as a path vector protocol because it advertises",
+      "q_vi": "BGP được gọi là giao thức vector đường đi vì nó quảng bá",
+      "choices": [
+        "Reachable prefixes together with the sequence of autonomous systems to cross",
+        "The full link state map of the internet",
+        "Only the hop count to each destination",
+        "The bandwidth of every link on the path"
+      ],
+      "answer": 0,
+      "why": "Carrying the AS path is what lets BGP detect loops and apply policy, which distance vector and link state protocols do not provide at that scale.",
+      "why_vi": "Việc mang theo chuỗi hệ tự trị giúp BGP phát hiện vòng lặp và áp chính sách, thứ mà giao thức vector khoảng cách hay trạng thái liên kết không làm được ở quy mô đó.",
+      "level": 3
+    },
+    {
+      "id": "qn-9",
+      "q": "A CDN reduces user-perceived latency mainly by",
+      "q_vi": "Mạng phân phối nội dung giảm độ trễ mà người dùng cảm nhận chủ yếu nhờ",
+      "choices": [
+        "Serving content from a cache physically close to the user",
+        "Increasing the origin server's CPU speed",
+        "Compressing the TCP headers",
+        "Switching the client to UDP"
+      ],
+      "answer": 0,
+      "why": "Propagation delay is bounded by distance and the speed of light. The only reliable fix is shortening the distance.",
+      "why_vi": "Trễ lan truyền bị chặn bởi khoảng cách và tốc độ ánh sáng. Cách sửa đáng tin duy nhất là rút ngắn khoảng cách.",
+      "level": 2
+    },
+    {
+      "id": "qn-10",
+      "q": "NAT complicates peer-to-peer applications because",
+      "q_vi": "NAT gây khó cho ứng dụng ngang hàng vì",
+      "choices": [
+        "Hosts behind it have no globally reachable address for inbound connections",
+        "It encrypts the payload",
+        "It reduces the MTU to 512 bytes",
+        "It blocks all UDP traffic by design"
+      ],
+      "answer": 0,
+      "why": "Address translation is built around outbound flows. Without a mapping already created, an incoming connection has nowhere to land, which is why hole punching and relays exist.",
+      "why_vi": "Biên dịch địa chỉ được dựng quanh các luồng đi ra. Nếu chưa có ánh xạ sẵn thì kết nối đi vào không biết đáp vào đâu, vì vậy mới sinh ra kỹ thuật đục lỗ và máy chủ trung chuyển.",
+      "level": 3
+    }
+  ]
+}

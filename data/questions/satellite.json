@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "id": "satellite",
+  "updated": "2026-08-07",
+  "questions": [
+    {
+      "id": "qs-1",
+      "q": "Why does a geostationary link feel unusable for interactive gaming while a LEO link does not?",
+      "q_vi": "Vì sao tuyến địa tĩnh gần như không dùng được cho chơi game tương tác còn tuyến LEO thì được?",
+      "choices": [
+        "The one way propagation delay at 35 786 km is around 120 ms, so the round trip approaches a quarter of a second",
+        "Geostationary satellites have less bandwidth",
+        "Geostationary satellites cannot use beamforming",
+        "LEO satellites transmit at higher power"
+      ],
+      "answer": 0,
+      "why": "The distance alone fixes the delay, and no amount of bandwidth or power removes it. LEO wins here purely because it is about forty times closer.",
+      "why_vi": "Riêng khoảng cách đã ấn định độ trễ, băng thông hay công suất không xoá được. LEO thắng đơn giản vì gần hơn khoảng bốn mươi lần.",
+      "level": 2
+    },
+    {
+      "id": "qs-2",
+      "q": "The main engineering consequence of a LEO satellite's high orbital speed is",
+      "q_vi": "Hệ quả kỹ thuật chính của tốc độ quỹ đạo cao ở vệ tinh LEO là",
+      "choices": [
+        "Frequent handovers and a large Doppler shift to compensate",
+        "Higher path loss than geostationary orbit",
+        "Inability to carry optical payloads",
+        "A permanently fixed footprint"
+      ],
+      "answer": 0,
+      "why": "Visibility lasts only minutes, so sessions must be handed over constantly, and the fast relative motion shifts the carrier frequency enough to break lock if uncompensated.",
+      "why_vi": "Thời gian nhìn thấy chỉ vài phút nên phiên phải chuyển giao liên tục, và chuyển động tương đối nhanh làm lệch tần sóng mang đủ để mất đồng bộ nếu không bù.",
+      "level": 2
+    },
+    {
+      "id": "qs-3",
+      "q": "Inter-satellite links change the architecture because they allow",
+      "q_vi": "Liên kết liên vệ tinh thay đổi kiến trúc vì cho phép",
+      "choices": [
+        "Routing traffic through space without returning to a ground gateway at every hop",
+        "Higher transmit power on the downlink",
+        "Elimination of the need for orbital station keeping",
+        "Direct connection to geostationary orbit only"
+      ],
+      "answer": 0,
+      "why": "Without inter-satellite links every hop is bent-pipe, so coverage is limited by gateway placement. With them the constellation becomes a real mesh network in orbit.",
+      "why_vi": "Không có liên kết liên vệ tinh thì mỗi chặng đều phải xuống đất, nên vùng phủ bị giới hạn bởi vị trí trạm cổng. Có nó, chòm vệ tinh trở thành một mạng lưới thực sự trên quỹ đạo.",
+      "level": 3
+    },
+    {
+      "id": "qs-4",
+      "q": "Routing in a LEO constellation is harder than in a terrestrial network mainly because",
+      "q_vi": "Định tuyến trong chòm LEO khó hơn mạng mặt đất chủ yếu vì",
+      "choices": [
+        "The topology changes continuously and predictably with orbital motion",
+        "Satellites have no routing tables",
+        "Packets cannot be buffered in orbit",
+        "There is no addressing scheme in space"
+      ],
+      "answer": 0,
+      "why": "The saving grace is that the change is deterministic, so paths can be precomputed. But a static shortest path computed once is wrong within minutes.",
+      "why_vi": "Điểm cứu vãn là sự thay đổi có tính tất định nên đường đi tính trước được. Nhưng đường ngắn nhất tính một lần rồi để yên thì chỉ vài phút sau đã sai.",
+      "level": 3
+    },
+    {
+      "id": "qs-5",
+      "q": "In a link budget, closing the link with a 3 dB margin means",
+      "q_vi": "Trong bài toán cân bằng công suất tuyến, tuyến thông với dự trữ 3 dB nghĩa là",
+      "choices": [
+        "The received power exceeds the required threshold by a factor of about two",
+        "The link fails half the time",
+        "The antenna gain is 3 dB",
+        "The noise figure is 3 dB"
+      ],
+      "answer": 0,
+      "why": "Three decibels is roughly a factor of two in power. The margin is what absorbs rain fade, pointing error and ageing.",
+      "why_vi": "Ba decibel xấp xỉ gấp đôi về công suất. Dự trữ đó chính là phần hấp thụ suy hao do mưa, lệch hướng và lão hoá thiết bị.",
+      "level": 2
+    },
+    {
+      "id": "qs-6",
+      "q": "Low elevation angles degrade a satellite link because",
+      "q_vi": "Góc ngẩng thấp làm xấu tuyến vệ tinh vì",
+      "choices": [
+        "The signal traverses a longer slant path through the atmosphere and meets more obstruction",
+        "The satellite reduces its transmit power at low elevation",
+        "The Doppler shift disappears",
+        "The frequency band changes automatically"
+      ],
+      "answer": 0,
+      "why": "A shallow angle means more kilometres of atmosphere and a much higher chance that terrain or buildings sit in the way.",
+      "why_vi": "Góc thấp nghĩa là đi qua nhiều kilômét khí quyển hơn và khả năng bị địa hình hay nhà cửa chắn cũng cao hơn hẳn.",
+      "level": 2
+    },
+    {
+      "id": "qs-7",
+      "q": "In SAGIN, what distinguishes the HAPS layer from the satellite layer?",
+      "q_vi": "Trong SAGIN, điều gì phân biệt tầng HAPS với tầng vệ tinh?",
+      "choices": [
+        "HAPS operates in the stratosphere at 20 to 50 km and can be repositioned or recovered",
+        "HAPS operates above geostationary orbit",
+        "HAPS cannot relay communications",
+        "HAPS is purely a ground based concept"
+      ],
+      "answer": 0,
+      "why": "The altitude gives much lower delay than any orbit and the platform can be moved or landed, which no satellite can do.",
+      "why_vi": "Độ cao đó cho độ trễ thấp hơn hẳn mọi quỹ đạo, và nền tảng có thể dời chỗ hoặc hạ xuống, điều không vệ tinh nào làm được.",
+      "level": 2
+    },
+    {
+      "id": "qs-8",
+      "q": "Satellite quantum key distribution is attractive mainly because",
+      "q_vi": "Phân phối khoá lượng tử qua vệ tinh hấp dẫn chủ yếu vì",
+      "choices": [
+        "Free-space loss over vacuum grows far more slowly than fibre attenuation over long distances",
+        "Satellites can amplify quantum states without disturbing them",
+        "Photons travel faster in orbit",
+        "Orbital links are immune to weather"
+      ],
+      "answer": 0,
+      "why": "Fibre loss is exponential in length, which caps terrestrial links at a few hundred kilometres. Vacuum is the only cheap way to cover thousands. Note that no-cloning forbids amplifying quantum states at all.",
+      "why_vi": "Suy hao trong sợi quang tăng theo hàm mũ với chiều dài, giới hạn tuyến mặt đất ở vài trăm kilômét. Chân không là cách rẻ duy nhất phủ hàng nghìn kilômét. Lưu ý định lý không sao chép cấm hẳn việc khuếch đại trạng thái lượng tử.",
+      "level": 3
+    },
+    {
+      "id": "qs-9",
+      "q": "A bent-pipe transponder differs from a regenerative payload because it",
+      "q_vi": "Bộ phát đáp kiểu ống cong khác tải trọng tái sinh ở chỗ nó",
+      "choices": [
+        "Amplifies and retransmits without decoding the signal, so noise is forwarded too",
+        "Decodes and re-encodes every packet in orbit",
+        "Cannot change the carrier frequency",
+        "Requires an inter-satellite link to work"
+      ],
+      "answer": 0,
+      "why": "Bent-pipe is simple and transparent to waveform changes, but it relays the noise it receives. Regenerative payloads clean the signal at the cost of onboard complexity.",
+      "why_vi": "Kiểu ống cong đơn giản và trong suốt với thay đổi dạng sóng, nhưng nó chuyển tiếp cả nhiễu thu được. Tải trọng tái sinh làm sạch tín hiệu, đổi lại là độ phức tạp trên vệ tinh.",
+      "level": 3
+    },
+    {
+      "id": "qs-10",
+      "q": "Gateway placement matters in a LEO system because gateways",
+      "q_vi": "Vị trí trạm cổng quan trọng trong hệ LEO vì trạm cổng",
+      "choices": [
+        "Are where traffic leaves the constellation for the terrestrial internet, so they concentrate load",
+        "Control the orbital altitude of the satellites",
+        "Are the only source of onboard power",
+        "Determine the modulation scheme"
+      ],
+      "answer": 0,
+      "why": "Every user flow eventually needs the ground network. Too few gateways, or badly placed ones, create a bottleneck no amount of orbital capacity fixes.",
+      "why_vi": "Mọi luồng người dùng cuối cùng đều phải xuống mạng mặt đất. Quá ít trạm cổng, hoặc đặt sai chỗ, sẽ tạo nút thắt mà dung lượng trên quỹ đạo không cứu được.",
+      "level": 2
+    }
+  ]
+}
