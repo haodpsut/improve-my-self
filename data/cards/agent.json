@@ -1,0 +1,428 @@
+{
+  "schema": 1,
+  "id": "agent",
+  "updated": "2026-08-07",
+  "cards": [
+    {
+      "id": "ag-agent",
+      "en": "Agent",
+      "vi": "Tác tử",
+      "def_en": "A system where a model decides its own next step, calls tools and keeps acting until a goal is reached or a stop condition fires.",
+      "def_vi": "Hệ mà mô hình tự quyết bước kế tiếp, gọi công cụ và tiếp tục hành động cho tới khi đạt mục tiêu hoặc gặp điều kiện dừng.",
+      "say": "The difference is that an agent decides what to do next, a pipeline is told.",
+      "tags": ["basic"]
+    },
+    {
+      "id": "ag-agentic-loop",
+      "en": "Agentic loop",
+      "vi": "Vòng lặp tác tử",
+      "def_en": "The repeating cycle of observe, decide, act and observe again that drives an agent forward.",
+      "def_vi": "Chu kỳ lặp gồm quan sát, quyết định, hành động rồi quan sát lại, chính là thứ đẩy tác tử đi tới.",
+      "say": "Every turn of the loop costs tokens, so the loop needs a budget.",
+      "tags": ["basic", "loop"]
+    },
+    {
+      "id": "ag-workflow-vs-agent",
+      "en": "Workflow versus agent",
+      "vi": "Luồng cố định so với tác tử",
+      "def_en": "A workflow has its control flow written by a human, an agent decides control flow at run time. Fixed workflows are cheaper and reproducible, agents handle cases you cannot enumerate.",
+      "def_vi": "Luồng cố định có dòng điều khiển do người viết sẵn, còn tác tử tự quyết dòng điều khiển lúc chạy. Luồng cố định rẻ và tái lập được, tác tử xử được các trường hợp không liệt kê nổi.",
+      "say": "Use a workflow where you can enumerate the steps, and an agent only where you cannot.",
+      "tags": ["basic", "design"]
+    },
+    {
+      "id": "ag-tool-use",
+      "en": "Tool use",
+      "vi": "Dùng công cụ",
+      "def_en": "Giving the model a set of callable functions with typed inputs, so it can act on the world instead of only producing text.",
+      "def_vi": "Cấp cho mô hình một tập hàm gọi được, có kiểu đầu vào rõ ràng, để nó tác động lên thế giới chứ không chỉ sinh chữ.",
+      "say": "The tool description is part of the prompt, so write it like documentation.",
+      "tags": ["tools"]
+    },
+    {
+      "id": "ag-tool-schema",
+      "en": "Tool schema",
+      "vi": "Lược đồ công cụ",
+      "def_en": "The typed declaration of a tool's name, purpose and parameters that the model reads to decide when and how to call it.",
+      "def_vi": "Phần khai báo có kiểu về tên, mục đích và tham số của công cụ, mà mô hình đọc để quyết định khi nào và gọi ra sao.",
+      "tags": ["tools"]
+    },
+    {
+      "id": "ag-tool-result",
+      "en": "Tool result",
+      "vi": "Kết quả trả về của công cụ",
+      "def_en": "The output fed back into the conversation after a call. Its size and format directly control how much context the agent burns.",
+      "def_vi": "Phần đầu ra được đưa ngược vào hội thoại sau mỗi lần gọi. Kích thước và định dạng của nó quyết định trực tiếp lượng ngữ cảnh mà tác tử tiêu tốn.",
+      "say": "Truncating tool output is often the single biggest cost saving.",
+      "tags": ["tools", "context"]
+    },
+    {
+      "id": "ag-structured-output",
+      "en": "Structured output",
+      "vi": "Đầu ra có cấu trúc",
+      "def_en": "Forcing the model to answer in a fixed schema so the result can be parsed by code without a fragile text parser.",
+      "def_vi": "Buộc mô hình trả lời theo một lược đồ cố định, để mã nguồn đọc được kết quả mà không cần bộ phân tích văn bản mong manh.",
+      "say": "Validate at the tool boundary so the model is forced to retry on a mismatch.",
+      "tags": ["tools"]
+    },
+    {
+      "id": "ag-mcp",
+      "en": "MCP (Model Context Protocol)",
+      "vi": "Giao thức ngữ cảnh mô hình",
+      "def_en": "An open protocol letting a model connect to external tools and data sources through a common interface, so each integration is written once rather than once per application.",
+      "def_vi": "Giao thức mở cho phép mô hình nối tới công cụ và nguồn dữ liệu bên ngoài qua một giao diện chung, nên mỗi tích hợp chỉ phải viết một lần thay vì viết lại cho từng ứng dụng.",
+      "say": "The protocol turns every integration from N times M into N plus M.",
+      "tags": ["protocol", "tools"]
+    },
+    {
+      "id": "ag-react",
+      "en": "ReAct pattern",
+      "vi": "Mẫu suy luận xen hành động",
+      "def_en": "Interleaving a reasoning step with an action step, so the model thinks, acts, sees the result and thinks again.",
+      "def_vi": "Đan xen bước lập luận với bước hành động, mô hình nghĩ, làm, nhìn kết quả rồi nghĩ tiếp.",
+      "tags": ["loop", "pattern"]
+    },
+    {
+      "id": "ag-planning",
+      "en": "Planning",
+      "vi": "Lập kế hoạch",
+      "def_en": "Producing an explicit sequence of intended steps before acting, which makes the agent inspectable and lets a human intervene early.",
+      "def_vi": "Sinh ra chuỗi bước dự định một cách tường minh trước khi hành động, nhờ vậy tác tử soi được và người dùng can thiệp sớm được.",
+      "say": "A plan you can read is a plan you can stop.",
+      "tags": ["planning"]
+    },
+    {
+      "id": "ag-decomposition",
+      "en": "Task decomposition",
+      "vi": "Phân rã nhiệm vụ",
+      "def_en": "Splitting a goal into subtasks small enough that each fits one context window and one clear success test.",
+      "def_vi": "Chia mục tiêu thành các nhiệm vụ con đủ nhỏ để mỗi cái vừa một cửa sổ ngữ cảnh và có một phép kiểm thành công rõ ràng.",
+      "tags": ["planning"]
+    },
+    {
+      "id": "ag-reflection",
+      "en": "Reflection",
+      "vi": "Tự soi lại",
+      "def_en": "Having the agent criticise its own output and revise it before returning, which catches shallow errors but cannot catch what the model never knew.",
+      "def_vi": "Cho tác tử tự phê bình đầu ra của mình rồi sửa trước khi trả về, bắt được lỗi nông nhưng không bắt được thứ mô hình vốn không biết.",
+      "say": "Self critique catches sloppiness, not blind spots.",
+      "tags": ["loop", "quality"]
+    },
+    {
+      "id": "ag-verifier",
+      "en": "Verifier",
+      "vi": "Bộ kiểm chứng",
+      "def_en": "A separate check, ideally deterministic code rather than another model, that decides whether a step actually succeeded.",
+      "def_vi": "Một phép kiểm riêng, tốt nhất là mã tất định chứ không phải một mô hình khác, để xác định bước vừa rồi có thực sự thành công không.",
+      "say": "If the verifier is another model, you have two opinions, not a check.",
+      "tags": ["quality"]
+    },
+    {
+      "id": "ag-context-window",
+      "en": "Context window",
+      "vi": "Cửa sổ ngữ cảnh",
+      "def_en": "The maximum number of tokens the model can attend to at once, which is the hard budget every agent design has to live inside.",
+      "def_vi": "Số token tối đa mô hình xét được cùng lúc, là ngân sách cứng mà mọi thiết kế tác tử phải sống bên trong.",
+      "tags": ["context"]
+    },
+    {
+      "id": "ag-context-engineering",
+      "en": "Context engineering",
+      "vi": "Thiết kế ngữ cảnh",
+      "def_en": "Deciding what information enters the window, in what order and in what form. It matters more than prompt wording once an agent runs for many turns.",
+      "def_vi": "Quyết định thông tin nào được đưa vào cửa sổ, theo thứ tự nào và ở dạng nào. Khi tác tử chạy nhiều lượt, việc này quan trọng hơn cách chữ nghĩa trong câu nhắc.",
+      "say": "Most agent failures at turn thirty are context failures, not reasoning failures.",
+      "tags": ["context"]
+    },
+    {
+      "id": "ag-compaction",
+      "en": "Compaction",
+      "vi": "Nén hội thoại",
+      "def_en": "Summarising earlier turns so a long run keeps going after the window fills, at the cost of losing detail that was not summarised.",
+      "def_vi": "Tóm tắt các lượt cũ để phiên dài chạy tiếp được sau khi cửa sổ đầy, đổi lại mất những chi tiết không được đưa vào bản tóm.",
+      "tags": ["context"]
+    },
+    {
+      "id": "ag-memory",
+      "en": "Agent memory",
+      "vi": "Bộ nhớ tác tử",
+      "def_en": "State that survives beyond one context window, usually written to a file or a store and read back when relevant.",
+      "def_vi": "Trạng thái tồn tại lâu hơn một cửa sổ ngữ cảnh, thường ghi ra tập tin hoặc kho rồi đọc lại khi cần.",
+      "say": "Memory is only useful if retrieval brings back the right piece at the right moment.",
+      "tags": ["memory"]
+    },
+    {
+      "id": "ag-scratchpad",
+      "en": "Scratchpad",
+      "vi": "Vùng nháp",
+      "def_en": "A working area, often a file on disk, where the agent offloads intermediate state instead of carrying it in context.",
+      "def_vi": "Vùng làm việc, thường là một tập tin trên đĩa, nơi tác tử đẩy trạng thái trung gian ra thay vì gánh trong ngữ cảnh.",
+      "tags": ["memory", "context"]
+    },
+    {
+      "id": "ag-agentic-rag",
+      "en": "Agentic RAG",
+      "vi": "Truy hồi có tác tử",
+      "def_en": "Retrieval where the agent decides what to search for, judges whether the result is enough and searches again, instead of one fixed retrieval step.",
+      "def_vi": "Truy hồi mà tác tử tự quyết tìm gì, tự đánh giá kết quả đã đủ chưa và tìm lại, thay vì chỉ một bước truy hồi cố định.",
+      "say": "The agent decides the query, which is the whole difference from classic retrieval.",
+      "tags": ["memory", "pattern"]
+    },
+    {
+      "id": "ag-subagent",
+      "en": "Subagent",
+      "vi": "Tác tử con",
+      "def_en": "A child agent given a narrow task and its own fresh context, returning only its conclusion to the parent.",
+      "def_vi": "Tác tử con được giao một nhiệm vụ hẹp cùng ngữ cảnh riêng mới tinh, chỉ trả kết luận về cho tác tử cha.",
+      "say": "The point of a subagent is that the parent never sees the noise, only the answer.",
+      "tags": ["multiagent"]
+    },
+    {
+      "id": "ag-orchestrator",
+      "en": "Orchestrator and worker",
+      "vi": "Điều phối và thợ",
+      "def_en": "A pattern where one agent splits the work and several workers run in parallel, each on its own slice.",
+      "def_vi": "Mẫu thiết kế trong đó một tác tử chia việc và nhiều tác tử thợ chạy song song, mỗi cái một phần.",
+      "tags": ["multiagent", "pattern"]
+    },
+    {
+      "id": "ag-router",
+      "en": "Router",
+      "vi": "Bộ định tuyến yêu cầu",
+      "def_en": "A cheap first step that classifies the request and sends it to the right specialist path or model.",
+      "def_vi": "Bước đầu tiên rẻ tiền, phân loại yêu cầu rồi đẩy sang đúng nhánh chuyên biệt hoặc đúng mô hình.",
+      "tags": ["multiagent", "pattern"]
+    },
+    {
+      "id": "ag-handoff",
+      "en": "Handoff",
+      "vi": "Bàn giao giữa tác tử",
+      "def_en": "Transferring control and the relevant state from one agent to another, where whatever is not passed along is simply lost.",
+      "def_vi": "Chuyển quyền điều khiển cùng phần trạng thái liên quan từ tác tử này sang tác tử khác, và thứ gì không được chuyển thì coi như mất.",
+      "tags": ["multiagent"]
+    },
+    {
+      "id": "ag-fanout",
+      "en": "Fan-out and barrier",
+      "vi": "Toả ra và điểm chờ",
+      "def_en": "Running many branches at once, and the point where you wait for all of them. Every barrier costs the wall clock time of the slowest branch.",
+      "def_vi": "Chạy nhiều nhánh cùng lúc, và điểm mà bạn phải chờ đủ tất cả. Mỗi điểm chờ tốn đúng thời gian thực của nhánh chậm nhất.",
+      "say": "Only put a barrier where the next stage genuinely needs every result.",
+      "tags": ["multiagent", "pattern"]
+    },
+    {
+      "id": "ag-computer-use",
+      "en": "Computer use",
+      "vi": "Điều khiển máy tính",
+      "def_en": "An agent operating a graphical interface by reading the screen and issuing clicks and keystrokes, used when no API exists.",
+      "def_vi": "Tác tử điều khiển giao diện đồ hoạ bằng cách đọc màn hình rồi phát ra thao tác bấm và gõ, dùng khi không có API nào.",
+      "tags": ["capability"]
+    },
+    {
+      "id": "ag-code-execution",
+      "en": "Code execution",
+      "vi": "Chạy mã sinh ra",
+      "def_en": "Letting the agent write and run code, which turns unreliable arithmetic and text munging into a deterministic step.",
+      "def_vi": "Cho tác tử viết và chạy mã, biến phần tính toán và xử lý văn bản vốn không đáng tin thành một bước tất định.",
+      "say": "Anything that must be exact should be computed, not generated.",
+      "tags": ["capability", "tools"]
+    },
+    {
+      "id": "ag-sandbox",
+      "en": "Sandbox",
+      "vi": "Môi trường cách ly",
+      "def_en": "An isolated environment where generated code and tool calls run without reaching the real filesystem, network or credentials.",
+      "def_vi": "Môi trường tách biệt để mã sinh ra và lời gọi công cụ chạy mà không chạm tới hệ tập tin, mạng hay thông tin đăng nhập thật.",
+      "tags": ["security", "ops"]
+    },
+    {
+      "id": "ag-permission",
+      "en": "Permission model",
+      "vi": "Mô hình cấp quyền",
+      "def_en": "The rules deciding which actions run automatically, which need a human click and which are forbidden outright.",
+      "def_vi": "Bộ quy tắc quyết định hành động nào chạy tự động, hành động nào cần người bấm duyệt, và hành động nào cấm hẳn.",
+      "say": "Read is cheap to allow, write and send are not.",
+      "tags": ["security", "ops"]
+    },
+    {
+      "id": "ag-hitl",
+      "en": "Human in the loop",
+      "vi": "Có người trong vòng lặp",
+      "def_en": "Placing a human approval step at the actions that are hard to reverse, rather than at every step.",
+      "def_vi": "Đặt bước duyệt của con người ở đúng những hành động khó đảo ngược, chứ không phải ở mọi bước.",
+      "say": "Ask before the irreversible action, not before every action.",
+      "tags": ["security", "design"]
+    },
+    {
+      "id": "ag-least-agency",
+      "en": "Least agency",
+      "vi": "Trao quyền tối thiểu",
+      "def_en": "Giving the agent the narrowest set of tools and permissions that still completes the job, the agent version of least privilege.",
+      "def_vi": "Chỉ trao cho tác tử tập công cụ và quyền hẹp nhất mà vẫn làm xong việc, chính là phiên bản đặc quyền tối thiểu cho tác tử.",
+      "tags": ["security", "design"]
+    },
+    {
+      "id": "ag-prompt-injection",
+      "en": "Prompt injection",
+      "vi": "Tiêm câu lệnh",
+      "def_en": "Text crafted by an attacker that the model reads as instructions rather than as data.",
+      "def_vi": "Đoạn chữ do kẻ tấn công dựng nên, khiến mô hình đọc nó như mệnh lệnh thay vì như dữ liệu.",
+      "say": "The model has no reliable way to tell an instruction from a quotation.",
+      "tags": ["security"]
+    },
+    {
+      "id": "ag-indirect-injection",
+      "en": "Indirect prompt injection",
+      "vi": "Tiêm câu lệnh gián tiếp",
+      "def_en": "Injection arriving through content the agent fetches, such as a web page, an email or a code comment, rather than from the user.",
+      "def_vi": "Kiểu tiêm câu lệnh đến qua nội dung mà tác tử tự lấy về, ví dụ một trang web, một email hay một dòng chú thích trong mã, chứ không đến từ người dùng.",
+      "say": "The dangerous input is the one your agent went and fetched by itself.",
+      "tags": ["security"]
+    },
+    {
+      "id": "ag-confused-deputy",
+      "en": "Confused deputy",
+      "vi": "Kẻ thừa hành bị lừa",
+      "def_en": "An agent with legitimate permissions tricked into using them on behalf of an attacker who has none.",
+      "def_vi": "Tác tử có quyền hợp lệ bị đánh lừa để dùng chính quyền đó phục vụ kẻ tấn công vốn không có quyền gì.",
+      "say": "The agent is not compromised, its authority is borrowed.",
+      "tags": ["security"]
+    },
+    {
+      "id": "ag-exfiltration",
+      "en": "Data exfiltration path",
+      "vi": "Đường rò dữ liệu ra ngoài",
+      "def_en": "Any tool that can send data outward, such as a web request or an email, which is what turns an injection into a real breach.",
+      "def_vi": "Bất kỳ công cụ nào gửi được dữ liệu ra ngoài, ví dụ gọi web hay gửi email, chính là thứ biến một vụ tiêm câu lệnh thành rò rỉ thật.",
+      "say": "Injection plus an outbound tool is what actually costs you the data.",
+      "tags": ["security"]
+    },
+    {
+      "id": "ag-guardrail",
+      "en": "Guardrail",
+      "vi": "Rào chắn",
+      "def_en": "A check placed around the model, on the input or the output, that blocks or rewrites what violates a policy.",
+      "def_vi": "Phép kiểm đặt bao quanh mô hình, ở đầu vào hoặc đầu ra, chặn hoặc viết lại những gì vi phạm chính sách.",
+      "tags": ["security", "quality"]
+    },
+    {
+      "id": "ag-trajectory",
+      "en": "Trajectory",
+      "vi": "Quỹ đạo thi hành",
+      "def_en": "The full recorded sequence of thoughts, tool calls and results in one run, which is the unit you inspect when debugging an agent.",
+      "def_vi": "Toàn bộ chuỗi được ghi lại gồm suy luận, lời gọi công cụ và kết quả trong một lần chạy, là đơn vị bạn soi khi gỡ lỗi tác tử.",
+      "say": "You cannot debug an agent from its final answer, only from its trajectory.",
+      "tags": ["eval", "ops"]
+    },
+    {
+      "id": "ag-observability",
+      "en": "Tracing",
+      "vi": "Truy vết",
+      "def_en": "Logging every step with its inputs, outputs, latency and cost, so a failure can be located instead of guessed at.",
+      "def_vi": "Ghi lại từng bước kèm đầu vào, đầu ra, độ trễ và chi phí, để định vị được chỗ hỏng thay vì đoán mò.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "ag-eval",
+      "en": "Agent evaluation",
+      "vi": "Đánh giá tác tử",
+      "def_en": "Measuring an agent on a fixed set of tasks with an automatic success test, since one impressive demo says nothing about reliability.",
+      "def_vi": "Đo tác tử trên một tập nhiệm vụ cố định kèm phép kiểm thành công tự động, vì một bản trình diễn ấn tượng không nói lên gì về độ tin cậy.",
+      "say": "Report the pass rate over fifty runs, not the transcript of the one that worked.",
+      "tags": ["eval"]
+    },
+    {
+      "id": "ag-pass-at-k",
+      "en": "Pass rate",
+      "vi": "Tỉ lệ hoàn thành",
+      "def_en": "The fraction of runs that reach the goal. Because agents are stochastic, a single run is an anecdote rather than a measurement.",
+      "def_vi": "Tỉ lệ số lần chạy đạt được mục tiêu. Vì tác tử mang tính ngẫu nhiên, một lần chạy chỉ là giai thoại chứ không phải phép đo.",
+      "tags": ["eval"]
+    },
+    {
+      "id": "ag-llm-judge",
+      "en": "LLM as judge",
+      "vi": "Dùng mô hình làm giám khảo",
+      "def_en": "Scoring an output with another model. Cheap and scalable, but it inherits the same blind spots and needs calibrating against human labels.",
+      "def_vi": "Chấm đầu ra bằng một mô hình khác. Rẻ và mở rộng được, nhưng nó thừa hưởng đúng những điểm mù đó và phải hiệu chuẩn lại với nhãn của người.",
+      "say": "A judge that shares the model's blind spots will approve its blind spots.",
+      "tags": ["eval"]
+    },
+    {
+      "id": "ag-determinism",
+      "en": "Reproducibility of a run",
+      "vi": "Khả năng chạy lại giống hệt",
+      "def_en": "Whether the same input gives the same trajectory. Agents are rarely reproducible, so tests must assert on outcomes, not on exact steps.",
+      "def_vi": "Việc cùng một đầu vào có cho ra cùng quỹ đạo hay không. Tác tử hiếm khi lặp lại giống hệt, nên bài kiểm phải khẳng định trên kết quả chứ không trên từng bước.",
+      "tags": ["eval", "ops"]
+    },
+    {
+      "id": "ag-token-budget",
+      "en": "Token budget",
+      "vi": "Ngân sách token",
+      "def_en": "The ceiling on tokens a task may consume, which is the main lever on both cost and how long an agent will keep trying.",
+      "def_vi": "Trần số token mà một nhiệm vụ được phép tiêu, là đòn bẩy chính lên cả chi phí lẫn mức kiên trì của tác tử.",
+      "say": "Without a budget an agent will happily loop until the bill arrives.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "ag-caching",
+      "en": "Prompt caching",
+      "vi": "Đệm phần nhắc lặp lại",
+      "def_en": "Reusing the computation for an unchanged prefix of the prompt across calls, which cuts cost and latency in long agent runs.",
+      "def_vi": "Tái dùng phần tính toán cho đoạn đầu câu nhắc không đổi giữa các lần gọi, giúp giảm chi phí và độ trễ trong phiên tác tử dài.",
+      "tags": ["ops"]
+    },
+    {
+      "id": "ag-latency-budget",
+      "en": "Latency budget",
+      "vi": "Ngân sách độ trễ",
+      "def_en": "The time a user will tolerate before the agent must show progress or hand back control.",
+      "def_vi": "Khoảng thời gian người dùng chịu đựng được trước khi tác tử phải báo tiến độ hoặc trả lại quyền điều khiển.",
+      "tags": ["ops", "design"]
+    },
+    {
+      "id": "ag-failure-mode",
+      "en": "Silent failure",
+      "vi": "Hỏng âm thầm",
+      "def_en": "The agent reports success while the underlying task did not happen, which is the most expensive failure because nobody looks again.",
+      "def_vi": "Tác tử báo thành công trong khi việc thật chưa xảy ra, đây là kiểu hỏng đắt nhất vì không ai quay lại kiểm nữa.",
+      "say": "An agent that always says done is an agent that tells you nothing.",
+      "tags": ["eval", "quality"]
+    },
+    {
+      "id": "ag-skill",
+      "en": "Skill",
+      "vi": "Kỹ năng đóng gói",
+      "def_en": "A packaged set of instructions and resources loaded on demand, so procedural know how lives outside the prompt until it is needed.",
+      "def_vi": "Gói hướng dẫn và tài nguyên được nạp khi cần, để phần bí quyết quy trình nằm ngoài câu nhắc cho tới lúc dùng tới.",
+      "say": "Loading the instructions only when the task appears keeps the base context small.",
+      "tags": ["design", "context"]
+    },
+    {
+      "id": "ag-system-prompt",
+      "en": "System prompt",
+      "vi": "Câu nhắc hệ thống",
+      "def_en": "The standing instructions that frame every turn, defining role, constraints and how the agent should behave when unsure.",
+      "def_vi": "Phần chỉ dẫn thường trực khung cho mọi lượt, xác định vai trò, ràng buộc và cách hành xử khi tác tử không chắc.",
+      "tags": ["design"]
+    },
+    {
+      "id": "ag-autonomy",
+      "en": "Autonomy level",
+      "vi": "Mức tự chủ",
+      "def_en": "How far the agent may go without asking, from suggesting only, through acting with approval, to acting alone.",
+      "def_vi": "Mức mà tác tử được phép đi tới mà không cần hỏi, từ chỉ gợi ý, tới hành động có duyệt, tới hành động một mình.",
+      "say": "Autonomy should scale with how reversible the action is.",
+      "tags": ["design"]
+    },
+    {
+      "id": "ag-checkpoint",
+      "en": "Checkpoint and resume",
+      "vi": "Điểm lưu và chạy tiếp",
+      "def_en": "Saving progress so a long run can continue after a crash or an edit, instead of starting the whole task again.",
+      "def_vi": "Lưu lại tiến độ để phiên dài chạy tiếp được sau sự cố hoặc sau khi sửa, thay vì làm lại toàn bộ nhiệm vụ.",
+      "tags": ["ops"]
+    }
+  ]
+}
