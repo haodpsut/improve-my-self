@@ -37,12 +37,18 @@ if (!manifest) { console.error('Không đọc được manifest.'); process.exit
 /* ---------------------------------------------------------------
    1. Bo the
    --------------------------------------------------------------- */
+// Ngay moi nhat trong toan bo file du lieu. Dau phien ban o chan trang lay tu
+// manifest.updated, nen no khong duoc phep cu hon con so nay.
+let newestData = '';
+const noteDate = (f) => { if (f?.updated && f.updated > newestData) newestData = f.updated; };
+
 const cardRows = [];
 const allCardIds = new Set();
 
 for (const deck of manifest.decks || []) {
   const file = await readJSON(deck.file);
   if (!file) continue;
+  noteDate(file);
   const cards = file.cards || [];
   const heads = new Map();
   let withSay = 0;
@@ -79,6 +85,7 @@ const qRows = [];
 for (const quiz of manifest.quizzes || []) {
   const file = await readJSON(quiz.file);
   if (!file) continue;
+  noteDate(file);
   const qs = file.questions || [];
   if (qs.length < 100) warn.push(`${quiz.file}: mới có ${qs.length} câu, mốc đặt ra là 100`);
 
@@ -140,6 +147,7 @@ const sRows = [];
 for (const set of manifest.speaking || []) {
   const file = await readJSON(set.file);
   if (!file) continue;
+  noteDate(file);
   const drills = file.drills || [];
   if (drills.length < 100) warn.push(`${set.file}: mới có ${drills.length} tình huống, mốc đặt ra là 100`);
 
@@ -196,6 +204,12 @@ line('\nLUYỆN NÓI');
 line('  bộ              tình huống   độ dài câu mẫu trung bình');
 for (const r of sRows) line(`  ${r.id.padEnd(15)}${String(r.n).padStart(10)}${String(r.avgWords + ' từ').padStart(22)}`);
 line(`  tổng cộng      ${String(sRows.reduce((a, r) => a + r.n, 0)).padStart(10)}`);
+
+// Dau phien ban o chan trang doc tu manifest.updated. Neu no cu hon du lieu that
+// thi nguoi dung se tuong minh dang o ban cu, dung loai nham lan da xay ra.
+if (newestData && (!manifest.updated || manifest.updated < newestData)) {
+  fail.push(`manifest.updated là ${manifest.updated || 'trống'} nhưng dữ liệu mới nhất là ${newestData}, dấu phiên bản ở chân trang sẽ nói sai ngày`);
+}
 
 if (warn.length) {
   line(`\nCẢNH BÁO (${warn.length})`);

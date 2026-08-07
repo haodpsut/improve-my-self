@@ -1,5 +1,6 @@
 // Bo dinh tuyen theo hash. Trang tinh hoan toan, khong build, khong API.
 
+import { getManifest } from './data.js';
 import { getTheme, setTheme } from './store.js';
 import { renderHome } from './views/home.js';
 import { renderDeck } from './views/deck.js';
@@ -78,6 +79,21 @@ async function route() {
       </div>`;
   }
 }
+
+/* ---------- Dau phien ban ----------
+   In ngay chan trang de nhin mot cai la biet dang o ban nao. Truoc day khong co
+   cach nao phan biet ban moi voi ban trinh duyet con giu trong bo dem. */
+
+getManifest()
+  .then((m) => {
+    const el = document.getElementById('ver');
+    if (!el || !m.updated) return;
+    const [y, mo, d] = String(m.updated).split('-');
+    const nDeck = (m.decks || []).length;
+    const nSpeak = (m.speaking || []).length;
+    el.textContent = `Dữ liệu ${d}/${mo}/${y} · ${nDeck} bộ thẻ · ${nSpeak} bộ luyện nói`;
+  })
+  .catch(() => { /* chan trang khong quan trong den muc lam hong trang */ });
 
 window.addEventListener('hashchange', route);
 route();
