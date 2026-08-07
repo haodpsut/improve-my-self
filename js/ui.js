@@ -44,6 +44,25 @@ export function emptyState(text) {
   return `<div class="empty">${esc(text)}</div>`;
 }
 
+/**
+ * O chon co luot hoc, dat ngay tren thanh phien.
+ * Day la cho nguoi dung hay hieu nham rang bo chi co bay nhieu the,
+ * nen luon in kem tong so co that trong bo.
+ */
+export function sizePicker(current, choices, total, unit) {
+  const opts = choices.map((n) => {
+    const label = n === 0 ? `tất cả ${total}` : `${n}`;
+    const disabled = n !== 0 && n > total ? ' disabled' : '';
+    return `<option value="${n}"${n === current ? ' selected' : ''}${disabled}>${label}</option>`;
+  }).join('');
+  return `
+    <label class="size-pick">
+      <span>mỗi lượt</span>
+      <select id="size-sel">${opts}</select>
+      <span class="size-total">trong tổng ${total} ${esc(unit)}</span>
+    </label>`;
+}
+
 export function fmtDate(iso) {
   const [y, m, d] = String(iso).split('-');
   return `${d}/${m}/${y}`;

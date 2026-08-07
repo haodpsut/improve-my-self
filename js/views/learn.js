@@ -1,9 +1,7 @@
 import { loadDeck } from '../data.js';
-import { buildQueue, gradeCard, cardState } from '../store.js';
-import { esc, crumb, progressBar } from '../ui.js';
+import { buildQueue, gradeCard, cardState, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
+import { esc, crumb, progressBar, sizePicker } from '../ui.js';
 import { speak, canSpeak } from '../speech.js';
-
-const SESSION = 20;
 
 export async function renderLearn(app, deckId) {
   const { deck, cards } = await loadDeck(deckId);
@@ -12,7 +10,8 @@ export async function renderLearn(app, deckId) {
     return;
   }
 
-  const queue = buildQueue(cards, SESSION);
+  const size = sessionSize('learn');
+  const queue = buildQueue(cards, size === 0 ? cards.length : size);
   let index = 0;
   let flipped = false;
   const graded = { good: 0, hard: 0, again: 0 };
@@ -24,6 +23,7 @@ export async function renderLearn(app, deckId) {
         <div class="big">🎯</div>
         <h2>Xong ${queue.length} thẻ</h2>
         <p>Thuộc ${graded.good}, còn ngập ngừng ${graded.hard}, phải học lại ${graded.again}. Những thẻ bạn bấm học lại sẽ quay lại ngay hôm nay.</p>
+        <p style="font-size:14px">Bộ này có tất cả ${cards.length} thẻ. Bấm học tiếp để sang lượt kế, hoặc đổi cỡ lượt ở thanh trên khi đang học.</p>
         <div class="btn-row" style="justify-content:center">
           <button class="btn btn-primary" id="btn-again-round">Học tiếp lượt nữa</button>
           <a class="btn" href="#/quiz/${esc(deckId)}">Sang trắc nghiệm</a>
@@ -48,6 +48,8 @@ export async function renderLearn(app, deckId) {
         <span>${index + 1} / ${queue.length}</span>
         <span class="dot"></span>
         <span>${esc(boxLabel)}</span>
+        <span class="dot"></span>
+        ${sizePicker(size, SIZE_CHOICES, cards.length, 'thẻ của bộ')}
         <span class="spacer"></span>
         <a class="btn btn-sm btn-ghost" href="#/deck/${esc(deckId)}">Dừng</a>
       </div>
@@ -85,6 +87,12 @@ export async function renderLearn(app, deckId) {
       </div>
       <p class="flash-hint" style="margin-top:12px">Phím tắt: <code>space</code> lật · <code>1</code> học lại · <code>2</code> ngập ngừng · <code>3</code> thuộc</p>
     `;
+
+    app.querySelector('#size-sel')?.addEventListener('change', (e) => {
+      setSessionSize('learn', Number(e.target.value));
+      document.removeEventListener('keydown', onKey);
+      renderLearn(app, deckId);
+    });
 
     const flip = () => { flipped = !flipped; draw(); };
     app.querySelector('#flash-inner')?.addEventListener('click', flip);

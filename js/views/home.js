@@ -1,4 +1,4 @@
-import { getManifest, loadAllDecks } from '../data.js';
+import { getManifest, loadAllDecks, loadAllSpeakingSets } from '../data.js';
 import { dueCount, newCount, streak, overview } from '../store.js';
 import { esc } from '../ui.js';
 
@@ -6,6 +6,8 @@ export async function renderHome(app) {
   const manifest = await getManifest();
   const decks = await loadAllDecks();
   const byId = new Map(decks.map((d) => [d.deck.id, d]));
+  const speakSets = await loadAllSpeakingSets();
+  const drillCount = new Map(speakSets.map((s) => [s.meta.id, s.drills.length]));
 
   const totalCards = decks.reduce((n, d) => n + d.cards.length, 0);
   const allIds = decks.flatMap((d) => d.cards.map((c) => c.id));
@@ -49,6 +51,7 @@ export async function renderHome(app) {
           <div>
             <div class="mode-name">${esc(s.title)}</div>
             <div class="mode-desc">${esc(s.blurb || '')}</div>
+            <div class="flash-hint" style="margin-top:6px">${drillCount.get(s.id) || 0} tình huống</div>
           </div>
         </a>`).join('')}
     </div>

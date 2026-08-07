@@ -126,6 +126,16 @@ nhập chữ và chấm y hệt. Phần đọc câu mẫu lên dùng `speechSynt
 thấp, và đó là giới hạn có chủ ý: mục tiêu của phần này là luyện phản xạ bật ra đúng cụm, không
 phải chấm bài viết.
 
+## Cỡ một lượt học
+
+Mỗi lượt chỉ lấy ra một phần của bộ chứ không phải cả bộ, vì học một mạch một trăm thẻ thì không
+nhớ được gì. Mặc định là 20 thẻ mỗi lượt học khái niệm, 12 câu mỗi bài trắc nghiệm, 12 tình huống
+mỗi lượt luyện nói. Lượt sau sẽ ra thẻ khác.
+
+Đổi được ngay trên thanh phía trên khi đang học, chọn 10, 20, 30, 50 hoặc lấy hết. Lựa chọn này lưu
+lại cho những lần sau. Trang của mỗi bộ cũng in rõ tổng số thẻ và cỡ lượt đang đặt, để không nhầm
+rằng bộ chỉ có bấy nhiêu.
+
 ## Lịch ôn
 
 Thẻ chạy theo hộp Leitner, khoảng cách 0, 1, 2, 4, 8, 16, 32 ngày. Bấm **Thuộc** thì lên một hộp,

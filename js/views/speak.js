@@ -1,6 +1,6 @@
 import { loadSpeakingSet, loadDeck } from '../data.js';
-import { recordSpeak } from '../store.js';
-import { esc, crumb, progressBar, scoreRing } from '../ui.js';
+import { recordSpeak, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
+import { esc, crumb, progressBar, scoreRing, sizePicker } from '../ui.js';
 import { speak, canSpeak, canListen, listenOnce, scoreSpoken, stopSpeaking } from '../speech.js';
 
 /* ---------- Tinh huong hoi thoai ---------- */
@@ -11,6 +11,7 @@ export async function renderSpeak(app, setId) {
     app.innerHTML = `<div class="empty">Bộ này chưa có tình huống nào.</div>`;
     return;
   }
+  const size = sessionSize('speak');
   runDrills(app, {
     id: setId,
     title: meta.title,
@@ -18,7 +19,10 @@ export async function renderSpeak(app, setId) {
     blurb: meta.blurb || '',
     backHref: '#/',
     backLabel: 'Trang chính',
-    items: drills,
+    items: shuffleSlice(drills, size === 0 ? drills.length : size),
+    size,
+    total: drills.length,
+    unit: 'tình huống của bộ',
     rerun: () => renderSpeak(app, setId)
   });
 }
@@ -45,6 +49,7 @@ export async function renderSay(app, deckId) {
     return;
   }
 
+  const size = sessionSize('speak');
   runDrills(app, {
     id: `say-${deckId}`,
     title: `Đọc thành tiếng · ${deck.title}`,
@@ -52,7 +57,10 @@ export async function renderSay(app, deckId) {
     blurb: 'Đọc to câu ví dụ. Máy nghe rồi so từng từ với câu gốc, không nhờ mô hình nào chấm.',
     backHref: `#/deck/${deckId}`,
     backLabel: deck.title,
-    items: shuffleSlice(items, 12),
+    items: shuffleSlice(items, size === 0 ? items.length : size),
+    size,
+    total: items.length,
+    unit: 'thẻ có câu ví dụ',
     rerun: () => renderSay(app, deckId)
   });
 }
@@ -115,6 +123,8 @@ function runDrills(app, cfg) {
         <span>${index + 1} / ${cfg.items.length}</span>
         <span class="dot"></span>
         <span>${esc(cfg.icon)} ${esc(cfg.title)}</span>
+        <span class="dot"></span>
+        ${sizePicker(cfg.size, SIZE_CHOICES, cfg.total, cfg.unit)}
         <span class="spacer"></span>
         <a class="btn btn-sm btn-ghost" href="${cfg.backHref}">Dừng</a>
       </div>
@@ -159,6 +169,12 @@ function runDrills(app, cfg) {
 
       <div id="result-slot">${showAnswer ? resultBlock(d, result) : ''}</div>
     `;
+
+    app.querySelector('#size-sel')?.addEventListener('change', (e) => {
+      setSessionSize('speak', Number(e.target.value));
+      cleanup();
+      cfg.rerun();
+    });
 
     app.querySelector('#btn-hear')?.addEventListener('click', () => {
       speak(hasPrompt ? d.prompt : d.target, { lang: 'en-US', rate: 0.92 });

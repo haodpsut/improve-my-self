@@ -1,15 +1,17 @@
 import { loadDeck, loadQuestions } from '../data.js';
 import { buildQuizSet } from '../quiz.js';
-import { recordQuiz, gradeCard } from '../store.js';
-import { esc, crumb, progressBar, scoreRing } from '../ui.js';
+import { recordQuiz, gradeCard, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
+import { esc, crumb, progressBar, scoreRing, sizePicker } from '../ui.js';
 
-const SIZE = 12;
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 export async function renderQuiz(app, deckId) {
   const { deck, cards } = await loadDeck(deckId);
   const authored = await loadQuestions(deckId);
-  const set = buildQuizSet({ cards, authored, size: SIZE });
+  // Kho cau hoi that = cau viet tay cong cau sinh duoc tu tung the.
+  const pool = authored.length + cards.length;
+  const size = sessionSize('quiz');
+  const set = buildQuizSet({ cards, authored, size: size === 0 ? pool : size });
 
   if (!set.length) {
     app.innerHTML = `<div class="empty">Bộ này chưa đủ dữ liệu để sinh câu hỏi.</div>`;
@@ -58,6 +60,8 @@ export async function renderQuiz(app, deckId) {
         <span class="dot"></span>
         <span>đúng ${right}</span>
         ${q.generated ? '<span class="dot"></span><span>sinh từ thẻ</span>' : '<span class="dot"></span><span>câu hiểu bản chất</span>'}
+        <span class="dot"></span>
+        ${sizePicker(size, SIZE_CHOICES, pool, `câu có thể ra, gồm ${authored.length} câu viết tay`)}
         <span class="spacer"></span>
         <a class="btn btn-sm btn-ghost" href="#/deck/${esc(deckId)}">Dừng</a>
       </div>
@@ -112,6 +116,12 @@ export async function renderQuiz(app, deckId) {
       next.disabled = false;
       next.focus();
     };
+
+    app.querySelector('#size-sel')?.addEventListener('change', (e) => {
+      setSessionSize('quiz', Number(e.target.value));
+      document.removeEventListener('keydown', onKey);
+      renderQuiz(app, deckId);
+    });
 
     app.querySelectorAll('.choice').forEach((b) => {
       b.addEventListener('click', () => choose(Number(b.dataset.i)));

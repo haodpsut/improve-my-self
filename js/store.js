@@ -5,8 +5,12 @@ const KEY = 'ims.v1';
 const BOX_DAYS = [0, 1, 2, 4, 8, 16, 32];
 
 function blank() {
-  return { cards: {}, quiz: {}, speak: {}, days: {}, theme: null };
+  return { cards: {}, quiz: {}, speak: {}, days: {}, theme: null, prefs: {} };
 }
+
+// Co mot luot hoc. Khong phai so the trong bo, ma la so the lay ra moi lan.
+const DEFAULT_SIZE = { learn: 20, quiz: 12, speak: 12 };
+export const SIZE_CHOICES = [10, 20, 30, 50, 0]; // 0 nghia la lay het
 
 let state = load();
 
@@ -184,6 +188,19 @@ export function lastDays(n = 14) {
     d.setDate(d.getDate() + 1);
   }
   return out;
+}
+
+/* ---------- Co luot hoc ---------- */
+
+/** mode: 'learn' | 'quiz' | 'speak'. Tra ve 0 khi nguoi dung chon lay het. */
+export function sessionSize(mode) {
+  const v = state.prefs?.[mode];
+  return Number.isInteger(v) ? v : DEFAULT_SIZE[mode];
+}
+
+export function setSessionSize(mode, n) {
+  state.prefs = { ...(state.prefs || {}), [mode]: n };
+  save();
 }
 
 /* ---------- Nen sang toi ---------- */
