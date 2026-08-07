@@ -53,7 +53,9 @@ export async function renderDeck(app, deckId) {
         <div class="mode-icon">🗣️</div>
         <div>
           <div class="mode-name">Đọc thành tiếng</div>
-          <div class="mode-desc">Đọc câu ví dụ chứa thuật ngữ, máy nghe rồi chấm bằng thuật toán. Có ${cards.filter((c) => c.say).length} thẻ kèm câu ví dụ.</div>
+          <div class="mode-desc">${deck.lang === 'ru-vi'
+            ? `Đọc to định nghĩa tiếng Nga, máy nghe bằng giọng Nga rồi chấm bằng thuật toán. Có ${cards.filter((c) => c.defA).length} thẻ đọc được.`
+            : `Đọc câu ví dụ chứa thuật ngữ, máy nghe rồi chấm bằng thuật toán. Có ${cards.filter((c) => c.say).length} thẻ kèm câu ví dụ.`}</div>
         </div>
       </a>
       <a class="card mode-card" href="#/browse/${esc(deckId)}">

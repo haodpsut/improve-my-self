@@ -31,16 +31,33 @@ export async function renderSpeak(app, setId) {
 
 export async function renderSay(app, deckId) {
   const { deck, cards } = await loadDeck(deckId);
-  const items = cards
-    .filter((c) => c.say)
-    .map((c) => ({
-      id: `say-${c.id}`,
-      situation: `${c.head}${c.gloss ? ` · ${c.gloss}` : ''}`,
-      target: c.say,
-      target_vi: c.defB || '',
-      keys: [],
-      tip: c.defA || ''
-    }));
+  const isRu = deck.lang === 'ru-vi';
+
+  // Bo tieng Nga khong co truong say vi say la cau tieng Anh. Voi bo do, cau de
+  // doc chinh la dinh nghia tieng Nga, va phai doc bang giong Nga.
+  const items = isRu
+    ? cards
+      .filter((c) => c.defA)
+      .map((c) => ({
+        id: `say-${c.id}`,
+        situation: `${c.head}${c.translit ? ` [${c.translit}]` : ''}${c.gloss ? ` · ${c.gloss}` : ''}`,
+        target: c.defA,
+        target_vi: c.defB || '',
+        lang: 'ru-RU',
+        keys: [],
+        tip: c.altEn ? `Tiếng Anh: ${c.altEn}` : ''
+      }))
+    : cards
+      .filter((c) => c.say)
+      .map((c) => ({
+        id: `say-${c.id}`,
+        situation: `${c.head}${c.gloss ? ` · ${c.gloss}` : ''}`,
+        target: c.say,
+        target_vi: c.defB || '',
+        lang: 'en-US',
+        keys: [],
+        tip: c.defA || ''
+      }));
 
   if (!items.length) {
     app.innerHTML = `
@@ -176,8 +193,10 @@ function runDrills(app, cfg) {
       cfg.rerun();
     });
 
+    const lang = d.lang || 'en-US';
+
     app.querySelector('#btn-hear')?.addEventListener('click', () => {
-      speak(hasPrompt ? d.prompt : d.target, { lang: 'en-US', rate: 0.92 });
+      speak(hasPrompt ? d.prompt : d.target, { lang, rate: 0.92 });
     });
 
     app.querySelector('#btn-mic')?.addEventListener('click', () => {
@@ -193,7 +212,7 @@ function runDrills(app, cfg) {
       listening = true;
       draw();
       stopListening = listenOnce({
-        lang: 'en-US',
+        lang,
         onResult: (text) => {
           said = text;
           const t = app.querySelector('#transcript');

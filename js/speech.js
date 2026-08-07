@@ -87,10 +87,12 @@ const STOP = new Set([
   'will', 'would', 'can', 'could', 'with', 'from', 'by', 'not', 'there', 'here', 'about'
 ]);
 
+// Giu moi chu cai cua moi he chu viet, khong chi a den z, neu khong thi tieng Nga
+// bi xoa sach va moi luot doc tieng Nga deu bi cham 0 diem.
 export function tokenise(text) {
   return String(text || '')
     .toLowerCase()
-    .replace(/[^a-z0-9\s']/g, ' ')
+    .replace(/[^\p{L}\p{N}\s']/gu, ' ')
     .split(/\s+/)
     .filter(Boolean);
 }
@@ -121,7 +123,12 @@ export function scoreSpoken(said, target, keys = []) {
   const words = tokenise(said).length;
   const lengthOk = words >= Math.max(4, Math.round(targetWords.length * 0.4));
 
-  let score = Math.round((keyRatio * 0.55 + coverage * 0.45) * 100);
+  // Khong co cum khoa thi KHONG duoc coi phan do la dat san, neu khong moi luot
+  // noi sai van duoc 55 diem khong cong. Bai doc thanh tieng khong co keys, nen
+  // truong hop nay la pho bien chu khong phai ngoai le.
+  let score = keys.length
+    ? Math.round((keyRatio * 0.55 + coverage * 0.45) * 100)
+    : Math.round(coverage * 100);
   if (!lengthOk) score = Math.round(score * 0.6);
   score = Math.max(0, Math.min(100, score));
 

@@ -56,8 +56,10 @@ for (const deck of manifest.decks || []) {
     if (heads.has(key)) fail.push(`${deck.file}: hai thẻ cùng mặt trước "${head}" (${heads.get(key)} và ${c.id})`);
     heads.set(key, c.id);
 
+    // Bo tieng Nga khong dung truong say, cau doc thanh tieng cua no la def_ru.
+    const readable = deck.lang === 'ru-vi' ? c.def_ru : c.say;
+    if (readable) withSay += 1;
     if (c.say) {
-      withSay += 1;
       // Cau doc thanh tieng ma con chu so thi may doc sai nhip.
       if (/\d/.test(c.say)) warn.push(`${deck.file}: thẻ "${c.id}" có chữ số trong câu đọc thành tiếng, nên viết thành chữ`);
       if (DANGLING.test(c.say.trim())) fail.push(`${deck.file}: thẻ "${c.id}" câu ví dụ kết thúc lửng`);
