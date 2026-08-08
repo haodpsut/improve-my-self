@@ -19,8 +19,10 @@ export async function renderHome(app) {
   const groupBlock = (group) => {
     const items = manifest.decks.filter((d) => (d.group || 'domain') === group.id);
     if (!items.length) return '';
+    const nCards = items.reduce((n, d) => n + (byId.get(d.id)?.cards.length || 0), 0);
     return `
-      <div class="section-title">${esc(group.title)}</div>
+      <div class="section-title">${esc(group.title)} <span class="section-count">${items.length} bộ · ${nCards} thẻ</span></div>
+      ${group.blurb ? `<p class="section-blurb">${esc(group.blurb)}</p>` : ''}
       <div class="grid grid-decks">
         ${items.map((d) => deckCard(d, byId.get(d.id))).join('')}
       </div>`;

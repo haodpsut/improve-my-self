@@ -136,6 +136,18 @@ mỗi lượt luyện nói. Lượt sau sẽ ra thẻ khác.
 lại cho những lần sau. Trang của mỗi bộ cũng in rõ tổng số thẻ và cỡ lượt đang đặt, để không nhầm
 rằng bộ chỉ có bấy nhiêu.
 
+## Ôn tổng hợp
+
+Với hơn mười lăm bộ thẻ, tự chọn từng bộ để ôn là ma sát vô ích, vì thẻ đến hạn nằm rải khắp nơi.
+Hai đường tắt trên trang chính:
+
+- `#/learn/all` xếp hàng đợi theo lịch đến hạn trên **toàn kho**, trộn mọi môn. Mỗi thẻ in kèm tên
+  bộ ở cả hai mặt nên vẫn biết nó đến từ đâu.
+- `#/quiz/all` rút câu từ toàn kho, gồm mọi câu viết tay cộng câu sinh tự động từ mọi thẻ.
+
+Điểm của bài trộn được ghi vào **đúng môn của từng câu**, không dồn vào một khoá chung, nên bảng
+thống kê theo môn ở trang Tiến độ vẫn đúng.
+
 ## Lịch ôn
 
 Thẻ chạy theo hộp Leitner, khoảng cách 0, 1, 2, 4, 8, 16, 32 ngày. Bấm **Thuộc** thì lên một hộp,
@@ -149,7 +161,8 @@ dùng khi đổi máy hoặc trước khi xoá dữ liệu duyệt web.
 
 1. Tạo `data/cards/<id>.json` theo mẫu ở trên.
 2. Thêm một mục vào mảng `decks` của `data/manifest.json`, gồm `id`, `file`, `title`, `icon`,
-   `lang` (`en-vi` hoặc `ru-vi`), `blurb`, `color`, `group`.
+   `lang` (`en-vi` hoặc `ru-vi`), `blurb`, `color`, và `group` là một trong các nhóm đang có:
+   `telecom`, `compute`, `build`, `career`, `language`. Trang chính gom thẻ theo nhóm này.
 3. Muốn có câu hỏi hiểu bản chất thì thêm `data/questions/<id>.json` và một mục vào `quizzes`.
 4. Chạy `npm run qa`, rồi commit.
 
