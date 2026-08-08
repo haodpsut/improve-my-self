@@ -26,10 +26,16 @@ async function readJSON(rel) {
 const norm = (s) => String(s || '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, ' ').replace(/\s+/g, ' ').trim();
 const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
 
-// Cac tu that su khong the dung cuoi cau. Luu y tieng Anh cho phep ket cau bang
-// gioi tu ("the path it travels on"), nen khong duoc liet ke gioi tu o day,
-// neu khong se bao dong gia hang loat.
-const DANGLING = /\b(?:and|or|but|because|which|than|the|a|an|its|their|our|your)\s*$/i;
+// Cac tu that su khong the dung cuoi cau.
+//
+// Hai bay da mac phai, ghi lai de dung lap:
+//  1. Tieng Anh CHO PHEP ket cau bang gioi tu ("the path it travels on"), nen
+//     khong duoc liet ke gioi tu, neu khong se bao dong gia hang loat.
+//  2. Mao tu phai kiem PHAN BIET HOA THUONG. Chu "A" viet hoa cuoi cau thuong
+//     la nhan, vi du "the notebooks of group A", khong phai mao tu bo lung.
+const DANGLING_CONJ = /\b(?:and|or|but|because|which|than)\s*$/i;
+const DANGLING_ART = /\b(?:the|a|an|its|their|our|your)\s*$/;
+const isDangling = (s) => DANGLING_CONJ.test(s) || DANGLING_ART.test(s);
 
 const manifest = await readJSON('data/manifest.json');
 if (!manifest) { console.error('Không đọc được manifest.'); process.exit(1); }
@@ -68,7 +74,7 @@ for (const deck of manifest.decks || []) {
     if (c.say) {
       // Cau doc thanh tieng ma con chu so thi may doc sai nhip.
       if (/\d/.test(c.say)) warn.push(`${deck.file}: thẻ "${c.id}" có chữ số trong câu đọc thành tiếng, nên viết thành chữ`);
-      if (DANGLING.test(c.say.trim())) fail.push(`${deck.file}: thẻ "${c.id}" câu ví dụ kết thúc lửng`);
+      if (isDangling(c.say.trim())) fail.push(`${deck.file}: thẻ "${c.id}" câu ví dụ kết thúc lửng`);
     }
     if (norm(c.vi) === norm(head)) warn.push(`${deck.file}: thẻ "${c.id}" nghĩa tiếng Việt trùng mặt trước`);
   }
@@ -114,7 +120,7 @@ for (const quiz of manifest.quizzes || []) {
     for (const c of ch) {
       const s = String(c).trim();
       if (!s) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn rỗng`);
-      if (DANGLING.test(s)) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn kết thúc lửng, "${s.slice(-45)}"`);
+      if (isDangling(s)) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn kết thúc lửng, "${s.slice(-45)}"`);
     }
     if (new Set(ch.map(norm)).size !== ch.length) {
       fail.push(`${quiz.file}: câu "${q.id}" có hai lựa chọn giống nhau về nội dung`);
