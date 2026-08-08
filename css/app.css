@@ -1,50 +1,60 @@
 /* ============================================================
    Improve my self — bang mau va nen
    ============================================================ */
+/* Bang mau ho xanh la nhat, lay theo trang ra-mat.agentra.io.vn.
+   Nen sang la dien mao chinh, nen toi la ban do bong cua cung ho mau. */
 :root {
-  --bg: #070b16;
-  --bg-soft: #0d1426;
-  --panel: rgba(255, 255, 255, 0.045);
-  --panel-strong: rgba(255, 255, 255, 0.075);
-  --line: rgba(255, 255, 255, 0.11);
-  --line-soft: rgba(255, 255, 255, 0.06);
-  --ink: #eaeefb;
-  --ink-2: #aeb9d4;
-  --ink-3: #8792ae;
-  --accent: #6ea8fe;
-  --accent-2: #b98bff;
-  --ok: #34d399;
+  --bg: #0a1512;
+  --bg-soft: #0f1d18;
+  --panel: rgba(180, 230, 200, 0.05);
+  --panel-strong: rgba(180, 230, 200, 0.085);
+  --line: rgba(150, 210, 175, 0.14);
+  --line-soft: rgba(150, 210, 175, 0.08);
+  --ink: #e9f3ec;
+  --ink-2: #b3cbbc;
+  --ink-3: #8dab9b;
+  --accent: #6cc94a;
+  --accent-2: #2fbf7a;
+  --ok: #4ade80;
   --warn: #fbbf24;
   --bad: #fb7185;
   /* Nen DUC danh cho dieu khien goc cua trinh duyet. Khong duoc dung mau trong
      suot o day: nen trang mac dinh cua he thong se lo ra duoi va chu sang thanh
      vo hinh. Day la loi da gap that voi the select. */
-  --surface: #141c2f;
+  --surface: #12241d;
   --radius: 18px;
   --radius-sm: 12px;
   color-scheme: dark;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
   --font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --display: "Space Grotesk", "Inter", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, Consolas, monospace;
+  --grid-size: 64px;
+  /* Nen cua the. O nen toi thi la lop phu mo, o nen sang thi la mau TRANG duc,
+     vi tren nen bac ha mot lop phu mo se lam the chim xuong thay vi noi len. */
+  --card-bg: var(--panel);
 }
 
 html[data-theme="light"] {
-  --bg: #f5f7fc;
+  --bg: #eef5ea;
   --bg-soft: #ffffff;
-  --panel: rgba(15, 25, 55, 0.035);
-  --panel-strong: rgba(15, 25, 55, 0.06);
-  --line: rgba(15, 25, 55, 0.12);
-  --line-soft: rgba(15, 25, 55, 0.07);
-  --ink: #131a2e;
-  --ink-2: #46516d;
-  --ink-3: #5d688a;
-  --accent: #2563eb;
-  --accent-2: #7c3aed;
-  --ok: #059669;
-  --warn: #b45309;
-  --bad: #e11d48;
+  --panel: rgba(18, 48, 36, 0.028);
+  --panel-strong: rgba(18, 48, 36, 0.055);
+  --line: rgba(18, 48, 36, 0.10);
+  --line-soft: rgba(18, 48, 36, 0.06);
+  --ink: #122f22;
+  --ink-2: #3f5c4c;
+  /* Trang tham chieu dung #5f7568 cho chu mo, do lai chi duoc 4,46 tren nen bac
+     ha, tuc sat duoi nguong 4,5. Lam dam mot chut chu khong chep nguyen. */
+  --ink-3: #536a5c;
+  --accent: #2b8a4a;
+  --accent-2: #3f8f26;
+  --ok: #2b8a4a;
+  --warn: #a16207;
+  --bad: #c2334d;
   --surface: #ffffff;
-  --shadow: 0 14px 40px rgba(20, 30, 70, 0.1);
+  --shadow: 0 14px 40px rgba(18, 48, 36, 0.09);
+  --card-bg: #ffffff;
   color-scheme: light;
 }
 
@@ -69,22 +79,39 @@ body {
   overflow-x: hidden;
 }
 
-.aurora {
+/* Luoi ke o. Ve bang hai gradient tuyen tinh chu khong dung anh, nen no sac o
+   moi mat do diem anh. Mat na toa tron lam luoi mo dan o ria de no khong tranh
+   voi noi dung, va no cung khien trang khong bi cam giac giay ke o. */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 38%, #000 22%, transparent 80%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 38%, #000 22%, transparent 80%);
+  opacity: 0.75;
+}
+
+.bg-glow {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(60rem 40rem at 12% -10%, rgba(110, 168, 254, 0.20), transparent 60%),
-    radial-gradient(48rem 34rem at 88% 4%, rgba(185, 139, 255, 0.17), transparent 62%),
-    radial-gradient(52rem 40rem at 50% 105%, rgba(52, 211, 153, 0.10), transparent 60%);
+    radial-gradient(58rem 38rem at 14% -8%, rgba(108, 201, 74, 0.16), transparent 62%),
+    radial-gradient(46rem 32rem at 86% 2%, rgba(47, 191, 122, 0.13), transparent 64%),
+    radial-gradient(52rem 38rem at 50% 108%, rgba(93, 182, 58, 0.09), transparent 62%);
 }
 
-html[data-theme="light"] .aurora {
+html[data-theme="light"] .bg-glow {
   background:
-    radial-gradient(60rem 40rem at 12% -10%, rgba(37, 99, 235, 0.13), transparent 60%),
-    radial-gradient(48rem 34rem at 88% 4%, rgba(124, 58, 237, 0.10), transparent 62%),
-    radial-gradient(52rem 40rem at 50% 105%, rgba(5, 150, 105, 0.08), transparent 60%);
+    radial-gradient(58rem 38rem at 14% -8%, rgba(63, 143, 38, 0.10), transparent 62%),
+    radial-gradient(46rem 32rem at 86% 2%, rgba(43, 138, 74, 0.09), transparent 64%),
+    radial-gradient(52rem 38rem at 50% 108%, rgba(93, 182, 58, 0.07), transparent 62%);
 }
 
 a { color: inherit; text-decoration: none; }
@@ -114,10 +141,10 @@ code { font-family: var(--mono); font-size: 0.88em; }
   border-radius: 13px;
   /* Bong do lay mau tu chinh logo, khong to lai nen phia sau,
      vi logo da co nen gradient rieng cua no. */
-  box-shadow: 0 8px 22px rgba(110, 168, 254, 0.28);
+  box-shadow: 0 8px 22px rgba(63, 143, 38, 0.26);
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
-.brand-text strong { font-size: 15.5px; letter-spacing: -0.01em; }
+.brand-text strong { font-family: var(--display); font-size: 15.5px; letter-spacing: -0.01em; }
 .brand-text small { font-size: 11.5px; color: var(--ink-3); }
 
 .topnav { display: flex; gap: 4px; }
@@ -176,6 +203,7 @@ code { font-family: var(--mono); font-size: 0.88em; }
 /* Tieu de */
 .page-head { margin-bottom: 26px; }
 .page-head h1 {
+  font-family: var(--display);
   margin: 0 0 6px;
   font-size: clamp(24px, 4.2vw, 34px);
   letter-spacing: -0.022em;
@@ -212,7 +240,7 @@ code { font-family: var(--mono); font-size: 0.88em; }
   padding: 18px;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: var(--panel);
+  background: var(--card-bg);
   transition: transform 0.18s ease, border-color 0.18s, background 0.18s;
   overflow: hidden;
 }
@@ -238,7 +266,7 @@ a.card:hover, button.card:hover {
   background: color-mix(in srgb, var(--deck-color, var(--accent)) 18%, transparent);
   border: 1px solid color-mix(in srgb, var(--deck-color, var(--accent)) 35%, transparent);
 }
-.deck-title { font-weight: 650; font-size: 16px; letter-spacing: -0.01em; line-height: 1.3; }
+.deck-title { font-family: var(--display); font-weight: 650; font-size: 16px; letter-spacing: -0.01em; line-height: 1.3; }
 .deck-blurb { font-size: 13.2px; color: var(--ink-2); flex: 1; }
 .deck-foot {
   display: flex; align-items: center; gap: 8px;
@@ -296,9 +324,9 @@ a.card:hover, button.card:hover {
   padding: 16px 18px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
-  background: var(--panel);
+  background: var(--card-bg);
 }
-.stat-value { font-size: 27px; font-weight: 680; letter-spacing: -0.03em; line-height: 1.1; }
+.stat-value { font-family: var(--display); font-size: 27px; font-weight: 680; letter-spacing: -0.03em; line-height: 1.1; }
 .stat-label { font-size: 12.2px; color: var(--ink-3); margin-top: 3px; }
 
 /* ============================================================
@@ -429,7 +457,7 @@ a.card:hover, button.card:hover {
   padding: clamp(22px, 4vw, 38px);
   border-radius: 22px;
   border: 1px solid var(--line);
-  background: linear-gradient(160deg, var(--panel-strong), var(--panel));
+  background: var(--card-bg);
   box-shadow: var(--shadow);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -437,6 +465,7 @@ a.card:hover, button.card:hover {
 .flash-back { transform: rotateY(180deg); }
 
 .flash-term {
+  font-family: var(--display);
   font-size: clamp(24px, 5vw, 36px);
   font-weight: 660;
   letter-spacing: -0.025em;
@@ -477,7 +506,7 @@ a.card:hover, button.card:hover {
   padding: clamp(20px, 3.6vw, 30px);
   border-radius: 20px;
   border: 1px solid var(--line);
-  background: linear-gradient(160deg, var(--panel-strong), var(--panel));
+  background: var(--card-bg);
   box-shadow: var(--shadow);
 }
 .qtext { font-size: clamp(17px, 2.6vw, 21px); font-weight: 570; line-height: 1.45; margin-bottom: 6px; }
@@ -490,7 +519,7 @@ a.card:hover, button.card:hover {
   padding: 13px 15px;
   border-radius: 13px;
   border: 1px solid var(--line);
-  background: var(--panel);
+  background: var(--card-bg);
   color: var(--ink);
   font: inherit;
   font-size: 15px;
@@ -540,7 +569,7 @@ a.card:hover, button.card:hover {
   padding: 20px 22px;
   border-radius: 18px;
   border: 1px solid var(--line);
-  background: linear-gradient(160deg, var(--panel-strong), var(--panel));
+  background: var(--card-bg);
   margin-bottom: 16px;
 }
 .speak-sit { font-size: 13.5px; color: var(--ink-3); margin-bottom: 10px; }
@@ -664,7 +693,7 @@ a.card:hover, button.card:hover {
   padding: 15px 17px;
   border-radius: 14px;
   border: 1px solid var(--line-soft);
-  background: var(--panel);
+  background: var(--card-bg);
   margin-bottom: 9px;
 }
 .entry-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
@@ -689,14 +718,14 @@ a.card:hover, button.card:hover {
   padding: 14px 16px;
   border-radius: 13px;
   border: 1px solid var(--line-soft);
-  background: var(--panel);
+  background: var(--card-bg);
   font-size: 14px;
   color: var(--ink-2);
 }
 
 .done-hero { text-align: center; padding: 40px 20px 30px; }
 .done-hero .big { font-size: 52px; line-height: 1; margin-bottom: 14px; }
-.done-hero h2 { margin: 0 0 8px; font-size: 24px; letter-spacing: -0.02em; }
+.done-hero h2 { font-family: var(--display); margin: 0 0 8px; font-size: 24px; letter-spacing: -0.02em; }
 .done-hero p { color: var(--ink-2); margin: 0 auto 20px; max-width: 46ch; }
 
 @media (max-width: 720px) {

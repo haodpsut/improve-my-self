@@ -17,11 +17,13 @@ const app = document.getElementById('app');
 
 function applyTheme(v) {
   document.documentElement.dataset.theme = v;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', v === 'light' ? '#f5f7fc' : '#070b16');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', v === 'light' ? '#eef5ea' : '#0a1512');
 }
 
 const saved = getTheme();
-applyTheme(saved || (window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+// Mac dinh la nen sang, vi do la dien mao chinh cua bang mau nay.
+// Bam nut doi thi lua chon duoc nho lai cho lan sau.
+applyTheme(saved || 'light');
 
 document.getElementById('theme-toggle').addEventListener('click', () => {
   const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
