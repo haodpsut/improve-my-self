@@ -78,6 +78,7 @@ export async function renderLearn(app, deckId) {
             ${c.defA ? `<div class="flash-def">${esc(c.defA)}</div>` : ''}
             ${c.defB ? `<div class="flash-def" style="color:var(--ink-3)">${esc(c.defB)}</div>` : ''}
             ${c.say ? `<div class="flash-say">“${esc(c.say)}”</div>` : ''}
+            ${c.src.length ? `<div class="flash-src">Nguồn: ${c.src.map((s) => `<a href="https://arxiv.org/abs/${esc(s)}" target="_blank" rel="noopener">arXiv:${esc(s)}</a>`).join(' · ')}</div>` : ''}
             ${c.tags.length ? `<div class="flash-tags">${c.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
           </div>
         </div>

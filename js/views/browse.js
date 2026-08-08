@@ -92,6 +92,7 @@ export async function renderBrowse(app, deckId) {
         ${c.defA ? `<div class="entry-def">${esc(c.defA)}</div>` : ''}
         ${c.defB ? `<div class="entry-def-vi">${esc(c.defB)}</div>` : ''}
         ${c.say ? `<div class="entry-def-vi" style="font-style:italic">“${esc(c.say)}”</div>` : ''}
+        ${c.src.length ? `<div class="entry-def-vi">Nguồn: ${c.src.map((s) => `<a href="https://arxiv.org/abs/${esc(s)}" target="_blank" rel="noopener">arXiv:${esc(s)}</a>`).join(' · ')}</div>` : ''}
         <div class="entry-meta">
           <span>${esc(c.deckIcon || '')} ${esc(c.deckTitle)}</span>
           <span>·</span>

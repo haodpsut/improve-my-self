@@ -83,6 +83,19 @@ for (const deck of manifest.decks || []) {
       if (isDangling(c.say.trim())) fail.push(`${deck.file}: thẻ "${c.id}" câu ví dụ kết thúc lửng`);
     }
     if (norm(c.vi) === norm(head)) warn.push(`${deck.file}: thẻ "${c.id}" nghĩa tiếng Việt trùng mặt trước`);
+
+    // Nguon phai la ma arXiv that, vi ca diem manh cua the co nguon la truy nguoc duoc.
+    if (c.src !== undefined) {
+      if (!Array.isArray(c.src)) fail.push(`${deck.file}: thẻ "${c.id}" trường src phải là mảng`);
+      else for (const s of c.src) {
+        if (!/^\d{4}\.\d{4,5}(v\d+)?$/.test(String(s))) {
+          fail.push(`${deck.file}: thẻ "${c.id}" mã nguồn "${s}" không đúng dạng mã arXiv`);
+        }
+      }
+    }
+    if (deck.id.startsWith('arxiv-') && !(c.src || []).length) {
+      fail.push(`${deck.file}: thẻ "${c.id}" thuộc bộ đọc từ arXiv nhưng không dẫn nguồn nào`);
+    }
   }
 
   cardRows.push({ deck: deck.id, n: cards.length, say: withSay, sayPct: pct(withSay, cards.length) });

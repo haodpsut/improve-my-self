@@ -136,6 +136,33 @@ mỗi lượt luyện nói. Lượt sau sẽ ra thẻ khác.
 lại cho những lần sau. Trang của mỗi bộ cũng in rõ tổng số thẻ và cỡ lượt đang đặt, để không nhầm
 rằng bộ chỉ có bấy nhiêu.
 
+## Bộ đọc từ arXiv, cách làm mới hằng tháng
+
+Hai bộ `arxiv-llm` và `arxiv-agent` khác mọi bộ còn lại ở chỗ chúng nói về thứ **đang thay đổi**,
+nên chúng được soạn từ bài báo thật chứ không từ trí nhớ. Mỗi thẻ có trường `src` chứa mã arXiv, và
+trang học in kèm đường dẫn để bạn bấm vào đọc bài gốc.
+
+Làm mới:
+
+```bash
+npm run arxiv     # tải bài mới nhất về tools/arxiv-llm.json và tools/arxiv-agent.json
+```
+
+Lệnh này gọi API công khai của arXiv, lấy khoảng năm trăm bài mỗi mảng trong vài tuần gần nhất, gồm
+mã bài, ngày nộp, tiêu đề và tóm tắt. Hai file kết quả **không được commit**, chúng chỉ là nguyên
+liệu đầu vào và tái tạo được bất cứ lúc nào.
+
+Sau đó soạn thẻ từ chúng theo ba luật đã đặt ra:
+
+- **Gom theo chủ đề, đừng làm mỗi bài một thẻ.** Một thẻ nên là hướng lặp lại ở nhiều bài, và dẫn
+  hai tới bốn mã arXiv làm chứng. Mỗi bài một thẻ thì ra danh mục chứ không ra kiến thức.
+- **Nói rõ mức bằng chứng.** Tóm tắt là lời tự nhận của tác giả, chưa qua phản biện. Một kỹ thuật
+  nhiều nhóm cùng báo cáo khác hẳn một kỹ thuật mới có một nhóm nói.
+- **Không chép con số hiệu năng.** Điểm chuẩn đo và tỉ lệ cải thiện là số một nhóm tự báo, cũ rất
+  nhanh. Viết cơ chế và hướng thay đổi thay vì viết số.
+
+Cổng QA chặn nếu một thẻ trong bộ `arxiv-` không dẫn nguồn, hoặc dẫn mã sai dạng.
+
 ## Ôn tổng hợp
 
 Với hơn mười lăm bộ thẻ, tự chọn từng bộ để ôn là ma sát vô ích, vì thẻ đến hạn nằm rải khắp nơi.

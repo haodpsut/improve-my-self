@@ -45,6 +45,8 @@ export function normaliseCard(raw, deck) {
     defB: raw.def_vi || '',
     say: raw.say || '',
     tags: raw.tags || [],
+    // Ma bai tren arXiv, de moi khang dinh trong the deu truy nguoc duoc.
+    src: Array.isArray(raw.src) ? raw.src : [],
     raw
   };
 }
