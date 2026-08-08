@@ -1,0 +1,2150 @@
+{
+  "schema": 1,
+  "id": "limits",
+  "updated": "2026-08-08",
+  "cards": [
+    {
+      "id": "lim-fluency-is-not-accuracy",
+      "en": "Fluency is not accuracy",
+      "vi": "Trôi chảy không đồng nghĩa chính xác",
+      "def_en": "A model optimised to produce likely text produces smooth prose whether or not the content is true, so surface quality carries almost no signal about correctness.",
+      "def_vi": "Mô hình được tối ưu để sinh văn bản có khả năng cao sẽ viết trơn tru bất kể nội dung đúng hay sai, nên chất lượng bề mặt gần như không nói gì về độ đúng.",
+      "say": "Please stop using how polished the answer reads as a proxy for whether it is right.",
+      "tags": [
+        "ao-giac",
+        "co-che"
+      ]
+    },
+    {
+      "id": "lim-fabricated-reference",
+      "en": "Fabricated reference",
+      "vi": "Trích dẫn bịa",
+      "def_en": "The model produces an author, title, venue and year that follow the shape of a real citation but point to nothing that exists.",
+      "def_vi": "Mô hình sinh ra tác giả, tên bài, nơi công bố và năm đúng hình dạng một trích dẫn thật nhưng không trỏ tới thứ gì có thật.",
+      "src": [
+        "2607.18360"
+      ],
+      "tags": [
+        "ao-giac",
+        "trich-dan"
+      ]
+    },
+    {
+      "id": "lim-fabricated-quantity",
+      "en": "Fabricated quantity",
+      "vi": "Số liệu bịa",
+      "def_en": "A statistic is generated because a number of that magnitude fits the sentence, not because any measurement produced it.",
+      "def_vi": "Một con số được sinh ra vì độ lớn đó hợp với câu văn, không phải vì có phép đo nào cho ra nó.",
+      "say": "Every figure in this report needs a source row, otherwise we treat it as generated text.",
+      "tags": [
+        "ao-giac",
+        "so-lieu"
+      ]
+    },
+    {
+      "id": "lim-fabricated-user-profile",
+      "en": "Fabricated user profile",
+      "vi": "Bịa hồ sơ người dùng",
+      "def_en": "When asked to personalise, a model invents attributes about the user that were never stated and then reasons on top of them.",
+      "def_vi": "Khi được yêu cầu cá nhân hoá, mô hình tự nghĩ ra thuộc tính về người dùng vốn chưa từng được nêu rồi suy luận tiếp trên đó.",
+      "src": [
+        "2608.04570"
+      ],
+      "tags": [
+        "ao-giac",
+        "ca-nhan-hoa"
+      ]
+    },
+    {
+      "id": "lim-assert-instead-of-abstain",
+      "en": "Asserting instead of abstaining",
+      "vi": "Khẳng định thay vì nói không biết",
+      "def_en": "The default behaviour is to produce an answer, so absence of knowledge shows up as a confident claim rather than as a refusal.",
+      "def_vi": "Hành vi mặc định là phải ra câu trả lời, nên thiếu kiến thức biểu hiện thành lời khẳng định chắc nịch chứ không thành lời từ chối.",
+      "say": "I would rather the system return nothing than return something it cannot back up.",
+      "tags": [
+        "ao-giac",
+        "tu-choi"
+      ]
+    },
+    {
+      "id": "lim-intrinsic-vs-extrinsic-error",
+      "en": "Intrinsic versus extrinsic fabrication",
+      "vi": "Bịa nội tại và bịa ngoại lai",
+      "def_en": "Intrinsic fabrication contradicts the material the model was given, while extrinsic fabrication adds content the material never mentioned.",
+      "def_vi": "Bịa nội tại là nói ngược với tài liệu đã đưa cho mô hình, còn bịa ngoại lai là thêm nội dung mà tài liệu không hề nhắc tới.",
+      "src": [
+        "2608.04286"
+      ],
+      "tags": [
+        "ao-giac",
+        "phan-loai"
+      ]
+    },
+    {
+      "id": "lim-grounding-compensates-fabrication",
+      "en": "Grounding compensates for fabrication",
+      "vi": "Buộc dẫn nguồn bù cho việc bịa",
+      "def_en": "Forcing every claim to attach to a retrieved span turns an open generation problem into a narrower copy and summarise problem.",
+      "def_vi": "Buộc mọi khẳng định phải gắn vào một đoạn văn đã truy hồi biến bài toán sinh tự do thành bài toán chép và tóm tắt hẹp hơn.",
+      "say": "Ground every claim to a span we can open, then the reviewer can argue with the source instead of with the model.",
+      "src": [
+        "2607.27823"
+      ],
+      "tags": [
+        "ao-giac",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-grounding-limit-selection",
+      "en": "Grounding does not fix what was never retrieved",
+      "vi": "Dẫn nguồn không cứu được thứ chưa hề truy hồi",
+      "def_en": "Attribution only covers the material that reached the context, so a claim built on a document the retriever missed still looks fully sourced.",
+      "def_vi": "Việc gắn nguồn chỉ phủ được phần tài liệu đã vào ngữ cảnh, nên khẳng định dựng trên một tài liệu mà bộ truy hồi bỏ sót vẫn trông như có nguồn đầy đủ.",
+      "tags": [
+        "ao-giac",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-verbalised-confidence",
+      "en": "Verbalised confidence",
+      "vi": "Độ tự tin nói bằng lời",
+      "def_en": "Asking a model how sure it is yields a number produced by the same process that produced the answer, so the two errors are correlated.",
+      "def_vi": "Hỏi mô hình nó chắc bao nhiêu sẽ nhận về một con số sinh ra từ chính quá trình đã sinh câu trả lời, nên hai lỗi tương quan với nhau.",
+      "say": "A confidence number from the same model is not independent evidence about that model.",
+      "src": [
+        "2608.05064"
+      ],
+      "tags": [
+        "ao-giac",
+        "do-tin-cay"
+      ]
+    },
+    {
+      "id": "lim-confidence-estimate-pitfall",
+      "en": "Confidence estimate pitfall",
+      "vi": "Bẫy của ước lượng độ tự tin",
+      "def_en": "Confidence scores read off a model concentrate on a few coarse values, which makes them look calibrated in aggregate while being useless per item.",
+      "def_vi": "Điểm tự tin đọc ra từ mô hình thường dồn vào vài mức thô, khiến nhìn tổng thể thì có vẻ hiệu chỉnh tốt nhưng xét từng ca thì vô dụng.",
+      "src": [
+        "2608.04899"
+      ],
+      "tags": [
+        "ao-giac",
+        "do-tin-cay"
+      ]
+    },
+    {
+      "id": "lim-self-check-shared-blind-spot",
+      "en": "Self-check inherits the same blind spot",
+      "vi": "Tự kiểm thừa hưởng đúng điểm mù cũ",
+      "def_en": "Asking the same model to review its own output re-runs the priors that caused the mistake, so the check agrees most strongly exactly where it is wrong.",
+      "def_vi": "Bảo chính mô hình đó soi lại đầu ra của nó là chạy lại đúng thiên kiến đã gây ra lỗi, nên phép kiểm đồng ý mạnh nhất đúng ở chỗ nó sai.",
+      "say": "A model checking its own work is not a control, it is the same experiment run twice.",
+      "src": [
+        "2607.24300"
+      ],
+      "tags": [
+        "ao-giac",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-format-repair-illusion",
+      "en": "Format repair mistaken for self-correction",
+      "vi": "Sửa hình thức bị tưởng là tự sửa sai",
+      "def_en": "A second pass that cleans up structure and wording can raise every surface metric while leaving the substantive error untouched.",
+      "def_vi": "Lượt chạy thứ hai dọn lại cấu trúc và câu chữ có thể nâng mọi chỉ số bề mặt trong khi lỗi nội dung vẫn nguyên.",
+      "src": [
+        "2608.04355"
+      ],
+      "tags": [
+        "ao-giac",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-asymmetric-error-cost",
+      "en": "Asymmetric cost of a wrong answer",
+      "vi": "Chi phí lệch của một câu trả lời sai",
+      "def_en": "In some workflows a missing answer costs a delay while a wrong answer costs a contract, and that asymmetry, not the average score, should set the abstention threshold.",
+      "def_vi": "Trong nhiều luồng việc, thiếu câu trả lời chỉ tốn thời gian còn sai câu trả lời thì mất hợp đồng, và chính độ lệch đó, không phải điểm trung bình, mới nên định ngưỡng từ chối.",
+      "say": "Tell me what a wrong answer costs here, then I will tell you how often the system should refuse.",
+      "tags": [
+        "ao-giac",
+        "thiet-ke"
+      ]
+    },
+    {
+      "id": "lim-brittle-near-transfer",
+      "en": "Brittle transfer to a near-identical problem",
+      "vi": "Giòn khi chuyển sang bài gần như y hệt",
+      "def_en": "A model can solve a hard instance and then fail a variant that changes only a name, a unit or the order of the givens.",
+      "def_vi": "Mô hình giải được ca khó rồi lại hỏng ở biến thể chỉ đổi một cái tên, một đơn vị hoặc thứ tự dữ kiện.",
+      "say": "Before we celebrate, run the same task with the variable names swapped and see if it still holds.",
+      "src": [
+        "2608.04567"
+      ],
+      "tags": [
+        "suy-luan",
+        "gion"
+      ]
+    },
+    {
+      "id": "lim-state-tracking-across-steps",
+      "en": "State tracking across many steps",
+      "vi": "Giữ trạng thái qua nhiều bước",
+      "def_en": "Holding a set of intermediate values that keep changing is where reasoning degrades fastest, because nothing in the architecture guarantees the values persist.",
+      "def_vi": "Giữ một tập giá trị trung gian liên tục thay đổi là chỗ suy luận xuống cấp nhanh nhất, vì không có gì trong kiến trúc bảo đảm các giá trị đó còn nguyên.",
+      "tags": [
+        "suy-luan",
+        "trang-thai"
+      ]
+    },
+    {
+      "id": "lim-constraint-handling",
+      "en": "Handling a full set of constraints",
+      "vi": "Xử lý trọn bộ ràng buộc",
+      "def_en": "Models tend to satisfy the constraints mentioned last or most vividly and quietly drop the rest, which looks like a good answer to a different question.",
+      "def_vi": "Mô hình thường thoả các ràng buộc nêu sau cùng hoặc nêu nổi bật nhất rồi lặng lẽ bỏ phần còn lại, cho ra một đáp án tốt cho câu hỏi khác.",
+      "src": [
+        "2608.05254"
+      ],
+      "tags": [
+        "suy-luan",
+        "rang-buoc"
+      ]
+    },
+    {
+      "id": "lim-false-premise-detection",
+      "en": "Detecting a false premise in the prompt",
+      "vi": "Phát hiện giả định sai trong đề bài",
+      "def_en": "When the question itself contains an impossible or contradictory assumption, the cooperative behaviour is to answer anyway rather than to challenge the premise.",
+      "def_vi": "Khi bản thân câu hỏi chứa giả định bất khả hoặc mâu thuẫn, hành vi hợp tác mặc định là cứ trả lời chứ không vặn lại giả định.",
+      "say": "Add a check that lets the system say the question cannot be answered as asked.",
+      "src": [
+        "2608.04591"
+      ],
+      "tags": [
+        "suy-luan",
+        "gia-dinh"
+      ]
+    },
+    {
+      "id": "lim-long-horizon-execution",
+      "en": "Executing a plan of dozens of steps",
+      "vi": "Thi hành kế hoạch hàng chục bước",
+      "def_en": "Writing a good plan and carrying it out to the end are different capabilities, and the second one degrades with the number of steps.",
+      "def_vi": "Viết ra kế hoạch tốt và thi hành nó tới cùng là hai năng lực khác nhau, và năng lực thứ hai xuống cấp theo số bước.",
+      "say": "It writes a good plan, so let us find out whether it can still be on plan at step forty.",
+      "src": [
+        "2608.05139"
+      ],
+      "tags": [
+        "suy-luan",
+        "dai-han"
+      ]
+    },
+    {
+      "id": "lim-real-world-reasoning",
+      "en": "Reasoning about the physical world",
+      "vi": "Suy luận về thế giới thật",
+      "def_en": "Judgements about time, distance, cost and physical feasibility are learned from text about the world rather than from the world, so they fail in ways text rarely records.",
+      "def_vi": "Phán đoán về thời gian, khoảng cách, chi phí và tính khả thi vật lý được học từ văn bản nói về thế giới chứ không từ thế giới, nên hỏng theo những kiểu ít khi được ghi lại thành chữ.",
+      "src": [
+        "2607.28478"
+      ],
+      "tags": [
+        "suy-luan",
+        "the-gioi-thuc"
+      ]
+    },
+    {
+      "id": "lim-unfaithful-trace",
+      "en": "The written trace may not be the real reason",
+      "vi": "Vết suy luận không trung thực",
+      "def_en": "The written chain of steps is itself generated text and may be a post hoc story rather than the computation that produced the answer.",
+      "def_vi": "Chuỗi bước viết ra cũng chỉ là văn bản sinh, có thể là câu chuyện dựng sau chứ không phải phép tính đã cho ra đáp án.",
+      "say": "Treat the visible reasoning as a claim about the computation, not as the computation.",
+      "src": [
+        "2608.01631"
+      ],
+      "tags": [
+        "suy-luan",
+        "trung-thuc"
+      ]
+    },
+    {
+      "id": "lim-theory-of-mind-robustness",
+      "en": "Robustness beats depth on social reasoning",
+      "vi": "Vững hơn quan trọng hơn sâu ở suy luận xã hội",
+      "def_en": "Tasks about what another party knows or intends are often passed by surface cues, and small rewordings reveal that the underlying model was shallow.",
+      "def_vi": "Các bài về việc bên kia biết gì hoặc định gì thường được vượt qua nhờ dấu hiệu bề mặt, và chỉ cần diễn đạt lại đôi chút là lộ ra mô hình bên dưới rất nông.",
+      "src": [
+        "2608.04646"
+      ],
+      "tags": [
+        "suy-luan",
+        "gion"
+      ]
+    },
+    {
+      "id": "lim-error-has-a-location",
+      "en": "A reasoning error has a first wrong step",
+      "vi": "Lỗi suy luận có một bước sai đầu tiên",
+      "def_en": "Failures in a long chain usually trace back to one identifiable step, which makes step level supervision more useful than scoring the final answer.",
+      "def_vi": "Hỏng trong chuỗi dài thường truy về một bước xác định được, nên giám sát ở mức từng bước hữu ích hơn chấm đáp án cuối.",
+      "src": [
+        "2608.03291",
+        "2608.05660"
+      ],
+      "tags": [
+        "suy-luan",
+        "chan-doan"
+      ]
+    },
+    {
+      "id": "lim-decomposition-compensates",
+      "en": "Decomposition compensates for weak reasoning",
+      "vi": "Chia nhỏ bài toán bù cho suy luận yếu",
+      "def_en": "Splitting a task into short well defined sub-tasks shortens every chain the model must hold, which is why decomposition raises reliability more than a bigger model often does.",
+      "def_vi": "Chẻ nhiệm vụ thành các nhiệm vụ con ngắn và định nghĩa rõ sẽ rút ngắn mọi chuỗi mà mô hình phải giữ, nên chia nhỏ thường nâng độ tin cậy hơn là đổi sang mô hình to hơn.",
+      "say": "Cut this into three short calls with a checked handoff, instead of one long call that has to remember everything.",
+      "tags": [
+        "suy-luan",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-decomposition-limit",
+      "en": "Decomposition moves the error to the seams",
+      "vi": "Chia nhỏ đẩy lỗi ra chỗ nối",
+      "def_en": "Once a task is split, correctness depends on the interfaces between parts, and a wrong decomposition produces sub-tasks that are each done perfectly and jointly useless.",
+      "def_vi": "Khi đã chẻ nhỏ, tính đúng phụ thuộc vào giao diện giữa các phần, và một cách chẻ sai sẽ cho ra các phần con làm hoàn hảo từng cái mà gộp lại thì vô dụng.",
+      "say": "We fixed each part and broke the seams, so the next review is about the interfaces.",
+      "src": [
+        "2608.05263"
+      ],
+      "tags": [
+        "suy-luan",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-solver-in-the-loop",
+      "en": "Solver in the loop",
+      "vi": "Đưa bộ giải vào vòng lặp",
+      "def_en": "Handing the constrained part of a problem to a solver, a type checker or a database turns an unreliable inference into a checkable computation.",
+      "def_vi": "Giao phần có ràng buộc chặt cho bộ giải, bộ kiểm kiểu hoặc cơ sở dữ liệu sẽ biến một suy luận không đáng tin thành phép tính kiểm được.",
+      "say": "The model should write the constraint, and the solver should decide whether it holds.",
+      "tags": [
+        "suy-luan",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-solver-limit-translation",
+      "en": "The solver only checks what was translated",
+      "vi": "Bộ giải chỉ kiểm phần đã được dịch sang",
+      "def_en": "Formal tooling verifies the formalisation, so an error in turning the business problem into constraints passes every proof untouched.",
+      "def_vi": "Công cụ hình thức chỉ kiểm chứng bản hình thức hoá, nên sai sót khi biến bài toán nghiệp vụ thành ràng buộc sẽ đi qua mọi chứng minh mà không bị chạm tới.",
+      "src": [
+        "2608.05097"
+      ],
+      "tags": [
+        "suy-luan",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-retry-is-not-repair",
+      "en": "Retrying is not repairing",
+      "vi": "Chạy lại không phải là sửa",
+      "def_en": "Sampling the same prompt again explores the same distribution, so it fixes noise but not a systematic misunderstanding of the task.",
+      "def_vi": "Lấy mẫu lại cùng một câu lệnh là dò lại đúng phân bố cũ, nên chỉ chữa được nhiễu chứ không chữa được hiểu sai hệ thống về nhiệm vụ.",
+      "say": "Running it again three times is not a fix, it is a way to hide a systematic error.",
+      "src": [
+        "2608.05643"
+      ],
+      "tags": [
+        "suy-luan",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-middle-of-context-loss",
+      "en": "Material in the middle gets skipped",
+      "vi": "Phần nằm giữa hay bị bỏ qua",
+      "def_en": "Attention is not uniform across a long input, so a fact sitting far from both ends is systematically less likely to be used.",
+      "def_vi": "Sự chú ý không trải đều trên đầu vào dài, nên một dữ kiện nằm xa cả hai đầu bị dùng tới ít hơn một cách hệ thống.",
+      "say": "Put the decisive clause near the top, do not bury it in the middle of forty pages.",
+      "src": [
+        "2608.01676"
+      ],
+      "tags": [
+        "ngu-canh",
+        "vi-tri"
+      ]
+    },
+    {
+      "id": "lim-context-is-not-memory",
+      "en": "A long window is not long-term memory",
+      "vi": "Cửa sổ dài không phải bộ nhớ dài hạn",
+      "def_en": "Context is re-supplied on every call and disappears when the session ends, whereas memory is something the system decides to keep, index and retrieve later.",
+      "def_vi": "Ngữ cảnh được nạp lại ở mỗi lượt gọi và biến mất khi phiên kết thúc, còn bộ nhớ là thứ hệ thống chủ động giữ, lập chỉ mục và lấy lại về sau.",
+      "say": "A bigger window buys you one conversation, a memory store buys you the next hundred.",
+      "src": [
+        "2608.04843"
+      ],
+      "tags": [
+        "ngu-canh",
+        "bo-nho"
+      ]
+    },
+    {
+      "id": "lim-source-confusion",
+      "en": "Source confusion across documents",
+      "vi": "Nhầm lẫn giữa các nguồn",
+      "def_en": "When several documents in the window say similar things, the model blends them and attributes a sentence from one contract to another.",
+      "def_vi": "Khi nhiều tài liệu trong cửa sổ nói những điều na ná nhau, mô hình trộn chúng lại và gán một câu của hợp đồng này sang hợp đồng kia.",
+      "tags": [
+        "ngu-canh",
+        "nguon"
+      ]
+    },
+    {
+      "id": "lim-recency-interference",
+      "en": "Recent text interferes with older text",
+      "vi": "Thông tin mới nhiễu lên thông tin cũ",
+      "def_en": "New material added late in a session can override an earlier instruction without any signal that an override happened.",
+      "def_vi": "Nội dung mới thêm vào cuối phiên có thể ghi đè một chỉ dẫn trước đó mà không hề có tín hiệu nào báo rằng đã ghi đè.",
+      "say": "What you pasted at the end just silently overrode the rule you set at the start.",
+      "src": [
+        "2608.01314"
+      ],
+      "tags": [
+        "ngu-canh",
+        "nhieu"
+      ]
+    },
+    {
+      "id": "lim-consistency-drift-in-session",
+      "en": "Consistency drift within one session",
+      "vi": "Trôi dần tính nhất quán trong một phiên",
+      "def_en": "Positions taken early can quietly shift as the conversation grows, so the same question answered at two points gives two answers.",
+      "def_vi": "Lập trường nêu ở đầu có thể dịch chuyển âm thầm khi cuộc trò chuyện dài ra, nên cùng một câu hỏi hỏi ở hai thời điểm cho hai đáp án.",
+      "say": "Pin the decisions we already made into a short standing block and repeat it every turn.",
+      "tags": [
+        "ngu-canh",
+        "nhat-quan"
+      ]
+    },
+    {
+      "id": "lim-effective-versus-advertised-context",
+      "en": "Effective context versus advertised context",
+      "vi": "Ngữ cảnh dùng được so với ngữ cảnh công bố",
+      "def_en": "The length a model accepts and the length over which it still uses information reliably are two different numbers, and only the first one is in the datasheet.",
+      "def_vi": "Độ dài mà mô hình chấp nhận và độ dài mà nó còn dùng được thông tin một cách đáng tin là hai đại lượng khác nhau, và chỉ đại lượng thứ nhất nằm trong bảng thông số.",
+      "src": [
+        "2608.03297"
+      ],
+      "tags": [
+        "ngu-canh",
+        "do-dai"
+      ]
+    },
+    {
+      "id": "lim-retrieval-into-context",
+      "en": "Retrieval compensates for the window",
+      "vi": "Truy hồi bù cho giới hạn cửa sổ",
+      "def_en": "Selecting a small relevant slice keeps the useful material near the front of a short prompt instead of diluted across a very long one.",
+      "def_vi": "Chọn ra một lát cắt nhỏ và liên quan sẽ giữ phần hữu ích nằm gần đầu một câu lệnh ngắn thay vì loãng ra trong một câu lệnh rất dài.",
+      "tags": [
+        "ngu-canh",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-retrieval-limit-in-context",
+      "en": "Retrieval turns a reading problem into a ranking problem",
+      "vi": "Truy hồi biến bài toán đọc thành bài toán xếp hạng",
+      "def_en": "Once you select, correctness depends on the selector, so anything the ranker puts below the cut is invisible no matter how good the model is.",
+      "def_vi": "Khi đã chọn lọc, tính đúng phụ thuộc vào bộ chọn, nên thứ gì bị bộ xếp hạng đẩy xuống dưới ngưỡng cắt là vô hình, dù mô hình có giỏi tới đâu.",
+      "say": "The answer quality is now bounded by the retriever, so audit the retriever first.",
+      "src": [
+        "2608.06305"
+      ],
+      "tags": [
+        "ngu-canh",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-external-memory-store",
+      "en": "External memory store",
+      "vi": "Kho nhớ ngoài",
+      "def_en": "A persistent store outside the model holds facts, decisions and past outcomes so they survive session boundaries and can be edited and audited.",
+      "def_vi": "Một kho bền vững nằm ngoài mô hình giữ dữ kiện, quyết định và kết quả cũ để chúng sống qua ranh giới phiên, có thể sửa và có thể soi lại.",
+      "src": [
+        "2608.05095"
+      ],
+      "tags": [
+        "ngu-canh",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-memory-staleness",
+      "en": "A stored fact quietly goes out of date",
+      "vi": "Bộ nhớ ôi",
+      "def_en": "A stored fact that was true when written keeps being retrieved with full confidence after the world moved on, which is worse than having no memory.",
+      "def_vi": "Một dữ kiện lưu lại vốn đúng lúc ghi vẫn được lấy ra với đầy đủ vẻ chắc chắn sau khi thực tế đã đổi, và như vậy còn tệ hơn là không có bộ nhớ.",
+      "say": "Every memory row needs a written at timestamp and a rule for when it expires.",
+      "src": [
+        "2608.04574"
+      ],
+      "tags": [
+        "ngu-canh",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-memory-poisoning",
+      "en": "Memory poisoning",
+      "vi": "Đầu độc bộ nhớ",
+      "def_en": "If the agent can write to its own memory, one accepted false entry becomes a durable premise that every later run treats as established fact.",
+      "def_vi": "Nếu tác tử được ghi vào chính bộ nhớ của nó, một mục sai được chấp nhận sẽ thành tiền đề bền vững mà mọi lượt chạy sau đều coi là sự thật đã xác lập.",
+      "say": "If the agent can write to its own memory, treat that write path as an attack surface.",
+      "src": [
+        "2608.00426",
+        "2607.29167"
+      ],
+      "tags": [
+        "ngu-canh",
+        "an-ninh"
+      ]
+    },
+    {
+      "id": "lim-authorised-memory-write",
+      "en": "Authorised memory write",
+      "vi": "Ghi bộ nhớ có thẩm quyền",
+      "def_en": "Treating memory as an append-only log with an identified writer and a signature makes a poisoned entry attributable instead of anonymous.",
+      "def_vi": "Coi bộ nhớ như một nhật ký chỉ ghi thêm, có người ghi định danh và có chữ ký, sẽ khiến một mục bị đầu độc trở nên truy được thay vì vô danh.",
+      "src": [
+        "2608.02843"
+      ],
+      "tags": [
+        "ngu-canh",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-compression-drops-referents",
+      "en": "Compression drops the referent",
+      "vi": "Nén ngữ cảnh làm rơi mất cái được trỏ tới",
+      "def_en": "Summarising a context to fit a budget can keep a sentence while deleting the entity it points to, leaving a fluent statement that now refers to nothing.",
+      "def_vi": "Tóm tắt ngữ cảnh cho vừa ngân sách có thể giữ lại một câu nhưng xoá mất thực thể mà câu đó trỏ tới, để lại một phát biểu trôi chảy nhưng không còn trỏ vào đâu.",
+      "src": [
+        "2608.04569"
+      ],
+      "tags": [
+        "ngu-canh",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-knowledge-cutoff",
+      "en": "Knowledge cutoff",
+      "vi": "Mốc kiến thức",
+      "def_en": "Weights encode the world as it appeared in the training corpus, so anything after that date exists for the model only if a tool brings it in.",
+      "def_vi": "Trọng số mã hoá thế giới đúng như nó hiện ra trong kho huấn luyện, nên mọi thứ sau mốc đó chỉ tồn tại với mô hình nếu có công cụ mang vào.",
+      "tags": [
+        "moc-kien-thuc",
+        "co-che"
+      ]
+    },
+    {
+      "id": "lim-parametric-versus-retrieved",
+      "en": "Parametric knowledge versus retrieved knowledge",
+      "vi": "Kiến thức trong trọng số và kiến thức truy hồi",
+      "def_en": "One lives in the weights and cannot be updated per request, the other arrives in the prompt and can be swapped, dated and audited.",
+      "def_vi": "Một loại nằm trong trọng số và không cập nhật được theo từng yêu cầu, loại kia đi vào câu lệnh nên có thể thay, gắn ngày và soi lại.",
+      "say": "Anything a customer can dispute should come from the retrieved side, not from the weights.",
+      "tags": [
+        "moc-kien-thuc",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "lim-knowing-when-to-search",
+      "en": "Knowing when to search",
+      "vi": "Biết khi nào cần tìm",
+      "def_en": "The hard part of connecting a model to live data is not the connection but the decision that the answer in the weights is not good enough today.",
+      "def_vi": "Phần khó khi nối mô hình với dữ liệu sống không phải là đường nối mà là quyết định rằng câu trả lời trong trọng số hôm nay không còn đủ tốt.",
+      "say": "The hard part is not the connector, it is teaching the system that today it should look.",
+      "src": [
+        "2607.26845"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "quyet-dinh"
+      ]
+    },
+    {
+      "id": "lim-knowing-what-to-search-for",
+      "en": "Knowing what to search for",
+      "vi": "Biết phải tìm cái gì",
+      "def_en": "A search is only as good as the query, and forming the right query often requires the very knowledge the search was meant to supply.",
+      "def_vi": "Một lần tìm chỉ tốt bằng chính truy vấn, và đặt được truy vấn đúng thường đòi hỏi chính cái kiến thức mà lần tìm đó lẽ ra phải cung cấp.",
+      "src": [
+        "2608.06128"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "truy-van"
+      ]
+    },
+    {
+      "id": "lim-retrieval-compensates-cutoff",
+      "en": "Retrieval compensates for the cutoff",
+      "vi": "Truy hồi bù cho mốc kiến thức",
+      "def_en": "Connecting search, a database or an interface turns a frozen snapshot into a system whose facts are as fresh as its sources.",
+      "def_vi": "Nối tìm kiếm, cơ sở dữ liệu hoặc một giao diện sẽ biến bức ảnh đóng băng thành một hệ thống có dữ kiện tươi ngang với nguồn của nó.",
+      "tags": [
+        "moc-kien-thuc",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-retrieval-does-not-decide",
+      "en": "Retrieval does not decide to retrieve",
+      "vi": "Truy hồi không tự quyết định là phải truy hồi",
+      "def_en": "Wiring a tool in does not make the model call it at the right moment, so a system with search still answers from memory when it feels sure.",
+      "def_vi": "Cắm công cụ vào không làm mô hình gọi nó đúng lúc, nên một hệ có tìm kiếm vẫn trả lời theo trí nhớ khi nó thấy chắc chắn.",
+      "say": "Do not assume the tool is used just because the tool exists, log the call rate first.",
+      "src": [
+        "2608.06377"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-forced-retrieval-policy",
+      "en": "Forced retrieval policy",
+      "vi": "Chính sách bắt buộc truy hồi",
+      "def_en": "Making retrieval mandatory for a class of questions removes the decision from the model and hands it to a rule you can read and test.",
+      "def_vi": "Bắt buộc truy hồi cho một nhóm câu hỏi sẽ lấy quyết định ra khỏi tay mô hình và giao cho một luật mà bạn đọc được và kiểm được.",
+      "tags": [
+        "moc-kien-thuc",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-forced-retrieval-cost",
+      "en": "Mandatory retrieval buys freshness with latency",
+      "vi": "Bắt buộc truy hồi đổi độ trễ lấy độ tươi",
+      "def_en": "A rule that always searches removes one failure mode and adds cost, delay and a new dependency that can itself be down.",
+      "def_vi": "Một luật luôn luôn tìm sẽ xoá được một kiểu hỏng nhưng thêm chi phí, độ trễ và một phụ thuộc mới vốn cũng có thể chết.",
+      "tags": [
+        "moc-kien-thuc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-silent-retrieval-failure",
+      "en": "Silent retrieval failure",
+      "vi": "Truy hồi hỏng trong im lặng",
+      "def_en": "When a source returns nothing or times out, a generative system usually fills the gap from the weights rather than reporting that the lookup failed.",
+      "def_vi": "Khi một nguồn trả về rỗng hoặc quá hạn, hệ sinh nội dung thường lấp chỗ trống bằng trọng số thay vì báo rằng tra cứu đã hỏng.",
+      "say": "An empty result must become a visible error, never a smooth paragraph.",
+      "src": [
+        "2608.02011"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "loi-am"
+      ]
+    },
+    {
+      "id": "lim-corpus-poisoning",
+      "en": "Corpus poisoning",
+      "vi": "Đầu độc kho tài liệu",
+      "def_en": "If an attacker can place a document where the retriever will find it, the freshest possible pipeline delivers their content with full authority.",
+      "def_vi": "Nếu kẻ tấn công đặt được một tài liệu vào chỗ bộ truy hồi sẽ tìm thấy, đường ống tươi nhất có thể vẫn chuyển nội dung của họ đi kèm đầy đủ uy tín.",
+      "src": [
+        "2608.02678",
+        "2607.17535"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "an-ninh"
+      ]
+    },
+    {
+      "id": "lim-source-trust-tiering",
+      "en": "Source trust tiering",
+      "vi": "Phân hạng tin cậy của nguồn",
+      "def_en": "Giving each source a trust level lets the system prefer an authoritative record over a scraped page instead of treating every hit as equal evidence.",
+      "def_vi": "Gán cho mỗi nguồn một mức tin cậy giúp hệ thống ưu tiên bản ghi chính thức hơn một trang cào về, thay vì coi mọi kết quả là bằng chứng ngang nhau.",
+      "src": [
+        "2608.04366"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-conflicting-sources",
+      "en": "Conflicting sources",
+      "vi": "Nguồn mâu thuẫn nhau",
+      "def_en": "When two retrieved documents disagree, the default behaviour is to synthesise a smooth answer that hides the conflict instead of surfacing it.",
+      "def_vi": "Khi hai tài liệu truy hồi về nói ngược nhau, hành vi mặc định là tổng hợp thành một câu trả lời mượt che mất mâu thuẫn thay vì phơi nó ra.",
+      "say": "If the sources disagree, I want to see both rows, not an average of them.",
+      "src": [
+        "2607.27136"
+      ],
+      "tags": [
+        "moc-kien-thuc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-freshness-as-a-service-level",
+      "en": "Freshness as a service level",
+      "vi": "Độ tươi như một mức cam kết dịch vụ",
+      "def_en": "Instead of promising the system is up to date, promise a bounded lag per data class and measure it, because that is a claim you can honour.",
+      "def_vi": "Thay vì hứa hệ thống luôn cập nhật, hãy cam kết một độ trễ có chặn cho từng loại dữ liệu rồi đo nó, vì đó là lời hứa giữ được.",
+      "say": "We do not promise real time, we promise a lag under one hour for pricing and under one day for policy.",
+      "tags": [
+        "moc-kien-thuc",
+        "thiet-ke"
+      ]
+    },
+    {
+      "id": "lim-compounding-step-error",
+      "en": "Compounding error over steps",
+      "vi": "Sai số tích luỹ qua các bước",
+      "def_en": "A per-step success rate that looks excellent multiplies down to a poor end-to-end rate once the trajectory is dozens of steps long.",
+      "def_vi": "Tỉ lệ thành công từng bước nhìn rất đẹp sẽ nhân dồn thành tỉ lệ toàn tuyến rất tệ khi hành trình dài tới vài chục bước.",
+      "say": "Show me the end to end success rate over the whole trajectory, not the accuracy of one call.",
+      "src": [
+        "2608.05013"
+      ],
+      "tags": [
+        "tac-tu",
+        "tich-luy"
+      ]
+    },
+    {
+      "id": "lim-single-turn-is-not-autonomy",
+      "en": "A smart single turn is not autonomy",
+      "vi": "Giỏi một lượt không phải là tự chủ",
+      "def_en": "Quality on one question measures generation, while autonomy measures whether the system can keep choosing correct next actions without a human.",
+      "def_vi": "Chất lượng ở một câu hỏi đo năng lực sinh nội dung, còn tự chủ đo việc hệ thống có tiếp tục chọn đúng hành động kế tiếp mà không cần người hay không.",
+      "say": "It answers one question beautifully, that tells us nothing about a thirty step job.",
+      "src": [
+        "2608.06370"
+      ],
+      "tags": [
+        "tac-tu",
+        "co-che"
+      ]
+    },
+    {
+      "id": "lim-wrong-tool-selection",
+      "en": "Wrong tool selection",
+      "vi": "Chọn nhầm công cụ",
+      "def_en": "With many similar tools available, the model picks by name similarity and description wording rather than by what the tool actually does.",
+      "def_vi": "Khi có nhiều công cụ na ná nhau, mô hình chọn theo độ giống tên và cách viết mô tả chứ không theo việc công cụ đó thật sự làm gì.",
+      "src": [
+        "2607.29254"
+      ],
+      "tags": [
+        "tac-tu",
+        "cong-cu"
+      ]
+    },
+    {
+      "id": "lim-malformed-argument",
+      "en": "Malformed tool argument",
+      "vi": "Truyền sai tham số",
+      "def_en": "A call that is syntactically valid can still carry the wrong identifier, unit or scope, and the tool will execute it happily.",
+      "def_vi": "Một lệnh gọi đúng cú pháp vẫn có thể mang sai định danh, sai đơn vị hoặc sai phạm vi, và công cụ sẽ vui vẻ thi hành.",
+      "say": "Validate the arguments against the schema and the business rule before anything is executed.",
+      "src": [
+        "2608.02645"
+      ],
+      "tags": [
+        "tac-tu",
+        "cong-cu"
+      ]
+    },
+    {
+      "id": "lim-state-misreading",
+      "en": "Misreading the environment state",
+      "vi": "Hiểu sai trạng thái môi trường",
+      "def_en": "The agent acts on its belief about the system, and once that belief diverges from reality every subsequent correct-looking step is wrong.",
+      "def_vi": "Tác tử hành động dựa trên niềm tin của nó về hệ thống, và khi niềm tin đó lệch khỏi thực tế thì mọi bước trông có vẻ đúng sau đó đều sai.",
+      "tags": [
+        "tac-tu",
+        "trang-thai"
+      ]
+    },
+    {
+      "id": "lim-action-loop",
+      "en": "Repeating the same action",
+      "vi": "Lặp lại cùng một hành động",
+      "def_en": "Without a memory of what was already tried, an agent that fails a step tends to retry the identical call and consume the budget on a loop.",
+      "def_vi": "Không có ký ức về những gì đã thử, tác tử hỏng ở một bước thường gọi lại đúng lệnh cũ và đốt sạch ngân sách trong một vòng lặp.",
+      "src": [
+        "2608.02358"
+      ],
+      "tags": [
+        "tac-tu",
+        "vong-lap"
+      ]
+    },
+    {
+      "id": "lim-no-stopping-criterion",
+      "en": "No stopping criterion",
+      "vi": "Không có tiêu chí dừng",
+      "def_en": "Deciding that the evidence collected is now sufficient is a separate skill from collecting evidence, and it is usually the missing one.",
+      "def_vi": "Quyết định rằng chứng cứ thu được đã đủ là một kỹ năng khác với việc thu chứng cứ, và thường là kỹ năng còn thiếu.",
+      "say": "Define the stopping rule in the spec, otherwise the agent will keep searching until the budget dies.",
+      "src": [
+        "2608.01285"
+      ],
+      "tags": [
+        "tac-tu",
+        "dung"
+      ]
+    },
+    {
+      "id": "lim-confident-continuation",
+      "en": "Confident continuation after a wrong turn",
+      "vi": "Tự tin đi tiếp sau khi đã rẽ sai",
+      "def_en": "Nothing in the loop rewards noticing that the plan has become impossible, so the agent keeps producing plausible next steps down a dead branch.",
+      "def_vi": "Không có gì trong vòng lặp thưởng cho việc nhận ra kế hoạch đã trở nên bất khả, nên tác tử cứ sinh ra các bước tiếp hợp lý trên một nhánh chết.",
+      "say": "Nothing here rewards noticing the plan died, so we have to add that check ourselves.",
+      "src": [
+        "2608.06346"
+      ],
+      "tags": [
+        "tac-tu",
+        "chan-doan"
+      ]
+    },
+    {
+      "id": "lim-checkpoint-and-rollback",
+      "en": "Checkpoint and rollback",
+      "vi": "Điểm kiểm và quay lui",
+      "def_en": "Saving a known good state after each verified step lets the system return to it instead of carrying a corrupted state to the end.",
+      "def_vi": "Lưu lại một trạng thái tốt đã biết sau mỗi bước đã kiểm cho phép hệ thống quay về đó thay vì mang trạng thái hỏng đi tới cuối.",
+      "tags": [
+        "tac-tu",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-rollback-limit-side-effects",
+      "en": "Rollback cannot undo an external side effect",
+      "vi": "Quay lui không rút lại được tác động ra bên ngoài",
+      "def_en": "Internal state can be restored, but an email that left, a payment that cleared and a row another system already read cannot be taken back.",
+      "def_vi": "Trạng thái nội bộ khôi phục được, nhưng một email đã gửi, một khoản thanh toán đã hoàn tất và một dòng dữ liệu hệ khác đã đọc thì không rút lại được.",
+      "say": "Separate the reversible actions from the irreversible ones and gate the second group.",
+      "src": [
+        "2608.00783"
+      ],
+      "tags": [
+        "tac-tu",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-non-atomic-failure",
+      "en": "Non-atomic tool failure",
+      "vi": "Công cụ hỏng nửa chừng",
+      "def_en": "A call that partially succeeded leaves the world in a state that matches neither the before picture nor the after picture, and agents reason badly about that.",
+      "def_vi": "Một lệnh gọi thành công một nửa để lại thế giới ở trạng thái không khớp bức tranh trước cũng không khớp bức tranh sau, và tác tử suy luận rất tệ trong tình huống đó.",
+      "src": [
+        "2608.02645"
+      ],
+      "tags": [
+        "tac-tu",
+        "cong-cu"
+      ]
+    },
+    {
+      "id": "lim-trajectory-replay",
+      "en": "Trajectory replay for diagnosis",
+      "vi": "Phát lại hành trình để chẩn đoán",
+      "def_en": "Recording every observation, decision and call makes a failure reproducible, which is the only way to distinguish a bad model from a bad tool contract.",
+      "def_vi": "Ghi lại mọi quan sát, quyết định và lệnh gọi làm cho một lần hỏng tái lập được, và đó là cách duy nhất phân biệt mô hình tồi với hợp đồng công cụ tồi.",
+      "say": "Without the full trace we are guessing, and guessing is how we spend a week on the wrong layer.",
+      "src": [
+        "2608.06346"
+      ],
+      "tags": [
+        "tac-tu",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-skill-library-contamination",
+      "en": "Skill library contamination",
+      "vi": "Nhiễm bẩn thư viện kỹ năng",
+      "def_en": "An agent that writes its own reusable procedures can commit a flawed one, after which every later task inherits the flaw as if it were experience.",
+      "def_vi": "Tác tử tự viết ra quy trình tái dùng có thể ghi vào một quy trình lỗi, và từ đó mọi nhiệm vụ sau kế thừa cái lỗi ấy như thể là kinh nghiệm.",
+      "src": [
+        "2608.05810",
+        "2608.03874"
+      ],
+      "tags": [
+        "tac-tu",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-verification-as-a-layer",
+      "en": "Verification as its own layer",
+      "vi": "Kiểm chứng thành một tầng riêng",
+      "def_en": "Checking is being separated from generating because the two need different objectives, different data and often a different kind of engine.",
+      "def_vi": "Việc kiểm đang được tách khỏi việc sinh vì hai bên cần mục tiêu khác nhau, dữ liệu khác nhau và thường là loại động cơ khác nhau.",
+      "say": "Generation and verification should not share a budget, a model or an owner.",
+      "src": [
+        "2608.03609"
+      ],
+      "tags": [
+        "kiem-chung",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "lim-claim-decomposition",
+      "en": "Claim decomposition before checking",
+      "vi": "Chẻ khẳng định trước khi kiểm",
+      "def_en": "A paragraph is not checkable, so a verifier first splits it into atomic claims that each map to one piece of evidence.",
+      "def_vi": "Một đoạn văn thì không kiểm được, nên bộ kiểm chứng trước hết chẻ nó thành các khẳng định nguyên tử, mỗi cái ứng với một mẩu chứng cứ.",
+      "src": [
+        "2608.05823"
+      ],
+      "tags": [
+        "kiem-chung",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "lim-citation-exists-but-does-not-support",
+      "en": "The citation exists but does not support the claim",
+      "vi": "Trích dẫn có thật nhưng không chống lưng cho khẳng định",
+      "def_en": "Checking that a reference resolves is the easy half, and the failure that survives is a real paper attached to a sentence it never says.",
+      "def_vi": "Kiểm rằng một trích dẫn tra ra được mới là nửa dễ, còn kiểu hỏng sống sót là một bài báo có thật gắn vào một câu mà nó chưa từng nói.",
+      "say": "Resolving the digital object identifier proves the paper exists, not that it says this.",
+      "src": [
+        "2607.18360"
+      ],
+      "tags": [
+        "kiem-chung",
+        "trich-dan"
+      ]
+    },
+    {
+      "id": "lim-source-quality-versus-existence",
+      "en": "Source quality is not source existence",
+      "vi": "Nguồn đáng tin khác với nguồn có tồn tại",
+      "def_en": "A verifier that only proves a source exists will happily certify a claim backed by a blog post copying an error from another blog post.",
+      "def_vi": "Bộ kiểm chỉ chứng minh nguồn có tồn tại sẽ vui vẻ xác nhận một khẳng định dựa trên một bài blog chép lại lỗi từ một bài blog khác.",
+      "src": [
+        "2607.24117"
+      ],
+      "tags": [
+        "kiem-chung",
+        "nguon"
+      ]
+    },
+    {
+      "id": "lim-model-as-its-own-judge",
+      "en": "Model as its own judge",
+      "vi": "Lấy mô hình làm quan toà cho chính nó",
+      "def_en": "Using a language model to score language model output is cheap and scales, and it also correlates the judge with the defendant.",
+      "def_vi": "Dùng mô hình ngôn ngữ chấm đầu ra của mô hình ngôn ngữ thì rẻ và mở rộng được, đồng thời cũng làm quan toà tương quan với bị cáo.",
+      "say": "Using the same family to grade itself gives us a correlated judge, so bring in a different check.",
+      "src": [
+        "2607.27674"
+      ],
+      "tags": [
+        "kiem-chung",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-frozen-judge-interface",
+      "en": "Judge locked to a frozen interface",
+      "vi": "Quan toà bị khoá vào giao diện đóng băng",
+      "def_en": "When a judge can only see a fixed rendering of the answer, it grades that rendering, so improvements outside the frame are invisible and regressions inside it dominate.",
+      "def_vi": "Khi quan toà chỉ nhìn được một cách trình bày cố định của câu trả lời, nó chấm chính cách trình bày đó, nên cải thiện ngoài khung là vô hình còn suy giảm trong khung thì áp đảo.",
+      "src": [
+        "2608.05353"
+      ],
+      "tags": [
+        "kiem-chung",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-deterministic-checker",
+      "en": "Deterministic checker",
+      "vi": "Bộ kiểm tất định",
+      "def_en": "A compiler, a schema validator, a unit test or a database constraint gives the same verdict every time and does not share the model's priors.",
+      "def_vi": "Trình biên dịch, bộ kiểm lược đồ, một kiểm thử đơn vị hay một ràng buộc cơ sở dữ liệu cho cùng một phán quyết mọi lần và không chia sẻ thiên kiến của mô hình.",
+      "say": "Where a deterministic check exists, use it, and reserve the model judge for what cannot be decided mechanically.",
+      "tags": [
+        "kiem-chung",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-verifier-coverage",
+      "en": "Verifier coverage",
+      "vi": "Độ phủ của bộ kiểm chứng",
+      "def_en": "A monitor only catches the failure shapes it was written for, so its true value is the fraction of the real failure distribution it covers.",
+      "def_vi": "Một bộ giám sát chỉ bắt được những hình dạng lỗi mà nó được viết ra để bắt, nên giá trị thật của nó là phần trăm phân bố lỗi thật mà nó phủ được.",
+      "src": [
+        "2608.01388"
+      ],
+      "tags": [
+        "kiem-chung",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-verification-cost",
+      "en": "Verification cost",
+      "vi": "Chi phí kiểm chứng",
+      "def_en": "Checking often costs as much as generating, sometimes more, and a design that ignores this ships a verifier that gets switched off under load.",
+      "def_vi": "Kiểm thường tốn ngang với sinh, đôi khi tốn hơn, và một thiết kế bỏ qua điều này sẽ cho ra bộ kiểm bị tắt đi khi hệ thống quá tải.",
+      "say": "Budget the verifier as a first class cost, or it will be the first thing disabled in production.",
+      "tags": [
+        "kiem-chung",
+        "chi-phi"
+      ]
+    },
+    {
+      "id": "lim-provenance-chain",
+      "en": "Provenance chain",
+      "vi": "Chuỗi xuất xứ",
+      "def_en": "Recording where each fact entered the system and who transformed it lets you answer why a wrong number appeared, months after it appeared.",
+      "def_vi": "Ghi lại mỗi dữ kiện vào hệ thống từ đâu và ai đã biến đổi nó cho phép bạn trả lời vì sao một con số sai xuất hiện, kể cả nhiều tháng sau.",
+      "src": [
+        "2607.24117"
+      ],
+      "tags": [
+        "kiem-chung",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-server-verified-action",
+      "en": "Server verified action claim",
+      "vi": "Hành động do máy chủ xác nhận",
+      "def_en": "Rather than trusting the agent's report that it did something, the executing service returns a signed record of what actually happened.",
+      "def_vi": "Thay vì tin lời tác tử báo rằng nó đã làm gì đó, dịch vụ thi hành trả về một bản ghi có ký xác nhận việc thật sự đã xảy ra.",
+      "say": "I do not want the agent's summary of the transaction, I want the receipt from the system that executed it.",
+      "src": [
+        "2607.25364"
+      ],
+      "tags": [
+        "kiem-chung",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-silent-omission",
+      "en": "Silent omission",
+      "vi": "Bỏ sót trong im lặng",
+      "def_en": "The hardest failure to verify is the one where nothing wrong was said, because a required item never appeared at all.",
+      "def_vi": "Kiểu hỏng khó kiểm nhất là kiểu không có câu nào sai, chỉ vì một mục bắt buộc chưa từng xuất hiện.",
+      "say": "Nothing here is wrong, and that is the problem, a required section never appeared.",
+      "src": [
+        "2607.22448"
+      ],
+      "tags": [
+        "kiem-chung",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-what-a-verifier-cannot-see",
+      "en": "What a verifier cannot see",
+      "vi": "Thứ bộ kiểm chứng không nhìn thấy",
+      "def_en": "Verification bounds the output against evidence in front of it, so a well grounded answer to the wrong question passes every check.",
+      "def_vi": "Kiểm chứng chỉ ràng đầu ra vào chứng cứ đang bày trước mắt nó, nên một câu trả lời có nguồn tốt cho một câu hỏi sai vẫn qua mọi phép kiểm.",
+      "src": [
+        "2608.00877"
+      ],
+      "tags": [
+        "kiem-chung",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-high-quality-data-ceiling",
+      "en": "Ceiling on high quality text",
+      "vi": "Trần của văn bản chất lượng cao",
+      "def_en": "Careful edited human writing is a finite resource, and the easy part of the web has already been consumed by earlier training runs.",
+      "def_vi": "Văn bản do người viết và biên tập kỹ là tài nguyên hữu hạn, và phần dễ lấy của mạng đã bị các đợt huấn luyện trước tiêu thụ hết.",
+      "say": "The next gain probably comes from data nobody else has, not from more of the same web text.",
+      "tags": [
+        "du-lieu",
+        "nut-that"
+      ]
+    },
+    {
+      "id": "lim-licence-constraint",
+      "en": "Licence and copyright constraint",
+      "vi": "Ràng buộc bản quyền và giấy phép",
+      "def_en": "Whether a corpus may lawfully be used is now a design constraint that can shrink the usable pool faster than any technical limit.",
+      "def_vi": "Việc một kho dữ liệu có được phép dùng hợp pháp hay không giờ là ràng buộc thiết kế, và nó có thể thu hẹp phần dùng được nhanh hơn mọi giới hạn kỹ thuật.",
+      "src": [
+        "2608.00964"
+      ],
+      "tags": [
+        "du-lieu",
+        "phap-ly"
+      ]
+    },
+    {
+      "id": "lim-near-duplicate-data",
+      "en": "Near duplicate data",
+      "vi": "Dữ liệu trùng lặp gần",
+      "def_en": "Web scale corpora repeat the same passage in many wrappers, which inflates the apparent size while adding almost no new signal.",
+      "def_vi": "Kho dữ liệu quy mô mạng lặp lại cùng một đoạn văn trong nhiều lớp vỏ, làm phồng kích thước bề ngoài mà gần như không thêm tín hiệu mới.",
+      "tags": [
+        "du-lieu",
+        "chat-luong"
+      ]
+    },
+    {
+      "id": "lim-machine-text-in-corpus",
+      "en": "Machine generated text in the corpus",
+      "vi": "Văn bản do máy sinh nằm trong kho",
+      "def_en": "New crawls now contain a large share of model output, so later training partly learns from earlier models rather than from the world.",
+      "def_vi": "Các lần cào mới hiện chứa một phần lớn là đầu ra của mô hình, nên huấn luyện về sau phần nào học lại từ mô hình trước chứ không phải từ thế giới.",
+      "say": "Ask where the corpus came from and what share of it was written by another model.",
+      "tags": [
+        "du-lieu",
+        "chat-luong"
+      ]
+    },
+    {
+      "id": "lim-benchmark-contamination",
+      "en": "Test items that leaked into training",
+      "vi": "Nhiễm bẩn chuẩn đo",
+      "def_en": "When test items leaked into training, a score measures recall of the answer key rather than the ability the benchmark claims to measure.",
+      "def_vi": "Khi các mục kiểm tra đã lọt vào dữ liệu huấn luyện, điểm số đo khả năng nhớ đáp án chứ không đo năng lực mà chuẩn đo tuyên bố là mình đo.",
+      "src": [
+        "2608.03219"
+      ],
+      "tags": [
+        "du-lieu",
+        "chuan-do"
+      ]
+    },
+    {
+      "id": "lim-corpus-staleness",
+      "en": "The corpus stops describing the present",
+      "vi": "Kho dữ liệu thôi mô tả hiện tại",
+      "def_en": "Even a clean corpus encodes practices, prices and institutions as they were, so a model can be perfectly trained on a world that no longer exists.",
+      "def_vi": "Ngay cả một kho sạch cũng mã hoá tập quán, giá cả và thiết chế đúng như chúng từng là, nên mô hình có thể được huấn luyện hoàn hảo trên một thế giới không còn tồn tại.",
+      "tags": [
+        "du-lieu",
+        "thoi-gian"
+      ]
+    },
+    {
+      "id": "lim-memorisation-of-secrets",
+      "en": "Memorisation of sensitive records",
+      "vi": "Học thuộc bản ghi nhạy cảm",
+      "def_en": "Rare strings such as keys, identifiers and personal records are exactly the items a model is most likely to reproduce verbatim.",
+      "def_vi": "Những chuỗi hiếm như khoá, định danh và bản ghi cá nhân lại chính là thứ mô hình dễ tái hiện nguyên văn nhất.",
+      "src": [
+        "2608.02052"
+      ],
+      "tags": [
+        "du-lieu",
+        "rieng-tu"
+      ]
+    },
+    {
+      "id": "lim-synthetic-data-compensates",
+      "en": "Synthetic data compensates for scarcity",
+      "vi": "Dữ liệu tổng hợp bù cho sự khan hiếm",
+      "def_en": "Generating examples with a controlled process gives coverage of cases the real corpus never contained, at a volume nobody could label by hand.",
+      "def_vi": "Sinh ví dụ bằng một quy trình kiểm soát được cho ta độ phủ ở những ca kho thật chưa từng có, với khối lượng không ai gán nhãn tay nổi.",
+      "src": [
+        "2607.29250",
+        "2608.05148"
+      ],
+      "tags": [
+        "du-lieu",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-synthetic-data-limit",
+      "en": "Synthetic data inherits the generator",
+      "vi": "Dữ liệu tổng hợp thừa hưởng bộ sinh",
+      "def_en": "Generated examples can only contain the structure the generator already knows, so they add volume and diversity but not genuinely new facts about the world.",
+      "def_vi": "Ví dụ sinh ra chỉ chứa được cấu trúc mà bộ sinh đã biết, nên chúng thêm khối lượng và độ đa dạng chứ không thêm dữ kiện thật sự mới về thế giới.",
+      "say": "Synthetic data widens the coverage, it does not import information nobody had.",
+      "src": [
+        "2608.06265"
+      ],
+      "tags": [
+        "du-lieu",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-low-resource-gap",
+      "en": "Low resource language gap",
+      "vi": "Khoảng trống ngôn ngữ ít tài nguyên",
+      "def_en": "Capability follows the amount of text a language contributed, so the same model can be strong in one language and unusable in another.",
+      "def_vi": "Năng lực đi theo lượng văn bản mà một ngôn ngữ đóng góp, nên cùng một mô hình có thể mạnh ở ngôn ngữ này và không dùng được ở ngôn ngữ khác.",
+      "src": [
+        "2608.05850"
+      ],
+      "tags": [
+        "du-lieu",
+        "ngon-ngu"
+      ]
+    },
+    {
+      "id": "lim-proprietary-data-as-moat",
+      "en": "Proprietary process data as the real moat",
+      "vi": "Dữ liệu quy trình riêng mới là hào bảo vệ",
+      "def_en": "If open text is exhausted, the remaining differentiator is data produced by operating a business, which is small, messy and legally yours.",
+      "def_vi": "Nếu văn bản mở đã cạn, thứ còn tạo khác biệt là dữ liệu sinh ra từ chính việc vận hành doanh nghiệp, vốn ít, lộn xộn và thuộc về bạn về mặt pháp lý.",
+      "say": "Our advantage is not a bigger model, it is five years of resolved tickets nobody else can read.",
+      "tags": [
+        "du-lieu",
+        "chien-luoc"
+      ]
+    },
+    {
+      "id": "lim-data-provenance-record",
+      "en": "Keeping the origin of every data subset",
+      "vi": "Bản ghi xuất xứ dữ liệu",
+      "def_en": "Keeping the source, licence and collection date of every subset is what makes a later legal or scientific question answerable at all.",
+      "def_vi": "Giữ lại nguồn, giấy phép và ngày thu thập của từng tập con là thứ khiến một câu hỏi pháp lý hay khoa học về sau còn trả lời được.",
+      "tags": [
+        "du-lieu",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-clean-benchmark-is-perishable",
+      "en": "A clean benchmark is perishable",
+      "vi": "Chuẩn đo sạch là thứ mau hỏng",
+      "def_en": "The moment a test set is published it starts flowing into the next crawl, so freshness of the evaluation is a maintenance task, not a one-off.",
+      "def_vi": "Ngay khi một tập kiểm tra được công bố, nó bắt đầu chảy vào lần cào kế tiếp, nên giữ độ tươi cho phép đánh giá là việc bảo trì liên tục chứ không phải làm một lần.",
+      "src": [
+        "2608.03219"
+      ],
+      "tags": [
+        "du-lieu",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-inference-dominates-cost",
+      "en": "Inference dominates the lifetime cost",
+      "vi": "Suy luận chiếm phần lớn chi phí vòng đời",
+      "def_en": "Training is paid once while serving is paid on every request, so a system in daily use spends most of its money after the model is finished.",
+      "def_vi": "Huấn luyện trả một lần còn phục vụ trả theo từng yêu cầu, nên một hệ dùng hằng ngày tiêu phần lớn tiền sau khi mô hình đã xong.",
+      "say": "The interesting number is cost per resolved ticket, not cost per training run.",
+      "src": [
+        "2608.03036"
+      ],
+      "tags": [
+        "chi-phi",
+        "kinh-te"
+      ]
+    },
+    {
+      "id": "lim-energy-and-cooling",
+      "en": "Energy and cooling as a design constraint",
+      "vi": "Điện và làm mát là ràng buộc thiết kế",
+      "def_en": "Beyond the compute bill there is power draw, heat removal, interconnect bandwidth and physical space, and any of them can become the binding limit.",
+      "def_vi": "Ngoài hoá đơn tính toán còn có công suất tiêu thụ, thoát nhiệt, băng thông kết nối và không gian vật lý, và bất kỳ thứ nào cũng có thể thành giới hạn siết chặt nhất.",
+      "src": [
+        "2608.01526"
+      ],
+      "tags": [
+        "chi-phi",
+        "ha-tang"
+      ]
+    },
+    {
+      "id": "lim-latency-budget",
+      "en": "Reliability is bought with time",
+      "vi": "Ngân sách độ trễ",
+      "def_en": "Every added verification, retrieval and retry buys reliability with time, and a workflow with a human waiting has a hard ceiling.",
+      "def_vi": "Mỗi lần thêm kiểm chứng, truy hồi và thử lại đều đổi thời gian lấy độ tin cậy, và một luồng việc có người đang ngồi chờ thì có trần cứng.",
+      "say": "Each verification step we add is bought with time from a person sitting there waiting.",
+      "tags": [
+        "chi-phi",
+        "do-tre"
+      ]
+    },
+    {
+      "id": "lim-four-axis-tradeoff",
+      "en": "The four axis trade-off",
+      "vi": "Đánh đổi trên bốn trục",
+      "def_en": "The design question is no longer which model is smartest but how to balance capability, cost, latency and reliability for one specific workflow.",
+      "def_vi": "Câu hỏi thiết kế không còn là mô hình nào thông minh nhất mà là cân bằng thế nào giữa năng lực, chi phí, độ trễ và độ tin cậy cho đúng một luồng việc cụ thể.",
+      "say": "Name which of the four axes we are willing to sacrifice, because we cannot maximise all of them.",
+      "tags": [
+        "chi-phi",
+        "thiet-ke"
+      ]
+    },
+    {
+      "id": "lim-model-routing",
+      "en": "Model routing",
+      "vi": "Định tuyến giữa các mô hình",
+      "def_en": "Sending easy requests to a small model and hard ones to a large model compensates for cost without giving up the ceiling on hard cases.",
+      "def_vi": "Đưa yêu cầu dễ sang mô hình nhỏ và yêu cầu khó sang mô hình lớn bù được chi phí mà vẫn không hạ trần năng lực ở các ca khó.",
+      "src": [
+        "2608.05872"
+      ],
+      "tags": [
+        "chi-phi",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-routing-limit-difficulty-estimation",
+      "en": "Routing needs to know the difficulty first",
+      "vi": "Định tuyến phải biết trước độ khó",
+      "def_en": "A router must judge how hard a request is before it is answered, and that judgement is hardest exactly for the requests where routing matters most.",
+      "def_vi": "Bộ định tuyến phải phán đoán một yêu cầu khó tới đâu trước khi nó được trả lời, và phán đoán đó khó nhất đúng ở những yêu cầu mà việc định tuyến quan trọng nhất.",
+      "src": [
+        "2608.06171"
+      ],
+      "tags": [
+        "chi-phi",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-cascade-with-escalation",
+      "en": "Cascade with an escalation rule",
+      "vi": "Xếp tầng kèm luật leo thang",
+      "def_en": "Run the cheap path first and escalate only when a checkable signal says it failed, which replaces a difficulty prediction with an observed outcome.",
+      "def_vi": "Chạy đường rẻ trước và chỉ leo thang khi có một tín hiệu kiểm được báo rằng nó hỏng, tức là thay dự đoán độ khó bằng kết quả quan sát được.",
+      "say": "Try the small model, and let a failing check, not a guess, decide when we pay for the big one.",
+      "src": [
+        "2607.20216"
+      ],
+      "tags": [
+        "chi-phi",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-quantisation-tradeoff",
+      "en": "Quantisation trade-off",
+      "vi": "Đánh đổi khi lượng tử hoá",
+      "def_en": "Shrinking numeric precision cuts memory and cost while degrading behaviour unevenly, often leaving average scores intact and rare cases broken.",
+      "def_vi": "Giảm độ chính xác số học cắt được bộ nhớ và chi phí nhưng làm hành vi xuống cấp không đều, thường giữ nguyên điểm trung bình mà làm hỏng các ca hiếm.",
+      "src": [
+        "2608.03854"
+      ],
+      "tags": [
+        "chi-phi",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-caching-compensates",
+      "en": "Caching compensates for repeated work",
+      "vi": "Bộ đệm bù cho công việc lặp lại",
+      "def_en": "Reusing a computed prefix or a previous answer removes cost from the common path, which is where most production traffic actually lives.",
+      "def_vi": "Tái dùng một tiền tố đã tính hoặc một câu trả lời trước sẽ bỏ chi phí khỏi đường đi phổ biến, vốn là chỗ phần lớn lưu lượng thật đi qua.",
+      "tags": [
+        "chi-phi",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-cache-limit-freshness",
+      "en": "A cache trades cost against freshness",
+      "vi": "Bộ đệm đổi độ tươi lấy chi phí",
+      "def_en": "Every cached answer is a bet that the world did not change, and the invalidation rule, not the hit rate, decides whether the bet is safe.",
+      "def_vi": "Mỗi câu trả lời nằm trong đệm là một canh bạc rằng thế giới chưa đổi, và luật vô hiệu hoá đệm, chứ không phải tỉ lệ trúng, mới quyết định canh bạc đó có an toàn hay không.",
+      "tags": [
+        "chi-phi",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-token-amplification",
+      "en": "Token amplification in an agent loop",
+      "vi": "Khuếch đại token trong vòng lặp tác tử",
+      "def_en": "One user request becomes many model calls once tools, retries and verification are added, so the cost per request is a multiple nobody quoted.",
+      "def_vi": "Một yêu cầu của người dùng biến thành nhiều lượt gọi mô hình khi đã thêm công cụ, thử lại và kiểm chứng, nên chi phí mỗi yêu cầu là một bội số không ai báo giá.",
+      "say": "Measure calls per user request before you promise a price per user.",
+      "src": [
+        "2608.04588"
+      ],
+      "tags": [
+        "chi-phi",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "lim-cost-per-successful-task",
+      "en": "Cost per successful task",
+      "vi": "Chi phí trên mỗi nhiệm vụ thành công",
+      "def_en": "Dividing spend by attempts flatters a system that fails often, so the honest denominator is the number of tasks that actually completed correctly.",
+      "def_vi": "Chia chi tiêu cho số lần thử sẽ tâng bốc một hệ hay hỏng, nên mẫu số trung thực là số nhiệm vụ thật sự hoàn thành đúng.",
+      "say": "Divide the bill by tasks that actually completed, not by the calls we made.",
+      "src": [
+        "2608.00685",
+        "2608.04333"
+      ],
+      "tags": [
+        "chi-phi",
+        "do-luong"
+      ]
+    },
+    {
+      "id": "lim-denial-of-wallet",
+      "en": "Denial of wallet",
+      "vi": "Tấn công đốt ví",
+      "def_en": "An adversary who can trigger long generations or deep tool loops attacks the budget instead of the availability, and nothing looks broken while it happens.",
+      "def_vi": "Kẻ tấn công có thể kích hoạt các lượt sinh dài hoặc vòng lặp công cụ sâu sẽ đánh vào ngân sách thay vì đánh vào tính sẵn sàng, và trong lúc đó không có gì trông như đang hỏng.",
+      "say": "Put a hard ceiling on steps and tokens per request, or someone will bill us for a loop.",
+      "src": [
+        "2607.27990",
+        "2607.22188"
+      ],
+      "tags": [
+        "chi-phi",
+        "an-ninh"
+      ]
+    },
+    {
+      "id": "lim-benchmark-versus-operations",
+      "en": "Benchmarks ask can it, operations ask how often",
+      "vi": "Chuẩn đo hỏi làm được không, vận hành hỏi bao nhiêu lần đúng",
+      "def_en": "A benchmark asks whether a system can solve this task, while a deployment asks whether it does the same task correctly on run after run.",
+      "def_vi": "Chuẩn đo hỏi hệ thống có giải được nhiệm vụ này không, còn triển khai hỏi nó có làm đúng đúng nhiệm vụ ấy lần này qua lần khác hay không.",
+      "say": "Passing the benchmark tells me it is possible, not that it is dependable.",
+      "src": [
+        "2607.28840"
+      ],
+      "tags": [
+        "chuan-do",
+        "luan-diem"
+      ]
+    },
+    {
+      "id": "lim-per-task-versus-per-run",
+      "en": "Per task accuracy versus per run success",
+      "vi": "Độ chính xác theo nhiệm vụ và tỉ lệ thành công theo lượt chạy",
+      "def_en": "Averaging over a task set hides the distribution over repeated attempts at one task, which is the quantity an operator actually experiences.",
+      "def_vi": "Lấy trung bình trên một tập nhiệm vụ che mất phân bố khi lặp lại cùng một nhiệm vụ, mà đó mới là đại lượng người vận hành thật sự trải qua.",
+      "tags": [
+        "chuan-do",
+        "do-luong"
+      ]
+    },
+    {
+      "id": "lim-tail-failure",
+      "en": "Tail failure",
+      "vi": "Hỏng ở đuôi phân bố",
+      "def_en": "The rare case that the average hides is usually the expensive one, because rare in a benchmark and rare in production are different populations.",
+      "def_vi": "Ca hiếm bị giá trị trung bình che đi thường là ca đắt tiền, vì hiếm trong chuẩn đo và hiếm trong vận hành là hai tổng thể khác nhau.",
+      "tags": [
+        "chuan-do",
+        "rui-ro"
+      ]
+    },
+    {
+      "id": "lim-run-to-run-variance",
+      "en": "The same input gives a different run",
+      "vi": "Phương sai giữa các lượt chạy",
+      "def_en": "Sampling makes the same input give different outputs, so a single evaluation run is a draw from a distribution rather than a measurement.",
+      "def_vi": "Việc lấy mẫu khiến cùng một đầu vào cho ra đầu ra khác nhau, nên một lượt đánh giá đơn lẻ là một lần rút thăm chứ không phải một phép đo.",
+      "say": "Report the spread across seeds, a single number from a single run is not a result.",
+      "src": [
+        "2608.04001"
+      ],
+      "tags": [
+        "chuan-do",
+        "thong-ke"
+      ]
+    },
+    {
+      "id": "lim-benchmark-saturation",
+      "en": "When a benchmark stops separating systems",
+      "vi": "Chuẩn đo bão hoà",
+      "def_en": "Once most systems score near the top, the remaining differences measure the quirks of the test set rather than any capability.",
+      "def_vi": "Khi phần lớn hệ thống đã đạt sát trần, phần chênh còn lại đo các đặc thù riêng của tập kiểm tra chứ không đo năng lực nào cả.",
+      "src": [
+        "2608.05086"
+      ],
+      "tags": [
+        "chuan-do",
+        "gioi-han"
+      ]
+    },
+    {
+      "id": "lim-construct-validity",
+      "en": "Construct validity of an evaluation",
+      "vi": "Hiệu lực khái niệm của phép đánh giá",
+      "def_en": "The question is whether the thing being scored is the thing you care about, and a benchmark can be reproducible, well documented and still measure the wrong construct.",
+      "def_vi": "Câu hỏi là thứ đang được chấm có phải thứ bạn quan tâm hay không, và một chuẩn đo có thể tái lập được, ghi chép đầy đủ mà vẫn đo sai khái niệm.",
+      "src": [
+        "2608.06329"
+      ],
+      "tags": [
+        "chuan-do",
+        "hieu-luc"
+      ]
+    },
+    {
+      "id": "lim-benchmark-to-production-shift",
+      "en": "Shift from benchmark to production",
+      "vi": "Dịch chuyển từ chuẩn đo sang vận hành",
+      "def_en": "Real inputs are longer, dirtier, more ambiguous and arrive with context the benchmark stripped away, which is why scores travel badly.",
+      "def_vi": "Đầu vào thật thì dài hơn, bẩn hơn, mơ hồ hơn và đến kèm ngữ cảnh mà chuẩn đo đã lược bỏ, đó là lý do điểm số di chuyển rất kém.",
+      "say": "Real documents are longer, dirtier and less well posed than anything in that test set.",
+      "src": [
+        "2608.05266"
+      ],
+      "tags": [
+        "chuan-do",
+        "dich-chuyen"
+      ]
+    },
+    {
+      "id": "lim-cross-benchmark-generalisation",
+      "en": "Cross benchmark generalisation",
+      "vi": "Tổng quát hoá giữa các chuẩn đo",
+      "def_en": "A system tuned against one agent benchmark often does not carry over to another, which shows the score was partly a property of the harness.",
+      "def_vi": "Hệ thống được tinh chỉnh theo một chuẩn đo tác tử thường không mang sang được chuẩn đo khác, cho thấy điểm số một phần là tính chất của chính bộ khung chạy.",
+      "src": [
+        "2608.00181"
+      ],
+      "tags": [
+        "chuan-do",
+        "tong-quat"
+      ]
+    },
+    {
+      "id": "lim-reliability-budget",
+      "en": "Reliability budget",
+      "vi": "Ngân sách độ tin cậy",
+      "def_en": "Stating the acceptable failure rate per task class turns an argument about model quality into an engineering target you can test against.",
+      "def_vi": "Nêu rõ tỉ lệ hỏng chấp nhận được cho từng nhóm nhiệm vụ sẽ biến cuộc tranh cãi về chất lượng mô hình thành một chỉ tiêu kỹ thuật kiểm được.",
+      "say": "Give me the allowed failure rate per task class and I will tell you which layer we need to build.",
+      "tags": [
+        "chuan-do",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-shadow-evaluation",
+      "en": "Shadow evaluation on live traffic",
+      "vi": "Đánh giá bóng trên lưu lượng thật",
+      "def_en": "Running the new configuration on real requests without acting on its output measures the distribution you actually serve rather than a curated set.",
+      "def_vi": "Chạy cấu hình mới trên yêu cầu thật mà không dùng đầu ra của nó sẽ đo đúng phân bố bạn đang phục vụ chứ không phải một tập đã tuyển chọn.",
+      "src": [
+        "2608.01004"
+      ],
+      "tags": [
+        "chuan-do",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-shadow-limit-labels",
+      "en": "Shadow evaluation still needs a ground truth",
+      "vi": "Đánh giá bóng vẫn cần đáp án đúng",
+      "def_en": "Live traffic gives you the right inputs and no labels, so the bottleneck moves from collecting cases to deciding what the correct answer was.",
+      "def_vi": "Lưu lượng thật cho bạn đầu vào đúng nhưng không có nhãn, nên nút thắt chuyển từ việc thu thập ca sang việc xác định đâu là câu trả lời đúng.",
+      "tags": [
+        "chuan-do",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-evaluate-the-evaluator",
+      "en": "Evaluate the evaluator",
+      "vi": "Đánh giá chính bộ đánh giá",
+      "def_en": "A judge has its own error rate and its own bias, so a pipeline that never measures the judge is reporting a number of unknown quality.",
+      "def_vi": "Bộ chấm cũng có tỉ lệ lỗi và thiên lệch riêng, nên một đường ống không bao giờ đo chính bộ chấm đang báo ra một con số không rõ chất lượng.",
+      "say": "Before we trust the score, show me how the judge performs against a set we labelled by hand.",
+      "src": [
+        "2608.05573"
+      ],
+      "tags": [
+        "chuan-do",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-evaluation-stopping-rule",
+      "en": "Stopping rule for an evaluation",
+      "vi": "Luật dừng cho một phép đánh giá",
+      "def_en": "Deciding in advance how many runs are enough prevents the habit of stopping as soon as the numbers look favourable.",
+      "def_vi": "Quyết định trước bao nhiêu lượt chạy là đủ sẽ ngăn thói quen dừng lại ngay khi các con số trông có lợi.",
+      "src": [
+        "2608.06362"
+      ],
+      "tags": [
+        "chuan-do",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-specification-gap",
+      "en": "Specification gap",
+      "vi": "Khoảng hở giữa mục tiêu và đặc tả",
+      "def_en": "What you wrote down is never the whole of what you meant, and a capable optimiser will find the difference and live in it.",
+      "def_vi": "Thứ bạn viết ra không bao giờ là toàn bộ điều bạn muốn nói, và một bộ tối ưu đủ mạnh sẽ tìm ra phần chênh đó và sống trong đó.",
+      "say": "Write down the constraint you assumed everyone knew, because the system does not know it.",
+      "src": [
+        "2607.24866"
+      ],
+      "tags": [
+        "can-chinh",
+        "dac-ta"
+      ]
+    },
+    {
+      "id": "lim-unconstrained-objective",
+      "en": "Unconstrained objective",
+      "vi": "Mục tiêu không kèm ràng buộc",
+      "def_en": "Telling a system to maximise revenue without saying what it may not do defines a search space that includes every method you would refuse.",
+      "def_vi": "Bảo hệ thống tối đa hoá doanh thu mà không nói nó không được làm gì là định nghĩa một không gian tìm kiếm bao gồm mọi cách mà bạn sẽ từ chối.",
+      "say": "Maximise revenue subject to what, exactly, because right now the answer is subject to nothing.",
+      "tags": [
+        "can-chinh",
+        "muc-tieu"
+      ]
+    },
+    {
+      "id": "lim-reward-hacking",
+      "en": "Optimising the proxy instead of the goal",
+      "vi": "Lợi dụng hàm thưởng",
+      "def_en": "When the measured proxy is easier to move than the real goal, an optimiser improves the proxy and the goal quietly stays where it was.",
+      "def_vi": "Khi đại lượng đại diện được đo dễ nâng hơn mục tiêu thật, bộ tối ưu sẽ nâng đại lượng đại diện còn mục tiêu thì lặng lẽ đứng nguyên.",
+      "say": "We rewarded the metric, so we got the metric, and the outcome did not move at all.",
+      "src": [
+        "2607.18575"
+      ],
+      "tags": [
+        "can-chinh",
+        "thuong"
+      ]
+    },
+    {
+      "id": "lim-sycophancy",
+      "en": "Agreeing with the user instead of the evidence",
+      "vi": "Xu nịnh người dùng",
+      "def_en": "Training on human approval rewards agreement, so a model shifts towards what the user seems to want rather than towards what is true.",
+      "def_vi": "Huấn luyện theo sự tán thành của người dùng là thưởng cho việc đồng tình, nên mô hình dịch về phía điều người dùng có vẻ muốn nghe thay vì về phía điều đúng.",
+      "say": "Ask the same question from the opposite position and see whether the answer flips.",
+      "src": [
+        "2608.05624",
+        "2607.28906"
+      ],
+      "tags": [
+        "can-chinh",
+        "hanh-vi"
+      ]
+    },
+    {
+      "id": "lim-hidden-behaviour",
+      "en": "Behaviour that hides itself",
+      "vi": "Hành vi tự che giấu",
+      "def_en": "A system optimised while being watched can learn to behave differently when the observable trace is the thing being scored.",
+      "def_vi": "Một hệ được tối ưu trong lúc bị quan sát có thể học cách cư xử khác đi khi chính cái vết quan sát được mới là thứ bị chấm điểm.",
+      "src": [
+        "2607.15434"
+      ],
+      "tags": [
+        "can-chinh",
+        "che-giau"
+      ]
+    },
+    {
+      "id": "lim-trace-monitoring",
+      "en": "Monitoring the reasoning trace",
+      "vi": "Giám sát vết suy luận",
+      "def_en": "Reading the intermediate steps gives an early warning that the plan is drifting, long before the final action is taken.",
+      "def_vi": "Đọc các bước trung gian cho ta cảnh báo sớm rằng kế hoạch đang trôi, từ rất lâu trước khi hành động cuối được thực hiện.",
+      "src": [
+        "2608.04735"
+      ],
+      "tags": [
+        "can-chinh",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-trace-monitoring-limit",
+      "en": "The trace is not the computation",
+      "vi": "Vết không phải là phép tính",
+      "def_en": "Monitoring what a system writes about its reasoning only works while the written trace stays connected to the behaviour, and that link can be broken.",
+      "def_vi": "Giám sát thứ hệ thống viết ra về lập luận của nó chỉ có tác dụng chừng nào cái vết viết ra còn dính với hành vi, và mối dính đó có thể bị cắt.",
+      "src": [
+        "2608.02820",
+        "2608.04928"
+      ],
+      "tags": [
+        "can-chinh",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-monitor-as-only-defence",
+      "en": "A monitor as the only defence",
+      "vi": "Bộ giám sát làm phòng tuyến duy nhất",
+      "def_en": "A detector with useful average performance collapses when it is the sole gate, because every case it misses goes straight through with nothing behind it.",
+      "def_vi": "Một bộ phát hiện có hiệu năng trung bình khá sẽ sụp khi nó là cổng duy nhất, vì mọi ca nó bỏ lọt sẽ đi thẳng qua mà phía sau không còn gì.",
+      "say": "A detector this good is fine as one of three gates and useless as the only gate.",
+      "src": [
+        "2608.00583"
+      ],
+      "tags": [
+        "can-chinh",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-fine-tuning-side-effects",
+      "en": "Side effects of fine-tuning",
+      "vi": "Tác dụng phụ của tinh chỉnh",
+      "def_en": "Adapting a model for one narrow purpose can move behaviour on unrelated inputs, including safety behaviour nobody re-tested.",
+      "def_vi": "Chỉnh mô hình cho một mục đích hẹp có thể làm dịch chuyển hành vi trên các đầu vào không liên quan, kể cả hành vi an toàn mà không ai kiểm lại.",
+      "src": [
+        "2608.04347"
+      ],
+      "tags": [
+        "can-chinh",
+        "tac-dung-phu"
+      ]
+    },
+    {
+      "id": "lim-refusal-is-not-safety",
+      "en": "Refusal is not safety",
+      "vi": "Từ chối không phải là an toàn",
+      "def_en": "Measuring how often a system declines counts a surface behaviour, while the risk lives in what happens on the requests it does accept.",
+      "def_vi": "Đo xem hệ thống từ chối bao nhiêu lần là đếm một hành vi bề mặt, còn rủi ro nằm ở chuyện gì xảy ra với những yêu cầu nó chấp nhận.",
+      "say": "Counting refusals measures politeness, and the risk lives in the requests it accepted.",
+      "src": [
+        "2607.15977",
+        "2607.19449"
+      ],
+      "tags": [
+        "can-chinh",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-phrasing-sensitivity-of-policy",
+      "en": "Policy behaviour is sensitive to phrasing",
+      "vi": "Hành vi theo chính sách nhạy với cách diễn đạt",
+      "def_en": "The same request in a different grammatical mood can cross a boundary that the previous wording respected, which means the boundary was never in the meaning.",
+      "def_vi": "Cùng một yêu cầu diễn đạt ở một thức ngữ pháp khác có thể vượt qua ranh giới mà cách diễn đạt trước còn tôn trọng, nghĩa là ranh giới ấy chưa bao giờ nằm ở tầng nghĩa.",
+      "src": [
+        "2608.05409"
+      ],
+      "tags": [
+        "can-chinh",
+        "gion"
+      ]
+    },
+    {
+      "id": "lim-hard-rule-outside-the-model",
+      "en": "Hard rule outside the model",
+      "vi": "Luật cứng đặt ngoài mô hình",
+      "def_en": "A constraint that must always hold belongs in code that the model cannot argue with, not in an instruction the model is asked to remember.",
+      "def_vi": "Ràng buộc buộc phải luôn đúng thì thuộc về đoạn mã mà mô hình không cãi được, chứ không thuộc về một chỉ dẫn mà mô hình được nhờ ghi nhớ.",
+      "say": "If it must never happen, it goes in the enforcement layer, not in the prompt.",
+      "tags": [
+        "can-chinh",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-collective-misbehaviour",
+      "en": "Collective misbehaviour of many agents",
+      "vi": "Hành vi lệch của cả đàn tác tử",
+      "def_en": "Agents that are individually reasonable can produce a bad outcome together by all pursuing the same locally correct strategy on a shared resource.",
+      "def_vi": "Các tác tử xét riêng đều hợp lý vẫn có thể cùng nhau tạo ra kết cục xấu khi tất cả theo đuổi một chiến lược đúng cục bộ trên một tài nguyên dùng chung.",
+      "src": [
+        "2607.22188"
+      ],
+      "tags": [
+        "can-chinh",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "lim-layered-ai-system",
+      "en": "The layered AI system",
+      "vi": "Hệ AI phân tầng",
+      "def_en": "A working deployment stacks model and tools at the bottom, verification above them, guardrails above that and a human at the top, each covering a different failure class.",
+      "def_vi": "Một triển khai chạy được xếp mô hình và công cụ ở dưới cùng, kiểm chứng ở trên, rào chắn ở trên nữa và con người trên cùng, mỗi tầng phủ một lớp lỗi khác nhau.",
+      "say": "Draw the four layers on the board and put every failure we have seen into exactly one of them.",
+      "src": [
+        "2608.06112"
+      ],
+      "tags": [
+        "kien-truc",
+        "tong-quan"
+      ]
+    },
+    {
+      "id": "lim-model-and-tool-layer",
+      "en": "Model and tool layer",
+      "vi": "Tầng mô hình và công cụ",
+      "def_en": "The bottom layer supplies capability, and tools compensate for what the weights cannot do, namely fresh facts, exact arithmetic and real actions.",
+      "def_vi": "Tầng dưới cùng cung cấp năng lực, và công cụ bù cho những gì trọng số không làm được, tức dữ kiện tươi, phép tính chính xác và hành động thật.",
+      "tags": [
+        "kien-truc",
+        "tang-mo-hinh"
+      ]
+    },
+    {
+      "id": "lim-model-layer-cannot-guarantee",
+      "en": "The bottom layer cannot promise anything",
+      "vi": "Tầng dưới cùng không hứa được điều gì",
+      "def_en": "No amount of capability at the model layer turns a probabilistic output into a guarantee, which is why the layers above exist at all.",
+      "def_vi": "Dù năng lực ở tầng mô hình có cao tới đâu cũng không biến một đầu ra xác suất thành một bảo đảm, và đó chính là lý do các tầng phía trên tồn tại.",
+      "tags": [
+        "kien-truc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-verification-layer-role",
+      "en": "What the verification layer covers",
+      "vi": "Tầng kiểm chứng phủ được gì",
+      "def_en": "It converts an unverified assertion into a checked one, so it compensates for fabrication, arithmetic slips and claims with no supporting evidence.",
+      "def_vi": "Nó biến một lời khẳng định chưa kiểm thành một lời đã kiểm, nên nó bù cho việc bịa, sai số học và các khẳng định không có chứng cứ chống lưng.",
+      "tags": [
+        "kien-truc",
+        "tang-kiem-chung"
+      ]
+    },
+    {
+      "id": "lim-verification-layer-gap",
+      "en": "What the verification layer misses",
+      "vi": "Tầng kiểm chứng bỏ sót gì",
+      "def_en": "It cannot tell you that the task itself was the wrong one, that a required item is missing, or that the evidence it checked against was planted.",
+      "def_vi": "Nó không thể cho bạn biết rằng bản thân nhiệm vụ đã sai, rằng một mục bắt buộc đang thiếu, hoặc rằng chứng cứ nó dựa vào đã bị cài vào.",
+      "say": "The checker tells us the answer matches the evidence, it does not tell us the evidence was ours.",
+      "tags": [
+        "kien-truc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-guardrail-layer-role",
+      "en": "What the guardrail layer covers",
+      "vi": "Tầng rào chắn phủ được gì",
+      "def_en": "It bounds what may be attempted, so it compensates for an agent that decided to do something outside the intended envelope.",
+      "def_vi": "Nó chặn phạm vi những gì được phép thử làm, nên nó bù cho một tác tử đã quyết định làm điều nằm ngoài khuôn đã định.",
+      "src": [
+        "2608.05695"
+      ],
+      "tags": [
+        "kien-truc",
+        "tang-rao-chan"
+      ]
+    },
+    {
+      "id": "lim-guardrail-layer-gap",
+      "en": "What the guardrail layer misses",
+      "vi": "Tầng rào chắn bỏ sót gì",
+      "def_en": "A rule only blocks the shapes it enumerates, so an action that is permitted, correct in form and wrong in substance walks straight through.",
+      "def_vi": "Một luật chỉ chặn được những hình dạng nó liệt kê ra, nên một hành động được phép, đúng về hình thức và sai về nội dung sẽ đi thẳng qua.",
+      "src": [
+        "2608.01388"
+      ],
+      "tags": [
+        "kien-truc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-human-layer-role",
+      "en": "What the human layer covers",
+      "vi": "Tầng con người phủ được gì",
+      "def_en": "A person supplies judgement about goals, context and acceptable risk, which is exactly the part no layer below can supply.",
+      "def_vi": "Con người cung cấp phán đoán về mục tiêu, bối cảnh và mức rủi ro chấp nhận được, tức đúng phần mà không tầng nào bên dưới cung cấp nổi.",
+      "src": [
+        "2607.21268"
+      ],
+      "tags": [
+        "kien-truc",
+        "tang-con-nguoi"
+      ]
+    },
+    {
+      "id": "lim-human-layer-gap",
+      "en": "What the human layer misses",
+      "vi": "Tầng con người bỏ sót gì",
+      "def_en": "A reviewer facing a fluent output at high volume approves by default, so oversight decays into a rubber stamp unless the review is made cheap and specific.",
+      "def_vi": "Người duyệt đối diện một đầu ra trôi chảy với số lượng lớn sẽ duyệt theo quán tính, nên giám sát thoái hoá thành đóng dấu nếu việc duyệt không được làm cho rẻ và cụ thể.",
+      "say": "Do not ask a human to review everything, ask them to review the three fields that decide the outcome.",
+      "tags": [
+        "kien-truc",
+        "gioi-han-cua-bu"
+      ]
+    },
+    {
+      "id": "lim-permission-separate-from-capability",
+      "en": "Permission separated from capability",
+      "vi": "Tách quyền khỏi năng lực",
+      "def_en": "What a system is able to do and what it is allowed to do should be two different objects, so autonomy can be raised or lowered without retraining.",
+      "def_vi": "Việc hệ thống có thể làm gì và việc nó được phép làm gì nên là hai đối tượng khác nhau, để mức tự chủ có thể nâng hoặc hạ mà không phải huấn luyện lại.",
+      "src": [
+        "2607.23438"
+      ],
+      "tags": [
+        "kien-truc",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-taint-confinement",
+      "en": "Taint confinement",
+      "vi": "Giam giữ dữ liệu nhiễm",
+      "def_en": "Marking anything that came from an untrusted source and refusing to let it reach a privileged action stops injected text from being executed as an instruction.",
+      "def_vi": "Đánh dấu mọi thứ đến từ nguồn không tin cậy và không cho nó chạm tới một hành động có đặc quyền sẽ chặn văn bản bị tiêm khỏi việc được thi hành như một chỉ dẫn.",
+      "say": "Anything that came from outside is data, never an instruction, and it never reaches a write action.",
+      "src": [
+        "2607.24625"
+      ],
+      "tags": [
+        "kien-truc",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-irreversibility-gate",
+      "en": "Irreversibility gate",
+      "vi": "Cổng cho hành động không đảo được",
+      "def_en": "Classify each action by whether it can be undone, and require a different level of evidence and approval for the ones that cannot.",
+      "def_vi": "Phân loại từng hành động theo việc có rút lại được hay không, và đòi một mức chứng cứ cùng mức phê duyệt khác cho những hành động không rút lại được.",
+      "say": "Send an email, delete a record and move money are three different risk classes, so they cannot share one approval rule.",
+      "src": [
+        "2608.00783",
+        "2607.21642"
+      ],
+      "tags": [
+        "kien-truc",
+        "bu"
+      ]
+    },
+    {
+      "id": "lim-defence-in-depth-for-agents",
+      "en": "Defence in depth for agents",
+      "vi": "Phòng thủ nhiều lớp cho tác tử",
+      "def_en": "Because every layer has a known blind spot, the design goal is to arrange them so that no single failure passes through all of them.",
+      "def_vi": "Vì mỗi tầng đều có một điểm mù đã biết, mục tiêu thiết kế là sắp xếp chúng sao cho không một kiểu hỏng đơn lẻ nào đi lọt qua hết.",
+      "src": [
+        "2608.02683"
+      ],
+      "tags": [
+        "kien-truc",
+        "tong-quan"
+      ]
+    },
+    {
+      "id": "lim-from-smart-model-to-trusted-system",
+      "en": "From a smart model to a trusted system",
+      "vi": "Từ mô hình thông minh tới hệ thống tin cậy được",
+      "def_en": "The open problem is no longer whether a model is capable but how to turn a very capable and occasionally wrong model into something an organisation can rely on.",
+      "def_vi": "Bài toán mở không còn là mô hình có giỏi hay không mà là làm sao biến một mô hình rất giỏi và đôi lúc sai thành thứ mà một tổ chức dựa vào được.",
+      "say": "Our job is not to find a model that never fails, it is to build a system that fails visibly and recoverably.",
+      "src": [
+        "2608.05602"
+      ],
+      "tags": [
+        "chot",
+        "luan-diem"
+      ]
+    },
+    {
+      "id": "lim-best-model-versus-best-system",
+      "en": "Best model and best system are different things",
+      "vi": "Mô hình tốt nhất và hệ AI tốt nhất là hai khái niệm khác nhau",
+      "def_en": "A weaker model wrapped in retrieval, verification and clear scope routinely beats a stronger model called directly, which is why the two questions have separated.",
+      "def_vi": "Một mô hình yếu hơn nhưng bọc trong truy hồi, kiểm chứng và phạm vi rõ ràng thường xuyên thắng một mô hình mạnh hơn gọi trực tiếp, và đó là lý do hai câu hỏi đã tách ra.",
+      "say": "Choosing the strongest model is one decision, and it is not the decision that determines whether this works.",
+      "src": [
+        "2607.28840"
+      ],
+      "tags": [
+        "chot",
+        "luan-diem"
+      ]
+    },
+    {
+      "id": "lim-research-shift",
+      "en": "The research shift",
+      "vi": "Sự dịch chuyển của nghiên cứu",
+      "def_en": "Effort is moving from making models larger to a chain of reasoning, tools, memory, agency, verification and reliability, because that is where the remaining failures live.",
+      "def_vi": "Nỗ lực đang dịch từ việc làm mô hình to hơn sang một chuỗi gồm suy luận, công cụ, bộ nhớ, tác tử, kiểm chứng và độ tin cậy, vì đó là chỗ các kiểu hỏng còn lại đang nằm.",
+      "src": [
+        "2607.23942"
+      ],
+      "tags": [
+        "chot",
+        "huong-di"
+      ]
+    },
+    {
+      "id": "lim-reliability-engineering-for-ai",
+      "en": "Reliability engineering for AI systems",
+      "vi": "Kỹ thuật độ tin cậy cho hệ AI",
+      "def_en": "The useful discipline is the one used for any critical system, namely known failure modes, budgets, monitoring, recovery paths and post-incident review.",
+      "def_vi": "Ngành hữu dụng ở đây chính là ngành dùng cho mọi hệ trọng yếu, tức là biết trước các kiểu hỏng, có ngân sách, có giám sát, có đường phục hồi và có rà soát sau sự cố.",
+      "tags": [
+        "chot",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "lim-warranted-reliance",
+      "en": "Warranted reliance",
+      "vi": "Sự tin dùng có căn cứ",
+      "def_en": "The goal is not that people trust the system but that the amount they trust it matches the evidence about when it is right.",
+      "def_vi": "Mục tiêu không phải là để người ta tin hệ thống mà là để mức tin của họ khớp với bằng chứng về việc khi nào nó đúng.",
+      "say": "I want the team to trust this exactly as much as the evidence supports, not more and not less.",
+      "src": [
+        "2608.05602"
+      ],
+      "tags": [
+        "chot",
+        "tin-cay"
+      ]
+    },
+    {
+      "id": "lim-system-level-security",
+      "en": "System level security thinking",
+      "vi": "Tư duy an ninh ở mức hệ thống",
+      "def_en": "The risk of an AI deployment is not a property of the model but of the model plus its tools, its data paths and the actions it can reach.",
+      "def_vi": "Rủi ro của một triển khai AI không phải là tính chất của mô hình mà là của mô hình cộng với công cụ, đường dữ liệu và các hành động nó với tới được.",
+      "src": [
+        "2608.04033",
+        "2607.22024"
+      ],
+      "tags": [
+        "chot",
+        "an-ninh"
+      ]
+    },
+    {
+      "id": "lim-autonomy-level-is-a-decision",
+      "en": "Autonomy level is a product decision",
+      "vi": "Mức tự chủ là một quyết định sản phẩm",
+      "def_en": "How much the system may do without asking is chosen per workflow from the cost of an error, and it can be different for two features in one product.",
+      "def_vi": "Việc hệ thống được làm bao nhiêu mà không cần hỏi được chọn theo từng luồng việc dựa trên chi phí của một lần sai, và có thể khác nhau giữa hai tính năng trong cùng một sản phẩm.",
+      "say": "Reading a report and issuing a refund cannot sit at the same autonomy level.",
+      "src": [
+        "2608.05201"
+      ],
+      "tags": [
+        "chot",
+        "thiet-ke"
+      ]
+    },
+    {
+      "id": "lim-compensation-ledger",
+      "en": "Compensation ledger",
+      "vi": "Sổ đối chiếu bù trừ",
+      "def_en": "For every known limitation, write the mechanism that compensates for it and the residual risk that mechanism leaves behind, then review the residuals.",
+      "def_vi": "Với mỗi giới hạn đã biết, hãy ghi ra cơ chế bù cho nó và phần rủi ro còn lại mà cơ chế ấy để sót, rồi rà soát chính phần còn lại đó.",
+      "say": "Every mitigation in this document needs a second column saying what it still does not cover.",
+      "tags": [
+        "chot",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "lim-honest-capability-statement",
+      "en": "Honest capability statement",
+      "vi": "Phát biểu năng lực trung thực",
+      "def_en": "Saying what the system does, on what inputs, with what error rate and with what fallback is more persuasive to a serious buyer than any superlative.",
+      "def_vi": "Nói rõ hệ thống làm gì, trên đầu vào nào, với tỉ lệ lỗi bao nhiêu và có phương án dự phòng gì thì thuyết phục một khách hàng nghiêm túc hơn mọi lời có cánh.",
+      "say": "Here is what it does, here is where it fails, and here is what happens when it does.",
+      "tags": [
+        "chot",
+        "giao-tiep"
+      ]
+    },
+    {
+      "id": "lim-failure-budget-conversation",
+      "en": "The failure budget conversation",
+      "vi": "Cuộc trao đổi về ngân sách lỗi",
+      "def_en": "Asking a customer what an error costs and how often it may happen converts a vague demand for accuracy into a specification you can build against.",
+      "def_vi": "Hỏi khách hàng một lần sai tốn bao nhiêu và được phép xảy ra bao nhiêu lần sẽ biến một đòi hỏi mơ hồ về độ chính xác thành một đặc tả mà bạn xây được.",
+      "say": "Tell me the two numbers, what a mistake costs and how many you can absorb per month.",
+      "tags": [
+        "chot",
+        "giao-tiep"
+      ]
+    },
+    {
+      "id": "lim-narrowing-the-scope",
+      "en": "Narrowing the scope is the cheapest fix",
+      "vi": "Thu hẹp phạm vi là cách sửa rẻ nhất",
+      "def_en": "Most reliability problems dissolve when the system is asked to do one well defined thing instead of anything a user might type.",
+      "def_vi": "Phần lớn vấn đề độ tin cậy tan biến khi hệ thống chỉ được giao đúng một việc định nghĩa rõ thay vì bất cứ thứ gì người dùng có thể gõ vào.",
+      "say": "Before we add another layer, let us cut the scope in half and see how many failures disappear.",
+      "tags": [
+        "chot",
+        "thiet-ke"
+      ]
+    },
+    {
+      "id": "lim-design-review-questions",
+      "en": "The three design review questions",
+      "vi": "Ba câu hỏi cho buổi rà soát thiết kế",
+      "def_en": "Which limitation does this component compensate for, what does it still not cover, and what happens on the path where it fails silently.",
+      "def_vi": "Thành phần này bù cho giới hạn nào, nó vẫn không phủ được gì, và chuyện gì xảy ra trên nhánh mà nó hỏng trong im lặng.",
+      "say": "For each box on this diagram, answer all three questions before we approve it.",
+      "tags": [
+        "chot",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "lim-every-compensation-has-a-limit",
+      "en": "Every compensation has its own limit",
+      "vi": "Mọi cách bù đều có giới hạn của chính nó",
+      "def_en": "Retrieval, verification, guardrails and human review each remove one failure class and introduce a new dependency, so the design never converges on a component with no blind spot.",
+      "def_vi": "Truy hồi, kiểm chứng, rào chắn và người duyệt, mỗi thứ xoá được một lớp lỗi và thêm vào một phụ thuộc mới, nên thiết kế không bao giờ hội tụ về một thành phần không có điểm mù.",
+      "say": "There is no final layer, only a stack where the remaining blind spots are ones we chose to accept.",
+      "tags": [
+        "chot",
+        "gioi-han-cua-bu"
+      ]
+    }
+  ]
+}
