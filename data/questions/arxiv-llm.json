@@ -9,7 +9,7 @@
       "q_vi": "Nhiều nhóm trong tuần cùng đánh vào một điểm yếu của việc loại bỏ token khỏi bộ đệm khoá giá trị. Điểm yếu đó là",
       "choices": [
         "The implementation always requires retraining the base model weights",
-        "It reliably increases how many tokens the model generates",
+        "It reliably increases how many tokens the model ends up generating",
         "The decision is irreversible while importance keeps changing",
         "It only applies to models using grouped query attention"
       ],
@@ -25,8 +25,8 @@
       "choices": [
         "Attention scores can only be defined once the query has finally arrived",
         "The context is compressed once and reused for queries not yet known",
-        "Quantization cannot be applied to the value half of the cache",
-        "It removes the need for rotary positional embeddings entirely"
+        "Quantization cannot be applied to the value half of the running cache",
+        "It completely removes any need for the rotary positional embeddings used"
       ],
       "answer": 1,
       "why": "Agent and document workloads compress a context before the future queries exist, so query-specific importance scores are unavailable.",
@@ -115,8 +115,8 @@
       "choices": [
         "New content must be compressed before its future relevance is known",
         "Agent traces contain almost no natural language that is worth compressing",
-        "Agents and documents run on quite different hardware profiles",
-        "Tool outputs cannot be tokenized by the standard tokenizer used"
+        "Agents and documents tend to run on quite different hardware profiles",
+        "Tool outputs cannot be tokenized by the standard tokenizer that is used"
       ],
       "answer": 0,
       "why": "An agent keeps producing turns whose usefulness depends on a query that has not been issued yet, and delaying compaction recovered much of the loss.",
@@ -190,7 +190,7 @@
       "choices": [
         "How uncertain the model is about the current token",
         "Detecting an injected instruction inside the prompt",
-        "Selecting which tokenizer to apply to the input",
+        "Selecting which tokenizer should be applied to the input",
         "Estimating the remaining length of the sequence"
       ],
       "answer": 0,
@@ -221,7 +221,7 @@
         "Image, question and answer phases route differently",
         "The vision encoder contains no experts of its own",
         "Merging always requires a held out calibration set first",
-        "Experts are shared across every layer of the stack"
+        "Experts are shared across every single layer of the stack"
       ],
       "answer": 0,
       "why": "Image context tokens are far more numerous, so statistics aggregated over all tokens make experts serving different phases look interchangeable.",
@@ -249,7 +249,7 @@
       "q_vi": "Kéo dài chân trời đầu cơ hết tác dụng khi",
       "choices": [
         "The draft model becomes larger than the target model that it is meant to serve",
-        "The context length passes somewhere in the region of one million tokens",
+        "The context length passes somewhere in the region of one million input tokens",
         "The batch happens to contain more than one concurrent decoding request",
         "The marginal acceptance probability falls below the relative drafting cost"
       ],
@@ -266,7 +266,7 @@
         "The cost of loading the model weights from storage",
         "The wall clock time spent waiting for the environment",
         "The prompt template used by the person operating the agent",
-        "The memory footprint of the growing key value cache"
+        "The memory footprint of the steadily growing key value cache"
       ],
       "answer": 1,
       "why": "As decoding gets faster the tool execution becomes the visible bottleneck, so the next call is predicted and pre executed.",
@@ -280,7 +280,7 @@
       "choices": [
         "The target policy keeps updating, so a static drafter goes stale",
         "Rewards cannot be computed over tokens that were only drafted",
-        "Rollouts are always shorter than the width of the draft window",
+        "Rollouts are always much shorter than the width of the draft window",
         "The verifier and the policy must use two entirely different vocabularies"
       ],
       "answer": 0,
@@ -339,7 +339,7 @@
       "q_vi": "Tự chưng cất theo chính sách biến phần thưởng kết quả thưa thành giám sát dày bằng cách",
       "choices": [
         "Adding a separate value network for every turn of the episode",
-        "Sampling a much larger number of rollouts for each prompt",
+        "Sampling a much larger number of rollouts for every single prompt",
         "Raising the discount factor applied to the outcome reward",
         "Rescoring the model's own tokens under a more informed view"
       ],
@@ -353,7 +353,7 @@
       "q": "The privilege illusion in self distillation refers to",
       "q_vi": "Ảo giác đặc quyền trong tự chưng cất chỉ hiện tượng",
       "choices": [
-        "The teacher model being substantially larger and considerably stronger than the student",
+        "The teacher model being substantially larger and considerably stronger than the student model",
         "The student learning behaviour that only makes sense when privileged information is present",
         "The reward model systematically overestimating the quality of the responses it scores",
         "The rollouts being generated by an off policy behaviour model rather than the current policy"
@@ -460,8 +460,8 @@
       "choices": [
         "No step outside the final answer consumes model tokens",
         "The agent stores no persistent memory of any kind whatsoever",
-        "Memory is held inside the key value cache only",
-        "Retrieval is performed by exact string matching"
+        "Memory is held inside the key value cache and nowhere else",
+        "Retrieval is performed only by exact string matching of keys"
       ],
       "answer": 0,
       "why": "Maintaining memory through extra model calls is a recurring cost, so the design pushes the bookkeeping into encoders and graph structure instead.",
@@ -476,7 +476,7 @@
         "Embeddings drift noticeably between two consecutive model versions",
         "Different kinds of fact stay valid for very different lengths of time",
         "Retrieval scores are not comparable across two different embedding models",
-        "Memories cannot be serialised to disk without losing their structure"
+        "Memories cannot be serialised to disk without losing their whole structure"
       ],
       "answer": 1,
       "why": "Treating all memories as equally persistent contaminates the retrieved context with facts that have quietly expired.",
@@ -503,7 +503,7 @@
       "q": "A study of spatial memory staleness in vision language agents found that",
       "q_vi": "Một nghiên cứu về bộ nhớ không gian lỗi thời ở tác tử thị giác ngôn ngữ thấy rằng",
       "choices": [
-        "Image input consistently outperformed text input in every tested grid",
+        "Image input consistently outperformed text input on every one of the tested grids",
         "Stale memories never affected the downstream navigation task at all",
         "Solving the task from text does not imply the model is visually grounded",
         "Only the closed source models detected the conflicts in the stored memory"
@@ -550,7 +550,7 @@
       "choices": [
         "Adaptation to prior context and feedback rather than reusable skills",
         "The steady growth of the external skill library across all the episodes",
-        "The size of the underlying model that was used in the experiment",
+        "The size of the underlying model that happened to be used in the experiment",
         "The ordering of the task difficulty levels inside each domain"
       ],
       "answer": 0,
@@ -564,7 +564,7 @@
       "q_vi": "Trong chế độ hé lộ dần, một tài liệu mô tả kỹ năng còn cần nêu",
       "choices": [
         "The version of the runtime environment that it targets",
-        "The number of tokens that it will consume",
+        "The number of tokens that it is going to consume",
         "Which similar requests belong to another skill",
         "The license of the underlying model used"
       ],
@@ -624,7 +624,7 @@
       "q_vi": "Một phép so giữa gọi công cụ bằng mã và gọi bằng đối tượng có cấu trúc trên nhiều mô hình cho thấy",
       "choices": [
         "Programmatic calling matched or exceeded the structured form in most models",
-        "The structured call form won on every single model that was tested here",
+        "The structured call form won on every single one of the models that was tested",
         "Neither of the two forms managed to chain more than a single call",
         "The difference vanished entirely once the sampling temperature had been fixed"
       ],
@@ -731,7 +731,7 @@
         "Every safety benchmark ends up measuring one distinct latent factor",
         "Randomly chosen item subsets are as informative as carefully selected ones",
         "A few interpretable factors explain most of the variance between models",
-        "Model size on its own determines the aggregate safety score obtained"
+        "Model size on its own determines the aggregate safety score that is obtained"
       ],
       "answer": 2,
       "why": "Refusal strictness, truthfulness and contextual harm accounted for most of the between model variance, and psychometrically selected items recovered full scores with lower error than random ones.",
@@ -818,9 +818,9 @@
       "q": "Model poisoning work on chain of thought monitoring suggests that monitoring is better framed as a question about",
       "q_vi": "Nghiên cứu đầu độc mô hình trong giám sát chuỗi suy nghĩ gợi ý rằng nên đặt lại giám sát thành câu hỏi về",
       "choices": [
-        "The plain readability of the reasoning trace",
+        "The plain readability of the whole visible reasoning trace",
         "The total length of the visible reasoning trace produced",
-        "The sampling temperature used during decoding",
+        "The sampling temperature that was used during decoding",
         "The consistency between the reasoning and the action"
       ],
       "answer": 3,
@@ -850,7 +850,7 @@
       "choices": [
         "Cannot separate at all the concept that it was originally fitted for",
         "Separates the concept cleanly yet promotes the opposite behaviour",
-        "Only takes effect when it is added at the final decoder layer",
+        "Only takes effect when it is added at the very final decoder layer",
         "Requires a trained sparse autoencoder in order to be computed"
       ],
       "answer": 1,
@@ -985,7 +985,7 @@
       "choices": [
         "Linear compute cost against quadratic memory",
         "Dense writes interfere while sparse writes forget",
-        "High recall against comparatively low precision",
+        "High recall against a comparatively low level of precision",
         "Training throughput against the throughput at inference"
       ],
       "answer": 1,
@@ -1013,10 +1013,10 @@
       "q": "Logging every commitment while decoding a masked diffusion language model revealed that unconstrained decoding",
       "q_vi": "Ghi nhật ký từng lần chốt token khi giải mã mô hình ngôn ngữ khuếch tán có che cho thấy giải mã không ràng buộc",
       "choices": [
-        "Never commits the final answer until the very end of decoding",
+        "Never commits the final answer until the very end of the decoding run",
         "Commits the final answer while much of the reasoning is still masked",
         "Produces the same commitment order as ordinary autoregressive decoding",
-        "Fails to terminate at all on the longer reasoning problems tested"
+        "Fails to terminate at all on the longer reasoning problems that were tested"
       ],
       "answer": 1,
       "why": "The cause was identified as reachability rather than the model's termination beliefs, and chain of thought only helped under ordered commitment.",
@@ -1075,8 +1075,8 @@
       "choices": [
         "High within a turn and much lower across turns",
         "Uniformly low across the whole of a coding session",
-        "Independent of the pattern of tool execution",
-        "Higher for chat workloads than for agent ones"
+        "Independent of the pattern of tool execution in the loop",
+        "Higher for chat workloads than for agentic coding ones"
       ],
       "answer": 0,
       "why": "Sessions consist of sparse user initiated turns that each unfold into an autonomous loop of model calls coupled with tool execution, so reuse concentrates inside a turn.",
