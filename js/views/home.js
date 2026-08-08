@@ -41,6 +41,26 @@ export async function renderHome(app) {
       <div class="stat"><div class="stat-value">${ov.quiz.asked ? Math.round((ov.quiz.right / ov.quiz.asked) * 100) : 0}%</div><div class="stat-label">đúng khi trắc nghiệm</div></div>
     </div>
 
+    <div class="section-title">Ôn tổng hợp</div>
+    <div class="grid grid-modes">
+      <a class="card mode-card" href="#/learn/all" style="--deck-color:#6ea8fe">
+        <div class="mode-icon">🗓️</div>
+        <div>
+          <div class="mode-name">Học thẻ đến hạn của mọi bộ</div>
+          <div class="mode-desc">${due > 0
+            ? `${due} thẻ đang đến hạn, trộn từ mọi môn. Không phải tự chọn bộ nào.`
+            : `Chưa có thẻ nào đến hạn. Lượt này sẽ lấy thẻ mới, trộn từ mọi môn.`}</div>
+        </div>
+      </a>
+      <a class="card mode-card" href="#/quiz/all">
+        <div class="mode-icon">🎲</div>
+        <div>
+          <div class="mode-name">Trắc nghiệm trộn mọi môn</div>
+          <div class="mode-desc">Câu hỏi rút từ toàn kho, không biết trước câu tiếp theo thuộc môn nào.</div>
+        </div>
+      </a>
+    </div>
+
     ${(manifest.groups || [{ id: 'domain', title: 'Bộ thẻ' }]).map(groupBlock).join('')}
 
     <div class="section-title">Luyện nói</div>

@@ -1,10 +1,12 @@
-import { loadDeck } from '../data.js';
+import { loadDeck, loadEverything } from '../data.js';
 import { buildQueue, gradeCard, cardState, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
 import { esc, crumb, progressBar, sizePicker } from '../ui.js';
 import { speak, canSpeak } from '../speech.js';
 
 export async function renderLearn(app, deckId) {
-  const { deck, cards } = await loadDeck(deckId);
+  const isAll = deckId === 'all';
+  const { deck, cards } = isAll ? await loadEverything() : await loadDeck(deckId);
+  const backHref = isAll ? '#/' : `#/deck/${deckId}`;
   if (!cards.length) {
     app.innerHTML = `<div class="empty">Bộ thẻ này chưa có thẻ nào.</div>`;
     return;
@@ -19,16 +21,18 @@ export async function renderLearn(app, deckId) {
   function done() {
     keyHandler = null; // man hinh ket thuc khong nhan phim tat cua phien hoc
     app.innerHTML = `
-      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: `#/deck/${deckId}` }, { label: 'Học khái niệm' }])}
+      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Học khái niệm' }])}
       <div class="done-hero">
         <div class="big">🎯</div>
         <h2>Xong ${queue.length} thẻ</h2>
         <p>Thuộc ${graded.good}, còn ngập ngừng ${graded.hard}, phải học lại ${graded.again}. Những thẻ bạn bấm học lại sẽ quay lại ngay hôm nay.</p>
-        <p style="font-size:14px">Bộ này có tất cả ${cards.length} thẻ. Bấm học tiếp để sang lượt kế, hoặc đổi cỡ lượt ở thanh trên khi đang học.</p>
+        <p style="font-size:14px">${isAll
+          ? `Toàn kho có ${cards.length} thẻ trải trên mọi bộ.`
+          : `Bộ này có tất cả ${cards.length} thẻ.`} Bấm học tiếp để sang lượt kế, hoặc đổi cỡ lượt ở thanh trên khi đang học.</p>
         <div class="btn-row" style="justify-content:center">
           <button class="btn btn-primary" id="btn-again-round">Học tiếp lượt nữa</button>
           <a class="btn" href="#/quiz/${esc(deckId)}">Sang trắc nghiệm</a>
-          <a class="btn btn-ghost" href="#/deck/${esc(deckId)}">Về bộ thẻ</a>
+          <a class="btn btn-ghost" href="${backHref}">${isAll ? "Về trang chính" : "Về bộ thẻ"}</a>
         </div>
       </div>`;
     app.querySelector('#btn-again-round')?.addEventListener('click', () => {
@@ -44,28 +48,29 @@ export async function renderLearn(app, deckId) {
     const boxLabel = st.seen ? `hộp ${st.box}` : 'thẻ mới';
 
     app.innerHTML = `
-      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: `#/deck/${deckId}` }, { label: 'Học khái niệm' }])}
+      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Học khái niệm' }])}
       <div class="session-bar">
         <span>${index + 1} / ${queue.length}</span>
         <span class="dot"></span>
         <span>${esc(boxLabel)}</span>
         <span class="dot"></span>
-        ${sizePicker(size, SIZE_CHOICES, cards.length, 'thẻ của bộ')}
+        ${sizePicker(size, SIZE_CHOICES, cards.length, isAll ? 'thẻ trên toàn kho' : 'thẻ của bộ')}
         <span class="spacer"></span>
-        <a class="btn btn-sm btn-ghost" href="#/deck/${esc(deckId)}">Dừng</a>
+        <a class="btn btn-sm btn-ghost" href="${backHref}">Dừng</a>
       </div>
       ${progressBar(index, queue.length)}
 
       <div class="flash ${flipped ? 'is-flipped' : ''}" id="flash">
         <div class="flash-inner" id="flash-inner">
           <div class="flash-face">
-            <div class="flash-hint">${esc(deck.icon || '')} ${esc(deck.title)}</div>
+            <div class="flash-hint">${esc(c.deckIcon || deck.icon || '')} ${esc(c.deckTitle || deck.title)}</div>
             <div class="flash-term ${c.lang === 'ru-vi' ? 'term-ru' : ''}">${esc(c.head)}</div>
             ${c.translit ? `<div class="translit">[${esc(c.translit)}]</div>` : ''}
             ${c.ipa ? `<div class="translit">${esc(c.ipa)}</div>` : ''}
             <div class="flash-hint">Bấm vào thẻ để lật, hoặc nhấn phím cách.</div>
           </div>
           <div class="flash-face flash-back">
+            <div class="flash-hint">${esc(c.deckIcon || deck.icon || '')} ${esc(c.deckTitle || deck.title)}</div>
             <div>
               <div class="flash-term" style="font-size:clamp(20px,3.6vw,28px)">${esc(c.gloss || c.head)}</div>
               ${c.altEn ? `<div class="flash-sub">${esc(c.altEn)}</div>` : ''}

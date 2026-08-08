@@ -63,6 +63,26 @@ export async function loadAllDecks() {
   return Promise.all(manifest.decks.map((d) => loadDeck(d.id)));
 }
 
+/**
+ * Gop moi bo the thanh mot bo ao de on tong hop.
+ * The da mang san deckTitle va deckIcon nen van biet no den tu bo nao.
+ */
+export async function loadEverything() {
+  const bundles = await loadAllDecks();
+  return {
+    deck: {
+      id: 'all',
+      title: 'Ôn tổng hợp',
+      title_en: 'Mixed review across every deck',
+      icon: '🗓️',
+      lang: 'en-vi',
+      blurb: 'Thẻ đến hạn của mọi bộ, trộn lại thành một lượt.',
+      color: '#6ea8fe'
+    },
+    cards: bundles.flatMap((b) => b.cards)
+  };
+}
+
 export async function loadQuestions(deckId) {
   const manifest = await getManifest();
   const entry = (manifest.quizzes || []).find((q) => q.deck === deckId);
@@ -74,6 +94,13 @@ export async function loadQuestions(deckId) {
     console.warn('Bỏ qua ngân hàng câu hỏi lỗi:', entry.file, err);
     return [];
   }
+}
+
+/** Moi cau hoi viet tay cua moi mon, dung cho bai trac nghiem tong hop. */
+export async function loadAllQuestions() {
+  const manifest = await getManifest();
+  const lists = await Promise.all((manifest.quizzes || []).map((q) => loadQuestions(q.deck)));
+  return lists.flat();
 }
 
 export async function loadSpeakingSet(setId) {

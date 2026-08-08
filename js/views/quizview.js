@@ -1,4 +1,4 @@
-import { loadDeck, loadQuestions } from '../data.js';
+import { loadDeck, loadQuestions, loadEverything, loadAllQuestions } from '../data.js';
 import { buildQuizSet } from '../quiz.js';
 import { recordQuiz, gradeCard, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
 import { esc, crumb, progressBar, scoreRing, sizePicker } from '../ui.js';
@@ -6,8 +6,10 @@ import { esc, crumb, progressBar, scoreRing, sizePicker } from '../ui.js';
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 export async function renderQuiz(app, deckId) {
-  const { deck, cards } = await loadDeck(deckId);
-  const authored = await loadQuestions(deckId);
+  const isAll = deckId === 'all';
+  const { deck, cards } = isAll ? await loadEverything() : await loadDeck(deckId);
+  const authored = isAll ? await loadAllQuestions() : await loadQuestions(deckId);
+  const backHref = isAll ? '#/' : `#/deck/${deckId}`;
   // Kho cau hoi that = cau viet tay cong cau sinh duoc tu tung the.
   const pool = authored.length + cards.length;
   const size = sessionSize('quiz');
@@ -26,7 +28,7 @@ export async function renderQuiz(app, deckId) {
   function finish() {
     const pct = Math.round((right / set.length) * 100);
     app.innerHTML = `
-      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: `#/deck/${deckId}` }, { label: 'Trắc nghiệm' }])}
+      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Trắc nghiệm' }])}
       <div class="done-hero">
         <div class="big">${pct >= 80 ? '🏅' : pct >= 50 ? '📈' : '🧗'}</div>
         <h2>Đúng ${right} trên ${set.length}</h2>
@@ -42,7 +44,7 @@ export async function renderQuiz(app, deckId) {
         <div class="btn-row" style="justify-content:center">
           <button class="btn btn-primary" id="btn-retry">Làm bộ câu khác</button>
           <a class="btn" href="#/learn/${esc(deckId)}">Ôn lại thẻ</a>
-          <a class="btn btn-ghost" href="#/deck/${esc(deckId)}">Về bộ thẻ</a>
+          <a class="btn btn-ghost" href="${backHref}">${isAll ? "Về trang chính" : "Về bộ thẻ"}</a>
         </div>
       </div>`;
     app.querySelector('#btn-retry')?.addEventListener('click', () => renderQuiz(app, deckId));
@@ -54,7 +56,7 @@ export async function renderQuiz(app, deckId) {
     answered = false;
 
     app.innerHTML = `
-      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: `#/deck/${deckId}` }, { label: 'Trắc nghiệm' }])}
+      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Trắc nghiệm' }])}
       <div class="session-bar">
         <span>Câu ${index + 1} / ${set.length}</span>
         <span class="dot"></span>
@@ -63,7 +65,7 @@ export async function renderQuiz(app, deckId) {
         <span class="dot"></span>
         ${sizePicker(size, SIZE_CHOICES, pool, `câu có thể ra, gồm ${authored.length} câu viết tay`)}
         <span class="spacer"></span>
-        <a class="btn btn-sm btn-ghost" href="#/deck/${esc(deckId)}">Dừng</a>
+        <a class="btn btn-sm btn-ghost" href="${backHref}">Dừng</a>
       </div>
       ${progressBar(index, set.length)}
 
@@ -101,7 +103,9 @@ export async function renderQuiz(app, deckId) {
         right += 1;
         if (q.cardId) gradeCard(q.cardId, 'good');
       }
-      recordQuiz(deckId, ok);
+      // Ghi diem vao dung mon cua cau hoi, khong phai vao "all", neu khong
+      // thi bai tong hop se lam hong thong ke cua tung mon.
+      recordQuiz(q.deckId || deckId, ok);
 
       const why = app.querySelector('#why-slot');
       if (q.why || q.why_vi) {
