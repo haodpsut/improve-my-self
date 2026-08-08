@@ -24,6 +24,12 @@ async function readJSON(rel) {
 }
 
 const norm = (s) => String(s || '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, ' ').replace(/\s+/g, ' ').trim();
+
+// Rieng khi so hai LUA CHON co trung nhau khong thi PHAI giu dau cau.
+// Bo the cum tu co nhung cau lay chinh dau noi lam diem phan biet, vi du
+// "follow up email" so voi "follow-up email". Dung norm() o day se gop hai
+// phuong an khac nhau that thanh mot va bao loi oan.
+const normChoice = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
 
 // Cac tu that su khong the dung cuoi cau.
@@ -122,7 +128,7 @@ for (const quiz of manifest.quizzes || []) {
       if (!s) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn rỗng`);
       if (isDangling(s)) fail.push(`${quiz.file}: câu "${q.id}" có lựa chọn kết thúc lửng, "${s.slice(-45)}"`);
     }
-    if (new Set(ch.map(norm)).size !== ch.length) {
+    if (new Set(ch.map(normChoice)).size !== ch.length) {
       fail.push(`${quiz.file}: câu "${q.id}" có hai lựa chọn giống nhau về nội dung`);
     }
     // Giai thich tro theo vi tri se sai ngay khi ai do hoan vi lua chon.
