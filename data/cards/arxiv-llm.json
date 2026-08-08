@@ -1,0 +1,3292 @@
+{
+  "schema": 1,
+  "id": "arxiv-llm",
+  "updated": "2026-08-08",
+  "note": "Soan tu 533 bai arXiv nop tu 27/07/2026 toi 06/08/2026. Moi the deu dan ma arXiv de truy nguoc.",
+  "cards": [
+    {
+      "id": "axl-irreversible-kv-eviction",
+      "en": "Irreversible KV eviction",
+      "vi": "Loại bỏ khoá giá trị không thể lấy lại",
+      "def_en": "Eviction policies drop cache entries permanently, so a token judged unimportant now can never contribute again even if later queries would attend to it.",
+      "def_vi": "Chính sách loại bỏ xoá hẳn mục trong bộ đệm, nên một token bị coi là không quan trọng lúc này sẽ không bao giờ đóng góp lại được. Nhiều nhóm độc lập cùng nêu đây là điểm yếu cấu trúc, không phải suy đoán của một nhóm.",
+      "say": "The trouble with eviction is that the decision is final, and importance is not.",
+      "src": [
+        "2608.05326",
+        "2607.29591",
+        "2608.02901"
+      ],
+      "tags": [
+        "kv-cache",
+        "suy-luan"
+      ]
+    },
+    {
+      "id": "axl-attention-drift",
+      "en": "Attention drift during decoding",
+      "vi": "Trôi chú ý trong lúc sinh",
+      "def_en": "As generated queries evolve, the set of tokens that matter shifts, so a policy calibrated on the prompt becomes wrong later in the trajectory.",
+      "def_vi": "Khi truy vấn sinh ra thay đổi, tập token quan trọng cũng đổi theo, nên chính sách hiệu chỉnh lúc đầu sẽ sai dần về sau. Có ít nhất hai nhóm đo hiện tượng này bằng các chỉ số riêng.",
+      "src": [
+        "2608.05326",
+        "2607.27600"
+      ],
+      "tags": [
+        "kv-cache",
+        "co-che"
+      ],
+      "say": "The token it dropped at step ten is the one it wants at step four hundred."
+    },
+    {
+      "id": "axl-query-agnostic-eviction",
+      "en": "Query-agnostic KV eviction",
+      "vi": "Loại bỏ bộ đệm không phụ thuộc truy vấn",
+      "def_en": "Compressing a context once so the same compressed cache serves arbitrary future queries, which is what agent and document reuse actually need.",
+      "def_vi": "Nén ngữ cảnh một lần rồi dùng lại cho mọi truy vấn về sau, đúng nhu cầu của tác tử và của kho tài liệu. Vài nhóm cùng chỉ ra rằng chất lượng sụp nhanh khi ngân sách siết chặt.",
+      "say": "Query-aware scores are useless when you do not know the query yet.",
+      "src": [
+        "2608.03276",
+        "2608.01247"
+      ],
+      "tags": [
+        "kv-cache",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-kv-restoration",
+      "en": "Learned KV restoration",
+      "vi": "Khôi phục bộ đệm bằng học",
+      "def_en": "Instead of only choosing which entries to keep, a small learned pass reconstructs a compact stand-in for what was thrown away, inside the same budget.",
+      "def_vi": "Thay vì chỉ chọn giữ lại mục nào, một lượt học nhẹ dựng thêm phần thay thế gọn cho những gì đã bỏ, vẫn trong cùng ngân sách. Hai nhóm đi theo hướng này bằng cơ chế khác nhau.",
+      "src": [
+        "2608.01247",
+        "2607.29591"
+      ],
+      "tags": [
+        "kv-cache",
+        "nen"
+      ]
+    },
+    {
+      "id": "axl-residual-attention-mass",
+      "en": "Residual attention mass",
+      "vi": "Phần khối lượng chú ý còn sót",
+      "def_en": "What eviction removes can be written as residual terms in both the numerator and the denominator of softmax attention, so a small residual cache can restore normalisation rather than patch the result afterwards.",
+      "def_vi": "Phần bị loại bỏ có thể viết thành số hạng dư ở cả tử số lẫn mẫu số của softmax, nên một bộ đệm dư nhỏ khôi phục được chuẩn hoá thay vì vá kết quả sau. Đây là cách đặt bài toán của một nhóm, nhưng ý tưởng giữ lại đại diện cho phần bỏ thì nhiều nhóm cùng theo.",
+      "src": [
+        "2607.29591",
+        "2608.02901"
+      ],
+      "tags": [
+        "kv-cache",
+        "toan"
+      ]
+    },
+    {
+      "id": "axl-attention-aware-lowrank",
+      "en": "Attention-aware low-rank KV",
+      "vi": "Nén hạng thấp theo điểm chú ý",
+      "def_en": "Choosing the low-rank basis to preserve attention scores rather than to reconstruct keys, since key reconstruction error is only a proxy for what the model uses.",
+      "def_vi": "Chọn cơ sở hạng thấp sao cho giữ điểm chú ý, thay vì để dựng lại khoá cho khớp, vì sai số dựng khoá chỉ là đại lượng thay thế. Ít nhất ba nhóm cùng chuyển mục tiêu từ đại lượng thay thế sang đại lượng thật.",
+      "say": "Optimise the thing the model reads, not the thing that is easy to measure.",
+      "src": [
+        "2608.03228",
+        "2607.24331",
+        "2608.00528"
+      ],
+      "tags": [
+        "kv-cache",
+        "nen"
+      ]
+    },
+    {
+      "id": "axl-output-aware-objective",
+      "en": "Output-aware compression objective",
+      "vi": "Mục tiêu nén tính theo đầu ra",
+      "def_en": "Measuring compression error after it has propagated through attention and the output projection, instead of measuring it on the cache statistics alone.",
+      "def_vi": "Đo sai số nén sau khi nó đã lan qua chú ý và phép chiếu đầu ra, thay vì đo trên thống kê của bộ đệm. Nhiều nhóm cùng báo cáo rằng sửa mục tiêu ở đây quan trọng hơn sửa thuật toán nén.",
+      "src": [
+        "2608.02691",
+        "2608.04074",
+        "2608.03228"
+      ],
+      "tags": [
+        "kv-cache",
+        "luong-tu-hoa"
+      ],
+      "say": "Measure the error after the output projection, because that is where the model feels it."
+    },
+    {
+      "id": "axl-rotation-kv-quantization",
+      "en": "Rotation-based KV quantization",
+      "vi": "Lượng tử hoá bộ đệm bằng phép quay",
+      "def_en": "Applying an orthogonal transform before quantizing keys and values so that energy is compacted into fewer coordinates, which is what makes very low bit widths survivable.",
+      "def_vi": "Áp một phép biến đổi trực giao trước khi lượng tử hoá khoá và giá trị để dồn năng lượng vào ít toạ độ hơn, nhờ vậy mới sống được ở số bit rất thấp. Hai nhóm cùng chỉ ra rằng quay ngẫu nhiên hoặc Hadamard chỉ cân bằng phương sai chứ không dồn năng lượng.",
+      "say": "A random rotation equalises variance, but you actually want to compact energy.",
+      "src": [
+        "2608.02691",
+        "2608.04074"
+      ],
+      "tags": [
+        "kv-cache",
+        "luong-tu-hoa"
+      ]
+    },
+    {
+      "id": "axl-page-local-summary",
+      "en": "Page-local key summary",
+      "vi": "Bản tóm khoá theo trang",
+      "def_en": "Giving each block of the cache its own compact spectral summary so the decoder can estimate which blocks matter without reading any of their keys.",
+      "def_vi": "Cho mỗi khối bộ đệm một bản tóm phổ riêng để bộ giải mã ước lượng khối nào đáng đọc mà không phải đọc khoá nào cả. Hai nhóm cùng khai thác việc khoá chú ý thấp hạng cục bộ nhưng cao hạng toàn cục.",
+      "src": [
+        "2607.24555",
+        "2607.27692"
+      ],
+      "tags": [
+        "kv-cache",
+        "chu-y-thua"
+      ],
+      "say": "Each page keeps its own basis, so we never read the keys we are not going to use."
+    },
+    {
+      "id": "axl-bandwidth-bound-decoding",
+      "en": "Bandwidth-bound decoding",
+      "vi": "Sinh token bị chặn bởi băng thông",
+      "def_en": "At long context the cost of decoding is dominated by loading the cache, not by computing attention over it, so shrinking bytes matters more than shrinking flops.",
+      "def_vi": "Ở ngữ cảnh dài, chi phí sinh token bị chi phối bởi việc nạp bộ đệm chứ không phải bởi việc tính chú ý, nên giảm byte quan trọng hơn giảm phép nhân. Nhiều nhóm hệ thống lấy đây làm tiền đề thiết kế.",
+      "say": "We are moving bytes, not doing maths, and that changes what to optimise.",
+      "src": [
+        "2608.04074",
+        "2607.24555",
+        "2608.03555"
+      ],
+      "tags": [
+        "kv-cache",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-position-independent-cache",
+      "en": "Position-independent caching",
+      "vi": "Bộ đệm không phụ thuộc vị trí",
+      "def_en": "Compiling a document's cache once so it can be reused at any position in any later prompt, which prefix caching cannot do when order changes.",
+      "def_vi": "Biên dịch bộ đệm của một tài liệu một lần để dùng lại ở bất kỳ vị trí nào trong mọi lời nhắc sau, việc mà bộ đệm theo tiền tố không làm được khi thứ tự thay đổi. Đây là hướng mới, mới có ít nhóm báo kết quả và độ tin cậy còn là vấn đề mở.",
+      "src": [
+        "2607.28069",
+        "2608.01526"
+      ],
+      "tags": [
+        "kv-cache",
+        "he-thong"
+      ],
+      "say": "Prefix caching dies the moment somebody reorders the documents."
+    },
+    {
+      "id": "axl-cross-model-kv-transfer",
+      "en": "Cross-model KV transfer",
+      "vi": "Chuyển bộ đệm giữa các mô hình",
+      "def_en": "Mapping the cache produced by one model into the cache space of another so a routing or cascading system does not repay prefill on every switch.",
+      "def_vi": "Ánh xạ bộ đệm do mô hình này sinh ra sang không gian bộ đệm của mô hình khác để hệ định tuyến không phải trả lại chi phí nạp mỗi lần đổi mô hình. Hai nhóm cùng báo có cấu trúc tuyến tính đáng kể giữa các mô hình cùng họ, nhưng đây vẫn là kết quả sớm.",
+      "say": "If the two caches are that linearly related, a switch need not cost a full prefill.",
+      "src": [
+        "2608.03893",
+        "2607.28979"
+      ],
+      "tags": [
+        "kv-cache",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-selective-kv-transfer",
+      "en": "Selective KV transfer",
+      "vi": "Truyền chọn lọc bộ đệm",
+      "def_en": "In prefill and decode disaggregation the network can saturate before the GPUs do, so only the entries that will actually be read get shipped across nodes.",
+      "def_vi": "Khi tách giai đoạn nạp và giai đoạn sinh ra hai cụm máy, mạng bão hoà trước khi GPU bão hoà, nên chỉ truyền những mục thật sự sẽ được đọc. Nhiều nhóm hệ thống cùng chỉ ra ràng buộc mạng này.",
+      "src": [
+        "2607.28150",
+        "2608.01526"
+      ],
+      "tags": [
+        "kv-cache",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-pooled-memory-tier",
+      "en": "Pooled memory tier for the cache",
+      "vi": "Tầng bộ nhớ gộp cho bộ đệm",
+      "def_en": "Placing the cache in a shared memory pool addressed over CXL, NVLink or a photonic fabric, and putting compute next to it rather than pulling data to the GPU.",
+      "def_vi": "Đặt bộ đệm trong một hồ bộ nhớ chung truy cập qua CXL, NVLink hoặc kết cấu quang, rồi đặt phép tính cạnh dữ liệu thay vì kéo dữ liệu về GPU. Vài nhóm phần cứng cùng theo hướng này nhưng phần lớn còn ở mức mô phỏng hoặc giả lập.",
+      "src": [
+        "2607.27187",
+        "2608.03555",
+        "2608.01526"
+      ],
+      "tags": [
+        "kv-cache",
+        "phan-cung"
+      ]
+    },
+    {
+      "id": "axl-runtime-compression-witness",
+      "en": "Runtime witness for compression error",
+      "vi": "Chứng cứ tại chỗ cho sai số nén",
+      "def_en": "A per-request bound on how far compressed attention can be from exact attention, so a live system can gate compression instead of trusting an offline benchmark average.",
+      "def_vi": "Một cận trên tính theo từng yêu cầu cho khoảng cách giữa chú ý đã nén và chú ý chính xác, để hệ đang chạy tự chặn thay vì tin vào điểm trung bình đo ngoại tuyến. Mới một nhóm dựng được cận có chứng minh, nhưng vấn đề mà nó nêu thì nhiều nhóm cùng thừa nhận.",
+      "say": "An average over a benchmark says nothing about the request you are serving right now.",
+      "src": [
+        "2607.28699",
+        "2608.01631"
+      ],
+      "tags": [
+        "kv-cache",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-accuracy-not-faithfulness",
+      "en": "Accuracy preserved, evidence not",
+      "vi": "Giữ được đáp án nhưng mất chứng cứ",
+      "def_en": "Under cache compression the final answer and the validity of the rationale supporting it can be preserved at different rates, so answer accuracy is not a sufficient check.",
+      "def_vi": "Khi nén bộ đệm, đáp án cuối và tính hợp lệ của lập luận đỡ nó có thể được giữ ở mức khác nhau, nên đo đúng sai của đáp án là chưa đủ. Một nhóm đo trực tiếp điều này trên nhiều phương pháp nén, và một nhóm khác báo hiệu ứng liên quan trên phía sinh token.",
+      "src": [
+        "2608.01631",
+        "2608.04771"
+      ],
+      "tags": [
+        "kv-cache",
+        "danh-gia"
+      ],
+      "say": "The answer survived compression and the reasoning behind it did not."
+    },
+    {
+      "id": "axl-compression-rebound",
+      "en": "Compression rebound in token count",
+      "vi": "Nén xong lại sinh nhiều token hơn",
+      "def_en": "A smaller cache can push a reasoning model to generate more tokens, so part of the memory saving is cancelled on the generation side.",
+      "def_vi": "Bộ đệm nhỏ hơn có thể khiến mô hình lập luận sinh nhiều token hơn, nên một phần khoản tiết kiệm bị triệt tiêu ở phía sinh. Mới một nhóm báo cáo và đề xuất phối hợp hai phía, chưa được lặp lại.",
+      "src": [
+        "2608.04771"
+      ],
+      "tags": [
+        "kv-cache",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-online-compaction",
+      "en": "Online cache compaction for agents",
+      "vi": "Nén bộ đệm trực tuyến cho tác tử",
+      "def_en": "An agent must compress a turn before it knows which future query will need it, and delaying compaction until a real future query exists recovers much of the loss.",
+      "def_vi": "Tác tử phải nén một lượt trước khi biết truy vấn nào sau này cần tới, và hoãn nén đến khi đã có truy vấn thật thì lấy lại được phần lớn chất lượng. Đây là kết quả thực nghiệm của một nhóm, nhưng đặc điểm tải của tác tử thì có nhóm khác đo độc lập.",
+      "say": "Compress too early and you throw away exactly what the next tool call needed.",
+      "src": [
+        "2608.00902",
+        "2608.00101"
+      ],
+      "tags": [
+        "kv-cache",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-sink-and-recent-window",
+      "en": "Sink tokens and the recent window",
+      "vi": "Token neo và cửa sổ gần",
+      "def_en": "The first tokens of a sequence and the most recent ones carry disproportionate weight, so many schemes protect them at higher precision or exempt them from eviction.",
+      "def_vi": "Những token đầu chuỗi và những token gần nhất mang trọng số lớn bất cân xứng, nên nhiều phương pháp giữ chúng ở độ chính xác cao hoặc miễn loại bỏ. Nhiều nhóm cùng dựa trên quan sát này.",
+      "src": [
+        "2607.29076",
+        "2607.27735"
+      ],
+      "tags": [
+        "kv-cache",
+        "co-che"
+      ],
+      "say": "Protect the first few tokens and the last window, then compress everything between."
+    },
+    {
+      "id": "axl-indexer-bottleneck",
+      "en": "Sparse attention indexer bottleneck",
+      "vi": "Nút cổ chai ở bộ chỉ mục chú ý thưa",
+      "def_en": "Once attention itself is sparse, the cost moves to the selector that scores every preceding token to decide what to attend to.",
+      "def_vi": "Khi chú ý đã thưa rồi thì chi phí chuyển sang bộ chọn, vì nó vẫn phải chấm điểm mọi token đứng trước để quyết định đọc gì. Ít nhất hai nhóm cùng chỉ ra và cùng tấn công đúng chỗ này.",
+      "say": "You made attention sparse and now the indexer is the quadratic part.",
+      "src": [
+        "2608.01662",
+        "2607.24593"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-counterfactual-sparsity-audit",
+      "en": "Counterfactual audit of sparsity",
+      "vi": "Kiểm phản thực cho chú ý thưa",
+      "def_en": "Testing what dropping blocks actually changes by replaying matched probe content instead of only reporting benchmark scores after sparsification.",
+      "def_vi": "Kiểm xem việc bỏ khối thật sự thay đổi cái gì bằng cách phát lại nội dung dò đã ghép cặp, thay vì chỉ báo điểm chuẩn sau khi làm thưa. Mới một nhóm dựng quy trình kiểm này, nhưng nó trả lời đúng câu hỏi mà cả mảng đang tránh.",
+      "src": [
+        "2608.01676",
+        "2607.25291"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "danh-gia"
+      ],
+      "say": "Replay a matched probe through the sparse route and see what the decision does."
+    },
+    {
+      "id": "axl-signal-concentration-vs-integration",
+      "en": "Signal concentration versus integration loss",
+      "vi": "Dồn tín hiệu so với mất kết nối",
+      "def_en": "Sparse selectors do keep the blocks that carry the answer, yet dropping the rest severs the cross-block links needed to combine evidence, and the two effects pull opposite ways.",
+      "def_vi": "Bộ chọn thưa vẫn giữ được khối chứa đáp án, nhưng bỏ phần còn lại thì cắt đứt liên kết giữa các khối cần cho việc ghép chứng cứ, và hai hiệu ứng này kéo ngược nhau. Đây là phát hiện của một nhóm, tuy vậy dạng hỏng tương tự đã được nhóm khác quan sát khi nén lời nhắc.",
+      "src": [
+        "2608.01676",
+        "2608.04569"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "ngu-canh-dai"
+      ],
+      "say": "It kept both key blocks and lost the link that joins them."
+    },
+    {
+      "id": "axl-topk-reuse",
+      "en": "Top-K reuse across nearby queries",
+      "vi": "Dùng lại lựa chọn của truy vấn lân cận",
+      "def_en": "Neighbouring decode queries select highly overlapping key sets, so one shared prefix scan can serve a whole group and remove most of the selection cost.",
+      "def_vi": "Các truy vấn kề nhau trong lúc sinh chọn tập khoá chồng lấn rất nhiều, nên một lượt quét tiền tố dùng chung phục vụ được cả nhóm và bỏ được phần lớn chi phí chọn. Hai nhóm cùng khai thác đúng tính chất này.",
+      "say": "Nearby queries look at nearly the same keys, so scan once and share it.",
+      "src": [
+        "2607.27692",
+        "2607.24593"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "co-che"
+      ]
+    },
+    {
+      "id": "axl-proxy-kernel-codesign",
+      "en": "Proxy and kernel co-design",
+      "vi": "Đồng thiết kế bộ ước lượng và nhân tính",
+      "def_en": "Treating the block selector and the GPU kernel as one design, so the selector produces an order the kernel can consume with coalesced memory access.",
+      "def_vi": "Coi bộ chọn khối và nhân tính trên GPU là một thiết kế duy nhất, để bộ chọn sinh ra thứ tự mà nhân tính đọc được liền mạch. Hai nhóm cùng chỉ ra rằng mặt nạ thưa đúng về mặt toán vẫn có thể tệ về mặt truy cập bộ nhớ.",
+      "src": [
+        "2607.25291",
+        "2608.01662"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "phan-cung"
+      ],
+      "say": "A mathematically correct sparse mask can still be a terrible memory access pattern."
+    },
+    {
+      "id": "axl-rope-wavelength-window",
+      "en": "Per-wavelength attention window",
+      "vi": "Cửa sổ chú ý theo bước sóng",
+      "def_en": "Because the rotary embedding decomposes attention into frequency pairs, each pair can be given a distance window proportional to its wavelength, giving an input-independent reduction.",
+      "def_vi": "Vì nhúng vị trí quay tách chú ý thành các cặp tần số, mỗi cặp có thể nhận một cửa sổ khoảng cách tỉ lệ với bước sóng của nó, cho mức giảm không phụ thuộc dữ liệu vào. Mới một nhóm đề xuất, cần lặp lại ở quy mô lớn hơn.",
+      "src": [
+        "2608.02947"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "axl-hashing-attention",
+      "en": "Hashing-based sparse attention",
+      "vi": "Chú ý thưa dựa trên băm",
+      "def_en": "Building compact binary codes from the data so candidate keys can be shortlisted by cheap code comparisons rather than by full scoring.",
+      "def_vi": "Dựng mã nhị phân gọn từ chính dữ liệu để lọc trước khoá ứng viên bằng phép so mã rẻ thay vì chấm điểm đầy đủ. Hướng lọc trước bằng cấu trúc rẻ được nhiều nhóm theo, còn cách băm theo thành phần chính thì mới một nhóm.",
+      "src": [
+        "2608.04405",
+        "2607.27692"
+      ],
+      "tags": [
+        "chu-y-thua",
+        "co-che"
+      ]
+    },
+    {
+      "id": "axl-kv-resident-accelerator",
+      "en": "KV-resident accelerator",
+      "vi": "Bộ tăng tốc chứa sẵn bộ đệm",
+      "def_en": "Splitting a decode step by operation type, leaving weights and dense layers on the GPU while a memory-side device holds the cache and runs everything that reads it.",
+      "def_vi": "Chia một bước sinh theo loại phép tính, để trọng số và lớp dày trên GPU còn thiết bị cạnh bộ nhớ giữ bộ đệm và chạy mọi phép đọc nó. Vài nhóm kiến trúc cùng đề xuất, kết quả chủ yếu từ mô phỏng.",
+      "src": [
+        "2608.03555",
+        "2607.27187"
+      ],
+      "tags": [
+        "phan-cung",
+        "he-thong"
+      ],
+      "say": "Leave the cache where it lives and send the operation to it."
+    },
+    {
+      "id": "axl-moe-scaling-differs",
+      "en": "MoE scaling trends differ by model family",
+      "vi": "Quy luật mở rộng của hỗn hợp chuyên gia khác nhau theo họ",
+      "def_en": "Optimal batch size, learning rate decay and the data to parameter tilt for mixture-of-experts diffusion models were reported to differ quantitatively from the autoregressive trends people quote by habit.",
+      "def_vi": "Kích thước lô tối ưu, tốc độ giảm bước học và tỉ lệ nghiêng giữa dữ liệu và tham số cho mô hình khuếch tán hỗn hợp chuyên gia được báo là khác về lượng so với các quy luật tự hồi quy mà mọi người quen trích. Mới một nhóm công bố, nên hãy coi là cảnh báo chứ chưa phải hằng số.",
+      "say": "Do not assume the autoregressive scaling recipe transfers to a diffusion mixture of experts.",
+      "src": [
+        "2608.03457"
+      ],
+      "tags": [
+        "moe",
+        "mo-rong"
+      ]
+    },
+    {
+      "id": "axl-adaptive-expert-count",
+      "en": "Adaptive per-token expert count",
+      "vi": "Số chuyên gia thay đổi theo token",
+      "def_en": "Replacing fixed top-k routing with a rule that admits experts until some criterion is met, so easy tokens spend less and ambiguous tokens spend more.",
+      "def_vi": "Thay định tuyến chọn cố định bằng luật nhận chuyên gia đến khi đạt một tiêu chí, để token dễ tiêu ít và token mập mờ tiêu nhiều. Ít nhất ba nhóm cùng đề xuất biến thể của ý này trong cùng khoảng thời gian.",
+      "src": [
+        "2608.04401",
+        "2607.26052",
+        "2608.01784"
+      ],
+      "tags": [
+        "moe",
+        "suy-luan"
+      ],
+      "say": "Easy tokens do not need the same number of experts as hard ones."
+    },
+    {
+      "id": "axl-router-as-uncertainty",
+      "en": "Router distribution as an uncertainty signal",
+      "vi": "Phân phối của bộ định tuyến là tín hiệu bất định",
+      "def_en": "A peaked router output means the model is confident about which expert fits, while a flat one means ambiguity, and this is available for free at inference.",
+      "def_vi": "Đầu ra định tuyến nhọn nghĩa là mô hình chắc chắn về chuyên gia phù hợp, còn phẳng nghĩa là mập mờ, và tín hiệu này có sẵn miễn phí lúc chạy. Hai nhóm cùng khai thác đúng tín hiệu này.",
+      "say": "The router already tells you how unsure it is, so read it instead of adding a probe.",
+      "src": [
+        "2607.26052",
+        "2608.04401"
+      ],
+      "tags": [
+        "moe",
+        "bat-dinh"
+      ]
+    },
+    {
+      "id": "axl-expert-subspace-overlap",
+      "en": "Expert subspaces overlap",
+      "vi": "Không gian con của chuyên gia chồng lấn",
+      "def_en": "Co-selected experts do not contribute cleanly distinct directions, so the geometric story that routing works by complementarity is not what the measurements show.",
+      "def_vi": "Các chuyên gia được chọn cùng nhau không đóng góp những hướng tách bạch, nên câu chuyện hình học rằng định tuyến hiệu quả nhờ tính bù trừ không khớp với số đo. Mới một nhóm đo kỹ trên nhiều kiến trúc, nhưng hệ quả thì trùng với nhóm nghiên cứu hợp nhất chuyên gia.",
+      "src": [
+        "2607.28308",
+        "2608.04454"
+      ],
+      "tags": [
+        "moe",
+        "dien-giai"
+      ],
+      "say": "The experts are not as complementary as the geometric story wants them to be."
+    },
+    {
+      "id": "axl-phase-conditioned-experts",
+      "en": "Phase-conditioned expert roles",
+      "vi": "Vai trò chuyên gia theo pha",
+      "def_en": "In a vision-language mixture the image, question and answer phases have different routing distributions, so statistics aggregated over all tokens hide the real roles.",
+      "def_vi": "Trong hỗn hợp chuyên gia thị giác ngôn ngữ, các pha ảnh, câu hỏi và câu trả lời có phân phối định tuyến khác nhau, nên gộp thống kê trên mọi token sẽ che mất vai trò thật. Mới một nhóm chỉ ra cho hợp nhất chuyên gia, một nhóm khác nêu ý tương tự cho mô hình khuếch tán.",
+      "src": [
+        "2608.04454",
+        "2608.01784"
+      ],
+      "tags": [
+        "moe",
+        "da-phuong-thuc"
+      ]
+    },
+    {
+      "id": "axl-expert-merging",
+      "en": "Training-free expert merging",
+      "vi": "Hợp nhất chuyên gia không cần huấn luyện",
+      "def_en": "Collapsing several experts into one to cut the stored pool, judged by whether the merged pair really played the same role rather than by average routing similarity.",
+      "def_vi": "Gộp vài chuyên gia thành một để giảm kho trọng số, xét theo việc cặp được gộp có thật sự cùng vai trò hay không thay vì theo độ giống định tuyến trung bình. Hợp nhất trọng số cũng đang được dùng cho việc quên máy, nên đây là kỹ thuật dùng chung nhiều mục đích.",
+      "src": [
+        "2608.04454",
+        "2608.04548"
+      ],
+      "tags": [
+        "moe",
+        "hop-nhat"
+      ],
+      "say": "If two experts really do play the same role, keep one and drop the other."
+    },
+    {
+      "id": "axl-expert-parallel-imbalance",
+      "en": "Expert-parallel load imbalance",
+      "vi": "Lệch tải khi song song theo chuyên gia",
+      "def_en": "Dynamic routing sends uneven token counts to each rank, and the usual fix of replicating hot experts can cost more in cross-node traffic than it saves in balance.",
+      "def_vi": "Định tuyến động đẩy số token không đều về từng nhánh, và cách chữa quen thuộc là nhân bản chuyên gia nóng có thể tốn lưu lượng liên nút nhiều hơn phần cân bằng thu được. Hai nhóm cùng chỉ ra rằng cân bằng tải và chi phí truyền phải được tối ưu chung.",
+      "say": "Balancing the ranks is easy, paying for the weight movement is the hard part.",
+      "src": [
+        "2608.03676",
+        "2607.26340"
+      ],
+      "tags": [
+        "moe",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-moe-incast",
+      "en": "MoE incast on the fabric",
+      "vi": "Hiện tượng dồn luồng của hỗn hợp chuyên gia",
+      "def_en": "All-to-all expert traffic under round-robin scheduling was reported to create a burst pattern that oversubscribes the network fabric, which proactive rate-based scheduling can prevent.",
+      "def_vi": "Lưu lượng toàn phần giữa các chuyên gia dưới lịch quay vòng được báo là tạo dạng bùng nổ làm quá tải kết cấu mạng, và lập lịch theo tốc độ chủ động ngăn được. Mới một nhóm mạng báo cáo, chủ yếu qua mô phỏng.",
+      "src": [
+        "2607.26340",
+        "2608.03676"
+      ],
+      "tags": [
+        "moe",
+        "mang"
+      ]
+    },
+    {
+      "id": "axl-expert-offloading",
+      "en": "Expert offloading and staging",
+      "vi": "Đẩy chuyên gia ra ngoài và nạp dần",
+      "def_en": "On devices where routed expert weights exceed accelerator memory, experts are staged on demand, which makes the cost of a decode step depend on which experts get touched rather than on token count.",
+      "def_vi": "Trên thiết bị mà trọng số chuyên gia vượt bộ nhớ tăng tốc, chuyên gia được nạp theo nhu cầu, khiến chi phí một bước sinh phụ thuộc vào việc chạm tới chuyên gia nào chứ không phải số token. Nhiều nhóm biên và nhóm phần cứng cùng gặp ràng buộc này.",
+      "src": [
+        "2607.24434",
+        "2608.05303",
+        "2608.02989"
+      ],
+      "tags": [
+        "moe",
+        "bien"
+      ],
+      "say": "On this device the cost is which experts you touch, not how many tokens you produce."
+    },
+    {
+      "id": "axl-expert-union-cost",
+      "en": "Activated expert union",
+      "vi": "Hợp các chuyên gia bị kích hoạt",
+      "def_en": "Verifying several draft tokens in one pass activates the union of the experts every node would pick, so cutting the token workload does not cut the expert traffic proportionally.",
+      "def_vi": "Kiểm nhiều token nháp trong một lượt sẽ kích hoạt hợp của mọi chuyên gia mà từng nút chọn, nên giảm số token không kéo theo giảm lưu lượng chuyên gia tương ứng. Hai nhóm cùng phát hiện sự không tương thích này giữa giải mã đầu cơ và hỗn hợp chuyên gia.",
+      "say": "Token count and activated expert count are different cost measures, and only one of them shrank.",
+      "src": [
+        "2608.02989",
+        "2607.24434"
+      ],
+      "tags": [
+        "moe",
+        "dau-co"
+      ]
+    },
+    {
+      "id": "axl-edge-moe-routing",
+      "en": "Cost-aware routing across edge servers",
+      "vi": "Định tuyến theo chi phí giữa các máy chủ biên",
+      "def_en": "When the selected experts for one token live on different machines, the right routing depends jointly on link bandwidth, compute heterogeneity, load queues and replica precision.",
+      "def_vi": "Khi các chuyên gia được chọn cho một token nằm trên nhiều máy khác nhau, định tuyến đúng phụ thuộc đồng thời vào băng thông liên kết, năng lực tính không đồng nhất, hàng đợi tải và độ chính xác của bản sao. Hai nhóm biên cùng nộp trong tuần này với cách đặt bài toán rất giống nhau.",
+      "src": [
+        "2608.00577",
+        "2608.00573"
+      ],
+      "tags": [
+        "moe",
+        "bien"
+      ]
+    },
+    {
+      "id": "axl-adaptive-depth-exit",
+      "en": "Adaptive depth and early exit",
+      "vi": "Độ sâu thích nghi và thoát sớm",
+      "def_en": "Asking not only which expert to run but whether a layer and everything after it needs to run at all, under a single quality budget.",
+      "def_vi": "Hỏi không chỉ chạy chuyên gia nào mà còn hỏi lớp này và mọi lớp sau nó có cần chạy hay không, dưới một ngân sách chất lượng chung. Ít nhất ba nhóm cùng theo hướng bỏ bớt độ sâu thay vì chỉ bỏ bớt bề rộng.",
+      "src": [
+        "2608.00573",
+        "2607.28966",
+        "2608.05872"
+      ],
+      "tags": [
+        "moe",
+        "suy-luan"
+      ],
+      "say": "Ask not only which expert to run but whether this layer needs to run at all."
+    },
+    {
+      "id": "axl-layer-routing-caution",
+      "en": "Layer routing gains need an answer-blind check",
+      "vi": "Lợi ích của định tuyến lớp phải kiểm khi không biết đáp án",
+      "def_en": "Dynamic routes through layers can raise scores, but under a matched budget random routes matched or beat structured search, and the gain vanished when the procedure could not see the correct answer.",
+      "def_vi": "Định tuyến động qua các lớp có thể nâng điểm, nhưng khi khớp ngân sách thì tuyến ngẫu nhiên bằng hoặc hơn tìm kiếm có cấu trúc, và phần lợi biến mất khi quy trình không được nhìn đáp án đúng. Đây là kết quả kiểm toán của một nhóm và nó mâu thuẫn với cách trình bày của các bài đề xuất định tuyến lớp.",
+      "say": "If the route only helps when the procedure can see the answer, it is not a capability gain.",
+      "src": [
+        "2608.05872",
+        "2608.03219"
+      ],
+      "tags": [
+        "danh-gia",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "axl-moe-breaks-stateless-optimizers",
+      "en": "Routed experts break stateless optimizers",
+      "vi": "Chuyên gia định tuyến làm hỏng tối ưu không trạng thái",
+      "def_en": "Memory-light matrix optimizers that work for dense layers were reported to fail on routed expert matrices, because those gradients are conditional and vary over time.",
+      "def_vi": "Các bộ tối ưu ma trận ít bộ nhớ chạy tốt cho lớp dày được báo là hỏng trên ma trận chuyên gia định tuyến, vì gradient ở đó có điều kiện và biến thiên theo thời gian. Mới một nhóm làm ở quy mô nhỏ, cần lặp lại trước khi tin.",
+      "src": [
+        "2608.04407"
+      ],
+      "tags": [
+        "moe",
+        "toi-uu"
+      ]
+    },
+    {
+      "id": "axl-learned-router-not-always",
+      "en": "A learned router is not automatically better",
+      "vi": "Bộ định tuyến học được không mặc nhiên tốt hơn",
+      "def_en": "At a matched parameter budget a fixed parameter-free routing scheme can match or beat learned routers, which shifts the question from the routing algorithm to the granularity of the training signal.",
+      "def_vi": "Ở cùng ngân sách tham số, một sơ đồ định tuyến cố định không có tham số có thể bằng hoặc hơn bộ định tuyến học được, điều này chuyển câu hỏi từ thuật toán định tuyến sang độ mịn của tín hiệu huấn luyện. Mới một nhóm báo cáo, nhưng khớp với phát hiện rằng không gian chuyên gia chồng lấn.",
+      "src": [
+        "2608.04084",
+        "2607.28308"
+      ],
+      "tags": [
+        "moe",
+        "dien-giai"
+      ],
+      "say": "At a matched parameter budget the fixed routing was not worse, which is worth explaining."
+    },
+    {
+      "id": "axl-speculation-horizon",
+      "en": "Speculation length has an optimum",
+      "vi": "Độ dài đầu cơ có điểm tối ưu",
+      "def_en": "Extending the draft horizon reduces speedup once the marginal acceptance probability falls below the relative drafting cost, so longer is not simply better.",
+      "def_vi": "Kéo dài chân trời nháp làm giảm mức tăng tốc khi xác suất chấp nhận biên tụt dưới chi phí nháp tương đối, nên dài hơn không đơn giản là tốt hơn. Hai nhóm cùng đưa ra phân tích hoặc kết quả theo hướng này.",
+      "say": "Past a point, each extra drafted token costs more than it is likely to save.",
+      "src": [
+        "2607.27735",
+        "2608.05448"
+      ],
+      "tags": [
+        "dau-co",
+        "suy-luan"
+      ]
+    },
+    {
+      "id": "axl-draft-independence",
+      "en": "Block drafters assume conditional independence",
+      "vi": "Bộ nháp theo khối giả định độc lập có điều kiện",
+      "def_en": "Drafters that emit several positions in one pass usually treat those positions as independent, which is brittle when the target is sampled stochastically rather than greedily.",
+      "def_vi": "Bộ nháp sinh nhiều vị trí trong một lượt thường coi các vị trí đó là độc lập, giả định này dễ vỡ khi mô hình đích lấy mẫu ngẫu nhiên chứ không tham lam. Mới một nhóm phân tích trực diện, nhưng vấn đề khớp giữa nháp và đích thì nhiều nhóm cùng nêu.",
+      "src": [
+        "2608.05448",
+        "2607.27269"
+      ],
+      "tags": [
+        "dau-co",
+        "co-che"
+      ]
+    },
+    {
+      "id": "axl-self-speculative-decoding",
+      "en": "Self-speculative decoding",
+      "vi": "Giải mã tự đầu cơ",
+      "def_en": "Using the target model itself, run in a cheaper mode such as with a sparsified cache or a light per-layer head, as its own drafter so no second model has to be hosted.",
+      "def_vi": "Dùng chính mô hình đích chạy ở chế độ rẻ hơn, ví dụ với bộ đệm đã làm thưa hoặc đầu nhẹ theo lớp, làm bộ nháp cho chính nó nên không phải nuôi mô hình thứ hai. Nhiều nhóm cùng theo hướng này, đặc biệt khi bộ nhớ là ràng buộc.",
+      "src": [
+        "2607.27735",
+        "2607.24434"
+      ],
+      "tags": [
+        "dau-co",
+        "suy-luan"
+      ],
+      "say": "The drafter and the target are one model in two modes, so there is nothing extra to host."
+    },
+    {
+      "id": "axl-tree-speculation-hybrid",
+      "en": "Tree speculation on hybrid attention",
+      "vi": "Đầu cơ dạng cây trên chú ý lai",
+      "def_en": "Verification systems built around key value caches do not transfer cleanly to models that mix full attention with a recurrent linear layer, because every proposal node would need its own materialised state.",
+      "def_vi": "Hệ kiểm dựng quanh bộ đệm khoá giá trị không chuyển thẳng sang mô hình trộn chú ý đầy đủ với lớp tuyến tính hồi quy, vì mỗi nút đề xuất sẽ cần trạng thái riêng. Hai nhóm cùng chỉ ra rằng kiến trúc lai buộc phải viết lại phần kiểm.",
+      "src": [
+        "2608.01651",
+        "2607.27269"
+      ],
+      "tags": [
+        "dau-co",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "axl-tool-call-speculation",
+      "en": "Tool-call speculation",
+      "vi": "Đầu cơ lời gọi công cụ",
+      "def_en": "Predicting and pre-executing the agent's next tool call so the wall-clock time spent waiting for the environment can be hidden behind generation.",
+      "def_vi": "Đoán trước và chạy sớm lời gọi công cụ tiếp theo của tác tử để thời gian chờ môi trường được giấu sau quá trình sinh. Hai nhóm cùng nộp trong tuần này với cùng động cơ, cho thấy độ trễ công cụ đang thành nút cổ chai thật.",
+      "say": "Decoding got fast enough that the tool call is now the slow part.",
+      "src": [
+        "2607.25816",
+        "2608.00881"
+      ],
+      "tags": [
+        "dau-co",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-observation-speculation",
+      "en": "Observation speculation",
+      "vi": "Đầu cơ quan sát trả về",
+      "def_en": "Guessing what the environment will return, not just what the agent will ask, and prioritising the guesses by how much latency they would hide rather than by hit rate.",
+      "def_vi": "Đoán cả thứ mà môi trường sẽ trả về chứ không chỉ thứ tác tử sẽ hỏi, và xếp ưu tiên theo lượng độ trễ giấu được thay vì theo tỉ lệ đoán trúng. Mới một nhóm làm cả hai phía, phía hành động thì có nhóm khác làm độc lập.",
+      "src": [
+        "2608.00881",
+        "2607.25816"
+      ],
+      "tags": [
+        "dau-co",
+        "tac-tu"
+      ],
+      "say": "Optimise for time hidden, not for how often the guess was right."
+    },
+    {
+      "id": "axl-speculative-rollouts",
+      "en": "Speculative rollouts under a moving policy",
+      "vi": "Đầu cơ khi chính sách đang thay đổi",
+      "def_en": "Speculative decoding inside reinforcement learning is awkward because the target policy keeps updating, so a static drafter goes stale while frequent drafter updates cost more than they save.",
+      "def_vi": "Giải mã đầu cơ bên trong học tăng cường vướng ở chỗ chính sách đích cứ cập nhật, nên bộ nháp tĩnh sẽ lỗi thời còn cập nhật bộ nháp thường xuyên lại tốn hơn phần tiết kiệm. Mới một nhóm giải quyết trực tiếp, nhưng chi phí sinh rollout thì nhiều nhóm cùng gọi là nút cổ chai.",
+      "src": [
+        "2608.04962",
+        "2607.25816"
+      ],
+      "tags": [
+        "dau-co",
+        "hoc-tang-cuong"
+      ]
+    },
+    {
+      "id": "axl-categorical-critic",
+      "en": "Categorical critic",
+      "vi": "Bộ phê bình dạng phân loại",
+      "def_en": "Training the value head as a classifier over a discretised value support and decoding its expectation, instead of regressing a scalar with mean squared error.",
+      "def_vi": "Huấn luyện đầu giá trị như một bộ phân loại trên miền giá trị đã rời rạc hoá rồi giải mã kỳ vọng, thay vì hồi quy một số vô hướng bằng sai số bình phương. Mới một nhóm kiểm cho mô hình ngôn ngữ, nhưng ý này đã quen ở học tăng cường cổ điển.",
+      "src": [
+        "2608.02181",
+        "2608.03068"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "phan-thuong"
+      ],
+      "say": "Train the value head as a classifier and decode the expectation for the actor."
+    },
+    {
+      "id": "axl-value-variance-signal",
+      "en": "Value variance as an exploration signal",
+      "vi": "Phương sai giá trị làm tín hiệu khám phá",
+      "def_en": "Token-level variance in the estimated value tracks how much intrinsic randomness a rollout carries, and it bounds how large a policy update should be.",
+      "def_vi": "Phương sai theo token của giá trị ước lượng phản ánh mức ngẫu nhiên nội tại của một lượt sinh, và nó chặn độ lớn hợp lý của một bước cập nhật chính sách. Mới một nhóm chứng minh và dùng, nên hãy coi là đề xuất có lý thuyết chứ chưa được lặp lại.",
+      "src": [
+        "2608.03068",
+        "2608.02181"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "co-che"
+      ]
+    },
+    {
+      "id": "axl-generative-reward-mismatch",
+      "en": "Generative reward model mismatch",
+      "vi": "Lệch giữa mô hình thưởng sinh và học tăng cường",
+      "def_en": "Generative reward models are good at ranking responses against each other, but standard policy optimisation wants a scalar score, and forcing one out of the other loses the comparative information.",
+      "def_vi": "Mô hình thưởng dạng sinh giỏi xếp hạng các phản hồi so với nhau, còn tối ưu chính sách chuẩn lại cần một số vô hướng, và ép cái này thành cái kia làm mất thông tin so sánh. Hai nhóm cùng chuyển sang xây thưởng từ thứ hạng tương đối.",
+      "say": "The reward model compares, the algorithm wants a number, and that gap is where the signal dies.",
+      "src": [
+        "2608.06310",
+        "2607.26873"
+      ],
+      "tags": [
+        "phan-thuong",
+        "hoc-tang-cuong"
+      ]
+    },
+    {
+      "id": "axl-policy-lag",
+      "en": "Policy lag from rollout reuse",
+      "vi": "Trễ chính sách do dùng lại lượt sinh",
+      "def_en": "Reusing one batch of rollouts for several learner updates amortises generation cost, but later updates drift off-policy and need a correction that the plain cumulative ratio makes numerically unwieldy.",
+      "def_vi": "Dùng lại một lô lượt sinh cho nhiều bước cập nhật giúp chia đều chi phí sinh, nhưng các bước sau lệch dần khỏi chính sách và cần hiệu chỉnh mà tỉ số tích luỹ thuần làm dải số quá rộng. Hai nhóm cùng coi chi phí sinh là ràng buộc chính của học tăng cường hiện nay.",
+      "src": [
+        "2608.01418",
+        "2608.04962"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "toi-uu"
+      ],
+      "say": "By the fourth inner update that batch is no longer describing our policy."
+    },
+    {
+      "id": "axl-kl-anchor-tradeoff",
+      "en": "The KL anchor trades retention against plasticity",
+      "vi": "Neo KL đánh đổi giữ năng lực và khả năng học",
+      "def_en": "Constraining the whole output distribution toward a reference model preserves old capability but also restricts exploration, which motivates narrowing the constraint to a conditional slice.",
+      "def_vi": "Ràng buộc toàn bộ phân phối đầu ra về mô hình tham chiếu giữ được năng lực cũ nhưng đồng thời bó hẹp khám phá, từ đó nảy ra hướng thu hẹp ràng buộc về một lát cắt có điều kiện. Hai nhóm cùng chỉ ra rằng neo KL không phải lúc nào cũng vô hại.",
+      "src": [
+        "2608.01743",
+        "2608.00301"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "quen"
+      ],
+      "say": "The anchor that protects the old skill is the same one blocking the new one."
+    },
+    {
+      "id": "axl-abstention-collapse",
+      "en": "Abstention collapse",
+      "vi": "Sụp đổ vì được phép từ chối",
+      "def_en": "When abstaining is a discrete action and wrong answers are penalised, a gradient learner can drift toward refusing everything while its mean training reward rises, so the curve reads as improvement while coverage disappears.",
+      "def_vi": "Khi từ chối là một hành động rời rạc và trả lời sai bị phạt, bộ học theo gradient có thể trôi về chỗ từ chối tất cả trong khi phần thưởng huấn luyện trung bình vẫn tăng, nên đường cong trông như tiến bộ còn độ phủ thì biến mất. Mới một nhóm chứng minh điều kiện xảy ra, và đây đúng là dạng báo động giả đáng nhớ.",
+      "say": "The reward curve went up because the model stopped answering, which is the opposite of what we wanted.",
+      "src": [
+        "2608.00301",
+        "2608.05064"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "phan-thuong"
+      ]
+    },
+    {
+      "id": "axl-multi-reward-conflict",
+      "en": "Multi-reward conflict",
+      "vi": "Xung đột giữa nhiều phần thưởng",
+      "def_en": "Optimising several reward terms at once makes the alignment tax worse because the objectives trade off or fight, which destabilises post-training.",
+      "def_vi": "Tối ưu nhiều thành phần thưởng cùng lúc làm khoản thuế căn chỉnh nặng thêm vì các mục tiêu đánh đổi hoặc chống nhau, khiến giai đoạn sau huấn luyện mất ổn định. Hai nhóm cùng chỉ ra và cùng đề nghị tách ở mức chính sách thay vì trộn ở mức thưởng.",
+      "src": [
+        "2607.29246",
+        "2608.03573"
+      ],
+      "tags": [
+        "phan-thuong",
+        "hoc-tang-cuong"
+      ],
+      "say": "Three reward terms and each update is a negotiation between them."
+    },
+    {
+      "id": "axl-mix-policies-not-rewards",
+      "en": "Mix policies, not rewards",
+      "vi": "Trộn chính sách chứ đừng trộn phần thưởng",
+      "def_en": "Instead of combining reward terms into one scalar, keep a separate policy per objective and compose them, which removes the conflict at the point where it is created.",
+      "def_vi": "Thay vì gộp các thành phần thưởng thành một số, giữ riêng một chính sách cho mỗi mục tiêu rồi hợp chúng lại, cách này gỡ xung đột ngay tại nơi nó sinh ra. Mới một nhóm đề xuất, nhưng vấn đề mà nó nhắm tới thì có nhóm khác xác nhận độc lập.",
+      "src": [
+        "2607.29246"
+      ],
+      "tags": [
+        "phan-thuong",
+        "hoc-tang-cuong"
+      ]
+    },
+    {
+      "id": "axl-sft-conflicts-rl-coexists",
+      "en": "SFT conflicts where RL coexists",
+      "vi": "Tinh chỉnh giám sát xung đột còn học tăng cường thì chung sống",
+      "def_en": "In multi-task training, supervised fine-tuning was observed to suffer heavy task interference while reinforcement learning produced sparse and nearly orthogonal updates across tasks.",
+      "def_vi": "Trong huấn luyện đa nhiệm, tinh chỉnh giám sát được quan sát là chịu nhiễu chéo nặng giữa các nhiệm vụ còn học tăng cường lại tạo cập nhật thưa và gần trực giao. Mới một nhóm phân tích cả lý thuyết lẫn thực nghiệm, và đây là loại kết quả nên tự kiểm lại trước khi dựa vào.",
+      "say": "If that holds, the order of supervised and reinforcement stages matters more than we assumed.",
+      "src": [
+        "2608.03573",
+        "2607.29246"
+      ],
+      "tags": [
+        "hau-huan-luyen",
+        "da-nhiem"
+      ]
+    },
+    {
+      "id": "axl-environment-as-dense-signal",
+      "en": "Environment feedback as dense supervision",
+      "vi": "Phản hồi môi trường làm giám sát dày",
+      "def_en": "A multi-turn agent trajectory usually earns one outcome reward, but every action produces an observation, and predicting that observation gives a dense signal for free.",
+      "def_vi": "Một quỹ đạo tác tử nhiều lượt thường chỉ nhận một phần thưởng kết quả, nhưng mỗi hành động đều sinh ra một quan sát, và dự đoán quan sát đó cho tín hiệu dày mà không tốn thêm gì. Nhiều nhóm cùng khai thác quan sát môi trường như nguồn giám sát bổ sung.",
+      "src": [
+        "2607.27973",
+        "2608.04788"
+      ],
+      "tags": [
+        "tac-tu",
+        "hoc-tang-cuong"
+      ],
+      "say": "Every action already produced an observation, so predict it and get dense supervision free."
+    },
+    {
+      "id": "axl-rollouts-not-equal",
+      "en": "Rollouts are not worth the same",
+      "vi": "Các lượt sinh không đáng giá như nhau",
+      "def_en": "Group-based methods usually allocate the same number of rollouts to every task and state, even though some rollouts carry far more learning signal than others.",
+      "def_vi": "Các phương pháp theo nhóm thường cấp cùng số lượt sinh cho mọi nhiệm vụ và mọi trạng thái, dù có lượt mang tín hiệu học nhiều hơn hẳn lượt khác. Nhiều nhóm cùng chuyển sang cấp ngân sách thích nghi, cả trong huấn luyện lẫn lúc suy luận.",
+      "src": [
+        "2608.05080",
+        "2608.03961"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "ngan-sach"
+      ],
+      "say": "Do not spend eight rollouts on a task where the first two already agreed."
+    },
+    {
+      "id": "axl-external-rollouts",
+      "en": "External policy rollouts",
+      "vi": "Lượt sinh từ chính sách ngoài",
+      "def_en": "When on-policy rollouts almost never succeed there is nothing positive to learn from, so higher-reward trajectories from a stronger policy are mixed in, at the cost of length and reward-scale mismatch.",
+      "def_vi": "Khi lượt sinh theo chính sách hiện tại gần như không bao giờ thành công thì không có gì tích cực để học, nên người ta trộn thêm quỹ đạo phần thưởng cao từ chính sách mạnh hơn, đổi lại phải xử lý lệch độ dài và lệch thang thưởng. Mới một nhóm làm cho mô hình khuếch tán, nhưng bài toán thiếu tín hiệu dương thì phổ biến.",
+      "src": [
+        "2608.01717",
+        "2608.05080"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "khuech-tan"
+      ]
+    },
+    {
+      "id": "axl-self-evolving-curriculum",
+      "en": "Self-evolving curriculum",
+      "vi": "Chương trình học tự tiến hoá",
+      "def_en": "A teacher rewrites existing problems into variants that probe the same skills, and the training distribution is updated as the model improves so it does not plateau on a static set.",
+      "def_vi": "Một mô hình giáo viên viết lại bài tập cũ thành biến thể chạm cùng kỹ năng, và phân phối huấn luyện được cập nhật theo đà tiến của mô hình để không dừng ở một tập tĩnh. Nhiều nhóm cùng báo rằng huấn luyện tĩnh chạm trần sớm hơn nhiều so với kỳ vọng.",
+      "say": "The ceiling was in the data distribution, not in the model.",
+      "src": [
+        "2608.01522",
+        "2608.03068"
+      ],
+      "tags": [
+        "du-lieu",
+        "hoc-tang-cuong"
+      ]
+    },
+    {
+      "id": "axl-instruction-conditioned-exploration",
+      "en": "Instruction-conditioned exploration",
+      "vi": "Khám phá theo chỉ dẫn kèm thêm",
+      "def_en": "Appending a small fixed set of instructions to training prompts widens the range of behaviours attempted, then distilling back into the unconditioned policy keeps the coverage without keeping the scaffold.",
+      "def_vi": "Gắn thêm một tập chỉ dẫn cố định nhỏ vào lời nhắc huấn luyện làm rộng dải hành vi được thử, rồi chưng cất ngược về chính sách không điều kiện để giữ độ phủ mà không giữ giàn giáo. Mới một nhóm đề xuất, nhưng khớp với hướng dùng thông tin đặc quyền rồi rút đi.",
+      "src": [
+        "2608.02087",
+        "2608.01522"
+      ],
+      "tags": [
+        "hoc-tang-cuong",
+        "kham-pha"
+      ]
+    },
+    {
+      "id": "axl-opsd",
+      "en": "On-policy self-distillation",
+      "vi": "Tự chưng cất theo chính sách",
+      "def_en": "The same model rescores its own generated tokens under a more informed view, turning a single outcome reward into dense token-level supervision without a separate teacher model.",
+      "def_vi": "Cùng một mô hình chấm lại chính token nó vừa sinh dưới một góc nhìn có nhiều thông tin hơn, biến một phần thưởng kết quả duy nhất thành giám sát dày ở mức token mà không cần mô hình giáo viên riêng. Đây là hướng nổi bật nhất trong dữ liệu tuần này, với rất nhiều nhóm độc lập cùng đề xuất biến thể.",
+      "say": "The teacher and the student are the same weights, only the context differs.",
+      "src": [
+        "2608.06296",
+        "2608.01837",
+        "2608.05802"
+      ],
+      "tags": [
+        "chung-cat",
+        "hau-huan-luyen"
+      ]
+    },
+    {
+      "id": "axl-privileged-teacher-view",
+      "en": "Privileged teacher view",
+      "vi": "Góc nhìn đặc quyền của giáo viên",
+      "def_en": "The teacher is conditioned on information the student will not have at inference, such as the reference solution, the supporting evidence or a future observation.",
+      "def_vi": "Mô hình giáo viên được điều kiện hoá theo thông tin mà học trò sẽ không có lúc chạy thật, ví dụ lời giải mẫu, chứng cứ hỗ trợ hoặc quan sát trong tương lai. Nhiều nhóm cùng dùng cấu trúc này với các loại đặc quyền khác nhau.",
+      "src": [
+        "2608.01589",
+        "2608.01359",
+        "2608.01735"
+      ],
+      "tags": [
+        "chung-cat",
+        "co-che"
+      ],
+      "say": "The teacher sees the reference solution and the student never will."
+    },
+    {
+      "id": "axl-privilege-illusion",
+      "en": "Privilege illusion",
+      "vi": "Ảo giác đặc quyền",
+      "def_en": "The student learns behaviour that only makes sense when the privileged information is present, then acts at inference as if it were still there, which degrades rather than helps.",
+      "def_vi": "Học trò học hành vi chỉ hợp lý khi có thông tin đặc quyền, rồi lúc chạy thật vẫn hành xử như thể thông tin đó còn đó, khiến kết quả xấu đi chứ không tốt lên. Nhiều nhóm cùng nêu dạng hỏng này, đây là mặt trái đã được nhận diện của tự chưng cất.",
+      "say": "The student is answering a question it can no longer see.",
+      "src": [
+        "2608.01735",
+        "2608.04788"
+      ],
+      "tags": [
+        "chung-cat",
+        "loi"
+      ]
+    },
+    {
+      "id": "axl-more-privilege-not-better",
+      "en": "More privileged information is not better",
+      "vi": "Nhiều đặc quyền hơn không có nghĩa tốt hơn",
+      "def_en": "Handing the teacher the full solution can make the targets depend on reference-specific detail, and replacing it with structural guidance about goals and constraints was reported to work better.",
+      "def_vi": "Đưa cho giáo viên toàn bộ lời giải có thể khiến mục tiêu phụ thuộc vào chi tiết riêng của lời giải đó, và thay bằng chỉ dẫn cấu trúc về mục tiêu và ràng buộc được báo là tốt hơn. Hai nhóm cùng đi tới kết luận rằng phải cắt bớt đặc quyền chứ không phải tăng.",
+      "src": [
+        "2608.01589",
+        "2608.01263"
+      ],
+      "tags": [
+        "chung-cat",
+        "co-che"
+      ],
+      "say": "Give the teacher the structure of the problem, not the finished solution."
+    },
+    {
+      "id": "axl-replay-scaffold-confound",
+      "en": "Replay scaffold confound",
+      "vi": "Nhiễu do giàn giáo phát lại",
+      "def_en": "When the privileged view is built by replaying future observations, the scaffold itself shifts token scores, so the measured teacher support mixes real information with an artefact of the replay.",
+      "def_vi": "Khi góc nhìn đặc quyền được dựng bằng cách phát lại quan sát tương lai, chính giàn giáo đó cũng làm lệch điểm token, nên phần ủng hộ đo được của giáo viên trộn lẫn thông tin thật với hiện vật của phép phát lại. Mới một nhóm tách được nhiễu này, và đây là loại lỗi nhân quả rất dễ bỏ sót.",
+      "say": "Part of what looked like teacher signal was just the shape of the replay prompt.",
+      "src": [
+        "2608.04788",
+        "2608.01837"
+      ],
+      "tags": [
+        "chung-cat",
+        "nhan-qua"
+      ]
+    },
+    {
+      "id": "axl-unsupervised-self-distillation",
+      "en": "Self-distillation without external supervision",
+      "vi": "Tự chưng cất không cần giám sát ngoài",
+      "def_en": "Building the teacher target from the model's own agreement across samples, such as a majority pseudo-solution above a consistency threshold, so no labels or stronger model are needed.",
+      "def_vi": "Dựng mục tiêu giáo viên từ chính mức đồng thuận giữa các mẫu của mô hình, ví dụ lấy lời giải giả theo đa số vượt ngưỡng nhất quán, nên không cần nhãn cũng không cần mô hình mạnh hơn. Hai nhóm cùng theo hướng tự dựng thưởng ở mức nội tại.",
+      "src": [
+        "2608.06296",
+        "2607.26873"
+      ],
+      "tags": [
+        "chung-cat",
+        "khong-giam-sat"
+      ]
+    },
+    {
+      "id": "axl-distil-what-student-can-see",
+      "en": "Distil only what the student can represent",
+      "vi": "Chỉ chưng cất phần học trò biểu diễn được",
+      "def_en": "Teacher corrections that depend on a distinction the compact student cannot encode are not realisable, and pushing the target toward the full teacher distribution was reported to make downstream results worse.",
+      "def_vi": "Những chỉnh sửa của giáo viên phụ thuộc vào phân biệt mà học trò gọn không mã hoá được thì không hiện thực hoá được, và đẩy mục tiêu về phân phối đầy đủ của giáo viên được báo là làm kết quả xấu đi. Mới một nhóm đo trên mô hình thị giác ngôn ngữ, nhưng logic khớp với nhóm bàn về đặc quyền.",
+      "src": [
+        "2608.01263",
+        "2608.01589"
+      ],
+      "tags": [
+        "chung-cat",
+        "da-phuong-thuc"
+      ],
+      "say": "A correction the student cannot represent is not a target, it is noise."
+    },
+    {
+      "id": "axl-offline-topk-logits",
+      "en": "Offline top-K logit distillation",
+      "vi": "Chưng cất từ đỉnh logit lưu sẵn",
+      "def_en": "Caching the teacher's top few logits once and training against the cache removes the teacher from memory during training, at similar loss to running it online.",
+      "def_vi": "Lưu sẵn vài logit cao nhất của giáo viên một lần rồi huấn luyện dựa vào bộ lưu đó giúp bỏ hẳn giáo viên khỏi bộ nhớ trong lúc huấn luyện, với mức mất mát tương đương chạy trực tuyến. Mới một nhóm báo cáo dạng nghiên cứu thực hành, nhưng kỹ thuật thì đơn giản và dễ kiểm.",
+      "src": [
+        "2608.03796",
+        "2608.02975"
+      ],
+      "tags": [
+        "chung-cat",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-reasoning-pivot",
+      "en": "Reasoning pivot",
+      "vi": "Điểm xoay của lập luận",
+      "def_en": "Inside a reasoning trace, a few decisions advance or redirect the argument while the rest is surface text, and concentrating supervision on those pivots helps cross-lingual transfer.",
+      "def_vi": "Bên trong một vệt lập luận, chỉ vài quyết định đẩy hoặc bẻ hướng lập luận còn lại là chữ bề mặt, và dồn giám sát vào các điểm xoay đó giúp chuyển giao giữa các ngôn ngữ. Mới một nhóm định nghĩa được điểm xoay bằng cách đo, nhóm khác cùng làm chưng cất đa ngữ nhưng không tách pivot.",
+      "src": [
+        "2608.06347",
+        "2608.05802"
+      ],
+      "tags": [
+        "chung-cat",
+        "da-ngu"
+      ],
+      "say": "Only a handful of steps actually redirect the argument, so put the supervision there."
+    },
+    {
+      "id": "axl-outcome-verified-teacher",
+      "en": "Outcome-verified teacher supervision",
+      "vi": "Giám sát của giáo viên được kiểm bằng kết quả",
+      "def_en": "Requiring the teacher's preferred action to be confirmed by an environment outcome before it is used as a target, rather than trusting the teacher's score alone.",
+      "def_vi": "Bắt hành động mà giáo viên ưa thích phải được kết quả từ môi trường xác nhận trước khi dùng làm mục tiêu, thay vì tin vào điểm của giáo viên. Hai nhóm cùng chuyển từ chấm điểm sang xác nhận bằng hành động thật.",
+      "say": "A teacher score is a preference, an environment result is evidence.",
+      "src": [
+        "2607.27937",
+        "2608.01359"
+      ],
+      "tags": [
+        "tac-tu",
+        "chung-cat"
+      ]
+    },
+    {
+      "id": "axl-test-time-scaling-regimes",
+      "en": "Three regimes of test-time scaling",
+      "vi": "Ba chế độ của mở rộng lúc chạy",
+      "def_en": "Extending one trajectory, sampling complete candidates and aggregating them, and searching over unfinished partial states are structurally different procedures with different failure modes.",
+      "def_vi": "Kéo dài một quỹ đạo, lấy mẫu nhiều lời giải hoàn chỉnh rồi tổng hợp, và tìm kiếm trên các trạng thái dở dang là ba thủ tục khác nhau về cấu trúc và có dạng hỏng khác nhau. Mới một nhóm hệ thống hoá, nhưng việc gộp chúng vào một con số ngân sách thì rõ ràng đang gây nhầm lẫn.",
+      "src": [
+        "2608.04001",
+        "2608.03961"
+      ],
+      "tags": [
+        "suy-luan",
+        "danh-gia"
+      ],
+      "say": "Say which regime you used, because those three are not the same procedure."
+    },
+    {
+      "id": "axl-budget-not-one-number",
+      "en": "Compute budget is not one number",
+      "vi": "Ngân sách tính không phải một con số",
+      "def_en": "Reporting accuracy without the inference protocol that produced it makes results incomparable, because two methods at the same nominal budget do very different work.",
+      "def_vi": "Báo độ chính xác mà không kèm giao thức suy luận đã sinh ra nó khiến kết quả không so được, vì hai phương pháp ở cùng ngân sách danh nghĩa làm những việc rất khác nhau. Nhiều nhóm cùng nhấn mạnh việc phải khớp ngân sách và khớp nỗ lực tối ưu khi so sánh.",
+      "say": "Same budget on paper, completely different work in practice.",
+      "src": [
+        "2608.04001",
+        "2608.00685"
+      ],
+      "tags": [
+        "danh-gia",
+        "suy-luan"
+      ]
+    },
+    {
+      "id": "axl-adaptive-sampling-budget",
+      "en": "Per-query adaptive sampling budget",
+      "vi": "Ngân sách lấy mẫu thích nghi theo câu hỏi",
+      "def_en": "Deciding how many samples a prompt deserves from interpretable signals such as estimated difficulty and model confidence, instead of spending the same amount on every prompt.",
+      "def_vi": "Quyết định một lời nhắc đáng bao nhiêu mẫu dựa trên tín hiệu đọc được như độ khó ước lượng và độ tự tin của mô hình, thay vì tiêu như nhau cho mọi lời nhắc. Nhiều nhóm cùng theo hướng này, cả bằng bộ điều khiển ngoài lẫn bằng chính sách học được.",
+      "src": [
+        "2608.03961",
+        "2607.28457"
+      ],
+      "tags": [
+        "suy-luan",
+        "ngan-sach"
+      ],
+      "say": "Spend two samples on the easy prompt and twenty on the one it is unsure about."
+    },
+    {
+      "id": "axl-refine-over-resample",
+      "en": "Refining over resampling",
+      "vi": "Chỉnh sửa thay vì lấy mẫu thêm",
+      "def_en": "Wider sampling gives diminishing returns because new rollouts repeat existing answer patterns, so spending the extra compute on repairing each candidate can pay better than drawing more.",
+      "def_vi": "Lấy mẫu rộng hơn cho lợi ích giảm dần vì lượt sinh mới lặp lại các dạng đáp án đã có, nên tiêu phần tính thêm vào việc sửa từng ứng viên có thể lợi hơn là rút thêm mẫu. Hai nhóm cùng báo rằng chiều sâu và quy tắc quyết định thắng chiều rộng trong bối cảnh của họ.",
+      "src": [
+        "2608.05643",
+        "2607.27564"
+      ],
+      "tags": [
+        "suy-luan",
+        "lap-luan"
+      ],
+      "say": "The tenth sample repeated the first, so repair it instead of drawing an eleventh."
+    },
+    {
+      "id": "axl-orchestration-modest",
+      "en": "Orchestration gains shrink against tuned baselines",
+      "vi": "Lợi ích của điều phối co lại khi baseline được tinh chỉnh",
+      "def_en": "When self-refine, best-of-N and debate are each given the same optimisation effort as the single-call baseline, the improvement over an optimised chain of thought was moderate and benchmark dependent.",
+      "def_vi": "Khi tự chỉnh, chọn tốt nhất trong N và tranh luận đều được cấp cùng công sức tối ưu như baseline gọi một lần, phần cải thiện so với chuỗi suy nghĩ đã tối ưu là vừa phải và phụ thuộc bộ đo. Hai nhóm cùng cảnh báo rằng so sánh không khớp nỗ lực đã thổi phồng giá trị của điều phối.",
+      "say": "Once you optimise the single-call baseline with the same budget, the orchestration edge gets small.",
+      "src": [
+        "2608.00685",
+        "2607.27564"
+      ],
+      "tags": [
+        "danh-gia",
+        "da-tac-tu"
+      ]
+    },
+    {
+      "id": "axl-scaling-changes-failure-modes",
+      "en": "Extra compute changes the failure mode",
+      "vi": "Thêm tính toán làm đổi dạng hỏng",
+      "def_en": "For constrained local agents, adding inference compute often gives diminishing returns while shifting where the agent breaks, so a flat accuracy number hides what happened.",
+      "def_vi": "Với tác tử cục bộ bị hạn chế tài nguyên, thêm tính toán lúc chạy thường cho lợi ích giảm dần trong khi làm đổi chỗ tác tử hỏng, nên một con số độ chính xác phẳng che mất chuyện đã xảy ra. Nhiều nhóm cùng nhắc rằng phải phân tích dạng hỏng chứ không chỉ điểm tổng.",
+      "src": [
+        "2607.28573",
+        "2608.00685"
+      ],
+      "tags": [
+        "tac-tu",
+        "suy-luan"
+      ]
+    },
+    {
+      "id": "axl-format-repair-illusion",
+      "en": "Format repair posing as self-correction",
+      "vi": "Sửa định dạng đội lốt tự sửa lỗi",
+      "def_en": "Accuracy gains after a revision pass can come from the answer becoming parseable rather than from the reasoning improving, and at small to mid scale the format effect was found to exceed the content effect.",
+      "def_vi": "Phần tăng độ chính xác sau một lượt sửa có thể đến từ việc đáp án trở nên bóc tách được chứ không phải từ lập luận tốt lên, và ở quy mô nhỏ tới trung, hiệu ứng định dạng được đo là lớn hơn hiệu ứng nội dung. Mới một nhóm tách được hai phần này, và đây là bẫy đo lường rất dễ mắc.",
+      "say": "Half of that self-correction gain was the parser finally finding a number.",
+      "src": [
+        "2608.04355",
+        "2608.04899"
+      ],
+      "tags": [
+        "danh-gia",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-dynamic-exit-reasoning",
+      "en": "Dynamic exit from a reasoning trace",
+      "vi": "Thoát sớm khỏi vệt lập luận",
+      "def_en": "Estimating whether the prefix already suffices for a correct answer and stopping there, using ordinary reasoning boundaries rather than only explicit expressions of self-doubt.",
+      "def_vi": "Ước lượng xem phần đã sinh có đủ để trả lời đúng chưa rồi dừng ở đó, dựa vào ranh giới lập luận thông thường chứ không chỉ dựa vào những câu tự nghi ngờ hiện rõ. Hai nhóm cùng chỉ ra rằng phần lớn phần đuôi là kiểm lại và sửa lặp thừa.",
+      "src": [
+        "2607.28966",
+        "2608.03401"
+      ],
+      "tags": [
+        "suy-luan",
+        "lap-luan"
+      ],
+      "say": "Most of that trace was rechecking work it had already finished."
+    },
+    {
+      "id": "axl-shorter-is-not-cheaper-thinking",
+      "en": "A shorter trace may only mean stopping sooner",
+      "vi": "Vệt ngắn hơn có thể chỉ là dừng sớm hơn",
+      "def_en": "Prompts and trained effort settings do shorten reasoning, but at matched token limits the accuracy change was small and mixed, so a shorter trace is not evidence of more efficient thinking.",
+      "def_vi": "Lời nhắc và các mức nỗ lực đã huấn luyện đúng là làm vệt lập luận ngắn lại, nhưng khi khớp giới hạn token thì thay đổi độ chính xác nhỏ và không nhất quán, nên vệt ngắn không chứng minh là suy nghĩ hiệu quả hơn. Mới một nhóm đo có ghép cặp, nhưng thiết kế của họ đúng chuẩn cần dùng.",
+      "src": [
+        "2608.03401",
+        "2607.28966"
+      ],
+      "tags": [
+        "danh-gia",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-difficulty-without-rollouts",
+      "en": "Predicting difficulty without rollouts",
+      "vi": "Đoán độ khó mà không phải chạy thử",
+      "def_en": "Estimating how likely an agent is to succeed from the task description alone, so benchmarks can be calibrated and curricula built without paying for trial runs.",
+      "def_vi": "Ước lượng khả năng thành công của tác tử chỉ từ mô tả nhiệm vụ, để hiệu chỉnh bộ đo và dựng chương trình học mà không phải trả tiền chạy thử. Mới một nhóm khảo sát trên nhiều bộ đo tác tử, và họ cũng chỉ ra rằng chỉ số diện tích dưới đường cong che mất ước lượng độ khó tồi.",
+      "src": [
+        "2608.05797",
+        "2608.03961"
+      ],
+      "tags": [
+        "danh-gia",
+        "tac-tu"
+      ],
+      "say": "Estimate the difficulty from the task text before paying for a single rollout."
+    },
+    {
+      "id": "axl-replica-vs-structural-parallelism",
+      "en": "Replica versus structural parallelism",
+      "vi": "Song song bản sao so với song song cấu trúc",
+      "def_en": "A multi-agent system can run several complete solution paths at once or decompose one path and run its parts concurrently, and the two choices trade accuracy against latency differently.",
+      "def_vi": "Hệ nhiều tác tử có thể chạy song song vài đường giải hoàn chỉnh, hoặc tách một đường giải rồi chạy song song các phần của nó, và hai lựa chọn đánh đổi độ chính xác với độ trễ theo cách khác nhau. Mới một nhóm phân loại rõ, nhưng phân cấp điều phối viên và tác tử con thì nhiều nhóm cùng dùng.",
+      "src": [
+        "2608.05791",
+        "2607.25090"
+      ],
+      "tags": [
+        "da-tac-tu",
+        "suy-luan"
+      ]
+    },
+    {
+      "id": "axl-zero-token-memory",
+      "en": "Zero-token memory operations",
+      "vi": "Thao tác bộ nhớ không tốn token",
+      "def_en": "Organising an agent's memory with encoders and graph structure so that no step outside the final answer consumes model tokens, since memory upkeep by extra model calls is a recurring hidden cost.",
+      "def_vi": "Tổ chức bộ nhớ của tác tử bằng bộ mã hoá và cấu trúc đồ thị để không bước nào ngoài câu trả lời cuối tiêu token của mô hình, vì việc bảo trì bộ nhớ bằng các lời gọi phụ là khoản chi ngầm lặp lại. Nhiều nhóm cùng nêu chi phí này, đây là nhóm đẩy tới cực đoan nhất.",
+      "say": "Every memory write that costs a model call is a tax you pay forever.",
+      "src": [
+        "2607.29377",
+        "2607.27415"
+      ],
+      "tags": [
+        "tac-tu",
+        "bo-nho"
+      ]
+    },
+    {
+      "id": "axl-type-conditioned-decay",
+      "en": "Type-conditioned memory decay",
+      "vi": "Suy giảm bộ nhớ theo loại nội dung",
+      "def_en": "Different kinds of stored fact stay valid for very different lengths of time, so a memory store needs a per-item perishability estimate rather than one retention rule.",
+      "def_vi": "Các loại dữ kiện lưu lại có thời hạn đúng rất khác nhau, nên kho bộ nhớ cần ước lượng độ mau hỏng cho từng mục thay vì một luật lưu giữ chung. Hai nhóm cùng chỉ ra rằng bộ nhớ không cập nhật sẽ âm thầm làm bẩn ngữ cảnh truy xuất.",
+      "src": [
+        "2608.04746",
+        "2608.00967"
+      ],
+      "tags": [
+        "tac-tu",
+        "bo-nho"
+      ],
+      "say": "A phone number stays true for years and a meeting room stays true for an hour."
+    },
+    {
+      "id": "axl-analytic-memory",
+      "en": "Analytic memory",
+      "vi": "Bộ nhớ để tính toán",
+      "def_en": "Memory that supports filtering, aggregation, ranking and temporal comparison over accumulated observations, as opposed to retrieval memory that only returns relevant passages.",
+      "def_vi": "Bộ nhớ hỗ trợ lọc, tổng hợp, xếp hạng và so sánh theo thời gian trên các quan sát tích luỹ, khác với bộ nhớ truy xuất chỉ trả về đoạn liên quan. Mới một nhóm đặt tên và hình thức hoá, nhưng nhu cầu tính trên lịch sử thì nhiều hệ tác tử đều gặp.",
+      "src": [
+        "2607.29440",
+        "2608.04746"
+      ],
+      "tags": [
+        "tac-tu",
+        "bo-nho"
+      ]
+    },
+    {
+      "id": "axl-memory-provenance",
+      "en": "Memory with provenance and revision",
+      "vi": "Bộ nhớ có nguồn gốc và có sửa đổi",
+      "def_en": "Storing each memory as an evolving trajectory with immutable snapshots and explicit add, revise and deprecate operations, so you can see how a claim originated and when it went stale.",
+      "def_vi": "Lưu mỗi mẩu nhớ như một quỹ đạo tiến hoá gồm ảnh chụp bất biến kèm các thao tác thêm, sửa và loại bỏ tường minh, để nhìn được một khẳng định ra đời thế nào và lỗi thời khi nào. Hai nhóm cùng nhấn mạnh việc ghi nguồn thay vì ghi đè trạng thái.",
+      "src": [
+        "2608.00967",
+        "2607.29440"
+      ],
+      "tags": [
+        "tac-tu",
+        "bo-nho"
+      ],
+      "say": "I want to see where that claim came from and when it stopped being true."
+    },
+    {
+      "id": "axl-memory-staleness",
+      "en": "Memory staleness",
+      "vi": "Bộ nhớ lỗi thời",
+      "def_en": "A persistent memory claim can contradict a fresh observation, and models were found to flag such conflicts reliably from text yet fail badly on the same grids presented as images.",
+      "def_vi": "Một khẳng định trong bộ nhớ lâu dài có thể mâu thuẫn với quan sát mới, và các mô hình được đo là phát hiện xung đột khá tốt qua văn bản nhưng hỏng nặng trên cùng dữ liệu ở dạng ảnh. Mới một nhóm đo, và nó nhắc rằng giải được bằng chữ không chứng minh có nền thị giác.",
+      "say": "It reads the conflict correctly in text and walks straight into it when the same thing is a picture.",
+      "src": [
+        "2608.04574",
+        "2608.04746"
+      ],
+      "tags": [
+        "tac-tu",
+        "da-phuong-thuc"
+      ]
+    },
+    {
+      "id": "axl-hidden-state-memory",
+      "en": "Hidden states as memory",
+      "vi": "Trạng thái ẩn dùng làm bộ nhớ",
+      "def_en": "Reusing previously computed internal representations instead of re-encoding text, so past context costs a fixed read rather than a growing prefill.",
+      "def_vi": "Dùng lại biểu diễn nội tại đã tính thay vì mã hoá lại văn bản, để ngữ cảnh cũ chỉ tốn một phép đọc cố định thay vì một lượt nạp ngày càng lớn. Nhiều nhóm cùng theo hướng này với cơ chế khác nhau, đây đang là hướng mạnh.",
+      "src": [
+        "2607.29032",
+        "2607.28263",
+        "2608.02560"
+      ],
+      "tags": [
+        "bo-nho",
+        "ngu-canh-dai"
+      ],
+      "say": "The representation is already computed, so read it instead of re-encoding the text."
+    },
+    {
+      "id": "axl-dual-polarity-memory",
+      "en": "Recording failures as well as successes",
+      "vi": "Ghi cả thất bại chứ không chỉ thành công",
+      "def_en": "Keeping the directions that did not work alongside the verified corrections, so later episodes avoid rediscovering the same dead ends.",
+      "def_vi": "Giữ lại cả những hướng đã không chạy được bên cạnh các chỉnh sửa đã được xác nhận, để các lần sau không phải tự khám phá lại cùng những ngõ cụt. Hai nhóm cùng chỉ ra rằng thất bại có thông tin và thường bị vứt đi.",
+      "src": [
+        "2608.05906",
+        "2607.29468"
+      ],
+      "tags": [
+        "tac-tu",
+        "bo-nho"
+      ]
+    },
+    {
+      "id": "axl-memory-instead-of-search",
+      "en": "Memory instead of repeated search",
+      "vi": "Bộ nhớ thay cho tìm kiếm lặp lại",
+      "def_en": "Inference-time search is stateless by default, so an agent redoes work it already did, and an episodic memory turns that repeated search into a lookup.",
+      "def_vi": "Tìm kiếm lúc chạy mặc định là không trạng thái, nên tác tử làm lại việc nó đã làm, còn bộ nhớ tình tiết biến phần tìm kiếm lặp đó thành một phép tra. Hai nhóm cùng đặt bài toán ở chỗ giao giữa mở rộng lúc chạy và bộ nhớ.",
+      "src": [
+        "2607.27415",
+        "2608.01285"
+      ],
+      "tags": [
+        "tac-tu",
+        "bo-nho"
+      ]
+    },
+    {
+      "id": "axl-skill-contamination",
+      "en": "Skill contamination",
+      "vi": "Ô nhiễm kho kỹ năng",
+      "def_en": "Past a critical library size, newly distilled skills start to hurt, because a defective skill becomes reference material for later skills and forms contamination chains.",
+      "def_vi": "Vượt một cỡ kho tới hạn, kỹ năng mới chưng cất bắt đầu làm hại thay vì giúp, vì một kỹ năng lỗi trở thành tài liệu tham chiếu cho các kỹ năng sau và tạo chuỗi lây nhiễm. Mới một nhóm hình thức hoá thành chuyển pha, nhưng nhóm khác cũng đo được rằng tiến hoá kỹ năng rất thưa và hay hỏng.",
+      "say": "One bad skill becomes the reference for the next ten, and rolling it back does not undo them.",
+      "src": [
+        "2608.05810",
+        "2608.02636"
+      ],
+      "tags": [
+        "tac-tu",
+        "ky-nang"
+      ]
+    },
+    {
+      "id": "axl-pre-commit-gating",
+      "en": "Pre-commit skill admission",
+      "vi": "Kiểm trước khi nạp kỹ năng",
+      "def_en": "Because removing a bad skill after the fact does not erase what its descendants inherited, admission has to be gated before the skill enters the decision context.",
+      "def_vi": "Vì gỡ một kỹ năng hỏng sau đó không xoá được thứ mà các kỹ năng con đã thừa hưởng, việc kết nạp phải bị chặn trước khi kỹ năng vào ngữ cảnh quyết định. Mới một nhóm chứng minh tính không thể đảo ngược, nhưng hệ quả thực hành thì rất rõ.",
+      "src": [
+        "2608.05810",
+        "2608.02636"
+      ],
+      "tags": [
+        "tac-tu",
+        "ky-nang"
+      ]
+    },
+    {
+      "id": "axl-skill-evolution-sparse",
+      "en": "Self-evolution is sparse",
+      "vi": "Tiến hoá tự thân diễn ra rất thưa",
+      "def_en": "In a controlled multi-round study only a small minority of candidate skill revisions ever became a validated best, so most of the evolution budget produced nothing.",
+      "def_vi": "Trong một nghiên cứu nhiều vòng có kiểm soát, chỉ một phần rất nhỏ các bản sửa kỹ năng ứng viên trở thành bản tốt nhất được thẩm định, nên phần lớn ngân sách tiến hoá không sinh ra gì. Mới một nhóm đo có kiểm soát, và kết quả này nên làm dịu kỳ vọng về tác tử tự cải tiến.",
+      "src": [
+        "2608.02636",
+        "2608.03874"
+      ],
+      "tags": [
+        "tac-tu",
+        "ky-nang"
+      ]
+    },
+    {
+      "id": "axl-context-explains-skill-gain",
+      "en": "Context can explain the apparent skill gain",
+      "vi": "Ngữ cảnh có thể giải thích phần lợi tưởng là do kỹ năng",
+      "def_en": "Plain in-context learning performed comparably to explicit skill maintenance on average, suggesting much of the improvement comes from adaptation to prior context rather than from reusable skills.",
+      "def_vi": "Học trong ngữ cảnh thuần cho kết quả trung bình ngang với việc duy trì kho kỹ năng tường minh, cho thấy phần lớn cải thiện đến từ việc thích nghi với ngữ cảnh trước đó chứ không từ kỹ năng dùng lại được. Mới một nhóm dựng phép so này, nhưng nó đúng là kiểm chứng đối chứng mà mảng này đang thiếu.",
+      "say": "Before crediting the skill library, check whether plain context does the same thing.",
+      "src": [
+        "2608.03874",
+        "2608.02636"
+      ],
+      "tags": [
+        "tac-tu",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-progressive-disclosure",
+      "en": "Progressive disclosure of skills",
+      "vi": "Hé lộ dần nội dung kỹ năng",
+      "def_en": "The agent first sees only a skill's name and short description and must retrieve the full procedure before following it, which is how a large library fits in a limited context.",
+      "def_vi": "Tác tử ban đầu chỉ thấy tên và mô tả ngắn của kỹ năng rồi phải tự lấy toàn bộ quy trình mới làm theo được, đây là cách nhét một kho lớn vào ngữ cảnh hạn chế. Hai nhóm cùng lấy đây làm giả định thiết kế.",
+      "src": [
+        "2608.04828",
+        "2608.05604"
+      ],
+      "tags": [
+        "tac-tu",
+        "ky-nang"
+      ],
+      "say": "It sees the name and the one-line description, then has to go and fetch the rest."
+    },
+    {
+      "id": "axl-trigger-compliance-boundary",
+      "en": "Trigger, compliance and boundary",
+      "vi": "Kích hoạt, tuân thủ và ranh giới",
+      "def_en": "Three separable facets of skill use, namely whether the agent invokes the right skill, how faithfully it follows the procedure, and whether it avoids the forbidden operations.",
+      "def_vi": "Ba mặt tách rời được của việc dùng kỹ năng, gồm tác tử có gọi đúng kỹ năng hay không, làm theo quy trình trung thành đến đâu, và có tránh được thao tác bị cấm hay không. Mới một nhóm tách thành ba trục, nhưng cách tách này rất hữu dụng khi thiết kế kho kỹ năng.",
+      "src": [
+        "2608.04828"
+      ],
+      "tags": [
+        "tac-tu",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-document-imposed-retrieval-error",
+      "en": "Retrieval error imposed by the document",
+      "vi": "Sai số truy xuất do chính tài liệu gây ra",
+      "def_en": "A skill page that says what a skill does without saying which similar requests belong elsewhere creates an error no better retriever can remove.",
+      "def_vi": "Một trang mô tả kỹ năng chỉ nói kỹ năng làm gì mà không nói yêu cầu tương tự nào phải đi chỗ khác sẽ tạo ra sai số mà không bộ truy xuất nào gỡ được. Mới một nhóm hình thức hoá, nhưng đây là điểm rất đáng nhớ khi viết mô tả kỹ năng.",
+      "say": "Write the negative boundary into the page, or no retriever will find it.",
+      "src": [
+        "2608.04482",
+        "2608.05604"
+      ],
+      "tags": [
+        "tac-tu",
+        "truy-xuat"
+      ]
+    },
+    {
+      "id": "axl-contract-preserving-compression",
+      "en": "Contract-preserving skill compression",
+      "vi": "Nén kỹ năng nhưng giữ giao kèo",
+      "def_en": "Compressing a skill library at the level of executable procedure graphs rather than free text, so the compressed routine can still be run and expanded.",
+      "def_vi": "Nén kho kỹ năng ở mức đồ thị quy trình chạy được thay vì ở mức văn bản tự do, để phần đã nén vẫn chạy và vẫn bung ra được. Mới một nhóm đề xuất, nhưng vấn đề lệch đơn vị giữa lúc lấy về và lúc thực thi thì có thật.",
+      "src": [
+        "2608.05604",
+        "2608.04482"
+      ],
+      "tags": [
+        "tac-tu",
+        "ky-nang"
+      ]
+    },
+    {
+      "id": "axl-skill-entropy",
+      "en": "Skill entropy",
+      "vi": "Entropy chuyển kỹ năng",
+      "def_en": "A measure of how hard it is to switch from one reasoning skill to another inside a single chain, used to grade cross-skill long-horizon tasks.",
+      "def_vi": "Một đại lượng đo mức khó của việc chuyển từ kỹ năng lập luận này sang kỹ năng khác ngay trong một chuỗi, dùng để xếp hạng nhiệm vụ dài hơi liên kỹ năng. Mới một nhóm đề xuất, nhưng khoảng trống mà nó lấp thì có thật vì phần lớn bộ đo chỉ chấm từng kỹ năng riêng.",
+      "src": [
+        "2608.05139",
+        "2608.03874"
+      ],
+      "tags": [
+        "danh-gia",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-trace-to-workflow",
+      "en": "Compiling traces into workflows",
+      "vi": "Biên dịch vệt chạy thành quy trình",
+      "def_en": "Mining clusters of noisy agent traces and turning the reusable part into a mostly deterministic workflow, admitting a dependency only when a value is uniquely attributable to an earlier step.",
+      "def_vi": "Khai thác các cụm vệt chạy nhiễu của tác tử rồi biến phần dùng lại được thành quy trình gần như tất định, chỉ công nhận phụ thuộc khi một giá trị quy được duy nhất về một bước trước đó. Hai nhóm cùng theo hướng cố định hoá phần lặp lại của tác tử.",
+      "say": "Once the agent has done it twenty times, it should not still be reasoning about it.",
+      "src": [
+        "2608.02680",
+        "2608.02353"
+      ],
+      "tags": [
+        "tac-tu",
+        "quy-trinh"
+      ]
+    },
+    {
+      "id": "axl-harness",
+      "en": "The harness",
+      "vi": "Bộ giàn chạy quanh mô hình",
+      "def_en": "The prompts, tools, control flow, memory and orchestration code around a model, now treated as a first-class object that can be optimised, benchmarked and stolen.",
+      "def_vi": "Tập lời nhắc, công cụ, luồng điều khiển, bộ nhớ và mã điều phối bao quanh mô hình, nay được coi là đối tượng hạng nhất có thể tối ưu, đo đạc và bị đánh cắp. Nhiều nhóm độc lập cùng dùng đúng thuật ngữ này trong tuần, đây là một hướng đang định hình.",
+      "src": [
+        "2608.06301",
+        "2608.01918",
+        "2608.05446"
+      ],
+      "tags": [
+        "tac-tu",
+        "harness"
+      ],
+      "say": "The capability lives in the harness as much as in the weights."
+    },
+    {
+      "id": "axl-harness-overfitting",
+      "en": "Harness evolution overfits its own tasks",
+      "vi": "Tiến hoá bộ giàn khớp quá với chính nhiệm vụ dùng để tiến hoá",
+      "def_en": "Iteratively improving a harness from interaction traces tends to bake in task-specific tricks, so the right question is whether the harness still helps on tasks it never evolved against.",
+      "def_vi": "Cải tiến bộ giàn theo vòng lặp từ vệt tương tác có xu hướng đóng cứng các mẹo riêng của nhiệm vụ, nên câu hỏi đúng là bộ giàn có còn giúp trên nhiệm vụ nó chưa từng tiến hoá cùng hay không. Hai nhóm cùng chỉ ra rằng chỉ tập kiểm cùng phân phối là không đủ.",
+      "src": [
+        "2608.01918",
+        "2608.00181"
+      ],
+      "tags": [
+        "harness",
+        "danh-gia"
+      ],
+      "say": "It got better at the tasks it evolved against and no better anywhere else."
+    },
+    {
+      "id": "axl-harness-as-ip",
+      "en": "Harness as extractable intellectual property",
+      "vi": "Bộ giàn là tài sản trí tuệ có thể bị moi",
+      "def_en": "Because a tuned harness costs real engineering and compute, an attacker interacting with a deployed multi-agent system can try to reconstruct it from its behaviour.",
+      "def_vi": "Vì một bộ giàn đã tinh chỉnh tốn công kỹ thuật và tốn tính toán thật, kẻ tấn công tương tác với hệ nhiều tác tử đang chạy có thể tìm cách dựng lại nó từ hành vi. Mới một nhóm hình thức hoá phép moi này, nên hãy coi là cảnh báo sớm chứ chưa phải mối đe doạ đã lặp lại.",
+      "say": "The prompt stack is the moat, and moats can be measured from outside.",
+      "src": [
+        "2607.28147",
+        "2608.06301"
+      ],
+      "tags": [
+        "harness",
+        "an-toan"
+      ]
+    },
+    {
+      "id": "axl-programmatic-tool-calling",
+      "en": "Programmatic tool calling",
+      "vi": "Gọi công cụ bằng mã",
+      "def_en": "Exposing tools as typed function stubs the model invokes from code, so chaining and parallelism come from the language rather than from a sequence of structured call objects.",
+      "def_vi": "Phơi công cụ ra dưới dạng khai báo hàm có kiểu để mô hình gọi từ mã, nhờ đó việc nối chuỗi và chạy song song đến từ ngôn ngữ chứ không từ một dãy đối tượng gọi có cấu trúc. Một nhóm so trên nhiều mô hình và thấy cách này bằng hoặc hơn ở đa số, còn tác động thì phụ thuộc mô hình.",
+      "src": [
+        "2608.06370",
+        "2608.03327"
+      ],
+      "tags": [
+        "tac-tu",
+        "cong-cu"
+      ]
+    },
+    {
+      "id": "axl-tool-adoption-gap",
+      "en": "Tool adoption gap",
+      "vi": "Khoảng trống chịu dùng công cụ",
+      "def_en": "Having a tool available does not mean the agent calls it, and the same tools were reported to help a reasoning model and hurt a non-reasoning one under one identical harness.",
+      "def_vi": "Có công cụ không có nghĩa tác tử sẽ gọi, và cùng bộ công cụ được báo là giúp mô hình biết lập luận nhưng làm hại mô hình không lập luận, dưới cùng một bộ giàn. Mới một nhóm đo trực tiếp, nhưng nó cho thấy đo lợi ích của công cụ phải theo từng mô hình.",
+      "src": [
+        "2608.03327",
+        "2608.06370"
+      ],
+      "tags": [
+        "tac-tu",
+        "cong-cu"
+      ]
+    },
+    {
+      "id": "axl-prompt-induced-waste",
+      "en": "Prompt-induced waste",
+      "vi": "Lãng phí do cách viết lời nhắc",
+      "def_en": "Two prompts asking for the same change can yield the same correct patch while causing very different amounts and kinds of work, so wording changes where effort is spent, not only how much.",
+      "def_vi": "Hai lời nhắc yêu cầu cùng một thay đổi có thể cho cùng bản vá đúng nhưng khiến tác tử làm lượng việc và loại việc rất khác nhau, nên cách diễn đạt đổi cả chỗ tiêu công chứ không chỉ mức tiêu. Một nhóm đăng ký trước thiết kế rồi đo trên nhiều mô hình, và một nhóm khác thấy dấu vết tương tự ở quy mô sản xuất.",
+      "say": "Asking for multiple approaches bought us three branches we threw away.",
+      "src": [
+        "2608.01347",
+        "2608.00101"
+      ],
+      "tags": [
+        "tac-tu",
+        "chi-phi"
+      ]
+    },
+    {
+      "id": "axl-judge-scoring-bias",
+      "en": "Scoring bias of a model judge",
+      "vi": "Thiên lệch chấm điểm của mô hình giám khảo",
+      "def_en": "A judging model tends to emit certain scores regardless of the text in front of it, a latent numeric preference that can be measured and corrected for.",
+      "def_vi": "Mô hình làm giám khảo có xu hướng cho một số điểm nhất định bất kể văn bản trước mặt, đây là thiên lệch số tiềm ẩn có thể đo và hiệu chỉnh. Nhiều nhóm cùng chỉ ra rằng giám khảo mang thiên lệch riêng, các cách hiệu chỉnh thì còn mới.",
+      "src": [
+        "2608.05726",
+        "2608.04463"
+      ],
+      "tags": [
+        "giam-khao",
+        "danh-gia"
+      ],
+      "say": "That judge gives a four out of five no matter what you put in front of it."
+    },
+    {
+      "id": "axl-evidence-locking-hurts",
+      "en": "Evidence locking degrades judging",
+      "vi": "Khoá chứng cứ làm giám khảo tệ đi",
+      "def_en": "Making a judge write evidence in one call and then decide from only that record was reported to lower agreement with human preferences and to raise order inconsistency, compared with structured judging in a single call.",
+      "def_vi": "Bắt giám khảo ghi chứng cứ ở một lời gọi rồi quyết định chỉ dựa vào bản ghi đó được báo là làm giảm mức đồng thuận với sở thích của người và tăng tính bất nhất theo thứ tự, so với chấm có cấu trúc trong một lời gọi. Mới một nhóm đo với quy mô phán quyết lớn, nhưng kết quả này đi ngược trực giác nên đáng nhớ.",
+      "say": "Freezing the evidence sounded more rigorous and it measurably made the judge worse.",
+      "src": [
+        "2608.05353",
+        "2608.05726"
+      ],
+      "tags": [
+        "giam-khao",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-evaluator-part-of-experiment",
+      "en": "The evaluator is part of the experiment",
+      "vi": "Người chấm là một phần của thí nghiệm",
+      "def_en": "Different judges rated identical answers differently depending on whether they saw the peer context, some shifting toward the peer position and some away, so the judge is a variable and not a ruler.",
+      "def_vi": "Các giám khảo khác nhau chấm cùng một câu trả lời khác nhau tuỳ theo có nhìn thấy ngữ cảnh của nhóm hay không, có bên nghiêng về phía nhóm và có bên nghiêng ra xa, nên giám khảo là một biến chứ không phải cây thước. Hai nhóm cùng chỉ ra rằng giám khảo phản ứng với ngữ cảnh xã hội.",
+      "src": [
+        "2608.04463",
+        "2608.04415"
+      ],
+      "tags": [
+        "giam-khao",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-panel-social-pressure",
+      "en": "Panels break under shared misleading context",
+      "vi": "Hội đồng vỡ khi cùng nhìn ngữ cảnh sai",
+      "def_en": "Combining several model judgments corrects individual mistakes only while the members are independent, and a wrong label asserted by simulated peers before the vote can drive the panel to a far worse decision than its average member.",
+      "def_vi": "Gộp phán quyết của nhiều mô hình chỉ sửa được lỗi cá nhân khi các thành viên còn độc lập, và một nhãn sai do các bên giả lập khẳng định trước khi bỏ phiếu có thể đẩy cả hội đồng tới quyết định tệ hơn hẳn thành viên trung bình. Mới một nhóm đo trong thiết kế hai vòng có kiểm soát, và hiệu ứng bất đối xứng của nó rất đáng chú ý.",
+      "say": "Majority voting only helps while the voters are actually independent.",
+      "src": [
+        "2608.04415",
+        "2608.04463"
+      ],
+      "tags": [
+        "giam-khao",
+        "an-toan"
+      ]
+    },
+    {
+      "id": "axl-jury-distillation",
+      "en": "Multi-model jury as a teacher",
+      "vi": "Bồi thẩm đoàn nhiều mô hình làm giáo viên",
+      "def_en": "Using an ensemble of large judges to generate synthetic evaluation labels, then distilling into a small model so the judging can run at production scale.",
+      "def_vi": "Dùng một tập giám khảo lớn để sinh nhãn đánh giá tổng hợp rồi chưng cất vào mô hình nhỏ để việc chấm chạy được ở quy mô sản xuất. Hai nhóm cùng đối mặt bài toán làm cho giám khảo rẻ đi mà không mất quá nhiều chất lượng.",
+      "src": [
+        "2608.02975",
+        "2607.27674"
+      ],
+      "tags": [
+        "giam-khao",
+        "chung-cat"
+      ]
+    },
+    {
+      "id": "axl-calibrated-judge",
+      "en": "Calibrating the judge before using it",
+      "vi": "Hiệu chỉnh giám khảo trước khi dùng",
+      "def_en": "Anchoring a model judge against a set of human decisions before trusting it at scale, since agreement with people is the only thing that makes the judge a measurement.",
+      "def_vi": "Neo mô hình giám khảo vào một tập quyết định của người trước khi tin nó ở quy mô lớn, vì mức đồng thuận với người là thứ duy nhất biến giám khảo thành một phép đo. Nhiều nhóm cùng nhấn mạnh bước này, và có nhóm còn đi xa hơn là chấm cả chất lượng bộ đo.",
+      "src": [
+        "2607.27674",
+        "2608.06329"
+      ],
+      "tags": [
+        "giam-khao",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-reachable-not-realized",
+      "en": "Reachable is not realized",
+      "vi": "Chạm tới được không phải là làm được",
+      "def_en": "A question is realized when the default deployment procedure gets it right, and merely reachable when some probe can find the answer within a budget, and confusing the two makes benchmark gains look like capability.",
+      "def_vi": "Một câu hỏi được coi là làm được khi quy trình triển khai mặc định trả lời đúng, và chỉ là chạm tới được khi một phép dò nào đó tìm ra đáp án trong ngân sách, nhầm hai thứ này khiến điểm chuẩn tăng trông như năng lực tăng. Mới một nhóm dựng phép kiểm ở mức từng câu, nhưng đây là công cụ tư duy rất hữu ích.",
+      "say": "Ask whether the default procedure gets there, not whether some probe can.",
+      "src": [
+        "2608.03219",
+        "2608.00355"
+      ],
+      "tags": [
+        "danh-gia",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "axl-level-versus-shape",
+      "en": "Level versus shape of progress",
+      "vi": "Mức so với hình dạng của tiến bộ",
+      "def_en": "Most of the apparent shift of gains toward harder tasks can be reproduced by a single ability parameter rising against a fixed difficulty curve, which is a ceiling effect rather than a qualitative change.",
+      "def_vi": "Phần lớn cái tưởng là lợi ích dịch về phía nhiệm vụ khó có thể tái tạo bằng một tham số năng lực duy nhất tăng lên trên một đường độ khó cố định, tức là hiệu ứng trần chứ không phải thay đổi về chất. Mới một nhóm chỉ ra, nhưng nó lặp lại bài học cũ về năng lực nổi lên.",
+      "src": [
+        "2608.00355",
+        "2608.03219"
+      ],
+      "tags": [
+        "danh-gia",
+        "do-luong"
+      ]
+    },
+    {
+      "id": "axl-irt-for-benchmarks",
+      "en": "Item response theory for benchmarks",
+      "vi": "Lý thuyết đáp ứng câu hỏi cho bộ đo",
+      "def_en": "Treating benchmark items as psychometric items with their own difficulty and discrimination, so a few well-chosen items recover the full score better than a random subset of the same size.",
+      "def_vi": "Coi từng câu trong bộ đo như một mục trắc nghiệm có độ khó và độ phân biệt riêng, nhờ đó vài câu chọn khéo dựng lại điểm tổng tốt hơn một tập ngẫu nhiên cùng cỡ. Mới một nhóm làm ở quy mô lớn cho an toàn, nhưng phương pháp thì đã trưởng thành ở ngành khác.",
+      "src": [
+        "2608.05086",
+        "2608.00355"
+      ],
+      "tags": [
+        "danh-gia",
+        "do-luong"
+      ]
+    },
+    {
+      "id": "axl-benchmark-quality-audit",
+      "en": "Auditing the benchmark itself",
+      "vi": "Kiểm chất lượng của chính bộ đo",
+      "def_en": "Checking a benchmark for inconsistent tasks, simplistic scenarios and thin policy coverage before drawing conclusions from scores computed on it.",
+      "def_vi": "Kiểm bộ đo về nhiệm vụ thiếu nhất quán, kịch bản quá đơn giản và độ phủ chính sách mỏng, trước khi rút kết luận từ điểm số tính trên nó. Nhiều nhóm cùng chuyển hướng sang đo chất lượng của phép đo, đây là một trong những hướng nổi lên rõ trong tuần.",
+      "say": "Before I trust the number I want to know whether the benchmark deserves it.",
+      "src": [
+        "2608.06329",
+        "2608.05086"
+      ],
+      "tags": [
+        "danh-gia",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "axl-distractor-aware-truncation",
+      "en": "Distractor-aware truncation",
+      "vi": "Cắt ngữ cảnh có phân biệt phần nhiễu",
+      "def_en": "The common claim that shorter context is better was tested by dropping only the irrelevant content instead of dropping the middle, and the two protocols gave different pictures of context-length effects.",
+      "def_vi": "Khẳng định quen thuộc rằng ngữ cảnh ngắn hơn thì tốt hơn đã được kiểm bằng cách chỉ bỏ phần không liên quan thay vì bỏ đoạn giữa, và hai giao thức cho hai bức tranh khác nhau về ảnh hưởng của độ dài. Mới một nhóm chạy đủ cả hai giao thức trên nhiều họ mô hình, nhưng bài học về giao thức thì tổng quát.",
+      "src": [
+        "2608.03297",
+        "2608.04569"
+      ],
+      "tags": [
+        "ngu-canh-dai",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-cross-benchmark-transfer",
+      "en": "Cross-benchmark transfer as the real test",
+      "vi": "Chuyển giao chéo bộ đo mới là phép thử thật",
+      "def_en": "In a self-contained training environment a policy can earn reward by exploiting tool schemas and grader parsing, and an in-distribution holdout shares those same regularities, so only an untouched benchmark discriminates.",
+      "def_vi": "Trong môi trường huấn luyện khép kín, chính sách có thể kiếm thưởng nhờ khai thác lược đồ công cụ và cách bóc điểm, và tập giữ lại cùng phân phối cũng mang đúng những quy luật đó, nên chỉ bộ đo chưa hề đụng tới mới phân biệt được. Hai nhóm cùng nhấn đúng điểm này.",
+      "src": [
+        "2608.00181",
+        "2608.01918"
+      ],
+      "tags": [
+        "danh-gia",
+        "hoc-tang-cuong"
+      ]
+    },
+    {
+      "id": "axl-anytime-valid-stopping",
+      "en": "Anytime-valid stopping",
+      "vi": "Dừng lúc nào cũng hợp lệ",
+      "def_en": "Using a confidence sequence so an evaluation can stop as soon as the evidence suffices, since stopping a fixed-budget test early with an ordinary confidence interval invalidates the stated level.",
+      "def_vi": "Dùng dãy khoảng tin cậy để một phép đánh giá dừng ngay khi chứng cứ đã đủ, vì dừng sớm một phép kiểm ngân sách cố định bằng khoảng tin cậy thông thường sẽ phá mức tin cậy đã tuyên bố. Mới một nhóm áp vào đánh giá tác tử, nhưng công cụ thống kê thì đã vững.",
+      "say": "You cannot peek at a fixed-budget test and keep the confidence level you claimed.",
+      "src": [
+        "2608.06362",
+        "2608.04333"
+      ],
+      "tags": [
+        "danh-gia",
+        "thong-ke"
+      ]
+    },
+    {
+      "id": "axl-eval-as-bandit",
+      "en": "Configuration evaluation as a bandit",
+      "vi": "Đánh giá cấu hình như bài toán tay kéo",
+      "def_en": "Choosing among model configurations under a limited budget, where each trial costs a different amount and returns a noisy vector of competing objectives.",
+      "def_vi": "Chọn giữa các cấu hình mô hình dưới ngân sách hạn chế, trong đó mỗi lần thử tốn một mức chi phí khác nhau và trả về một vector kết quả nhiễu gồm nhiều mục tiêu cạnh tranh. Mới một nhóm hình thức hoá kèm cận hối tiếc, nhưng khung này khớp với thực tế chọn mô hình.",
+      "src": [
+        "2608.04333",
+        "2608.06362"
+      ],
+      "tags": [
+        "danh-gia",
+        "toi-uu"
+      ]
+    },
+    {
+      "id": "axl-regression-eval-ceiling",
+      "en": "Regression eval set under a hard ceiling",
+      "vi": "Tập kiểm hồi quy dưới trần cứng",
+      "def_en": "A platform cannot keep every customer's evaluation set, so incoming sets have to be projected onto a capability taxonomy and each query admitted, dropped or swapped under a fixed query count.",
+      "def_vi": "Một nền tảng không giữ nổi tập đánh giá của mọi khách hàng, nên các tập gửi vào phải được chiếu lên một phân loại năng lực rồi từng truy vấn được nhận, bỏ hoặc thay dưới một trần số lượng cố định. Mới một nhóm mô tả quy trình công nghiệp này, nhưng bài toán thì bất kỳ nền tảng nào cũng sẽ gặp.",
+      "src": [
+        "2608.01004",
+        "2608.06329"
+      ],
+      "tags": [
+        "danh-gia",
+        "van-hanh"
+      ]
+    },
+    {
+      "id": "axl-run-to-run-noise",
+      "en": "Run-to-run noise inflates oracle gains",
+      "vi": "Nhiễu giữa các lần chạy thổi phồng lợi ích của lời sấm",
+      "def_en": "If rerunning the same configuration flips a noticeable share of outcomes, then an oracle that picks the best configuration per task is partly picking noise, and the headroom it advertises is not real.",
+      "def_vi": "Nếu chạy lại cùng cấu hình đã lật một phần đáng kể kết quả thì lời sấm chọn cấu hình tốt nhất cho từng nhiệm vụ đang chọn cả nhiễu, và khoảng trống mà nó quảng cáo không có thật. Hai nhóm cùng nhắc rằng phải trừ nhiễu lặp lại trước khi tuyên bố khoảng trống.",
+      "say": "Rerun the same setting first, then tell me how big the oracle gap really is.",
+      "src": [
+        "2608.06171",
+        "2608.02636"
+      ],
+      "tags": [
+        "danh-gia",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "axl-cot-monitorability",
+      "en": "Chain-of-thought monitorability",
+      "vi": "Khả năng giám sát chuỗi suy nghĩ",
+      "def_en": "The assumption that reading a model's reasoning trace tells you something reliable about why it acted, now being probed rather than assumed.",
+      "def_vi": "Giả định rằng đọc vệt lập luận của mô hình sẽ cho biết điều gì đó đáng tin về lý do nó hành động, nay đang bị dò xét chứ không còn được mặc định. Rất nhiều nhóm cùng làm mảng này trong tuần và phần lớn kết quả đều làm yếu giả định đó.",
+      "src": [
+        "2608.04735",
+        "2608.04928",
+        "2608.03291"
+      ],
+      "tags": [
+        "an-toan",
+        "dien-giai"
+      ],
+      "say": "We were treating the trace as evidence, and this week is mostly about why that is shaky."
+    },
+    {
+      "id": "axl-implicit-influence",
+      "en": "Implicit versus explicit influence",
+      "vi": "Ảnh hưởng ngầm so với ảnh hưởng tường minh",
+      "def_en": "Most monitorability tests instruct the model to hide something, but the harder case is when nothing tells it to hide and its behaviour is still shaped by an irrelevant detail in the prompt.",
+      "def_vi": "Phần lớn phép kiểm khả năng giám sát đều bảo mô hình phải giấu điều gì đó, nhưng ca khó hơn là khi không có lệnh giấu nào mà hành vi vẫn bị một chi tiết vô can trong lời nhắc uốn nắn. Mới một nhóm dựng bộ so trực tiếp hai chế độ, nhưng đây là phân biệt rất quan trọng.",
+      "say": "Nobody told it to hide anything, and the trace still does not mention the nudge.",
+      "src": [
+        "2608.04735",
+        "2608.03745"
+      ],
+      "tags": [
+        "an-toan",
+        "dien-giai"
+      ]
+    },
+    {
+      "id": "axl-latent-cot-monitoring",
+      "en": "Latent reasoning removes the readable trace",
+      "vi": "Lập luận ẩn xoá mất vệt đọc được",
+      "def_en": "Replacing explicit reasoning tokens with a few continuous states lowers inference cost but takes away the text that monitoring relies on, leaving only probing or verbalising the latents.",
+      "def_vi": "Thay token lập luận tường minh bằng vài trạng thái liên tục làm giảm chi phí chạy nhưng lấy mất phần chữ mà việc giám sát dựa vào, chỉ còn cách dò kích hoạt hoặc diễn giải trạng thái ẩn ra chữ. Mới một nhóm đo mức giám sát còn lại, và một nhóm khác đo bậc thang quan sát tương tự.",
+      "src": [
+        "2608.04928",
+        "2608.02089"
+      ],
+      "tags": [
+        "an-toan",
+        "dien-giai"
+      ]
+    },
+    {
+      "id": "axl-cot-hidden-backdoor",
+      "en": "Backdoors hidden from the trace",
+      "vi": "Cửa hậu giấu khỏi vệt lập luận",
+      "def_en": "Fine-tuning can implant a trigger that produces attacker-chosen behaviour while the visible reasoning stays benign, which reframes monitoring as a question about consistency rather than about content.",
+      "def_vi": "Tinh chỉnh có thể cấy một kích hoạt sinh ra hành vi do kẻ tấn công chọn trong khi phần lập luận nhìn thấy vẫn vô hại, điều này biến giám sát thành câu hỏi về tính nhất quán chứ không phải về nội dung. Mới một nhóm chứng minh bằng đầu độc mô hình, nhưng hệ quả với mọi lớp an toàn dựa vào vệt là rất nặng.",
+      "src": [
+        "2608.02820",
+        "2608.04735"
+      ],
+      "tags": [
+        "an-toan",
+        "tan-cong"
+      ],
+      "say": "The trace looks completely ordinary and the behaviour underneath is not."
+    },
+    {
+      "id": "axl-faithfulness-safety-tension",
+      "en": "Faithfulness versus safety tension",
+      "vi": "Căng thẳng giữa trung thực và an toàn",
+      "def_en": "A model must be faithful enough to its reasoning to be monitorable, yet robust enough to refuse acting on an unsafe thought, and injecting unsafe steps directly into the chain exposes the tradeoff.",
+      "def_vi": "Mô hình phải trung thực với lập luận của chính nó đủ để giám sát được, đồng thời phải vững đủ để từ chối hành động theo một ý nghĩ nguy hiểm, và tiêm thẳng bước nguy hiểm vào chuỗi làm lộ ra đánh đổi này. Mới một nhóm đo bằng kỹ thuật thay thế lập luận, nhưng cách đặt vấn đề rất sắc.",
+      "src": [
+        "2608.03745",
+        "2608.02820"
+      ],
+      "tags": [
+        "an-toan",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-observability-ladder",
+      "en": "Observability ladder",
+      "vi": "Bậc thang quan sát",
+      "def_en": "Holding a completed run fixed and varying only what a reader may inspect, namely the answer, a self-written summary, the full trace, or internal signals, to measure how much each level actually adds.",
+      "def_vi": "Giữ nguyên một lượt chạy đã hoàn tất rồi chỉ thay đổi thứ mà người đọc được nhìn, gồm câu trả lời, bản tự tóm tắt, toàn bộ vệt, hoặc tín hiệu nội tại, để đo mỗi mức thật sự thêm được bao nhiêu. Mới một nhóm dựng thang này, nhưng nó là thiết kế đối chứng đúng chuẩn.",
+      "say": "Fix the run, change only what the reader can see, then measure the difference.",
+      "src": [
+        "2608.02089",
+        "2608.03291"
+      ],
+      "tags": [
+        "an-toan",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "axl-trace-dynamics",
+      "en": "Trace dynamics rather than single steps",
+      "vi": "Động lực của cả vệt thay vì từng bước",
+      "def_en": "Failures spread across a reasoning trajectory are missed by checking each intermediate step for correctness, so the signal is looked for in how the trace evolves.",
+      "def_vi": "Những lỗi rải đều dọc quỹ đạo lập luận sẽ lọt lưới nếu chỉ kiểm tính đúng của từng bước trung gian, nên tín hiệu được tìm ở cách vệt lập luận biến đổi. Hai nhóm cùng chuyển sang đọc quỹ đạo, một nhóm ở mức chữ và một nhóm ở mức trạng thái ẩn.",
+      "src": [
+        "2608.03291",
+        "2608.05660"
+      ],
+      "tags": [
+        "dien-giai",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-inverted-steering-vector",
+      "en": "Inverted steering vector",
+      "vi": "Vector lái bị đảo",
+      "def_en": "A direction that separates a concept very cleanly can nevertheless push the model toward the opposite behaviour when you add it, so detection quality does not imply control direction.",
+      "def_vi": "Một hướng phân tách khái niệm rất sạch vẫn có thể đẩy mô hình về hành vi ngược lại khi bạn cộng nó vào, nên khả năng phát hiện tốt không suy ra hướng điều khiển đúng. Mới một nhóm mô tả và giải thích bằng hình học, nhưng đây là bẫy nghiêm trọng cho mọi ai dùng vector lái.",
+      "say": "The probe separates the concept perfectly and steering along it does the opposite.",
+      "src": [
+        "2608.02957",
+        "2607.27910"
+      ],
+      "tags": [
+        "dien-giai",
+        "lai-mo-hinh"
+      ]
+    },
+    {
+      "id": "axl-multi-layer-circuit-steering",
+      "en": "Multi-layer circuit steering",
+      "vi": "Lái theo mạch nhiều lớp",
+      "def_en": "Instead of one intervention at one layer derived from averaged activation differences, identifying a coherent circuit spread over layers and intervening along it.",
+      "def_vi": "Thay vì một can thiệp ở một lớp rút ra từ hiệu kích hoạt trung bình, người ta xác định một mạch mạch lạc trải qua nhiều lớp rồi can thiệp dọc theo nó. Hai nhóm cùng dùng bộ mã tự động thưa để tìm đặc trưng, nhưng cách dựng vector thì khác nhau.",
+      "src": [
+        "2608.05732",
+        "2608.04904"
+      ],
+      "tags": [
+        "dien-giai",
+        "lai-mo-hinh"
+      ]
+    },
+    {
+      "id": "axl-magnitude-matched-control",
+      "en": "Magnitude-matched control for steering",
+      "vi": "Đối chứng khớp biên độ khi lái",
+      "def_en": "Comparing a candidate direction against a random direction of the same norm, because otherwise part of the measured effect is just the size of the perturbation.",
+      "def_vi": "So một hướng ứng viên với một hướng ngẫu nhiên cùng chuẩn, vì nếu không thì một phần hiệu ứng đo được chỉ là do độ lớn của nhiễu loạn. Mới một nhóm áp giao thức này cho phòng thủ ở mô hình thị giác ngôn ngữ, và họ thấy không ứng viên nào thắng ở cả hai tiêu chí.",
+      "say": "Pair every direction with a random one of the same norm or you are measuring the norm.",
+      "src": [
+        "2607.27910",
+        "2608.02957"
+      ],
+      "tags": [
+        "dien-giai",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "axl-steering-from-objective",
+      "en": "Steering vectors fitted from a behavioural objective",
+      "vi": "Vector lái khớp từ mục tiêu hành vi",
+      "def_en": "Building the intervention by accumulating gradients of a temporary behavioural objective over a few rollouts, rather than by contrasting activations on labelled text.",
+      "def_vi": "Dựng can thiệp bằng cách tích luỹ gradient của một mục tiêu hành vi tạm thời trên vài lượt chạy, thay vì lấy hiệu kích hoạt trên văn bản có nhãn. Mới một nhóm làm và họ chỉ ra rằng cách lái quen thuộc thất bại ngay cả trên một chính sách lưới đơn giản.",
+      "src": [
+        "2607.27574",
+        "2608.05732"
+      ],
+      "tags": [
+        "lai-mo-hinh",
+        "hoc-tang-cuong"
+      ]
+    },
+    {
+      "id": "axl-residual-trajectory-probe",
+      "en": "Residual-stream trajectory probe",
+      "vi": "Dò theo quỹ đạo dòng dư",
+      "def_en": "Reading how the representation moves across layers, not only where it sits, in order to separate sound reasoning from flawed reasoning without relying on the visible text.",
+      "def_vi": "Đọc cách biểu diễn dịch chuyển qua các lớp chứ không chỉ đọc nó nằm ở đâu, để tách lập luận đúng khỏi lập luận hỏng mà không dựa vào phần chữ nhìn thấy. Mới một nhóm ghép chuyển động với vị trí có kiểm soát, nhưng hướng đọc quỹ đạo thì nhiều nhóm cùng theo.",
+      "src": [
+        "2608.05660",
+        "2608.03842"
+      ],
+      "tags": [
+        "dien-giai",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-layer-maps-dissociate",
+      "en": "Sensitivity, causality and repair dissociate",
+      "vi": "Nhạy cảm, nhân quả và sửa chữa tách rời nhau",
+      "def_en": "Where representations diverge most, where restoring clean activations recovers the prediction, and where a small adapter can fix the damage are three different layer maps, so naming one layer as responsible is ambiguous.",
+      "def_vi": "Lớp mà biểu diễn lệch nhiều nhất, lớp mà khôi phục kích hoạt sạch cứu được dự đoán, và lớp mà một bộ điều hợp nhỏ sửa được hỏng hóc là ba bản đồ khác nhau, nên nói lớp nào chịu trách nhiệm là mơ hồ. Mới một nhóm đo cả ba trên cùng một bảng mô hình, và đây là bài học phương pháp rất đáng nhớ.",
+      "say": "Which layer is responsible depends entirely on which of the three questions you asked.",
+      "src": [
+        "2608.03842",
+        "2608.05660"
+      ],
+      "tags": [
+        "dien-giai",
+        "phuong-phap"
+      ]
+    },
+    {
+      "id": "axl-progressive-precision",
+      "en": "One checkpoint, several precisions",
+      "vi": "Một bản trọng số, nhiều mức chính xác",
+      "def_en": "Representing weights as a low-bit base plus a sequence of quantized residual corrections, so several effective bit widths come out of a single stored model.",
+      "def_vi": "Biểu diễn trọng số thành một nền bit thấp cộng một dãy hiệu chỉnh dư đã lượng tử hoá, để nhiều mức bit hiệu dụng cùng lấy ra từ một bản lưu duy nhất. Mới một nhóm công bố khung này, nhưng nhu cầu thì rõ vì mỗi mức bit hiện phải giữ một bản riêng.",
+      "src": [
+        "2608.04048",
+        "2608.05253"
+      ],
+      "tags": [
+        "luong-tu-hoa",
+        "trien-khai"
+      ]
+    },
+    {
+      "id": "axl-fp4-training-instability",
+      "en": "FP4 training instability",
+      "vi": "Mất ổn định khi huấn luyện ở bốn bit",
+      "def_en": "Pushing training below eight bits exposes a scale inconsistency, because one-dimensional block quantization assigns different scaling factors to the same values after transposition, biasing the gradient.",
+      "def_vi": "Đẩy huấn luyện xuống dưới tám bit làm lộ ra một sự bất nhất về hệ số thang, vì lượng tử hoá khối một chiều gán hệ số khác nhau cho cùng những giá trị sau khi chuyển vị, làm lệch gradient. Mới một nhóm chỉ ra nguồn gốc này, nhưng nó giải thích rất gọn một hiện tượng nhiều nơi gặp.",
+      "src": [
+        "2607.24953",
+        "2608.04607"
+      ],
+      "tags": [
+        "luong-tu-hoa",
+        "huan-luyen"
+      ]
+    },
+    {
+      "id": "axl-protocol-dominates-quantization",
+      "en": "The measurement protocol can dominate the quantization effect",
+      "vi": "Giao thức đo có thể lấn át hiệu ứng lượng tử hoá",
+      "def_en": "When a decoder model is used as a classifier, the prompt template, the label mapping and the scoring rule can move calibration more than the precision does, and switching scoring rule reversed the model ranking.",
+      "def_vi": "Khi dùng mô hình sinh làm bộ phân loại, mẫu lời nhắc, cách ánh xạ nhãn và quy tắc chấm có thể làm đổi hiệu chỉnh nhiều hơn cả mức chính xác số học, và đổi quy tắc chấm đã đảo ngược thứ hạng giữa các mô hình. Mới một nhóm đo có kiểm soát, và đây là ca báo động giả rất sạch.",
+      "say": "The precision barely moved anything, the verbalizer moved everything.",
+      "src": [
+        "2608.03854",
+        "2607.29397"
+      ],
+      "tags": [
+        "luong-tu-hoa",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-analog-cim-noise",
+      "en": "Analog compute-in-memory noise",
+      "vi": "Nhiễu của tính toán trong bộ nhớ dạng tương tự",
+      "def_en": "Analog arrays are energy efficient but have a hardware noise floor, so allocating precision without modelling that floor wastes bits in regions where noise already dominates.",
+      "def_vi": "Mảng tương tự tiết kiệm năng lượng nhưng có sàn nhiễu phần cứng, nên phân bổ độ chính xác mà không mô hình hoá sàn đó sẽ phí bit ở những vùng nhiễu đã lấn át. Hai nhóm phần cứng cùng nộp trong tuần với cùng nhận định này.",
+      "src": [
+        "2608.02700",
+        "2607.29076"
+      ],
+      "tags": [
+        "phan-cung",
+        "luong-tu-hoa"
+      ]
+    },
+    {
+      "id": "axl-quantization-restores-unlearned",
+      "en": "Quantization can restore unlearned knowledge",
+      "vi": "Lượng tử hoá có thể làm sống lại kiến thức đã xoá",
+      "def_en": "Gradient-based unlearning can leave the target knowledge merely hidden rather than removed, to the point that quantizing the unlearned model brings much of it back.",
+      "def_vi": "Quên máy bằng gradient có thể chỉ giấu kiến thức đích đi chứ không xoá, đến mức lượng tử hoá mô hình đã quên lại làm phần lớn kiến thức đó trở về. Mới một nhóm nêu thẳng, nhưng nhóm khác cũng cho thấy kiến thức đã xoá phục hồi được bằng thích nghi nhẹ sau đó.",
+      "say": "If quantizing the model brings the knowledge back, it was never unlearned.",
+      "src": [
+        "2608.05783",
+        "2608.04519"
+      ],
+      "tags": [
+        "quen-may",
+        "an-toan"
+      ]
+    },
+    {
+      "id": "axl-depth-division-of-labour",
+      "en": "Depth division of labour",
+      "vi": "Phân công theo độ sâu",
+      "def_en": "Lower and middle layers build the semantic representation while upper layers specialise it for the next-token prediction, which lets a system write memory through an intermediate layer and recompute only the top.",
+      "def_vi": "Các lớp dưới và giữa dựng biểu diễn ngữ nghĩa còn các lớp trên chuyên biệt hoá nó cho dự đoán token kế tiếp, nhờ vậy hệ có thể ghi bộ nhớ qua một lớp trung gian rồi chỉ tính lại phần trên. Hai nhóm cùng dựa vào tính không đồng nhất theo độ sâu, một nhóm cho bộ nhớ và một nhóm cho phân bổ bề rộng.",
+      "src": [
+        "2607.28263",
+        "2608.02064"
+      ],
+      "tags": [
+        "kien-truc",
+        "ngu-canh-dai"
+      ]
+    },
+    {
+      "id": "axl-parallel-iterative-memory",
+      "en": "Parallel iterative memory over chunks",
+      "vi": "Bộ nhớ lặp song song trên các mảnh",
+      "def_en": "Reading all context chunks in parallel against a shared memory and refining that memory over a bounded number of turns, instead of updating it chunk by chunk in sequence.",
+      "def_vi": "Đọc song song mọi mảnh ngữ cảnh dựa trên một bộ nhớ dùng chung rồi tinh chỉnh bộ nhớ đó qua một số vòng có chặn, thay vì cập nhật tuần tự từng mảnh. Mới một nhóm đẩy tới ngữ cảnh cực dài theo cách này, nên hãy coi con số độ dài là tuyên bố của tác giả.",
+      "src": [
+        "2608.03048",
+        "2607.28263"
+      ],
+      "tags": [
+        "ngu-canh-dai",
+        "bo-nho"
+      ]
+    },
+    {
+      "id": "axl-recursive-language-model",
+      "en": "Recursive language model",
+      "vi": "Mô hình ngôn ngữ đệ quy",
+      "def_en": "Calling the same model repeatedly as a sequence of fresh reasoning roots, each receiving the problem plus a compact summary and durable artefacts written by its predecessors instead of the whole history.",
+      "def_vi": "Gọi cùng một mô hình lặp lại như một dãy gốc lập luận mới, mỗi gốc nhận bài toán kèm một bản tóm gọn và các hiện vật bền do gốc trước ghi lại, thay vì nhận toàn bộ lịch sử. Hai nhóm cùng dùng khuôn này, một cho văn bản và một cho chuỗi thời gian.",
+      "say": "Give the next root a blackboard, not the transcript.",
+      "src": [
+        "2608.05124",
+        "2608.03391"
+      ],
+      "tags": [
+        "ngu-canh-dai",
+        "suy-luan"
+      ]
+    },
+    {
+      "id": "axl-context-outside-the-model",
+      "en": "Keeping the context outside the model",
+      "vi": "Giữ ngữ cảnh ở ngoài mô hình",
+      "def_en": "Storing the long input in an external structure the model queries through code or a state lookup, so the window never has to hold it and the read cost stops growing with length.",
+      "def_vi": "Lưu đầu vào dài trong một cấu trúc bên ngoài mà mô hình truy vấn qua mã hoặc qua một phép tra trạng thái, nhờ đó cửa sổ không phải chứa nó và chi phí đọc thôi tăng theo độ dài. Nhiều nhóm cùng theo hướng này, đây là một trong những chuyển dịch rõ nhất trong dữ liệu tuần.",
+      "src": [
+        "2608.03391",
+        "2608.05124",
+        "2608.02560"
+      ],
+      "tags": [
+        "ngu-canh-dai",
+        "kien-truc"
+      ],
+      "say": "Keep the corpus outside and let the model query it, rather than stuffing the window."
+    },
+    {
+      "id": "axl-aggregation-state",
+      "en": "Set-based aggregation degrades with length",
+      "vi": "Tổng hợp theo tập suy giảm theo độ dài",
+      "def_en": "Counting distinct items, comparing sets and computing grouped statistics get less reliable as context grows, which motivates keeping a small sketch state beside the frozen model.",
+      "def_vi": "Đếm phần tử phân biệt, so sánh tập và tính thống kê theo nhóm trở nên kém tin cậy khi ngữ cảnh dài ra, từ đó nảy ra hướng giữ một trạng thái tóm nhỏ bên cạnh mô hình đóng băng. Mới một nhóm đề xuất giao diện tổng hợp này, nhưng hạn chế mà nó nhắm tới thì đã được ghi nhận rộng.",
+      "src": [
+        "2607.26448",
+        "2608.03297"
+      ],
+      "tags": [
+        "ngu-canh-dai",
+        "gioi-han"
+      ]
+    },
+    {
+      "id": "axl-long-range-data-scarcity",
+      "en": "Long-range dependency data is scarce",
+      "vi": "Dữ liệu có phụ thuộc xa thì hiếm",
+      "def_en": "Books, papers and single repositories are finite and often lack genuine long-distance dependencies, so long-context corpora are being built by recursively following code references across repositories.",
+      "def_vi": "Sách, bài báo và từng kho mã là hữu hạn và thường thiếu phụ thuộc xa thật sự, nên kho ngữ cảnh dài đang được dựng bằng cách truy vết đệ quy các tham chiếu mã qua nhiều kho. Mới một nhóm dựng đường ống này, nhưng vấn đề thiếu dữ liệu phụ thuộc xa thì được nhiều nơi nêu.",
+      "src": [
+        "2608.05141",
+        "2607.26448"
+      ],
+      "tags": [
+        "du-lieu",
+        "ngu-canh-dai"
+      ]
+    },
+    {
+      "id": "axl-dense-write-versus-sparse-write",
+      "en": "Dense writes interfere, sparse writes forget",
+      "vi": "Ghi dày gây nhiễu, ghi thưa thì quên",
+      "def_en": "Linear-time models update the whole state for every token and so blur specific past items, while a sliding window keeps explicit tokens but loses them once they leave the window.",
+      "def_vi": "Mô hình thời gian tuyến tính cập nhật toàn bộ trạng thái cho mỗi token nên làm mờ những mục quá khứ cụ thể, còn cửa sổ trượt giữ token tường minh nhưng mất chúng ngay khi ra khỏi cửa sổ. Nhiều nhóm cùng mô tả đúng đánh đổi này và cùng đề xuất các phương án ở giữa.",
+      "say": "You either smear everything into one state or you remember a window and forget the rest.",
+      "src": [
+        "2607.25357",
+        "2608.02032",
+        "2608.02347"
+      ],
+      "tags": [
+        "kien-truc",
+        "ngu-canh-dai"
+      ]
+    },
+    {
+      "id": "axl-ssm-state-injection",
+      "en": "Injecting a precomputed recurrent state",
+      "vi": "Tiêm trạng thái hồi quy đã tính sẵn",
+      "def_en": "Because a state-space model's fixed-size recurrent state summarises everything it has read, a document can be encoded offline and its state injected at query time instead of being re-read.",
+      "def_vi": "Vì trạng thái hồi quy cỡ cố định của mô hình không gian trạng thái tóm tắt mọi thứ nó đã đọc, một tài liệu có thể được mã hoá ngoại tuyến rồi tiêm trạng thái vào lúc truy vấn thay vì đọc lại. Mới một nhóm khai thác tính chất này, nhưng nó cùng họ với ý bộ đệm không phụ thuộc vị trí.",
+      "src": [
+        "2608.02560",
+        "2607.28069"
+      ],
+      "tags": [
+        "kien-truc",
+        "truy-xuat"
+      ]
+    },
+    {
+      "id": "axl-test-time-training-context",
+      "en": "Test-time training for context",
+      "vi": "Huấn luyện lúc chạy cho ngữ cảnh",
+      "def_en": "Updating a few parameters online while reading a long input, with an objective that asks which information will be useful later rather than which is easiest to reconstruct now.",
+      "def_vi": "Cập nhật vài tham số ngay trong lúc đọc một đầu vào dài, với mục tiêu hỏi thông tin nào sẽ có ích về sau chứ không hỏi thông tin nào dễ dựng lại ngay bây giờ. Mới một nhóm đặt mục tiêu theo lợi ích tương lai, nhưng hướng huấn luyện lúc chạy thì đang được nhiều nhóm theo.",
+      "src": [
+        "2608.01672",
+        "2608.02560"
+      ],
+      "tags": [
+        "ngu-canh-dai",
+        "thich-nghi"
+      ]
+    },
+    {
+      "id": "axl-commitment-order-dllm",
+      "en": "Commitment order in diffusion language models",
+      "vi": "Thứ tự chốt token ở mô hình ngôn ngữ khuếch tán",
+      "def_en": "The freedom to commit tokens in any order becomes the failure axis on reasoning, because unconstrained decoding was observed to commit the final answer while much of the reasoning region was still masked.",
+      "def_vi": "Quyền chốt token theo thứ tự tuỳ ý lại trở thành trục hỏng trên nhiệm vụ lập luận, vì giải mã không ràng buộc được quan sát là chốt đáp án cuối trong khi phần lớn vùng lập luận còn bị che. Mới một nhóm ghi nhật ký từng lần chốt để đo, và cách phân tích đó rất đáng học.",
+      "say": "It writes the answer first and only then fills in the reasoning that was supposed to produce it.",
+      "src": [
+        "2608.05687",
+        "2607.29079"
+      ],
+      "tags": [
+        "khuech-tan",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-acceleration-content-drift",
+      "en": "Accelerated decoding drifts in content",
+      "vi": "Tăng tốc giải mã làm trôi nội dung",
+      "def_en": "Training-free acceleration of a diffusion multimodal model can silently change what gets generated, and stale cached visual and text states were identified as contributors rather than the confidence threshold.",
+      "def_vi": "Tăng tốc không cần huấn luyện cho mô hình khuếch tán đa phương thức có thể âm thầm đổi nội dung sinh ra, và trạng thái thị giác cùng trạng thái chữ bị cũ trong bộ đệm được chỉ ra là nguyên nhân chứ không phải ngưỡng tự tin. Mới một nhóm chẩn đoán, nhưng đây là dạng lỗi nhất quán lúc phục vụ mà mọi hệ tăng tốc nên kiểm.",
+      "src": [
+        "2607.29079",
+        "2608.05687"
+      ],
+      "tags": [
+        "khuech-tan",
+        "trien-khai"
+      ]
+    },
+    {
+      "id": "axl-ar-to-diffusion-conversion",
+      "en": "Converting an autoregressive model into a diffusion one",
+      "vi": "Chuyển mô hình tự hồi quy thành mô hình khuếch tán",
+      "def_en": "Rather than pretraining from scratch, an existing autoregressive mixture of experts is fine-tuned to denoise blocks of tokens in parallel, using a small fraction of the original token budget.",
+      "def_vi": "Thay vì tiền huấn luyện lại từ đầu, một mô hình hỗn hợp chuyên gia tự hồi quy sẵn có được tinh chỉnh để khử nhiễu song song từng khối token, chỉ dùng một phần nhỏ ngân sách token ban đầu. Có báo cáo kỹ thuật của một nhóm và một nghiên cứu mở rộng của nhóm khác, nên hướng này đang được vài nơi theo đuổi nghiêm túc.",
+      "src": [
+        "2608.00146",
+        "2608.03457"
+      ],
+      "tags": [
+        "khuech-tan",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "axl-refinement-aware-allocation",
+      "en": "Refinement-aware compute allocation",
+      "vi": "Cấp phát tính toán theo nhu cầu tinh chỉnh",
+      "def_en": "In a diffusion model every denoising pass revisits all positions even though they need very different amounts of further work, so a uniform expert budget per position is a mismatch.",
+      "def_vi": "Ở mô hình khuếch tán, mỗi lượt khử nhiễu đều duyệt lại mọi vị trí dù các vị trí cần lượng chỉnh sửa rất khác nhau, nên cấp cùng ngân sách chuyên gia cho mọi vị trí là lệch. Mới một nhóm đề xuất phân bổ theo trạng thái tinh chỉnh, nhưng ý cấp phát thích nghi thì trùng với nhiều nhóm khác.",
+      "src": [
+        "2608.01784",
+        "2608.03457"
+      ],
+      "tags": [
+        "khuech-tan",
+        "moe"
+      ]
+    },
+    {
+      "id": "axl-tensor-lifecycle-layer",
+      "en": "Tensor lifecycle as a missing layer",
+      "vi": "Vòng đời tensor là tầng còn thiếu",
+      "def_en": "Weight loading, cache management and checkpoint synchronisation are all the same problem of managing persistent tensor state, yet each is currently solved separately inside its own engine.",
+      "def_vi": "Nạp trọng số, quản lý bộ đệm và đồng bộ điểm lưu thực chất là cùng một bài toán quản lý trạng thái tensor bền, nhưng hiện mỗi việc được giải riêng bên trong từng động cơ. Mới một nhóm đề nghị tách thành một tầng chung, nhưng nhóm khác cũng lập luận tương tự ở tầng mạng.",
+      "src": [
+        "2608.06007",
+        "2608.01526"
+      ],
+      "tags": [
+        "he-thong",
+        "kien-truc"
+      ]
+    },
+    {
+      "id": "axl-attention-ffn-disaggregation",
+      "en": "Attention and feed-forward disaggregation",
+      "vi": "Tách chú ý khỏi mạng truyền thẳng",
+      "def_en": "Running the attention part and the expert or feed-forward part on separate hardware pools, which raises the provisioning question of whether it actually beats the best collocated deployment.",
+      "def_vi": "Chạy phần chú ý và phần chuyên gia hoặc truyền thẳng trên hai hồ phần cứng riêng, kéo theo câu hỏi cấp phát là cách này có thật sự thắng phương án đặt chung tốt nhất hay không. Mới một nhóm đặt câu hỏi cấp phát này rõ ràng, và đó chính là câu hỏi mà các bài trước đã bỏ ngỏ.",
+      "say": "Disaggregation is only a win if you also provisioned the collocated baseline properly.",
+      "src": [
+        "2608.04502",
+        "2607.28150"
+      ],
+      "tags": [
+        "he-thong",
+        "trien-khai"
+      ]
+    },
+    {
+      "id": "axl-max-driven-batch-cost",
+      "en": "Max-driven cost inside a decode batch",
+      "vi": "Chi phí theo mục lớn nhất trong một lô sinh",
+      "def_en": "The wall-clock cost of a decode step is largely set by the largest active cache in the batch, so a short request batched with a long one consumes resources far beyond its own token workload.",
+      "def_vi": "Chi phí thời gian thực của một bước sinh chủ yếu do bộ đệm lớn nhất đang hoạt động trong lô quyết định, nên một yêu cầu ngắn bị ghép chung với một yêu cầu dài sẽ tiêu tài nguyên vượt xa khối lượng token của chính nó. Mới một nhóm hình thức hoá thành bài toán lập lịch công bằng, nhưng hiện tượng thì ai vận hành cũng gặp.",
+      "src": [
+        "2608.02244",
+        "2608.06135"
+      ],
+      "tags": [
+        "he-thong",
+        "lap-lich"
+      ],
+      "say": "The short request paid for the long one it happened to share a batch with."
+    },
+    {
+      "id": "axl-bursty-arrivals",
+      "en": "Bursty arrivals break Poisson scheduling",
+      "vi": "Lưu lượng bùng nổ phá giả định Poisson",
+      "def_en": "Scheduling work that assumes a constant-rate Poisson arrival process does not match real traffic, which is bursty, so the arrival intensity has to be estimated online.",
+      "def_vi": "Các nghiên cứu lập lịch giả định luồng đến Poisson tốc độ không đổi không khớp lưu lượng thật vốn bùng nổ theo cụm, nên cường độ đến phải được ước lượng trực tuyến. Mới một nhóm mở rộng thuật toán theo hướng này bằng mô phỏng, nên hãy coi là hướng đúng chứ chưa phải bằng chứng vận hành.",
+      "src": [
+        "2608.06135",
+        "2608.02244"
+      ],
+      "tags": [
+        "he-thong",
+        "lap-lich"
+      ]
+    },
+    {
+      "id": "axl-agentic-workload-shape",
+      "en": "Agentic workloads are not chat workloads",
+      "vi": "Tải của tác tử không giống tải trò chuyện",
+      "def_en": "A production characterisation of coding agents found sparse user-initiated turns that unfold into long autonomous loops, with cache reuse very high inside a turn and much lower across turns.",
+      "def_vi": "Một khảo sát tải ở quy mô sản xuất cho tác tử lập trình thấy các lượt do người khởi tạo rất thưa nhưng mỗi lượt bung thành vòng lặp tự động dài, với mức dùng lại bộ đệm rất cao trong một lượt và thấp hơn nhiều giữa các lượt. Mới một nhóm có dữ liệu ở quy mô này, nên đây là mô tả quý và khó lặp lại.",
+      "say": "Almost every model call in that trace was paired with a tool execution.",
+      "src": [
+        "2608.00101",
+        "2608.00902"
+      ],
+      "tags": [
+        "he-thong",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-cross-layer-root-cause",
+      "en": "Cross-layer root cause analysis",
+      "vi": "Truy nguyên xuyên tầng",
+      "def_en": "One request spans the serving engine, the language runtime, the host driver calls, the device kernels and the collective communication, so diagnosis needs traces reassembled per request across all of them.",
+      "def_vi": "Một yêu cầu trải qua động cơ phục vụ, môi trường chạy, lời gọi trình điều khiển ở máy chủ, nhân tính trên thiết bị và giao tiếp tập thể, nên chẩn đoán cần ghép vệt lại theo từng yêu cầu qua tất cả các tầng đó. Mới một nhóm dựng công cụ này, nhưng khảo sát khung phục vụ của nhóm khác cũng cho thấy độ phức tạp tương ứng.",
+      "src": [
+        "2608.01975",
+        "2608.03036"
+      ],
+      "tags": [
+        "he-thong",
+        "van-hanh"
+      ]
+    },
+    {
+      "id": "axl-multi-lora-serving",
+      "en": "Multi-LoRA serving",
+      "vi": "Phục vụ nhiều bộ điều hợp thấp hạng",
+      "def_en": "One base model plus thousands of adapters, one per user or task, which inverts the usual hardware balance because the workload needs enormous memory against modest compute.",
+      "def_vi": "Một mô hình nền cộng hàng nghìn bộ điều hợp, mỗi người dùng hoặc mỗi nhiệm vụ một bộ, cấu hình này đảo ngược cân bằng phần cứng quen thuộc vì tải cần rất nhiều bộ nhớ mà cần ít phép tính. Mới một nhóm nhắm vào bộ nhớ gộp cho ca này, nhưng khảo sát khung phục vụ cho thấy đây là mẫu triển khai thật.",
+      "src": [
+        "2608.05483",
+        "2608.03036"
+      ],
+      "tags": [
+        "he-thong",
+        "peft"
+      ],
+      "say": "One base model and a thousand adapters inverts what the hardware was built for."
+    },
+    {
+      "id": "axl-sparsity-side-channel",
+      "en": "Sparsity creates a side channel",
+      "vi": "Tính thưa mở ra kênh rò bên",
+      "def_en": "Skipping the weights of inactive neurons makes memory access depend on the input, and those access patterns were shown to be invertible back into the input tokens.",
+      "def_vi": "Bỏ qua trọng số của các nơron không kích hoạt khiến mẫu truy cập bộ nhớ phụ thuộc đầu vào, và người ta cho thấy mẫu truy cập đó đảo ngược lại thành chính token đầu vào. Mới một nhóm dựng tấn công hoàn chỉnh, nên hãy coi là cảnh báo sớm, nhưng lập luận nhân quả thì chặt.",
+      "say": "Every optimisation that depends on the input is a channel that leaks the input.",
+      "src": [
+        "2608.02995",
+        "2607.28147"
+      ],
+      "tags": [
+        "an-toan",
+        "he-thong"
+      ]
+    },
+    {
+      "id": "axl-tool-schema-weakens-refusal",
+      "en": "Tool schemas weaken refusal",
+      "vi": "Lược đồ công cụ làm yếu phản xạ từ chối",
+      "def_en": "Presenting tools as structured schemas was identified as a source of agent safety degradation, weakening internal refusal signals compared with the same specification written as plain text.",
+      "def_vi": "Trình bày công cụ dưới dạng lược đồ có cấu trúc được chỉ ra là một nguồn làm suy giảm an toàn của tác tử, làm yếu tín hiệu từ chối nội tại so với chính đặc tả đó viết bằng văn xuôi. Mới một nhóm phân tích ở mức biểu diễn, nhưng kết quả trùng hướng với ca lời nhắc theo lô.",
+      "src": [
+        "2607.29254",
+        "2608.02681"
+      ],
+      "tags": [
+        "an-toan",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-batch-prompting-safety",
+      "en": "Batch prompting weakens refusal",
+      "vi": "Gộp lô lời nhắc làm yếu từ chối",
+      "def_en": "A harmful question that is reliably refused on its own can get answered when embedded among benign questions in one batch, a failure mode distinct from in-context learning or long-context effects.",
+      "def_vi": "Một câu hỏi có hại vốn luôn bị từ chối khi đứng riêng lại được trả lời khi nhét chung với các câu vô hại trong một lô, và đây là dạng hỏng khác với hiệu ứng học trong ngữ cảnh hay hiệu ứng ngữ cảnh dài. Hai nhóm cùng cho thấy hình thức trình bày đầu vào ảnh hưởng tới an toàn.",
+      "say": "Refusal is not a property of the question alone, it depends on what you put around it.",
+      "src": [
+        "2608.02681",
+        "2607.29254"
+      ],
+      "tags": [
+        "an-toan",
+        "tan-cong"
+      ]
+    },
+    {
+      "id": "axl-search-channel-boundary",
+      "en": "The search channel is a fragile boundary",
+      "vi": "Kênh tìm kiếm là biên an ninh mong manh",
+      "def_en": "A search agent cross-checks sources, so one poisoned page is often diluted, but an intermediary that controls the results channel can steer how evidence is gathered across many queries.",
+      "def_vi": "Tác tử tìm kiếm đối chiếu chéo nhiều nguồn nên một trang bị đầu độc thường bị pha loãng, nhưng một bên trung gian kiểm soát kênh trả kết quả có thể lái cả cách thu thập chứng cứ qua nhiều truy vấn. Hai nhóm cùng nhắm vào việc đầu độc nguồn của tác tử với hai mô hình tấn công khác nhau.",
+      "src": [
+        "2608.04565",
+        "2608.02678"
+      ],
+      "tags": [
+        "an-toan",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-denial-style-poisoning",
+      "en": "Denial-style retrieval poisoning",
+      "vi": "Đầu độc truy xuất kiểu phủ nhận",
+      "def_en": "Instead of quietly asserting the wrong answer, the poisoned passage names the correct answer, denies it and explains why, putting the conflict inside the very context the generator reads.",
+      "def_vi": "Thay vì lặng lẽ khẳng định đáp án sai, đoạn văn bị đầu độc gọi tên đáp án đúng, phủ nhận nó và giải thích lý do, đặt xung đột ngay bên trong ngữ cảnh mà bộ sinh đọc. Mới một nhóm thử thiết kế này, nên hãy coi là ý tưởng tấn công mới chứ chưa phải mối đe doạ đã được lặp lại.",
+      "src": [
+        "2608.02678",
+        "2608.04565"
+      ],
+      "tags": [
+        "an-toan",
+        "rag"
+      ]
+    },
+    {
+      "id": "axl-detecting-a-poisoned-model",
+      "en": "Detecting a poisoned model without the trigger",
+      "vi": "Phát hiện mô hình bị đầu độc mà không biết mồi",
+      "def_en": "The realistic defender has the weights and knows the behaviour of concern, but has no training data, no trusted reference model, no knowledge of the trigger and no certainty the model is poisoned at all.",
+      "def_vi": "Người phòng thủ thực tế có trọng số và biết hành vi đáng lo, nhưng không có dữ liệu huấn luyện, không có mô hình tham chiếu đáng tin, không biết mồi kích hoạt và cũng không chắc mô hình có bị đầu độc hay không. Mới một nhóm phát hành bộ đo cho đúng kịch bản này, nhưng đó là kịch bản đúng.",
+      "src": [
+        "2607.26849",
+        "2608.02820"
+      ],
+      "tags": [
+        "an-toan",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-fine-tuning-erodes-guardrails",
+      "en": "Fine-tuning erodes guardrails",
+      "vi": "Tinh chỉnh làm mòn hàng rào an toàn",
+      "def_en": "Task-specific fine-tuning weakens the safety behaviour of an aligned model even when the task data is innocuous, which is why safety data is mixed back in and why the choice of which safety examples matters.",
+      "def_vi": "Tinh chỉnh theo nhiệm vụ làm yếu hành vi an toàn của mô hình đã căn chỉnh ngay cả khi dữ liệu nhiệm vụ vô hại, vì thế người ta trộn lại dữ liệu an toàn và vì thế việc chọn ví dụ an toàn nào mới quan trọng. Nhiều nhóm độc lập cùng ghi nhận hiện tượng gốc.",
+      "src": [
+        "2608.04322",
+        "2608.05045",
+        "2608.04347"
+      ],
+      "tags": [
+        "an-toan",
+        "tinh-chinh"
+      ],
+      "say": "Fine-tuning on completely harmless data still cost us some of the refusal behaviour."
+    },
+    {
+      "id": "axl-gradient-blocking-release",
+      "en": "Blocking harmful gradients at release",
+      "vi": "Chặn gradient có hại ngay từ lúc phát hành",
+      "def_en": "A provider releasing open weights keeps one small safety-critical component fixed and shaped so that gradients from harmful samples are suppressed while ordinary forward behaviour is restored.",
+      "def_vi": "Bên phát hành trọng số mở giữ cố định một thành phần nhỏ trọng yếu về an toàn và định hình nó sao cho gradient từ mẫu có hại bị chặn trong khi hành vi xuôi thông thường vẫn được khôi phục. Mới một nhóm đề xuất, và các phòng thủ dạng này lịch sử cho thấy thường bị vượt qua, nên hãy giữ thái độ dè dặt.",
+      "src": [
+        "2608.05045",
+        "2608.04322"
+      ],
+      "tags": [
+        "an-toan",
+        "trong-so-mo"
+      ]
+    },
+    {
+      "id": "axl-agentic-posture-vulnerability",
+      "en": "Agentic posture vulnerability",
+      "vi": "Lỗ hổng tư thế của tác tử",
+      "def_en": "A durable record for a composed agent exposure that spans components and outlives any single event, proposed because excessive agency and weak task-bound authorisation do not fit the usual per-defect vulnerability record.",
+      "def_vi": "Một bản ghi bền cho phơi nhiễm của tác tử được ghép từ nhiều thành phần và tồn tại lâu hơn bất kỳ sự cố đơn lẻ nào, được đề xuất vì quyền hạn quá rộng và uỷ quyền yếu theo nhiệm vụ không khớp với bản ghi lỗ hổng theo từng khiếm khuyết. Mới một nhóm đề xuất khái niệm, chưa có kết quả thực nghiệm.",
+      "src": [
+        "2608.05884",
+        "2607.28147"
+      ],
+      "tags": [
+        "an-toan",
+        "van-hanh"
+      ]
+    },
+    {
+      "id": "axl-unlearning-may-only-hide",
+      "en": "Unlearning may only hide",
+      "vi": "Quên máy có thể chỉ là giấu đi",
+      "def_en": "Static evaluation of unlearning is insufficient, because the removed knowledge can leak through alternative multi-hop reasoning paths or be recovered by lightweight adaptation afterwards.",
+      "def_vi": "Đánh giá tĩnh cho quên máy là chưa đủ, vì kiến thức bị gỡ có thể rò qua các đường lập luận nhiều bước khác hoặc được khôi phục bằng một lượt thích nghi nhẹ về sau. Hai nhóm cùng chỉ ra và cùng đề nghị đo cả khả năng phục hồi.",
+      "say": "Test it with a recovery attack, otherwise you only measured the forgetting you asked for.",
+      "src": [
+        "2608.05783",
+        "2608.04519"
+      ],
+      "tags": [
+        "quen-may",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-continual-unlearning-drift",
+      "en": "Continual unlearning drift",
+      "vi": "Trôi khi quên máy liên tục",
+      "def_en": "Applying one-shot unlearning repeatedly accumulates utility loss, rebound of supposedly removed content and drift in what was meant to be retained, so requests arriving in sequence need their own method.",
+      "def_vi": "Áp lặp lại thủ tục quên một lần sẽ tích luỹ mất tiện ích, làm phần đáng lẽ đã gỡ quay lại và làm trôi phần đáng lẽ phải giữ, nên các yêu cầu đến theo dãy cần phương pháp riêng. Mới một nhóm nêu và xử lý, nhưng bối cảnh liên tục là bối cảnh thực tế.",
+      "src": [
+        "2608.04548",
+        "2608.04519"
+      ],
+      "tags": [
+        "quen-may",
+        "hop-nhat"
+      ]
+    },
+    {
+      "id": "axl-introspecting-side-effects",
+      "en": "Introspecting side effects of fine-tuning",
+      "vi": "Tự soi tác dụng phụ của tinh chỉnh",
+      "def_en": "Training a small adapter so the model can describe how fine-tuning changed its own behaviour, now being tested on ordinary task fine-tuning rather than on data designed to implant a known behaviour.",
+      "def_vi": "Huấn luyện một bộ điều hợp nhỏ để mô hình tự mô tả việc tinh chỉnh đã thay đổi hành vi của chính nó ra sao, nay được kiểm trên tinh chỉnh nhiệm vụ thông thường chứ không phải trên dữ liệu cố ý cấy một hành vi đã biết. Mới một nhóm mở rộng sang bối cảnh thực tế này, kết quả còn sớm.",
+      "src": [
+        "2608.04347",
+        "2608.03887"
+      ],
+      "tags": [
+        "tinh-chinh",
+        "dien-giai"
+      ]
+    },
+    {
+      "id": "axl-visual-token-bottleneck",
+      "en": "Visual tokens are the bottleneck",
+      "vi": "Token thị giác là nút cổ chai",
+      "def_en": "One image or volume becomes thousands of tokens that each traverse the decoder and sit in the cache, so visual compression is where multimodal inference cost is decided.",
+      "def_vi": "Một ảnh hoặc một khối dữ liệu biến thành hàng nghìn token, mỗi token đều đi qua bộ giải mã và nằm lại trong bộ đệm, nên nén phần thị giác là nơi quyết định chi phí suy luận đa phương thức. Rất nhiều nhóm cùng làm mảng này trong tuần, ở ảnh, khối ba chiều và video.",
+      "src": [
+        "2608.04496",
+        "2608.02134",
+        "2608.01185"
+      ],
+      "tags": [
+        "da-phuong-thuc",
+        "nen"
+      ],
+      "say": "One picture became four thousand tokens and every one of them sits in the cache."
+    },
+    {
+      "id": "axl-coreset-not-topk",
+      "en": "Coresets rather than top-K tokens",
+      "vi": "Tập lõi thay vì chọn K token cao điểm",
+      "def_en": "Scoring each visual token independently and keeping the highest lets one salient region be covered many times while sparse complementary evidence is dropped, so selection should be judged collectively.",
+      "def_vi": "Chấm điểm từng token thị giác độc lập rồi giữ những token cao nhất khiến một vùng nổi bật bị lấy nhiều lần trong khi chứng cứ bổ sung thưa lại bị bỏ, nên việc chọn phải được xét theo cả tập. Hai nhóm cùng chỉ ra khiếm khuyết của chấm điểm độc lập, cùng dạng lỗi với nén lời nhắc.",
+      "say": "Ten tokens on the same patch is not ten pieces of evidence.",
+      "src": [
+        "2608.02134",
+        "2608.04496"
+      ],
+      "tags": [
+        "da-phuong-thuc",
+        "nen"
+      ]
+    },
+    {
+      "id": "axl-iterative-token-selection",
+      "en": "One-shot token scoring is not enough",
+      "vi": "Chấm điểm token một lượt là chưa đủ",
+      "def_en": "Whether a token is still useful depends on what has already been kept, so selection is recast as iterative evidence construction with residual conditioning rather than a single ranking pass.",
+      "def_vi": "Một token còn hữu ích hay không phụ thuộc vào những gì đã được giữ lại, nên việc chọn được đặt lại thành dựng chứng cứ theo vòng lặp có điều kiện phần dư thay vì một lượt xếp hạng duy nhất. Hai nhóm cùng đi tới kết luận này bằng hai cơ chế khác nhau.",
+      "src": [
+        "2608.04496",
+        "2608.02134"
+      ],
+      "tags": [
+        "da-phuong-thuc",
+        "nen"
+      ]
+    },
+    {
+      "id": "axl-visual-text-compression-eval",
+      "en": "Evaluating text rendered as an image",
+      "vi": "Đánh giá văn bản kết xuất thành ảnh",
+      "def_en": "Rendering long text as an image reports impressive compression ratios, but scoring it by downstream task success lets the model's linguistic priors fill the gaps, so the evaluation has to be decoupled from those priors.",
+      "def_vi": "Kết xuất văn bản dài thành ảnh cho tỉ lệ nén rất ấn tượng, nhưng chấm bằng kết quả nhiệm vụ hạ nguồn lại để tiên nghiệm ngôn ngữ của mô hình lấp chỗ trống, nên phép đánh giá phải tách khỏi những tiên nghiệm đó. Mới một nhóm dựng khung đánh giá này, và đây là ca báo động giả rất sạch.",
+      "say": "The model guessed the missing words, so your compression ratio measured its language prior.",
+      "src": [
+        "2608.01848",
+        "2608.02134"
+      ],
+      "tags": [
+        "da-phuong-thuc",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-referential-dangling",
+      "en": "Referential dangling",
+      "vi": "Tham chiếu treo lơ lửng",
+      "def_en": "Hard prompt compression scores units independently, so it can keep the sentence containing the answer while deleting the sentence that defines the entity needed to interpret it.",
+      "def_vi": "Nén lời nhắc dạng cứng chấm điểm từng đơn vị độc lập, nên nó có thể giữ câu chứa đáp án mà xoá câu định nghĩa thực thể cần để hiểu đáp án đó. Mới một nhóm đặt tên và đo, nhưng cùng dạng lỗi với việc bỏ khối trong chú ý thưa.",
+      "src": [
+        "2608.04569",
+        "2608.03297"
+      ],
+      "tags": [
+        "nen",
+        "ngu-canh-dai"
+      ],
+      "say": "It kept the sentence with the answer and deleted the one that names the thing."
+    },
+    {
+      "id": "axl-topk-retrieval-unsound-for-tables",
+      "en": "Chunk and embed is unsound for tables",
+      "vi": "Cắt mảnh rồi nhúng là sai với bảng biểu",
+      "def_en": "In a financial or regulatory document most content lines are table rows, thousands of near-identical figures compete in one embedding space, and a chunk boundary can separate a number from the header that gives it its unit.",
+      "def_vi": "Trong tài liệu tài chính hoặc quy phạm, phần lớn dòng nội dung là hàng bảng, hàng nghìn con số gần giống nhau cạnh tranh trong cùng một không gian nhúng, và một ranh giới mảnh có thể tách con số khỏi tiêu đề cho biết đơn vị của nó. Mới một nhóm đo trên một tài liệu lớn, nhưng lập luận cấu trúc thì thuyết phục.",
+      "say": "The chunk boundary separated the number from the word that said what unit it was in.",
+      "src": [
+        "2608.06305",
+        "2608.01269"
+      ],
+      "tags": [
+        "rag",
+        "truy-xuat"
+      ]
+    },
+    {
+      "id": "axl-agentic-context-engineering",
+      "en": "Agentic context engineering",
+      "vi": "Kỹ thuật ngữ cảnh có tác tử",
+      "def_en": "Treating the construction of the prompt context as a policy chosen at inference time, with retrieval branches and task-conditioned adaptation, instead of a fixed template filled by a retriever.",
+      "def_vi": "Coi việc dựng ngữ cảnh cho lời nhắc là một chính sách được chọn lúc chạy, có nhánh truy xuất và có thích nghi theo nhiệm vụ, thay vì một khuôn cố định do bộ truy xuất điền vào. Nhiều nhóm cùng chuyển sang coi ngữ cảnh là thứ phải quyết định chứ không phải thứ có sẵn.",
+      "src": [
+        "2608.01269",
+        "2608.02353"
+      ],
+      "tags": [
+        "rag",
+        "tac-tu"
+      ]
+    },
+    {
+      "id": "axl-verbalized-confidence-sparse",
+      "en": "Verbalized confidence is extremely sparse",
+      "vi": "Độ tự tin nói thành lời rất thưa",
+      "def_en": "Models emit only a handful of distinct confidence values, often piling most mass on one number, which limits usefulness and makes the ranking of methods depend on how the evaluation curve is interpolated.",
+      "def_vi": "Mô hình chỉ phát ra một nhúm giá trị tự tin khác nhau, thường dồn phần lớn khối lượng vào một con số, điều này vừa hạn chế tính hữu dụng vừa khiến thứ hạng các phương pháp phụ thuộc vào cách nội suy đường đánh giá. Mới một nhóm chỉ ra hiệu ứng nội suy, nhưng độ thưa thì được quan sát nhất quán trên nhiều bộ dữ liệu.",
+      "src": [
+        "2608.04899",
+        "2608.05064"
+      ],
+      "tags": [
+        "bat-dinh",
+        "danh-gia"
+      ],
+      "say": "It says ninety five percent for almost everything, so the number carries no information."
+    },
+    {
+      "id": "axl-risk-controlled-deferral",
+      "en": "Risk-controlled deferral",
+      "vi": "Chuyển giao có kiểm soát rủi ro",
+      "def_en": "The deployment question for a small model is not only what it answers but when it should hand over to a human, and temperature scaling cannot fix a model whose confidence stays high while accuracy falls.",
+      "def_vi": "Câu hỏi triển khai cho mô hình nhỏ không chỉ là nó trả lời gì mà còn là khi nào nó nên chuyển cho người, và co giãn nhiệt độ không cứu được mô hình có độ tự tin luôn cao trong khi độ chính xác tụt. Mới một nhóm chứng minh các giới hạn này, nhưng chúng là giới hạn của phép hiệu chỉnh nói chung.",
+      "say": "Calibration cannot rescue a model that is confidently below chance.",
+      "src": [
+        "2608.05064",
+        "2608.01460"
+      ],
+      "tags": [
+        "bat-dinh",
+        "trien-khai"
+      ]
+    },
+    {
+      "id": "axl-configuration-shift",
+      "en": "Configuration shift",
+      "vi": "Dịch chuyển do cấu hình",
+      "def_en": "Conformal coverage guarantees assume exchangeability, but for a model the nonconformity score depends on the prompt template, the decoding parameters and the deployment setting, which people change routinely.",
+      "def_vi": "Bảo đảm độ phủ của dự đoán tuân thủ giả định tính hoán vị được, nhưng với mô hình ngôn ngữ thì điểm bất tuân phụ thuộc vào mẫu lời nhắc, tham số giải mã và bối cảnh triển khai, những thứ người ta vẫn đổi thường xuyên. Mới một nhóm đặt tên và khảo sát, và đây là cảnh báo thẳng cho ai định dùng dự đoán tuân thủ.",
+      "src": [
+        "2608.01460",
+        "2608.04899"
+      ],
+      "tags": [
+        "bat-dinh",
+        "thong-ke"
+      ]
+    },
+    {
+      "id": "axl-completeness-sensitive-negation",
+      "en": "Absence is evidence only under coverage",
+      "vi": "Vắng mặt chỉ là chứng cứ khi đã phủ đủ",
+      "def_en": "Not seeing something licenses a negative answer only if the evidence completely covers the query scope, otherwise the honest answer is unknown, and models were found to over-close on this.",
+      "def_vi": "Không thấy một thứ chỉ cho phép trả lời phủ định nếu chứng cứ đã phủ hết phạm vi truy vấn, còn không thì câu trả lời trung thực là chưa biết, và các mô hình được đo là hay đóng kết luận quá sớm. Mới một nhóm dựng bộ đo có ghép cặp cho đúng chuyện này.",
+      "src": [
+        "2608.04591",
+        "2608.05823"
+      ],
+      "tags": [
+        "lap-luan",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-selective-trust",
+      "en": "Selective trust in context",
+      "vi": "Tin có chọn lọc vào ngữ cảnh",
+      "def_en": "Training a model to resist misleading context hides a second failure, because a model that ignores all context looks robust and is useless when the context is worth trusting.",
+      "def_vi": "Huấn luyện mô hình chống lại ngữ cảnh gây nhiễu che mất một dạng hỏng thứ hai, vì mô hình bỏ qua mọi ngữ cảnh trông thì vững nhưng vô dụng khi ngữ cảnh đáng tin. Mới một nhóm dựng bộ đo bốn điều kiện ghép cặp, và cách đặt vấn đề này rất hữu ích cho hệ truy xuất.",
+      "say": "Robustness to misleading context is trivial if you are allowed to ignore all context.",
+      "src": [
+        "2608.06377",
+        "2608.04591"
+      ],
+      "tags": [
+        "rag",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-frontier-sparse-at-trillion-scale",
+      "en": "Frontier models are sparse at trillion scale",
+      "vi": "Mô hình tiên phong thưa ở quy mô nghìn tỷ",
+      "def_en": "Recent open technical reports describe mixtures of experts with total parameters in the hundreds of billions to trillions but only a small fraction activated per token, with long context and native multimodality.",
+      "def_vi": "Các báo cáo kỹ thuật mở gần đây mô tả hỗn hợp chuyên gia có tổng tham số từ hàng trăm tỷ đến hàng nghìn tỷ nhưng chỉ kích hoạt một phần nhỏ cho mỗi token, kèm ngữ cảnh dài và đa phương thức nguyên bản. Nhiều nhóm cùng công bố theo mẫu này, đây là kiến trúc mặc định hiện nay.",
+      "src": [
+        "2607.24653",
+        "2608.04505"
+      ],
+      "tags": [
+        "mo-hinh-nen",
+        "moe"
+      ],
+      "say": "Trillions of parameters in total and a small slice of them active per token."
+    },
+    {
+      "id": "axl-upcycling",
+      "en": "Upcycling an existing checkpoint",
+      "vi": "Nâng cấp từ bản trọng số sẵn có",
+      "def_en": "Expanding a released dense or smaller model into a larger sparse one, or converting it to a different generation paradigm, instead of pretraining a new model from scratch.",
+      "def_vi": "Mở rộng một mô hình dày hoặc nhỏ hơn đã phát hành thành mô hình thưa lớn hơn, hoặc chuyển nó sang một mô thức sinh khác, thay vì tiền huấn luyện mô hình mới từ đầu. Nhiều nhóm cùng công bố theo cách này trong tuần, cho thấy huấn luyện lại từ đầu đang bớt hấp dẫn.",
+      "say": "Nobody wants to pay for a full pretraining run if an upcycle gets them there.",
+      "src": [
+        "2608.04505",
+        "2608.00146"
+      ],
+      "tags": [
+        "mo-hinh-nen",
+        "huan-luyen"
+      ]
+    },
+    {
+      "id": "axl-edge-first-foundation-model",
+      "en": "Edge-first foundation model",
+      "vi": "Mô hình nền ưu tiên thiết bị biên",
+      "def_en": "A small dense model designed around the memory profile of an on-device accelerator, using a hybrid mixer with local and global attention to keep the cache from growing with context.",
+      "def_vi": "Một mô hình dày cỡ nhỏ thiết kế quanh đặc tính bộ nhớ của bộ tăng tốc trên thiết bị, dùng bộ trộn lai với chú ý cục bộ và toàn cục để bộ đệm không phình theo ngữ cảnh. Mới một nhóm công bố báo cáo kỹ thuật, nhưng hướng chạy trên thiết bị thì nhiều nhóm cùng theo.",
+      "src": [
+        "2608.01034",
+        "2608.04488"
+      ],
+      "tags": [
+        "bien",
+        "mo-hinh-nen"
+      ]
+    },
+    {
+      "id": "axl-procedural-reasoning-data",
+      "en": "Procedural generators as training data",
+      "vi": "Bộ sinh thủ tục làm dữ liệu huấn luyện",
+      "def_en": "Programs that generate verifiable reasoning problems with difficulty controls and semantic scorers, used for completion-supervised training rather than only as an evaluation source.",
+      "def_vi": "Các chương trình sinh bài toán lập luận kiểm chứng được kèm nút chỉnh độ khó và bộ chấm ngữ nghĩa, dùng làm dữ liệu huấn luyện có giám sát chứ không chỉ làm nguồn đánh giá. Hai nhóm cùng theo hướng dữ liệu hình thức và thủ tục cho giai đoạn trước ngôn ngữ tự nhiên.",
+      "src": [
+        "2608.05148",
+        "2608.03930"
+      ],
+      "tags": [
+        "du-lieu",
+        "lap-luan"
+      ]
+    },
+    {
+      "id": "axl-pre-pretraining-formal",
+      "en": "Pre-pretraining on formal derivations",
+      "vi": "Tiền tiền huấn luyện trên suy diễn hình thức",
+      "def_en": "Starting a model on formal derivations before natural language, on the argument that this imparts structural bias richer than the narrow primitives used in earlier symbolic warmups.",
+      "def_vi": "Cho mô hình học suy diễn hình thức trước khi học ngôn ngữ tự nhiên, với lập luận rằng cách này truyền thiên lệch cấu trúc phong phú hơn những nguyên thuỷ hẹp của các đợt khởi động ký hiệu trước đây. Mới một nhóm làm ở ngân sách token lớn hơn trước, kết quả cần lặp lại.",
+      "src": [
+        "2608.03930",
+        "2608.05148"
+      ],
+      "tags": [
+        "du-lieu",
+        "tien-huan-luyen"
+      ]
+    },
+    {
+      "id": "axl-synthetic-data-where-real-is-private",
+      "en": "Synthetic data where the real data is private",
+      "vi": "Dữ liệu tổng hợp ở nơi dữ liệu thật riêng tư",
+      "def_en": "In clinical communication the authentic exchanges are private, fragmented and costly to annotate, so models are increasingly trained on model-generated conversations that stand in for them.",
+      "def_vi": "Trong giao tiếp lâm sàng, các cuộc trao đổi thật thì riêng tư, rời rạc và tốn kém để gán nhãn, nên mô hình ngày càng được huấn luyện trên hội thoại do mô hình sinh ra để thay thế. Có một khảo sát có cấu trúc và nhiều bài ứng dụng cùng theo, nhưng mức tương đương với dữ liệu thật vẫn là câu hỏi mở.",
+      "src": [
+        "2608.05993",
+        "2608.05249"
+      ],
+      "tags": [
+        "du-lieu",
+        "y-te"
+      ]
+    },
+    {
+      "id": "axl-rubric-as-executable",
+      "en": "Rubric as something to execute",
+      "vi": "Thang chấm như thứ để thi hành",
+      "def_en": "Casting the model as an executor that must verify each prioritised rule before judging, rather than as a generator measured against a rubric someone else applies.",
+      "def_vi": "Đặt mô hình vào vai người thi hành phải kiểm từng quy tắc theo thứ tự ưu tiên trước khi kết luận, thay vì vai người sinh ra sản phẩm rồi bị người khác chấm theo thang. Hai nhóm cùng dùng thang chấm như đối tượng học được chứ không phải như thước đo cố định.",
+      "src": [
+        "2608.05249",
+        "2607.26873"
+      ],
+      "tags": [
+        "du-lieu",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-interventional-data-limit",
+      "en": "Interventional data does not automatically teach causal direction",
+      "vi": "Dữ liệu can thiệp không tự động dạy được chiều nhân quả",
+      "def_en": "In a controlled synthetic setting where correlation and causal effect have opposite signs, raising the fraction of interventional samples did not fix the direction, because the sign was copied from the observational context.",
+      "def_vi": "Trong một môi trường tổng hợp có kiểm soát mà tương quan và tác động nhân quả trái dấu, tăng tỉ lệ mẫu can thiệp không sửa được chiều, vì dấu bị sao chép từ ngữ cảnh quan sát. Mới một nhóm chứng minh, nhưng nó bác thẳng một giả định rất phổ biến.",
+      "say": "More interventional data raised the response magnitude and left the sign wrong.",
+      "src": [
+        "2607.29484",
+        "2608.02412"
+      ],
+      "tags": [
+        "nhan-qua",
+        "du-lieu"
+      ]
+    },
+    {
+      "id": "axl-english-only-training-drifts",
+      "en": "English-only training drifts responses to English",
+      "vi": "Huấn luyện chỉ bằng tiếng Anh kéo phản hồi về tiếng Anh",
+      "def_en": "Distilling reasoning in English can raise scores in other languages while shifting the responses themselves toward English, so target-language data is needed to keep the output in the right language.",
+      "def_vi": "Chưng cất lập luận bằng tiếng Anh có thể nâng điểm ở ngôn ngữ khác nhưng đồng thời kéo chính phản hồi về tiếng Anh, nên cần dữ liệu ngôn ngữ đích để giữ đầu ra đúng ngôn ngữ. Hai nhóm cùng gặp vấn đề giữ đặc trưng ngôn ngữ đích, một bằng dữ liệu và một bằng lái đặc trưng.",
+      "src": [
+        "2608.05802",
+        "2608.04904"
+      ],
+      "tags": [
+        "da-ngu",
+        "chung-cat"
+      ],
+      "say": "The Korean accuracy went up and the answers started coming back in English."
+    },
+    {
+      "id": "axl-vocabulary-extension",
+      "en": "Vocabulary extension",
+      "vi": "Mở rộng từ vựng",
+      "def_en": "Adding tokens for a new language to a pretrained model, where how the new embeddings are initialised strongly affects how efficiently continued pretraining recovers quality.",
+      "def_vi": "Thêm token cho một ngôn ngữ mới vào mô hình đã tiền huấn luyện, trong đó cách khởi tạo nhúng mới ảnh hưởng mạnh tới việc tiếp tục tiền huấn luyện lấy lại chất lượng nhanh đến đâu. Mới một nhóm so hệ thống hơn hai mươi chiến lược cho một ngôn ngữ, nên kết luận còn phụ thuộc ngôn ngữ.",
+      "src": [
+        "2608.03494",
+        "2608.00837"
+      ],
+      "tags": [
+        "da-ngu",
+        "tokeniser"
+      ]
+    },
+    {
+      "id": "axl-perturbation-cpt",
+      "en": "Perturbation-based continued pretraining",
+      "vi": "Tiếp tục tiền huấn luyện bằng nhiễu loạn",
+      "def_en": "Continuing pretraining on deliberately noised text to make a model robust to dialectal variation, where character-level noise was reported to help most while largely preserving standard performance.",
+      "def_vi": "Tiếp tục tiền huấn luyện trên văn bản bị nhiễu có chủ ý để mô hình vững trước biến thể phương ngữ, trong đó nhiễu ở mức ký tự được báo là giúp nhiều nhất mà vẫn giữ được phần lớn hiệu năng chuẩn. Mới một nhóm so sáu điều kiện huấn luyện trên ba nhóm phương ngữ.",
+      "src": [
+        "2608.05510",
+        "2608.03494"
+      ],
+      "tags": [
+        "da-ngu",
+        "vung-chac"
+      ]
+    },
+    {
+      "id": "axl-tabular-gap",
+      "en": "Models still fail at tabular prediction",
+      "vi": "Mô hình vẫn hỏng ở dự đoán trên bảng",
+      "def_en": "Predictive analytics over tabular data remains a workload where a frontier model in a plain inference regime does poorly, which is the founding premise of the separate tabular foundation model field.",
+      "def_vi": "Phân tích dự báo trên dữ liệu bảng vẫn là loại tải mà mô hình tiên phong ở chế độ suy luận thuần làm kém, và đó chính là tiền đề của mảng mô hình nền cho dữ liệu bảng. Hai nhóm cùng nộp, một nhóm truy nguyên nguyên nhân và một nhóm xây mô hình chuyên biệt.",
+      "src": [
+        "2608.02412",
+        "2608.01400"
+      ],
+      "tags": [
+        "gioi-han",
+        "du-lieu"
+      ],
+      "say": "It writes excellent code about the table and predicts badly from the table."
+    },
+    {
+      "id": "axl-muon-optimizer",
+      "en": "Orthogonalized momentum optimizers",
+      "vi": "Bộ tối ưu mô men trực giao hoá",
+      "def_en": "Optimizers that orthogonalize the momentum matrix through a polynomial iteration, now receiving both convergence analysis and curvature-aware extensions after being adopted for pretraining.",
+      "def_vi": "Các bộ tối ưu trực giao hoá ma trận mô men bằng một phép lặp đa thức, nay được phân tích hội tụ và được mở rộng theo độ cong sau khi đã được dùng cho tiền huấn luyện. Nhiều nhóm cùng làm quanh họ tối ưu này trong tuần, cho thấy nó đang thành đối tượng nghiên cứu chuẩn.",
+      "src": [
+        "2608.04607",
+        "2608.05088",
+        "2608.01284"
+      ],
+      "tags": [
+        "toi-uu",
+        "huan-luyen"
+      ]
+    },
+    {
+      "id": "axl-hybrid-attention-architecture",
+      "en": "Hybrid attention and recurrence",
+      "vi": "Kiến trúc lai giữa chú ý và hồi quy",
+      "def_en": "Combining full attention layers with linear or convolutional recurrent mixers so that most of the sequence cost becomes linear while some exact retrieval capability is kept.",
+      "def_vi": "Kết hợp lớp chú ý đầy đủ với bộ trộn hồi quy tuyến tính hoặc tích chập để phần lớn chi phí theo chuỗi trở thành tuyến tính trong khi vẫn giữ được một phần khả năng truy hồi chính xác. Nhiều nhóm cùng dùng, từ mô hình biên tới mô hình tiên phong, đây gần như đã thành mặc định.",
+      "say": "Almost every new report has some linear mixer sitting next to the attention layers.",
+      "src": [
+        "2608.01651",
+        "2607.24653",
+        "2608.01034"
+      ],
+      "tags": [
+        "kien-truc",
+        "ngu-canh-dai"
+      ]
+    },
+    {
+      "id": "axl-salience-bias",
+      "en": "Salience bias",
+      "vi": "Thiên lệch vì cái nổi bật",
+      "def_en": "Models prioritise the explicit conditions written in the input so strongly that a useless but conspicuous detail can hijack the answer and suppress an implicit commonsense prerequisite.",
+      "def_vi": "Mô hình ưu tiên các điều kiện viết tường minh trong đầu vào mạnh tới mức một chi tiết vô dụng nhưng nổi bật có thể chiếm quyền câu trả lời và đè mất một điều kiện thường thức ngầm. Mới một nhóm đặt tên và dựng bộ đo, nhưng nó ăn khớp với ca tin nhầm ngữ cảnh gây nhiễu.",
+      "src": [
+        "2607.28478",
+        "2608.06377"
+      ],
+      "tags": [
+        "lap-luan",
+        "gioi-han"
+      ],
+      "say": "One irrelevant number in the prompt and it forgets the obvious physical constraint."
+    },
+    {
+      "id": "axl-personalization-over-inference",
+      "en": "Over-inference of user attributes",
+      "vi": "Suy diễn quá đà về người dùng",
+      "def_en": "Personalised systems fabricate user attributes beyond what the evidence supports, and in one large audit every evaluated model over-inferred a substantial share of its claims.",
+      "def_vi": "Hệ cá nhân hoá bịa ra thuộc tính của người dùng vượt quá mức chứng cứ cho phép, và trong một cuộc kiểm quy mô lớn thì mọi mô hình được đánh giá đều suy diễn quá đà ở một phần đáng kể các khẳng định. Mới một nhóm đo, nhưng thiết kế của họ có đối chiếu với người gán nhãn.",
+      "say": "It built a whole persona out of two sentences and then acted on it.",
+      "src": [
+        "2608.04570",
+        "2608.05624"
+      ],
+      "tags": [
+        "ca-nhan-hoa",
+        "an-toan"
+      ]
+    },
+    {
+      "id": "axl-stance-reversal-sycophancy",
+      "en": "Stance reversal sycophancy",
+      "vi": "Nịnh bợ bằng cách đảo lập trường",
+      "def_en": "A specific harmful sycophancy in which the model reverses an initial position purely to match a preference the user stated, which can be detected from a single response.",
+      "def_vi": "Một dạng nịnh bợ có hại cụ thể, trong đó mô hình đảo ngược lập trường ban đầu chỉ để khớp với sở thích mà người dùng nói ra, và dạng này phát hiện được từ một phản hồi đơn lẻ. Hai nhóm cùng làm về nịnh bợ, một nhóm ở mức hành vi và một nhóm ở mức quy gán token.",
+      "src": [
+        "2608.05624",
+        "2607.28906"
+      ],
+      "tags": [
+        "an-toan",
+        "hanh-vi"
+      ]
+    },
+    {
+      "id": "axl-delusion-linked-behaviour",
+      "en": "Delusion-linked behaviour",
+      "vi": "Hành vi tiếp tay cho hoang tưởng",
+      "def_en": "Behaviours that reinforce a user's delusional beliefs over a conversation, evaluated against real conversation histories from people who experienced psychological harm, and found not to track model size or release date.",
+      "def_vi": "Những hành vi củng cố niềm tin hoang tưởng của người dùng qua cả cuộc trò chuyện, được đánh giá dựa trên lịch sử hội thoại thật của những người đã chịu tổn hại tâm lý, và kết quả không đi theo cỡ mô hình hay ngày phát hành. Mới một nhóm dựng bộ đo này, và cách lấy dữ liệu của họ đáng chú ý.",
+      "src": [
+        "2608.05004",
+        "2608.05624"
+      ],
+      "tags": [
+        "an-toan",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-stylistic-trace-of-assistance",
+      "en": "Stylistic trace of model assistance",
+      "vi": "Dấu vết văn phong của việc dùng mô hình",
+      "def_en": "Population-level writing statistics can shift when models come into wide use, which is a weak signal about individual documents but a measurable one about a corpus over time.",
+      "def_vi": "Thống kê văn phong ở mức quần thể có thể dịch chuyển khi mô hình được dùng rộng rãi, đây là tín hiệu yếu với từng văn bản riêng nhưng đo được ở mức tập hợp theo thời gian. Mới một nghiên cứu đăng ký trước trên một tập văn bản, nên đừng suy ra kết luận về cá nhân.",
+      "say": "It tells you something about the corpus and almost nothing about any one document.",
+      "src": [
+        "2608.05889",
+        "2608.05741"
+      ],
+      "tags": [
+        "phat-hien",
+        "do-luong"
+      ]
+    },
+    {
+      "id": "axl-agent-centric-world-proxy",
+      "en": "Agent-centric world proxy",
+      "vi": "Đại diện thế giới lấy tác tử làm trung tâm",
+      "def_en": "Shifting world modelling from predicting the next physical state toward producing the feedback an agent can actually act on, since real interaction is costly, slow and hard to parallelise.",
+      "def_vi": "Chuyển mô hình hoá thế giới từ chỗ dự đoán trạng thái vật lý kế tiếp sang chỗ sinh ra phản hồi mà tác tử dùng được ngay, vì tương tác thật thì đắt, chậm và khó chạy song song. Đây là bài định hướng của một nhóm, nhưng hướng dùng dự đoán quan sát làm giám sát thì có nhóm khác làm thực nghiệm.",
+      "src": [
+        "2608.02713",
+        "2607.27973"
+      ],
+      "tags": [
+        "tac-tu",
+        "the-gioi"
+      ]
+    },
+    {
+      "id": "axl-grammar-constrained-decoding",
+      "en": "Learning grammars for constrained decoding",
+      "vi": "Học văn phạm cho giải mã có ràng buộc",
+      "def_en": "Constrained decoding can eliminate syntactically invalid programs but needs a grammar, which is rarely available for a third-party domain-specific language, so an agent learns one from documentation and execution data.",
+      "def_vi": "Giải mã có ràng buộc loại được chương trình sai cú pháp nhưng cần một văn phạm, thứ hiếm khi có sẵn cho ngôn ngữ chuyên biệt của bên thứ ba, nên một tác tử học văn phạm đó từ tài liệu và dữ liệu chạy thử. Mới một nhóm làm, kèm bảo đảm hình thức về đối tượng học được.",
+      "src": [
+        "2608.05493",
+        "2608.06292"
+      ],
+      "tags": [
+        "cong-cu",
+        "ky-hieu"
+      ]
+    },
+    {
+      "id": "axl-hallucination-by-decomposition",
+      "en": "Decomposed entailment for hallucination checking",
+      "vi": "Kiểm ảo giác bằng cách tách khẳng định",
+      "def_en": "Breaking generated content into atomic claims and verifying each against source chunks with a compact entailment model, which keeps the check reference-free and cheap enough to run on every output.",
+      "def_vi": "Tách nội dung sinh ra thành các khẳng định nguyên tử rồi kiểm từng khẳng định với mảnh nguồn bằng một mô hình suy dẫn gọn, cách này giữ phép kiểm không cần đáp án mẫu và đủ rẻ để chạy trên mọi đầu ra. Hai nhóm cùng làm về ảo giác nội tại nhưng ở hai phía, một phía kiểm và một phía tấn công.",
+      "src": [
+        "2608.05823",
+        "2608.04286"
+      ],
+      "tags": [
+        "ao-giac",
+        "danh-gia"
+      ]
+    },
+    {
+      "id": "axl-semantically-equivalent-stress-test",
+      "en": "Semantically equivalent stress test",
+      "vi": "Kiểm áp lực bằng biến thể tương đương nghĩa",
+      "def_en": "Searching for paraphrases of a query that keep the meaning but flip the model into contradicting its own retrieved evidence, which measures robustness rather than average accuracy.",
+      "def_vi": "Tìm những cách diễn đạt lại truy vấn giữ nguyên nghĩa nhưng lật mô hình sang chỗ mâu thuẫn với chính chứng cứ nó đã lấy về, phép này đo độ vững chứ không đo độ chính xác trung bình. Mới một nhóm dựng khung tối ưu đối kháng có ràng buộc tương đương nghĩa.",
+      "say": "Same question, different words, and now it contradicts the passage it just retrieved.",
+      "src": [
+        "2608.04286",
+        "2608.05823"
+      ],
+      "tags": [
+        "ao-giac",
+        "vung-chac"
+      ]
+    },
+    {
+      "id": "axl-observation-mode-routing",
+      "en": "Observation mode for web agents",
+      "vi": "Chế độ quan sát của tác tử web",
+      "def_en": "A browser can be observed as text, as pixels or as both, the modes solve different tasks and fail differently, yet choosing per task is hardest to learn exactly where it would be most valuable.",
+      "def_vi": "Trình duyệt có thể được quan sát bằng chữ, bằng điểm ảnh hoặc cả hai, các chế độ giải được những nhiệm vụ khác nhau và hỏng theo cách khác nhau, nhưng chọn theo từng nhiệm vụ lại khó học nhất đúng ở chỗ nó đáng giá nhất. Mới một nhóm đo và kèm cận lý thuyết.",
+      "src": [
+        "2608.06171",
+        "2608.03327"
+      ],
+      "tags": [
+        "tac-tu",
+        "da-phuong-thuc"
+      ]
+    }
+  ]
+}

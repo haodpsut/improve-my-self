@@ -1,0 +1,1807 @@
+{
+  "schema": 1,
+  "id": "arxiv-llm",
+  "updated": "2026-08-08",
+  "questions": [
+    {
+      "id": "qaxl-1",
+      "q": "Several groups this week attack the same weakness of token eviction in the key value cache. That weakness is",
+      "q_vi": "Nhiều nhóm trong tuần cùng đánh vào một điểm yếu của việc loại bỏ token khỏi bộ đệm khoá giá trị. Điểm yếu đó là",
+      "choices": [
+        "The implementation always requires retraining the base model weights",
+        "It reliably increases how many tokens the model generates",
+        "The decision is irreversible while importance keeps changing",
+        "It only applies to models using grouped query attention"
+      ],
+      "answer": 2,
+      "why": "Once an entry is discarded it can never contribute again, yet the tokens that matter shift as generation proceeds.",
+      "why_vi": "Một mục đã bị xoá thì không bao giờ đóng góp lại được, trong khi tập token quan trọng lại thay đổi trong lúc sinh.",
+      "level": 1
+    },
+    {
+      "id": "qaxl-2",
+      "q": "Query-agnostic cache compression exists because",
+      "q_vi": "Nén bộ đệm không phụ thuộc truy vấn tồn tại vì",
+      "choices": [
+        "Attention scores can only be defined once the query has finally arrived",
+        "The context is compressed once and reused for queries not yet known",
+        "Quantization cannot be applied to the value half of the cache",
+        "It removes the need for rotary positional embeddings entirely"
+      ],
+      "answer": 1,
+      "why": "Agent and document workloads compress a context before the future queries exist, so query-specific importance scores are unavailable.",
+      "why_vi": "Tải của tác tử và của kho tài liệu nén ngữ cảnh trước khi truy vấn tương lai xuất hiện, nên không có sẵn điểm quan trọng theo truy vấn.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-3",
+      "q": "Work on low rank compression of the key cache has shifted its objective toward",
+      "q_vi": "Các nghiên cứu nén hạng thấp bộ đệm khoá đã chuyển mục tiêu sang",
+      "choices": [
+        "Minimising the reconstruction error of the stored key vectors",
+        "Maximising the compression ratio whatever the cost in accuracy",
+        "Matching the per channel variance of the value cache exactly",
+        "Preserving the attention scores the model actually reads"
+      ],
+      "answer": 3,
+      "why": "Key reconstruction quality is only a proxy, and several groups now optimise the quantity that reaches the output instead.",
+      "why_vi": "Dựng lại khoá cho khớp chỉ là đại lượng thay thế, nên vài nhóm nay tối ưu thẳng đại lượng đi tới đầu ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-4",
+      "q": "At long context, decoding throughput is limited mainly by",
+      "q_vi": "Ở ngữ cảnh dài, thông lượng sinh token bị giới hạn chủ yếu bởi",
+      "choices": [
+        "The memory bandwidth needed to load the cache",
+        "The cost of the softmax normalisation at each step",
+        "The number of transformer layers stacked in the model",
+        "The size of the vocabulary used at the output head"
+      ],
+      "answer": 0,
+      "why": "Reading the cache takes longer than computing attention over it, which is why byte level reduction matters more than arithmetic reduction.",
+      "why_vi": "Đọc bộ đệm mất nhiều thời gian hơn tính chú ý trên nó, vì vậy giảm số byte quan trọng hơn giảm phép tính.",
+      "level": 1
+    },
+    {
+      "id": "qaxl-5",
+      "q": "Cross model cache transfer was proposed because production systems",
+      "q_vi": "Chuyển bộ đệm giữa các mô hình được đề xuất vì hệ thống thực tế",
+      "choices": [
+        "Never run more than one model inside one service",
+        "Cannot store the cache in the device memory",
+        "Swap between model sizes and repay prefill on every swap",
+        "Require identical tokenizers from all of the model vendors involved"
+      ],
+      "answer": 2,
+      "why": "Cost quality cascading and routing make model switching routine, and each switch otherwise recomputes the whole prefill.",
+      "why_vi": "Xếp tầng theo chi phí và định tuyến khiến việc đổi mô hình thành thường xuyên, và mỗi lần đổi thì phải nạp lại toàn bộ từ đầu.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-6",
+      "q": "One paper argues that judging cache compression only by final answer accuracy is insufficient because",
+      "q_vi": "Một bài lập luận rằng chỉ chấm nén bộ đệm bằng độ chính xác của đáp án cuối là chưa đủ vì",
+      "choices": [
+        "Accuracy is impossible to measure reliably on any long context reasoning benchmark that is in use",
+        "The answer and the validity of its supporting rationale can be preserved at different rates",
+        "Compression lowers accuracy in every single setting that has been tested",
+        "Accuracy depends entirely on the tokenizer used to segment the context"
+      ],
+      "answer": 1,
+      "why": "Under a fixed trace replay protocol, correct answers survived compression more readily than the usable evidence behind them.",
+      "why_vi": "Dưới giao thức phát lại vệt cố định, đáp án đúng sống sót qua nén dễ hơn phần chứng cứ dùng được đứng sau nó.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-7",
+      "q": "In a system that compresses the cache to save memory, one reported second order effect is that",
+      "q_vi": "Trong hệ nén bộ đệm để tiết kiệm bộ nhớ, một hiệu ứng bậc hai được báo cáo là",
+      "choices": [
+        "The tokenizer vocabulary has to be extended beforehand too",
+        "Attention becomes quadratic in the sequence length once again",
+        "The router stops balancing the load across the experts",
+        "A smaller cache leads the model to generate more tokens"
+      ],
+      "answer": 3,
+      "why": "Part of the memory saving is cancelled on the generation side, which is why one group coordinates compression and generation under one reward.",
+      "why_vi": "Một phần khoản tiết kiệm bộ nhớ bị triệt tiêu ở phía sinh, vì thế một nhóm phối hợp nén và sinh dưới cùng một phần thưởng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-8",
+      "q": "Compacting an agent's cache is harder than compacting a document's cache because",
+      "q_vi": "Nén bộ đệm của tác tử khó hơn nén bộ đệm của một tài liệu vì",
+      "choices": [
+        "New content must be compressed before its future relevance is known",
+        "Agent traces contain almost no natural language that is worth compressing",
+        "Agents and documents run on quite different hardware profiles",
+        "Tool outputs cannot be tokenized by the standard tokenizer used"
+      ],
+      "answer": 0,
+      "why": "An agent keeps producing turns whose usefulness depends on a query that has not been issued yet, and delaying compaction recovered much of the loss.",
+      "why_vi": "Tác tử liên tục sinh ra lượt mới mà tính hữu ích phụ thuộc vào truy vấn chưa xuất hiện, và hoãn nén lại lấy về được phần lớn chất lượng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-9",
+      "q": "After attention itself has been made sparse, the next bottleneck reported is",
+      "q_vi": "Sau khi bản thân chú ý đã được làm thưa, nút cổ chai tiếp theo được báo cáo là",
+      "choices": [
+        "The layer normalisation kernels inside each block",
+        "The embedding lookup at the input of the model",
+        "The optimizer state kept in the host memory",
+        "The indexer that scores every preceding token"
+      ],
+      "answer": 3,
+      "why": "Selecting the top entries still requires scoring the full prefix, so the selector keeps the quadratic term the sparse attention removed.",
+      "why_vi": "Chọn ra các mục đầu bảng vẫn phải chấm điểm toàn bộ phần tiền tố, nên bộ chọn giữ lại đúng phần bậc hai mà chú ý thưa đã bỏ.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-10",
+      "q": "A counterfactual audit of block sparse attention found two effects that pull in opposite directions. They are",
+      "q_vi": "Một cuộc kiểm phản thực trên chú ý thưa theo khối tìm ra hai hiệu ứng kéo ngược nhau. Đó là",
+      "choices": [
+        "Higher throughput and higher energy consumption",
+        "Signal concentration and integration loss",
+        "Load balancing and expert specialisation",
+        "Prefill latency and decode latency together"
+      ],
+      "answer": 1,
+      "why": "The selector does preserve the blocks that carry the answer, but discarding the rest severs the cross block links needed to combine evidence.",
+      "why_vi": "Bộ chọn có giữ được khối mang đáp án, nhưng bỏ phần còn lại thì cắt đứt liên kết giữa các khối cần cho việc ghép chứng cứ.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-11",
+      "q": "Reusing the top entries selected by a neighbouring query works because",
+      "q_vi": "Dùng lại các mục đầu bảng mà truy vấn kề bên đã chọn là hiệu quả vì",
+      "choices": [
+        "Attention scores stay constant across all positions",
+        "The rotary embedding removes positional information",
+        "Nearby queries select highly overlapping key sets",
+        "Queries become identical after layer normalisation"
+      ],
+      "answer": 2,
+      "why": "Partially overlapping supports still preserve most of the exact attention mass, so one shared scan can serve a group of queries.",
+      "why_vi": "Tập hỗ trợ chồng lấn một phần vẫn giữ được phần lớn khối lượng chú ý chính xác, nên một lượt quét dùng chung phục vụ được cả nhóm truy vấn.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-12",
+      "q": "For diffusion mixtures of experts, one scaling study reported that",
+      "q_vi": "Với hỗn hợp chuyên gia dạng khuếch tán, một nghiên cứu mở rộng báo cáo rằng",
+      "choices": [
+        "Expert pools should get smaller as the total training scale grows",
+        "The learning rate should be held constant as the compute budget rises",
+        "The optimal hyperparameter trends differ quantitatively from autoregressive ones",
+        "The token budget should grow considerably more slowly than the activated model compute"
+      ],
+      "answer": 2,
+      "why": "Optimal batch size grew faster and learning rate decayed more rapidly than the autoregressive trends people usually quote, and this comes from a single group.",
+      "why_vi": "Kích thước lô tối ưu tăng nhanh hơn và bước học giảm nhanh hơn so với các quy luật tự hồi quy vẫn thường được trích, và đây là kết quả của một nhóm.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-13",
+      "q": "Several groups now use the router output distribution as a free signal for",
+      "q_vi": "Nhiều nhóm nay dùng phân phối đầu ra của bộ định tuyến làm tín hiệu miễn phí cho",
+      "choices": [
+        "How uncertain the model is about the current token",
+        "Detecting an injected instruction inside the prompt",
+        "Selecting which tokenizer to apply to the input",
+        "Estimating the remaining length of the sequence"
+      ],
+      "answer": 0,
+      "why": "A peaked router distribution means one expert clearly fits and a flat one means ambiguity, so the number of experts can adapt per token.",
+      "why_vi": "Phân phối định tuyến nhọn nghĩa là một chuyên gia rõ ràng phù hợp còn phẳng nghĩa là mập mờ, nhờ vậy số chuyên gia thích nghi theo từng token.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-14",
+      "q": "A measurement study of sparse mixtures found that co-selected experts",
+      "q_vi": "Một nghiên cứu đo trên hỗn hợp chuyên gia thưa thấy rằng các chuyên gia được chọn cùng nhau",
+      "choices": [
+        "Contribute strictly orthogonal representation directions",
+        "Are always the same set of experts from token to token",
+        "Overlap substantially in the subspaces they contribute",
+        "Cannot be merged in any way without further retraining"
+      ],
+      "answer": 2,
+      "why": "The geometric complementarity story does not match the measurements, though the actual routes still explained the representations better than matched alternatives.",
+      "why_vi": "Câu chuyện bù trừ theo hình học không khớp với số đo, dù tuyến định tuyến thật vẫn giải thích biểu diễn tốt hơn các phương án đã ghép cặp.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-15",
+      "q": "Merging experts in a vision language mixture should account for the fact that",
+      "q_vi": "Hợp nhất chuyên gia trong hỗn hợp thị giác ngôn ngữ cần tính tới việc",
+      "choices": [
+        "Image, question and answer phases route differently",
+        "The vision encoder contains no experts of its own",
+        "Merging always requires a held out calibration set first",
+        "Experts are shared across every layer of the stack"
+      ],
+      "answer": 0,
+      "why": "Image context tokens are far more numerous, so statistics aggregated over all tokens make experts serving different phases look interchangeable.",
+      "why_vi": "Token ngữ cảnh ảnh đông hơn hẳn, nên gộp thống kê trên mọi token khiến các chuyên gia phục vụ những pha khác nhau trông như thay thế được cho nhau.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-16",
+      "q": "Combining speculative decoding with a mixture of experts target model is awkward because",
+      "q_vi": "Kết hợp giải mã đầu cơ với mô hình đích dạng hỗn hợp chuyên gia gặp trở ngại vì",
+      "choices": [
+        "The drafter cannot be made any smaller than the target model itself",
+        "Experts within a single layer cannot be executed in parallel at all",
+        "Verification activates the union of the experts every draft node would pick",
+        "The router has to be retrained for every new speculation length that is being used"
+      ],
+      "answer": 2,
+      "why": "Cutting the token workload does not shrink expert traffic proportionally, so token count and activated expert count are separate cost measures.",
+      "why_vi": "Giảm khối lượng token không kéo theo giảm lưu lượng chuyên gia tương ứng, nên số token và số chuyên gia được kích hoạt là hai thước chi phí khác nhau.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-17",
+      "q": "Extending the speculation horizon stops helping once",
+      "q_vi": "Kéo dài chân trời đầu cơ hết tác dụng khi",
+      "choices": [
+        "The draft model becomes larger than the target model that it is meant to serve",
+        "The context length passes somewhere in the region of one million tokens",
+        "The batch happens to contain more than one concurrent decoding request",
+        "The marginal acceptance probability falls below the relative drafting cost"
+      ],
+      "answer": 3,
+      "why": "Each additional drafted token costs drafting work that is only repaid if it is likely to be accepted, so longer speculation can reduce speedup.",
+      "why_vi": "Mỗi token nháp thêm tốn công nháp mà chỉ hoàn vốn nếu có khả năng được chấp nhận, nên đầu cơ dài hơn có thể làm giảm mức tăng tốc.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-18",
+      "q": "Tool call speculation in an agent aims to hide",
+      "q_vi": "Đầu cơ lời gọi công cụ trong tác tử nhằm giấu đi",
+      "choices": [
+        "The cost of loading the model weights from storage",
+        "The wall clock time spent waiting for the environment",
+        "The prompt template used by the person operating the agent",
+        "The memory footprint of the growing key value cache"
+      ],
+      "answer": 1,
+      "why": "As decoding gets faster the tool execution becomes the visible bottleneck, so the next call is predicted and pre executed.",
+      "why_vi": "Khi giải mã nhanh dần thì việc chạy công cụ trở thành nút cổ chai nhìn thấy được, nên lời gọi kế tiếp được đoán trước và chạy sớm.",
+      "level": 1
+    },
+    {
+      "id": "qaxl-19",
+      "q": "Speculative decoding inside reinforcement learning is difficult because",
+      "q_vi": "Giải mã đầu cơ bên trong học tăng cường khó ở chỗ",
+      "choices": [
+        "The target policy keeps updating, so a static drafter goes stale",
+        "Rewards cannot be computed over tokens that were only drafted",
+        "Rollouts are always shorter than the width of the draft window",
+        "The verifier and the policy must use two entirely different vocabularies"
+      ],
+      "answer": 0,
+      "why": "Refreshing the drafter often enough to keep acceptance high costs more than it saves, which is the tension the work addresses.",
+      "why_vi": "Cập nhật bộ nháp đủ thường xuyên để giữ tỉ lệ chấp nhận cao lại tốn hơn phần tiết kiệm, và đó là mâu thuẫn mà nghiên cứu này nhắm tới.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-20",
+      "q": "A theoretical result this week warns that an error penalised scoring rule with an abstain option can cause",
+      "q_vi": "Một kết quả lý thuyết trong tuần cảnh báo rằng luật chấm phạt sai kèm lựa chọn từ chối có thể gây ra",
+      "choices": [
+        "Immediate divergence of the value function being learned",
+        "Complete loss of alignment between model and tokenizer",
+        "The reward model to become entirely deterministic within a handful of steps",
+        "The model to refuse everything while its mean training reward rises"
+      ],
+      "answer": 3,
+      "why": "The reward gradient and the anchor's restoring force are throttled by the same gate saturation factor, so the training curve reads as improvement while coverage collapses.",
+      "why_vi": "Gradient phần thưởng và lực kéo về của neo bị chặn bởi cùng một hệ số bão hoà cổng, nên đường huấn luyện trông như tiến bộ trong khi độ phủ sụp đổ.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-21",
+      "q": "The reported reason generative reward models underperform inside reinforcement learning is",
+      "q_vi": "Lý do được báo cáo khiến mô hình thưởng dạng sinh hoạt động kém bên trong học tăng cường là",
+      "choices": [
+        "They cannot be run on the same hardware as the policy network",
+        "Their comparative nature clashes with the scalar scoring the algorithms expect",
+        "They require paired human annotations at every single step of the whole training run",
+        "They are far too small to judge responses of any real length"
+      ],
+      "answer": 1,
+      "why": "The reward model ranks responses against each other, and squeezing that into one number discards the comparison, which is why rewards are being built from relative rankings.",
+      "why_vi": "Mô hình thưởng xếp hạng các phản hồi so với nhau, ép nó thành một con số làm mất phần so sánh, vì thế người ta xây thưởng từ thứ hạng tương đối.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-22",
+      "q": "A multi task analysis reported that reinforcement learning tolerates task mixing better than supervised fine tuning because",
+      "q_vi": "Một phân tích đa nhiệm báo cáo rằng học tăng cường chịu được việc trộn nhiệm vụ tốt hơn tinh chỉnh giám sát vì",
+      "choices": [
+        "It relies on much smaller batches during the update step",
+        "It never touches the attention layers of the base model",
+        "It induces sparse and nearly orthogonal parameter updates across tasks",
+        "It requires far fewer training tokens in order to reach the very same loss"
+      ],
+      "answer": 2,
+      "why": "Interference in supervised training scaled with the absolute gradient magnitude, whereas the reinforcement case was bounded by the variance left after advantage normalisation.",
+      "why_vi": "Nhiễu chéo ở huấn luyện giám sát tỉ lệ với độ lớn tuyệt đối của gradient, còn ở học tăng cường thì bị chặn bởi phương sai còn lại sau chuẩn hoá lợi thế.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-23",
+      "q": "On policy self distillation turns a sparse outcome reward into dense supervision by",
+      "q_vi": "Tự chưng cất theo chính sách biến phần thưởng kết quả thưa thành giám sát dày bằng cách",
+      "choices": [
+        "Adding a separate value network for every turn of the episode",
+        "Sampling a much larger number of rollouts for each prompt",
+        "Raising the discount factor applied to the outcome reward",
+        "Rescoring the model's own tokens under a more informed view"
+      ],
+      "answer": 3,
+      "why": "The same weights act as teacher and student, and the difference between the two views produces a token level signal that a single trajectory reward cannot.",
+      "why_vi": "Cùng bộ trọng số đóng vai giáo viên và học trò, và khác biệt giữa hai góc nhìn sinh ra tín hiệu ở mức token mà một phần thưởng quỹ đạo không tạo được.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-24",
+      "q": "The privilege illusion in self distillation refers to",
+      "q_vi": "Ảo giác đặc quyền trong tự chưng cất chỉ hiện tượng",
+      "choices": [
+        "The teacher model being substantially larger and considerably stronger than the student",
+        "The student learning behaviour that only makes sense when privileged information is present",
+        "The reward model systematically overestimating the quality of the responses it scores",
+        "The rollouts being generated by an off policy behaviour model rather than the current policy"
+      ],
+      "answer": 1,
+      "why": "At inference the student behaves as if the reference solution were still available, and that mismatch degrades performance rather than improving it.",
+      "why_vi": "Lúc chạy thật, học trò hành xử như thể lời giải mẫu vẫn còn đó, và sự lệch pha này làm kết quả xấu đi chứ không tốt lên.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-25",
+      "q": "One paper identified a confound when future observations are used as the teacher's privileged information. The confound is that",
+      "q_vi": "Một bài chỉ ra một nhiễu gây nhầm khi quan sát tương lai được dùng làm thông tin đặc quyền của giáo viên. Nhiễu đó là",
+      "choices": [
+        "The future observations are themselves noisy and unreliable",
+        "The environment is not deterministic between two episodes",
+        "The replay scaffold itself perturbs the token scores",
+        "The student and the teacher use two different tokenizers"
+      ],
+      "answer": 2,
+      "why": "Reconstructing the extended context needed to replay the observation changes the scores independently of the information it carries, so the support cannot be attributed cleanly.",
+      "why_vi": "Dựng lại ngữ cảnh mở rộng để phát lại quan sát làm đổi điểm số một cách độc lập với thông tin nó mang, nên phần ủng hộ không quy được rõ ràng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-26",
+      "q": "Fisher projected distillation for a compact vision language student is motivated by the finding that",
+      "q_vi": "Chưng cất có chiếu Fisher cho học trò thị giác ngôn ngữ gọn xuất phát từ phát hiện rằng",
+      "choices": [
+        "As the target approaches the full teacher distribution the student does worse",
+        "Visual tokens turn out to be much cheaper than text tokens",
+        "The teacher network should always be kept frozen throughout the distillation run",
+        "Distillation needs a contrastive loss term in order to work"
+      ],
+      "answer": 0,
+      "why": "Corrections that depend on visual distinctions the student cannot represent are not realisable, so only the locally realisable part of the teacher signal is used.",
+      "why_vi": "Những chỉnh sửa phụ thuộc vào phân biệt thị giác mà học trò không biểu diễn được thì không hiện thực hoá được, nên chỉ phần tín hiệu giáo viên khả thi cục bộ mới được dùng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-27",
+      "q": "A survey of test time scaling argues that reporting a single scalar budget is misleading because",
+      "q_vi": "Một bài tổng quan về mở rộng lúc chạy lập luận rằng báo một con số ngân sách duy nhất là gây hiểu lầm vì",
+      "choices": [
+        "Compute budgets always depend on the currency and the hardware generation used",
+        "Token counts cannot be measured reliably inside a real served system at all",
+        "Extending one trajectory, aggregating candidates and searching partial states differ",
+        "Sampling completed candidates always dominates search over unfinished partial states"
+      ],
+      "answer": 2,
+      "why": "The three regimes have different statistical structure and failure modes, so comparing them under one number hides what the compute actually bought.",
+      "why_vi": "Ba chế độ có cấu trúc thống kê và dạng hỏng khác nhau, nên so chúng dưới một con số sẽ che mất phần tính toán thật sự mua được gì.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-28",
+      "q": "When self refine, best of N and debate were each given the same optimisation budget as a single call baseline, the result was",
+      "q_vi": "Khi tự chỉnh, chọn tốt nhất trong N và tranh luận đều được cấp cùng ngân sách tối ưu như baseline gọi một lần, kết quả là",
+      "choices": [
+        "Orchestration gains became moderate and benchmark dependent",
+        "Orchestration turned out to be strictly worse in every domain",
+        "The single call baseline failed to run on most items",
+        "Debate dominated every domain that was included"
+      ],
+      "answer": 0,
+      "why": "Earlier comparisons often left the baseline under optimised, so part of the reported orchestration advantage was an artefact of unequal effort.",
+      "why_vi": "Các phép so trước thường để baseline chưa được tối ưu đủ, nên một phần lợi thế được báo của điều phối chỉ là hiện vật của công sức không cân bằng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-29",
+      "q": "A controlled study found that accuracy gains after a self revision pass at small to mid scale often came from",
+      "q_vi": "Một nghiên cứu có kiểm soát thấy phần tăng độ chính xác sau một lượt tự sửa ở quy mô nhỏ tới trung thường đến từ",
+      "choices": [
+        "The answer becoming parseable rather than the reasoning improving",
+        "Chains of thought becoming considerably longer on average",
+        "The sampling temperature being set much higher than before",
+        "Better retrieval of the external evidence which supports the claim"
+      ],
+      "answer": 0,
+      "why": "Decomposing the revision shift into a content margin and format recovery showed the format effect exceeding the content effect in most of the tested cells.",
+      "why_vi": "Tách phần dịch chuyển sau khi sửa thành biên nội dung và phần phục hồi định dạng cho thấy hiệu ứng định dạng lớn hơn hiệu ứng nội dung ở phần lớn ô đã kiểm.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-30",
+      "q": "An evaluation of shortened reasoning traces at matched token limits found that",
+      "q_vi": "Một đánh giá về vệt lập luận rút ngắn ở cùng giới hạn token cho thấy",
+      "choices": [
+        "Accuracy collapsed in almost every setting",
+        "Accuracy changes were small and mixed",
+        "Longer traces were better in every case",
+        "Shorter traces improved accuracy uniformly"
+      ],
+      "answer": 1,
+      "why": "A shorter trace can simply mean the model stopped sooner, so trace length is not by itself evidence of more efficient reasoning.",
+      "why_vi": "Vệt ngắn hơn có thể chỉ nghĩa là mô hình dừng sớm hơn, nên độ dài vệt tự nó không chứng minh việc lập luận hiệu quả hơn.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-31",
+      "q": "Zero token memory operations for an agent means that",
+      "q_vi": "Thao tác bộ nhớ không tốn token cho tác tử nghĩa là",
+      "choices": [
+        "No step outside the final answer consumes model tokens",
+        "The agent stores no persistent memory of any kind whatsoever",
+        "Memory is held inside the key value cache only",
+        "Retrieval is performed by exact string matching"
+      ],
+      "answer": 0,
+      "why": "Maintaining memory through extra model calls is a recurring cost, so the design pushes the bookkeeping into encoders and graph structure instead.",
+      "why_vi": "Duy trì bộ nhớ bằng các lời gọi mô hình phụ là khoản chi lặp lại, nên thiết kế đẩy phần ghi chép sang bộ mã hoá và cấu trúc đồ thị.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-32",
+      "q": "Memory systems that assign each stored item its own perishability are responding to the problem that",
+      "q_vi": "Các hệ bộ nhớ gán cho mỗi mục lưu một mức mau hỏng riêng đang xử lý vấn đề",
+      "choices": [
+        "Embeddings drift noticeably between two consecutive model versions",
+        "Different kinds of fact stay valid for very different lengths of time",
+        "Retrieval scores are not comparable across two different embedding models",
+        "Memories cannot be serialised to disk without losing their structure"
+      ],
+      "answer": 1,
+      "why": "Treating all memories as equally persistent contaminates the retrieved context with facts that have quietly expired.",
+      "why_vi": "Coi mọi mẩu nhớ đều bền như nhau sẽ làm bẩn ngữ cảnh truy xuất bằng những dữ kiện đã âm thầm hết hạn.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-33",
+      "q": "Analytic memory differs from retrieval memory in that it supports",
+      "q_vi": "Bộ nhớ để tính toán khác bộ nhớ truy xuất ở chỗ nó hỗ trợ",
+      "choices": [
+        "Considerably faster embedding of the newly arriving documents in the whole corpus",
+        "Aggressive compression of the key value cache of the running model",
+        "Automatic translation of the stored text at the moment of retrieval",
+        "Filtering, aggregation, ranking and temporal comparison over stored observations"
+      ],
+      "answer": 3,
+      "why": "Returning relevant passages is not enough when the question asks the agent to compute over everything it has seen across sessions.",
+      "why_vi": "Trả về đoạn liên quan là chưa đủ khi câu hỏi yêu cầu tác tử tính toán trên mọi thứ nó đã thấy qua nhiều phiên.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-34",
+      "q": "A study of spatial memory staleness in vision language agents found that",
+      "q_vi": "Một nghiên cứu về bộ nhớ không gian lỗi thời ở tác tử thị giác ngôn ngữ thấy rằng",
+      "choices": [
+        "Image input consistently outperformed text input in every tested grid",
+        "Stale memories never affected the downstream navigation task at all",
+        "Solving the task from text does not imply the model is visually grounded",
+        "Only the closed source models detected the conflicts in the stored memory"
+      ],
+      "answer": 2,
+      "why": "Models that flagged stale entries reliably from text failed badly on the identical grids presented as images, and the weakest kept acting confidently on them.",
+      "why_vi": "Những mô hình phát hiện tốt mục lỗi thời qua chữ lại hỏng nặng trên đúng dữ liệu đó ở dạng ảnh, và mô hình yếu nhất vẫn tự tin hành động theo chúng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-35",
+      "q": "The capability contamination phase transition in self evolving agents describes",
+      "q_vi": "Chuyển pha ô nhiễm năng lực ở tác tử tự tiến hoá mô tả việc",
+      "choices": [
+        "Skills eventually becoming too large to fit inside the available context window",
+        "Routers losing their load balance as the library grows",
+        "Skills being retrieved in the wrong natural language",
+        "Newly added skills degrading performance past a critical library size"
+      ],
+      "answer": 3,
+      "why": "A defective skill becomes reference material for later distillation, forming chains, and removing the source afterwards recovers only a small fraction of the loss.",
+      "why_vi": "Một kỹ năng lỗi trở thành tài liệu tham chiếu cho các lần chưng cất sau, tạo thành chuỗi, và gỡ nguồn về sau chỉ lấy lại được một phần rất nhỏ.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-36",
+      "q": "A controlled evaluation of self evolving skill systems reported that evolution is",
+      "q_vi": "Một đánh giá có kiểm soát trên hệ kỹ năng tự tiến hoá báo rằng quá trình tiến hoá",
+      "choices": [
+        "Sparse, with only a small minority of candidates ever validated as best",
+        "Perfectly reliable once the round budget has been made sufficiently large",
+        "Monotone in the number of evolution rounds that are run",
+        "Independent of which feedback is shown to the optimizer"
+      ],
+      "answer": 0,
+      "why": "Most of the evolution budget produced nothing that passed validation, which is a caution against assuming continuous self improvement.",
+      "why_vi": "Phần lớn ngân sách tiến hoá không sinh ra gì vượt được khâu thẩm định, đây là lời cảnh báo cho giả định rằng tác tử tự cải tiến liên tục.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-37",
+      "q": "A benchmark of continual skill learning suggested that much of the observed improvement came from",
+      "q_vi": "Một bộ đo về học kỹ năng liên tục gợi ý rằng phần lớn cải thiện quan sát được đến từ",
+      "choices": [
+        "Adaptation to prior context and feedback rather than reusable skills",
+        "The steady growth of the external skill library across all the episodes",
+        "The size of the underlying model that was used in the experiment",
+        "The ordering of the task difficulty levels inside each domain"
+      ],
+      "answer": 0,
+      "why": "Plain in context learning performed comparably to explicit skill maintenance on average, which is the control the field needed.",
+      "why_vi": "Học trong ngữ cảnh thuần cho kết quả trung bình ngang với việc duy trì kho kỹ năng tường minh, đây chính là phép đối chứng mà mảng này cần.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-38",
+      "q": "Under progressive disclosure, a skill retrieval document should also state",
+      "q_vi": "Trong chế độ hé lộ dần, một tài liệu mô tả kỹ năng còn cần nêu",
+      "choices": [
+        "The version of the runtime environment that it targets",
+        "The number of tokens that it will consume",
+        "Which similar requests belong to another skill",
+        "The license of the underlying model used"
+      ],
+      "answer": 2,
+      "why": "A page that only says what the skill does creates a document imposed retrieval error that no better retriever can remove.",
+      "why_vi": "Một trang chỉ nói kỹ năng làm gì sẽ tạo ra sai số truy xuất do chính tài liệu gây ra, và không bộ truy xuất nào gỡ được sai số đó.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-39",
+      "q": "In current work the harness of an agent refers to",
+      "q_vi": "Trong các nghiên cứu hiện nay, bộ giàn của tác tử chỉ",
+      "choices": [
+        "The physical server infrastructure that the model happens to run on",
+        "The prompts, tools, control flow, memory and orchestration code around the model",
+        "The safety filter that is applied to the model outputs before display",
+        "The training data that was used during the final stage of post training for the model"
+      ],
+      "answer": 1,
+      "why": "Capability is now treated as a property of the weights and this surrounding structure together, which is why it is benchmarked, evolved and even extracted.",
+      "why_vi": "Năng lực nay được coi là thuộc tính của cả trọng số lẫn phần cấu trúc bao quanh, vì thế nó được đo đạc, tiến hoá và thậm chí bị moi ra.",
+      "level": 1
+    },
+    {
+      "id": "qaxl-40",
+      "q": "Automatic harness evolution has a reported weakness, namely that it",
+      "q_vi": "Tiến hoá bộ giàn tự động có một điểm yếu được báo cáo, đó là nó",
+      "choices": [
+        "Requires labels at each interaction step",
+        "Cannot modify the prompt in the harness",
+        "Overfits the tasks it evolved against",
+        "Only works on closed weight models"
+      ],
+      "answer": 2,
+      "why": "Trajectory derived signals bake in task specific tricks, so the discriminating question is whether the harness still helps on tasks it never saw.",
+      "why_vi": "Tín hiệu rút từ quỹ đạo đóng cứng các mẹo riêng của nhiệm vụ, nên câu hỏi phân biệt là bộ giàn có còn giúp trên nhiệm vụ nó chưa từng thấy hay không.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-41",
+      "q": "One paper treats a tuned inference time harness as valuable intellectual property because",
+      "q_vi": "Một bài coi bộ giàn suy luận đã tinh chỉnh là tài sản trí tuệ có giá vì",
+      "choices": [
+        "It is already protected by an existing patent regime in most jurisdictions",
+        "It contains the weights of the model in a heavily compressed form",
+        "It cannot be reproduced at all without direct access to the original training data used",
+        "It costs substantial engineering and compute and can be reconstructed from behaviour"
+      ],
+      "answer": 3,
+      "why": "The harness is iteratively optimised over a large search space, and an attacker interacting with the deployed system can try to recover it.",
+      "why_vi": "Bộ giàn được tối ưu qua nhiều vòng trên không gian tìm kiếm lớn, và kẻ tấn công tương tác với hệ đang chạy có thể tìm cách dựng lại nó.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-42",
+      "q": "A comparison of programmatic tool calling against structured call objects across many models found that",
+      "q_vi": "Một phép so giữa gọi công cụ bằng mã và gọi bằng đối tượng có cấu trúc trên nhiều mô hình cho thấy",
+      "choices": [
+        "Programmatic calling matched or exceeded the structured form in most models",
+        "The structured call form won on every single model that was tested here",
+        "Neither of the two forms managed to chain more than a single call",
+        "The difference vanished entirely once the sampling temperature had been fixed"
+      ],
+      "answer": 0,
+      "why": "Exposing tools as typed code stubs lets chaining and parallelism come from the language, though the effect still varied by model.",
+      "why_vi": "Phơi công cụ ra dưới dạng khai báo mã có kiểu để việc nối chuỗi và chạy song song đến từ ngôn ngữ, dù hiệu ứng vẫn thay đổi theo từng mô hình.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-43",
+      "q": "The tool adoption gap in hybrid computer use agents means that",
+      "q_vi": "Khoảng trống chịu dùng công cụ ở tác tử máy tính lai nghĩa là",
+      "choices": [
+        "Having a tool available does not mean the agent calls it",
+        "Tools cannot be registered in the harness at all",
+        "Screenshots are always cheaper than any tool call",
+        "Tools always have to be described inside the system prompt"
+      ],
+      "answer": 0,
+      "why": "Under one identical harness the same tools helped a reasoning model and hurt a non reasoning one, and even the stronger model invoked a tool on a minority of reachable tasks.",
+      "why_vi": "Dưới cùng một bộ giàn, cùng bộ công cụ giúp mô hình biết lập luận và làm hại mô hình không lập luận, và ngay mô hình mạnh hơn cũng chỉ gọi công cụ ở một phần nhỏ các nhiệm vụ khả dụng.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-44",
+      "q": "A preregistered study of coding agents found that prompt wording",
+      "q_vi": "Một nghiên cứu đăng ký trước về tác tử lập trình thấy rằng cách viết lời nhắc",
+      "choices": [
+        "Only affects the format of the final answer",
+        "Has no measurable effect at all once the task has been fixed",
+        "Determines which model family performs best",
+        "Changes where the effort is spent, not only how much"
+      ],
+      "answer": 3,
+      "why": "Two prompts requesting the same change produced the same correct patch while inflating reasoning and creating elaborated branches that were then discarded.",
+      "why_vi": "Hai lời nhắc yêu cầu cùng một thay đổi cho ra cùng bản vá đúng nhưng lại làm phình phần lập luận và tạo ra những nhánh được triển khai rồi bị vứt đi.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-45",
+      "q": "An experiment on evidence locking in model judging reported that forcing the judge to decide from a frozen record",
+      "q_vi": "Một thí nghiệm về khoá chứng cứ khi mô hình chấm điểm báo rằng bắt giám khảo quyết định từ một bản ghi đóng băng",
+      "choices": [
+        "Removed every trace of position bias",
+        "Improved agreement with human preferences",
+        "Lowered agreement with human preferences",
+        "Had no effect on answer order consistency"
+      ],
+      "answer": 2,
+      "why": "Two call evidence locking and pointwise locking both did worse than structured judging in a single call, which is the opposite of the intuition that motivated the design.",
+      "why_vi": "Khoá chứng cứ hai lời gọi và khoá theo từng điểm đều tệ hơn chấm có cấu trúc trong một lời gọi, ngược hẳn với trực giác đã dẫn tới thiết kế đó.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-46",
+      "q": "A two round experiment on safety panels found that majority voting",
+      "q_vi": "Một thí nghiệm hai vòng trên hội đồng an toàn thấy rằng bỏ phiếu đa số",
+      "choices": [
+        "Always improves on the accuracy of its own average member",
+        "Can be driven to a far worse decision when peers assert a wrong label first",
+        "Is completely unaffected by whatever the members happen to see before they vote",
+        "Needs an odd number of participating members in order to work"
+      ],
+      "answer": 1,
+      "why": "Without an asserted label the same panel outperformed its average member, so the benefit of combining judgments depends on the members staying independent.",
+      "why_vi": "Khi không có nhãn được khẳng định trước, chính hội đồng đó lại vượt thành viên trung bình, nên lợi ích của việc gộp phán quyết phụ thuộc vào việc các thành viên còn độc lập.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-47",
+      "q": "In the audit distinguishing realized from reachable answers, a question counts as realized when",
+      "q_vi": "Trong cuộc kiểm phân biệt câu làm được và câu chạm tới được, một câu hỏi được tính là làm được khi",
+      "choices": [
+        "The default deployment procedure produces the correct answer",
+        "Some specified probe manages to find the answer within a fixed budget",
+        "The model assigns it a probability above zero",
+        "A majority vote over many samples comes out right"
+      ],
+      "answer": 0,
+      "why": "Aggregate scores blur the two, and the audit found that answer blind procedures retained almost none of the gain that layer routing appeared to give.",
+      "why_vi": "Điểm tổng làm mờ hai khái niệm này, và cuộc kiểm thấy rằng các thủ tục không được nhìn đáp án gần như không giữ lại được phần lợi mà định tuyến lớp tưởng như đem lại.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-48",
+      "q": "An analysis of agent time horizon data argued that most of the apparent shift of gains toward harder tasks reflects",
+      "q_vi": "Một phân tích trên dữ liệu chân trời thời gian của tác tử lập luận rằng phần lớn cái tưởng là lợi ích dịch về nhiệm vụ khó thực ra phản ánh",
+      "choices": [
+        "A real change in the shape of the difficulty response curve",
+        "Contamination of the evaluation set by training data",
+        "A change in the grading rubric between releases",
+        "A ceiling effect with a single rising ability parameter"
+      ],
+      "answer": 3,
+      "why": "One item response model with rising ability reproduced the pattern, and only a smaller hard task effect survived that control.",
+      "why_vi": "Một mô hình đáp ứng câu hỏi với năng lực tăng dần đã tái tạo được dạng đó, và chỉ còn một hiệu ứng nhỏ hơn ở nhiệm vụ khó sống sót qua phép đối chứng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-49",
+      "q": "Applying item response theory to safety benchmarks gave the result that",
+      "q_vi": "Áp lý thuyết đáp ứng câu hỏi vào bộ đo an toàn cho kết quả rằng",
+      "choices": [
+        "Every safety benchmark ends up measuring one distinct latent factor",
+        "Randomly chosen item subsets are as informative as carefully selected ones",
+        "A few interpretable factors explain most of the variance between models",
+        "Model size on its own determines the aggregate safety score obtained"
+      ],
+      "answer": 2,
+      "why": "Refusal strictness, truthfulness and contextual harm accounted for most of the between model variance, and psychometrically selected items recovered full scores with lower error than random ones.",
+      "why_vi": "Mức nghiêm khắc khi từ chối, tính trung thực và tác hại theo ngữ cảnh giải thích phần lớn phương sai giữa các mô hình, và các câu chọn theo trắc nghiệm học dựng lại điểm tổng với sai số nhỏ hơn câu chọn ngẫu nhiên.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-50",
+      "q": "Distractor aware truncation was introduced to separate",
+      "q_vi": "Cắt ngữ cảnh có phân biệt phần nhiễu được đưa ra để tách",
+      "choices": [
+        "Prefill cost from the cost incurred during the decode phase",
+        "Model capability from the quality of the prompt engineering",
+        "Retrieval quality from the quality of the generation that comes after it",
+        "The effect of context length from the effect of losing relevant signal"
+      ],
+      "answer": 3,
+      "why": "Dropping content from the middle removes signal and length together, whereas dropping only the irrelevant content isolates the length variable.",
+      "why_vi": "Bỏ nội dung ở giữa sẽ gỡ mất cả tín hiệu lẫn độ dài cùng lúc, còn chỉ bỏ phần không liên quan thì cô lập được biến độ dài.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-51",
+      "q": "For an agent post trained in a self contained environment, the discriminating evidence of real skill is",
+      "q_vi": "Với tác tử được huấn luyện sau trong môi trường khép kín, chứng cứ phân biệt kỹ năng thật là",
+      "choices": [
+        "The held out split of the training environment itself",
+        "The value of the final training reward reached",
+        "The number of tool schemas that it supports",
+        "Performance on an untouched external benchmark"
+      ],
+      "answer": 3,
+      "why": "A policy can earn reward by exploiting tool schemas and grader parsing, and an in distribution holdout shares exactly those regularities.",
+      "why_vi": "Chính sách có thể kiếm thưởng nhờ khai thác lược đồ công cụ và cách bóc điểm, còn tập giữ lại cùng phân phối lại mang đúng những quy luật đó.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-52",
+      "q": "Anytime valid stopping is needed for agent evaluation because",
+      "q_vi": "Dừng lúc nào cũng hợp lệ là cần thiết cho đánh giá tác tử vì",
+      "choices": [
+        "Peeking at a fixed budget test with an ordinary interval invalidates the level",
+        "Agents simply cannot be evaluated in a fully deterministic way",
+        "Variance reduction is impossible in any game with imperfect information involved",
+        "Confidence intervals are undefined whenever the data are paired"
+      ],
+      "answer": 0,
+      "why": "The number of games needed is unknown in advance, so the evaluation must be allowed to stop as soon as the evidence suffices without breaking the guarantee.",
+      "why_vi": "Không biết trước cần bao nhiêu ván, nên phép đánh giá phải được phép dừng ngay khi chứng cứ đủ mà không phá vỡ bảo đảm thống kê.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-53",
+      "q": "A study of web agent observation modes warned that an oracle picking the best mode per task",
+      "q_vi": "Một nghiên cứu về chế độ quan sát của tác tử web cảnh báo rằng lời sấm chọn chế độ tốt nhất cho từng nhiệm vụ",
+      "choices": [
+        "Is easy to learn from the task text",
+        "Is inflated by run to run noise",
+        "Only applies to pixel based modes",
+        "Needs the source code of the site"
+      ],
+      "answer": 1,
+      "why": "Rerunning the same mode on the same tasks already changed a noticeable share of outcomes, so part of the advertised headroom is not real capability.",
+      "why_vi": "Chạy lại cùng chế độ trên cùng nhiệm vụ đã làm đổi một phần đáng kể kết quả, nên một phần khoảng trống được quảng cáo không phải năng lực thật.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-54",
+      "q": "Implicit influence settings for chain of thought monitoring are the case where",
+      "q_vi": "Bối cảnh ảnh hưởng ngầm trong giám sát chuỗi suy nghĩ là trường hợp",
+      "choices": [
+        "The prompt directly instructs the model to hide a hidden side task",
+        "The explicit reasoning tokens are entirely replaced by a few continuous latent states",
+        "Nothing instructs the model to hide, yet an irrelevant detail shapes its behaviour",
+        "The model is asked to summarise its own reasoning trace for the reader"
+      ],
+      "answer": 2,
+      "why": "Most monitorability evaluations study the instructed case, and the benchmark compares the two regimes directly with the same nudge delivered two ways.",
+      "why_vi": "Phần lớn phép đánh giá khả năng giám sát chỉ xét trường hợp có lệnh giấu, còn bộ đo này so trực tiếp hai chế độ với cùng một gợi ý trao theo hai cách.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-55",
+      "q": "Model poisoning work on chain of thought monitoring suggests that monitoring is better framed as a question about",
+      "q_vi": "Nghiên cứu đầu độc mô hình trong giám sát chuỗi suy nghĩ gợi ý rằng nên đặt lại giám sát thành câu hỏi về",
+      "choices": [
+        "The plain readability of the reasoning trace",
+        "The total length of the visible reasoning trace produced",
+        "The sampling temperature used during decoding",
+        "The consistency between the reasoning and the action"
+      ],
+      "answer": 3,
+      "why": "Backdoors can be implanted so the trace looks entirely benign while the behaviour is attacker chosen, which breaks the assumption that trace content is informative.",
+      "why_vi": "Cửa hậu có thể được cấy sao cho vệt lập luận trông hoàn toàn vô hại trong khi hành vi lại do kẻ tấn công chọn, điều này phá vỡ giả định rằng nội dung vệt mang thông tin.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-56",
+      "q": "The observability ladder measures how much a reader learns by",
+      "q_vi": "Bậc thang quan sát đo lượng thông tin người đọc thu được bằng cách",
+      "choices": [
+        "Holding a completed run fixed and varying only what may be inspected",
+        "Comparing several different models on one shared benchmark suite instead",
+        "Retraining the model separately at each level of reader access",
+        "Sampling a large number of runs and averaging their accuracy"
+      ],
+      "answer": 0,
+      "why": "By keeping the run constant the design isolates the contribution of the response, the self written summary, the full trace and the internal signals.",
+      "why_vi": "Bằng cách giữ nguyên lượt chạy, thiết kế cô lập được phần đóng góp của câu trả lời, bản tự tóm tắt, toàn bộ vệt và tín hiệu nội tại.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-57",
+      "q": "An inverted steering vector is a direction that",
+      "q_vi": "Vector lái bị đảo là một hướng mà",
+      "choices": [
+        "Cannot separate at all the concept that it was originally fitted for",
+        "Separates the concept cleanly yet promotes the opposite behaviour",
+        "Only takes effect when it is added at the final decoder layer",
+        "Requires a trained sparse autoencoder in order to be computed"
+      ],
+      "answer": 1,
+      "why": "Discriminative quality and control direction come apart, so a probe that classifies a concept well is not proof that steering along it will promote that concept.",
+      "why_vi": "Chất lượng phân biệt và chiều điều khiển tách rời nhau, nên một bộ dò phân loại tốt một khái niệm không chứng minh rằng lái theo hướng đó sẽ thúc đẩy khái niệm ấy.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-58",
+      "q": "A cross architecture audit of direction based defences in vision language models paired every candidate with",
+      "q_vi": "Một cuộc kiểm xuyên kiến trúc trên các phòng thủ theo hướng ở mô hình thị giác ngôn ngữ đã ghép mỗi ứng viên với",
+      "choices": [
+        "An adversarial image of the same size",
+        "A random control of the same norm",
+        "A second model from the same family",
+        "A human annotated refusal label set"
+      ],
+      "answer": 1,
+      "why": "Without matching the intervention magnitude, part of any measured effect would simply be the size of the perturbation rather than its direction.",
+      "why_vi": "Nếu không khớp độ lớn can thiệp thì một phần hiệu ứng đo được chỉ là do biên độ nhiễu loạn chứ không phải do hướng của nó.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-59",
+      "q": "A layer wise study of perturbation robustness found that sensitivity, causality and repairability",
+      "q_vi": "Một nghiên cứu theo lớp về độ vững trước nhiễu loạn thấy rằng độ nhạy, tính nhân quả và khả năng sửa chữa",
+      "choices": [
+        "Always point to one single layer",
+        "Only measurable after fine tuning",
+        "Are three different layer maps",
+        "Depend solely on the tokenizer used"
+      ],
+      "answer": 2,
+      "why": "Where representations diverge most, where restoring clean activations recovers the prediction, and where an adapter can fix the damage are separate questions.",
+      "why_vi": "Lớp mà biểu diễn lệch nhiều nhất, lớp mà khôi phục kích hoạt sạch cứu được dự đoán, và lớp mà bộ điều hợp sửa được hỏng hóc là ba câu hỏi khác nhau.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-60",
+      "q": "The instability that blocks four bit floating point training was traced to",
+      "q_vi": "Sự mất ổn định cản trở huấn luyện ở số thực dấu phẩy động bốn bit được truy về",
+      "choices": [
+        "Scale inconsistency introduced by tensor transposition",
+        "Loss spikes coming from the attention softmax during training",
+        "Overflow inside the optimizer state buffers",
+        "Rounding error in the token embedding table"
+      ],
+      "answer": 0,
+      "why": "One dimensional block quantization assigns different scaling factors to the same values in the forward and backward passes, which biases the gradient.",
+      "why_vi": "Lượng tử hoá khối một chiều gán hệ số thang khác nhau cho cùng những giá trị ở lượt xuôi và lượt ngược, việc này làm lệch gradient.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-61",
+      "q": "A controlled study of biomedical classification under different precisions concluded that",
+      "q_vi": "Một nghiên cứu có kiểm soát về phân loại y sinh ở các mức chính xác khác nhau kết luận rằng",
+      "choices": [
+        "Four bit precision destroyed accuracy in every setting",
+        "Specialised models were always the better calibrated ones",
+        "The probability extraction protocol dominated the apparent calibration",
+        "Calibration turned out to be completely unaffected by the prompt template used"
+      ],
+      "answer": 2,
+      "why": "Switching between summed and mean token log likelihood scoring reversed the calibration ranking between models while accuracy barely moved.",
+      "why_vi": "Đổi giữa cách chấm log xác suất cộng dồn và trung bình theo token đã đảo ngược thứ hạng hiệu chỉnh giữa các mô hình trong khi độ chính xác gần như không đổi.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-62",
+      "q": "One unlearning paper argues that gradient based unlearning may only hide knowledge because",
+      "q_vi": "Một bài về quên máy lập luận rằng quên bằng gradient có thể chỉ giấu kiến thức đi vì",
+      "choices": [
+        "The evaluation always relies on single hop questions",
+        "Quantizing the unlearned model restores much of what was erased",
+        "The adapters are never merged back into the weights of the base model",
+        "The unlearning loss curve does not converge properly"
+      ],
+      "answer": 1,
+      "why": "Static evaluation is therefore insufficient, and a second paper adds that lightweight post unlearning adaptation can recover the target knowledge as well.",
+      "why_vi": "Vì vậy đánh giá tĩnh là chưa đủ, và một bài khác bổ sung rằng một lượt thích nghi nhẹ sau khi quên cũng khôi phục được kiến thức đích.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-63",
+      "q": "The depth division of labour in transformers is used to build unbounded context memory by",
+      "q_vi": "Phân công theo độ sâu trong transformer được dùng để dựng bộ nhớ ngữ cảnh không giới hạn bằng cách",
+      "choices": [
+        "Freezing the lower layers during the whole training run",
+        "Removing all of the residual connections above the middle layer of the stack",
+        "Sharing one set of attention weights across all layers",
+        "Writing each chunk through an intermediate layer and recomputing the top"
+      ],
+      "answer": 3,
+      "why": "Lower and middle layers build the semantic representation, so a fixed retrieval budget makes read compute independent of how much context is stored.",
+      "why_vi": "Các lớp dưới và giữa dựng biểu diễn ngữ nghĩa, nên với ngân sách truy hồi cố định thì chi phí đọc không phụ thuộc lượng ngữ cảnh đã lưu.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-64",
+      "q": "A recursive language model differs from a long context model in that each new call receives",
+      "q_vi": "Mô hình ngôn ngữ đệ quy khác mô hình ngữ cảnh dài ở chỗ mỗi lời gọi mới nhận",
+      "choices": [
+        "A context window considerably larger than the previous call was given",
+        "The same prompt again at a higher sampling temperature",
+        "A distilled copy of the model used in the previous call",
+        "A compact summary and durable artefacts instead of the full history"
+      ],
+      "answer": 3,
+      "why": "Keeping the full trajectory in one inference forces it to explore, store state, verify and answer at once, and a fresh root with a blackboard splits those roles.",
+      "why_vi": "Giữ toàn bộ quỹ đạo trong một lượt suy luận buộc nó vừa khám phá, vừa lưu trạng thái, vừa kiểm chứng, vừa trả lời cùng lúc, còn một gốc mới kèm bảng ghi thì tách các vai đó ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-65",
+      "q": "Set based aggregation such as counting distinct items over a long context motivated one group to",
+      "q_vi": "Việc tổng hợp theo tập, ví dụ đếm phần tử phân biệt trên ngữ cảnh dài, đã thúc đẩy một nhóm",
+      "choices": [
+        "Extend the context window of the backbone model even further",
+        "Increase the number of attention heads per layer",
+        "Maintain a mergeable sketch state beside the frozen model",
+        "Fine tune the backbone model on tabular data"
+      ],
+      "answer": 2,
+      "why": "These non additive tasks get less reliable as context grows, and a compact sketch can be merged across segments and read out directly.",
+      "why_vi": "Những nhiệm vụ không cộng tính này kém tin cậy dần khi ngữ cảnh dài ra, còn một bản tóm gọn thì hợp được giữa các đoạn và đọc ra trực tiếp.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-66",
+      "q": "The tradeoff between state based linear models and sliding window attention is described as",
+      "q_vi": "Đánh đổi giữa mô hình tuyến tính theo trạng thái và chú ý cửa sổ trượt được mô tả là",
+      "choices": [
+        "Linear compute cost against quadratic memory",
+        "Dense writes interfere while sparse writes forget",
+        "High recall against comparatively low precision",
+        "Training throughput against the throughput at inference"
+      ],
+      "answer": 1,
+      "why": "A recurrent state updates for every token and blurs specific past items, whereas a window keeps explicit tokens but loses them at eviction.",
+      "why_vi": "Trạng thái hồi quy cập nhật theo mọi token nên làm mờ những mục quá khứ cụ thể, còn cửa sổ giữ token tường minh nhưng mất chúng khi bị đẩy ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-67",
+      "q": "Injecting a precomputed state instead of re reading a document is possible in a state space model because",
+      "q_vi": "Tiêm trạng thái tính sẵn thay vì đọc lại tài liệu là khả thi ở mô hình không gian trạng thái vì",
+      "choices": [
+        "Its recurrent state is fixed size and summarises everything read",
+        "Its attention matrix turns out to be extremely sparse",
+        "It uses one shared set of weights at every single layer of the stack",
+        "It carries no positional encoding of any kind at all"
+      ],
+      "answer": 0,
+      "why": "That property collapses the retrieval prefill cost from something proportional to the context length down to a constant per query.",
+      "why_vi": "Tính chất đó thu chi phí nạp cho truy xuất từ mức tỉ lệ với độ dài ngữ cảnh xuống mức hằng số cho mỗi truy vấn.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-68",
+      "q": "Logging every commitment while decoding a masked diffusion language model revealed that unconstrained decoding",
+      "q_vi": "Ghi nhật ký từng lần chốt token khi giải mã mô hình ngôn ngữ khuếch tán có che cho thấy giải mã không ràng buộc",
+      "choices": [
+        "Never commits the final answer until the very end of decoding",
+        "Commits the final answer while much of the reasoning is still masked",
+        "Produces the same commitment order as ordinary autoregressive decoding",
+        "Fails to terminate at all on the longer reasoning problems tested"
+      ],
+      "answer": 1,
+      "why": "The cause was identified as reachability rather than the model's termination beliefs, and chain of thought only helped under ordered commitment.",
+      "why_vi": "Nguyên nhân được chỉ ra là khả năng chạm tới chứ không phải niềm tin dừng của mô hình, và chuỗi suy nghĩ chỉ giúp khi việc chốt token có thứ tự.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-69",
+      "q": "A study of training free acceleration in diffusion multimodal models identified the main contributor to content drift as",
+      "q_vi": "Một nghiên cứu về tăng tốc không cần huấn luyện ở mô hình khuếch tán đa phương thức chỉ ra nguyên nhân chính của trôi nội dung là",
+      "choices": [
+        "The choice of the input image resolution",
+        "The confidence threshold for parallel commitment",
+        "Stale cached visual and generated text states",
+        "The random seed given to the sampler"
+      ],
+      "answer": 2,
+      "why": "Tuning the confidence threshold changed decoding behaviour without changing agreement with the unaccelerated output, whereas shortening the cache refresh interval did.",
+      "why_vi": "Chỉnh ngưỡng tự tin làm đổi hành vi giải mã mà không đổi mức trùng khớp với đầu ra chưa tăng tốc, còn rút ngắn chu kỳ làm mới bộ đệm thì có.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-70",
+      "q": "One diffusion technical report obtained its model without pretraining from scratch by",
+      "q_vi": "Một báo cáo kỹ thuật về mô hình khuếch tán đã có mô hình mà không phải tiền huấn luyện từ đầu bằng cách",
+      "choices": [
+        "Distilling the behaviour directly from a closed weight model",
+        "Merging together several smaller diffusion models into a single one",
+        "Fine tuning an autoregressive mixture of experts to denoise blocks in parallel",
+        "Training only the output head while the rest of the model stays frozen"
+      ],
+      "answer": 2,
+      "why": "The two stage pipeline used supervised fine tuning for bidirectional denoising and then reinforcement learning with sampler distillation, at a small fraction of the original token budget.",
+      "why_vi": "Đường ống hai giai đoạn dùng tinh chỉnh giám sát cho khử nhiễu hai chiều rồi học tăng cường kèm chưng cất bộ lấy mẫu, với một phần nhỏ ngân sách token ban đầu.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-71",
+      "q": "Resource fair scheduling in batched serving addresses the fact that",
+      "q_vi": "Lập lịch công bằng tài nguyên khi phục vụ theo lô xử lý việc",
+      "choices": [
+        "Long requests are always the more valuable ones to serve",
+        "Prefill and decode simply cannot share the same device",
+        "Batching actually starts to reduce throughput once the load gets high enough",
+        "The cost of a batch step is set by the largest active cache in it"
+      ],
+      "answer": 3,
+      "why": "A short request co batched with a long one consumes latency and resources far beyond its own token workload, which is the disparity the fairness constraint bounds.",
+      "why_vi": "Một yêu cầu ngắn bị ghép chung với một yêu cầu dài sẽ tiêu độ trễ và tài nguyên vượt xa khối lượng token của chính nó, và đó là mức chênh mà ràng buộc công bằng chặn lại.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-72",
+      "q": "A production characterisation of agentic coding traces reported cache hit rates that were",
+      "q_vi": "Một khảo sát vệt chạy của tác tử lập trình ở quy mô sản xuất báo tỉ lệ trúng bộ đệm ở mức",
+      "choices": [
+        "High within a turn and much lower across turns",
+        "Uniformly low across the whole of a coding session",
+        "Independent of the pattern of tool execution",
+        "Higher for chat workloads than for agent ones"
+      ],
+      "answer": 0,
+      "why": "Sessions consist of sparse user initiated turns that each unfold into an autonomous loop of model calls coupled with tool execution, so reuse concentrates inside a turn.",
+      "why_vi": "Phiên gồm các lượt do người khởi tạo rất thưa, mỗi lượt bung thành một vòng lặp tự động gồm lời gọi mô hình kèm chạy công cụ, nên việc dùng lại dồn vào bên trong một lượt.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-73",
+      "q": "An attack on sparsity exploiting serving systems works because",
+      "q_vi": "Một tấn công vào hệ phục vụ khai thác tính thưa hoạt động được vì",
+      "choices": [
+        "Activation sparsity requires storing the prompt in plaintext memory",
+        "Sparse kernels have to disable the memory encryption",
+        "Skipping inactive neurons makes weight access depend on the input",
+        "The router writes every expert selection into the log"
+      ],
+      "answer": 2,
+      "why": "The access traces form a neuron activation oracle that can be inverted back into the input tokens, so the optimisation itself becomes the leak.",
+      "why_vi": "Vệt truy cập tạo thành một tiên tri kích hoạt nơron có thể đảo ngược lại thành chính token đầu vào, nên bản thân phép tối ưu trở thành chỗ rò.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-74",
+      "q": "Schema formatted tool specifications were identified as a source of agent safety degradation because they",
+      "q_vi": "Đặc tả công cụ ở dạng lược đồ được chỉ ra là nguồn làm suy giảm an toàn của tác tử vì chúng",
+      "choices": [
+        "Weaken the model's internal refusal signals",
+        "Increase the number of tokens used in the prompt",
+        "Force the model to emit valid structured output",
+        "Prevent the model from asking a clarifying question"
+      ],
+      "answer": 0,
+      "why": "White box representation analysis showed the effect, and the proposed safeguard assesses the request from a flattened textual specification while keeping the schema for execution.",
+      "why_vi": "Phân tích biểu diễn ở dạng hộp trắng cho thấy hiệu ứng này, và biện pháp đề xuất là xét yêu cầu dựa trên đặc tả đã làm phẳng thành văn xuôi trong khi vẫn giữ lược đồ để thực thi.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-75",
+      "q": "Batch prompting was shown to create a safety failure mode that is",
+      "q_vi": "Gộp lô lời nhắc được chứng minh là tạo ra một dạng hỏng an toàn mà",
+      "choices": [
+        "Only ever present in models with closed weights",
+        "Distinct from in context learning and long context effects",
+        "Essentially identical to a known long context effect",
+        "Removable simply by lowering the sampling temperature"
+      ],
+      "answer": 1,
+      "why": "A harmful question reliably refused in isolation was answered when embedded among benign ones, which the authors attribute to alignment signal weakening and refusal dilution.",
+      "why_vi": "Một câu hỏi có hại vốn luôn bị từ chối khi đứng riêng lại được trả lời khi nhét chung với các câu vô hại, điều mà tác giả quy cho việc tín hiệu căn chỉnh yếu đi và phản xạ từ chối bị pha loãng.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-76",
+      "q": "A single injected page often fails to hijack a search agent because",
+      "q_vi": "Một trang bị tiêm nội dung độc thường không chiếm được quyền của tác tử tìm kiếm vì",
+      "choices": [
+        "Modern agents issue follow up queries and cross check sources",
+        "Search engines filter the injected content out",
+        "Agents are not allowed to read untrusted web pages",
+        "The injected page always ends up ranked last in terms of relevance"
+      ],
+      "answer": 0,
+      "why": "That is why one attack moves up a level and controls the results channel itself, steering how evidence is gathered across many queries.",
+      "why_vi": "Vì vậy một cách tấn công dịch lên một tầng và kiểm soát chính kênh trả kết quả, lái cả cách thu thập chứng cứ qua nhiều truy vấn.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-77",
+      "q": "The realistic defender setting in backdoor detection assumes the defender has",
+      "q_vi": "Bối cảnh phòng thủ thực tế trong phát hiện cửa hậu giả định bên phòng thủ có",
+      "choices": [
+        "The poisoned training data but not the weights of the model",
+        "A clean reference model built on the very same architecture",
+        "The weights and the behaviour of concern but no trigger and no reference",
+        "Full knowledge of the exact trigger string that the attacker had implanted"
+      ],
+      "answer": 2,
+      "why": "The defender is also not certain the model is poisoned at all, which is why a benchmark of many backdoored models was released for exactly this setting.",
+      "why_vi": "Bên phòng thủ cũng không chắc mô hình có bị đầu độc hay không, vì thế một bộ đo gồm nhiều mô hình đã cấy cửa hậu được phát hành cho đúng bối cảnh này.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-78",
+      "q": "Coreset style visual token compression was proposed because independent top scoring selection",
+      "q_vi": "Nén token thị giác theo kiểu tập lõi được đề xuất vì việc chọn theo điểm cao một cách độc lập",
+      "choices": [
+        "Requires a second full forward pass over the input image",
+        "Cannot be implemented at all without additional training",
+        "Always keeps the background instead of the salient object",
+        "Can cover one salient region repeatedly while dropping sparse evidence"
+      ],
+      "answer": 3,
+      "why": "Text queries consume collective signed attention messages from the whole visual population, so the selected set has to be judged together rather than token by token.",
+      "why_vi": "Truy vấn chữ tiêu thụ các thông điệp chú ý có dấu ở mức tập thể từ toàn bộ quần thể thị giác, nên tập được chọn phải được xét chung chứ không xét từng token.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-79",
+      "q": "A new evaluation framework for text rendered as an image was needed because downstream task scoring",
+      "q_vi": "Cần một khung đánh giá mới cho văn bản kết xuất thành ảnh vì việc chấm bằng nhiệm vụ hạ nguồn",
+      "choices": [
+        "Lets the model's linguistic priors fill in what compression lost",
+        "Cannot be run on images of sufficiently high resolution",
+        "Requires paired human annotations in order to be usable",
+        "Is far too slow to be run at any realistic scale of evaluation today"
+      ],
+      "answer": 0,
+      "why": "The reported compression ratios then measure the model's prior as much as the fidelity of the representation, so the evaluation has to be decoupled from those priors.",
+      "why_vi": "Các tỉ lệ nén được báo khi đó đo tiên nghiệm của mô hình nhiều ngang với độ trung thực của biểu diễn, nên phép đánh giá phải tách khỏi những tiên nghiệm đó.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-80",
+      "q": "Referential dangling in hard prompt compression happens when the retained text",
+      "q_vi": "Tham chiếu treo lơ lửng khi nén lời nhắc dạng cứng xảy ra khi phần văn bản được giữ lại",
+      "choices": [
+        "Consists almost entirely of irrelevant filler sentences",
+        "Contains the answer but not the definition needed to interpret it",
+        "Is longer than the compression budget will actually allow",
+        "Comes from some document other than the one that actually holds the query"
+      ],
+      "answer": 1,
+      "why": "Independent scoring of units can split dependent evidence pairs, keeping one member and deleting the other, which is a paradigm level failure rather than a tuning issue.",
+      "why_vi": "Chấm điểm độc lập từng đơn vị có thể tách đôi cặp chứng cứ phụ thuộc nhau, giữ một vế và xoá vế kia, đây là hỏng ở mức mô thức chứ không phải chuyện tinh chỉnh tham số.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-81",
+      "q": "One paper argues that chunking and embedding is structurally unsound for financial reports because",
+      "q_vi": "Một bài lập luận rằng cắt mảnh rồi nhúng là sai về cấu trúc với báo cáo tài chính vì",
+      "choices": [
+        "Financial documents are far too short to be chunked usefully",
+        "Embeddings are simply unable to represent digits at all",
+        "A chunk boundary can separate a number from the header giving its unit",
+        "Regulatory returns are almost always distributed in scanned form"
+      ],
+      "answer": 2,
+      "why": "Most content lines are table rows, thousands of near identical figures compete in one embedding space, and the unit often lives many lines above the number.",
+      "why_vi": "Phần lớn dòng nội dung là hàng bảng, hàng nghìn con số gần giống nhau cạnh tranh trong cùng không gian nhúng, và đơn vị thường nằm cách con số nhiều dòng phía trên.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-82",
+      "q": "Verbalized confidence from instruction tuned models was found to be",
+      "q_vi": "Độ tự tin nói thành lời của mô hình đã tinh chỉnh theo chỉ dẫn được đo là",
+      "choices": [
+        "Extremely sparse, with most of the mass on a few values",
+        "Well spread across the whole unit interval",
+        "Perfectly calibrated after a temperature rescaling",
+        "Entirely independent of the task being solved"
+      ],
+      "answer": 0,
+      "why": "That sparsity also makes the ranking of methods depend on how the accuracy rejection curve is interpolated, which is an evaluation artefact rather than a property of the methods.",
+      "why_vi": "Độ thưa đó còn khiến thứ hạng các phương pháp phụ thuộc vào cách nội suy đường độ chính xác theo mức từ chối, đây là hiện vật của phép đo chứ không phải tính chất của phương pháp.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-83",
+      "q": "A theoretical result on deferral in small models states that temperature scaling cannot calibrate a model whose",
+      "q_vi": "Một kết quả lý thuyết về chuyển giao ở mô hình nhỏ nói rằng co giãn nhiệt độ không hiệu chỉnh được mô hình mà",
+      "choices": [
+        "The vocabulary grows beyond a certain fixed size",
+        "The output length varies a great deal across prompts",
+        "The model weights have been quantized down to four bits",
+        "Confidence stays above one half while accuracy falls below it"
+      ],
+      "answer": 3,
+      "why": "Strictly monotone calibration preserves the risk coverage frontier, so a rescaling cannot fix a model that is confidently below chance.",
+      "why_vi": "Hiệu chỉnh đơn điệu chặt giữ nguyên biên rủi ro theo độ phủ, nên một phép co giãn không cứu được mô hình tự tin nhưng dưới mức ngẫu nhiên.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-84",
+      "q": "Configuration shift is a threat to conformal prediction for language models because the nonconformity score depends on",
+      "q_vi": "Dịch chuyển do cấu hình là mối đe doạ với dự đoán tuân thủ cho mô hình ngôn ngữ vì điểm bất tuân phụ thuộc vào",
+      "choices": [
+        "The size of the calibration set and nothing else",
+        "The prompt template, decoding parameters and deployment setting",
+        "The random seed handed to the sampler and nothing more",
+        "The number of transformer layers the model happens to have"
+      ],
+      "answer": 1,
+      "why": "Coverage guarantees assume exchangeability, yet these configurable factors are routinely modified in practice and are rarely treated as a source of shift.",
+      "why_vi": "Bảo đảm độ phủ giả định tính hoán vị được, trong khi những yếu tố cấu hình này vẫn bị đổi thường xuyên trong thực tế và ít khi được coi là một nguồn dịch chuyển.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-85",
+      "q": "Completeness sensitive negative reasoning means that a model may answer no only when",
+      "q_vi": "Lập luận phủ định nhạy với độ phủ nghĩa là mô hình chỉ được trả lời không khi",
+      "choices": [
+        "The retrieved passages are ranked with high confidence",
+        "The question itself has been phrased in the negative",
+        "The evidence completely covers the scope of the query",
+        "At least three independent sources happen to agree"
+      ],
+      "answer": 2,
+      "why": "Otherwise the honest answer is unknown, and models were found to over close, failing to distinguish a justified no from an unresolved one.",
+      "why_vi": "Nếu không thì câu trả lời trung thực là chưa biết, và các mô hình được đo là đóng kết luận quá sớm, không phân biệt được lời từ chối có cơ sở với lời chưa xác định.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-86",
+      "q": "Training a model to resist misleading context hides a second failure mode, namely that",
+      "q_vi": "Huấn luyện mô hình chống lại ngữ cảnh gây nhiễu che mất một dạng hỏng thứ hai, đó là",
+      "choices": [
+        "A model ignoring all context looks robust and is useless when context is right",
+        "It becomes noticeably slower at inference time on every request",
+        "It stops producing any visible chain of thought at all whatsoever",
+        "It ends up needing a considerably larger number of retrieval calls"
+      ],
+      "answer": 0,
+      "why": "That is why the problem is recast as selective trust, with matched clean, misleading, correct context and irrelevant context conditions for the same item.",
+      "why_vi": "Vì thế bài toán được đặt lại thành tin có chọn lọc, với bốn điều kiện ghép cặp gồm sạch, gây nhiễu, ngữ cảnh đúng và ngữ cảnh không liên quan cho cùng một câu.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-87",
+      "q": "The architecture pattern shared by several frontier reports released this window is",
+      "q_vi": "Mẫu kiến trúc chung của nhiều báo cáo mô hình tiên phong công bố trong đợt này là",
+      "choices": [
+        "A dense model with a very wide feed forward layer inside",
+        "A sparse mixture of experts with a small activated fraction per token",
+        "An encoder decoder stack joined together by cross attention",
+        "A pure state space model carrying no attention layers at all"
+      ],
+      "answer": 1,
+      "why": "The reports describe hundreds of billions to trillions of total parameters with only a small slice active, alongside long context and native multimodality.",
+      "why_vi": "Các báo cáo mô tả tổng tham số từ hàng trăm tỷ đến hàng nghìn tỷ mà chỉ một lát nhỏ được kích hoạt, kèm ngữ cảnh dài và đa phương thức nguyên bản.",
+      "level": 1
+    },
+    {
+      "id": "qaxl-88",
+      "q": "Upcycling in current technical reports means",
+      "q_vi": "Nâng cấp trong các báo cáo kỹ thuật hiện nay nghĩa là",
+      "choices": [
+        "Reusing the training data assembled for a previous release",
+        "Recovering the weights back out of a quantized checkpoint",
+        "Expanding an already released model rather than pretraining from scratch",
+        "Merging two models drawn from entirely different model families"
+      ],
+      "answer": 2,
+      "why": "One report expands a predecessor into a much larger sparse model and another converts an autoregressive model to a diffusion one, both avoiding a full pretraining run.",
+      "why_vi": "Một báo cáo mở rộng mô hình tiền nhiệm thành mô hình thưa lớn hơn nhiều, một báo cáo khác chuyển mô hình tự hồi quy thành mô hình khuếch tán, cả hai đều tránh chạy tiền huấn luyện đầy đủ.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-89",
+      "q": "A controlled synthetic study on causal direction found that increasing the fraction of interventional samples",
+      "q_vi": "Một nghiên cứu tổng hợp có kiểm soát về chiều nhân quả thấy rằng tăng tỉ lệ mẫu can thiệp",
+      "choices": [
+        "Fixed the causal direction in every world that was tested",
+        "Made the model refuse to answer the question at all",
+        "Grew the response magnitude while the sign stayed observational",
+        "Reduced the measured response magnitude down to zero"
+      ],
+      "answer": 2,
+      "why": "In worlds where correlation and causal effect have opposite signs, what governed the outcome was the evidence available at the point of use, not the training mixture.",
+      "why_vi": "Ở những thế giới mà tương quan và tác động nhân quả trái dấu, thứ quyết định kết quả là chứng cứ có mặt lúc dùng chứ không phải tỉ lệ trộn khi huấn luyện.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-90",
+      "q": "Distilling reasoning only in English into a multilingual model was reported to",
+      "q_vi": "Chưng cất lập luận chỉ bằng tiếng Anh vào mô hình đa ngữ được báo là",
+      "choices": [
+        "Leave the other languages entirely unchanged in behaviour",
+        "Degrade the English performance quite noticeably in return",
+        "Only work for languages that happen to share one script",
+        "Raise scores in other languages while shifting responses toward English"
+      ],
+      "answer": 3,
+      "why": "That is why target language data matters for keeping the output in the intended language, even when the accuracy number already improved.",
+      "why_vi": "Vì thế dữ liệu ngôn ngữ đích vẫn quan trọng để giữ đầu ra đúng ngôn ngữ mong muốn, ngay cả khi con số độ chính xác đã tăng.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-91",
+      "q": "Reasoning pivots are defined as the points in a trace that",
+      "q_vi": "Điểm xoay của lập luận được định nghĩa là những chỗ trong vệt mà",
+      "choices": [
+        "Advance or redirect the reasoning and shape what follows",
+        "Happen to contain the longest sentences in the trace",
+        "Simply repeat information already given in the prompt",
+        "Contain the numerical calculations of the derivation"
+      ],
+      "answer": 0,
+      "why": "Concentrating privileged distillation around those decisions targets the signal most relevant to cross lingual transfer rather than the surface text around it.",
+      "why_vi": "Dồn phần chưng cất đặc quyền quanh những quyết định đó nhắm vào tín hiệu liên quan nhất tới chuyển giao giữa các ngôn ngữ chứ không nhắm vào phần chữ bề mặt bao quanh.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-92",
+      "q": "A study of a frontier model on tabular prediction ran it in a plain inference regime specifically to",
+      "q_vi": "Một nghiên cứu về mô hình tiên phong trên dự đoán dữ liệu bảng đã chạy nó ở chế độ suy luận thuần cốt để",
+      "choices": [
+        "Reduce the interface cost of running the experiment",
+        "Isolate why generic models fail without tools or scaffolding",
+        "Test whether long context was really the limitation",
+        "Compare it directly against a tabular foundation model"
+      ],
+      "answer": 1,
+      "why": "Removing tools, agentic scaffolding and fine tuning lets the candidate hypotheses for the failure be tested one at a time.",
+      "why_vi": "Bỏ công cụ, bỏ giàn giáo tác tử và bỏ tinh chỉnh cho phép kiểm từng giả thuyết về nguyên nhân hỏng một cách riêng rẽ.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-93",
+      "q": "Salience bias in commonsense reasoning refers to models",
+      "q_vi": "Thiên lệch vì cái nổi bật trong lập luận thường thức chỉ việc mô hình",
+      "choices": [
+        "Preferring whichever answer option is presented first",
+        "Answering only in the language used in the prompt",
+        "Being hijacked by a useless but conspicuous explicit detail",
+        "Ignoring numerical values that appear in the question"
+      ],
+      "answer": 2,
+      "why": "The explicit condition suppresses an implicit physical or commonsense prerequisite, and the open question is whether the knowledge is missing or merely suppressed.",
+      "why_vi": "Điều kiện tường minh đè mất một tiền đề vật lý hoặc thường thức ngầm, và câu hỏi còn bỏ ngỏ là kiến thức đó thiếu hẳn hay chỉ bị đè xuống.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-94",
+      "q": "An audit of personalised systems found that over inference of user attributes was",
+      "q_vi": "Một cuộc kiểm trên hệ cá nhân hoá thấy rằng việc suy diễn quá đà về thuộc tính người dùng là",
+      "choices": [
+        "Confined to the smallest models in the study",
+        "Eliminated once self monitoring prompts were used",
+        "Restricted to the stereotypical persona group",
+        "Present in every one of the models evaluated"
+      ],
+      "answer": 3,
+      "why": "The judged claims were validated against a blind human annotator, and no model in the leaderboard escaped fabricating attributes beyond the supporting evidence.",
+      "why_vi": "Các khẳng định đã chấm được đối chiếu với một người gán nhãn mù, và không mô hình nào trong bảng xếp hạng thoát khỏi việc bịa thuộc tính vượt quá chứng cứ.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-95",
+      "q": "An evaluation of delusion linked chatbot behaviour reported that the tendency to exhibit it",
+      "q_vi": "Một đánh giá về hành vi tiếp tay cho hoang tưởng của chatbot báo rằng xu hướng thể hiện hành vi đó",
+      "choices": [
+        "Does not reliably correlate with size, release date or reasoning mode",
+        "Correlates strongly with the number of parameters in the model",
+        "Disappears completely once test time reasoning has been enabled",
+        "Is only ever observed in models that were released open weight"
+      ],
+      "answer": 0,
+      "why": "The protocol used real conversation histories from people who experienced psychological harm, so the finding is grounded in episodes rather than synthetic prompts.",
+      "why_vi": "Giao thức dùng lịch sử hội thoại thật của những người đã chịu tổn hại tâm lý, nên phát hiện này dựa trên tình huống thật chứ không phải lời nhắc tổng hợp.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-96",
+      "q": "A population level study of writing style in press releases supports a conclusion about",
+      "q_vi": "Một nghiên cứu ở mức quần thể về văn phong trong thông cáo báo chí ủng hộ kết luận về",
+      "choices": [
+        "The corpus over time, not any individual document",
+        "Which model actually wrote a particular release",
+        "The accuracy of current machine text detectors",
+        "The individual productivity of the writing staff"
+      ],
+      "answer": 0,
+      "why": "Stylistic traces are a weak signal for any one text, which is exactly why the design is preregistered and reported at the aggregate level.",
+      "why_vi": "Dấu vết văn phong là tín hiệu yếu với từng văn bản riêng, và đó chính là lý do thiết kế được đăng ký trước và kết quả chỉ báo ở mức tổng hợp.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-97",
+      "q": "Agent centric world proxies shift world modelling from predicting the next physical state toward",
+      "q_vi": "Đại diện thế giới lấy tác tử làm trung tâm chuyển mô hình hoá thế giới từ dự đoán trạng thái vật lý kế tiếp sang",
+      "choices": [
+        "Rendering observations that look photorealistic",
+        "Compressing each observation into fewer tokens",
+        "Producing feedback the agent can act on before committing",
+        "Predicting the scalar reward signal directly"
+      ],
+      "answer": 2,
+      "why": "Real interaction is costly, slow and hard to parallelise, so the proxy is judged by whether it gives actionable information rather than accurate physics.",
+      "why_vi": "Tương tác thật thì đắt, chậm và khó chạy song song, nên đại diện được xét theo việc nó có cho thông tin dùng được hay không chứ không theo độ chính xác vật lý.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-98",
+      "q": "Learning a grammar automatically for constrained decoding is motivated by the fact that",
+      "q_vi": "Việc học tự động một văn phạm cho giải mã có ràng buộc xuất phát từ việc",
+      "choices": [
+        "Constrained decoding runs much slower than free decoding does",
+        "Grammars for third party domain specific languages are rarely available",
+        "Models cannot be fine tuned on a domain specific language at all",
+        "Parsers simply cannot be executed at inference time in production"
+      ],
+      "answer": 1,
+      "why": "Constrained decoding does eliminate syntactically invalid programs, but only if someone supplies the syntactic constraints, which is the missing artefact.",
+      "why_vi": "Giải mã có ràng buộc đúng là loại được chương trình sai cú pháp, nhưng chỉ khi có người cung cấp ràng buộc cú pháp, và đó chính là thứ đang thiếu.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-99",
+      "q": "A semantically equivalent adversarial stress test for retrieval systems searches for",
+      "q_vi": "Phép kiểm áp lực đối kháng tương đương nghĩa cho hệ truy xuất tìm kiếm",
+      "choices": [
+        "Documents that maximise the retrieval score for the given query",
+        "Prompts that force the model into refusing the user request",
+        "Paraphrases that keep the meaning but make the model contradict its evidence",
+        "Queries that carry the highest possible token count for the budget"
+      ],
+      "answer": 2,
+      "why": "Enforcing strict semantic equivalence isolates robustness from difficulty, so a flip cannot be explained away as the question having changed.",
+      "why_vi": "Ép ràng buộc tương đương nghĩa chặt tách được độ vững khỏi độ khó, nên khi kết quả lật thì không thể biện minh rằng câu hỏi đã đổi.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-100",
+      "q": "Reference free hallucination detection by decomposed entailment works by",
+      "q_vi": "Phát hiện ảo giác không cần đáp án mẫu bằng suy dẫn theo khẳng định tách nhỏ hoạt động bằng cách",
+      "choices": [
+        "Comparing the output against a second independent generation",
+        "Measuring the perplexity of the text that has been generated",
+        "Asking a considerably larger model whether the output is correct",
+        "Breaking the output into atomic claims and verifying each against the source"
+      ],
+      "answer": 3,
+      "why": "A compact encoder based entailment model keeps the check cheap enough to run on every output and avoids needing a gold reference.",
+      "why_vi": "Một mô hình suy dẫn gọn dựa trên bộ mã hoá giữ phép kiểm đủ rẻ để chạy trên mọi đầu ra và tránh phải có đáp án chuẩn.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-101",
+      "q": "One paper reported that a routed expert matrix breaks memory light matrix optimizers because its gradients are",
+      "q_vi": "Một bài báo cáo rằng ma trận chuyên gia được định tuyến làm hỏng bộ tối ưu ma trận ít bộ nhớ vì gradient của nó",
+      "choices": [
+        "Conditional on the routing and varying over time",
+        "Exactly zero for every expert that stays inactive",
+        "Identical across all the experts within one layer",
+        "Bounded above by the load balancing loss term"
+      ],
+      "answer": 0,
+      "why": "Stateless normalisation serves dense matrices well but not gradients that only appear when the router selects that expert, and this comes from a single small scale study.",
+      "why_vi": "Chuẩn hoá không trạng thái phục vụ tốt cho ma trận dày nhưng không hợp với gradient chỉ xuất hiện khi bộ định tuyến chọn đúng chuyên gia đó, và đây là kết quả của một nghiên cứu nhỏ.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-102",
+      "q": "The reported problem with replicating hot experts onto idle ranks during expert parallel training is that",
+      "q_vi": "Vấn đề được báo cáo khi nhân bản chuyên gia nóng sang các nhánh rỗi trong huấn luyện song song theo chuyên gia là",
+      "choices": [
+        "It changes the output distribution of the model",
+        "The cross node weight movement can outweigh the balancing gain",
+        "It requires the router to be retrained from scratch",
+        "Idle ranks cannot hold a complete expert at all"
+      ],
+      "answer": 1,
+      "why": "Optimising load balance alone ignores the topology, which is why placement is posed as a transport problem with a communication cost matrix.",
+      "why_vi": "Chỉ tối ưu cân bằng tải thì bỏ qua tô pô mạng, vì thế bài toán đặt vị trí được đưa về bài toán vận chuyển kèm ma trận chi phí truyền thông.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-103",
+      "q": "Deciding whether attention and feed forward disaggregation is worth deploying requires",
+      "q_vi": "Quyết định xem việc tách chú ý khỏi mạng truyền thẳng có đáng triển khai hay không đòi hỏi",
+      "choices": [
+        "Running both variants on identical hardware only",
+        "Ignoring the latency service level objective",
+        "Measuring nothing except the peak throughput",
+        "Provisioning the collocated baseline just as carefully"
+      ],
+      "answer": 3,
+      "why": "Under the same model, workload, latency objective and hardware budget, the question is whether disaggregation beats the best collocated arrangement, not just a default one.",
+      "why_vi": "Với cùng mô hình, cùng tải, cùng mục tiêu độ trễ và cùng ngân sách phần cứng, câu hỏi là tách ra có thắng phương án đặt chung tốt nhất hay không, chứ không phải thắng một phương án mặc định.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-104",
+      "q": "A survey of test time scaling reproducibility recommends that papers report",
+      "q_vi": "Một bài tổng quan về khả năng tái lập của mở rộng lúc chạy khuyến nghị các bài báo nên nêu",
+      "choices": [
+        "The number of accelerators that were used",
+        "The wall clock time taken by every run",
+        "The inference protocol that produced the accuracy",
+        "Only the final accuracy, for comparability"
+      ],
+      "answer": 2,
+      "why": "Two procedures at the same nominal budget do different work, so accuracy without the procedure cannot be compared across studies.",
+      "why_vi": "Hai thủ tục ở cùng ngân sách danh nghĩa làm những việc khác nhau, nên độ chính xác mà thiếu thủ tục thì không so được giữa các nghiên cứu.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-105",
+      "q": "Evaluating skill use under progressive disclosure separates three facets. The one that measures forbidden operations is",
+      "q_vi": "Đánh giá việc dùng kỹ năng trong chế độ hé lộ dần tách ba mặt. Mặt đo các thao tác bị cấm là",
+      "choices": [
+        "Trigger",
+        "Boundary",
+        "Compliance",
+        "Retrieval"
+      ],
+      "answer": 1,
+      "why": "Trigger asks whether the relevant skill was invoked and compliance asks how faithfully the procedure was followed, so the remaining facet covers what must not be done.",
+      "why_vi": "Kích hoạt hỏi kỹ năng liên quan có được gọi hay không và tuân thủ hỏi quy trình được theo trung thành đến đâu, nên mặt còn lại phụ trách những việc không được phép làm.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-106",
+      "q": "A memory system that records both verified corrections and observed unsuccessful directions is trying to avoid",
+      "q_vi": "Hệ bộ nhớ ghi lại cả chỉnh sửa đã xác nhận lẫn những hướng đã thất bại đang cố tránh",
+      "choices": [
+        "Rediscovering the same dead ends in later episodes",
+        "Exceeding the size of the available context window",
+        "Retrieval latency at the moment a query arrives",
+        "Storing information that could identify a person"
+      ],
+      "answer": 0,
+      "why": "Repair episodes usually discard the successful correction as well as the failed attempts, so both polarities are kept and retrieved together.",
+      "why_vi": "Các lượt sửa lỗi thường vứt bỏ cả phần chỉnh sửa thành công lẫn phần thử thất bại, nên cả hai cực đều được giữ và truy xuất cùng nhau.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-107",
+      "q": "TraceCompiler admits a dependency between two tool calls only when",
+      "q_vi": "TraceCompiler chỉ công nhận phụ thuộc giữa hai lời gọi công cụ khi",
+      "choices": [
+        "A consumer argument holds a value uniquely attributable to a producer",
+        "The two calls happen to appear inside the very same trace",
+        "The second call fails whenever the first one has been removed",
+        "The model states the dependency explicitly in its own reasoning"
+      ],
+      "answer": 0,
+      "why": "Ordering in a noisy trace is often accidental, so ambiguous relations are marked as suspected and impose no constraint on the compiled workflow.",
+      "why_vi": "Thứ tự trong một vệt nhiễu thường chỉ là ngẫu nhiên, nên các quan hệ mập mờ được đánh dấu là nghi ngờ và không áp ràng buộc nào lên quy trình đã biên dịch.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-108",
+      "q": "Recoverability aware rollout intervention differs from earlier adaptive rollout work by controlling",
+      "q_vi": "Can thiệp lượt sinh có tính tới khả năng cứu vãn khác các nghiên cứu lượt sinh thích nghi trước đó ở chỗ nó kiểm soát",
+      "choices": [
+        "Only the number of rollouts that get generated per prompt",
+        "Where and how to intervene, not only how many rollouts to generate",
+        "The sampling temperature applied to the behaviour policy",
+        "The parameter count of the reward model that is in use"
+      ],
+      "answer": 1,
+      "why": "Earlier heuristics were fixed and could not adjust as the policy changed, so the intervention itself is learned from the improvement it produces.",
+      "why_vi": "Các quy tắc kinh nghiệm trước đó là cố định và không tự điều chỉnh khi chính sách thay đổi, nên bản thân phép can thiệp được học từ mức cải thiện mà nó tạo ra.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-109",
+      "q": "Correctness conditioned KL regularisation narrows the standard constraint in order to",
+      "q_vi": "Chuẩn hoá KL có điều kiện theo tính đúng thu hẹp ràng buộc chuẩn nhằm",
+      "choices": [
+        "Reduce the memory needed to hold the frozen reference model",
+        "Remove the need for a separate reward model altogether",
+        "Preserve existing capability while interfering less with the new task",
+        "Allow off policy rollouts to be reused many times over"
+      ],
+      "answer": 2,
+      "why": "Constraining the entire response distribution restricts exploration, so the preservation constraint is applied only to correctness conditioned distributions.",
+      "why_vi": "Ràng buộc toàn bộ phân phối phản hồi sẽ bó hẹp khám phá, nên ràng buộc bảo tồn chỉ được áp lên các phân phối có điều kiện theo tính đúng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-110",
+      "q": "A serving system that keeps adapters in pooled memory addressable by the accelerator targets the fact that multi adapter workloads",
+      "q_vi": "Hệ phục vụ giữ bộ điều hợp trong bộ nhớ gộp mà bộ tăng tốc địa chỉ hoá được nhắm vào việc tải nhiều bộ điều hợp",
+      "choices": [
+        "Need enormous memory capacity against fairly modest compute",
+        "Require one separate base model for each adapter",
+        "Cannot be batched together with ordinary requests",
+        "Depend on the tokenizer shipped with each adapter"
+      ],
+      "answer": 0,
+      "why": "Staging adapters from host memory over the interconnect pays a stop and a copy on each access, and capacity is bounded by the motherboard rather than by the workload.",
+      "why_vi": "Nạp dần bộ điều hợp từ bộ nhớ máy chủ qua đường liên kết phải trả một lần dừng và một lần sao chép cho mỗi lần truy cập, và dung lượng bị chặn bởi bo mạch chứ không phải bởi nhu cầu của tải.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-111",
+      "q": "An empirical study of local computer use agents concluded that additional inference compute mainly",
+      "q_vi": "Một nghiên cứu thực nghiệm về tác tử máy tính chạy cục bộ kết luận rằng thêm tính toán lúc chạy chủ yếu",
+      "choices": [
+        "Removes the need for a stronger backbone model",
+        "Improves stability on every dimension that was examined",
+        "Reduces the total wall clock time needed per task",
+        "Yields diminishing returns while changing the failure modes"
+      ],
+      "answer": 3,
+      "why": "Contextual scaling improved trajectory stability while other dimensions traded one kind of breakdown for another, so a single accuracy number hides the change.",
+      "why_vi": "Mở rộng theo ngữ cảnh cải thiện độ ổn định của quỹ đạo trong khi các chiều khác chỉ đổi dạng hỏng này lấy dạng hỏng kia, nên một con số độ chính xác che mất sự thay đổi đó.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-112",
+      "q": "An agent skill retrieval page built as a capability page contains a positive trigger, a discriminative body and",
+      "q_vi": "Một trang năng lực dùng cho truy xuất kỹ năng của tác tử gồm phần kích hoạt dương, phần thân phân biệt và",
+      "choices": [
+        "A negative boundary",
+        "A version identifier",
+        "A worked example",
+        "A latency estimate"
+      ],
+      "answer": 0,
+      "why": "The boundary states which neighbouring requests belong elsewhere, which is the information a document about what a skill does never carries.",
+      "why_vi": "Phần ranh giới nói rõ những yêu cầu lân cận nào phải đi chỗ khác, và đó là thông tin mà một tài liệu chỉ nói kỹ năng làm gì không bao giờ mang.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-113",
+      "q": "A benchmark of harness optimization treats the optimizer as an LLM that receives",
+      "q_vi": "Một bộ đo về tối ưu bộ giàn coi bộ tối ưu là một mô hình ngôn ngữ nhận",
+      "choices": [
+        "The weights and gradients of the target agent being improved",
+        "A seed harness, graded evaluation feedback and a fixed evaluation budget",
+        "A curated dataset of harnesses that were written by humans",
+        "Only the description of the task that is meant to be solved"
+      ],
+      "answer": 1,
+      "why": "The optimizer edits the harness and nominates a final candidate under expensive and stochastic evaluation, which is what makes the task demanding.",
+      "why_vi": "Bộ tối ưu sửa bộ giàn rồi đề cử một ứng viên cuối trong điều kiện đánh giá đắt đỏ và ngẫu nhiên, chính điều đó làm nhiệm vụ trở nên khó.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-114",
+      "q": "Analog compute in memory becomes difficult for attention specifically because",
+      "q_vi": "Tính toán trong bộ nhớ dạng tương tự trở nên khó với riêng phần chú ý vì",
+      "choices": [
+        "Cache operations demand repeated in situ weight updates",
+        "Attention contains no matrix multiplication at all",
+        "The softmax cannot be computed in the analog domain",
+        "Attention weights are shared between all the layers"
+      ],
+      "answer": 0,
+      "why": "The array is built for weight stationary computation, so the dynamic part of attention is exposed to hardware noise that linear layers avoid.",
+      "why_vi": "Mảng tương tự được xây cho phép tính có trọng số đứng yên, nên phần động của chú ý bị phơi ra trước nhiễu phần cứng mà các lớp tuyến tính tránh được.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-115",
+      "q": "A framework for continual unlearning was needed because repeating a one shot procedure causes",
+      "q_vi": "Cần một khung cho quên máy liên tục vì lặp lại thủ tục quên một lần gây ra",
+      "choices": [
+        "Noticeably longer latency during every single inference",
+        "Loss of alignment with the tokenizer that is in use",
+        "Cumulative utility loss, unlearning rebound and retention drift",
+        "Complete failure of the external retrieval index used"
+      ],
+      "answer": 2,
+      "why": "Requests arrive over time rather than all at once, so the accumulated damage across rounds is the property that has to be controlled.",
+      "why_vi": "Các yêu cầu đến rải theo thời gian chứ không đến cùng lúc, nên thứ phải kiểm soát chính là mức hư hại tích luỹ qua các vòng.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-116",
+      "q": "Skill entropy was introduced to measure",
+      "q_vi": "Entropy chuyển kỹ năng được đưa ra để đo",
+      "choices": [
+        "How many tokens a single skill document ends up consuming",
+        "The diversity of the pretraining corpus that was used",
+        "How uncertain the router is about the chosen expert",
+        "The difficulty of switching between reasoning skills inside a chain"
+      ],
+      "answer": 3,
+      "why": "Existing benchmarks evaluate individual skills, so a cross skill long horizon task needs its own difficulty grading.",
+      "why_vi": "Các bộ đo hiện có chấm từng kỹ năng riêng lẻ, nên nhiệm vụ dài hơi liên kỹ năng cần một cách xếp hạng độ khó của riêng nó.",
+      "level": 2
+    },
+    {
+      "id": "qaxl-117",
+      "q": "A runtime meter for cache quantization was proposed because offline benchmark averages",
+      "q_vi": "Một thước đo tại chỗ cho lượng tử hoá bộ đệm được đề xuất vì điểm trung bình đo ngoại tuyến",
+      "choices": [
+        "Are far too expensive to compute in practice",
+        "Say nothing about the request being served right now",
+        "Cannot be reproduced across different hardware",
+        "Depend heavily on the batch size that was used"
+      ],
+      "answer": 1,
+      "why": "The meter gives a per layer, per head, per step bound on how far compressed attention can be from exact attention, so a live system can gate rather than trust an average.",
+      "why_vi": "Thước này cho một cận theo từng lớp, từng đầu và từng bước về khoảng cách giữa chú ý đã nén và chú ý chính xác, nhờ đó hệ đang chạy tự chặn thay vì tin vào một con số trung bình.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-118",
+      "q": "Sink tokens and a recent window are given special treatment in cache schemes because",
+      "q_vi": "Token neo và cửa sổ gần được đối xử đặc biệt trong các phương án bộ đệm vì",
+      "choices": [
+        "They carry disproportionate weight in attention",
+        "They are the cheapest positions to store",
+        "They always sit in exactly the same layer",
+        "They are produced directly by the tokenizer"
+      ],
+      "answer": 0,
+      "why": "Because those positions matter out of proportion to their count, several schemes keep them at higher precision or exempt them from eviction entirely.",
+      "why_vi": "Vì những vị trí đó quan trọng vượt xa số lượng của chúng, vài phương án giữ chúng ở độ chính xác cao hơn hoặc miễn hẳn việc loại bỏ.",
+      "level": 1
+    },
+    {
+      "id": "qaxl-119",
+      "q": "A parameter free routing scheme matched or beat learned routers at a matched parameter budget, which suggests the bottleneck may be",
+      "q_vi": "Một sơ đồ định tuyến không tham số bằng hoặc hơn bộ định tuyến học được ở cùng ngân sách tham số, điều này gợi ý nút thắt có thể nằm ở",
+      "choices": [
+        "The alignment between training signal granularity and target categories",
+        "The number of experts that are held in the available pool",
+        "The numeric precision used to store the weights of the router",
+        "The position of the routing layer within the transformer stack"
+      ],
+      "answer": 0,
+      "why": "The result fits the separate measurement finding that co selected expert subspaces overlap rather than being cleanly complementary.",
+      "why_vi": "Kết quả này khớp với phát hiện đo lường riêng rằng không gian con của các chuyên gia được chọn cùng nhau thì chồng lấn chứ không bù trừ tách bạch.",
+      "level": 3
+    },
+    {
+      "id": "qaxl-120",
+      "q": "Building a long context corpus by recursively following code references across repositories is motivated by",
+      "q_vi": "Việc dựng kho ngữ cảnh dài bằng cách truy vết đệ quy tham chiếu mã qua nhiều kho xuất phát từ",
+      "choices": [
+        "The need to support a much wider set of programming languages",
+        "The scarcity of genuine long distance dependencies in existing corpora",
+        "A licensing restriction that covers published books and papers",
+        "The requirement to remove near duplicate documents from the corpus"
+      ],
+      "answer": 1,
+      "why": "Books, articles and single repositories are finite and often lack the dependency structure that long context training is supposed to teach.",
+      "why_vi": "Sách, bài báo và từng kho mã đơn lẻ là hữu hạn và thường thiếu chính cấu trúc phụ thuộc mà huấn luyện ngữ cảnh dài lẽ ra phải dạy được.",
+      "level": 2
+    }
+  ]
+}

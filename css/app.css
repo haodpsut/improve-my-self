@@ -405,13 +405,14 @@ a.card:hover, button.card:hover {
    The lat (hoc khai niem)
    ============================================================ */
 .flash {
-  position: relative;
-  min-height: 300px;
   perspective: 1400px;
   margin-bottom: 18px;
 }
+/* Hai mat xep chong trong CUNG mot o luoi, khong dung dinh vi tuyet doi.
+   Nho vay khung tu cao bang mat dai hon, thay vi de noi dung tran ra ngoai.
+   Loi tran nay lo ra khi the co them truong nguon dan bai arXiv. */
 .flash-inner {
-  position: relative;
+  display: grid;
   width: 100%;
   min-height: 300px;
   transition: transform 0.55s cubic-bezier(0.42, 0, 0.2, 1);
@@ -420,8 +421,7 @@ a.card:hover, button.card:hover {
 }
 .flash.is-flipped .flash-inner { transform: rotateY(180deg); }
 .flash-face {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
   justify-content: center;

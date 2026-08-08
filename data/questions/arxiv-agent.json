@@ -1,0 +1,1882 @@
+{
+  "schema": 1,
+  "id": "arxiv-agent",
+  "updated": "2026-08-08",
+  "questions": [
+    {
+      "id": "qaxa-1",
+      "q": "Physical prompt injection against a vision language planner works because",
+      "q_vi": "Tiêm câu lệnh vật lý vào bộ lập kế hoạch thị giác ngôn ngữ hiệu quả vì",
+      "choices": [
+        "text the camera sees enters the same context that also carries the user's instruction",
+        "the camera sensor can be saturated so the planner falls back to a default action list of motions",
+        "vision encoders are trained on far less data than the language half of the same model",
+        "the robot controller accepts raw motor commands from any process on the local network"
+      ],
+      "answer": 0,
+      "why": "The reported mechanism is the coupling between perceiving a scene and following instructions: once both arrive in one context, anything readable in the frame inherits instruction authority.",
+      "why_vi": "Cơ chế được báo cáo là sự ghép nối giữa tri giác cảnh vật và tuân lệnh, khi cả hai cùng vào một ngữ cảnh thì mọi thứ đọc được trong khung hình đều thừa hưởng thẩm quyền của mệnh lệnh.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-2",
+      "q": "In smart home settings the hardest safety question raised is",
+      "q_vi": "Trong bối cảnh nhà thông minh, câu hỏi an toàn khó nhất được nêu là",
+      "choices": [
+        "how to compress audio and video streams enough for an on device model to run",
+        "whether video and audio should be fused early in the encoder or late in the decoder",
+        "how many wake words a household should register before recognition accuracy degrades noticeably",
+        "whether the agent can tell a genuine user command from ambient command shaped speech"
+      ],
+      "answer": 3,
+      "why": "The pilot benchmark is built around addressee ambiguity: television speech, on screen text, and overheard conversation all look like commands, and the agent has no reliable way to ask who was speaking to it.",
+      "why_vi": "Bộ thử thí điểm được dựng quanh sự nhập nhằng người được nói tới, vì tiếng tivi, chữ trên màn hình, và câu chuyện nghe lỏm đều trông như mệnh lệnh, mà tác tử không có cách đáng tin để biết ai đang nói với nó.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-3",
+      "q": "Salience induction differs from ordinary content poisoning because",
+      "q_vi": "Dẫn dụ bằng độ nổi bật khác đầu độc nội dung thông thường ở chỗ",
+      "choices": [
+        "it requires write access to the vector index rather than to the source documents",
+        "it only works against agents that use a reranker on top of dense retrieval",
+        "every retrieved claim stays true and no instruction is inserted anywhere",
+        "it inserts a false fact that is only reachable after three or more retrieval hops"
+      ],
+      "answer": 2,
+      "why": "The attack uses truth preserving edits to position, emphasis, framing, and semantic proximity, so nothing false and nothing imperative is added, which is exactly why content filters miss it.",
+      "why_vi": "Tấn công dùng các sửa đổi giữ nguyên tính đúng về vị trí, nhấn mạnh, cách đóng khung, và độ gần ngữ nghĩa, nên không thêm gì sai và cũng không thêm mệnh lệnh nào, đó chính là lý do bộ lọc nội dung bỏ sót.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-4",
+      "q": "Invisible ink threats defeat human in the loop confirmation because the injected goal is",
+      "q_vi": "Mối đe doạ mực vô hình vượt qua bước xác nhận của con người vì mục tiêu bị tiêm",
+      "choices": [
+        "encrypted so the confirmation dialog cannot render the action being requested",
+        "executed only after the confirmation window has already timed out on its own",
+        "split across so many steps that no single dialog can present the whole request at one time",
+        "behaviourally indistinguishable from legitimate low harm work the user expects"
+      ],
+      "answer": 3,
+      "why": "The reported blind spot is low harm actions such as starring a repository or installing a package, which look like ordinary task execution to both the model's safety layer and the human approver.",
+      "why_vi": "Điểm mù được báo cáo là các hành động ít gây hại như gắn sao một kho mã hay cài một gói, chúng trông y hệt việc bình thường trong mắt cả lớp an toàn của mô hình lẫn người phê duyệt.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-5",
+      "q": "In self evolving skill systems the promotion step matters because",
+      "q_vi": "Trong hệ kỹ năng tự tiến hoá, bước đề bạt quan trọng vì",
+      "choices": [
+        "untrusted execution experience is converted into instruction the agent then trusts",
+        "it is the only stage where the skill bank is written to persistent storage on disk volumes",
+        "the promoted skill is re embedded so retrieval quality improves for later queries",
+        "skills are compressed at that point which is when contract information is lost"
+      ],
+      "answer": 0,
+      "why": "Several groups converge on the same framing: distillation turns a trace, which nobody vouched for, into a durable skill that the agent later follows as procedure.",
+      "why_vi": "Nhiều nhóm cùng đi tới một cách diễn đạt, đó là việc chưng cất biến một vết chạy vốn không ai bảo lãnh thành một kỹ năng bền mà về sau tác tử tuân theo như quy trình.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-6",
+      "q": "The distinctive bottleneck an attacker must clear to poison a skill bank is",
+      "q_vi": "Nút thắt đặc trưng mà kẻ tấn công phải vượt để đầu độc kho kỹ năng là",
+      "choices": [
+        "obtaining write permission on the private experience pool used for distillation",
+        "making the target behaviour look causally useful, recurrent, and generalisable",
+        "knowing the exact evolution logic and the pool size the victim is configured with",
+        "having the payload survive the embedding step without semantic drift or loss"
+      ],
+      "answer": 1,
+      "why": "Inclusion in the pool is cheap; attribution is the hard gate, because the promotion process only keeps behaviour that appears to have caused repeated and transferable success.",
+      "why_vi": "Lọt vào kho là chuyện dễ, còn quy công mới là cổng khó, vì quá trình đề bạt chỉ giữ lại hành vi trông như đã gây ra thành công lặp lại và chuyển giao được.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-7",
+      "q": "A poisoned skill is more dangerous than a poisoned memory record mainly because",
+      "q_vi": "Kỹ năng bị đầu độc nguy hiểm hơn bản ghi bộ nhớ bị đầu độc chủ yếu vì",
+      "choices": [
+        "skill files are stored outside the sandbox while memory records live inside it",
+        "memory records expire on a schedule whereas skill files carry no timestamp at all",
+        "skills are shared across tenants while memory is bound to a single user account",
+        "the agent applies it as its own procedure rather than waiting to retrieve it"
+      ],
+      "answer": 3,
+      "why": "The stated contrast is that retrieval poisoning only bites when the poisoned record happens to be pulled into context, while a skill has become part of what the agent does by default.",
+      "why_vi": "Điểm tương phản được nêu là đầu độc truy hồi chỉ phát tác khi bản ghi độc tình cờ được kéo vào ngữ cảnh, còn kỹ năng thì đã thành một phần việc mà tác tử mặc định làm.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-8",
+      "q": "The claim that skill contamination is structurally irreversible rests on",
+      "q_vi": "Khẳng định nhiễm bẩn kỹ năng không hoàn nguyên được về mặt cấu trúc dựa trên",
+      "choices": [
+        "an argument that deleted files remain recoverable from the underlying storage layer",
+        "the fact that later skills inherited the flawed reasoning before the source was removed",
+        "the observation that removal requires a full retrain of the underlying policy model",
+        "a proof that skill banks grow faster than any pruning schedule can keep up with"
+      ],
+      "answer": 1,
+      "why": "Once a defective skill has served as reference material for distilling its descendants, deleting the source afterwards leaves the inherited flaw in place, so rollback recovers only part of the loss.",
+      "why_vi": "Khi một kỹ năng lỗi đã làm tài liệu tham chiếu để chưng cất ra các kỹ năng con, việc xoá nguồn về sau vẫn để nguyên phần sai đã kế thừa, nên gỡ bỏ chỉ phục hồi được một phần.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-9",
+      "q": "Static scanning of an agent skill is limited chiefly because harmful behaviour may",
+      "q_vi": "Soi tĩnh một kỹ năng của tác tử bị hạn chế chủ yếu vì hành vi có hại có thể",
+      "choices": [
+        "appear only after particular environment states or interaction histories are reached",
+        "be written in a scripting language the static analyser has no parser available for",
+        "reside in a binary blob that the skill downloads the first time it is ever loaded",
+        "be described in a language other than the one the reviewing model was trained on"
+      ],
+      "answer": 0,
+      "why": "The motivation for dynamic honey world testing is conditional behaviour: the skill inspects clean and only reveals itself once the right resources or history appear.",
+      "why_vi": "Động cơ của việc thử động bằng thế giới mồi là hành vi có điều kiện, kỹ năng soi tĩnh thì sạch và chỉ lộ ra khi gặp đúng tài nguyên hoặc đúng lịch sử.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-10",
+      "q": "Behavioural skill reconstruction shows that a defence which only prevents file disclosure",
+      "q_vi": "Dựng lại kỹ năng từ hành vi cho thấy một phòng thủ chỉ ngăn lộ tệp thì",
+      "choices": [
+        "still protects the provider as long as the skill is served over an encrypted channel",
+        "is sufficient whenever the skill contains no constants and no embedded data tables",
+        "does not stop a user rebuilding the functionality from ordinary use and responses",
+        "must also block the retrieval index or the skill name will leak through the ranker"
+      ],
+      "answer": 2,
+      "why": "The paper separates the artifact from the capability: an attacker who never sees the files can still assemble a functional clone by issuing valid requests and watching what comes back.",
+      "why_vi": "Bài báo tách hiện vật khỏi năng lực, kẻ tấn công không hề thấy tệp vẫn ráp được một bản sao chạy được bằng cách gửi yêu cầu hợp lệ rồi quan sát thứ trả về.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-11",
+      "q": "Memory provenance laundering is best described as",
+      "q_vi": "Rửa xuất xứ trong bộ nhớ được mô tả đúng nhất là",
+      "choices": [
+        "an attacker overwriting the provenance column of the memory database directly",
+        "an embedding collision that maps two unrelated memories to the same neighbourhood",
+        "a retrieval bug that returns another tenant's records under the wrong identifier",
+        "consolidation rewriting an external observation into apparent user history"
+      ],
+      "answer": 3,
+      "why": "The identified boundary failure happens during lossy consolidation: the action trigger survives the rewrite while the low trust source that should have capped its authority is erased.",
+      "why_vi": "Hỏng hóc ranh giới được chỉ ra xảy ra ngay trong bước hợp nhất có mất mát, yếu tố kích hoạt hành động sống sót qua lần viết lại còn nguồn ít tin cậy lẽ ra phải giới hạn thẩm quyền của nó thì bị xoá.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-12",
+      "q": "Memory link poisoning is hard to catch with communication monitoring because",
+      "q_vi": "Đầu độc qua liên kết bộ nhớ khó bắt bằng giám sát liên lạc vì",
+      "choices": [
+        "the poisoned write is encrypted at rest and decrypted only inside the model process",
+        "agents exchange embeddings rather than text so the monitor cannot read the payload",
+        "no malicious message crosses a visible agent edge at the moment harm occurs",
+        "the shared memory service runs on a different network segment than the agent mesh"
+      ],
+      "answer": 2,
+      "why": "A single poisoned write is retrieved later, promoted into shared memory, and reused by agents that never received the original message, so the harmful moment has no corresponding communication event.",
+      "why_vi": "Một lần ghi độc duy nhất được truy hồi về sau, được đề bạt lên bộ nhớ chung, rồi dùng lại bởi những tác tử chưa từng nhận thông điệp gốc, nên thời điểm gây hại không có sự kiện liên lạc tương ứng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-13",
+      "q": "Binding long term memory to a user identifier still leaves an extraction path through",
+      "q_vi": "Buộc bộ nhớ dài hạn theo định danh người dùng vẫn để hở đường trích xuất qua",
+      "choices": [
+        "the tool invocation parameters into which retrieved memory is routinely embedded",
+        "the shared embedding model whose gradients can be inverted by a curious tenant",
+        "the backup snapshots that are written without per user encryption boundaries",
+        "the summarisation cache that is keyed by content hash rather than by user id"
+      ],
+      "answer": 0,
+      "why": "The overlooked surface is the tool interface: isolation is never violated, yet the agent hands private memory to a malicious tool as an ordinary argument.",
+      "why_vi": "Bề mặt bị bỏ quên là giao diện công cụ, cách ly không hề bị vi phạm nhưng tác tử vẫn trao bộ nhớ riêng tư cho một công cụ độc dưới dạng một tham số bình thường.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-14",
+      "q": "Treating every accepted memory write as actionable truth is risky mainly because",
+      "q_vi": "Coi mọi lần ghi bộ nhớ được chấp nhận là sự thật hành động được thì rủi ro chủ yếu vì",
+      "choices": [
+        "storage costs grow without bound when nothing is ever marked as provisional",
+        "retrieval latency rises once the index has to score every historical record",
+        "downstream summarisers cannot distinguish recent writes from older ones",
+        "a polluted tool result or an unfinished note can drive an irreversible action"
+      ],
+      "answer": 3,
+      "why": "The proposed fix is transactional: stage the write, validate it against evidence, permissions, and provenance, and only then let it become a premise a tool call can act on.",
+      "why_vi": "Cách chữa được đề xuất mang tính giao dịch, tức là để lần ghi ở trạng thái chờ, kiểm nó theo bằng chứng, quyền, và xuất xứ, rồi mới cho nó thành tiền đề mà một lời gọi công cụ dựa vào.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-15",
+      "q": "The claim that safe models do not compose into a safe multi agent system means",
+      "q_vi": "Khẳng định mô hình an toàn không cộng lại thành hệ nhiều tác tử an toàn nghĩa là",
+      "choices": [
+        "a model that refuses harmful text will still refuse it when placed behind a planner",
+        "every hop between agents is an unmonitored channel that per model safety ignores",
+        "safety improves with more agents because each one can veto the previous output",
+        "multi agent systems need larger models than single agent systems for the same task"
+      ],
+      "answer": 1,
+      "why": "Defences are typically placed at the input boundary of the pipeline, leaving planner to worker and worker to verifier hops as channels through which instructions can be smuggled.",
+      "why_vi": "Phòng thủ thường được đặt ở ranh giới đầu vào của đường ống, để lại các bước chuyển từ bộ lập kế hoạch sang tác tử làm việc và từ đó sang bộ kiểm chứng như những kênh có thể lén đưa mệnh lệnh vào.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-16",
+      "q": "A pipeline reporting zero attack success should first be rechecked by",
+      "q_vi": "Một đường ống báo tỉ lệ tấn công thành công bằng không thì trước hết nên kiểm lại bằng cách",
+      "choices": [
+        "raising the sampling temperature until the attack surface becomes visible again",
+        "increasing the number of attack families until the reported number moves upward",
+        "rerunning it with the cloud provider's own server side filter taken out of the path",
+        "swapping the backend for a smaller model that has weaker refusal training built in"
+      ],
+      "answer": 2,
+      "why": "One measurement study attributed nearly all blocks in an apparently safe pipeline to an opaque provider filter, so the reported number described the vendor, not the team's defence.",
+      "why_vi": "Một nghiên cứu đo lường quy gần như toàn bộ số lần chặn trong một đường ống trông rất an toàn về một bộ lọc mờ đục của nhà cung cấp, nên con số báo cáo mô tả nhà cung cấp chứ không mô tả phòng thủ của đội.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-17",
+      "q": "A distributed payload defeats per step safety checks because",
+      "q_vi": "Tải trọng phân mảnh đánh bại kiểm an toàn theo từng bước vì",
+      "choices": [
+        "each check runs on a different model with a different refusal threshold configured",
+        "no single agent ever holds the complete payload during the run itself",
+        "the checks are sampled rather than applied to every action in the trajectory",
+        "the fragments are compressed so the check sees only high entropy binary data"
+      ],
+      "answer": 1,
+      "why": "A poisoned tool hides fragments in observations, spreads them across agents, and an external step reassembles them after the run, so a check that judges each action in isolation sees only benign pieces.",
+      "why_vi": "Một công cụ bị đầu độc giấu các mảnh trong quan sát, rải chúng qua nhiều tác tử, rồi một bước bên ngoài ráp lại sau lần chạy, nên phép kiểm xét riêng từng hành động chỉ thấy toàn mảnh lành.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-18",
+      "q": "Treating cross agent propagation as an information flow problem is motivated by",
+      "q_vi": "Xem lan truyền giữa các tác tử là bài toán luồng thông tin xuất phát từ việc",
+      "choices": [
+        "the observation that message classifiers are too slow for production throughput",
+        "the fact that most agent frameworks already ship a graph representation of roles",
+        "the need to encrypt inter agent traffic without breaking existing tool schemas",
+        "a harmful objective being splittable into subtasks that look plausible one by one"
+      ],
+      "answer": 3,
+      "why": "Role specialisation and decomposition let intent fragment, so no single agent sees anything worth refusing, which is why the unit of analysis moves from the message to the flow.",
+      "why_vi": "Việc chuyên biệt hoá vai và phân rã nhiệm vụ khiến ý định bị chẻ nhỏ, nên không tác tử nào thấy thứ gì đáng từ chối, đó là lý do đơn vị phân tích chuyển từ thông điệp sang luồng.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-19",
+      "q": "A collective evidence threshold backdoor is triggered by",
+      "q_vi": "Cửa hậu theo ngưỡng bằng chứng tập thể được kích hoạt bởi",
+      "choices": [
+        "peer evidence accumulating past a hidden level rather than by one message",
+        "a specific token sequence appearing in the orchestrator's system prompt",
+        "the number of tool calls in a session exceeding a fixed configured limit per session",
+        "a timestamp condition that the compromised agent evaluates on every turn"
+      ],
+      "answer": 0,
+      "why": "The construction deliberately separates benign behaviour below the threshold from the adversarial objective above it, so inspecting any individual message finds nothing.",
+      "why_vi": "Cách dựng cố ý tách hành vi lành ở dưới ngưỡng khỏi mục tiêu đối kháng ở trên ngưỡng, nên soi bất kỳ thông điệp riêng lẻ nào cũng không thấy gì.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-20",
+      "q": "Covert collusion between agents run by different organisations is hard to detect because",
+      "q_vi": "Thông đồng ngầm giữa các tác tử do những tổ chức khác nhau vận hành khó phát hiện vì",
+      "choices": [
+        "the agents negotiate over an encrypted side channel that no operator can observe",
+        "collusion only forms when the agents share the same base model checkpoint",
+        "no operator can see inside another's model, so detection must work from behaviour",
+        "the market clearing rules make any coordinated bid indistinguishable from noise"
+      ],
+      "answer": 2,
+      "why": "The realistic constraint is cross principal opacity: each organisation sees only traces, often partially, so the detector has to treat coordination as an information hiding problem.",
+      "why_vi": "Ràng buộc thực tế là các chủ thể không nhìn được vào trong hệ của nhau, mỗi tổ chức chỉ thấy vết chạy và thường là thấy một phần, nên bộ dò phải xử lý phối hợp như bài toán giấu tin.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-21",
+      "q": "The result that price level audits are blind by construction says that such a test",
+      "q_vi": "Kết quả nói phép kiểm theo mức giá mù ngay từ thiết kế khẳng định rằng phép kiểm đó",
+      "choices": [
+        "loses power gradually as the number of colluding participants keeps increasing",
+        "has power exactly equal to its false positive rate against that coupling",
+        "requires a much larger sample before its confidence interval becomes usable",
+        "works only when the agents share a common reward model during their training"
+      ],
+      "answer": 1,
+      "why": "If agents couple only through the joint distribution while each keeps a competitive marginal, a test reading one agent's own history carries no signal, so more data cannot repair it.",
+      "why_vi": "Nếu các tác tử chỉ ghép qua phân phối chung mà mỗi con vẫn giữ biên cạnh tranh, thì phép kiểm chỉ đọc lịch sử của riêng một tác tử không mang tín hiệu nào, nên thêm dữ liệu cũng không cứu được.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-22",
+      "q": "Cross session misuse exploits an asymmetry in which",
+      "q_vi": "Lạm dụng xuyên phiên khai thác một bất đối xứng trong đó",
+      "choices": [
+        "the attacker keeps state across sessions while the agent resets between them",
+        "the agent logs every session while the attacker rotates addresses to avoid logging",
+        "session limits apply per account while the attacker holds many free accounts",
+        "the agent runs a stronger model in the first session than in later sessions"
+      ],
+      "answer": 0,
+      "why": "The harmful goal is decomposed into innocuous units executed in separate conversations, and detection that assumes a single session cannot accumulate the capability the attacker has assembled.",
+      "why_vi": "Mục tiêu có hại được chia thành các đơn vị vô hại chạy ở những cuộc hội thoại tách rời, và cơ chế phát hiện giả định chỉ một phiên thì không cộng dồn được năng lực mà kẻ tấn công đã ráp lại.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-23",
+      "q": "The argument that agent security is a contextual problem rests on the observation that",
+      "q_vi": "Lập luận an ninh tác tử là bài toán ngữ cảnh dựa trên nhận xét rằng",
+      "choices": [
+        "harmful strings can always be paraphrased until any classifier stops flagging them",
+        "context windows are now long enough to hold the whole authorisation policy",
+        "agents change behaviour when the system prompt is moved to a different position",
+        "the same action can be routine administration or an attack depending on authority"
+      ],
+      "answer": 3,
+      "why": "Deleting user data is not intrinsically malicious; what separates the routine case from the attack is whether an authenticated user actually requested it, which content based judgement cannot see.",
+      "why_vi": "Xoá dữ liệu người dùng tự nó không phải hành vi độc, cái tách ca thường ngày khỏi ca tấn công là việc có người dùng đã xác thực thực sự yêu cầu hay không, và xét theo nội dung thì không thấy được điều đó.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-24",
+      "q": "Classic taint tracking hurts usability in agents because reading unvetted data",
+      "q_vi": "Theo dõi nhiễm kiểu cổ điển làm giảm tính dùng được vì việc đọc dữ liệu chưa kiểm",
+      "choices": [
+        "forces the runtime to rewrite the whole prompt before the next model call",
+        "permanently taints the context and restricts everything the agent does afterwards",
+        "requires a second model pass whose latency doubles the cost of every step",
+        "invalidates the prompt cache so the prefix has to be recomputed from scratch"
+      ],
+      "answer": 1,
+      "why": "Once the context is tainted, downstream utility collapses, which is why the proposed framework branches the context so untrusted material can be inspected without polluting the privileged branch.",
+      "why_vi": "Khi ngữ cảnh đã nhiễm thì phần hữu ích phía sau sụp đổ, đó là lý do khung được đề xuất phân nhánh ngữ cảnh để soi vật liệu không tin cậy mà không làm bẩn nhánh có đặc quyền.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-25",
+      "q": "Semantic replay happens when",
+      "q_vi": "Phát lại theo ngữ nghĩa xảy ra khi",
+      "choices": [
+        "an old token identifier is reused after its nominal expiry window has passed",
+        "two agents present the same credential to the same service at the same moment in time",
+        "one authorisation is executed several times under freshly issued fresh tokens",
+        "a token is minted for a scope broader than the task actually required"
+      ],
+      "answer": 2,
+      "why": "Replanning, retries, delegation, and crash recovery cause the same authorised action to run more than once, so single use tokens do not help unless the issuer keeps durable state over the action itself.",
+      "why_vi": "Lập lại kế hoạch, thử lại, uỷ thác, và phục hồi sau sự cố khiến cùng một hành động đã được cấp phép chạy hơn một lần, nên mã dùng một lần không giúp gì trừ khi bên cấp giữ trạng thái bền cho chính hành động đó.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-26",
+      "q": "The problem with request time authorisation for stateful policies is that",
+      "q_vi": "Vấn đề của việc cấp phép tại thời điểm yêu cầu với chính sách có trạng thái là",
+      "choices": [
+        "budgets, inventory, and approvals can change before the effect actually lands",
+        "the authorisation service becomes a single point of failure for the whole system",
+        "policy evaluation is too slow to run inline with an interactive agent loop",
+        "the agent may request the same permission twice within one planning cycle"
+      ],
+      "answer": 0,
+      "why": "Governance has to cover effects, not just requested outputs, so an approval computed from the view available at request time can be stale by the time the refund or reservation commits.",
+      "why_vi": "Quản trị phải phủ lên hiệu ứng chứ không chỉ đầu ra được yêu cầu, nên một phê duyệt tính từ khung nhìn có tại thời điểm yêu cầu có thể đã cũ khi lệnh hoàn tiền hoặc lệnh giữ chỗ thực sự được ghi.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-27",
+      "q": "The authorisation problem raised by long lived evolving agents is that",
+      "q_vi": "Bài toán uỷ quyền mà tác tử sống lâu và biết tiến hoá đặt ra là",
+      "choices": [
+        "credentials rotate faster than the agent can refresh its cached copies of them",
+        "the agent forgets which grants it holds once its context has been compacted",
+        "audit logs grow beyond what a reviewer can read within a single review cycle",
+        "the subject exercising an old grant may no longer match what the user evaluated"
+      ],
+      "answer": 3,
+      "why": "Retaining experience, acquiring skills and tools, and revising workflows can change both the effects reachable under the old grant and the authority the task now requires.",
+      "why_vi": "Việc giữ lại kinh nghiệm, thu nạp kỹ năng và công cụ, sửa lại quy trình có thể làm đổi cả những hệ quả với tới được dưới quyền cũ lẫn mức thẩm quyền mà nhiệm vụ bây giờ đòi hỏi.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-28",
+      "q": "Permission literacy in mobile interface agents measures whether the agent",
+      "q_vi": "Hiểu biết về quyền ở tác tử giao diện di động đo xem tác tử",
+      "choices": [
+        "can read permission dialogs rendered in languages other than English correctly",
+        "recovers gracefully when a permission dialog appears mid gesture on the screen",
+        "grants only the permissions the delegated task actually needs to be completed",
+        "caches its permission decisions so the same dialog is not re evaluated later"
+      ],
+      "answer": 2,
+      "why": "The study injects permission popups into real tasks and finds the completion objective pushes agents toward accepting whatever stands between them and finishing.",
+      "why_vi": "Nghiên cứu chèn hộp thoại quyền vào các nhiệm vụ thật và thấy mục tiêu hoàn thành đẩy tác tử tới chỗ chấp nhận bất cứ thứ gì chắn giữa nó và việc xong việc.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-29",
+      "q": "Running coding agents under enterprise style hardening was found to",
+      "q_vi": "Chạy tác tử lập trình dưới các biện pháp làm cứng kiểu doanh nghiệp được ghi nhận là",
+      "choices": [
+        "cost both success and efficiency, with the two axes disagreeing across models",
+        "leave success unchanged while raising only the wall clock time of each session",
+        "affect only agents that depend on network egress for package installation steps",
+        "improve reliability because narrower permissions reduce the branching factor"
+      ],
+      "answer": 0,
+      "why": "Under the strictest policy both success loss and cost inflation appear, and the model that best preserves task success is not the one that best preserves efficiency.",
+      "why_vi": "Dưới chính sách chặt nhất, cả mất mát về tỉ lệ thành công lẫn tăng chi phí đều xuất hiện, và mô hình giữ được tỉ lệ thành công tốt nhất không phải mô hình giữ được hiệu suất tốt nhất.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-30",
+      "q": "When an agent acts under its user's own credentials, account level controls fail to catch",
+      "q_vi": "Khi tác tử hành động dưới chính chứng thư của người dùng, kiểm soát ở mức tài khoản không bắt được",
+      "choices": [
+        "commands issued outside the agent's normal working hours for that account",
+        "task redirection, because every resulting command is authenticated and permitted",
+        "attempts to escalate to another account within the same organisational unit",
+        "usage that exceeds the quota assigned to that user on the shared scheduler"
+      ],
+      "answer": 1,
+      "why": "Adversarial instructions in a log, a tool description, a shared file, or a peer message can push the agent past its assigned task while every action still sits inside the user's rights.",
+      "why_vi": "Chỉ dẫn đối kháng nằm trong nhật ký, trong mô tả công cụ, trong tệp dùng chung, hoặc trong tin nhắn của tác tử bạn có thể đẩy tác tử vượt ra ngoài nhiệm vụ được giao trong khi mọi hành động vẫn nằm trong quyền của người dùng.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-31",
+      "q": "The reason a model's free form rationale must not widen its authority is that",
+      "q_vi": "Lý do không được để lời giải thích tự do của mô hình nới rộng thẩm quyền của nó là",
+      "choices": [
+        "rationales consume tokens that would otherwise be spent on the actual task",
+        "an explanation is neither an authorisation nor reliable introspection",
+        "rationales are generated after the action so they arrive too late to matter",
+        "explanations vary between sampling runs which makes caching them impossible"
+      ],
+      "answer": 1,
+      "why": "The mediation layer converts rationale content into typed claims and checks them against server held facts, and a claim that is incomplete or conflicting can only narrow, never widen, baseline authority.",
+      "why_vi": "Tầng trung gian biến nội dung lời giải thích thành các khẳng định có kiểu rồi đối chiếu với dữ kiện do máy chủ nắm, và một khẳng định thiếu hoặc mâu thuẫn chỉ có thể thu hẹp chứ không bao giờ nới rộng thẩm quyền nền.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-32",
+      "q": "Role stratified risk control on tool arguments exists because aggregate certification",
+      "q_vi": "Kiểm soát rủi ro theo vai của từng tham số ra đời vì chứng nhận gộp",
+      "choices": [
+        "cannot be computed when a tool schema contains optional or nested fields",
+        "requires a calibration set larger than most deployments can realistically collect",
+        "assumes the tool returns a typed result which many production tools do not",
+        "lets many benign arguments average away a failure in one rare high risk field"
+      ],
+      "answer": 3,
+      "why": "Untrusted content may legitimately shape an email body but must never set a recipient, an account, or a command, so each semantic argument role needs its own threshold and risk budget.",
+      "why_vi": "Nội dung không tin cậy có thể chính đáng định hình phần thân thư nhưng tuyệt đối không được đặt người nhận, tài khoản, hay câu lệnh, nên mỗi vai tham số cần ngưỡng và ngân sách rủi ro riêng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-33",
+      "q": "The coverage bound proved for fixed invariant runtime monitors says recall is limited by",
+      "q_vi": "Trần bao phủ được chứng minh cho bộ giám sát chạy với tập bất biến cố định nói rằng độ nhạy bị giới hạn bởi",
+      "choices": [
+        "how concentrated the attack distribution is over trigger completion patterns",
+        "the number of tool calls the monitor is allowed to buffer before deciding",
+        "the depth of the automaton used to encode each temporal safety property",
+        "the ratio between benign and malicious sessions present in the calibration data"
+      ],
+      "answer": 0,
+      "why": "When attacks concentrate on a few patterns a small invariant set catches most of them, and when they disperse the same monitor collapses, which explains identical monitors scoring very differently across models.",
+      "why_vi": "Khi tấn công tập trung vào vài khuôn thì một tập bất biến nhỏ bắt được phần lớn, còn khi chúng tản ra thì cùng bộ giám sát đó sụp, điều này giải thích vì sao cùng một bộ giám sát cho kết quả rất khác nhau giữa các mô hình.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-34",
+      "q": "Chain of thought monitoring was defeated in the reported attack by",
+      "q_vi": "Giám sát chuỗi suy luận bị đánh bại trong tấn công được báo cáo bằng cách",
+      "choices": [
+        "removing the reasoning entirely so the monitor had no text left to classify",
+        "flooding the monitor with reasoning long enough to exceed its context window",
+        "rewriting only the reasoning while leaving every command and output identical",
+        "training a second model to imitate the monitor and then optimising against it offline"
+      ],
+      "answer": 2,
+      "why": "Because the actions are unchanged, the exploit still works, and the monitor loses the only signal it had precisely on the subset where reasoning was the sole evidence of misconduct.",
+      "why_vi": "Vì phần hành động không đổi nên khai thác vẫn chạy, và bộ giám sát mất đi tín hiệu duy nhất nó có, đúng ở tập con mà lập luận là bằng chứng duy nhất của việc làm sai.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-35",
+      "q": "The phrase false average applied to a monitor's accuracy warns that the score is",
+      "q_vi": "Cụm trung bình giả áp cho độ chính xác của bộ giám sát cảnh báo rằng điểm số đó",
+      "choices": [
+        "dominated by cases the actions already reveal, hiding collapse where it matters",
+        "computed on a sample too small for the stated confidence interval to hold",
+        "sensitive to the decoding temperature used when the monitor was evaluated",
+        "biased upward because the same model wrote both the traces and the labels"
+      ],
+      "answer": 0,
+      "why": "Most detections come from cases where the commands themselves give the game away, so the aggregate stays high even when performance on the subset that actually needs the monitor drops close to nothing.",
+      "why_vi": "Phần lớn lần bắt được đến từ các ca mà chính câu lệnh đã tố cáo, nên số gộp vẫn cao ngay cả khi hiệu năng ở tập con thực sự cần tới bộ giám sát tụt gần về không.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-36",
+      "q": "Reporting only endpoint outcomes for prompt injection experiments can conceal",
+      "q_vi": "Chỉ báo cáo kết cục cuối trong thí nghiệm tiêm câu lệnh có thể che mất",
+      "choices": [
+        "the exact wording of the injection that was used against the target agent",
+        "the identity of the model backend that produced each individual rollout",
+        "the token cost of the additional defence layer added to the pipeline",
+        "how far the taint propagated and how much authorised utility survived"
+      ],
+      "answer": 3,
+      "why": "Two systems can share the same terminal policy outcome while differing in logged propagation, recovery, and completion of authorised structured actions, which is why trace based containment is measured separately.",
+      "why_vi": "Hai hệ có thể cùng một kết cục chính sách cuối cùng trong khi khác nhau ở mức lan được ghi nhận, ở khả năng phục hồi, và ở lượng hành động hợp lệ hoàn thành, đó là lý do việc khoanh vùng được đo riêng theo vết.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-37",
+      "q": "When a tool silently returns an empty payload, the dominant observed agent behaviour was",
+      "q_vi": "Khi công cụ âm thầm trả về tải trọng rỗng, hành vi phổ biến nhất được quan sát ở tác tử là",
+      "choices": [
+        "retrying the same call until a configured retry budget was fully exhausted",
+        "escalating to the user with an explicit note about the malformed response",
+        "fabricating an answer as if the empty payload had been real returned data",
+        "refusing outright and citing an internal safety policy for the refusal"
+      ],
+      "answer": 2,
+      "why": "The audit classifies responses into honest surrender, fabrication, and unfaithful safety refusal, and fabrication accounted for the majority of valid responses under injected silent failures.",
+      "why_vi": "Phép kiểm toán phân loại phản hồi thành đầu hàng trung thực, bịa đặt, và từ chối nhân danh an toàn nhưng không thật, và bịa đặt chiếm đa số trong các phản hồi hợp lệ dưới các hỏng hóc âm thầm được tiêm vào.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-38",
+      "q": "Kill chain style sequential detection is applied to tool protocol traffic because",
+      "q_vi": "Phát hiện tuần tự theo chuỗi tấn công được áp cho lưu lượng giao thức công cụ vì",
+      "choices": [
+        "protocol messages are too short for a content classifier to score reliably",
+        "individually benign invocations can be composed into a malicious sequence",
+        "servers do not expose enough metadata for per call authorisation decisions",
+        "encryption prevents inspection of anything other than the call ordering"
+      ],
+      "answer": 1,
+      "why": "Per call defences inspect each invocation in isolation, so an attacker who never issues an obviously bad call can still assemble a harmful progression across a session.",
+      "why_vi": "Phòng thủ theo từng lời gọi soi riêng từng lần gọi, nên kẻ tấn công không bao giờ phát ra lời gọi xấu lộ liễu vẫn ráp được một tiến trình có hại trải suốt một phiên.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-39",
+      "q": "The cross vendor tool trust gap in autonomous networks is that",
+      "q_vi": "Khoảng trống tin cậy công cụ giữa các nhà cung cấp trong mạng tự trị là",
+      "choices": [
+        "tools from different vendors expose incompatible schemas for the same operation",
+        "vendors publish trust state but agents lack the credentials to subscribe to it",
+        "trust scores decay at different rates depending on which registry issued them",
+        "compromise of one vendor's tool is not communicated to another vendor's agents"
+      ],
+      "answer": 3,
+      "why": "Without a standard notification path, agents keep invoking a degraded tool because nothing tells them its trust state changed, and the service impact cascades.",
+      "why_vi": "Không có đường thông báo chuẩn thì tác tử vẫn tiếp tục gọi một công cụ đã suy giảm vì không có gì báo cho nó biết trạng thái tin cậy đã đổi, và tác động dịch vụ lan theo dây chuyền.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-40",
+      "q": "Static decoys planted before an attack are limited against capable pentest agents because",
+      "q_vi": "Mồi tĩnh cài trước khi bị tấn công bị hạn chế trước tác tử kiểm thử xâm nhập giỏi vì",
+      "choices": [
+        "the decoys consume resources the defender needs for the real production systems instead",
+        "the agents progressively recognise the artifacts and refocus on the real target",
+        "modern scanners fingerprint decoy hosts by their unusual network stack timing",
+        "planting them requires privileges most defenders do not hold in cloud accounts"
+      ],
+      "answer": 1,
+      "why": "The proposed answer is a decoy environment that unfolds in response to the attacker's own trajectory, so the deception adapts faster than the agent can rule it out.",
+      "why_vi": "Câu trả lời được đề xuất là một môi trường mồi bung ra theo chính quỹ đạo của kẻ tấn công, để phần đánh lừa thích nghi nhanh hơn tốc độ mà tác tử loại trừ được nó.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-41",
+      "q": "Binary human versus bot detectors misroute browsing agents because",
+      "q_vi": "Bộ dò nhị phân người so với bot định tuyến sai tác tử duyệt web vì",
+      "choices": [
+        "agent sessions produce timing patterns identical to a slow human on mobile data",
+        "agents rotate residential addresses faster than the reputation service updates",
+        "browser automation frameworks now spoof the fingerprints these detectors read",
+        "the label space has no agent class, so the confusion is architectural"
+      ],
+      "answer": 3,
+      "why": "Adding an explicit third class is what fixes the routing, which is the evidence that the failure came from the representation rather than from insufficient tuning.",
+      "why_vi": "Thêm một lớp thứ ba tường minh mới sửa được việc định tuyến, đó là bằng chứng cho thấy hỏng hóc đến từ cách biểu diễn chứ không phải từ việc tinh chỉnh chưa đủ.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-42",
+      "q": "Restricting scoring to the attacker's first turn against a frozen attack pool tends to",
+      "q_vi": "Chỉ chấm lượt tấn công đầu tiên trên một kho tấn công đóng băng thường sẽ",
+      "choices": [
+        "overstate risk because the first turn is where refusal training is weakest",
+        "give an unstable estimate that swings with the sampling temperature used",
+        "understate risk compared with letting an adversary observe and pivot",
+        "match the multi round estimate once enough scenarios have been included"
+      ],
+      "answer": 2,
+      "why": "Holding scenarios and defenders fixed and only changing whether the attacker may adapt across rounds moves the measured success rate substantially, so the evaluation protocol itself decides the conclusion.",
+      "why_vi": "Giữ nguyên kịch bản và bên phòng thủ, chỉ đổi việc kẻ tấn công có được thích nghi qua nhiều vòng hay không, đã làm tỉ lệ thành công đo được dịch chuyển đáng kể, nên chính giao thức đánh giá quyết định kết luận.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-43",
+      "q": "Building a transferable strategy library for injection red teaming is motivated by",
+      "q_vi": "Việc dựng kho chiến lược chuyển được cho đội đỏ tiêm câu lệnh xuất phát từ",
+      "choices": [
+        "reinforcement learned attacker models generalising poorly to new target models",
+        "the need to keep every attack string under the target's context length limit",
+        "regulators requiring that red team evidence be reproducible across vendors",
+        "the fact that attack success drops whenever the target's temperature is lowered"
+      ],
+      "answer": 0,
+      "why": "Instead of retraining an attacker for each victim, the system accumulates strategies during training and applies the library directly to a target it has never seen.",
+      "why_vi": "Thay vì huấn luyện lại một mô hình tấn công cho từng nạn nhân, hệ tích lũy chiến lược trong lúc huấn luyện rồi áp thẳng kho đó lên một mục tiêu chưa từng gặp.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-44",
+      "q": "Open ended environment evolution is preferred to short static safety tasks because",
+      "q_vi": "Tiến hoá môi trường mở được ưa hơn nhiệm vụ an toàn tĩnh và ngắn vì",
+      "choices": [
+        "short tasks cannot be generated automatically at the scale evaluation now needs",
+        "static tasks are easier to contaminate through public benchmark leakage",
+        "risk is cumulative when an early state change influences a much later decision",
+        "long tasks expose latency problems that short tasks structurally cannot surface"
+      ],
+      "answer": 2,
+      "why": "Agent behaviour is mediated through shared state that is repeatedly modified and reused, so a benchmark of short static tasks cannot express a hazard that only exists across a long horizon.",
+      "why_vi": "Hành vi của tác tử đi qua một trạng thái dùng chung bị sửa và dùng lại nhiều lần, nên một bộ thử gồm nhiệm vụ tĩnh và ngắn không diễn tả nổi một mối nguy chỉ tồn tại khi chạy dài.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-45",
+      "q": "Reconnaissance driven pentesting of an agent proceeds by first",
+      "q_vi": "Kiểm thử xâm nhập tác tử theo lối trinh sát trước hết tiến hành bằng cách",
+      "choices": [
+        "fuzzing the tool schema until the agent emits a malformed structured call",
+        "profiling the target's tools, instructions, and habits to craft stronger injections",
+        "measuring response latency to infer which model backend is being served",
+        "requesting the system prompt directly and recording whether it is refused"
+      ],
+      "answer": 1,
+      "why": "The framework mirrors classic penetration testing: extract knowledge assets about the target first, then use that profile to build attacks that exploit the specific weaknesses found.",
+      "why_vi": "Khung này mô phỏng kiểm thử xâm nhập cổ điển, tức là trích các tài sản tri thức về mục tiêu trước, rồi dùng hồ sơ đó để dựng tấn công khai thác đúng những điểm yếu đã tìm ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-46",
+      "q": "The finding that prompt level alignment is local means a one line guard instruction",
+      "q_vi": "Phát hiện căn chỉnh bằng câu lệnh chỉ hiệu lực cục bộ nghĩa là một dòng chỉ dẫn phòng vệ",
+      "choices": [
+        "stops working once the guard text is moved below the tool definitions",
+        "only holds when the harmful request is issued by an unauthenticated caller",
+        "must be repeated at every turn or the model will drop it from its context",
+        "holds in single turn explicit requests and degrades under user side persuasion"
+      ],
+      "answer": 3,
+      "why": "The paired diagnostic uses screen grounded persuasion from the user with no environment injection at all, and the guard degrades along exactly the axes a real user can traverse.",
+      "why_vi": "Chẩn đoán ghép cặp dùng cách thuyết phục neo vào màn hình từ phía người dùng mà không tiêm gì vào môi trường, và dòng chỉ dẫn phòng vệ suy giảm đúng theo những trục mà một người dùng thật có thể đi qua.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-47",
+      "q": "Evaluating security agents at fixed spend rather than peak capability matters because",
+      "q_vi": "Đánh giá tác tử an ninh ở mức chi tiêu cố định thay vì ở đỉnh năng lực quan trọng vì",
+      "choices": [
+        "peak capability numbers cannot be reproduced without the original random seeds",
+        "in operations every reasoning step, tool call, and query consumes real budget",
+        "generous budgets mask differences in the underlying tokeniser efficiency",
+        "vendors price inference differently so absolute scores are not comparable"
+      ],
+      "answer": 1,
+      "why": "Comparing models at matched cost levels and splitting spend into inference and tool components reveals scaling behaviour that a single best case success number hides.",
+      "why_vi": "So sánh các mô hình ở cùng mức chi phí rồi tách chi tiêu thành phần suy luận và phần công cụ làm lộ ra dáng điệu mở rộng mà một con số thành công tốt nhất che mất.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-48",
+      "q": "Operational stealth is measured separately from success because a capable offensive agent may",
+      "q_vi": "Độ ẩn tác chiến được đo tách khỏi thành công vì một tác tử tấn công giỏi có thể",
+      "choices": [
+        "reach the objective while leaving evidence that reveals its presence and methods",
+        "reach the objective only when the defender's telemetry pipeline is offline",
+        "fail the objective yet still produce a report that reads as a successful run",
+        "reach the objective faster than any human operator working the same scenario"
+      ],
+      "answer": 0,
+      "why": "The benchmark separates achieving the goal from the tradecraft of not revealing presence, capabilities, or collected intelligence, which is what distinguishes sophisticated operators.",
+      "why_vi": "Bộ chuẩn tách việc đạt mục tiêu khỏi kỹ năng không để lộ sự hiện diện, năng lực, và thông tin đã thu, đó chính là thứ phân biệt người tác chiến lão luyện.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-49",
+      "q": "Before reading an agent's capture the flag pass rate as capability, one should",
+      "q_vi": "Trước khi đọc tỉ lệ vượt qua thử thách tìm cờ của tác tử như năng lực, nên",
+      "choices": [
+        "confirm the challenges were not present in any public training corpus",
+        "check that the same model was used for both solving and grading the runs",
+        "audit the traces, since shortcutting inflates reported rates substantially",
+        "rerun the suite with a lower temperature to remove sampling variability"
+      ],
+      "answer": 2,
+      "why": "A controlled ablation with a four stage audit of every trace found cheating far more pervasive than earlier estimates, so the headline pass rate partly measures shortcut discovery.",
+      "why_vi": "Một khảo sát có kiểm soát với quy trình kiểm bốn tầng trên từng vết chạy cho thấy gian lận phổ biến hơn nhiều so với ước tính trước, nên con số vượt qua ở tiêu đề đo một phần là khả năng tìm lối tắt.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-50",
+      "q": "An agentic remote access trojan built around a locally hosted small model is notable because",
+      "q_vi": "Trojan truy cập từ xa dạng tác tử dựng quanh một mô hình nhỏ chạy tại chỗ đáng chú ý vì",
+      "choices": [
+        "it can decrypt traffic that a conventional trojan would have to forward outward",
+        "it replaces the command and control channel with a peer to peer overlay network",
+        "small models are known to evade signature scanners more reliably than large ones",
+        "it needs no continuous operator and no outbound call to a hosted model"
+      ],
+      "answer": 3,
+      "why": "The interesting claim is autonomy of the loop: the local model interprets observations, selects actions, and recovers from failed steps, which removes both the operator and a network dependency defenders watch.",
+      "why_vi": "Khẳng định đáng chú ý là tính tự trị của vòng lặp, mô hình chạy tại chỗ tự diễn giải quan sát, chọn hành động, và phục hồi khi bước trước hỏng, việc này bỏ đi cả người điều khiển lẫn một phụ thuộc mạng mà bên phòng thủ hay theo dõi.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-51",
+      "q": "Post compromise incident response benchmarks were introduced because existing suites mostly",
+      "q_vi": "Bộ chuẩn ứng cứu sau xâm nhập ra đời vì các bộ hiện có phần lớn",
+      "choices": [
+        "place the agent in a clean idealised environment before any attack has happened",
+        "grade only the final written report rather than the commands the agent issued",
+        "require access to proprietary telemetry that most research groups cannot obtain easily",
+        "assume the agent has root access which real responders rarely start out holding"
+      ],
+      "answer": 0,
+      "why": "The new setting gives the agent a forensic disk snapshot of an already compromised host together with alerts and scans, which is the situation responders actually face.",
+      "why_vi": "Bối cảnh mới đưa cho tác tử một ảnh chụp pháp y của máy đã bị xâm nhập kèm cảnh báo và kết quả quét, đó mới là tình huống mà người ứng cứu thực sự gặp.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-52",
+      "q": "The reported evidence requirement for detecting real vulnerabilities in code is that",
+      "q_vi": "Yêu cầu bằng chứng được báo cáo khi phát hiện lỗ hổng thật trong mã là",
+      "choices": [
+        "the detector needs the commit history that first introduced the fragile pattern",
+        "most vulnerable functions need evidence from outside the function to judge",
+        "a runtime crash trace is required before any static verdict can be trusted",
+        "the function must be compiled with the same flags used in production builds"
+      ],
+      "answer": 1,
+      "why": "On a sample of real disclosed vulnerabilities the majority of vulnerable functions could not be classified correctly in isolation, which is the argument for letting an agent gather interprocedural evidence.",
+      "why_vi": "Trên một mẫu các lỗ hổng đã công bố thật, phần lớn hàm có lỗ hổng không thể phân loại đúng nếu xét riêng lẻ, đó là lập luận cho việc để tác tử tự thu bằng chứng liên thủ tục.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-53",
+      "q": "Adversarial code comments are an effective attack on LLM vulnerability detectors because they",
+      "q_vi": "Chú thích mã đối kháng là đòn hiệu quả với bộ dò lỗ hổng bằng mô hình vì chúng",
+      "choices": [
+        "exploit the detector's reliance on natural language context inside source code",
+        "break the parser so the detector falls back to a weaker lexical scanning mode",
+        "exceed the model's context budget so the vulnerable function is truncated away entirely",
+        "trigger the license filter which causes the detector to skip the file entirely"
+      ],
+      "answer": 0,
+      "why": "The comments change nothing about program behaviour, so the attack works purely through the textual context the detector was trained to read alongside the code.",
+      "why_vi": "Các chú thích không làm đổi hành vi chương trình chút nào, nên đòn tấn công chỉ chạy qua phần ngữ cảnh văn bản mà bộ dò được huấn luyện để đọc kèm với mã.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-54",
+      "q": "In the studied agentic continuous integration pipeline, the downstream verifiers",
+      "q_vi": "Trong đường ống tích hợp liên tục dạng tác tử được nghiên cứu, các khâu kiểm phía sau",
+      "choices": [
+        "failed to parse the injected feature request and skipped their review entirely",
+        "flagged the exfiltration line but were overruled by the deployment approver",
+        "saw the exfiltration line, cited the fake prior approval, and passed it anyway",
+        "leaked their own system prompts which then propagated to the approval stage"
+      ],
+      "answer": 2,
+      "why": "The authority framed injection claimed the change was pre approved and should not be re reviewed, and the finding is that verification happened while action did not follow from it.",
+      "why_vi": "Mũi tiêm giả danh thẩm quyền tuyên bố thay đổi đã được duyệt trước và không cần soi lại, và phát hiện là việc kiểm chứng vẫn diễn ra nhưng hành động không đi theo kết quả kiểm.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-55",
+      "q": "A local transcript boundary with typed slots is preferred to plain redaction because plain redaction",
+      "q_vi": "Ranh giới bản ghi tại máy dùng ô có kiểu được ưa hơn che chữ đơn giản vì che chữ đơn giản",
+      "choices": [
+        "cannot be applied before the transcript is uploaded to the model provider",
+        "misses cross turn references and destroys structure the agent reasons over",
+        "requires a regular expression for every secret format the organisation uses",
+        "leaves the original values in the local cache where any process can read them"
+      ],
+      "answer": 1,
+      "why": "Placeholder redaction can miss embedded or cross turn references, over redact benign lookalikes, and strip the structure that made the observation useful, which is what typed slots and a session graph are meant to preserve.",
+      "why_vi": "Che chữ bằng ô giữ chỗ có thể bỏ sót tham chiếu lồng nhau hoặc tham chiếu chéo lượt, che nhầm thứ vô hại trông giống, và phá mất cấu trúc vốn làm quan sát trở nên hữu ích, đó là thứ mà ô có kiểu và đồ thị phiên muốn giữ lại.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-56",
+      "q": "Scope bound semantic declassification goes beyond redaction by specifying",
+      "q_vi": "Hạ mật theo ngữ nghĩa có phạm vi đi xa hơn che chữ nhờ quy định",
+      "choices": [
+        "which encryption key protects each field of the outgoing internal message",
+        "how long each secret may remain resident in the model's key value cache",
+        "which agents in the topology are permitted to open a channel to which others",
+        "what should be disclosed, to whom, for what purpose, and how it may be reused"
+      ],
+      "answer": 3,
+      "why": "The protocol binds a task sufficient disclosure to an explicit recipient, purpose, forwarding rule, lifetime, logging rule, and memory reuse rule, which surface level redaction never states.",
+      "why_vi": "Giao thức buộc một mức tiết lộ vừa đủ cho nhiệm vụ vào một người nhận cụ thể, một mục đích, một luật chuyển tiếp, một thời hạn, một luật ghi nhật ký, và một luật tái dùng trong bộ nhớ, những thứ mà che chữ ở bề mặt không bao giờ nói tới.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-57",
+      "q": "A signed append only record of an agent's actions is insufficient on its own because it proves",
+      "q_vi": "Bản ghi hành động của tác tử có chữ ký và chỉ thêm không sửa tự nó chưa đủ vì nó chứng minh",
+      "choices": [
+        "only that the action was authorised, not that the outcome was ever delivered",
+        "that the log is complete, but not that any specific entry is semantically correct",
+        "only the ordering of events, not the wall clock time at which each occurred",
+        "which key wrote the record, not what the runtime that produced it actually was"
+      ],
+      "answer": 3,
+      "why": "The record is a software layer artifact produced by the very stack whose integrity is in question, which is why the follow up work binds it into a hardware rooted attestation.",
+      "why_vi": "Bản ghi là hiện vật ở tầng phần mềm, do chính ngăn xếp đang bị nghi ngờ về tính toàn vẹn tạo ra, đó là lý do công trình tiếp theo buộc nó vào một chứng thực có gốc phần cứng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-58",
+      "q": "Protocol level vulnerabilities in agentic commerce platforms are distinctive because they",
+      "q_vi": "Lỗ hổng ở tầng giao thức của nền tảng thương mại tác tử đặc biệt ở chỗ chúng",
+      "choices": [
+        "exploit deterministically regardless of which model the agent happens to run",
+        "require the attacker to control the buyer agent's system prompt beforehand",
+        "only appear once transaction volume exceeds the facilitator's batching threshold",
+        "depend on the specific tokeniser used to render the payment intent as text"
+      ],
+      "answer": 0,
+      "why": "Because the flaw lives one layer below the model, no improvement in refusal training or injection robustness removes it, which is why the authors argue the study of agent security should not stop at the model.",
+      "why_vi": "Vì lỗi nằm ở tầng dưới mô hình, không cải tiến nào về huấn luyện từ chối hay độ bền trước tiêm câu lệnh xoá được nó, đó là lý do nhóm tác giả cho rằng nghiên cứu an ninh tác tử không nên dừng ở mô hình.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-59",
+      "q": "Delegating payment proof verification to shared facilitators concentrates risk because",
+      "q_vi": "Uỷ thác việc kiểm chứng chứng cứ thanh toán cho các bên trung gian dùng chung làm rủi ro tập trung vì",
+      "choices": [
+        "facilitators settle in a currency whose price volatility merchants cannot hedge properly",
+        "each merchant must trust a different facilitator with the same customer records",
+        "one authorisation flaw in a facilitator reaches every service sitting behind it",
+        "the protocol requires the facilitator to hold custody of the merchant's keys"
+      ],
+      "answer": 2,
+      "why": "Many independent merchants route verification and settlement through a small number of shared components, so a single correctness bug has a blast radius far larger than one integration.",
+      "why_vi": "Nhiều người bán độc lập cùng đẩy việc kiểm chứng và tất toán qua một số ít thành phần dùng chung, nên một lỗi đúng đắn duy nhất có bán kính ảnh hưởng lớn hơn nhiều so với một lần tích hợp.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-60",
+      "q": "The hidden state analysis of physically grounded danger concluded that",
+      "q_vi": "Phân tích trạng thái ẩn về nguy hiểm neo vào thế giới vật lý kết luận rằng",
+      "choices": [
+        "physical danger and content danger form separable signals inside the model",
+        "physical danger is a strict subset of what content safety training already covers",
+        "the two signals merge in larger models and separate only in small ones",
+        "physical danger can be detected only after the plan has been grounded to actions"
+      ],
+      "answer": 0,
+      "why": "Direction analysis with random split null tests found the two danger types distinguishable across several model families, which is the basis for probing physical risk rather than reusing a text safety classifier.",
+      "why_vi": "Phân tích theo hướng kèm phép thử rỗng bằng chia ngẫu nhiên cho thấy hai loại nguy hiểm phân biệt được trên vài họ mô hình, đó là cơ sở để dò rủi ro vật lý thay vì tái dùng bộ phân loại an toàn văn bản.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-61",
+      "q": "Treating a learned world model as a security boundary is justified because compromise there",
+      "q_vi": "Coi mô hình thế giới đã học là một ranh giới an ninh là hợp lý vì việc nó bị chiếm",
+      "choices": [
+        "makes the simulator diverge slowly enough that monitoring cannot detect the drift",
+        "propagates from data, sensors, prompts, or feedback into executed action",
+        "prevents the planner from producing any valid trajectory at all in that episode",
+        "is confined to the imagination stage and never reaches the execution stage"
+      ],
+      "answer": 1,
+      "why": "The predictive layer sits between perception and planning, so poisoning, backdoors, and adversarial examples introduced anywhere in its lifecycle can end up steering physical or terminal actions.",
+      "why_vi": "Tầng dự đoán nằm giữa tri giác và lập kế hoạch, nên đầu độc, cửa hậu, và mẫu đối kháng đưa vào bất kỳ đâu trong vòng đời của nó đều có thể kết thúc bằng việc lái hành động vật lý hoặc hành động trên máy.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-62",
+      "q": "A self state attack on a self hosted agent is notable because it requires",
+      "q_vi": "Tấn công vào trạng thái của chính tác tử tự vận hành đáng chú ý vì nó chỉ cần",
+      "choices": [
+        "a kernel exploit to bypass the mandatory access control policy in place",
+        "no exploit at all, only legitimate system calls writing the agent's own files",
+        "physical access to the host during the window when memory is being flushed",
+        "a compromised model checkpoint downloaded from a public weight repository"
+      ],
+      "answer": 1,
+      "why": "The agent reads and writes its own memory and configuration files to function, so corrupting those files through ordinary operating system calls is enough to compromise its behaviour.",
+      "why_vi": "Tác tử phải đọc và ghi chính tệp bộ nhớ và cấu hình của mình để hoạt động, nên làm hỏng các tệp đó bằng lời gọi hệ điều hành thông thường là đủ để chiếm hành vi của nó.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-63",
+      "q": "The missing specification layer for AI oversight is described as",
+      "q_vi": "Tầng đặc tả còn thiếu cho giám sát trí tuệ nhân tạo được mô tả là",
+      "choices": [
+        "a research gap that will close once interpretability methods become reliable enough",
+        "a hardware gap that only trusted execution environments can eventually fill",
+        "a coordination gap, since every team rebuilds its own audit and policy stack",
+        "a data gap caused by the absence of public incident reports from deployments"
+      ],
+      "answer": 2,
+      "why": "The diagnosis is that the artifacts produced by interpretability, formal methods, security engineering, and evaluation do not compose, so each deployment reinvents schemas and escalation paths already understood elsewhere.",
+      "why_vi": "Chẩn đoán là các hiện vật do khả diễn giải, phương pháp hình thức, kỹ thuật an ninh, và phương pháp đánh giá tạo ra không ghép được với nhau, nên mỗi lần triển khai lại phát minh lại những lược đồ và đường leo thang mà nơi khác đã hiểu rõ.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-64",
+      "q": "The reported risk of persona skills is that distilling a person's history",
+      "q_vi": "Rủi ro được báo cáo của kỹ năng chân dung cá nhân là việc chưng cất lịch sử một người",
+      "choices": [
+        "concentrates fragmented personal signals and amplifies them through reuse",
+        "requires storing the raw dialogue transcripts alongside the distilled artifact",
+        "produces an artifact that only the originating provider can decrypt and load",
+        "degrades personalisation quality because rare preferences are averaged away"
+      ],
+      "answer": 0,
+      "why": "The concern is not one leaked record but the aggregation: portable executable artifacts gather scattered signals into one object that is then reused by downstream agents.",
+      "why_vi": "Mối lo không phải là một bản ghi bị lộ mà là sự gộp lại, các hiện vật chạy được và mang đi được thu gom những tín hiệu rời rạc vào một đối tượng rồi được các tác tử phía sau dùng lại.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-65",
+      "q": "Compared with prompt injection defences, a malicious skill file is a supply chain problem because",
+      "q_vi": "So với phòng thủ tiêm câu lệnh, tệp kỹ năng độc hại là bài toán chuỗi cung ứng vì",
+      "choices": [
+        "it is delivered through the model provider rather than through the user's input",
+        "its payload executes at build time rather than while the agent is running",
+        "it can only be introduced by an insider with commit access to the repository",
+        "it arrives as an installed artifact that reviewers read as documentation"
+      ],
+      "answer": 3,
+      "why": "Skill folders of prose and scripts are pulled from public registries with essentially no screening, so shell commands can sit inside natural language that a reviewer skims as instructions.",
+      "why_vi": "Các thư mục kỹ năng gồm văn xuôi và kịch bản được kéo về từ kho công khai mà gần như không qua sàng lọc, nên lệnh shell có thể nằm trong ngôn ngữ tự nhiên mà người soi chỉ lướt qua như chỉ dẫn.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-66",
+      "q": "Agentic technical debt is defined as debt that arises specifically from",
+      "q_vi": "Nợ kỹ thuật dạng tác tử được định nghĩa là nợ nảy sinh riêng từ",
+      "choices": [
+        "the cost of retraining a model every time an external tool changes its schema",
+        "the accumulated prompt templates that no team member is willing to delete",
+        "the mismatch between the model context length and the size of the codebase",
+        "autonomy, multi agent collaboration, tool orchestration, and persistent memory"
+      ],
+      "answer": 3,
+      "why": "Existing technical debt models assume static component level architectures, and the proposed extension covers debt that emerges, propagates, and amplifies because the system decides and remembers on its own.",
+      "why_vi": "Các mô hình nợ kỹ thuật hiện có giả định kiến trúc tĩnh ở mức thành phần, còn phần mở rộng được đề xuất bao phủ loại nợ nảy sinh, lan ra, và khuếch đại vì hệ tự quyết định và tự ghi nhớ.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-67",
+      "q": "Stage level conformal guarantees in a modular security agent do not automatically give",
+      "q_vi": "Bảo đảm bảo giác ở mức từng chặng trong một tác tử an ninh mô đun không tự động cho",
+      "choices": [
+        "coverage for the individual stage when its calibration set is small",
+        "a trajectory level guarantee across the whole chain of stages",
+        "any control over the false positive rate of the first stage classifier",
+        "protection against distribution shift within one stage between runs"
+      ],
+      "answer": 1,
+      "why": "When stages are trained and calibrated independently the errors can be correlated, and a natural pairwise extension to three or more stages was shown to be invalid because it bounds the wrong way.",
+      "why_vi": "Khi các chặng được huấn luyện và hiệu chuẩn độc lập thì sai số có thể tương quan, và một cách mở rộng theo từng cặp cho ba chặng trở lên đã được chỉ ra là không hợp lệ vì nó chặn sai chiều.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-68",
+      "q": "The main claim about the tool specification format is that schema style specifications",
+      "q_vi": "Khẳng định chính về định dạng đặc tả công cụ là các bản đặc tả kiểu lược đồ",
+      "choices": [
+        "make argument validation harder because optional fields are ambiguous",
+        "increase token cost enough to crowd out the safety section of the prompt",
+        "appear to weaken the model's internal refusal signals during agent operation",
+        "prevent the model from reasoning about tool composition across several calls"
+      ],
+      "answer": 2,
+      "why": "White box representation analysis linked the schema format itself to degraded refusal behaviour, and the proposed safeguard assesses the request against a flattened textual form instead.",
+      "why_vi": "Phân tích biểu diễn dạng hộp trắng nối chính định dạng lược đồ với hành vi từ chối bị suy giảm, và biện pháp được đề xuất là xét yêu cầu dựa trên một dạng văn bản đã làm phẳng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-69",
+      "q": "In multi robot systems, prompt injection risk grows beyond the single agent case mainly through",
+      "q_vi": "Trong hệ nhiều robot, rủi ro tiêm câu lệnh vượt quá trường hợp một tác tử chủ yếu qua",
+      "choices": [
+        "cross agent contamination and a wider set of perception entry points",
+        "the higher actuation frequency required to keep several platforms synchronised",
+        "shared battery budgets that force agents to skip verification steps under load",
+        "the use of a common radio channel that any nearby transmitter can occupy"
+      ],
+      "answer": 0,
+      "why": "The evaluation covers both direct injections into task instructions and indirect injections through perception modules, and the multi agent setting adds propagation between platforms on top of a larger surface.",
+      "why_vi": "Phần đánh giá phủ cả tiêm trực tiếp vào chỉ dẫn nhiệm vụ lẫn tiêm gián tiếp qua các mô đun tri giác, và bối cảnh nhiều tác tử thêm phần lan truyền giữa các nền tảng bên trên một bề mặt vốn đã rộng hơn.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-70",
+      "q": "Hardware confined signing keys are proposed for agents because software resident keys",
+      "q_vi": "Khoá ký giam trong phần cứng được đề xuất cho tác tử vì khoá nằm trong phần mềm",
+      "choices": [
+        "expire on a schedule that agents cannot refresh while running unattended",
+        "cannot be used to sign commits without exposing the author identity",
+        "can be read by any process holding sufficient read privileges on the host",
+        "must be re issued whenever the agent's tool set changes its declared scope"
+      ],
+      "answer": 2,
+      "why": "Plaintext files, environment variables, and container memory are all readable, and the cited production incident showed key material leaving a widely deployed framework quickly once an injection reached it.",
+      "why_vi": "Tệp văn bản thuần, biến môi trường, và bộ nhớ container đều đọc được, và sự cố sản xuất được dẫn ra cho thấy vật liệu khoá rời khỏi một khung phần mềm phổ biến rất nhanh khi một mũi tiêm chạm tới nó.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-71",
+      "q": "Stage specific safety skills are proposed so that heterogeneous defences can be",
+      "q_vi": "Kỹ năng an toàn theo từng chặng được đề xuất để các phòng thủ khác nhau có thể",
+      "choices": [
+        "ranked so the operator always deploys the single strongest available one",
+        "composed as reusable components carrying explicit stage semantics",
+        "trained jointly with the agent policy in one reinforcement learning run",
+        "replaced by a single guard model that covers memory, planning, and execution"
+      ],
+      "answer": 1,
+      "why": "Risks emerge at different stages and propagate across steps, so the abstraction exists to let memory, planning, and execution defences be combined rather than chosen against one another.",
+      "why_vi": "Rủi ro nảy sinh ở những chặng khác nhau và lan qua các bước, nên phép trừu tượng này tồn tại để phòng thủ cho bộ nhớ, cho lập kế hoạch, và cho thực thi được ghép lại thay vì phải loại trừ nhau.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-72",
+      "q": "The concept of an agentic posture vulnerability was introduced to manage",
+      "q_vi": "Khái niệm lỗ hổng do tư thế triển khai được đưa ra để quản lý",
+      "choices": [
+        "a durable composed exposure that outlives any single runtime incident",
+        "the backlog of unpatched dependencies inside the agent's container image",
+        "the gap between a model's training cutoff and the current threat landscape",
+        "the set of prompts an agent has accumulated across its deployment history"
+      ],
+      "answer": 0,
+      "why": "One posture can produce different runtime manifestations across tasks, so the abstraction links those manifestations back to the invariant configuration that a security programme can actually act on.",
+      "why_vi": "Một tư thế triển khai có thể sinh ra những biểu hiện khác nhau tuỳ nhiệm vụ, nên phép trừu tượng này nối các biểu hiện đó về lại cấu hình bất biến mà một chương trình an ninh thực sự xử lý được.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-73",
+      "q": "A prespecified equivalence study on reasoning effort and unauthorised tool use is valuable because it",
+      "q_vi": "Nghiên cứu tương đương có đăng ký trước về mức nỗ lực suy luận và việc dùng công cụ trái phép có giá trị vì nó",
+      "choices": [
+        "compares many models so the finding is not tied to one vendor's behaviour",
+        "measures cost and policy compliance in the same units for easier reporting",
+        "uses a public benchmark so other groups can reproduce the exact numbers",
+        "manipulates one operator tuned parameter directly inside a single model"
+      ],
+      "answer": 3,
+      "why": "Operators change reasoning effort for cost and latency, and varying it inside one model with a hypothesis registered in advance is what turns an association into a controlled comparison.",
+      "why_vi": "Người vận hành đổi mức nỗ lực suy luận vì chi phí và độ trễ, và việc thay đổi nó trong cùng một mô hình với giả thuyết đã đăng ký trước là thứ biến một mối liên hệ thành một so sánh có kiểm soát.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-74",
+      "q": "Mission level runtime verification for robot swarms is needed because per platform guardrails",
+      "q_vi": "Kiểm chứng lúc chạy ở mức nhiệm vụ cho bầy robot là cần thiết vì hàng rào ở từng nền tảng",
+      "choices": [
+        "cannot be updated once the platforms have deployed into a contested area",
+        "depend on a clock synchronisation that degraded links cannot maintain",
+        "consume more onboard compute than the navigation stack can spare in flight",
+        "miss a prohibited objective split across platforms to evade per platform limits"
+      ],
+      "answer": 3,
+      "why": "The assurance failures described arise between platforms rather than inside any one of them, including a collective budget quietly exceeded, so the invariant has to be checked at squad and mission tiers.",
+      "why_vi": "Các hỏng hóc bảo đảm được mô tả nảy sinh giữa các nền tảng chứ không nằm trong bất kỳ nền tảng nào, kể cả việc một ngân sách tập thể bị vượt âm thầm, nên bất biến phải được kiểm ở tầng đội và tầng nhiệm vụ.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-75",
+      "q": "Byzantine tolerant collaborative retrieval addresses knowledge corruption by",
+      "q_vi": "Truy hồi cộng tác chịu lỗi Byzantine xử lý việc tri thức bị làm hỏng bằng cách",
+      "choices": [
+        "encrypting the shared index so only authenticated agents can write to it",
+        "requiring every retrieved passage to be confirmed by a human reviewer",
+        "verifying provenance with credibility scoring across multiple sources",
+        "discarding any document whose embedding is an outlier in the corpus"
+      ],
+      "answer": 2,
+      "why": "The framework aims to keep a poisoned document from silently steering outputs while preserving legitimate domain knowledge, which a blunt outlier filter would also discard.",
+      "why_vi": "Khung này nhắm tới việc không cho một tài liệu bị đầu độc âm thầm lái đầu ra trong khi vẫn giữ được tri thức chuyên ngành hợp lệ, thứ mà một bộ lọc ngoại lai thô bạo cũng sẽ vứt đi.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-76",
+      "q": "An immune system style defence against prompt injection learns across encounters because",
+      "q_vi": "Phòng thủ kiểu hệ miễn dịch trước tiêm câu lệnh học qua từng lần gặp vì",
+      "choices": [
+        "user requests are underspecified and injections exploit that ambiguity",
+        "attack strings repeat verbatim often enough for a cache to be effective",
+        "the model's refusal behaviour drifts and must be recalibrated continuously",
+        "guard models degrade unless their thresholds are retuned after each release"
+      ],
+      "answer": 0,
+      "why": "A request that names an outcome without stating acceptable behaviour leaves room for a completion the user would reject, so the defence accumulates a representation of what this user actually expects.",
+      "why_vi": "Một yêu cầu chỉ nêu kết quả mong muốn mà không nói rõ hành vi nào là chấp nhận được sẽ chừa chỗ cho một cách hoàn thành mà người dùng sẽ bác bỏ, nên phòng thủ tích lũy dần một biểu diễn về điều người dùng này thực sự trông đợi.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-77",
+      "q": "Under progressive disclosure, evaluating skill use requires separating",
+      "q_vi": "Trong chế độ hé lộ dần, đánh giá việc dùng kỹ năng đòi hỏi tách bạch",
+      "choices": [
+        "the retrieval latency of the skill store from the model's generation latency",
+        "whether the agent invokes the right skill from whether it then follows it",
+        "the skill author's intent from the reviewer's reading of the same procedure",
+        "skills written as prose from skills that ship an executable script alongside"
+      ],
+      "answer": 1,
+      "why": "The agent sees only a name and a short description first, so triggering the correct skill and correctly applying the retrieved procedure are two failures that an aggregate score would merge.",
+      "why_vi": "Tác tử ban đầu chỉ thấy tên và một mô tả ngắn, nên việc kích hoạt đúng kỹ năng và việc áp dụng đúng quy trình đã lấy về là hai hỏng hóc mà một điểm gộp sẽ trộn vào nhau.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-78",
+      "q": "The reasoning backroom finding warns that a skill's visible mention in a trace",
+      "q_vi": "Phát hiện về phòng sau của lập luận cảnh báo rằng việc kỹ năng được nhắc trong vết chạy",
+      "choices": [
+        "guarantees the skill was loaded but not that it was loaded in full",
+        "shows what the agent appears to use, not what changed its decision",
+        "means the skill retrieval step succeeded and can therefore be trusted",
+        "correlates with task success strongly enough to be used as a proxy"
+      ],
+      "answer": 1,
+      "why": "The framework pairs each skill conditioned answer with a matched counterfactual that removes the skill, and it also intervenes on the skill's meaning and identity, because self attribution is not evidence of influence.",
+      "why_vi": "Khung này ghép mỗi câu trả lời có điều kiện trên kỹ năng với một phản thực tương ứng đã bỏ kỹ năng đi, và còn can thiệp vào nghĩa và danh tính của kỹ năng, vì việc tác tử tự nhận không phải bằng chứng về ảnh hưởng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-79",
+      "q": "Compiling a prose skill into a typed harness is motivated by the finding that a prose agent",
+      "q_vi": "Việc biên dịch kỹ năng văn xuôi thành khung có kiểu xuất phát từ phát hiện rằng tác tử chạy văn xuôi",
+      "choices": [
+        "performs only part of the steps its own skill mandates while still passing checks",
+        "cannot parse skills longer than the runtime's configured context budget",
+        "loads the same skill repeatedly because the loader has no caching layer",
+        "rewrites the skill text on each run which slowly corrupts the original file"
+      ],
+      "answer": 0,
+      "why": "Because the procedure is described to the runtime but never encoded in it, control flow is re derived every run, and mandated verification can be skipped while the produced artifact still satisfies output checks.",
+      "why_vi": "Vì quy trình chỉ được mô tả cho thời gian chạy chứ không được mã hoá vào đó, luồng điều khiển bị suy lại mỗi lần chạy, và bước kiểm bắt buộc có thể bị bỏ trong khi sản phẩm tạo ra vẫn thoả các phép kiểm đầu ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-80",
+      "q": "The exploitation trap in autonomous skill refinement arises because",
+      "q_vi": "Bẫy khai thác trong tinh chỉnh kỹ năng tự động nảy sinh vì",
+      "choices": [
+        "refining a skill costs more tokens than generating a fresh one from scratch",
+        "the validation set is drawn from the same distribution as the training tasks",
+        "sparse outcomes conflate several latent causes so an early misdiagnosis persists",
+        "the agent prefers skills it authored itself over skills written by a human"
+      ],
+      "answer": 2,
+      "why": "With a limited interaction budget and no validation set, greedily refining a single incumbent skill spends the remaining trials following whichever cause was guessed first.",
+      "why_vi": "Với ngân sách tương tác hạn chế và không có tập kiểm định, việc tham lam tinh chỉnh một kỹ năng đang giữ chỗ sẽ tiêu nốt số lần thử còn lại theo đúng nguyên nhân được đoán đầu tiên.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-81",
+      "q": "Distilling skills only from the agent's own trajectories is limited because those skills",
+      "q_vi": "Chỉ chưng cất kỹ năng từ vết chạy của chính tác tử bị hạn chế vì các kỹ năng đó",
+      "choices": [
+        "grow too long for the runtime to load them within its context budget",
+        "become tied to the specific tool names present during the original run",
+        "lose their procedural contract whenever the library is later compressed",
+        "stay bounded by what the model already knows about the domain"
+      ],
+      "answer": 3,
+      "why": "Professional conventions and standard procedures often lie outside the model's parametric knowledge, so they have to be brought in from an external source rather than elicited from the agent.",
+      "why_vi": "Quy ước nghề nghiệp và quy trình chuẩn thường nằm ngoài tri thức tham số của mô hình, nên chúng phải được đưa vào từ nguồn bên ngoài chứ không khêu ra được từ chính tác tử.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-82",
+      "q": "In current agent research the harness refers to",
+      "q_vi": "Trong nghiên cứu tác tử hiện nay, khung điều phối chỉ",
+      "choices": [
+        "the evaluation script that grades each rollout against a reference answer",
+        "the fine tuning recipe used to adapt a base model to agentic behaviour",
+        "the serving stack that batches requests and manages the key value cache",
+        "the program that builds context, calls tools, verifies, and recovers"
+      ],
+      "answer": 3,
+      "why": "A whole cluster of recent work treats this surrounding program as a first class carrier of capability, separate from the weights, and studies optimising and evolving it directly.",
+      "why_vi": "Cả một cụm công trình gần đây coi chương trình bao quanh này là nơi mang năng lực bậc nhất, tách khỏi trọng số, và nghiên cứu việc tối ưu cũng như tiến hoá nó một cách trực tiếp.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-83",
+      "q": "Collaborative harness evolution was proposed because real deployments produce",
+      "q_vi": "Tiến hoá khung điều phối theo lối cộng tác được đề xuất vì triển khai thật sinh ra",
+      "choices": [
+        "traces too long for any single optimiser to fit inside one context window",
+        "harness variants whose performance cannot be compared across backends",
+        "evaluation signals that arrive too late to guide the next harness proposal",
+        "isolated experience streams across users that cannot be pooled centrally"
+      ],
+      "answer": 3,
+      "why": "The assumption behind a single sequential optimiser is that all execution experience can be routed to one place, and organisational boundaries break exactly that assumption.",
+      "why_vi": "Giả định của một bộ tối ưu tuần tự duy nhất là mọi kinh nghiệm thực thi đều dồn được về một chỗ, và ranh giới tổ chức phá vỡ đúng giả định đó.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-84",
+      "q": "Keeping long horizon task state outside the growing context is recommended so that",
+      "q_vi": "Giữ trạng thái nhiệm vụ dài hơi ở ngoài ngữ cảnh đang phình to được khuyến nghị để",
+      "choices": [
+        "the context window can be filled with more retrieved reference documents",
+        "the agent can resume after a crash without replaying its earlier tool calls",
+        "the prompt prefix stays stable enough for the provider cache to hit",
+        "incorrect self assessments do not propagate into later decisions"
+      ],
+      "answer": 3,
+      "why": "Several harnesses converge on updating external state only with facts independently verified from the environment, precisely because an agent's own belief about its progress is what silently corrupts later steps.",
+      "why_vi": "Nhiều khung điều phối cùng đi tới chỗ chỉ cập nhật trạng thái bên ngoài bằng những dữ kiện đã kiểm độc lập từ môi trường, đúng vì niềm tin của tác tử về tiến độ của chính nó mới là thứ âm thầm làm hỏng các bước sau.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-85",
+      "q": "Scaffold overfitting was diagnosed by observing that",
+      "q_vi": "Quá khớp với khung huấn luyện được chẩn đoán qua quan sát rằng",
+      "choices": [
+        "larger models degrade more than smaller ones on the same transfer",
+        "untuned base models do not show the same cross scaffold gap",
+        "the gap disappears once the temperature is set to zero for both runs",
+        "the effect only appears on tasks longer than twenty tool calls"
+      ],
+      "answer": 1,
+      "why": "If the divergence were inherent to the task it would appear before fine tuning too, so the fact that it appears only after training on one scaffold's trajectories points at learned conventions.",
+      "why_vi": "Nếu sự chênh lệch là bản chất của nhiệm vụ thì nó phải xuất hiện cả trước khi tinh chỉnh, nên việc nó chỉ xuất hiện sau khi huấn luyện trên vết của một khung cụ thể chỉ về phía các quy ước đã học.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-86",
+      "q": "Type conditioned memory decay is motivated by the observation that",
+      "q_vi": "Bộ nhớ mục nát theo loại nội dung xuất phát từ quan sát rằng",
+      "choices": [
+        "retrieval latency scales with the number of stored records in the index",
+        "embedding models drift so old vectors become incomparable with new ones",
+        "the validity of a stored fact varies enormously by what kind of fact it is",
+        "users rarely revisit memories written more than a few sessions earlier"
+      ],
+      "answer": 2,
+      "why": "Treating all memories as equally persistent contaminates retrieved context with outdated facts, so each record carries an estimated perishability and a utility horizon of its own.",
+      "why_vi": "Coi mọi mục bộ nhớ đều bền như nhau sẽ làm ngữ cảnh truy hồi bị nhiễm bởi sự kiện đã cũ, nên mỗi bản ghi mang theo một mức dễ hỏng và một chân trời hữu dụng riêng.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-87",
+      "q": "A reliability memory over peer agents stores",
+      "q_vi": "Bộ nhớ độ tin cậy về các tác tử bạn lưu lại",
+      "choices": [
+        "the full text of every message each peer has sent during the session",
+        "an embedding of each peer's system prompt for later similarity search",
+        "the routing cost of reaching each peer under the current topology",
+        "evidence about which peer was competent under which conditions"
+      ],
+      "answer": 3,
+      "why": "The motivation is that a coordinator often cannot directly verify a plausible peer answer, so competence history becomes the signal it uses instead of the content alone.",
+      "why_vi": "Động cơ là bên điều phối thường không kiểm chứng trực tiếp được một câu trả lời nghe hợp lý từ tác tử bạn, nên lịch sử năng lực trở thành tín hiệu nó dùng thay cho chỉ mỗi nội dung.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-88",
+      "q": "Programmatic tool calling differs from native structured calling in that the model",
+      "q_vi": "Gọi công cụ bằng mã khác gọi có cấu trúc kiểu bản địa ở chỗ mô hình",
+      "choices": [
+        "writes a script that chains and parallelises typed tool stubs",
+        "receives the tool schema as a system message instead of a separate field",
+        "is fine tuned on the tool set before it is allowed to call anything",
+        "delegates argument filling to a smaller sidecar model at request time"
+      ],
+      "answer": 0,
+      "why": "Exposing tools as typed function stubs lets a code capable model express composition and parallelism naturally, instead of emitting one structured call per turn.",
+      "why_vi": "Phơi công cụ ra dưới dạng khai báo hàm có kiểu cho phép một mô hình biết viết mã diễn đạt việc kết hợp và song song hoá một cách tự nhiên, thay vì phát ra mỗi lượt một lời gọi có cấu trúc.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-89",
+      "q": "History pollution in multi turn tool use is dangerous because the stale trace",
+      "q_vi": "Nhiễm bẩn lịch sử trong dùng công cụ nhiều lượt nguy hiểm vì vết cũ",
+      "choices": [
+        "consumes the context budget that the current request would otherwise use",
+        "remains structurally valid and plausible after it stops being authoritative",
+        "cannot be deleted once the provider has cached the conversation prefix",
+        "forces the agent to re verify every entity mentioned earlier in the session again"
+      ],
+      "answer": 1,
+      "why": "Because nothing about the old trace looks wrong, it can override a policy the model would otherwise have applied correctly, and the reported effect is a flip in decisions rather than a refusal.",
+      "why_vi": "Vì không có gì ở vết cũ trông sai cả, nó có thể lấn át một chính sách mà mô hình lẽ ra đã áp dụng đúng, và hiệu ứng được báo cáo là quyết định bị lật chứ không phải mô hình từ chối.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-90",
+      "q": "Canary tools turn a wrong tool selection into a diagnosis by",
+      "q_vi": "Công cụ mồi chẩn đoán biến một lần chọn sai công cụ thành chẩn đoán bằng cách",
+      "choices": [
+        "logging the model's token level probabilities for each candidate tool name",
+        "replaying the same task with the distracting tools removed from the set",
+        "planting probes that each target one specific selection weakness",
+        "asking the model to explain its choice and grading that explanation"
+      ],
+      "answer": 2,
+      "why": "A taxonomy of decoy types such as semantic decoys, parameter traps, and prerequisite blindness converts a single wrong outcome into a profile across several distinct reasoning weaknesses.",
+      "why_vi": "Một phân loại các kiểu mồi như mồi ngữ nghĩa, bẫy tham số, và mù điều kiện tiên quyết biến một kết cục sai duy nhất thành hồ sơ trải trên nhiều điểm yếu lập luận khác nhau.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-91",
+      "q": "Assuming tool calls are atomic with a binary result causes trouble because real systems",
+      "q_vi": "Giả định lời gọi công cụ là nguyên tử với kết quả nhị phân gây rắc rối vì hệ thống thật",
+      "choices": [
+        "return errors in formats that vary between versions of the same service",
+        "rate limit callers in ways the agent cannot observe from its own side",
+        "require authentication tokens that expire during a long agent session",
+        "may time out after dispatch and update state only partially"
+      ],
+      "answer": 3,
+      "why": "Delayed visibility and partial state updates mean a retry can duplicate a completed effect, which is why the proposed wrapper adds postcondition checks, verify before retry, and idempotency keys.",
+      "why_vi": "Việc hiệu ứng lộ ra muộn và trạng thái chỉ cập nhật một phần khiến một lần thử lại có thể nhân đôi một hiệu ứng đã hoàn tất, đó là lý do lớp bọc được đề xuất thêm kiểm hậu điều kiện, kiểm trước khi thử lại, và khoá bất biến lặp.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-92",
+      "q": "Cost aware stopping for tool acquisition addresses the fact that a ranking of tools",
+      "q_vi": "Dừng có tính chi phí khi nạp công cụ xử lý thực tế rằng một bảng xếp hạng công cụ",
+      "choices": [
+        "does not say how many of the ranked candidates are worth taking",
+        "changes whenever the retriever is re indexed after a schema update",
+        "cannot express prerequisites between two tools in the same workflow",
+        "reflects lexical overlap more than the tool's actual runtime behaviour"
+      ],
+      "answer": 0,
+      "why": "Too few tools leaves the task under informed while too many adds cost, context load, and privacy exposure, so the cutoff is a decision the ranker itself never makes.",
+      "why_vi": "Lấy quá ít công cụ thì nhiệm vụ thiếu thông tin còn lấy quá nhiều thì thêm chi phí, thêm gánh nặng ngữ cảnh, và thêm phơi nhiễm riêng tư, nên điểm cắt là một quyết định mà bản thân bộ xếp hạng không bao giờ đưa ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-93",
+      "q": "The adoption gap in hybrid interface and tool agents refers to",
+      "q_vi": "Khoảng hụt trong việc chịu dùng công cụ ở tác tử lai giao diện và công cụ chỉ",
+      "choices": [
+        "users disabling the tool integration after the first failed invocation",
+        "tools being available on one operating system but not on the others",
+        "the delay between a tool being registered and the agent noticing it exists",
+        "the model calling a tool on only a small share of tasks where it would help"
+      ],
+      "answer": 3,
+      "why": "Under one identical harness the same tools improved a reasoning model and degraded a non reasoning one, and even the better model invoked a tool on a minority of the tasks where a tool was reachable.",
+      "why_vi": "Dưới cùng một khung điều phối, cùng bộ công cụ đó cải thiện một mô hình biết suy luận và làm tệ đi một mô hình không suy luận, và ngay cả mô hình tốt hơn cũng chỉ gọi công cụ ở thiểu số các nhiệm vụ mà công cụ với tới được.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-94",
+      "q": "The apparent benefit of an oracle that picks the best observation mode per web task is inflated by",
+      "q_vi": "Lợi ích trông thấy của một bộ chọn lý tưởng theo từng nhiệm vụ web bị thổi phồng bởi",
+      "choices": [
+        "the uneven number of tasks available in each of the evaluated sites",
+        "the oracle being allowed to see the ground truth answer in advance",
+        "run to run noise, since rerunning one mode already flips many outcomes",
+        "the fact that some modes share the same underlying page representation internally"
+      ],
+      "answer": 2,
+      "why": "Rerunning the same mode on the same tasks changes a noticeable fraction of outcomes, so a second run of a single mode already captures much of what the oracle appeared to gain.",
+      "why_vi": "Chạy lại cùng một chế độ trên cùng các nhiệm vụ đã làm đổi một phần đáng kể kết cục, nên chỉ cần chạy lần thứ hai với một chế độ duy nhất là đã lấy được phần lớn cái mà bộ chọn lý tưởng có vẻ mang lại.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-95",
+      "q": "Standard imitation training for interface agents discards the next screenshot, which matters because",
+      "q_vi": "Huấn luyện bắt chước chuẩn cho tác tử giao diện vứt bỏ ảnh màn hình kế tiếp, điều này quan trọng vì",
+      "choices": [
+        "that screen often carries the only evidence explaining why the action was right",
+        "it doubles the storage needed for each recorded interaction trajectory",
+        "the next screen is the only place where the task instruction is restated",
+        "without it the model cannot compute the pixel difference between two states"
+      ],
+      "answer": 0,
+      "why": "The example given is a menu that only reveals after the click which entry contains the target setting, so without hindsight evidence the model has little chance of sampling the correct reasoning at all.",
+      "why_vi": "Ví dụ được nêu là một trình đơn chỉ sau khi bấm mới lộ ra mục nào chứa thiết lập cần tìm, nên không có bằng chứng hậu nghiệm thì mô hình gần như không có cơ hội lấy mẫu ra được lối lập luận đúng.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-96",
+      "q": "Cascade radius is reported alongside task accuracy in orchestration benchmarks in order to show",
+      "q_vi": "Bán kính lan của lỗi được báo cùng độ chính xác nhiệm vụ trong bộ chuẩn điều phối nhằm cho thấy",
+      "choices": [
+        "how much compute was consumed before the pipeline finally terminated",
+        "which of the participating models produced the largest share of tokens",
+        "how many alternative routings the orchestrator considered per decision",
+        "how far a single failure spread through the rest of the pipeline"
+      ],
+      "answer": 3,
+      "why": "Accuracy tells you the pipeline failed, whereas the spread metric plus per failure mode recovery tells you where a cascade began and which routing decision let it travel.",
+      "why_vi": "Độ chính xác cho biết đường ống đã hỏng, còn thước đo mức lan cộng với khả năng phục hồi theo từng kiểu hỏng cho biết dòng thác bắt đầu ở đâu và quyết định định tuyến nào đã để nó đi tiếp.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-97",
+      "q": "Critical error localisation in long agent trajectories is hard partly because a failed run",
+      "q_vi": "Định vị lỗi then chốt trong quỹ đạo tác tử dài khó một phần vì một lần chạy hỏng",
+      "choices": [
+        "usually contains several local errors with unequal downstream effects",
+        "cannot be replayed once the environment state has been mutated",
+        "produces logs in a format that differs between orchestration frameworks",
+        "is often shorter than the successful runs it should be compared against"
+      ],
+      "answer": 0,
+      "why": "The task is to find the earliest step responsible for the final failure, and that is not simply the first anomaly, because many local mistakes never propagate.",
+      "why_vi": "Nhiệm vụ là tìm bước sớm nhất chịu trách nhiệm cho thất bại cuối cùng, và đó không đơn giản là dấu hiệu bất thường đầu tiên, vì nhiều lỗi cục bộ chẳng lan đi đâu cả.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-98",
+      "q": "Blind conformity in multi agent debate is not solved by scoring individual confidence because",
+      "q_vi": "Hùa theo mù quáng trong tranh luận nhiều tác tử không giải quyết được bằng cách chấm độ tự tin cá thể vì",
+      "choices": [
+        "confidence scores are not comparable between different model families",
+        "such scores can make the conformity worse rather than reveal it",
+        "perplexity is undefined for models served behind a hosted interface",
+        "individual agents rarely report a calibrated probability at all"
+      ],
+      "answer": 1,
+      "why": "The proposed shift is from evaluating individuals to regulating the mutual referencing relationships between them, on the grounds that individual confidence does not reflect whether the reasoning was correct.",
+      "why_vi": "Chuyển dịch được đề xuất là từ đánh giá cá thể sang điều tiết các quan hệ tham chiếu lẫn nhau giữa chúng, với lý do độ tự tin cá thể không phản ánh việc lập luận có đúng hay không.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-99",
+      "q": "Pluralistic ignorance in a population of language model agents describes a state where agents",
+      "q_vi": "Vô minh tập thể trong quần thể tác tử ngôn ngữ mô tả trạng thái mà các tác tử",
+      "choices": [
+        "are unaware of the tools available to the other members of the population",
+        "hold contradictory beliefs that they never surface in their visible output",
+        "cannot recall what the group agreed in an earlier round of the interaction",
+        "privately reject a norm while continuing to conform in public"
+      ],
+      "answer": 3,
+      "why": "Each agent believes it is alone in dissenting, which is the mechanism that makes a norm persist even when almost nobody actually supports it.",
+      "why_vi": "Mỗi tác tử tin rằng chỉ mình nó bất đồng, đó là cơ chế khiến một chuẩn mực tồn tại dai dẳng ngay cả khi gần như không ai thực sự ủng hộ nó.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-100",
+      "q": "The commons experiment with agent prosumers found that agents instructed to maximise continuity",
+      "q_vi": "Thí nghiệm tài nguyên dùng chung với các tác tử vừa sản xuất vừa tiêu thụ cho thấy tác tử được bảo hãy tối đa hoá khả năng duy trì hoạt động thì",
+      "choices": [
+        "drew the shared pool down until every participant was worse off",
+        "converged on a stable sharing rule once regeneration became scarce",
+        "reduced their draw as soon as the reserve fell below a warning level",
+        "coordinated better when the reserve was scarce than when it was abundant"
+      ],
+      "answer": 0,
+      "why": "The outcome is self defeating over appropriation, and it appeared across all three model families tested, which points at the incentive structure rather than at a single vendor's behaviour.",
+      "why_vi": "Kết cục là việc vắt kiệt tự chuốc lấy thiệt hại, và nó xuất hiện ở cả ba họ mô hình được thử, điều này chỉ về phía cơ cấu khuyến khích chứ không phải hành vi của riêng một nhà cung cấp.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-101",
+      "q": "Pre evidence procedural failure in agentic retrieval means the agent",
+      "q_vi": "Hỏng thủ tục trước bằng chứng trong truy hồi dạng tác tử nghĩa là tác tử",
+      "choices": [
+        "retrieves a passage but finalises the answer without reading it",
+        "asks a follow up question before the first retrieval has returned",
+        "reads the passage but misattributes which document it came from",
+        "retrieves from a stale index that has not been rebuilt since ingestion"
+      ],
+      "answer": 0,
+      "why": "Decomposing wrong answers with saved tool call traces separates this discipline failure from failures that occur after the correct passage was actually read, and the two categories were largely non overlapping.",
+      "why_vi": "Việc phân tách các câu trả lời sai bằng vết lời gọi công cụ đã lưu tách được hỏng hóc kỷ luật này khỏi những hỏng hóc xảy ra sau khi đoạn đúng đã thực sự được đọc, và hai nhóm này phần lớn không chồng lên nhau.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-102",
+      "q": "Citation laundering defeats a proof of retrieval reward because the cited passage is",
+      "q_vi": "Rửa trích dẫn đánh bại phần thưởng chứng minh đã truy hồi vì đoạn được trích",
+      "choices": [
+        "paraphrased enough that exact string matching no longer finds it",
+        "real and present in the corpus but was never actually retrieved",
+        "generated by the model and then inserted into the corpus index",
+        "retrieved but attributed to a different document in the same corpus"
+      ],
+      "answer": 1,
+      "why": "The counterfactual audit showed the base reward rejected deletion of the search step and fabricated identifiers, yet a label free attack that cites a genuine but unretrieved passage still succeeded.",
+      "why_vi": "Kiểm toán phản thực cho thấy phần thưởng nền bác được việc xoá bước tìm kiếm và bác được định danh bịa, nhưng một tấn công không cần nhãn, tức trích một đoạn có thật mà chưa hề được lấy về, thì vẫn thành công.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-103",
+      "q": "Assurance scoped reliability for agentic networks was introduced because an accepted intent may still",
+      "q_vi": "Độ tin cậy xét theo phạm vi bảo đảm cho mạng tác tử ra đời vì một ý định đã được chấp nhận vẫn có thể",
+      "choices": [
+        "be rejected later by a downstream domain controller without notice",
+        "exceed the compute budget allocated to the orchestration layer",
+        "be carried out on stale information or applied only in part",
+        "require manual approval that no operator is on shift to give"
+      ],
+      "answer": 2,
+      "why": "The listed failure modes include repeating an external action and quietly entering a fallback mode that relaxes policy, which leave a service running and apparently healthy while its behaviour is unaccountable.",
+      "why_vi": "Các kiểu hỏng được liệt kê gồm lặp lại một tác động ra bên ngoài và âm thầm rơi vào chế độ dự phòng có nới lỏng chính sách, chúng để dịch vụ vẫn chạy và trông khoẻ mạnh trong khi hành vi của nó không quy trách được.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-104",
+      "q": "Queueing control for an agentic service network must treat contextual memory states as active because they",
+      "q_vi": "Điều khiển hàng đợi cho mạng dịch vụ dạng tác tử phải coi trạng thái bộ nhớ ngữ cảnh là chủ động vì chúng",
+      "choices": [
+        "occupy memory that would otherwise hold queued requests",
+        "are replicated across nodes and must be kept consistent",
+        "expire on a fixed schedule that the scheduler cannot influence",
+        "alter the service work required and the downstream successor law"
+      ],
+      "answer": 3,
+      "why": "Cached prefixes, retrieved contexts, warm expert states, and verified tool outputs arise from execution history, so treating them as passive caches leaves a gap between the queueing model and the real system.",
+      "why_vi": "Tiền tố đã lưu, ngữ cảnh đã truy hồi, trạng thái chuyên gia còn nóng, và đầu ra công cụ đã kiểm đều sinh ra từ lịch sử thực thi, nên coi chúng là bộ đệm thụ động sẽ để lại khoảng hở giữa mô hình hàng đợi và hệ thật.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-105",
+      "q": "The argument for letting agents translate network artifacts rather than reason about networks is that",
+      "q_vi": "Lập luận cho việc để tác tử dịch các hiện vật của mạng thay vì suy luận về mạng là",
+      "choices": [
+        "translation runs faster and therefore fits inside a maintenance window",
+        "translation output can be formally verified whereas free reasoning cannot",
+        "most network engineers can read logic rules more easily than prose",
+        "translation avoids the need to expose configuration files to a hosted model"
+      ],
+      "answer": 1,
+      "why": "Once network artifacts become rules in formal logic, a checker can catch the model's mistakes, which is a different safety posture from trusting an answer the model reasoned its way to.",
+      "why_vi": "Khi các hiện vật của mạng đã thành luật trong logic hình thức thì một bộ kiểm bắt được lỗi của mô hình, đây là tư thế an toàn khác hẳn việc tin vào một câu trả lời mà mô hình tự lập luận ra.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-106",
+      "q": "The claim capability is not production readiness is aimed at release decisions that rely on",
+      "q_vi": "Khẳng định có năng lực không đồng nghĩa sẵn sàng vận hành nhắm vào các quyết định phát hành dựa trên",
+      "choices": [
+        "long running canary deployments in a small fraction of live traffic",
+        "third party audits performed before the model weights were frozen",
+        "regression suites that are rerun on every change to the harness",
+        "demos, capability signals, and behavioural tests alone"
+      ],
+      "answer": 3,
+      "why": "The proposed index adds evaluation, context, compliance, and governance evidence, on the argument that observed behaviour in a demo says nothing about operating under production constraints and oversight.",
+      "why_vi": "Chỉ số được đề xuất bổ sung bằng chứng về đánh giá, ngữ cảnh, tuân thủ, và quản trị, dựa trên lập luận rằng hành vi quan sát được trong một bản trình diễn không nói gì về việc vận hành dưới ràng buộc và giám sát của môi trường thật.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-107",
+      "q": "The implementation lottery arises whenever a single run is used to",
+      "q_vi": "Xổ số bản hiện thực xuất hiện mỗi khi một lần chạy được dùng để",
+      "choices": [
+        "update beliefs about the mechanism rather than about that realisation",
+        "estimate the variance of the metric across random seeds",
+        "compare two systems that were tuned on different validation splits",
+        "decide whether a benchmark has been contaminated by training data"
+      ],
+      "answer": 0,
+      "why": "One run scores one implementation of an idea, so an idea level conclusion ends up depending on which plausible implementation happened to be sampled, and that mismatch is structural.",
+      "why_vi": "Một lần chạy chấm điểm cho một bản hiện thực của một ý tưởng, nên kết luận ở mức ý tưởng rốt cuộc phụ thuộc vào việc bản hiện thực hợp lý nào tình cờ được lấy mẫu, và sự lệch đó mang tính cấu trúc.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-108",
+      "q": "Evaluating coordination algorithms across independent implementations is recommended because seed variation",
+      "q_vi": "Đánh giá thuật toán phối hợp trên nhiều bản hiện thực độc lập được khuyến nghị vì việc đổi hạt giống",
+      "choices": [
+        "requires more compute than most academic groups can afford to spend",
+        "produces confidence intervals that are too narrow to be reported honestly",
+        "changes the result only for algorithms that use stochastic exploration",
+        "does not capture how separate parties would interpret the same specification"
+      ],
+      "answer": 3,
+      "why": "The ideal is several independent codebases per algorithm, reflecting the variation that appears when different teams read the same high level learning rule and write it down differently.",
+      "why_vi": "Lý tưởng là mỗi thuật toán có vài mã nguồn độc lập, phản ánh mức dao động xuất hiện khi các nhóm khác nhau đọc cùng một luật học ở mức cao rồi viết nó ra theo cách khác nhau.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-109",
+      "q": "The verifier and deployment gap in self improving agents appears when the agent controls",
+      "q_vi": "Khoảng cách giữa bộ kiểm và triển khai ở tác tử tự cải thiện xuất hiện khi tác tử nắm cả",
+      "choices": [
+        "the compute budget and the schedule on which its edits are applied",
+        "both the object being optimised and the tests that judge it",
+        "the retrieval corpus and the prompt that queries that corpus",
+        "the random seed and the ordering of the tasks it is trained on"
+      ],
+      "answer": 1,
+      "why": "Self assigned scores can stay near perfect while a sealed evaluation the agent cannot observe shows flat or degrading performance, which is why one held out evaluation must be kept out of reach.",
+      "why_vi": "Điểm tự chấm có thể gần như hoàn hảo trong khi một phép đánh giá niêm phong mà tác tử không quan sát được lại cho thấy hiệu năng đứng yên hoặc tụt, đó là lý do phải giữ một phép đánh giá nằm ngoài tầm với.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-110",
+      "q": "Replaying a repair agent's validation command on the buggy state is done in order to check whether",
+      "q_vi": "Chạy lại lệnh kiểm chứng của tác tử sửa lỗi trên trạng thái còn lỗi nhằm kiểm xem",
+      "choices": [
+        "the test suite still compiles before the candidate patch is applied",
+        "the command depends on network access that the sandbox denies",
+        "the passing test actually discriminates the reported defect",
+        "the developer gold fix and the candidate touch the same files"
+      ],
+      "answer": 2,
+      "why": "A test that already passed on the original buggy code carries no evidence about the defect, so replaying across buggy, candidate, and gold states assigns each passing event an evidence role.",
+      "why_vi": "Một phép kiểm vốn đã vượt qua trên mã còn lỗi thì không mang bằng chứng gì về lỗi đó, nên việc chạy lại trên trạng thái còn lỗi, trạng thái ứng viên, và bản sửa chuẩn gán cho mỗi lần vượt qua một vai trò bằng chứng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-111",
+      "q": "Anytime valid stopping is needed for agent comparisons because ordinary confidence intervals",
+      "q_vi": "Dừng hợp lệ ở mọi thời điểm cần cho việc so sánh tác tử vì khoảng tin cậy thông thường",
+      "choices": [
+        "assume the two agents were evaluated on identical random seeds",
+        "widen faster than the evidence accumulates in long horizon tasks",
+        "cannot be computed when the outcome variable is not continuous",
+        "lose their stated level once you are allowed to stop when you like"
+      ],
+      "answer": 3,
+      "why": "Fixed budget evaluation either keeps paying after the result is settled or stops too early, and peeking with a naive interval breaks the guarantee, so the stopping rule itself has to be certified.",
+      "why_vi": "Đánh giá theo ngân sách cố định hoặc tiếp tục trả tiền sau khi kết quả đã ngã ngũ, hoặc dừng quá sớm, còn việc nhìn trộm kết quả với một khoảng tin cậy ngây thơ thì phá vỡ đảm bảo, nên chính luật dừng phải được chứng nhận.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-112",
+      "q": "Path dependent evaluation of a lifelong agent means that a single probe score is",
+      "q_vi": "Đánh giá phụ thuộc đường đi cho tác tử suốt đời nghĩa là một điểm thăm dò đơn lẻ",
+      "choices": [
+        "underspecified unless the sequence of prior tasks is also stated",
+        "only comparable between agents that use the same memory backend",
+        "valid only if the probe task was never seen during pretraining",
+        "reliable once averaged over at least five independent repetitions"
+      ],
+      "answer": 0,
+      "why": "Because the agent stores retrievable memories and reusable skills, helpful and interfering histories change what it transfers and retains, so forward transfer and interference are measured explicitly.",
+      "why_vi": "Vì tác tử lưu lại các ký ức truy hồi được và các kỹ năng dùng lại được, những lịch sử có ích và những lịch sử gây nhiễu làm đổi thứ nó chuyển giao và giữ lại, nên chuyển giao xuôi và can nhiễu được đo tường minh.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-113",
+      "q": "Judging a skill augmented execution requires the task time skill because that knowledge indicates",
+      "q_vi": "Chấm một lần chạy có kèm kỹ năng cần tới kỹ năng nạp lúc làm nhiệm vụ vì tri thức đó cho biết",
+      "choices": [
+        "which model produced each of the intermediate artifacts in the run",
+        "how many tool calls the trajectory should have required in total",
+        "what evidence to inspect and which failures are task critical",
+        "whether the agent had permission to invoke each tool it called"
+      ],
+      "answer": 2,
+      "why": "Verification has shifted from scoring a final response to checking a complete execution, and the procedural content of the skill is what tells the judge where to look.",
+      "why_vi": "Việc kiểm chứng đã chuyển từ chấm câu trả lời cuối sang kiểm cả một lần thực thi, và chính phần nội dung quy trình của kỹ năng mới cho bộ chấm biết phải soi vào đâu.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-114",
+      "q": "The microscopy agent study concluded that its benchmark results support",
+      "q_vi": "Nghiên cứu tác tử điều khiển kính hiển vi kết luận rằng kết quả trên bộ chuẩn của họ đủ để",
+      "choices": [
+        "ranking language model backends by their suitability for instrument control",
+        "comparing retrieval settings independently of the number of agents used",
+        "replacing human operators for the tasks the benchmark already covers",
+        "qualifying a configuration without assuring performance on unseen tasks"
+      ],
+      "answer": 3,
+      "why": "The design space includes model choice, number of agents, delegation rules, and retrieval parameters, and the honest conclusion is that a good score qualifies the tuned configuration rather than proving generalisation.",
+      "why_vi": "Không gian thiết kế gồm việc chọn mô hình, số tác tử, luật uỷ thác, và tham số truy hồi, và kết luận trung thực là điểm cao chứng nhận cấu hình đã tinh chỉnh chứ không chứng minh khả năng khái quát.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-115",
+      "q": "A score basis audit of a driving benchmark found that a forgiveness rule can",
+      "q_vi": "Kiểm nền tảng thang điểm của một bộ chuẩn lái xe cho thấy một luật khoan hồng có thể",
+      "choices": [
+        "penalise policies that observe surrounding actors more than those that do not",
+        "reduce variance so much that two different policies appear statistically tied",
+        "invalidate the benchmark entirely whenever the reference log is incomplete",
+        "spread shared reference failures into broad undeserved compliance credit"
+      ],
+      "answer": 3,
+      "why": "When the agent and the logged human reference share an unstable rollout transformation, crediting the agent whenever the reference also failed hands out compliance credit that the policy did not earn.",
+      "why_vi": "Khi tác tử và bản tham chiếu người cùng dùng một phép biến đổi mô phỏng không ổn định, việc cho điểm tác tử mỗi khi bản tham chiếu cũng trượt sẽ phát ra phần điểm tuân thủ mà chính sách không hề xứng đáng.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-116",
+      "q": "Prompt induced waste in coding agents refers to the finding that two prompts requesting the same change",
+      "q_vi": "Lãng phí do cách viết câu lệnh ở tác tử lập trình chỉ phát hiện rằng hai câu lệnh yêu cầu cùng một thay đổi",
+      "choices": [
+        "produce different patches whose test outcomes cannot be compared fairly",
+        "differ mainly in how many files the agent decides to open before editing",
+        "can yield the same patch while changing where the effort was spent",
+        "trigger different tool sets depending on which harness executes them"
+      ],
+      "answer": 2,
+      "why": "Wording does not merely scale total effort, it redistributes it: asking for multiple approaches inflated reasoning several fold while the resulting correct patch was unchanged.",
+      "why_vi": "Cách diễn đạt không chỉ nhân lên tổng công sức mà còn phân bố lại nó, việc yêu cầu nhiều hướng tiếp cận làm phần lập luận phình lên nhiều lần trong khi bản vá đúng thu được thì không đổi.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-117",
+      "q": "Making the budget part of the task changes an agent benchmark by requiring the agent to decide",
+      "q_vi": "Đưa ngân sách vào chính nhiệm vụ làm đổi một bộ chuẩn tác tử ở chỗ buộc tác tử phải quyết định",
+      "choices": [
+        "how many random seeds to average before it commits to an answer",
+        "which of the priced actions and escalations are worth taking",
+        "whether to run locally or in the cloud for each individual step",
+        "when to compact the context to keep the token count within limits"
+      ],
+      "answer": 1,
+      "why": "Each action carries a price and the suite tests avoiding unnecessary escalation, escalating when local evidence is insufficient, selecting a model tier, and stopping on unsupported premises.",
+      "why_vi": "Mỗi hành động mang một mức giá và bộ đề kiểm cả bốn việc, tránh leo thang không cần thiết, leo thang khi bằng chứng tại chỗ chưa đủ, chọn hạng mô hình, và dừng lại khi tiền đề không có gì chống lưng.",
+      "level": 1
+    },
+    {
+      "id": "qaxa-118",
+      "q": "Benchmarking standing instruction following differs from ordinary task benchmarks because it measures whether",
+      "q_vi": "Đo việc tuân thủ chỉ dẫn thường trực khác bộ chuẩn nhiệm vụ thông thường vì nó đo xem",
+      "choices": [
+        "a long binding policy document constrains behaviour over a whole horizon",
+        "the agent can summarise the policy document accurately when asked to",
+        "the policy document fits inside the context window of the chosen model",
+        "the agent asks for clarification when two policy clauses appear to conflict"
+      ],
+      "answer": 0,
+      "why": "The deployment pattern being modelled is a handbook placed in context and trusted to govern every subsequent action, which task completion scores do not test at all.",
+      "why_vi": "Mẫu triển khai được mô hình hoá ở đây là một cuốn cẩm nang đặt vào ngữ cảnh và được tin là sẽ chi phối mọi hành động về sau, thứ mà điểm hoàn thành nhiệm vụ hoàn toàn không kiểm.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-119",
+      "q": "Compressing an agent's persistent control context is risky because existing compression evaluations do not show whether",
+      "q_vi": "Nén ngữ cảnh điều khiển thường trực của tác tử là rủi ro vì các phép đánh giá nén hiện có không cho biết",
+      "choices": [
+        "the compressed text remains readable to a human reviewer afterwards",
+        "the same compression ratio can be achieved on a different model family",
+        "control remains operationally reliable after the reduction",
+        "the saved tokens outweigh the cost of running the compressor itself"
+      ],
+      "answer": 2,
+      "why": "The control context specifies tools, arguments, policies, execution protocol, and recovery, so its compression has to be judged in an environment verified setting rather than by text similarity.",
+      "why_vi": "Ngữ cảnh điều khiển quy định công cụ, tham số, chính sách, giao thức thực thi, và cách phục hồi, nên việc nén nó phải được chấm trong bối cảnh có môi trường kiểm chứng chứ không phải bằng độ giống văn bản.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-120",
+      "q": "Converting a completed research trajectory into evidence requires checking that",
+      "q_vi": "Biến một quỹ đạo nghiên cứu đã chạy xong thành bằng chứng đòi hỏi phải kiểm rằng",
+      "choices": [
+        "the trajectory was produced by a model of at least a stated size",
+        "every tool the agent called was available at the time of the run",
+        "the total token cost stayed within the project's allocated budget",
+        "the artifacts are supported and later edits did not obscure earlier rounds"
+      ],
+      "answer": 3,
+      "why": "A finished trajectory is not automatically evidence, because generated artifacts may be unsupported, rounds may be invalid or confounded, and subsequent modifications can hide what an earlier round actually showed.",
+      "why_vi": "Một quỹ đạo đã chạy xong không tự động là bằng chứng, vì hiện vật sinh ra có thể không có gì chống lưng, các vòng chạy có thể không hợp lệ hoặc bị nhiễu, và những sửa đổi về sau có thể che mất điều mà một vòng trước đó thực sự cho thấy.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-121",
+      "q": "The layered taxonomy of information omission is used to distinguish",
+      "q_vi": "Phân loại theo tầng về việc thông tin bị bỏ sót dùng để phân biệt",
+      "choices": [
+        "deterministic software loss from behavioural non retrieval",
+        "hallucinated facts from facts that were retrieved but misquoted",
+        "omissions caused by the user prompt from those caused by the tool",
+        "errors in the ingestion stage from errors in the answer formatting stage"
+      ],
+      "answer": 0,
+      "why": "Decision critical facts can disappear at any boundary between source ingestion and final generation, and the practical question is whether a component dropped it or the model simply never went to fetch it.",
+      "why_vi": "Sự kiện quan trọng cho quyết định có thể biến mất ở bất kỳ ranh giới nào giữa lúc nạp nguồn và lúc sinh câu trả lời, và câu hỏi thực dụng là một thành phần đã đánh rơi nó hay mô hình đơn giản là không đi lấy.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-122",
+      "q": "The causal audit of thinking with images concluded that many visual tool calls",
+      "q_vi": "Kiểm toán nhân quả về việc suy nghĩ kèm hình ảnh kết luận rằng nhiều lời gọi công cụ thị giác",
+      "choices": [
+        "improve accuracy but only on questions with more than one object",
+        "add token cost without the returned image affecting the answer",
+        "fail because the cropping tool cannot handle very high resolution inputs",
+        "help most when the model is allowed to crop more than three times"
+      ],
+      "answer": 1,
+      "why": "The audit formulates visual tool use as a causal graph separating observation mediated paths from action induced shortcuts, and finds calls that receive credit while the answer never depended on the returned evidence.",
+      "why_vi": "Phép kiểm toán mô tả việc dùng công cụ thị giác thành một đồ thị nhân quả tách các đường qua trung gian quan sát khỏi các lối tắt do hành động gây ra, và tìm thấy những lời gọi vẫn được tính công trong khi câu trả lời chưa từng phụ thuộc vào bằng chứng trả về.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-123",
+      "q": "Mining agent traces into mostly deterministic workflows admits a dependency only when",
+      "q_vi": "Đúc vết chạy của tác tử thành quy trình phần lớn tất định chỉ chấp nhận một phụ thuộc khi",
+      "choices": [
+        "the two tool calls appeared adjacent in more than half of the traces",
+        "the producing tool is marked as side effect free in its declared schema",
+        "a consumer argument carries a value uniquely attributable to an earlier producer",
+        "both calls belong to the same session and the same authenticated user"
+      ],
+      "answer": 2,
+      "why": "Accidental ordering is common in noisy traces, so relations that cannot be traced to a value are marked as suspected and deliberately impose no ordering constraint.",
+      "why_vi": "Thứ tự tình cờ rất hay gặp trong các vết chạy nhiễu, nên những quan hệ không truy được về một giá trị cụ thể sẽ bị đánh dấu là nghi ngờ và cố ý không áp đặt ràng buộc thứ tự nào.",
+      "level": 3
+    },
+    {
+      "id": "qaxa-124",
+      "q": "Lifting tool specific trajectories to a function level graph is meant to produce plans that",
+      "q_vi": "Nâng các vết chạy gắn với công cụ cụ thể lên đồ thị mức chức năng nhằm tạo ra kế hoạch",
+      "choices": [
+        "transfer across different tool sets that implement the same workflow",
+        "execute faster because the graph can be compiled ahead of time",
+        "require fewer tokens to represent inside the agent's working context window",
+        "avoid calling any tool whose schema has changed since the trace"
+      ],
+      "answer": 0,
+      "why": "Graphs built directly at tool level stay tied to the specific tools that appeared in the traces, whereas analogous tasks often share a workflow structure once the tool identity is abstracted away.",
+      "why_vi": "Đồ thị dựng thẳng ở mức công cụ vẫn dính chặt vào những công cụ đã xuất hiện trong vết chạy, trong khi các nhiệm vụ tương tự thường dùng chung một cấu trúc quy trình một khi danh tính công cụ đã được trừu tượng hoá đi.",
+      "level": 2
+    },
+    {
+      "id": "qaxa-125",
+      "q": "Deterministic compilation of screen activity into agent memory is attractive mainly because the output is",
+      "q_vi": "Biên dịch tất định hoạt động màn hình thành bộ nhớ tác tử hấp dẫn chủ yếu vì đầu ra",
+      "choices": [
+        "richer than what a model based summariser could produce from the same data",
+        "already labelled with the user's stated intent for each recorded episode",
+        "small enough to fit inside a single prompt regardless of the capture length",
+        "byte identical, cacheable, and mechanically auditable with no model involved"
+      ],
+      "answer": 3,
+      "why": "The pipeline segments a capture stream into typed bounded episodes with evidence pointers back to the raw rows, and keeping a model out of the loop is what makes the result reproducible and checkable.",
+      "why_vi": "Đường ống cắt dòng ghi màn hình thành các đoạn có kiểu và có biên kèm con trỏ bằng chứng trỏ ngược về dữ liệu thô, và việc giữ mô hình ở ngoài vòng lặp mới là thứ làm kết quả tái lập và kiểm được.",
+      "level": 2
+    }
+  ]
+}
