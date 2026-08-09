@@ -36,21 +36,26 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 
 /* ---------- Dinh tuyen ---------- */
 
+/* Phan tu thu tu la KIEU BO CUC, khong phai muc dieu huong.
+   'study' la nhung man dang hoc: the lat, cau hoi, bai noi. Chung phai nam trong
+   mot cot doc hep, vi tren man hinh rong mot the cao ba tram diem anh keo ngang
+   hon mot nghin diem anh thi mat phai quet qua xa va chu tu thanh loang.
+   'wide' la nhung man tra cuu va tong hop, cang rong cang tot. */
 const ROUTES = [
-  [/^\/?$/, () => renderHome(app), 'home'],
+  [/^\/?$/, () => renderHome(app), 'home', 'wide'],
   // #/start la cua vao khi mo ung dung da cai. No ton trong lua chon "vao thang
   // the dau tien". #/today thi luon chay chuoi, vi do la nut nguoi hoc tu bam.
-  [/^\/start$/, () => (getPlan().autostart ? renderToday(app) : renderPlan(app)), 'today'],
-  [/^\/today$/, () => renderToday(app), 'today'],
-  [/^\/plan$/, () => renderPlan(app), 'today'],
-  [/^\/deck\/([\w-]+)$/, (m) => renderDeck(app, m[1]), 'home'],
-  [/^\/learn\/([\w-]+)$/, (m) => renderLearn(app, m[1]), 'home'],
-  [/^\/quiz\/([\w-]+)$/, (m) => renderQuiz(app, m[1]), 'home'],
-  [/^\/say\/([\w-]+)$/, (m) => renderSay(app, m[1]), 'home'],
-  [/^\/speak\/([\w-]+)$/, (m) => renderSpeak(app, m[1]), 'home'],
-  [/^\/browse\/([\w-]+)$/, (m) => renderBrowse(app, m[1]), 'browse'],
-  [/^\/browse$/, () => renderBrowse(app, null), 'browse'],
-  [/^\/stats$/, () => renderStats(app), 'stats']
+  [/^\/start$/, () => (getPlan().autostart ? renderToday(app) : renderPlan(app)), 'today', 'study'],
+  [/^\/today$/, () => renderToday(app), 'today', 'study'],
+  [/^\/plan$/, () => renderPlan(app), 'today', 'wide'],
+  [/^\/deck\/([\w-]+)$/, (m) => renderDeck(app, m[1]), 'home', 'wide'],
+  [/^\/learn\/([\w-]+)$/, (m) => renderLearn(app, m[1]), 'home', 'study'],
+  [/^\/quiz\/([\w-]+)$/, (m) => renderQuiz(app, m[1]), 'home', 'study'],
+  [/^\/say\/([\w-]+)$/, (m) => renderSay(app, m[1]), 'home', 'study'],
+  [/^\/speak\/([\w-]+)$/, (m) => renderSpeak(app, m[1]), 'home', 'study'],
+  [/^\/browse\/([\w-]+)$/, (m) => renderBrowse(app, m[1]), 'browse', 'wide'],
+  [/^\/browse$/, () => renderBrowse(app, null), 'browse', 'wide'],
+  [/^\/stats$/, () => renderStats(app), 'stats', 'wide']
 ];
 
 function markNav(name) {
@@ -76,6 +81,7 @@ async function route() {
   }
 
   markNav(hit[2]);
+  app.dataset.layout = hit[3] || 'wide';
   app.innerHTML = '<div class="loading">Đang tải…</div>';
   try {
     await hit[1](path.match(hit[0]));

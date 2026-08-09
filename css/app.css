@@ -1030,3 +1030,47 @@ a.card:hover, button.card:hover {
    của mặt sau, tên bộ thẻ, đã bị cắt mất mà không cách nào xem lại.
    Từ khoá safe làm nó tự chuyển về căn đầu khi và chỉ khi tràn. */
 .flash-face { justify-content: safe center; }
+
+/* ============================================================
+   Cột đọc cho những màn đang học
+   ============================================================
+   Trên màn hình rộng, một thẻ cao ba trăm điểm ảnh mà kéo ngang hơn một nghìn
+   điểm ảnh thì chữ trôi thành một dải mỏng và mắt phải quét quá xa. Ràng mọi
+   thứ của màn đang học vào một cột hẹp, căn giữa. Màn tra cứu và tổng hợp thì
+   giữ nguyên bề rộng vì càng rộng càng xem được nhiều. */
+.app[data-layout="study"] > * {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Vạch màu nhỏ trước mỗi tiêu đề mục, để mắt bắt được nhịp của trang thay vì
+   thấy một dãy chữ hoa đều nhau. */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.section-title::before {
+  content: "";
+  width: 16px; height: 2px;
+  flex: none;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+/* Viền khi đi bằng bàn phím. Trước đây chỉ vài chỗ có, nên bấm tab là mất dấu. */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+.chip:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.choice:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: var(--panel-strong);
+}

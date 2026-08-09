@@ -68,25 +68,6 @@ export async function renderPlan(app) {
     <div class="section-title">Cài lên điện thoại</div>
     <div class="card install-card" id="install-card">${installBlock()}</div>
 
-    <div class="card install-card apk-card">
-      <p style="margin:0 0 6px"><strong>Hoặc tải tệp cài về máy Android</strong></p>
-      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-2)">
-        Tệp <code>.apk</code> này là vỏ ứng dụng Android bọc chính trang web này, nên nội dung học
-        vẫn tự cập nhật, không phải tải lại tệp mới mỗi lần tôi thêm thẻ.
-      </p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="app/improve-my-self.apk" download>Tải .apk cho Android</a>
-      </div>
-      <ol class="steps" style="margin-top:12px">
-        <li>Tải xong, mở tệp trong phần <strong>Tệp đã tải</strong> của điện thoại.</li>
-        <li>Android sẽ hỏi cho phép cài từ nguồn này, chọn <strong>Cài đặt</strong>.</li>
-        <li>Play Protect có thể cảnh báo vì tệp không qua CH Play, chọn <strong>Vẫn cài</strong>.</li>
-      </ol>
-      <p class="flash-hint" style="margin-top:10px">
-        Trên iPhone thì tệp này vô dụng, Apple không cho cài ngoài App Store. Dùng cách Thêm vào
-        màn hình chính ở trên.
-      </p>
-    </div>
 
     <div class="section-title">Sửa chuỗi</div>
     <div class="card plan-card">
