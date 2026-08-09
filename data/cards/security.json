@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "security",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "sec-cia",
@@ -1259,6 +1259,834 @@
       "tags": [
         "governance",
         "operations"
+      ]
+    },
+    {
+      "id": "sec-stride",
+      "en": "STRIDE",
+      "vi": "Sáu nhóm mối đe dọa STRIDE",
+      "def_en": "A checklist of six threat classes used to interrogate each element of a design: spoofing, tampering, repudiation, information disclosure, denial of service and elevation of privilege.",
+      "def_vi": "Danh mục sáu nhóm mối đe dọa dùng để tra hỏi từng thành phần của thiết kế: giả danh, sửa đổi, chối bỏ, lộ thông tin, từ chối dịch vụ và leo thang đặc quyền.",
+      "say": "We walked every data flow through STRIDE and found repudiation had no control at all.",
+      "tags": [
+        "threat-model",
+        "principle"
+      ]
+    },
+    {
+      "id": "sec-attack-tree",
+      "en": "Attack tree",
+      "vi": "Cây tấn công",
+      "def_en": "A tree whose root is the attacker's goal and whose branches are the alternative ways of reaching it, so defences can be placed on the cheapest branches.",
+      "def_vi": "Cây có gốc là mục tiêu của kẻ tấn công, các nhánh là những cách khác nhau để đạt mục tiêu đó, nhờ vậy đặt được phòng thủ vào nhánh rẻ nhất.",
+      "say": "The attack tree showed the cheapest branch was a helpdesk phone call, not the firewall.",
+      "tags": [
+        "threat-model",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-security-boundary",
+      "en": "Security boundary",
+      "vi": "Ranh giới an ninh",
+      "def_en": "A line in the design where the level of trust changes, so everything crossing it must be authenticated, authorised and validated.",
+      "def_vi": "Đường ranh trong thiết kế nơi mức độ tin cậy thay đổi, nên mọi thứ đi qua nó đều phải được xác thực, cấp quyền và kiểm tra tính hợp lệ.",
+      "say": "Draw the security boundary first, then ask what crosses it and who checks that.",
+      "tags": [
+        "threat-model",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-abuse-case",
+      "en": "Abuse case",
+      "vi": "Ca lạm dụng",
+      "def_en": "A use case written from the attacker's point of view, describing how a legitimate feature is turned against its owner.",
+      "def_vi": "Một ca sử dụng viết theo góc nhìn kẻ tấn công, mô tả cách một tính năng hợp lệ bị quay ngược lại chống chủ nhân của nó.",
+      "say": "For every use case the team wrote, we asked them to write one abuse case beside it.",
+      "tags": [
+        "threat-model",
+        "appsec"
+      ]
+    },
+    {
+      "id": "sec-security-assumption",
+      "en": "Security assumption",
+      "vi": "Giả định an ninh",
+      "def_en": "A condition a defence silently relies on, such as a trusted clock or an uncompromised endpoint, which becomes the first thing an attacker attacks.",
+      "def_vi": "Điều kiện mà một biện pháp phòng thủ ngầm dựa vào, chẳng hạn đồng hồ đáng tin hay máy đầu cuối chưa bị chiếm, và đó chính là thứ kẻ tấn công nhắm vào đầu tiên.",
+      "say": "List your security assumptions explicitly, because an unstated one is never tested.",
+      "tags": [
+        "threat-model",
+        "principle"
+      ]
+    },
+    {
+      "id": "sec-residual-risk",
+      "en": "Residual risk",
+      "vi": "Rủi ro còn lại",
+      "def_en": "The risk that remains after every planned control is in place, which someone with authority must formally accept.",
+      "def_vi": "Phần rủi ro còn lại sau khi mọi biện pháp dự kiến đã được triển khai, và phải có người đủ thẩm quyền chấp nhận nó một cách chính thức.",
+      "say": "Residual risk does not disappear because nobody wrote it down.",
+      "tags": [
+        "governance",
+        "threat-model"
+      ]
+    },
+    {
+      "id": "sec-dolev-yao",
+      "en": "Dolev-Yao model",
+      "vi": "Mô hình kẻ tấn công Dolev-Yao",
+      "def_en": "The standard protocol adversary who controls the whole network and may read, drop, reorder and forge messages, yet cannot break the cryptography itself.",
+      "def_vi": "Kẻ tấn công tiêu chuẩn trong phân tích giao thức, kiểm soát toàn bộ mạng, có thể đọc, bỏ, đảo thứ tự và giả mạo bản tin, nhưng không phá được chính phần mật mã.",
+      "say": "Under the Dolev-Yao model the network is the attacker, so no message ordering can be assumed.",
+      "tags": [
+        "threat-model",
+        "network"
+      ]
+    },
+    {
+      "id": "sec-honest-curious",
+      "en": "Honest-but-curious adversary",
+      "vi": "Đối thủ tuân thủ nhưng tò mò",
+      "def_en": "A participant who follows the protocol exactly but tries to learn everything it can from what it legitimately sees.",
+      "def_vi": "Bên tham gia làm đúng giao thức nhưng cố suy ra mọi điều có thể từ những gì nó được phép nhìn thấy.",
+      "say": "A federated server that never deviates can still be honest but curious about the gradients.",
+      "tags": [
+        "threat-model",
+        "privacy"
+      ]
+    },
+    {
+      "id": "sec-insider-threat",
+      "en": "Insider threat",
+      "vi": "Mối đe dọa từ bên trong",
+      "def_en": "Harm caused by someone who already holds legitimate access, whether deliberately, through coercion or by accident.",
+      "def_vi": "Thiệt hại gây ra bởi người vốn đã có quyền truy cập hợp lệ, dù cố ý, bị ép buộc hay do sơ suất.",
+      "say": "Perimeter controls say nothing about the insider threat, since the insider is already inside.",
+      "tags": [
+        "threat-model",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-kerckhoffs",
+      "en": "Kerckhoffs principle",
+      "vi": "Nguyên lý Kerckhoffs",
+      "def_en": "A system must stay secure even when everything about its design is public, with only the key kept secret.",
+      "def_vi": "Hệ thống phải vẫn an toàn ngay cả khi toàn bộ thiết kế của nó được công khai, chỉ riêng khóa là giữ bí mật.",
+      "say": "By Kerckhoffs principle the design may be published, but the key never is.",
+      "tags": [
+        "principle",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-toctou",
+      "en": "Time-of-check to time-of-use",
+      "vi": "Khoảng hở giữa lúc kiểm và lúc dùng",
+      "def_en": "A race in which a resource is validated and then used, while an attacker swaps the resource in the gap between the two steps.",
+      "def_vi": "Tình huống chạy đua khi một tài nguyên được kiểm tra rồi mới dùng, còn kẻ tấn công tráo tài nguyên đó trong khoảng hở giữa hai bước.",
+      "say": "Check and use must be one atomic operation, or the gap becomes the vulnerability.",
+      "tags": [
+        "systems",
+        "appsec"
+      ]
+    },
+    {
+      "id": "sec-assume-breach",
+      "en": "Assume breach",
+      "vi": "Giả định đã bị xâm nhập",
+      "def_en": "A design stance that treats compromise of some component as certain and asks how far the damage can spread.",
+      "def_vi": "Lập trường thiết kế coi việc một thành phần nào đó bị chiếm là điều chắc chắn, rồi hỏi thiệt hại lan được tới đâu.",
+      "say": "Assume breach turns the question from whether they get in into how far they get.",
+      "tags": [
+        "principle",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-reproducible-build",
+      "en": "Reproducible build",
+      "vi": "Bản dựng tái lập được",
+      "def_en": "A build process where the same source always yields a bit for bit identical artefact, so anyone can verify that a published binary matches the code.",
+      "def_vi": "Quy trình dựng mà cùng một mã nguồn luôn cho ra sản phẩm giống hệt nhau đến từng bit, nhờ vậy ai cũng kiểm chứng được tệp nhị phân công bố có khớp mã nguồn hay không.",
+      "say": "Without a reproducible build, signing the binary only proves who uploaded it.",
+      "tags": [
+        "supply-chain",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-slsa",
+      "en": "SLSA levels",
+      "vi": "Các mức bảo đảm chuỗi cung ứng SLSA",
+      "def_en": "A graded framework describing how much can be proved about how an artefact was built, from unverified scripts up to hardened and independently attested pipelines.",
+      "def_vi": "Khung phân mức mô tả mức độ chứng minh được về cách một sản phẩm được dựng ra, từ kịch bản không kiểm chứng cho tới đường ống được làm cứng và có bên độc lập chứng thực.",
+      "say": "Claiming a higher assurance level means the build platform, not the developer, produces the evidence.",
+      "tags": [
+        "supply-chain",
+        "governance"
+      ]
+    },
+    {
+      "id": "sec-in-toto",
+      "en": "in-toto attestation",
+      "vi": "Chứng thực từng bước dựng in-toto",
+      "def_en": "A signed statement that a named step of the supply chain was carried out by an authorised party on specific inputs, producing specific outputs.",
+      "def_vi": "Bản tuyên bố có chữ ký khẳng định một bước cụ thể trong chuỗi cung ứng đã được bên có thẩm quyền thực hiện trên đầu vào xác định và cho ra đầu ra xác định.",
+      "say": "The attestation links inputs to outputs, so a swapped artefact breaks the chain visibly.",
+      "tags": [
+        "supply-chain",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-sigstore",
+      "en": "Sigstore",
+      "vi": "Hệ ký phần mềm Sigstore",
+      "def_en": "A signing ecosystem based on short lived keys tied to an identity and recorded in a public transparency log, removing the need to guard a long lived signing key.",
+      "def_vi": "Hệ sinh thái ký phần mềm dựa trên khóa dùng ngắn hạn gắn với một danh tính và được ghi vào nhật ký minh bạch công khai, nhờ vậy không phải canh giữ một khóa ký dùng lâu dài.",
+      "say": "The signature is worthless on its own, so the log entry is what makes it checkable later.",
+      "tags": [
+        "supply-chain",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-code-signing",
+      "en": "Code signing",
+      "vi": "Ký mã nguồn và tệp thi hành",
+      "def_en": "Attaching a digital signature to software so that a verifier can tell who published it and that it has not changed since.",
+      "def_vi": "Gắn chữ ký số vào phần mềm để bên kiểm tra biết được ai đã phát hành và biết phần mềm chưa bị thay đổi kể từ lúc đó.",
+      "say": "A valid signature answers who published this, never whether the code is safe.",
+      "tags": [
+        "supply-chain",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-typosquatting",
+      "en": "Typosquatting",
+      "vi": "Chiếm tên gõ nhầm",
+      "def_en": "Publishing a package or domain whose name differs from a popular one by a plausible typing mistake, so victims install it by accident.",
+      "def_vi": "Đăng một gói hoặc tên miền chỉ khác tên phổ biến bởi một lỗi gõ dễ mắc, khiến nạn nhân cài nhầm.",
+      "say": "An allow list of package names removes typosquatting far more reliably than developer vigilance.",
+      "tags": [
+        "supply-chain",
+        "attack"
+      ]
+    },
+    {
+      "id": "sec-sca",
+      "en": "Software composition analysis",
+      "vi": "Phân tích thành phần phần mềm",
+      "def_en": "Automated identification of the third party components inside a build and of the known flaws affecting those versions.",
+      "def_vi": "Việc tự động nhận diện các thành phần của bên thứ ba nằm trong bản dựng cùng những lỗi đã biết ảnh hưởng tới các phiên bản đó.",
+      "say": "Composition analysis tells you what you shipped, the bill of materials tells everyone else.",
+      "tags": [
+        "supply-chain",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-lockfile",
+      "en": "Lockfile pinning",
+      "vi": "Ghim phiên bản bằng tệp khóa",
+      "def_en": "Recording the exact resolved version and digest of every dependency so that two builds of the same commit pull identical code.",
+      "def_vi": "Ghi lại đúng phiên bản đã phân giải và mã băm của từng phụ thuộc, để hai lần dựng cùng một commit đều kéo về mã giống hệt nhau.",
+      "say": "Pinning the digest stops a rebuild from silently picking up a republished version.",
+      "tags": [
+        "supply-chain",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-tuf",
+      "en": "The Update Framework",
+      "vi": "Khung cập nhật phần mềm an toàn TUF",
+      "def_en": "A design for software update systems that splits signing authority across roles and adds freshness metadata, so one stolen key cannot push an arbitrary update.",
+      "def_vi": "Thiết kế cho hệ thống cập nhật phần mềm, chia thẩm quyền ký thành nhiều vai trò và thêm siêu dữ liệu về độ mới, nhờ vậy một khóa bị đánh cắp không đủ để đẩy ra bản cập nhật tùy ý.",
+      "say": "Role separation means the key that signs the index cannot also sign the payload.",
+      "tags": [
+        "supply-chain",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-merkle",
+      "en": "Merkle tree",
+      "vi": "Cây băm Merkle",
+      "def_en": "A tree of hashes in which each parent hashes its children, so membership of one leaf can be proved against the root using only a short path.",
+      "def_vi": "Cây các giá trị băm trong đó mỗi nút cha băm các nút con, nhờ vậy có thể chứng minh một lá thuộc về cây chỉ bằng một đường đi ngắn tới gốc.",
+      "say": "An inclusion proof grows with the logarithm of the log size, which is why the scheme scales.",
+      "tags": [
+        "integrity",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-ct",
+      "en": "Certificate transparency",
+      "vi": "Minh bạch chứng thư số",
+      "def_en": "Public append only logs of issued certificates, so a certificate issued for your domain without your knowledge becomes publicly visible.",
+      "def_vi": "Nhật ký công khai chỉ ghi thêm về các chứng thư đã cấp, nhờ vậy một chứng thư cấp cho tên miền của bạn mà bạn không biết sẽ hiện ra cho mọi người thấy.",
+      "say": "Transparency does not prevent misissuance, it only guarantees that misissuance is discoverable.",
+      "tags": [
+        "identity",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-append-only",
+      "en": "Append-only log",
+      "vi": "Nhật ký chỉ ghi thêm",
+      "def_en": "A record store that permits new entries but no editing or deletion of past ones, which is the basis of tamper evident audit trails.",
+      "def_vi": "Kho bản ghi chỉ cho phép thêm mục mới, không cho sửa hay xóa mục cũ, đây là nền tảng của vết kiểm toán phát hiện được can thiệp.",
+      "say": "Append only in the application layer means nothing if the operator can still edit the database.",
+      "tags": [
+        "forensics",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-hash-chain",
+      "en": "Hash chain",
+      "vi": "Chuỗi băm móc nối",
+      "def_en": "A sequence in which every record includes the hash of the previous one, so altering any earlier record breaks every hash after it.",
+      "def_vi": "Dãy bản ghi trong đó mỗi bản ghi chứa mã băm của bản ghi liền trước, nên sửa bất kỳ bản ghi cũ nào cũng làm hỏng toàn bộ mã băm phía sau.",
+      "say": "A hash chain is tamper evident, yet it is only tamper proof once the head is anchored elsewhere.",
+      "tags": [
+        "forensics",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-worm",
+      "en": "WORM storage",
+      "vi": "Lưu trữ ghi một lần đọc nhiều lần",
+      "def_en": "Storage that physically or contractually refuses modification and deletion for a retention period, even by an administrator.",
+      "def_vi": "Kho lưu trữ từ chối sửa và xóa trong suốt thời hạn lưu giữ, kể cả với người quản trị, bằng cơ chế vật lý hoặc bằng ràng buộc của nhà cung cấp.",
+      "say": "If the backup account can delete the backup, the backup is not a defence against ransomware.",
+      "tags": [
+        "operations",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-chain-custody",
+      "en": "Chain of custody",
+      "vi": "Chuỗi giữ gìn vật chứng",
+      "def_en": "The documented sequence of who held a piece of evidence, when, and what they did to it, which is what makes the evidence admissible.",
+      "def_vi": "Trình tự được ghi chép về việc ai đã giữ vật chứng, vào lúc nào và đã làm gì với nó, đây là điều làm cho vật chứng có giá trị sử dụng.",
+      "say": "Break the chain of custody once and the evidence loses its standing entirely.",
+      "tags": [
+        "forensics",
+        "governance"
+      ]
+    },
+    {
+      "id": "sec-timestamp-authority",
+      "en": "Timestamping authority",
+      "vi": "Cơ quan cấp dấu thời gian",
+      "def_en": "A trusted third party that signs a hash together with the current time, proving that data existed before that moment.",
+      "def_vi": "Bên thứ ba đáng tin ký lên mã băm kèm thời điểm hiện tại, qua đó chứng minh dữ liệu đã tồn tại trước thời điểm ấy.",
+      "say": "A timestamp lets a signature stay meaningful after the signing certificate has expired.",
+      "tags": [
+        "crypto",
+        "integrity"
+      ]
+    },
+    {
+      "id": "sec-nonrepudiation",
+      "en": "Non-repudiation",
+      "vi": "Tính không thể chối bỏ",
+      "def_en": "The property that the originator of a message cannot credibly deny having produced it, which needs a signature bound to a verified identity.",
+      "def_vi": "Tính chất khiến bên tạo ra bản tin không thể chối bỏ một cách thuyết phục rằng mình đã tạo ra nó, muốn có được thì chữ ký phải gắn với danh tính đã được xác minh.",
+      "say": "A shared secret gives authenticity but never non-repudiation, since both sides could have made the tag.",
+      "tags": [
+        "crypto",
+        "governance"
+      ]
+    },
+    {
+      "id": "sec-behaviour-baseline",
+      "en": "Behavioural baseline",
+      "vi": "Đường nền hành vi",
+      "def_en": "A statistical picture of what normal activity looks like for a host, account or link, against which deviation is measured.",
+      "def_vi": "Bức tranh thống kê về hoạt động bình thường của một máy, một tài khoản hay một đường truyền, dùng làm mốc để đo độ lệch.",
+      "say": "If the baseline is learned while the intruder is already active, their traffic becomes normal.",
+      "tags": [
+        "defence",
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-ueba",
+      "en": "UEBA",
+      "vi": "Phân tích hành vi người dùng và thực thể",
+      "def_en": "Detection that scores accounts and devices against their own history and against comparable peers, rather than against fixed rules.",
+      "def_vi": "Cách phát hiện chấm điểm tài khoản và thiết bị dựa trên lịch sử của chính chúng và dựa trên nhóm tương đương, thay vì dựa vào luật cố định.",
+      "say": "Comparing an account with its peer group catches what comparing it with a global threshold misses.",
+      "tags": [
+        "defence",
+        "ai-security"
+      ]
+    },
+    {
+      "id": "sec-beaconing",
+      "en": "Beaconing",
+      "vi": "Nhịp gọi về máy điều khiển",
+      "def_en": "The regular check in traffic from an implanted agent to its controller, recognisable by its timing regularity rather than its content.",
+      "def_vi": "Lưu lượng gọi về đều đặn từ tác nhân đã được cài cắm tới máy điều khiển, nhận ra được nhờ tính đều đặn về thời gian chứ không nhờ nội dung.",
+      "say": "Encryption hides the payload but the interval between connections is still in plain view.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "sec-lolbin",
+      "en": "Living off the land binary",
+      "vi": "Lợi dụng công cụ sẵn có của hệ điều hành",
+      "def_en": "A legitimate signed system tool repurposed by an intruder, so no unfamiliar file ever appears on disk.",
+      "def_vi": "Công cụ hệ thống hợp lệ đã được ký nhưng bị kẻ xâm nhập dùng vào việc khác, nhờ vậy không có tệp lạ nào xuất hiện trên ổ đĩa.",
+      "say": "Blocking unknown binaries does nothing when the attacker only uses tools you shipped yourself.",
+      "tags": [
+        "attack",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-process-ancestry",
+      "en": "Process ancestry",
+      "vi": "Cây quan hệ cha con của tiến trình",
+      "def_en": "The parent chain that launched a process, which often separates a benign use of a tool from a malicious one.",
+      "def_vi": "Chuỗi tiến trình cha đã sinh ra một tiến trình, thứ thường giúp phân biệt việc dùng công cụ vì mục đích lành và vì mục đích xấu.",
+      "say": "A shell is unremarkable, a shell whose parent is a document reader is not.",
+      "tags": [
+        "forensics",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-sigma-rule",
+      "en": "Sigma rule",
+      "vi": "Luật phát hiện dạng Sigma",
+      "def_en": "A vendor neutral way of writing a detection over log fields, which is then translated into the query language of whichever platform holds the data.",
+      "def_vi": "Cách viết một luật phát hiện trên các trường nhật ký mà không phụ thuộc nhà cung cấp, sau đó được dịch sang ngôn ngữ truy vấn của nền tảng đang chứa dữ liệu.",
+      "say": "Writing the logic once and translating it keeps detections from being locked to one platform.",
+      "tags": [
+        "defence",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-alert-fatigue",
+      "en": "Alert fatigue",
+      "vi": "Mệt mỏi vì cảnh báo",
+      "def_en": "The gradual loss of analyst attention caused by a queue in which almost every alert turns out to be harmless.",
+      "def_vi": "Sự suy giảm dần khả năng chú ý của người phân tích, do hàng đợi mà hầu như cảnh báo nào cũng hóa ra vô hại.",
+      "say": "A detector that is right one time in five hundred trains its own analysts to ignore it.",
+      "tags": [
+        "operations",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "sec-canary-token",
+      "en": "Canary token",
+      "vi": "Mồi báo động",
+      "def_en": "A credential, file or record that has no legitimate use, so any access to it is evidence of intrusion with essentially no false alarms.",
+      "def_vi": "Một thông tin đăng nhập, tệp hay bản ghi không có công dụng hợp lệ nào, nên mọi lần bị chạm tới đều là bằng chứng xâm nhập với gần như không có báo động giả.",
+      "say": "Nobody has a reason to open that file, which is exactly why opening it is a signal.",
+      "tags": [
+        "defence",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-purple-team",
+      "en": "Purple team exercise",
+      "vi": "Diễn tập phối hợp công và thủ",
+      "def_en": "An exercise in which the attacking and defending sides work together, executing known techniques to find out which ones the sensors actually see.",
+      "def_vi": "Buổi diễn tập trong đó bên tấn công và bên phòng thủ làm việc cùng nhau, thực hiện các kỹ thuật đã biết để tìm ra cảm biến thật sự thấy được kỹ thuật nào.",
+      "say": "The output is not a score, it is a list of techniques your sensors were blind to.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-sni",
+      "en": "Server name indication",
+      "vi": "Trường báo tên máy chủ trong bắt tay",
+      "def_en": "The field a client sends early in a handshake to say which host it wants, historically in clear text and therefore visible to observers.",
+      "def_vi": "Trường mà máy khách gửi ở đầu quá trình bắt tay để nói nó muốn tới máy chủ nào, trước đây gửi ở dạng rõ nên người quan sát nhìn thấy được.",
+      "say": "The connection is encrypted, yet an observer still learns which site you asked for.",
+      "tags": [
+        "network",
+        "privacy"
+      ]
+    },
+    {
+      "id": "sec-ech",
+      "en": "Encrypted client hello",
+      "vi": "Bắt tay đầu tiên được mã hóa",
+      "def_en": "An extension that encrypts the sensitive part of the first handshake message, so the requested hostname stops leaking to passive observers.",
+      "def_vi": "Phần mở rộng mã hóa phần nhạy cảm của bản tin bắt tay đầu tiên, nhờ vậy tên máy chủ được yêu cầu không còn rò ra cho người quan sát thụ động.",
+      "say": "It closes the hostname leak, though the destination address is still on the wire.",
+      "tags": [
+        "network",
+        "privacy"
+      ]
+    },
+    {
+      "id": "sec-dnssec",
+      "en": "DNSSEC",
+      "vi": "Ký số cho hệ thống tên miền",
+      "def_en": "Signatures over DNS records that let a resolver verify an answer came from the zone owner and was not altered, without hiding the query.",
+      "def_vi": "Chữ ký trên các bản ghi tên miền giúp bộ phân giải kiểm chứng câu trả lời đúng là từ chủ vùng và chưa bị sửa, nhưng không hề che giấu truy vấn.",
+      "say": "It signs the answer, so it gives integrity and origin, never confidentiality.",
+      "tags": [
+        "network",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-doh",
+      "en": "DNS over HTTPS",
+      "vi": "Phân giải tên miền qua kênh mã hóa",
+      "def_en": "Carrying DNS queries inside an encrypted web transport, which hides them from the local network and moves the trust onto the chosen resolver.",
+      "def_vi": "Đưa truy vấn tên miền vào trong một kênh truyền web đã mã hóa, che được truy vấn khỏi mạng nội bộ nhưng dồn niềm tin sang bộ phân giải đã chọn.",
+      "say": "The queries leave the local network unreadable, and the resolver operator now sees all of them.",
+      "tags": [
+        "network",
+        "privacy"
+      ]
+    },
+    {
+      "id": "sec-rpki",
+      "en": "RPKI route origin validation",
+      "vi": "Kiểm chứng nguồn gốc tuyến bằng RPKI",
+      "def_en": "Signed statements declaring which network is allowed to originate a prefix, letting routers discard announcements from anyone else.",
+      "def_vi": "Các tuyên bố có ký khai báo mạng nào được phép phát ra một dải địa chỉ, giúp bộ định tuyến loại bỏ thông báo đến từ bên khác.",
+      "say": "Origin validation checks who announced the prefix, not whether the path behind it is real.",
+      "tags": [
+        "network",
+        "identity"
+      ]
+    },
+    {
+      "id": "sec-macsec",
+      "en": "MACsec",
+      "vi": "Mã hóa chặng tại lớp liên kết",
+      "def_en": "Authenticated encryption applied hop by hop on a local link, protecting frames between two directly connected devices.",
+      "def_vi": "Mã hóa có xác thực áp dụng theo từng chặng trên đường liên kết cục bộ, bảo vệ khung tin giữa hai thiết bị nối trực tiếp với nhau.",
+      "say": "It secures the wire between two switches, so the frame is in the clear inside each switch.",
+      "tags": [
+        "network",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-ipsec-tunnel",
+      "en": "IPsec tunnel mode",
+      "vi": "Chế độ đường hầm của IPsec",
+      "def_en": "A mode that wraps the entire original packet inside a new one, so the inner addresses are hidden and gateways can protect whole networks.",
+      "def_vi": "Chế độ bọc trọn gói tin gốc vào trong một gói mới, nhờ vậy che được địa chỉ bên trong và cổng biên có thể bảo vệ cả mạng phía sau.",
+      "say": "Tunnel mode hides the inner header, transport mode leaves it exposed.",
+      "tags": [
+        "network",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-wireguard",
+      "en": "WireGuard",
+      "vi": "Giao thức đường hầm WireGuard",
+      "def_en": "A tunnel protocol with a deliberately small code base and a fixed set of cryptographic choices, where each peer is identified by a public key.",
+      "def_vi": "Giao thức đường hầm có mã nguồn cố ý giữ nhỏ và bộ lựa chọn mật mã cố định, mỗi bên tham gia được nhận diện bằng một khóa công khai.",
+      "say": "Fewer options mean fewer ways to configure the thing insecurely.",
+      "tags": [
+        "network",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-downgrade",
+      "en": "Downgrade attack",
+      "vi": "Tấn công ép hạ cấp",
+      "def_en": "Interference with negotiation so that two parties settle on the weakest option both still support, rather than the strongest.",
+      "def_vi": "Sự can thiệp vào quá trình thương lượng khiến hai bên chốt ở lựa chọn yếu nhất mà cả hai còn hỗ trợ, thay vì lựa chọn mạnh nhất.",
+      "say": "Binding the handshake transcript into the keys is what makes silent downgrade detectable.",
+      "tags": [
+        "attack",
+        "network"
+      ]
+    },
+    {
+      "id": "sec-replay",
+      "en": "Replay attack",
+      "vi": "Tấn công phát lại",
+      "def_en": "Capturing a valid message and sending it again later to cause the same effect twice, without ever needing to decrypt it.",
+      "def_vi": "Bắt lại một bản tin hợp lệ rồi gửi lại về sau để gây ra cùng một tác động hai lần, mà không cần giải mã nó.",
+      "say": "Encryption alone does not stop replay, since the attacker never has to read the message.",
+      "tags": [
+        "attack",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-8021x",
+      "en": "802.1X",
+      "vi": "Kiểm soát truy nhập theo cổng mạng",
+      "def_en": "Port based network access control in which a device must authenticate before the switch port carries any ordinary traffic.",
+      "def_vi": "Cơ chế kiểm soát truy nhập theo cổng, thiết bị phải xác thực xong thì cổng chuyển mạch mới cho lưu lượng thông thường đi qua.",
+      "say": "Without it, physical access to a wall socket is the same as access to the network.",
+      "tags": [
+        "network",
+        "identity"
+      ]
+    },
+    {
+      "id": "sec-x509",
+      "en": "X.509 certificate",
+      "vi": "Chứng thư số theo chuẩn X.509",
+      "def_en": "A signed structure binding a public key to a subject name, with a validity period, an issuer and extensions constraining its use.",
+      "def_vi": "Cấu trúc có chữ ký gắn một khóa công khai với tên chủ thể, kèm thời hạn hiệu lực, bên cấp phát và các phần mở rộng ràng buộc phạm vi sử dụng.",
+      "say": "The certificate binds a name to a key, and nothing more than that.",
+      "tags": [
+        "identity",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-cert-path",
+      "en": "Certificate path validation",
+      "vi": "Kiểm chứng đường dẫn chứng thư",
+      "def_en": "Walking from a presented certificate up to a trusted root, checking every signature, validity period, name constraint and revocation status along the way.",
+      "def_vi": "Đi từ chứng thư được xuất trình ngược lên tới một gốc tin cậy, kiểm tra từng chữ ký, thời hạn, ràng buộc tên và trạng thái thu hồi trên suốt đường đi.",
+      "say": "A chain that verifies mathematically can still fail because a name constraint forbids that host.",
+      "tags": [
+        "identity",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-trust-store",
+      "en": "Root trust store",
+      "vi": "Kho gốc tin cậy",
+      "def_en": "The set of root certificates a system treats as authoritative, where every entry can vouch for any name on the internet.",
+      "def_vi": "Tập hợp các chứng thư gốc mà hệ thống coi là có thẩm quyền, trong đó mỗi mục đều có thể bảo lãnh cho bất kỳ tên nào trên internet.",
+      "say": "Adding one root to the store hands its owner the power to impersonate every site.",
+      "tags": [
+        "identity",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-ocsp-stapling",
+      "en": "OCSP stapling",
+      "vi": "Đính kèm chứng nhận còn hiệu lực",
+      "def_en": "Having the server fetch a signed freshness proof for its own certificate and deliver it in the handshake, so the client need not contact the issuer.",
+      "def_vi": "Máy chủ tự lấy bằng chứng có ký về việc chứng thư của mình còn hiệu lực rồi gửi kèm trong lúc bắt tay, nhờ vậy máy khách không phải liên hệ bên cấp phát.",
+      "say": "Stapling removes both the privacy leak and the extra round trip of asking the issuer directly.",
+      "tags": [
+        "identity",
+        "network"
+      ]
+    },
+    {
+      "id": "sec-csr",
+      "en": "Certificate signing request",
+      "vi": "Yêu cầu cấp chứng thư",
+      "def_en": "A self signed bundle containing the subject name and public key, sent to an authority so it can issue a certificate without ever seeing the private key.",
+      "def_vi": "Gói tự ký chứa tên chủ thể và khóa công khai, gửi tới cơ quan cấp phát để họ cấp chứng thư mà không bao giờ nhìn thấy khóa bí mật.",
+      "say": "The private key stays on the machine that generated the request, and it must stay there.",
+      "tags": [
+        "identity",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-intermediate-ca",
+      "en": "Intermediate CA",
+      "vi": "Cơ quan cấp phát trung gian",
+      "def_en": "A signing authority certified by a root, used for day to day issuance so the root key can stay offline.",
+      "def_vi": "Cơ quan ký được một gốc chứng nhận, dùng để cấp phát hằng ngày nhằm giữ cho khóa gốc luôn nằm ngoại tuyến.",
+      "say": "Replacing a compromised intermediate is painful, replacing a root is far worse.",
+      "tags": [
+        "identity",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-short-lived-cert",
+      "en": "Short-lived certificate",
+      "vi": "Chứng thư hiệu lực ngắn",
+      "def_en": "A certificate whose validity is measured in days or hours, so expiry does the work that revocation checking does poorly.",
+      "def_vi": "Chứng thư có hiệu lực tính bằng ngày hoặc bằng giờ, để việc hết hạn làm thay phần việc mà kiểm tra thu hồi vốn làm rất kém.",
+      "say": "If it expires by tomorrow, a failed revocation check matters far less.",
+      "tags": [
+        "identity",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-mtls",
+      "en": "Mutual TLS",
+      "vi": "Xác thực hai chiều bằng chứng thư",
+      "def_en": "A handshake in which the client also presents a certificate, so the server authenticates the caller cryptographically rather than by a bearer token.",
+      "def_vi": "Quá trình bắt tay trong đó máy khách cũng xuất trình chứng thư, nhờ vậy máy chủ xác thực bên gọi bằng mật mã thay vì bằng một mã thông hành mang theo.",
+      "say": "A stolen token can be replayed anywhere, a client certificate key is far harder to move.",
+      "tags": [
+        "identity",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-acme",
+      "en": "ACME protocol",
+      "vi": "Giao thức cấp chứng thư tự động",
+      "def_en": "An automated issuance protocol in which the requester proves control of a name by answering a challenge, then receives a certificate without human steps.",
+      "def_vi": "Giao thức cấp phát tự động, bên yêu cầu chứng minh mình kiểm soát một tên bằng cách trả lời thử thách rồi nhận chứng thư mà không cần bước thủ công nào.",
+      "say": "Automation makes control of the name the whole security story, so guard the name.",
+      "tags": [
+        "identity",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-crypto-agility",
+      "en": "Cryptographic agility",
+      "vi": "Khả năng thay thế thuật toán mật mã",
+      "def_en": "Designing systems so an algorithm can be replaced without redesigning the protocol, which is what makes a migration feasible at all.",
+      "def_vi": "Thiết kế hệ thống sao cho có thể thay một thuật toán mà không phải thiết kế lại giao thức, đây chính là điều làm cho việc chuyển đổi trở nên khả thi.",
+      "say": "Hard coding one cipher suite is a decision you will pay for during the next migration.",
+      "tags": [
+        "architecture",
+        "crypto"
+      ]
+    },
+    {
+      "id": "sec-byzantine-agg",
+      "en": "Byzantine-robust aggregation",
+      "vi": "Tổng hợp chống bên tham gia phá hoại",
+      "def_en": "Combining client updates with a rule such as a coordinate wise median, so a minority of malicious contributions cannot dominate the result.",
+      "def_vi": "Cách gộp cập nhật từ các bên bằng một quy tắc như trung vị theo từng tọa độ, để một nhóm nhỏ đóng góp có ác ý không chi phối được kết quả.",
+      "say": "Averaging lets one client move the model anywhere, a median does not.",
+      "tags": [
+        "ai-security",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-model-signing",
+      "en": "Model signing",
+      "vi": "Ký số cho mô hình",
+      "def_en": "Signing the weights and the metadata of a model so a deployment can verify it came from the expected training run and was not swapped.",
+      "def_vi": "Ký lên trọng số và siêu dữ liệu của mô hình để nơi triển khai kiểm chứng được nó đúng là từ lần huấn luyện dự kiến và chưa bị tráo.",
+      "say": "Verifying the weights proves origin, and it says nothing about what was in the training data.",
+      "tags": [
+        "ai-security",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "sec-certified-robustness",
+      "en": "Certified robustness",
+      "vi": "Bền vững có chứng minh",
+      "def_en": "A guarantee, proved rather than measured, that no perturbation within a stated norm ball can change the prediction of a given input.",
+      "def_vi": "Sự bảo đảm được chứng minh chứ không phải đo đạc, rằng không nhiễu loạn nào nằm trong quả cầu chuẩn đã nêu làm đổi được dự đoán cho một đầu vào cụ thể.",
+      "say": "An empirical number can be broken by a stronger attack, a certificate cannot.",
+      "tags": [
+        "ai-security",
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-smoothing",
+      "en": "Randomised smoothing",
+      "vi": "Làm trơn bằng nhiễu ngẫu nhiên",
+      "def_en": "Turning any classifier into one with a provable robustness radius by classifying many noisy copies of the input and taking the majority.",
+      "def_vi": "Cách biến một bộ phân loại bất kỳ thành bộ phân loại có bán kính bền vững chứng minh được, bằng cách phân loại nhiều bản sao có nhiễu của đầu vào rồi lấy đa số.",
+      "say": "The certificate is real, and you pay for it with many forward passes per prediction.",
+      "tags": [
+        "ai-security",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-guardrail",
+      "en": "Guardrail model",
+      "vi": "Mô hình chắn lọc đầu vào và đầu ra",
+      "def_en": "A secondary classifier that screens inputs or outputs of a main model, which is itself a statistical component and therefore itself attackable.",
+      "def_vi": "Bộ phân loại phụ có nhiệm vụ sàng lọc đầu vào hoặc đầu ra của mô hình chính, bản thân nó cũng là một thành phần thống kê nên cũng bị tấn công được.",
+      "say": "A filter model is a mitigation layer, never a security boundary you can rely on alone.",
+      "tags": [
+        "ai-security",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-training-extraction",
+      "en": "Training data extraction",
+      "vi": "Rút lại dữ liệu huấn luyện",
+      "def_en": "Recovering verbatim training examples from a deployed model, which turns memorisation of rare records into a disclosure problem.",
+      "def_vi": "Việc khôi phục nguyên văn các mẫu huấn luyện từ một mô hình đang triển khai, biến hiện tượng ghi nhớ các bản ghi hiếm thành vấn đề lộ thông tin.",
+      "say": "A model that memorised a rare record can be made to repeat it word for word.",
+      "tags": [
+        "ai-security",
+        "privacy"
+      ]
+    },
+    {
+      "id": "sec-unsafe-checkpoint",
+      "en": "Unsafe checkpoint format",
+      "vi": "Định dạng lưu mô hình không an toàn",
+      "def_en": "A serialisation format that reconstructs arbitrary objects while loading, so opening a downloaded checkpoint can execute code.",
+      "def_vi": "Định dạng lưu trữ có khả năng dựng lại đối tượng tùy ý ngay trong lúc nạp, nên chỉ cần mở một tệp mô hình tải về là mã có thể chạy.",
+      "say": "Loading weights should read numbers, not run whatever the author decided to embed.",
+      "tags": [
+        "ai-security",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "sec-retrieval-poisoning",
+      "en": "Retrieval poisoning",
+      "vi": "Đầu độc kho tri thức truy hồi",
+      "def_en": "Planting crafted documents in a knowledge base so that a retrieval system pulls them into context and the model repeats or obeys them.",
+      "def_vi": "Việc cấy tài liệu được dàn dựng vào kho tri thức để hệ truy hồi kéo chúng vào ngữ cảnh, khiến mô hình lặp lại hoặc làm theo chúng.",
+      "say": "Whoever can write into the index can write into the prompt.",
+      "tags": [
+        "ai-security",
+        "attack"
+      ]
+    },
+    {
+      "id": "sec-agent-sandbox",
+      "en": "Agent sandboxing",
+      "vi": "Cách ly quyền hạn của tác nhân",
+      "def_en": "Running an automated agent with only the credentials, network reach and file access its task needs, so a hijacked agent has little to work with.",
+      "def_vi": "Cho tác nhân tự động chạy với đúng phần thông tin đăng nhập, phạm vi mạng và quyền tệp mà nhiệm vụ của nó cần, để nếu bị chiếm quyền thì nó cũng chẳng có gì để dùng.",
+      "say": "The agent will eventually be tricked, so bound what it is able to do when that happens.",
+      "tags": [
+        "ai-security",
+        "architecture"
+      ]
+    },
+    {
+      "id": "sec-instruction-separation",
+      "en": "Data and instruction separation",
+      "vi": "Tách bạch dữ liệu và mệnh lệnh",
+      "def_en": "Keeping retrieved or user supplied content in a channel that can never be interpreted as commands, which is the structural answer to injection.",
+      "def_vi": "Giữ nội dung truy hồi được hoặc do người dùng cung cấp trong một kênh không bao giờ được diễn giải thành mệnh lệnh, đây là lời giải mang tính cấu trúc cho vấn đề tiêm nhiễm.",
+      "say": "Injection is solved the same way in every era, by never mixing the two channels.",
+      "tags": [
+        "ai-security",
+        "principle"
       ]
     }
   ]

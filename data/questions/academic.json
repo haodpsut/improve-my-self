@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "academic",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qac-1",
@@ -1502,6 +1502,726 @@
       "why": "Author contribution statements are now mandatory at most venues, so an empty entry is visible to editors and readers alike. Raising it early is easier than signing a false statement.",
       "why_vi": "Phần khai đóng góp của từng tác giả nay là bắt buộc ở hầu hết tạp chí, nên một dòng trống sẽ hiện rõ trước mắt biên tập viên lẫn người đọc. Nêu sớm còn dễ hơn là ký vào một bản khai sai.",
       "level": 3
+    },
+    {
+      "id": "qac-101",
+      "q": "A reviewer writes that your method section cannot be reimplemented. The change that helps most is",
+      "q_vi": "Phản biện viết rằng phần phương pháp của bạn không thể cài lại được. Thay đổi hữu ích nhất là",
+      "choices": [
+        "Collecting the stopping rule, the initialisation scheme and every fixed hyperparameter into one setup paragraph, with the values that were actually used",
+        "Adding a longer motivation for why the two stage structure was chosen",
+        "Rewriting the pseudocode in a more compact mathematical notation",
+        "Citing the framework you built on instead of describing your changes"
+      ],
+      "answer": 0,
+      "why": "Reimplementation fails on the small fixed quantities, not on the idea. A reader can rebuild the idea from the pseudocode but cannot guess a stopping threshold.",
+      "why_vi": "Việc cài lại thất bại ở những đại lượng cố định nhỏ nhặt chứ không ở ý tưởng. Người đọc dựng lại được ý tưởng từ mã giả nhưng không đoán nổi một ngưỡng dừng.",
+      "level": 2
+    },
+    {
+      "id": "qac-102",
+      "q": "The opening sentence of a method section works best when it",
+      "q_vi": "Câu mở đầu phần phương pháp hiệu quả nhất khi nó",
+      "choices": [
+        "Defines every symbol that the rest of the section will use",
+        "States the key idea in one sentence, before any notation",
+        "Recalls the limitations of each method reviewed in the previous section",
+        "Explains at length why the problem cannot be solved exactly in polynomial time"
+      ],
+      "answer": 1,
+      "why": "A reader who has the idea can follow the notation. A reader given notation first has nothing to attach it to and rereads the section twice.",
+      "why_vi": "Người đọc nắm được ý tưởng thì theo được ký hiệu. Người bị dội ký hiệu trước không có gì để gắn vào và phải đọc lại mục đó hai lần.",
+      "level": 1
+    },
+    {
+      "id": "qac-103",
+      "q": "Writing that results are averaged over ten runs unless otherwise stated does what for the paper?",
+      "q_vi": "Việc ghi rằng kết quả lấy trung bình trên mười lần chạy trừ khi có nói khác đi mang lại điều gì cho bài?",
+      "choices": [
+        "It removes any need to report the spread across the runs",
+        "It tells the reader that each of the ten runs used a different dataset entirely",
+        "It fixes one default for the whole paper, so each caption stays short",
+        "It licenses the reader to assume that a significance test was carried out somewhere"
+      ],
+      "answer": 2,
+      "why": "A default stated once covers every table that follows. It says nothing about variance, which still has to be reported separately.",
+      "why_vi": "Một giá trị mặc định nêu một lần sẽ phủ cho mọi bảng phía sau. Nó không nói gì về độ dao động, thứ vẫn phải báo cáo riêng.",
+      "level": 2
+    },
+    {
+      "id": "qac-104",
+      "q": "Your algorithm is described without an explicit stopping rule. A reviewer objects because",
+      "q_vi": "Thuật toán của bạn được mô tả mà không nêu điều kiện dừng. Phản biện phản đối vì",
+      "choices": [
+        "An algorithm that lacks an explicit stopping rule cannot be proved to be correct",
+        "Journals require pseudocode to contain a while loop",
+        "It makes the complexity analysis impossible to write down",
+        "Without it nobody can tell how much computation your reported timings cover"
+      ],
+      "answer": 3,
+      "why": "Runtime and quality both depend on when you stopped. Two papers running the same method to different tolerances are not comparing the same thing.",
+      "why_vi": "Cả thời gian chạy lẫn chất lượng đều phụ thuộc vào chỗ bạn dừng. Hai bài chạy cùng phương pháp tới hai mức sai số khác nhau thì không so cùng một thứ.",
+      "level": 2
+    },
+    {
+      "id": "qac-105",
+      "q": "You extended a public simulator and changed only its scheduling module. The method section should",
+      "q_vi": "Bạn mở rộng một bộ mô phỏng công khai và chỉ đổi phần xếp lịch. Phần phương pháp nên",
+      "choices": [
+        "Name the simulator and the version you used, then describe exactly which parts you replaced and which you left untouched",
+        "Describe the whole simulator from scratch so the paper is self contained",
+        "Leave the simulator out, since the contribution is the scheduler",
+        "Say that a standard simulator was used, without naming it"
+      ],
+      "answer": 0,
+      "why": "Naming the base and the delta is what lets someone else reach your numbers. Rewriting the whole simulator wastes pages and still leaves the delta unclear.",
+      "why_vi": "Nêu rõ nền và phần thay đổi mới là thứ giúp người khác chạm tới đúng con số của bạn. Viết lại cả bộ mô phỏng vừa tốn trang vừa vẫn không rõ bạn đã đổi gì.",
+      "level": 1
+    },
+    {
+      "id": "qac-106",
+      "q": "Stating that hyperparameters were tuned on a held out split matters mainly because",
+      "q_vi": "Việc ghi rõ siêu tham số được tinh chỉnh trên phần dữ liệu giữ riêng quan trọng chủ yếu vì",
+      "choices": [
+        "A held out split makes the training procedure converge considerably more quickly",
+        "Tuning against the test set silently inflates every number you then report",
+        "Most journals now require a validation split in every manuscript that is submitted",
+        "It proves the model has not memorised the training examples"
+      ],
+      "answer": 1,
+      "why": "Selection on the test set is a form of fitting to it, so the reported score stops estimating performance on unseen data. It is invisible unless the paper says where tuning happened.",
+      "why_vi": "Chọn tham số dựa trên tập kiểm tra cũng là một dạng khớp vào chính tập đó, nên điểm báo cáo thôi ước lượng cho dữ liệu chưa thấy. Không ai phát hiện được trừ khi bài nói rõ tinh chỉnh ở đâu.",
+      "level": 3
+    },
+    {
+      "id": "qac-107",
+      "q": "Sweeping the learning rate across three orders of magnitude beats reporting one value because it",
+      "q_vi": "Quét tốc độ học qua ba bậc độ lớn tốt hơn báo cáo một giá trị duy nhất vì nó",
+      "choices": [
+        "Guarantees that the true optimum has been located exactly rather than approximately",
+        "Reduces the variance of each training run",
+        "Shows the conclusion does not rest on one lucky setting you happened to find",
+        "Replaces the need to average over several random seeds"
+      ],
+      "answer": 2,
+      "why": "A single value invites the suspicion that your method was tuned and the baseline was not. A curve over a wide range answers that suspicion without a word of argument.",
+      "why_vi": "Một giá trị duy nhất mời gọi mối nghi rằng phương pháp của bạn được chỉnh còn phương pháp nền thì không. Một đường cong trên khoảng rộng trả lời mối nghi đó mà không cần tranh luận câu nào.",
+      "level": 2
+    },
+    {
+      "id": "qac-108",
+      "q": "A method section says only that the weights are initialised randomly. The problem is that",
+      "q_vi": "Phần phương pháp chỉ ghi rằng trọng số được khởi tạo ngẫu nhiên. Vấn đề là",
+      "choices": [
+        "Random initialisation is no longer accepted practice for deep models",
+        "The reader will assume that no initialisation was performed at all",
+        "A random start makes the optimisation problem formally non convex",
+        "Random covers many schemes, which give different curves"
+      ],
+      "answer": 3,
+      "why": "The scale and the distribution of the starting weights change both the speed and the final point of training. The word random names none of that.",
+      "why_vi": "Biên độ và phân phối của trọng số ban đầu đổi cả tốc độ lẫn điểm dừng của quá trình huấn luyện. Chữ ngẫu nhiên không nói gì về hai thứ đó.",
+      "level": 2
+    },
+    {
+      "id": "qac-109",
+      "q": "The complexity of your algorithm belongs",
+      "q_vi": "Độ phức tạp của thuật toán nên đặt ở",
+      "choices": [
+        "In the method section, just after the procedure",
+        "In the abstract, since reviewers read that part first",
+        "In the conclusion, next to the summary of the contributions",
+        "In a footnote, because it is only a technical detail"
+      ],
+      "answer": 0,
+      "why": "A reader forms a cost expectation the moment they finish reading the steps. Putting the cost anywhere else means they carry the wrong expectation through the experiments.",
+      "why_vi": "Người đọc hình thành kỳ vọng về chi phí ngay khi đọc xong các bước. Đặt chi phí ở chỗ khác khiến họ mang một kỳ vọng sai suốt phần thí nghiệm.",
+      "level": 1
+    },
+    {
+      "id": "qac-110",
+      "q": "You may write that all other settings are unchanged only when",
+      "q_vi": "Bạn chỉ được viết rằng mọi thiết lập còn lại giữ nguyên khi",
+      "choices": [
+        "The two runs use the same model family and the same dataset",
+        "Nothing at all except the component under study differs between the two runs, including the seed, the data order and the number of epochs",
+        "The remaining differences are too small to matter in practice",
+        "You reran both configurations on the same machine"
+      ],
+      "answer": 1,
+      "why": "The sentence is what turns a comparison into a controlled one, so a single uncontrolled difference makes it false. Small differences are exactly the ones that produce a gain you cannot explain.",
+      "why_vi": "Chính câu đó biến phép so sánh thành phép so sánh có kiểm soát, nên chỉ một khác biệt không kiểm soát là câu đó thành sai. Những khác biệt nhỏ đúng là thứ tạo ra cải thiện mà bạn không giải thích nổi.",
+      "level": 3
+    },
+    {
+      "id": "qac-111",
+      "q": "Your method beats the baseline by half a point, and the spread across seeds is two points. Write",
+      "q_vi": "Phương pháp của bạn hơn phương pháp nền nửa điểm, còn độ dao động giữa các hạt là hai điểm. Hãy viết",
+      "choices": [
+        "Our method improves accuracy by half a percentage point over the strongest baseline",
+        "Our method achieves a small but consistent gain over the baseline",
+        "The difference is within the noise, so we do not claim an improvement here",
+        "Our method is slightly better, although the gain is not yet statistically significant"
+      ],
+      "answer": 2,
+      "why": "A gap smaller than the run to run spread is not evidence of anything. Calling it small but consistent asserts consistency that the seeds did not show.",
+      "why_vi": "Khoảng cách nhỏ hơn độ dao động giữa các lần chạy thì không chứng minh được gì. Gọi nó là nhỏ nhưng ổn định là khẳng định một sự ổn định mà các hạt không hề cho thấy.",
+      "level": 2
+    },
+    {
+      "id": "qac-112",
+      "q": "Once you match parameter counts, the advantage of your model disappears. You should",
+      "q_vi": "Khi bạn khớp số tham số, ưu thế của mô hình biến mất. Bạn nên",
+      "choices": [
+        "Keep the original comparison as it stands, since both of the models were trained honestly",
+        "Report only the matched result and drop the earlier one silently",
+        "Report both and argue the matched setting is unfair to your design",
+        "Report that the effect disappears under a matched budget and reframe the contribution"
+      ],
+      "answer": 3,
+      "why": "A gain that comes from extra capacity is a claim about capacity, not about your design. Saying so is what separates a finding from a confound.",
+      "why_vi": "Cải thiện đến từ dung lượng mô hình lớn hơn là khẳng định về dung lượng, không phải về thiết kế của bạn. Nói ra điều đó chính là ranh giới giữa một phát hiện và một yếu tố gây nhiễu.",
+      "level": 3
+    },
+    {
+      "id": "qac-113",
+      "q": "A negative result becomes useful to other groups mainly when the paper",
+      "q_vi": "Một kết quả âm tính chỉ thật sự có ích cho nhóm khác khi bài báo",
+      "choices": [
+        "Describes how wide the search was before you concluded that it does not work, including the ranges swept and the variants that were tried",
+        "Suggests a different method that might work instead",
+        "Frames the outcome as a limitation rather than a result",
+        "Shows that the effect is also absent on a second dataset entirely"
+      ],
+      "answer": 0,
+      "why": "Without the extent of the search, a reader cannot tell whether the approach fails or whether you stopped early. The search space is the finding.",
+      "why_vi": "Không biết bạn tìm rộng tới đâu thì người đọc không phân biệt được hướng đó hỏng thật hay bạn dừng sớm. Chính phạm vi tìm kiếm mới là phát hiện.",
+      "level": 3
+    },
+    {
+      "id": "qac-114",
+      "q": "You cannot reproduce a published number using the authors own released code. In your paper you should",
+      "q_vi": "Bạn không tái lập được một con số đã công bố dù dùng chính mã nguồn tác giả phát hành. Trong bài bạn nên",
+      "choices": [
+        "Report the published number as it stands, since it did go through peer review",
+        "State what you ran, what you obtained, and that the gap remains unexplained",
+        "Leave the method out of the comparison altogether so as to avoid a public dispute",
+        "Say the original result could not be confirmed by anyone"
+      ],
+      "answer": 1,
+      "why": "A factual account of your own run is defensible and invites the original authors to respond. Any wording that generalises beyond what you ran is not.",
+      "why_vi": "Một bản tường thuật đúng dữ kiện về lần chạy của chính bạn thì bảo vệ được và mở đường cho tác giả gốc phản hồi. Mọi cách diễn đạt khái quát hơn thứ bạn đã chạy thì không.",
+      "level": 3
+    },
+    {
+      "id": "qac-115",
+      "q": "The accuracy curve is flat and scattered across the three depths you tested. Write",
+      "q_vi": "Đường độ chính xác phẳng và tán loạn qua ba độ sâu bạn đã thử. Hãy viết",
+      "choices": [
+        "Accuracy improves slightly as the depth of the network increases",
+        "Accuracy is essentially constant, which confirms that depth does not matter",
+        "Accuracy shows no clear trend across the depths",
+        "Accuracy varies with depth in a way that will require further theoretical study"
+      ],
+      "answer": 2,
+      "why": "Three scattered points support neither a rise nor a claim that depth is irrelevant. Naming the absence of a trend is the only statement the data carries.",
+      "why_vi": "Ba điểm tán loạn không chống đỡ cho việc đường đi lên, cũng không chống đỡ cho khẳng định độ sâu vô nghĩa. Nói rằng không thấy xu hướng là điều duy nhất dữ liệu cho phép.",
+      "level": 1
+    },
+    {
+      "id": "qac-116",
+      "q": "You discover that your reported gain came from an evaluation script that skipped the hardest batch. You should",
+      "q_vi": "Bạn phát hiện cải thiện đã báo cáo đến từ đoạn mã đánh giá bỏ sót lô dữ liệu khó nhất. Bạn nên",
+      "choices": [
+        "Rerun only your own method, since the baseline numbers were obviously unaffected by this",
+        "Keep the numbers and note the issue in a footnote of the paper",
+        "Report both sets of numbers and let the reader decide",
+        "Fix the script, rerun every method under it, and report the corrected numbers"
+      ],
+      "answer": 3,
+      "why": "A broken evaluation affects every method it scored, so only a full rerun restores the comparison. Reporting two sets shifts your work onto the reader.",
+      "why_vi": "Một phép đánh giá hỏng ảnh hưởng tới mọi phương pháp mà nó chấm, nên chỉ chạy lại toàn bộ mới khôi phục được phép so sánh. Đưa ra hai bộ số là đẩy phần việc của bạn sang người đọc.",
+      "level": 3
+    },
+    {
+      "id": "qac-117",
+      "q": "A result contradicts the mechanism you predicted in the introduction. The best handling is",
+      "q_vi": "Một kết quả mâu thuẫn với cơ chế bạn đã dự đoán ở phần mở đầu. Cách xử lý tốt nhất là",
+      "choices": [
+        "Report it, say plainly that it runs counter to your expectation, and propose a mechanism that a further experiment could test",
+        "Soften the prediction in the introduction so nothing contradicts it",
+        "Move the result to an appendix and keep the discussion focused",
+        "Report it and attribute the mismatch to noise in the measurement"
+      ],
+      "answer": 0,
+      "why": "Quietly editing the prediction removes the most interesting thing in the paper. A surprise you name and try to explain is what other groups follow up.",
+      "why_vi": "Âm thầm sửa lại dự đoán sẽ xoá mất thứ thú vị nhất trong bài. Một bất ngờ được gọi tên và cố lý giải mới là thứ khiến nhóm khác đi tiếp.",
+      "level": 2
+    },
+    {
+      "id": "qac-118",
+      "q": "Writing that you did not observe a significant difference is the right sentence when",
+      "q_vi": "Câu viết rằng bạn không thấy khác biệt đáng kể là đúng khi",
+      "choices": [
+        "You ran the comparison twice and the two outcomes clearly pointed in different directions",
+        "The comparison came out flat and you had enough runs to detect the effect you expected",
+        "The difference is real but simply too small to be of interest in a practical deployment",
+        "You did not have the compute budget needed to run a proper significance test on these results"
+      ],
+      "answer": 1,
+      "why": "The sentence claims an absence, and an absence is only informative when the test could have found the effect. With too few runs it says nothing.",
+      "why_vi": "Câu đó khẳng định một sự vắng mặt, mà vắng mặt chỉ có ý nghĩa khi phép kiểm đủ sức phát hiện ra hiệu ứng. Với quá ít lần chạy thì nó chẳng nói lên điều gì.",
+      "level": 2
+    },
+    {
+      "id": "qac-119",
+      "q": "Your scheduler becomes unstable when the queue is nearly empty. The paper should",
+      "q_vi": "Bộ xếp lịch của bạn mất ổn định khi hàng đợi gần rỗng. Bài báo nên",
+      "choices": [
+        "Restrict every experiment to loads at which the queue always stays full",
+        "Mention the instability in the future work section only",
+        "Name the regime where it fails and show the curve that breaks",
+        "Add a heuristic guard and leave the failure undocumented"
+      ],
+      "answer": 2,
+      "why": "A failure mode you document is a boundary; a failure mode a reader finds is a retraction risk. The broken curve is also the most useful figure for anyone deploying the method.",
+      "why_vi": "Chế độ hỏng mà bạn ghi rõ là một ranh giới; chế độ hỏng do người đọc tự tìm ra là nguy cơ bị rút bài. Đường cong gãy còn là hình hữu ích nhất cho người muốn triển khai phương pháp.",
+      "level": 2
+    },
+    {
+      "id": "qac-120",
+      "q": "A reviewer asks why you report a variant that failed. The strongest answer is",
+      "q_vi": "Phản biện hỏi vì sao bạn báo cáo một biến thể đã thất bại. Câu trả lời mạnh nhất là",
+      "choices": [
+        "It fills the ablation table that the venue expects to see",
+        "It shows that we explored the design space thoroughly",
+        "It makes our own method look stronger by comparison",
+        "The approach is widely assumed to work in this setting, and reporting where it breaks saves other groups the same weeks of compute"
+      ],
+      "answer": 3,
+      "why": "A negative result earns its space by what it saves other people, not by what it says about your diligence. That is also the argument an editor accepts.",
+      "why_vi": "Một kết quả âm tính xứng đáng có chỗ nhờ thứ nó giúp người khác tiết kiệm, chứ không phải nhờ nó chứng tỏ bạn chăm chỉ. Đó cũng là lập luận biên tập viên chấp nhận.",
+      "level": 2
+    },
+    {
+      "id": "qac-121",
+      "q": "A reviewer asks you to change the objective function, which would invalidate every result in the paper. Reply",
+      "q_vi": "Phản biện yêu cầu đổi hàm mục tiêu, việc này sẽ làm vô hiệu mọi kết quả trong bài. Hãy trả lời",
+      "choices": [
+        "We take the point, but changing the objective would make the results in Section five incomparable, so we have kept it and added a paragraph discussing the alternative",
+        "The suggested objective lies outside the scope of the present paper",
+        "We have changed the objective and rerun the smaller experiments only",
+        "The current objective is standard in this literature and needs no defence"
+      ],
+      "answer": 0,
+      "why": "Conceding the framing, naming the concrete cost and adding the discussion answers the concern without destroying the paper. A bare appeal to scope answers nothing.",
+      "why_vi": "Nhượng bộ cách đặt vấn đề, nêu rõ cái giá cụ thể và thêm phần bàn luận sẽ xử lý được băn khoăn mà không phá bài. Viện dẫn phạm vi suông thì không trả lời được gì.",
+      "level": 3
+    },
+    {
+      "id": "qac-122",
+      "q": "A reviewer asks for an experiment whose answer is already in Appendix B. The best reply",
+      "q_vi": "Phản biện đòi một thí nghiệm mà câu trả lời đã nằm ở Phụ lục B. Cách trả lời tốt nhất là",
+      "choices": [
+        "Runs the whole experiment again from scratch so that the reviewer can see a fresh set of numbers",
+        "Says this would duplicate Appendix B, quotes the lines, and adds a pointer from the main text",
+        "Notes that the answer is in Appendix B and makes no change",
+        "Moves Appendix B into the main text in full"
+      ],
+      "answer": 1,
+      "why": "If a careful reader missed it, the signposting was at fault, so the fix belongs in the paper as well as in the letter. Quoting the lines saves the reviewer from opening the file.",
+      "why_vi": "Nếu một người đọc kỹ mà bỏ sót thì lỗi nằm ở chỉ dẫn, nên phải sửa cả trong bài chứ không chỉ trong thư. Trích thẳng vài dòng giúp phản biện khỏi phải mở tệp.",
+      "level": 2
+    },
+    {
+      "id": "qac-123",
+      "q": "You decide not to make a change a reviewer requested. The worst thing you can do is",
+      "q_vi": "Bạn quyết định không thực hiện một thay đổi phản biện yêu cầu. Điều tệ nhất bạn có thể làm là",
+      "choices": [
+        "State the decision and give one concrete reason for it",
+        "Offer a smaller analysis that answers the same underlying concern",
+        "Say nothing and hope the request is forgotten",
+        "Ask the editor to decide, explaining exactly why the two reviews conflict"
+      ],
+      "answer": 2,
+      "why": "Editors compare the letter against the review line by line, so an unanswered request is visible and reads as evasion. A stated refusal with a reason is often accepted.",
+      "why_vi": "Biên tập viên đối chiếu thư với bản nhận xét từng dòng, nên một yêu cầu bị bỏ trống hiện ra rất rõ và bị đọc là né tránh. Một lời từ chối nói thẳng kèm lý do thường được chấp nhận.",
+      "level": 1
+    },
+    {
+      "id": "qac-124",
+      "q": "Redirecting a reviewer to evidence already in the paper works best when you",
+      "q_vi": "Việc dẫn phản biện tới bằng chứng đã có sẵn trong bài hiệu quả nhất khi bạn",
+      "choices": [
+        "Repeat the whole of the argument again in the letter, in your own words this time",
+        "Ask the reviewer to reread that section carefully before the next round begins",
+        "Attach the manuscript again with the passage highlighted",
+        "Quote the passage in the letter rather than giving the section number alone"
+      ],
+      "answer": 3,
+      "why": "A reviewer reading twenty letters will not open the file to check a cross reference. The quoted lines make the point land inside the letter itself.",
+      "why_vi": "Một phản biện đang đọc hai chục lá thư sẽ không mở tệp ra để kiểm một chỗ dẫn chiếu. Vài dòng trích thẳng khiến lập luận nằm gọn ngay trong thư.",
+      "level": 2
+    },
+    {
+      "id": "qac-125",
+      "q": "A reviewer wants three more benchmarks and you can run only one to convergence. Reply",
+      "q_vi": "Phản biện muốn thêm ba bộ đo chuẩn mà bạn chỉ chạy hội tụ được một. Hãy trả lời",
+      "choices": [
+        "We would rather report one benchmark run to convergence than three that stop early, and we have added the one that is closest to the reviewer concern",
+        "All three benchmarks have been added at a reduced training budget",
+        "The additional benchmarks fall outside the scope of this submission",
+        "We will add the remaining benchmarks in the journal version"
+      ],
+      "answer": 0,
+      "why": "Under trained results on three benchmarks are three unreliable numbers. Choosing the benchmark that matches the concern shows you read the request rather than counted it.",
+      "why_vi": "Ba bộ đo chuẩn chạy chưa đủ là ba con số không đáng tin. Chọn đúng bộ khớp với băn khoăn cho thấy bạn đọc yêu cầu chứ không phải đếm yêu cầu.",
+      "level": 2
+    },
+    {
+      "id": "qac-126",
+      "q": "Two reviewers ask for opposite changes to the same figure. In the letter you should",
+      "q_vi": "Hai phản biện yêu cầu hai thay đổi trái ngược cho cùng một hình. Trong thư bạn nên",
+      "choices": [
+        "Produce two different versions of the figure and include both of them in the revised paper",
+        "Describe the conflict openly, state your choice with a reason, and defer to the editor",
+        "Follow whichever request would take the least amount of work",
+        "Change nothing and explain that the requests cancel each other out"
+      ],
+      "answer": 1,
+      "why": "Resolving contradictory reviews is the editor role, and they can only exercise it if the conflict is surfaced. Two figures showing the same data invite a new objection.",
+      "why_vi": "Xử lý hai bản nhận xét mâu thuẫn là việc của biên tập viên, và họ chỉ làm được nếu mâu thuẫn được nêu ra. Hai hình vẽ cùng một dữ liệu lại mời thêm một lời phản đối mới.",
+      "level": 3
+    },
+    {
+      "id": "qac-127",
+      "q": "Adding that you retain the original figure with the reviewer permission does what to a refusal?",
+      "q_vi": "Việc thêm rằng bạn giữ hình gốc nếu phản biện đồng ý có tác dụng gì với một lời từ chối?",
+      "choices": [
+        "It transfers the whole responsibility for taking this decision over to the editor",
+        "It commits you to changing the figure at some point in the next round of the review",
+        "It leaves the reviewer room to insist, which makes the refusal easier to accept",
+        "It signals that you consider the point unimportant"
+      ],
+      "answer": 2,
+      "why": "A refusal that closes the door invites a fight in the second round. Leaving the decision formally open costs you nothing and usually ends the exchange.",
+      "why_vi": "Một lời từ chối đóng sập cửa sẽ mời một cuộc đôi co ở vòng sau. Để ngỏ quyết định về mặt hình thức chẳng tốn gì mà thường khép lại được cuộc trao đổi.",
+      "level": 2
+    },
+    {
+      "id": "qac-128",
+      "q": "A refusal in a response letter is most likely to be accepted when it",
+      "q_vi": "Một lời từ chối trong thư phản hồi dễ được chấp nhận nhất khi nó",
+      "choices": [
+        "Cites the page limit imposed by the venue as the reason for not complying",
+        "Explains that the requested analysis belongs to a different research community",
+        "Points out that the other two reviewers did not raise the same concern at all",
+        "Names a concrete constraint and offers something smaller instead"
+      ],
+      "answer": 3,
+      "why": "A reviewer accepts a refusal once they see their concern was understood. A page limit or a headcount of reviewers speaks to neither.",
+      "why_vi": "Phản biện chấp nhận một lời từ chối khi thấy băn khoăn của mình được hiểu. Giới hạn số trang hay việc đếm xem mấy phản biện cùng nêu đều không chạm tới điều đó.",
+      "level": 3
+    },
+    {
+      "id": "qac-129",
+      "q": "As chair, the first thing to tell each speaker before the session begins is",
+      "q_vi": "Với tư cách chủ toạ, điều đầu tiên cần nói với từng diễn giả trước khi phiên bắt đầu là",
+      "choices": [
+        "How long they have and at which minute you will signal them",
+        "Which of the papers in the session you personally found strongest",
+        "That you will not interrupt them under any circumstances",
+        "How many people have registered to attend this particular session today"
+      ],
+      "answer": 0,
+      "why": "An agreed signal turns a later interruption into something expected rather than a public embarrassment. Everything else can wait until after the session.",
+      "why_vi": "Một tín hiệu đã thoả thuận trước biến việc cắt lời sau đó thành chuyện đã hẹn chứ không phải một cú bẽ mặt trước phòng. Mọi chuyện khác để sau phiên cũng được.",
+      "level": 1
+    },
+    {
+      "id": "qac-130",
+      "q": "A questioner begins without saying who they are. As chair you should",
+      "q_vi": "Người đặt câu hỏi bắt đầu mà không nói mình là ai. Với tư cách chủ toạ bạn nên",
+      "choices": [
+        "Let the question run and note the person down for the record afterwards",
+        "Ask for their name and affiliation first",
+        "Ask the speaker whether they recognise the person asking the question",
+        "Say nothing, since the microphone recording will capture the voice anyway"
+      ],
+      "answer": 1,
+      "why": "The speaker answers differently once they know who is asking, and the room learns who is in it. Six words at the start cost nothing.",
+      "why_vi": "Diễn giả trả lời khác đi khi biết ai đang hỏi, và cả phòng cũng biết trong phòng có những ai. Sáu chữ ở đầu chẳng tốn gì.",
+      "level": 1
+    },
+    {
+      "id": "qac-131",
+      "q": "You are chairing, six hands are up and four minutes remain. Say",
+      "q_vi": "Bạn đang chủ toạ, sáu cánh tay giơ lên và còn bốn phút. Hãy nói",
+      "choices": [
+        "Let us go quickly, one sentence each, and we will get through all six",
+        "We will run over a little, since the questions are clearly worth it",
+        "We have time for one more question, and the rest of us can carry on with the speaker during the break outside",
+        "We are out of time, so let us move straight to the next talk"
+      ],
+      "answer": 2,
+      "why": "Closing the queue out loud stops three more hands going up and still leaves everyone a route to the speaker. Running over steals time from the next session.",
+      "why_vi": "Nói to rằng hàng chờ sắp đóng sẽ ngăn thêm ba cánh tay giơ lên mà vẫn để lại cho mọi người một đường tới gặp diễn giả. Kéo dài quá giờ là lấy mất thời gian của phiên sau.",
+      "level": 2
+    },
+    {
+      "id": "qac-132",
+      "q": "People at the back cannot hear the speaker. The chair should",
+      "q_vi": "Người ngồi cuối phòng không nghe được diễn giả. Chủ toạ nên",
+      "choices": [
+        "Wait for someone in the audience to raise the problem themselves",
+        "Repeat each of the speaker sentences aloud for the back of the room",
+        "Leave it to the technical staff, who will notice the level eventually",
+        "Ask the speaker to move closer to the microphone at once"
+      ],
+      "answer": 3,
+      "why": "Half a room hearing nothing is a failure of the session, and the chair owns the session. Waiting means the first minutes are lost for everyone at the back.",
+      "why_vi": "Nửa phòng không nghe được là hỏng cả phiên, mà phiên thì thuộc trách nhiệm chủ toạ. Chờ đợi nghĩa là những phút đầu mất trắng với tất cả người ngồi phía sau.",
+      "level": 1
+    },
+    {
+      "id": "qac-133",
+      "q": "The standard way for a chair to close a talk slot is",
+      "q_vi": "Cách chuẩn để chủ toạ khép lại một lượt trình bày là",
+      "choices": [
+        "Please join me in thanking the speaker",
+        "That is all the time we have for this one, so let us move on quickly",
+        "I think we can all agree that was a very interesting piece of work indeed",
+        "If there are no further questions then I suppose we should probably stop there"
+      ],
+      "answer": 0,
+      "why": "The line cues the applause and marks the boundary between two talks. A vague ending leaves the room unsure whether questions are still open.",
+      "why_vi": "Câu đó ra hiệu vỗ tay và đánh dấu ranh giới giữa hai bài. Một cái kết mơ hồ khiến cả phòng không biết còn được hỏi nữa hay không.",
+      "level": 1
+    },
+    {
+      "id": "qac-134",
+      "q": "A speaker has run four minutes over and shows no sign of stopping. As chair you should",
+      "q_vi": "Diễn giả đã quá giờ bốn phút và không có dấu hiệu dừng. Với tư cách chủ toạ bạn nên",
+      "choices": [
+        "Stand up beside the podium and wait quietly for them to notice you standing there",
+        "Interrupt, say the time is up, and ask for the conclusion on one slide",
+        "Let them finish and take the time from the following speaker",
+        "Cut the question period for this talk and say nothing to them"
+      ],
+      "answer": 1,
+      "why": "Every minute you allow is taken from the next speaker, who agreed to the same limit. Asking for one closing slide ends it without humiliating anyone.",
+      "why_vi": "Mỗi phút bạn cho thêm là một phút lấy của diễn giả kế tiếp, người đã chấp nhận cùng giới hạn đó. Xin một slide kết khép lại được mà không làm ai bẽ mặt.",
+      "level": 3
+    },
+    {
+      "id": "qac-135",
+      "q": "Every question so far has come from the front row. As chair you should",
+      "q_vi": "Tới giờ mọi câu hỏi đều đến từ hàng ghế đầu. Với tư cách chủ toạ bạn nên",
+      "choices": [
+        "Continue in the order that hands were raised, whatever the seating",
+        "Ask the speaker to choose the next person from the audience",
+        "Take the next question from the back of the room and say so aloud",
+        "Invite questions only from people who have not yet spoken during the session"
+      ],
+      "answer": 2,
+      "why": "Naming the direction out loud is what tells quieter people the queue is genuinely open to them. Strict order of hands reproduces whoever is quickest and loudest.",
+      "why_vi": "Nói to hướng bạn chọn chính là điều cho những người ít nói biết hàng chờ thật sự mở với họ. Đi đúng thứ tự giơ tay chỉ tái tạo lợi thế của người nhanh tay và nói to nhất.",
+      "level": 2
+    },
+    {
+      "id": "qac-136",
+      "q": "The session is late and you must cut the discussion short. The best thing to say is",
+      "q_vi": "Phiên đã trễ và bạn phải cắt ngắn phần thảo luận. Điều nên nói là",
+      "choices": [
+        "There do not appear to be very many questions left today, so let us simply stop here for now",
+        "The remaining questions can be sent to the speaker by email later",
+        "We will skip the discussion entirely for this talk today",
+        "We are running a little behind schedule, so let us take two questions rather than four"
+      ],
+      "answer": 3,
+      "why": "Naming the reason stops anyone reading a short question period as a verdict on the talk. Pretending there are no questions is visibly untrue when hands are up.",
+      "why_vi": "Nêu rõ lý do sẽ ngăn người ta hiểu phần hỏi đáp ngắn là một lời phán xét về bài nói. Vờ như không có ai hỏi là điều sai rành rành khi tay vẫn đang giơ.",
+      "level": 2
+    },
+    {
+      "id": "qac-137",
+      "q": "Your journal submission extends an earlier conference paper of yours. The cover letter must",
+      "q_vi": "Bài bạn nộp tạp chí là bản mở rộng từ một bài hội nghị trước đó của chính bạn. Thư gửi kèm bắt buộc phải",
+      "choices": [
+        "Cite the conference version, state which parts are new, and say roughly how much of the material has not appeared before",
+        "Say that the manuscript has not been published elsewhere",
+        "Leave the conference version out, since it is a different venue",
+        "Mention the conference version only if one of the reviewers asks about it"
+      ],
+      "answer": 0,
+      "why": "Publishers check overlap automatically, so an undeclared conference version turns a routine extension into a self plagiarism case. Declaring it is what makes the extension legitimate.",
+      "why_vi": "Nhà xuất bản kiểm trùng lặp tự động, nên một bản hội nghị không khai báo biến một bản mở rộng bình thường thành vụ tự đạo văn. Khai ra chính là thứ khiến bản mở rộng hợp lệ.",
+      "level": 2
+    },
+    {
+      "id": "qac-138",
+      "q": "Suggesting potential reviewers to an editor is acceptable provided that",
+      "q_vi": "Việc đề xuất phản biện tiềm năng cho biên tập viên là chấp nhận được với điều kiện",
+      "choices": [
+        "You suggest at least five different names so that the editor has a real choice",
+        "None of them is a coauthor, a colleague or a recent collaborator of yours",
+        "You tell each of the suggested reviewers in advance that you have named them",
+        "They all work at institutions in a country other than your own"
+      ],
+      "answer": 1,
+      "why": "The editor uses the list to find competence, not friendliness, and a hidden relationship is grounds to discard the whole review. Geography settles nothing.",
+      "why_vi": "Biên tập viên dùng danh sách đó để tìm người đủ chuyên môn, không phải người thân thiện, và một quan hệ giấu đi là lý do để huỷ cả bản nhận xét. Chuyện ở nước nào không giải quyết được gì.",
+      "level": 1
+    },
+    {
+      "id": "qac-139",
+      "q": "A request to exclude a particular reviewer is usually granted when it",
+      "q_vi": "Yêu cầu loại trừ một phản biện cụ thể thường được chấp thuận khi nó",
+      "choices": [
+        "Explains that the person has rejected two of your earlier papers already",
+        "Argues that the person does not have the expertise to judge this contribution",
+        "Names a factual conflict such as a competing submission",
+        "Points out that the person works in a rival group at another university abroad"
+      ],
+      "answer": 2,
+      "why": "An editor can verify a competing submission and act on it. A history of rejections describes a disagreement, which is not a conflict of interest.",
+      "why_vi": "Biên tập viên kiểm được việc có bài đang cạnh tranh và xử lý được. Lịch sử từng bị từ chối chỉ mô tả một bất đồng, không phải xung đột lợi ích.",
+      "level": 2
+    },
+    {
+      "id": "qac-140",
+      "q": "After acceptance you find an error that changes your main claim. You should",
+      "q_vi": "Sau khi bài được nhận, bạn phát hiện một lỗi làm thay đổi khẳng định chính. Bạn nên",
+      "choices": [
+        "Wait until the camera ready stage and then quietly adjust every one of the affected numbers",
+        "Publish as accepted and address the error in a later paper",
+        "Ask a coauthor to check it before deciding whether to say anything",
+        "Write to the editor at once, describe the error, and ask to correct or withdraw"
+      ],
+      "answer": 3,
+      "why": "A correction before publication is an email; the same correction afterwards is a public notice attached to your name forever. Editors handle pre publication errors routinely.",
+      "why_vi": "Đính chính trước khi đăng chỉ là một lá thư; cũng đính chính đó sau khi đăng là một thông báo công khai gắn với tên bạn mãi mãi. Biên tập viên xử lý lỗi trước khi đăng như việc thường ngày.",
+      "level": 3
+    },
+    {
+      "id": "qac-141",
+      "q": "An appeal against a rejection has a real chance only when it",
+      "q_vi": "Đơn khiếu nại một quyết định từ chối chỉ có cơ hội thật sự khi nó",
+      "choices": [
+        "Points to a statement of fact in a review that is demonstrably wrong, such as a claim that no ablation was provided when Table six contains one",
+        "Explains that the reviewers did not appreciate the novelty of the work",
+        "Notes that two of the three reports were broadly positive",
+        "Argues that the topic is important for the community right now"
+      ],
+      "answer": 0,
+      "why": "An editor can act on a checkable factual error in a report and cannot act on a difference of judgement. Enthusiasm about importance is what every appeal contains.",
+      "why_vi": "Biên tập viên xử lý được một sai sót dữ kiện kiểm chứng được trong bản nhận xét, và không xử lý được sự khác nhau về đánh giá. Sự sốt sắng về tầm quan trọng thì đơn khiếu nại nào cũng có.",
+      "level": 3
+    },
+    {
+      "id": "qac-142",
+      "q": "The cover letter of a resubmission should introduce",
+      "q_vi": "Thư gửi kèm khi nộp lại bản sửa nên giới thiệu",
+      "choices": [
+        "The revised manuscript alone, since the response speaks for itself",
+        "The point by point response and the revised manuscript together",
+        "A list of all the reviewer comments that you decided not to act upon",
+        "The abstract of the revised paper, repeated in full"
+      ],
+      "answer": 1,
+      "why": "The editor opens the letter first and needs to know both documents exist and what each contains. Refusals belong inside the response, next to the comment they answer.",
+      "why_vi": "Biên tập viên mở thư trước và cần biết cả hai tài liệu đều có cùng nội dung từng cái. Các điểm bạn từ chối nên nằm trong bản trả lời, ngay cạnh nhận xét mà nó đáp lại.",
+      "level": 1
+    },
+    {
+      "id": "qac-143",
+      "q": "The declaration that all authors have approved the submission",
+      "q_vi": "Lời khai rằng toàn bộ tác giả đã đồng ý với việc nộp bài",
+      "choices": [
+        "Is a formality that the corresponding author signs on behalf of the group",
+        "Applies only to the final version rather than the submitted one",
+        "Must be literally true, because any listed author can later be asked by the publisher to confirm that they saw and approved this version",
+        "Can be signed once the coauthors have seen an earlier draft"
+      ],
+      "answer": 2,
+      "why": "Publishers now contact every author on record when a dispute arises, so a signature given on somebody else behalf becomes a false statement. It costs one email to make it true.",
+      "why_vi": "Nhà xuất bản nay liên hệ từng tác giả có tên khi có tranh chấp, nên một chữ ký ký thay người khác trở thành lời khai sai. Chỉ tốn một lá thư để nó thành đúng.",
+      "level": 2
+    },
+    {
+      "id": "qac-144",
+      "q": "You tested on one corpus only. The abstract should",
+      "q_vi": "Bạn chỉ thử trên một kho dữ liệu duy nhất. Phần tóm tắt nên",
+      "choices": [
+        "State the conclusion plainly and leave the caveat for the discussion section",
+        "Avoid the word dataset entirely so that the claim reads more general",
+        "Describe the corpus in detail so that the reader can judge how representative it is",
+        "Say the conclusion rests on a single dataset"
+      ],
+      "answer": 3,
+      "why": "The abstract is the only part most people read, so a caveat buried in the discussion never reaches them. Six words there prevent years of miscitation.",
+      "why_vi": "Phần tóm tắt là chỗ duy nhất phần lớn người đọc đọc tới, nên một lời dè dặt chôn ở phần bàn luận sẽ không bao giờ tới tay họ. Sáu chữ ở đó ngăn được nhiều năm trích dẫn sai.",
+      "level": 2
+    },
+    {
+      "id": "qac-145",
+      "q": "Writing that findings should be interpreted with caution is useful only when you",
+      "q_vi": "Viết rằng các phát hiện cần được diễn giải thận trọng chỉ có ích khi bạn",
+      "choices": [
+        "Say in the same sentence what specifically makes them fragile",
+        "Repeat the caution in the abstract and in the conclusion as well",
+        "Follow it with a list of the strengths of the study",
+        "Place it at the very end of the discussion section"
+      ],
+      "answer": 0,
+      "why": "The phrase on its own is a ritual that protects nothing and warns nobody. Naming the one weakness lets a reader judge whether it affects their use of your result.",
+      "why_vi": "Cụm đó đứng một mình chỉ là nghi thức, không bảo vệ được gì và không cảnh báo được ai. Gọi tên đúng điểm yếu giúp người đọc tự đánh giá nó có ảnh hưởng tới cách họ dùng kết quả không.",
+      "level": 2
+    },
+    {
+      "id": "qac-146",
+      "q": "Your data merely hints at a mechanism you find plausible. The right status for it is",
+      "q_vi": "Dữ liệu của bạn mới chỉ gợi ra một cơ chế mà bạn thấy hợp lý. Vị thế đúng cho nó là",
+      "choices": [
+        "A finding, since the data does point in that direction",
+        "A hypothesis stated as such, together with the experiment that would test it and the outcome that would refute it",
+        "A remark in the future work section at the end of the paper",
+        "A claim in the abstract, hedged carefully with the word suggests"
+      ],
+      "answer": 1,
+      "why": "Labelling it a hypothesis and naming the refuting outcome is what lets someone else settle the question. A hedged claim in an abstract gets cited as a finding within a year.",
+      "why_vi": "Gắn nhãn giả thuyết và nêu rõ kết quả nào sẽ bác bỏ nó chính là thứ giúp người khác kết luận được. Một khẳng định nói dè dặt trong tóm tắt sẽ bị trích như một phát hiện chỉ sau một năm.",
+      "level": 3
+    },
+    {
+      "id": "qac-147",
+      "q": "A limitations paragraph listing only generic issues such as compute cost",
+      "q_vi": "Một đoạn hạn chế chỉ liệt kê những vấn đề chung chung như chi phí tính toán",
+      "choices": [
+        "Satisfies the requirement that most venues now impose on their authors",
+        "Is preferable to naming a specific weakness that a reviewer might not notice",
+        "Reads as a formality and protects none of the claims in the paper",
+        "Shows modesty, which reviewers reward in borderline cases"
+      ],
+      "answer": 2,
+      "why": "A limitation is only worth writing when it bounds a specific claim you made. Generic constraints apply to every paper and therefore inform nobody about yours.",
+      "why_vi": "Một hạn chế chỉ đáng viết khi nó giới hạn đúng một khẳng định bạn đã nêu. Những ràng buộc chung chung đúng với mọi bài nên không cho ai biết gì về bài của bạn.",
+      "level": 3
+    },
+    {
+      "id": "qac-148",
+      "q": "Your simulation covers constellations of up to four hundred satellites. The honest phrasing is",
+      "q_vi": "Mô phỏng của bạn phủ tới chòm bốn trăm vệ tinh. Cách diễn đạt trung thực là",
+      "choices": [
+        "The approach scales to any constellation size",
+        "The approach is expected to hold for larger constellations as well",
+        "Results are shown for four hundred satellites purely for reasons of space",
+        "We have not tested this beyond four hundred satellites"
+      ],
+      "answer": 3,
+      "why": "Naming the edge of your evidence lets an engineer use the result without being misled. Saying it holds for space reasons implies you have larger runs that you do not.",
+      "why_vi": "Nêu rõ rìa của bằng chứng giúp một kỹ sư dùng được kết quả mà không bị dẫn sai. Nói rằng chỉ trình bày tới đó vì thiếu chỗ là ngụ ý bạn có các lần chạy lớn hơn, trong khi không hề có.",
+      "level": 1
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "agent",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qag-1",
@@ -1502,6 +1502,786 @@
       "why": "Producing a plausible continuation is the default behaviour, and an answer scores better than a refusal unless you decide otherwise. Saying so in the instructions and in the success test is what makes abstention available.",
       "why_vi": "Sinh ra một đoạn tiếp nghe hợp lý mới là hành vi mặc định, và một câu trả lời luôn được điểm cao hơn một lời từ chối trừ khi bạn quyết định khác đi. Nói rõ điều đó trong chỉ dẫn và trong phép kiểm thành công mới là thứ mở đường cho việc tự thú không biết.",
       "level": 2
+    },
+    {
+      "id": "qag2-1",
+      "q": "A tool result is appended to the history without the identifier of the call it answers. The immediate consequence is",
+      "q_vi": "Một kết quả công cụ được nối vào lịch sử mà thiếu định danh của lần gọi mà nó trả lời. Hậu quả trực tiếp là",
+      "choices": [
+        "The model cannot pair the result with the call it belongs to, so the turn is malformed and the output is dropped or attributed to the wrong call",
+        "The result is treated as a user message",
+        "The tool is invoked a second time automatically",
+        "Nothing breaks, because results are matched by content"
+      ],
+      "answer": 0,
+      "why": "Pairing is done by identifier, not by order and not by content. Without it the message history is invalid, and the model either errors or credits the output to a different call.",
+      "why_vi": "Việc ghép cặp dựa vào định danh, không dựa vào thứ tự cũng không dựa vào nội dung. Thiếu nó, lịch sử hội thoại thành không hợp lệ, và mô hình hoặc báo lỗi hoặc gán đầu ra cho một lần gọi khác.",
+      "level": 2
+    },
+    {
+      "id": "qag2-2",
+      "q": "Parsing tool arguments while they are still streaming in leads to",
+      "q_vi": "Phân tích tham số công cụ ngay khi chúng còn đang về theo dòng sẽ dẫn tới",
+      "choices": [
+        "Duplicate calls, one for every streamed fragment, because each fragment is parsed as a separate invocation request",
+        "Calls fired with truncated values, because the argument object is only complete once the call closes",
+        "Lower latency at no cost",
+        "A schema error raised by the model"
+      ],
+      "answer": 1,
+      "why": "Arguments arrive piece by piece, so a half received path or identifier looks syntactically fine and points somewhere else. The safe boundary is the end of the call.",
+      "why_vi": "Tham số về từng mảnh một, nên một đường dẫn hay định danh nhận dở vẫn trông đúng cú pháp mà lại trỏ đi chỗ khác. Ranh giới an toàn là lúc lần gọi kết thúc.",
+      "level": 3
+    },
+    {
+      "id": "qag2-3",
+      "q": "Forcing the model to call a named tool on every turn mainly costs you",
+      "q_vi": "Ép mô hình phải gọi một công cụ được chỉ tên ở mọi lượt chủ yếu làm bạn mất",
+      "choices": [
+        "Prompt caching, which stops working whenever tool choice is constrained by the caller",
+        "The ability to validate arguments against the declared schema before running them",
+        "The option of answering directly when no tool is needed",
+        "Parallel calls, which are disabled"
+      ],
+      "answer": 2,
+      "why": "Forcing removes a decision rather than adding a capability. Where the honest move was a direct answer, the agent now has to route through a tool and pay for it.",
+      "why_vi": "Việc ép buộc lấy đi một quyết định chứ không thêm năng lực nào. Ở những chỗ mà việc đúng đắn lẽ ra là trả lời thẳng, tác tử buộc phải vòng qua công cụ và trả giá cho vòng đó.",
+      "level": 2
+    },
+    {
+      "id": "qag2-4",
+      "q": "Four parallel tool calls finish in a different order from the order they were issued. The runtime must",
+      "q_vi": "Bốn lần gọi công cụ song song kết thúc theo thứ tự khác với thứ tự phát đi. Phần chạy phải",
+      "choices": [
+        "Replay the calls one at a time so the results arrive in the order the model expects",
+        "Discard the results and let the model reissue every call in a deterministic order",
+        "Sort the results by completion time before appending them to the message history",
+        "Pair each result with its own call identifier"
+      ],
+      "answer": 3,
+      "why": "Completion order carries no meaning. What the model needs is the link from each result back to the call that produced it, and that link is the identifier.",
+      "why_vi": "Thứ tự hoàn tất không mang ý nghĩa gì. Thứ mô hình cần là mối nối từ mỗi kết quả về đúng lần gọi sinh ra nó, và mối nối đó chính là định danh.",
+      "level": 2
+    },
+    {
+      "id": "qag2-5",
+      "q": "A tool's real signature changed but its declaration did not. The resulting failures usually look like",
+      "q_vi": "Chữ ký thật của một công cụ đã đổi nhưng bản khai báo thì không. Các lỗi sinh ra thường trông giống",
+      "choices": [
+        "Model mistakes, because it keeps sending the old argument shape that the declaration still advertises as the correct one",
+        "A rate limit problem",
+        "A context window overflow",
+        "A permission error from the tool"
+      ],
+      "answer": 0,
+      "why": "The model can only follow what it was told the tool accepts. Blaming the model here wastes days, because the wrong document is the declaration.",
+      "why_vi": "Mô hình chỉ có thể làm theo đúng cái mà người ta bảo nó rằng công cụ chấp nhận. Đổ lỗi cho mô hình ở đây làm mất nhiều ngày, vì thứ sai là bản khai báo.",
+      "level": 2
+    },
+    {
+      "id": "qag2-6",
+      "q": "An agent calls a lookup tool with a record identifier it was never given. The most useful fix is",
+      "q_vi": "Tác tử gọi công cụ tra cứu bằng một mã bản ghi mà nó chưa từng được cho. Cách sửa hữu ích nhất là",
+      "choices": [
+        "Add a line to the system prompt telling the model never to invent identifiers under any circumstances",
+        "Make the identifier optional so the model can search for it instead of inventing one",
+        "Retry the call at a higher temperature",
+        "Increase the context window"
+      ],
+      "answer": 1,
+      "why": "A required field with no source of truth is a request to invent one. Giving the model a way to obtain the value removes the pressure that produced the fabrication.",
+      "why_vi": "Một trường bắt buộc mà không có nguồn nào cấp giá trị thì chính là lời mời bịa ra. Cho mô hình một đường để lấy giá trị đó sẽ gỡ bỏ áp lực đã sinh ra sự bịa đặt.",
+      "level": 3
+    },
+    {
+      "id": "qag2-7",
+      "q": "Two attached servers both expose a tool named search. The robust fix is",
+      "q_vi": "Hai máy chủ cùng gắn vào đều lộ ra một công cụ tên là search. Cách sửa vững nhất là",
+      "choices": [
+        "Detach one of the servers, since two tools with one name can never be told apart by a model",
+        "Rewrite both descriptions so the model can tell which one it wants from the wording alone",
+        "Prefix each tool name with its source",
+        "Let the client pick one"
+      ],
+      "answer": 2,
+      "why": "Selection happens on the name first and the description second, so ambiguity in the name is decided by chance. Making the names distinct removes the coin flip.",
+      "why_vi": "Việc chọn dựa trước hết vào tên rồi mới tới mô tả, nên sự mập mờ ở tên sẽ do may rủi định đoạt. Làm cho các tên khác nhau là bỏ được cú tung đồng xu đó.",
+      "level": 2
+    },
+    {
+      "id": "qag2-8",
+      "q": "Editing a deployed tool in place, instead of publishing it as a new version, breaks",
+      "q_vi": "Sửa đè lên một công cụ đã triển khai, thay vì công bố nó thành phiên bản mới, sẽ làm hỏng",
+      "choices": [
+        "Nothing, provided the parameter names are unchanged and the return type still matches",
+        "Only the caching layer, which keys on the text of the tool description",
+        "The model's ability to call tools in parallel across servers",
+        "Stored traces, which no longer match reality"
+      ],
+      "answer": 3,
+      "why": "A trace is only useful if it describes the thing that ran. Overwriting a tool makes every past run a report about a tool that no longer exists.",
+      "why_vi": "Một vết chạy chỉ hữu ích khi nó mô tả đúng thứ đã chạy. Ghi đè lên công cụ biến mọi lượt chạy cũ thành báo cáo về một công cụ không còn tồn tại.",
+      "level": 2
+    },
+    {
+      "id": "qag2-9",
+      "q": "Separating read only tools from state changing tools pays off mainly because",
+      "q_vi": "Tách công cụ chỉ đọc khỏi công cụ làm đổi trạng thái chủ yếu có lợi vì",
+      "choices": [
+        "Only the smaller group of state changing calls needs approval, logging and rate limits, so reads stay fast and cheap",
+        "Read tools are attacked more often",
+        "Models call read tools more accurately",
+        "It halves the number of tool descriptions"
+      ],
+      "answer": 0,
+      "why": "Control costs latency and attention, so you want to spend it only where an action cannot be undone. Splitting the set is what lets you spend it there and nowhere else.",
+      "why_vi": "Việc kiểm soát tốn độ trễ và tốn sự chú ý, nên bạn chỉ muốn tiêu nó vào chỗ mà hành động không hoàn tác được. Tách bộ công cụ chính là cách để tiêu đúng chỗ đó và không tiêu chỗ nào khác.",
+      "level": 2
+    },
+    {
+      "id": "qag2-10",
+      "q": "A tool whose work takes twenty minutes should return",
+      "q_vi": "Một công cụ mà phần việc mất hai mươi phút thì nên trả về",
+      "choices": [
+        "The full result, since anything else forces the caller to write extra logic for polling and for resuming",
+        "A handle the agent can poll, so the loop is not held open by one slow call",
+        "An error, so the caller tries later",
+        "A progress bar"
+      ],
+      "answer": 1,
+      "why": "Holding the loop open ties the run's survival to one connection. A ticket lets the agent do other work, and lets the run be resumed after an interruption.",
+      "why_vi": "Giữ vòng lặp mở là buộc sự sống còn của lượt chạy vào một kết nối duy nhất. Một tấm phiếu cho tác tử làm việc khác, và cho lượt chạy tiếp tục được sau khi bị ngắt.",
+      "level": 2
+    },
+    {
+      "id": "qag2-11",
+      "q": "The search index your agent depends on is down. The best designed response is to",
+      "q_vi": "Chỉ mục tìm kiếm mà tác tử phụ thuộc đang chết. Phản ứng được thiết kế tốt nhất là",
+      "choices": [
+        "Keep retrying the index until it returns, because an answer from cache would be worse than a delayed answer",
+        "Fail the run at once so nobody acts on information that might be out of date",
+        "Answer from cache and say the answer may be stale",
+        "Switch to a larger model"
+      ],
+      "answer": 2,
+      "why": "A reduced answer that is honest about its age is usually more useful than silence, and it is only safe because the label travels with it.",
+      "why_vi": "Một câu trả lời thu gọn nhưng thành thật về độ cũ của mình thường hữu ích hơn sự im lặng, và nó chỉ an toàn nhờ cái nhãn đi kèm.",
+      "level": 2
+    },
+    {
+      "id": "qag2-12",
+      "q": "Under a traffic spike, accepting every request equally causes",
+      "q_vi": "Trong một đợt tăng tải đột biến, nhận đều mọi yêu cầu sẽ gây ra",
+      "choices": [
+        "A ban from the provider upstream, which is the only real failure mode in this situation",
+        "Higher cost per task but stable latency for the requests already in flight",
+        "No change at all, because queueing is fair by construction and all the work still completes",
+        "Every run to slow down together"
+      ],
+      "answer": 3,
+      "why": "Queueing spreads the shortage across everyone instead of concentrating it. Turning some work away early is what keeps the accepted work finishing on time.",
+      "why_vi": "Việc xếp hàng rải sự thiếu hụt lên tất cả mọi người thay vì dồn nó vào một chỗ. Từ chối sớm một phần công việc mới là thứ giữ cho phần được nhận vẫn xong đúng hạn.",
+      "level": 3
+    },
+    {
+      "id": "qag2-13",
+      "q": "A cap on how many agent workers run at once is really a decision about",
+      "q_vi": "Trần cho số tác tử chạy cùng lúc thực chất là một quyết định về",
+      "choices": [
+        "Which failure you would rather have, a slower queue of your own making or a ban imposed on you by the service downstream",
+        "The size of the context window",
+        "How many tools each worker may hold",
+        "Whether the run can later be resumed"
+      ],
+      "answer": 0,
+      "why": "The work does not disappear when you remove the cap, it moves to the service you depend on. Setting the limit yourself is choosing where the pain lands.",
+      "why_vi": "Công việc không biến mất khi bạn bỏ trần, nó chỉ dồn sang dịch vụ mà bạn phụ thuộc. Tự đặt giới hạn là tự chọn nơi hứng chịu phần đau.",
+      "level": 3
+    },
+    {
+      "id": "qag2-14",
+      "q": "Writing every run's notes into long term memory with no consolidation pass leads to",
+      "q_vi": "Ghi ghi chú của mọi lượt chạy vào bộ nhớ dài hạn mà không có bước chắt lọc sẽ dẫn tới",
+      "choices": [
+        "A store that is always correct but expensive, because nothing is ever lost and every fact stays available",
+        "A store that grows faster than it improves, since retrieval has more near duplicates to sort through",
+        "Faster retrieval",
+        "Better calibration"
+      ],
+      "answer": 1,
+      "why": "Volume is not the same as knowledge. Once many similar items compete, the ranker decides what the agent believes, and that decision was never designed.",
+      "why_vi": "Khối lượng không đồng nghĩa với tri thức. Khi nhiều mục na ná nhau cùng cạnh tranh, bộ xếp hạng sẽ quyết định tác tử tin điều gì, mà quyết định đó chưa hề được thiết kế.",
+      "level": 2
+    },
+    {
+      "id": "qag2-15",
+      "q": "Two stored notes contradict each other and nothing marks which is current. The visible symptom is",
+      "q_vi": "Hai ghi chú đã lưu mâu thuẫn nhau và không có gì đánh dấu cái nào còn hiệu lực. Triệu chứng nhìn thấy được là",
+      "choices": [
+        "A refusal, because the agent detects the contradiction and declines to answer until a person resolves it",
+        "A consistent error, since the ranker will always return the same one of the two notes",
+        "Answers that flip between runs for no visible reason",
+        "A retrieval timeout"
+      ],
+      "answer": 2,
+      "why": "Ranking is sensitive to wording, so which of the two surfaces changes with the question. The instability looks like model randomness and is actually an unresolved conflict in the store.",
+      "why_vi": "Việc xếp hạng nhạy với cách diễn đạt, nên mục nào nổi lên sẽ thay đổi theo câu hỏi. Sự bất ổn đó trông như mô hình ngẫu nhiên, mà thật ra là một mâu thuẫn chưa được giải quyết trong kho.",
+      "level": 3
+    },
+    {
+      "id": "qag2-16",
+      "q": "Weighting retrieval by recency has a predictable cost, namely",
+      "q_vi": "Ưu tiên truy hồi theo độ mới có một cái giá đoán trước được, đó là",
+      "choices": [
+        "Newer documents are usually shorter, so the retrieved context ends up thinner than it should be",
+        "The embedding model has to be retrained whenever the weighting constant is changed",
+        "Hybrid retrieval stops working, because keyword scores cannot be combined with a time term",
+        "Stable facts sink over time"
+      ],
+      "answer": 3,
+      "why": "A rule that has been true for years earns no recency credit, so it loses to a fresher but less relevant note. Age is a proxy for correctness and a poor one.",
+      "why_vi": "Một quy tắc đúng suốt nhiều năm chẳng được điểm nào cho độ mới, nên nó thua một ghi chú mới hơn mà kém liên quan hơn. Tuổi chỉ là đại lượng thay thế cho tính đúng, và là đại lượng tồi.",
+      "level": 3
+    },
+    {
+      "id": "qag2-17",
+      "q": "After forty turns the agent stops honouring a rule stated in the system prompt. The cheapest effective fix is",
+      "q_vi": "Sau bốn mươi lượt, tác tử thôi tuân thủ một quy tắc đã nêu trong câu lệnh hệ thống. Cách sửa rẻ mà hiệu quả nhất là",
+      "choices": [
+        "Restate the binding rules near the end of the context each turn, where they are not competing with forty turns of history",
+        "Move the rule to the very first line",
+        "Use a model with a larger window",
+        "Lower the sampling temperature"
+      ],
+      "answer": 0,
+      "why": "The rule did not disappear, it was buried under everything written since. Position within the context is a lever you control on every turn without paying for a bigger model.",
+      "why_vi": "Quy tắc không biến mất, nó bị chôn dưới mọi thứ được viết ra kể từ lúc đó. Vị trí trong ngữ cảnh là cái cần bạn điều khiển được ở mọi lượt mà không phải trả tiền cho mô hình lớn hơn.",
+      "level": 3
+    },
+    {
+      "id": "qag2-18",
+      "q": "Judging a compaction step by how readable its summary is misses",
+      "q_vi": "Đánh giá một bước nén ngữ cảnh bằng độ dễ đọc của bản tóm tắt sẽ bỏ sót",
+      "choices": [
+        "Whether the summary uses fewer tokens than the conversation it replaced, which is the whole point of compaction",
+        "Whether the constraints a later step depends on survived the compression",
+        "The cost of the summarising call",
+        "The model that produced it"
+      ],
+      "answer": 1,
+      "why": "Fluency and fidelity are unrelated. The test that matters is whether a step taken two hours later still has what it needs, so score the summary against downstream needs.",
+      "why_vi": "Sự trôi chảy và sự trung thực là hai chuyện không liên quan. Phép kiểm có ý nghĩa là liệu một bước làm sau đó hai tiếng có còn đủ thứ nó cần hay không, nên hãy chấm bản tóm tắt theo nhu cầu ở phía sau.",
+      "level": 3
+    },
+    {
+      "id": "qag2-19",
+      "q": "An agent retrieves planted sentences from long inputs perfectly yet fails to reason over a long report. This shows",
+      "q_vi": "Tác tử lấy lại các câu được cắm trong đầu vào rất dài một cách hoàn hảo nhưng lại thất bại khi phải suy luận trên một báo cáo dài. Điều này cho thấy",
+      "choices": [
+        "The evaluation was contaminated, since the planted sentences must have appeared in the training data",
+        "The window is too small for the report, so the failure is about capacity rather than skill",
+        "Finding one fact and combining many facts are different abilities",
+        "The retrieval step is broken"
+      ],
+      "answer": 2,
+      "why": "Locating a distinctive string tests reach across the window. Holding several facts at once and relating them is a separate demand, and a passing reach test says nothing about it.",
+      "why_vi": "Việc định vị một chuỗi nổi bật chỉ kiểm tra tầm với trên cả cửa sổ. Giữ nhiều dữ kiện cùng lúc rồi liên hệ chúng lại là một đòi hỏi khác, và một bài kiểm tầm với đạt điểm tuyệt đối không nói gì về nó.",
+      "level": 3
+    },
+    {
+      "id": "qag2-20",
+      "q": "Filling a very large context window right up to its stated limit typically",
+      "q_vi": "Nhồi một cửa sổ ngữ cảnh rất lớn tới sát mức trần công bố thường sẽ",
+      "choices": [
+        "Improves accuracy, because the model now has every document it could possibly need for the task",
+        "Leaves quality unchanged while raising cost, since accuracy is flat across the whole declared window",
+        "Reduces latency, because fewer retrieval calls are needed once everything is already in the prompt",
+        "Costs accuracy as well as money"
+      ],
+      "answer": 3,
+      "why": "The length a model accepts and the length at which it still works well are different numbers. Past the second one you are paying more for worse answers.",
+      "why_vi": "Độ dài mà mô hình chấp nhận và độ dài mà nó còn làm việc tốt là hai con số khác nhau. Qua con số thứ hai, bạn trả nhiều tiền hơn để nhận câu trả lời tệ hơn.",
+      "level": 2
+    },
+    {
+      "id": "qag2-21",
+      "q": "A user returns the next day and the agent has lost a decision made yesterday. The structural reason is",
+      "q_vi": "Người dùng quay lại vào hôm sau và tác tử đã mất một quyết định đưa ra từ hôm qua. Nguyên nhân về mặt cấu trúc là",
+      "choices": [
+        "Context ends with the session, so anything meant to outlive it has to be written into a store on purpose",
+        "The window was too small for two days of conversation",
+        "Compaction removed it during the first session",
+        "The model was upgraded overnight"
+      ],
+      "answer": 0,
+      "why": "Nothing carries a decision across a session boundary by default. Persistence is a write you have to perform, not a property the conversation has.",
+      "why_vi": "Mặc định không có gì mang một quyết định đi qua ranh giới phiên làm việc. Tính bền là một thao tác ghi mà bạn phải thực hiện, không phải một thuộc tính sẵn có của hội thoại.",
+      "level": 2
+    },
+    {
+      "id": "qag2-22",
+      "q": "A retrieval call made for one customer surfaces a note written during another customer's run. The underlying defect is",
+      "q_vi": "Một lần truy hồi cho khách hàng này lại làm nổi lên ghi chú viết trong lượt chạy của khách hàng khác. Khiếm khuyết nằm bên dưới là",
+      "choices": [
+        "The embedding model placed the two customers' notes close together in vector space, which cannot be avoided",
+        "Stored items were never bound to the tenant that produced them",
+        "The reranker was disabled",
+        "The chunk size is too large"
+      ],
+      "answer": 1,
+      "why": "Similarity search returns whatever is in the index, so separation has to be enforced at write time and at query time. Relying on the ranker to keep tenants apart is not a control.",
+      "why_vi": "Tìm theo tương đồng trả về bất cứ thứ gì có trong chỉ mục, nên sự tách biệt phải được áp đặt ngay lúc ghi và lúc truy vấn. Trông vào bộ xếp hạng để giữ các khách hàng tách nhau thì không phải là một biện pháp kiểm soát.",
+      "level": 3
+    },
+    {
+      "id": "qag2-23",
+      "q": "Storing a fact without its source and its timestamp makes it impossible to",
+      "q_vi": "Lưu một dữ kiện mà không kèm nguồn và thời điểm sẽ khiến bạn không thể",
+      "choices": [
+        "Retrieve it later, since most vector stores require a time field before they will index a record",
+        "Compress the store, because consolidation depends on knowing which facts came from the same run",
+        "Tell an observed fact from the model's own guess",
+        "Delete it on request"
+      ],
+      "answer": 2,
+      "why": "Once written, every item looks equally authoritative. Provenance is the only thing that later lets a reader downgrade something the agent merely inferred.",
+      "why_vi": "Một khi đã ghi ra, mọi mục trông đều có thẩm quyền như nhau. Nguồn gốc là thứ duy nhất cho phép người đọc về sau hạ giá trị của điều mà tác tử chỉ suy ra.",
+      "level": 3
+    },
+    {
+      "id": "qag2-24",
+      "q": "Half a corpus is re-embedded with a newer model while the rest is left alone. The result is",
+      "q_vi": "Một nửa kho được nhúng lại bằng mô hình mới hơn còn nửa kia để nguyên. Kết quả là",
+      "choices": [
+        "A slower index, because two sets of vectors of different dimensions must be searched one after the other",
+        "Better recall on the new half and unchanged recall on the old half, so the change is a strict improvement",
+        "A permission error whenever a query touches records from both halves of the corpus",
+        "Scores that are no longer comparable"
+      ],
+      "answer": 3,
+      "why": "Distance only means something inside one geometry. Mixing two of them makes the ranking arbitrary at the boundary, which is why re-embedding is an all or nothing job.",
+      "why_vi": "Khoảng cách chỉ có ý nghĩa bên trong một hình học. Trộn hai hình học lại làm việc xếp hạng thành tuỳ tiện ở chỗ giáp ranh, và đó là lý do nhúng lại phải làm toàn bộ hoặc không làm.",
+      "level": 3
+    },
+    {
+      "id": "qag2-25",
+      "q": "Prompt caching saves nothing on your agent loop. The first thing to check is",
+      "q_vi": "Bộ nhớ đệm câu lệnh chẳng tiết kiệm được gì cho vòng lặp tác tử của bạn. Thứ cần kiểm tra đầu tiên là",
+      "choices": [
+        "Whether anything at the start of the prompt changes between calls, such as a timestamp or a reordered tool list",
+        "Whether the model supports caching",
+        "Whether the answers are too short",
+        "Whether the tools return too much text"
+      ],
+      "answer": 0,
+      "why": "A cache hit needs an identical prefix, so one moving character at the top invalidates everything after it. The fix is to move volatile content to the end.",
+      "why_vi": "Một lần trúng đệm đòi phần đầu giống hệt nhau, nên chỉ một ký tự thay đổi ở trên đầu là huỷ toàn bộ phần phía sau. Cách sửa là dời phần hay đổi xuống cuối.",
+      "level": 3
+    },
+    {
+      "id": "qag2-26",
+      "q": "A verification step that lets work through whenever the checker itself errors will",
+      "q_vi": "Một bước kiểm mà cứ hễ bản thân bộ kiểm gặp lỗi là cho việc đi qua sẽ",
+      "choices": [
+        "Slow every run down, since each error path has to be retried before the pipeline may continue",
+        "Report clean while it is broken, because nothing distinguishes a pass from a failure to run",
+        "Raise the false alarm rate",
+        "Block most valid changes"
+      ],
+      "answer": 1,
+      "why": "Silence is being read as approval. A gate that cannot decide must stop the action, otherwise the safest looking weeks are the ones where it was not running at all.",
+      "why_vi": "Sự im lặng đang bị hiểu thành sự chấp thuận. Một cổng không kết luận được thì phải chặn hành động lại, nếu không thì những tuần trông an toàn nhất lại chính là những tuần nó không hề chạy.",
+      "level": 3
+    },
+    {
+      "id": "qag2-27",
+      "q": "Your quality gate has not rejected anything in three months. The right reading is",
+      "q_vi": "Cổng chất lượng của bạn suốt ba tháng chưa chặn thứ gì. Cách hiểu đúng là",
+      "choices": [
+        "The work upstream has improved enough that the gate has nothing left to catch",
+        "The threshold is set too high, which is the usual cause of a gate that never fires",
+        "You have no evidence the gate can reject at all",
+        "The gate is redundant and can be removed"
+      ],
+      "answer": 2,
+      "why": "A quiet gate and a dead gate produce the same log. Feeding it a case you know is bad is the only cheap way to tell those two states apart.",
+      "why_vi": "Một cổng im lặng và một cổng đã chết cho ra cùng một bản nhật ký. Đưa vào một ca mà bạn biết chắc là sai là cách rẻ duy nhất để phân biệt hai trạng thái đó.",
+      "level": 3
+    },
+    {
+      "id": "qag2-28",
+      "q": "Deciding what counts as done only after reading the agent's output means",
+      "q_vi": "Chỉ quyết định thế nào là xong sau khi đã đọc đầu ra của tác tử nghĩa là",
+      "choices": [
+        "The evaluation is more realistic, because the criteria now reflect what the task actually required in practice",
+        "Nothing much, as long as the same person judges every run and applies a consistent standard",
+        "The agent is being held to a higher bar, since the reviewer has seen the work before setting the target",
+        "The output defines success"
+      ],
+      "answer": 3,
+      "why": "Criteria written after the fact bend toward what was produced, so the run can never fail. Fixing the bar before the run is what makes a failure possible.",
+      "why_vi": "Tiêu chí viết sau khi đã thấy kết quả sẽ uốn theo thứ vừa làm ra, nên lượt chạy không bao giờ trượt được. Chốt mức trước khi chạy mới là thứ làm cho việc trượt trở nên khả dĩ.",
+      "level": 2
+    },
+    {
+      "id": "qag2-29",
+      "q": "An evaluation is only as good as its oracle because",
+      "q_vi": "Một phép đánh giá chỉ tốt ngang nguồn phán đúng sai của nó, vì",
+      "choices": [
+        "Every score is a comparison against that source, so a wrong or missing oracle produces confident numbers about nothing",
+        "Oracles are expensive to construct",
+        "Model judges are always biased",
+        "Scores need error bars"
+      ],
+      "answer": 0,
+      "why": "The number you report is a distance from the oracle's answer, not from the truth. If the two differ, every decimal place you publish is measuring the wrong thing.",
+      "why_vi": "Con số bạn báo là khoảng cách tới câu trả lời của nguồn phán, chứ không phải tới sự thật. Nếu hai thứ đó lệch nhau thì mọi chữ số bạn công bố đều đang đo nhầm đối tượng.",
+      "level": 3
+    },
+    {
+      "id": "qag2-30",
+      "q": "Replacing a model's opinion of correctness with a compile step changes",
+      "q_vi": "Thay ý kiến của mô hình về tính đúng đắn bằng một bước biên dịch sẽ đổi",
+      "choices": [
+        "The cost of evaluation, since running a compiler is far more expensive than one short model call",
+        "A judgement that can be talked around into a check that can fail",
+        "Nothing but the wording of the report",
+        "Only the latency"
+      ],
+      "answer": 1,
+      "why": "A model asked whether the work looks right will often agree with confident output. A build either succeeds or it does not, and that verdict cannot be argued with.",
+      "why_vi": "Một mô hình bị hỏi rằng công việc trông có đúng không thường sẽ đồng tình với đầu ra tự tin. Một lần dựng thì hoặc thành công hoặc không, và phán quyết đó không cãi được.",
+      "level": 2
+    },
+    {
+      "id": "qag2-31",
+      "q": "A second reviewer approves irreversible actions but only ever reads the acting agent's own summary. That gate is",
+      "q_vi": "Người duyệt thứ hai phê chuẩn các hành động không hoàn tác được nhưng chỉ đọc bản tóm tắt do chính tác tử hành động viết. Cổng đó là",
+      "choices": [
+        "Sound, because a summary written by the acting agent is the most complete account of what it intended to do",
+        "Effective against injection, since two independent reviewers are unlikely to be attacked at the same time",
+        "Weak, because it inherits the first agent's mistakes",
+        "Equivalent to no gate at all"
+      ],
+      "answer": 2,
+      "why": "If the summary is wrong the reviewer is wrong in the same direction, so the second opinion is not independent. Independence requires seeing the underlying evidence.",
+      "why_vi": "Nếu bản tóm tắt sai thì người duyệt cũng sai theo đúng hướng đó, nên ý kiến thứ hai không hề độc lập. Muốn độc lập thì phải nhìn được bằng chứng gốc.",
+      "level": 3
+    },
+    {
+      "id": "qag2-32",
+      "q": "Running a task with a known answer alongside live traffic is worth doing in order to",
+      "q_vi": "Chạy một việc đã biết trước đáp án song song với lưu lượng thật là đáng làm để",
+      "choices": [
+        "Measure the true accuracy of the system on the full distribution of inputs that real users send",
+        "Replace the regression suite with something that runs continuously against production traffic",
+        "Reduce cost, since a small task consumes fewer tokens than the requests it runs beside",
+        "Notice a silent quality drop early"
+      ],
+      "answer": 3,
+      "why": "Most quality regressions arrive without an error, so nothing alerts. A task whose correct answer you already know converts that silence into a signal within minutes.",
+      "why_vi": "Phần lớn các cú tụt chất lượng đến mà không kèm lỗi nào, nên chẳng có gì báo động. Một việc mà bạn đã biết đáp án đúng sẽ biến sự im lặng đó thành tín hiệu chỉ trong vài phút.",
+      "level": 2
+    },
+    {
+      "id": "qag2-33",
+      "q": "Running a new agent version in shadow means",
+      "q_vi": "Chạy phiên bản tác tử mới trong bóng nghĩa là",
+      "choices": [
+        "It sees real inputs while its actions are discarded, so you can compare behaviour without letting it change anything",
+        "It runs on a copy of last month's data",
+        "It runs only when the current version fails",
+        "It answers every second request"
+      ],
+      "answer": 0,
+      "why": "Test inputs never match production inputs, so you want the real distribution. Discarding the actions is what makes exposure to that distribution safe.",
+      "why_vi": "Đầu vào thử nghiệm không bao giờ giống đầu vào thật, nên bạn muốn có đúng phân bố thật. Vứt bỏ hành động của nó chính là thứ làm cho việc phơi ra trước phân bố đó trở nên an toàn.",
+      "level": 2
+    },
+    {
+      "id": "qag2-34",
+      "q": "The aggregate pass rate did not move after a prompt change, yet users complain. Comparing against a stored reference run helps because",
+      "q_vi": "Tỉ lệ đạt tổng hợp không nhúc nhích sau khi đổi câu lệnh, vậy mà người dùng vẫn kêu. So với một vết chạy chuẩn đã lưu lại giúp ích vì",
+      "choices": [
+        "It re-runs the whole suite with fixed random seeds, so the two versions become directly comparable",
+        "It shows which steps changed, which a single score cannot",
+        "It is cheaper to run",
+        "It removes flakiness entirely"
+      ],
+      "answer": 1,
+      "why": "A score is one number over many runs, so a behaviour change that keeps the count the same is invisible in it. Step by step comparison is where that change becomes visible.",
+      "why_vi": "Điểm số là một con số gộp trên nhiều lượt chạy, nên một thay đổi hành vi mà vẫn giữ nguyên số lượt đạt thì tàng hình trong đó. So sánh từng bước mới là nơi thay đổi ấy lộ ra.",
+      "level": 3
+    },
+    {
+      "id": "qag2-35",
+      "q": "Reading ten complete agent runs by hand every week is worth the time because",
+      "q_vi": "Mỗi tuần đọc tay trọn vẹn mười lượt chạy của tác tử là đáng bỏ thời gian vì",
+      "choices": [
+        "It replaces the automated suite, which cannot cover the range of inputs that real users produce anyway",
+        "It gives a more accurate pass rate than sampled metrics, since every step is inspected directly",
+        "Aggregate numbers hide failure shapes you never thought to measure",
+        "It is required for audits"
+      ],
+      "answer": 2,
+      "why": "Metrics can only report the failures someone already anticipated and instrumented. Reading whole runs is how a category you have no counter for gets discovered.",
+      "why_vi": "Chỉ số chỉ báo được những kiểu hỏng mà ai đó đã lường trước và cài phép đo. Đọc trọn vẹn các lượt chạy mới là cách phát hiện ra một loại hỏng mà bạn chưa có bộ đếm nào cho nó.",
+      "level": 3
+    },
+    {
+      "id": "qag2-36",
+      "q": "Letting an agent attempt a task many times is rational specifically when",
+      "q_vi": "Để tác tử thử một việc nhiều lần là hợp lý cụ thể trong trường hợp",
+      "choices": [
+        "The task is important enough that the extra token cost of repeated attempts does not matter to anyone",
+        "The model has a high temperature, which makes each attempt sufficiently different from the previous one",
+        "The failures are independent, so more attempts push the probability of a total failure toward zero",
+        "Checking is cheaper than doing"
+      ],
+      "answer": 3,
+      "why": "Repeated attempts only pay when you can tell a good result from a bad one at low cost. Without a cheap check you are just picking a random attempt and calling it the answer.",
+      "why_vi": "Thử đi thử lại chỉ có lãi khi bạn phân biệt được kết quả tốt với kết quả tồi mà tốn ít. Không có phép kiểm rẻ thì bạn chỉ đang bốc ngẫu nhiên một lần thử rồi gọi nó là đáp án.",
+      "level": 3
+    },
+    {
+      "id": "qag2-37",
+      "q": "A policy of three attempts applied at three nested layers means one task can cost",
+      "q_vi": "Chính sách ba lần thử áp ở ba tầng lồng nhau nghĩa là một việc có thể tốn tới",
+      "choices": [
+        "Up to twenty seven calls, because the layers multiply rather than add and each layer restarts the one below it",
+        "Nine calls, since retries at different layers are counted once",
+        "Three calls, because the outermost layer wins",
+        "The same as one call, thanks to caching"
+      ],
+      "answer": 0,
+      "why": "Every retry at an outer layer replays the full inner sequence, so the counts compose by multiplication. This is why a retry policy must be set in one place, not at every layer.",
+      "why_vi": "Mỗi lần thử lại ở tầng ngoài sẽ chạy lại trọn vẹn chuỗi bên trong, nên các con số nhân với nhau. Vì vậy chính sách thử lại phải được đặt ở một chỗ duy nhất, chứ không phải ở mọi tầng.",
+      "level": 3
+    },
+    {
+      "id": "qag2-38",
+      "q": "Users describe a technically fast agent as slow. The number to look at first is",
+      "q_vi": "Người dùng mô tả một tác tử vốn nhanh về mặt kỹ thuật là chậm. Con số cần nhìn trước tiên là",
+      "choices": [
+        "The total number of tokens generated across the run, since throughput sets the floor on everything else",
+        "How long it is before the first visible real action",
+        "The cost per completed task",
+        "The tail latency of the slowest tool"
+      ],
+      "answer": 1,
+      "why": "Waiting with nothing happening feels far longer than waiting while work is visibly progressing. Perceived speed is set at the front of the run, not by its total duration.",
+      "why_vi": "Chờ trong lúc không có gì diễn ra thì thấy lâu hơn nhiều so với chờ khi công việc đang chạy trước mắt. Cảm giác nhanh chậm được định đoạt ở đầu lượt chạy, chứ không phải bởi tổng thời gian.",
+      "level": 2
+    },
+    {
+      "id": "qag2-39",
+      "q": "The cheapest way to cut the wait on a long verbose answer is usually to",
+      "q_vi": "Cách rẻ nhất để cắt thời gian chờ một câu trả lời dài dòng thường là",
+      "choices": [
+        "Move to a larger model, since larger models produce tokens at a higher rate per second",
+        "Stream the answer to the user so the wait is spread out rather than felt all at once at the end",
+        "Ask for a shorter answer",
+        "Add more workers"
+      ],
+      "answer": 2,
+      "why": "Generation time scales with the number of tokens produced, so length is the term you control directly. Everything else in the stack is a smaller lever than the output size.",
+      "why_vi": "Thời gian sinh tỉ lệ với số token được sinh ra, nên độ dài là đại lượng bạn điều khiển trực tiếp. Mọi thứ khác trong hệ đều là cái cần yếu hơn so với kích thước đầu ra.",
+      "level": 2
+    },
+    {
+      "id": "qag2-40",
+      "q": "Starting a likely needed tool call before the model asks for it trades",
+      "q_vi": "Khởi động trước một lần gọi công cụ nhiều khả năng sẽ cần, trước cả khi mô hình yêu cầu, là đánh đổi",
+      "choices": [
+        "Correctness for speed, because the model no longer chooses which tool is appropriate for the situation",
+        "Reproducibility for cost, since the prefetched call may or may not appear in the recorded trace",
+        "Context space for latency, as the speculative result must be kept in the prompt until it is used",
+        "Wasted calls for less waiting"
+      ],
+      "answer": 3,
+      "why": "The result is thrown away when it turns out to be unnecessary, so the model still decides. What you spend is a few extra calls, and what you buy back is time.",
+      "why_vi": "Kết quả sẽ bị vứt đi khi hoá ra không cần tới, nên mô hình vẫn là bên quyết định. Thứ bạn tiêu là vài lần gọi thừa, và thứ bạn mua lại là thời gian.",
+      "level": 3
+    },
+    {
+      "id": "qag2-41",
+      "q": "A cheap model does the first pass and escalates hard cases to an expensive one. The saving disappears when",
+      "q_vi": "Một mô hình rẻ chạy lượt đầu rồi đẩy các ca khó lên mô hình đắt. Khoản tiết kiệm biến mất khi",
+      "choices": [
+        "It escalates the wrong cases, so you pay for the small pass and the large one on almost every request",
+        "The cheap model is slower than expected",
+        "The expensive model changes version",
+        "Prompt caching is enabled"
+      ],
+      "answer": 0,
+      "why": "The economics rest entirely on how often the first pass is trusted to finish. Escalate too readily and you have added a stage without removing one.",
+      "why_vi": "Bài toán kinh tế ở đây phụ thuộc hoàn toàn vào tần suất lượt chạy đầu được tin là đủ để kết thúc. Đẩy lên quá dễ dàng thì bạn đã thêm một chặng mà không bỏ được chặng nào.",
+      "level": 3
+    },
+    {
+      "id": "qag2-42",
+      "q": "Grouping many independent items into a single call lowers cost per item and raises",
+      "q_vi": "Gom nhiều mục độc lập vào một lần gọi duy nhất làm giảm chi phí trên mỗi mục và làm tăng",
+      "choices": [
+        "The accuracy of each item, because the model can compare the items against one another inside a single context",
+        "The damage of a single failed call, since one failure now takes the whole group with it",
+        "The per call overhead",
+        "The token price"
+      ],
+      "answer": 1,
+      "why": "Batching concentrates risk in the same move that it spreads out overhead. That is acceptable only if a partial failure can be detected and the group re-split.",
+      "why_vi": "Việc gom nhóm dồn rủi ro lại đúng bằng cùng một động tác đã rải chi phí cố định ra. Điều đó chỉ chấp nhận được nếu bạn phát hiện được hỏng một phần và tách nhóm ra chạy lại.",
+      "level": 2
+    },
+    {
+      "id": "qag2-43",
+      "q": "The danger in serving a cached answer to a merely similar question is that",
+      "q_vi": "Mối nguy khi phục vụ câu trả lời đã lưu đệm cho một câu hỏi chỉ na ná là",
+      "choices": [
+        "Cached answers are stored without their sources, so the user has no way to check where the answer came from",
+        "Retrieval and caching use different embedding models, which makes the similarity score unreliable in practice",
+        "Two questions can be close in wording and need opposite answers",
+        "The cache grows quickly"
+      ],
+      "answer": 2,
+      "why": "Similarity in surface form is not similarity in required answer, and a negation or a changed date moves very little in vector space. The threshold decides how often you are wrong.",
+      "why_vi": "Giống nhau về hình thức bề mặt không đồng nghĩa với giống nhau về câu trả lời cần có, mà một từ phủ định hay một mốc ngày đổi khác thì dịch chuyển rất ít trong không gian vector. Cái ngưỡng quyết định bạn sai bao nhiêu lần.",
+      "level": 3
+    },
+    {
+      "id": "qag2-44",
+      "q": "Handing an agent a short lived token scoped to one repository, instead of an account wide key, mainly limits",
+      "q_vi": "Trao cho tác tử một chứng chỉ sống ngắn giới hạn trong một kho mã, thay vì khoá dùng cho cả tài khoản, chủ yếu giới hạn",
+      "choices": [
+        "How often the agent has to ask a human for approval before it may take any action at all",
+        "The number of tools the agent is able to attach at once during a single run of the loop",
+        "The cost of the run, because a narrower token means fewer calls are permitted each minute",
+        "What a single mistake can reach"
+      ],
+      "answer": 3,
+      "why": "The credential decides the ceiling on damage regardless of why the wrong action happened. Narrowing it converts a possible account wide incident into a contained one.",
+      "why_vi": "Chứng chỉ quyết định mức trần thiệt hại bất kể vì sao hành động sai xảy ra. Thu hẹp nó là biến một sự cố có thể lan ra cả tài khoản thành một sự cố bị khoanh lại.",
+      "level": 2
+    },
+    {
+      "id": "qag2-45",
+      "q": "An injected page tells the agent to fetch a link whose address contains the contents of a local file. An outbound allowlist stops this because",
+      "q_vi": "Một trang bị tiêm mã bảo tác tử tải một liên kết mà địa chỉ của nó chứa nội dung một tập tin cục bộ. Danh sách đích được phép gửi ra chặn được vụ này vì",
+      "choices": [
+        "The request never leaves for an unapproved host, so the data has nowhere to go even though the model obeyed",
+        "The model recognises the address as hostile",
+        "The file cannot be read in the first place",
+        "The page is stripped of its links"
+      ],
+      "answer": 0,
+      "why": "The control works at the point of departure rather than the point of decision, so it holds even when the injection succeeds at persuading the model.",
+      "why_vi": "Biện pháp này tác động ở điểm đi ra chứ không ở điểm ra quyết định, nên nó vẫn giữ được ngay cả khi cú tiêm đã thuyết phục thành công mô hình.",
+      "level": 3
+    },
+    {
+      "id": "qag2-46",
+      "q": "Wrapping fetched text in a marker that declares it to be data",
+      "q_vi": "Bọc phần văn bản lấy về trong một dấu hiệu tuyên bố rằng đó là dữ liệu sẽ",
+      "choices": [
+        "Removes the risk entirely, since a model told that text is data will not follow instructions inside it",
+        "Lowers how often injected commands are obeyed without ever making it zero",
+        "Has no measurable effect",
+        "Breaks prompt caching"
+      ],
+      "answer": 1,
+      "why": "The marker is a strong hint and not a boundary the runtime enforces, so it shifts a probability. Anything you would not survive at that probability still needs a hard control.",
+      "why_vi": "Dấu hiệu đó là một gợi ý mạnh chứ không phải ranh giới do phần chạy cưỡng chế, nên nó chỉ dịch chuyển một xác suất. Thứ gì mà bạn không sống nổi ở mức xác suất đó thì vẫn cần một biện pháp cứng.",
+      "level": 3
+    },
+    {
+      "id": "qag2-47",
+      "q": "In a dual model design, the model that reads untrusted web content is not allowed to",
+      "q_vi": "Trong thiết kế hai mô hình, mô hình đọc nội dung web không đáng tin thì không được phép",
+      "choices": [
+        "Return any value at all to the privileged model, since anything it emits could carry an instruction with it",
+        "Read the user's original request, because that request may itself contain hostile text",
+        "Invoke tools or change the plan",
+        "Produce output of any kind"
+      ],
+      "answer": 2,
+      "why": "It may hand back values because values are inspected and typed, but it must not act. Keeping action rights away from whatever reads hostile text is the whole point of the split.",
+      "why_vi": "Nó được phép trả về giá trị vì giá trị còn được soi và ràng kiểu, nhưng nó không được hành động. Giữ cho quyền hành động tách khỏi thứ đang đọc văn bản thù địch chính là toàn bộ ý nghĩa của việc chia đôi.",
+      "level": 3
+    },
+    {
+      "id": "qag2-48",
+      "q": "Adding a sixth parallel worker to a research fan out made the whole task slower. The likely cause is",
+      "q_vi": "Thêm tác tử song song thứ sáu vào một đợt tản việc nghiên cứu lại làm cả tác vụ chậm đi. Nguyên nhân nhiều khả năng là",
+      "choices": [
+        "The provider throttled the account, which is the usual cause of a slowdown at higher levels of parallelism",
+        "Each worker received a smaller context window than the workers that were started before it",
+        "The barrier now waits on more branches, so the slowest branch became slower than it was",
+        "Time spent describing work instead of doing it"
+      ],
+      "answer": 3,
+      "why": "Every extra worker has to be briefed and its findings merged, and that traffic grows faster than the work it splits. Past a point the coordination consumes the gain.",
+      "why_vi": "Mỗi tác tử thêm vào đều phải được giao việc và phải gộp kết quả lại, mà phần trao đổi đó phình nhanh hơn phần việc được chia ra. Qua một ngưỡng, chi phí phối hợp nuốt trọn phần lợi.",
+      "level": 3
+    },
+    {
+      "id": "qag2-49",
+      "q": "Two agents stall with no error raised, each waiting for the other to act. The design fix is to",
+      "q_vi": "Hai tác tử đứng im mà không hề báo lỗi, mỗi bên đều chờ bên kia hành động. Cách sửa về thiết kế là",
+      "choices": [
+        "Give every decision a single owner and put a turn limit on the exchange, so waiting cannot continue silently",
+        "Raise the token budget",
+        "Run both agents on a faster model",
+        "Merge them into one agent"
+      ],
+      "answer": 0,
+      "why": "Nothing in the loop treats waiting as an error, so the run burns time without a signal. Ownership decides who moves, and the limit guarantees the stall is noticed.",
+      "why_vi": "Không có gì trong vòng lặp coi việc chờ là lỗi, nên lượt chạy đốt thời gian mà chẳng phát tín hiệu nào. Quyền sở hữu quyết định ai phải đi bước tiếp, còn giới hạn bảo đảm thế kẹt được phát hiện.",
+      "level": 3
+    },
+    {
+      "id": "qag2-50",
+      "q": "For an agent already serving real users, the more informative reliability number is",
+      "q_vi": "Với một tác tử đang phục vụ người dùng thật, con số về độ tin cậy có nhiều thông tin hơn là",
+      "choices": [
+        "The pass rate on the fixed regression suite, measured again after every prompt change and model upgrade",
+        "How often a person had to step in per hundred runs",
+        "The average cost per task",
+        "The median latency per turn"
+      ],
+      "answer": 1,
+      "why": "A fixed suite measures the inputs you thought of, while real traffic keeps producing ones you did not. Counting rescues captures both the failures and the near failures.",
+      "why_vi": "Một bộ đề cố định chỉ đo những đầu vào bạn đã nghĩ tới, còn lưu lượng thật thì liên tục đẻ ra những đầu vào bạn chưa nghĩ tới. Đếm số lần phải ra tay cứu sẽ bắt được cả những ca hỏng lẫn những ca suýt hỏng.",
+      "level": 3
+    },
+    {
+      "id": "qag2-51",
+      "q": "An agent scores seventy percent on a task suite. The first thing that number needs beside it is",
+      "q_vi": "Tác tử đạt bảy mươi phần trăm trên một bộ đề. Thứ đầu tiên mà con số đó cần đặt cạnh là",
+      "choices": [
+        "A comparison against the same suite run with a different model at the same temperature setting",
+        "A breakdown by task category, since the average hides which categories the agent cannot do",
+        "The score of the simplest possible approach",
+        "A figure for cost per task"
+      ],
+      "answer": 2,
+      "why": "Without knowing what a trivial method already achieves, you cannot tell whether the agent contributed anything. The floor is what turns a score into evidence.",
+      "why_vi": "Không biết một cách làm tầm thường đã đạt tới đâu thì bạn không thể nói tác tử có đóng góp gì hay không. Cái sàn mới là thứ biến một điểm số thành bằng chứng.",
+      "level": 3
+    },
+    {
+      "id": "qag2-52",
+      "q": "Version B beats version A by four points on a suite of twenty tasks. The honest conclusion is",
+      "q_vi": "Bản B hơn bản A bốn điểm trên một bộ hai mươi bài. Kết luận trung thực là",
+      "choices": [
+        "Version B is better, since the same tasks were used for both and the comparison is therefore controlled",
+        "Version B is better on this category of task, though it may not generalise to other categories at all",
+        "Neither version can be judged, because a suite of that size cannot support any comparison whatsoever",
+        "The difference could be noise"
+      ],
+      "answer": 3,
+      "why": "Four points on twenty tasks is under one task of difference, which a single flaky case can produce. More runs, or an interval around each rate, is what makes the gap readable.",
+      "why_vi": "Bốn điểm trên hai mươi bài là chưa tới một bài chênh lệch, mà chỉ một ca chập chờn cũng tạo ra được ngần đó. Chạy thêm nhiều lượt, hoặc kèm một khoảng quanh mỗi tỉ lệ, mới làm cho khoảng cách đọc được.",
+      "level": 3
     }
   ]
 }

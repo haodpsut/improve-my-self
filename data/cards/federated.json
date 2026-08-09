@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "federated",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "f-fl",
@@ -1147,6 +1147,837 @@
       "def_vi": "Ước lượng mỗi máy khách đã cải thiện mô hình toàn cục bao nhiêu, thường bằng cách bỏ ra từng bên theo kiểu Shapley.",
       "tags": [
         "incentive",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-dirichlet",
+      "en": "Dirichlet partition",
+      "vi": "Chia dữ liệu theo phân bố Dirichlet",
+      "def_en": "A synthetic way of splitting a dataset across clients where one concentration parameter controls how skewed the label mix is.",
+      "def_vi": "Cách chia dữ liệu nhân tạo cho các máy khách, trong đó một tham số tập trung duy nhất quyết định tỉ lệ nhãn lệch tới mức nào.",
+      "say": "Every number in that table changes once you move the Dirichlet concentration parameter.",
+      "tags": [
+        "non-iid",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-pathological",
+      "en": "Pathological label partition",
+      "vi": "Chia nhãn kiểu cực đoan",
+      "def_en": "A harsher split where each client is handed only a fixed handful of classes, used as a worst case stress test.",
+      "def_vi": "Kiểu chia khắc nghiệt hơn, mỗi máy khách chỉ nhận một số lớp cố định, dùng làm phép thử ở tình huống xấu nhất.",
+      "tags": [
+        "non-iid",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-stat-heterogeneity",
+      "en": "Statistical heterogeneity",
+      "vi": "Không đồng nhất về dữ liệu",
+      "def_en": "Differences between clients in what their data looks like, as opposed to differences in how fast they compute.",
+      "def_vi": "Khác biệt giữa các máy khách ở chính dữ liệu, phân biệt với khác biệt về tốc độ tính toán.",
+      "say": "People blame statistical heterogeneity when the real problem is a slow radio link.",
+      "tags": [
+        "non-iid",
+        "challenge"
+      ]
+    },
+    {
+      "id": "f2-sys-heterogeneity",
+      "en": "System heterogeneity",
+      "vi": "Không đồng nhất về năng lực hệ thống",
+      "def_en": "Differences in compute, memory, battery and link quality across clients, which decide who can finish a round at all.",
+      "def_vi": "Khác biệt về năng lực tính toán, bộ nhớ, pin và chất lượng đường truyền giữa các máy khách, quyết định ai kịp hoàn thành một vòng.",
+      "tags": [
+        "system",
+        "challenge"
+      ]
+    },
+    {
+      "id": "f2-fedbn",
+      "en": "FedBN",
+      "vi": "Thuật toán FedBN",
+      "def_en": "A variant that averages every layer except the normalisation statistics, which each client keeps to itself.",
+      "def_vi": "Biến thể lấy trung bình mọi lớp trừ các thống kê chuẩn hoá, phần này mỗi máy khách giữ riêng.",
+      "say": "Keeping the normalisation layers local costs nothing and often fixes feature skew.",
+      "tags": [
+        "algorithm",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f2-norm-swap",
+      "en": "Normalisation layer swap",
+      "vi": "Đổi lớp chuẩn hoá",
+      "def_en": "Replacing batch normalisation with group or layer normalisation so no statistic depends on the local batch composition.",
+      "def_vi": "Thay chuẩn hoá theo lô bằng chuẩn hoá theo nhóm hoặc theo lớp, để không thống kê nào phụ thuộc vào thành phần lô cục bộ.",
+      "tags": [
+        "method",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f2-feddyn",
+      "en": "FedDyn",
+      "vi": "Thuật toán FedDyn",
+      "def_en": "A method adding a client specific linear correction term so the local optima line up with the global one over rounds.",
+      "def_vi": "Phương pháp thêm số hạng hiệu chỉnh tuyến tính riêng cho từng máy khách, để các nghiệm cục bộ dần trùng với nghiệm toàn cục qua các vòng.",
+      "tags": [
+        "algorithm",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f2-moon",
+      "en": "Model contrastive federated learning",
+      "vi": "Học liên kết đối chiếu biểu diễn",
+      "def_en": "Regularising the local representation to stay near the global model representation and away from the previous local one.",
+      "def_vi": "Ràng buộc biểu diễn cục bộ ở gần biểu diễn của mô hình toàn cục và tránh xa biểu diễn cục bộ ở vòng trước.",
+      "tags": [
+        "algorithm",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f2-inexact-solver",
+      "en": "Inexact local solver",
+      "vi": "Bộ giải cục bộ không chính xác",
+      "def_en": "Allowing each client to solve its local subproblem only approximately, with the tolerance entering the convergence bound.",
+      "def_vi": "Cho phép mỗi máy khách chỉ giải gần đúng bài toán con cục bộ, sai số cho phép được đưa vào cận hội tụ.",
+      "say": "The bound still holds for an inexact solver as long as the tolerance is uniform.",
+      "tags": [
+        "theory",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-classifier-head-bias",
+      "en": "Classifier head bias",
+      "vi": "Lệch ở lớp phân loại cuối",
+      "def_en": "The last layer drifting hardest under label skew, because its gradients depend directly on which classes a client holds.",
+      "def_vi": "Lớp cuối trôi mạnh nhất khi nhãn lệch, vì gradient của nó phụ thuộc trực tiếp vào việc máy khách nắm những lớp nào.",
+      "say": "Freeze the head and most of the drift disappears.",
+      "tags": [
+        "non-iid",
+        "challenge"
+      ]
+    },
+    {
+      "id": "f2-warmup-set",
+      "en": "Globally shared warm up set",
+      "vi": "Tập khởi động dùng chung",
+      "def_en": "A small public dataset used to initialise or regularise the global model, trading a little openness for stability under skew.",
+      "def_vi": "Tập dữ liệu công khai nhỏ dùng để khởi tạo hoặc ràng buộc mô hình toàn cục, đánh đổi một chút tính mở lấy sự ổn định khi dữ liệu lệch.",
+      "tags": [
+        "method",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f2-stochastic-quant",
+      "en": "Stochastic quantisation",
+      "vi": "Lượng tử hoá ngẫu nhiên",
+      "def_en": "Rounding each coordinate up or down at random so the expected value is unchanged, keeping the compressor unbiased.",
+      "def_vi": "Làm tròn từng toạ độ lên hoặc xuống một cách ngẫu nhiên sao cho kỳ vọng không đổi, giữ cho phép nén không chệch.",
+      "say": "Deterministic rounding biases the average, so we round at random instead.",
+      "tags": [
+        "communication",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-qsgd",
+      "en": "QSGD",
+      "vi": "Sơ đồ nén QSGD",
+      "def_en": "A gradient compression scheme that sends a quantised direction together with a norm, with a tunable number of levels.",
+      "def_vi": "Sơ đồ nén gradient gửi đi hướng đã lượng tử hoá kèm theo chuẩn, với số mức có thể điều chỉnh.",
+      "tags": [
+        "communication",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-signsgd",
+      "en": "Sign based compression",
+      "vi": "Nén theo dấu",
+      "def_en": "Transmitting only the sign of each coordinate and aggregating by majority vote, which collapses the payload to one bit per weight.",
+      "def_vi": "Chỉ truyền dấu của từng toạ độ và tổng hợp bằng biểu quyết đa số, thu gọn tải tin còn một bit cho mỗi trọng số.",
+      "say": "Sign only updates are cheap but they throw away every magnitude.",
+      "tags": [
+        "communication",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-topk",
+      "en": "Top-k sparsification",
+      "vi": "Tỉa theo k giá trị lớn nhất",
+      "def_en": "Sending only the largest magnitude coordinates of an update and zeroing the rest, a biased step that needs memory to correct.",
+      "def_vi": "Chỉ gửi các toạ độ có độ lớn lớn nhất trong bản cập nhật và cho phần còn lại về không, bước này bị chệch nên cần bộ nhớ để bù.",
+      "tags": [
+        "communication",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-lowrank",
+      "en": "Low rank update factorisation",
+      "vi": "Phân rã hạng thấp bản cập nhật",
+      "def_en": "Writing the update as a product of two thin matrices so only the factors travel over the link.",
+      "def_vi": "Viết bản cập nhật thành tích của hai ma trận hẹp, để chỉ các thừa số phải đi qua đường truyền.",
+      "tags": [
+        "communication",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-sketch",
+      "en": "Sketched aggregation",
+      "vi": "Tổng hợp qua bản phác nén",
+      "def_en": "Compressing updates into a fixed size random projection that can be summed directly and decoded once at the server.",
+      "def_vi": "Nén bản cập nhật vào một phép chiếu ngẫu nhiên có kích thước cố định, có thể cộng trực tiếp rồi giải mã một lần tại máy chủ.",
+      "say": "Sketches are attractive because summing them commutes with compressing them.",
+      "tags": [
+        "communication",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-bidirectional-comp",
+      "en": "Bidirectional compression",
+      "vi": "Nén hai chiều",
+      "def_en": "Compressing the broadcast model as well as the uploaded update, which needs care because errors from both directions accumulate.",
+      "def_vi": "Nén cả mô hình phát xuống lẫn bản cập nhật tải lên, cần thận trọng vì sai số từ hai chiều cùng tích luỹ.",
+      "tags": [
+        "communication",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-unbiased-compressor",
+      "en": "Unbiased compressor",
+      "vi": "Toán tử nén không chệch",
+      "def_en": "A compression operator whose expectation equals its input, so it adds variance to the update but no systematic shift.",
+      "def_vi": "Toán tử nén có kỳ vọng bằng chính đầu vào, nên chỉ thêm phương sai cho bản cập nhật chứ không gây lệch hệ thống.",
+      "tags": [
+        "theory",
+        "communication"
+      ]
+    },
+    {
+      "id": "f2-lazy-upload",
+      "en": "Lazy update transmission",
+      "vi": "Bỏ bớt lượt tải lên",
+      "def_en": "Letting a client skip its upload entirely when the new update differs little from the one the server already holds.",
+      "def_vi": "Cho phép máy khách bỏ hẳn lượt tải lên khi bản cập nhật mới khác rất ít so với bản mà máy chủ đang giữ.",
+      "tags": [
+        "communication",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-fed-dropout",
+      "en": "Federated dropout",
+      "vi": "Tỉa mô hình con theo máy khách",
+      "def_en": "Sending each client a randomly thinned submodel so weak devices train and upload only a fraction of the parameters.",
+      "def_vi": "Gửi cho mỗi máy khách một mô hình con được tỉa ngẫu nhiên, để thiết bị yếu chỉ huấn luyện và tải lên một phần tham số.",
+      "tags": [
+        "system",
+        "communication"
+      ]
+    },
+    {
+      "id": "f2-ordered-submodel",
+      "en": "Ordered submodel training",
+      "vi": "Huấn luyện mô hình con lồng nhau",
+      "def_en": "Nesting submodels so a small device trains a prefix of the channels while a strong device trains the whole width.",
+      "def_vi": "Lồng các mô hình con vào nhau, thiết bị nhỏ huấn luyện phần đầu của các kênh còn thiết bị mạnh huấn luyện toàn bộ bề rộng.",
+      "tags": [
+        "system",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-pairwise-mask",
+      "en": "Pairwise masking",
+      "vi": "Mặt nạ theo cặp",
+      "def_en": "Each pair of clients adds equal and opposite random vectors, so the masks cancel exactly once every update is summed.",
+      "def_vi": "Mỗi cặp máy khách cộng vào hai vectơ ngẫu nhiên đối nhau, nên các mặt nạ triệt tiêu chính xác khi cộng toàn bộ cập nhật.",
+      "say": "The masks cancel only if every pair in the agreed graph shows up.",
+      "tags": [
+        "crypto",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-secret-sharing",
+      "en": "Threshold secret sharing",
+      "vi": "Chia sẻ bí mật theo ngưỡng",
+      "def_en": "Splitting a secret into shares so any large enough subset reconstructs it while any smaller subset learns nothing.",
+      "def_vi": "Chia một bí mật thành các mảnh, sao cho tập con đủ lớn khôi phục được còn tập con nhỏ hơn không biết gì.",
+      "tags": [
+        "crypto",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-secagg-recovery",
+      "en": "Dropout recovery in secure aggregation",
+      "vi": "Khôi phục khi máy khách rớt giữa chừng",
+      "def_en": "The extra protocol phase that reconstructs the masks of clients who vanished mid protocol, so the sum still decodes.",
+      "def_vi": "Pha giao thức bổ sung nhằm khôi phục mặt nạ của những máy khách biến mất giữa chừng, để tổng vẫn giải mã được.",
+      "say": "Every recovery phase is another round trip, which is why deadlines matter.",
+      "tags": [
+        "crypto",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-honest-curious",
+      "en": "Honest but curious server",
+      "vi": "Máy chủ trung thực nhưng tò mò",
+      "def_en": "A server that follows the protocol exactly but tries to infer whatever it can from the messages it legitimately receives.",
+      "def_vi": "Máy chủ tuân thủ đúng giao thức nhưng cố suy ra mọi thứ có thể từ những thông điệp nó nhận được một cách hợp lệ.",
+      "tags": [
+        "privacy",
+        "attack"
+      ]
+    },
+    {
+      "id": "f2-verifiable-agg",
+      "en": "Verifiable aggregation",
+      "vi": "Tổng hợp kiểm chứng được",
+      "def_en": "Letting clients check that the published global model really is the sum of the submitted updates, not a value the server picked.",
+      "def_vi": "Cho phép máy khách kiểm chứng rằng mô hình toàn cục công bố đúng là tổng các cập nhật đã nộp, không phải giá trị do máy chủ tự chọn.",
+      "tags": [
+        "crypto",
+        "defence"
+      ]
+    },
+    {
+      "id": "f2-noise-multiplier",
+      "en": "Noise multiplier",
+      "vi": "Hệ số nhiễu",
+      "def_en": "The ratio of the added noise standard deviation to the clipping norm, the knob that actually sets the privacy level.",
+      "def_vi": "Tỉ số giữa độ lệch chuẩn của nhiễu thêm vào và ngưỡng cắt chuẩn, đây mới là núm thực sự quyết định mức riêng tư.",
+      "say": "Report the noise multiplier and the sampling rate, not just the final epsilon.",
+      "tags": [
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-sampling-rate",
+      "en": "Client sampling rate",
+      "vi": "Tỉ lệ lấy mẫu máy khách",
+      "def_en": "The expected fraction of the population touched each round, which enters privacy accounting as directly as the noise does.",
+      "def_vi": "Tỉ lệ kỳ vọng của tổng thể được chạm tới mỗi vòng, đại lượng này đi vào phép tính riêng tư trực tiếp không kém gì nhiễu.",
+      "tags": [
+        "privacy",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-zcdp",
+      "en": "Zero concentrated differential privacy",
+      "vi": "Riêng tư vi phân tập trung không",
+      "def_en": "A relaxation stated through a single curvature parameter, which composes cleanly and converts to the usual pair afterwards.",
+      "def_vi": "Dạng nới lỏng phát biểu qua một tham số độ cong duy nhất, ghép nối gọn gàng rồi mới quy đổi về cặp tham số quen thuộc.",
+      "tags": [
+        "privacy",
+        "theory"
+      ]
+    },
+    {
+      "id": "f2-delta-calibration",
+      "en": "Delta calibration",
+      "vi": "Chọn giá trị delta",
+      "def_en": "Choosing the failure probability well below the reciprocal of the population size, since a larger value permits releasing whole records.",
+      "def_vi": "Chọn xác suất thất bại nhỏ hơn hẳn nghịch đảo cỡ tổng thể, vì giá trị lớn hơn có thể cho phép công bố nguyên cả bản ghi.",
+      "say": "A failure probability of one percent is not small when you have a million users.",
+      "tags": [
+        "privacy",
+        "theory"
+      ]
+    },
+    {
+      "id": "f2-dp-ftrl",
+      "en": "DP-FTRL",
+      "vi": "Thuật toán DP-FTRL",
+      "def_en": "A private training scheme adding correlated noise through a tree structure, so it needs no assumption about random client sampling.",
+      "def_vi": "Cách huấn luyện riêng tư thêm nhiễu có tương quan theo cấu trúc cây, nên không cần giả thiết máy khách được lấy mẫu ngẫu nhiên.",
+      "say": "In production you cannot control who checks in, so the sampling based bound does not apply.",
+      "tags": [
+        "privacy",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-adaptive-clipping",
+      "en": "Adaptive clipping",
+      "vi": "Cắt chuẩn thích nghi",
+      "def_en": "Tracking a quantile of the update norms and moving the clipping threshold towards it, instead of fixing the bound by hand.",
+      "def_vi": "Theo dõi một phân vị của chuẩn các bản cập nhật rồi dịch ngưỡng cắt về phía đó, thay vì ấn định ngưỡng bằng tay.",
+      "tags": [
+        "privacy",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-privacy-audit",
+      "en": "Empirical privacy audit",
+      "vi": "Kiểm định riêng tư bằng thực nghiệm",
+      "def_en": "Running a distinguishing attack to obtain a lower bound on the real privacy loss, which tests whether the claimed bound is honest.",
+      "def_vi": "Chạy một tấn công phân biệt để thu cận dưới của mất mát riêng tư thực tế, qua đó kiểm xem cận công bố có trung thực hay không.",
+      "say": "An audit can only push the bound up from below, it never confirms the analysis.",
+      "tags": [
+        "privacy",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-canary",
+      "en": "Canary insertion",
+      "vi": "Cài bản ghi mồi",
+      "def_en": "Planting a unique made up record and later measuring how strongly the trained model prefers it, as a memorisation probe.",
+      "def_vi": "Cài một bản ghi bịa duy nhất rồi đo xem mô hình đã huấn luyện thiên vị nó mạnh đến đâu, dùng làm phép dò ghi nhớ.",
+      "tags": [
+        "privacy",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-group-privacy",
+      "en": "Group privacy",
+      "vi": "Riêng tư theo nhóm",
+      "def_en": "The degraded guarantee that applies when one person contributes many records, since the budget scales with the group size.",
+      "def_vi": "Bảo đảm bị suy giảm khi một người đóng góp nhiều bản ghi, vì ngân sách phải nhân lên theo cỡ nhóm.",
+      "say": "One user with a thousand photos is not protected by a record level guarantee.",
+      "tags": [
+        "privacy",
+        "theory"
+      ]
+    },
+    {
+      "id": "f2-aggregate-snr",
+      "en": "Aggregate signal to noise ratio",
+      "vi": "Tỉ số tín hiệu trên nhiễu của tổng",
+      "def_en": "The ratio of the true summed update to the injected noise, which improves with cohort size and explains why private training needs crowds.",
+      "def_vi": "Tỉ số giữa tổng cập nhật thật và nhiễu được thêm vào, tỉ số này tăng theo cỡ nhóm và giải thích vì sao huấn luyện riêng tư cần đông máy khách.",
+      "say": "Central privacy is cheap at a cohort of thousands and hopeless at a cohort of ten.",
+      "tags": [
+        "privacy",
+        "theory"
+      ]
+    },
+    {
+      "id": "f2-loss-threshold-attack",
+      "en": "Loss threshold attack",
+      "vi": "Tấn công theo ngưỡng mất mát",
+      "def_en": "The simplest membership test, declaring a sample a member when its loss under the model falls below a chosen cut.",
+      "def_vi": "Phép thử thành viên đơn giản nhất, kết luận một mẫu là thành viên khi mất mát của nó dưới một ngưỡng đã chọn.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-shadow-model",
+      "en": "Shadow model attack",
+      "vi": "Tấn công dùng mô hình bóng",
+      "def_en": "Training many models on data the attacker controls, so the attacker learns what a member output distribution looks like.",
+      "def_vi": "Huấn luyện nhiều mô hình trên dữ liệu do kẻ tấn công kiểm soát, nhờ đó học được phân bố đầu ra của một mẫu là thành viên trông ra sao.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-lira",
+      "en": "Likelihood ratio membership attack",
+      "vi": "Tấn công thành viên theo tỉ số hợp lý",
+      "def_en": "Comparing the observed loss against two fitted distributions, one where the sample was trained on and one where it was not.",
+      "def_vi": "So sánh mất mát quan sát được với hai phân bố đã khớp, một ứng với trường hợp mẫu có trong huấn luyện và một ứng với trường hợp không có.",
+      "say": "Average attack accuracy hides the tail where the real damage happens.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-tpr-low-fpr",
+      "en": "True positive rate at low false positive rate",
+      "vi": "Tỉ lệ dương tính thật ở vùng ít báo động giả",
+      "def_en": "The membership attack metric that matters, because confidently exposing a few people is worse than guessing slightly better than chance.",
+      "def_vi": "Thước đo đáng quan tâm của tấn công thành viên, vì lộ chắc chắn vài người còn tệ hơn việc đoán tốt hơn ngẫu nhiên một chút.",
+      "tags": [
+        "attack",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-gap-leak-signal",
+      "en": "Generalisation gap as a leakage signal",
+      "vi": "Khoảng chênh khái quát hoá như dấu hiệu rò rỉ",
+      "def_en": "The observation that a wider train and test gap makes membership easier, though a small gap is no proof of safety.",
+      "def_vi": "Nhận xét rằng khoảng chênh giữa tập huấn luyện và tập kiểm tra càng rộng thì suy luận thành viên càng dễ, tuy khoảng chênh nhỏ không chứng minh được là an toàn.",
+      "tags": [
+        "attack",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-active-server",
+      "en": "Active server attack",
+      "vi": "Tấn công từ máy chủ chủ động",
+      "def_en": "A server that sends a specially crafted global model to a target client in order to make the returned update reveal more.",
+      "def_vi": "Máy chủ gửi một mô hình toàn cục được dàn dựng riêng cho máy khách mục tiêu, nhằm khiến bản cập nhật trả về lộ ra nhiều hơn.",
+      "say": "Assuming the server is passive is an assumption, not a fact about the deployment.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-deep-leakage",
+      "en": "Deep leakage from gradients",
+      "vi": "Rò rỉ sâu từ gradient",
+      "def_en": "Recovering inputs by optimising a dummy batch until its gradient matches the observed one, which works best on small batches.",
+      "def_vi": "Khôi phục đầu vào bằng cách tối ưu một lô giả cho tới khi gradient của nó khớp gradient quan sát được, hiệu quả nhất với lô nhỏ.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-label-leakage",
+      "en": "Label leakage from gradients",
+      "vi": "Rò rỉ nhãn từ gradient",
+      "def_en": "Reading the labels present in a batch straight off the signs of the last layer bias gradients, with no optimisation at all.",
+      "def_vi": "Đọc ra các nhãn có trong lô ngay từ dấu của gradient hệ số tự do ở lớp cuối, hoàn toàn không cần tối ưu.",
+      "say": "The signs of the final bias gradients give the labels away for free.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-batch-barrier",
+      "en": "Batch size as a leakage barrier",
+      "vi": "Cỡ lô như rào cản rò rỉ",
+      "def_en": "The empirical fact that averaging many samples into one gradient makes reconstruction far harder, though it is not a guarantee.",
+      "def_vi": "Thực tế quan sát được là gộp nhiều mẫu vào một gradient khiến việc tái dựng khó hơn nhiều, tuy đó không phải bảo đảm.",
+      "tags": [
+        "privacy",
+        "defence"
+      ]
+    },
+    {
+      "id": "f2-trap-weights",
+      "en": "Trap weights",
+      "vi": "Trọng số bẫy",
+      "def_en": "Malicious initial parameters chosen so individual examples land in separate neurons and can be read back one by one.",
+      "def_vi": "Tham số khởi tạo độc hại được chọn sao cho từng mẫu rơi vào các nơ ron riêng biệt và có thể đọc lại từng mẫu một.",
+      "tags": [
+        "attack",
+        "privacy"
+      ]
+    },
+    {
+      "id": "f2-local-finetune",
+      "en": "Local fine tuning",
+      "vi": "Tinh chỉnh tại chỗ",
+      "def_en": "The simplest personalisation baseline, taking the converged global model and running a few local steps on each client.",
+      "def_vi": "Cách cá nhân hoá đơn giản nhất, lấy mô hình toàn cục đã hội tụ rồi chạy vài bước cục bộ trên từng máy khách.",
+      "say": "Any personalised method has to beat plain local fine tuning before it is interesting.",
+      "tags": [
+        "personalisation",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-meta-init",
+      "en": "Meta learned initialisation",
+      "vi": "Khởi tạo theo lối siêu học",
+      "def_en": "Training the global model so it adapts well after a few local steps, rather than so it performs well as it stands.",
+      "def_vi": "Huấn luyện mô hình toàn cục sao cho nó thích nghi tốt sau vài bước cục bộ, thay vì để nó tự chạy tốt ngay.",
+      "tags": [
+        "personalisation",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-global-anchor",
+      "en": "Personalised model with a global anchor",
+      "vi": "Mô hình riêng có neo toàn cục",
+      "def_en": "Keeping a private per client model penalised for straying too far from the shared one, tuning the pull with a single weight.",
+      "def_vi": "Giữ một mô hình riêng cho từng máy khách, bị phạt nếu đi quá xa mô hình chung, mức níu kéo điều chỉnh bằng một trọng số duy nhất.",
+      "tags": [
+        "personalisation",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-model-interpolation",
+      "en": "Model interpolation",
+      "vi": "Nội suy giữa hai mô hình",
+      "def_en": "Mixing the global and local weights with a coefficient chosen per client, which gives a whole curve of intermediate models.",
+      "def_vi": "Trộn trọng số toàn cục và cục bộ với hệ số chọn riêng cho từng máy khách, cho ra cả một đường cong các mô hình trung gian.",
+      "tags": [
+        "personalisation",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-shared-representation",
+      "en": "Shared representation with a personal head",
+      "vi": "Biểu diễn chung kèm đầu ra riêng",
+      "def_en": "Federating the feature extractor while every client trains and keeps its own classifier, which suits label skew.",
+      "def_vi": "Liên kết phần trích đặc trưng còn mỗi máy khách tự huấn luyện và giữ bộ phân lớp riêng, cách này hợp với trường hợp nhãn lệch.",
+      "say": "The features are common, the decision boundary is not.",
+      "tags": [
+        "personalisation",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-multitask",
+      "en": "Federated multi task learning",
+      "vi": "Học liên kết đa tác vụ",
+      "def_en": "Treating each client as a related but distinct task and learning the relationships between them instead of forcing one model.",
+      "def_vi": "Xem mỗi máy khách là một tác vụ khác nhau nhưng có liên hệ, rồi học chính mối liên hệ đó thay vì ép về một mô hình duy nhất.",
+      "tags": [
+        "personalisation",
+        "taxonomy"
+      ]
+    },
+    {
+      "id": "f2-personalisation-gap",
+      "en": "Personalisation gap",
+      "vi": "Khoảng lợi từ cá nhân hoá",
+      "def_en": "The distance between a client personalised accuracy and what it would reach training alone, which can be negative for data rich clients.",
+      "def_vi": "Khoảng cách giữa độ chính xác sau cá nhân hoá của một máy khách và mức nó tự đạt được khi huấn luyện một mình, giá trị này có thể âm với máy khách nhiều dữ liệu.",
+      "say": "If a client does better alone, the federation is costing it something.",
+      "tags": [
+        "personalisation",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-hypernetwork",
+      "en": "Hypernetwork personalisation",
+      "vi": "Cá nhân hoá bằng mạng sinh trọng số",
+      "def_en": "A server side network mapping a client embedding to that client weights, so only the embedding and the generator are shared.",
+      "def_vi": "Mạng phía máy chủ ánh xạ một vectơ mô tả máy khách thành trọng số của chính máy khách đó, nên chỉ vectơ mô tả và bộ sinh được chia sẻ.",
+      "tags": [
+        "personalisation",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-staleness-weighting",
+      "en": "Staleness weighting",
+      "vi": "Trọng số theo độ cũ",
+      "def_en": "Discounting an asynchronous update by a decreasing function of how many versions old the model it was computed from is.",
+      "def_vi": "Giảm trọng số một bản cập nhật bất đồng bộ theo hàm giảm dần của số phiên bản mà mô hình gốc của nó đã lạc hậu.",
+      "tags": [
+        "algorithm",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-buffered-async",
+      "en": "Buffered asynchronous aggregation",
+      "vi": "Tổng hợp bất đồng bộ có bộ đệm",
+      "def_en": "Holding arriving updates in a buffer and applying them once it fills, which keeps secure aggregation and privacy accounting workable.",
+      "def_vi": "Giữ các bản cập nhật đến trong một bộ đệm rồi áp dụng khi bộ đệm đầy, nhờ vậy tổng hợp an toàn và phép tính riêng tư vẫn dùng được.",
+      "say": "Pure asynchrony breaks secure aggregation, buffering brings it back.",
+      "tags": [
+        "system",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-deadline-round",
+      "en": "Deadline based round",
+      "vi": "Vòng chạy theo hạn chót",
+      "def_en": "Fixing a wall clock cut off and aggregating whatever arrived, trading a biased cohort for a predictable round time.",
+      "def_vi": "Ấn định một mốc thời gian rồi tổng hợp những gì đã tới, đánh đổi việc nhóm bị lệch lấy thời lượng vòng dự đoán được.",
+      "tags": [
+        "system",
+        "method"
+      ]
+    },
+    {
+      "id": "f2-mixing-matrix",
+      "en": "Mixing matrix",
+      "vi": "Ma trận trộn",
+      "def_en": "The doubly stochastic matrix of weights each peer applies to the models of its neighbours when there is no central server.",
+      "def_vi": "Ma trận trọng số song ngẫu nhiên mà mỗi nút áp cho mô hình của các nút lân cận khi không có máy chủ trung tâm.",
+      "tags": [
+        "theory",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f2-spectral-gap",
+      "en": "Spectral gap of the mixing graph",
+      "vi": "Khe phổ của đồ thị trộn",
+      "def_en": "The quantity saying how fast information spreads through a peer topology, entering decentralised convergence rates directly.",
+      "def_vi": "Đại lượng cho biết thông tin lan qua tô pô mạng ngang hàng nhanh đến đâu, đi thẳng vào tốc độ hội tụ của học phi tập trung.",
+      "say": "A ring looks tidy on a slide and mixes terribly.",
+      "tags": [
+        "theory",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-consensus-distance",
+      "en": "Consensus distance",
+      "vi": "Khoảng cách đồng thuận",
+      "def_en": "The average disagreement between peer models at a given step, the decentralised counterpart of client drift.",
+      "def_vi": "Mức bất đồng trung bình giữa các mô hình của các nút tại một bước, tương ứng phi tập trung của hiện tượng trôi mô hình cục bộ.",
+      "tags": [
+        "theory",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-time-varying-topology",
+      "en": "Time varying topology",
+      "vi": "Tô pô thay đổi theo thời gian",
+      "def_en": "A neighbour graph that changes every round, which can still converge provided the union over a window stays connected.",
+      "def_vi": "Đồ thị lân cận thay đổi mỗi vòng, vẫn có thể hội tụ miễn là hợp của các đồ thị trong một cửa sổ vẫn liên thông.",
+      "say": "In a satellite constellation the neighbour set is never the same twice.",
+      "tags": [
+        "system",
+        "theory"
+      ]
+    },
+    {
+      "id": "f2-time-to-accuracy",
+      "en": "Time to target accuracy",
+      "vi": "Thời gian đạt mức chính xác mục tiêu",
+      "def_en": "Measuring progress in elapsed time rather than rounds, the only fair comparison when methods differ in cost per round.",
+      "def_vi": "Đo tiến độ bằng thời gian trôi qua thay vì số vòng, đây là cách so sánh công bằng duy nhất khi các phương pháp tốn khác nhau ở mỗi vòng.",
+      "say": "Fewer rounds means nothing if each round takes four times as long.",
+      "tags": [
+        "evaluation",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-contact-window",
+      "en": "Contact window",
+      "vi": "Cửa sổ liên lạc",
+      "def_en": "The bounded interval during which a moving node can actually talk to its aggregator, which sets the real deadline for a round.",
+      "def_vi": "Khoảng thời gian hữu hạn mà một nút đang di chuyển thực sự liên lạc được với bộ tổng hợp, khoảng này quyết định hạn chót thật của một vòng.",
+      "say": "The round length is not a hyperparameter here, the pass duration decides it.",
+      "tags": [
+        "system",
+        "application"
+      ]
+    },
+    {
+      "id": "f2-intermittent",
+      "en": "Intermittent connectivity",
+      "vi": "Kết nối chập chờn",
+      "def_en": "Links appearing and vanishing on a schedule or at random, making participation a property of the network rather than a design choice.",
+      "def_vi": "Đường truyền xuất hiện rồi biến mất theo lịch hoặc ngẫu nhiên, khiến việc tham gia trở thành đặc tính của mạng chứ không phải lựa chọn thiết kế.",
+      "tags": [
+        "system",
+        "challenge"
+      ]
+    },
+    {
+      "id": "f2-aircomp",
+      "en": "Over the air aggregation",
+      "vi": "Tổng hợp qua sóng",
+      "def_en": "Letting clients transmit at once on the same band so the channel itself performs the sum, at the cost of tight synchronisation.",
+      "def_vi": "Cho các máy khách phát đồng thời trên cùng băng tần để chính kênh truyền thực hiện phép cộng, đổi lại phải đồng bộ rất chặt.",
+      "say": "The channel does the addition for free, but only if the phases line up.",
+      "tags": [
+        "communication",
+        "application"
+      ]
+    },
+    {
+      "id": "f2-channel-inversion",
+      "en": "Channel inversion alignment",
+      "vi": "Cân bằng bằng nghịch đảo kênh",
+      "def_en": "Pre scaling each transmission by the inverse of its channel gain so the superposed signals carry the intended weights.",
+      "def_vi": "Nhân trước mỗi lần phát với nghịch đảo độ lợi kênh, để các tín hiệu chồng lấn mang đúng trọng số mong muốn.",
+      "tags": [
+        "communication",
+        "application"
+      ]
+    },
+    {
+      "id": "f2-energy-budget",
+      "en": "Energy budget per round",
+      "vi": "Ngân sách năng lượng mỗi vòng",
+      "def_en": "The energy a device may spend on local computation and transmission, often a harder constraint than accuracy on battery powered nodes.",
+      "def_vi": "Lượng năng lượng thiết bị được phép tiêu cho tính toán cục bộ và truyền tin, ràng buộc này thường khó hơn cả yêu cầu độ chính xác trên nút chạy pin.",
+      "tags": [
+        "system",
+        "application"
+      ]
+    },
+    {
+      "id": "f2-joint-scheduling",
+      "en": "Joint scheduling and bandwidth allocation",
+      "vi": "Lập lịch và cấp băng thông đồng thời",
+      "def_en": "Deciding who trains and how much spectrum each gets in one optimisation, since selecting a client is worthless without a link to carry it.",
+      "def_vi": "Quyết định ai huấn luyện và mỗi bên được bao nhiêu băng thông trong cùng một bài toán tối ưu, vì chọn máy khách mà không có đường truyền là vô nghĩa.",
+      "tags": [
+        "system",
+        "application"
+      ]
+    },
+    {
+      "id": "f2-inorbit-agg",
+      "en": "In orbit aggregation",
+      "vi": "Tổng hợp ngay trên quỹ đạo",
+      "def_en": "Performing partial aggregation on satellites over inter satellite links so only one merged update needs a ground pass.",
+      "def_vi": "Thực hiện tổng hợp một phần ngay trên vệ tinh qua liên kết giữa các vệ tinh, để chỉ một bản cập nhật đã gộp cần truyền xuống trạm mặt đất.",
+      "say": "Aggregating in orbit turns many downlink passes into one.",
+      "tags": [
+        "system",
+        "application"
+      ]
+    },
+    {
+      "id": "f2-fed-eval",
+      "en": "Federated evaluation",
+      "vi": "Đánh giá theo lối liên kết",
+      "def_en": "Computing metrics by shipping the model out and returning only aggregated statistics, so the test data stays with its owner too.",
+      "def_vi": "Tính các chỉ số bằng cách gửi mô hình đi rồi chỉ nhận về thống kê đã tổng hợp, để dữ liệu kiểm tra cũng ở lại với chủ của nó.",
+      "tags": [
+        "evaluation",
+        "system"
+      ]
+    },
+    {
+      "id": "f2-unseen-client",
+      "en": "Unseen client generalisation",
+      "vi": "Khái quát hoá sang máy khách chưa gặp",
+      "def_en": "How the global model performs on devices that never took part in training, the number a deployment actually cares about.",
+      "def_vi": "Mức hoạt động của mô hình toàn cục trên các thiết bị chưa từng tham gia huấn luyện, đây mới là con số mà một hệ triển khai thật sự quan tâm.",
+      "say": "Report participating and non participating clients separately or the table misleads.",
+      "tags": [
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f2-private-tuning",
+      "en": "Private hyperparameter tuning",
+      "vi": "Dò siêu tham số dưới ràng buộc riêng tư",
+      "def_en": "The often ignored fact that every configuration tried on the real data spends budget, so the reported epsilon is optimistic.",
+      "def_vi": "Điều thường bị bỏ qua là mỗi cấu hình đem thử trên dữ liệu thật đều tiêu ngân sách, nên epsilon được báo cáo là lạc quan.",
+      "tags": [
+        "privacy",
         "evaluation"
       ]
     }

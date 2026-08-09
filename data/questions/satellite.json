@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "satellite",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qs-1",
@@ -1501,6 +1501,816 @@
       "answer": 3,
       "why": "A rate that the physical layer cannot deliver invalidates everything computed on top of it, so the objection is about the foundation rather than about formatting. A link budget says nothing about routing optimality, and the orbital period comes from the altitude alone.",
       "why_vi": "Một tốc độ mà lớp vật lý không thể cung cấp sẽ làm hỏng mọi thứ tính bên trên nó, nên phản đối này nhắm vào nền móng chứ không phải vào hình thức trình bày. Bài toán cân bằng tuyến không nói gì về tính tối ưu của định tuyến, còn chu kỳ quỹ đạo chỉ do độ cao quyết định.",
+      "level": 2
+    },
+    {
+      "id": "qs-101",
+      "q": "Orbit propagators step the mean anomaly forward in time and only then solve for the true anomaly. Why that order?",
+      "q_vi": "Bộ lan truyền quỹ đạo bước góc dị thường trung bình theo thời gian rồi mới giải ra góc dị thường thật. Vì sao lại theo thứ tự đó?",
+      "choices": [
+        "Only the mean anomaly grows linearly with time, so advancing it is a multiplication, while the true angle needs a transcendental equation solved afterwards",
+        "The true anomaly is undefined for circular orbits, so the mean value is used as a substitute whenever eccentricity is small",
+        "The mean anomaly already accounts for the flattening of the Earth, whereas the true anomaly ignores every perturbing force",
+        "Ground stations report the mean anomaly directly, so using it avoids a conversion that would add measurement error"
+      ],
+      "answer": 0,
+      "why": "The whole point of the mean angle is that it is a fictitious uniform angle, which makes time propagation trivial. Recovering the real geometry then costs one iterative solve of Kepler's equation.",
+      "why_vi": "Ý nghĩa của góc trung bình chính là nó là một góc giả định biến thiên đều, nhờ vậy việc đẩy theo thời gian chỉ là một phép nhân. Muốn lấy lại hình học thật thì phải giải lặp phương trình Kepler.",
+      "level": 2
+    },
+    {
+      "id": "qs-102",
+      "q": "On an eccentric orbit, why does the satellite spend far more of each period near apogee than near perigee?",
+      "q_vi": "Trên quỹ đạo lệch tâm, vì sao vệ tinh dành phần lớn thời gian của mỗi chu kỳ ở gần viễn điểm chứ không phải gần cận điểm?",
+      "choices": [
+        "Atmospheric drag near perigee removes energy, which shortens the time spent on the lower half of the ellipse",
+        "Angular momentum is conserved, so the sweep rate of the true anomaly falls as the radius grows and the satellite crawls through the far part of the ellipse",
+        "The gravitational constant is effectively weaker at apogee, so the orbit is stretched in time as well as in distance and the satellite is held out there for much longer",
+        "Station keeping thrusters are fired at apogee to hold the satellite there for the observation window"
+      ],
+      "answer": 1,
+      "why": "Equal areas are swept in equal times, so a long radius means a slow angular rate. This is exactly why a highly elliptical orbit can dwell over one hemisphere.",
+      "why_vi": "Diện tích quét được trong những khoảng thời gian bằng nhau là như nhau, nên bán kính lớn thì tốc độ góc nhỏ. Đó chính là lý do quỹ đạo elip cao có thể nán lại trên một bán cầu.",
+      "level": 2
+    },
+    {
+      "id": "qs-103",
+      "q": "Two satellites share the same altitude, eccentricity and inclination but differ in argument of perigee. What actually differs on the ground?",
+      "q_vi": "Hai vệ tinh cùng độ cao, cùng độ lệch tâm và cùng độ nghiêng nhưng khác đối số cận điểm. Trên mặt đất khác nhau ở điểm nào?",
+      "choices": [
+        "The longitude at which each one crosses the equator going north, since that crossing point is fixed inside the orbital plane itself",
+        "The orbital period of each satellite, because rotating the perigee argument also raises the perigee height and hence the mean altitude",
+        "The latitude band over which each one lingers, because perigee sits at a different point along the same orbital plane",
+        "The maximum elevation angle available to any observer, since the plane tilt has effectively been altered"
+      ],
+      "answer": 2,
+      "why": "Rotating perigee inside the plane moves where the slow apogee arc falls in latitude. The equator crossing longitude is governed by the ascending node, and the period depends only on the semi-major axis.",
+      "why_vi": "Xoay cận điểm bên trong mặt phẳng làm cung viễn điểm chậm rơi vào vĩ độ khác. Kinh độ điểm cắt xích đạo do nút lên quyết định, còn chu kỳ chỉ phụ thuộc bán trục lớn.",
+      "level": 3
+    },
+    {
+      "id": "qs-104",
+      "q": "What condition makes an orbit a repeat ground track orbit?",
+      "q_vi": "Điều kiện nào khiến một quỹ đạo trở thành quỹ đạo lặp vệt mặt đất?",
+      "choices": [
+        "The inclination is set so that nodal precession exactly cancels the rotation of the Earth",
+        "The eccentricity is driven to zero so the ground speed under the satellite never varies",
+        "The orbital period is an exact divisor of the sidereal rotation period of the Earth",
+        "An integer number of revolutions closes exactly on an integer number of nodal days"
+      ],
+      "answer": 3,
+      "why": "The track closes only when the two clocks commensurate, that is when whole revolutions fit whole nodal days. Cancelling Earth rotation entirely would give a geostationary case, which is a very special instance rather than the general rule.",
+      "why_vi": "Vệt chỉ khép kín khi hai nhịp thời gian ước chung được, tức số vòng nguyên khớp số ngày nút nguyên. Việc triệt tiêu hoàn toàn sự quay của Trái Đất sẽ cho trường hợp địa tĩnh, đó là một ca rất đặc biệt chứ không phải quy tắc chung.",
+      "level": 3
+    },
+    {
+      "id": "qs-105",
+      "q": "A sun-synchronous mission specifies a local time of the ascending node of ten thirty in the morning. What is that specification buying?",
+      "q_vi": "Một sứ mệnh đồng bộ mặt trời quy định giờ địa phương tại nút lên là mười giờ ba mươi sáng. Quy định đó mua được gì?",
+      "choices": [
+        "Repeatable illumination and thermal conditions on every pass, so images taken months apart remain comparable",
+        "A guaranteed absence of eclipse, since the plane keeps a fixed angle to the direction of the sun",
+        "A shorter revisit time, because the ground track is forced to repeat over the same point each day",
+        "Lower atmospheric drag, since the satellite crosses the densest air only during local night"
+      ],
+      "answer": 0,
+      "why": "Holding the crossing time fixes the sun angle seen at the surface, which is what makes a time series comparable. Freedom from eclipse depends on the beta angle and holds only for the dawn to dusk case, and revisit is a separate design choice.",
+      "why_vi": "Giữ cố định giờ cắt xích đạo tức là giữ cố định góc mặt trời nhìn thấy ở bề mặt, nhờ vậy chuỗi ảnh theo thời gian mới so sánh được. Việc thoát khỏi bóng tối phụ thuộc góc beta và chỉ đúng với cấu hình bình minh hoàng hôn, còn chu kỳ lặp lại là lựa chọn thiết kế khác.",
+      "level": 2
+    },
+    {
+      "id": "qs-106",
+      "q": "Why does the beta angle of an orbit matter more to the power engineer than to the link engineer?",
+      "q_vi": "Vì sao góc beta của quỹ đạo lại quan trọng với kỹ sư năng lượng hơn là với kỹ sư tuyến truyền?",
+      "choices": [
+        "It changes the slant range to the gateway, which drives the fade margin needed on the feeder link",
+        "It sets how much of each revolution is spent in shadow, which sizes the battery and the depth of discharge",
+        "It determines the Doppler rate seen at the terminal, which the carrier tracking loop must be able to follow without ever losing lock",
+        "It fixes how many satellites remain visible at once, which decides whether diversity is available"
+      ],
+      "answer": 1,
+      "why": "The angle between the orbital plane and the sun direction governs eclipse duration, so it lands squarely on energy storage. Range, Doppler and visibility are geometry against the ground, not against the sun.",
+      "why_vi": "Góc giữa mặt phẳng quỹ đạo và hướng mặt trời chi phối thời gian nằm trong bóng tối, nên nó rơi thẳng vào bài toán tích trữ năng lượng. Cự ly, Doppler và số vệ tinh nhìn thấy là hình học so với mặt đất, không phải so với mặt trời.",
+      "level": 2
+    },
+    {
+      "id": "qs-107",
+      "q": "An operator finds that a satellite has less remaining delta-v than planned. Which consequence bites first?",
+      "q_vi": "Một nhà khai thác phát hiện vệ tinh còn ít delta-v hơn dự kiến. Hệ quả nào ập tới trước?",
+      "choices": [
+        "The transponder output power must be reduced, since a lighter propellant load means less electrical power is available to the payload",
+        "The onboard clock loses its reference, because the station keeping burns are what discipline the onboard timing chain against drift",
+        "The reserve set aside for controlled disposal must be protected, so the revenue-earning service life is cut short instead",
+        "The inter-satellite links must be shut down, as pointing them consumes propellant on every reconfiguration"
+      ],
+      "answer": 2,
+      "why": "Disposal is a regulatory obligation held back from the same tank, so a shortfall is paid out of operational life rather than out of the disposal reserve. Propellant does not feed the electrical bus or the timing chain.",
+      "why_vi": "Việc thải bỏ có kiểm soát là nghĩa vụ pháp lý và được giữ lại từ chính bình nhiên liệu đó, nên thiếu hụt sẽ trừ vào tuổi thọ khai thác chứ không trừ vào phần dự trữ thải bỏ. Nhiên liệu đẩy không nuôi bus điện hay chuỗi định thời.",
+      "level": 3
+    },
+    {
+      "id": "qs-108",
+      "q": "A geostationary operator chooses electric propulsion for orbit raising. What is the honest trade?",
+      "q_vi": "Một nhà khai thác địa tĩnh chọn động cơ điện để nâng quỹ đạo. Đánh đổi thật sự là gì?",
+      "choices": [
+        "Much faster arrival at the operational slot in exchange for a heavier spacecraft and a correspondingly more expensive launch vehicle",
+        "A structurally simpler spacecraft in exchange for giving up any station keeping capability once the operational slot has been reached",
+        "Higher available payload power in exchange for a noticeably shorter total design lifetime once the satellite is on station",
+        "Much lower launch mass in exchange for months of spiralling through the radiation belts before service can begin"
+      ],
+      "answer": 3,
+      "why": "High specific impulse cuts propellant mass sharply, but low thrust means a long slow climb with revenue deferred and extra radiation dose accumulated. The same electric system usually also performs station keeping later.",
+      "why_vi": "Xung lượng riêng cao cắt mạnh khối lượng nhiên liệu, nhưng lực đẩy thấp nghĩa là leo chậm và lâu, doanh thu bị hoãn còn liều bức xạ tích thêm. Chính hệ động cơ điện đó về sau vẫn dùng để giữ vị trí.",
+      "level": 2
+    },
+    {
+      "id": "qs-109",
+      "q": "Why is a Hohmann transfer described as cheap yet slow?",
+      "q_vi": "Vì sao chuyển quỹ đạo Hohmann được mô tả là rẻ nhưng chậm?",
+      "choices": [
+        "It uses two tangential burns on an ellipse touching both orbits, which minimises propellant but takes half of that transfer ellipse period",
+        "It relies on continuous low thrust, so the propellant use is small but the spiral takes many revolutions",
+        "It waits for a favourable alignment of the two orbital planes, and such windows open only twice per year",
+        "It uses aerodynamic braking in the upper atmosphere, which costs nothing but must be done in small steps"
+      ],
+      "answer": 0,
+      "why": "The cost comes from two impulsive burns at the ends of a tangent ellipse, and the duration is simply half of that ellipse period. Continuous low thrust describes electric raising, which is a different manoeuvre.",
+      "why_vi": "Chi phí đến từ hai lần đốt xung tại hai đầu của một ellipse tiếp tuyến, còn thời gian đơn giản là nửa chu kỳ của chính ellipse đó. Lực đẩy thấp liên tục là mô tả của nâng quỹ đạo bằng động cơ điện, một thao tác khác.",
+      "level": 2
+    },
+    {
+      "id": "qs-110",
+      "q": "Two constellations have identical satellite count, plane count and inclination but a different Walker phasing factor. What changes?",
+      "q_vi": "Hai chòm sao có cùng số vệ tinh, cùng số mặt phẳng và cùng độ nghiêng nhưng khác hệ số pha Walker. Cái gì thay đổi?",
+      "choices": [
+        "The total coverage area available at any instant, since a different phasing turns more of the satellites towards the populated hemisphere",
+        "Where satellites bunch up and where coverage holes open, since the relative along-track offset between neighbouring planes is different",
+        "The orbital period of each satellite, because the phasing factor scales the semi-major axis of the shell",
+        "The number of inter-satellite links each satellite can host, because neighbours are no longer reachable"
+      ],
+      "answer": 1,
+      "why": "Phasing only shifts satellites along their own orbits relative to the next plane, which redistributes the geometry without adding or removing anything. Instantaneous total footprint area depends on satellite count and altitude, not on phasing.",
+      "why_vi": "Hệ số pha chỉ dịch vệ tinh dọc theo quỹ đạo của chính nó so với mặt phẳng kế bên, tức là phân bố lại hình học chứ không thêm bớt gì. Tổng diện tích phủ tức thời phụ thuộc số vệ tinh và độ cao, không phụ thuộc hệ số pha.",
+      "level": 3
+    },
+    {
+      "id": "qs-111",
+      "q": "In a polar constellation, the street of coverage concept is used to decide",
+      "q_vi": "Trong chòm sao cực, khái niệm dải phủ liên tục được dùng để quyết định",
+      "choices": [
+        "How many satellites each plane must contain before the links within it can stay closed",
+        "How high the shell must fly before atmospheric drag falls inside the propellant budget",
+        "How far apart the orbital planes may be spaced while adjacent bands still touch",
+        "How wide the seam region should be before cross-seam links are added"
+      ],
+      "answer": 2,
+      "why": "The overlapping footprints of one plane form a continuous band, and continuity of global coverage is guaranteed when neighbouring bands meet. That is a statement about spacing between planes rather than about altitude or link count.",
+      "why_vi": "Các vùng phủ chồng nhau của một mặt phẳng tạo thành một dải liên tục, và vùng phủ toàn cầu chỉ liên tục khi hai dải kề nhau chạm được. Đó là phát biểu về khoảng cách giữa các mặt phẳng chứ không phải về độ cao hay số liên kết.",
+      "level": 3
+    },
+    {
+      "id": "qs-112",
+      "q": "Why does satellite diversity change what kind of handover is possible, not merely how often it happens?",
+      "q_vi": "Vì sao phân tập vệ tinh làm thay đổi loại chuyển giao có thể thực hiện chứ không chỉ thay đổi tần suất chuyển giao?",
+      "choices": [
+        "With two satellites in view the terminal can average their signals, so the measurement report becomes reliable enough to trigger earlier",
+        "With two satellites in view the network can lower the transmit power on both links, which reduces the interference caused during the switch and after it",
+        "With two satellites in view the ephemeris broadcast is duplicated, so the terminal no longer needs to pre-compensate its own timing before it transmits",
+        "With two satellites usable at once the new link can be established before the old one is released, which removes the gap entirely"
+      ],
+      "answer": 3,
+      "why": "Simultaneous usable visibility is the precondition for a make-before-break procedure, and only that removes the interruption rather than shortening it. Averaging measurements or cutting power does nothing about the gap itself.",
+      "why_vi": "Việc nhìn thấy và dùng được đồng thời là điều kiện tiên quyết cho thủ tục nối trước khi cắt, và chỉ điều đó mới xoá được khoảng gián đoạn thay vì rút ngắn nó. Lấy trung bình phép đo hay giảm công suất không đụng gì tới khoảng trống ấy.",
+      "level": 3
+    },
+    {
+      "id": "qs-113",
+      "q": "A packet in a polar constellation must go from a satellite just east of the seam to one just west of it. What typically happens?",
+      "q_vi": "Một gói tin trong chòm sao cực phải đi từ vệ tinh ngay phía đông vệt ghép sang vệ tinh ngay phía tây vệt ghép. Điều gì thường xảy ra?",
+      "choices": [
+        "It is routed the long way around through several planes, so a geographically short pair becomes a topologically distant one",
+        "It is buffered until the two satellites reach the equator, where their relative velocity briefly falls to zero",
+        "It is dropped, because the routing protocol treats seam neighbours as unreachable and returns an error",
+        "It is sent down to a gateway and back up, which is always faster than crossing several planes"
+      ],
+      "answer": 0,
+      "why": "Counter-rotating planes make the crossing link impractical, so the mesh behaves as if it were cut there and the path must detour. Physical proximity and topological proximity come apart exactly at that boundary.",
+      "why_vi": "Hai mặt phẳng chạy ngược chiều khiến liên kết cắt ngang khó duy trì, nên lưới hành xử như bị cắt ở đó và đường đi phải vòng. Gần về địa lý và gần về cấu hình mạng tách rời nhau đúng tại ranh giới này.",
+      "level": 3
+    },
+    {
+      "id": "qs-114",
+      "q": "Why is the usable range of an inter-satellite link shorter than the pure geometric line of sight between the two satellites?",
+      "q_vi": "Vì sao cự ly dùng được của liên kết liên vệ tinh ngắn hơn tầm nhìn hình học thuần tuý giữa hai vệ tinh?",
+      "choices": [
+        "The transmit power available on a small satellite is far too low to close any optical link beyond a few hundred kilometres of separation",
+        "The beam must clear the atmosphere by a set grazing altitude, otherwise absorption and turbulence in the lower layers ruin the link",
+        "Regulations forbid inter-satellite links whose path passes over another operator's licensed service area",
+        "The relative Doppler shift grows with range until the receiver can no longer acquire the carrier at all"
+      ],
+      "answer": 1,
+      "why": "A grazing path through dense air is attenuated and distorted, so designers impose a minimum tangent height that cuts the geometric maximum well back. Power and Doppler are real constraints but they do not define this particular limit.",
+      "why_vi": "Đường tia sượt qua lớp không khí dày bị hấp thụ và méo, nên người thiết kế áp một độ cao tiếp tuyến tối thiểu, cắt bớt đáng kể giá trị cực đại hình học. Công suất và Doppler là ràng buộc có thật nhưng không định nghĩa giới hạn này.",
+      "level": 3
+    },
+    {
+      "id": "qs-115",
+      "q": "A plus-grid inter-satellite topology is often drawn as a neat torus. Where does that picture break down?",
+      "q_vi": "Cấu hình liên kết dạng lưới cộng thường được vẽ như một mặt xuyến gọn gàng. Bức tranh đó hỏng ở đâu?",
+      "choices": [
+        "Near the equator the satellites are moving at their fastest, so the links inside a single plane cannot be held closed for any useful length of time",
+        "Over the open oceans there are no gateways at all, so the grid has no way of reaching the terrestrial core network from those particular satellites",
+        "Near the poles the planes converge and the cross-plane geometry rotates too fast, so those links are dropped and the grid loses its regularity",
+        "During eclipse the power budget forces every satellite to shut down two of its four terminals"
+      ],
+      "answer": 2,
+      "why": "Convergence at high latitude makes the inter-plane pointing rate and the relative Doppler unmanageable, and the seam adds a second break, so the clean torus is an approximation valid only in the mid-latitude band. Intra-plane links are the stable ones.",
+      "why_vi": "Sự hội tụ ở vĩ độ cao khiến tốc độ quay hướng giữa các mặt phẳng và Doppler tương đối trở nên khó kham, cộng thêm vệt ghép tạo chỗ đứt thứ hai, nên mặt xuyến sạch sẽ chỉ là xấp xỉ đúng ở dải vĩ độ trung bình. Liên kết trong cùng mặt phẳng mới là loại ổn định.",
+      "level": 3
+    },
+    {
+      "id": "qs-116",
+      "q": "Why is Doppler almost a non-issue on an intra-plane inter-satellite link but severe on an inter-plane one?",
+      "q_vi": "Vì sao Doppler gần như không thành vấn đề trên liên kết trong cùng mặt phẳng nhưng lại nặng nề trên liên kết khác mặt phẳng?",
+      "choices": [
+        "Intra-plane links use optical carriers on which Doppler cancels, while inter-plane links must fall back to radio",
+        "Intra-plane links are much shorter, and Doppler shift scales inversely with the distance between the two terminals",
+        "Intra-plane partners are locked by the same ground station clock, so any frequency error is corrected at the source",
+        "Neighbours in one plane hold a nearly constant separation, while planes that cross open and close rapidly"
+      ],
+      "answer": 3,
+      "why": "Doppler follows the rate of change of range, which is near zero for a fixed formation and large for planes crossing at an angle. Wavelength affects the size of the shift but not this contrast, and shift does not scale with distance.",
+      "why_vi": "Doppler đi theo tốc độ biến thiên của cự ly, giá trị này gần bằng không với đội hình cố định và rất lớn khi hai mặt phẳng cắt nhau một góc. Bước sóng ảnh hưởng độ lớn của dịch tần nhưng không tạo ra sự tương phản này, và dịch tần cũng không tỷ lệ theo khoảng cách.",
+      "level": 2
+    },
+    {
+      "id": "qs-117",
+      "q": "An optical inter-satellite terminal aims slightly away from where it sees its partner. What is that offset for?",
+      "q_vi": "Đầu cuối quang liên vệ tinh chĩa lệch một chút so với chỗ nó nhìn thấy đối tác. Độ lệch đó để làm gì?",
+      "choices": [
+        "The partner will have moved during the flight time of the beam, so the transmitter must lead the target rather than aim straight at it",
+        "The received beacon is refracted by the residual atmosphere, so the apparent direction must be corrected",
+        "The detector saturates on boresight, so the beam is deliberately offset to keep the receiver in its linear range",
+        "The offset spreads the beam over a wider area, which relaxes the accuracy demanded of the tracking loop"
+      ],
+      "answer": 0,
+      "why": "Light takes measurable time to cross thousands of kilometres while the partner moves several kilometres per second, so pointing at the observed position would miss. The correction is kinematic rather than atmospheric.",
+      "why_vi": "Ánh sáng mất một khoảng thời gian đo được để vượt hàng nghìn kilômét trong khi đối tác di chuyển vài kilômét mỗi giây, nên chĩa vào vị trí quan sát được sẽ trượt. Đây là hiệu chỉnh động học chứ không phải hiệu chỉnh khí quyển.",
+      "level": 3
+    },
+    {
+      "id": "qs-118",
+      "q": "Virtual node routing assigns addresses to fixed geographic cells rather than to satellites. What does that buy?",
+      "q_vi": "Định tuyến theo nút ảo gán địa chỉ cho các ô địa lý cố định thay vì cho vệ tinh. Cách đó được lợi gì?",
+      "choices": [
+        "The number of hops on any path is reduced, because a geographic address lets a node reach the destination cell directly without consulting a global table",
+        "The forwarding table stops changing with the constellation, because only the mapping from cell to spacecraft has to be refreshed",
+        "The satellites no longer need inter-satellite links, since traffic is handed between cells through the ground segment",
+        "The propagation delay becomes constant, because a fixed cell is always served from the same slant range"
+      ],
+      "answer": 1,
+      "why": "Decoupling the address from the moving hardware is what stabilises routing state, and the churn is pushed into a small mapping update. Hop count, link requirements and delay are unchanged by the naming scheme.",
+      "why_vi": "Tách địa chỉ khỏi phần cứng đang chuyển động chính là điều giúp trạng thái định tuyến ổn định, còn phần biến động bị dồn vào một bản ánh xạ nhỏ. Số chặng, nhu cầu liên kết và độ trễ không thay đổi vì cách đặt tên.",
+      "level": 3
+    },
+    {
+      "id": "qs-119",
+      "q": "How should the topology snapshot interval of a LEO simulation be chosen?",
+      "q_vi": "Chu kỳ chụp ảnh cấu hình mạng trong mô phỏng LEO nên được chọn thế nào?",
+      "choices": [
+        "Equal to the orbital period, so that each snapshot corresponds to exactly one complete revolution of the shell around the Earth",
+        "As short as the simulator can compute, since a finer time step is always closer to physical truth",
+        "Short enough that the static graph stays accurate, yet long enough that recomputation does not swamp the control plane",
+        "Equal to the round trip time of the longest path in the mesh, so that every packet in flight sees exactly one snapshot of the topology"
+      ],
+      "answer": 2,
+      "why": "The interval is a two-sided compromise between representation error and recomputation cost. Making it as small as possible ignores the second side and produces a control plane that cannot exist in practice.",
+      "why_vi": "Chu kỳ này là thoả hiệp hai chiều giữa sai số biểu diễn và chi phí tính lại. Làm nó nhỏ nhất có thể là bỏ qua chiều thứ hai và sinh ra một mặt phẳng điều khiển không thể tồn tại trong thực tế.",
+      "level": 2
+    },
+    {
+      "id": "qs-120",
+      "q": "What makes contact graph routing different in kind from ordinary link state routing?",
+      "q_vi": "Điều gì làm định tuyến theo đồ thị tiếp xúc khác về bản chất so với định tuyến trạng thái liên kết thông thường?",
+      "choices": [
+        "It floods link state advertisements more frequently, which keeps the database fresh despite the fast topology change",
+        "It computes routes at the destination instead of the source, which removes the need for a synchronised database",
+        "It uses geographic coordinates instead of node identifiers, which lets any node infer the next hop locally",
+        "It plans over a schedule of future contacts, so a route can be valid when no end to end path is open"
+      ],
+      "answer": 3,
+      "why": "The defining move is treating time as part of the graph, so forwarding decisions can rely on a link that is not up yet. Faster flooding is still a present-tense view of the network.",
+      "why_vi": "Điểm khác biệt cốt lõi là đưa thời gian vào chính đồ thị, nhờ đó quyết định chuyển tiếp có thể dựa vào một liên kết chưa mở. Việc quảng bá dày hơn vẫn chỉ là cái nhìn về hiện tại của mạng.",
+      "level": 3
+    },
+    {
+      "id": "qs-121",
+      "q": "In a delay tolerant architecture, taking custody of a bundle at each hop means",
+      "q_vi": "Trong kiến trúc chịu trễ, việc nhận trách nhiệm giữ một bó dữ liệu ở từng chặng có nghĩa là",
+      "choices": [
+        "The intermediate node stores the data and becomes responsible for delivering it onward, so recovery does not have to reach back to the source",
+        "The intermediate node acknowledges the data but discards it once the next hop has been selected",
+        "The source keeps a copy until the destination confirms, and every hop is purely a forwarder",
+        "The bundle is fragmented so that each hop carries only the part it can deliver immediately"
+      ],
+      "answer": 0,
+      "why": "Custody transfer moves retransmission responsibility hop by hop, which is what makes an intermittent path survivable without end to end retries over hours. Pure forwarding would leave the source holding everything.",
+      "why_vi": "Chuyển giao trách nhiệm giữ dữ liệu đẩy nghĩa vụ phát lại đi theo từng chặng, nhờ đó đường truyền đứt quãng vẫn dùng được mà không phải phát lại đầu cuối trong nhiều giờ. Nếu chỉ chuyển tiếp thuần tuý thì nguồn phải ôm hết.",
+      "level": 2
+    },
+    {
+      "id": "qs-122",
+      "q": "Why is conditional handover a better fit for a non-terrestrial network than a classic network-commanded handover?",
+      "q_vi": "Vì sao chuyển giao có điều kiện phù hợp với mạng phi mặt đất hơn là chuyển giao do mạng ra lệnh theo kiểu cổ điển?",
+      "choices": [
+        "The terminal measures fewer neighbour cells, which saves the battery that a satellite terminal cannot afford to waste",
+        "The configuration is delivered in advance and executed locally when a condition fires, so the long round trip no longer delays the moment of switching",
+        "The network can still reject the switch after it has begun, which protects the session against a handover to a satellite that is already setting below the horizon",
+        "The target cell reserves resources permanently, which guarantees that admission control never rejects the incoming session"
+      ],
+      "answer": 1,
+      "why": "The delay problem is that a command issued on the basis of a stale measurement arrives too late to be correct, and pre-arming removes that dependency. It is a timing fix, not a measurement or admission fix.",
+      "why_vi": "Vấn đề độ trễ nằm ở chỗ lệnh phát ra dựa trên phép đo đã cũ nên tới nơi thì không còn đúng, việc nạp cấu hình trước xoá bỏ sự phụ thuộc đó. Đây là cách chữa về thời gian chứ không phải về đo đạc hay về điều khiển nạp nhận.",
+      "level": 3
+    },
+    {
+      "id": "qs-123",
+      "q": "Why do non-terrestrial systems often trigger handover on distance rather than on measured signal quality?",
+      "q_vi": "Vì sao hệ thống phi mặt đất thường kích hoạt chuyển giao theo khoảng cách chứ không theo chất lượng tín hiệu đo được?",
+      "choices": [
+        "Measuring reference signals is impossible while the terminal is pre-compensating for Doppler and delay",
+        "Signal quality measurements are unreliable in rain, and non-terrestrial links use higher bands",
+        "The received level stays high almost until the beam has left, so quality gives far too little warning",
+        "Distance triggers allow the network to charge users by geographic zone, which simplifies roaming agreements"
+      ],
+      "answer": 2,
+      "why": "In a beam sweeping across the ground, path loss changes slowly compared with the speed at which the cell edge arrives, so a level threshold fires too late. Ephemeris and terminal position make the geometric trigger both early and precise.",
+      "why_vi": "Với búp sóng quét trên mặt đất, suy hao thay đổi chậm so với tốc độ mà rìa ô ập tới, nên ngưỡng theo mức tín hiệu kích hoạt quá muộn. Lịch thiên văn cộng vị trí đầu cuối làm cho ngưỡng hình học vừa sớm vừa chính xác.",
+      "level": 3
+    },
+    {
+      "id": "qs-124",
+      "q": "What does RACH-less handover actually save in a non-terrestrial system?",
+      "q_vi": "Chuyển giao không cần truy nhập ngẫu nhiên thực sự tiết kiệm được gì trong hệ thống phi mặt đất?",
+      "choices": [
+        "The uplink transmit power of the preamble, which is the largest single energy cost for a small battery powered terminal in the field",
+        "The need to decode system information at the target cell, since the source cell forwards all of it over the air interface beforehand",
+        "The signalling load on the core network, because mobility is now handled entirely inside the radio access network without core involvement",
+        "One full propagation round trip, because the timing needed at the target is already derivable from ephemeris and position"
+      ],
+      "answer": 3,
+      "why": "The random access exchange costs at least one round trip, and here that round trip is hundreds of times longer than on the ground, so removing it dominates any other saving. The timing information it would have obtained is already known.",
+      "why_vi": "Thủ tục truy nhập ngẫu nhiên tốn ít nhất một lượt khứ hồi, mà ở đây lượt khứ hồi dài gấp hàng trăm lần so với mặt đất, nên bỏ được nó là khoản lợi lớn nhất. Thông tin định thời mà thủ tục đó lấy về thì vốn đã biết trước.",
+      "level": 3
+    },
+    {
+      "id": "qs-125",
+      "q": "How does a feeder link switchover differ operationally from a user handover?",
+      "q_vi": "Chuyển đổi tuyến tiếp sóng khác gì về mặt vận hành so với chuyển giao của một người dùng?",
+      "choices": [
+        "It moves every session carried by that satellite at once, so the fault domain is the whole served population rather than one terminal",
+        "It is executed by the terminal rather than by the network, since only the terminal knows when the gateway is setting",
+        "It requires no advance planning, because gateways are always visible somewhere on the ground below the satellite",
+        "It affects only control plane traffic, since user data continues through the inter-satellite links unchanged"
+      ],
+      "answer": 0,
+      "why": "The feeder link is the common trunk for everything on that spacecraft, so its switch is a scheduled mass event that must be planned and, where possible, made before break. Its blast radius is exactly what distinguishes it.",
+      "why_vi": "Tuyến tiếp sóng là trục chung cho mọi thứ trên vệ tinh đó, nên việc chuyển nó là sự kiện hàng loạt theo lịch, phải lên kế hoạch và nếu được thì nối trước khi cắt. Chính phạm vi ảnh hưởng là điểm phân biệt.",
+      "level": 2
+    },
+    {
+      "id": "qs-126",
+      "q": "A beam hopping payload shortens its dwell time per cell. What is gained and what is lost?",
+      "q_vi": "Tải trọng nhảy búp sóng rút ngắn thời gian nán ở mỗi ô. Được gì và mất gì?",
+      "choices": [
+        "Each cell receives more total capacity overall, but the interference between neighbouring beams rises in direct proportion",
+        "Each cell waits less between visits, but a larger share of the frame is consumed by switching and retuning overhead",
+        "The payload consumes less power overall, but the coverage area of the satellite shrinks accordingly",
+        "The scheduler becomes simpler to implement, but the delay experienced by each cell grows"
+      ],
+      "answer": 1,
+      "why": "Total illuminated time is conserved by the hopping plan, so shortening dwell redistributes delay rather than adding capacity, while the fixed cost of each transition is paid more often. Delay falls rather than grows.",
+      "why_vi": "Tổng thời gian chiếu sáng đã bị kế hoạch nhảy búp cố định, nên rút ngắn thời gian nán chỉ phân bố lại độ trễ chứ không thêm dung lượng, trong khi chi phí cố định của mỗi lần chuyển phải trả nhiều lần hơn. Độ trễ giảm chứ không tăng.",
+      "level": 3
+    },
+    {
+      "id": "qs-127",
+      "q": "A terminal keeps switching back and forth between two satellites every few seconds. What is the standard remedy?",
+      "q_vi": "Một đầu cuối cứ chuyển qua chuyển lại giữa hai vệ tinh vài giây một lần. Cách xử lý tiêu chuẩn là gì?",
+      "choices": [
+        "Raise the transmit power on both links so that the measured quality of each candidate stays comfortably above the switching threshold",
+        "Widen the beam of the terminal antenna so that both satellites remain inside the same lobe and no switching decision is needed at all",
+        "Add a hysteresis offset and a minimum time before a further switch is allowed, so the crossing metrics stop driving the decision",
+        "Reduce the frequency of the ephemeris broadcast so the terminal recomputes candidates less often"
+      ],
+      "answer": 2,
+      "why": "Oscillation arises when two candidates are close enough that noise repeatedly flips the ranking, so the fix is to make switching sticky in both level and time. Raising power lifts both candidates equally and changes nothing about the ordering.",
+      "why_vi": "Dao động xảy ra khi hai ứng viên gần nhau đến mức nhiễu liên tục đảo thứ hạng, nên cách chữa là làm cho việc chuyển trở nên dính cả về mức lẫn về thời gian. Tăng công suất nâng cả hai ứng viên như nhau nên không đổi thứ tự.",
+      "level": 2
+    },
+    {
+      "id": "qs-128",
+      "q": "A vendor offers a faster baseband processor and claims it will cut handover interruption in a LEO system. Why is the claim weak?",
+      "q_vi": "Một nhà cung cấp chào bộ xử lý băng gốc nhanh hơn và tuyên bố sẽ cắt giảm thời gian gián đoạn chuyển giao trong hệ LEO. Vì sao tuyên bố này yếu?",
+      "choices": [
+        "The interruption is set by the beam dwell time of the payload, which no terminal side change can influence",
+        "The interruption is fixed by the standard as a constant value, so no implementation may shorten it",
+        "The interruption occurs while the antenna is mechanically repointed, which is limited by the motor",
+        "The interruption is dominated by propagation, so processing speed barely touches it"
+      ],
+      "answer": 3,
+      "why": "Signalling round trips over hundreds or thousands of kilometres dwarf the milliseconds spent computing, so the lever that matters is removing exchanges rather than speeding them up. That is exactly why pre-arming and skipping random access are the real remedies.",
+      "why_vi": "Các lượt báo hiệu khứ hồi qua hàng trăm hoặc hàng nghìn kilômét lớn hơn hẳn vài mili giây dành cho tính toán, nên đòn bẩy thật là bớt số lượt trao đổi chứ không phải làm chúng nhanh hơn. Đó chính là lý do nạp cấu hình trước và bỏ truy nhập ngẫu nhiên mới là cách chữa thật.",
+      "level": 3
+    },
+    {
+      "id": "qs-129",
+      "q": "A network pre-compensates Doppler for the centre of each beam. What remains for the terminal at the beam edge?",
+      "q_vi": "Mạng bù trước Doppler cho tâm mỗi búp sóng. Vậy còn lại gì cho đầu cuối ở rìa búp?",
+      "choices": [
+        "A residual differential offset set by its own geometry relative to the reference point, which its own loop must still track",
+        "Nothing at all, since a single correction applied at the transmitter is exact for the entire illuminated area",
+        "The whole shift, since compensation applied at the gateway is undone by the transponder before retransmission",
+        "Only a phase ambiguity, since the frequency error has been removed and just the constellation rotation remains"
+      ],
+      "answer": 0,
+      "why": "One correction cannot be exact for every point of a wide footprint, and the spread across the beam is precisely the differential term. Its size is what dictates how much tracking range the terminal receiver still needs.",
+      "why_vi": "Một phép hiệu chỉnh duy nhất không thể đúng cho mọi điểm của vùng phủ rộng, và độ tản mát qua búp sóng chính là thành phần vi sai. Độ lớn của nó quyết định máy thu ở đầu cuối còn cần dải bám bao nhiêu.",
+      "level": 3
+    },
+    {
+      "id": "qs-130",
+      "q": "Two LEO passes give the same peak Doppler shift, but only one breaks the carrier tracking loop. What explains the difference?",
+      "q_vi": "Hai lượt bay LEO cho cùng giá trị dịch Doppler đỉnh, nhưng chỉ một lượt làm hỏng vòng bám sóng mang. Điều gì giải thích khác biệt đó?",
+      "choices": [
+        "The pass with the lower maximum elevation has a longer slant range, and the weaker signal alone breaks the lock",
+        "The pass with the higher maximum elevation sweeps the shift faster, and a loop fails on the rate of change rather than on the value",
+        "The pass with the higher maximum elevation lasts longer, so the accumulated phase error eventually exceeds the pull-in range of the loop",
+        "The two passes use different polarisations, and only one of them suffers from Faraday rotation in the ionosphere"
+      ],
+      "answer": 1,
+      "why": "A tracking loop can follow a large but slowly varying offset, while a steep slope through the closest approach exceeds its bandwidth. The overhead pass has the shortest range yet the sharpest Doppler slope.",
+      "why_vi": "Vòng bám có thể theo được độ lệch lớn nhưng biến thiên chậm, còn độ dốc gắt khi đi qua điểm gần nhất thì vượt băng thông của nó. Lượt bay qua đỉnh đầu có cự ly ngắn nhất nhưng độ dốc Doppler gắt nhất.",
+      "level": 3
+    },
+    {
+      "id": "qs-131",
+      "q": "The absolute delay of an NTN cell is already pre-compensated. Why must the timing advance range still be widened?",
+      "q_vi": "Độ trễ tuyệt đối của ô trong mạng phi mặt đất đã được bù trước. Vì sao vẫn phải mở rộng dải định trước thời gian?",
+      "choices": [
+        "The satellite clock drifts between ephemeris updates, and the timing advance field is used to correct that accumulated drift",
+        "The gateway and the terminal use different frame numbering, so a constant offset must be carried in the same signalling field",
+        "Users at opposite edges of one wide beam differ in propagation time, and that spread inside the cell has to be absorbed",
+        "Higher subcarrier spacing shortens the cyclic prefix, which forces every timing field to be re-scaled"
+      ],
+      "answer": 2,
+      "why": "A common correction removes the shared component, but a footprint hundreds of kilometres across still contains a large differential delay that the scheduler must accommodate. The residual is geometric, not a clock problem.",
+      "why_vi": "Phép hiệu chỉnh chung khử được phần dùng chung, nhưng vùng phủ rộng hàng trăm kilômét vẫn chứa chênh lệch trễ lớn mà bộ lập lịch phải chứa được. Phần dư này là do hình học chứ không phải do đồng hồ.",
+      "level": 3
+    },
+    {
+      "id": "qs-132",
+      "q": "What problem does the scheduling offset introduced for NTN solve?",
+      "q_vi": "Độ lệch lịch biểu đưa vào cho mạng phi mặt đất giải quyết vấn đề gì?",
+      "choices": [
+        "A grant would otherwise be decoded with too low a signal to noise ratio because of the very long distance the signal has to travel",
+        "A grant would otherwise collide with the broadcast of the ephemeris block on exactly the same time and frequency resources of the frame",
+        "A grant would otherwise be lost during the eclipse period, when the payload has to reduce its output power to protect the battery",
+        "A grant would otherwise schedule a transmission for a moment that arrives before the grant itself has finished propagating"
+      ],
+      "answer": 3,
+      "why": "Terrestrial timing relations assume a reply can be prepared within a few slots, which is physically impossible when the message is still in flight. The offset simply pushes the scheduled instant beyond the propagation time.",
+      "why_vi": "Quan hệ định thời trên mặt đất giả định có thể chuẩn bị hồi đáp trong vài khe, điều bất khả thi khi bản tin còn đang bay. Độ lệch chỉ đơn giản đẩy thời điểm đã lập lịch ra xa hơn thời gian lan truyền.",
+      "level": 3
+    },
+    {
+      "id": "qs-133",
+      "q": "Why did the timing advance field have to be extended for satellite access?",
+      "q_vi": "Vì sao trường định trước thời gian phải được mở rộng khi truy nhập qua vệ tinh?",
+      "choices": [
+        "Its terrestrial range covers cells of tens of kilometres, while a satellite round trip corresponds to thousands",
+        "Its terrestrial resolution is too coarse to represent the fine delay differences inside a satellite beam",
+        "Its terrestrial definition assumes a stationary base station, which a moving satellite violates",
+        "Its terrestrial value is signalled only at attach, while a satellite link needs it on every slot"
+      ],
+      "answer": 0,
+      "why": "The field was dimensioned for the largest terrestrial cell, and orbital distances exceed that by orders of magnitude, so the ceiling rather than the resolution is what broke. Resolution and update rate are separate issues that were also addressed.",
+      "why_vi": "Trường này vốn được thiết kế theo ô mặt đất lớn nhất, còn khoảng cách quỹ đạo vượt xa nhiều bậc, nên cái hỏng là mức trần chứ không phải độ phân giải. Độ phân giải và nhịp cập nhật là những vấn đề riêng và cũng đã được xử lý.",
+      "level": 2
+    },
+    {
+      "id": "qs-134",
+      "q": "Why is disabling hybrid retransmission sometimes the right choice on a satellite bearer?",
+      "q_vi": "Vì sao đôi khi tắt cơ chế phát lại lai là lựa chọn đúng trên kênh mang vệ tinh?",
+      "choices": [
+        "Retransmission consumes onboard processing and radiated energy that a small satellite simply cannot spare during the eclipse part of the orbit",
+        "Feedback arrives so late that a stop and wait process idles for most of the round trip, and reliability is better handled by the layer above",
+        "The error rate on a satellite link is so low that no retransmission mechanism is ever needed at all",
+        "The soft combining buffer is too large to implement in a terminal without a dedicated memory chip"
+      ],
+      "answer": 1,
+      "why": "With a fixed number of parallel processes, a long round trip means most of them are waiting rather than sending, and throughput collapses. Turning the mechanism off and relying on the outer retransmission layer keeps the pipe full.",
+      "why_vi": "Với số tiến trình song song cố định, thời gian khứ hồi dài khiến phần lớn tiến trình đang chờ chứ không phát, và thông lượng sụp. Tắt cơ chế này và dựa vào lớp phát lại phía trên giúp giữ đường truyền luôn đầy.",
+      "level": 3
+    },
+    {
+      "id": "qs-135",
+      "q": "A non-terrestrial terminal cannot decode the system information block carrying satellite assistance data. What is the immediate consequence?",
+      "q_vi": "Một đầu cuối phi mặt đất không giải mã được khối thông tin hệ thống mang dữ liệu hỗ trợ vệ tinh. Hệ quả trước mắt là gì?",
+      "choices": [
+        "It falls back to a terrestrial cell automatically, since the standard requires a ground layer to be present underneath",
+        "It can still access the cell but only for emergency calls, since the assistance data governs normal service alone",
+        "It cannot compute its own delay and frequency correction, so it cannot even start the access procedure correctly",
+        "It loses only its positioning accuracy, since the block carries the ephemeris used for location reporting"
+      ],
+      "answer": 2,
+      "why": "Ephemeris, common timing and the validity window are what let the terminal pre-compensate before its first transmission, so without them the first uplink lands outside the expected window. Access fails at the very first step.",
+      "why_vi": "Lịch thiên văn, tham số định thời chung và cửa sổ hiệu lực là những gì cho phép đầu cuối bù trước ngay trước lần phát đầu tiên, thiếu chúng thì tín hiệu đường lên đầu tiên rơi ngoài cửa sổ mong đợi. Việc truy nhập hỏng ngay ở bước đầu.",
+      "level": 2
+    },
+    {
+      "id": "qs-136",
+      "q": "How does a quasi-Earth-fixed cell change the handover pattern compared with a cell that sweeps continuously?",
+      "q_vi": "Ô gần cố định theo mặt đất làm thay đổi kiểu chuyển giao thế nào so với ô quét liên tục?",
+      "choices": [
+        "Handovers disappear entirely, because the cell identity now stays attached to that ground area permanently from then on",
+        "Handovers become measurement driven again, because the received level now falls away gradually towards the edge of the cell",
+        "Handovers move to the feeder link, because the user link no longer changes while the beam is being held over the area",
+        "Handovers stop being a continuous trickle and become scheduled bulk events when the beam jumps to the next area"
+      ],
+      "answer": 3,
+      "why": "Steering the beam to hold a ground area postpones mobility and then concentrates it, which is easier to plan but produces a sharp signalling peak. The satellite still passes, so the cell must eventually be handed over.",
+      "why_vi": "Lái búp sóng để giữ một vùng mặt đất làm hoãn phần di động rồi dồn nó lại, dễ lên kế hoạch hơn nhưng tạo đỉnh báo hiệu nhọn. Vệ tinh vẫn bay qua nên ô rốt cuộc vẫn phải chuyển giao.",
+      "level": 3
+    },
+    {
+      "id": "qs-137",
+      "q": "For a battery powered sensor served by a sparse constellation, what makes discontinuous coverage acceptable?",
+      "q_vi": "Với một cảm biến chạy pin được phục vụ bởi chòm sao thưa, điều gì khiến vùng phủ gián đoạn vẫn chấp nhận được?",
+      "choices": [
+        "The device is told when the next pass will occur, so it sleeps instead of listening and spends its energy only on transmission",
+        "The device raises its transmit power between passes, which keeps the link closed even without a satellite in view",
+        "The device switches to a terrestrial network between passes, which guarantees uninterrupted reachability",
+        "The device stores its readings in a shared buffer on the ground, which is emptied when a satellite appears"
+      ],
+      "answer": 0,
+      "why": "Predictability turns an outage into a schedule, and a scheduled outage costs nothing in energy because the receiver stays off. Listening continuously for a satellite that is not there is what drains such a device.",
+      "why_vi": "Tính dự đoán được biến sự mất kết nối thành một lịch trình, và lịch trình đó không tốn năng lượng vì máy thu được tắt. Việc nghe liên tục để chờ một vệ tinh chưa tới mới là cái làm cạn pin thiết bị.",
+      "level": 2
+    },
+    {
+      "id": "qs-138",
+      "q": "Current non-terrestrial radio access assumes the terminal knows its own position. What operational risk does that create?",
+      "q_vi": "Truy nhập vô tuyến phi mặt đất hiện nay giả định đầu cuối biết vị trí của chính mình. Rủi ro vận hành nào phát sinh từ đó?",
+      "choices": [
+        "A navigation outage merely reduces throughput, because the network can always fall back to a lower modulation order and a slower rate",
+        "A navigation outage or a spoofing attack denies access altogether, because the terminal can no longer compute its own corrections",
+        "A navigation outage affects only handover, because position is used solely to select the next satellite",
+        "A navigation outage affects only billing, because location is required for regulatory zone reporting"
+      ],
+      "answer": 1,
+      "why": "Delay and Doppler pre-compensation are preconditions for the first uplink transmission, so losing position is not a degradation but a hard denial. That also turns a positioning attack into an availability attack on the whole service.",
+      "why_vi": "Bù trước độ trễ và Doppler là điều kiện tiên quyết cho lần phát đường lên đầu tiên, nên mất vị trí không phải là suy giảm mà là chặn đứng. Điều đó cũng biến một đòn tấn công định vị thành đòn tấn công vào tính sẵn sàng của cả dịch vụ.",
+      "level": 3
+    },
+    {
+      "id": "qs-139",
+      "q": "In a regenerative architecture the base station is split, with one part on board and one part on the ground. What does the choice of split point mainly decide?",
+      "q_vi": "Trong kiến trúc tái sinh, trạm gốc được chia làm hai, một phần trên vệ tinh và một phần dưới mặt đất. Điểm chia chủ yếu quyết định điều gì?",
+      "choices": [
+        "How much transmit power the payload needs, since the lower layers consume far more energy than the upper ones",
+        "Which frequency band the feeder link may use, since the higher layers demand a much wider transport bandwidth",
+        "Which timing critical loops have to survive the feeder link delay and which can be closed locally in orbit",
+        "How many users can be served, since the split determines the number of available beams"
+      ],
+      "answer": 2,
+      "why": "Every function left on the ground has its control loop stretched by the feeder round trip, so the split is chosen to keep scheduling and retransmission near the air interface. Bandwidth and power follow from the split rather than defining it.",
+      "why_vi": "Mọi chức năng để lại dưới mặt đất đều có vòng điều khiển bị kéo dài thêm một lượt khứ hồi của tuyến tiếp sóng, nên điểm chia được chọn để giữ việc lập lịch và phát lại ở gần giao diện vô tuyến. Băng thông và công suất là hệ quả của điểm chia chứ không định nghĩa nó.",
+      "level": 3
+    },
+    {
+      "id": "qs-140",
+      "q": "Putting the full base station on board shortens the control loop. What does it cost?",
+      "q_vi": "Đặt trọn trạm gốc lên vệ tinh giúp rút ngắn vòng điều khiển. Cái giá là gì?",
+      "choices": [
+        "A longer round trip out to the core network, since user data must now traverse two independent links in series",
+        "The loss of inter-satellite routing, since a full base station occupies the very ports used by those optical terminals",
+        "A permanent increase in Doppler, since the reference oscillator now moves together with the base station itself",
+        "Processing power, heat rejection and the risk of updating complex software on hardware that cannot be reached"
+      ],
+      "answer": 3,
+      "why": "Onboard scheduling and retransmission close locally, which is the gain, but the payload must then carry a general purpose processing load with all its thermal and maintenance consequences. Doppler comes from motion, not from where the processing sits.",
+      "why_vi": "Lập lịch và phát lại khép kín tại chỗ là phần lợi, nhưng tải trọng phải mang theo khối xử lý đa dụng cùng mọi hệ quả về nhiệt và bảo trì. Doppler sinh ra từ chuyển động chứ không phải từ chỗ đặt khối xử lý.",
+      "level": 2
+    },
+    {
+      "id": "qs-141",
+      "q": "An operator uses a satellite to backhaul a rural base station instead of serving handsets directly. What follows?",
+      "q_vi": "Một nhà khai thác dùng vệ tinh để truyền dẫn hồi tiếp cho trạm gốc nông thôn thay vì phục vụ trực tiếp máy cầm tay. Hệ quả là gì?",
+      "choices": [
+        "The air interface stays terrestrial with normal timing, and only the transport layer has to tolerate the long delay",
+        "The handsets must still support satellite waveforms, since the delay is visible to them at the radio layer",
+        "The satellite must carry a regenerative payload, since backhaul cannot be transported over a transparent one",
+        "The base station must be synchronised through the satellite, which removes the need for a local reference"
+      ],
+      "answer": 0,
+      "why": "Placing the satellite behind the base station keeps the radio protocol timing entirely on the ground, so ordinary handsets work unmodified and the delay is a transport concern. This is why backhaul was deployable long before direct access.",
+      "why_vi": "Đặt vệ tinh phía sau trạm gốc giữ toàn bộ định thời giao thức vô tuyến ở mặt đất, nhờ đó máy cầm tay thông thường hoạt động không cần sửa và độ trễ chỉ là chuyện của lớp truyền tải. Đó là lý do truyền dẫn hồi tiếp triển khai được từ rất lâu trước khi có truy nhập trực tiếp.",
+      "level": 2
+    },
+    {
+      "id": "qs-142",
+      "q": "What makes a slice guarantee harder to honour over a satellite segment than over a fibre segment?",
+      "q_vi": "Điều gì khiến cam kết của một lát mạng khó bảo đảm trên phân đoạn vệ tinh hơn là trên phân đoạn cáp quang?",
+      "choices": [
+        "Encryption on the space link prevents the orchestrator from inspecting traffic and classifying it into slices",
+        "Both the available capacity and the path itself change with orbital motion, so the resource being reserved is not the same one minute later",
+        "Satellite links cannot be partitioned in frequency, so only a form of time division isolation is ever available to the operator of the slice",
+        "The number of slices is limited by the number of transponders, which is far smaller than on a fibre route"
+      ],
+      "answer": 1,
+      "why": "A slice contract is a promise about resources, and here the pool moves, fades and reroutes on a timescale of minutes. Admission control therefore has to be written against a forecast rather than against an inventory.",
+      "why_vi": "Cam kết của lát mạng là lời hứa về tài nguyên, mà ở đây tập tài nguyên luôn dịch chuyển, bị pha đinh và bị định tuyến lại trong vài phút. Vì vậy điều khiển nạp nhận phải viết dựa trên dự báo chứ không dựa trên bảng kiểm kê.",
+      "level": 3
+    },
+    {
+      "id": "qs-143",
+      "q": "A simulation shows the busiest inter-satellite links of a global constellation sitting over the Arctic, far from any demand. What is happening?",
+      "q_vi": "Một mô phỏng cho thấy các liên kết liên vệ tinh bận nhất của chòm sao toàn cầu lại nằm trên Bắc Cực, cách xa mọi nhu cầu. Chuyện gì đang xảy ra?",
+      "choices": [
+        "Polar satellites carry the largest antennas in the fleet, so the routing metric prefers them for the higher data rate they can offer on each hop",
+        "Ionospheric conditions are calmest at high latitude, so the protocol deliberately assigns the most reliable links to that region of the constellation",
+        "Orbital planes converge near the poles, so shortest path routing keeps finding short hops there and funnels transit traffic through them",
+        "Ground stations cluster at high latitude, so traffic naturally converges towards the polar gateways"
+      ],
+      "answer": 2,
+      "why": "Convergence makes the polar region a topological shortcut, and a hop count or distance metric cannot see that those few links carry a whole hemisphere of transit. The fix is a load aware metric rather than more capacity there.",
+      "why_vi": "Sự hội tụ biến vùng cực thành lối tắt về cấu hình mạng, còn thước đo theo số chặng hay theo khoảng cách thì không thấy được rằng vài liên kết đó gánh lưu lượng quá cảnh của cả một bán cầu. Cách chữa là dùng thước đo có tính tới tải chứ không phải dựng thêm dung lượng ở đó.",
+      "level": 3
+    },
+    {
+      "id": "qs-144",
+      "q": "A transport connection over a LEO mesh reports frequent rate reductions although no packet is ever lost. What is the likely cause?",
+      "q_vi": "Một kết nối truyền tải qua lưới LEO liên tục báo giảm tốc độ dù không hề mất gói. Nguyên nhân nhiều khả năng là gì?",
+      "choices": [
+        "The receiver window is too small for the delay of the path, which limits the achievable rate regardless of whether anything is lost",
+        "The satellite reduces its transmit power during eclipse, which lowers the modulation order and therefore the rate that can be delivered",
+        "The gateway applies a traffic shaper that caps the rate at the subscribed value on every newly opened connection of that subscriber",
+        "Successive packets take paths of different length after a topology change, and the resulting reordering is read as congestion"
+      ],
+      "answer": 3,
+      "why": "Out of order arrival triggers duplicate acknowledgements, and a classic congestion controller responds by halving the rate even though nothing was dropped. A small window would cap throughput steadily rather than cause repeated reductions.",
+      "why_vi": "Gói tới không đúng thứ tự sinh ra các báo nhận trùng, và bộ điều khiển tắc nghẽn cổ điển phản ứng bằng cách giảm nửa tốc độ dù không mất gì. Cửa sổ nhỏ sẽ chặn thông lượng ở mức đều đặn chứ không gây ra những lần giảm lặp đi lặp lại.",
+      "level": 3
+    },
+    {
+      "id": "qs-145",
+      "q": "A multibeam system is limited by carrier to interference rather than by carrier to noise. What does raising the satellite transmit power achieve?",
+      "q_vi": "Một hệ đa búp sóng bị giới hạn bởi tỷ số sóng mang trên nhiễu chứ không phải trên tạp âm. Việc tăng công suất phát của vệ tinh đạt được gì?",
+      "choices": [
+        "Essentially nothing, because the interfering beams come from the same payload and grow in step with the wanted signal",
+        "A proportional gain in throughput, because the received signal to interference ratio scales with transmit power",
+        "A large gain at the beam edge only, because interference is concentrated at the centre of each beam",
+        "A gain that appears only in clear sky, because rain attenuates interference and wanted signal differently"
+      ],
+      "answer": 0,
+      "why": "When the dominant impairment shares the same amplifier, the ratio is invariant to power and only spatial or spectral separation helps. That is why tighter beams, better sidelobe control and reuse planning are the real levers.",
+      "why_vi": "Khi nguồn gây suy giảm chính dùng chung bộ khuếch đại, tỷ số này không đổi theo công suất và chỉ có tách biệt về không gian hoặc tần số mới giúp được. Đó là lý do búp sóng hẹp hơn, kiểm soát búp phụ tốt hơn và kế hoạch tái sử dụng mới là đòn bẩy thật.",
+      "level": 3
+    },
+    {
+      "id": "qs-146",
+      "q": "An equatorial ground station reports brief signal dropouts after sunset even in clear weather. What should be suspected first?",
+      "q_vi": "Một trạm mặt đất ở vùng xích đạo báo có những lần rớt tín hiệu ngắn sau hoàng hôn dù trời quang. Nên nghi ngờ điều gì trước tiên?",
+      "choices": [
+        "Rain fade, which is strongest in equatorial regions and therefore explains both the geographic and the seasonal pattern",
+        "Ionospheric scintillation, whose rapid amplitude and phase fades peak in the hours after local sunset near the equator",
+        "Sun outage, which occurs when the sun passes behind the satellite as seen from the station",
+        "Jamming, since interference sources are usually switched on outside normal working hours"
+      ],
+      "answer": 1,
+      "why": "The signature is fast fading with a diurnal and geographic pattern tied to plasma irregularities, and it attacks carrier tracking more than average power. Clear weather rules out rain, and sun outage occurs near local noon around the equinoxes.",
+      "why_vi": "Dấu hiệu là pha đinh nhanh với quy luật theo giờ trong ngày và theo vị trí địa lý, gắn với bất thường của lớp plasma, và nó phá việc bám sóng mang nhiều hơn là hạ công suất trung bình. Trời quang loại trừ mưa, còn hiện tượng mặt trời che xảy ra quanh giữa trưa vào dịp xuân phân và thu phân.",
+      "level": 3
+    },
+    {
+      "id": "qs-147",
+      "q": "Why do systems operating at lower frequencies through the ionosphere prefer circular polarisation?",
+      "q_vi": "Vì sao các hệ thống làm việc ở tần số thấp xuyên qua tầng điện ly lại chuộng phân cực tròn?",
+      "choices": [
+        "A circular wave suffers less free space path loss than a linear wave over the same distance",
+        "A circular wave penetrates rain cells better than a linear one, and that matters most in the lower frequency bands used for these particular services",
+        "A linear plane of polarisation is rotated by the ionised medium in the geomagnetic field, and the rotation angle is hard to predict and track",
+        "A circular wave allows two independent channels to share one frequency, which doubles the available capacity without asking for any extra spectrum"
+      ],
+      "answer": 2,
+      "why": "The rotation scales strongly with the inverse of frequency, so at lower bands a linearly polarised receiver would suffer deep and variable mismatch loss. Circular polarisation makes the received power insensitive to that twist.",
+      "why_vi": "Góc quay tăng mạnh khi tần số giảm, nên ở băng thấp máy thu phân cực thẳng sẽ chịu suy hao do lệch phân cực rất sâu và thất thường. Phân cực tròn làm công suất thu không còn nhạy với góc xoắn đó.",
+      "level": 2
+    },
+    {
+      "id": "qs-148",
+      "q": "A terminal is upgraded to a higher gain antenna but the measured link performance gets worse. What is the most likely explanation?",
+      "q_vi": "Một đầu cuối được nâng cấp lên ăng ten độ lợi cao hơn nhưng chất lượng tuyến đo được lại tệ đi. Giải thích khả dĩ nhất là gì?",
+      "choices": [
+        "The higher gain raises the system noise temperature, which cancels the improvement in received power",
+        "The larger aperture collects more rain attenuation, since the affected volume of atmosphere is bigger",
+        "The higher gain violates the off-axis emission mask, so the terminal is forced to reduce its power",
+        "The narrower beam turns the existing tracking error into a much larger pointing loss than before"
+      ],
+      "answer": 3,
+      "why": "Gain and beamwidth trade against each other, so an unchanged pointing error costs far more decibels once the beam is narrow. A high gain design is only worth its rating if the tracking accuracy is upgraded with it.",
+      "why_vi": "Độ lợi và độ rộng búp đánh đổi lẫn nhau, nên cùng một sai số chĩa hướng sẽ tốn nhiều decibel hơn hẳn khi búp sóng hẹp lại. Thiết kế độ lợi cao chỉ đáng giá như con số ghi trên nhãn nếu độ chính xác bám được nâng cấp theo.",
+      "level": 2
+    },
+    {
+      "id": "qs-149",
+      "q": "A tropical Ka band service is designed with a margin taken from the worst month rather than the annual average. Why?",
+      "q_vi": "Dịch vụ băng Ka ở vùng nhiệt đới được thiết kế với dự trữ lấy theo tháng xấu nhất chứ không theo trung bình năm. Vì sao?",
+      "choices": [
+        "Rain is concentrated in a few months, so an annual average would hide the season in which the service actually fails",
+        "Regulators define availability on a monthly basis, so the annual figure has no legal standing",
+        "Rain attenuation is independent of season, so any single month is representative of the whole year",
+        "The worst month is easier to measure, since propagation campaigns rarely run for a full year"
+      ],
+      "answer": 0,
+      "why": "Outage is what users experience when it happens, not spread evenly over the calendar, so averaging across a year understates the fade the link must survive. Sizing on the concentrated period is what makes the availability figure meaningful.",
+      "why_vi": "Người dùng cảm nhận sự mất dịch vụ đúng vào lúc nó xảy ra chứ không trải đều theo lịch, nên lấy trung bình cả năm sẽ hạ thấp mức pha đinh mà tuyến phải chịu được. Tính theo giai đoạn dồn dập mới làm con số sẵn sàng có ý nghĩa.",
+      "level": 2
+    },
+    {
+      "id": "qs-150",
+      "q": "Why does the eclipse power demand, rather than the sunlit demand, usually size the battery of a LEO satellite?",
+      "q_vi": "Vì sao nhu cầu công suất lúc vào bóng tối, chứ không phải lúc được chiếu sáng, thường quyết định kích thước pin của vệ tinh LEO?",
+      "choices": [
+        "The solar arrays cannot charge and discharge at the same time, so the battery has to hold a full orbit worth of energy entirely on its own",
+        "Cycle life falls steeply as the depth of discharge rises, so the battery must be oversized to survive tens of thousands of eclipses",
+        "Battery capacity falls with temperature, and the coldest point of the orbit occurs during sunlit operation",
+        "The payload draws its peak current only in sunlight, so the battery must buffer that peak for the arrays"
+      ],
+      "answer": 1,
+      "why": "A LEO satellite enters shadow on most revolutions, which accumulates a very large cycle count over the mission, and deep cycles shorten life disproportionately. Keeping the discharge shallow is what forces a large pack.",
+      "why_vi": "Vệ tinh LEO vào bóng tối ở hầu hết các vòng bay, tích lại thành số chu kỳ rất lớn trong cả sứ mệnh, mà phóng sâu thì tuổi thọ giảm không tương xứng. Muốn giữ mức phóng nông thì buộc phải dùng khối pin lớn.",
+      "level": 3
+    },
+    {
+      "id": "qs-151",
+      "q": "Onboard memory reports occasional bit flips that clear after a rewrite, with no permanent damage. What is the standard mitigation?",
+      "q_vi": "Bộ nhớ trên vệ tinh thỉnh thoảng báo lật bit rồi hết sau khi ghi lại, không hỏng vĩnh viễn. Biện pháp giảm thiểu tiêu chuẩn là gì?",
+      "choices": [
+        "Thicker shielding around the memory, since the particles responsible are stopped by a few millimetres of aluminium",
+        "Lowering the clock frequency, since slower logic is inherently less sensitive to charged particle strikes",
+        "Error correcting codes with periodic scrubbing, plus redundancy and majority voting on critical state",
+        "Switching the memory off while passing through the radiation belts and buffering data in the payload"
+      ],
+      "answer": 2,
+      "why": "A transient upset leaves the device healthy, so the answer is to detect and repair the state rather than to protect the silicon. Shielding helps against total dose but does very little against the high energy particles that cause these events.",
+      "why_vi": "Lỗi thoáng qua không làm hỏng linh kiện, nên cách xử lý là phát hiện và sửa lại trạng thái chứ không phải bảo vệ phần bán dẫn. Che chắn có ích với liều tích luỹ nhưng gần như vô dụng trước các hạt năng lượng cao gây ra hiện tượng này.",
+      "level": 2
+    },
+    {
+      "id": "qs-152",
+      "q": "A ground node loses its timing reference. What determines how long it can still be trusted?",
+      "q_vi": "Một nút mặt đất mất tham chiếu định thời. Điều gì quyết định nó còn đáng tin trong bao lâu?",
+      "choices": [
+        "The accuracy it had achieved at the instant of the loss, since that error is simply carried forward unchanged from then on",
+        "The number of nodes still holding a valid reference, since the network average then replaces the lost source for everyone",
+        "The bandwidth of the tracking loop, since a wider loop stores more information about the behaviour of the past reference",
+        "The drift rate of its local oscillator, since the error accumulates from the moment the reference disappears"
+      ],
+      "answer": 3,
+      "why": "Holdover performance is an integration of drift over time, so a very accurate but unstable oscillator fails quickly while a slightly less accurate stable one lasts far longer. The starting offset is a constant that is easily calibrated out.",
+      "why_vi": "Khả năng duy trì là tích luỹ của độ trôi theo thời gian, nên một dao động rất chính xác nhưng kém ổn định sẽ hỏng nhanh, còn loại kém chính xác hơn một chút nhưng ổn định thì trụ lâu hơn nhiều. Độ lệch ban đầu chỉ là hằng số và dễ hiệu chuẩn bỏ.",
+      "level": 3
+    },
+    {
+      "id": "qs-153",
+      "q": "A remote sensing link increases its update rate to improve freshness, yet the measured age of information gets worse. Why?",
+      "q_vi": "Một tuyến viễn thám tăng nhịp cập nhật để dữ liệu tươi hơn, nhưng tuổi của thông tin đo được lại xấu đi. Vì sao?",
+      "choices": [
+        "Updates now arrive faster than the link can drain them, so each one waits in a growing queue and is stale by the time it is delivered",
+        "Updates now interfere with each other on the air interface, which raises the error rate and forces retransmission",
+        "Updates now exceed the storage of the receiver, so the oldest ones are discarded before they can be used",
+        "Updates now consume more onboard power, so the transmitter reduces its rate to stay within the budget"
+      ],
+      "answer": 0,
+      "why": "Freshness depends on both how often a sample is taken and how long it waits, and beyond a certain rate the queueing delay dominates. This is why the metric has an interior optimum rather than improving monotonically with sampling rate.",
+      "why_vi": "Độ tươi phụ thuộc cả vào nhịp lấy mẫu lẫn thời gian chờ, và vượt qua một nhịp nhất định thì độ trễ hàng đợi chiếm ưu thế. Đó là lý do chỉ số này có cực trị ở giữa chứ không tốt lên đơn điệu theo nhịp lấy mẫu.",
+      "level": 3
+    },
+    {
+      "id": "qs-154",
+      "q": "A flat panel terminal tracks a LEO satellite electronically. Why does the link degrade as the satellite moves away from overhead?",
+      "q_vi": "Một đầu cuối dạng tấm phẳng bám vệ tinh LEO bằng phương pháp điện tử. Vì sao tuyến truyền xấu đi khi vệ tinh rời xa vị trí thẳng đỉnh đầu?",
+      "choices": [
+        "The phase shifters run out of range at large angles, so the beam simply cannot be formed in that direction at all any more",
+        "The effective aperture of the array shrinks with the cosine of the scan angle, and the slant range grows at the same time",
+        "The polarisation of the incoming wave rotates with elevation, so the panel receives a mismatched field",
+        "The array elements begin to interfere with each other once the beam is steered away from broadside"
+      ],
+      "answer": 1,
+      "why": "Projected area falls as the beam is steered off broadside, so gain drops even before the extra distance and atmosphere are counted. Two independent effects therefore push in the same direction as elevation falls.",
+      "why_vi": "Diện tích hình chiếu giảm khi búp sóng lái lệch khỏi pháp tuyến, nên độ lợi tụt xuống ngay cả trước khi tính thêm cự ly và khí quyển. Hai hiệu ứng độc lập cùng đẩy về một hướng khi góc ngẩng giảm.",
       "level": 2
     }
   ]

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "ai",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "a-ml",
@@ -1503,6 +1503,967 @@
       "tags": [
         "llm",
         "metric"
+      ]
+    },
+    {
+      "id": "a-cosine-annealing",
+      "en": "Cosine annealing",
+      "vi": "Ủ tốc độ học theo hàm cô sin",
+      "def_en": "A schedule that decays the learning rate along a cosine curve from its peak to near zero over a run of fixed length, so most steps happen at moderate rates and only the final ones at very small rates.",
+      "def_vi": "Lịch giảm tốc độ học theo đường cô sin, từ đỉnh xuống gần không trong một lần chạy có độ dài định trước, nên phần lớn số bước diễn ra ở mức vừa và chỉ những bước cuối mới rất nhỏ.",
+      "say": "Cosine annealing needs the total step count fixed in advance, so cutting the run short leaves the model stranded at a high learning rate.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-one-cycle",
+      "en": "One-cycle learning rate policy",
+      "vi": "Chính sách tốc độ học một chu kỳ",
+      "def_en": "Raising the learning rate to a large peak and bringing it back down within a single run while momentum moves the opposite way, so the model crosses the landscape fast before settling.",
+      "def_vi": "Đưa tốc độ học lên một đỉnh lớn rồi hạ trở lại ngay trong một lần chạy, còn đà thì đi ngược chiều, nhờ vậy mô hình băng qua mặt phẳng mất mát nhanh rồi mới lắng lại.",
+      "say": "The one cycle policy pushes the learning rate far above what a constant schedule would tolerate.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-lr-range-test",
+      "en": "Learning rate range test",
+      "vi": "Phép dò dải tốc độ học",
+      "def_en": "A short run in which the learning rate grows exponentially every step while the loss is logged, so the largest rate that still drives the loss down can be read straight off the curve.",
+      "def_vi": "Một lần chạy ngắn, tốc độ học tăng theo hàm mũ ở mỗi bước và hàm mất mát được ghi lại, nhờ đó đọc thẳng trên đường cong ra mức lớn nhất mà vẫn còn kéo mất mát đi xuống.",
+      "say": "Run the range test first, then set the peak just below the point where the loss turns upward.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-grad-accum",
+      "en": "Gradient accumulation",
+      "vi": "Cộng dồn gradient",
+      "def_en": "Summing gradients over several forward and backward passes before one optimiser step, which reproduces a large batch gradient on a device that cannot hold the batch.",
+      "def_vi": "Cộng gradient qua vài lượt truyền xuôi và ngược rồi mới thực hiện một bước cập nhật, cách này tái tạo gradient của lô lớn trên thiết bị không chứa nổi lô đó.",
+      "say": "Accumulation gives you the large batch gradient, but batch normalisation still sees only the small chunks.",
+      "tags": [
+        "optimisation",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-linear-scaling",
+      "en": "Linear scaling rule",
+      "vi": "Quy tắc co giãn tuyến tính",
+      "def_en": "The heuristic that multiplying the batch size by some factor calls for multiplying the learning rate by the same factor, because gradient noise per step falls as the batch grows.",
+      "def_vi": "Kinh nghiệm cho rằng nhân kích thước lô lên bao nhiêu lần thì nhân tốc độ học lên bấy nhiêu lần, vì nhiễu của gradient trên mỗi bước giảm khi lô lớn dần.",
+      "say": "When we doubled the batch across two nodes we doubled the learning rate and stretched the warmup.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-rmsprop",
+      "en": "RMSProp",
+      "vi": "Bộ tối ưu RMSProp",
+      "def_en": "An optimiser dividing each coordinate's step by a running root mean square of that coordinate's recent gradients, so rarely active parameters still move a useful distance.",
+      "def_vi": "Bộ tối ưu chia bước của từng toạ độ cho căn trung bình bình phương trượt của chính gradient toạ độ đó, nhờ vậy tham số hiếm khi hoạt động vẫn dịch chuyển được một đoạn có ích.",
+      "say": "RMSProp normalises every coordinate by its own recent gradient magnitude.",
+      "tags": [
+        "optimisation"
+      ]
+    },
+    {
+      "id": "a-nesterov",
+      "en": "Nesterov momentum",
+      "vi": "Đà Nesterov",
+      "def_en": "A momentum variant evaluating the gradient at the point momentum is about to carry the parameters to, so the correction arrives one step earlier than in the classical form.",
+      "def_vi": "Biến thể của đà, tính gradient ngay tại điểm mà đà sắp đẩy tham số tới, nên phần hiệu chỉnh đến sớm hơn một bước so với dạng cổ điển.",
+      "say": "Nesterov looks ahead before it corrects, which damps the overshoot near a sharp valley.",
+      "tags": [
+        "optimisation"
+      ]
+    },
+    {
+      "id": "a-sam",
+      "en": "Sharpness-aware minimisation",
+      "vi": "Cực tiểu hoá có xét độ sắc",
+      "def_en": "An optimiser that first perturbs the weights toward the worst nearby point and takes the gradient there, so the accepted solution keeps a low loss across a neighbourhood rather than at one point.",
+      "def_vi": "Bộ tối ưu trước hết đẩy trọng số về phía điểm xấu nhất lân cận rồi lấy gradient tại đó, nhờ vậy nghiệm được chấp nhận phải giữ mất mát thấp trên cả một vùng chứ không chỉ tại một điểm.",
+      "say": "Sharpness aware minimisation costs two forward passes per step, but it usually buys real test accuracy.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-flat-minimum",
+      "en": "Flat minimum",
+      "vi": "Cực tiểu phẳng",
+      "def_en": "A solution whose loss barely changes under small weight perturbations, which tends to generalise better because the shift between the training and test loss surfaces moves such a point less.",
+      "def_vi": "Nghiệm mà mất mát gần như không đổi khi trọng số bị nhiễu nhẹ, thường tổng quát hoá tốt hơn vì độ lệch giữa mặt mất mát huấn luyện và mặt mất mát kiểm tra làm điểm ấy xê dịch ít.",
+      "say": "Flat minima survive the small shift between the training loss surface and the test one.",
+      "tags": [
+        "optimisation",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-adam-bias-correction",
+      "en": "Adam bias correction",
+      "vi": "Hiệu chỉnh chệch trong Adam",
+      "def_en": "Dividing the two moving averages by one minus the decay raised to the step number, which repairs the pull toward zero caused by starting both moments at zero.",
+      "def_vi": "Chia hai trung bình trượt cho một trừ hệ số suy giảm luỹ thừa số bước, nhằm sửa lực kéo về không sinh ra do khởi tạo cả hai mô men bằng không.",
+      "say": "Without bias correction the first Adam steps come out far too small.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-loss-spike",
+      "en": "Loss spike",
+      "vi": "Đột biến hàm mất mát",
+      "def_en": "A sudden jump of the training loss during a long run, usually traced to a rare batch, an overflow in low precision, or a stale second moment in the optimiser.",
+      "def_vi": "Cú nhảy đột ngột của mất mát huấn luyện giữa một lần chạy dài, thường truy ra là do một lô dữ liệu hiếm, do tràn số ở độ chính xác thấp, hoặc do mô men bậc hai của bộ tối ưu đã cũ.",
+      "say": "We keep rolling checkpoints so a loss spike costs one hour of training rather than one week.",
+      "tags": [
+        "training",
+        "optimisation"
+      ]
+    },
+    {
+      "id": "a-mup",
+      "en": "Maximal update parametrisation",
+      "vi": "Tham số hoá cập nhật cực đại",
+      "def_en": "A scaling scheme for initialisation and learning rates under which the best hyperparameters found on a narrow model stay optimal as width grows, so tuning can happen on a cheap proxy.",
+      "def_vi": "Cách co giãn khởi tạo và tốc độ học sao cho siêu tham số tốt nhất tìm được trên mô hình hẹp vẫn tối ưu khi bề rộng tăng lên, nhờ vậy có thể dò tham số trên một bản thay thế rẻ tiền.",
+      "say": "Under this parametrisation the tuned learning rate transfers from the narrow proxy to the full width model.",
+      "tags": [
+        "optimisation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-rmsnorm",
+      "en": "RMSNorm",
+      "vi": "Chuẩn hoá theo căn trung bình bình phương",
+      "def_en": "A layer normalisation variant rescaling activations by their root mean square without subtracting the mean, dropping one reduction and the shift parameter while keeping scale control.",
+      "def_vi": "Biến thể của chuẩn hoá theo lớp, co giãn giá trị hoạt hoá theo căn trung bình bình phương mà không trừ trung bình, bỏ bớt một phép rút gọn và tham số dịch nhưng vẫn giữ khả năng kiểm soát biên độ.",
+      "say": "RMSNorm drops the mean subtraction, which saves one pass over the hidden dimension.",
+      "tags": [
+        "architecture",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-prenorm",
+      "en": "Pre-norm residual block",
+      "vi": "Khối phần dư chuẩn hoá trước",
+      "def_en": "Placing normalisation inside the residual branch before the sublayer, so the identity path stays unnormalised and gradients reach the early layers without a long warmup.",
+      "def_vi": "Đặt phép chuẩn hoá bên trong nhánh phần dư, trước lớp con, nhờ đó đường truyền đồng nhất không bị chuẩn hoá và gradient tới được các lớp đầu mà không cần khởi động dài.",
+      "say": "Pre norm blocks train without warmup, but they need one final normalisation before the output head.",
+      "tags": [
+        "architecture",
+        "training"
+      ]
+    },
+    {
+      "id": "a-groupnorm",
+      "en": "Group normalisation",
+      "vi": "Chuẩn hoá theo nhóm",
+      "def_en": "Normalising over groups of channels inside each sample, which makes the statistics independent of batch size and therefore identical during training and inference.",
+      "def_vi": "Chuẩn hoá trên từng nhóm kênh bên trong mỗi mẫu, khiến các thống kê không phụ thuộc kích thước lô nên giống hệt nhau ở lúc huấn luyện và lúc suy luận.",
+      "say": "We switched to group normalisation because a batch of two images made batch statistics meaningless.",
+      "tags": [
+        "architecture",
+        "vision"
+      ]
+    },
+    {
+      "id": "a-running-stats",
+      "en": "Running statistics",
+      "vi": "Thống kê trượt",
+      "def_en": "The moving mean and variance a normalisation layer accumulates during training and then uses at inference, which is why a model can look healthy in training mode and collapse in evaluation mode.",
+      "def_vi": "Trung bình và phương sai trượt mà lớp chuẩn hoá tích luỹ trong lúc huấn luyện rồi dùng lại lúc suy luận, đây là lý do một mô hình có thể rất ổn ở chế độ huấn luyện mà sụp ở chế độ đánh giá.",
+      "say": "The gap vanished once we found that the running statistics had never been updated.",
+      "tags": [
+        "training",
+        "architecture"
+      ]
+    },
+    {
+      "id": "a-covariate-shift-internal",
+      "en": "Internal covariate shift",
+      "vi": "Dịch phân bố nội tại",
+      "def_en": "The change in the distribution of a layer's inputs as the layers beneath it update, the motivation originally offered for batch normalisation and later shown not to be its main benefit.",
+      "def_vi": "Sự thay đổi phân bố đầu vào của một lớp khi các lớp bên dưới nó cập nhật, đây là lý do ban đầu người ta đưa ra cho chuẩn hoá theo lô, về sau được chứng minh không phải là lợi ích chính.",
+      "say": "Internal covariate shift was the stated motive, but a smoother loss surface explains the gain better.",
+      "tags": [
+        "theory",
+        "training"
+      ]
+    },
+    {
+      "id": "a-weightnorm",
+      "en": "Weight normalisation",
+      "vi": "Chuẩn hoá trọng số",
+      "def_en": "Reparametrising each weight vector into a direction and a separate magnitude, so the optimiser controls length and direction independently without touching any batch statistic.",
+      "def_vi": "Tái tham số hoá mỗi vector trọng số thành một hướng và một độ lớn tách rời, để bộ tối ưu điều khiển độ dài và hướng độc lập nhau mà không cần đến thống kê của lô.",
+      "say": "Weight normalisation separates the length of a filter from its direction.",
+      "tags": [
+        "architecture",
+        "training"
+      ]
+    },
+    {
+      "id": "a-xavier",
+      "en": "Xavier initialisation",
+      "vi": "Khởi tạo Xavier",
+      "def_en": "Drawing initial weights with a variance set from the average of fan in and fan out, which keeps activation variance roughly constant across layers whose activation is symmetric around zero.",
+      "def_vi": "Lấy trọng số ban đầu với phương sai đặt theo trung bình của số đầu vào và số đầu ra, giữ cho phương sai của giá trị hoạt hoá gần như không đổi qua các lớp có hàm kích hoạt đối xứng quanh không.",
+      "say": "Xavier initialisation assumes a symmetric activation, which is why it under scales a rectified stack.",
+      "tags": [
+        "training"
+      ]
+    },
+    {
+      "id": "a-he-init",
+      "en": "He initialisation",
+      "vi": "Khởi tạo He",
+      "def_en": "Doubling the initial weight variance relative to the Xavier rule to compensate for a rectified activation zeroing out roughly half of the signal.",
+      "def_vi": "Nhân đôi phương sai trọng số ban đầu so với quy tắc Xavier để bù cho việc hàm kích hoạt chỉnh lưu đưa khoảng một nửa tín hiệu về không.",
+      "say": "He initialisation keeps the forward signal alive through a deep rectified stack.",
+      "tags": [
+        "training"
+      ]
+    },
+    {
+      "id": "a-orthogonal-init",
+      "en": "Orthogonal initialisation",
+      "vi": "Khởi tạo trực giao",
+      "def_en": "Setting a weight matrix to an orthogonal one so it preserves vector norms, which stops repeated multiplication in deep or recurrent stacks from exploding or vanishing.",
+      "def_vi": "Đặt ma trận trọng số bằng một ma trận trực giao để nó bảo toàn chuẩn của vector, nhờ đó phép nhân lặp lại trong mạng sâu hoặc mạng hồi quy không bùng nổ cũng không tiêu biến.",
+      "say": "Orthogonal initialisation preserves the norm, which matters most inside recurrent stacks.",
+      "tags": [
+        "training"
+      ]
+    },
+    {
+      "id": "a-zero-init-residual",
+      "en": "Zero-initialised residual branch",
+      "vi": "Nhánh phần dư khởi tạo bằng không",
+      "def_en": "Starting the last layer of every residual branch at zero so each block begins as an identity map and effective depth grows only as training finds a use for the branch.",
+      "def_vi": "Đặt lớp cuối của mỗi nhánh phần dư bằng không để từng khối khởi đầu như một ánh xạ đồng nhất, độ sâu hữu hiệu chỉ tăng dần khi quá trình huấn luyện thấy nhánh đó có ích.",
+      "say": "Zeroing the last layer of every residual branch makes the whole network start as an identity map.",
+      "tags": [
+        "training",
+        "architecture"
+      ]
+    },
+    {
+      "id": "a-symmetry-breaking",
+      "en": "Symmetry breaking",
+      "vi": "Phá vỡ đối xứng",
+      "def_en": "The reason weights cannot all start at the same value, since identical units receive identical gradients and stay identical forever, collapsing the layer to one effective unit.",
+      "def_vi": "Lý do không thể khởi tạo mọi trọng số bằng cùng một giá trị, vì các đơn vị giống hệt nhau sẽ nhận gradient giống hệt nhau và mãi mãi giống nhau, khiến cả lớp thu về một đơn vị hữu hiệu.",
+      "say": "If every unit starts at the same value they receive the same gradient and never differentiate.",
+      "tags": [
+        "training",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-fan-in-out",
+      "en": "Fan-in and fan-out",
+      "vi": "Số đầu vào và số đầu ra của một đơn vị",
+      "def_en": "The count of incoming and outgoing connections of a unit, the two numbers every principled initialisation rule uses to set its variance.",
+      "def_vi": "Số kết nối đi vào và số kết nối đi ra của một đơn vị, hai con số mà mọi quy tắc khởi tạo có cơ sở đều dùng để đặt phương sai.",
+      "say": "The initialiser needs fan in for the forward pass and fan out for the backward one.",
+      "tags": [
+        "training"
+      ]
+    },
+    {
+      "id": "a-cross-entropy",
+      "en": "Cross-entropy loss",
+      "vi": "Hàm mất mát entropy chéo",
+      "def_en": "The negative log probability the model assigns to the true class, whose gradient with respect to the logits is exactly the predicted distribution minus the one hot target.",
+      "def_vi": "Log xác suất âm mà mô hình gán cho lớp đúng, gradient của nó theo các điểm thô đúng bằng phân bố dự đoán trừ đi vector đích một nóng.",
+      "say": "The gradient of cross entropy at the logits is the predicted distribution minus the target.",
+      "tags": [
+        "training",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-label-smoothing",
+      "en": "Label smoothing",
+      "vi": "Làm mịn nhãn",
+      "def_en": "Replacing the hard target with a mixture leaving a little mass on the wrong classes, which caps the logit gap and usually improves calibration while costing a little top accuracy.",
+      "def_vi": "Thay đích cứng bằng một hỗn hợp còn chừa chút khối lượng cho các lớp sai, cách này chặn khoảng cách giữa các điểm thô, thường cải thiện hiệu chuẩn nhưng mất một chút độ chính xác đỉnh.",
+      "say": "Label smoothing improved our calibration error but it shrank the margins the distillation student relied on.",
+      "tags": [
+        "training",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-focal-loss",
+      "en": "Focal loss",
+      "vi": "Hàm mất mát tiêu điểm",
+      "def_en": "Cross-entropy multiplied by a factor that shrinks toward zero as an example becomes easy, so the gradient budget flows to the rare hard cases in a heavily imbalanced set.",
+      "def_vi": "Entropy chéo nhân thêm một hệ số tiến về không khi mẫu trở nên dễ, nhờ vậy phần gradient dồn cho những trường hợp khó và hiếm trong tập mất cân bằng nặng.",
+      "say": "Focal loss down weights the easy background boxes that would otherwise drown the real objects.",
+      "tags": [
+        "training",
+        "vision"
+      ]
+    },
+    {
+      "id": "a-huber",
+      "en": "Huber loss",
+      "vi": "Hàm mất mát Huber",
+      "def_en": "A regression loss that is quadratic near zero and linear beyond a threshold, so large residuals contribute a bounded gradient and outliers stop steering the fit.",
+      "def_vi": "Hàm mất mát hồi quy có dạng bậc hai quanh không và tuyến tính ngoài một ngưỡng, nên phần dư lớn chỉ đóng góp gradient bị chặn và các điểm dị thường thôi lèo lái phép khớp.",
+      "say": "We moved to a Huber loss because a handful of sensor spikes were steering the whole regression.",
+      "tags": [
+        "training",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-hinge",
+      "en": "Hinge loss",
+      "vi": "Hàm mất mát bản lề",
+      "def_en": "A margin loss that reaches zero once the correct score beats the rival score by a set margin, so only the examples still inside the margin produce any gradient.",
+      "def_vi": "Hàm mất mát theo lề, bằng không ngay khi điểm của lớp đúng vượt điểm của lớp cạnh tranh một khoảng lề đã định, nên chỉ những mẫu còn nằm trong lề mới sinh ra gradient.",
+      "say": "With a hinge loss the examples already outside the margin contribute nothing to the update.",
+      "tags": [
+        "training",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-kl",
+      "en": "Kullback-Leibler divergence",
+      "vi": "Phân kỳ Kullback-Leibler",
+      "def_en": "An asymmetric measure of how badly one distribution misplaces probability mass relative to another, where the direction chosen decides whether the fitted model covers every mode or locks onto one.",
+      "def_vi": "Đại lượng bất đối xứng đo mức một phân bố đặt sai khối lượng xác suất so với phân bố kia, chiều được chọn quyết định mô hình khớp sẽ phủ mọi đỉnh hay bám chặt vào một đỉnh.",
+      "say": "The direction of the divergence decides whether the fit covers every mode or picks just one.",
+      "tags": [
+        "theory",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-infonce",
+      "en": "InfoNCE loss",
+      "vi": "Hàm mất mát InfoNCE",
+      "def_en": "A contrastive objective scoring one positive pair against many negatives inside a softmax, so its value bounds the mutual information and its usefulness grows with the number of negatives.",
+      "def_vi": "Mục tiêu đối lập, chấm một cặp dương so với nhiều mẫu âm bên trong một hàm softmax, giá trị của nó chặn thông tin tương hỗ và mức hữu ích tăng theo số lượng mẫu âm.",
+      "say": "InfoNCE gets sharper as the negative pool grows, which is why the queue size matters so much.",
+      "tags": [
+        "training",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-triplet",
+      "en": "Triplet loss",
+      "vi": "Hàm mất mát bộ ba",
+      "def_en": "A metric learning objective pulling an anchor closer to a positive than to a negative by a margin, whose training stalls unless the triplets are mined for difficulty.",
+      "def_vi": "Mục tiêu học độ đo, kéo mẫu mỏ neo lại gần mẫu dương hơn mẫu âm một khoảng lề, quá trình huấn luyện sẽ đứng yên nếu không khai thác bộ ba theo độ khó.",
+      "say": "Random triplets satisfy the margin immediately, so the loss needs hard negative mining.",
+      "tags": [
+        "training"
+      ]
+    },
+    {
+      "id": "a-logit",
+      "en": "Logit",
+      "vi": "Điểm thô trước hàm softmax",
+      "def_en": "The unnormalised score a network emits before the softmax, living on a scale where only differences carry meaning, so adding a constant to every logit changes nothing.",
+      "def_vi": "Điểm số chưa chuẩn hoá mà mạng phát ra trước hàm softmax, nằm trên thang mà chỉ hiệu số mới mang ý nghĩa, nên cộng cùng một hằng số vào mọi điểm thô thì không đổi gì cả.",
+      "say": "Adding the same constant to every logit leaves the probabilities untouched.",
+      "tags": [
+        "basic",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-softmax",
+      "en": "Softmax",
+      "vi": "Hàm softmax",
+      "def_en": "The map turning logits into a probability distribution by exponentiating and dividing by the sum, invariant to a shift of all inputs and sharpened by dividing them by a temperature.",
+      "def_vi": "Phép biến điểm thô thành một phân bố xác suất bằng cách lấy hàm mũ rồi chia cho tổng, bất biến khi dịch toàn bộ đầu vào và trở nên sắc hơn khi chia đầu vào cho một nhiệt độ nhỏ.",
+      "say": "Dividing the logits by a temperature below one makes the softmax output sharper.",
+      "tags": [
+        "basic",
+        "architecture"
+      ]
+    },
+    {
+      "id": "a-class-weighting",
+      "en": "Class weighting",
+      "vi": "Gán trọng số theo lớp",
+      "def_en": "Multiplying each example's loss by a factor inverse to its class frequency, which moves the implied decision threshold without adding any new information about the rare class.",
+      "def_vi": "Nhân mất mát của mỗi mẫu với hệ số nghịch đảo tần suất lớp của nó, việc này dịch ngưỡng quyết định ngầm chứ không thêm chút thông tin nào về lớp hiếm.",
+      "say": "Class weighting moves the threshold, it does not create new minority examples.",
+      "tags": [
+        "training",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-aux-lb-loss",
+      "en": "Load-balancing loss",
+      "vi": "Hàm mất mát cân tải",
+      "def_en": "An auxiliary term added when training a mixture of experts that penalises uneven routing, without which a few experts capture nearly every token and the rest never receive a gradient.",
+      "def_vi": "Số hạng phụ thêm vào khi huấn luyện hỗn hợp chuyên gia, phạt việc định tuyến lệch, nếu thiếu nó thì vài chuyên gia hút gần hết token còn số còn lại không bao giờ nhận được gradient.",
+      "say": "Without the load balancing term the router sends almost every token to the same two experts.",
+      "tags": [
+        "training",
+        "architecture"
+      ]
+    },
+    {
+      "id": "a-nested-cv",
+      "en": "Nested cross-validation",
+      "vi": "Kiểm chứng chéo lồng nhau",
+      "def_en": "Wrapping the hyperparameter search inside an outer resampling loop, so the score finally reported comes from folds that took no part in choosing the configuration.",
+      "def_vi": "Bọc bước dò siêu tham số vào bên trong một vòng lấy mẫu lại ở ngoài, để điểm số cuối cùng được báo cáo đến từ những phần dữ liệu không hề tham gia chọn cấu hình.",
+      "say": "Nested cross validation is the only honest way to report a score when the search itself consumed the folds.",
+      "tags": [
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-group-kfold",
+      "en": "Grouped k-fold",
+      "vi": "Chia k phần theo nhóm",
+      "def_en": "Splitting so that every record sharing a source, patient or session lands in the same fold, which stops a near duplicate of a training record from appearing in the test fold.",
+      "def_vi": "Chia dữ liệu sao cho mọi bản ghi cùng một nguồn, cùng một bệnh nhân hay cùng một phiên đều rơi vào một phần, nhờ đó bản gần trùng của mẫu huấn luyện không lọt sang phần kiểm tra.",
+      "say": "Grouped folds keep every scan of one patient on the same side of the split.",
+      "tags": [
+        "evaluation",
+        "data"
+      ]
+    },
+    {
+      "id": "a-temporal-leakage",
+      "en": "Temporal leakage",
+      "vi": "Rò rỉ theo thời gian",
+      "def_en": "Training on records dated after the evaluation period, so the model sees a future the deployed system will never have and the reported accuracy cannot be reproduced online.",
+      "def_vi": "Huấn luyện trên các bản ghi có thời điểm sau giai đoạn đánh giá, mô hình nhìn thấy một tương lai mà hệ thống triển khai không bao giờ có, nên độ chính xác đã báo cáo không tái lập được khi chạy thật.",
+      "say": "Shuffling a time series before the split is temporal leakage, however good the score looks.",
+      "tags": [
+        "evaluation",
+        "timeseries"
+      ]
+    },
+    {
+      "id": "a-target-leakage",
+      "en": "Target leakage",
+      "vi": "Rò rỉ từ biến mục tiêu",
+      "def_en": "Including a feature that is a consequence of the label rather than a cause available at prediction time, which yields near perfect validation scores and a useless deployed model.",
+      "def_vi": "Đưa vào một đặc trưng vốn là hệ quả của nhãn chứ không phải nguyên nhân có sẵn tại thời điểm dự đoán, điều này cho điểm kiểm định gần như hoàn hảo và một mô hình triển khai vô dụng.",
+      "say": "The discharge code was written after diagnosis, so using it as a feature was target leakage.",
+      "tags": [
+        "evaluation",
+        "data"
+      ]
+    },
+    {
+      "id": "a-test-set-reuse",
+      "en": "Test set reuse",
+      "vi": "Dùng lại tập kiểm tra nhiều lần",
+      "def_en": "Consulting the same held out set across many modelling decisions, which turns it into a training signal and makes the final number optimistic even though no test label was ever fitted.",
+      "def_vi": "Tra cứu cùng một tập giữ riêng qua rất nhiều quyết định thiết kế, việc đó biến nó thành tín hiệu huấn luyện và làm con số cuối cùng lạc quan, dù chưa từng khớp mô hình vào nhãn kiểm tra.",
+      "say": "After forty design choices guided by the same held out set, that number is no longer held out.",
+      "tags": [
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-bootstrap-ci",
+      "en": "Bootstrap confidence interval",
+      "vi": "Khoảng tin cậy bằng lấy mẫu lặp",
+      "def_en": "Resampling the test set with replacement many times and reading percentiles of the resulting metric, which gives an interval without assuming any parametric form for the metric.",
+      "def_vi": "Lấy mẫu lại có hoàn lại từ tập kiểm tra rất nhiều lần rồi đọc phân vị của chỉ số thu được, cách này cho một khoảng mà không cần giả định dạng tham số nào cho chỉ số đó.",
+      "say": "Resampling the test set with replacement gave an interval wide enough to swallow our claimed gain.",
+      "tags": [
+        "evaluation",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-mcnemar",
+      "en": "McNemar test",
+      "vi": "Kiểm định McNemar",
+      "def_en": "A paired test comparing two classifiers on the same test set by looking only at the cases where they disagree, so the shared easy and shared hard examples cannot dilute the comparison.",
+      "def_vi": "Kiểm định theo cặp, so hai bộ phân loại trên cùng tập kiểm tra bằng cách chỉ xét những trường hợp chúng bất đồng, nhờ vậy các mẫu dễ chung và khó chung không làm loãng phép so sánh.",
+      "say": "McNemar counts only the examples where the two systems disagree.",
+      "tags": [
+        "evaluation",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-macro-micro",
+      "en": "Macro and micro averaging",
+      "vi": "Trung bình vĩ mô và trung bình vi mô",
+      "def_en": "Two ways of pooling a per class metric, one giving every class equal weight and the other giving every example equal weight, which diverge sharply once the classes are imbalanced.",
+      "def_vi": "Hai cách gộp một chỉ số tính theo từng lớp, một bên cho mọi lớp trọng số bằng nhau, bên kia cho mọi mẫu trọng số bằng nhau, hai con số tách xa nhau ngay khi các lớp mất cân bằng.",
+      "say": "The macro average fell while the micro average rose, which told us the rare classes had collapsed.",
+      "tags": [
+        "metric",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-mcc",
+      "en": "Matthews correlation coefficient",
+      "vi": "Hệ số tương quan Matthews",
+      "def_en": "A single balanced score computed from all four cells of the confusion matrix, which stays near zero for a classifier that only predicts the majority class.",
+      "def_vi": "Một điểm số cân bằng duy nhất tính từ cả bốn ô của ma trận nhầm lẫn, giá trị nằm gần không đối với bộ phân loại chỉ biết đoán lớp chiếm đa số.",
+      "say": "Accuracy read ninety eight percent while the Matthews coefficient sat near zero.",
+      "tags": [
+        "metric",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-model-selection-bias",
+      "en": "Model selection bias",
+      "vi": "Chệch do chọn mô hình",
+      "def_en": "The optimism introduced by reporting the best of many configurations, since the maximum of noisy estimates sits above the true quality of whichever configuration won.",
+      "def_vi": "Mức lạc quan sinh ra khi báo cáo cấu hình tốt nhất trong rất nhiều cấu hình, bởi giá trị lớn nhất của các ước lượng có nhiễu nằm cao hơn chất lượng thật của cấu hình thắng cuộc.",
+      "say": "Picking the best of thirty runs reports the luckiest noise rather than the better method.",
+      "tags": [
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-train-serve-skew",
+      "en": "Train serve skew",
+      "vi": "Lệch giữa huấn luyện và phục vụ",
+      "def_en": "A mismatch between the feature computation used offline and the one running in production, which degrades a model silently because the offline evaluation never exercises the serving path.",
+      "def_vi": "Sự vênh nhau giữa cách tính đặc trưng lúc ngoại tuyến và cách tính đang chạy trong sản phẩm, nó làm mô hình xấu đi âm thầm vì đánh giá ngoại tuyến không bao giờ chạy qua nhánh phục vụ.",
+      "say": "The offline pipeline trimmed whitespace and the serving path did not, and that skew cost us four points.",
+      "tags": [
+        "evaluation",
+        "infra"
+      ]
+    },
+    {
+      "id": "a-brier",
+      "en": "Brier score",
+      "vi": "Điểm Brier",
+      "def_en": "The mean squared difference between the predicted probability and the outcome, a proper score that decomposes into a calibration term and a refinement term.",
+      "def_vi": "Trung bình bình phương chênh lệch giữa xác suất dự đoán và kết quả thực tế, một điểm số chính đáng có thể tách thành phần hiệu chuẩn và phần phân giải.",
+      "say": "The Brier score improved even though accuracy did not, because the probabilities became honest.",
+      "tags": [
+        "metric",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-reliability-diagram",
+      "en": "Reliability diagram",
+      "vi": "Biểu đồ độ tin cậy",
+      "def_en": "A plot of observed frequency against predicted probability across bins, where a curve below the diagonal marks overconfidence and the choice of binning can hide or exaggerate the gap.",
+      "def_vi": "Đồ thị vẽ tần suất quan sát theo xác suất dự đoán trên từng khoảng chia, đường nằm dưới đường chéo cho thấy mô hình quá tự tin, và cách chia khoảng có thể che bớt hoặc thổi phồng khoảng lệch.",
+      "say": "The reliability curve sits below the diagonal, so the model is overconfident.",
+      "tags": [
+        "metric",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-temp-scaling",
+      "en": "Temperature scaling",
+      "vi": "Co giãn theo nhiệt độ",
+      "def_en": "Fitting a single scalar divisor for the logits on a validation set, which recalibrates the probabilities while leaving every predicted class and therefore the accuracy untouched.",
+      "def_vi": "Khớp một số vô hướng duy nhất để chia các điểm thô, ước lượng trên tập kiểm định, phép này hiệu chuẩn lại xác suất mà không đổi lớp được dự đoán nên độ chính xác giữ nguyên.",
+      "say": "Temperature scaling fixed the calibration error and left the accuracy exactly where it was.",
+      "tags": [
+        "evaluation",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-platt",
+      "en": "Platt scaling",
+      "vi": "Hiệu chuẩn Platt",
+      "def_en": "Fitting a logistic regression on the raw scores of a trained classifier so its outputs read as probabilities, appropriate when the miscalibration has a sigmoid shape.",
+      "def_vi": "Khớp một hồi quy logistic lên điểm thô của bộ phân loại đã huấn luyện để đầu ra đọc được như xác suất, phù hợp khi sai lệch hiệu chuẩn có dạng hàm sigmoid.",
+      "say": "Platt scaling turns the margin of a support vector machine into something you can read as a probability.",
+      "tags": [
+        "evaluation",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-isotonic",
+      "en": "Isotonic regression",
+      "vi": "Hồi quy đơn điệu",
+      "def_en": "A non-parametric calibration fitting an arbitrary non-decreasing map from score to probability, more flexible than a sigmoid fit and quick to overfit a small validation set.",
+      "def_vi": "Phép hiệu chuẩn phi tham số, khớp một ánh xạ không giảm bất kỳ từ điểm số sang xác suất, linh hoạt hơn dạng sigmoid nhưng rất dễ khớp quá mức nếu tập kiểm định nhỏ.",
+      "say": "Isotonic calibration needs a large validation set or it will simply fit the noise.",
+      "tags": [
+        "evaluation",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-conformal",
+      "en": "Conformal prediction",
+      "vi": "Dự đoán hợp quy",
+      "def_en": "Turning any model's scores into prediction sets that contain the truth at a chosen rate, calibrated on held out residuals and valid as long as the data stay exchangeable.",
+      "def_vi": "Biến điểm số của mô hình bất kỳ thành tập dự đoán chứa đáp án đúng với tỷ lệ đã chọn, hiệu chuẩn trên phần dư của dữ liệu giữ riêng và còn đúng chừng nào dữ liệu vẫn hoán vị được.",
+      "say": "Conformal prediction gives a coverage guarantee without assuming the model itself is correct.",
+      "tags": [
+        "evaluation",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-selective-prediction",
+      "en": "Selective prediction",
+      "vi": "Dự đoán có quyền từ chối",
+      "def_en": "Letting a model abstain when its confidence falls under a threshold, trading coverage for accuracy along a curve that has to be reported as a whole.",
+      "def_vi": "Cho phép mô hình từ chối trả lời khi độ tự tin xuống dưới ngưỡng, đánh đổi mức phủ lấy độ chính xác dọc theo một đường cong mà phải báo cáo trọn vẹn.",
+      "say": "Report accuracy and coverage together, since abstaining on the hard half always looks impressive.",
+      "tags": [
+        "evaluation",
+        "safety"
+      ]
+    },
+    {
+      "id": "a-proper-scoring",
+      "en": "Proper scoring rule",
+      "vi": "Quy tắc tính điểm chính đáng",
+      "def_en": "A loss minimised exactly when the reported probabilities equal the true ones, so a forecaster gains nothing by shading the numbers toward a safer looking answer.",
+      "def_vi": "Hàm mất mát đạt cực tiểu đúng khi xác suất được báo cáo bằng xác suất thật, nên người dự báo không lợi lộc gì khi bẻ cong con số về phía một câu trả lời trông an toàn hơn.",
+      "say": "Under a proper scoring rule, reporting anything but your honest belief loses points.",
+      "tags": [
+        "theory",
+        "metric"
+      ]
+    },
+    {
+      "id": "a-ood-detection",
+      "en": "Out-of-distribution detection",
+      "vi": "Phát hiện dữ liệu ngoài phân bố",
+      "def_en": "Flagging inputs unlike the training data before the classifier answers, needed because a softmax over the known classes must sum to one and so cannot express none of these.",
+      "def_vi": "Đánh dấu những đầu vào khác hẳn dữ liệu huấn luyện trước khi bộ phân loại trả lời, việc này cần thiết vì hàm softmax trên các lớp đã biết luôn cộng lại bằng một nên không thể nói không lớp nào cả.",
+      "say": "The softmax cannot say none of the above, so we score every input for novelty first.",
+      "tags": [
+        "safety",
+        "robustness"
+      ]
+    },
+    {
+      "id": "a-deep-ensemble",
+      "en": "Deep ensemble",
+      "vi": "Tổ hợp nhiều mạng sâu",
+      "def_en": "Training one architecture several times from different seeds and averaging the predicted distributions, which lifts both accuracy and calibration because members disagree where data is thin.",
+      "def_vi": "Huấn luyện cùng một kiến trúc vài lần với các hạt giống khác nhau rồi lấy trung bình các phân bố dự đoán, cách này nâng cả độ chính xác lẫn mức hiệu chuẩn vì các thành viên bất đồng ở nơi dữ liệu thưa.",
+      "say": "Five independently seeded models gave better calibrated probabilities than any single one of them.",
+      "tags": [
+        "evaluation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-mc-dropout",
+      "en": "Monte Carlo dropout",
+      "vi": "Dropout kiểu Monte Carlo",
+      "def_en": "Keeping dropout active at inference and averaging several stochastic passes, which yields a cheap approximate posterior whose spread is read as predictive uncertainty.",
+      "def_vi": "Giữ dropout hoạt động lúc suy luận rồi lấy trung bình vài lượt truyền ngẫu nhiên, cách này cho một hậu nghiệm xấp xỉ rẻ tiền mà độ tản của nó được đọc như độ bất định của dự đoán.",
+      "say": "We left dropout on at inference and averaged twenty passes to get an uncertainty estimate.",
+      "tags": [
+        "evaluation",
+        "training"
+      ]
+    },
+    {
+      "id": "a-aleatoric",
+      "en": "Aleatoric uncertainty",
+      "vi": "Bất định do nhiễu trong dữ liệu",
+      "def_en": "The irreducible part of predictive uncertainty coming from noise in the data itself, which no amount of extra training data can remove.",
+      "def_vi": "Phần bất định không thể rút gọn của dự đoán, sinh ra từ chính nhiễu trong dữ liệu, thêm bao nhiêu mẫu huấn luyện cũng không xoá được.",
+      "say": "More labelled data will not shrink aleatoric uncertainty, only better sensors will.",
+      "tags": [
+        "theory",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-epistemic",
+      "en": "Epistemic uncertainty",
+      "vi": "Bất định do thiếu tri thức",
+      "def_en": "The part of predictive uncertainty caused by having seen too little data in that region of input space, which does shrink as the training set grows.",
+      "def_vi": "Phần bất định của dự đoán sinh ra do đã thấy quá ít dữ liệu ở vùng đầu vào đó, phần này thu hẹp lại khi tập huấn luyện lớn dần.",
+      "say": "Epistemic uncertainty is highest exactly where the training set is thin.",
+      "tags": [
+        "theory",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "a-ptq",
+      "en": "Post-training quantisation",
+      "vi": "Lượng tử hoá sau huấn luyện",
+      "def_en": "Converting a trained model to a lower precision using a small calibration sample to fix the scales, with no gradient step involved, which is fast but sensitive to outlier activations.",
+      "def_vi": "Chuyển mô hình đã huấn luyện sang độ chính xác thấp hơn, dùng một mẫu hiệu chỉnh nhỏ để chốt các hệ số co giãn, không cần bước gradient nào, cách này nhanh nhưng nhạy với giá trị hoạt hoá dị thường.",
+      "say": "Post training quantisation took ten minutes and cost us half a point of accuracy.",
+      "tags": [
+        "efficiency",
+        "inference"
+      ]
+    },
+    {
+      "id": "a-qat",
+      "en": "Quantisation-aware training",
+      "vi": "Huấn luyện có tính đến lượng tử hoá",
+      "def_en": "Simulating the rounding in the forward pass while letting gradients pass straight through it, so the weights settle at values where the rounding error hurts least.",
+      "def_vi": "Mô phỏng phép làm tròn ngay trong lượt truyền xuôi và cho gradient đi thẳng qua nó, để trọng số dừng lại ở những giá trị mà sai số làm tròn gây hại ít nhất.",
+      "say": "Quantisation aware training recovers most of what the post training route loses at very low bit widths.",
+      "tags": [
+        "efficiency",
+        "training"
+      ]
+    },
+    {
+      "id": "a-activation-outlier",
+      "en": "Activation outlier",
+      "vi": "Giá trị hoạt hoá dị thường",
+      "def_en": "A few hidden dimensions whose magnitudes sit far above the rest, stretching the quantisation range and destroying the resolution of every other dimension unless they are handled apart.",
+      "def_vi": "Một vài chiều ẩn có biên độ lớn hơn hẳn phần còn lại, chúng kéo giãn dải lượng tử hoá và phá sạch độ phân giải của mọi chiều khác nếu không được xử lý riêng.",
+      "say": "A handful of outlier channels stretched the range and wrecked the rest of the tensor.",
+      "tags": [
+        "efficiency",
+        "inference"
+      ]
+    },
+    {
+      "id": "a-calib-set",
+      "en": "Calibration set",
+      "vi": "Tập hiệu chỉnh dải giá trị",
+      "def_en": "The small unlabelled sample used to estimate activation ranges when quantising, whose distribution has to match deployment or the chosen scales will clip real inputs.",
+      "def_vi": "Mẫu nhỏ không cần nhãn, dùng để ước lượng dải giá trị hoạt hoá khi lượng tử hoá, phân bố của nó phải giống lúc triển khai, nếu không các hệ số co giãn đã chọn sẽ cắt cụt dữ liệu thật.",
+      "say": "The calibration sample must look like production traffic, not like the cleanest slice of training data.",
+      "tags": [
+        "efficiency",
+        "data"
+      ]
+    },
+    {
+      "id": "a-lottery-ticket",
+      "en": "Lottery ticket hypothesis",
+      "vi": "Giả thuyết vé số trúng thưởng",
+      "def_en": "The claim that a dense network contains a sparse subnetwork which matches the full model when retrained from its original initialisation, so mask and initialisation carry the result together.",
+      "def_vi": "Khẳng định rằng trong một mạng dày đặc có sẵn một mạng con thưa, huấn luyện lại từ đúng khởi tạo ban đầu thì đạt ngang mô hình đầy đủ, nghĩa là mặt nạ và khởi tạo cùng nhau tạo ra kết quả.",
+      "say": "The subnetwork only matches the dense model when it is rewound to its original initialisation.",
+      "tags": [
+        "efficiency",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-magnitude-pruning",
+      "en": "Magnitude pruning",
+      "vi": "Tỉa theo độ lớn trọng số",
+      "def_en": "Removing the weights with the smallest absolute value and fine tuning what remains, a baseline that is hard to beat although a small weight is not always an unimportant one.",
+      "def_vi": "Bỏ đi những trọng số có trị tuyệt đối nhỏ nhất rồi tinh chỉnh phần còn lại, đây là mốc đối chứng khó vượt dù trọng số nhỏ không phải lúc nào cũng là trọng số không quan trọng.",
+      "say": "Magnitude pruning is a strong baseline even though small weights are not always unimportant.",
+      "tags": [
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-semi-structured-sparsity",
+      "en": "Semi-structured sparsity",
+      "vi": "Thưa nửa cấu trúc",
+      "def_en": "A pattern forcing a fixed number of zeros inside every small block of weights, chosen because the hardware can skip exactly that pattern while unrestricted sparsity brings no speedup.",
+      "def_vi": "Kiểu thưa buộc mỗi khối trọng số nhỏ phải có đúng một số lượng phần tử bằng không, được chọn vì phần cứng bỏ qua được đúng kiểu đó, trong khi thưa tự do không đem lại chút tăng tốc nào.",
+      "say": "Unrestricted sparsity saves memory, but only the fixed block pattern actually runs faster on the tensor cores.",
+      "tags": [
+        "efficiency",
+        "inference"
+      ]
+    },
+    {
+      "id": "a-low-rank-factorisation",
+      "en": "Low-rank factorisation",
+      "vi": "Phân rã hạng thấp",
+      "def_en": "Replacing a weight matrix by the product of two thinner matrices, cutting parameters and multiplications at the price of an approximation whose error the discarded singular values set.",
+      "def_vi": "Thay một ma trận trọng số bằng tích của hai ma trận mảnh hơn, giảm số tham số và số phép nhân, đổi lại là một phép xấp xỉ mà sai số do các giá trị kỳ dị bị bỏ đi quyết định.",
+      "say": "The discarded singular values tell you exactly how much the factorisation will cost you.",
+      "tags": [
+        "efficiency",
+        "theory"
+      ]
+    },
+    {
+      "id": "a-flashattention",
+      "en": "FlashAttention",
+      "vi": "Tính chú ý theo khối không lưu ma trận điểm",
+      "def_en": "An exact attention implementation tiling the computation in fast on chip memory and never writing the full score matrix out, so the saving is in memory traffic rather than in arithmetic.",
+      "def_vi": "Cách cài đặt chú ý chính xác, chia phép tính thành từng ô nằm trong bộ nhớ nhanh trên chip và không bao giờ ghi ra ma trận điểm đầy đủ, nên phần tiết kiệm nằm ở lưu lượng bộ nhớ chứ không ở số phép tính.",
+      "say": "It is exact attention, the saving comes from never writing the score matrix out to main memory.",
+      "tags": [
+        "efficiency",
+        "inference"
+      ]
+    },
+    {
+      "id": "a-paged-attention",
+      "en": "Paged attention",
+      "vi": "Phân trang bộ nhớ đệm chú ý",
+      "def_en": "Storing the key and value cache in fixed size blocks addressed through a table, so sequences of different lengths share memory without contiguous reservation and fragmentation drops sharply.",
+      "def_vi": "Lưu bộ nhớ đệm khoá và giá trị thành các khối cỡ cố định, đánh địa chỉ qua một bảng, nhờ vậy các chuỗi dài ngắn khác nhau dùng chung bộ nhớ mà không phải đặt trước vùng liền mạch và mức phân mảnh giảm hẳn.",
+      "say": "Paged attention lets many sessions share the cache without reserving the worst case length for each.",
+      "tags": [
+        "inference",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-roofline",
+      "en": "Roofline model",
+      "vi": "Mô hình mái nhà",
+      "def_en": "A chart bounding achievable throughput by either peak arithmetic or memory bandwidth, which tells you whether an operator is worth optimising for maths or for data movement.",
+      "def_vi": "Biểu đồ chặn thông lượng đạt được bởi hoặc là năng lực tính toán đỉnh, hoặc là băng thông bộ nhớ, nó cho biết một toán tử đáng tối ưu về phép tính hay về việc di chuyển dữ liệu.",
+      "say": "The roofline showed the kernel was bandwidth bound, so fusing it mattered more than a faster multiply.",
+      "tags": [
+        "efficiency",
+        "infra"
+      ]
+    },
+    {
+      "id": "a-operator-fusion",
+      "en": "Operator fusion",
+      "vi": "Hợp nhất toán tử",
+      "def_en": "Merging consecutive operations into a single kernel so intermediate tensors stay in registers, removing the trips to main memory that dominate the cost of small elementwise work.",
+      "def_vi": "Gộp các phép tính liên tiếp vào chung một nhân tính toán để tensor trung gian nằm lại trong thanh ghi, loại bỏ những lượt ra vào bộ nhớ chính vốn chiếm gần hết chi phí của các phép nhỏ theo từng phần tử.",
+      "say": "Fusing the activation into the previous kernel removed two full reads of the tensor.",
+      "tags": [
+        "efficiency",
+        "infra"
+      ]
+    },
+    {
+      "id": "a-mixed-precision",
+      "en": "Mixed precision training",
+      "vi": "Huấn luyện độ chính xác hỗn hợp",
+      "def_en": "Running the matrix multiplications in a low precision format while keeping a master copy of the weights and the accumulations in higher precision, so speed rises without updates vanishing under rounding.",
+      "def_vi": "Chạy các phép nhân ma trận ở định dạng độ chính xác thấp nhưng giữ một bản chính của trọng số và các phép cộng dồn ở độ chính xác cao hơn, nhờ vậy tốc độ tăng mà bước cập nhật không bị làm tròn thành không.",
+      "say": "Mixed precision keeps a master copy of the weights in higher precision so that small updates still register.",
+      "tags": [
+        "efficiency",
+        "training"
+      ]
+    },
+    {
+      "id": "a-loss-scaling",
+      "en": "Loss scaling",
+      "vi": "Nhân tỷ lệ hàm mất mát",
+      "def_en": "Multiplying the loss before the backward pass so tiny gradients land inside the representable range of a low precision format, then dividing them back before the optimiser step.",
+      "def_vi": "Nhân hàm mất mát lên trước lượt truyền ngược để những gradient rất nhỏ rơi vào dải biểu diễn được của định dạng độ chính xác thấp, rồi chia trả lại trước khi bộ tối ưu cập nhật.",
+      "say": "Loss scaling lifts tiny gradients out of the range where the format flushes them to zero.",
+      "tags": [
+        "efficiency",
+        "training"
+      ]
+    },
+    {
+      "id": "a-bf16",
+      "en": "bfloat16",
+      "vi": "Định dạng dấu phẩy động bfloat16",
+      "def_en": "A sixteen bit float keeping the exponent range of single precision and giving up mantissa bits, which is why it usually trains without loss scaling but resolves fewer significant digits.",
+      "def_vi": "Định dạng dấu phẩy động mười sáu bit, giữ nguyên dải số mũ của độ chính xác đơn và hy sinh số bit phần định trị, vì thế nó thường huấn luyện được mà không cần nhân tỷ lệ mất mát nhưng phân giải ít chữ số có nghĩa hơn.",
+      "say": "This format keeps the wide exponent, so overflow is rare and loss scaling becomes unnecessary.",
+      "tags": [
+        "efficiency",
+        "training"
+      ]
+    },
+    {
+      "id": "a-grad-checkpointing",
+      "en": "Gradient checkpointing",
+      "vi": "Lưu điểm kiểm để tính lại kích hoạt",
+      "def_en": "Discarding most activations during the forward pass and recomputing them in the backward pass, trading extra compute for a large cut in peak memory.",
+      "def_vi": "Bỏ phần lớn giá trị hoạt hoá trong lượt truyền xuôi rồi tính lại chúng ở lượt truyền ngược, đánh đổi thêm phép tính để cắt mạnh mức bộ nhớ đỉnh.",
+      "say": "Checkpointing recomputes the activations instead of storing them, which buys memory with time.",
+      "tags": [
+        "efficiency",
+        "training"
+      ]
+    },
+    {
+      "id": "a-tensor-parallel",
+      "en": "Tensor parallelism",
+      "vi": "Song song theo tensor",
+      "def_en": "Splitting a single weight matrix across devices so every device holds a slice of each layer, which forces a collective communication inside every layer.",
+      "def_vi": "Chia một ma trận trọng số duy nhất ra nhiều thiết bị, mỗi thiết bị giữ một lát của từng lớp, cách này bắt buộc phải có một phép truyền thông tập thể ngay bên trong mỗi lớp.",
+      "say": "Tensor parallelism needs a fast interconnect because every layer ends in a collective.",
+      "tags": [
+        "infra",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-pipeline-parallel",
+      "en": "Pipeline parallelism",
+      "vi": "Song song theo đường ống",
+      "def_en": "Assigning consecutive layers to different devices and streaming micro batches through them, where the idle time at the two ends of the schedule is the cost you have to manage.",
+      "def_vi": "Giao các lớp liên tiếp cho những thiết bị khác nhau rồi cho các lô nhỏ chảy qua, chi phí phải quản lý ở đây là khoảng thời gian rỗi ở hai đầu lịch chạy.",
+      "say": "Smaller micro batches shrink the idle bubble at the start and the end of the pipeline.",
+      "tags": [
+        "infra",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-optimiser-sharding",
+      "en": "Optimiser state sharding",
+      "vi": "Chia nhỏ trạng thái bộ tối ưu",
+      "def_en": "Partitioning the optimiser moments, and often the gradients and weights too, across data parallel workers, since those states can occupy several times the memory of the parameters.",
+      "def_vi": "Chia các mô men của bộ tối ưu, và thường chia cả gradient lẫn trọng số, ra các tiến trình song song dữ liệu, vì những trạng thái đó có thể chiếm bộ nhớ gấp mấy lần bản thân tham số.",
+      "say": "The moments cost more memory than the weights, so we sharded them across the workers.",
+      "tags": [
+        "infra",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-early-exit",
+      "en": "Early exit",
+      "vi": "Thoát sớm khỏi mạng",
+      "def_en": "Attaching classifiers to intermediate layers and stopping as soon as one is confident enough, which cuts average latency while leaving the worst case path exactly as slow as before.",
+      "def_vi": "Gắn thêm bộ phân loại vào các lớp giữa và dừng lại ngay khi một bộ đủ tự tin, cách này giảm độ trễ trung bình nhưng nhánh xấu nhất vẫn chậm y như cũ.",
+      "say": "Early exit lowers the average latency but the tail still runs through every layer.",
+      "tags": [
+        "inference",
+        "efficiency"
+      ]
+    },
+    {
+      "id": "a-prefill-decode",
+      "en": "Prefill and decode",
+      "vi": "Giai đoạn nạp và giai đoạn sinh",
+      "def_en": "The two phases of generation, one processing the whole prompt in parallel and limited by arithmetic, the other emitting one token at a time and limited by memory bandwidth.",
+      "def_vi": "Hai giai đoạn của quá trình sinh, một giai đoạn xử lý toàn bộ lời nhắc song song và bị giới hạn bởi năng lực tính toán, giai đoạn kia phát từng token một và bị giới hạn bởi băng thông bộ nhớ.",
+      "say": "The prompt phase is compute bound while the token by token phase is bandwidth bound.",
+      "tags": [
+        "inference",
+        "llm"
       ]
     }
   ]

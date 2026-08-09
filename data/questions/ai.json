@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "ai",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qa-1",
@@ -1502,6 +1502,1011 @@
       "why": "Perplexity measures fit to the text distribution, and it is only comparable when the tokeniser and corpus match. Post-training in particular can improve usefulness while raising perplexity, so the two must be reported separately.",
       "why_vi": "Độ bối rối đo mức khớp với phân phối văn bản, và chỉ so sánh được khi bộ tách token và kho văn bản giống nhau. Riêng giai đoạn hậu huấn luyện có thể làm mô hình hữu dụng hơn trong khi độ bối rối lại tăng, nên hai thứ này phải báo cáo tách bạch.",
       "level": 2
+    },
+    {
+      "id": "qa-101",
+      "q": "You halt a cosine annealing run at sixty percent of its planned steps and the checkpoint is far worse than the curve suggested. The reason is",
+      "q_vi": "Bạn dừng một lần chạy ủ theo hàm cô sin ở sáu mươi phần trăm số bước đã định và bản lưu tệ hơn hẳn những gì đường cong gợi ý. Lý do là",
+      "choices": [
+        "The schedule had not yet decayed the rate, so the weights were still taking large steps",
+        "Cosine schedules need a restart before they converge",
+        "The optimiser moments were never bias corrected",
+        "Early stopping cancels the regularising effect"
+      ],
+      "answer": 0,
+      "why": "A cosine schedule reaches its small rates only at the end of the planned horizon, so a truncated run leaves the model at a rate that never let it settle.",
+      "why_vi": "Lịch cô sin chỉ xuống tới các mức nhỏ ở cuối quãng đã định, nên cắt ngang lần chạy sẽ để mô hình đứng ở mức tốc độ chưa bao giờ cho phép nó lắng lại.",
+      "level": 2
+    },
+    {
+      "id": "qa-102",
+      "q": "A learning rate range test reports",
+      "q_vi": "Phép dò dải tốc độ học cho biết",
+      "choices": [
+        "The optimal batch size for the hardware you own",
+        "The number of epochs needed to converge",
+        "The largest rate at which the loss still falls",
+        "The point where weight decay stops mattering"
+      ],
+      "answer": 2,
+      "why": "The test sweeps the rate upward while logging the loss, so the curve shows where progress stops and divergence begins.",
+      "why_vi": "Phép dò quét tốc độ học tăng dần và ghi lại mất mát, nhờ vậy đường cong chỉ ra chỗ tiến bộ dừng lại và chỗ bắt đầu phân kỳ.",
+      "level": 2
+    },
+    {
+      "id": "qa-103",
+      "q": "You replace a batch of two hundred fifty six with four accumulation steps of sixty four and the results shift. The most likely cause is",
+      "q_vi": "Bạn thay lô hai trăm năm mươi sáu bằng bốn bước cộng dồn, mỗi bước sáu mươi tư mẫu, và kết quả thay đổi. Nguyên nhân nhiều khả năng nhất là",
+      "choices": [
+        "The optimiser now performs four times as many updates per epoch",
+        "Batch normalisation still computes its statistics over sixty four samples",
+        "Gradient accumulation changes the direction of the summed gradient",
+        "Accumulation disables weight decay"
+      ],
+      "answer": 1,
+      "why": "Accumulation reproduces the large batch gradient, but every normalisation layer still sees only the chunk in front of it.",
+      "why_vi": "Cộng dồn tái tạo được gradient của lô lớn, nhưng mỗi lớp chuẩn hoá vẫn chỉ nhìn thấy đúng mẩu dữ liệu trước mặt nó.",
+      "level": 3
+    },
+    {
+      "id": "qa-104",
+      "q": "Moving a job from one accelerator to eight while keeping the per device batch, the standard first adjustment is",
+      "q_vi": "Chuyển một tác vụ từ một bộ tăng tốc sang tám bộ mà giữ nguyên kích thước lô trên mỗi thiết bị, điều chỉnh đầu tiên theo thông lệ là",
+      "choices": [
+        "Leave every hyperparameter alone since the gradient is averaged",
+        "Divide the learning rate by eight to keep each update small",
+        "Increase the weight decay by a factor of eight too",
+        "Raise the learning rate by eight and warm it up longer"
+      ],
+      "answer": 3,
+      "why": "A gradient averaged over eight times more samples carries less noise per step, so the step can be that much larger, with a longer warmup to survive the unstable opening.",
+      "why_vi": "Gradient lấy trung bình trên số mẫu gấp tám lần thì nhiễu trên mỗi bước ít đi, nên bước nhảy có thể lớn tương ứng, kèm giai đoạn khởi động dài hơn để vượt qua đoạn đầu bất ổn.",
+      "level": 3
+    },
+    {
+      "id": "qa-105",
+      "q": "Adam divides its moment estimates by one minus the decay raised to the step number. Removing that division would",
+      "q_vi": "Adam chia các ước lượng mô men cho một trừ hệ số suy giảm luỹ thừa số bước. Bỏ phép chia đó đi sẽ",
+      "choices": [
+        "Make the first updates much smaller than intended",
+        "Remove the decoupling between weight decay and the gradient",
+        "Cause the second moment to grow without any bound at all",
+        "Turn Adam into ordinary stochastic gradient descent"
+      ],
+      "answer": 0,
+      "why": "Both moments start at zero, so the early averages are biased toward zero and undoing the correction leaves those first steps shrunk by that bias.",
+      "why_vi": "Cả hai mô men đều khởi tạo bằng không nên trung bình ở giai đoạn đầu bị kéo lệch về không, bỏ phép hiệu chỉnh thì những bước đầu tiên bị co lại đúng bằng độ lệch đó.",
+      "level": 3
+    },
+    {
+      "id": "qa-106",
+      "q": "Nesterov momentum differs from classical momentum in that it",
+      "q_vi": "Đà Nesterov khác đà cổ điển ở chỗ nó",
+      "choices": [
+        "Uses a separate learning rate for every parameter coordinate",
+        "Decays the momentum coefficient during training",
+        "Evaluates the gradient after applying the momentum step",
+        "Adds the momentum term to the weight decay"
+      ],
+      "answer": 2,
+      "why": "Looking ahead to where momentum is about to place the parameters lets the correction respond to the curvature at the point actually reached.",
+      "why_vi": "Nhìn trước tới chỗ mà đà sắp đưa tham số tới giúp phần hiệu chỉnh phản ứng với độ cong ngay tại điểm thực sự đi đến.",
+      "level": 2
+    },
+    {
+      "id": "qa-107",
+      "q": "Sharpness-aware minimisation raises the cost of every step because it",
+      "q_vi": "Cực tiểu hoá có xét độ sắc làm mỗi bước tốn kém hơn vì nó",
+      "choices": [
+        "Stores a second copy of the optimiser moments",
+        "Computes a gradient at a deliberately perturbed set of weights first",
+        "Runs the backward pass in higher precision",
+        "Requires a larger batch in order to estimate sharpness"
+      ],
+      "answer": 1,
+      "why": "The method looks for the worst loss inside a neighbourhood, which needs one extra forward and backward pass before the real update happens.",
+      "why_vi": "Phương pháp đi tìm mất mát xấu nhất trong một lân cận, việc đó cần thêm một lượt truyền xuôi và một lượt truyền ngược trước khi cập nhật thật.",
+      "level": 3
+    },
+    {
+      "id": "qa-108",
+      "q": "RMSNorm removes which part of layer normalisation?",
+      "q_vi": "RMSNorm bỏ đi phần nào của chuẩn hoá theo lớp?",
+      "choices": [
+        "The dependence on batch statistics, which it never had",
+        "The learned scale parameter applied after normalising",
+        "The division by a standard deviation estimate",
+        "Subtraction of the mean"
+      ],
+      "answer": 3,
+      "why": "It rescales by the root mean square only, so one reduction and the shift parameter disappear while scale control stays in place.",
+      "why_vi": "Nó chỉ co giãn theo căn trung bình bình phương, nên một phép rút gọn và tham số dịch biến mất còn khả năng kiểm soát biên độ vẫn giữ nguyên.",
+      "level": 2
+    },
+    {
+      "id": "qa-109",
+      "q": "A deep transformer trains stably with no warmup at all. The most likely reason is",
+      "q_vi": "Một transformer sâu huấn luyện ổn định mà không cần khởi động chút nào. Lý do nhiều khả năng nhất là",
+      "choices": [
+        "Normalisation sits inside the residual branch, leaving the identity path clean",
+        "The model uses a much larger batch size",
+        "Dropout was disabled in the attention layers",
+        "The embeddings are tied to the output head"
+      ],
+      "answer": 0,
+      "why": "With normalisation placed before each sublayer, gradients flow along an unnormalised identity path and the early layers no longer need a slow start.",
+      "why_vi": "Khi phép chuẩn hoá nằm trước mỗi lớp con, gradient chảy dọc đường đồng nhất không bị chuẩn hoá và các lớp đầu không còn cần khởi động chậm.",
+      "level": 3
+    },
+    {
+      "id": "qa-110",
+      "q": "Your segmentation model trains with a batch of two images and validation is wildly unstable. The best fix among these is",
+      "q_vi": "Mô hình phân vùng của bạn huấn luyện với lô hai ảnh và phần kiểm định dao động dữ dội. Cách sửa tốt nhất trong số này là",
+      "choices": [
+        "Increase the momentum of the running statistics estimator",
+        "Switch from Adam to plain stochastic gradient descent",
+        "Replace batch normalisation with group normalisation",
+        "Freeze the encoder and train only the decoder head"
+      ],
+      "answer": 2,
+      "why": "Statistics estimated from two samples are almost pure noise, while group normalisation computes them inside each sample so batch size stops mattering.",
+      "why_vi": "Thống kê ước lượng từ hai mẫu gần như chỉ là nhiễu, còn chuẩn hoá theo nhóm tính chúng bên trong từng mẫu nên kích thước lô không còn quan trọng.",
+      "level": 2
+    },
+    {
+      "id": "qa-111",
+      "q": "A model scores well in training mode and badly the instant you switch to evaluation mode. Look first at",
+      "q_vi": "Mô hình cho điểm tốt ở chế độ huấn luyện và tệ ngay khi bạn chuyển sang chế độ đánh giá. Hãy xem trước hết",
+      "choices": [
+        "The learning rate schedule applied during the closing epochs",
+        "The running mean and variance of the normalisation layers",
+        "The random seed that controls data loader order",
+        "The number of attention heads in the encoder"
+      ],
+      "answer": 1,
+      "why": "Evaluation mode stops using the current batch and starts using the accumulated averages, so a model whose averages were never updated changes behaviour at that exact moment.",
+      "why_vi": "Chế độ đánh giá ngừng dùng lô hiện tại và bắt đầu dùng các trung bình đã tích luỹ, nên mô hình có trung bình chưa từng được cập nhật sẽ đổi hành vi đúng vào lúc đó.",
+      "level": 3
+    },
+    {
+      "id": "qa-112",
+      "q": "The claim that batch normalisation works by removing internal covariate shift is best described as",
+      "q_vi": "Khẳng định rằng chuẩn hoá theo lô hiệu quả nhờ xoá bỏ dịch phân bố nội tại nên được mô tả đúng nhất là",
+      "choices": [
+        "A proof that follows from the chain rule",
+        "The reason it must sit after the activation",
+        "Equivalent to the definition of weight decay",
+        "The original explanation, later contradicted by controlled experiments"
+      ],
+      "answer": 3,
+      "why": "Injecting distribution shift after the normalisation layer left training just as fast, which pointed the real benefit toward a smoother loss surface instead.",
+      "why_vi": "Cố tình bơm thêm dịch phân bố ngay sau lớp chuẩn hoá mà tốc độ huấn luyện vẫn như cũ, điều này hướng lợi ích thật sự về phía mặt mất mát trơn hơn.",
+      "level": 3
+    },
+    {
+      "id": "qa-113",
+      "q": "Rectified activations call for a larger initial weight variance than the Xavier rule provides because",
+      "q_vi": "Hàm kích hoạt chỉnh lưu đòi hỏi phương sai trọng số ban đầu lớn hơn mức quy tắc Xavier đưa ra, vì",
+      "choices": [
+        "Half of the pre-activations are zeroed, halving the variance",
+        "The gradient of a rectified unit is one wherever it is active",
+        "Rectified units have outputs that are unbounded above",
+        "The fan out always exceeds the fan in in such layers"
+      ],
+      "answer": 0,
+      "why": "A rectifier zeroes the negative half of its input, so signal variance drops by roughly half at each layer unless the initialisation compensates for it.",
+      "why_vi": "Bộ chỉnh lưu đưa nửa âm của đầu vào về không, nên phương sai tín hiệu giảm khoảng một nửa qua mỗi lớp nếu khởi tạo không bù lại.",
+      "level": 3
+    },
+    {
+      "id": "qa-114",
+      "q": "Initialising every weight in a layer to the same non-zero constant fails because",
+      "q_vi": "Khởi tạo mọi trọng số trong một lớp bằng cùng một hằng số khác không sẽ hỏng, vì",
+      "choices": [
+        "The loss surface becomes non-differentiable at that point",
+        "The forward pass overflows in low precision immediately",
+        "Identical units receive identical gradients and never diverge",
+        "Weight decay would drive all of them to zero within an epoch"
+      ],
+      "answer": 2,
+      "why": "Symmetric units get symmetric updates forever, so the whole layer behaves as a single unit no matter how wide you make it.",
+      "why_vi": "Các đơn vị đối xứng mãi mãi nhận cập nhật đối xứng, nên cả lớp hành xử như một đơn vị duy nhất dù bạn có làm nó rộng đến đâu.",
+      "level": 2
+    },
+    {
+      "id": "qa-115",
+      "q": "Setting the last layer of every residual branch to zero at initialisation means the network begins as",
+      "q_vi": "Đặt lớp cuối của mỗi nhánh phần dư bằng không lúc khởi tạo nghĩa là mạng khởi đầu như",
+      "choices": [
+        "A random projection whose weights are then frozen throughout",
+        "An identity map that gains depth as training proceeds",
+        "A purely linear model that can never represent interactions",
+        "A constant function of its input"
+      ],
+      "answer": 1,
+      "why": "Each block contributes nothing at first, so the signal passes straight through and effective depth grows only where a branch earns its place.",
+      "why_vi": "Ban đầu mỗi khối không đóng góp gì, tín hiệu đi thẳng qua và độ sâu hữu hiệu chỉ tăng ở những nhánh tự chứng minh được giá trị.",
+      "level": 3
+    },
+    {
+      "id": "qa-116",
+      "q": "Label smoothing usually improves calibration yet can weaken a distillation student, because it",
+      "q_vi": "Làm mịn nhãn thường cải thiện mức hiệu chuẩn nhưng có thể làm yếu mô hình học trò trong chưng cất, vì nó",
+      "choices": [
+        "Removes the softmax from the output layer",
+        "Freezes the last layer during training",
+        "Forces the student to use a larger temperature",
+        "Compresses the logit gaps that carry the teacher's finer knowledge"
+      ],
+      "answer": 3,
+      "why": "Smoothing caps how far the correct logit may exceed the others, so the fine structure a student learns from is squeezed out of the teacher's outputs.",
+      "why_vi": "Làm mịn chặn mức mà điểm thô của lớp đúng được phép vượt các lớp khác, nên phần cấu trúc tinh tế mà học trò dựa vào bị ép ra khỏi đầu ra của thầy.",
+      "level": 3
+    },
+    {
+      "id": "qa-117",
+      "q": "Focal loss helps a dense object detector mainly by",
+      "q_vi": "Hàm mất mát tiêu điểm giúp bộ phát hiện vật thể dày đặc chủ yếu nhờ",
+      "choices": [
+        "Shrinking the loss contributed by examples already classified well",
+        "Increasing the resolution of the feature map",
+        "Adding a margin between anchor and negative",
+        "Normalising the box coordinates before regression"
+      ],
+      "answer": 0,
+      "why": "The modulating factor falls toward zero as confidence rises, so the vast easy background stops dominating the sum of gradients.",
+      "why_vi": "Hệ số điều biến tiến về không khi độ tự tin tăng lên, nhờ vậy vùng nền dễ và đông đảo thôi lấn át tổng gradient.",
+      "level": 2
+    },
+    {
+      "id": "qa-118",
+      "q": "Switching a regression from squared error to a Huber loss changes the fit because",
+      "q_vi": "Chuyển một bài hồi quy từ sai số bình phương sang hàm mất mát Huber làm thay đổi phép khớp, vì",
+      "choices": [
+        "The residuals are standardised before the loss is taken",
+        "The loss becomes convex for the first time in training",
+        "Large residuals now contribute a bounded gradient",
+        "The output is now squashed through a sigmoid function"
+      ],
+      "answer": 2,
+      "why": "Beyond the threshold the loss grows linearly, so a single extreme residual can no longer dominate the sum of gradients.",
+      "why_vi": "Ngoài ngưỡng, mất mát tăng tuyến tính nên một phần dư cực đoan duy nhất không còn chi phối được tổng gradient.",
+      "level": 2
+    },
+    {
+      "id": "qa-119",
+      "q": "For a softmax classifier trained with cross-entropy, the gradient with respect to the logits equals",
+      "q_vi": "Với bộ phân loại dùng softmax huấn luyện bằng entropy chéo, gradient theo các điểm thô bằng",
+      "choices": [
+        "The entropy of the predicted distribution over classes",
+        "The predicted distribution minus the one hot target",
+        "The negative log of the predicted probability",
+        "The softmax Jacobian times the raw label vector"
+      ],
+      "answer": 1,
+      "why": "The softmax and the logarithm combine so that the messy Jacobian cancels, leaving a plain difference of two vectors.",
+      "why_vi": "Hàm softmax và hàm log kết hợp lại làm ma trận Jacobi rườm rà triệt tiêu, chỉ còn hiệu của hai vector.",
+      "level": 3
+    },
+    {
+      "id": "qa-120",
+      "q": "Fitting a model by minimising the divergence from the model to the data, rather than the other way round, tends to give",
+      "q_vi": "Khớp mô hình bằng cách cực tiểu phân kỳ tính từ mô hình sang dữ liệu, thay vì theo chiều ngược lại, thường cho",
+      "choices": [
+        "An estimator with strictly lower variance in every case",
+        "An identical solution, the measure being symmetric",
+        "A fit that spreads its mass over every mode present",
+        "A fit that locks onto one mode and ignores the others"
+      ],
+      "answer": 3,
+      "why": "The direction that punishes putting mass where the data has none rewards a narrow, mode seeking fit, while the reverse direction rewards covering everything.",
+      "why_vi": "Chiều phạt nặng việc đặt khối lượng vào nơi dữ liệu không có sẽ thưởng cho phép khớp hẹp, bám một đỉnh, còn chiều ngược lại thưởng cho việc phủ hết mọi đỉnh.",
+      "level": 3
+    },
+    {
+      "id": "qa-121",
+      "q": "The quality of a representation learned with InfoNCE depends strongly on",
+      "q_vi": "Chất lượng biểu diễn học được bằng InfoNCE phụ thuộc mạnh vào",
+      "choices": [
+        "How many negatives each positive pair is scored against",
+        "The depth of the projection head after the encoder",
+        "Whether the encoder uses layer or batch normalisation",
+        "The order in which the batches are drawn each epoch"
+      ],
+      "answer": 0,
+      "why": "The bound on mutual information tightens as the pool of negatives grows, which is why large queues or large batches matter so much here.",
+      "why_vi": "Cận trên thông tin tương hỗ siết chặt lại khi số mẫu âm tăng, đó là lý do hàng đợi lớn hoặc lô lớn lại quan trọng đến vậy ở đây.",
+      "level": 3
+    },
+    {
+      "id": "qa-122",
+      "q": "A triplet loss stops decreasing almost immediately after training starts. The usual cause is",
+      "q_vi": "Hàm mất mát bộ ba gần như ngừng giảm ngay sau khi bắt đầu huấn luyện. Nguyên nhân thường gặp là",
+      "choices": [
+        "The embedding dimension exceeds the number of classes",
+        "The anchor and positive come from different batches",
+        "Randomly drawn triplets already satisfy the margin",
+        "The margin was set far too small for the embedding size"
+      ],
+      "answer": 2,
+      "why": "If nearly every sampled triplet is already correct by more than the margin, the gradient is zero and the model has nothing left to learn from.",
+      "why_vi": "Nếu gần như mọi bộ ba lấy ra đều đã đúng vượt quá khoảng lề thì gradient bằng không và mô hình không còn gì để học.",
+      "level": 3
+    },
+    {
+      "id": "qa-123",
+      "q": "Adding the same constant to every logit of a softmax classifier",
+      "q_vi": "Cộng cùng một hằng số vào mọi điểm thô của bộ phân loại softmax sẽ",
+      "choices": [
+        "Shifts the predicted class toward the largest index",
+        "Leaves the output probabilities unchanged",
+        "Increases the entropy of the output distribution",
+        "Scales all probabilities by that same constant"
+      ],
+      "answer": 1,
+      "why": "The shift factors out of both the numerator and the denominator of the exponential ratio, so the distribution is untouched.",
+      "why_vi": "Phần dịch được rút ra khỏi cả tử số lẫn mẫu số của tỷ số hàm mũ, nên phân bố không hề thay đổi.",
+      "level": 2
+    },
+    {
+      "id": "qa-124",
+      "q": "Weighting the loss by inverse class frequency on a heavily imbalanced set",
+      "q_vi": "Nhân mất mát với nghịch đảo tần suất lớp trên tập mất cân bằng nặng sẽ",
+      "choices": [
+        "Creates additional minority examples during training",
+        "Guarantees a higher area under the ROC curve",
+        "Removes the need for a stratified split",
+        "Moves the effective decision threshold without adding information"
+      ],
+      "answer": 3,
+      "why": "The rare class is still represented by the same handful of examples. What changes is the price of missing them, and that is a threshold, not new evidence.",
+      "why_vi": "Lớp hiếm vẫn chỉ có đúng vài mẫu như cũ. Cái thay đổi là giá phải trả khi bỏ sót chúng, mà đó là một ngưỡng chứ không phải bằng chứng mới.",
+      "level": 3
+    },
+    {
+      "id": "qa-125",
+      "q": "Training a mixture of experts without any auxiliary balancing term usually ends with",
+      "q_vi": "Huấn luyện hỗn hợp chuyên gia mà không có số hạng cân tải phụ trợ thường kết thúc bằng",
+      "choices": [
+        "A few experts taking nearly all tokens while the rest stay untrained",
+        "Every expert receiving an equal share of tokens",
+        "The router collapsing into a linear layer",
+        "The gating weights becoming exactly uniform"
+      ],
+      "answer": 0,
+      "why": "Routing is self reinforcing, since an expert that receives more tokens improves faster and therefore attracts even more of them.",
+      "why_vi": "Việc định tuyến tự khuếch đại, vì chuyên gia nhận nhiều token hơn sẽ tiến bộ nhanh hơn và do đó lại hút thêm token.",
+      "level": 3
+    },
+    {
+      "id": "qa-126",
+      "q": "You tuned twenty configurations with five-fold cross-validation and report the best fold-averaged score. That number is",
+      "q_vi": "Bạn dò hai mươi cấu hình bằng kiểm chứng chéo năm phần rồi báo cáo điểm trung bình tốt nhất. Con số đó là",
+      "choices": [
+        "Pessimistic, because each fold is smaller than the whole set",
+        "Unbiased once you correct for the number of folds compared",
+        "Optimistic, since the folds also picked the configuration",
+        "Unbiased, since every fold was held out in its turn"
+      ],
+      "answer": 2,
+      "why": "Selection consumed the same resampling that produced the report, so only an outer loop untouched by the search gives a clean estimate.",
+      "why_vi": "Bước chọn cấu hình đã tiêu thụ đúng phép lấy mẫu lại dùng để báo cáo, nên chỉ một vòng ngoài không dính tới bước dò mới cho ước lượng sạch.",
+      "level": 3
+    },
+    {
+      "id": "qa-127",
+      "q": "A dataset holds ten photographs of each of two hundred patients. A purely random split will",
+      "q_vi": "Một tập dữ liệu có mười ảnh cho mỗi người trong hai trăm bệnh nhân. Chia ngẫu nhiên thuần tuý sẽ",
+      "choices": [
+        "Reduce the variance of the estimated accuracy",
+        "Put photographs of one patient on both sides",
+        "Break the assumption that the folds are equal in size",
+        "Under-represent the majority class in the test fold"
+      ],
+      "answer": 1,
+      "why": "Near duplicates of a training image then appear in the test fold, so the score measures memorisation of that patient rather than generalisation to a new one.",
+      "why_vi": "Bản gần trùng của ảnh huấn luyện sẽ xuất hiện ở phần kiểm tra, nên điểm số đo mức thuộc lòng bệnh nhân đó chứ không đo khả năng tổng quát sang người mới.",
+      "level": 2
+    },
+    {
+      "id": "qa-128",
+      "q": "For a forecasting model, a randomly shuffled train and test split produces",
+      "q_vi": "Với mô hình dự báo, việc xáo trộn ngẫu nhiên rồi chia tập huấn luyện và kiểm tra sẽ cho",
+      "choices": [
+        "An unbiased estimate with slightly wider error bars",
+        "A valid estimate provided the split is stratified",
+        "A conservative estimate of live behaviour",
+        "A score the deployed system can never reach"
+      ],
+      "answer": 3,
+      "why": "Shuffling lets the model train on periods that come after the ones it is tested on, an advantage no live system will ever have.",
+      "why_vi": "Xáo trộn cho phép mô hình học trên những giai đoạn nằm sau giai đoạn đem ra kiểm tra, một lợi thế mà hệ thống chạy thật không bao giờ có.",
+      "level": 2
+    },
+    {
+      "id": "qa-129",
+      "q": "A hospital readmission model reaches an area under the curve of ninety nine. The first suspicion should be",
+      "q_vi": "Một mô hình dự báo tái nhập viện đạt diện tích dưới đường cong tới chín mươi chín. Nghi ngờ đầu tiên nên là",
+      "choices": [
+        "A feature recorded only once the outcome was known",
+        "The evaluation metric is inappropriate for the task",
+        "The classes are perfectly balanced by design",
+        "The training set is far too small for this model"
+      ],
+      "answer": 0,
+      "why": "A field written into the record after the event encodes the answer, which is why the score is spectacular offline and collapses in service.",
+      "why_vi": "Một trường được ghi vào hồ sơ sau khi sự kiện xảy ra chính là chứa sẵn đáp án, vì thế điểm số ngoại tuyến rực rỡ còn khi chạy thật thì sụp.",
+      "level": 3
+    },
+    {
+      "id": "qa-130",
+      "q": "The same test set has guided fifty design decisions over a year. Its score is now",
+      "q_vi": "Cùng một tập kiểm tra đã dẫn đường cho năm mươi quyết định thiết kế suốt một năm. Điểm số của nó bây giờ là",
+      "choices": [
+        "Still valid, since the model never saw those labels",
+        "Invalid because the test set has drifted over the year",
+        "Contaminated by selection, even though no label was fitted",
+        "Valid only when the test set exceeds the training set"
+      ],
+      "answer": 2,
+      "why": "Every decision that consulted the held out score pulled the model toward that particular sample, which is a form of fitting even without any gradient.",
+      "why_vi": "Mỗi quyết định có tra cứu điểm của tập giữ riêng đều kéo mô hình về phía chính mẫu đó, và đấy đã là một dạng khớp dù không hề có gradient nào.",
+      "level": 3
+    },
+    {
+      "id": "qa-131",
+      "q": "Bootstrapping the test set yields a confidence interval for a metric by",
+      "q_vi": "Lấy mẫu lặp trên tập kiểm tra cho ra khoảng tin cậy của một chỉ số bằng cách",
+      "choices": [
+        "Assuming the metric is normally distributed around its mean",
+        "Resampling with replacement and reading the percentiles",
+        "Retraining the model on many random subsets",
+        "Splitting the test set into equal halves repeatedly"
+      ],
+      "answer": 1,
+      "why": "The resampling stands in for drawing fresh test sets from the population, so no parametric form has to be assumed for the metric.",
+      "why_vi": "Việc lấy mẫu lại đóng vai trò thay cho việc rút ra những tập kiểm tra mới từ tổng thể, nên không cần giả định dạng tham số nào cho chỉ số.",
+      "level": 2
+    },
+    {
+      "id": "qa-132",
+      "q": "McNemar's test compares two classifiers using",
+      "q_vi": "Kiểm định McNemar so sánh hai bộ phân loại dựa trên",
+      "choices": [
+        "A permutation test over the training labels",
+        "The full confusion matrix of each system",
+        "The difference of their mean accuracies",
+        "Only the cases where the two disagree"
+      ],
+      "answer": 3,
+      "why": "Examples that both systems get right, and those both get wrong, carry no information about which one is better, so the test discards them.",
+      "why_vi": "Những mẫu mà cả hai hệ cùng đúng, hoặc cùng sai, không mang thông tin nào về việc hệ nào tốt hơn, nên phép kiểm định loại chúng ra.",
+      "level": 3
+    },
+    {
+      "id": "qa-133",
+      "q": "Micro averaged recall rises while macro averaged recall falls. This tells you",
+      "q_vi": "Độ bao phủ trung bình vi mô tăng còn trung bình vĩ mô giảm. Điều này cho bạn biết",
+      "choices": [
+        "The large classes improved while the small ones got worse",
+        "The model has become better calibrated on all classes",
+        "The metric was computed before the softmax was applied",
+        "The test set has fewer classes than the training set"
+      ],
+      "answer": 0,
+      "why": "Weighting by example favours the frequent classes while weighting by class exposes the rare ones, so the two move apart exactly when the tail degrades.",
+      "why_vi": "Gộp theo mẫu thì ưu ái các lớp đông, gộp theo lớp thì phơi bày các lớp hiếm, nên hai con số tách nhau đúng lúc phần đuôi xấu đi.",
+      "level": 3
+    },
+    {
+      "id": "qa-134",
+      "q": "On a set where ninety nine percent of cases are negative, a model that always predicts negative shows",
+      "q_vi": "Trên tập mà chín mươi chín phần trăm là ca âm tính, một mô hình luôn đoán âm tính sẽ cho",
+      "choices": [
+        "Low accuracy together with a very strong Matthews score",
+        "High accuracy and a Matthews coefficient close to one",
+        "High accuracy with a Matthews coefficient near zero",
+        "Perfect recall on the positive class of interest"
+      ],
+      "answer": 2,
+      "why": "The coefficient draws on all four cells of the confusion matrix, so a classifier that never identifies a positive scores near zero however high its accuracy reads.",
+      "why_vi": "Hệ số này lấy từ cả bốn ô của ma trận nhầm lẫn, nên bộ phân loại không bao giờ nhận ra ca dương sẽ có điểm gần không dù độ chính xác đọc lên rất cao.",
+      "level": 2
+    },
+    {
+      "id": "qa-135",
+      "q": "Reporting the best of forty random seeds as your method's result overstates it because",
+      "q_vi": "Báo cáo kết quả tốt nhất trong bốn mươi hạt giống ngẫu nhiên làm phương pháp bị thổi phồng, vì",
+      "choices": [
+        "Random seeds change how many parameters actually get trained",
+        "The maximum over noisy estimates sits above the truth",
+        "Seed choice also changes the size of the validation split",
+        "Averaging is a biased estimator of any maximum"
+      ],
+      "answer": 1,
+      "why": "Selecting the largest of several noisy numbers keeps the noise inside the report, so the same configuration will look worse on any fresh draw.",
+      "why_vi": "Chọn con số lớn nhất trong nhiều ước lượng có nhiễu tức là giữ luôn phần nhiễu trong báo cáo, nên chính cấu hình đó sẽ xấu đi ở bất kỳ lần rút mới nào.",
+      "level": 3
+    },
+    {
+      "id": "qa-136",
+      "q": "Offline evaluation is excellent, live accuracy is four points lower, and the weights are identical. Investigate",
+      "q_vi": "Đánh giá ngoại tuyến rất tốt, độ chính xác khi chạy thật thấp hơn bốn điểm, còn trọng số thì y hệt. Hãy đi tìm",
+      "choices": [
+        "Whether the learning rate was decayed too fast",
+        "Whether dropout was left switched on during training",
+        "Whether the batch size chosen was far too large",
+        "Whether the two paths compute features alike"
+      ],
+      "answer": 3,
+      "why": "The same weights fed differently prepared inputs give different answers, and an offline harness that never runs the serving code cannot see that difference.",
+      "why_vi": "Cùng bộ trọng số nhưng đầu vào được chuẩn bị khác nhau thì cho câu trả lời khác nhau, mà bộ khung ngoại tuyến không bao giờ chạy qua mã phục vụ nên không thấy được khác biệt đó.",
+      "level": 3
+    },
+    {
+      "id": "qa-137",
+      "q": "Temperature scaling fitted on a validation set changes",
+      "q_vi": "Co giãn theo nhiệt độ khớp trên tập kiểm định sẽ làm thay đổi",
+      "choices": [
+        "The probabilities, but not a single predicted class",
+        "The predicted classes while leaving probabilities alone",
+        "Both the probabilities and the ranking of the classes",
+        "The training loss surface for later fine tuning"
+      ],
+      "answer": 0,
+      "why": "Dividing every logit by one positive number is a monotone operation, so the ordering survives and only the sharpness of the distribution moves.",
+      "why_vi": "Chia mọi điểm thô cho cùng một số dương là phép đơn điệu, nên thứ tự được giữ nguyên và chỉ độ sắc của phân bố thay đổi.",
+      "level": 2
+    },
+    {
+      "id": "qa-138",
+      "q": "A proper scoring rule is one under which a forecaster",
+      "q_vi": "Quy tắc tính điểm chính đáng là quy tắc mà theo đó người dự báo",
+      "choices": [
+        "Can lift the score by always predicting the majority class",
+        "Receives the same score for any consistent forecast",
+        "Scores best by reporting exactly the honest probability",
+        "Is rewarded for confidence regardless of the truth"
+      ],
+      "answer": 2,
+      "why": "The rule is built so that any shading away from the true probability lowers the expected score, which removes the incentive to game the number.",
+      "why_vi": "Quy tắc được dựng sao cho mọi sự bẻ cong khỏi xác suất thật đều làm giảm điểm kỳ vọng, nhờ đó không còn động cơ để lách con số.",
+      "level": 3
+    },
+    {
+      "id": "qa-139",
+      "q": "In a reliability diagram, a curve lying below the diagonal means the model is",
+      "q_vi": "Trên biểu đồ độ tin cậy, đường cong nằm dưới đường chéo nghĩa là mô hình",
+      "choices": [
+        "Unable to separate the classes at all",
+        "Overconfident in its predictions",
+        "Underconfident about its predictions",
+        "Perfectly calibrated on this data"
+      ],
+      "answer": 1,
+      "why": "Predicted probability exceeds observed frequency in those bins, so the stated confidence is higher than the outcomes justify.",
+      "why_vi": "Ở những khoảng chia đó, xác suất dự đoán cao hơn tần suất quan sát, nghĩa là mức tự tin công bố cao hơn mức mà kết quả thực tế cho phép.",
+      "level": 2
+    },
+    {
+      "id": "qa-140",
+      "q": "With only three hundred validation points, calibrating by isotonic regression rather than a sigmoid fit risks",
+      "q_vi": "Chỉ với ba trăm điểm kiểm định, hiệu chuẩn bằng hồi quy đơn điệu thay vì khớp sigmoid sẽ có nguy cơ",
+      "choices": [
+        "Changing the ranking of the predictions",
+        "Losing the monotonicity of the mapping",
+        "Requiring labels for the test set too",
+        "Fitting the noise, because the map is unconstrained in shape"
+      ],
+      "answer": 3,
+      "why": "A free non-decreasing step function has far more freedom than a two parameter curve, and a small calibration sample cannot pin that freedom down.",
+      "why_vi": "Hàm bậc thang không giảm và tự do có nhiều bậc tự do hơn hẳn một đường cong hai tham số, mà mẫu hiệu chuẩn nhỏ thì không ghim nổi phần tự do đó.",
+      "level": 3
+    },
+    {
+      "id": "qa-141",
+      "q": "Conformal prediction delivers its coverage guarantee under which condition?",
+      "q_vi": "Dự đoán hợp quy bảo đảm mức phủ với điều kiện nào?",
+      "choices": [
+        "The calibration and test data are exchangeable",
+        "The calibration set is drawn without replacement from training",
+        "The score function must be a proper scoring rule",
+        "The underlying model is correctly specified"
+      ],
+      "answer": 0,
+      "why": "The method needs only that a new point be statistically interchangeable with the calibration points, and correctness of the model is not part of the bargain.",
+      "why_vi": "Phương pháp chỉ cần điểm mới có thể hoán đổi về mặt thống kê với các điểm hiệu chuẩn, còn mô hình đúng hay sai không nằm trong thoả thuận.",
+      "level": 3
+    },
+    {
+      "id": "qa-142",
+      "q": "A model reports ninety five percent accuracy after abstaining on the hardest third of inputs. To read that fairly you need",
+      "q_vi": "Một mô hình báo cáo độ chính xác chín mươi lăm phần trăm sau khi từ chối trả lời một phần ba đầu vào khó nhất. Để đọc con số đó cho công bằng, bạn cần",
+      "choices": [
+        "The confusion matrix of the abstained cases",
+        "The size of the validation split used",
+        "The coverage alongside the accuracy",
+        "The training loss at the final epoch"
+      ],
+      "answer": 2,
+      "why": "Accuracy measured on the easy remainder is not comparable with a full coverage number, so the two figures have to travel together.",
+      "why_vi": "Độ chính xác đo trên phần dễ còn lại không so sánh được với con số ở mức phủ đầy đủ, nên hai chỉ số phải đi cùng nhau.",
+      "level": 2
+    },
+    {
+      "id": "qa-143",
+      "q": "A classifier trained on ten animal species is shown a photograph of a car. Its softmax output will",
+      "q_vi": "Một bộ phân loại huấn luyện trên mười loài động vật được đưa cho tấm ảnh chụp ô tô. Đầu ra softmax của nó sẽ",
+      "choices": [
+        "Raise an exception because the input is unfamiliar to it",
+        "Still assign the full probability mass to some species",
+        "Return a uniform distribution over the ten species",
+        "Return probabilities that sum to less than one"
+      ],
+      "answer": 1,
+      "why": "Normalisation forces the outputs to sum to one over the known classes, so the model has no channel through which to answer none of these.",
+      "why_vi": "Phép chuẩn hoá buộc tổng đầu ra trên các lớp đã biết bằng một, nên mô hình không có kênh nào để trả lời rằng không lớp nào cả.",
+      "level": 2
+    },
+    {
+      "id": "qa-144",
+      "q": "Compared with averaging several dropout passes of one network, an ensemble of separately seeded networks usually gives",
+      "q_vi": "So với việc lấy trung bình vài lượt dropout của cùng một mạng, tổ hợp các mạng gieo hạt giống riêng rẽ thường cho",
+      "choices": [
+        "Identical uncertainty estimates at a fraction of the cost",
+        "Weaker accuracy but far cheaper inference overall",
+        "Lower training cost for the same accuracy level",
+        "More diverse errors and better calibrated averages"
+      ],
+      "answer": 3,
+      "why": "Independent runs settle in different basins, so their mistakes overlap less and the averaged distribution reflects genuine disagreement where data is thin.",
+      "why_vi": "Các lần chạy độc lập dừng ở những vùng khác nhau nên lỗi của chúng ít chồng nhau, và phân bố trung bình phản ánh đúng sự bất đồng ở nơi dữ liệu thưa.",
+      "level": 3
+    },
+    {
+      "id": "qa-145",
+      "q": "Collecting far more labelled data mainly reduces",
+      "q_vi": "Thu thập thêm thật nhiều dữ liệu có nhãn chủ yếu làm giảm",
+      "choices": [
+        "Uncertainty from lack of knowledge",
+        "The variance introduced by the optimiser",
+        "Uncertainty from noise in the labels",
+        "The irreducible error of the task"
+      ],
+      "answer": 0,
+      "why": "Extra data fills in regions of input space the model has not seen, while noise inherent to the measurement stays exactly where it was.",
+      "why_vi": "Dữ liệu thêm vào lấp đầy những vùng đầu vào mà mô hình chưa từng thấy, còn phần nhiễu vốn có trong phép đo thì vẫn nguyên như cũ.",
+      "level": 2
+    },
+    {
+      "id": "qa-146",
+      "q": "Post-training quantisation costs two accuracy points at low bit width. The direct remedy is",
+      "q_vi": "Lượng tử hoá sau huấn luyện mất hai điểm chính xác ở mức bit thấp. Cách khắc phục trực tiếp là",
+      "choices": [
+        "Increase the size of the calibration sample",
+        "Use a larger batch at inference time",
+        "Simulate the rounding during training and let gradients pass through",
+        "Disable the key and value cache"
+      ],
+      "answer": 2,
+      "why": "Letting the weights move while the rounding sits in the loop puts them where the quantisation error costs least, which no post hoc rescaling can achieve.",
+      "why_vi": "Cho trọng số dịch chuyển trong khi phép làm tròn nằm ngay trong vòng lặp sẽ đưa chúng tới chỗ sai số lượng tử hoá gây thiệt hại ít nhất, điều mà co giãn hậu kỳ không làm được.",
+      "level": 3
+    },
+    {
+      "id": "qa-147",
+      "q": "A few hidden channels carry values far larger than the rest. When quantising the tensor, this",
+      "q_vi": "Vài kênh ẩn mang giá trị lớn hơn hẳn phần còn lại. Khi lượng tử hoá tensor đó, điều này sẽ",
+      "choices": [
+        "Improves the signal to noise ratio of the tensor",
+        "Stretches the shared range and starves the other channels of resolution",
+        "Has no effect if the weights are symmetric",
+        "Only matters for the attention scores"
+      ],
+      "answer": 1,
+      "why": "One scale has to cover the whole tensor, so a handful of extreme values push the step size up and everything else collapses into very few levels.",
+      "why_vi": "Một hệ số co giãn phải phủ cả tensor, nên vài giá trị cực đoan đẩy bước lượng tử lên cao và mọi giá trị còn lại dồn vào rất ít mức.",
+      "level": 3
+    },
+    {
+      "id": "qa-148",
+      "q": "The sample used to fix activation ranges before quantising must",
+      "q_vi": "Mẫu dùng để chốt dải giá trị hoạt hoá trước khi lượng tử hoá phải",
+      "choices": [
+        "Come from the cleanest part of the training set",
+        "Be labelled and drawn from the test partition",
+        "Contain at least one example of every class",
+        "Look like the traffic the model will see"
+      ],
+      "answer": 3,
+      "why": "The chosen scales clip anything outside the observed range, so ranges measured on unrepresentative data will cut off real inputs in service.",
+      "why_vi": "Các hệ số co giãn đã chọn sẽ cắt cụt mọi giá trị nằm ngoài dải đã quan sát, nên dải đo trên dữ liệu không đại diện sẽ cắt mất đầu vào thật khi chạy.",
+      "level": 2
+    },
+    {
+      "id": "qa-149",
+      "q": "The lottery ticket result holds that a pruned subnetwork matches the dense model only when",
+      "q_vi": "Kết quả về vé số trúng thưởng cho rằng mạng con sau khi tỉa chỉ đạt ngang mô hình dày đặc khi",
+      "choices": [
+        "It is rewound to its original initialisation",
+        "The dense model was trained to convergence first",
+        "It is retrained with a far larger learning rate",
+        "The pruning is applied gradually, one layer at a time"
+      ],
+      "answer": 0,
+      "why": "The mask alone is not the discovery, since the same sparse shape started from fresh random values does not reach the same accuracy.",
+      "why_vi": "Bản thân mặt nạ không phải là phát hiện, vì cùng hình dạng thưa đó mà khởi tạo lại bằng giá trị ngẫu nhiên mới thì không đạt được độ chính xác như vậy.",
+      "level": 3
+    },
+    {
+      "id": "qa-150",
+      "q": "Pruning half the weights at random saves memory but not time on a tensor core, because",
+      "q_vi": "Tỉa ngẫu nhiên một nửa số trọng số tiết kiệm bộ nhớ nhưng không tiết kiệm thời gian trên nhân tensor, vì",
+      "choices": [
+        "Sparse kernels are missing from every low precision format",
+        "The zeros still occupy registers during the multiply",
+        "The hardware skips only one fixed pattern of zeros",
+        "Random pruning removes more weights than intended"
+      ],
+      "answer": 2,
+      "why": "Speedup needs the zeros to fall in positions the multiply unit can skip, and an arbitrary mask forces it to process the tensor as if it were dense.",
+      "why_vi": "Muốn tăng tốc thì các số không phải rơi vào đúng vị trí mà đơn vị nhân có thể bỏ qua, còn mặt nạ tuỳ ý buộc nó xử lý tensor như thể vẫn dày đặc.",
+      "level": 3
+    },
+    {
+      "id": "qa-151",
+      "q": "FlashAttention speeds up attention primarily by",
+      "q_vi": "FlashAttention tăng tốc phép chú ý chủ yếu nhờ",
+      "choices": [
+        "Reducing the number of floating point operations that are required",
+        "Avoiding any write of the full score matrix to main memory",
+        "Approximating the softmax with a low rank kernel",
+        "Skipping attention heads that contribute little"
+      ],
+      "answer": 1,
+      "why": "The computation stays exact and the arithmetic count is unchanged, so what falls is the traffic between the compute units and memory.",
+      "why_vi": "Phép tính vẫn chính xác và số phép tính không đổi, cái giảm đi là lưu lượng dữ liệu giữa các đơn vị tính toán và bộ nhớ.",
+      "level": 3
+    },
+    {
+      "id": "qa-152",
+      "q": "Paged attention raises the throughput of a serving system mainly by",
+      "q_vi": "Phân trang bộ nhớ đệm chú ý nâng thông lượng của hệ thống phục vụ chủ yếu nhờ",
+      "choices": [
+        "Compressing the cached keys and values into a lower precision",
+        "Batching together requests that share the same prompt prefix",
+        "Predicting several tokens per forward pass",
+        "Removing the need to reserve a contiguous worst case cache"
+      ],
+      "answer": 3,
+      "why": "Fixed size blocks addressed through a table let sequences of different lengths share memory, so many more requests fit on the device at once.",
+      "why_vi": "Các khối cỡ cố định đánh địa chỉ qua bảng cho phép chuỗi dài ngắn khác nhau dùng chung bộ nhớ, nhờ đó thiết bị chứa được nhiều yêu cầu hơn hẳn cùng lúc.",
+      "level": 3
+    },
+    {
+      "id": "qa-153",
+      "q": "Generating one token at a time from a large model is usually limited by",
+      "q_vi": "Việc sinh từng token một từ mô hình lớn thường bị giới hạn bởi",
+      "choices": [
+        "Memory bandwidth, since every weight is read per token",
+        "The peak arithmetic throughput of the accelerator in use",
+        "The tokeniser, which runs on the host processor instead",
+        "The number of attention heads in the model"
+      ],
+      "answer": 0,
+      "why": "Each decoding step performs very little arithmetic per weight loaded, so the cost is dominated by moving parameters rather than by multiplying them.",
+      "why_vi": "Mỗi bước sinh chỉ thực hiện rất ít phép tính trên mỗi trọng số được nạp, nên chi phí bị chi phối bởi việc di chuyển tham số chứ không phải việc nhân chúng.",
+      "level": 3
+    },
+    {
+      "id": "qa-154",
+      "q": "Gradient checkpointing trades",
+      "q_vi": "Kỹ thuật lưu điểm kiểm đánh đổi",
+      "choices": [
+        "Precision for numerical stability during the backward pass",
+        "Lower accuracy for a faster training loop",
+        "Extra computation for a lower peak memory footprint",
+        "Batch size for a longer context window"
+      ],
+      "answer": 2,
+      "why": "Activations are discarded and recomputed when the backward pass needs them, so the run takes longer but fits into less memory.",
+      "why_vi": "Giá trị hoạt hoá bị bỏ đi rồi tính lại khi lượt truyền ngược cần đến, nên lần chạy lâu hơn nhưng lọt vào lượng bộ nhớ nhỏ hơn.",
+      "level": 2
+    },
+    {
+      "id": "qa-155",
+      "q": "Training in bfloat16 rarely needs loss scaling because the format",
+      "q_vi": "Huấn luyện ở định dạng bfloat16 hiếm khi cần nhân tỷ lệ mất mát, vì định dạng này",
+      "choices": [
+        "Is accumulated in integer arithmetic on the tensor cores",
+        "Keeps the exponent range of single precision",
+        "Rounds every value toward the nearest even number",
+        "Stores more mantissa bits than half precision"
+      ],
+      "answer": 1,
+      "why": "Underflow of small gradients is what loss scaling was invented to prevent, and a wide exponent already keeps those values representable.",
+      "why_vi": "Nhân tỷ lệ mất mát ra đời là để chống hiện tượng gradient nhỏ bị tràn dưới, mà dải số mũ rộng thì đã giữ được những giá trị đó trong vùng biểu diễn.",
+      "level": 3
+    },
+    {
+      "id": "qa-156",
+      "q": "Tensor parallelism places a heavier demand on the interconnect than pipeline parallelism because",
+      "q_vi": "Song song theo tensor đòi hỏi đường kết nối nhiều hơn so với song song theo đường ống, vì",
+      "choices": [
+        "It replicates the whole optimiser state on all of the devices",
+        "It requires micro batches to be much smaller",
+        "It stores the activations twice on each device",
+        "Every layer ends in a collective across the devices"
+      ],
+      "answer": 3,
+      "why": "Splitting a single matrix means the partial results must be combined inside each layer, so communication happens at every layer rather than only at stage boundaries.",
+      "why_vi": "Chia một ma trận duy nhất nghĩa là các kết quả thành phần phải được gộp lại ngay trong từng lớp, nên truyền thông xảy ra ở mọi lớp chứ không chỉ ở ranh giới các chặng.",
+      "level": 3
+    },
+    {
+      "id": "qa-157",
+      "q": "When training a large model with Adam, the optimiser state alone typically costs",
+      "q_vi": "Khi huấn luyện mô hình lớn bằng Adam, riêng trạng thái của bộ tối ưu thường tốn",
+      "choices": [
+        "Several times the memory of the parameters themselves",
+        "Nothing extra, since the moments live inside the weights",
+        "About the same memory as a single activation batch",
+        "Less memory than the gradients of one step"
+      ],
+      "answer": 0,
+      "why": "Two moment tensors of parameter size, usually held in higher precision beside a master copy of the weights, are why sharding that state across workers pays off.",
+      "why_vi": "Hai tensor mô men có kích thước bằng tham số, thường giữ ở độ chính xác cao hơn bên cạnh bản chính của trọng số, đó là lý do chia nhỏ trạng thái này ra các tiến trình lại có lợi.",
+      "level": 3
+    },
+    {
+      "id": "qa-158",
+      "q": "Fusing an activation into the preceding matrix multiply helps most when the operation is",
+      "q_vi": "Hợp nhất hàm kích hoạt vào phép nhân ma trận ngay trước nó có lợi nhất khi phép tính đang",
+      "choices": [
+        "Bound by the peak floating point rate of the device",
+        "Executed only once per training step",
+        "Bound by memory traffic rather than by arithmetic",
+        "Numerically unstable in low precision"
+      ],
+      "answer": 2,
+      "why": "An elementwise pass reads and writes a whole tensor for very little maths, so removing that round trip to memory is exactly where the time is saved.",
+      "why_vi": "Một lượt tính theo từng phần tử phải đọc và ghi cả tensor mà làm rất ít phép toán, nên bỏ được vòng ra vào bộ nhớ chính là chỗ tiết kiệm thời gian.",
+      "level": 3
+    },
+    {
+      "id": "qa-159",
+      "q": "Adding early exit heads to a network lowers",
+      "q_vi": "Gắn thêm các đầu ra thoát sớm vào mạng sẽ làm giảm",
+      "choices": [
+        "The number of parameters that must be trained and stored",
+        "Average latency, while the worst case stays the same",
+        "Both the average and the worst case latency",
+        "Memory use, since fewer layers are stored"
+      ],
+      "answer": 1,
+      "why": "Easy inputs stop at an intermediate head, but a hard input still traverses every layer, so the tail of the latency distribution does not move.",
+      "why_vi": "Đầu vào dễ dừng lại ở một đầu ra trung gian, nhưng đầu vào khó vẫn đi qua đủ mọi lớp, nên phần đuôi của phân bố độ trễ không hề dịch chuyển.",
+      "level": 2
+    },
+    {
+      "id": "qa-160",
+      "q": "Replacing a weight matrix by a product of two thinner matrices costs accuracy in proportion to",
+      "q_vi": "Thay một ma trận trọng số bằng tích của hai ma trận mảnh hơn làm mất độ chính xác tỷ lệ với",
+      "choices": [
+        "The condition number of the input covariance matrix",
+        "The learning rate that was used during fine tuning",
+        "The number of layers in the whole network",
+        "The singular values that the truncation discards"
+      ],
+      "answer": 3,
+      "why": "The best rank limited approximation keeps the largest singular directions, so whatever energy sits in the dropped ones is exactly what is lost.",
+      "why_vi": "Phép xấp xỉ tốt nhất ở hạng bị giới hạn sẽ giữ lại các hướng kỳ dị lớn nhất, nên phần năng lượng nằm ở những hướng bị bỏ chính là phần mất đi.",
+      "level": 3
+    },
+    {
+      "id": "qa-161",
+      "q": "Magnitude pruning removes the smallest weights. Its main conceptual weakness is that",
+      "q_vi": "Tỉa theo độ lớn loại bỏ những trọng số nhỏ nhất. Điểm yếu chính về mặt khái niệm là",
+      "choices": [
+        "A small weight may still have a large effect on the output",
+        "It always produces a completely unstructured sparsity pattern",
+        "It requires the entire network to be retrained from scratch",
+        "It cannot be applied to convolutional layers"
+      ],
+      "answer": 0,
+      "why": "Importance depends on the input distribution and on the scale of the activations a weight multiplies, which the magnitude on its own does not capture.",
+      "why_vi": "Mức quan trọng phụ thuộc vào phân bố đầu vào và vào biên độ của giá trị hoạt hoá mà trọng số nhân với, những thứ mà riêng độ lớn không nắm bắt được.",
+      "level": 3
+    },
+    {
+      "id": "qa-162",
+      "q": "A pretraining run shows a sharp loss spike deep into the schedule. A standard first response is",
+      "q_vi": "Một lần tiền huấn luyện xuất hiện đột biến mất mát rất mạnh khi đã đi sâu vào lịch chạy. Phản ứng đầu tiên theo thông lệ là",
+      "choices": [
+        "Switch off gradient clipping for the rest of the run",
+        "Increase the learning rate to escape the region",
+        "Roll back to an earlier checkpoint and skip the offending batches",
+        "Reduce the number of layers in the model"
+      ],
+      "answer": 2,
+      "why": "The spike usually traces to a rare batch or a numerical event, so rewinding and stepping around it costs far less than restarting the whole run.",
+      "why_vi": "Đột biến thường truy về một lô dữ liệu hiếm hoặc một sự cố số học, nên quay lại và đi vòng qua nó rẻ hơn nhiều so với chạy lại từ đầu.",
+      "level": 3
+    },
+    {
+      "id": "qa-163",
+      "q": "The point of a width scaling scheme such as maximal update parametrisation is that",
+      "q_vi": "Ý nghĩa của một sơ đồ co giãn theo bề rộng như tham số hoá cập nhật cực đại là",
+      "choices": [
+        "The model ends up needing fewer training tokens overall",
+        "Tuning on a narrow model transfers to full width",
+        "The optimiser can drop its second moment estimate",
+        "Weight decay can be removed without any loss at all"
+      ],
+      "answer": 1,
+      "why": "The scheme keeps the size of each update stable as width grows, so a sweep run cheaply on a small proxy transfers rather than having to be repeated.",
+      "why_vi": "Sơ đồ này giữ cho độ lớn của mỗi bước cập nhật ổn định khi bề rộng tăng, nên đợt dò tham số chạy rẻ trên bản thay thế nhỏ có thể chuyển sang dùng được thay vì phải làm lại.",
+      "level": 3
+    },
+    {
+      "id": "qa-164",
+      "q": "Orthogonal initialisation is most useful in recurrent stacks because an orthogonal matrix",
+      "q_vi": "Khởi tạo trực giao hữu ích nhất trong các mạng hồi quy vì ma trận trực giao",
+      "choices": [
+        "Guarantees that the loss surface will stay convex everywhere",
+        "Has a determinant equal to the number of hidden units",
+        "Removes the need for any activation function",
+        "Preserves the norm of the vector it multiplies"
+      ],
+      "answer": 3,
+      "why": "Repeated multiplication by a norm preserving map neither explodes nor shrinks the signal, and that is precisely the failure mode of long recurrent chains.",
+      "why_vi": "Nhân lặp đi lặp lại với một ánh xạ bảo toàn chuẩn thì tín hiệu không bùng nổ cũng không teo lại, mà đó đúng là kiểu hỏng của các chuỗi hồi quy dài.",
+      "level": 3
+    },
+    {
+      "id": "qa-165",
+      "q": "Unlike cross-entropy, a hinge loss stops producing any gradient for an example once",
+      "q_vi": "Khác với entropy chéo, hàm mất mát bản lề ngừng sinh gradient cho một mẫu ngay khi",
+      "choices": [
+        "Its score exceeds the rival score by the margin",
+        "The example has appeared in more than one training batch",
+        "The learning rate has decayed far enough already",
+        "Its predicted probability has climbed above one half"
+      ],
+      "answer": 0,
+      "why": "The loss is flat at zero beyond the margin, so an example placed correctly and confidently contributes nothing further to the update.",
+      "why_vi": "Ngoài khoảng lề, hàm mất mát phẳng ở mức không, nên một mẫu đã được đặt đúng và chắc chắn thì không đóng góp gì thêm vào bước cập nhật.",
+      "level": 2
+    },
+    {
+      "id": "qa-166",
+      "q": "Dividing the logits by a temperature greater than one before the softmax",
+      "q_vi": "Chia các điểm thô cho một nhiệt độ lớn hơn một trước khi qua softmax sẽ",
+      "choices": [
+        "Reverses the ranking of the classes",
+        "Leaves the distribution completely unchanged",
+        "Flattens the distribution toward uniform",
+        "Sharpens the distribution toward one class"
+      ],
+      "answer": 2,
+      "why": "A larger divisor shrinks the differences between logits, and it is those differences that the exponential turns into peakedness.",
+      "why_vi": "Số chia lớn hơn làm co lại hiệu số giữa các điểm thô, mà chính những hiệu số ấy mới được hàm mũ biến thành độ nhọn của phân bố.",
+      "level": 2
+    },
+    {
+      "id": "qa-167",
+      "q": "An initialisation rule that scales the variance by fan in is protecting",
+      "q_vi": "Quy tắc khởi tạo co giãn phương sai theo số đầu vào đang bảo vệ",
+      "choices": [
+        "The optimiser moments over the course of the first epoch",
+        "The forward signal as it passes through the layers",
+        "The numerical range that the loss value itself occupies",
+        "The backward gradient as it returns toward the input"
+      ],
+      "answer": 1,
+      "why": "Fan in governs how many terms are summed on the way forward, while fan out governs the same on the way back, which is why both counts appear in these rules.",
+      "why_vi": "Số đầu vào quyết định có bao nhiêu số hạng được cộng lại ở chiều xuôi, còn số đầu ra quyết định điều tương tự ở chiều ngược, vì thế cả hai con số đều xuất hiện trong các quy tắc này.",
+      "level": 3
     }
   ]
 }

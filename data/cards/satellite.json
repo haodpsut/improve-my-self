@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "satellite",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "s-leo",
@@ -970,6 +970,582 @@
       "def_vi": "Đặt hai trạm cổng cách nhau đủ xa để một ổ mưa lớn hiếm khi phủ cả hai, nhờ đó hệ thống chuyển sang trạm đang quang mây.",
       "say": "Site diversity is how a Ka band gateway reaches five nines of availability.",
       "tags": ["design", "propagation"]
+    },
+    {
+      "id": "s-true-anomaly",
+      "en": "True anomaly",
+      "vi": "Góc dị thường thật",
+      "def_en": "The real angle from perigee to the satellite measured at the focus, so it advances unevenly on an eccentric orbit, fast near perigee and slow near apogee.",
+      "def_vi": "Góc thật tính từ cận điểm tới vệ tinh, đo tại tiêu điểm, nên trên quỹ đạo lệch tâm nó tăng không đều, nhanh gần cận điểm và chậm gần viễn điểm.",
+      "say": "We convert mean anomaly to true anomaly before we compute the actual look angle.",
+      "tags": ["orbit", "mechanics"]
+    },
+    {
+      "id": "s-mean-anomaly",
+      "en": "Mean anomaly",
+      "vi": "Góc dị thường trung bình",
+      "def_en": "A fictitious angle that grows linearly with time as if the satellite moved on a circle of the same period, which is why propagators step it first and solve Kepler's equation afterwards.",
+      "def_vi": "Góc giả định tăng tuyến tính theo thời gian như thể vệ tinh chạy trên đường tròn cùng chu kỳ, vì vậy bộ lan truyền quỹ đạo bước theo nó trước rồi mới giải phương trình Kepler.",
+      "say": "Mean anomaly is linear in time, which is exactly why the propagator starts from it.",
+      "tags": ["orbit", "mechanics"]
+    },
+    {
+      "id": "s-argument-of-perigee",
+      "en": "Argument of perigee",
+      "vi": "Đối số cận điểm",
+      "def_en": "The angle inside the orbital plane from the ascending node to perigee, so it sets where in latitude the satellite lingers rather than how the plane itself is tilted.",
+      "def_vi": "Góc nằm trong mặt phẳng quỹ đạo tính từ nút lên tới cận điểm, nên nó quyết định vệ tinh nán lại ở vĩ độ nào chứ không phải mặt phẳng nghiêng ra sao.",
+      "say": "The argument of perigee is what keeps the apogee dwell over the northern hemisphere.",
+      "tags": ["orbit", "geometry"]
+    },
+    {
+      "id": "s-repeat-ground-track",
+      "en": "Repeat ground track orbit",
+      "vi": "Quỹ đạo lặp vệt mặt đất",
+      "def_en": "An orbit whose period is tuned so an integer number of revolutions fits an integer number of nodal days, making the ground track close on itself and repeat exactly.",
+      "def_vi": "Quỹ đạo có chu kỳ chỉnh sao cho số vòng bay nguyên khớp với số ngày nút nguyên, khiến vệt mặt đất khép kín và lặp lại chính xác.",
+      "say": "A repeat ground track buys you identical viewing geometry on every cycle.",
+      "tags": ["orbit", "coverage"]
+    },
+    {
+      "id": "s-ltan",
+      "en": "LTAN (Local Time of Ascending Node)",
+      "vi": "Giờ địa phương tại nút lên",
+      "def_en": "The mean solar time under the satellite when it crosses the equator northbound, which a sun-synchronous design holds constant so illumination and thermal conditions repeat.",
+      "def_vi": "Giờ mặt trời trung bình tại điểm dưới vệ tinh khi nó cắt xích đạo theo hướng bắc, thiết kế đồng bộ mặt trời giữ giá trị này không đổi để điều kiện chiếu sáng và nhiệt lặp lại.",
+      "say": "Choosing the local time of the ascending node fixes the lighting on every pass.",
+      "tags": ["orbit", "design"]
+    },
+    {
+      "id": "s-beta-angle",
+      "en": "Beta angle",
+      "vi": "Góc beta",
+      "def_en": "The angle between the orbital plane and the direction to the sun, which drives how long the satellite stays in eclipse and therefore how hard the battery works.",
+      "def_vi": "Góc giữa mặt phẳng quỹ đạo và hướng tới mặt trời, quyết định vệ tinh nằm trong bóng tối bao lâu và do đó pin phải làm việc nặng đến mức nào.",
+      "say": "At a high beta angle the spacecraft sees almost no eclipse at all.",
+      "tags": ["orbit", "platform"]
+    },
+    {
+      "id": "s-delta-v-budget",
+      "en": "Delta-v budget",
+      "vi": "Ngân sách delta-v",
+      "def_en": "The total velocity change a satellite can still produce with its remaining propellant, which caps how much orbit correction and end of life disposal it can afford.",
+      "def_vi": "Tổng lượng biến thiên vận tốc mà vệ tinh còn tạo ra được với nhiên liệu còn lại, đặt trần cho lượng hiệu chỉnh quỹ đạo và việc thải bỏ cuối đời.",
+      "say": "The remaining delta-v budget decides whether we can still deorbit safely.",
+      "tags": ["platform", "operations"]
+    },
+    {
+      "id": "s-hohmann-transfer",
+      "en": "Hohmann transfer",
+      "vi": "Chuyển quỹ đạo Hohmann",
+      "def_en": "A two burn manoeuvre along an ellipse tangent to both circular orbits, cheapest in propellant for moderate radius ratios but slow because it takes half the transfer period.",
+      "def_vi": "Thao tác hai lần đốt dọc theo một ellipse tiếp tuyến với cả hai quỹ đạo tròn, rẻ nhiên liệu nhất với tỷ số bán kính vừa phải nhưng chậm vì mất nửa chu kỳ chuyển tiếp.",
+      "say": "A Hohmann transfer saves propellant but costs you weeks of drift.",
+      "tags": ["orbit", "operations"]
+    },
+    {
+      "id": "s-electric-orbit-raising",
+      "en": "Electric orbit raising",
+      "vi": "Nâng quỹ đạo bằng động cơ điện",
+      "def_en": "Reaching the operational orbit with low thrust electric propulsion, trading months of spiralling and radiation belt exposure for a large cut in launch mass.",
+      "def_vi": "Đưa vệ tinh lên quỹ đạo làm việc bằng động cơ điện lực đẩy thấp, đổi nhiều tháng bay xoắn ốc và phơi trong vành đai bức xạ lấy mức giảm lớn về khối lượng phóng.",
+      "say": "Electric orbit raising cut the launch mass but delayed revenue by months.",
+      "tags": ["platform", "economics"]
+    },
+    {
+      "id": "s-walker-phasing-factor",
+      "en": "Walker phasing factor",
+      "vi": "Hệ số pha Walker",
+      "def_en": "The third number in the Walker notation, setting how far a satellite in one plane is shifted in argument of latitude relative to the neighbouring plane, which controls where satellites bunch and where gaps open.",
+      "def_vi": "Số thứ ba trong ký hiệu Walker, quy định vệ tinh ở một mặt phẳng lệch bao nhiêu về đối số vĩ độ so với mặt phẳng kề, từ đó chi phối chỗ nào vệ tinh dồn lại và chỗ nào hở.",
+      "say": "Changing only the phasing factor already moves the worst coverage hole.",
+      "tags": ["constellation", "design"]
+    },
+    {
+      "id": "s-street-of-coverage",
+      "en": "Street of coverage",
+      "vi": "Dải phủ liên tục",
+      "def_en": "The continuous band swept by the overlapping footprints of one plane, used in polar constellation design because the plane spacing must be narrow enough for adjacent streets to touch.",
+      "def_vi": "Dải liên tục do các vùng phủ chồng nhau của một mặt phẳng quét ra, dùng trong thiết kế chòm sao cực vì khoảng cách giữa các mặt phẳng phải đủ hẹp để hai dải kề nhau chạm được.",
+      "say": "Two adjacent streets of coverage must overlap or the seam leaks.",
+      "tags": ["constellation", "coverage"]
+    },
+    {
+      "id": "s-elevation-mask",
+      "en": "Minimum elevation mask",
+      "vi": "Ngưỡng góc ngẩng tối thiểu",
+      "def_en": "The lowest elevation at which a terminal is allowed to work, raised to cut multipath and atmospheric loss but paying for it with shorter passes and more satellites needed.",
+      "def_vi": "Góc ngẩng thấp nhất mà đầu cuối được phép làm việc, nâng lên để giảm đa đường và suy hao khí quyển nhưng phải trả giá bằng thời gian nhìn thấy ngắn hơn và cần nhiều vệ tinh hơn.",
+      "say": "Raising the elevation mask improved the link but shortened every pass.",
+      "tags": ["geometry", "design"]
+    },
+    {
+      "id": "s-satellite-diversity",
+      "en": "Satellite diversity",
+      "vi": "Phân tập vệ tinh",
+      "def_en": "Keeping more than one satellite in view and usable at once, so a blockage or a fade on one path does not drop the session and handover can be made before break.",
+      "def_vi": "Giữ đồng thời nhiều hơn một vệ tinh trong tầm nhìn và dùng được, nhờ đó vật cản hay pha đinh trên một đường không làm rớt phiên và có thể nối trước khi cắt.",
+      "say": "Satellite diversity is what lets us connect the new link before dropping the old one.",
+      "tags": ["mobility", "coverage"]
+    },
+    {
+      "id": "s-seam",
+      "en": "Constellation seam",
+      "vi": "Vệt ghép của chòm sao",
+      "def_en": "The boundary in a polar constellation where two planes run in opposite directions, so relative geometry changes too fast for a stable link and the topology behaves as if it were cut.",
+      "def_vi": "Ranh giới trong chòm sao cực nơi hai mặt phẳng chạy ngược chiều nhau, khiến hình học tương đối đổi quá nhanh để giữ liên kết ổn định và cấu hình mạng hành xử như bị cắt rời.",
+      "say": "Traffic that has to cross the seam pays a detour of several hops.",
+      "tags": ["constellation", "topology"]
+    },
+    {
+      "id": "s-isl-horizon",
+      "en": "ISL grazing altitude limit",
+      "vi": "Giới hạn độ cao tiếp tuyến của liên kết liên vệ tinh",
+      "def_en": "The rule that the line between two satellites must clear the atmosphere by a set height, which caps the usable inter-satellite range well below pure geometric line of sight.",
+      "def_vi": "Quy tắc buộc đường nối hai vệ tinh phải vượt trên khí quyển một độ cao nhất định, làm trần cự ly liên vệ tinh dùng được thấp hơn hẳn tầm nhìn hình học thuần tuý.",
+      "say": "The grazing altitude limit is why the geometric range overstates what we can actually close.",
+      "tags": ["link", "geometry"]
+    },
+    {
+      "id": "s-plus-grid",
+      "en": "Plus-grid ISL topology",
+      "vi": "Cấu hình liên kết dạng lưới cộng",
+      "def_en": "The mesh in which every satellite holds two intra-plane and two inter-plane links, giving a regular grid whose routing looks simple until the seam and the polar convergence break the regularity.",
+      "def_vi": "Lưới trong đó mỗi vệ tinh giữ hai liên kết cùng mặt phẳng và hai liên kết khác mặt phẳng, tạo mạng đều đặn mà việc định tuyến trông đơn giản cho tới khi vệt ghép và sự hội tụ ở vùng cực phá vỡ tính đều đặn.",
+      "say": "The plus grid looks like a torus until you reach the poles.",
+      "tags": ["topology", "routing"]
+    },
+    {
+      "id": "s-isl-doppler",
+      "en": "Inter-satellite Doppler",
+      "vi": "Doppler giữa hai vệ tinh",
+      "def_en": "The frequency offset from the relative velocity of two satellites, which is near zero within a plane but large and swinging across planes as the crossing angle changes.",
+      "def_vi": "Độ lệch tần do vận tốc tương đối của hai vệ tinh, gần bằng không khi cùng mặt phẳng nhưng lớn và dao động mạnh khi khác mặt phẳng vì góc cắt thay đổi.",
+      "say": "Inter-satellite Doppler is negligible within a plane and brutal across planes.",
+      "tags": ["link", "phy"]
+    },
+    {
+      "id": "s-point-ahead-angle",
+      "en": "Point-ahead angle",
+      "vi": "Góc dẫn trước",
+      "def_en": "The small offset by which an optical terminal must aim ahead of where it sees the partner, because the partner moves during the flight time of the beam.",
+      "def_vi": "Độ lệch nhỏ mà đầu cuối quang phải chĩa vượt lên trước vị trí nhìn thấy của đối tác, vì đối tác đã di chuyển trong khoảng thời gian chùm tia bay tới.",
+      "say": "Without the point-ahead angle the beam arrives where the partner used to be.",
+      "tags": ["link", "antenna"]
+    },
+    {
+      "id": "s-virtual-node-routing",
+      "en": "Virtual node routing",
+      "vi": "Định tuyến theo nút ảo",
+      "def_en": "Binding addresses to fixed geographic cells rather than to moving satellites, so the routing table stays stable and only the mapping from cell to spacecraft is updated as they fly through.",
+      "def_vi": "Gắn địa chỉ vào các ô địa lý cố định thay vì vào vệ tinh đang bay, nhờ đó bảng định tuyến giữ nguyên và chỉ ánh xạ từ ô sang tàu vũ trụ được cập nhật khi chúng bay qua.",
+      "say": "Virtual node routing hides the motion from the forwarding table.",
+      "tags": ["routing", "architecture"]
+    },
+    {
+      "id": "s-topology-snapshot",
+      "en": "Topology snapshot interval",
+      "vi": "Chu kỳ chụp ảnh cấu hình mạng",
+      "def_en": "The slice of time over which a moving constellation is treated as a fixed graph, short enough that the error stays small and long enough that recomputing paths does not swamp the control plane.",
+      "def_vi": "Lát thời gian mà trong đó chòm sao đang chuyển động được coi như một đồ thị cố định, đủ ngắn để sai số nhỏ và đủ dài để việc tính lại đường đi không làm ngập mặt phẳng điều khiển.",
+      "say": "Shorten the snapshot interval and the control plane starts to drown.",
+      "tags": ["routing", "simulation"]
+    },
+    {
+      "id": "s-cgr",
+      "en": "CGR (Contact Graph Routing)",
+      "vi": "Định tuyến theo đồ thị tiếp xúc",
+      "def_en": "Routing over a schedule of future contacts rather than over links believed to exist now, which is what makes forwarding possible when no end to end path is ever open at one instant.",
+      "def_vi": "Định tuyến dựa trên lịch các lần tiếp xúc trong tương lai thay vì dựa trên liên kết được coi là đang tồn tại, nhờ đó vẫn chuyển tiếp được khi không lúc nào có đường thông suốt đầu cuối.",
+      "say": "Contact graph routing plans over the schedule, not over the current graph.",
+      "tags": ["routing", "architecture"]
+    },
+    {
+      "id": "s-dtn-bundle",
+      "en": "DTN bundle protocol",
+      "vi": "Giao thức bó của mạng chịu trễ",
+      "def_en": "A store and carry layer that takes custody of a whole bundle at each hop, so a long or intermittent link is survived by waiting rather than by retransmitting end to end.",
+      "def_vi": "Lớp giao thức lưu và mang, nhận trách nhiệm giữ trọn một bó dữ liệu ở từng chặng, nhờ đó liên kết dài hoặc đứt quãng được vượt qua bằng cách chờ chứ không phải phát lại từ đầu cuối.",
+      "say": "The bundle layer takes custody at each hop instead of retransmitting from the source.",
+      "tags": ["network", "architecture"]
+    },
+    {
+      "id": "s-cho-ntn",
+      "en": "Conditional handover in NTN",
+      "vi": "Chuyển giao có điều kiện trong mạng phi mặt đất",
+      "def_en": "Sending the target configuration to the terminal early and letting it execute when a condition fires, which matters here because the long round trip makes a last moment command arrive too late.",
+      "def_vi": "Gửi trước cấu hình đích cho đầu cuối và để nó tự thực hiện khi điều kiện được kích hoạt, điều này quan trọng vì thời gian khứ hồi dài khiến lệnh gửi vào phút chót tới nơi đã muộn.",
+      "say": "The command would arrive too late, so the terminal is armed in advance.",
+      "tags": ["mobility", "3gpp"]
+    },
+    {
+      "id": "s-location-handover-trigger",
+      "en": "Location-based handover trigger",
+      "vi": "Kích hoạt chuyển giao theo vị trí",
+      "def_en": "Firing the switch on the distance between the terminal and a reference point instead of on a measured signal level, which suits a moving cell whose signal barely degrades before the cell simply leaves.",
+      "def_vi": "Kích hoạt chuyển giao dựa trên khoảng cách giữa đầu cuối và một điểm tham chiếu thay vì dựa trên mức tín hiệu đo được, phù hợp với ô đang di chuyển vì tín hiệu hầu như chưa suy giảm thì ô đã rời đi.",
+      "say": "Signal strength barely warns you, so the trigger is geometric instead.",
+      "tags": ["mobility", "3gpp"]
+    },
+    {
+      "id": "s-rachless-handover",
+      "en": "RACH-less handover",
+      "vi": "Chuyển giao không cần truy nhập ngẫu nhiên",
+      "def_en": "Skipping the random access exchange at the target cell by reusing timing already known from ephemeris and position, which removes one full round trip from the interruption.",
+      "def_vi": "Bỏ qua thủ tục truy nhập ngẫu nhiên ở ô đích bằng cách tái dùng thông tin định thời đã biết từ lịch thiên văn và vị trí, nhờ đó cắt bớt trọn một lượt khứ hồi khỏi thời gian gián đoạn.",
+      "say": "Skipping random access removes a whole round trip from the interruption.",
+      "tags": ["mobility", "3gpp"]
+    },
+    {
+      "id": "s-feeder-switchover",
+      "en": "Feeder link switchover",
+      "vi": "Chuyển đổi tuyến tiếp sóng",
+      "def_en": "Moving the satellite's connection from one gateway to the next as the current one sets, an event that touches every user carried by that satellite rather than a single session.",
+      "def_vi": "Chuyển kết nối của vệ tinh từ trạm cổng này sang trạm cổng kế tiếp khi trạm hiện tại lặn xuống, sự kiện này ảnh hưởng tới mọi người dùng do vệ tinh đó phục vụ chứ không riêng một phiên.",
+      "say": "A gateway switchover hits every user on that satellite at the same moment.",
+      "tags": ["mobility", "segment"]
+    },
+    {
+      "id": "s-beam-dwell",
+      "en": "Beam dwell time",
+      "vi": "Thời gian nán của búp sóng",
+      "def_en": "How long a hopping beam stays illuminating one cell before jumping on, which sets both the delay a cell waits between visits and the efficiency lost to retuning.",
+      "def_vi": "Khoảng thời gian một búp sóng nhảy còn chiếu vào một ô trước khi nhảy đi, đại lượng này quyết định cả độ trễ mà ô phải chờ giữa hai lượt và phần hiệu suất mất đi khi chỉnh lại.",
+      "say": "A shorter dwell time smooths the delay but wastes more on retuning.",
+      "tags": ["capacity", "scheduling"]
+    },
+    {
+      "id": "s-ping-pong-handover",
+      "en": "Ping-pong handover",
+      "vi": "Chuyển giao qua lại",
+      "def_en": "Repeated switching back and forth between two candidates whose quality metrics keep crossing, wasting signalling and interruption time without any gain in served quality.",
+      "def_vi": "Việc chuyển đi chuyển lại liên tục giữa hai ứng viên có chỉ số chất lượng cứ cắt nhau, làm hao báo hiệu và thời gian gián đoạn mà chất lượng phục vụ không tăng.",
+      "say": "Hysteresis and a dwell timer are what stop the ping pong.",
+      "tags": ["mobility", "qos"]
+    },
+    {
+      "id": "s-handover-interruption",
+      "en": "Handover interruption time",
+      "vi": "Thời gian gián đoạn khi chuyển giao",
+      "def_en": "The gap during which the terminal is attached to neither cell, dominated in this setting by propagation rather than by processing, so it shrinks only if signalling round trips are removed.",
+      "def_vi": "Khoảng trống mà đầu cuối không gắn với ô nào, ở đây chủ yếu do lan truyền chứ không do xử lý, nên chỉ giảm được khi bớt được số lượt báo hiệu khứ hồi.",
+      "say": "Faster processing barely helps because the gap is dominated by propagation.",
+      "tags": ["mobility", "metric"]
+    },
+    {
+      "id": "s-differential-doppler",
+      "en": "Differential Doppler",
+      "vi": "Doppler vi sai",
+      "def_en": "The spread of Doppler shift between users at the two edges of the same beam, which survives common pre-compensation and therefore sets the residual offset the receiver still has to track.",
+      "def_vi": "Độ chênh lệch dịch tần Doppler giữa những người dùng ở hai rìa cùng một búp sóng, phần này sống sót qua khâu bù chung nên quyết định độ lệch dư mà máy thu vẫn phải bám.",
+      "say": "Common pre-compensation removes the bulk but leaves the differential term.",
+      "tags": ["phy", "3gpp"]
+    },
+    {
+      "id": "s-doppler-rate",
+      "en": "Doppler rate",
+      "vi": "Tốc độ biến thiên Doppler",
+      "def_en": "How fast the Doppler shift itself changes, peaking near the closest approach, and it is this slope rather than the shift size that decides whether a tracking loop can hold lock.",
+      "def_vi": "Mức độ nhanh chậm khi chính độ dịch Doppler thay đổi, đạt đỉnh gần điểm tiếp cận gần nhất, và chính độ dốc này chứ không phải biên độ dịch quyết định vòng bám có giữ được đồng bộ hay không.",
+      "say": "The loop breaks on the slope, not on the size of the shift.",
+      "tags": ["phy", "link"]
+    },
+    {
+      "id": "s-common-doppler-precomp",
+      "en": "Common Doppler pre-compensation",
+      "vi": "Bù Doppler chung",
+      "def_en": "Correcting the shift computed for a reference point of the beam at the transmitter, which cancels the part everyone shares and leaves each user only its own residual.",
+      "def_vi": "Hiệu chỉnh sẵn tại máy phát theo độ dịch tính cho một điểm tham chiếu của búp sóng, cách này khử phần chung cho mọi người và chỉ để lại cho mỗi người phần dư của riêng mình.",
+      "say": "The network pre-compensates for the beam centre and leaves the rest to the terminal.",
+      "tags": ["phy", "3gpp"]
+    },
+    {
+      "id": "s-differential-delay",
+      "en": "Differential delay across a cell",
+      "vi": "Chênh lệch trễ trong một ô",
+      "def_en": "The difference in propagation time between the near and far edge of one beam, which is what forces a wider timing advance range even though the absolute delay is already pre-compensated.",
+      "def_vi": "Chênh lệch thời gian lan truyền giữa rìa gần và rìa xa của cùng một búp sóng, chính nó buộc phải mở rộng dải định trước thời gian dù độ trễ tuyệt đối đã được bù sẵn.",
+      "say": "The absolute delay is pre-compensated, yet the spread inside the cell remains.",
+      "tags": ["3gpp", "phy"]
+    },
+    {
+      "id": "s-k-offset",
+      "en": "K offset (NTN scheduling offset)",
+      "vi": "Độ lệch lịch biểu K trong mạng phi mặt đất",
+      "def_en": "An added delay inserted between a grant and the transmission it schedules, so the terminal is not asked to answer before the long propagation of the grant has physically finished.",
+      "def_vi": "Độ trễ cộng thêm chèn giữa lệnh cấp phát và lần phát mà nó lập lịch, để đầu cuối không bị buộc trả lời trước khi lệnh đó thực sự đi hết quãng đường lan truyền dài.",
+      "say": "The offset stops the schedule from asking for a reply that cannot exist yet.",
+      "tags": ["3gpp", "scheduling"]
+    },
+    {
+      "id": "s-extended-ta",
+      "en": "Extended timing advance",
+      "vi": "Định trước thời gian mở rộng",
+      "def_en": "Widening the range of the timing advance field far beyond terrestrial values, because the round trip to a satellite is orders of magnitude larger than any cell radius on the ground.",
+      "def_vi": "Mở rộng dải giá trị của trường định trước thời gian vượt xa mức trên mặt đất, vì thời gian khứ hồi tới vệ tinh lớn hơn nhiều bậc so với bán kính bất kỳ ô mặt đất nào.",
+      "say": "The field had to be widened because the round trip dwarfs any terrestrial cell.",
+      "tags": ["3gpp", "phy"]
+    },
+    {
+      "id": "s-harq-disabling",
+      "en": "HARQ disabling in NTN",
+      "vi": "Tắt HARQ trong mạng phi mặt đất",
+      "def_en": "Turning off the stop and wait retransmission for a bearer because the feedback arrives after so long that the process would stall throughput, leaving reliability to the layer above.",
+      "def_vi": "Tắt cơ chế phát lại dừng và chờ cho một kênh mang vì phản hồi về quá muộn khiến tiến trình làm nghẽn thông lượng, độ tin cậy được nhường cho lớp phía trên lo.",
+      "say": "The feedback comes back so late that the process stalls the pipe.",
+      "tags": ["3gpp", "network"]
+    },
+    {
+      "id": "s-sib19",
+      "en": "SIB19 broadcast",
+      "vi": "Khối thông tin hệ thống SIB19",
+      "def_en": "The system information block that carries satellite ephemeris, common timing and the validity window, without which a terminal cannot pre-compensate delay or Doppler before its first transmission.",
+      "def_vi": "Khối thông tin hệ thống mang lịch thiên văn của vệ tinh, các tham số định thời chung và cửa sổ hiệu lực, thiếu nó thì đầu cuối không thể bù trước độ trễ hay Doppler trước lần phát đầu tiên.",
+      "say": "Without that broadcast the terminal cannot pre-compensate anything before it speaks.",
+      "tags": ["3gpp", "standard"]
+    },
+    {
+      "id": "s-quasi-earth-fixed-cell",
+      "en": "Quasi-Earth-fixed cell",
+      "vi": "Ô gần cố định theo mặt đất",
+      "def_en": "A cell held over one ground area by steering the beam for a while and then jumping to a new area, so handovers become scheduled bulk events instead of a continuous trickle.",
+      "def_vi": "Ô được giữ trên một vùng mặt đất bằng cách lái búp sóng trong một khoảng thời gian rồi nhảy sang vùng mới, khiến chuyển giao trở thành sự kiện hàng loạt theo lịch thay vì rả rích liên tục.",
+      "say": "The cell is held over the same ground area and then jumps in one go.",
+      "tags": ["3gpp", "coverage"]
+    },
+    {
+      "id": "s-earth-moving-cell",
+      "en": "Earth-moving cell",
+      "vi": "Ô di chuyển theo vệ tinh",
+      "def_en": "A cell whose footprint sweeps the ground with the satellite, so every terminal is handed over as the beam passes regardless of whether the terminal moved at all.",
+      "def_vi": "Ô có vùng phủ quét trên mặt đất theo vệ tinh, nên mọi đầu cuối đều bị chuyển giao khi búp sóng lướt qua bất kể bản thân đầu cuối có di chuyển hay không.",
+      "say": "Every terminal is handed over as the beam sweeps past, even a fixed one.",
+      "tags": ["3gpp", "mobility"]
+    },
+    {
+      "id": "s-discontinuous-coverage",
+      "en": "Discontinuous coverage",
+      "vi": "Vùng phủ gián đoạn",
+      "def_en": "Service that exists only during scheduled passes, which is acceptable for delay tolerant devices if they are told when to wake instead of listening and draining the battery.",
+      "def_vi": "Dịch vụ chỉ tồn tại trong các lượt bay qua theo lịch, chấp nhận được với thiết bị chịu được trễ nếu chúng được báo lúc nào cần thức dậy thay vì nghe liên tục và cạn pin.",
+      "say": "The device sleeps until the predicted pass instead of listening all day.",
+      "tags": ["iot", "coverage"]
+    },
+    {
+      "id": "s-gnss-dependent-operation",
+      "en": "GNSS-dependent NTN operation",
+      "vi": "Chế độ mạng phi mặt đất phụ thuộc GNSS",
+      "def_en": "The assumption that the terminal knows its own position before it transmits, so it can compute its own delay and Doppler correction, which also means a positioning outage blocks access entirely.",
+      "def_vi": "Giả định rằng đầu cuối biết vị trí của chính mình trước khi phát, để tự tính phần bù độ trễ và Doppler, đồng nghĩa mất định vị là mất luôn khả năng truy nhập.",
+      "say": "If positioning drops, the terminal cannot even open the access procedure.",
+      "tags": ["3gpp", "security"]
+    },
+    {
+      "id": "s-direct-to-device",
+      "en": "Direct-to-device satellite service",
+      "vi": "Dịch vụ vệ tinh nối thẳng máy đầu cuối",
+      "def_en": "Serving an ordinary handset with no dish and no extra hardware, which forces the whole link margin onto the space segment through very large antennas and low rate waveforms.",
+      "def_vi": "Phục vụ điện thoại thông thường không có chảo và không thêm phần cứng, buộc toàn bộ phần dự trữ tuyến dồn về phân đoạn không gian bằng ăng ten rất lớn và dạng sóng tốc độ thấp.",
+      "say": "The handset gives you nothing, so the space segment has to carry the entire margin.",
+      "tags": ["architecture", "link"]
+    },
+    {
+      "id": "s-functional-split-feeder",
+      "en": "Functional split over the feeder link",
+      "vi": "Chia chức năng trên tuyến tiếp sóng",
+      "def_en": "Placing part of the base station on board and the rest on the ground, where the split point decides how much timing critical traffic must survive the feeder delay.",
+      "def_vi": "Đặt một phần trạm gốc trên vệ tinh và phần còn lại dưới mặt đất, điểm chia quyết định lượng lưu lượng nhạy thời gian phải chịu được độ trễ của tuyến tiếp sóng.",
+      "say": "Where you cut the base station decides what has to survive the feeder delay.",
+      "tags": ["architecture", "3gpp"]
+    },
+    {
+      "id": "s-onboard-gnb",
+      "en": "Onboard gNB",
+      "vi": "Trạm gNB đặt trên vệ tinh",
+      "def_en": "Running the full base station in orbit so scheduling and retransmission close locally, which cuts the control loop but adds processing power, heat and software update risk to the spacecraft.",
+      "def_vi": "Chạy trọn trạm gốc trên quỹ đạo để việc lập lịch và phát lại khép kín tại chỗ, cách này rút ngắn vòng điều khiển nhưng thêm gánh nặng công suất xử lý, nhiệt và rủi ro cập nhật phần mềm cho tàu vũ trụ.",
+      "say": "Closing the scheduling loop in orbit shortens control but heats the payload.",
+      "tags": ["architecture", "payload"]
+    },
+    {
+      "id": "s-satellite-backhaul",
+      "en": "Satellite backhaul",
+      "vi": "Truyền dẫn hồi tiếp qua vệ tinh",
+      "def_en": "Using the satellite to carry the transport link of a terrestrial base station rather than to serve users directly, so the air interface stays terrestrial and only the transport inherits the delay.",
+      "def_vi": "Dùng vệ tinh để mang tuyến truyền tải của một trạm gốc mặt đất thay vì phục vụ trực tiếp người dùng, nhờ đó giao diện vô tuyến vẫn là mặt đất và chỉ phần truyền tải chịu độ trễ.",
+      "say": "Only the transport inherits the delay, the air interface stays terrestrial.",
+      "tags": ["architecture", "network"]
+    },
+    {
+      "id": "s-slicing-ntn",
+      "en": "Network slicing over NTN",
+      "vi": "Cắt lát mạng trên hạ tầng phi mặt đất",
+      "def_en": "Reserving isolated logical resources across a space segment whose capacity and topology both change with time, so the slice contract must be written against a moving resource pool.",
+      "def_vi": "Dành riêng tài nguyên logic được cách ly trên phân đoạn không gian mà cả dung lượng lẫn cấu hình đều thay đổi theo thời gian, nên cam kết của lát mạng phải viết trên một tập tài nguyên luôn dịch chuyển.",
+      "say": "You are promising isolation on a resource pool that keeps moving.",
+      "tags": ["network", "qos"]
+    },
+    {
+      "id": "s-polar-congestion",
+      "en": "Polar region congestion",
+      "vi": "Nghẽn ở vùng cực",
+      "def_en": "The pile up of paths near the poles where planes converge, so shortest path routing sends far more traffic through those links than the sparse population there would suggest.",
+      "def_vi": "Sự dồn ứ đường đi gần hai cực nơi các mặt phẳng hội tụ, khiến định tuyến đường ngắn nhất đẩy qua các liên kết đó nhiều lưu lượng hơn hẳn mức mà dân cư thưa thớt ở đó gợi ý.",
+      "say": "Shortest path keeps dragging traffic through links nobody lives under.",
+      "tags": ["routing", "capacity"]
+    },
+    {
+      "id": "s-link-state-churn",
+      "en": "Link state churn",
+      "vi": "Biến động trạng thái liên kết",
+      "def_en": "The constant stream of topology updates caused by links forming and breaking on schedule, which can consume more capacity than the data if the protocol was designed for a static graph.",
+      "def_vi": "Dòng cập nhật cấu hình liên tục do các liên kết hình thành và đứt theo lịch, có thể ngốn nhiều dung lượng hơn cả dữ liệu nếu giao thức vốn được thiết kế cho đồ thị tĩnh.",
+      "say": "The updates ate more capacity than the traffic they were meant to protect.",
+      "tags": ["routing", "network"]
+    },
+    {
+      "id": "s-packet-reordering",
+      "en": "Packet reordering on multipath",
+      "vi": "Đảo thứ tự gói khi đi đa đường",
+      "def_en": "Arrival out of order when successive packets take routes of different length, which a congestion controller can mistake for loss and answer by cutting the rate it did not need to cut.",
+      "def_vi": "Gói tới không đúng thứ tự khi các gói liên tiếp đi theo đường có độ dài khác nhau, bộ điều khiển tắc nghẽn có thể hiểu nhầm là mất gói và phản ứng bằng cách giảm tốc độ một cách không cần thiết.",
+      "say": "The controller read the reordering as loss and cut the rate for nothing.",
+      "tags": ["network", "qos"]
+    },
+    {
+      "id": "s-fibre-speed-advantage",
+      "en": "Speed advantage over fibre",
+      "vi": "Lợi thế tốc độ so với cáp quang",
+      "def_en": "The gain from light travelling faster in vacuum than in glass, which on long routes can outweigh the extra distance of going up and back down again.",
+      "def_vi": "Lợi thế do ánh sáng đi trong chân không nhanh hơn trong thuỷ tinh, trên tuyến dài phần lợi này có thể bù lại quãng đường phụ khi phải bay lên rồi xuống.",
+      "say": "On a long enough route the vacuum wins even after the climb and the descent.",
+      "tags": ["link", "architecture"]
+    },
+    {
+      "id": "s-four-colour-reuse",
+      "en": "Four-colour frequency reuse",
+      "vi": "Tái sử dụng tần số bốn màu",
+      "def_en": "Assigning two frequency sub-bands and two polarisations so no two touching beams share a colour, trading a quarter of the band per beam for a manageable interference floor.",
+      "def_vi": "Gán hai băng con tần số kết hợp hai phân cực sao cho không hai búp sóng kề nhau nào dùng chung một màu, đổi việc mỗi búp chỉ còn một phần tư băng lấy nền nhiễu ở mức kiểm soát được.",
+      "say": "Each beam keeps a quarter of the band and the interference stays bounded.",
+      "tags": ["spectrum", "capacity"]
+    },
+    {
+      "id": "s-carrier-to-interference",
+      "en": "Carrier-to-interference ratio",
+      "vi": "Tỷ số sóng mang trên nhiễu",
+      "def_en": "The ratio of wanted power to interfering power, which unlike the noise term does not improve when you raise transmit power because the interferer scales with you.",
+      "def_vi": "Tỷ số giữa công suất tín hiệu mong muốn và công suất nhiễu, khác với thành phần tạp âm, tỷ số này không tốt lên khi tăng công suất phát vì nguồn nhiễu cũng tăng theo.",
+      "say": "Turning up the power does not help because the interferer scales with you.",
+      "tags": ["interference", "phy"]
+    },
+    {
+      "id": "s-adjacent-satellite-interference",
+      "en": "Adjacent satellite interference",
+      "vi": "Nhiễu từ vệ tinh lân cận",
+      "def_en": "Energy leaking into or out of a neighbouring orbital position through the sidelobes of the earth station antenna, which is why a small dish is limited by its beamwidth and not by its gain.",
+      "def_vi": "Năng lượng rò sang hoặc rò từ vị trí quỹ đạo kề bên qua búp phụ của ăng ten trạm mặt đất, đây là lý do chảo nhỏ bị giới hạn bởi độ rộng búp chứ không phải bởi độ lợi.",
+      "say": "A small dish is limited by its beamwidth long before its gain becomes the issue.",
+      "tags": ["interference", "antenna"]
+    },
+    {
+      "id": "s-scintillation",
+      "en": "Ionospheric scintillation",
+      "vi": "Nhấp nháy tầng điện ly",
+      "def_en": "Rapid fluctuation of amplitude and phase caused by irregularities in the ionised layer, worst near the equator after sunset, and it hurts carrier tracking more than it hurts average power.",
+      "def_vi": "Dao động nhanh của biên độ và pha do bất thường trong lớp ion hoá, nặng nhất ở gần xích đạo sau hoàng hôn, và nó phá việc bám sóng mang nhiều hơn là làm giảm công suất trung bình.",
+      "say": "It damages carrier tracking far more than it damages the average power.",
+      "tags": ["propagation", "phy"]
+    },
+    {
+      "id": "s-faraday-rotation",
+      "en": "Faraday rotation",
+      "vi": "Quay Faraday",
+      "def_en": "Rotation of a linearly polarised wave as it crosses the ionosphere in the geomagnetic field, which is why lower band systems prefer circular polarisation instead of tracking the twist.",
+      "def_vi": "Sự quay của sóng phân cực thẳng khi đi qua tầng điện ly trong từ trường Trái Đất, vì vậy hệ thống ở băng thấp chuộng phân cực tròn thay vì phải bám theo góc xoắn.",
+      "say": "Circular polarisation sidesteps the twist instead of trying to follow it.",
+      "tags": ["propagation", "phy"]
+    },
+    {
+      "id": "s-pointing-loss",
+      "en": "Antenna pointing loss",
+      "vi": "Suy hao do lệch hướng ăng ten",
+      "def_en": "The gain given up when the boresight misses the target, growing sharply as the antenna narrows, so a higher gain design can end up worse under the same tracking error.",
+      "def_vi": "Phần độ lợi mất đi khi trục chính lệch khỏi mục tiêu, tăng rất nhanh khi búp sóng hẹp lại, nên thiết kế độ lợi cao hơn có thể lại tệ hơn với cùng một sai số bám.",
+      "say": "A narrower beam turns a small tracking error into a large loss.",
+      "tags": ["antenna", "link"]
+    },
+    {
+      "id": "s-link-margin",
+      "en": "Link margin",
+      "vi": "Dự trữ tuyến",
+      "def_en": "The decibels held in reserve above the threshold needed for the target error rate, sized from the fade statistics of the worst month rather than from an average year.",
+      "def_vi": "Số decibel giữ dự trữ trên ngưỡng cần thiết để đạt tỷ lệ lỗi mục tiêu, được tính từ thống kê pha đinh của tháng xấu nhất chứ không phải của một năm trung bình.",
+      "say": "The reserve is sized against the worst month, never against the yearly average.",
+      "tags": ["link", "design"]
+    },
+    {
+      "id": "s-depth-of-discharge",
+      "en": "Battery depth of discharge",
+      "vi": "Độ sâu phóng điện của pin",
+      "def_en": "The fraction of capacity drawn during each eclipse, and because cycle life falls steeply with it, the eclipse power demand effectively sizes the battery for the whole mission.",
+      "def_vi": "Phần dung lượng bị rút ra trong mỗi lần vào bóng tối, và vì tuổi thọ chu kỳ giảm rất nhanh theo đại lượng này, nhu cầu công suất lúc bị che quyết định kích thước pin cho cả sứ mệnh.",
+      "say": "Cycle life falls so steeply that the eclipse demand sizes the whole battery.",
+      "tags": ["platform", "design"]
+    },
+    {
+      "id": "s-single-event-upset",
+      "en": "Single event upset",
+      "vi": "Lỗi bit do hạt đơn",
+      "def_en": "A bit flipped by one energetic particle strike, which leaves the hardware undamaged and is therefore fought with scrubbing and voting rather than with shielding alone.",
+      "def_vi": "Một bit bị lật do một hạt năng lượng cao đâm vào, phần cứng không hỏng nên cách chống là quét sửa và biểu quyết đa số chứ không chỉ dựa vào che chắn.",
+      "say": "The hardware survives, so we answer with scrubbing and voting.",
+      "tags": ["platform", "security"]
+    },
+    {
+      "id": "s-gateway-placement",
+      "en": "Gateway placement problem",
+      "vi": "Bài toán đặt trạm cổng",
+      "def_en": "Choosing ground station sites so that visibility, weather correlation and terrestrial backhaul all hold together, which is why the cheapest site list is rarely the resilient one.",
+      "def_vi": "Chọn vị trí trạm mặt đất sao cho tầm nhìn, tương quan thời tiết và hạ tầng truyền dẫn mặt đất đều thoả mãn, đó là lý do danh sách vị trí rẻ nhất hiếm khi là phương án bền vững.",
+      "say": "Sites that never share a storm are worth more than sites that are merely cheap.",
+      "tags": ["segment", "optimisation"]
+    },
+    {
+      "id": "s-aoi",
+      "en": "AoI (Age of Information)",
+      "vi": "Tuổi của thông tin",
+      "def_en": "The time since the freshest received update was generated, so it penalises both slow delivery and rare sampling, and it can worsen if the source transmits either too seldom or too often.",
+      "def_vi": "Khoảng thời gian tính từ lúc bản tin mới nhất nhận được sinh ra, nên nó phạt cả việc chuyển chậm lẫn việc lấy mẫu thưa, và có thể xấu đi nếu nguồn phát quá thưa hoặc quá dày.",
+      "say": "Sending more often can make the age worse once the queue starts to build.",
+      "tags": ["metric", "qos"]
+    },
+    {
+      "id": "s-clock-holdover",
+      "en": "Clock holdover",
+      "vi": "Duy trì đồng hồ khi mất tham chiếu",
+      "def_en": "Keeping time within tolerance on the local oscillator alone after the reference is lost, where the drift rate rather than the initial accuracy sets how long the node stays usable.",
+      "def_vi": "Giữ thời gian trong sai số cho phép chỉ bằng dao động nội sau khi mất tham chiếu, ở đây tốc độ trôi chứ không phải độ chính xác ban đầu quyết định nút còn dùng được bao lâu.",
+      "say": "What matters after the reference is lost is the drift rate, not the starting accuracy.",
+      "tags": ["operations", "phy"]
+    },
+    {
+      "id": "s-electronic-beam-steering",
+      "en": "Electronic beam steering",
+      "vi": "Lái búp sóng bằng điện tử",
+      "def_en": "Aiming by adjusting the phase of each array element rather than by moving the antenna, which allows instant switching between satellites but loses gain as the beam is steered far off broadside.",
+      "def_vi": "Chĩa búp sóng bằng cách chỉnh pha từng phần tử mảng thay vì xoay ăng ten, cho phép chuyển giữa các vệ tinh tức thời nhưng mất độ lợi khi lái búp lệch xa khỏi pháp tuyến.",
+      "say": "Switching is instant, yet the gain falls away as you steer off broadside.",
+      "tags": ["antenna", "phy"]
+    },
+    {
+      "id": "s-look-angle",
+      "en": "Look angle",
+      "vi": "Góc nhìn tới vệ tinh",
+      "def_en": "The pair of azimuth and elevation a terminal must point at, computed from the satellite ephemeris and the terminal position, and it changes continuously for any non-geostationary target.",
+      "def_vi": "Cặp góc phương vị và góc ngẩng mà đầu cuối phải chĩa tới, tính từ lịch thiên văn của vệ tinh và vị trí đầu cuối, và nó thay đổi liên tục với mọi mục tiêu không địa tĩnh.",
+      "say": "For anything other than a geostationary target the pointing never stops moving.",
+      "tags": ["geometry", "operations"]
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "security",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qsec-1",
@@ -1576,6 +1576,861 @@
       "answer": 1,
       "why": "An easier second campaign produces the same drop with no learning, so the comparison is only meaningful at matched difficulty. Click rate also cannot reach zero, which is why the operationally useful measure is how fast someone reports the message.",
       "why_vi": "Một đợt thứ hai dễ hơn cũng cho ra mức giảm y hệt mà chẳng ai học được gì, nên phép so sánh chỉ có nghĩa khi độ khó tương đương. Tỉ lệ bấm cũng không bao giờ về được không, vì thế thước đo hữu ích trong vận hành là bao lâu thì có người báo lại thư đó.",
+      "level": 3
+    },
+    {
+      "id": "qsec-106",
+      "q": "STRIDE is applied to a design mainly in order to",
+      "q_vi": "STRIDE được áp lên một thiết kế chủ yếu nhằm",
+      "choices": [
+        "walk every element through six threat classes so none is quietly skipped",
+        "rank the findings of a penetration test by how easy each one is to exploit",
+        "certify a product once the vendor has completed an accredited audit",
+        "count how many attacks the deployed system blocked last quarter"
+      ],
+      "answer": 0,
+      "why": "It is a design time completeness aid. Its value is that repudiation or tampering cannot be forgotten simply because nobody thought of them.",
+      "why_vi": "Đây là công cụ bảo đảm tính đầy đủ ở giai đoạn thiết kế. Giá trị của nó là không thể bỏ quên chối bỏ hay sửa đổi chỉ vì không ai nghĩ tới.",
+      "level": 1
+    },
+    {
+      "id": "qsec-107",
+      "q": "In an attack tree, the root node represents",
+      "q_vi": "Trong cây tấn công, nút gốc biểu diễn",
+      "choices": [
+        "the single vulnerability that received the highest severity score in the scan",
+        "the goal the attacker wants to reach",
+        "the first host that an intruder happens to compromise on the way in",
+        "the control that the defending team considers strongest at the moment"
+      ],
+      "answer": 1,
+      "why": "Branches under the root are alternative ways of achieving the same goal, which is what lets you compare their cost and defend the cheapest one.",
+      "why_vi": "Các nhánh dưới gốc là những cách khác nhau để đạt cùng một mục tiêu, nhờ vậy so sánh được chi phí của chúng và phòng thủ nhánh rẻ nhất.",
+      "level": 2
+    },
+    {
+      "id": "qsec-108",
+      "q": "A microservice accepts requests only from inside the cluster and therefore performs no authorisation. The design flaw is",
+      "q_vi": "Một dịch vụ nhỏ chỉ nhận yêu cầu từ bên trong cụm nên không thực hiện cấp quyền. Sai lầm thiết kế ở đây là",
+      "choices": [
+        "internal traffic is usually slower than external traffic on the same hardware",
+        "the service has no way of writing an audit log for internal callers",
+        "network position is being used as proof of identity",
+        "encryption inside the cluster costs more processor time than it saves"
+      ],
+      "answer": 2,
+      "why": "Once any workload in the cluster is compromised, every service that trusts cluster membership is reachable. Identity has to be carried by the request itself.",
+      "why_vi": "Chỉ cần một khối công việc trong cụm bị chiếm là mọi dịch vụ tin vào tư cách thành viên của cụm đều bị với tới. Danh tính phải nằm trong chính yêu cầu.",
+      "level": 2
+    },
+    {
+      "id": "qsec-109",
+      "q": "The Dolev-Yao adversary is assumed to be able to",
+      "q_vi": "Kẻ tấn công theo mô hình Dolev-Yao được giả định là có thể",
+      "choices": [
+        "recover a key from ciphertext once it has observed a sufficiently long stretch of traffic",
+        "reverse a cryptographic hash whenever the input space is small",
+        "read memory on the endpoints without touching the network",
+        "read, drop, reorder and forge any message on the network while the cryptography holds"
+      ],
+      "answer": 3,
+      "why": "The model separates protocol reasoning from cryptanalysis. The primitives are treated as perfect so that flaws in message flow become visible on their own.",
+      "why_vi": "Mô hình tách việc lập luận về giao thức khỏi việc phá mã. Các nguyên hàm được coi là hoàn hảo để lỗi trong luồng bản tin tự hiện ra.",
+      "level": 3
+    },
+    {
+      "id": "qsec-110",
+      "q": "A privacy analysis states that the aggregation server is honest but curious. This means the server",
+      "q_vi": "Một phân tích riêng tư nêu rằng máy chủ tổng hợp là bên tuân thủ nhưng tò mò. Điều này nghĩa là máy chủ",
+      "choices": [
+        "may send arbitrary malformed responses to selected clients whenever doing so serves its goal",
+        "is fully trusted and needs no protection at all",
+        "follows the protocol faithfully yet tries to infer as much as it can from what it receives",
+        "will drop the updates of clients whose data it dislikes"
+      ],
+      "answer": 2,
+      "why": "It is a deliberately weak adversary. A defence that only holds under it must not be reported as protection against a server that actively deviates.",
+      "why_vi": "Đây là kẻ tấn công cố ý đặt yếu. Biện pháp chỉ đứng vững trước nó không được trình bày như bảo vệ trước một máy chủ chủ động làm sai giao thức.",
+      "level": 3
+    },
+    {
+      "id": "qsec-111",
+      "q": "Adopting an assume breach posture changes design work because the main question becomes",
+      "q_vi": "Chấp nhận lập trường giả định đã bị xâm nhập làm thay đổi công việc thiết kế vì câu hỏi chính trở thành",
+      "choices": [
+        "how far damage spreads once one component falls",
+        "whether the perimeter can be made strong enough to keep everyone out permanently",
+        "which vendor offers the largest catalogue of detection signatures this year",
+        "how many controls the organisation can list during its next external audit"
+      ],
+      "answer": 0,
+      "why": "Containment, segmentation and short lived credentials all follow from taking compromise as given rather than as a remote possibility.",
+      "why_vi": "Việc khoanh vùng, chia đoạn mạng và dùng thông tin đăng nhập ngắn hạn đều bắt nguồn từ chỗ coi chuyện bị chiếm là chuyện đương nhiên chứ không phải khả năng xa vời.",
+      "level": 2
+    },
+    {
+      "id": "qsec-112",
+      "q": "After all planned controls are deployed, the risk that is left over should be",
+      "q_vi": "Sau khi mọi biện pháp dự kiến đã triển khai, phần rủi ro còn lại cần được",
+      "choices": [
+        "removed from the register on the grounds that the planned controls are now in place",
+        "reassigned in full to the supplier through a clause written into the purchase contract",
+        "treated as zero whenever the audit finished without findings",
+        "written down and formally accepted by someone with the authority to accept it"
+      ],
+      "answer": 3,
+      "why": "Residual risk is a decision, not a leftover. Recording who accepted it is what makes the decision reviewable later.",
+      "why_vi": "Rủi ro còn lại là một quyết định chứ không phải phần thừa. Ghi rõ ai đã chấp nhận nó chính là điều cho phép xem xét lại quyết định về sau.",
+      "level": 2
+    },
+    {
+      "id": "qsec-113",
+      "q": "A service checks that a path is outside a protected directory, then opens it. An attacker replaces the path with a link in between. This is",
+      "q_vi": "Một dịch vụ kiểm tra rằng đường dẫn nằm ngoài thư mục được bảo vệ rồi mới mở nó. Kẻ tấn công tráo đường dẫn thành một liên kết ở giữa hai bước. Đây là",
+      "choices": [
+        "a buffer overflow in the routine that parses the supplied path string",
+        "a race between the check and the use",
+        "an injection flaw caused by concatenating user input into a query",
+        "a cryptographic weakness in how the file digest is computed"
+      ],
+      "answer": 1,
+      "why": "The validation was correct at the moment it ran. The defect is that the result was still trusted after the state had been allowed to change.",
+      "why_vi": "Phép kiểm tra đúng vào lúc nó chạy. Khuyết điểm nằm ở chỗ kết quả đó vẫn được tin sau khi trạng thái đã kịp thay đổi.",
+      "level": 3
+    },
+    {
+      "id": "qsec-114",
+      "q": "A vendor argues that publishing the protocol specification would weaken security. The standard objection is",
+      "q_vi": "Một nhà cung cấp lập luận rằng công bố đặc tả giao thức sẽ làm yếu an ninh. Phản bác tiêu chuẩn là",
+      "choices": [
+        "publication of the full protocol specification is required by law in most jurisdictions today",
+        "security must rest on the key, since a design leaks or is reverse engineered eventually",
+        "secret designs are known to run more slowly than published ones on identical hardware today",
+        "reviewers charge less when the specification is public"
+      ],
+      "answer": 1,
+      "why": "Kerckhoffs principle is a practical claim about failure modes. A secret you cannot change after disclosure is a poor thing to depend on.",
+      "why_vi": "Nguyên lý Kerckhoffs là một khẳng định thực tế về cách hệ thống sụp đổ. Phụ thuộc vào bí mật mà bạn không thể thay sau khi nó bị lộ là điều tệ hại.",
+      "level": 2
+    },
+    {
+      "id": "qsec-115",
+      "q": "Two builds from the same commit produce binaries with different hashes. Before this is fixed, the strongest available claim about a signed release is",
+      "q_vi": "Hai lần dựng từ cùng một commit cho ra tệp nhị phân có mã băm khác nhau. Trước khi khắc phục, khẳng định mạnh nhất có thể nói về một bản phát hành đã ký là",
+      "choices": [
+        "the source and the binary have been shown to correspond exactly",
+        "the compiler used in the build has been proved free of backdoors",
+        "an independent party can rebuild it and compare the result",
+        "it identifies who signed the artefact, not which source produced it"
+      ],
+      "answer": 3,
+      "why": "Only a bit for bit reproducible build closes the gap between published source and shipped binary. A signature alone attributes the upload.",
+      "why_vi": "Chỉ bản dựng tái lập được đến từng bit mới khép được khoảng cách giữa mã nguồn công bố và tệp nhị phân phát hành. Riêng chữ ký chỉ quy trách nhiệm cho người tải lên.",
+      "level": 3
+    },
+    {
+      "id": "qsec-116",
+      "q": "A build provenance attestation is more useful than a developer's word because it is generated",
+      "q_vi": "Chứng thực nguồn gốc bản dựng hữu ích hơn lời cam kết của lập trình viên vì nó được sinh ra",
+      "choices": [
+        "by the build platform itself, recording the inputs it actually consumed",
+        "after the release notes have been reviewed by a manager",
+        "from a template that the project maintainer fills in manually",
+        "whenever the test suite reports that every case has passed"
+      ],
+      "answer": 0,
+      "why": "The evidence must come from a system the developer does not control, otherwise it merely restates the claim it is supposed to check.",
+      "why_vi": "Bằng chứng phải đến từ một hệ thống mà lập trình viên không kiểm soát, nếu không nó chỉ nhắc lại chính điều đáng lẽ nó phải kiểm.",
+      "level": 3
+    },
+    {
+      "id": "qsec-117",
+      "q": "Signing releases with short lived identity bound keys recorded in a public log mainly removes the problem of",
+      "q_vi": "Việc ký bản phát hành bằng khóa ngắn hạn gắn với danh tính và ghi vào nhật ký công khai chủ yếu loại bỏ vấn đề",
+      "choices": [
+        "verifying that the released code compiles on every supported platform",
+        "deciding which of the published versions users ought to install first",
+        "guarding one long lived private key for years",
+        "measuring how many downloads each signed release receives"
+      ],
+      "answer": 2,
+      "why": "A key that exists for minutes has almost no window in which to be stolen, and the log preserves the evidence needed to verify afterwards.",
+      "why_vi": "Khóa chỉ tồn tại vài phút gần như không có cửa sổ nào để bị đánh cắp, còn nhật ký lưu lại bằng chứng cần thiết để kiểm chứng về sau.",
+      "level": 3
+    },
+    {
+      "id": "qsec-118",
+      "q": "The most reliable defence against installing a typosquatted package is",
+      "q_vi": "Biện pháp đáng tin nhất để khỏi cài phải gói bị chiếm tên gõ nhầm là",
+      "choices": [
+        "reminding developers to read package names carefully before installing",
+        "scanning the installed package for known malicious file hashes",
+        "requiring that every package have at least one public review",
+        "an allow list of approved names resolved through an internal mirror"
+      ],
+      "answer": 3,
+      "why": "Attention fails at some rate under time pressure, so a control that never depends on attention dominates any amount of reminding.",
+      "why_vi": "Sự chú ý luôn hỏng ở một tỉ lệ nào đó khi bị sức ép thời gian, nên biện pháp không phụ thuộc vào chú ý luôn hơn hẳn mọi lời nhắc nhở.",
+      "level": 2
+    },
+    {
+      "id": "qsec-119",
+      "q": "A lockfile records exact versions and digests. What it still does not give you is",
+      "q_vi": "Tệp khóa ghi lại đúng phiên bản và mã băm. Điều nó vẫn không mang lại là",
+      "choices": [
+        "the same resolved dependency versions across two machines",
+        "detection of a package republished under an identical version number",
+        "assurance that the pinned code is free of malicious behaviour",
+        "a record of which transitive packages the build pulled in"
+      ],
+      "answer": 2,
+      "why": "Pinning fixes what you get, never what it does. It converts an unknown into a known, and the known can still be hostile.",
+      "why_vi": "Việc ghim chỉ cố định thứ bạn nhận về, không nói gì về hành vi của nó. Nó biến cái chưa biết thành cái đã biết, mà cái đã biết vẫn có thể độc hại.",
+      "level": 2
+    },
+    {
+      "id": "qsec-120",
+      "q": "An update framework splits signing across several roles chiefly so that",
+      "q_vi": "Khung cập nhật phần mềm chia thẩm quyền ký thành nhiều vai trò chủ yếu để",
+      "choices": [
+        "the download of large packages can be spread across more servers",
+        "one stolen key is not enough to push an arbitrary update to clients",
+        "each developer on the team gets a personal signing certificate",
+        "the update metadata becomes smaller and quicker to parse"
+      ],
+      "answer": 1,
+      "why": "Separating the authority that lists available versions from the authority that signs content means a single compromise yields an incomplete capability.",
+      "why_vi": "Tách thẩm quyền liệt kê phiên bản khỏi thẩm quyền ký nội dung khiến một lần bị chiếm chỉ cho ra năng lực không trọn vẹn.",
+      "level": 3
+    },
+    {
+      "id": "qsec-121",
+      "q": "An inclusion proof in a Merkle tree lets a verifier confirm that a record is in the log while downloading",
+      "q_vi": "Bằng chứng thuộc về trong cây băm Merkle cho phép bên kiểm tra khẳng định một bản ghi nằm trong nhật ký mà chỉ phải tải",
+      "choices": [
+        "a path of hashes that grows with the logarithm of the log size",
+        "every record that was appended before the one being checked",
+        "the complete log once, after which further proofs are free",
+        "a signature from each party that has ever written to the log"
+      ],
+      "answer": 0,
+      "why": "The logarithmic proof size is exactly what makes public transparency logs practical for verifiers with limited bandwidth.",
+      "why_vi": "Kích thước bằng chứng theo hàm lôgarit chính là điều làm cho nhật ký minh bạch công khai trở nên khả thi với bên kiểm tra có băng thông hạn chế.",
+      "level": 3
+    },
+    {
+      "id": "qsec-122",
+      "q": "Certificate transparency helps a domain owner mainly because it makes misissuance",
+      "q_vi": "Minh bạch chứng thư giúp chủ tên miền chủ yếu vì nó khiến việc cấp phát sai",
+      "choices": [
+        "publicly discoverable after the fact",
+        "impossible for a trusted authority",
+        "automatically revoked by the browser within a few minutes of issuance",
+        "reportable only to the authority that issued the certificate in question"
+      ],
+      "answer": 0,
+      "why": "The logs give detection, not prevention. An authority can still issue wrongly, but it can no longer do so without leaving a public record.",
+      "why_vi": "Nhật ký mang lại khả năng phát hiện chứ không phải ngăn chặn. Cơ quan cấp phát vẫn có thể cấp sai, chỉ là không còn cấp sai mà không để lại dấu vết công khai.",
+      "level": 2
+    },
+    {
+      "id": "qsec-123",
+      "q": "Audit records are stored as a hash chain on the same server that writes them. An administrator who is compromised can still",
+      "q_vi": "Bản ghi kiểm toán được lưu dưới dạng chuỗi băm ngay trên máy chủ ghi ra chúng. Người quản trị bị chiếm quyền vẫn có thể",
+      "choices": [
+        "read the records but never alter a single stored entry",
+        "rewrite history and recompute the whole chain consistently",
+        "delete individual entries while the chain stays verifiable",
+        "forge a timestamp that an external authority has already signed"
+      ],
+      "answer": 1,
+      "why": "Chaining is tamper evident only against someone who cannot redo the computation. The head must be published or anchored outside the machine.",
+      "why_vi": "Chuỗi băm chỉ phát hiện được can thiệp trước kẻ không thể tính lại được. Đầu chuỗi phải được công bố hoặc neo ra ngoài chính cỗ máy đó.",
+      "level": 3
+    },
+    {
+      "id": "qsec-124",
+      "q": "Against ransomware, a backup copy is meaningfully protected when",
+      "q_vi": "Trước mã độc tống tiền, một bản sao lưu chỉ thật sự được bảo vệ khi",
+      "choices": [
+        "it is encrypted with a strong key held on the file server",
+        "it runs every night and reports success to the operations team",
+        "no credential available on the production network can delete it",
+        "it is stored on a second array inside the same data centre"
+      ],
+      "answer": 2,
+      "why": "Ransomware operators look for the backups first. Immutability for a retention period is what survives an attacker holding administrative rights.",
+      "why_vi": "Kẻ phát tán mã độc tống tiền tìm bản sao lưu trước tiên. Tính bất biến trong thời hạn lưu giữ mới là thứ sống sót khi kẻ tấn công đã nắm quyền quản trị.",
+      "level": 2
+    },
+    {
+      "id": "qsec-125",
+      "q": "A timestamping authority is used so that a signature remains meaningful",
+      "q_vi": "Cơ quan cấp dấu thời gian được dùng để chữ ký vẫn còn ý nghĩa",
+      "choices": [
+        "even if the private key is later found to be mathematically weak",
+        "when the verifier has no access to the signer's public key",
+        "although the signed document has since been edited",
+        "after the signing certificate has expired or been revoked"
+      ],
+      "answer": 3,
+      "why": "The countersigned time proves the signature predates the loss of validity, which is what lets old documents stay verifiable.",
+      "why_vi": "Dấu thời gian được ký chứng minh chữ ký có trước thời điểm mất hiệu lực, nhờ vậy tài liệu cũ vẫn kiểm chứng được.",
+      "level": 3
+    },
+    {
+      "id": "qsec-126",
+      "q": "A message authentication code shared between two parties cannot provide non-repudiation because",
+      "q_vi": "Mã xác thực bản tin dùng chung giữa hai bên không mang lại tính không thể chối bỏ vì",
+      "choices": [
+        "the tag is too short to be presented as evidence anywhere",
+        "the algorithm behind it has never been standardised for that purpose",
+        "either holder of the key could have produced the same tag",
+        "verifying it requires the original message to be kept forever"
+      ],
+      "answer": 2,
+      "why": "Non-repudiation needs a secret that exactly one party can hold, which is what a private signing key gives and a shared key never does.",
+      "why_vi": "Tính không thể chối bỏ đòi hỏi một bí mật mà đúng một bên nắm giữ, điều mà khóa ký riêng mang lại còn khóa dùng chung thì không bao giờ.",
+      "level": 3
+    },
+    {
+      "id": "qsec-127",
+      "q": "A behavioural baseline learned over the last thirty days is dangerous when",
+      "q_vi": "Đường nền hành vi học từ ba mươi ngày gần nhất trở nên nguy hiểm khi",
+      "choices": [
+        "the intrusion began before the learning window opened",
+        "the network carries more traffic during working hours than at night",
+        "the monitored hosts run several different operating systems",
+        "some users sit in another time zone"
+      ],
+      "answer": 0,
+      "why": "The model then encodes the attacker's activity as ordinary, so the very behaviour you want flagged sits at the centre of the normal region.",
+      "why_vi": "Khi đó mô hình mã hóa hoạt động của kẻ tấn công thành chuyện bình thường, nên chính hành vi cần cảnh báo lại nằm giữa vùng được coi là bình thường.",
+      "level": 3
+    },
+    {
+      "id": "qsec-128",
+      "q": "Scoring an account against a peer group rather than a global threshold helps because",
+      "q_vi": "Chấm điểm một tài khoản theo nhóm tương đương thay vì theo ngưỡng chung giúp ích vì",
+      "choices": [
+        "peer groups can be computed without collecting any log data",
+        "a global threshold cannot be adjusted once it has been set",
+        "administrators generate fewer events than ordinary staff members",
+        "what is unremarkable for an administrator is remarkable for a clerk"
+      ],
+      "answer": 3,
+      "why": "A single cut point across very different roles must either miss the quiet accounts or bury the analyst in alerts from the busy ones.",
+      "why_vi": "Một ngưỡng duy nhất áp cho các vai trò rất khác nhau thì hoặc bỏ sót các tài khoản ít hoạt động, hoặc chôn vùi người phân tích trong cảnh báo từ các tài khoản bận rộn.",
+      "level": 2
+    },
+    {
+      "id": "qsec-129",
+      "q": "Encrypted traffic to an unknown host still reveals beaconing because the detector examines",
+      "q_vi": "Lưu lượng đã mã hóa tới một máy chủ lạ vẫn để lộ nhịp gọi về vì bộ phát hiện xem xét",
+      "choices": [
+        "the plaintext of the controller's reply",
+        "the regularity of connection times and sizes",
+        "the certificate chain that the remote host presented during setup",
+        "the name of the process that opened the socket on the endpoint"
+      ],
+      "answer": 1,
+      "why": "Timing and volume survive encryption. A periodic pattern with small jitter is a property of the schedule, not of the payload.",
+      "why_vi": "Thời điểm và khối lượng vẫn còn sau khi mã hóa. Mẫu lặp có nhiễu nhỏ là tính chất của lịch gọi, không phải của nội dung.",
+      "level": 3
+    },
+    {
+      "id": "qsec-130",
+      "q": "Intruders prefer built in signed system tools because this defeats controls that rely on",
+      "q_vi": "Kẻ xâm nhập ưa dùng công cụ hệ thống có sẵn đã được ký vì cách đó vô hiệu hóa các biện pháp dựa trên",
+      "choices": [
+        "recording which parent process launched each new child process",
+        "recognising files that do not belong on the machine",
+        "limiting which accounts may run administrative utilities at all",
+        "alerting on a first contact with an address"
+      ],
+      "answer": 1,
+      "why": "No foreign binary appears, so file reputation and signing checks stay silent. Detection has to move to how the tool was invoked and by whom.",
+      "why_vi": "Không có tệp nhị phân lạ nào xuất hiện, nên kiểm tra uy tín tệp và kiểm tra chữ ký đều im lặng. Việc phát hiện phải chuyển sang cách công cụ được gọi và ai gọi nó.",
+      "level": 3
+    },
+    {
+      "id": "qsec-131",
+      "q": "A command interpreter starting is unremarkable. It becomes a strong signal when the telemetry also shows",
+      "q_vi": "Việc một trình thông dịch lệnh khởi chạy là chuyện bình thường. Nó trở thành tín hiệu mạnh khi dữ liệu đo còn cho thấy",
+      "choices": [
+        "the exact number of milliseconds that the process stayed alive",
+        "the amount of memory the interpreter reserved when it started up",
+        "the version string reported by the interpreter to the operating system",
+        "which process launched it"
+      ],
+      "answer": 3,
+      "why": "Ancestry carries the context. A document reader spawning an interpreter describes a situation that the event on its own does not.",
+      "why_vi": "Quan hệ cha con mang theo ngữ cảnh. Trình đọc tài liệu sinh ra trình thông dịch mô tả một tình huống mà bản thân sự kiện đơn lẻ không mô tả được.",
+      "level": 2
+    },
+    {
+      "id": "qsec-132",
+      "q": "Writing detections in a platform neutral rule format and translating them helps mainly because",
+      "q_vi": "Viết luật phát hiện theo định dạng không phụ thuộc nền tảng rồi dịch sang nơi triển khai giúp ích chủ yếu vì",
+      "choices": [
+        "the detection logic survives a change of logging platform",
+        "translated rules always run faster",
+        "a neutral format removes the need to normalise fields",
+        "the format guarantees that the required log source is collected"
+      ],
+      "answer": 0,
+      "why": "The expensive asset is the reasoning behind the rule. Keeping it separate from one vendor's query dialect is what preserves that investment.",
+      "why_vi": "Tài sản đắt giá là phần lập luận đằng sau luật. Giữ nó tách khỏi phương ngữ truy vấn của một nhà cung cấp chính là cách bảo toàn khoản đầu tư đó.",
+      "level": 2
+    },
+    {
+      "id": "qsec-133",
+      "q": "A canary credential produces almost no false alarms because",
+      "q_vi": "Một thông tin đăng nhập mồi hầu như không gây báo động giả vì",
+      "choices": [
+        "it sits where ordinary users cannot reach",
+        "the detection rule behind it uses a very high confidence threshold",
+        "it has no legitimate use, so any use at all is anomalous",
+        "it is rotated far more often than real credentials"
+      ],
+      "answer": 2,
+      "why": "The base rate problem disappears when the benign class is empty by construction. That is a property of the design rather than of the detector.",
+      "why_vi": "Vấn đề tần suất nền biến mất khi lớp lành tính rỗng ngay từ thiết kế. Đó là tính chất của cách bố trí chứ không phải của bộ phát hiện.",
+      "level": 3
+    },
+    {
+      "id": "qsec-134",
+      "q": "The most valuable output of a joint attack and defence exercise is",
+      "q_vi": "Kết quả giá trị nhất của một buổi diễn tập phối hợp công thủ là",
+      "choices": [
+        "a score comparing this year's performance with last year's",
+        "a report showing that the attacking side reached the domain controller",
+        "a set of new signatures purchased from the exercise provider",
+        "a list of executed techniques that produced no telemetry at all"
+      ],
+      "answer": 3,
+      "why": "Silent techniques mark the gaps that would matter during a real intrusion, and they can be closed one by one afterwards.",
+      "why_vi": "Những kỹ thuật không để lại dấu vết chỉ ra đúng các lỗ hổng sẽ quan trọng khi có xâm nhập thật, và có thể lấp dần từng cái sau đó.",
+      "level": 2
+    },
+    {
+      "id": "qsec-135",
+      "q": "A connection is protected by TLS with a valid certificate. A passive observer on the path can typically still learn",
+      "q_vi": "Một kết nối được TLS bảo vệ với chứng thư hợp lệ. Người quan sát thụ động trên đường đi thường vẫn biết được",
+      "choices": [
+        "the contents of the request body sent after the handshake",
+        "the session key that both sides derived during the handshake",
+        "which hostname the client asked for and how much data flowed",
+        "the password that the user typed into the login form"
+      ],
+      "answer": 2,
+      "why": "Metadata is outside the encrypted envelope. Hostname exposure is why the handshake extension that encrypts it was designed at all.",
+      "why_vi": "Siêu dữ liệu nằm ngoài phần được mã hóa. Chính việc lộ tên máy chủ là lý do người ta thiết kế phần mở rộng mã hóa nó trong lúc bắt tay.",
+      "level": 2
+    },
+    {
+      "id": "qsec-136",
+      "q": "DNSSEC and DNS over HTTPS solve different problems, in that",
+      "q_vi": "Ký số cho hệ thống tên miền và phân giải qua kênh mã hóa giải quyết hai vấn đề khác nhau, ở chỗ",
+      "choices": [
+        "one works on internal zones, the other on public ones",
+        "one authenticates the answer while the other hides the question",
+        "one needs new hardware, the other is only software",
+        "one is a routing protocol while the other is a transport protocol"
+      ],
+      "answer": 1,
+      "why": "Signed records give origin and integrity to whoever reads them. An encrypted transport gives confidentiality against the local network and nothing else.",
+      "why_vi": "Bản ghi được ký mang lại nguồn gốc và tính toàn vẹn cho bất kỳ ai đọc. Kênh truyền mã hóa mang lại tính bí mật trước mạng nội bộ, chỉ vậy thôi.",
+      "level": 3
+    },
+    {
+      "id": "qsec-137",
+      "q": "Moving name resolution to an encrypted external resolver mainly shifts",
+      "q_vi": "Chuyển việc phân giải tên miền sang một bộ phân giải bên ngoài có mã hóa chủ yếu làm dịch chuyển",
+      "choices": [
+        "who is able to observe the queries",
+        "the cryptographic strength of the answers that come back",
+        "the number of records that any single zone is allowed to publish",
+        "the ability of the enterprise to sign its own internal zones"
+      ],
+      "answer": 0,
+      "why": "The local network loses visibility and the resolver operator gains it. That is a trust decision rather than a strict improvement.",
+      "why_vi": "Mạng nội bộ mất khả năng nhìn thấy còn bên vận hành bộ phân giải thì có được. Đó là một quyết định về niềm tin chứ không phải cải thiện thuần túy.",
+      "level": 3
+    },
+    {
+      "id": "qsec-138",
+      "q": "Route origin validation checks a signed record stating which network may announce a prefix. What it does not verify is",
+      "q_vi": "Kiểm chứng nguồn gốc tuyến đối chiếu một bản ghi có ký nêu mạng nào được phép thông báo một dải địa chỉ. Điều nó không kiểm chứng là",
+      "choices": [
+        "whether the rest of the announced path is genuine",
+        "the identity of the originating network",
+        "the signature covering the authorisation record itself",
+        "the length of the prefix that the authorisation permits"
+      ],
+      "answer": 0,
+      "why": "An announcement can carry a truthful origin and a fabricated path behind it. Closing that gap needs path validation, which is a separate mechanism.",
+      "why_vi": "Một thông báo có thể mang nguồn gốc đúng nhưng đường đi phía sau lại bịa. Khép được khoảng trống đó cần tới kiểm chứng đường đi, vốn là cơ chế riêng.",
+      "level": 3
+    },
+    {
+      "id": "qsec-139",
+      "q": "Link layer encryption between two switches leaves data exposed",
+      "q_vi": "Mã hóa lớp liên kết giữa hai bộ chuyển mạch vẫn để dữ liệu phơi ra",
+      "choices": [
+        "on the fibre segment that joins the two devices together",
+        "inside every device that terminates a hop",
+        "only when the two devices come from different manufacturers",
+        "during the first few frames sent after the link comes up"
+      ],
+      "answer": 1,
+      "why": "Hop by hop protection is decrypted and re-encrypted at each node, so it is not a substitute for end to end protection between the real endpoints.",
+      "why_vi": "Bảo vệ theo từng chặng được giải mã rồi mã hóa lại ở mỗi nút, nên nó không thay thế được bảo vệ đầu cuối tới đầu cuối giữa hai điểm thật sự.",
+      "level": 3
+    },
+    {
+      "id": "qsec-140",
+      "q": "Compared with transport mode, IPsec in tunnel mode additionally protects",
+      "q_vi": "So với chế độ vận chuyển, IPsec ở chế độ đường hầm bảo vệ thêm được",
+      "choices": [
+        "the payload of the packet against modification in transit",
+        "the sequence numbers used to reject replayed packets",
+        "the addresses in the original packet header",
+        "the negotiation of keys that precedes any data transfer"
+      ],
+      "answer": 2,
+      "why": "Wrapping the whole packet in a new one hides the internal topology from anyone watching the outer header.",
+      "why_vi": "Việc bọc trọn gói tin gốc vào một gói mới che được cấu trúc mạng bên trong khỏi bất kỳ ai theo dõi phần đầu bên ngoài.",
+      "level": 2
+    },
+    {
+      "id": "qsec-141",
+      "q": "A protocol with a small fixed set of cryptographic choices is easier to deploy safely because",
+      "q_vi": "Giao thức có bộ lựa chọn mật mã nhỏ và cố định dễ triển khai an toàn hơn vì",
+      "choices": [
+        "fixed choices are mathematically stronger than negotiated ones",
+        "removing negotiation makes the handshake immune to replay",
+        "a shorter specification is always reviewed by more people",
+        "there is no weak combination left for a negotiation to settle on"
+      ],
+      "answer": 3,
+      "why": "Most downgrade problems come from supporting an old option for compatibility. Removing the option removes the class of attack.",
+      "why_vi": "Phần lớn vấn đề hạ cấp đến từ việc vẫn hỗ trợ một lựa chọn cũ để tương thích. Bỏ hẳn lựa chọn đó là bỏ luôn cả lớp tấn công.",
+      "level": 2
+    },
+    {
+      "id": "qsec-142",
+      "q": "A downgrade attack is prevented in a modern handshake chiefly by",
+      "q_vi": "Tấn công ép hạ cấp bị chặn trong các quá trình bắt tay hiện đại chủ yếu nhờ",
+      "choices": [
+        "encrypting the negotiation messages with a preshared key",
+        "sending the list of supported options twice for comparison",
+        "binding a digest of the whole negotiation into the derived keys",
+        "requiring both sides to use certificates from one authority"
+      ],
+      "answer": 2,
+      "why": "If the transcript is authenticated, tampering with the offered options makes the two sides derive different keys and the handshake fails visibly.",
+      "why_vi": "Nếu toàn bộ bản ghi thương lượng được xác thực thì việc sửa danh sách lựa chọn khiến hai bên dẫn xuất ra khóa khác nhau và quá trình bắt tay hỏng lộ liễu.",
+      "level": 3
+    },
+    {
+      "id": "qsec-143",
+      "q": "Encrypting a command message does not stop it from being replayed because the attacker",
+      "q_vi": "Mã hóa một bản tin lệnh không ngăn được việc phát lại nó vì kẻ tấn công",
+      "choices": [
+        "never needs to read it in order to send it again",
+        "can recover the key from long recordings",
+        "is able to modify the ciphertext into a different valid command",
+        "can force the receiver to accept a shorter key during setup"
+      ],
+      "answer": 0,
+      "why": "Freshness is a separate property. A nonce, a counter or a bounded timestamp is what makes the receiver reject a repeat.",
+      "why_vi": "Tính mới là một tính chất riêng. Số dùng một lần, bộ đếm hay dấu thời gian có giới hạn mới là thứ khiến bên nhận từ chối bản lặp.",
+      "level": 2
+    },
+    {
+      "id": "qsec-144",
+      "q": "Port based access control is often bypassed in practice when a network still permits",
+      "q_vi": "Kiểm soát truy nhập theo cổng thường bị vượt qua trên thực tế khi mạng vẫn cho phép",
+      "choices": [
+        "several authenticated devices to share one physical uplink",
+        "wireless clients to use the same directory as wired clients",
+        "administrators to log in to the switch over an encrypted channel",
+        "an unauthenticated fallback for devices that cannot authenticate"
+      ],
+      "answer": 3,
+      "why": "Printers and similar devices usually get an exception, and an exception that grants network access on an easily copied attribute is the weakest link.",
+      "why_vi": "Máy in và các thiết bị tương tự thường được cấp ngoại lệ, mà ngoại lệ cấp quyền vào mạng dựa trên một thuộc tính dễ sao chép chính là mắt xích yếu nhất.",
+      "level": 3
+    },
+    {
+      "id": "qsec-145",
+      "q": "A certificate chain verifies mathematically, yet the connection is still rejected. A legitimate reason is that",
+      "q_vi": "Một chuỗi chứng thư kiểm chứng đúng về mặt toán học nhưng kết nối vẫn bị từ chối. Một lý do chính đáng là",
+      "choices": [
+        "the root certificate was issued more than ten years ago",
+        "a name constraint or the requested host does not match the certificate",
+        "the server chose a cipher suite the client also supports",
+        "the certificate carries more extensions than the client expected"
+      ],
+      "answer": 1,
+      "why": "Path validation is more than a sequence of signature checks. Names, validity windows, key usage and constraints all have to hold as well.",
+      "why_vi": "Kiểm chứng đường dẫn không chỉ là chuỗi phép kiểm chữ ký. Tên, khoảng hiệu lực, mục đích sử dụng khóa và các ràng buộc đều phải thỏa mãn.",
+      "level": 3
+    },
+    {
+      "id": "qsec-146",
+      "q": "Installing an additional root certificate on every company laptop gives the owner of that root the ability to",
+      "q_vi": "Cài thêm một chứng thư gốc lên mọi máy tính xách tay của công ty trao cho chủ sở hữu gốc đó khả năng",
+      "choices": [
+        "read files stored on the laptop without any network access",
+        "impersonate any site those laptops connect to",
+        "issue certificates that other organisations will also accept",
+        "prevent the laptops from reaching sites it has not approved"
+      ],
+      "answer": 1,
+      "why": "Every root in the store can vouch for every name. This is why interception proxies work and why the decision deserves the same scrutiny as a key escrow.",
+      "why_vi": "Mọi gốc trong kho đều có thể bảo lãnh cho mọi tên. Đó là lý do máy chủ chặn giữa hoạt động được, và là lý do quyết định này phải được cân nhắc kỹ như việc ký gửi khóa.",
+      "level": 3
+    },
+    {
+      "id": "qsec-147",
+      "q": "Stapling a freshness proof to the handshake improves privacy because the client no longer has to",
+      "q_vi": "Việc đính bằng chứng còn hiệu lực vào lúc bắt tay cải thiện quyền riêng tư vì máy khách không còn phải",
+      "choices": [
+        "download the full list of revoked serial numbers each morning",
+        "store the certificate of every site it has previously visited",
+        "reveal its own client certificate before the session begins",
+        "tell the issuer which site it is visiting"
+      ],
+      "answer": 3,
+      "why": "Asking the issuer about a certificate discloses the destination to a third party, and it also adds a round trip that can fail open under load.",
+      "why_vi": "Việc hỏi bên cấp phát về một chứng thư làm lộ đích đến cho bên thứ ba, đồng thời thêm một vòng trao đổi có thể hỏng theo hướng cho qua khi tải cao.",
+      "level": 3
+    },
+    {
+      "id": "qsec-148",
+      "q": "When a certificate signing request is generated correctly, the private key",
+      "q_vi": "Khi yêu cầu cấp chứng thư được sinh ra đúng cách, khóa bí mật",
+      "choices": [
+        "never leaves the machine that created the request",
+        "is uploaded to the authority so that it can countersign it",
+        "is split between the requester and the issuing authority",
+        "is escrowed with the registrar for the life of the certificate"
+      ],
+      "answer": 0,
+      "why": "The request carries only the public key and the subject name. Any workflow that transports the private key has destroyed the guarantee it exists to provide.",
+      "why_vi": "Yêu cầu chỉ mang theo khóa công khai và tên chủ thể. Bất kỳ quy trình nào vận chuyển khóa bí mật đều đã phá hỏng chính sự bảo đảm mà nó sinh ra để mang lại.",
+      "level": 2
+    },
+    {
+      "id": "qsec-149",
+      "q": "Certificates valid for a few days reduce the operational importance of",
+      "q_vi": "Chứng thư chỉ có hiệu lực vài ngày làm giảm tầm quan trọng vận hành của",
+      "choices": [
+        "validating the name the server presents",
+        "protecting the private key on the host that terminates the session",
+        "revocation checking that often fails open",
+        "keeping the clock on the client roughly synchronised with real time"
+      ],
+      "answer": 2,
+      "why": "Short lifetimes bound the damage window by expiry instead of by a check that browsers routinely skip when it is unreachable.",
+      "why_vi": "Hiệu lực ngắn giới hạn cửa sổ thiệt hại bằng chính việc hết hạn, thay vì bằng một phép kiểm mà trình duyệt thường bỏ qua khi không truy cập được.",
+      "level": 3
+    },
+    {
+      "id": "qsec-150",
+      "q": "Moving service to service calls from bearer tokens to mutual certificate authentication mainly helps because a certificate key",
+      "q_vi": "Chuyển các lời gọi giữa dịch vụ từ mã thông hành mang theo sang xác thực chứng thư hai chiều chủ yếu có lợi vì khóa của chứng thư",
+      "choices": [
+        "is faster for the receiver to check",
+        "does not need to be rotated during the life of the service",
+        "removes the need to authorise the caller for each operation",
+        "cannot be reused elsewhere once copied out of a log"
+      ],
+      "answer": 3,
+      "why": "A token that leaks into a log or an error report is immediately usable by anyone. Possession of a private key is much harder to transfer accidentally.",
+      "why_vi": "Một mã thông hành lọt vào nhật ký hay báo lỗi là ai cũng dùng được ngay. Việc nắm giữ khóa bí mật thì khó vô tình chuyển giao hơn nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qsec-151",
+      "q": "With fully automated certificate issuance, the security of the certificate rests on",
+      "q_vi": "Với việc cấp chứng thư hoàn toàn tự động, an ninh của chứng thư đặt trên",
+      "choices": [
+        "the length of the key that the requesting host generated",
+        "the reputation of the authority chosen by the requester",
+        "control of the name and of the records that prove it",
+        "the frequency with which the certificate is later renewed"
+      ],
+      "answer": 2,
+      "why": "Automation removes the human review that used to sit in the way, so whoever can answer the challenge can obtain a valid certificate.",
+      "why_vi": "Tự động hóa loại bỏ khâu con người xét duyệt vốn nằm chắn ở giữa, nên ai trả lời được thử thách là lấy được chứng thư hợp lệ.",
+      "level": 3
+    },
+    {
+      "id": "qsec-152",
+      "q": "Cryptographic agility is worth building in mainly because it determines",
+      "q_vi": "Khả năng thay thế thuật toán mật mã đáng được đưa vào thiết kế chủ yếu vì nó quyết định",
+      "choices": [
+        "how many bits of security it offers today",
+        "how expensive the next algorithm migration will be",
+        "whether the protocol can run on constrained embedded devices",
+        "how quickly a session key can be derived during the handshake"
+      ],
+      "answer": 1,
+      "why": "Algorithms are retired on a schedule set by cryptanalysis, not by product plans. A protocol that hard codes one choice must be redesigned rather than updated.",
+      "why_vi": "Thuật toán bị loại bỏ theo nhịp do phân tích mật mã quyết định chứ không theo kế hoạch sản phẩm. Giao thức gắn cứng một lựa chọn thì phải thiết kế lại chứ không thể cập nhật.",
+      "level": 2
+    },
+    {
+      "id": "qsec-153",
+      "q": "Replacing the average with a coordinate wise median when combining client updates is intended to",
+      "q_vi": "Việc thay phép trung bình bằng trung vị theo từng tọa độ khi gộp cập nhật từ các bên nhằm",
+      "choices": [
+        "stop a small number of clients from dragging the model anywhere they like",
+        "reduce the number of communication rounds that convergence requires on large models",
+        "compress the updates so that far less bandwidth is consumed on every training round",
+        "guarantee that no client can infer anything about the others"
+      ],
+      "answer": 0,
+      "why": "An arithmetic mean is unbounded in each coordinate, so one crafted contribution can dominate. A median is bounded by the honest majority.",
+      "why_vi": "Trung bình cộng không bị chặn theo từng tọa độ nên một đóng góp được dàn dựng có thể chi phối. Trung vị bị chặn bởi đa số các bên trung thực.",
+      "level": 3
+    },
+    {
+      "id": "qsec-154",
+      "q": "You verify the signature over a downloaded model and it checks out. What you have established is",
+      "q_vi": "Bạn kiểm chữ ký của một mô hình tải về và nó hợp lệ. Điều bạn xác lập được là",
+      "choices": [
+        "the weights came from the expected publisher unaltered",
+        "the training data contained no poisoned examples",
+        "the model will behave correctly on inputs outside its training distribution",
+        "the model hides no trigger driven behaviour"
+      ],
+      "answer": 0,
+      "why": "A signature is an integrity and origin control. Whether the publisher's own pipeline was clean is a separate question that needs separate evidence.",
+      "why_vi": "Chữ ký là biện pháp về toàn vẹn và nguồn gốc. Việc đường ống của chính bên phát hành có sạch hay không là câu hỏi khác, cần bằng chứng khác.",
+      "level": 2
+    },
+    {
+      "id": "qsec-155",
+      "q": "A certified robustness radius differs from an empirical robust accuracy in that the certificate",
+      "q_vi": "Bán kính bền vững có chứng minh khác với độ chính xác bền vững đo thực nghiệm ở chỗ chứng minh đó",
+      "choices": [
+        "is measured against the strongest attack currently published",
+        "holds against every attack inside the stated ball, including future ones",
+        "is obtained by evaluating the model on a held out test set",
+        "applies to the whole input space rather than to one point"
+      ],
+      "answer": 1,
+      "why": "An empirical number is an upper bound that a stronger attack can lower. A proof cannot be reduced by a cleverer adversary within the same threat model.",
+      "why_vi": "Con số thực nghiệm là chặn trên mà một tấn công mạnh hơn có thể kéo xuống. Một chứng minh thì không bị kẻ tấn công khôn ngoan hơn làm giảm trong cùng mô hình mối đe dọa.",
+      "level": 3
+    },
+    {
+      "id": "qsec-156",
+      "q": "The main practical cost of obtaining a robustness certificate through randomised smoothing is",
+      "q_vi": "Chi phí thực tế chính khi lấy chứng nhận bền vững bằng cách làm trơn ngẫu nhiên là",
+      "choices": [
+        "the model must be retrained on noisy data weekly",
+        "the certificate suits one architecture only",
+        "many forward passes are needed for a single prediction",
+        "the guarantee weakens as the number of output classes grows"
+      ],
+      "answer": 2,
+      "why": "The prediction becomes a vote over noisy copies, so latency and compute scale with the number of samples the confidence bound requires.",
+      "why_vi": "Dự đoán trở thành một cuộc bỏ phiếu trên các bản sao có nhiễu, nên độ trễ và khối lượng tính toán tỉ lệ với số mẫu mà cận tin cậy đòi hỏi.",
+      "level": 3
+    },
+    {
+      "id": "qsec-157",
+      "q": "A filtering model is placed in front of a language model to block unsafe requests. Treating it as a security boundary is wrong because",
+      "q_vi": "Một mô hình lọc được đặt trước mô hình ngôn ngữ để chặn yêu cầu không an toàn. Coi nó là ranh giới an ninh là sai vì",
+      "choices": [
+        "the filter adds latency that users find unacceptable in practice",
+        "the filter cannot be updated once the main model is deployed",
+        "the filter needs access to the weights of the main model",
+        "the filter is itself a statistical classifier that can be evaded"
+      ],
+      "answer": 3,
+      "why": "A boundary must fail closed by construction. A learned filter has an error rate, so it belongs in defence in depth rather than at the boundary.",
+      "why_vi": "Ranh giới phải hỏng theo hướng chặn lại ngay từ cấu trúc. Bộ lọc học được luôn có tỉ lệ sai, nên nó thuộc về phòng thủ nhiều lớp chứ không phải ranh giới.",
+      "level": 3
+    },
+    {
+      "id": "qsec-158",
+      "q": "A model repeats a rare training record word for word when prompted with its first line. This shows that",
+      "q_vi": "Một mô hình nhắc lại nguyên văn một bản ghi huấn luyện hiếm khi được nhắc bằng dòng đầu tiên của nó. Điều này cho thấy",
+      "choices": [
+        "the model was trained for too few epochs on the corpus",
+        "the retrieval index contains a copy of the same record",
+        "memorisation of rare examples has become a disclosure risk",
+        "the tokeniser fails to split the record into subwords"
+      ],
+      "answer": 2,
+      "why": "Rare records receive little averaging pressure during training, so they are the ones most likely to be reproducible and the ones most likely to be sensitive.",
+      "why_vi": "Các bản ghi hiếm ít chịu sức ép trung bình hóa trong lúc huấn luyện, nên chúng vừa dễ tái hiện nhất vừa thường là dữ liệu nhạy cảm nhất.",
+      "level": 3
+    },
+    {
+      "id": "qsec-159",
+      "q": "A checkpoint format that reconstructs arbitrary objects during loading is dangerous because opening a file",
+      "q_vi": "Định dạng lưu mô hình có khả năng dựng lại đối tượng tùy ý trong lúc nạp là nguy hiểm vì việc mở tệp",
+      "choices": [
+        "can run code before any weight is ever used",
+        "may consume more memory than the training machine had available",
+        "requires the same library version that produced the file",
+        "makes the resulting model slower at inference time"
+      ],
+      "answer": 0,
+      "why": "Deserialisation happens before evaluation, so no amount of testing the model afterwards protects the machine that loaded it.",
+      "why_vi": "Việc giải tuần tự xảy ra trước khi đánh giá, nên có kiểm thử mô hình sau đó bao nhiêu cũng không bảo vệ được cỗ máy đã nạp tệp.",
+      "level": 2
+    },
+    {
+      "id": "qsec-160",
+      "q": "In a retrieval augmented system, anyone able to write documents into the index effectively gains",
+      "q_vi": "Trong hệ thống có truy hồi tăng cường, ai ghi được tài liệu vào kho chỉ mục thì trên thực tế có được",
+      "choices": [
+        "read access to every past conversation held with the assistant",
+        "the ability to change the weights of the deployed model",
+        "administrative control over the vector database software",
+        "the ability to place text into the model's context"
+      ],
+      "answer": 3,
+      "why": "Retrieved passages are concatenated into the prompt, so write access to the corpus is a path into the instruction stream unless the two are kept apart.",
+      "why_vi": "Các đoạn truy hồi được nối vào lời nhắc, nên quyền ghi vào kho tài liệu là một lối đi vào dòng mệnh lệnh, trừ khi hai thứ đó được tách bạch.",
+      "level": 3
+    },
+    {
+      "id": "qsec-161",
+      "q": "The structural defence against instructions arriving inside retrieved content is to",
+      "q_vi": "Biện pháp mang tính cấu trúc trước những mệnh lệnh nằm lẫn trong nội dung truy hồi là",
+      "choices": [
+        "add a system message telling the model to ignore embedded instructions",
+        "keep untrusted text in a channel that is never executed as a command",
+        "increase the size of the context window so instructions are diluted",
+        "fine tune the model on examples of malicious documents"
+      ],
+      "answer": 1,
+      "why": "Every mitigation that asks the model to be careful has an error rate. Separating data from commands removes the confusion rather than reducing it.",
+      "why_vi": "Mọi biện pháp giảm nhẹ dựa trên việc yêu cầu mô hình cẩn thận đều có tỉ lệ sai. Tách dữ liệu khỏi mệnh lệnh là xóa bỏ sự nhầm lẫn chứ không phải giảm bớt nó.",
+      "level": 3
+    },
+    {
+      "id": "qsec-162",
+      "q": "An automated agent with tool access will eventually be manipulated. The most durable response is to",
+      "q_vi": "Một tác nhân tự động có quyền dùng công cụ rồi sẽ có lúc bị thao túng. Cách ứng phó bền vững nhất là",
+      "choices": [
+        "log every action it takes so the incident can be reconstructed",
+        "bound what its credentials and network reach allow it to do",
+        "review its prompt template after each reported incident",
+        "restrict it to models that have passed a safety benchmark"
+      ],
+      "answer": 1,
+      "why": "Confinement holds regardless of which manipulation succeeds, while every measure aimed at preventing manipulation has to anticipate the specific input.",
+      "why_vi": "Việc giam giữ quyền hạn vẫn đứng vững bất kể lần thao túng nào thành công, còn mọi biện pháp nhắm vào việc ngăn thao túng đều phải đoán trước đầu vào cụ thể.",
       "level": 3
     }
   ]

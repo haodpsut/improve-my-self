@@ -56,6 +56,11 @@ const noteDate = (f) => { if (f?.updated && f.updated > newestData) newestData =
 
 const cardRows = [];
 const allCardIds = new Set();
+// Mat truoc tren TOAN KHO, de biet thuat ngu nao nam o nhieu bo.
+// Nam o nhieu bo khong phai loi: prompt injection vua thuoc AI vua thuoc an ninh.
+// Nhung neu hai the cung mat truoc ma khac nghia thi bai tron ca kho se sinh ra
+// cau hoi khong co dap an dung duy nhat, nen phai in ra de con nhin thay.
+const headMap = new Map();
 
 for (const deck of manifest.decks || []) {
   const file = await readJSON(deck.file);
@@ -73,6 +78,8 @@ for (const deck of manifest.decks || []) {
     const key = norm(head);
     if (heads.has(key)) fail.push(`${deck.file}: hai thẻ cùng mặt trước "${head}" (${heads.get(key)} và ${c.id})`);
     heads.set(key, c.id);
+    if (!headMap.has(key)) headMap.set(key, []);
+    headMap.get(key).push({ deck: deck.id, head, gloss: norm(c.vi) });
 
     // Bo tieng Nga khong dung truong say, cau doc thanh tieng cua no la def_ru.
     const readable = deck.lang === 'ru-vi' ? c.def_ru : c.say;
@@ -292,6 +299,24 @@ if (webmanifest) {
   if (!okRoute(webmanifest.start_url)) fail.push(`site.webmanifest: start_url "${webmanifest.start_url}" không khớp đường dẫn nào của trang`);
   for (const sc of webmanifest.shortcuts || []) {
     if (!okRoute(sc.url)) fail.push(`site.webmanifest: lối tắt "${sc.name}" trỏ tới "${sc.url}" không khớp đường dẫn nào`);
+  }
+}
+
+/* ---------------------------------------------------------------
+   Thuat ngu nam o nhieu bo
+   ---------------------------------------------------------------
+   Chi CANH BAO chu khong chan, vi mot thuat ngu nam o hai bo thuong la co chu y.
+   Nhung phai in ra: bai tron ca kho lay the tu moi bo, va neu hai the cung mat
+   truoc ma khac nghia thi mau cau hoi nghia se co hai dap an dung ma chi mot cai
+   duoc cham. Bo sinh cau hoi da duoc day bo qua nhung the nhu vay, va con so o
+   day cho biet no dang phai bo bao nhieu. */
+
+const chungMat = [...headMap.entries()].filter(([, ds]) => ds.length > 1);
+const khacNghia = chungMat.filter(([, ds]) => new Set(ds.map((d) => d.gloss)).size > 1);
+if (chungMat.length) {
+  warn.push(`${chungMat.length} thuật ngữ nằm ở nhiều bộ, trong đó ${khacNghia.length} thuật ngữ mang nghĩa khác nhau giữa các bộ`);
+  for (const [, ds] of khacNghia.slice(0, 6)) {
+    warn.push(`  "${ds[0].head}" ở ${ds.map((d) => d.deck).join(', ')} với nghĩa khác nhau, bài trộn sẽ bỏ mẫu hỏi nghĩa của thẻ này`);
   }
 }
 

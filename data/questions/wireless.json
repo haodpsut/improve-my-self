@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "wireless",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qw-1",
@@ -1501,6 +1501,726 @@
       "answer": 3,
       "why": "An empty buffer means the radio was ready and had nothing to send, so throughput is being set upstream by the application, the transport protocol or the server. Chasing radio parameters in this state produces no gain at all.",
       "why_vi": "Bộ đệm rỗng nghĩa là phía vô tuyến đã sẵn sàng mà không có gì để gửi, nên thông lượng đang bị quyết định ở phía trên, bởi ứng dụng, giao thức truyền tải hoặc máy chủ. Loay hoay chỉnh tham số vô tuyến trong tình trạng này không đem lại chút độ lợi nào.",
+      "level": 2
+    },
+    {
+      "id": "qw-101",
+      "q": "A device is registered on 5G but every voice call moves it onto LTE first. What does that behaviour indicate?",
+      "q_vi": "Một thiết bị đã đăng ký trên 5G nhưng mọi cuộc gọi thoại đều đưa nó về LTE trước. Hành vi đó cho thấy điều gì?",
+      "choices": [
+        "The serving 5G cell has no voice service provisioned, so call setup triggers a move to the earlier packet system",
+        "The device radio cannot decode the band that carries voice",
+        "The subscription blocks packet switched voice on this radio access",
+        "The core ran out of session anchors and refused the call"
+      ],
+      "answer": 0,
+      "why": "Voice on the new radio has to be provisioned in the serving cell. When it is missing, the network relocates the device to the earlier system for the duration of the call, which is exactly why setup time grows.",
+      "why_vi": "Thoại trên sóng vô tuyến mới phải được khai báo ở ô đang phục vụ. Khi thiếu, mạng dời thiết bị về hệ thống cũ trong suốt cuộc gọi, và đó chính là lý do thời gian thiết lập dài ra.",
+      "level": 2
+    },
+    {
+      "id": "qw-102",
+      "q": "At registration a device asks for three slices and the network replies with only two. Which mechanism produced that reply?",
+      "q_vi": "Khi đăng ký, thiết bị xin ba lát mạng nhưng mạng chỉ trả về hai. Cơ chế nào tạo ra câu trả lời đó?",
+      "choices": [
+        "The policy function revoked one slice for billing reasons",
+        "The slice selection function intersected the requested list with the subscription and returned the allowed list",
+        "The device dropped a slice because its bandwidth part was busy",
+        "The repository found no producer for the third slice"
+      ],
+      "answer": 1,
+      "why": "A requested slice list is only a request. The network side function that owns slice selection compares it with the subscription and with what the serving area supports, and what comes back is the allowed list.",
+      "why_vi": "Danh sách lát được yêu cầu chỉ là đề nghị. Hàm phía mạng phụ trách chọn lát đem so với thuê bao và với những gì vùng phục vụ hỗ trợ, cái trả về là danh sách được phép.",
+      "level": 2
+    },
+    {
+      "id": "qw-103",
+      "q": "A device carries enterprise traffic and public internet traffic at the same time, anchored in different places. What makes that possible?",
+      "q_vi": "Một thiết bị vừa chở lưu lượng doanh nghiệp vừa chở lưu lượng internet công cộng, neo ở hai nơi khác nhau. Nhờ đâu làm được như vậy?",
+      "choices": [
+        "The device runs two subscriber modules at once",
+        "The scheduler places the two flows on different carriers",
+        "Each protocol data unit session is a separate logical connection with its own anchor and can sit on a different slice",
+        "The core assigns the device two temporary identities"
+      ],
+      "answer": 2,
+      "why": "Sessions are the unit of anchoring. A device may hold several of them in parallel, each terminated at a different user plane anchor and each associated with its own slice, so the two traffic types never share a path.",
+      "why_vi": "Phiên mới là đơn vị neo lưu lượng. Thiết bị có thể giữ song song nhiều phiên, mỗi phiên kết thúc ở một điểm neo mặt phẳng người dùng khác nhau và gắn với lát riêng, nên hai loại lưu lượng không dùng chung đường.",
+      "level": 2
+    },
+    {
+      "id": "qw-104",
+      "q": "An operator wants a loop that reacts to per user radio measurements within about a hundred milliseconds. Where does that logic belong?",
+      "q_vi": "Nhà mạng muốn một vòng điều khiển phản ứng theo số đo vô tuyến của từng người dùng trong khoảng một trăm mili giây. Logic đó nên đặt ở đâu?",
+      "choices": [
+        "In the service management and orchestration layer",
+        "In the policy control function of the packet core network",
+        "In the subscriber data repository of the home network",
+        "In an application hosted on the near real time controller, whose loop runs from ten milliseconds to one second"
+      ],
+      "answer": 3,
+      "why": "The management layer loop is slower than a second and the core policy function does not see per user radio measurements at all. Only the fast radio controller closes a loop in that time range.",
+      "why_vi": "Vòng ở lớp quản lý chậm hơn một giây, còn hàm chính sách của lõi hoàn toàn không thấy số đo vô tuyến của từng người dùng. Chỉ bộ điều khiển vô tuyến nhanh mới đóng được vòng trong khoảng thời gian đó.",
+      "level": 2
+    },
+    {
+      "id": "qw-105",
+      "q": "Why is a slice guarantee harder to keep in the radio access network than in the core?",
+      "q_vi": "Vì sao cam kết cho một lát mạng khó giữ ở mạng truy nhập vô tuyến hơn là ở mạng lõi?",
+      "choices": [
+        "Radio resources are shared over a channel that changes every slot, so a fixed partition either wastes capacity or misses the target",
+        "The core network has no scheduler of any kind, so every slice there is served strictly in the order in which packets arrive at the anchor point",
+        "Radio nodes are unable to read the slice identifier",
+        "Slice policies are only defined for the core network"
+      ],
+      "answer": 0,
+      "why": "Core capacity is largely deterministic, so a share can be reserved and honoured. On the air interface the same reservation buys a different bit rate every slot, which is why radio guarantees need either headroom or constant reallocation.",
+      "why_vi": "Dung lượng ở lõi gần như tất định nên có thể đặt trước một phần và giữ đúng. Trên giao diện vô tuyến, cùng một phần đặt trước lại cho tốc độ khác nhau ở từng khe, nên cam kết vô tuyến phải có dự phòng hoặc phải cấp lại liên tục.",
+      "level": 3
+    },
+    {
+      "id": "qw-106",
+      "q": "A radio node accepts the controller connection but the controller application still reads no metric at all. What is the most likely cause?",
+      "q_vi": "Nút vô tuyến chấp nhận kết nối từ bộ điều khiển nhưng ứng dụng trên đó vẫn không đọc được chỉ số nào. Nguyên nhân khả dĩ nhất là gì?",
+      "choices": [
+        "The management interface was configured with the wrong certificate authority chain for this particular radio node vendor",
+        "The node does not support the service model that the application subscribes to",
+        "The controller is simply running too slowly",
+        "The policy interface towards the orchestrator is down"
+      ],
+      "answer": 1,
+      "why": "The link between controller and radio node only carries what a shared service model defines. A connection can come up cleanly and still expose nothing, because the subscription refers to a model the node never implemented.",
+      "why_vi": "Đường nối giữa bộ điều khiển và nút vô tuyến chỉ chở được những gì mô hình dịch vụ chung định nghĩa. Kết nối vẫn có thể lên bình thường mà không lộ ra gì, vì đăng ký trỏ tới mô hình mà nút chưa hề cài.",
+      "level": 3
+    },
+    {
+      "id": "qw-107",
+      "q": "Compared with carrying raw sampled waveforms, what does a lower layer fronthaul split mainly change?",
+      "q_vi": "So với việc chở thẳng dạng sóng đã lấy mẫu, điểm tách fronthaul ở lớp thấp hơn thay đổi chủ yếu điều gì?",
+      "choices": [
+        "It removes the need for accurate time synchronisation across the fronthaul network, because the radio unit now derives its own timing reference",
+        "It moves the scheduler into the radio unit",
+        "The fronthaul rate then scales with traffic and occupied bandwidth rather than with antenna count alone",
+        "It doubles the number of radio units per site"
+      ],
+      "answer": 2,
+      "why": "Carrying samples means the rate is set by sampling rate times antenna count, whatever the load. Once precoding sits in the radio unit, the fronthaul carries layers instead of antenna streams and follows the actual traffic.",
+      "why_vi": "Chở mẫu nghĩa là tốc độ do tần số lấy mẫu nhân số ăng ten quyết định, bất kể tải. Khi tiền mã hoá nằm ở khối vô tuyến, fronthaul chở lớp dữ liệu thay vì luồng theo ăng ten và bám theo lưu lượng thật.",
+      "level": 3
+    },
+    {
+      "id": "qw-108",
+      "q": "Uplink noise on one sector rose sharply after a storm although no equipment reports any fault. Which cause fits best?",
+      "q_vi": "Nhiễu nền đường lên của một vùng phục vụ tăng vọt sau cơn bão dù không thiết bị nào báo lỗi. Nguyên nhân nào hợp lý nhất?",
+      "choices": [
+        "A neighbouring operator changed its downlink power schedule in the adjacent band during the same maintenance window",
+        "Thermal noise increased because the ambient temperature fell",
+        "The receiver noise figure improved after the rain",
+        "Corroded metal near the antenna began mixing strong downlink carriers back into the receive band"
+      ],
+      "answer": 3,
+      "why": "Rusted joints and loose connectors behave as weak nonlinearities. They mix the strong transmitted carriers and drop products straight into the receive band, and nothing in the active chain reports a fault because nothing active is broken.",
+      "why_vi": "Mối nối gỉ và đầu nối lỏng hành xử như phần tử phi tuyến yếu. Chúng trộn các sóng mang phát mạnh và ném sản phẩm trộn thẳng vào dải thu, còn chuỗi tích cực không báo lỗi vì chẳng có linh kiện tích cực nào hỏng.",
+      "level": 3
+    },
+    {
+      "id": "qw-109",
+      "q": "Why can a modern carrier save power at low load in a way that earlier systems could not?",
+      "q_vi": "Vì sao sóng mang hiện đại tiết kiệm được điện lúc tải thấp theo cách mà các hệ trước không làm được?",
+      "choices": [
+        "Its always on broadcast signals are sparse, so the amplifier can genuinely idle between bursts",
+        "It transmits reference symbols continuously across the whole band, which lets the receiver average the noise away and lowers the power that is required",
+        "Its amplifiers use a semiconductor material that draws no current at all whenever the input signal happens to be absent",
+        "It always operates on a lower carrier frequency"
+      ],
+      "answer": 0,
+      "why": "Power saving depends on how long the transmitter may stay silent. Earlier carriers broadcast reference and control symbols in almost every symbol period, so no useful sleep window ever existed regardless of load.",
+      "why_vi": "Tiết kiệm điện phụ thuộc vào việc máy phát được im lặng bao lâu. Các sóng mang trước phát ký hiệu tham chiếu và điều khiển ở gần như mọi chu kỳ ký hiệu, nên không bao giờ có cửa sổ ngủ hữu ích, bất kể tải ra sao.",
+      "level": 2
+    },
+    {
+      "id": "qw-110",
+      "q": "An upgrade cuts energy per bit by a third, yet the electricity bill for the site grows. How can both be true?",
+      "q_vi": "Một đợt nâng cấp giảm năng lượng trên mỗi bit đi một phần ba, nhưng tiền điện của trạm lại tăng. Vì sao cả hai đều đúng?",
+      "choices": [
+        "Energy per bit and total energy are the same quantity in different units, so one of the two reported numbers has to be a measurement error",
+        "Traffic volume grew faster than the efficiency gain, so total energy still rose",
+        "The energy per bit figure excludes the cooling system, and that is where the whole of the increase actually appeared",
+        "The electricity tariff changed"
+      ],
+      "answer": 1,
+      "why": "Energy per bit is a ratio. Halving the numerator per bit while tripling the number of bits still raises the total, which is why efficiency ratios must always be read together with an absolute consumption figure.",
+      "why_vi": "Năng lượng trên mỗi bit là một tỉ số. Giảm một nửa ở tử số cho từng bit nhưng gấp ba số bit thì tổng vẫn tăng, nên tỉ số hiệu quả luôn phải đọc kèm con số tiêu thụ tuyệt đối.",
+      "level": 2
+    },
+    {
+      "id": "qw-111",
+      "q": "One cell has two different neighbours carrying the same physical cell identity. Which failure does that create?",
+      "q_vi": "Một ô có hai láng giềng khác nhau nhưng cùng mang một mã nhận dạng ô vật lý. Lỗi nào sẽ xuất hiện?",
+      "choices": [
+        "Synchronisation signals from the two neighbours cancel each other out everywhere their coverage areas happen to overlap in the field",
+        "Both neighbours refuse every incoming handover because their identities are not unique inside the tracking area",
+        "Handover fails because the source cannot tell which neighbour a measurement report refers to",
+        "Nothing at all, identities may repeat freely"
+      ],
+      "answer": 2,
+      "why": "A measurement report names the identity, not the cell. When one source cell sees two neighbours under the same identity, the preparation request can be sent to the wrong target and the handover drops.",
+      "why_vi": "Bản tin báo cáo đo nêu mã nhận dạng chứ không nêu ô. Khi một ô nguồn thấy hai láng giềng cùng mã, yêu cầu chuẩn bị chuyển giao có thể gửi nhầm đích và cuộc chuyển giao rớt.",
+      "level": 3
+    },
+    {
+      "id": "qw-112",
+      "q": "In a reciprocity based system, what most often limits how fast the downlink beam can follow a moving vehicle?",
+      "q_vi": "Trong hệ dựa trên tính thuận nghịch, thứ gì thường giới hạn tốc độ chùm đường xuống bám theo xe đang chạy?",
+      "choices": [
+        "The number of antenna elements in the base station array, because a larger array needs proportionally longer to steer",
+        "The modulation order picked by link adaptation after the last block error report arrived",
+        "The size of the codebook used for beam reporting",
+        "The period of the uplink sounding signal used to estimate the channel"
+      ],
+      "answer": 3,
+      "why": "With reciprocity the downlink weights are computed from the uplink pilot, so the channel is only as fresh as the last sounding instance. Between two soundings the beam is pointing at where the vehicle used to be.",
+      "why_vi": "Nhờ thuận nghịch, trọng số đường xuống tính từ tín hiệu dẫn đường đường lên, nên kênh chỉ mới bằng lần dò gần nhất. Giữa hai lần dò, chùm vẫn đang chỉ vào chỗ mà xe đã rời đi.",
+      "level": 3
+    },
+    {
+      "id": "qw-113",
+      "q": "Which quantity does a clustered delay line model carry that a tapped delay line model does not?",
+      "q_vi": "Đại lượng nào có trong mô hình đường trễ theo cụm mà mô hình đường trễ có nhánh không có?",
+      "choices": [
+        "Angles of departure and arrival",
+        "The average received power assigned to each individual propagation tap of the profile",
+        "The delay of each propagation tap relative to the first arriving component",
+        "The carrier frequency at which the original measurement campaign was run"
+      ],
+      "answer": 0,
+      "why": "Both model families describe delay and power per tap. Only the clustered form attaches spatial directions, which is what a beamforming or beam management study has to act on.",
+      "why_vi": "Cả hai họ mô hình đều mô tả trễ và công suất theo từng nhánh. Chỉ dạng theo cụm mới gắn thêm hướng trong không gian, và đó là thứ mà nghiên cứu định hình chùm hay quản lý chùm phải dựa vào.",
+      "level": 2
+    },
+    {
+      "id": "qw-114",
+      "q": "A passive reflecting surface placed halfway between base station and user gives almost no measurable gain. Why?",
+      "q_vi": "Bề mặt phản xạ thụ động đặt giữa quãng đường từ trạm gốc tới người dùng gần như không cho độ lợi đo được. Vì sao?",
+      "choices": [
+        "Reflection reverses the polarisation of the incident wave and the receiving antenna then rejects most of the arriving power",
+        "Received power falls with the product of both hop distances",
+        "Surface elements can only apply phase shifts quantised to a small number of discrete states",
+        "The surface adds a random delay per element and destroys subcarrier orthogonality"
+      ],
+      "answer": 1,
+      "why": "A purely reflecting surface reradiates rather than amplifies, so the two hops multiply instead of adding. The midpoint is the worst place for that product, which is why useful deployments sit close to one end.",
+      "why_vi": "Bề mặt phản xạ thuần tuý chỉ bức xạ lại chứ không khuếch đại, nên hai chặng nhân với nhau chứ không cộng. Điểm giữa là chỗ tệ nhất cho tích đó, vì thế các triển khai có ích đều đặt sát một đầu.",
+      "level": 3
+    },
+    {
+      "id": "qw-115",
+      "q": "Which reading is the strongest sign that a fitted propagation model is absorbing an effect it does not describe?",
+      "q_vi": "Con số nào là dấu hiệu mạnh nhất cho thấy mô hình lan truyền vừa khớp đang gánh một hiệu ứng mà nó không mô tả?",
+      "choices": [
+        "A shadowing standard deviation near eight decibels in a dense urban measurement set",
+        "A coherence bandwidth smaller than the bandwidth used during the campaign",
+        "A fitted path loss exponent above four in open terrain",
+        "A Rician factor that drops when the direct path is blocked by a vehicle"
+      ],
+      "answer": 2,
+      "why": "Open terrain should sit close to free space. An unusually steep fitted slope means the regression is soaking up blockage, antenna pattern or calibration error and reporting it as propagation.",
+      "why_vi": "Địa hình trống trải lẽ ra phải gần với không gian tự do. Độ dốc khớp được dốc bất thường nghĩa là phép hồi quy đang hút vào nó phần che chắn, giản đồ ăng ten hay sai số hiệu chuẩn rồi báo ra như thể đó là lan truyền.",
+      "level": 3
+    },
+    {
+      "id": "qw-116",
+      "q": "What does a concealed subscription identifier actually protect against?",
+      "q_vi": "Định danh thuê bao được che thực sự bảo vệ trước điều gì?",
+      "choices": [
+        "Replay of authentication vectors by a compromised roaming partner in the visited network",
+        "Jamming aimed at the synchronisation signal block of the serving cell",
+        "Fraud committed by cloning the equipment identity of a stolen phone",
+        "Passive collection of the permanent subscriber identity"
+      ],
+      "answer": 3,
+      "why": "The concealment is applied before the identity leaves the device, so a listener that only receives the air interface never sees the permanent value. It does nothing about authentication replay or radio jamming.",
+      "why_vi": "Việc che được thực hiện trước khi định danh rời thiết bị, nên bên chỉ thu sóng trên giao diện vô tuyến không bao giờ thấy giá trị cố định. Nó không giải quyết chuyện phát lại bản tin xác thực hay gây nghẽn sóng.",
+      "level": 2
+    },
+    {
+      "id": "qw-117",
+      "q": "Why does a high resolution channel report cost so much more uplink capacity than a single beam index?",
+      "q_vi": "Vì sao báo cáo kênh độ phân giải cao tốn dung lượng đường lên hơn hẳn so với một chỉ số chùm?",
+      "choices": [
+        "It reports a weighted combination of several beams with amplitude and phase coefficients instead of one entry from a fixed set",
+        "It has to be repeated on every subcarrier of the carrier",
+        "It is always sent using the highest modulation order",
+        "It carries the entire transmit power headroom history"
+      ],
+      "answer": 0,
+      "why": "A codebook index is a pointer into an agreed table, so a handful of bits suffices. A high resolution report describes the channel itself through per beam coefficients, and the payload grows with beam count and quantisation depth.",
+      "why_vi": "Chỉ số bảng mã chỉ là con trỏ vào một bảng đã thống nhất nên vài bit là đủ. Báo cáo độ phân giải cao mô tả chính cái kênh bằng hệ số cho từng chùm, nên tải tin tăng theo số chùm và độ sâu lượng tử.",
+      "level": 3
+    },
+    {
+      "id": "qw-118",
+      "q": "An operator wants third party applications to receive location events without exposing internal core signalling. Which function is meant for that?",
+      "q_vi": "Nhà mạng muốn ứng dụng bên thứ ba nhận được sự kiện vị trí mà không lộ báo hiệu lõi bên trong. Hàm nào dành cho việc đó?",
+      "choices": [
+        "The session management function",
+        "The exposure function, which mediates external subscriptions and requests through a controlled interface",
+        "The unified data repository",
+        "The access and mobility management function"
+      ],
+      "answer": 1,
+      "why": "Exposure exists precisely so that outside parties never speak the internal protocols. It translates a narrow set of events and requests, and it is also the point where authorisation and rate limits for the external party are applied.",
+      "why_vi": "Hàm mở giao diện sinh ra đúng để bên ngoài không bao giờ phải nói giao thức nội bộ. Nó dịch một tập sự kiện và yêu cầu hẹp, và cũng là chỗ áp phân quyền cùng giới hạn tần suất cho bên ngoài.",
+      "level": 2
+    },
+    {
+      "id": "qw-119",
+      "q": "A one degree half power beamwidth is specified for a millimetre wave array. What operational cost follows most directly?",
+      "q_vi": "Một dàn ăng ten sóng milimet được đặt yêu cầu độ rộng chùm nửa công suất một độ. Cái giá vận hành trực tiếp nhất là gì?",
+      "choices": [
+        "The amplifier has to be backed off much further",
+        "The cyclic prefix has to be lengthened",
+        "Pointing and tracking turn critical, because a small angular error now costs several decibels of gain",
+        "The subcarrier spacing has to be reduced"
+      ],
+      "answer": 2,
+      "why": "Beamwidth and pointing tolerance are the same number seen from two sides. A one degree beam means that a mechanical sway or a stale beam decision of the same order throws away most of the array gain.",
+      "why_vi": "Độ rộng chùm và dung sai chỉ hướng là một con số nhìn từ hai phía. Chùm một độ nghĩa là chỉ cần rung cơ khí hoặc quyết định chùm cũ lệch cùng cỡ đó là mất gần hết độ lợi của dàn.",
+      "level": 2
+    },
+    {
+      "id": "qw-120",
+      "q": "Why can a very large aperture array leave its users inside the near field?",
+      "q_vi": "Vì sao dàn ăng ten khẩu độ rất lớn có thể khiến người dùng nằm trong vùng trường gần?",
+      "choices": [
+        "Because array gain grows without any bound",
+        "Because mutual coupling forces wider element spacing",
+        "Because the carrier wavelength grows with aperture",
+        "Because the far field boundary grows with the square of aperture size and can exceed the cell radius"
+      ],
+      "answer": 3,
+      "why": "The distance at which a wavefront may be treated as planar scales with aperture squared over wavelength. Once the array is metres wide at a short wavelength, that boundary lands inside the served area and the planar assumption is simply wrong.",
+      "why_vi": "Khoảng cách mà từ đó coi mặt sóng là phẳng tỉ lệ với bình phương khẩu độ chia bước sóng. Khi dàn rộng vài mét ở bước sóng ngắn, ranh giới đó rơi vào bên trong vùng phục vụ và giả thiết sóng phẳng đơn giản là sai.",
+      "level": 3
+    },
+    {
+      "id": "qw-121",
+      "q": "What separates coordinated scheduling from joint transmission in multipoint coordination?",
+      "q_vi": "Điều gì phân biệt lập lịch phối hợp với truyền chung trong phối hợp nhiều điểm?",
+      "choices": [
+        "Joint transmission needs phase and timing aligned sites, while coordinated scheduling only needs agreement on who transmits where",
+        "Coordinated scheduling requires every participating site to be joined by a dedicated fibre pair with fixed and identical propagation delay",
+        "Joint transmission works only in time division duplex",
+        "Coordinated scheduling needs no transport network at all"
+      ],
+      "answer": 0,
+      "why": "Both share information, but only one shares a waveform. Serving a device from two sites coherently means the two signals must add in phase at the antenna, a requirement that scheduling coordination never imposes.",
+      "why_vi": "Cả hai đều chia sẻ thông tin, nhưng chỉ một bên chia sẻ dạng sóng. Phục vụ một thiết bị từ hai trạm một cách kết hợp nghĩa là hai tín hiệu phải cộng đúng pha tại ăng ten, yêu cầu mà lập lịch phối hợp không hề đặt ra.",
+      "level": 3
+    },
+    {
+      "id": "qw-122",
+      "q": "A muting pattern is switched on in a heterogeneous network so that small cell edge users survive. What is the cost?",
+      "q_vi": "Người ta bật mẫu tắt phát trong mạng không đồng nhất để cứu người dùng ở biên ô nhỏ. Cái giá phải trả là gì?",
+      "choices": [
+        "The small cell must drop its transmit power below the level its licence class allows in that band",
+        "The macro cell gives up capacity during the muted subframes it is no longer allowed to use",
+        "Devices lose synchronisation entirely",
+        "The core network needs one more anchor"
+      ],
+      "answer": 1,
+      "why": "Muting is a transfer, not a creation. Whatever protection the small cell edge gains comes out of macro transmission opportunities, so the pattern has to be sized against the actual number of users it rescues.",
+      "why_vi": "Tắt phát là một phép chuyển giao chứ không tạo thêm gì. Phần bảo vệ mà biên ô nhỏ nhận được lấy từ cơ hội phát của ô lớn, nên mẫu tắt phải được cân theo đúng số người dùng mà nó cứu.",
+      "level": 2
+    },
+    {
+      "id": "qw-123",
+      "q": "Why does an adjacent channel leakage requirement effectively cap amplifier efficiency?",
+      "q_vi": "Vì sao yêu cầu về rò công suất sang kênh kề trên thực tế chặn trần hiệu suất bộ khuếch đại?",
+      "choices": [
+        "Because the regulator measures leakage in a bandwidth wider than the assigned channel, so part of the wanted signal is counted as leakage",
+        "Because leakage comes from thermal noise in the driver stage",
+        "Because meeting the leakage limit forces the amplifier to work well below saturation",
+        "Because guard bands themselves consume transmit power"
+      ],
+      "answer": 2,
+      "why": "Leakage into the neighbour is spectral regrowth produced by nonlinearity near saturation. The only reliable way to suppress it is to leave headroom, and an amplifier is least efficient exactly where that headroom is largest.",
+      "why_vi": "Rò sang kênh bên cạnh là phần phổ mọc thêm do phi tuyến khi gần bão hoà. Cách duy nhất chắc chắn để dập nó là chừa dự phòng, mà bộ khuếch đại lại kém hiệu suất nhất đúng ở chỗ dự phòng nhiều nhất.",
+      "level": 3
+    },
+    {
+      "id": "qw-124",
+      "q": "What does a wake-up signal save compared with plain paging reception?",
+      "q_vi": "Tín hiệu đánh thức tiết kiệm được gì so với việc nhận nhắn gọi theo cách thông thường?",
+      "choices": [
+        "It removes any need for the device to keep timing alignment with the serving cell while it is idle",
+        "It allows the device to transmit data without waiting for a grant",
+        "It shortens the random access procedure",
+        "It lets the device decode a short indication instead of the whole control channel"
+      ],
+      "answer": 3,
+      "why": "Most idle energy goes into waking the receiver and decoding a control channel that usually carries nothing for this device. A tiny indication answers the same question at a fraction of the receive time.",
+      "why_vi": "Phần lớn năng lượng lúc rỗi dùng để đánh thức máy thu và giải mã một kênh điều khiển mà thường chẳng có gì cho chính thiết bị đó. Một chỉ báo rất nhỏ trả lời cùng câu hỏi với thời gian thu ít hơn nhiều.",
+      "level": 2
+    },
+    {
+      "id": "qw-125",
+      "q": "Why does a spatially inconsistent channel model invalidate a mobility study?",
+      "q_vi": "Vì sao mô hình kênh thiếu nhất quán theo không gian làm hỏng một nghiên cứu về di động?",
+      "choices": [
+        "Because a moving user then draws an independent channel at every step instead of a smoothly evolving one",
+        "Because the model reports an average path loss systematically lower than the value measured in the real deployment scenario",
+        "Because handover margins are defined in the standard only for models that carry explicit angular clusters and polarisation",
+        "Because Doppler becomes undefined"
+      ],
+      "answer": 0,
+      "why": "Handover, beam tracking and prediction all live on the correlation between successive positions. If consecutive samples are independent, any algorithm that exploits continuity is being tested against a world that does not exist.",
+      "why_vi": "Chuyển giao, bám chùm và dự đoán đều sống nhờ tương quan giữa các vị trí liên tiếp. Nếu các mẫu kế tiếp độc lập nhau thì mọi thuật toán khai thác tính liên tục đang bị thử trên một thế giới không tồn tại.",
+      "level": 3
+    },
+    {
+      "id": "qw-126",
+      "q": "Radio measurements collected from ordinary handsets instead of a survey vehicle carry which characteristic bias?",
+      "q_vi": "Số đo vô tuyến thu từ máy người dùng thay vì từ xe đo mang thiên lệch đặc trưng nào?",
+      "choices": [
+        "They overstate uplink power because handsets always transmit at the maximum permitted level whatever the path loss",
+        "They only cover the places where subscribers actually go, leaving quiet areas unmeasured",
+        "They cannot be time stamped, so no trend across the day can be recovered from them",
+        "They exclude the downlink entirely"
+      ],
+      "answer": 1,
+      "why": "The sampling follows human traffic, not the coverage map. A street with poor coverage and few users produces few reports, so the very places that need attention look statistically fine.",
+      "why_vi": "Việc lấy mẫu bám theo dòng người chứ không bám bản đồ phủ sóng. Con phố phủ kém và ít người dùng sẽ sinh ra rất ít bản tin, nên đúng những nơi cần chú ý lại trông có vẻ ổn về mặt thống kê.",
+      "level": 2
+    },
+    {
+      "id": "qw-127",
+      "q": "Why is channel estimation unusually expensive when a passive reflecting surface is in the path?",
+      "q_vi": "Vì sao ước lượng kênh trở nên tốn kém bất thường khi có bề mặt phản xạ thụ động trên đường truyền?",
+      "choices": [
+        "Because the surface must be resynchronised to the base station clock before every transmission opportunity in the frame",
+        "Because the surface adds a Doppler shift that changes with the phase configuration of each element",
+        "Because it sends no pilots of its own, so both hops must be estimated as a single product",
+        "Because it requires full duplex operation"
+      ],
+      "answer": 2,
+      "why": "A passive surface has no transmitter, so no pilot can mark the boundary between the two hops. The estimator therefore works on a cascaded quantity whose dimension grows with the number of elements.",
+      "why_vi": "Bề mặt thụ động không có máy phát nên không tín hiệu dẫn đường nào đánh dấu được ranh giới giữa hai chặng. Vì thế bộ ước lượng phải làm việc với đại lượng ghép tầng, mà số chiều của nó tăng theo số phần tử.",
+      "level": 3
+    },
+    {
+      "id": "qw-128",
+      "q": "What is the practical loss from restricting every phase shifter to a single bit?",
+      "q_vi": "Giới hạn mỗi bộ dịch pha xuống còn một bit gây thiệt hại thực tế gì?",
+      "choices": [
+        "The array can no longer steer away from the broadside direction of the panel under any configuration",
+        "The array loses the ability to place nulls and keeps a sidelobe pattern fixed by element spacing alone",
+        "Nothing measurable",
+        "A few decibels of beamforming gain, most of which a second bit recovers"
+      ],
+      "answer": 3,
+      "why": "Coarse phase states leave a residual misalignment between element contributions, which shows up as a modest loss of coherent gain and higher sidelobes. Steering still works, it is simply less clean.",
+      "why_vi": "Trạng thái pha thô để lại phần lệch dư giữa đóng góp của các phần tử, biểu hiện thành mất một ít độ lợi kết hợp và búp phụ cao hơn. Việc lái chùm vẫn chạy, chỉ là kém sạch hơn.",
+      "level": 2
+    },
+    {
+      "id": "qw-129",
+      "q": "Which mechanism inspects destination addresses inside an established session and diverts only selected traffic to a local anchor?",
+      "q_vi": "Cơ chế nào xét địa chỉ đích ngay bên trong một phiên đang chạy và chỉ rẽ phần lưu lượng chọn lọc sang điểm neo cục bộ?",
+      "choices": [
+        "An uplink classifier",
+        "A dedicated bandwidth part configured for the enterprise slice",
+        "A policy rule lowering the priority of traffic to the central gateway",
+        "A second registration on another mobility management function"
+      ],
+      "answer": 0,
+      "why": "The classifier is a user plane element inserted on the existing path, so the device keeps one session and one address while part of its traffic never reaches the central anchor.",
+      "why_vi": "Bộ phân loại là phần tử mặt phẳng người dùng chèn vào đường đang có, nhờ đó thiết bị vẫn giữ một phiên và một địa chỉ trong khi một phần lưu lượng không bao giờ tới điểm neo trung tâm.",
+      "level": 2
+    },
+    {
+      "id": "qw-130",
+      "q": "What is the defining property of a lean carrier?",
+      "q_vi": "Đặc tính định danh của một sóng mang tinh gọn là gì?",
+      "choices": [
+        "A channel bandwidth narrower than the licence permits in the band",
+        "Very few always on transmissions",
+        "A reduced number of antenna ports at the radio unit of the cell",
+        "A shorter cyclic prefix chosen to raise the useful symbol duration"
+      ],
+      "answer": 1,
+      "why": "The design goal is silence when there is nothing to send. Everything a cell must radiate regardless of load sets the floor for both energy consumption and the interference the cell pours on its neighbours.",
+      "why_vi": "Mục tiêu thiết kế là im lặng khi không có gì để gửi. Mọi thứ ô buộc phải bức xạ bất kể tải đều đặt ra mức sàn cho cả điện năng tiêu thụ lẫn lượng nhiễu mà ô đổ sang láng giềng.",
+      "level": 2
+    },
+    {
+      "id": "qw-131",
+      "q": "Which measurement exposes a transmitter impairment that a noise figure reading would completely miss?",
+      "q_vi": "Phép đo nào phơi ra khiếm khuyết của máy phát mà số đo hệ số tạp âm hoàn toàn bỏ sót?",
+      "choices": [
+        "Reference signal received power averaged over the measurement window",
+        "Block error rate reported by the outer loop of link adaptation",
+        "Error vector magnitude",
+        "Received signal strength across the configured carrier bandwidth"
+      ],
+      "answer": 2,
+      "why": "Noise figure describes a receiver. Distortion inside the transmitter shows up as a systematic offset of constellation points, which only a measurement referenced to the ideal constellation can reveal.",
+      "why_vi": "Hệ số tạp âm mô tả máy thu. Méo bên trong máy phát biểu hiện thành độ lệch có hệ thống của các điểm chòm sao, và chỉ phép đo lấy chòm sao lý tưởng làm chuẩn mới lộ ra được.",
+      "level": 2
+    },
+    {
+      "id": "qw-132",
+      "q": "Which registry lets core functions discover one another without any static configuration?",
+      "q_vi": "Sổ đăng ký nào giúp các hàm mạng lõi tìm ra nhau mà không cần cấu hình tĩnh?",
+      "choices": [
+        "The unified data management function of the home network",
+        "The policy control function serving the current session",
+        "The access and mobility management function of the visited network",
+        "The repository function"
+      ],
+      "answer": 3,
+      "why": "In a service based core, a function publishes its profile on start up and queries the same registry to find a producer. Removing that step would push every deployment back to hand written peer lists.",
+      "why_vi": "Trong lõi kiểu dịch vụ, một hàm công bố hồ sơ của mình lúc khởi động và cũng tra chính sổ đó để tìm bên cung cấp. Bỏ bước này thì mọi triển khai lại quay về danh sách láng giềng viết tay.",
+      "level": 2
+    },
+    {
+      "id": "qw-133",
+      "q": "Why does hard slice isolation cost more on the radio interface than soft isolation?",
+      "q_vi": "Vì sao cách ly cứng giữa các lát tốn kém hơn cách ly mềm trên giao diện vô tuyến?",
+      "choices": [
+        "Because dedicated resource blocks stay reserved even while the slice that owns them has nothing to send",
+        "Because isolated slices each require a separate subscriber database",
+        "Because hard isolation forbids the use of carrier aggregation",
+        "Because every isolated slice needs its own core identity"
+      ],
+      "answer": 0,
+      "why": "Soft isolation lets an idle slice lend capacity to a busy one and only guarantees a share on average. Reserving spectrum outright removes that statistical gain, and the unused reservation is a direct loss of cell capacity.",
+      "why_vi": "Cách ly mềm cho lát đang rỗi nhường dung lượng cho lát đang bận và chỉ bảo đảm phần chia theo trung bình. Đặt riêng hẳn phổ sẽ xoá mất phần lợi thống kê đó, và phần đặt trước không dùng là mất trắng dung lượng của ô.",
+      "level": 3
+    },
+    {
+      "id": "qw-134",
+      "q": "An enterprise and an operator keep disagreeing about what a slice must deliver. Which artefact is meant to settle that?",
+      "q_vi": "Doanh nghiệp và nhà mạng cứ tranh cãi về việc lát mạng phải đạt được gì. Tài liệu nào sinh ra để giải quyết chuyện đó?",
+      "choices": [
+        "The subscription profile held in the home network",
+        "A standard template listing the attributes a slice must meet, such as guaranteed rate, latency and availability",
+        "The physical cell identity plan of the serving area",
+        "The service model supported by the radio node"
+      ],
+      "answer": 1,
+      "why": "Without an agreed attribute list the two sides negotiate different quantities and both believe they are right. The template fixes what is being promised before anyone can price it.",
+      "why_vi": "Không có danh mục thuộc tính thống nhất thì hai bên đang thương lượng hai đại lượng khác nhau mà bên nào cũng tin mình đúng. Mẫu mô tả cố định lại điều được cam kết trước khi ai đó ra giá.",
+      "level": 2
+    },
+    {
+      "id": "qw-135",
+      "q": "Why does a fixed grid of beams lose gain compared with weights computed from the instantaneous channel?",
+      "q_vi": "Vì sao lưới chùm cố định mất độ lợi so với trọng số tính từ kênh tức thời?",
+      "choices": [
+        "Because fixed beams cannot be transmitted at full power",
+        "Because the grid must be recomputed in every slot",
+        "Because a user sitting between two fixed beam directions is served by neither one at the peak of its pattern",
+        "Because fixed beams occupy a wider bandwidth"
+      ],
+      "answer": 2,
+      "why": "A finite grid quantises direction. The worst case sits at the crossover between adjacent beams, and that crossover loss is exactly what a channel matched weight vector avoids.",
+      "why_vi": "Lưới hữu hạn là phép lượng tử hoá theo hướng. Trường hợp xấu nhất nằm ở điểm giao giữa hai chùm kề nhau, và mất mát tại điểm giao đó chính là thứ mà vectơ trọng số khớp kênh tránh được.",
+      "level": 3
+    },
+    {
+      "id": "qw-136",
+      "q": "In a non-standalone deployment, which element still anchors the control plane?",
+      "q_vi": "Trong triển khai không độc lập, phần tử nào vẫn đang neo mặt phẳng điều khiển?",
+      "choices": [
+        "The new radio cell of the same site",
+        "The user plane function of the new core",
+        "The exposure function at the network edge",
+        "The long term evolution cell, which keeps the control anchor while the new radio carries user data"
+      ],
+      "answer": 3,
+      "why": "This is why such a deployment cannot offer core features that depend on the newer signalling, and why coverage of the older layer still dictates where the newer radio can be used at all.",
+      "why_vi": "Đó là lý do kiểu triển khai này không cung cấp được các tính năng lõi phụ thuộc báo hiệu mới, và cũng là lý do vùng phủ của lớp cũ vẫn quyết định chỗ nào dùng được sóng vô tuyến mới.",
+      "level": 2
+    },
+    {
+      "id": "qw-137",
+      "q": "Why is a packet based fronthaul protocol attractive for a site with a very large antenna array?",
+      "q_vi": "Vì sao giao thức fronthaul dựa trên gói hấp dẫn với trạm có dàn ăng ten rất lớn?",
+      "choices": [
+        "Because the carried rate follows traffic and occupied bandwidth rather than antenna count alone",
+        "Because it removes the need for phase synchronisation between the radio unit and the distributed unit, which simplifies deployment a great deal",
+        "Because the radio unit can then run without any power amplifier",
+        "Because it doubles the available spectrum"
+      ],
+      "answer": 0,
+      "why": "A constant rate serial link scales with sampling rate times antenna port count, so an array of a hundred elements demands the same transport whether the cell is empty or full. A packet link only carries what is actually being sent.",
+      "why_vi": "Đường nối tiếp tốc độ cố định tăng theo tần số lấy mẫu nhân số cổng ăng ten, nên dàn trăm phần tử đòi cùng một mức truyền dẫn dù ô rỗng hay đầy. Đường gói chỉ chở đúng phần đang thực sự gửi.",
+      "level": 3
+    },
+    {
+      "id": "qw-138",
+      "q": "Which task belongs on the slow management layer controller rather than on the fast radio controller?",
+      "q_vi": "Nhiệm vụ nào thuộc về bộ điều khiển chậm ở lớp quản lý chứ không thuộc bộ điều khiển vô tuyến nhanh?",
+      "choices": [
+        "Deciding within a single scheduling interval which resource blocks each connected device receives on the downlink",
+        "Training a traffic prediction model and issuing the resulting policy",
+        "Adjusting the handover offset for one device",
+        "Recovering from a beam failure"
+      ],
+      "answer": 1,
+      "why": "The split is set by the timescale the decision needs. Model training runs on hours of history and produces a policy, while anything that must react inside a slot cannot wait for a management layer round trip.",
+      "why_vi": "Ranh giới do thang thời gian mà quyết định cần quyết định. Huấn luyện mô hình chạy trên hàng giờ dữ liệu quá khứ rồi sinh ra chính sách, còn thứ gì phải phản ứng trong một khe thì không thể chờ một vòng lên lớp quản lý.",
+      "level": 2
+    },
+    {
+      "id": "qw-139",
+      "q": "What does a quality of service flow identifier actually bind together?",
+      "q_vi": "Chỉ số luồng chất lượng dịch vụ thực chất ràng buộc những gì với nhau?",
+      "choices": [
+        "A subscriber to the specific user plane function that will anchor every session that subscriber ever establishes",
+        "A device to one physical cell identity",
+        "A set of packets to a delay budget, an error rate target and a scheduling priority",
+        "A slice to one frequency band"
+      ],
+      "answer": 2,
+      "why": "The identifier is an index into an agreed table of treatment parameters. It is what allows a radio scheduler in a visited network to serve traffic correctly without knowing anything about the application behind it.",
+      "why_vi": "Chỉ số này là con trỏ vào bảng tham số đối xử đã thống nhất. Nhờ nó, bộ lập lịch vô tuyến ở mạng khách phục vụ đúng lưu lượng mà không cần biết gì về ứng dụng đứng sau.",
+      "level": 2
+    },
+    {
+      "id": "qw-140",
+      "q": "Why does fractional frequency reuse help users at the cell edge?",
+      "q_vi": "Vì sao tái sử dụng tần số phân đoạn giúp được người dùng ở biên ô?",
+      "choices": [
+        "Because the cell edge is served by a separate carrier whose transmit power is raised above the licence limit for the band",
+        "Because it raises the modulation order used at the edge",
+        "Because it shortens the handover margin",
+        "Because edge users receive sub-bands that neighbouring cells do not reuse at high power"
+      ],
+      "answer": 3,
+      "why": "Edge quality is limited by interference rather than by noise. Giving the edge an orthogonal slice of spectrum removes the dominant interferer, and the price is that centre users no longer see the whole band at full power.",
+      "why_vi": "Chất lượng vùng biên bị giới hạn bởi nhiễu chứ không phải tạp âm. Cấp cho vùng biên một mảnh phổ trực giao sẽ loại được nguồn nhiễu trội, cái giá là người dùng vùng giữa không còn dùng cả dải ở công suất đầy.",
+      "level": 2
+    },
+    {
+      "id": "qw-141",
+      "q": "What does a controller application need before it can act on a given radio node at all?",
+      "q_vi": "Ứng dụng trên bộ điều khiển cần gì trước khi có thể tác động lên một nút vô tuyến cụ thể?",
+      "choices": [
+        "A service model that both the node and the application implement",
+        "A dedicated optical fibre from the controller to each radio node, provisioned separately from the fronthaul network of the site",
+        "A policy issued by the management layer controller for every individual device the application intends to influence",
+        "A fresh physical cell identity"
+      ],
+      "answer": 0,
+      "why": "The interface itself defines only transport and procedures. What may be read and what may be commanded is described by the service model, so a node that lacks the model is unreachable in practice even when the link is healthy.",
+      "why_vi": "Bản thân giao diện chỉ định nghĩa cách truyền và các thủ tục. Cái gì đọc được và cái gì ra lệnh được là do mô hình dịch vụ mô tả, nên nút thiếu mô hình thì trên thực tế không với tới được dù đường nối vẫn tốt.",
+      "level": 3
+    },
+    {
+      "id": "qw-142",
+      "q": "Which observation would justify raising the density of the downlink channel state reference signal?",
+      "q_vi": "Quan sát nào đủ lý do để tăng mật độ tín hiệu tham chiếu trạng thái kênh đường xuống?",
+      "choices": [
+        "The control channel block error rate exceeds its target although the reported channel quality has stayed stable over a long period",
+        "Reported channel quality lags the true channel because users are moving quickly",
+        "The uplink sounding signal collides with the random access preamble whenever many devices connect at once",
+        "The cell is very lightly loaded"
+      ],
+      "answer": 1,
+      "why": "Denser pilots buy fresher and more accurate reports, and the gain only exists when staleness is the binding problem. On a slow channel the extra pilots consume resources and return almost nothing.",
+      "why_vi": "Tín hiệu dẫn đường dày hơn mua được báo cáo mới hơn và chính xác hơn, và phần lợi chỉ có khi cái ràng buộc đúng là độ cũ của báo cáo. Trên kênh biến đổi chậm, phần dẫn đường thêm chỉ ăn tài nguyên mà gần như không trả lại gì.",
+      "level": 3
+    },
+    {
+      "id": "qw-143",
+      "q": "Why does deeper amplifier back-off hurt an operator twice over?",
+      "q_vi": "Vì sao lùi công suất bộ khuếch đại sâu hơn lại gây thiệt hại hai lần cho nhà mạng?",
+      "choices": [
+        "It forces the scheduler to allocate a wider bandwidth part to every connected device in order to preserve the same delivered rate",
+        "It shortens the coherence time of the channel because the transmitted waveform becomes narrower in frequency",
+        "It lowers efficiency and it lowers the power actually delivered towards the cell edge",
+        "It raises the receiver noise figure"
+      ],
+      "answer": 2,
+      "why": "The same headroom that keeps the spectrum clean is power the amplifier burns without radiating and power that never reaches the edge user. Coverage and the electricity bill move against the operator together.",
+      "why_vi": "Chính phần dự phòng giữ cho phổ sạch lại vừa là công suất bộ khuếch đại đốt mà không bức xạ, vừa là công suất không bao giờ tới được người dùng ở biên. Vùng phủ và tiền điện cùng lúc quay lưng với nhà mạng.",
+      "level": 3
+    },
+    {
+      "id": "qw-144",
+      "q": "A ray tracing prediction disagrees with a drive test by more than ten decibels. What should be checked first?",
+      "q_vi": "Kết quả dò tia lệch với đo thực địa hơn mười đêxiben. Cần kiểm tra điều gì trước tiên?",
+      "choices": [
+        "Whether the tracing engine represents diffraction at all, since every shadowed location would otherwise need a statistical model",
+        "Whether the measurement receiver reported power in a bandwidth different from the one the simulation assumed for each path",
+        "Whether the carrier frequency is too low",
+        "Whether the building and material database matches what is actually on the ground"
+      ],
+      "answer": 3,
+      "why": "A deterministic method can only be as good as its geometry. A missing building, a wrong material or a stale map moves entire paths, and no amount of tuning inside the solver repairs an input that does not match reality.",
+      "why_vi": "Phương pháp tất định chỉ tốt ngang với hình học đầu vào của nó. Một toà nhà bị thiếu, vật liệu sai hay bản đồ cũ sẽ dời hẳn cả đường truyền, và không có tinh chỉnh nào bên trong bộ giải sửa được đầu vào lệch thực tế.",
+      "level": 3
+    },
+    {
+      "id": "qw-145",
+      "q": "Which quantity collapses towards zero when a lorry blocks the direct path?",
+      "q_vi": "Đại lượng nào tụt về gần không khi một chiếc xe tải chắn mất đường truyền thẳng?",
+      "choices": [
+        "The Rician K factor",
+        "The root mean square delay spread of the received power profile",
+        "The coherence bandwidth measured over the occupied channel",
+        "The noise figure of the receiver front end in the handset"
+      ],
+      "answer": 0,
+      "why": "That factor is the ratio between the dominant component and everything scattered. Remove the dominant component and the ratio falls, which is also the moment the fading statistics turn from mild to severe.",
+      "why_vi": "Hệ số đó là tỉ số giữa thành phần trội và toàn bộ phần tán xạ. Bỏ thành phần trội đi thì tỉ số giảm, và đó cũng là lúc thống kê pha đinh chuyển từ nhẹ sang nặng.",
+      "level": 2
+    },
+    {
+      "id": "qw-146",
+      "q": "Which identity does the network deliberately refresh in order to break linkability over the air?",
+      "q_vi": "Mạng chủ động đổi mới định danh nào để phá khả năng liên kết các phiên trên sóng?",
+      "choices": [
+        "The international mobile equipment identity of the handset",
+        "The temporary subscriber identity",
+        "The physical cell identity of the serving radio node",
+        "The permanent subscription identifier held in the module"
+      ],
+      "answer": 1,
+      "why": "A concealed permanent identity protects the first message only. If the temporary value that follows is kept for a long time, an observer can still stitch a device history together from it.",
+      "why_vi": "Định danh cố định được che chỉ bảo vệ bản tin đầu tiên. Nếu giá trị tạm thời đi sau bị giữ nguyên quá lâu, người quan sát vẫn ghép lại được lịch sử của một thiết bị từ chính nó.",
+      "level": 2
+    },
+    {
+      "id": "qw-147",
+      "q": "Which decision does slice admission control actually make?",
+      "q_vi": "Điều khiển kết nạp lát mạng thực sự ra quyết định gì?",
+      "choices": [
+        "Which modulation order the scheduler will apply to the slice",
+        "Which user plane function will anchor local edge traffic",
+        "Whether to accept one more session",
+        "How many antenna ports the radio unit exposes to the slice"
+      ],
+      "answer": 2,
+      "why": "Admission is a gate placed before the resource problem, not inside it. Once a session is accepted the scheduler has to serve it somehow, so the only clean moment to protect existing commitments is at the door.",
+      "why_vi": "Kết nạp là cái cổng đặt trước bài toán tài nguyên chứ không nằm bên trong nó. Khi một phiên đã được nhận thì bộ lập lịch buộc phải phục vụ bằng cách nào đó, nên thời điểm sạch sẽ duy nhất để bảo vệ cam kết cũ là ngay ở cửa.",
+      "level": 2
+    },
+    {
+      "id": "qw-148",
+      "q": "Which interface carries declarative policy from the management layer down to the fast radio controller?",
+      "q_vi": "Giao diện nào mang chính sách khai báo từ lớp quản lý xuống bộ điều khiển vô tuyến nhanh?",
+      "choices": [
+        "The management interface used for configuration and fault reporting",
+        "The interface between the controller and the radio nodes",
+        "The interface between the distributed unit and the radio unit",
+        "The policy interface"
+      ],
+      "answer": 3,
+      "why": "Policy travels as intent, not as commands. The management channel handles configuration and faults, and the controller to node link carries subscriptions and control, so neither of those is where intent belongs.",
+      "why_vi": "Chính sách đi xuống dưới dạng ý định chứ không phải lệnh. Kênh quản lý lo cấu hình và báo lỗi, còn đường từ bộ điều khiển tới nút lo đăng ký và điều khiển, nên ý định không thuộc về hai kênh đó.",
       "level": 2
     }
   ]

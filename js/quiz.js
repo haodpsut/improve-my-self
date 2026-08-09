@@ -71,9 +71,45 @@ const TEMPLATES = [
   }
 ];
 
+/**
+ * Nhung mat truoc va nhung nghia xuat hien o HAI the tro len voi noi dung khac
+ * nhau. Vai thuat ngu nam o nhieu bo la co chu y, vi du prompt injection vua
+ * thuoc AI vua thuoc an ninh, moi bo nhin mot goc. Nhung khi tron ca kho de ra
+ * de thi chung sinh ra cau KHONG CO dap an dung duy nhat:
+ *
+ *   "prompt injection nghia tieng Viet la gi?"
+ *   A. tiem nhiem loi nhac   B. chen chi thi doc vao dau vao
+ *
+ * Ca hai deu dung, nhung chi mot cai duoc cham. Nen phai bo dung nhung mau cau
+ * bi nhap nhang do, chu khong phai bo the.
+ */
+function ambiguous(pool, field) {
+  const thay = new Map();
+  for (const c of pool) {
+    const k = String(c[field] || '').trim().toLowerCase();
+    if (!k) continue;
+    if (!thay.has(k)) thay.set(k, new Set());
+    thay.get(k).add(String(c[field === 'head' ? 'gloss' : 'head'] || '').trim().toLowerCase());
+  }
+  const out = new Set();
+  for (const [k, v] of thay) if (v.size > 1) out.add(k);
+  return out;
+}
+
 /** Sinh mot cau hoi tu vung tu the da cho. Tra ve null neu the thieu du lieu. */
-export function questionFromCard(card, pool) {
-  const usable = TEMPLATES.filter((t) => t.need(card));
+export function questionFromCard(card, pool, mo = null) {
+  const nhapNhang = mo || { head: ambiguous(pool, 'head'), gloss: ambiguous(pool, 'gloss') };
+  const headMo = nhapNhang.head.has(String(card.head || '').trim().toLowerCase());
+  const glossMo = nhapNhang.gloss.has(String(card.gloss || '').trim().toLowerCase());
+
+  const usable = TEMPLATES.filter((t) => {
+    if (!t.need(card)) return false;
+    // head2gloss hoi tu mat truoc ra nghia, nen hong khi mat truoc nhap nhang.
+    if (t.id === 'head2gloss' && headMo) return false;
+    // gloss2head hoi nguoc lai, nen hong khi nghia nhap nhang.
+    if (t.id === 'gloss2head' && glossMo) return false;
+    return true;
+  });
   if (!usable.length) return null;
   const tpl = usable[Math.floor(Math.random() * usable.length)];
   const distractors = pickDistractors(card, pool, tpl.field, 3);
@@ -104,10 +140,14 @@ export function buildQuizSet({ cards, authored, size = 12, mix = 0.5 }) {
   const handCount = Math.min(authored.length, Math.round(size * mix));
   const hand = shuffle(authored).slice(0, handCount);
 
+  // Tinh mot lan cho ca luot, khong tinh lai o tung the: kho co hon ba nghin the
+  // nen quet lai moi lan se cham thay ro tren dien thoai.
+  const mo = { head: ambiguous(cards, 'head'), gloss: ambiguous(cards, 'gloss') };
+
   const generated = [];
   for (const card of shuffle(cards)) {
     if (hand.length + generated.length >= size) break;
-    const q = questionFromCard(card, cards);
+    const q = questionFromCard(card, cards, mo);
     if (q) generated.push(q);
   }
   return shuffle([...hand, ...generated]);

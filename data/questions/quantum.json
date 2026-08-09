@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "quantum",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qq-1",
@@ -1532,6 +1532,786 @@
       "why": "Deployment cost is the deciding practical factor for most organisations. QKD gives a physics based guarantee on a link, but it still needs authentication and it does not route across the ordinary internet.",
       "why_vi": "Chi phí triển khai là yếu tố thực tế quyết định với phần lớn tổ chức. QKD cho một bảo đảm dựa trên vật lý trên từng tuyến, nhưng vẫn cần xác thực và không định tuyến được qua internet thông thường.",
       "level": 3
+    },
+    {
+      "id": "qq-103",
+      "q": "A paper titles its method quantum optimisation while the code is pure NumPy. The clearest reason this misleads is that",
+      "q_vi": "Một bài đặt tên phương pháp là tối ưu lượng tử trong khi mã nguồn thuần NumPy. Lý do rõ nhất khiến điều đó gây hiểu lầm là",
+      "choices": [
+        "it claims a physical resource the work never used, and it lets the paper skip the classical baseline that the method actually belongs to",
+        "NumPy is too slow for optimisation",
+        "quantum wording is banned by most journals",
+        "simulating a quantum state on a CPU is mathematically invalid"
+      ],
+      "answer": 0,
+      "why": "The name asserts hardware that was never touched. The practical damage is that the reader stops asking for a comparison against classical metaheuristics, which is the family the method really sits in.",
+      "why_vi": "Cái tên khẳng định một loại phần cứng chưa từng được dùng. Thiệt hại thực tế là người đọc thôi đòi so sánh với nhóm siêu heuristic cổ điển, đúng nhóm mà phương pháp này thuộc về.",
+      "level": 2
+    },
+    {
+      "id": "qq-104",
+      "q": "In a quantum-inspired evolutionary algorithm, what does one q-bit chromosome actually store?",
+      "q_vi": "Trong thuật toán tiến hoá lấy cảm hứng lượng tử, một nhiễm sắc thể giả lượng tử thực sự lưu gì?",
+      "choices": [
+        "A probability pair for each bit, so it represents a distribution over bit strings, not one solution",
+        "A physically entangled register of qubits that the algorithm keeps in memory and re observes every generation",
+        "The exact optimum found in the previous generation",
+        "A list of gates awaiting execution on hardware"
+      ],
+      "answer": 0,
+      "why": "Each pair of real numbers gives the chance that the bit reads as one. Observing the chromosome samples a concrete bit string, and the search proceeds by rotating those pairs toward better solutions.",
+      "why_vi": "Mỗi cặp số thực cho xác suất bit được đọc thành một. Quan sát nhiễm sắc thể sẽ lấy mẫu ra một chuỗi bit cụ thể, và việc tìm kiếm tiến hành bằng cách quay các cặp đó về phía lời giải tốt hơn.",
+      "level": 2
+    },
+    {
+      "id": "qq-105",
+      "q": "Quantum-behaved particle swarm optimisation differs from the standard swarm mainly because",
+      "q_vi": "Tối ưu bầy hạt kiểu lượng tử khác bầy hạt tiêu chuẩn chủ yếu ở chỗ",
+      "choices": [
+        "It evaluates the objective function on a superposition of all candidate solutions at once, which is where the speedup comes from",
+        "It must run on quantum hardware before the population can converge to a good solution",
+        "Particles are resampled from a distribution instead of being moved by a velocity",
+        "It guarantees the global optimum in polynomial time"
+      ],
+      "answer": 2,
+      "why": "Removing the velocity term and sampling from a heavy tailed distribution changes the exploration behaviour, but everything still runs as classical pseudo random arithmetic.",
+      "why_vi": "Bỏ thành phần vận tốc và lấy mẫu từ phân bố đuôi nặng làm đổi hành vi khám phá, nhưng tất cả vẫn chạy bằng số học giả ngẫu nhiên cổ điển.",
+      "level": 2
+    },
+    {
+      "id": "qq-106",
+      "q": "The Gottesman Knill theorem forces which conclusion about entanglement?",
+      "q_vi": "Định lý Gottesman Knill buộc ta kết luận gì về rối lượng tử?",
+      "choices": [
+        "Entanglement on its own is not sufficient for a speedup, since heavily entangled Clifford circuits are simulated classically in polynomial time",
+        "Entanglement cannot exist in circuits built from Clifford gates",
+        "Entanglement is destroyed by any measurement",
+        "Entanglement always implies exponential simulation cost"
+      ],
+      "answer": 0,
+      "why": "Clifford circuits generate large amounts of entanglement and are still tracked efficiently through the stabiliser formalism. Something beyond entanglement, such as magic, is needed for hardness.",
+      "why_vi": "Mạch Clifford sinh ra lượng rối rất lớn mà vẫn theo dõi hiệu quả được bằng hình thức luận nhóm ổn định. Muốn khó mô phỏng thì cần thứ khác ngoài rối, ví dụ tài nguyên magic.",
+      "level": 3
+    },
+    {
+      "id": "qq-107",
+      "q": "The BBBV lower bound tells us that for unstructured search",
+      "q_vi": "Chặn dưới BBBV cho biết rằng với tìm kiếm không cấu trúc",
+      "choices": [
+        "Quantum search becomes exponentially fast once the oracle is designed to expose the structure hidden in the data",
+        "No quantum algorithm beats a classical scan",
+        "The speedup depends only on hardware fidelity",
+        "The quadratic gain is the ceiling for any quantum algorithm, so Grover is not a starting point"
+      ],
+      "answer": 3,
+      "why": "The bound is proved against all quantum algorithms, not just Grover. So promising more than a square root improvement on a genuinely unstructured problem is promising something impossible.",
+      "why_vi": "Chặn này chứng minh cho mọi thuật toán lượng tử chứ không riêng Grover. Vì thế hứa hẹn hơn mức căn bậc hai trên bài toán thực sự không cấu trúc là hứa điều bất khả.",
+      "level": 3
+    },
+    {
+      "id": "qq-108",
+      "q": "Why can a speedup measured in oracle queries vanish when the algorithm is actually implemented?",
+      "q_vi": "Vì sao mức tăng tốc đo bằng số lần truy vấn hộp đen có thể biến mất khi thuật toán được cài đặt thật?",
+      "choices": [
+        "Queries are counted differently by different simulators, so the published figures are not comparable across papers",
+        "Oracle queries are always slower than ordinary gates on real hardware, which cancels the query advantage",
+        "The oracle has to be compiled into gates, and that cost can dominate the runtime",
+        "Real hardware cannot implement any oracle"
+      ],
+      "answer": 2,
+      "why": "The query model charges one unit for a black box that a real machine must build. Once the arithmetic inside the oracle is counted, the advantage over a well written classical routine often disappears.",
+      "why_vi": "Mô hình truy vấn tính một đơn vị cho hộp đen mà máy thật phải tự dựng lấy. Khi đếm cả phần số học bên trong hộp đen, lợi thế trước một thủ tục cổ điển viết tốt thường biến mất.",
+      "level": 3
+    },
+    {
+      "id": "qq-109",
+      "q": "Which statement about the class BQP is currently accurate?",
+      "q_vi": "Phát biểu nào về lớp BQP hiện đang chính xác?",
+      "choices": [
+        "It has been proven to contain every NP complete problem, which is why hard scheduling is expected to fall",
+        "It is not known to contain the NP complete problems, and most researchers expect that it does not",
+        "It is known to equal the class of efficiently classically solvable problems",
+        "It contains only problems with hidden algebraic structure"
+      ],
+      "answer": 1,
+      "why": "No proof places NP complete problems inside the efficiently quantum solvable class. Saying that quantum computers will crack every hard combinatorial problem contradicts the current state of knowledge.",
+      "why_vi": "Chưa có chứng minh nào đặt các bài toán NP đầy đủ vào lớp giải được hiệu quả bằng máy lượng tử. Nói máy lượng tử sẽ phá được mọi bài toán tổ hợp khó là trái với hiểu biết hiện nay.",
+      "level": 3
+    },
+    {
+      "id": "qq-110",
+      "q": "A classical algorithm reproduces the benchmark score of a sampling advantage experiment at lower cost. What follows?",
+      "q_vi": "Một thuật toán cổ điển tái tạo được điểm chuẩn của thí nghiệm lợi thế lấy mẫu với chi phí thấp hơn. Điều gì suy ra?",
+      "choices": [
+        "The quantum experiment must have been fabricated, since two methods cannot reach the same benchmark score",
+        "The benchmark score was computed with the wrong formula and the comparison has to be repeated",
+        "Nothing changes, since classical results do not apply",
+        "The advantage claim lapses, although the experiment was still performed as reported"
+      ],
+      "answer": 3,
+      "why": "Advantage is a comparison, so it can be retired by improving the classical side alone. The device still did what the paper says it did.",
+      "why_vi": "Lợi thế là một phép so sánh, nên chỉ cần bên cổ điển mạnh lên là nó hết hiệu lực. Thiết bị vẫn làm đúng điều bài báo mô tả.",
+      "level": 2
+    },
+    {
+      "id": "qq-111",
+      "q": "Quantum volume is designed to capture",
+      "q_vi": "Thể tích lượng tử được thiết kế để nắm bắt điều gì",
+      "choices": [
+        "the physical size of the dilution refrigerator",
+        "the number of shots a device can run in one job",
+        "qubit count together with connectivity, gate fidelity and compiler quality, through the largest random square circuit that still works",
+        "the total energy consumed per circuit layer"
+      ],
+      "answer": 2,
+      "why": "It is deliberately a composite. A machine with many qubits but poor connectivity or noisy gates scores no better than a smaller well connected one.",
+      "why_vi": "Nó cố ý là một chỉ số tổng hợp. Máy nhiều qubit nhưng liên kết kém hoặc cổng nhiễu sẽ không ghi điểm cao hơn máy nhỏ mà liên kết tốt.",
+      "level": 2
+    },
+    {
+      "id": "qq-112",
+      "q": "Two devices report the same qubit count and the same gate fidelity, yet a hybrid variational job finishes far sooner on one of them. The likely difference is",
+      "q_vi": "Hai thiết bị báo cùng số qubit và cùng độ trung thực cổng, nhưng một tác vụ biến phân lai lại xong sớm hơn hẳn trên một máy. Khác biệt nhiều khả năng nằm ở",
+      "choices": [
+        "The number of qubits that each machine reserves internally for calibration and for mitigation routines",
+        "The choice of programming language",
+        "Circuit layer throughput and the latency of each round trip between the optimiser and the device",
+        "The ambient temperature of the laboratory"
+      ],
+      "answer": 2,
+      "why": "A variational loop sends thousands of small jobs. Execution speed and the overhead of each submission decide wall clock time once fidelity is equal.",
+      "why_vi": "Vòng lặp biến phân gửi hàng nghìn tác vụ nhỏ. Khi độ trung thực đã bằng nhau thì tốc độ chạy và chi phí mỗi lần gửi quyết định thời gian thực tế.",
+      "level": 3
+    },
+    {
+      "id": "qq-113",
+      "q": "An algorithm has better asymptotic scaling but an enormous constant factor. The honest way to report it is to",
+      "q_vi": "Một thuật toán có độ tăng trưởng tiệm cận tốt hơn nhưng hệ số đứng trước rất lớn. Cách báo cáo trung thực là",
+      "choices": [
+        "Report the speedup as a ratio measured at the smallest instance size that both methods were able to run",
+        "Estimate the problem size where it overtakes the classical method",
+        "State the exponent only, since the constant factors are implementation details that will improve later",
+        "Omit the constant and cite the theoretical result"
+      ],
+      "answer": 1,
+      "why": "The crossover point turns an asymptotic statement into an engineering one. If the crossover sits beyond any instance anyone will ever run, the better exponent has no practical consequence.",
+      "why_vi": "Điểm giao cắt biến phát biểu tiệm cận thành phát biểu kỹ thuật. Nếu điểm giao cắt nằm ngoài mọi trường hợp ai đó thực sự chạy thì số mũ tốt hơn chẳng có hệ quả thực tế nào.",
+      "level": 3
+    },
+    {
+      "id": "qq-114",
+      "q": "End to end runtime accounting for a quantum job should include",
+      "q_vi": "Việc tính thời gian chạy trọn vòng cho một tác vụ lượng tử phải bao gồm",
+      "choices": [
+        "Compilation, calibration, queueing, all shots and the classical postprocessing that produces the final answer",
+        "Only the interval during which the qubits are actually manipulated, because every other stage is classical overhead",
+        "The shot time multiplied by the qubit count",
+        "The vendor quoted gate time alone"
+      ],
+      "answer": 0,
+      "why": "Users experience wall clock time from input to answer. Reporting only the interval when the processor is busy can hide overheads that are orders of magnitude larger.",
+      "why_vi": "Người dùng chịu thời gian thực tế tính từ đầu vào tới đáp án. Chỉ báo khoảng thời gian bộ xử lý bận có thể che mất phần chi phí lớn hơn nhiều bậc.",
+      "level": 2
+    },
+    {
+      "id": "qq-115",
+      "q": "Which sentence is the more defensible way to describe a useful result on a noisy device?",
+      "q_vi": "Câu nào là cách mô tả dễ bảo vệ hơn cho một kết quả hữu ích trên thiết bị nhiễu?",
+      "choices": [
+        "The device solved a problem no classical computer can ever solve",
+        "Quantum supremacy was achieved for this application domain",
+        "The hardware produced results of useful accuracy at this scale, without any claim of beating the best classical method",
+        "Classical computing is now obsolete for this class of problem"
+      ],
+      "answer": 2,
+      "why": "Utility is a statement about what was produced. Advantage is a comparison against the best known classical alternative, and it needs that alternative to be run and reported.",
+      "why_vi": "Tính hữu dụng là phát biểu về cái đã tạo ra được. Lợi thế là phép so với phương án cổ điển tốt nhất đã biết, và phải chạy rồi báo cáo phương án đó.",
+      "level": 2
+    },
+    {
+      "id": "qq-116",
+      "q": "Coherent errors are more damaging than stochastic errors of the same size because",
+      "q_vi": "Sai số kết hợp gây hại hơn sai số ngẫu nhiên cùng độ lớn vì",
+      "choices": [
+        "Quantum supremacy has been achieved for this application domain and classical baselines are no longer needed",
+        "The device solved a problem that no classical computer will ever be able to solve at this size",
+        "The hardware produced results of useful accuracy at this scale",
+        "Classical computing is obsolete here"
+      ],
+      "answer": 2,
+      "why": "A repeated systematic over rotation adds up in the same direction every layer. A random error partly cancels itself, so the worst case infidelity of a coherent error grows much faster with circuit depth.",
+      "why_vi": "Sai lệch quay có hệ thống lặp lại thì mỗi lớp đều cộng thêm cùng một hướng. Sai số ngẫu nhiên tự triệt tiêu một phần, nên độ mất trung thực xấu nhất do sai số kết hợp tăng nhanh hơn nhiều theo độ sâu mạch.",
+      "level": 3
+    },
+    {
+      "id": "qq-117",
+      "q": "Pauli twirling is applied in order to",
+      "q_vi": "Xoay ngẫu nhiên Pauli được áp dụng để",
+      "choices": [
+        "Convert coherent error into stochastic Pauli error, which decoders and mitigation both model correctly",
+        "Raise the gate fidelity of the underlying hardware by averaging away control pulse imperfections over many runs",
+        "Reduce the number of shots a circuit needs",
+        "Shorten the compiled circuit"
+      ],
+      "answer": 0,
+      "why": "The average error rate is not reduced and can even rise slightly. What improves is that the residual error now matches the simple model that decoders and mitigation assume.",
+      "why_vi": "Tỉ lệ lỗi trung bình không giảm, thậm chí có thể nhích lên. Cái được cải thiện là sai số còn lại nay khớp với mô hình đơn giản mà bộ giải mã và phép giảm nhẹ giả định.",
+      "level": 3
+    },
+    {
+      "id": "qq-118",
+      "q": "A single randomised benchmarking number is an incomplete picture of a device because",
+      "q_vi": "Một con số đo chuẩn ngẫu nhiên là bức tranh chưa đủ về thiết bị vì",
+      "choices": [
+        "It can only be measured on single qubit gates, so two qubit performance never enters the reported figure",
+        "It requires a fully error corrected device before the decay curve becomes meaningful at all",
+        "It averages over random sequences and hides which error type dominates",
+        "It is defined only for photonic platforms"
+      ],
+      "answer": 2,
+      "why": "The decay curve yields one average figure. Two devices with the same figure can behave very differently in a deep application circuit where correlated and non Pauli errors matter.",
+      "why_vi": "Đường suy giảm cho ra một con số trung bình duy nhất. Hai thiết bị cùng con số đó có thể hành xử rất khác nhau trong mạch ứng dụng sâu, nơi sai số tương quan và sai số phi Pauli mới là điều đáng kể.",
+      "level": 3
+    },
+    {
+      "id": "qq-119",
+      "q": "Compared with zero noise extrapolation, probabilistic error cancellation offers",
+      "q_vi": "So với ngoại suy nhiễu bằng không, khử sai số theo xác suất mang lại",
+      "choices": [
+        "Protection against errors occurring during the computation itself, in the same way that a code actively corrects them",
+        "A shorter compiled circuit",
+        "A lower shot count for the same accuracy",
+        "An unbiased estimate when the noise model is accurate, paid for with a sampling cost that grows exponentially"
+      ],
+      "answer": 3,
+      "why": "Extrapolation assumes a functional form and inherits bias when that form is wrong. Cancellation inverts a characterised noise map instead, but every inversion multiplies the variance and therefore the number of shots.",
+      "why_vi": "Ngoại suy giả định một dạng hàm và mang theo độ chệch khi dạng hàm đó sai. Khử sai số theo xác suất thì nghịch đảo bản đồ nhiễu đã đặc trưng hoá, nhưng mỗi lần nghịch đảo lại nhân phương sai lên, kéo theo số lần chạy tăng.",
+      "level": 3
+    },
+    {
+      "id": "qq-120",
+      "q": "Kraus operators are used to describe",
+      "q_vi": "Các toán tử Kraus dùng để mô tả",
+      "choices": [
+        "a reversible gate acting on a pure state",
+        "a general physical noise process acting on a density matrix, with a completeness condition that preserves the trace",
+        "the eigenvalues of an observable",
+        "the classical control electronics of a device"
+      ],
+      "answer": 1,
+      "why": "They give the standard operator sum form of a completely positive trace preserving map, which covers unitary evolution as a special case and every noise channel as the general case.",
+      "why_vi": "Chúng cho dạng tổng toán tử chuẩn của ánh xạ hoàn toàn dương bảo toàn vết, bao gồm tiến hoá unita như trường hợp riêng và mọi kênh nhiễu như trường hợp tổng quát.",
+      "level": 3
+    },
+    {
+      "id": "qq-121",
+      "q": "A qubit keeps its populations unchanged but loses all interference. The channel responsible is",
+      "q_vi": "Một qubit giữ nguyên mức chiếm đóng nhưng mất sạch giao thoa. Kênh nhiễu chịu trách nhiệm là",
+      "choices": [
+        "Leakage into a level outside the computational subspace",
+        "Phase damping, or pure dephasing",
+        "Amplitude damping toward the ground state",
+        "Readout misassignment"
+      ],
+      "answer": 1,
+      "why": "Energy relaxation would move population toward the ground state, which is not what is observed here. Pure dephasing destroys the off diagonal terms while leaving the diagonal alone.",
+      "why_vi": "Hồi phục năng lượng sẽ kéo mức chiếm đóng về trạng thái cơ bản, không đúng với quan sát ở đây. Mất pha thuần tuý phá các số hạng ngoài đường chéo mà giữ nguyên đường chéo.",
+      "level": 2
+    },
+    {
+      "id": "qq-122",
+      "q": "The depolarising channel is popular in simulation studies mainly because",
+      "q_vi": "Kênh khử phân cực được ưa dùng trong nghiên cứu mô phỏng chủ yếu vì",
+      "choices": [
+        "it is the noise that real superconducting hardware actually exhibits",
+        "it is analytically convenient and pessimistic, so a result that survives it is unlikely to be an artefact of the noise model",
+        "it is the only channel with Kraus operators",
+        "it makes classical simulation of the circuit harder"
+      ],
+      "answer": 1,
+      "why": "Real devices show structured and correlated noise instead. The value of the simple isotropic model is that it is easy to reason about and does not flatter the method under test.",
+      "why_vi": "Thiết bị thật cho nhiễu có cấu trúc và tương quan. Giá trị của mô hình đẳng hướng đơn giản là dễ lập luận và không tâng bốc phương pháp đang thử.",
+      "level": 3
+    },
+    {
+      "id": "qq-123",
+      "q": "Doubling the code distance of a surface code patch helps only if",
+      "q_vi": "Tăng gấp đôi khoảng cách mã của một mảng mã bề mặt chỉ có ích khi",
+      "choices": [
+        "The physical error rate is already below the threshold of the code",
+        "The syndrome is extracted with a decoder running on a graphics processor",
+        "The logical qubit is measured more often",
+        "The circuit uses no two qubit gates"
+      ],
+      "answer": 0,
+      "why": "Below threshold the logical error rate falls exponentially as distance grows. Above threshold each added physical qubit brings more errors than the code removes, so the larger patch is worse.",
+      "why_vi": "Dưới ngưỡng, tỉ lệ lỗi logic giảm theo hàm mũ khi khoảng cách tăng. Trên ngưỡng, mỗi qubit vật lý thêm vào mang lại nhiều lỗi hơn phần mã sửa được, nên mảng lớn hơn lại tệ hơn.",
+      "level": 3
+    },
+    {
+      "id": "qq-124",
+      "q": "Why does decoder latency threaten a fault tolerant computation even when the code itself is good?",
+      "q_vi": "Vì sao độ trễ bộ giải mã đe doạ tính toán chịu lỗi ngay cả khi bản thân mã sửa lỗi đã tốt?",
+      "choices": [
+        "The decoder consumes qubits that the code needs",
+        "Decoding introduces new physical errors into the register",
+        "Syndrome data arrives every cycle, so a decoder slower than the cycle builds an unbounded backlog and correction falls behind the machine",
+        "The decoder must be a quantum circuit itself"
+      ],
+      "answer": 2,
+      "why": "Correction has to keep pace with syndrome extraction in real time, especially before any non Clifford operation. A backlog that grows without bound means the correction is never applied in time to be useful.",
+      "why_vi": "Việc sửa lỗi phải theo kịp tốc độ trích hội chứng theo thời gian thực, nhất là trước mỗi phép toán phi Clifford. Hàng đợi phình vô hạn nghĩa là bản sửa không bao giờ tới kịp lúc còn dùng được.",
+      "level": 3
+    },
+    {
+      "id": "qq-125",
+      "q": "Leakage is a distinct problem from a bit flip because",
+      "q_vi": "Lỗi rò khỏi không gian tính toán là vấn đề khác với lỗi lật bit vì",
+      "choices": [
+        "the state has left the computational subspace, so the code sees no valid error to correct until the population is pumped back",
+        "it only occurs during readout",
+        "it can be corrected by a repetition code",
+        "it always affects every qubit at once"
+      ],
+      "answer": 0,
+      "why": "Stabiliser codes are defined on two level systems. A qubit sitting in a higher level is outside that description, keeps corrupting neighbours through gates, and needs dedicated reset hardware.",
+      "why_vi": "Mã nhóm ổn định được định nghĩa trên hệ hai mức. Qubit nằm ở mức cao hơn thì ở ngoài mô tả đó, tiếp tục làm hỏng các qubit lân cận qua cổng, và cần phần cứng đặt lại riêng.",
+      "level": 3
+    },
+    {
+      "id": "qq-126",
+      "q": "Converting errors into erasures is valuable because a located error",
+      "q_vi": "Chuyển lỗi thành lỗi xoá là điều đáng giá vì lỗi đã biết vị trí",
+      "choices": [
+        "Is tolerated at a much higher rate, since its location is already known",
+        "No longer affects the logical state at all, because the erased qubit is simply discarded from the code",
+        "Removes the need for syndrome extraction, since the hardware reports the fault directly",
+        "Can be ignored entirely by the decoder"
+      ],
+      "answer": 0,
+      "why": "Half of the decoder's job is locating the fault. When the hardware flags the location itself, the same code protects the computation at a much larger physical error rate.",
+      "why_vi": "Một nửa công việc của bộ giải mã là định vị chỗ hỏng. Khi phần cứng tự báo vị trí, cùng một mã vẫn bảo vệ được tính toán ở tỉ lệ lỗi vật lý cao hơn nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qq-127",
+      "q": "The most informative single cost measure for a fault tolerant subroutine is",
+      "q_vi": "Thước đo chi phí đơn lẻ giàu thông tin nhất cho một thủ tục chịu lỗi là",
+      "choices": [
+        "The number of logical gates that appear in the algorithm before compilation to the code",
+        "The number of physical qubits alone",
+        "The qubit count multiplied by the number of code cycles the routine occupies",
+        "The peak power draw of the control electronics"
+      ],
+      "answer": 2,
+      "why": "A routine that uses few qubits for a very long time can be more expensive than a wide shallow one. Multiplying the width by the duration compares the two on the same footing.",
+      "why_vi": "Thủ tục dùng ít qubit nhưng kéo dài rất lâu có thể đắt hơn thủ tục rộng mà nông. Nhân bề rộng với thời lượng mới đặt được hai bên lên cùng một thước.",
+      "level": 3
+    },
+    {
+      "id": "qq-128",
+      "q": "The decoy state method exists because practical key distribution transmitters",
+      "q_vi": "Phương pháp trạng thái mồi ra đời vì các máy phát phân phối khoá thực tế",
+      "choices": [
+        "Cannot be synchronised with the receiver closely enough to place every photon in its own time bin",
+        "Run at a clock rate too high for the detectors to resolve individual arrival events",
+        "Emit photons at the wrong wavelength for fibre",
+        "Use attenuated lasers that sometimes emit more than one photon"
+      ],
+      "answer": 3,
+      "why": "Varying the intensity lets the parties bound the yield and error rate of the single photon pulses from observed data. Without that bound the multi photon fraction has to be assumed lost to the eavesdropper.",
+      "why_vi": "Thay đổi cường độ giúp hai bên chặn được hiệu suất và tỉ lệ lỗi của các xung một photon từ dữ liệu quan sát. Không có chặn đó thì phải coi phần xung nhiều photon là đã mất vào tay kẻ nghe lén.",
+      "level": 3
+    },
+    {
+      "id": "qq-129",
+      "q": "A photon number splitting attack is dangerous specifically because",
+      "q_vi": "Tấn công tách số photon nguy hiểm chính ở chỗ",
+      "choices": [
+        "the attacker copies the quantum state exactly",
+        "it forces the parties to abort the protocol",
+        "the attacker keeps a copy from multi photon pulses and forwards the rest untouched, so no error appears in the sifted data",
+        "it works even against a true single photon source"
+      ],
+      "answer": 2,
+      "why": "Nothing is cloned, so the no cloning theorem is not violated. The pulse simply contained a spare photon, and taking it leaves no disturbance for the parties to detect.",
+      "why_vi": "Không có gì bị sao chép nên định lý không sao chép không bị vi phạm. Xung vốn đã chứa photon dư, lấy đi photon đó thì hai bên không thấy nhiễu loạn nào để phát hiện.",
+      "level": 3
+    },
+    {
+      "id": "qq-130",
+      "q": "On a very lossy link, the quantum bit error rate is usually pushed up by",
+      "q_vi": "Trên một tuyến suy hao rất lớn, tỉ lệ lỗi bit lượng tử thường bị đẩy lên bởi",
+      "choices": [
+        "The privacy amplification step, which compresses the sifted key and therefore magnifies any residual error",
+        "The finite speed of light over the path",
+        "The classical authentication channel",
+        "Detector dark counts, whose fixed rate stops shrinking while the signal keeps shrinking with loss"
+      ],
+      "answer": 3,
+      "why": "Signal counts fall with channel transmittance while spurious counts do not. Their ratio therefore sets the maximum loss at which any secret key survives.",
+      "why_vi": "Số đếm tín hiệu giảm theo độ truyền qua của kênh còn số đếm giả thì không. Tỉ số giữa chúng vì thế định ra mức suy hao lớn nhất mà khoá bí mật còn sống sót.",
+      "level": 3
+    },
+    {
+      "id": "qq-131",
+      "q": "Most satellite key distribution demonstrations operate at night because",
+      "q_vi": "Phần lớn thử nghiệm phân phối khoá qua vệ tinh vận hành ban đêm vì",
+      "choices": [
+        "Atmospheric turbulence disappears after sunset, so the fading and the pointing error both vanish",
+        "A low orbit satellite passes over a given ground station only during the hours of darkness",
+        "Scattered sunlight floods the detectors with background counts",
+        "The classical channel is less congested"
+      ],
+      "answer": 2,
+      "why": "Background photons are indistinguishable from signal photons once they fall inside the same spatial, spectral and time window. Daylight operation therefore needs aggressive filtering on all three axes.",
+      "why_vi": "Photon nền không phân biệt được với photon tín hiệu một khi lọt vào cùng cửa sổ không gian, phổ và thời gian. Vì thế vận hành ban ngày cần lọc rất mạnh trên cả ba trục.",
+      "level": 2
+    },
+    {
+      "id": "qq-132",
+      "q": "Temporal gating suppresses background counts by",
+      "q_vi": "Mở cổng theo thời gian giảm nhiễu nền bằng cách",
+      "choices": [
+        "Narrowing the optical bandwidth of the receiver until only the signal line passes",
+        "Cooling the detector further so that thermally generated carriers become rarer",
+        "Increasing the transmitter power so that the signal dominates the background",
+        "Opening the detector only when a photon is due"
+      ],
+      "answer": 3,
+      "why": "Background arrives at a steady rate, so the count it contributes falls in proportion to how small the open window is. It requires clock synchronisation good enough to predict arrival times.",
+      "why_vi": "Nhiễu nền tới với tốc độ đều nên số đếm nó đóng góp giảm theo đúng độ hẹp của cửa sổ mở. Cách này đòi đồng bộ đồng hồ đủ tốt để dự đoán thời điểm photon tới.",
+      "level": 2
+    },
+    {
+      "id": "qq-133",
+      "q": "The scintillation index of an atmospheric optical path measures",
+      "q_vi": "Chỉ số nhấp nháy của tuyến quang qua khí quyển đo",
+      "choices": [
+        "The average attenuation of the path in decibels, measured over the entire duration of a single satellite pass",
+        "The normalised variance of received intensity, which is how deep the turbulence induced fading gets",
+        "The angular spread of the transmitted beam",
+        "The detector quantum efficiency"
+      ],
+      "answer": 1,
+      "why": "It is a second moment quantity, so it describes fluctuation rather than average loss. Two links with identical mean loss can have very different outage behaviour.",
+      "why_vi": "Đây là đại lượng mômen bậc hai nên nó mô tả dao động chứ không phải suy hao trung bình. Hai tuyến có cùng suy hao trung bình vẫn có thể khác hẳn nhau về hành vi mất liên lạc.",
+      "level": 3
+    },
+    {
+      "id": "qq-134",
+      "q": "Beam wandering caused by large turbulent eddies appears at the receiver as",
+      "q_vi": "Trôi lệch chùm tia do các xoáy khí quyển lớn gây ra hiện ra ở phía thu dưới dạng",
+      "choices": [
+        "Additive white noise on the detected signal, with a variance set by the strength of the turbulence",
+        "Slow fading as the beam centroid moves off the aperture",
+        "A permanent rise in the quantum bit error rate that no amount of postprocessing can remove",
+        "A shift of the optical wavelength"
+      ],
+      "answer": 1,
+      "why": "Eddies larger than the beam deflect it as a whole rather than distorting its profile. The channel therefore looks like a fading channel with correlated dropouts, not like added noise.",
+      "why_vi": "Xoáy lớn hơn chùm tia thì đẩy lệch cả chùm chứ không làm méo dạng chùm. Kênh vì thế giống kênh pha đinh có các quãng mất tín hiệu tương quan, không giống nhiễu cộng.",
+      "level": 3
+    },
+    {
+      "id": "qq-135",
+      "q": "For the same ground station and satellite, the uplink is usually harder than the downlink because",
+      "q_vi": "Với cùng trạm mặt đất và vệ tinh, tuyến lên thường khó hơn tuyến xuống vì",
+      "choices": [
+        "The satellite receiver aperture is always smaller than the ground telescope, so less light is collected",
+        "Turbulence distorts the beam at the start of the path",
+        "The uplink wavelength has to be shorter, which makes the beam more sensitive to scattering",
+        "The uplink cannot use decoy states, so the multi photon fraction cannot be bounded"
+      ],
+      "answer": 1,
+      "why": "Going down, the beam crosses the dense atmosphere only in the last few kilometres, after its geometry is fixed. Going up, the distortion happens first and then propagates over hundreds of kilometres.",
+      "why_vi": "Đi xuống, chùm tia chỉ băng qua lớp khí quyển đặc ở vài kilômét cuối, khi hình học của nó đã định hình. Đi lên, méo dạng xảy ra trước rồi lan suốt hàng trăm kilômét còn lại.",
+      "level": 3
+    },
+    {
+      "id": "qq-136",
+      "q": "The amount of key a single ground station can collect per day from a low orbit satellite is capped mainly by",
+      "q_vi": "Lượng khoá một trạm mặt đất thu được mỗi ngày từ vệ tinh quỹ đạo thấp bị giới hạn chủ yếu bởi",
+      "choices": [
+        "The processing speed of the sifting and error correction software at the ground station",
+        "The length of the encryption keys in use",
+        "The number and duration of passes with a high enough elevation angle",
+        "The storage capacity of the key server"
+      ],
+      "answer": 2,
+      "why": "Below a certain elevation the slant path through the atmosphere becomes too long and loss too high for any secret key. The orbit therefore sets a hard duty cycle that no receiver improvement removes.",
+      "why_vi": "Dưới một góc ngẩng nhất định, quãng đường xiên qua khí quyển quá dài và suy hao quá lớn để còn khoá bí mật. Quỹ đạo vì thế áp một chu kỳ làm việc cứng mà cải tiến máy thu không xoá được.",
+      "level": 2
+    },
+    {
+      "id": "qq-137",
+      "q": "A national key distribution network built from trusted node relays has which security property?",
+      "q_vi": "Mạng phân phối khoá quốc gia dựng từ các nút chuyển tiếp tin cậy có tính chất an toàn nào?",
+      "choices": [
+        "End to end security guaranteed by physics along the whole route, no matter how many hops it crosses",
+        "Each link is physically secure, but every relay node learns the key",
+        "Security equal to that of a single link, whatever the route length and whoever operates the nodes",
+        "No authentication is needed between endpoints"
+      ],
+      "answer": 1,
+      "why": "Each hop is a separate protocol run. The node decrypts the key from one link and re encrypts it for the next, so the physics based guarantee stops at the node boundary.",
+      "why_vi": "Mỗi chặng là một lần chạy giao thức riêng. Nút giải mã khoá từ chặng này rồi mã hoá lại cho chặng sau, nên bảo đảm dựa trên vật lý dừng lại ở ranh giới của nút.",
+      "level": 2
+    },
+    {
+      "id": "qq-138",
+      "q": "Measurement device independent key distribution removes which class of attack?",
+      "q_vi": "Phân phối khoá không phụ thuộc thiết bị đo loại bỏ nhóm tấn công nào?",
+      "choices": [
+        "Every attack that exploits imperfections of the detectors, since the measurement station is assumed untrusted from the start",
+        "All attacks on the source",
+        "Attacks on the classical authentication channel",
+        "Attacks based on factoring the public key"
+      ],
+      "answer": 0,
+      "why": "Both parties are transmitters and the middle station only announces successful joint detections. An adversary who fully controls that station still learns nothing about the key.",
+      "why_vi": "Cả hai bên đều là bên phát và trạm giữa chỉ công bố các lần đo chung thành công. Kẻ địch dù kiểm soát hoàn toàn trạm đó vẫn không biết gì về khoá.",
+      "level": 3
+    },
+    {
+      "id": "qq-139",
+      "q": "Twin field key distribution is notable because its secret key rate scales as",
+      "q_vi": "Phân phối khoá trường song sinh đáng chú ý vì tốc độ khoá bí mật của nó tỉ lệ theo",
+      "choices": [
+        "The square of the channel transmittance, which is the reason the protocol still needs a repeater at every node",
+        "The square root of the channel transmittance, which passes the repeaterless bound without using a repeater",
+        "The logarithm of the distance",
+        "A constant independent of loss"
+      ],
+      "answer": 1,
+      "why": "Interfering fields at a central node makes the rate depend on the amplitude rather than the intensity reaching that node. The price is single photon level phase stabilisation across both arms.",
+      "why_vi": "Cho hai trường giao thoa tại nút trung tâm khiến tốc độ phụ thuộc vào biên độ thay vì cường độ tới nút đó. Cái giá phải trả là ổn định pha ở mức một photon trên cả hai nhánh.",
+      "level": 3
+    },
+    {
+      "id": "qq-140",
+      "q": "Device independent key distribution has not been widely deployed because",
+      "q_vi": "Phân phối khoá không phụ thuộc thiết bị chưa được triển khai rộng vì",
+      "choices": [
+        "Its security proof was found to contain an error that has not yet been repaired by the community",
+        "It requires a loophole free Bell violation, which demands very high detection efficiency",
+        "It cannot be used over optical fibre",
+        "Each endpoint needs a small quantum computer to prepare the measurement settings"
+      ],
+      "answer": 3,
+      "why": "Certifying security from the observed correlations alone leaves no room to assume away lost photons. That pushes the required efficiency and the tolerable loss to levels that field systems do not yet meet.",
+      "why_vi": "Chứng nhận an toàn chỉ từ các tương quan quan sát được thì không còn chỗ để bỏ qua photon bị mất. Điều đó đẩy yêu cầu hiệu suất và mức suy hao chịu được tới ngưỡng mà hệ thống ngoài hiện trường chưa đạt.",
+      "level": 3
+    },
+    {
+      "id": "qq-141",
+      "q": "Finite key analysis matters most for satellite links because",
+      "q_vi": "Phân tích khoá hữu hạn quan trọng nhất với tuyến vệ tinh vì",
+      "choices": [
+        "Satellites use a different protocol from the one that ground links run, with different security parameters",
+        "The orbital motion changes the wavelength, so the intensity settings drift during the pass",
+        "The ground station clock cannot be synchronised well enough for time bin encoding",
+        "A pass yields only a short block of raw key"
+      ],
+      "answer": 3,
+      "why": "Security parameters must hold for the actual block collected, not for an infinitely long one. Quoting the asymptotic rate for a few minute pass overstates the usable key, sometimes by a wide margin.",
+      "why_vi": "Tham số an toàn phải đúng cho khối dữ liệu thực sự thu được chứ không phải khối dài vô hạn. Trích tốc độ tiệm cận cho một lượt bay vài phút là thổi phồng lượng khoá dùng được, đôi khi rất nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qq-142",
+      "q": "A detector blinding attack succeeds against a protocol with a valid security proof because",
+      "q_vi": "Tấn công làm mù bộ tách sóng thành công trước một giao thức đã có chứng minh an toàn hợp lệ vì",
+      "choices": [
+        "the proof was only valid for short distances",
+        "the attacker breaks the underlying mathematics",
+        "the parties forgot to run privacy amplification",
+        "the proof assumes detectors that behave as the model says, and bright light pushes them outside that model without raising the error rate"
+      ],
+      "answer": 3,
+      "why": "Security proofs are conditional on an implementation model. Forcing the avalanche diodes into linear response lets the attacker choose which clicks occur, so the sifted data looks perfectly clean.",
+      "why_vi": "Chứng minh an toàn luôn kèm điều kiện về mô hình cài đặt. Ép điốt thác lũ sang chế độ đáp ứng tuyến tính cho phép kẻ tấn công chọn thời điểm phát tín hiệu, nên dữ liệu sau sàng lọc trông sạch hoàn toàn.",
+      "level": 3
+    },
+    {
+      "id": "qq-143",
+      "q": "Continuous variable key distribution is attractive for metropolitan links because it",
+      "q_vi": "Phân phối khoá biến liên tục hấp dẫn với tuyến đô thị vì nó",
+      "choices": [
+        "It uses standard telecom modulators and homodyne detectors",
+        "It tolerates higher channel loss than any discrete variable scheme, which is why it reaches further",
+        "It needs no classical postprocessing, because the quadrature values are already correlated",
+        "It provides device independent security by construction, without any Bell test"
+      ],
+      "answer": 0,
+      "why": "Reusing coherent optical components lowers cost and eases integration with existing fibre plant. The trade off is high sensitivity to excess noise, which limits the reach compared with photon counting schemes.",
+      "why_vi": "Tái dùng linh kiện quang kết hợp giúp hạ giá và dễ tích hợp với hạ tầng sợi quang sẵn có. Đánh đổi là rất nhạy với nhiễu dư, làm tầm với ngắn hơn so với các sơ đồ đếm photon.",
+      "level": 3
+    },
+    {
+      "id": "qq-144",
+      "q": "Rewriting a variational cost from a global observable into a sum of local terms helps because",
+      "q_vi": "Viết lại hàm chi phí biến phân từ một đại lượng đo toàn cục thành tổng các số hạng cục bộ có ích vì",
+      "choices": [
+        "The circuit no longer needs two qubit gates, which removes the dominant source of hardware error",
+        "Local terms are cheaper to evaluate on a classical simulator, so the training loop runs faster",
+        "It removes the shot noise from the gradient estimate, so fewer executions are needed",
+        "The gradients then decay only polynomially, if the circuit stays shallow"
+      ],
+      "answer": 3,
+      "why": "The plateau result depends on how far the observable spreads across the register. A local cost keeps a usable gradient signal, but the guarantee is tied to shallow depth and disappears as layers pile up.",
+      "why_vi": "Kết quả về cao nguyên phẳng phụ thuộc mức độ đại lượng đo trải rộng trên thanh ghi. Hàm chi phí cục bộ giữ được tín hiệu gradient dùng được, nhưng bảo đảm này gắn với mạch nông và mất đi khi chồng thêm lớp.",
+      "level": 3
+    },
+    {
+      "id": "qq-145",
+      "q": "A noise induced barren plateau differs from the usual barren plateau because",
+      "q_vi": "Cao nguyên phẳng do nhiễu khác cao nguyên phẳng thông thường ở chỗ",
+      "choices": [
+        "it comes from hardware noise driving the state toward the maximally mixed one, so smarter initialisation or a local cost will not repair it",
+        "it only occurs in circuits with fewer than ten qubits",
+        "it disappears when a local cost function is used",
+        "it affects the classical optimiser rather than the circuit"
+      ],
+      "answer": 0,
+      "why": "The usual plateau is a property of the ansatz and the cost, so circuit design can fight it. Noise induced flattening is a property of the device, and the only real remedies are shallower circuits or better hardware.",
+      "why_vi": "Cao nguyên phẳng thông thường là tính chất của dạng mạch và hàm chi phí nên thiết kế mạch còn chống được. Phẳng hoá do nhiễu là tính chất của thiết bị, và cách chữa thật sự chỉ là mạch nông hơn hoặc phần cứng tốt hơn.",
+      "level": 3
+    },
+    {
+      "id": "qq-146",
+      "q": "The narrow gorge phenomenon says that in a flat cost landscape",
+      "q_vi": "Hiện tượng hẻm cực tiểu hẹp nói rằng trong một mặt chi phí phẳng",
+      "choices": [
+        "There are exponentially many equally good minima, so any of them can be reached by chance",
+        "The minimum sits in a basin whose width shrinks exponentially",
+        "The cost function has no minimum at all, because the landscape is unbounded below",
+        "Gradient descent converges faster than expected once the plateau is crossed"
+      ],
+      "answer": 1,
+      "why": "Flatness and narrowness usually appear together. That combination defeats random restarts as well, because the target region occupies a vanishing fraction of parameter space.",
+      "why_vi": "Độ phẳng và độ hẹp thường đi cùng nhau. Tổ hợp đó đánh bại cả chiến lược khởi động lại ngẫu nhiên, vì vùng đích chiếm một phần nhỏ dần tới không của không gian tham số.",
+      "level": 3
+    },
+    {
+      "id": "qq-147",
+      "q": "Initialising a variational circuit as pairs of blocks that cancel is done so that",
+      "q_vi": "Khởi tạo mạch biến phân bằng các cặp khối triệt tiêu nhau là để",
+      "choices": [
+        "The circuit compiles into fewer native gates, which shortens the pulse schedule on hardware",
+        "The measurement result becomes deterministic, so a single shot suffices per evaluation",
+        "Training starts near the identity, where gradients survive",
+        "The ansatz becomes hardware efficient and therefore matches the chip connectivity"
+      ],
+      "answer": 2,
+      "why": "A circuit that starts as a random unitary already sits in the flat region. Starting near the identity keeps a usable gradient for the first steps, although nothing prevents the plateau later in training.",
+      "why_vi": "Mạch khởi đầu như một unita ngẫu nhiên thì đã nằm sẵn trong vùng phẳng. Khởi tạo gần toán tử đồng nhất giữ được gradient dùng được cho các bước đầu, dù không có gì ngăn cao nguyên phẳng xuất hiện về sau.",
+      "level": 3
+    },
+    {
+      "id": "qq-148",
+      "q": "SPSA is often preferred over the parameter shift rule on hardware when",
+      "q_vi": "Bộ tối ưu nhiễu loạn đồng thời thường được ưu tiên hơn luật dịch tham số trên phần cứng khi",
+      "choices": [
+        "The shot budget is tight, since each step costs only two circuits",
+        "The device supports no measurement outside the computational basis, so shifted circuits cannot run",
+        "The circuit has only one parameter, in which case the two estimates coincide exactly",
+        "An exact gradient is required for the convergence proof that the paper relies on"
+      ],
+      "answer": 0,
+      "why": "Parameter shift gives an exact gradient but costs two circuits per parameter. Simultaneous perturbation trades gradient accuracy for a cost that does not grow with the number of parameters.",
+      "why_vi": "Luật dịch tham số cho gradient chính xác nhưng tốn hai mạch cho mỗi tham số. Nhiễu loạn đồng thời đánh đổi độ chính xác gradient lấy chi phí không tăng theo số tham số.",
+      "level": 3
+    },
+    {
+      "id": "qq-149",
+      "q": "Quantum natural gradient converges in fewer iterations than plain gradient descent, yet it is not always the better choice because",
+      "q_vi": "Gradient tự nhiên lượng tử hội tụ trong ít vòng lặp hơn hạ gradient thường, nhưng không phải lúc nào cũng là lựa chọn tốt hơn vì",
+      "choices": [
+        "It can only be used with a hardware efficient ansatz, which limits the problems it applies to",
+        "It does not converge at all on noisy hardware, so the iteration gain never materialises",
+        "It requires an error corrected device before the geometry can be estimated reliably",
+        "Estimating the metric tensor costs many extra circuits per step"
+      ],
+      "answer": 3,
+      "why": "Iteration count is the wrong currency on a shared device. The fair comparison is total circuit executions, and the metric estimate scales with the square of the parameter count.",
+      "why_vi": "Đếm số vòng lặp là sai đơn vị tính trên thiết bị dùng chung. So sánh công bằng là tổng số lần chạy mạch, mà ước lượng tensor metric tăng theo bình phương số tham số.",
+      "level": 3
+    },
+    {
+      "id": "qq-150",
+      "q": "Classical shadows reduce measurement cost by",
+      "q_vi": "Bóng cổ điển giảm chi phí đo bằng cách",
+      "choices": [
+        "Replacing measurement with a classical simulation of the same circuit on a tensor network",
+        "Measuring the full density matrix once and then reading every expectation value from it",
+        "Running the circuit on fewer qubits and extrapolating to the full register",
+        "Reusing randomised measurement outcomes for many observables"
+      ],
+      "answer": 3,
+      "why": "Randomised single qubit bases produce a compact classical description from which many expectation values are reconstructed. The saving is large for local observables and disappears for highly non local ones.",
+      "why_vi": "Các cơ sở đo ngẫu nhiên trên từng qubit cho một mô tả cổ điển gọn, từ đó dựng lại được nhiều giá trị kỳ vọng. Mức tiết kiệm lớn với đại lượng đo cục bộ và biến mất với đại lượng phi cục bộ mạnh.",
+      "level": 3
+    },
+    {
+      "id": "qq-151",
+      "q": "A team warm starts QAOA from a classical relaxation and reports a good cut value. The reviewer's first demand should be",
+      "q_vi": "Một nhóm khởi động ấm cho QAOA từ nghiệm nới lỏng cổ điển và báo giá trị lát cắt tốt. Yêu cầu đầu tiên của phản biện nên là",
+      "choices": [
+        "A larger number of layers, together with the runtime that the deeper circuit needed",
+        "The cut value that the relaxation alone already achieved",
+        "A proof that the underlying problem is NP hard in the size of the input graph",
+        "The exact hardware calibration data recorded on the day of the experiment"
+      ],
+      "answer": 1,
+      "why": "The seed is itself a solver, so the circuit must be credited only with the improvement it added. Without the seed value the reported quality cannot be attributed to the quantum part at all.",
+      "why_vi": "Nghiệm mồi bản thân đã là một bộ giải, nên chỉ được ghi công cho mạch phần cải thiện mà nó thêm vào. Không có giá trị của nghiệm mồi thì không thể quy chất lượng báo cáo cho phần lượng tử.",
+      "level": 3
+    },
+    {
+      "id": "qq-152",
+      "q": "A reachability deficit in QAOA means that",
+      "q_vi": "Thiếu hụt khả năng vươn tới trong QAOA nghĩa là",
+      "choices": [
+        "The optimiser has converged to a local minimum in the space of the variational angles",
+        "The cost Hamiltonian was encoded incorrectly and the penalty weights are too small",
+        "The hardware ran out of qubits, so part of the problem graph had to be dropped",
+        "At that depth the circuit cannot represent the optimum"
+      ],
+      "answer": 3,
+      "why": "The limitation lives in the ansatz rather than in the optimisation. It becomes worse as the ratio of constraints to variables rises, and the only fix is more layers or a different construction.",
+      "why_vi": "Hạn chế nằm ở dạng mạch chứ không ở quá trình tối ưu. Nó nặng thêm khi tỉ lệ giữa số ràng buộc và số biến tăng, và cách chữa duy nhất là thêm lớp hoặc đổi cách xây dựng.",
+      "level": 3
+    },
+    {
+      "id": "qq-153",
+      "q": "The main appeal of a hardware efficient ansatz, and its main defect, are respectively",
+      "q_vi": "Điểm hấp dẫn chính và khiếm khuyết chính của dạng mạch thân thiện phần cứng lần lượt là",
+      "choices": [
+        "It needs no swap overhead, and it becomes untrainable as the width grows",
+        "High accuracy on chemistry problems, and a compilation time that grows with the molecule size",
+        "Guaranteed convergence to the ground state, and a large classical memory footprint",
+        "No classical optimiser is needed, and it works only for very small problem graphs"
+      ],
+      "answer": 0,
+      "why": "Matching the chip layout keeps the circuit shallow enough to run. The same lack of problem structure makes the circuit resemble a random unitary, which is precisely the regime where gradients vanish.",
+      "why_vi": "Bám theo cách bố trí của chip giữ cho mạch đủ nông để chạy được. Chính việc thiếu cấu trúc bài toán làm mạch giống một unita ngẫu nhiên, đúng vào chế độ mà gradient triệt tiêu.",
+      "level": 3
+    },
+    {
+      "id": "qq-154",
+      "q": "When comparing a variational quantum optimiser against a classical solver, the resource that must be matched is",
+      "q_vi": "Khi so sánh bộ tối ưu lượng tử biến phân với bộ giải cổ điển, tài nguyên phải cân bằng là",
+      "choices": [
+        "The number of optimiser iterations",
+        "Total computational work, counted as circuit executions on one side and function evaluations or wall clock time on the other",
+        "The number of qubits and of decision variables",
+        "The number of published baselines"
+      ],
+      "answer": 1,
+      "why": "One optimiser step can hide thousands of circuit runs. Counting iterations flatters the quantum side by a factor that grows with the number of parameters.",
+      "why_vi": "Một bước của bộ tối ưu có thể giấu hàng nghìn lần chạy mạch. Đếm theo vòng lặp là tâng bốc bên lượng tử với hệ số tăng theo số tham số.",
+      "level": 2
     }
   ]
 }

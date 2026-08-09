@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "agent",
-  "updated": "2026-08-07",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "ag-agent",
@@ -1226,6 +1226,813 @@
       "tags": [
         "ux",
         "quality"
+      ]
+    },
+    {
+      "id": "ag2-tool-call-id",
+      "en": "Tool call correlation id",
+      "vi": "Mã ghép cặp lần gọi công cụ",
+      "def_en": "The identifier that pairs a tool call with its result inside the message history. If a result arrives without the matching identifier, the model cannot tell which call it answers.",
+      "def_vi": "Định danh ghép một lần gọi công cụ với kết quả của nó trong lịch sử hội thoại. Nếu kết quả về mà thiếu định danh khớp, mô hình không biết nó trả lời cho lần gọi nào.",
+      "say": "Every tool result has to carry the id of the call it answers.",
+      "tags": [
+        "tools",
+        "protocol"
+      ]
+    },
+    {
+      "id": "ag2-streaming-args",
+      "en": "Streaming tool arguments",
+      "vi": "Tham số công cụ về theo dòng",
+      "def_en": "Arguments arrive token by token, so the argument object is incomplete until the call closes. Acting on a partly parsed argument is how an agent fires a request with half a file path.",
+      "def_vi": "Tham số về theo từng token nên khối tham số chưa hoàn chỉnh cho tới khi lần gọi đóng lại. Hành động trên tham số mới phân tích dở chính là cách tác tử bắn đi một yêu cầu với đường dẫn cụt nửa chừng.",
+      "say": "Wait for the call to close before you parse the arguments.",
+      "tags": [
+        "tools",
+        "protocol"
+      ]
+    },
+    {
+      "id": "ag2-forced-tool",
+      "en": "Forced tool choice",
+      "vi": "Ép chọn công cụ",
+      "def_en": "A setting that makes the model call a tool, or one named tool, instead of leaving the decision open. It guarantees a structured answer and removes the option of answering directly.",
+      "def_vi": "Thiết lập buộc mô hình phải gọi công cụ, hoặc gọi đúng một công cụ được chỉ tên, thay vì để nó tự quyết. Nó bảo đảm có đầu ra có cấu trúc và lấy đi khả năng trả lời thẳng.",
+      "say": "Forcing a call removes a decision, and sometimes that decision was the useful part.",
+      "tags": [
+        "tools",
+        "protocol"
+      ]
+    },
+    {
+      "id": "ag2-result-ordering",
+      "en": "Tool result ordering",
+      "vi": "Thứ tự kết quả công cụ",
+      "def_en": "Parallel calls finish in an arbitrary order, so results must be stitched back to their own calls by identifier rather than appended in completion order.",
+      "def_vi": "Các lần gọi song song kết thúc theo thứ tự bất kỳ, nên kết quả phải được khâu lại đúng lần gọi của mình theo định danh chứ không phải nối vào theo thứ tự hoàn tất.",
+      "say": "They finished out of order, so we matched them back by id before handing them over.",
+      "tags": [
+        "tools",
+        "protocol"
+      ]
+    },
+    {
+      "id": "ag2-schema-drift",
+      "en": "Tool schema drift",
+      "vi": "Lược đồ công cụ lệch khỏi hàm thật",
+      "def_en": "The declared schema and the real function stop agreeing after a code change. The model keeps sending the old shape, and the failures look like model errors rather than a stale declaration.",
+      "def_vi": "Lược đồ khai báo và hàm thật thôi khớp nhau sau một lần sửa mã. Mô hình vẫn gửi theo dạng cũ, và lỗi trông giống lỗi của mô hình chứ không giống một bản khai báo lỗi thời.",
+      "say": "The model was not confused, the declaration was out of date.",
+      "tags": [
+        "tools",
+        "reliability"
+      ]
+    },
+    {
+      "id": "ag2-arg-fabrication",
+      "en": "Argument fabrication",
+      "vi": "Bịa tham số",
+      "def_en": "The model fills a required parameter with a plausible value it never obtained, such as an invented record id. The call is well formed and wrong in substance.",
+      "def_vi": "Mô hình điền vào tham số bắt buộc một giá trị nghe hợp lý mà nó chưa từng có, ví dụ một mã bản ghi bịa ra. Lần gọi đúng về hình thức và sai về nội dung.",
+      "say": "Make the field optional, or the model will invent something to put in it.",
+      "tags": [
+        "tools",
+        "failure"
+      ]
+    },
+    {
+      "id": "ag2-name-collision",
+      "en": "Tool name collision",
+      "vi": "Trùng tên công cụ",
+      "def_en": "Two attached servers expose tools with the same name, so the model picks by description alone. Prefixing names by source keeps the choice unambiguous.",
+      "def_vi": "Hai máy chủ cùng gắn vào lại lộ ra công cụ trùng tên, nên mô hình chỉ còn dựa vào phần mô tả để chọn. Thêm tiền tố theo nguồn giữ cho lựa chọn không mập mờ.",
+      "say": "Two servers both offered a tool called search, and the wrong one won.",
+      "tags": [
+        "tools",
+        "protocol"
+      ]
+    },
+    {
+      "id": "ag2-tool-versioning",
+      "en": "Tool versioning",
+      "vi": "Đánh phiên bản công cụ",
+      "def_en": "Publishing a changed tool under a new name or version instead of editing the old one in place, so running agents and stored traces keep their meaning.",
+      "def_vi": "Công bố công cụ đã đổi dưới tên hoặc phiên bản mới thay vì sửa đè lên bản cũ, để các tác tử đang chạy và các vết đã lưu vẫn giữ nguyên ý nghĩa.",
+      "say": "Ship it as a new version so old traces still mean what they said.",
+      "tags": [
+        "tools",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-readonly-split",
+      "en": "Read only tool separation",
+      "vi": "Tách công cụ chỉ đọc",
+      "def_en": "Splitting the tool set into calls that only observe and calls that change state, so the second group can be gated, logged and approved without slowing the first.",
+      "def_vi": "Tách bộ công cụ thành nhóm chỉ quan sát và nhóm làm đổi trạng thái, để nhóm thứ hai bị chặn cổng, ghi nhật ký và cần phê duyệt mà không làm chậm nhóm thứ nhất.",
+      "say": "Reads run free, writes go through the gate.",
+      "tags": [
+        "tools",
+        "security"
+      ]
+    },
+    {
+      "id": "ag2-async-handle",
+      "en": "Asynchronous tool handle",
+      "vi": "Phiếu chờ cho công cụ chạy lâu",
+      "def_en": "A long job returns a ticket immediately and the agent polls it later. This keeps a slow task from holding the loop open and lets an interrupted run be resumed.",
+      "def_vi": "Việc chạy lâu trả về ngay một phiếu, rồi tác tử hỏi lại phiếu đó sau. Cách này giữ cho một việc chậm không giam vòng lặp và cho phép chạy tiếp sau khi bị ngắt.",
+      "say": "The tool hands back a ticket, and we poll it on the next turn.",
+      "tags": [
+        "tools",
+        "latency"
+      ]
+    },
+    {
+      "id": "ag2-degraded-mode",
+      "en": "Degraded mode",
+      "vi": "Chế độ chạy thu gọn",
+      "def_en": "A defined reduced behaviour for when a dependency is down, such as answering from cache and labelling the answer stale, instead of failing the whole run.",
+      "def_vi": "Hành vi thu gọn đã định sẵn cho lúc thành phần phụ thuộc chết, ví dụ trả lời từ bộ nhớ đệm và ghi rõ câu trả lời có thể cũ, thay vì để cả lượt chạy hỏng.",
+      "say": "When the index is down we answer from cache and label the answer stale.",
+      "tags": [
+        "ops",
+        "reliability"
+      ]
+    },
+    {
+      "id": "ag2-load-shedding",
+      "en": "Load shedding",
+      "vi": "Chủ động cắt tải",
+      "def_en": "Rejecting some requests early on purpose so the ones you accept still finish. Without it, an overloaded agent service degrades for everyone at once.",
+      "def_vi": "Cố ý từ chối sớm một phần yêu cầu để phần được nhận vẫn chạy xong. Không có nó, dịch vụ tác tử quá tải sẽ xuống cấp cho tất cả mọi người cùng lúc.",
+      "say": "Turning some requests away early is what keeps the rest usable.",
+      "tags": [
+        "ops",
+        "latency"
+      ]
+    },
+    {
+      "id": "ag2-concurrency-limit",
+      "en": "Concurrency limit",
+      "vi": "Trần số việc chạy song song",
+      "def_en": "A cap on how many agent runs or tool calls execute at once. It decides whether a traffic spike costs you queueing delay or costs you a ban from the service downstream.",
+      "def_vi": "Mức trần cho số lượt chạy tác tử hoặc số lần gọi công cụ diễn ra cùng lúc. Nó quyết định một đợt tăng đột biến sẽ khiến bạn mất thời gian xếp hàng hay khiến bạn bị dịch vụ phía sau chặn.",
+      "say": "We cap parallel workers at eight because the service below caps us anyway.",
+      "tags": [
+        "ops",
+        "cost"
+      ]
+    },
+    {
+      "id": "ag2-memory-consolidation",
+      "en": "Memory consolidation",
+      "vi": "Chắt lọc bộ nhớ",
+      "def_en": "A scheduled pass that turns raw run history into a small set of durable facts and rules, so the long term store grows by curation rather than by accumulation.",
+      "def_vi": "Lượt chạy định kỳ biến lịch sử thô của các lần chạy thành một tập nhỏ gồm sự kiện và quy tắc bền, để kho dài hạn lớn lên nhờ chắt lọc chứ không nhờ chất đống.",
+      "say": "Nightly we fold the day's notes into a handful of durable rules.",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "ag2-memory-conflict",
+      "en": "Memory conflict",
+      "vi": "Mâu thuẫn trong bộ nhớ",
+      "def_en": "Two stored items disagree and nothing in the store says which wins. Retrieval then returns whichever the ranker preferred, which makes behaviour look random.",
+      "def_vi": "Hai mục đã lưu mâu thuẫn nhau mà kho không hề nói mục nào thắng. Khi truy hồi, hệ trả về mục nào bộ xếp hạng ưa hơn, khiến hành vi trông như ngẫu nhiên.",
+      "say": "Two notes disagree, so store the time each was written and let the newer one win.",
+      "tags": [
+        "memory",
+        "failure"
+      ]
+    },
+    {
+      "id": "ag2-recency-weighting",
+      "en": "Recency weighting",
+      "vi": "Ưu tiên theo độ mới",
+      "def_en": "Ranking retrieved items partly by age so newer facts outrank older ones. It fixes stale answers and quietly buries a correct fact that simply has not changed in a year.",
+      "def_vi": "Xếp hạng các mục truy hồi có tính tới tuổi của chúng, để sự kiện mới đứng trên sự kiện cũ. Cách này chữa được câu trả lời lỗi thời, đồng thời âm thầm chôn mất một sự kiện đúng chỉ vì nó không đổi suốt một năm.",
+      "say": "Weighting by recency helped, until it buried a rule that never changes.",
+      "tags": [
+        "memory",
+        "retrieval"
+      ]
+    },
+    {
+      "id": "ag2-instruction-drift",
+      "en": "Instruction drift",
+      "vi": "Trôi khỏi chỉ dẫn",
+      "def_en": "Over a long run the model's behaviour slides away from the system instructions because later turns crowd them out. Restating the binding constraints late in the context is the cheap counter.",
+      "def_vi": "Qua một lượt chạy dài, hành vi của mô hình trượt dần khỏi chỉ dẫn hệ thống vì các lượt sau lấn át chúng. Nhắc lại các ràng buộc bắt buộc ở đoạn cuối ngữ cảnh là cách chống rẻ tiền.",
+      "say": "Restate the hard constraints near the end, not only at the top.",
+      "tags": [
+        "context",
+        "failure"
+      ]
+    },
+    {
+      "id": "ag2-summary-fidelity",
+      "en": "Summary fidelity",
+      "vi": "Độ trung thực của bản tóm tắt",
+      "def_en": "How much decision relevant detail survives a compaction step. A summary that reads well and drops the one constraint that mattered is worse than no summary.",
+      "def_vi": "Mức chi tiết có ý nghĩa cho việc ra quyết định còn sống sót sau một bước nén. Bản tóm tắt đọc mượt mà nhưng làm rơi mất đúng ràng buộc quan trọng thì tệ hơn là không tóm tắt.",
+      "say": "Score the summary by what a later step still needs, not by how it reads.",
+      "tags": [
+        "context",
+        "quality"
+      ]
+    },
+    {
+      "id": "ag2-needle-test",
+      "en": "Needle in a haystack test",
+      "vi": "Phép thử cắm kim vào đống rơm",
+      "def_en": "Planting a specific fact at a known position in a very long input and checking whether the model retrieves it. It measures reach across the window, not reasoning over the window.",
+      "def_vi": "Cắm một sự kiện cụ thể vào vị trí đã biết trong đầu vào rất dài rồi kiểm xem mô hình có lấy lại được không. Phép này đo tầm với trên cả cửa sổ, chứ không đo khả năng suy luận trên đó.",
+      "say": "Finding the planted sentence proves reach, not understanding.",
+      "tags": [
+        "context",
+        "eval"
+      ]
+    },
+    {
+      "id": "ag2-usable-context",
+      "en": "Advertised context versus usable context",
+      "vi": "Cửa sổ công bố so với cửa sổ dùng được",
+      "def_en": "The window a model accepts and the length at which its accuracy still holds are different numbers. Filling the window to its limit usually buys degradation, not capability.",
+      "def_vi": "Cửa sổ mà mô hình chấp nhận và độ dài mà độ chính xác còn giữ được là hai con số khác nhau. Nhồi cửa sổ tới sát trần thường mua về sự xuống cấp chứ không mua thêm năng lực.",
+      "say": "It accepts that much input, which is not the same as working well on it.",
+      "tags": [
+        "context"
+      ]
+    },
+    {
+      "id": "ag2-session-boundary",
+      "en": "Session boundary",
+      "vi": "Ranh giới phiên làm việc",
+      "def_en": "The point where one run's context ends and the next begins. Whatever must survive that line has to be written somewhere on purpose, because context does not cross it.",
+      "def_vi": "Điểm mà ngữ cảnh của lượt chạy này kết thúc và lượt kế bắt đầu. Thứ gì cần sống sót qua lằn ranh đó phải được ghi ra một cách có chủ đích, vì ngữ cảnh không tự đi qua.",
+      "say": "Anything that must outlive the session has to be written down.",
+      "tags": [
+        "memory",
+        "context"
+      ]
+    },
+    {
+      "id": "ag2-memory-scoping",
+      "en": "Memory scoping",
+      "vi": "Khoanh phạm vi bộ nhớ",
+      "def_en": "Binding each stored item to the user, project or tenant it belongs to, so retrieval cannot pull one customer's note into another customer's run.",
+      "def_vi": "Buộc mỗi mục đã lưu vào đúng người dùng, dự án hoặc khách hàng sở hữu nó, để truy hồi không thể kéo ghi chú của khách này vào lượt chạy của khách khác.",
+      "say": "Scope every write, or one tenant's notes will surface in another tenant's answer.",
+      "tags": [
+        "memory",
+        "security"
+      ]
+    },
+    {
+      "id": "ag2-memory-provenance",
+      "en": "Memory provenance",
+      "vi": "Nguồn gốc của mục nhớ",
+      "def_en": "Recording where a stored fact came from and when, so a later reader can judge it. Without provenance the store cannot distinguish an observed fact from the model's own guess.",
+      "def_vi": "Ghi lại một dữ kiện đã lưu đến từ đâu và vào lúc nào, để người đọc sau còn phán đoán được. Không có nguồn gốc, kho không phân biệt nổi dữ kiện quan sát được với phỏng đoán do chính mô hình sinh ra.",
+      "say": "Store the source with the fact, or you cannot tell observation from guess.",
+      "tags": [
+        "memory",
+        "quality"
+      ]
+    },
+    {
+      "id": "ag2-embedding-drift",
+      "en": "Embedding drift",
+      "vi": "Lệch không gian nhúng",
+      "def_en": "Re-embedding part of a corpus with a different model leaves two incompatible geometries in one index, and similarity scores stop being comparable across them.",
+      "def_vi": "Nhúng lại một phần kho bằng mô hình khác sẽ để lại hai hình học không tương thích trong cùng một chỉ mục, và điểm tương đồng thôi không còn so sánh được với nhau.",
+      "say": "Change the embedding model and you have to rebuild the whole index.",
+      "tags": [
+        "retrieval",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-cache-prefix",
+      "en": "Cache prefix stability",
+      "vi": "Giữ nguyên phần đầu câu lệnh",
+      "def_en": "Prompt caching only pays off when the beginning of the prompt is identical between calls. A timestamp or a reshuffled tool list at the top silently discards every hit.",
+      "def_vi": "Bộ nhớ đệm câu lệnh chỉ có lãi khi phần đầu câu lệnh giống hệt nhau giữa các lần gọi. Một dấu thời gian hoặc một danh sách công cụ bị xáo thứ tự đặt ở đầu sẽ âm thầm huỷ sạch mọi lần trúng.",
+      "say": "Put the changing part at the end, or the cache never hits.",
+      "tags": [
+        "cost",
+        "context"
+      ]
+    },
+    {
+      "id": "ag2-fail-closed",
+      "en": "Fail closed gate",
+      "vi": "Cổng chặn khi không kiểm được",
+      "def_en": "A check that blocks the action when it cannot run or cannot decide. The opposite, which lets work through on error, is how a broken gate reports clean for weeks.",
+      "def_vi": "Phép kiểm chặn hành động lại khi nó không chạy được hoặc không kết luận được. Kiểu ngược lại, tức cho việc đi qua khi gặp lỗi, chính là cách một cổng đã hỏng vẫn báo sạch suốt nhiều tuần.",
+      "say": "If the checker cannot run, the change does not ship.",
+      "tags": [
+        "verification",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-positive-control",
+      "en": "Positive control",
+      "vi": "Ca đối chứng dương",
+      "def_en": "Feeding the checker a case you know is bad to confirm it still fails. A gate that has never rejected anything has not been shown to work at all.",
+      "def_vi": "Đưa vào phép kiểm một ca mà bạn biết chắc là sai để xác nhận nó vẫn báo hỏng. Một cổng chưa từng chặn thứ gì thì chưa hề được chứng minh là còn chạy.",
+      "say": "Feed it a known bad case, and if that passes, the gate is the problem.",
+      "tags": [
+        "verification",
+        "eval"
+      ]
+    },
+    {
+      "id": "ag2-acceptance-criteria",
+      "en": "Acceptance criteria",
+      "vi": "Tiêu chí nghiệm thu",
+      "def_en": "The stated conditions a run must meet to count as done, written before the run starts. Without them, whatever the agent produced becomes the definition of success.",
+      "def_vi": "Các điều kiện được phát biểu rõ mà một lượt chạy phải đạt mới tính là xong, viết ra trước khi chạy. Thiếu chúng, thứ tác tử làm ra sẽ tự trở thành định nghĩa của thành công.",
+      "say": "Write down what done means before the agent starts, not after.",
+      "tags": [
+        "verification",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-oracle",
+      "en": "Ground truth oracle",
+      "vi": "Nguồn phán đúng sai",
+      "def_en": "An independent source that can say whether an output is right, such as a test suite or a database query. An evaluation is only as trustworthy as this source.",
+      "def_vi": "Nguồn độc lập có thể phán đầu ra là đúng hay sai, ví dụ một bộ kiểm thử hoặc một truy vấn cơ sở dữ liệu. Việc đánh giá chỉ đáng tin ngang với nguồn này.",
+      "say": "If nothing outside the model can say it is right, you have no evaluation.",
+      "tags": [
+        "eval",
+        "verification"
+      ]
+    },
+    {
+      "id": "ag2-executable-check",
+      "en": "Executable check",
+      "vi": "Phép kiểm chạy được",
+      "def_en": "A verification the machine can run and fail on, such as compiling, querying or comparing files. It beats asking a model whether the work looks correct.",
+      "def_vi": "Phép kiểm mà máy chạy được và báo hỏng được, ví dụ biên dịch, truy vấn hoặc so sánh tập tin. Nó hơn hẳn việc hỏi một mô hình xem công việc trông có đúng không.",
+      "say": "Prefer a check that can fail loudly over an opinion that sounds right.",
+      "tags": [
+        "verification"
+      ]
+    },
+    {
+      "id": "ag2-second-signature",
+      "en": "Second signature gate",
+      "vi": "Cổng hai chữ ký",
+      "def_en": "Requiring a different actor, human or independent agent, to approve an irreversible action. It only helps when the second reviewer sees the evidence rather than a summary written by the first.",
+      "def_vi": "Đòi một tác nhân khác, người hoặc tác tử độc lập, phê duyệt hành động không thể hoàn tác. Nó chỉ có ích khi người duyệt thứ hai nhìn thấy bằng chứng chứ không phải bản tóm tắt do bên thứ nhất viết.",
+      "say": "The second reviewer needs the evidence, not the first reviewer's summary.",
+      "tags": [
+        "verification",
+        "security"
+      ]
+    },
+    {
+      "id": "ag2-canary-task",
+      "en": "Canary task",
+      "vi": "Việc canh chừng",
+      "def_en": "A small task with a known answer that runs alongside real traffic, so a silent quality drop after a prompt or model change shows up quickly.",
+      "def_vi": "Việc nhỏ đã biết trước đáp án, chạy kèm cùng lưu lượng thật, để một cú tụt chất lượng âm thầm sau khi đổi câu lệnh hoặc đổi mô hình lộ ra sớm.",
+      "say": "The canary failed an hour after the prompt change, which is how we caught it.",
+      "tags": [
+        "eval",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-shadow-mode",
+      "en": "Shadow mode",
+      "vi": "Chạy trong bóng",
+      "def_en": "Running a new agent version on live inputs while discarding its actions, so you can compare behaviour without risking a real change.",
+      "def_vi": "Chạy phiên bản tác tử mới trên đầu vào thật nhưng vứt bỏ hành động của nó, để bạn so sánh được hành vi mà không phải liều với một thay đổi thật.",
+      "say": "Run it in shadow for a week before it gets to touch anything.",
+      "tags": [
+        "ops",
+        "eval"
+      ]
+    },
+    {
+      "id": "ag2-golden-transcript",
+      "en": "Golden transcript",
+      "vi": "Vết chạy chuẩn",
+      "def_en": "A stored run whose steps and outputs are known good, used as the reference a new version is compared against. It catches behaviour changes that no aggregate score reveals.",
+      "def_vi": "Lượt chạy đã lưu, có các bước và đầu ra được coi là chuẩn, dùng làm mốc để so với phiên bản mới. Nó bắt được những thay đổi hành vi mà điểm tổng hợp không hề lộ ra.",
+      "say": "Compare the new run against the golden one and read what moved.",
+      "tags": [
+        "eval",
+        "verification"
+      ]
+    },
+    {
+      "id": "ag2-spot-check",
+      "en": "Spot check sampling",
+      "vi": "Đọc mẫu ngẫu nhiên",
+      "def_en": "Reading a random handful of real runs in full instead of trusting the dashboard. Aggregate metrics hide failure shapes that a single careful read exposes immediately.",
+      "def_vi": "Đọc trọn vẹn một nhúm lượt chạy thật lấy ngẫu nhiên thay vì tin vào bảng số liệu. Chỉ số tổng hợp che mất những dạng hỏng mà chỉ cần đọc kỹ một lượt là thấy ngay.",
+      "say": "Read ten whole runs by hand every week and you will find what the metrics miss.",
+      "tags": [
+        "eval",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-verification-asymmetry",
+      "en": "Verification asymmetry",
+      "vi": "Lệch giữa kiểm và làm",
+      "def_en": "Tasks where checking an answer is far cheaper than producing it. Those are exactly the tasks where letting an agent try many times is rational.",
+      "def_vi": "Những việc mà kiểm một đáp án rẻ hơn hẳn so với tạo ra nó. Đó đúng là loại việc mà để tác tử thử đi thử lại nhiều lần là hợp lý.",
+      "say": "Where checking is cheap, let it try repeatedly and keep the one that passes.",
+      "tags": [
+        "design",
+        "verification"
+      ]
+    },
+    {
+      "id": "ag2-retry-amplification",
+      "en": "Retry amplification",
+      "vi": "Thử lại nhân lên nhiều tầng",
+      "def_en": "Each retry multiplies tokens, latency and downstream load, so a policy of three attempts at three nested layers can mean twenty seven calls for one task.",
+      "def_vi": "Mỗi lần thử lại nhân lên số token, độ trễ và tải phía sau, nên chính sách ba lần thử ở ba tầng lồng nhau có thể thành hai mươi bảy lần gọi cho một việc.",
+      "say": "Retries at three layers multiply, they do not add.",
+      "tags": [
+        "cost",
+        "reliability"
+      ]
+    },
+    {
+      "id": "ag2-ttfa",
+      "en": "Time to first useful action",
+      "vi": "Thời gian tới hành động hữu ích đầu tiên",
+      "def_en": "How long a user waits before the agent does something visible and real. It shapes perceived speed far more than total run time does.",
+      "def_vi": "Khoảng thời gian người dùng phải chờ trước khi tác tử làm được một việc nhìn thấy được và có thật. Nó định hình cảm giác nhanh chậm mạnh hơn nhiều so với tổng thời gian chạy.",
+      "say": "Users forgive a long run, they do not forgive a long silence at the start.",
+      "tags": [
+        "latency",
+        "ux"
+      ]
+    },
+    {
+      "id": "ag2-throughput",
+      "en": "Token throughput",
+      "vi": "Tốc độ sinh token",
+      "def_en": "Tokens produced per second, which sets the floor on how long a verbose answer takes. Cutting output length is often faster than any change of model.",
+      "def_vi": "Số token sinh ra mỗi giây, thứ đặt ra mức sàn cho thời gian tạo một câu trả lời dài dòng. Cắt bớt độ dài đầu ra thường nhanh hơn mọi cách đổi mô hình.",
+      "say": "Shorter output is the cheapest latency fix you have.",
+      "tags": [
+        "latency",
+        "cost"
+      ]
+    },
+    {
+      "id": "ag2-speculative-call",
+      "en": "Speculative tool call",
+      "vi": "Gọi công cụ đón trước",
+      "def_en": "Starting a likely needed call before the model asks for it, then discarding the result if it turns out unnecessary. It trades wasted calls for less waiting.",
+      "def_vi": "Khởi động trước một lần gọi nhiều khả năng sẽ cần, trước cả khi mô hình yêu cầu, rồi bỏ kết quả nếu hoá ra không dùng tới. Cách này đánh đổi vài lần gọi phí để bớt phải chờ.",
+      "say": "We fetch the file listing early because the next step almost always needs it.",
+      "tags": [
+        "latency",
+        "cost"
+      ]
+    },
+    {
+      "id": "ag2-small-first",
+      "en": "Small model first pass",
+      "vi": "Lượt chạy đầu bằng mô hình nhỏ",
+      "def_en": "Letting a cheap model handle routing, extraction or filtering and escalating only the hard remainder. The saving is real only if the cheap pass rarely escalates the wrong cases.",
+      "def_vi": "Để một mô hình rẻ lo phần định tuyến, bóc tách hoặc lọc, rồi chỉ đẩy phần khó còn lại lên trên. Khoản tiết kiệm chỉ có thật khi lượt chạy rẻ hiếm khi đẩy nhầm ca.",
+      "say": "The cheap pass only saves money if it hands up the right cases.",
+      "tags": [
+        "cost",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-batching",
+      "en": "Request batching",
+      "vi": "Gom nhiều mục vào một lần gọi",
+      "def_en": "Grouping many independent items into one call to cut the fixed overhead per call. It lowers cost per item and raises the damage done by a single failed call.",
+      "def_vi": "Gom nhiều mục độc lập vào một lần gọi để cắt chi phí cố định của mỗi lần gọi. Nó hạ chi phí trên mỗi mục và làm tăng thiệt hại khi một lần gọi hỏng.",
+      "say": "Batching cut the bill and made every failure hurt more.",
+      "tags": [
+        "cost",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-semantic-cache",
+      "en": "Semantic caching",
+      "vi": "Đệm theo nghĩa",
+      "def_en": "Reusing a previous answer when a new request is close enough in meaning. The whole risk lives in the threshold, since two similar questions can need opposite answers.",
+      "def_vi": "Dùng lại câu trả lời cũ khi yêu cầu mới đủ gần về nghĩa. Toàn bộ rủi ro nằm ở ngưỡng, vì hai câu hỏi na ná nhau có thể cần hai câu trả lời trái ngược.",
+      "say": "Two questions can look alike and still need opposite answers.",
+      "tags": [
+        "cost",
+        "retrieval"
+      ]
+    },
+    {
+      "id": "ag2-capability-token",
+      "en": "Capability token",
+      "vi": "Chứng chỉ quyền hẹp",
+      "def_en": "A short lived credential carrying exactly one permission for one target, handed to an agent for one task instead of a broad standing key.",
+      "def_vi": "Chứng chỉ sống ngắn, mang đúng một quyền cho đúng một đích, trao cho tác tử để làm đúng một việc thay vì một khoá rộng dùng mãi.",
+      "say": "Give it a token that expires and covers one repository.",
+      "tags": [
+        "security",
+        "permission"
+      ]
+    },
+    {
+      "id": "ag2-egress-allowlist",
+      "en": "Egress allowlist",
+      "vi": "Danh sách đích được phép gửi ra",
+      "def_en": "Restricting the destinations an agent can reach to a named set. It is the control that turns an exfiltration attempt into a blocked request.",
+      "def_vi": "Hạn chế các đích mà tác tử tới được vào một danh sách có tên. Đây là biện pháp biến một mưu toan rò rỉ dữ liệu thành một yêu cầu bị chặn.",
+      "say": "If it can only reach three hosts, the injected link goes nowhere.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "ag2-untrusted-label",
+      "en": "Untrusted content labelling",
+      "vi": "Gắn nhãn nội dung không đáng tin",
+      "def_en": "Wrapping fetched or user supplied text so the model can see it is data, not instruction. It reduces obedience to injected commands without ever removing the risk.",
+      "def_vi": "Bọc phần văn bản lấy về hoặc do người dùng đưa vào để mô hình thấy rõ đó là dữ liệu chứ không phải chỉ dẫn. Cách này giảm mức nghe lời các lệnh bị tiêm, nhưng không bao giờ xoá hết rủi ro.",
+      "say": "Mark it as data and still assume some of it will be obeyed.",
+      "tags": [
+        "security",
+        "context"
+      ]
+    },
+    {
+      "id": "ag2-dual-model",
+      "en": "Dual model pattern",
+      "vi": "Mẫu hai mô hình",
+      "def_en": "One privileged model never sees untrusted content, and a quarantined model that does see it may only return values, never actions. Fetched text stays data by construction.",
+      "def_vi": "Một mô hình có đặc quyền không bao giờ nhìn thấy nội dung không đáng tin, còn mô hình bị cách ly có nhìn thấy thì chỉ được trả về giá trị chứ không được ra hành động. Nhờ cấu trúc đó, văn bản lấy về luôn giữ nguyên vai trò dữ liệu.",
+      "say": "The model that reads the web is not the model that holds the keys.",
+      "tags": [
+        "security",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-quarantine",
+      "en": "Instruction quarantine",
+      "vi": "Cách ly chỉ dẫn lạ",
+      "def_en": "Treating every byte that came back from a tool as inert content that cannot change the plan. Only the principal who started the run may change the plan.",
+      "def_vi": "Coi mọi byte trả về từ công cụ là nội dung trơ, không được phép đổi kế hoạch. Chỉ người khởi tạo lượt chạy mới được đổi kế hoạch.",
+      "say": "Nothing a tool returns is allowed to change what we are doing.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "ag2-secret-redaction",
+      "en": "Secret redaction",
+      "vi": "Bóc bỏ bí mật",
+      "def_en": "Stripping keys and tokens from anything that enters the context or a log, because whatever reaches the context can be repeated back out in an answer.",
+      "def_vi": "Bóc bỏ khoá và chứng chỉ khỏi mọi thứ đi vào ngữ cảnh hoặc nhật ký, vì thứ gì tới được ngữ cảnh đều có thể bị đọc ngược ra trong một câu trả lời.",
+      "say": "Anything that reaches the context can come back out in an answer.",
+      "tags": [
+        "security",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-tool-supply-chain",
+      "en": "Tool supply chain",
+      "vi": "Chuỗi cung ứng công cụ",
+      "def_en": "Every attached server is code and prose you did not write, running with your agent's trust. Reviewing and pinning it matters as much as reviewing a software dependency.",
+      "def_vi": "Mỗi máy chủ gắn thêm đều là mã và văn bản không do bạn viết, lại chạy với mức tin cậy của tác tử. Việc soát và ghim phiên bản nó quan trọng ngang việc soát một thư viện phụ thuộc.",
+      "say": "An attached server is a dependency, so pin it and read what changed.",
+      "tags": [
+        "security",
+        "tools"
+      ]
+    },
+    {
+      "id": "ag2-silent-update",
+      "en": "Silent server update",
+      "vi": "Máy chủ đổi ngầm sau khi duyệt",
+      "def_en": "A remote tool server changes its descriptions or behaviour after you approved it, so what you reviewed is not what runs. Pinning versions and comparing descriptions is the defence.",
+      "def_vi": "Máy chủ công cụ từ xa đổi phần mô tả hoặc hành vi sau khi bạn đã duyệt, nên thứ bạn soát không còn là thứ đang chạy. Ghim phiên bản và so lại phần mô tả là cách phòng.",
+      "say": "Approve a version, not a name, because the name can change under you.",
+      "tags": [
+        "security",
+        "tools"
+      ]
+    },
+    {
+      "id": "ag2-blast-radius",
+      "en": "Blast radius",
+      "vi": "Bán kính thiệt hại",
+      "def_en": "How much can go wrong from a single bad action, counted in records touched, money moved and time to undo. Design choices are worth judging by this rather than by likelihood.",
+      "def_vi": "Mức thiệt hại tối đa từ một hành động sai duy nhất, tính bằng số bản ghi bị đụng, số tiền bị chuyển và thời gian để hoàn tác. Nên phán các lựa chọn thiết kế bằng con số này thay vì bằng xác suất.",
+      "say": "Ask what one wrong call can reach, not how likely it is.",
+      "tags": [
+        "security",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-blackboard",
+      "en": "Shared blackboard",
+      "vi": "Bảng chung nhiều tác tử",
+      "def_en": "A common workspace several agents read and write instead of passing messages. It removes copying at the cost of write conflicts and stale reads.",
+      "def_vi": "Vùng làm việc chung để nhiều tác tử cùng đọc và ghi thay vì chuyển tin cho nhau. Nó bỏ được việc sao chép, đổi lại là xung đột ghi và những lần đọc phải dữ liệu cũ.",
+      "say": "They share one board, so now we need a rule for who writes last.",
+      "tags": [
+        "multi-agent"
+      ]
+    },
+    {
+      "id": "ag2-coordination-overhead",
+      "en": "Coordination overhead",
+      "vi": "Chi phí phối hợp",
+      "def_en": "The tokens and turns spent on agents describing work to each other rather than doing it. Past a point, adding agents subtracts throughput.",
+      "def_vi": "Số token và số lượt tiêu vào việc các tác tử mô tả công việc cho nhau thay vì làm việc. Qua một ngưỡng, thêm tác tử là trừ đi năng suất.",
+      "say": "Past four workers, most of the tokens went into talking about the work.",
+      "tags": [
+        "multi-agent",
+        "cost"
+      ]
+    },
+    {
+      "id": "ag2-message-vs-state",
+      "en": "Message passing versus shared state",
+      "vi": "Truyền tin so với dùng chung trạng thái",
+      "def_en": "Agents either exchange explicit messages or read one common store. Messages keep boundaries clear and duplicate data, shared state avoids duplication and invites races.",
+      "def_vi": "Các tác tử hoặc trao đổi tin nhắn tường minh, hoặc cùng đọc một kho chung. Tin nhắn giữ ranh giới rõ và làm nhân bản dữ liệu, còn trạng thái chung tránh nhân bản nhưng mời gọi tranh chấp.",
+      "say": "Pick one, because half of each gives you both problems.",
+      "tags": [
+        "multi-agent",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-deadlock",
+      "en": "Agent deadlock",
+      "vi": "Kẹt chờ giữa các tác tử",
+      "def_en": "Two agents each wait for the other to act and the run stalls with no error raised. Turn limits and a single owner for every decision are what break it.",
+      "def_vi": "Hai tác tử cùng chờ bên kia hành động và lượt chạy đứng im mà không hề báo lỗi. Giới hạn số lượt và việc chỉ định một người sở hữu cho từng quyết định là thứ phá được thế đó.",
+      "say": "Nobody errored, they just waited for each other until the budget ran out.",
+      "tags": [
+        "multi-agent",
+        "failure"
+      ]
+    },
+    {
+      "id": "ag2-role-specialisation",
+      "en": "Role specialisation",
+      "vi": "Chuyên biệt hoá vai trò",
+      "def_en": "Giving each agent a narrow remit, tool set and prompt. It sharpens behaviour and creates the handover problem you then have to design for.",
+      "def_vi": "Giao cho mỗi tác tử một phạm vi hẹp, một bộ công cụ và một câu lệnh riêng. Cách này làm hành vi sắc nét hơn và sinh ra bài toán bàn giao mà sau đó bạn phải thiết kế cho nó.",
+      "say": "Narrow roles work right up to the moment they have to hand over.",
+      "tags": [
+        "multi-agent",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-agent-contract",
+      "en": "Interface contract between agents",
+      "vi": "Hợp đồng giao diện giữa các tác tử",
+      "def_en": "The agreed shape of what one agent must supply the next: fields, units and what counts as missing. Without it, handovers fail on assumptions nobody stated.",
+      "def_vi": "Dạng thức đã thống nhất về những gì tác tử này phải cấp cho tác tử kế: các trường, đơn vị và thế nào là thiếu. Không có nó, các lần bàn giao hỏng vì những giả định chẳng ai nói ra.",
+      "say": "Write the handover as a schema, including what missing looks like.",
+      "tags": [
+        "multi-agent",
+        "design"
+      ]
+    },
+    {
+      "id": "ag2-escalation",
+      "en": "Escalation policy",
+      "vi": "Chính sách chuyển cấp",
+      "def_en": "The written rule for when an agent must stop and pass a decision to a human or a higher authority. Stated in advance, it turns a judgement call into a check.",
+      "def_vi": "Quy tắc viết sẵn về lúc nào tác tử phải dừng và chuyển quyết định cho người hoặc cho cấp cao hơn. Được nêu trước, nó biến một phán đoán cảm tính thành một phép kiểm.",
+      "say": "Decide in advance what it must escalate, or it will decide for you.",
+      "tags": [
+        "design",
+        "ux"
+      ]
+    },
+    {
+      "id": "ag2-failure-taxonomy",
+      "en": "Failure taxonomy",
+      "vi": "Bảng phân loại kiểu hỏng",
+      "def_en": "A named list of the ways your agent actually fails, built by reading real runs. Fixes aimed at a category beat fixes aimed at the last bug you happened to see.",
+      "def_vi": "Danh sách có tên cho các kiểu hỏng thật sự của tác tử, dựng lên bằng cách đọc các lượt chạy thật. Sửa nhắm vào một loại thì hơn hẳn sửa nhắm vào con lỗi vừa tình cờ gặp.",
+      "say": "Name the failure categories first, then decide which one to spend on.",
+      "tags": [
+        "eval",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-intervention-rate",
+      "en": "Intervention rate",
+      "vi": "Tần suất người phải can thiệp",
+      "def_en": "How often a human has to step in per hundred runs. It tracks usefulness in production better than a pass rate on a fixed suite does.",
+      "def_vi": "Tần suất người phải nhảy vào can thiệp trên mỗi trăm lượt chạy. Chỉ số này bám sát mức hữu dụng trong vận hành tốt hơn tỉ lệ đạt trên một bộ đề cố định.",
+      "say": "Count how often a person had to step in, and trust that over the suite.",
+      "tags": [
+        "eval",
+        "ops"
+      ]
+    },
+    {
+      "id": "ag2-attempt-budget",
+      "en": "Attempt budget",
+      "vi": "Hạn mức số lần thử",
+      "def_en": "The number of tries a task is allowed before it is handed off or abandoned. It converts an open ended loop into a bounded cost.",
+      "def_vi": "Số lần thử mà một việc được phép dùng trước khi bị chuyển đi hoặc bỏ. Nó biến một vòng lặp không có điểm dừng thành một khoản chi phí có chặn.",
+      "say": "Three tries, then it goes to a person.",
+      "tags": [
+        "cost",
+        "loop"
+      ]
+    },
+    {
+      "id": "ag2-calibration-curve",
+      "en": "Calibration curve",
+      "vi": "Đường hiệu chuẩn độ tự tin",
+      "def_en": "A plot of stated confidence against observed accuracy. It is how you find out whether a confidence number carries information or is decoration.",
+      "def_vi": "Đồ thị đối chiếu mức tự tin được nêu với độ chính xác quan sát được. Đây là cách bạn biết con số tự tin có mang thông tin hay chỉ là đồ trang trí.",
+      "say": "Plot stated confidence against how often it was right, then decide whether to show it.",
+      "tags": [
+        "eval",
+        "quality"
+      ]
+    },
+    {
+      "id": "ag2-base-rate",
+      "en": "Base rate of a task",
+      "vi": "Mức nền của bài toán",
+      "def_en": "How often the task succeeds under the simplest possible approach. Any agent score is meaningless until you know what doing almost nothing already achieves.",
+      "def_vi": "Tỉ lệ thành công của việc đó dưới cách làm đơn giản nhất có thể. Mọi điểm số của tác tử đều vô nghĩa cho tới khi bạn biết cách gần như không làm gì đã đạt tới đâu.",
+      "say": "Measure the dumbest approach first, or the score has no floor.",
+      "tags": [
+        "eval"
+      ]
+    },
+    {
+      "id": "ag2-eval-sample-size",
+      "en": "Sample size for an evaluation",
+      "vi": "Cỡ mẫu của phép đánh giá",
+      "def_en": "How many tasks you need before a difference between two versions is more than noise. Twenty tasks cannot separate a small gap from luck.",
+      "def_vi": "Số việc cần có trước khi chênh lệch giữa hai phiên bản mới là điều gì đó hơn nhiễu. Hai mươi việc thì không tách nổi một khoảng cách nhỏ với sự may rủi.",
+      "say": "With that few tasks, the difference you are excited about is noise.",
+      "tags": [
+        "eval"
+      ]
+    },
+    {
+      "id": "ag2-error-bar",
+      "en": "Error bar on a pass rate",
+      "vi": "Khoảng sai số của tỉ lệ đạt",
+      "def_en": "The uncertainty around a measured score given the number of runs behind it. Reporting a rate without it invites a decision the data cannot support.",
+      "def_vi": "Khoảng bất định quanh điểm số đo được, tính theo số lượt chạy đứng sau nó. Báo tỉ lệ mà không kèm nó là mời gọi một quyết định mà dữ liệu không đỡ nổi.",
+      "say": "Give me the interval, because the point estimate alone decides nothing.",
+      "tags": [
+        "eval"
+      ]
+    },
+    {
+      "id": "ag2-flaky-eval",
+      "en": "Flaky evaluation",
+      "vi": "Bài đánh giá chập chờn",
+      "def_en": "A test that passes and fails on the same input across runs. Until that flakiness is quantified, every improvement you report may be sampling noise.",
+      "def_vi": "Bài kiểm lúc đạt lúc hỏng trên cùng một đầu vào qua các lần chạy. Chừng nào chưa định lượng được độ chập chờn đó, mọi cải thiện bạn báo cáo đều có thể chỉ là nhiễu lấy mẫu.",
+      "say": "Run the same case five times before you believe the suite.",
+      "tags": [
+        "eval",
+        "reliability"
+      ]
+    },
+    {
+      "id": "ag2-trace-sampling",
+      "en": "Trace sampling",
+      "vi": "Lấy mẫu vết chạy",
+      "def_en": "Keeping full traces for a fraction of runs and summaries for the rest, so debugging stays possible without storing everything. What you sample decides what you can ever investigate.",
+      "def_vi": "Giữ vết đầy đủ cho một phần nhỏ số lượt chạy và chỉ giữ bản tóm cho phần còn lại, để việc gỡ lỗi vẫn khả thi mà không phải lưu tất cả. Phần bạn lấy mẫu quyết định phần bạn còn có thể điều tra về sau.",
+      "say": "Sample full traces, and make sure every failed run is always kept.",
+      "tags": [
+        "ops",
+        "eval"
       ]
     }
   ]
