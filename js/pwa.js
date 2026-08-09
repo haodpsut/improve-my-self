@@ -20,6 +20,10 @@ export function isIOS() {
     || (/Macintosh/.test(ua) && typeof document.ontouchend !== 'undefined');
 }
 
+export function isAndroid() {
+  return /Android/i.test(navigator.userAgent || '');
+}
+
 export function canInstall() {
   return Boolean(deferredPrompt);
 }

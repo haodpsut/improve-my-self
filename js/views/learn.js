@@ -125,6 +125,15 @@ export async function renderLearn(app, deckId, chain = null) {
       renderLearn(app, deckId, chain);
     });
 
+    // Tren dien thoai, mat the co tran cao va tu cuon ben trong. Chu bi cat ngang
+    // giua dong la tin hieu mo ho, nen danh dau nhung mat CON noi dung de hien mot
+    // vet mo o day. Phai do sau khi trinh duyet dat xong bo cuc, khong do ngay.
+    requestAnimationFrame(() => {
+      app.querySelectorAll('.flash-face').forEach((f) => {
+        f.classList.toggle('has-more', f.scrollHeight > f.clientHeight + 2);
+      });
+    });
+
     const flip = () => { flipped = !flipped; draw(); };
     app.querySelector('#flash-inner')?.addEventListener('click', flip);
     app.querySelector('#btn-flip')?.addEventListener('click', flip);

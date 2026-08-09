@@ -77,11 +77,14 @@ export function sizePicker(current, choices, total, unit) {
     const disabled = n !== 0 && n > total ? ' disabled' : '';
     return `<option value="${n}"${n === current ? ' selected' : ''}${disabled}>${label}</option>`;
   }).join('');
+  // Tach phan duoi ra mot the rieng de o be ngang dien thoai chi giau phan duoi,
+  // van giu lai con so tong. Giau ca cum thi quay lai dung cai hieu nham cu:
+  // "bo co hon nam nghin cau ma sao chi lam co muoi cau".
   return `
     <label class="size-pick">
       <span>mỗi lượt</span>
       <span class="sel-wrap"><select id="size-sel">${opts}</select></span>
-      <span class="size-total">trong tổng ${total} ${esc(unit)}</span>
+      <span class="size-total">trong tổng ${total} <span class="size-tail">${esc(unit)}</span></span>
     </label>`;
 }
 
