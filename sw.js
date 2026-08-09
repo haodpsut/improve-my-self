@@ -14,7 +14,7 @@
       megabyte. Ban luu bi xoa khi truong updated trong manifest doi sang ngay
       moi, nen van khong the mac ket o du lieu cu. */
 
-const VERSION = 'v3';
+const VERSION = 'v4';
 const SHELL_CACHE = `ims-shell-${VERSION}`;
 const DATA_CACHE = 'ims-data';
 const FONT_CACHE = 'ims-font';
@@ -43,6 +43,7 @@ const SHELL = [
   'assets/logo.svg',
   'assets/favicon.svg',
   'assets/icon-180.png',
+  'assets/icon-192.png',
   'assets/icon-512.png',
   'assets/icon-maskable-512.png',
   'site.webmanifest',

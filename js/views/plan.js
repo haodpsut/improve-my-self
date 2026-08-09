@@ -150,11 +150,12 @@ export async function renderPlan(app) {
         </ol>`;
     }
     return `
-      <p style="margin:0 0 10px">Trình duyệt này chưa mời cài. Thường là vì một trong ba lẽ:</p>
+      <p style="margin:0 0 10px">Trình duyệt này chưa gửi lời mời cài. Thường là vì một trong bốn lẽ:</p>
       <ol class="steps">
-        <li>Trang chưa mở qua <strong>https</strong>.</li>
+        <li>Lời mời tới chậm vài giây sau khi mở trang. Nút sẽ tự hiện ra ở đây, không cần tải lại.</li>
         <li>Máy đã cài rồi, nên không mời nữa.</li>
-        <li>Trình duyệt cần bạn tự bấm: menu ba chấm, rồi <strong>Cài ứng dụng</strong> hoặc <strong>Thêm vào màn hình chính</strong>.</li>
+        <li>Trang chưa mở qua <strong>https</strong>.</li>
+        <li>Trình duyệt cần bạn tự bấm: menu ba chấm, rồi <strong>Cài ứng dụng</strong> hoặc <strong>Thêm vào màn hình chính</strong>. Firefox và Chrome trên máy tính thường nằm ở đây.</li>
       </ol>`;
   }
 

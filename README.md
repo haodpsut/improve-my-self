@@ -21,10 +21,15 @@ thư mục gốc là thư mục này.
 
 ## Cài lên điện thoại
 
-Trang là một ứng dụng web cài được. Trên Android, mở bằng Chrome rồi vào **Hôm nay**, mục *Cài lên
-điện thoại* sẽ hiện nút cài. Trên iPhone thì Safari không có nút, phải bấm **Chia sẻ** rồi **Thêm
-vào màn hình chính**; ba thẻ `apple-mobile-web-app-*` trong `index.html` là thứ khiến nó mở toàn
-màn hình chứ không mở trong Safari kèm thanh địa chỉ.
+Trang là một ứng dụng web cài được. Trên Android, nút cài nằm ngay đầu **trang chính** dưới dạng
+một thanh xanh, và có bản đầy đủ trong trang **Hôm nay**. Trên iPhone thì Safari không có nút, phải
+bấm **Chia sẻ** rồi **Thêm vào màn hình chính**; ba thẻ `apple-mobile-web-app-*` trong `index.html`
+là thứ khiến nó mở toàn màn hình chứ không mở trong Safari kèm thanh địa chỉ.
+
+Thanh mời cài phải **vẽ lại khi sự kiện tới**, không vẽ một lần rồi thôi: Chrome gửi
+`beforeinstallprompt` sau khi trang dựng xong, có khi vài giây. Vẽ một lần thì hầu như lúc nào cũng
+vẽ nhầm ra trạng thái "chưa mời cài". Sự kiện này cũng **không nổ trong khung nhúng**, nên muốn
+chụp ảnh kiểm tra thì phải ép số đo thiết bị ở trang cấp cao nhất, không nhét trang vào `iframe`.
 
 Cài xong, biểu tượng mở vào `#/start`. Đường dẫn đó tôn trọng lựa chọn *vào thẳng thẻ đầu tiên*:
 bật thì mở máy là thấy ngay thẻ, tắt thì dừng ở trang chuỗi để bấm.

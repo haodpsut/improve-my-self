@@ -2,6 +2,7 @@ import { getManifest, loadAllDecks, loadAllSpeakingSets } from '../data.js';
 import { dueCount, newCount, streak, overview, getPlan } from '../store.js';
 import { todayProgress } from './today.js';
 import { esc } from '../ui.js';
+import { canInstall, promptInstall, isStandalone, isIOS, onInstallChange } from '../pwa.js';
 
 export async function renderHome(app) {
   const manifest = await getManifest();
@@ -51,6 +52,7 @@ export async function renderHome(app) {
   };
 
   app.innerHTML = `
+    <div id="install-slot"></div>
     <div class="page-head">
       <div class="eyebrow">cập nhật ${esc(manifest.updated)}</div>
       <h1>Hôm nay học gì</h1>
@@ -102,6 +104,60 @@ export async function renderHome(app) {
         </a>`).join('')}
     </div>
   `;
+
+  /* ---------- Moi cai len may ----------
+     Dat ngay dau trang chinh chu khong chi nam trong trang Hom nay. Chrome khong
+     bao "cai duoc" vao dung luc trang ve xong: su kien moi cai den sau, co khi
+     vai giay. Nen phai ve lai rieng o nay khi su kien den, chu ve mot lan roi
+     thoi thi hau nhu luc nao cung ve nham ra "chua moi cai". */
+
+  const slot = app.querySelector('#install-slot');
+
+  function paintInstall() {
+    if (!slot || !slot.isConnected) return;
+    if (isStandalone()) { slot.innerHTML = ''; return; }
+
+    if (canInstall()) {
+      slot.innerHTML = `
+        <div class="install-bar">
+          <div class="install-bar-icon">📲</div>
+          <div class="install-bar-text">
+            <strong>Cài lên máy để học mỗi ngày</strong>
+            <span>Có biểu tượng riêng, mở toàn màn hình, học được cả khi mất mạng.</span>
+          </div>
+          <button class="btn btn-primary" id="btn-install-home">Cài</button>
+        </div>`;
+      slot.querySelector('#btn-install-home').addEventListener('click', async () => {
+        const outcome = await promptInstall();
+        if (outcome === 'accepted') {
+          slot.innerHTML = `<div class="install-bar"><div class="install-bar-icon">✅</div>
+            <div class="install-bar-text"><strong>Đang cài</strong>
+            <span>Biểu tượng sẽ hiện trên màn hình chính sau một lát.</span></div></div>`;
+        } else {
+          paintInstall();
+        }
+      });
+      return;
+    }
+
+    if (isIOS()) {
+      slot.innerHTML = `
+        <div class="install-bar">
+          <div class="install-bar-icon">📲</div>
+          <div class="install-bar-text">
+            <strong>Cài lên iPhone</strong>
+            <span>Safari không có nút cài. Bấm <b>Chia sẻ</b> rồi <b>Thêm vào màn hình chính</b>.</span>
+          </div>
+          <a class="btn" href="#/plan">Xem cách</a>
+        </div>`;
+      return;
+    }
+    slot.innerHTML = '';
+  }
+
+  paintInstall();
+  const off = onInstallChange(paintInstall);
+  app._cleanup = () => off();
 }
 
 function deckCard(meta, loaded) {

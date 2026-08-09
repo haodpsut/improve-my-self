@@ -269,6 +269,20 @@ if (webmanifest) {
   }
   const maskable = (webmanifest.icons || []).some((i) => String(i.purpose || '').includes('maskable'));
   if (!maskable) fail.push('site.webmanifest: chưa có biểu tượng maskable, Android sẽ cắt mất góc của biểu tượng');
+  // 192 va 512 la hai co Android that su lay: 192 dat len man hinh chinh, 512 dung
+  // cho man hinh mo dau.
+  //
+  // ĐÍNH CHÍNH cho chinh minh: toi tung ghi o day rang thieu 192 thi Chrome KHONG
+  // BAO GIO moi cai. Do lai bang cach bo han bieu tuong 192 roi nghe su kien
+  // beforeinstallprompt, thi no VAN no. Chrome doi mot bieu tuong tu 144 tro len
+  // chu khong doi dung 192. Giu phep kiem nay vi de he dieu hanh tu thu nho ban
+  // 512 se ra bieu tuong mo, chu khong phai vi no chan viec cai.
+  const pngSizes = new Set((webmanifest.icons || [])
+    .filter((i) => i.type === 'image/png')
+    .flatMap((i) => String(i.sizes || '').split(/\s+/)));
+  for (const need of ['192x192', '512x512']) {
+    if (!pngSizes.has(need)) fail.push(`site.webmanifest: thiếu biểu tượng PNG ${need}, hệ điều hành sẽ phải tự thu nhỏ bản khác và biểu tượng sẽ mờ`);
+  }
   // Loi tat va cua vao deu la duong dan bam. Sai mot chu la mo ra trang trong.
   const KNOWN = ['/', '/start', '/today', '/plan', '/browse', '/stats'];
   const okRoute = (u) => {
