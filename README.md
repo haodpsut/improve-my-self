@@ -52,6 +52,32 @@ Sửa mã nguồn thì nhớ đổi **cả hai** chỗ: `VERSION` trong `sw.js` 
 `index.html`. Cổng QA bắt hai giá trị này phải bằng nhau, và chân trang in nó ra để nhìn một cái là
 biết máy đang chạy bản nào.
 
+## Tệp cài Android
+
+Ngoài cách bấm nút cài, trang còn phát một tệp `app/improve-my-self.apk`. Đó là một
+**Trusted Web Activity**: một vỏ ứng dụng Android mở chính trang web này ở chế độ toàn màn hình.
+Vỏ chỉ chứa vài chục kilobyte mã, nên thêm thẻ hay sửa dữ liệu là ứng dụng đổi theo ngay, **không
+phải dựng lại tệp cài**. Chỉ khi đổi tên, biểu tượng hay mã gói mới phải dựng lại.
+
+`.well-known/assetlinks.json` là thứ khiến vỏ đó mở **không kèm thanh địa chỉ**. Nó ghép mã gói
+`com.haodpsut.improvemyself` với vân tay SHA-256 của khoá ký. Sai một chữ trong vân tay thì ứng
+dụng vẫn chạy, chỉ là chạy kèm thanh địa chỉ của trình duyệt, và đó là loại hỏng rất dễ bỏ qua khi
+thử trên máy mình.
+
+Dựng lại tệp cài (cần JDK 17 và Android SDK):
+
+```bash
+cd twa
+./gradlew.bat assembleRelease --no-daemon
+"$ANDROID_HOME/build-tools/34.0.0/zipalign" -p -f 4 \
+  app/build/outputs/apk/release/app-release-unsigned.apk aligned.apk
+"$ANDROID_HOME/build-tools/34.0.0/apksigner" sign \
+  --ks improve-my-self.keystore --ks-key-alias improve --out improve-my-self.apk aligned.apk
+```
+
+**Khoá ký nằm ngoài kho mã và không được đưa lên git.** Mất khoá thì không cập nhật được bản đã cài
+trên máy người dùng nữa, phải gỡ ra cài lại từ đầu bằng khoá mới.
+
 ## Chuỗi học hằng ngày
 
 `#/today` chạy liền ba chặng trên cùng một trang, không đổi hash: lật thẻ, rồi trắc nghiệm **ra đề

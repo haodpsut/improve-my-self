@@ -296,6 +296,36 @@ if (webmanifest) {
 }
 
 /* ---------------------------------------------------------------
+   Tep cai Android
+   ---------------------------------------------------------------
+   Trang ke hoach co mot nut tai tep .apk. Neu tep do khong co that thi nut van
+   hien binh thuong va chi bao loi luc nguoi dung bam, tuc la o dung luc te nhat.
+   Va neu co apk ma thieu assetlinks thi ung dung van chay, chi la chay kem mot
+   thanh dia chi cua trinh duyet, dieu rat de bo qua khi thu tren may minh. */
+
+const planSrc = existsSync(path.join(ROOT, 'js/views/plan.js'))
+  ? await readFile(path.join(ROOT, 'js/views/plan.js'), 'utf8') : '';
+const apkRef = planSrc.match(/href="(app\/[^"]+\.apk)"/)?.[1] || null;
+if (apkRef) {
+  if (!existsSync(path.join(ROOT, apkRef))) {
+    fail.push(`js/views/plan.js: nút tải trỏ tới "${apkRef}" nhưng tệp không có trong kho, bấm vào sẽ ra trang lỗi`);
+  }
+  const alPath = path.join(ROOT, '.well-known/assetlinks.json');
+  if (!existsSync(alPath)) {
+    fail.push('.well-known/assetlinks.json: thiếu, ứng dụng Android sẽ mở kèm thanh địa chỉ của trình duyệt');
+  } else {
+    const al = JSON.parse(await readFile(alPath, 'utf8'));
+    const fp = al?.[0]?.target?.sha256_cert_fingerprints?.[0] || '';
+    if (!/^([0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(fp)) {
+      fail.push('.well-known/assetlinks.json: vân tay SHA-256 sai dạng, phải là 32 cặp ký tự hoa nối bằng dấu hai chấm');
+    }
+    if (!al?.[0]?.target?.package_name) {
+      fail.push('.well-known/assetlinks.json: thiếu package_name');
+    }
+  }
+}
+
+/* ---------------------------------------------------------------
    Bao cao
    --------------------------------------------------------------- */
 const line = (s) => console.log(s);
