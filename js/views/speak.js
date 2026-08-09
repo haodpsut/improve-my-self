@@ -1,6 +1,6 @@
 import { loadSpeakingSet, loadDeck } from '../data.js';
 import { recordSpeak, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
-import { esc, crumb, progressBar, scoreRing, sizePicker } from '../ui.js';
+import { esc, crumb, chainBar, progressBar, scoreRing, sizePicker } from '../ui.js';
 import { speak, canSpeak, canListen, listenOnce, scoreSpoken, stopSpeaking } from '../speech.js';
 
 /* ---------- Tinh huong hoi thoai ---------- */
@@ -82,7 +82,7 @@ export async function renderSay(app, deckId) {
   });
 }
 
-function shuffleSlice(list, n) {
+export function shuffleSlice(list, n) {
   const a = list.slice();
   for (let i = a.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -91,9 +91,17 @@ function shuffleSlice(list, n) {
   return a.slice(0, n);
 }
 
-/* ---------- Vong chay chung ---------- */
+/* ---------- Vong chay chung ----------
+   cfg.chain khong rong nghia la dang chay mot chang cua chuoi hoc hang ngay:
+   thay thanh duong dan bang thanh chang, va khi xong thi tra quyen dieu khien
+   lai cho chuoi thay vi hien man ket thuc rieng. */
+
+export function runSpeakSession(app, cfg) {
+  return runDrills(app, cfg);
+}
 
 function runDrills(app, cfg) {
+  const chain = cfg.chain || null;
   let index = 0;
   let stopListening = null;
   let listening = false;
@@ -111,6 +119,11 @@ function runDrills(app, cfg) {
 
   function finish() {
     const avg = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
+    if (chain) {
+      cleanup();
+      chain.onDone({ total: cfg.items.length, done: scores.length, avg, title: cfg.title });
+      return;
+    }
     app.innerHTML = `
       ${crumb([{ label: cfg.backLabel, href: cfg.backHref }, { label: cfg.title }])}
       <div class="done-hero">
@@ -135,15 +148,18 @@ function runDrills(app, cfg) {
     const showAnswer = Boolean(result);
 
     app.innerHTML = `
-      ${crumb([{ label: cfg.backLabel, href: cfg.backHref }, { label: cfg.title }])}
+      ${chain
+        ? chainBar(chain)
+        : crumb([{ label: cfg.backLabel, href: cfg.backHref }, { label: cfg.title }])}
       <div class="session-bar">
         <span>${index + 1} / ${cfg.items.length}</span>
         <span class="dot"></span>
         <span>${esc(cfg.icon)} ${esc(cfg.title)}</span>
+        ${chain ? '' : `
         <span class="dot"></span>
         ${sizePicker(cfg.size, SIZE_CHOICES, cfg.total, cfg.unit)}
         <span class="spacer"></span>
-        <a class="btn btn-sm btn-ghost" href="${cfg.backHref}">Dừng</a>
+        <a class="btn btn-sm btn-ghost" href="${cfg.backHref}">Dừng</a>`}
       </div>
       ${progressBar(index, cfg.items.length)}
 

@@ -9,7 +9,7 @@
 // qa.mjs bat loi chat luong.
 
 import { readFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
@@ -208,6 +208,77 @@ for (const set of manifest.speaking || []) {
     warn.push(`${set.file}: ${pct(keyless, drills.length)} phần trăm tình huống không có cụm khoá nào, phần chấm chỉ còn dựa vào trùng từ`);
   }
   sRows.push({ id: set.id, n: drills.length, avgWords: Math.round(wordSum / (drills.length || 1)) });
+}
+
+/* ---------------------------------------------------------------
+   Cai len dien thoai: danh sach tai truoc, bieu tuong, loi tat
+   ---------------------------------------------------------------
+   Service worker tai truoc mot danh sach duong dan viet tay. Doi ten mot tep js
+   ma quen sua danh sach do thi trang van chay binh thuong khi CO mang, va chi
+   hong khi mat mang, tuc la hong o dung luc khong ai kiem tra duoc. Nen phai
+   kiem tu dong. Chieu nguoc lai cung phai kiem: co tep js moi ma khong ghi vao
+   danh sach thi ban ngoai tuyen se thieu dung tep do. */
+
+const swSrc = existsSync(path.join(ROOT, 'sw.js')) ? await readFile(path.join(ROOT, 'sw.js'), 'utf8') : '';
+if (!swSrc) {
+  fail.push('sw.js: không tồn tại, trang sẽ không cài lên điện thoại được');
+} else {
+  const block = swSrc.match(/const SHELL = \[([\s\S]*?)\];/);
+  if (!block) {
+    fail.push('sw.js: không tìm thấy danh sách SHELL để đối chiếu');
+  } else {
+    const listed = [...block[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+    for (const rel of listed) {
+      if (rel === './') continue;
+      if (!existsSync(path.join(ROOT, rel))) {
+        fail.push(`sw.js: tải trước "${rel}" nhưng tệp không tồn tại, bản ngoại tuyến sẽ thiếu`);
+      }
+    }
+    // Moi tep js phai co trong danh sach, neu khong thi mat mang la trang gay.
+    const jsFiles = [];
+    const walk = (dir) => {
+      for (const e of readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
+        const rel = `${dir}/${e.name}`;
+        if (e.isDirectory()) walk(rel);
+        else if (e.name.endsWith('.js')) jsFiles.push(rel);
+      }
+    };
+    walk('js');
+    for (const f of jsFiles) {
+      if (!listed.includes(f)) fail.push(`sw.js: thiếu "${f}" trong danh sách tải trước, mất mạng sẽ hỏng đúng trang dùng tệp này`);
+    }
+  }
+}
+
+// Dau ban o chan trang phai khop VERSION cua service worker. Neu lech, chan trang
+// se noi mot dang con ban luu tren may la mot dang khac, dung kieu nham lan da
+// tung ton mot buoi de tim ra.
+const indexSrc = existsSync(path.join(ROOT, 'index.html')) ? await readFile(path.join(ROOT, 'index.html'), 'utf8') : '';
+const metaBuild = indexSrc.match(/<meta name="build" content="([^"]+)"/)?.[1] || null;
+const swVersion = swSrc.match(/const VERSION = '([^']+)'/)?.[1] || null;
+if (!metaBuild) fail.push('index.html: thiếu <meta name="build">, chân trang sẽ không nói được đang chạy bản nào');
+else if (!swVersion) fail.push('sw.js: không đọc được VERSION để đối chiếu với dấu bản ở chân trang');
+else if (metaBuild !== swVersion) {
+  fail.push(`dấu bản lệch: index.html ghi "${metaBuild}" còn sw.js ghi "${swVersion}", sửa mã nguồn mà quên đổi một trong hai`);
+}
+
+const webmanifest = await readJSON('site.webmanifest');
+if (webmanifest) {
+  for (const ic of webmanifest.icons || []) {
+    if (!existsSync(path.join(ROOT, ic.src))) fail.push(`site.webmanifest: biểu tượng "${ic.src}" không tồn tại`);
+  }
+  const maskable = (webmanifest.icons || []).some((i) => String(i.purpose || '').includes('maskable'));
+  if (!maskable) fail.push('site.webmanifest: chưa có biểu tượng maskable, Android sẽ cắt mất góc của biểu tượng');
+  // Loi tat va cua vao deu la duong dan bam. Sai mot chu la mo ra trang trong.
+  const KNOWN = ['/', '/start', '/today', '/plan', '/browse', '/stats'];
+  const okRoute = (u) => {
+    const h = String(u).split('#')[1] || '/';
+    return KNOWN.includes(h) || /^\/(deck|learn|quiz|say|speak|browse)\/[\w-]+$/.test(h);
+  };
+  if (!okRoute(webmanifest.start_url)) fail.push(`site.webmanifest: start_url "${webmanifest.start_url}" không khớp đường dẫn nào của trang`);
+  for (const sc of webmanifest.shortcuts || []) {
+    if (!okRoute(sc.url)) fail.push(`site.webmanifest: lối tắt "${sc.name}" trỏ tới "${sc.url}" không khớp đường dẫn nào`);
+  }
 }
 
 /* ---------------------------------------------------------------

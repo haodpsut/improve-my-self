@@ -1,8 +1,11 @@
 // Bo dinh tuyen theo hash. Trang tinh hoan toan, khong build, khong API.
 
 import { getManifest } from './data.js';
-import { getTheme, setTheme } from './store.js';
+import { getTheme, setTheme, getPlan } from './store.js';
+import { initPWA } from './pwa.js';
 import { renderHome } from './views/home.js';
+import { renderToday } from './views/today.js';
+import { renderPlan } from './views/plan.js';
 import { renderDeck } from './views/deck.js';
 import { renderLearn } from './views/learn.js';
 import { renderQuiz } from './views/quizview.js';
@@ -35,6 +38,11 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 
 const ROUTES = [
   [/^\/?$/, () => renderHome(app), 'home'],
+  // #/start la cua vao khi mo ung dung da cai. No ton trong lua chon "vao thang
+  // the dau tien". #/today thi luon chay chuoi, vi do la nut nguoi hoc tu bam.
+  [/^\/start$/, () => (getPlan().autostart ? renderToday(app) : renderPlan(app)), 'today'],
+  [/^\/today$/, () => renderToday(app), 'today'],
+  [/^\/plan$/, () => renderPlan(app), 'today'],
   [/^\/deck\/([\w-]+)$/, (m) => renderDeck(app, m[1]), 'home'],
   [/^\/learn\/([\w-]+)$/, (m) => renderLearn(app, m[1]), 'home'],
   [/^\/quiz\/([\w-]+)$/, (m) => renderQuiz(app, m[1]), 'home'],
@@ -93,9 +101,11 @@ getManifest()
     const [y, mo, d] = String(m.updated).split('-');
     const nDeck = (m.decks || []).length;
     const nSpeak = (m.speaking || []).length;
-    el.textContent = `Dữ liệu ${d}/${mo}/${y} · ${nDeck} bộ thẻ · ${nSpeak} bộ luyện nói`;
+    const build = document.querySelector('meta[name="build"]')?.content || '';
+    el.textContent = `Dữ liệu ${d}/${mo}/${y} · ${nDeck} bộ thẻ · ${nSpeak} bộ luyện nói${build ? ` · bản ${build}` : ''}`;
   })
   .catch(() => { /* chan trang khong quan trong den muc lam hong trang */ });
 
 window.addEventListener('hashchange', route);
 route();
+initPWA();

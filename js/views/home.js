@@ -1,5 +1,6 @@
 import { getManifest, loadAllDecks, loadAllSpeakingSets } from '../data.js';
-import { dueCount, newCount, streak, overview } from '../store.js';
+import { dueCount, newCount, streak, overview, getPlan } from '../store.js';
+import { todayProgress } from './today.js';
 import { esc } from '../ui.js';
 
 export async function renderHome(app) {
@@ -15,6 +16,27 @@ export async function renderHome(app) {
   const fresh = newCount(allIds);
   const ov = overview();
   const days = streak();
+
+  // Chuoi hom nay dat ngay tren cung, vi day la viec nen lam truoc moi ngay,
+  // con danh sach bo the la de chon them khi con hung.
+  const chainCard = () => {
+    const plan = getPlan();
+    const prog = todayProgress(plan);
+    if (!prog.rows.length) return '';
+    const line = prog.rows.map((r) => `${r.done}/${r.goal} ${r.label}`).join(' · ');
+    return `
+      <div class="section-title">Chuỗi hôm nay</div>
+      <a class="card chain-card" href="#/today">
+        <div class="mode-icon">${prog.allDone ? '✅' : '🔥'}</div>
+        <div>
+          <div class="mode-name">${prog.allDone ? 'Hôm nay đã xong, chạy thêm một chuỗi nữa' : 'Bắt đầu chuỗi hôm nay'}</div>
+          <div class="mode-desc">${esc(line)}</div>
+        </div>
+        <span class="spacer"></span>
+        <span class="chain-card-go" aria-hidden="true">›</span>
+      </a>
+      <p class="section-blurb" style="margin-top:-4px">Muốn đổi số thẻ, số câu hay chọn bộ nào thì vào <a href="#/plan">sửa chuỗi</a>.</p>`;
+  };
 
   const groupBlock = (group) => {
     const items = manifest.decks.filter((d) => (d.group || 'domain') === group.id);
@@ -42,6 +64,8 @@ export async function renderHome(app) {
       <div class="stat"><div class="stat-value">${days}</div><div class="stat-label">ngày liên tiếp</div></div>
       <div class="stat"><div class="stat-value">${ov.quiz.asked ? Math.round((ov.quiz.right / ov.quiz.asked) * 100) : 0}%</div><div class="stat-label">đúng khi trắc nghiệm</div></div>
     </div>
+
+    ${chainCard()}
 
     <div class="section-title">Ôn tổng hợp</div>
     <div class="grid grid-modes">

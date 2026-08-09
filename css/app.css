@@ -406,7 +406,7 @@ a.card:hover, button.card:hover {
   font-size: 10px;
   color: var(--ink-3);
 }
-.size-pick select {
+.sel-wrap select {
   appearance: none;
   -webkit-appearance: none;
   padding: 4px 25px 4px 10px;
@@ -421,12 +421,12 @@ a.card:hover, button.card:hover {
   cursor: pointer;
 }
 /* Danh sach xo xuong do he thong ve, phai chi dinh mau roi rang. */
-.size-pick select option {
+.sel-wrap select option {
   background-color: var(--surface);
   color: var(--ink);
 }
-.size-pick select:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
-.size-pick select:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 1px; }
+.sel-wrap select:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.sel-wrap select:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 1px; }
 .size-total { color: var(--ink-3); }
 
 /* ============================================================
@@ -758,3 +758,165 @@ a.card:hover, button.card:hover {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ============================================================
+   Chuoi hoc hang ngay, trang ke hoach, va phan cai len dien thoai
+   ============================================================ */
+
+/* Thanh chang, dat dau moi man trong chuoi */
+.chain-bar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+.chain-bar .spacer { flex: 1; }
+.chain-step {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.chain-step b { font-weight: 640; }
+.chain-step.is-now {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--ink);
+}
+.chain-step.is-done { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); }
+.chain-step.is-done::after { content: "✓"; }
+.chain-sep { color: var(--ink-3); font-style: normal; }
+
+/* Khoi lon tren trang chuoi */
+.chain-hero { padding: 20px 22px; margin-bottom: 26px; }
+.chain-hero-steps { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.chain-prog { display: grid; gap: 9px; margin-bottom: 18px; }
+.chain-prog-row {
+  display: grid;
+  grid-template-columns: minmax(96px, 130px) 1fr auto;
+  align-items: center; gap: 12px;
+  font-size: 13.5px; color: var(--ink-2);
+}
+.chain-prog-bar {
+  height: 7px; border-radius: 999px;
+  background: var(--panel-strong);
+  overflow: hidden;
+}
+.chain-prog-bar i {
+  display: block; height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.chain-prog-num { font-variant-numeric: tabular-nums; color: var(--ink-3); font-size: 12.5px; }
+
+.btn-big { padding: 13px 26px; font-size: 15.5px; border-radius: 13px; }
+
+/* The chuoi tren trang chinh */
+.chain-card {
+  display: flex; align-items: center; gap: 13px;
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  margin-bottom: 10px;
+}
+.chain-card-go { font-size: 24px; color: var(--ink-3); }
+
+/* Trang ke hoach */
+.plan-card { padding: 20px 22px; display: grid; gap: 18px; }
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.field { display: grid; gap: 6px; font-size: 13px; color: var(--ink-3); }
+.field .sel-wrap { width: 100%; }
+.field select { width: 100%; }
+
+.switch { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--ink-2); cursor: pointer; }
+.switch input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--accent); }
+
+.plan-decks { display: grid; gap: 12px; }
+.plan-decks-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.plan-decks-head strong { flex: 1; font-size: 14.5px; }
+.plan-group-title { font-size: 12.5px; color: var(--ink-3); margin-bottom: 7px; }
+.plan-group + .plan-group { margin-top: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+/* The chon bo la mot nhan boc o danh dau, khong phai mot nut, nen phai tu dat
+   lai the nam ngang va giau o danh dau di. */
+.chips .chip { display: inline-flex; align-items: center; }
+.chips .chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+.chip.is-on {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--ink);
+}
+.chips .chip:focus-within { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
+
+.install-card { padding: 18px 20px; }
+.steps { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 14px; line-height: 1.75; }
+.steps strong { color: var(--ink); }
+
+/* Bao co ban moi */
+.toast {
+  position: fixed;
+  left: 50%; transform: translateX(-50%);
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  border-radius: 13px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  max-width: calc(100vw - 28px);
+}
+.toast[hidden] { display: none; }
+
+/* ============================================================
+   Chay duoi dang ung dung da cai
+   ============================================================ */
+/* Man hinh co tai tho va thanh vuot cham: phai chua cho, neu khong thi hang nut
+   duoi cung nam ngay duoi thanh vuot va bam nham lien tuc. */
+.topbar { padding-top: calc(12px + env(safe-area-inset-top)); }
+.app {
+  padding-left: max(clamp(14px, 4vw, 40px), env(safe-area-inset-left));
+  padding-right: max(clamp(14px, 4vw, 40px), env(safe-area-inset-right));
+}
+.footer { padding-bottom: calc(30px + env(safe-area-inset-bottom)); }
+
+@media (display-mode: standalone) {
+  /* Da cai roi thi khong con phai moi cai nua. */
+  .install-card .btn-primary { display: none; }
+}
+
+@media (max-width: 560px) {
+  .chain-hero { padding: 16px 16px; }
+  .plan-card { padding: 16px; }
+  .chain-prog-row { grid-template-columns: minmax(84px, 108px) 1fr auto; gap: 9px; font-size: 12.5px; }
+  .chain-step { padding: 4px 10px; font-size: 12.5px; }
+  .btn-big { width: 100%; }
+  /* Ba nut cham diem phai du to de bam bang ngon cai, va phai nam thanh mot hang
+     rieng chu khong lan vao hang nut dieu huong. */
+  .grade-row { margin-top: 8px; }
+  .grade-row .btn { flex: 1; min-height: 48px; padding: 9px 6px; }
+  .chain-hero-steps .chain-sep, .chain-bar .chain-sep { display: none; }
+}
+
+/* O chon cua trang ke hoach la dieu khien chinh, khong phai o chinh nho ben thanh
+   phien, nen phai to hon co mac dinh cua .sel-wrap select. */
+.field select { font-size: 14px; padding: 9px 30px 9px 12px; border-radius: 10px; }
+
+/* Them muc "Hom nay" la thanh tren cung co bon muc. O be ngang dien thoai, bon
+   muc voi co chu cu se day thanh tren rong hon man hinh, va khi mot phan tu day
+   trang rong ra thi CA TRANG tran ngang chu khong chi rieng thanh do. Day dung
+   la loi da xay ra, thay bang cach do scrollWidth chu khong bang cach nhin. */
+@media (max-width: 620px) {
+  .topbar { gap: 8px; padding-left: 12px; padding-right: 12px; }
+  .topnav { gap: 1px; }
+  .topnav a { padding: 6px 8px; font-size: 12.5px; }
+  .icon-btn { width: 32px; height: 32px; font-size: 15px; }
+  .brand-mark { width: 34px; height: 34px; border-radius: 11px; }
+}
+@media (max-width: 380px) {
+  .topnav a { padding: 5px 6px; font-size: 11.5px; }
+}
+
+.nav-row { margin-top: 4px; }
+.grade-row { margin-top: 10px; }

@@ -6,6 +6,18 @@
   <title>Improve my self · học khái niệm, trắc nghiệm, luyện nói</title>
   <meta name="description" content="Trang tĩnh tự học thuật ngữ kỹ thuật Anh, Việt, Nga. Thẻ ghi nhớ, trắc nghiệm và luyện nói, dữ liệu nằm hoàn toàn trong JSON.">
   <meta name="theme-color" content="#eef5ea">
+  <!-- Dau ban ma nguon, in o chan trang. Du lieu va ma nguon doi doc lap nhau,
+       nen chi mot dau ngay du lieu thi khong phan biet duoc "chua cap nhat" voi
+       "trinh duyet con giu ban cu". Cong QA bat gia tri nay phai bang VERSION
+       trong sw.js, de hai noi khong bao gio noi hai dieu khac nhau. -->
+  <meta name="build" content="v3">
+  <!-- iOS khong doc site.webmanifest de mo toan man hinh, van phai dung ba the
+       rieng nay. Thieu chung thi bam Them vao man hinh chinh se ra mot loi tat
+       mo trong Safari kem thanh dia chi, khong phai mot ung dung. -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Improve">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
   <link rel="manifest" href="site.webmanifest">
@@ -28,6 +40,7 @@
     </a>
     <nav class="topnav">
       <a href="#/" data-nav="home">Trang chính</a>
+      <a href="#/plan" data-nav="today">Hôm nay</a>
       <a href="#/browse" data-nav="browse">Tra cứu</a>
       <a href="#/stats" data-nav="stats">Tiến độ</a>
     </nav>
@@ -37,6 +50,8 @@
   <main id="app" class="app" aria-live="polite">
     <div class="loading">Đang tải dữ liệu…</div>
   </main>
+
+  <div id="toast" class="toast" role="status" hidden></div>
 
   <footer class="footer">
     <span>Dữ liệu nằm trong <code>data/</code>. Sửa JSON là trang tự đổi theo, không có bước build.</span>

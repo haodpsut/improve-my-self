@@ -40,6 +40,25 @@ export function scoreRing(pct) {
   return `<div class="score-ring" style="--pct:${pct};--ring-color:${colour}"><span>${pct}</span></div>`;
 }
 
+/**
+ * Thanh chang cua chuoi hoc hang ngay. Dat ngay dau moi man trong chuoi de luc
+ * nao cung nhin thay dang o chang may va con may chang nua.
+ */
+export function chainBar(chain) {
+  if (!chain) return '';
+  const steps = chain.stages.map((s, i) => {
+    const n = i + 1;
+    const cls = n === chain.step ? 'is-now' : n < chain.step ? 'is-done' : '';
+    return `<span class="chain-step ${cls}"><b>${esc(s.icon)}</b> ${esc(s.name)}</span>`;
+  });
+  return `
+    <div class="chain-bar">
+      ${steps.join('<i class="chain-sep" aria-hidden="true">›</i>')}
+      <span class="spacer"></span>
+      <a class="btn btn-sm btn-ghost" href="#/plan">Dừng</a>
+    </div>`;
+}
+
 export function emptyState(text) {
   return `<div class="empty">${esc(text)}</div>`;
 }

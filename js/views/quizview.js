@@ -1,18 +1,19 @@
 import { loadDeck, loadQuestions, loadEverything, loadAllQuestions } from '../data.js';
 import { buildQuizSet } from '../quiz.js';
 import { recordQuiz, gradeCard, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
-import { esc, crumb, progressBar, scoreRing, sizePicker } from '../ui.js';
+import { esc, crumb, chainBar, progressBar, scoreRing, sizePicker } from '../ui.js';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-export async function renderQuiz(app, deckId) {
+/** chain khong rong nghia la dang chay mot chang cua chuoi hoc hang ngay. */
+export async function renderQuiz(app, deckId, chain = null) {
   const isAll = deckId === 'all';
-  const { deck, cards } = isAll ? await loadEverything() : await loadDeck(deckId);
-  const authored = isAll ? await loadAllQuestions() : await loadQuestions(deckId);
-  const backHref = isAll ? '#/' : `#/deck/${deckId}`;
+  const { deck, cards } = chain?.bundle || (isAll ? await loadEverything() : await loadDeck(deckId));
+  const authored = chain ? chain.authored : isAll ? await loadAllQuestions() : await loadQuestions(deckId);
+  const backHref = chain ? '#/plan' : isAll ? '#/' : `#/deck/${deckId}`;
   // Kho cau hoi that = cau viet tay cong cau sinh duoc tu tung the.
   const pool = authored.length + cards.length;
-  const size = sessionSize('quiz');
+  const size = chain ? chain.size : sessionSize('quiz');
   const set = buildQuizSet({ cards, authored, size: size === 0 ? pool : size });
 
   if (!set.length) {
@@ -27,6 +28,10 @@ export async function renderQuiz(app, deckId) {
 
   function finish() {
     const pct = Math.round((right / set.length) * 100);
+    if (chain) {
+      chain.onDone({ total: set.length, right, pct, wrongOnes });
+      return;
+    }
     app.innerHTML = `
       ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Trắc nghiệm' }])}
       <div class="done-hero">
@@ -56,16 +61,19 @@ export async function renderQuiz(app, deckId) {
     answered = false;
 
     app.innerHTML = `
-      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Trắc nghiệm' }])}
+      ${chain
+        ? chainBar(chain)
+        : crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Trắc nghiệm' }])}
       <div class="session-bar">
         <span>Câu ${index + 1} / ${set.length}</span>
         <span class="dot"></span>
         <span>đúng ${right}</span>
         ${q.generated ? '<span class="dot"></span><span>sinh từ thẻ</span>' : '<span class="dot"></span><span>câu hiểu bản chất</span>'}
+        ${chain ? '' : `
         <span class="dot"></span>
         ${sizePicker(size, SIZE_CHOICES, pool, `câu có thể ra, gồm ${authored.length} câu viết tay`)}
         <span class="spacer"></span>
-        <a class="btn btn-sm btn-ghost" href="${backHref}">Dừng</a>
+        <a class="btn btn-sm btn-ghost" href="${backHref}">Dừng</a>`}
       </div>
       ${progressBar(index, set.length)}
 
@@ -98,10 +106,12 @@ export async function renderQuiz(app, deckId) {
       if (!ok) {
         buttons[i]?.classList.add('wrong');
         wrongOnes.push(q.term ? `${q.term} — ${q.gloss || ''}` : q.q.slice(0, 90));
-        if (q.cardId) gradeCard(q.cardId, 'again');
+        // count:false vi day la mot cau trac nghiem, khong phai mot the da lat.
+        // Lich on van doi, nhung so the hoc trong ngay thi khong duoc cong khong.
+        if (q.cardId) gradeCard(q.cardId, 'again', { count: false });
       } else {
         right += 1;
-        if (q.cardId) gradeCard(q.cardId, 'good');
+        if (q.cardId) gradeCard(q.cardId, 'good', { count: false });
       }
       // Ghi diem vao dung mon cua cau hoi, khong phai vao "all", neu khong
       // thi bai tong hop se lam hong thong ke cua tung mon.
@@ -124,7 +134,7 @@ export async function renderQuiz(app, deckId) {
     app.querySelector('#size-sel')?.addEventListener('change', (e) => {
       setSessionSize('quiz', Number(e.target.value));
       document.removeEventListener('keydown', onKey);
-      renderQuiz(app, deckId);
+      renderQuiz(app, deckId, chain);
     });
 
     app.querySelectorAll('.choice').forEach((b) => {

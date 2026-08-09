@@ -19,6 +19,48 @@ npx serve .          # hoặc: python -m http.server 8000
 Rồi mở `http://localhost:3000`. Đưa lên Vercel thì chọn framework **Other**, không có lệnh build,
 thư mục gốc là thư mục này.
 
+## Cài lên điện thoại
+
+Trang là một ứng dụng web cài được. Trên Android, mở bằng Chrome rồi vào **Hôm nay**, mục *Cài lên
+điện thoại* sẽ hiện nút cài. Trên iPhone thì Safari không có nút, phải bấm **Chia sẻ** rồi **Thêm
+vào màn hình chính**; ba thẻ `apple-mobile-web-app-*` trong `index.html` là thứ khiến nó mở toàn
+màn hình chứ không mở trong Safari kèm thanh địa chỉ.
+
+Cài xong, biểu tượng mở vào `#/start`. Đường dẫn đó tôn trọng lựa chọn *vào thẳng thẻ đầu tiên*:
+bật thì mở máy là thấy ngay thẻ, tắt thì dừng ở trang chuỗi để bấm.
+
+`sw.js` là service worker, và nó chia tệp làm ba loại vì ba lý do khác nhau:
+
+| loại | cách lấy | vì sao |
+| --- | --- | --- |
+| html, css, js | mạng trước, bản lưu là dự phòng | vỏ trang rất nhẹ, đổi lại là không bao giờ chạy nhầm mã nguồn cũ |
+| `data/manifest.json` | mạng trước | nó là mốc để biết bộ dữ liệu đã sang ngày mới chưa |
+| tệp dữ liệu còn lại | bản lưu trước | tổng hơn 5 MB, tải lại mỗi lần thì tốn dữ liệu di động |
+
+Bản lưu dữ liệu **tự bị dọn** khi `manifest.updated` đổi sang ngày khác. Việc đối chiếu làm ngay
+trong lượt trả `manifest.json` chứ không bằng tin nhắn từ trang gửi sang, vì trang gọi manifest
+xong mới gọi tệp thẻ đầu tiên, nên làm ở đó thì không có khe nào cho dữ liệu hôm qua lọt ra.
+
+Nút *Tải toàn bộ dữ liệu* trong trang **Hôm nay** kéo cả 54 tệp về máy để học khi bay hoặc mất sóng.
+
+Sửa mã nguồn thì nhớ đổi **cả hai** chỗ: `VERSION` trong `sw.js` và `<meta name="build">` trong
+`index.html`. Cổng QA bắt hai giá trị này phải bằng nhau, và chân trang in nó ra để nhìn một cái là
+biết máy đang chạy bản nào.
+
+## Chuỗi học hằng ngày
+
+`#/today` chạy liền ba chặng trên cùng một trang, không đổi hash: lật thẻ, rồi trắc nghiệm **ra đề
+từ chính những thẻ vừa lật**, rồi nói thành tiếng. Chặng hai ra đề từ thẻ vừa học chứ không bốc lại
+từ toàn kho, nên vừa kiểm đúng phần vừa học vừa chỉ phải tải ngân hàng câu hỏi của vài bộ liên quan
+thay vì cả 23 bộ.
+
+`#/plan` là nơi sửa: số thẻ, số câu, số lượt nói, bộ luyện nói, và chọn lấy thẻ từ bộ nào. Kế hoạch
+nằm trong `localStorage` dưới khoá `ims.v1`, trường `plan`. Chọn hết các bộ được lưu thành danh
+sách **rỗng** chứ không phải liệt kê từng bộ, để sau này thêm bộ mới vào manifest là chuỗi tự lấy
+luôn, không phải vào sửa lại.
+
+Chặng nào đặt số 0 thì bị bỏ khỏi chuỗi.
+
 ## Hai cổng kiểm, chạy trước khi đẩy lên
 
 ```bash

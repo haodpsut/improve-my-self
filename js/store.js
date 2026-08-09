@@ -14,6 +14,18 @@ function blank() {
 export const SIZE_CHOICES = [10, 20, 30, 50, 0]; // 0 nghia la lay het
 const DEFAULT_SIZE = { learn: 20, quiz: 10, speak: 10 };
 
+// Ke hoach cua chuoi hoc moi ngay, dung cho trang #/today.
+// decks rong nghia la lay het moi bo, khong phai khong lay bo nao.
+// So 0 o mot chang nghia la BO chang do khoi chuoi.
+const DEFAULT_PLAN = {
+  decks: [],
+  cards: 20,
+  quiz: 10,
+  speak: 5,
+  speakSet: 'auto',
+  autostart: true
+};
+
 let state = load();
 
 function load() {
@@ -62,8 +74,14 @@ export function isDue(cardId) {
   return cardState(cardId).due <= today();
 }
 
-/** grade: 'again' | 'hard' | 'good' */
-export function gradeCard(cardId, grade) {
+/**
+ * grade: 'again' | 'hard' | 'good'
+ * opts.count = false khi cham the tu mot man KHAC man hoc the, vi du khi tra loi
+ * trac nghiem. Lich on van doi, nhung so the hoc trong ngay thi khong duoc cong,
+ * neu khong mot cau trac nghiem se dem thanh mot the da hoc va muc tieu ngay
+ * se tu day len ma nguoi hoc khong lat the nao.
+ */
+export function gradeCard(cardId, grade, opts = {}) {
   const cur = cardState(cardId);
   let box = cur.box;
   if (grade === 'good') box = Math.min(box + 1, BOX_DAYS.length - 1);
@@ -78,7 +96,7 @@ export function gradeCard(cardId, grade) {
     wrong: cur.wrong + (grade === 'again' ? 1 : 0),
     last: today()
   };
-  bumpDay('learn');
+  if (opts.count !== false) bumpDay('learn');
   save();
 }
 
@@ -203,6 +221,33 @@ export function sessionSize(mode) {
 export function setSessionSize(mode, n) {
   state.prefs = { ...(state.prefs || {}), [mode]: n };
   save();
+}
+
+/* ---------- Ke hoach chuoi hoc moi ngay ---------- */
+
+export function getPlan() {
+  return { ...DEFAULT_PLAN, ...(state.plan || {}) };
+}
+
+export function setPlan(patch) {
+  state.plan = { ...getPlan(), ...patch };
+  save();
+}
+
+export function resetPlan() {
+  state.plan = { ...DEFAULT_PLAN };
+  save();
+}
+
+/** So viec da lam trong hom nay, doc thang tu so ngay san co. */
+export function todayCounts() {
+  return { learn: 0, quiz: 0, speak: 0, ...(state.days[today()] || {}) };
+}
+
+/** Da lam du chuoi hom nay chua. Chang bi tat (so 0) luon coi nhu xong. */
+export function planDone(plan = getPlan()) {
+  const d = todayCounts();
+  return d.learn >= plan.cards && d.quiz >= plan.quiz && d.speak >= plan.speak;
 }
 
 /* ---------- Nen sang toi ---------- */

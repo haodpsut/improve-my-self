@@ -1,25 +1,37 @@
 import { loadDeck, loadEverything } from '../data.js';
 import { buildQueue, gradeCard, cardState, sessionSize, setSessionSize, SIZE_CHOICES } from '../store.js';
-import { esc, crumb, progressBar, sizePicker } from '../ui.js';
+import { esc, crumb, chainBar, progressBar, sizePicker } from '../ui.js';
 import { speak, canSpeak } from '../speech.js';
 
-export async function renderLearn(app, deckId) {
+/**
+ * chain khong rong nghia la man nay dang la mot chang cua chuoi hoc hang ngay.
+ * Khi do du lieu da duoc nap san, co luot do ke hoach quyet dinh, va khi hoc xong
+ * thi khong hien man ket thuc rieng ma tra quyen dieu khien lai cho chuoi.
+ */
+export async function renderLearn(app, deckId, chain = null) {
   const isAll = deckId === 'all';
-  const { deck, cards } = isAll ? await loadEverything() : await loadDeck(deckId);
-  const backHref = isAll ? '#/' : `#/deck/${deckId}`;
+  const { deck, cards } = chain?.bundle || (isAll ? await loadEverything() : await loadDeck(deckId));
+  const backHref = chain ? '#/plan' : isAll ? '#/' : `#/deck/${deckId}`;
   if (!cards.length) {
     app.innerHTML = `<div class="empty">Bộ thẻ này chưa có thẻ nào.</div>`;
     return;
   }
 
-  const size = sessionSize('learn');
+  const size = chain ? chain.size : sessionSize('learn');
   const queue = buildQueue(cards, size === 0 ? cards.length : size);
   let index = 0;
   let flipped = false;
   const graded = { good: 0, hard: 0, again: 0 };
+  // The da thuc su cham diem trong luot nay. Chang trac nghiem ke tiep se ra de
+  // tu dung nhung the vua hoc, chu khong boc ngau nhien tu toan kho.
+  const touched = [];
 
   function done() {
     keyHandler = null; // man hinh ket thuc khong nhan phim tat cua phien hoc
+    if (chain) {
+      chain.onDone({ total: queue.length, ...graded, cards: touched });
+      return;
+    }
     app.innerHTML = `
       ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Học khái niệm' }])}
       <div class="done-hero">
@@ -37,7 +49,7 @@ export async function renderLearn(app, deckId) {
       </div>`;
     app.querySelector('#btn-again-round')?.addEventListener('click', () => {
       document.removeEventListener('keydown', onKey);
-      renderLearn(app, deckId);
+      renderLearn(app, deckId, chain);
     });
   }
 
@@ -48,15 +60,18 @@ export async function renderLearn(app, deckId) {
     const boxLabel = st.seen ? `hộp ${st.box}` : 'thẻ mới';
 
     app.innerHTML = `
-      ${crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Học khái niệm' }])}
+      ${chain
+        ? chainBar(chain)
+        : crumb([{ label: 'Trang chính', href: '#/' }, { label: deck.title, href: backHref }, { label: 'Học khái niệm' }])}
       <div class="session-bar">
         <span>${index + 1} / ${queue.length}</span>
         <span class="dot"></span>
         <span>${esc(boxLabel)}</span>
+        ${chain ? '' : `
         <span class="dot"></span>
         ${sizePicker(size, SIZE_CHOICES, cards.length, isAll ? 'thẻ trên toàn kho' : 'thẻ của bộ')}
         <span class="spacer"></span>
-        <a class="btn btn-sm btn-ghost" href="${backHref}">Dừng</a>
+        <a class="btn btn-sm btn-ghost" href="${backHref}">Dừng</a>`}
       </div>
       ${progressBar(index, queue.length)}
 
@@ -84,12 +99,16 @@ export async function renderLearn(app, deckId) {
         </div>
       </div>
 
-      <div class="btn-row">
+      <!-- Hai hang rieng, khong phai mot hang tu xuong dong. Tren dien thoai, mot
+           hang duy nhat se de nut "Học lại" ket lai o cuoi hang dieu huong va bi
+           bop thanh hai dong chu, con hai nut cham con lai roi xuong hang duoi. -->
+      <div class="btn-row nav-row">
         <button class="btn btn-nav" id="btn-prev" ${index === 0 ? 'disabled' : ''} title="Thẻ trước, không chấm">←</button>
         <button class="btn btn-nav" id="btn-next" title="Thẻ sau, không chấm">→</button>
         ${canSpeak() ? `<button class="btn" id="btn-say">🔊 Nghe</button>` : ''}
         <button class="btn" id="btn-flip">${flipped ? 'Lật lại' : 'Lật thẻ'}</button>
-        <span class="spacer" style="flex:1"></span>
+      </div>
+      <div class="btn-row grade-row">
         <button class="btn btn-again" id="g-again" ${flipped ? '' : 'disabled'}>Học lại</button>
         <button class="btn btn-hard" id="g-hard" ${flipped ? '' : 'disabled'}>Còn ngập ngừng</button>
         <button class="btn btn-good" id="g-good" ${flipped ? '' : 'disabled'}>Thuộc</button>
@@ -103,7 +122,7 @@ export async function renderLearn(app, deckId) {
     app.querySelector('#size-sel')?.addEventListener('change', (e) => {
       setSessionSize('learn', Number(e.target.value));
       document.removeEventListener('keydown', onKey);
-      renderLearn(app, deckId);
+      renderLearn(app, deckId, chain);
     });
 
     const flip = () => { flipped = !flipped; draw(); };
@@ -118,6 +137,7 @@ export async function renderLearn(app, deckId) {
       if (!flipped) return;
       gradeCard(c.id, g);
       graded[g] += 1;
+      if (!touched.some((t) => t.id === c.id)) touched.push(c);
       if (g === 'again') queue.push(c);
       index += 1;
       flipped = false;
