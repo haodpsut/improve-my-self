@@ -368,9 +368,9 @@
       "q": "A brief database hiccup turns into a thirty minute outage because every client retried immediately. The missing ingredient was",
       "q_vi": "Một trục trặc ngắn của cơ sở dữ liệu biến thành ba mươi phút gián đoạn vì mọi máy khách thử lại ngay lập tức. Thứ còn thiếu là",
       "choices": [
-        "Randomised delay growing after each attempt, so retries spread out",
+        "Randomised delay growing after every client attempt, so retries spread out",
         "A longer request timeout so the first attempt would have succeeded",
-        "A larger connection pool so more retries could be served in parallel",
+        "A larger connection pool so every client retry is served in parallel",
         "An immediate second attempt, which usually succeeds after a transient fault"
       ],
       "answer": 0,
@@ -458,7 +458,7 @@
       "q": "Which change to a public API is breaking?",
       "q_vi": "Thay đổi nào sau đây với một giao diện lập trình công khai là phá vỡ tương thích?",
       "choices": [
-        "Adding a new optional query parameter with a sensible default value",
+        "Adding one new optional query parameter with sensible default values",
         "Adding a new field to the response object that old clients ignore",
         "Making a previously optional request field required for validation",
         "Adding a new endpoint under a path that no client currently calls"
@@ -653,7 +653,7 @@
       "q": "One student's timetable page was briefly served to another user. The most likely cause is",
       "q_vi": "Trang thời khoá biểu của một sinh viên bị phục vụ nhầm cho người khác trong chốc lát. Nguyên nhân khả dĩ nhất là",
       "choices": [
-        "The session cookie was issued without the http only attribute set",
+        "Session cookies were issued without an http only attribute set",
         "The identifier in the path was guessable and someone tried a nearby number",
         "The database returned rows from an uncommitted transaction of another user",
         "A personalised response was marked cacheable and stored by a shared cache"
@@ -716,7 +716,7 @@
         "A too many requests status together with how long to wait",
         "A forbidden status so the client stops retrying",
         "A server error status so the failure appears on the service dashboard",
-        "A redirect to a queue page that refreshes itself every few seconds"
+        "One redirect to some queue page that refreshes itself every few seconds"
       ],
       "answer": 0,
       "why": "The client needs to know both that it was throttled and when to come back. A forbidden or server error status sends it down the wrong recovery path.",
@@ -835,7 +835,7 @@
       "choices": [
         "The largest of the three, since the browser opens them on one connection",
         "The average of the three, because the requests overlap partially in time",
-        "Independent of the three, since the render is blocked by parsing anyway",
+        "Independent of all fetch counts, since rendering gets blocked by parsing anyway",
         "The sum of the three, because none of them can start any earlier"
       ],
       "answer": 3,
@@ -880,7 +880,7 @@
       "choices": [
         "The database, because the query behind the first byte is clearly the bottleneck",
         "The origin region, because the server is placed far from most of your readers",
-        "The connection setup, because the handshake dominates before any byte arrives",
+        "Connection setup, because a handshake dominates well before data arrives",
         "The client work after arrival, such as blocking scripts, fonts and images"
       ],
       "answer": 3,
@@ -955,7 +955,7 @@
       "choices": [
         "It removes the need to invalidate the cache when a mutation succeeds",
         "It reduces the number of requests, since the background call replaces the first",
-        "It guarantees the user never reads a value older than the last mutation",
+        "Users can never read values older than whatever was written last",
         "The interface stays useful while correctness catches up a moment later"
       ],
       "answer": 3,
@@ -1091,7 +1091,7 @@
         "The gateway can read uncommitted rows through the open database connection",
         "The commit will fail because a network call resets the transaction state",
         "The gateway response cannot be stored inside the same transaction anyway",
-        "Locks and a connection are held for as long as the remote call takes"
+        "Locks and a connection are held inside it until the call returns"
       ],
       "answer": 3,
       "why": "A remote call can take seconds or hang entirely, and everything behind that lock waits with it. The remote work belongs outside the transaction, reconciled afterwards.",
@@ -1420,7 +1420,7 @@
       "choices": [
         "The runner applies a shorter timeout when only one test is selected",
         "The test asserts on a value computed from the current wall clock time",
-        "The test depends on data another test created before it",
+        "The test depends on data another test created in the same run",
         "The test opens a database connection the runner closes between files"
       ],
       "answer": 2,

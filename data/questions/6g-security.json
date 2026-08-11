@@ -10,7 +10,7 @@
       "choices": [
         "Encryption slows the path, since each hop decrypts and re-encrypts",
         "Encrypted interfaces cannot be inspected by a detection system",
-        "Holding a valid channel still lets a peer request any operation at all",
+        "Holding a valid encrypted channel still lets a peer request every operation",
         "Zero trust requires removing the perimeter firewall first"
       ],
       "answer": 2,
@@ -71,7 +71,7 @@
         "the directory service itself becomes noticeably slower at answering the queries other functions send it",
         "every existing session has to be re established once the contents of the registry have been changed",
         "later sessions are steered to attacker software with every link still correctly protected",
-        "the registry loses track of which functions are healthy and able to accept work"
+        "registry entries lose track of which elements are healthy and able to take work"
       ],
       "answer": 2,
       "why": "Discovery is trusted far more than it is authenticated. Once the lookup returns the wrong address, each hop authenticates and encrypts perfectly toward a destination that should never have been in the answer.",
@@ -401,7 +401,7 @@
         "whether the application will respect the resource limits it was given",
         "whether the application conflicts with another one, which the controller checks",
         "whether the application will change scheduling in an acceptable way",
-        "who built it, and nothing about what it will do"
+        "who built it, and nothing on what the controller will do"
       ],
       "answer": 3,
       "why": "Provenance and behaviour are separate questions. Behaviour has to be established in a test environment before admission, because after admission the application can already move scheduling decisions.",
@@ -805,7 +805,7 @@
       "choices": [
         "shape traffic in the production network",
         "obtain write access to the dataset store, since it holds the samples",
-        "substitute the model weights during a deployment window",
+        "swap in new weights during one deployment window",
         "compromise the pipeline that labels the collected samples"
       ],
       "answer": 0,
@@ -941,7 +941,7 @@
         "the challenge value then has to be longer to remain unpredictable in every case",
         "the device has to store more state between the two exchanges",
         "the server must accept a wider range of sequence numbers",
-        "a relay attack now fits comfortably inside ordinary timing variation"
+        "a relay attack now fits inside the widened window without notice"
       ],
       "answer": 3,
       "why": "Challenge and response derive their strength from a tight bound on how long an answer may take. Loosening that bound to fit the orbit gives a relay exactly the room it needs.",
@@ -1166,7 +1166,7 @@
         "the date on which a capable quantum computer is expected to appear in a laboratory",
         "the length of the key currently used on the interface",
         "the processing budget available on the radio equipment",
-        "how long the data in question has to remain confidential"
+        "how long the data on a given interface has to remain confidential"
       ],
       "answer": 3,
       "why": "An adversary can record ciphertext now and decrypt it once the capability exists, so the deadline belongs to the data lifetime rather than to any predicted arrival date.",
@@ -1344,7 +1344,7 @@
       "q_vi": "Điểm yếu nhất của chuỗi ký cho phần mềm vô tuyến thường là",
       "choices": [
         "the transport used to deliver the signed image out to the deployment site",
-        "the algorithm chosen to compute the signature itself",
+        "an algorithm too weak to compute trustworthy signatures",
         "the schedule on which signing keys are rotated",
         "the build machine, whose key signs whatever that machine produces"
       ],

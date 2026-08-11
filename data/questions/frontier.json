@@ -399,7 +399,7 @@
       "q_vi": "Một mô hình nhỏ chưng cất từ mô hình mạnh khớp với mô hình thầy trên nhiệm vụ của bạn và sụp đổ khi nhiệm vụ dịch đi một chút. Cách hiểu đúng là",
       "choices": [
         "Distillation transferred behaviour on the distribution you sampled, not the general ability behind it",
-        "The student was undertrained and a longer distillation run would remove the brittleness entirely",
+        "Students left undertrained recover fully once distillation runs for longer",
         "The teacher itself is brittle on the shifted task and the student is faithfully reproducing that weakness",
         "The evaluation for the shifted task is contaminated and the reported collapse is a measurement artefact"
       ],
@@ -626,7 +626,7 @@
         "The first token requires a full pass over every layer while later tokens only touch the final layer",
         "Prompt processing grows with the square of length under full attention, then decoding proceeds per token",
         "Providers deliberately delay the first token to allow safety classifiers to inspect the whole prompt",
-        "The tokeniser must process the entire prompt serially before any part of the model can begin work"
+        "Tokenisers must handle an entire request serially before any part of that model can begin work"
       ],
       "answer": 1,
       "why": "Prefill and decode are different regimes. The prompt is processed in one parallel but quadratically growing pass, after which each new token costs roughly the same regardless of how long the prompt was.",
@@ -686,7 +686,7 @@
         "The pruned weights are still loaded from memory, so the bandwidth cost is completely unchanged",
         "Scattered zeros do not remove any dense matrix operation, so the hardware still does the same work",
         "Sparsity is applied after the kernel launch, which means the schedule was already fixed by then",
-        "The accelerator recomputes the pruned values to preserve numerical equivalence with the dense model"
+        "Accelerators recompute the pruned values in order to preserve numerical equivalence with dense models"
       ],
       "answer": 1,
       "why": "Dense hardware executes fixed shaped operations. Unless whole rows, heads or layers are removed, the multiplication is the same size and the zeros are simply multiplied along with everything else.",
@@ -818,7 +818,7 @@
       "q": "The most effective structural defence against one verbose tool result crowding out the task state is",
       "q_vi": "Cách phòng thủ cấu trúc hiệu quả nhất chống việc một kết quả công cụ dài dòng lấn chỗ trạng thái nhiệm vụ là",
       "choices": [
-        "Instructing the model in the system prompt to ignore tool output longer than a stated length",
+        "Instructing this model by system prompt to ignore any output longer than some stated length",
         "Switching to a model with a larger context window so that the verbose result no longer dominates",
         "Giving each source a hard token allowance so no single result can consume the whole budget",
         "Summarising every tool result before it enters the context, regardless of how long it actually is"
@@ -985,7 +985,7 @@
       "choices": [
         "The subagent used a weaker model than the orchestrator and lacked the raw capability needed for the task",
         "Context isolation dropped information the orchestrator had, and the brief did not carry it across",
-        "The subagent's tool set was too broad, so it explored options outside the intended scope",
+        "Too broad a tool set let it explore options outside any intended scope",
         "The result was truncated on return, so the orchestrator received only part of what was produced"
       ],
       "answer": 1,
@@ -1091,7 +1091,7 @@
         "All three legs of an exfiltration path are present, so one successful injection completes the attack",
         "The email tool may be rate limited, which would cause the agent to retry and duplicate messages",
         "Browsing consumes context that the records also need, so the agent may summarise records badly",
-        "Web content may contradict the records, leading the agent to report inconsistent information"
+        "Untrusted material may contradict stored files, so replies become inconsistent"
       ],
       "answer": 0,
       "why": "Private data, untrusted content and an outbound channel together turn any successful injection into data loss. Removing any one leg breaks the chain, which is why the combination is treated as the design smell.",
@@ -1163,7 +1163,7 @@
       "q": "A tool description is fetched from a third party server at run time. The security concern is that",
       "q_vi": "Mô tả công cụ được lấy từ máy chủ bên thứ ba lúc chạy. Mối lo an ninh là",
       "choices": [
-        "The server may be unavailable, in which case the agent loses access to a capability mid task",
+        "That particular host may go offline, in which case an agent loses access to some capability mid task",
         "The description text reaches the model as instructions and can change after you reviewed it",
         "The schema may drift from the implementation, causing calls to be rejected by the server",
         "Latency of the fetch is added to time to first token on every request that lists the tools"
@@ -1313,7 +1313,7 @@
       "q": "Your defence was validated against a list of published jailbreak prompts. The reviewer objection you should expect is",
       "q_vi": "Phòng thủ của bạn được kiểm với một danh sách câu nhắc vượt rào đã công bố. Phản biện bạn nên lường trước là",
       "choices": [
-        "That published prompts are contaminated, having appeared in the model's own training data",
+        "That such text is contaminated, having already appeared inside model training data",
         "That the list is too small for the result to reach conventional statistical significance",
         "That attacks transfer and mutate, so passing a fixed list demonstrates almost nothing about robustness",
         "That jailbreak prompts test refusal behaviour rather than the injection pathway you actually care about"
@@ -1388,7 +1388,7 @@
       "q": "You claim a component is responsible for a behaviour. The experiment that upgrades this from correlation to a causal claim is",
       "q_vi": "Bạn khẳng định một thành phần chịu trách nhiệm cho một hành vi. Thí nghiệm nâng khẳng định đó từ tương quan lên nhân quả là",
       "choices": [
-        "Measuring how strongly that component's activation correlates with the behaviour across inputs",
+        "Measuring how strongly its activation correlates with observed outputs across many inputs",
         "Showing that the component activates earlier in the forward pass than any other candidate component",
         "Training a linear probe on the component's output and reporting how accurately it predicts the behaviour",
         "Copying its activation from another run into this one and checking whether the output changes"
