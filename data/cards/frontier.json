@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "frontier",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "note": "Bo nay noi ve thu thay doi nhanh. Viet o muc co che, khong neu ten phien ban, diem benchmark hay gia. Noi ro cho nao la ky thuat da dung duoc, cho nao con la huong nghien cuu.",
   "cards": [
     {
@@ -47,6 +47,7 @@
       "vi": "Phần thưởng kiểm chứng được",
       "def_en": "A reward computed by an external checker whose verdict does not depend on a neural network, which makes it far harder to game than a learned score.",
       "def_vi": "Phần thưởng do một bộ kiểm bên ngoài tính ra, kết luận không phụ thuộc mạng nơ ron, nên khó bị lợi dụng hơn nhiều so với điểm học được. Đã dùng được.",
+      "say": "Once the checker was a real test runner, the verifiable reward stopped being something the policy could talk its way around.",
       "tags": [
         "posttrain",
         "rl",
@@ -72,6 +73,7 @@
       "vi": "Phạt sai lệch so với mô hình tham chiếu",
       "def_en": "A term added to the reinforcement learning objective that punishes drift away from the pre-update model, keeping the policy close to fluent behaviour it already had.",
       "def_vi": "Số hạng thêm vào hàm mục tiêu học tăng cường, phạt việc trôi xa khỏi mô hình trước khi cập nhật, giữ chính sách gần với hành vi trôi chảy vốn có. Đã dùng được.",
+      "say": "Loosen the KL penalty and you get more reward, right up until the answers stop reading like the reference model.",
       "tags": [
         "posttrain",
         "rl",
@@ -84,6 +86,7 @@
       "vi": "Chính sách tham chiếu",
       "def_en": "The frozen copy of the model kept during post-training so that drift can be measured and penalised against a fixed point.",
       "def_vi": "Bản sao đóng băng của mô hình được giữ trong lúc huấn luyện sau, để đo và phạt độ trôi so với một mốc cố định. Đã dùng được.",
+      "say": "We froze the reference policy before the run, otherwise there is no fixed point to measure drift against.",
       "tags": [
         "posttrain",
         "rl",
@@ -109,6 +112,7 @@
       "vi": "Tinh chỉnh trên mẫu đã lọc",
       "def_en": "Sampling many answers, keeping only the ones that pass a filter or a checker, then doing ordinary supervised fine-tuning on the survivors.",
       "def_vi": "Lấy mẫu nhiều câu trả lời, chỉ giữ những câu qua được bộ lọc hoặc bộ kiểm, rồi tinh chỉnh có giám sát bình thường trên phần còn lại. Đã dùng được và rẻ hơn học tăng cường đầy đủ.",
+      "say": "Rejection sampling fine-tuning got us most of the gain for a fraction of the engineering effort a full policy run needs.",
       "tags": [
         "posttrain",
         "data",
@@ -147,6 +151,7 @@
       "vi": "Thiên lệch độ dài khi huấn luyện theo sở thích",
       "def_en": "The tendency of preference-trained models to produce longer answers, because raters and judge models mildly prefer length and the optimiser amplifies that preference.",
       "def_vi": "Xu hướng mô hình huấn luyện theo sở thích viết dài ra, vì người chấm và mô hình chấm hơi thiên về câu dài, rồi bộ tối ưu khuếch đại cái thiên lệch nhỏ đó. Đã được ghi nhận rõ.",
+      "say": "Ask yourself whether the model really got better, or whether length bias just taught it to pad every answer.",
       "tags": [
         "posttrain",
         "eval",
@@ -172,6 +177,7 @@
       "vi": "Tập dữ liệu dạy làm theo chỉ dẫn",
       "def_en": "A collection of instruction and response pairs used to turn a raw pretrained model into one that answers requests instead of continuing text.",
       "def_vi": "Tập các cặp chỉ dẫn và phản hồi dùng để biến mô hình tiền huấn luyện thô thành mô hình biết trả lời yêu cầu thay vì viết tiếp văn bản. Đã dùng được từ lâu.",
+      "say": "The raw checkpoint simply continued our text until we ran it through an instruction tuning dataset.",
       "tags": [
         "posttrain",
         "data",
@@ -210,6 +216,7 @@
       "vi": "Vòng huấn luyện lặp trên đầu ra của chính mô hình",
       "def_en": "The setup where generated text ends up back in the training corpus, which is safe if a filter or a human sits in the loop and harmful if nothing does.",
       "def_vi": "Tình huống văn bản do mô hình sinh quay lại tập huấn luyện, an toàn nếu có bộ lọc hoặc người đứng giữa, và có hại nếu không có gì cả. Ranh giới giữa hai trường hợp là bước lọc.",
+      "say": "Recursive training on model output is fine while a filter sits in the loop and quietly poisonous the moment nobody checks.",
       "tags": [
         "posttrain",
         "data",
@@ -261,6 +268,7 @@
       "vi": "Tỉ trọng trộn nguồn dữ liệu",
       "def_en": "The proportions assigned to different data sources during training, which shape the resulting model at least as much as architecture choices do.",
       "def_vi": "Tỉ lệ gán cho từng nguồn dữ liệu trong lúc huấn luyện, ảnh hưởng tới mô hình cuối ít nhất là ngang với lựa chọn kiến trúc. Đã dùng được và thường là bí mật của từng nhóm.",
+      "say": "Nobody in the meeting wanted to argue about mixture weights, and that argument shaped the model more than the architecture did.",
       "tags": [
         "posttrain",
         "data",
@@ -273,6 +281,7 @@
       "vi": "Thuế căn chỉnh",
       "def_en": "The capability lost on some tasks as a side effect of safety and preference training, which can often be reduced but rarely driven to zero.",
       "def_vi": "Phần năng lực mất đi trên một số nhiệm vụ như tác dụng phụ của huấn luyện an toàn và theo sở thích, thường giảm được nhưng hiếm khi về không. Đã quan sát được, độ lớn tuỳ cách làm.",
+      "say": "We paid an alignment tax on creative writing, measured it honestly, and decided the trade was worth shipping.",
       "tags": [
         "posttrain",
         "safety",
@@ -285,6 +294,7 @@
       "vi": "Huấn luyện từ chối",
       "def_en": "Teaching a model to decline certain requests, which produces both real safety gains and a tail of unnecessary refusals on benign look-alikes.",
       "def_vi": "Dạy mô hình từ chối một số yêu cầu, vừa mang lại lợi ích an toàn thật vừa sinh ra một đuôi các lần từ chối vô cớ với yêu cầu vô hại trông giống. Đã dùng được, cân bằng hai phía vẫn là bài toán mở.",
+      "say": "Refusal training fixed the real cases and left us a long tail of harmless questions the model now declines.",
       "tags": [
         "posttrain",
         "safety",
@@ -349,6 +359,7 @@
       "vi": "Phần thưởng theo kết quả cuối",
       "def_en": "Scoring only the final answer, which is cheap and hard to fake but gives no signal about where a long chain went wrong.",
       "def_vi": "Chỉ chấm đáp án cuối, rẻ và khó gian lận nhưng không cho biết chuỗi dài đã sai ở đâu. Đã dùng được và là mặc định hiện nay.",
+      "say": "An outcome reward tells you the answer was wrong and never tells you which of the twenty steps broke.",
       "tags": [
         "posttrain",
         "reasoning",
@@ -374,6 +385,7 @@
       "vi": "Bản đặc tả hành vi viết ra",
       "def_en": "A published document stating how a model should behave in contested cases, used both to guide labelling and to let outsiders tell a bug from an intended trade-off.",
       "def_vi": "Tài liệu công bố nêu mô hình nên hành xử ra sao trong các tình huống gây tranh cãi, vừa dẫn hướng gán nhãn vừa giúp người ngoài phân biệt lỗi với đánh đổi có chủ ý. Đã dùng được.",
+      "say": "Publish a written behaviour specification, so an outsider can tell a genuine bug from a trade-off you chose on purpose.",
       "tags": [
         "posttrain",
         "safety",
@@ -386,6 +398,7 @@
       "vi": "Trôi hướng dẫn gán nhãn",
       "def_en": "The slow change in what labellers actually reward as guidelines are reinterpreted, which shows up later as an unexplained shift in model behaviour.",
       "def_vi": "Sự thay đổi chậm trong cái người gán nhãn thực sự thưởng, khi hướng dẫn bị diễn giải lại, và sau đó lộ ra dưới dạng hành vi mô hình đổi mà không rõ nguyên nhân. Đã gặp trong thực tế vận hành.",
+      "say": "Behaviour shifted with no code change, and the cause was annotation guideline drift over several months of labelling.",
       "tags": [
         "posttrain",
         "data",
@@ -437,6 +450,7 @@
       "vi": "Ngân sách suy luận",
       "def_en": "An explicit cap on how many reasoning tokens a request may use, letting you trade accuracy against latency and cost per request rather than per model.",
       "def_vi": "Giới hạn tường minh cho số token suy luận mà một yêu cầu được dùng, cho phép đánh đổi độ chính xác với độ trễ và chi phí theo từng yêu cầu thay vì theo mô hình. Đã dùng được.",
+      "say": "Set a thinking budget per request, because the same model can be cheap or ruinous depending on how long it deliberates.",
       "tags": [
         "inference",
         "ops",
@@ -501,6 +515,7 @@
       "vi": "Dừng sớm chuỗi suy luận",
       "def_en": "Cutting a reasoning chain short once a confidence or agreement signal is reached, which saves latency and occasionally cuts off the step that would have fixed the answer.",
       "def_vi": "Cắt ngắn chuỗi suy luận khi đạt tín hiệu tự tin hoặc đồng thuận, tiết kiệm độ trễ nhưng đôi lúc cắt mất đúng bước sẽ sửa được đáp án. Đã dùng được, ngưỡng phải chỉnh theo nhiệm vụ.",
+      "say": "Early exit from reasoning saved latency on most calls and occasionally cut off the step that would have caught the mistake.",
       "tags": [
         "inference",
         "ops",
@@ -552,6 +567,7 @@
       "vi": "Thời gian tới token đầu tiên",
       "def_en": "How long a user waits before anything appears, dominated by prompt processing and therefore by prompt length and cache hits.",
       "def_vi": "Người dùng phải chờ bao lâu trước khi thấy chữ đầu tiên, chủ yếu do khâu xử lý câu nhắc quyết định, nên phụ thuộc độ dài câu nhắc và việc có trúng đệm hay không. Đã dùng làm chỉ số vận hành chuẩn.",
+      "say": "Users complained the assistant felt slow, and what they actually meant was time to first token, not total duration.",
       "tags": [
         "inference",
         "serving",
@@ -564,6 +580,7 @@
       "vi": "Độ trễ giữa các token",
       "def_en": "The pace at which tokens arrive after the first one, set by decoding speed and batching pressure rather than by prompt length.",
       "def_vi": "Nhịp token xuất hiện sau token đầu, do tốc độ giải mã và áp lực gộp lô quyết định chứ không do độ dài câu nhắc. Đã dùng làm chỉ số vận hành chuẩn.",
+      "say": "Inter-token latency is what makes streaming feel smooth, and it barely moves when you shorten the prompt.",
       "tags": [
         "inference",
         "serving",
@@ -654,6 +671,7 @@
       "vi": "Phương sai độ trễ khi lấy mẫu",
       "def_en": "The spread of response times caused by variable reasoning length, which makes an average latency number nearly useless for capacity planning.",
       "def_vi": "Độ tản mát của thời gian trả lời do độ dài suy luận thay đổi, khiến con số độ trễ trung bình gần như vô dụng khi hoạch định năng lực. Đã gặp trong vận hành thật.",
+      "say": "Plan capacity from the tail, since latency variance under sampling makes the average response time almost meaningless.",
       "tags": [
         "inference",
         "serving",
@@ -666,6 +684,7 @@
       "vi": "Ước lượng độ tự tin từ mức đồng thuận giữa các mẫu",
       "def_en": "Using how often independent samples agree as a cheap uncertainty signal, which is informative but systematically overconfident when the model is consistently wrong.",
       "def_vi": "Dùng mức các mẫu độc lập trùng nhau làm tín hiệu bất định rẻ tiền, có thông tin nhưng tự tin quá mức một cách hệ thống khi mô hình sai nhất quán. Đã dùng được nếu hiệu chỉnh lại.",
+      "say": "Sample agreement gives you a cheap confidence signal that turns overconfident whenever the model is wrong the same way every time.",
       "tags": [
         "inference",
         "eval",
@@ -678,6 +697,7 @@
       "vi": "Mô hình kiểm chứng riêng",
       "def_en": "A model trained specifically to score whether a candidate solution is correct, which is often cheaper and more reliable than the generator judging itself.",
       "def_vi": "Mô hình huấn luyện riêng để chấm xem một lời giải ứng viên có đúng không, thường rẻ hơn và đáng tin hơn so với để chính bộ sinh tự chấm. Đã dùng được ở miền có nhãn đúng sai.",
+      "say": "We trained a dedicated verifier model rather than asking the generator to grade itself, and the scores finally became usable.",
       "tags": [
         "inference",
         "reasoning",
@@ -729,6 +749,7 @@
       "vi": "Định tuyến chuyên gia",
       "def_en": "The small learned function that decides which experts each token is sent to, and the part of a sparse model most likely to behave badly during training.",
       "def_vi": "Hàm nhỏ được học để quyết định mỗi token đi tới chuyên gia nào, và là phần dễ hành xử tệ nhất của mô hình thưa trong lúc huấn luyện. Đã dùng được.",
+      "say": "Whenever a sparse run goes strange in the first epochs, look at expert routing before you blame the data.",
       "tags": [
         "arch",
         "proven"
@@ -740,6 +761,7 @@
       "vi": "Hàm mất cân bằng tải chuyên gia",
       "def_en": "An auxiliary penalty that stops the router from sending nearly all tokens to a few favourite experts, which would waste capacity and stall hardware.",
       "def_vi": "Số hạng phạt phụ ngăn bộ định tuyến dồn gần hết token vào vài chuyên gia ưa thích, việc dồn đó vừa lãng phí sức chứa vừa làm phần cứng nghẽn. Đã dùng được.",
+      "say": "Without an expert load balancing loss the router sends almost everything to two favourite experts and the hardware sits idle.",
       "tags": [
         "arch",
         "proven"
@@ -764,6 +786,7 @@
       "vi": "Song song theo chuyên gia",
       "def_en": "Placing different experts on different devices, which cuts memory per device and adds a communication step on every token.",
       "def_vi": "Đặt các chuyên gia khác nhau lên các thiết bị khác nhau, giảm bộ nhớ mỗi thiết bị nhưng thêm một bước truyền thông cho mỗi token. Đã dùng được trong hệ phục vụ quy mô lớn.",
+      "say": "Expert parallelism bought us the memory headroom we needed and handed us a communication step on every single token.",
       "tags": [
         "arch",
         "serving",
@@ -789,6 +812,7 @@
       "vi": "Tầng hồi quy tuyến tính",
       "def_en": "A sequence layer that carries a fixed-size state forward, giving constant memory per step and a cost that grows linearly rather than quadratically with length.",
       "def_vi": "Tầng xử lý chuỗi mang theo một trạng thái kích thước cố định, cho bộ nhớ hằng số mỗi bước và chi phí tăng tuyến tính thay vì bậc hai theo độ dài. Đã dùng được.",
+      "say": "A linear recurrent layer keeps memory flat as the sequence grows, which is why long inputs stopped scaring our budget.",
       "tags": [
         "arch",
         "efficiency",
@@ -801,6 +825,7 @@
       "vi": "Cập nhật trạng thái phụ thuộc đầu vào",
       "def_en": "Letting the recurrence decide from the current token what to keep and what to forget, which is what closed much of the gap between state space layers and attention.",
       "def_vi": "Để phép hồi quy dựa vào token hiện tại mà quyết định giữ gì và quên gì, chính điều này đã thu hẹp phần lớn khoảng cách giữa tầng không gian trạng thái và chú ý. Đã dùng được.",
+      "say": "Letting the state update depend on the current token is the change that closed most of the gap with attention.",
       "tags": [
         "arch",
         "proven"
@@ -824,6 +849,7 @@
       "vi": "Chú ý theo cửa sổ trượt",
       "def_en": "Restricting each token to attend within a nearby window, which bounds cost per layer and still reaches far positions through stacking many layers.",
       "def_vi": "Giới hạn mỗi token chỉ chú ý trong một cửa sổ lân cận, chặn được chi phí mỗi tầng mà vẫn vươn tới vị trí xa nhờ xếp chồng nhiều tầng. Đã dùng được.",
+      "say": "Sliding window attention capped the cost per layer, and stacking enough layers still let information travel the whole way.",
       "tags": [
         "arch",
         "efficiency",
@@ -836,6 +862,7 @@
       "vi": "Mẫu chú ý thưa",
       "def_en": "A fixed or learned rule that lets each token attend to only some earlier positions, trading exact coverage for a cost that no longer grows with the square of length.",
       "def_vi": "Quy tắc cố định hoặc học được cho phép mỗi token chỉ chú ý tới một số vị trí trước đó, đổi độ phủ chính xác lấy chi phí không còn tăng theo bình phương độ dài. Đã dùng được.",
+      "say": "Before you adopt a sparse attention pattern, ask what it quietly drops on the retrieval tasks nobody bothers to run.",
       "tags": [
         "arch",
         "efficiency",
@@ -848,6 +875,7 @@
       "vi": "Xen kẽ tầng chú ý cục bộ và toàn cục",
       "def_en": "Alternating cheap windowed layers with a few full attention layers, which keeps long-range recall at a small fraction of the cache and compute of an all-global stack.",
       "def_vi": "Xen các tầng cửa sổ rẻ với vài tầng chú ý đầy đủ, giữ khả năng nhớ xa với một phần nhỏ chi phí đệm và tính toán so với việc để mọi tầng đều toàn cục. Đã dùng được.",
+      "say": "Interleaving local and global attention layers gave us long range recall at a small fraction of the cache we used before.",
       "tags": [
         "arch",
         "efficiency",
@@ -860,6 +888,7 @@
       "vi": "Chú ý nhiều truy vấn dùng chung khoá và giá trị",
       "def_en": "Sharing one key and value projection across all attention heads, which shrinks the cache dramatically and costs some quality.",
       "def_vi": "Dùng chung một phép chiếu khoá và giá trị cho mọi đầu chú ý, thu nhỏ bộ đệm rất mạnh và mất một phần chất lượng. Đã dùng được.",
+      "say": "Multi-query attention shrank the cache enough to double our concurrency, and we gave back a little quality for it.",
       "tags": [
         "arch",
         "efficiency",
@@ -885,6 +914,7 @@
       "vi": "Mã hoá vị trí bằng phép quay",
       "def_en": "Encoding position by rotating query and key vectors by an angle proportional to index, so attention depends on relative distance and extends past training length more gracefully.",
       "def_vi": "Mã hoá vị trí bằng cách quay vector truy vấn và khoá một góc tỉ lệ với chỉ số, nhờ đó chú ý phụ thuộc khoảng cách tương đối và mở rộng ra ngoài độ dài huấn luyện êm hơn. Đã thành chuẩn thực tế.",
+      "say": "Rotary position embedding makes attention care about relative distance, which is why it stretches past the training length so gracefully.",
       "tags": [
         "arch",
         "proven"
@@ -896,6 +926,7 @@
       "vi": "Đổi cơ số phép quay để kéo dài ngữ cảnh",
       "def_en": "Changing the frequency base of rotary embeddings, usually with a short continued training run, so a model trained short can serve much longer inputs.",
       "def_vi": "Đổi cơ số tần số của mã hoá quay, thường kèm một đợt huấn luyện tiếp ngắn, để mô hình huấn luyện với chuỗi ngắn phục vụ được đầu vào dài hơn nhiều. Đã dùng được và rất phổ biến.",
+      "say": "We changed the rotary base and ran a short continued training pass, and the short-context model started serving long documents.",
       "tags": [
         "arch",
         "longctx",
@@ -908,6 +939,7 @@
       "vi": "Nội suy vị trí",
       "def_en": "Compressing position indices so a longer sequence falls inside the range the model was trained on, which extends usable length at some cost to fine positional resolution.",
       "def_vi": "Nén chỉ số vị trí để chuỗi dài rơi vào khoảng mô hình từng được huấn luyện, kéo dài phần dùng được và trả giá bằng độ phân giải vị trí tinh. Đã dùng được.",
+      "say": "Position interpolation squeezed the indices back into the trained range and cost us a little precision on nearby tokens.",
       "tags": [
         "arch",
         "longctx",
@@ -920,6 +952,7 @@
       "vi": "Ngoại suy độ dài",
       "def_en": "Running a model on sequences longer than it ever saw in training, which usually degrades smoothly rather than failing outright and needs measuring, not assuming.",
       "def_vi": "Chạy mô hình trên chuỗi dài hơn mọi thứ nó từng thấy khi huấn luyện, thường suy giảm dần chứ không hỏng hẳn, nên phải đo chứ đừng giả định. Đã dùng được kèm các kỹ thuật chỉnh vị trí.",
+      "say": "Measure length extrapolation on your own documents, because degradation is gradual and you will not notice it from the loss curve.",
       "tags": [
         "arch",
         "longctx",
@@ -945,6 +978,7 @@
       "vi": "Lượng tử hoá đệm khoá giá trị",
       "def_en": "Storing cached keys and values at lower precision to fit more concurrent requests, with quality loss that appears first on long-range recall.",
       "def_vi": "Lưu khoá và giá trị đã đệm ở độ chính xác thấp hơn để nhét thêm yêu cầu đồng thời, phần chất lượng mất đi lộ ra đầu tiên ở khả năng nhớ lại thông tin xa. Đã dùng được.",
+      "say": "Quantising the KV cache let us hold far more sessions, and the first thing to suffer was recall of early context.",
       "tags": [
         "serving",
         "efficiency",
@@ -970,6 +1004,7 @@
       "vi": "Đệm khoá giá trị phân trang",
       "def_en": "Allocating cache in fixed blocks like virtual memory pages, which removes fragmentation and lets many requests share a common prefix physically.",
       "def_vi": "Cấp phát bộ đệm theo khối cố định giống trang bộ nhớ ảo, xoá được phân mảnh và cho phép nhiều yêu cầu dùng chung một tiền tố ở mức vật lý. Đã dùng được trong các hệ phục vụ hiện đại.",
+      "say": "A paged KV cache ended the fragmentation problem and let every request in a batch share one physical prefix.",
       "tags": [
         "serving",
         "efficiency",
@@ -982,6 +1017,7 @@
       "vi": "Gộp lô liên tục",
       "def_en": "Letting new requests join a running batch as older ones finish, instead of waiting for a whole batch to complete, which raises throughput at some cost to worst-case latency.",
       "def_vi": "Cho yêu cầu mới nhập vào lô đang chạy khi yêu cầu cũ kết thúc, thay vì chờ cả lô xong, nâng thông lượng và trả giá phần nào ở độ trễ xấu nhất. Đã thành chuẩn phục vụ.",
+      "say": "Continuous batching lifted throughput sharply, and the worst-case wait for an unlucky request got a little worse.",
       "tags": [
         "serving",
         "proven"
@@ -1005,6 +1041,7 @@
       "vi": "Giải mã bị chặn bởi băng thông bộ nhớ",
       "def_en": "The fact that generating a single token requires reading the whole active weight set, so speed depends on memory bandwidth rather than raw arithmetic throughput.",
       "def_vi": "Việc sinh một token đòi phải đọc toàn bộ tập trọng số đang kích hoạt, nên tốc độ phụ thuộc băng thông bộ nhớ chứ không phụ thuộc năng lực tính số học thô. Đây là lý do gộp lô và giải mã suy đoán có tác dụng.",
+      "say": "Decoding is memory bandwidth bound, so buying a card with more arithmetic throughput bought us almost nothing.",
       "tags": [
         "serving",
         "proven"
@@ -1016,6 +1053,7 @@
       "vi": "Cường độ số học",
       "def_en": "The ratio of computation to memory traffic in a kernel, the single number that tells you whether more compute or more bandwidth would help.",
       "def_vi": "Tỉ số giữa lượng tính toán và lượng dữ liệu phải chuyển trong một nhân tính, con số duy nhất cho biết thêm sức tính hay thêm băng thông mới có ích. Đã dùng được khi phân tích hiệu năng.",
+      "say": "Work out the arithmetic intensity of the kernel first, then you will know whether compute or bandwidth is holding you back.",
       "tags": [
         "serving",
         "proven"
@@ -1027,6 +1065,7 @@
       "vi": "Nhân chú ý tối ưu theo luồng dữ liệu",
       "def_en": "Computing attention in tiles that stay in fast on-chip memory so the full score matrix is never written out, giving the same result much faster.",
       "def_vi": "Tính chú ý theo từng khối nằm gọn trong bộ nhớ nhanh trên chip để không bao giờ phải ghi ra toàn bộ ma trận điểm, cho kết quả y hệt mà nhanh hơn nhiều. Đã thành chuẩn.",
+      "say": "An IO aware attention kernel keeps the tiles on chip, never writes the full score matrix, and returns the same numbers.",
       "tags": [
         "serving",
         "efficiency",
@@ -1052,6 +1091,7 @@
       "vi": "Tỉ lệ chấp nhận token suy đoán",
       "def_en": "How often the large model confirms the draft, the number that decides whether speculation speeds things up or wastes work.",
       "def_vi": "Mức mô hình lớn xác nhận phần nháp, con số quyết định việc suy đoán làm nhanh lên hay chỉ phí công. Đã dùng được làm chỉ số theo dõi.",
+      "say": "If the acceptance rate of speculative tokens drops below about half, the draft model is costing you more than it saves.",
       "tags": [
         "serving",
         "efficiency",
@@ -1064,6 +1104,7 @@
       "vi": "Lượng tử hoá tám bit",
       "def_en": "Storing weights and often activations in eight bits, which is close to lossless for most models and is the safe default when memory is tight.",
       "def_vi": "Lưu trọng số và thường cả kích hoạt ở tám bit, gần như không mất mát với đa số mô hình và là lựa chọn an toàn khi thiếu bộ nhớ. Đã dùng được rộng rãi.",
+      "say": "Start with eight bit quantisation, since it is close to lossless and buys back memory you badly need.",
       "tags": [
         "efficiency",
         "serving",
@@ -1089,6 +1130,7 @@
       "vi": "Lượng tử hoá chỉ trọng số",
       "def_en": "Compressing stored weights while computing in higher precision, which cuts memory and bandwidth without touching numerical stability of the maths.",
       "def_vi": "Nén trọng số lưu trữ nhưng vẫn tính ở độ chính xác cao hơn, giảm bộ nhớ và băng thông mà không động tới độ ổn định số của phép tính. Đã dùng được.",
+      "say": "Weight only quantisation cut the memory traffic while the maths stayed in higher precision, so nothing became numerically fragile.",
       "tags": [
         "efficiency",
         "proven"
@@ -1100,6 +1142,7 @@
       "vi": "Lượng tử hoá kích hoạt",
       "def_en": "Compressing the intermediate tensors as well, which unlocks faster kernels but is far more fragile because activation ranges vary per input.",
       "def_vi": "Nén luôn cả các tensor trung gian, mở khoá được nhân tính nhanh hơn nhưng mong manh hơn nhiều vì biên độ kích hoạt thay đổi theo từng đầu vào. Đã dùng được nhưng cần hiệu chỉnh cẩn thận.",
+      "say": "Activation quantisation unlocked the faster kernel and broke on the first batch of inputs with an unusual dynamic range.",
       "tags": [
         "efficiency",
         "proven"
@@ -1111,6 +1154,7 @@
       "vi": "Kênh ngoại lai khi lượng tử hoá",
       "def_en": "A few dimensions with much larger magnitudes that dominate the quantisation range, which is why naive uniform quantisation of activations collapses quality.",
       "def_vi": "Một vài chiều có biên độ lớn hơn hẳn, chiếm trọn dải lượng tử hoá, đó là lý do lượng tử hoá đều một cách ngây thơ lên kích hoạt làm sập chất lượng. Đã được xác định rõ và có cách xử lý.",
+      "say": "A handful of outlier channels swallow the whole quantisation range, which is why the naive uniform scheme collapses.",
       "tags": [
         "efficiency",
         "proven"
@@ -1122,6 +1166,7 @@
       "vi": "Lượng tử hoá sau huấn luyện so với huấn luyện có tính tới lượng tử hoá",
       "def_en": "Compressing a finished model with a small calibration set, versus simulating the low precision during training, which costs much more and recovers more quality.",
       "def_vi": "Nén một mô hình đã xong bằng tập hiệu chỉnh nhỏ, so với mô phỏng độ chính xác thấp ngay trong lúc huấn luyện, cách sau tốn hơn nhiều và lấy lại được nhiều chất lượng hơn. Cả hai đã dùng được.",
+      "say": "We tried post-training quantisation first, and moved to quantisation aware training only once the accuracy loss became visible to users.",
       "tags": [
         "efficiency",
         "proven"
@@ -1145,6 +1190,7 @@
       "vi": "Bỏ bớt tầng",
       "def_en": "Removing whole transformer blocks judged redundant and healing with brief further training, which is cheap and hurts multi-step reasoning first.",
       "def_vi": "Bỏ hẳn các khối bị đánh giá là thừa rồi chữa lại bằng một đợt huấn luyện ngắn, cách này rẻ và làm hỏng khả năng suy luận nhiều bước trước tiên. Đã dùng được, phải đo trên nhiệm vụ dài.",
+      "say": "Layer dropping is cheap and tempting, and the first thing you lose is the multi-step reasoning nobody measured.",
       "tags": [
         "efficiency",
         "proven"
@@ -1169,6 +1215,7 @@
       "vi": "Vector nhiệm vụ",
       "def_en": "The difference between fine-tuned and base weights treated as a portable object that can be added to or subtracted from another checkpoint.",
       "def_vi": "Hiệu giữa trọng số đã tinh chỉnh và trọng số nền, được coi như một đối tượng mang đi được, có thể cộng vào hay trừ khỏi một điểm lưu khác. Đã dùng được, hiểu biết lý thuyết còn hạn chế.",
+      "say": "Subtract the base weights from the fine-tuned ones and you hold a task vector you can move onto another checkpoint.",
       "tags": [
         "efficiency",
         "posttrain",
@@ -1181,6 +1228,7 @@
       "vi": "Tinh chỉnh hạng thấp trên nền đã lượng tử hoá",
       "def_en": "Freezing a quantised base model and training only small adapter matrices in higher precision, which puts fine-tuning of large models on modest hardware.",
       "def_vi": "Đóng băng mô hình nền đã lượng tử hoá và chỉ huấn luyện các ma trận bộ thích ứng nhỏ ở độ chính xác cao hơn, đưa việc tinh chỉnh mô hình lớn về phần cứng vừa phải. Đã dùng được rộng rãi.",
+      "say": "Quantised low-rank adaptation is how a lab with one workstation still fine-tunes a model of this size.",
       "tags": [
         "efficiency",
         "posttrain",
@@ -1206,6 +1254,7 @@
       "vi": "Tinh chỉnh toàn phần so với tinh chỉnh bộ thích ứng",
       "def_en": "The choice between updating all weights and training a small added module, where adapters win on cost and reversibility and lose when a deep behaviour change is needed.",
       "def_vi": "Lựa chọn giữa cập nhật toàn bộ trọng số và huấn luyện một khối nhỏ thêm vào, bộ thích ứng thắng về chi phí và khả năng quay lui, và thua khi cần thay đổi hành vi ở mức sâu. Cả hai đã dùng được.",
+      "say": "Adapters win on cost and on being reversible, and full fine-tuning wins when you need the behaviour changed deep down.",
       "tags": [
         "efficiency",
         "posttrain",
@@ -1231,6 +1280,7 @@
       "vi": "Mô hình hoá ở mức byte",
       "def_en": "Removing the fixed tokeniser and learning directly over bytes or learned patches, which fixes several tokenisation artefacts and is still not the mainstream choice.",
       "def_vi": "Bỏ bộ tách token cố định và học thẳng trên byte hoặc trên các mảnh học được, cách này xử lý được vài hiện tượng lạ do tách token gây ra nhưng vẫn chưa thành dòng chính. Đây là hướng nghiên cứu đang chạy.",
+      "say": "Byte level modelling makes the tokeniser artefacts disappear, and almost nobody has shipped it as the default yet.",
       "tags": [
         "arch",
         "open"
@@ -1279,6 +1329,7 @@
       "vi": "Nhạy cảm với thông tin gây nhiễu trong ngữ cảnh dài",
       "def_en": "The drop in accuracy when plausible but irrelevant passages sit alongside the right one, which is why adding more retrieved text can make answers worse.",
       "def_vi": "Độ chính xác tụt khi các đoạn nghe hợp lý mà không liên quan nằm cạnh đoạn đúng, đó là lý do đưa thêm văn bản truy hồi vào có thể làm câu trả lời tệ đi. Đã đo được.",
+      "say": "We retrieved twice as many passages and accuracy fell, which is distractor sensitivity doing exactly what the papers describe.",
       "tags": [
         "longctx",
         "proven"
@@ -1290,6 +1341,7 @@
       "vi": "Chi phí bậc hai khi nạp câu nhắc",
       "def_en": "The fact that processing a prompt with full attention grows with the square of its length, which is why a long prompt hurts the first response most.",
       "def_vi": "Việc xử lý câu nhắc với chú ý đầy đủ tăng theo bình phương độ dài, đó là lý do câu nhắc dài làm hỏng chủ yếu ở lần phản hồi đầu tiên. Đây là ràng buộc tính toán thật.",
+      "say": "The quadratic cost of prefill is why a very long prompt punishes the first response far more than the rest.",
       "tags": [
         "longctx",
         "serving",
@@ -1302,6 +1354,7 @@
       "vi": "Nén ngữ cảnh",
       "def_en": "Shortening what goes into the prompt by summarising or by learned compact representations, which saves cost and irreversibly discards whatever the compressor judged unimportant.",
       "def_vi": "Rút ngắn thứ đưa vào câu nhắc bằng tóm tắt hoặc bằng biểu diễn cô đọng học được, tiết kiệm chi phí và vứt đi vĩnh viễn những gì bộ nén cho là không quan trọng. Đã dùng được, rủi ro nằm ở phần bị vứt.",
+      "say": "Context compression saved a lot of money and threw away, permanently, whatever the summariser judged unimportant that morning.",
       "tags": [
         "longctx",
         "proven"
@@ -1378,6 +1431,7 @@
       "vi": "Loãng chú ý",
       "def_en": "The way adding more tokens spreads attention mass thinner, so a signal that was salient in a short prompt becomes weak in a long one.",
       "def_vi": "Việc thêm token làm khối lượng chú ý bị trải mỏng ra, khiến một tín hiệu vốn nổi bật trong câu nhắc ngắn trở nên yếu trong câu nhắc dài. Đây là cách giải thích thường dùng, cơ chế chi tiết vẫn đang được nghiên cứu.",
+      "say": "The instruction was obvious in a short prompt and vanished into attention dilution once we pasted the whole handbook.",
       "tags": [
         "longctx",
         "open"
@@ -1389,6 +1443,7 @@
       "vi": "Ngân sách ngữ cảnh theo từng nguồn",
       "def_en": "Assigning each source a hard token allowance so no single verbose tool result can crowd out the instructions and the task state.",
       "def_vi": "Gán cho mỗi nguồn một hạn mức token cứng để không một kết quả công cụ dài dòng nào chiếm chỗ của chỉ dẫn và trạng thái nhiệm vụ. Đã dùng được và là biện pháp thiết kế đơn giản mà hiệu quả.",
+      "say": "Give every source a hard context budget, otherwise one chatty tool result will push the task state out of the window.",
       "tags": [
         "longctx",
         "agent",
@@ -1401,6 +1456,7 @@
       "vi": "Mô hình thị giác ngôn ngữ",
       "def_en": "A model that takes images and text in the same sequence, usually by encoding the image into tokens the language model consumes like any other input.",
       "def_vi": "Mô hình nhận cả ảnh và chữ trong cùng một chuỗi, thường bằng cách mã hoá ảnh thành token để mô hình ngôn ngữ tiêu thụ như mọi đầu vào khác. Đã dùng được trong sản phẩm.",
+      "say": "The vision language model reads the screenshot and the instruction in one sequence, so we stopped writing a separate parser.",
       "tags": [
         "multimodal",
         "proven"
@@ -1425,6 +1481,7 @@
       "vi": "Bộ mã hoá ảnh và lớp chiếu",
       "def_en": "The standard two-part design where a separate image encoder produces features and a small trained layer maps them into the language model's token space.",
       "def_vi": "Thiết kế hai phần đã thành chuẩn, một bộ mã hoá ảnh riêng sinh đặc trưng và một lớp nhỏ được huấn luyện ánh xạ chúng vào không gian token của mô hình ngôn ngữ. Đã dùng được.",
+      "say": "Freeze the vision encoder and train only the projector first, because that is where most of the cheap gain lives.",
       "tags": [
         "multimodal",
         "arch",
@@ -1437,6 +1494,7 @@
       "vi": "Chia ô ảnh độ phân giải cao",
       "def_en": "Splitting a large image into tiles that are encoded separately plus a downscaled overview, which preserves small text at a token cost that rises with area.",
       "def_vi": "Cắt ảnh lớn thành các ô được mã hoá riêng kèm một bản thu nhỏ toàn cảnh, giữ được chữ nhỏ với chi phí token tăng theo diện tích. Đã dùng được và là cách hiện nay đọc được tài liệu quét.",
+      "say": "Tiling the high resolution scan kept the small print readable and quietly tripled what a single page costs us.",
       "tags": [
         "multimodal",
         "proven"
@@ -1460,6 +1518,7 @@
       "vi": "Bóc tách tài liệu có tính tới bố cục",
       "def_en": "Using position on the page, not just reading order, so tables, multi-column text and forms are interpreted as structure rather than as a flat string.",
       "def_vi": "Dùng cả vị trí trên trang chứ không chỉ thứ tự đọc, nhờ đó bảng biểu, văn bản nhiều cột và biểu mẫu được hiểu như cấu trúc thay vì một chuỗi phẳng. Đã dùng được.",
+      "say": "Without layout aware parsing the two-column contract came out as one interleaved mess and every clause reference was wrong.",
       "tags": [
         "multimodal",
         "proven"
@@ -1471,6 +1530,7 @@
       "vi": "Token âm thanh",
       "def_en": "Discrete units produced by an audio codec so speech can be modelled in the same autoregressive way as text, which is what enables direct speech models.",
       "def_vi": "Các đơn vị rời rạc do bộ mã âm thanh sinh ra để tiếng nói được mô hình hoá tự hồi quy giống như chữ, đó là thứ cho phép làm mô hình tiếng nói trực tiếp. Đã dùng được.",
+      "say": "Once speech became audio tokens, the same autoregressive machinery we already ran for text handled it without a new stack.",
       "tags": [
         "multimodal",
         "proven"
@@ -1495,6 +1555,7 @@
       "vi": "Chuỗi xử lý tiếng nói nối tầng",
       "def_en": "The older design of recognition, then a text model, then synthesis, which adds latency and loses tone but gives an inspectable text stage at every hop.",
       "def_vi": "Thiết kế cũ gồm nhận dạng, rồi mô hình văn bản, rồi tổng hợp tiếng, thêm độ trễ và mất ngữ điệu nhưng cho một khâu văn bản soi được ở mỗi chặng. Vẫn đang dùng được và có lý do để chọn.",
+      "say": "The cascaded speech pipeline loses tone at every hop, and in exchange you can read exactly what each stage heard.",
       "tags": [
         "multimodal",
         "proven"
@@ -1506,6 +1567,7 @@
       "vi": "Sinh ảnh bằng khuếch tán so với tự hồi quy",
       "def_en": "Iterative denoising of a whole image versus predicting discrete tokens in order, which differ in how easily they follow detailed text instructions and in how they are steered.",
       "def_vi": "Khử nhiễu lặp trên toàn ảnh so với dự đoán token rời rạc theo thứ tự, hai cách khác nhau ở mức dễ tuân theo chỉ dẫn chữ chi tiết và ở cách điều hướng chúng. Cả hai đã dùng được trong sản phẩm.",
+      "say": "For tight instruction following we compared diffusion against autoregressive image generation, and the answer depended on how the prompt was written.",
       "tags": [
         "multimodal",
         "proven"
@@ -1517,6 +1579,7 @@
       "vi": "Nhất quán theo thời gian khi sinh video",
       "def_en": "The requirement that objects keep identity and physics across frames, which remains the main visible weakness of generated video and a live research problem.",
       "def_vi": "Yêu cầu vật thể giữ nguyên căn cước và tuân theo vật lý qua các khung hình, đây vẫn là điểm yếu dễ thấy nhất của video sinh ra và là bài toán nghiên cứu đang mở.",
+      "say": "The clip looks stunning frame by frame, and temporal consistency falls apart the moment the character turns around.",
       "tags": [
         "multimodal",
         "open"
@@ -1541,6 +1604,7 @@
       "vi": "Định vị toạ độ để điều khiển màn hình",
       "def_en": "The ability to name where on a screen an element is, in pixels or in a structured tree, which is the capability that turned screen control from a demo into something usable.",
       "def_vi": "Khả năng chỉ ra một phần tử nằm ở đâu trên màn hình, theo điểm ảnh hoặc theo cây cấu trúc, chính năng lực này đã biến việc điều khiển màn hình từ bản trình diễn thành thứ dùng được. Đã dùng được nhưng còn giòn.",
+      "say": "Coordinate grounding turned screen control from a conference demo into something we could actually put in front of staff.",
       "tags": [
         "multimodal",
         "agent",
@@ -1566,6 +1630,7 @@
       "vi": "Xác định phần tử trên màn hình",
       "def_en": "Mapping an intention such as save the file onto a specific control on screen, which is the step where computer using agents most often fail silently.",
       "def_vi": "Ánh xạ một ý định như lưu tệp vào một nút cụ thể trên màn hình, đây là bước mà tác tử điều khiển máy tính hay hỏng âm thầm nhất. Đã dùng được nhưng còn là điểm yếu.",
+      "say": "Screen element grounding is where our agent fails silently, clicking a plausible looking button that does something else entirely.",
       "tags": [
         "agent",
         "multimodal",
@@ -1578,6 +1643,7 @@
       "vi": "Cây trợ năng làm đầu vào cho tác tử",
       "def_en": "Feeding the structured element tree of an application instead of a screenshot, which is cheaper and more precise where it exists and unavailable in many real applications.",
       "def_vi": "Đưa cây phần tử có cấu trúc của ứng dụng vào thay cho ảnh chụp màn hình, cách này rẻ hơn và chính xác hơn ở nơi có sẵn nhưng nhiều ứng dụng thật lại không cung cấp. Đã dùng được khi có.",
+      "say": "Feed the agent the accessibility tree wherever it exists, and keep the screenshot path for applications that expose nothing.",
       "tags": [
         "agent",
         "proven"
@@ -1601,6 +1667,7 @@
       "vi": "Đo năng lực bằng độ dài nhiệm vụ làm được",
       "def_en": "Measuring progress by how long a task an agent can complete rather than by scores on single questions, an approach that fits agents better and is still young as a methodology.",
       "def_vi": "Đo tiến bộ bằng độ dài nhiệm vụ mà tác tử hoàn thành được thay vì bằng điểm trên từng câu hỏi lẻ, cách này hợp với tác tử hơn nhưng còn non về mặt phương pháp luận. Đây là hướng đang phát triển.",
+      "say": "Task horizon fits agents better than single question scores, and the methodology behind it is still very young.",
       "tags": [
         "agent",
         "eval",
@@ -1637,6 +1704,7 @@
       "vi": "Ngữ cảnh mã ở quy mô cả kho",
       "def_en": "Working across a codebase far larger than any window by searching and reading on demand, which makes retrieval strategy, not window size, the deciding factor.",
       "def_vi": "Làm việc trên một kho mã lớn hơn mọi cửa sổ ngữ cảnh bằng cách tìm và đọc theo nhu cầu, khiến chiến lược truy hồi mới là yếu tố quyết định chứ không phải kích thước cửa sổ. Đã dùng được.",
+      "say": "Working with repository scale code context, we found the search strategy mattered far more than any window size we could buy.",
       "tags": [
         "agent",
         "longctx",
@@ -1673,6 +1741,7 @@
       "vi": "Đặt tên công cụ theo không gian riêng",
       "def_en": "Prefixing tool names by their source so two servers offering a similar tool cannot be confused, which also stops a malicious server from shadowing a trusted name.",
       "def_vi": "Gắn tiền tố theo nguồn vào tên công cụ để hai máy chủ cung cấp công cụ giống nhau không bị lẫn, và cũng chặn một máy chủ độc hại chiếm chỗ một tên đáng tin. Đã dùng được.",
+      "say": "Tool namespacing is not cosmetic, since without it a hostile server can register a name your trusted one already uses.",
       "tags": [
         "agent",
         "security",
@@ -1697,6 +1766,7 @@
       "vi": "Sinh văn bản theo văn phạm",
       "def_en": "Constraining output to a formal grammar rather than only a data schema, which covers query languages and code where a schema is not expressive enough.",
       "def_vi": "Ràng buộc đầu ra theo một văn phạm hình thức chứ không chỉ theo lược đồ dữ liệu, phủ được ngôn ngữ truy vấn và mã nguồn ở những chỗ lược đồ không đủ sức diễn đạt. Đã dùng được.",
+      "say": "A schema was not enough for our query language, so we moved to grammar constrained generation and the parse errors stopped.",
       "tags": [
         "agent",
         "proven"
@@ -1745,6 +1815,7 @@
       "vi": "Đánh giá ở mức quỹ đạo",
       "def_en": "Grading the whole sequence of decisions rather than the final artefact, which catches the runs that reached a right answer through an unsafe or unrepeatable route.",
       "def_vi": "Chấm cả chuỗi quyết định thay vì chỉ sản phẩm cuối, cách này bắt được những lần chạy tới đáp án đúng qua một lối đi không an toàn hoặc không lặp lại được. Đã dùng được, tốn công gán nhãn.",
+      "say": "Trajectory level evaluation caught the runs that reached the right answer by deleting a file nobody wanted deleted.",
       "tags": [
         "agent",
         "eval",
@@ -1770,6 +1841,7 @@
       "vi": "Trôi môi trường trong chuẩn đo tác tử",
       "def_en": "The way a benchmark that touches live sites, packages or services stops measuring the same thing over time, which makes cross-paper comparisons unreliable.",
       "def_vi": "Việc một chuẩn đo có chạm tới trang web, gói phần mềm hay dịch vụ đang sống sẽ không còn đo cùng một thứ theo thời gian, khiến so sánh giữa các bài báo mất tin cậy. Đây là vấn đề thực tế khi đọc kết quả.",
+      "say": "Environment drift means last year's agent benchmark number and this year's are simply not measuring the same thing.",
       "tags": [
         "agent",
         "eval",
@@ -1820,6 +1892,7 @@
       "vi": "Mẫu mô hình bị cách ly",
       "def_en": "A design where one model touches untrusted content but has no tools, and a second privileged model never sees that content directly, only structured summaries of it.",
       "def_vi": "Thiết kế trong đó một mô hình chạm vào nội dung không tin cậy nhưng không có công cụ nào, còn một mô hình có quyền thì không bao giờ nhìn thẳng nội dung đó mà chỉ nhận bản tóm tắt có cấu trúc. Đây là mẫu đề xuất, hiệu lực thực tế còn đang được kiểm.",
+      "say": "In the quarantined model pattern the model reading untrusted pages holds no tools, and the privileged one never sees raw text.",
       "tags": [
         "security",
         "open"
@@ -1867,6 +1940,7 @@
       "vi": "Truy vết nguồn gốc nội dung",
       "def_en": "Attaching signed metadata about how a file was produced and edited, which proves origin when the chain is intact and proves nothing once the metadata is stripped.",
       "def_vi": "Gắn siêu dữ liệu có chữ ký về cách một tệp được tạo ra và chỉnh sửa, chứng minh được nguồn gốc khi chuỗi còn nguyên và không chứng minh được gì khi siêu dữ liệu bị bóc đi. Đã có chuẩn, mức áp dụng còn hạn chế.",
+      "say": "Content provenance proves origin while the signed metadata survives, and proves nothing at all after someone re-encodes the file.",
       "tags": [
         "security",
         "proven"
@@ -1903,6 +1977,7 @@
       "vi": "Đánh giá năng lực nguy hiểm",
       "def_en": "Structured testing for whether a model can meaningfully help with high-harm domains, run before release and used to decide what mitigations must ship with it.",
       "def_vi": "Kiểm thử có cấu trúc xem mô hình có thực sự giúp được đáng kể trong các miền gây hại lớn hay không, chạy trước khi phát hành và dùng để quyết định phải kèm biện pháp giảm thiểu nào. Đã thành thông lệ ở các phòng thí nghiệm lớn.",
+      "say": "Dangerous capability evaluation happens before release, and its result decides which mitigations have to ship alongside the model.",
       "tags": [
         "security",
         "eval",
@@ -1915,6 +1990,7 @@
       "vi": "Lập luận an toàn",
       "def_en": "A written argument, with evidence, that a system is safe enough to deploy for a stated use, borrowed from regulated engineering and still immature for these systems.",
       "def_vi": "Một lập luận viết ra kèm bằng chứng rằng hệ thống đủ an toàn để triển khai cho một mục đích đã nêu, vay từ ngành kỹ thuật có quản lý và còn non khi áp cho các hệ này. Đây là hướng đang hình thành.",
+      "say": "We borrowed the safety case idea from aviation, and writing ours honestly showed how thin the evidence still is.",
       "tags": [
         "security",
         "open"
@@ -1926,6 +2002,7 @@
       "vi": "Thẻ mô hình",
       "def_en": "A short structured document stating intended use, known limitations and evaluation results for a model, which is useful for procurement and never a substitute for your own testing.",
       "def_vi": "Tài liệu ngắn có cấu trúc nêu mục đích sử dụng, hạn chế đã biết và kết quả đánh giá của một mô hình, hữu ích khi mua sắm và không bao giờ thay được việc tự kiểm thử. Đã thành thông lệ.",
+      "say": "Procurement asked for the model card, and I told them it is a starting point, never a replacement for our own testing.",
       "tags": [
         "security",
         "ops",
@@ -1938,6 +2015,7 @@
       "vi": "Báo cáo hệ thống",
       "def_en": "A broader report covering the deployed system rather than the model alone, including the mitigations, the evaluations run and the residual risks accepted.",
       "def_vi": "Báo cáo rộng hơn, mô tả cả hệ thống được triển khai chứ không chỉ mô hình, gồm các biện pháp giảm thiểu, các đánh giá đã chạy và phần rủi ro còn lại được chấp nhận. Đã thành thông lệ ở các bản phát hành lớn.",
+      "say": "Read the system card rather than the model card, because the mitigations and the accepted residual risks live there.",
       "tags": [
         "security",
         "ops",
@@ -2000,6 +2078,7 @@
       "vi": "Nhận ra mình đang bị đánh giá",
       "def_en": "A model recognising the signature of a test and behaving differently, which is a direct threat to the validity of any safety evaluation and is now measured explicitly.",
       "def_vi": "Việc mô hình nhận ra dấu hiệu của một bài kiểm tra rồi hành xử khác đi, đây là mối đe doạ trực tiếp tới tính hợp lệ của mọi đánh giá an toàn và nay đã được đo tường minh. Đây là hướng nghiên cứu đang chạy.",
+      "say": "If the model recognises it is being tested and behaves accordingly, evaluation awareness has just invalidated your whole safety report.",
       "tags": [
         "security",
         "eval",
@@ -2024,6 +2103,7 @@
       "vi": "Huấn luyện đối kháng cho tác tử",
       "def_en": "Training on trajectories that contain attempted injections and malicious tool results, which lowers the success rate of known attack shapes and does not generalise to new ones.",
       "def_vi": "Huấn luyện trên các quỹ đạo có chứa lần tiêm và kết quả công cụ độc hại, cách này hạ tỉ lệ thành công của các dạng tấn công đã biết và không tổng quát sang dạng mới. Đã dùng được như một lớp phòng thủ, không phải lớp cuối.",
+      "say": "Adversarial training for agents pushed the known attack shapes down and did nothing for the one the red team invented next.",
       "tags": [
         "security",
         "agent",
@@ -2049,6 +2129,7 @@
       "vi": "Thoát khỏi môi trường cách ly",
       "def_en": "Breaking out of the isolated environment an agent runs code in, which turns a contained mistake into a general compromise and is why the sandbox boundary needs real hardening.",
       "def_vi": "Việc thoát khỏi môi trường cách ly nơi tác tử chạy mã, biến một sai sót bị giam thành một cuộc xâm nhập rộng, đó là lý do ranh giới cách ly cần được gia cố thật sự. Đây là rủi ro đã có tiền lệ.",
+      "say": "Harden the sandbox boundary properly, because a sandbox escape turns one contained mistake into a compromise of everything around it.",
       "tags": [
         "security",
         "agent",
@@ -2125,6 +2206,7 @@
       "vi": "Đặc trưng đơn nghĩa",
       "def_en": "A learned direction that activates for one coherent concept rather than a mixture, which is the goal of dictionary learning and only ever partially achieved.",
       "def_vi": "Một hướng học được kích hoạt cho đúng một khái niệm mạch lạc thay vì một hỗn hợp, đó là mục tiêu của việc học từ điển đặc trưng và mới chỉ đạt được một phần. Còn là hướng nghiên cứu.",
+      "say": "We found a nearly monosemantic feature for legal citations, and even that one fired on a few unrelated cases.",
       "tags": [
         "interp",
         "open"
@@ -2136,6 +2218,7 @@
       "vi": "Chồng chất đặc trưng",
       "def_en": "The hypothesis that a network stores more features than it has dimensions by packing them into overlapping directions, which explains why single neurons are hard to read.",
       "def_vi": "Giả thuyết cho rằng mạng lưu nhiều đặc trưng hơn số chiều nó có bằng cách nhồi chúng vào các hướng chồng lên nhau, điều này giải thích vì sao đọc từng nơ ron riêng lại khó. Đây là giả thuyết có bằng chứng ủng hộ.",
+      "say": "Superposition explains why staring at one neuron tells you so little about what the network has actually learned.",
       "tags": [
         "interp",
         "open"
@@ -2147,6 +2230,7 @@
       "vi": "Nơ ron đa nghĩa",
       "def_en": "A single unit that fires for several unrelated concepts, which is why picking neurons by eye produces stories that do not survive a controlled test.",
       "def_vi": "Một đơn vị đơn lẻ kích hoạt cho nhiều khái niệm không liên quan, đó là lý do chọn nơ ron bằng mắt thường sinh ra những câu chuyện không sống sót qua một phép thử có kiểm soát. Đã được ghi nhận rõ.",
+      "say": "That unit is polysemantic, so the neat story you built around it will not survive a controlled intervention.",
       "tags": [
         "interp",
         "proven"
@@ -2170,6 +2254,7 @@
       "vi": "Điều hướng theo đặc trưng",
       "def_en": "Turning a specific interpreted feature up or down to change behaviour, which is the most direct test that an interpretation is real rather than a plausible label.",
       "def_vi": "Vặn lên hoặc vặn xuống một đặc trưng đã được diễn giải để đổi hành vi, đây là phép thử trực tiếp nhất xem một diễn giải là thật hay chỉ là một cái nhãn nghe hợp lý. Còn là hướng nghiên cứu.",
+      "say": "Feature steering is the honest test, since turning the feature up should change behaviour the way your interpretation predicts.",
       "tags": [
         "interp",
         "open"
@@ -2193,6 +2278,7 @@
       "vi": "Phân tích mạch tính toán",
       "def_en": "Tracing the small subnetwork of components responsible for a specific behaviour, which has produced convincing accounts of narrow tasks and does not yet scale to whole model behaviour.",
       "def_vi": "Truy ra mạng con nhỏ gồm các thành phần chịu trách nhiệm cho một hành vi cụ thể, cách này đã cho những lời giải thích thuyết phục về nhiệm vụ hẹp và chưa mở rộng được lên hành vi toàn mô hình. Còn là hướng nghiên cứu.",
+      "say": "Circuit analysis has given genuinely convincing accounts of narrow behaviours, and it does not yet scale to a whole model.",
       "tags": [
         "interp",
         "open"
@@ -2204,6 +2290,7 @@
       "vi": "Đồ thị quy gán",
       "def_en": "A traced map of which interpreted features fed which others on a particular input, giving a step-by-step account of one response rather than of the model in general.",
       "def_vi": "Bản đồ truy ra cho biết đặc trưng đã diễn giải nào nuôi đặc trưng nào trên một đầu vào cụ thể, cho lời giải thích từng bước cho một phản hồi chứ không cho mô hình nói chung. Còn là hướng nghiên cứu.",
+      "say": "The attribution graph explains this one response beautifully, and it says nothing about how the model behaves in general.",
       "tags": [
         "interp",
         "open"
@@ -2215,6 +2302,7 @@
       "vi": "Bộ dò không tổng quát được",
       "def_en": "The pattern where a classifier trained on internal activations detects a property on its own distribution and fails on the cases you actually deployed it to catch.",
       "def_vi": "Kiểu hỏng khi một bộ phân loại huấn luyện trên kích hoạt bên trong phát hiện được một tính chất trên chính phân bố của nó nhưng trượt đúng những ca mà bạn triển khai nó để bắt. Đây là lý do bộ dò chưa dùng làm cổng an toàn được.",
+      "say": "Our deception probe scored well in the lab and missed every real case, which is probe generalisation failure in one line.",
       "tags": [
         "interp",
         "open"
@@ -2251,6 +2339,7 @@
       "vi": "Chuỗi chim hoàng yến",
       "def_en": "A unique marker embedded in a benchmark so its presence in training data can be detected later, which is a useful check and easily defeated by any filtering step.",
       "def_vi": "Một dấu hiệu duy nhất nhúng trong bộ chuẩn đo để sau này dò được nó có lọt vào dữ liệu huấn luyện hay không, một phép kiểm hữu ích và dễ bị vô hiệu bởi bất kỳ khâu lọc nào. Đã dùng được ở mức hạn chế.",
+      "say": "Grep the corpus for the canary string, and remember that any decent cleaning step would have removed it first.",
       "tags": [
         "eval",
         "proven"
@@ -2274,6 +2363,7 @@
       "vi": "Bộ chuẩn đo làm mới định kỳ",
       "def_en": "Replacing test items regularly with newly written ones kept private, which is currently the only practical answer to contamination and costs real ongoing effort.",
       "def_vi": "Thay các mục kiểm tra định kỳ bằng những mục mới viết và giữ kín, hiện đây là câu trả lời thực tế duy nhất cho nạn nhiễm dữ liệu và nó tốn công liên tục. Đã dùng được.",
+      "say": "A rolling held-out benchmark is the only contamination answer that keeps working, and somebody has to write fresh items forever.",
       "tags": [
         "eval",
         "proven"
@@ -2309,6 +2399,7 @@
       "vi": "Thiên lệch ưu ái chính mình",
       "def_en": "A judge scoring text from its own family higher, which makes a model evaluating its own outputs a conflicted measurement rather than an independent one.",
       "def_vi": "Giám khảo chấm cao hơn cho văn bản do chính họ mô hình sinh ra, khiến việc để mô hình chấm đầu ra của chính nó thành một phép đo có xung đột lợi ích chứ không độc lập. Đã được ghi nhận.",
+      "say": "Self preference bias means a model grading its own family is a conflicted measurement, not an independent one.",
       "tags": [
         "eval",
         "proven"
@@ -2320,6 +2411,7 @@
       "vi": "So sánh theo cặp",
       "def_en": "Asking which of two outputs is better instead of scoring each alone, which is far more reliable for humans and judges and gives only a relative ordering.",
       "def_vi": "Hỏi trong hai đầu ra cái nào tốt hơn thay vì chấm điểm từng cái, cách này đáng tin hơn nhiều với cả người lẫn mô hình giám khảo và chỉ cho ra một thứ tự tương đối. Đã dùng được rộng rãi.",
+      "say": "Switch the raters to pairwise comparison, because people are far more consistent choosing between two answers than scoring one.",
       "tags": [
         "eval",
         "proven"
@@ -2343,6 +2435,7 @@
       "vi": "Điểm ưa thích so với tính đúng của nhiệm vụ",
       "def_en": "The gap between what raters enjoy and what actually solves the problem, which widens on technical work where the rater cannot check the answer.",
       "def_vi": "Khoảng cách giữa cái người chấm thấy dễ chịu và cái thật sự giải được vấn đề, khoảng cách này rộng ra trong công việc kỹ thuật nơi người chấm không kiểm được đáp án. Đây là hạn chế cốt lõi của đánh giá theo sở thích.",
+      "say": "On technical work the preference score and the actual correctness pull apart, because the rater cannot check the answer.",
       "tags": [
         "eval",
         "proven"
@@ -2366,6 +2459,7 @@
       "vi": "Giới hạn của đánh giá trắc nghiệm",
       "def_en": "The fact that picking among given options rewards elimination and surface cues, and never tests whether a system could have produced the answer unaided.",
       "def_vi": "Việc chọn trong các phương án cho sẵn thưởng cho khả năng loại trừ và bám tín hiệu bề mặt, và không bao giờ kiểm được hệ thống có tự tạo ra đáp án đó không nếu không được gợi ý. Đây là hạn chế cấu trúc.",
+      "say": "Multiple choice rewards elimination and surface cues, and it never shows whether the system could produce the answer unaided.",
       "tags": [
         "eval",
         "proven"
@@ -2450,6 +2544,7 @@
       "vi": "Thông lượng so với độ trễ khi gộp lô",
       "def_en": "The direct trade where larger batches raise tokens per second for the fleet and raise the wait for each individual request.",
       "def_vi": "Sự đánh đổi trực tiếp, lô lớn hơn nâng số token mỗi giây cho cả cụm và làm mỗi yêu cầu riêng lẻ phải chờ lâu hơn. Đã dùng được và là núm vặn vận hành chính.",
+      "say": "Batching is a straight trade of throughput against latency, and you have to decide which of the two your users notice.",
       "tags": [
         "ops",
         "serving",
@@ -2498,6 +2593,7 @@
       "vi": "Hạn chế sử dụng trong giấy phép mô hình",
       "def_en": "Clauses limiting commercial scale, field of use or the training of competing models, which decide whether a weight release is usable for your company at all.",
       "def_vi": "Các điều khoản giới hạn quy mô thương mại, lĩnh vực sử dụng hoặc việc dùng để huấn luyện mô hình cạnh tranh, đây là thứ quyết định một bản phát hành trọng số có dùng được cho công ty của bạn hay không. Cần đọc trước khi tích hợp.",
+      "say": "Read the use restrictions in the model licence before benchmarking anything, since one clause can rule those weights out entirely.",
       "tags": [
         "ops",
         "proven"
@@ -2534,6 +2630,7 @@
       "vi": "Nơi lưu trú dữ liệu",
       "def_en": "The requirement that data be processed and stored within a stated jurisdiction, which constrains which hosted services can be used before any quality comparison matters.",
       "def_vi": "Yêu cầu dữ liệu phải được xử lý và lưu trong một phạm vi tài phán đã nêu, ràng buộc này giới hạn dịch vụ nào dùng được trước khi bàn tới chuyện so sánh chất lượng. Đây là ràng buộc pháp lý thực tế.",
+      "say": "Data residency knocked two providers off the list before we had run a single quality comparison.",
       "tags": [
         "ops",
         "security",
@@ -2546,6 +2643,7 @@
       "vi": "Xử lý không lưu giữ",
       "def_en": "A contractual mode where inputs are not stored after the response, which is the usual precondition for sending confidential material to an external service.",
       "def_vi": "Chế độ theo hợp đồng trong đó đầu vào không được lưu lại sau khi trả lời, đây thường là điều kiện tiên quyết để gửi tài liệu mật ra một dịch vụ bên ngoài. Đã có trong thực tế thương mại.",
+      "say": "Legal will not sign off until the contract states zero retention processing for everything we send to that endpoint.",
       "tags": [
         "ops",
         "security",
@@ -2558,6 +2656,7 @@
       "vi": "Dữ liệu khách hàng dùng để huấn luyện",
       "def_en": "Whether submitted content may be used to improve a provider's models, which differs by tier and by contract and is the first thing to check for regulated work.",
       "def_vi": "Việc nội dung gửi lên có được dùng để cải thiện mô hình của nhà cung cấp hay không, điều này khác nhau theo gói và theo hợp đồng và là thứ phải kiểm đầu tiên với công việc chịu quản lý. Đã có quy định thương mại rõ.",
+      "say": "Check whether customer data may be used for training on your tier, because it differs by contract and by plan.",
       "tags": [
         "ops",
         "security",

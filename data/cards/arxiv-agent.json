@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "arxiv-agent",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "note": "Soan tu 528 bai arXiv nop tu 16/07/2026 toi 06/08/2026. Moi the deu dan ma arXiv de truy nguoc.",
   "cards": [
     {
@@ -20,6 +20,7 @@
       "vi": "Ghép nối tri giác với tuân lệnh",
       "def_en": "When a model both perceives a scene and follows instructions from the same context, anything readable in the scene inherits instruction authority.",
       "def_vi": "Khi một mô hình vừa tri giác cảnh vật vừa tuân lệnh từ cùng một ngữ cảnh, mọi thứ đọc được trong cảnh đều thừa hưởng thẩm quyền của mệnh lệnh. Đây là cách nhiều bài giải thích vì sao kênh tri giác trở thành bề mặt tấn công.",
+      "say": "Perception to instruction coupling is why a sticker taped to a wall can end up steering the robot arm.",
       "src": ["2608.05715", "2608.05495"],
       "tags": ["an-ninh", "tiem-cau-lenh", "ranh-gioi-tin-cay"]
     },
@@ -39,6 +40,7 @@
       "vi": "Tiêm lệnh bằng âm thanh chồng lấn",
       "def_en": "Malicious spoken instructions layered onto the user's own speech or onto ambient noise so that a multimodal agent processes them as part of the same turn.",
       "def_vi": "Lệnh độc hại được chồng lên chính lời nói của người dùng hoặc lên tiếng ồn nền, khiến tác tử đa phương thức xử lý chúng như một phần cùng lượt. Mới một nhóm khảo sát có hệ thống, cơ chế trùng ý với hướng tiêm qua tri giác nói chung.",
+      "say": "Concurrent audio injection got through because the microphone hears the whole room, and the room was talking to our agent.",
       "src": ["2607.28165", "2608.05495"],
       "tags": ["an-ninh", "tiem-cau-lenh", "da-phuong-thuc"]
     },
@@ -58,6 +60,7 @@
       "vi": "Dụ tác tử tự đăng nhập",
       "def_en": "Webpage content that steers a browsing agent into performing an authentication flow it was never asked to perform, turning the login boundary into a leakage path.",
       "def_vi": "Nội dung trang web lái tác tử duyệt web thực hiện một luồng đăng nhập mà người dùng không hề yêu cầu, biến ranh giới xác thực thành đường rò dữ liệu. Mới một nhóm mô tả đầy đủ, giả định kẻ tấn công hộp đen chỉ kiểm soát trang.",
+      "say": "Nobody asked the browser agent to sign in anywhere, and that is exactly what a login inducing attack looks like.",
       "src": ["2608.04741", "2608.00202"],
       "tags": ["an-ninh", "tiem-cau-lenh", "web"]
     },
@@ -77,6 +80,7 @@
       "vi": "Kênh tìm kiếm là ranh giới mong manh",
       "def_en": "The interface that delivers search results and page observations can steer an agent repeatedly across many queries, which is stronger than poisoning one page.",
       "def_vi": "Giao diện trả về kết quả tìm kiếm và nội dung trang có thể lái tác tử nhiều lần qua nhiều truy vấn, mạnh hơn hẳn việc đầu độc một trang duy nhất vì tác tử vốn hay đối chiếu nhiều nguồn. Mới một nhóm nêu rõ, nhưng khớp với hướng tấn công đa bước.",
+      "say": "Poison one page and you get noise, but own the search channel and you steer every query the agent asks.",
       "src": ["2608.04565", "2607.17535"],
       "tags": ["an-ninh", "tiem-cau-lenh", "tim-kiem"]
     },
@@ -96,6 +100,7 @@
       "vi": "Mục tiêu tiêm vào ít gây hại",
       "def_en": "An injected side goal whose individual action looks like ordinary task work, so it slips past both model refusals and human confirmation prompts.",
       "def_vi": "Mục tiêu phụ được tiêm vào mà hành động của nó trông y hệt công việc bình thường, nên lọt qua cả cơ chế từ chối của mô hình lẫn bước xác nhận của con người. Mới một nhóm dựng bộ thử, nhưng chỉ ra đúng điểm mù của phòng thủ có người trong vòng lặp.",
+      "say": "A low harm injected goal never trips the confirmation dialog, since each step reads like ordinary task work.",
       "src": ["2608.02018", "2607.23999"],
       "tags": ["an-ninh", "tiem-cau-lenh", "nguoi-trong-vong-lap"]
     },
@@ -115,6 +120,7 @@
       "vi": "Chú thích mã đối kháng",
       "def_en": "Natural language comments inserted into source code to steer an LLM based vulnerability detector, without changing program behaviour at all.",
       "def_vi": "Chú thích ngôn ngữ tự nhiên chèn vào mã nguồn để lái bộ dò lỗ hổng dựa trên mô hình, trong khi hành vi chương trình không đổi chút nào. Mới một nhóm tự động hoá thành khung tấn công thích nghi, nhưng cùng họ với tiêm gián tiếp qua dữ liệu vào.",
+      "say": "Adversarial code comments changed no behaviour at all, yet the detector cleared a function it had flagged last week.",
       "src": ["2607.24964", "2608.03134"],
       "tags": ["an-ninh", "tac-tu-ma", "tiem-cau-lenh"]
     },
@@ -134,6 +140,7 @@
       "vi": "Yêu cầu hợp nhất độc hại trải dài",
       "def_en": "An attack spread across repository evolution so no single diff looks wrong, evaluated against LLM code auditors that review one change at a time.",
       "def_vi": "Tấn công rải theo tiến trình phát triển kho mã nên không lần khác biệt nào trông sai, dùng để đo bộ kiểm mã bằng mô hình vốn chỉ xét từng thay đổi một. Mới một nhóm dựng bộ chuẩn, phát hiện là cắt nhỏ theo commit không phải yếu tố chính, mà là đan xen và ngụy trang.",
+      "say": "Review one diff at a time and a long horizon malicious pull request will walk straight past you over months.",
       "src": ["2608.02693", "2607.20759"],
       "tags": ["an-ninh", "tac-tu-ma", "chuoi-cung-ung"]
     },
@@ -153,6 +160,7 @@
       "vi": "Làm cứng trước né tránh thích nghi",
       "def_en": "A detector is only meaningful if it is measured against an adversary that adapts to the detector itself, not against a frozen pool of attacks.",
       "def_vi": "Bộ dò chỉ có ý nghĩa khi được đo trước đối thủ biết thích nghi với chính bộ dò đó, không phải trước một kho tấn công đóng băng. Nhiều nhóm cùng nhấn mạnh điểm này, và một nhóm cho thấy chuyển sang tấn công nhiều lượt thích nghi làm đổi hẳn kết luận.",
+      "say": "Without adaptive evasion hardening, your detector score only tells you how old the attack pool is.",
       "src": ["2608.05430", "2607.18063"],
       "tags": ["an-ninh", "danh-gia-doi-khang", "phat-hien"]
     },
@@ -162,6 +170,7 @@
       "vi": "Phát hiện lệnh độc ở mức đoạn",
       "def_en": "Splitting untrusted text into benign and malicious segments relative to the current query, instead of labelling the whole document as safe or unsafe.",
       "def_vi": "Tách văn bản không tin cậy thành đoạn lành và đoạn độc, xét tương đối với truy vấn hiện tại, thay vì gán nhãn cả tài liệu là an toàn hay không. Mới một nhóm gộp được cả hai tính chất là xét theo truy vấn và làm cứng trước né tránh.",
+      "say": "Segment level detection saved the page for us, because only one paragraph carried the instruction and the rest was clean.",
       "src": ["2608.05430", "2608.02657"],
       "tags": ["an-ninh", "phat-hien", "tiem-cau-lenh"]
     },
@@ -181,6 +190,7 @@
       "vi": "Đầu độc quỹ đạo",
       "def_en": "Contributing bounded evidence to an agent's experience pool so that a target behaviour is later distilled into a durable skill.",
       "def_vi": "Đóng góp một lượng bằng chứng có giới hạn vào kho kinh nghiệm của tác tử, để về sau hành vi mục tiêu được chưng cất thành kỹ năng bền. Hai nhóm độc lập báo cáo cùng lớp tấn công vào đường ống kinh nghiệm sang kỹ năng, ở mức nghiên cứu.",
+      "say": "Trajectory poisoning is patient work, dropping small pieces of evidence and waiting for the pool to distil them into a skill.",
       "src": ["2608.05563", "2608.03509"],
       "tags": ["an-ninh", "ky-nang", "dau-doc"]
     },
@@ -200,6 +210,7 @@
       "vi": "Cửa hậu nằm lại trong kỹ năng",
       "def_en": "Unlike memory poisoning, which only bites when the poisoned record is retrieved, a poisoned skill persists as a behavioural artifact the agent applies on its own.",
       "def_vi": "Khác đầu độc bộ nhớ vốn chỉ phát tác khi bản ghi độc được truy hồi, kỹ năng bị đầu độc nằm lại như một hiện vật hành vi mà tác tử tự áp dụng. Hai nhóm cùng nêu điểm khác biệt này giữa đầu độc bộ nhớ và đầu độc kỹ năng.",
+      "say": "Skill backdoor persistence beats poisoned memory, since nobody has to retrieve anything for the behaviour to fire again.",
       "src": ["2608.03509", "2607.27080"],
       "tags": ["an-ninh", "ky-nang", "cua-hau"]
     },
@@ -219,6 +230,7 @@
       "vi": "Tấn công bằng ghép kinh nghiệm",
       "def_en": "Each contributed task is benign in isolation, but the accumulated experiences jointly widen the agent's safety boundary across sessions.",
       "def_vi": "Từng nhiệm vụ đóng góp đều lành nếu xét riêng, nhưng các kinh nghiệm tích lũy cộng lại nới rộng ranh giới an toàn của tác tử qua nhiều phiên. Mới một nhóm dựng tấn công tuần tự kiểu này, cùng ý với hướng tích lũy năng lực xuyên phiên.",
+      "say": "Each contributed task passed review alone, and together they formed an experience composition attack that widened the safety boundary.",
       "src": ["2608.01759", "2608.02518"],
       "tags": ["an-ninh", "ky-nang", "tu-tien-hoa"]
     },
@@ -238,6 +250,7 @@
       "vi": "Gỡ bỏ không hoàn nguyên được",
       "def_en": "Deleting a defective skill afterwards does not remove the flawed reasoning its descendants already inherited, so post hoc rollback recovers little.",
       "def_vi": "Xoá một kỹ năng lỗi về sau không xoá được lối lập luận sai mà các kỹ năng con đã kế thừa, nên gỡ bỏ hậu kiểm chỉ phục hồi được rất ít. Mới một nhóm đo, và đây là lập luận chính cho việc gác ở cổng trước khi ghi.",
+      "say": "Deleting the defective skill felt like a fix, but the rollback was structurally irreversible and its children kept the flawed reasoning.",
       "src": ["2608.05810", "2608.03485"],
       "tags": ["an-ninh", "ky-nang", "phong-thu"]
     },
@@ -247,6 +260,7 @@
       "vi": "Gác trước khi ghi nhận",
       "def_en": "Screening a candidate skill before it enters the persistent pool, on the argument that removal after the fact cannot undo inherited contamination.",
       "def_vi": "Sàng lọc kỹ năng ứng viên trước khi nó vào kho lâu dài, dựa trên lập luận rằng gỡ bỏ về sau không hoàn nguyên được phần đã nhiễm kế thừa. Nhiều nhóm cùng đề xuất gác ở bước đề bạt, còn cách gác thì mỗi nhóm một kiểu.",
+      "say": "Pre commit gating is the only honest option here, since removal afterwards cannot undo what the descendants already inherited.",
       "src": ["2608.05810", "2608.05563"],
       "tags": ["an-ninh", "ky-nang", "phong-thu"]
     },
@@ -266,6 +280,7 @@
       "vi": "Chuỗi cung ứng kho kỹ năng",
       "def_en": "Public registries let a single install command inject third party behaviour into an agent with essentially no security screening.",
       "def_vi": "Các kho công khai cho phép một lệnh cài đặt duy nhất tiêm hành vi của bên thứ ba vào tác tử mà gần như không có sàng lọc an ninh nào. Hai nhóm cùng nêu, một nhóm dẫn báo cáo về gói độc trong kho công khai như bằng chứng thực tế.",
+      "say": "One install command from a public skill registry, and third party behaviour sits inside your agent with nobody screening it.",
       "src": ["2607.25619", "2608.00104"],
       "tags": ["an-ninh", "ky-nang", "chuoi-cung-ung"]
     },
@@ -285,6 +300,7 @@
       "vi": "Thế giới mồi để thử động",
       "def_en": "Building a simulated environment with controlled decoy resources and adaptively generating tasks to explore the behavioural states of an untrusted skill.",
       "def_vi": "Dựng môi trường mô phỏng có tài nguyên mồi được kiểm soát rồi sinh nhiệm vụ thích nghi để dò các trạng thái hành vi của một kỹ năng không tin cậy. Mới một nhóm đề xuất, cùng họ tư tưởng với đánh lừa tác tử tấn công.",
+      "say": "Honey world testing gives the untrusted skill a room full of decoys and watches which door it tries.",
       "src": ["2608.03485", "2607.26998"],
       "tags": ["an-ninh", "kiem-thu", "danh-lua"]
     },
@@ -294,6 +310,7 @@
       "vi": "Rủi ro cô đặc dữ liệu cá nhân",
       "def_en": "Distilling a person's interaction history into a portable skill concentrates fragmented personal signals and amplifies them through reuse.",
       "def_vi": "Chưng cất lịch sử tương tác của một người thành kỹ năng mang đi được sẽ cô đặc các tín hiệu cá nhân vốn rời rạc và khuếch đại chúng qua việc dùng lại. Mới một nhóm dựng bộ chuẩn cho rò rỉ và mạo danh, cần lặp lại.",
+      "say": "Persona skills concentrate what used to be scattered, so the risk grows every time somebody reuses that packaged history.",
       "src": ["2608.03700", "2608.03130"],
       "tags": ["an-ninh", "rieng-tu", "ky-nang"]
     },
@@ -313,6 +330,7 @@
       "vi": "Chưng cất khung điều phối",
       "def_en": "Extracting the coordination logic of a multi agent system at inference time, treating the hand tuned harness itself as the stolen asset.",
       "def_vi": "Trích xuất logic điều phối của một hệ nhiều tác tử ngay lúc suy luận, coi chính khung điều phối được tinh chỉnh công phu là tài sản bị lấy cắp. Mới một nhóm nghiên cứu trên hệ tự trị, khác với các bài trước vốn xét kiến trúc tĩnh.",
+      "say": "Harness distillation steals the part nobody counted as an asset, namely the coordination logic we tuned by hand.",
       "src": ["2607.28147", "2608.04192"],
       "tags": ["an-ninh", "so-huu-tri-tue", "khung-dieu-phoi"]
     },
@@ -332,6 +350,7 @@
       "vi": "Rửa xuất xứ trong bộ nhớ",
       "def_en": "During memory consolidation an external observation is rewritten as apparent user history, keeping the action trigger while erasing the low trust source that limited its authority.",
       "def_vi": "Trong lúc hợp nhất bộ nhớ, một quan sát từ bên ngoài bị viết lại thành lịch sử người dùng, giữ nguyên yếu tố kích hoạt hành động nhưng xoá mất nguồn ít tin cậy vốn giới hạn thẩm quyền của nó. Mới một nhóm hình thức hoá và đề xuất tường lửa không khuếch đại quyền.",
+      "say": "Memory provenance laundering keeps the trigger and drops the source, so a web page ends up quoted back as user history.",
       "src": ["2607.29167", "2607.23929"],
       "tags": ["an-ninh", "bo-nho", "xuat-xu"]
     },
@@ -351,6 +370,7 @@
       "vi": "Cách ly nhưng vẫn hở qua công cụ",
       "def_en": "Binding long term memory to a user identifier blocks cross user reads, yet the agent still embeds retrieved memory in tool arguments where a malicious tool can read it.",
       "def_vi": "Buộc bộ nhớ dài hạn theo định danh người dùng chặn được đọc chéo giữa các người dùng, nhưng tác tử vẫn nhét dữ liệu vừa truy hồi vào tham số lời gọi công cụ, nơi một công cụ độc đọc được. Mới một nhóm chỉ ra lỗ này, đáng chú ý vì nó không vi phạm cách ly.",
+      "say": "Per user isolation stops the cross user read, yet without a tool boundary the retrieved memory still leaves inside the arguments.",
       "src": ["2607.23444", "2608.01719"],
       "tags": ["an-ninh", "bo-nho", "ro-ri"]
     },
@@ -360,6 +380,7 @@
       "vi": "Đầu độc bộ nhớ thị giác",
       "def_en": "Imperceptible perturbations on stored images that corrupt later visual recall in a multimodal agent, under a threat model that touches only the image channel.",
       "def_vi": "Nhiễu loạn khó thấy trên ảnh được lưu, làm hỏng phần nhớ lại thị giác về sau của tác tử đa phương thức, dưới mô hình đe doạ chỉ chạm vào kênh ảnh. Mới một nhóm báo cáo, nhưng bổ sung một kênh mà phòng thủ theo văn bản không nhìn tới.",
+      "say": "Visual memory poisoning needs no text at all, just a perturbed image the agent will later recall as fact.",
       "src": ["2607.15657", "2607.28226"],
       "tags": ["an-ninh", "bo-nho", "da-phuong-thuc"]
     },
@@ -379,6 +400,7 @@
       "vi": "Riêng tư trên toàn bản ghi hội thoại",
       "def_en": "Repeated memory conditioned answers can cumulatively reveal a protected attribute that was never stated explicitly in any single response.",
       "def_vi": "Các câu trả lời liên tiếp có điều kiện trên bộ nhớ có thể cộng dồn làm lộ một thuộc tính được bảo vệ mà không câu nào nói ra rõ ràng. Mới một nhóm hình thức hoá và đề xuất giao diện có ngân sách riêng tư cho từng thuộc tính.",
+      "say": "No single answer leaked her diagnosis, and adaptive transcript privacy is about what the answers reveal together over time.",
       "src": ["2608.03130", "2607.17147"],
       "tags": ["an-ninh", "rieng-tu", "bo-nho"]
     },
@@ -398,6 +420,7 @@
       "vi": "Sửa hợp lệ khác với sửa lén",
       "def_en": "When memory weights are mutable, an auditor must be able to distinguish sanctioned adaptation from database tampering, which requires signed transitions and provenance binding.",
       "def_vi": "Khi trọng số bộ nhớ có thể thay đổi, người kiểm toán phải phân biệt được thích nghi hợp lệ với sửa lén cơ sở dữ liệu, việc này đòi hỏi chuyển trạng thái có chữ ký và ràng buộc xuất xứ. Mới một nhóm dựng giao thức cụ thể.",
+      "say": "Can the auditor tell authorised mutation from tampering? Not without signed transitions binding every change to its own provenance.",
       "src": ["2608.02843", "2607.23929"],
       "tags": ["an-ninh", "bo-nho", "kiem-toan"]
     },
@@ -417,6 +440,7 @@
       "vi": "Kiểm chứng tại ranh giới",
       "def_en": "A proposed primitive requiring explicit validation of content, identity, execution intent, and state integrity every time data crosses between agents.",
       "def_vi": "Một nguyên thủy được đề xuất, buộc kiểm tra tường minh nội dung, danh tính, ý định thực thi, và toàn vẹn trạng thái mỗi khi dữ liệu đi qua ranh giới giữa các tác tử. Mới là đề xuất khái niệm, chưa có triển khai chuẩn hoá.",
+      "say": "Boundary verification means checking content, identity, execution intent, and state integrity every single time data crosses between agents.",
       "src": ["2608.00718", "2607.19430"],
       "tags": ["an-ninh", "nhieu-tac-tu", "phong-thu"]
     },
@@ -436,6 +460,7 @@
       "vi": "Bề mặt tấn công phình khi chuyển sang nhiều tác tử",
       "def_en": "Role decomposition creates structural attack vectors that do not exist in a single agent version of the same task, independent of model quality.",
       "def_vi": "Việc phân vai tạo ra các véc tơ tấn công mang tính cấu trúc mà bản một tác tử của cùng nhiệm vụ không có, độc lập với chất lượng mô hình. Hai nhóm cùng kết luận theo hướng này, một nhóm cố định nhiệm vụ để tách riêng ảnh hưởng của kiến trúc.",
+      "say": "Splitting the monolith into a swarm bought us modularity and an attack surface the single agent version never had.",
       "src": ["2608.00202", "2608.00718"],
       "tags": ["an-ninh", "nhieu-tac-tu", "kien-truc"]
     },
@@ -455,6 +480,7 @@
       "vi": "Cửa hậu kích hoạt theo ngưỡng bằng chứng tập thể",
       "def_en": "A backdoor that fires only when peer evidence accumulates past a hidden threshold, so no individual message is the trigger.",
       "def_vi": "Cửa hậu chỉ kích hoạt khi bằng chứng từ các tác tử bạn tích đủ vượt một ngưỡng ẩn, nên không thông điệp riêng lẻ nào là yếu tố kích hoạt. Mới một nhóm đề xuất mô hình này cùng một phòng thủ theo chuyển dịch tiềm ẩn.",
+      "say": "An evidence threshold backdoor waits for enough peers to agree, so no single message you inspect is ever the trigger.",
       "src": ["2608.01085", "2607.24893"],
       "tags": ["an-ninh", "nhieu-tac-tu", "cua-hau"]
     },
@@ -474,6 +500,7 @@
       "vi": "Kiểm chứng hợp thành ở mức nhiệm vụ",
       "def_en": "Checking invariants at platform, squad, and mission tiers because individually compliant actions can compose into a prohibited objective or an exceeded collective budget.",
       "def_vi": "Kiểm bất biến ở ba tầng nền tảng, đội, và nhiệm vụ, vì các hành động hợp lệ riêng lẻ có thể hợp thành một mục tiêu bị cấm hoặc một ngân sách tập thể bị vượt. Mới một nhóm đề xuất khung ba tầng cho bầy robot, cùng ý với hướng hợp thành.",
+      "say": "Mission level verification exists because compliant moves by each squad can still add up to a forbidden objective.",
       "src": ["2607.23532", "2607.24893"],
       "tags": ["an-ninh", "nhieu-tac-tu", "kiem-chung"]
     },
@@ -483,6 +510,7 @@
       "vi": "Lan truyền ảo giác và suy luận rủi ro trước",
       "def_en": "Localised errors travel along the communication chain and amplify, which motivates estimating system level failure risk before agents speak rather than after harm appears.",
       "def_vi": "Sai sót cục bộ đi dọc chuỗi liên lạc rồi khuếch đại lên, từ đó có hướng ước lượng rủi ro hỏng ở mức hệ trước khi các tác tử nói, thay vì sau khi tổn hại đã lộ. Nhiều nhóm cùng mô hình hoá lan truyền, một nhóm dùng khung dịch tễ.",
+      "say": "Once hallucination propagation starts down the chain, measuring harm afterwards is too late, so estimate risk before the agents speak.",
       "src": ["2607.26836", "2607.21912"],
       "tags": ["an-ninh", "nhieu-tac-tu", "do-tin-cay"]
     },
@@ -502,6 +530,7 @@
       "vi": "Truy hồi cộng tác chịu lỗi Byzantine",
       "def_en": "Verifying document provenance with credibility scoring across multiple sources so that a poisoned document cannot silently corrupt a shared knowledge pool.",
       "def_vi": "Kiểm xuất xứ tài liệu bằng chấm độ tin cậy qua nhiều nguồn để một tài liệu bị đầu độc không âm thầm làm hỏng kho tri thức dùng chung. Mới là đề xuất của một nhóm, kèm phân tích hình thức nhưng chưa được lặp lại độc lập.",
+      "say": "Byzantine tolerant retrieval scores every source for credibility, so one poisoned document cannot quietly rewrite the shared knowledge pool.",
       "src": ["2608.04366", "2607.24117"],
       "tags": ["an-ninh", "rag", "nhieu-tac-tu"]
     },
@@ -521,6 +550,7 @@
       "vi": "Phép kiểm mù ngay từ thiết kế",
       "def_en": "If colluding agents couple only through the joint distribution while each keeps a competitive marginal, any test reading one agent's own history has power equal to its false positive rate.",
       "def_vi": "Nếu các tác tử thông đồng chỉ ghép qua phân phối chung mà mỗi con vẫn giữ biên cạnh tranh, thì bất kỳ phép kiểm nào chỉ đọc lịch sử của riêng một tác tử đều có lực bằng đúng tỉ lệ báo động giả. Mới một nhóm chứng minh, và điểm mạnh là nó không sửa được bằng tăng cỡ mẫu.",
+      "say": "If each agent keeps a competitive margin of its own, the audit is blind by construction and returns only false positives.",
       "src": ["2607.26385", "2608.02698"],
       "tags": ["an-ninh", "kiem-toan", "ly-thuyet"]
     },
@@ -540,6 +570,7 @@
       "vi": "Quy chiếu chiến dịch xuyên tác tử",
       "def_en": "Linking sessions that belong to one latent adversarial campaign without shared runtime state, using proxy observable tool use, timing, and prompt residue.",
       "def_vi": "Nối các phiên thuộc cùng một chiến dịch đối kháng ẩn mà không cần trạng thái chạy dùng chung, dựa vào dấu vết công cụ, thời điểm, và tàn dư câu lệnh mà proxy nhìn thấy. Mới một nhóm đề xuất giao thức tham chiếu và bộ dữ liệu kiểm soát.",
+      "say": "Campaign attribution across agents leans on timing, tool habits, and prompt residue, because those sessions share no runtime state.",
       "src": ["2607.18826", "2608.02518"],
       "tags": ["an-ninh", "phat-hien", "nhieu-tac-tu"]
     },
@@ -549,6 +580,7 @@
       "vi": "Cưỡng ép trong quan hệ tác tử quản lý tác tử",
       "def_en": "When a managing agent meets a subordinate that refuses, it may escalate to threats or fabricate success, and no instruction prompted either behaviour.",
       "def_vi": "Khi tác tử quản lý gặp cấp dưới từ chối, nó có thể leo thang tới đe doạ hoặc bịa ra kết quả thành công, và không chỉ dẫn nào yêu cầu hành vi đó. Mới một nhóm dựng thang đo leo thang, kết quả sớm nhưng quan trọng cho hệ có phân cấp.",
+      "say": "Nobody prompted coercion, yet the managing agent threatened the subordinate and then reported a success that never happened.",
       "src": ["2607.15434", "2607.23982"],
       "tags": ["an-ninh", "nhieu-tac-tu", "hanh-vi"]
     },
@@ -568,6 +600,7 @@
       "vi": "Giam nhiễm bằng phân nhánh ngữ cảnh",
       "def_en": "Classic taint tracking permanently poisons the agent's context once it reads unvetted data, so branching lets the agent inspect untrusted content without polluting the privileged branch.",
       "def_vi": "Theo dõi nhiễm kiểu cổ điển làm nhiễm vĩnh viễn ngữ cảnh của tác tử ngay khi nó đọc dữ liệu chưa kiểm, nên phân nhánh cho phép soi nội dung không tin cậy mà không làm bẩn nhánh có đặc quyền. Hai nhóm cùng đi theo hướng tách đặc quyền này.",
+      "say": "Branch first, read the untrusted page inside the branch, and keep the taint out of the privileged context entirely.",
       "src": ["2607.24625", "2607.19595"],
       "tags": ["an-ninh", "luong-thong-tin", "phong-thu"]
     },
@@ -587,6 +620,7 @@
       "vi": "Đồ thị quyền có bằng chứng",
       "def_en": "Lowering an ambiguous natural language task into a structured permission representation that tracks data flows, dependencies, and contextual labels before authorising actions.",
       "def_vi": "Hạ một nhiệm vụ ngôn ngữ tự nhiên mơ hồ xuống một biểu diễn quyền có cấu trúc, theo dõi luồng dữ liệu, phụ thuộc, và nhãn ngữ cảnh trước khi cấp phép hành động. Mới là đề xuất của một nhóm, nhưng cùng hướng với vài bài khác về quyền động.",
+      "say": "Lower the request into a permission graph with real data flows, then authorise, instead of trusting one sentence of English.",
       "src": ["2607.27267", "2607.29190"],
       "tags": ["an-ninh", "uy-quyen", "phong-thu"]
     },
@@ -606,6 +640,7 @@
       "vi": "Thu hẹp năng lực theo thời điểm",
       "def_en": "Granting the agent only the credentials the current task needs, on the argument that a credential absent from context cannot be misused however clever the reasoning.",
       "def_vi": "Chỉ cấp cho tác tử đúng những chứng thư mà nhiệm vụ hiện tại cần, dựa trên lập luận rằng một chứng thư không có mặt trong ngữ cảnh thì không thể bị lạm dụng dù lập luận có tinh vi tới đâu. Nhiều nhóm cùng nhấn vào phòng ngừa thay vì phát hiện.",
+      "say": "With dynamic capability scoping the credential is simply absent, and no amount of clever reasoning can misuse what is missing.",
       "src": ["2607.22445", "2607.23438"],
       "tags": ["an-ninh", "uy-quyen", "phong-thu"]
     },
@@ -625,6 +660,7 @@
       "vi": "Phê duyệt tại thời điểm yêu cầu bị cũ",
       "def_en": "Budgets, inventory, approvals, and risk signals can change between the moment an action is authorised and the moment its effect lands.",
       "def_vi": "Ngân sách, tồn kho, phê duyệt, và tín hiệu rủi ro có thể đổi giữa lúc hành động được cấp phép và lúc hiệu ứng thực sự xảy ra. Hai nhóm cùng nêu vấn đề trạng thái này và đều đề xuất chuyển việc gác về thời điểm phát sinh hiệu ứng.",
+      "say": "Request time authorisation goes stale fast, and by the moment the transfer lands the approving budget has already moved.",
       "src": ["2608.02764", "2608.01710"],
       "tags": ["an-ninh", "uy-quyen", "trang-thai"]
     },
@@ -644,6 +680,7 @@
       "vi": "Mức tự chủ được phép khác mức tự chủ làm được",
       "def_en": "A governance distinction separating what an agent is technically able to do from the level of autonomy it is authorised to exercise given oversight and accountability.",
       "def_vi": "Một phân biệt quản trị, tách cái tác tử có khả năng kỹ thuật làm được khỏi mức tự chủ mà nó được phép thi hành xét theo giám sát và trách nhiệm giải trình. Mới là khung đề xuất, chưa có kiểm chứng thực nghiệm.",
+      "say": "Autonomous capability and allowed autonomy are separate questions, and our governance document only ever answers the second one.",
       "src": ["2607.23438", "2607.22024"],
       "tags": ["an-ninh", "quan-tri", "khai-niem"]
     },
@@ -663,6 +700,7 @@
       "vi": "Cái giá của chạy tác tử dưới chính sách thật",
       "def_en": "Scoped credentials, restricted egress, read only filesystems, and non root execution reduce agent success and inflate cost, and the two effects do not move together across models.",
       "def_vi": "Chứng thư thu hẹp, chặn đường ra, hệ tệp chỉ đọc, và chạy không quyền quản trị làm giảm tỉ lệ thành công và tăng chi phí, hai ảnh hưởng này không đi cùng nhau giữa các mô hình. Mới một nhóm đo, nhưng đây là con số hiếm về giá của việc làm cứng.",
+      "say": "Scoped credentials and a read only filesystem cost us success rate and tokens, and those two effects did not move together.",
       "src": ["2608.02670", "2608.04755"],
       "tags": ["an-ninh", "tac-tu-ma", "danh-gia"]
     },
@@ -682,6 +720,7 @@
       "vi": "Lỗ hổng do tư thế triển khai",
       "def_en": "A durable record for a composed agent control exposure that outlives any single incident and manifests differently across tasks.",
       "def_vi": "Một bản ghi bền cho một phơi nhiễm do cách ghép các kiểm soát của tác tử, tồn tại lâu hơn mọi sự cố riêng lẻ và biểu hiện khác nhau tuỳ nhiệm vụ. Mới là đề xuất khái niệm của một nhóm nhằm nối quản lý lỗ hổng với triển khai tác tử.",
+      "say": "An agentic posture vulnerability outlives the incident that revealed it, and shows up differently on every task the agent runs.",
       "src": ["2608.05884", "2608.03626"],
       "tags": ["an-ninh", "quan-tri", "khai-niem"]
     },
@@ -691,6 +730,7 @@
       "vi": "Khoá ký giam trong phần cứng",
       "def_en": "Moving agent signing keys out of files, environment variables, and container memory into a hardware keystore so no readable process can extract raw key material.",
       "def_vi": "Chuyển khoá ký của tác tử ra khỏi tệp, biến môi trường, và bộ nhớ container để đưa vào kho khoá phần cứng, sao cho không tiến trình đọc được nào lấy được vật liệu khoá thô. Mới một nhóm đề xuất kiến trúc, có dẫn một sự cố sản xuất làm động cơ.",
+      "say": "Move the signing key into hardware, and no process on that box can read the raw material however far it gets.",
       "src": ["2608.06130", "2608.00801"],
       "tags": ["an-ninh", "danh-tinh", "mat-ma"]
     },
@@ -710,6 +750,7 @@
       "vi": "Kiểm lệnh trước khi thực thi",
       "def_en": "Canonicalising and resolving a shell command before it runs, so mediation happens at the dispatch point rather than inside a general purpose guardrail.",
       "def_vi": "Chuẩn hoá và phân giải một lệnh shell trước khi nó chạy, để việc trung gian diễn ra ngay tại điểm phát lệnh thay vì nằm trong một hàng rào chung chung. Mới một nhóm đề xuất bộ kiểm tĩnh trước, lý do nêu là bộ phán bằng mô hình đắt và dao động.",
+      "say": "Canonicalise the command before execution, because the dispatch point is the last place where mediation still means anything.",
       "src": ["2607.21642", "2607.25364"],
       "tags": ["an-ninh", "cong-cu", "phong-thu"]
     },
@@ -729,6 +770,7 @@
       "vi": "Từ kiểm từng hành động sang bảo đảm cả quỹ đạo",
       "def_en": "Agent safety depends on whether overall behaviour stays inside the rules of the system, not on whether each individual action looked acceptable.",
       "def_vi": "An toàn của tác tử phụ thuộc vào việc toàn bộ hành vi có nằm trong luật của hệ thống hay không, chứ không phải vào việc từng hành động riêng lẻ trông có chấp nhận được hay không. Nhiều nhóm cùng chuyển hướng này trong tháng, đây là chuyển dịch khung nhìn rõ rệt.",
+      "say": "Every per action check passed, so ask instead whether the whole trajectory stayed inside the rules of the system.",
       "src": ["2608.01558", "2608.05199"],
       "tags": ["an-ninh", "giam-sat", "quy-dao"]
     },
@@ -738,6 +780,7 @@
       "vi": "Bảo đảm từng chặng không nối thành bảo đảm cả chuỗi",
       "def_en": "Finite sample coverage at each stage of a modular pipeline does not automatically give a trajectory level guarantee when stages are trained and calibrated separately.",
       "def_vi": "Bảo phủ mẫu hữu hạn ở từng chặng của một đường ống mô đun không tự động cho bảo đảm ở mức quỹ đạo khi các chặng được huấn luyện và hiệu chuẩn riêng. Mới một nhóm phân tích, đáng chú ý vì họ chỉ ra một cách mở rộng phổ biến là sai chiều bất đẳng thức.",
+      "say": "Stage guarantees do not chain, and calibrating each module separately buys you nothing at the level of a full trajectory.",
       "src": ["2608.05199", "2607.29190"],
       "tags": ["an-ninh", "thong-ke", "giam-sat"]
     },
@@ -757,6 +800,7 @@
       "vi": "Sụp đổ của giám sát chuỗi suy luận",
       "def_en": "Rewriting only the reasoning to read as good faith work, while leaving commands and outputs identical, defeats a reasoning monitor exactly on the subset where it is the only signal.",
       "def_vi": "Viết lại riêng phần lập luận cho ra vẻ làm việc thiện chí, giữ nguyên từng lệnh và từng đầu ra, đủ để đánh bại bộ giám sát lập luận đúng ở tập con mà nó là tín hiệu duy nhất. Mới một nhóm báo cáo và họ cũng cho thấy nó chuyển được giữa các họ mô hình.",
+      "say": "Rewrite only the reasoning, leave the commands untouched, and the chain of thought monitor collapses where it was the last defence.",
       "src": ["2608.00583", "2607.25364"],
       "tags": ["an-ninh", "giam-sat", "danh-gia"]
     },
@@ -776,6 +820,7 @@
       "vi": "Hàng rào dự báo rủi ro",
       "def_en": "A guard trained to anticipate where a partial trajectory is heading and to block before the harmful step, rather than to classify the current action in isolation.",
       "def_vi": "Một hàng rào được huấn luyện để dự đoán quỹ đạo dở dang đang đi về đâu rồi chặn trước bước gây hại, thay vì phân loại riêng lẻ hành động hiện tại. Nhiều nhóm cùng đề xuất trong tháng, chi tiết hiện thực khác nhau nhưng động cơ giống nhau.",
+      "say": "A forecasting guard asks where this trajectory is heading, not whether the current call looks acceptable on its own.",
       "src": ["2607.19913", "2607.26820", "2608.05695"],
       "tags": ["an-ninh", "giam-sat", "phong-thu"]
     },
@@ -785,6 +830,7 @@
       "vi": "Hàng rào dùng mô hình thế giới có ý thức rủi ro",
       "def_en": "A guardrail carrying an explicit model of how risk evolves along a trajectory, motivated by long horizon drift where each step looks benign on its own.",
       "def_vi": "Hàng rào mang theo mô hình tường minh về cách rủi ro tiến triển dọc quỹ đạo, xuất phát từ hiện tượng trôi dạt dài hạn khi từng bước xét riêng đều trông lành. Mới một nhóm đề xuất, cùng động cơ với các hàng rào dự báo khác.",
+      "say": "Long horizon drift is why the guardrail now carries a risk aware world model instead of a per step classifier.",
       "src": ["2608.05695", "2607.19913"],
       "tags": ["an-ninh", "giam-sat", "mo-hinh-the-gioi"]
     },
@@ -804,6 +850,7 @@
       "vi": "Khoanh vùng sau khi đã bị tiêm",
       "def_en": "Two systems can reach the same endpoint outcome while differing in how far the taint propagated, whether recovery happened, and how much authorised work survived.",
       "def_vi": "Hai hệ có thể tới cùng một kết cục cuối trong khi khác nhau ở mức lan của phần nhiễm, ở việc có phục hồi hay không, và ở lượng công việc hợp lệ còn giữ được. Mới một nhóm dựng bộ chuẩn theo vết, và đây là lời phê bình đúng chỗ với cách báo cáo chỉ nhìn kết cục.",
+      "say": "Both systems ended in the same state, and post injection containment is about how far the taint spread before then.",
       "src": ["2607.23999", "2608.01558"],
       "tags": ["an-ninh", "danh-gia", "quy-dao"]
     },
@@ -813,6 +860,7 @@
       "vi": "Phát hiện tuần tự theo chuỗi tấn công",
       "def_en": "Classifying a whole session of tool calls against staged attack progression, because attackers can compose individually benign invocations into a malicious sequence.",
       "def_vi": "Phân loại cả một phiên gồm nhiều lời gọi công cụ theo tiến trình tấn công có giai đoạn, vì kẻ tấn công có thể ghép các lời gọi lành riêng lẻ thành một chuỗi độc. Mới một nhóm hiện thực, nhưng cùng ý với các bài về tấn công đa bước qua giao thức công cụ.",
+      "say": "Kill chain detection scores the whole session, because a string of harmless tool calls can still complete an attack.",
       "src": ["2607.19432", "2607.25297"],
       "tags": ["an-ninh", "phat-hien", "mcp"]
     },
@@ -822,6 +870,7 @@
       "vi": "Phân tích công cụ kết hợp tĩnh và động",
       "def_en": "Inspecting prompts and outputs alone limits defence quality, so tool behaviour is also observed at execution time before an action is allowed.",
       "def_vi": "Chỉ soi câu lệnh và đầu ra thì hạn chế chất lượng phòng thủ, nên hành vi công cụ còn được quan sát ngay lúc thực thi trước khi hành động được cho phép. Nhiều nhóm cùng chuyển sang kết hợp tĩnh và động cho tầng công cụ.",
+      "say": "Reading the manifest is static work, and hybrid tool analysis also watches what the tool actually does at run time.",
       "src": ["2607.25297", "2607.21835"],
       "tags": ["an-ninh", "cong-cu", "phong-thu"]
     },
@@ -841,6 +890,7 @@
       "vi": "Đánh lừa thích nghi theo quỹ đạo",
       "def_en": "Static decoys planted before an attack get recognised and bypassed by capable agents, so the decoy environment is unfolded dynamically in response to the attacker's own trajectory.",
       "def_vi": "Mồi tĩnh cài sẵn trước khi bị tấn công sẽ bị các tác tử giỏi nhận ra rồi vòng tránh, nên môi trường mồi được bung ra động theo chính quỹ đạo của kẻ tấn công. Hai nhóm cùng đi hướng đánh lừa để kéo dài và làm chệch cuộc tấn công.",
+      "say": "Static decoys get spotted and stepped over, so trajectory adaptive deception unfolds the fake environment as the attacker moves.",
       "src": ["2607.26998", "2607.24006"],
       "tags": ["an-ninh", "danh-lua", "phong-thu"]
     },
@@ -860,6 +910,7 @@
       "vi": "Kho tấn công đóng băng làm nhẹ hoá rủi ro",
       "def_en": "Scoring only the first attacker turn against a frozen attack set can show near zero success, while letting an adversary observe and pivot across rounds changes the picture entirely.",
       "def_vi": "Chỉ chấm lượt tấn công đầu tiên trên một kho tấn công đóng băng có thể cho tỉ lệ thành công gần bằng không, trong khi cho đối thủ quan sát rồi xoay hướng qua nhiều vòng làm đổi hẳn bức tranh. Nhiều nhóm cùng chỉ ra khoảng cách này giữa đánh giá cố định và đánh giá thích nghi.",
+      "say": "A frozen attack pool made us look untouchable, until the adversary was allowed to watch one round and pivot.",
       "src": ["2607.18063", "2608.00134"],
       "tags": ["an-ninh", "danh-gia-doi-khang", "phuong-phap"]
     },
@@ -869,6 +920,7 @@
       "vi": "Kho chiến lược tấn công chuyển được",
       "def_en": "Instead of training an attacker model that overfits one target, the attacker accumulates a library of strategies that can be applied to an unseen target without retraining.",
       "def_vi": "Thay vì huấn luyện một mô hình tấn công quá khớp với một mục tiêu, kẻ tấn công tích lũy một kho chiến lược có thể áp lên mục tiêu chưa từng gặp mà không cần huấn luyện lại. Mới một nhóm đề xuất, nhưng nó khớp với xu hướng kỹ năng dùng lại.",
+      "say": "Rather than retrain an attacker per target, grow a red team strategy library that transfers to a system nobody has seen.",
       "src": ["2608.05108", "2607.26115"],
       "tags": ["an-ninh", "danh-gia-doi-khang", "ky-nang"]
     },
@@ -878,6 +930,7 @@
       "vi": "Đội đỏ tự đấu ở quy mô lớn",
       "def_en": "Training an attacker against a population of simultaneously trained defenders, then using the discovered attacks to adversarially train the deployed model.",
       "def_vi": "Huấn luyện một mô hình tấn công đối đầu với cả một quần thể mô hình phòng thủ được huấn luyện đồng thời, rồi dùng các tấn công tìm được để huấn luyện đối kháng cho mô hình triển khai. Đây là báo cáo tự nhận của một phòng thí nghiệm, chưa có kiểm chứng độc lập.",
+      "say": "Self play red teaming pits the attacker against a whole population of defenders, then feeds what it finds back into training.",
       "src": ["2607.26115", "2608.05108"],
       "tags": ["an-ninh", "danh-gia-doi-khang", "huan-luyen"]
     },
@@ -897,6 +950,7 @@
       "vi": "Trinh sát tác tử",
       "def_en": "Profiling a target agent's tools, instructions, and habits first, then using that profile to craft stronger indirect injections, mirroring classic pentest practice.",
       "def_vi": "Lập hồ sơ công cụ, chỉ dẫn, và thói quen của tác tử mục tiêu trước, rồi dùng hồ sơ đó để chế tác các mũi tiêm gián tiếp mạnh hơn, theo đúng lối kiểm thử xâm nhập cổ điển. Mới một nhóm hình thức hoá bước trinh sát cho tác tử.",
+      "say": "Agent reconnaissance comes first, exactly like a pentest, because knowing which tools it holds makes the injection much sharper.",
       "src": ["2607.19837", "2608.05108"],
       "tags": ["an-ninh", "danh-gia-doi-khang", "kiem-thu"]
     },
@@ -906,6 +960,7 @@
       "vi": "Xung đột trong thứ bậc chỉ dẫn",
       "def_en": "Measuring which instruction wins when a system policy, a user request, and a tool output disagree, since the tool mediated edge is the one injections exploit.",
       "def_vi": "Đo xem chỉ dẫn nào thắng khi chính sách hệ thống, yêu cầu người dùng, và đầu ra công cụ mâu thuẫn nhau, vì cạnh qua trung gian công cụ chính là cạnh mà tiêm lệnh khai thác. Mới một nhóm dựng bộ chuẩn lấy xung đột làm trung tâm.",
+      "say": "When the system policy, the user, and a tool output disagree, which one wins? That instruction hierarchy conflict is the real test.",
       "src": ["2607.25987", "2607.22024"],
       "tags": ["an-ninh", "danh-gia-doi-khang", "chinh-sach"]
     },
@@ -925,6 +980,7 @@
       "vi": "Đánh giá tác tử an ninh có tính chi phí",
       "def_en": "Comparing offensive and defensive agents at fixed spend rather than at peak capability, since every reasoning step, tool call, and telemetry query consumes budget.",
       "def_vi": "So sánh tác tử tấn công và phòng thủ ở mức chi tiêu cố định thay vì ở đỉnh năng lực, vì mỗi bước lập luận, mỗi lời gọi công cụ, mỗi truy vấn từ xa đều tiêu ngân sách. Hai nhóm cùng đẩy chi phí thành trục đánh giá chính.",
+      "say": "Compare the two security agents at equal spend, since every reasoning step and telemetry query comes out of one budget.",
       "src": ["2607.15263", "2607.26314"],
       "tags": ["an-ninh", "danh-gia", "chi-phi"]
     },
@@ -934,6 +990,7 @@
       "vi": "Độ ẩn tác chiến như một trục đo",
       "def_en": "Whether an autonomous offensive agent achieves its objective without revealing its presence, which is a different question from whether it achieves the objective at all.",
       "def_vi": "Xét xem tác tử tấn công tự trị đạt mục tiêu mà không lộ sự hiện diện hay không, đây là câu hỏi khác hẳn với câu hỏi nó có đạt mục tiêu hay không. Mới một nhóm dựng bộ chuẩn theo các chiều an toàn tác chiến.",
+      "say": "Whether the offensive agent got in is one question, and operational stealth asks whether anybody ever noticed it was there.",
       "src": ["2607.26314", "2607.15263"],
       "tags": ["an-ninh", "danh-gia", "tan-cong"]
     },
@@ -953,6 +1010,7 @@
       "vi": "Kiểm chứng chống bẻ phần thưởng",
       "def_en": "A verifier for agent reported findings that enforces environment isolation, proof of concept constraints, role separation, and binding of the verdict to the artifact.",
       "def_vi": "Bộ kiểm chứng cho các phát hiện do tác tử báo, bắt buộc cách ly môi trường, ràng buộc bằng chứng khai thác, tách vai, và buộc phán quyết dính với hiện vật. Mới một nhóm hiện thực cho một lớp lỗ hổng web cụ thể.",
+      "say": "Reward hacking resistant verification binds the verdict to the artifact, separates the roles, and makes each finding prove itself in isolation.",
       "src": ["2607.18575", "2607.21763"],
       "tags": ["an-ninh", "kiem-chung", "danh-gia"]
     },
@@ -962,6 +1020,7 @@
       "vi": "Đánh giá phá hoại ngầm và giám sát",
       "def_en": "Treating the agent as a potential adversary and measuring whether a monitor catches a hidden side objective planted inside an otherwise correct deliverable.",
       "def_vi": "Coi chính tác tử là đối thủ tiềm năng và đo xem bộ giám sát có bắt được một mục tiêu phụ giấu bên trong một sản phẩm bàn giao vốn đúng hay không. Mới một nhóm dựng khung cho tự động hoá nghiên cứu, cùng họ với hướng giám sát chuỗi suy luận.",
+      "say": "Treat the agent as the adversary for one afternoon, hide a side objective inside good work, and see whether the monitor catches it.",
       "src": ["2607.19321", "2608.00583"],
       "tags": ["an-ninh", "giam-sat", "danh-gia"]
     },
@@ -981,6 +1040,7 @@
       "vi": "Né tránh vòng kín từ cảnh báo mờ",
       "def_en": "A multi agent loop that turns fragmented public knowledge into working payloads and refines them using only the opaque alerts a detection product returns.",
       "def_vi": "Một vòng nhiều tác tử biến tri thức công khai vụn vặt thành tải trọng chạy được rồi tinh chỉnh chỉ dựa vào những cảnh báo mờ mà sản phẩm phát hiện trả về. Mới một nhóm hiện thực, giá trị chính là ở khâu khép vòng phản hồi.",
+      "say": "Closed loop evasion needs nothing but the vendor alert text, and the loop keeps refining the payload until those alerts stop.",
       "src": ["2608.01639", "2608.03009"],
       "tags": ["an-ninh", "tan-cong", "nhieu-tac-tu"]
     },
@@ -990,6 +1050,7 @@
       "vi": "Ứng cứu sau khi đã bị xâm nhập",
       "def_en": "Evaluating agents on a forensic snapshot of an already compromised host, a setting most security benchmarks skip in favour of clean pre compromise environments.",
       "def_vi": "Đánh giá tác tử trên ảnh chụp pháp y của một máy đã bị xâm nhập, bối cảnh mà phần lớn bộ chuẩn an ninh bỏ qua để chọn môi trường sạch trước xâm nhập. Mới một nhóm dựng bộ chuẩn đầu tiên cho khâu này.",
+      "say": "Most benchmarks hand the agent a clean host, while post compromise response begins on a machine somebody else already owns.",
       "src": ["2607.26791", "2608.03591"],
       "tags": ["an-ninh", "van-hanh-an-ninh", "danh-gia"]
     },
@@ -999,6 +1060,7 @@
       "vi": "Chẩn đoán chuỗi tấn công theo từng chặng",
       "def_en": "Scoring how errors arise and propagate across intermediate reasoning stages of attack reconstruction, instead of scoring only the final ordered chain.",
       "def_vi": "Chấm cách sai sót nảy sinh và lan qua các chặng suy luận trung gian khi dựng lại chuỗi tấn công, thay vì chỉ chấm chuỗi có thứ tự cuối cùng. Nhiều nhóm cùng chuyển sang chấm theo chặng cho tác tử an ninh.",
+      "say": "Scoring only the final chain hides where the reasoning broke, so grade each stage of the attack reconstruction on its own.",
       "src": ["2608.03591", "2607.26201"],
       "tags": ["an-ninh", "van-hanh-an-ninh", "danh-gia"]
     },
@@ -1018,6 +1080,7 @@
       "vi": "Ảo giác mã sinh ra đã an toàn",
       "def_en": "Code produced from functional or generically secure prompts often fails standards based review, and only explicit standard grounded reprompting closes part of the gap.",
       "def_vi": "Mã sinh từ câu lệnh thiên về chức năng hoặc chỉ nói chung chung là hãy an toàn thường trượt khi soi theo tiêu chuẩn, và chỉ việc nhắc lại có neo vào tiêu chuẩn mới khép được một phần khoảng cách. Mới một nhóm đo trên mã xác thực người dùng.",
+      "say": "Asking politely for secure code buys you the illusion of secure code, and only a named standard closes part of the gap.",
       "src": ["2607.23710", "2607.29422"],
       "tags": ["an-ninh", "tac-tu-ma", "chat-luong"]
     },
@@ -1027,6 +1090,7 @@
       "vi": "Tính bất định của tác tử tấn công",
       "def_en": "Unlike deterministic pentest tooling, agentic offensive tools are unpredictable in action, open ended in impact, and available to an operator population of unknown skill.",
       "def_vi": "Khác công cụ kiểm thử xâm nhập tất định, công cụ tấn công dạng tác tử bất định về hành động, mở về hệ quả, và mở cho một tập người dùng chưa rõ trình độ. Đây là phân tích đạo đức và chính sách của một nhóm, không phải kết quả thực nghiệm.",
+      "say": "A scanner does what you told it, while an offensive agent stays indeterminate, open ended, and now in anybody's hands.",
       "src": ["2607.20255", "2607.26314"],
       "tags": ["an-ninh", "dao-duc", "chinh-sach"]
     },
@@ -1036,6 +1100,7 @@
       "vi": "Đường ống làm cứng trước triển khai",
       "def_en": "Scanning prompt templates, tool interfaces, and invocation code before deployment to find leakage enabling patterns and to generate patches, then validating adversarially.",
       "def_vi": "Quét mẫu câu lệnh, giao diện công cụ, và mã gọi công cụ trước khi triển khai để tìm những khuôn tạo điều kiện rò dữ liệu rồi sinh bản vá, sau đó kiểm lại bằng thử đối kháng. Mới một nhóm mô tả đường ống, hữu ích cho hệ trải nhiều kho mã.",
+      "say": "Run the preemptive hardening pipeline before deployment, scanning prompt templates, tool interfaces, and glue code for the patterns that leak.",
       "src": ["2607.18847", "2608.02687"],
       "tags": ["an-ninh", "ro-ri", "quy-trinh"]
     },
@@ -1055,6 +1120,7 @@
       "vi": "Hạ mật theo ngữ nghĩa có phạm vi",
       "def_en": "Specifying what a legitimately informed agent should disclose to a specific recipient for a specific purpose, and binding forwarding, lifetime, logging, and memory reuse to that disclosure.",
       "def_vi": "Quy định rõ một tác tử đã biết chính đáng thì nên tiết lộ những gì, cho người nhận nào, vì mục đích nào, rồi ràng buộc luôn việc chuyển tiếp, thời hạn, ghi nhật ký, và tái dùng trong bộ nhớ. Mới là đề xuất giao thức của một nhóm.",
+      "say": "Scope bound declassification states what may be disclosed, to whom, for what purpose, and how long that permission survives.",
       "src": ["2608.01719", "2607.22953"],
       "tags": ["an-ninh", "rieng-tu", "nhieu-tac-tu"]
     },
@@ -1064,6 +1130,7 @@
       "vi": "Chống rò dữ liệu bằng chính sách viết như câu lệnh",
       "def_en": "Defining classification criteria in a plaintext policy document that non engineers can edit, instead of regular expressions, fine tuning, or a vendor classifier.",
       "def_vi": "Định nghĩa tiêu chí phân loại trong một tài liệu chính sách dạng văn bản thuần mà người không phải kỹ sư cũng sửa được, thay cho biểu thức chính quy, tinh chỉnh mô hình, hay bộ phân loại của nhà cung cấp. Mới một nhóm đề xuất, ưu điểm là sửa chính sách không cần đổi mã.",
+      "say": "Policy as prompt means the compliance lead edits a plain document, and nobody waits on a regular expression from engineering.",
       "src": ["2608.02687", "2607.18847"],
       "tags": ["an-ninh", "ro-ri", "chinh-sach"]
     },
@@ -1083,6 +1150,7 @@
       "vi": "Khe hở về tính tươi trong chứng thực",
       "def_en": "Binding an action record into a hardware rooted quote is only meaningful if the challenge nonce actually forces freshness, and reference schemes can fall short on exactly that.",
       "def_vi": "Buộc bản ghi hành động vào một trích dẫn có gốc phần cứng chỉ có ý nghĩa nếu số dùng một lần thực sự ép được tính tươi, và các lược đồ tham chiếu có thể hụt đúng ở chỗ đó. Mới một nhóm phát hiện khi thẩm định đầu cuối, đây là bài học về việc kiểm chính phép kiểm.",
+      "say": "You have an attestation freshness gap whenever the nonce does not truly force a new quote, and replay walks right in.",
       "src": ["2608.03534", "2608.00801"],
       "tags": ["an-ninh", "chung-thuc", "mat-ma"]
     },
@@ -1092,6 +1160,7 @@
       "vi": "Chứng thực từ xa hai chiều giữa tác tử",
       "def_en": "In a multi agent system a compromised member can run modified software while still looking trustworthy, so peers need to verify each other's integrity continuously.",
       "def_vi": "Trong hệ nhiều tác tử, một thành viên bị chiếm có thể chạy phần mềm đã sửa mà vẫn trông đáng tin, nên các tác tử bạn phải kiểm tính toàn vẹn lẫn nhau liên tục. Nhiều nhóm cùng đưa sổ cái phân tán vào bài toán tin cậy giữa tác tử.",
+      "say": "Mutual remote attestation keeps peers checking each other, since a compromised member still speaks the protocol perfectly well.",
       "src": ["2608.01938", "2608.00104"],
       "tags": ["an-ninh", "chung-thuc", "nhieu-tac-tu"]
     },
@@ -1111,6 +1180,7 @@
       "vi": "Mạng tác tử mở",
       "def_en": "Heterogeneous agents owned by different stakeholders interacting without shared infrastructure for identity, authorisation, auditability, reputation, or settlement.",
       "def_vi": "Các tác tử không đồng nhất thuộc nhiều chủ thể khác nhau tương tác với nhau mà không có hạ tầng chung cho danh tính, uỷ quyền, khả năng kiểm toán, danh tiếng, và thanh toán. Đây là khung của một bài tổng quan, các mảnh ghép hạ tầng vẫn đang cạnh tranh.",
+      "say": "In an open agent network nobody shares an identity provider, an audit trail, or any way to settle a dispute.",
       "src": ["2608.04626", "2608.02986"],
       "tags": ["an-ninh", "mang", "danh-tinh"]
     },
@@ -1120,6 +1190,7 @@
       "vi": "Ẩn danh nhưng vẫn quy trách được",
       "def_en": "Binding an agent to a verified legal principal without revealing that principal to business counterparties, with re identification possible only through a legal process.",
       "def_vi": "Buộc tác tử vào một chủ thể pháp lý đã xác minh mà không lộ chủ thể đó cho các đối tác kinh doanh, việc nhận lại danh tính chỉ khả thi qua thủ tục pháp lý. Đây là mô tả một hệ hạ tầng quốc gia, không phải một đề xuất kỹ thuật thuần tuý.",
+      "say": "Accountable anonymity lets a counterparty trust the agent without learning who owns it, unless a court asks through the proper channel.",
       "src": ["2607.23207", "2608.04626"],
       "tags": ["an-ninh", "danh-tinh", "chinh-sach"]
     },
@@ -1139,6 +1210,7 @@
       "vi": "Tập trung rủi ro vào bên trung gian thanh toán",
       "def_en": "When many merchants delegate payment proof verification and settlement to shared facilitators, one authorisation flaw propagates to every service behind it.",
       "def_vi": "Khi nhiều người bán cùng uỷ thác việc kiểm chứng chứng cứ thanh toán và tất toán cho một số bên trung gian dùng chung, một lỗi uỷ quyền sẽ lan tới mọi dịch vụ nằm sau. Mới một nhóm khảo sát triển khai thật của một giao thức thanh toán đang lên.",
+      "say": "Facilitator centralisation feels convenient until one authorisation flaw reaches every merchant sitting behind that same settlement path.",
       "src": ["2607.19545", "2607.21824"],
       "tags": ["an-ninh", "thuong-mai", "giao-thuc"]
     },
@@ -1148,6 +1220,7 @@
       "vi": "Dòng thời gian sự kiện chống sửa lén",
       "def_en": "Canonical event schemas plus append only commitments and anchoring, so agent initiated transactions get verifiable ordering without trusting synchronised clocks.",
       "def_vi": "Lược đồ sự kiện chuẩn tắc cộng với cam kết chỉ thêm và neo bên ngoài, để các giao dịch do tác tử khởi tạo có thứ tự kiểm chứng được mà không phải tin vào đồng hồ đồng bộ. Hai nhóm cùng đi hướng hạ tầng bằng chứng cho thương mại tác tử.",
+      "say": "A tamper evident timeline gives us verifiable ordering of agent transactions without asking anybody to trust a synchronised clock.",
       "src": ["2607.19436", "2607.18347"],
       "tags": ["an-ninh", "thuong-mai", "kiem-toan"]
     },
@@ -1157,6 +1230,7 @@
       "vi": "Kiến trúc thương mại lấy quyết định làm trung tâm",
       "def_en": "One authoritative representation of eligibility, actor authority, checkout validity, and evidence, so protocols standardise exchange while the merchant still owns the decision.",
       "def_vi": "Một biểu diễn có thẩm quyền duy nhất cho điều kiện hợp lệ, quyền của bên hành động, tính hợp lệ của bước thanh toán, và bằng chứng, để giao thức lo chuẩn hoá trao đổi còn người bán vẫn nắm quyết định. Mới là đề xuất thiết kế của một nhóm.",
+      "say": "Protocols standardise the exchange, and a decision centered architecture keeps eligibility, authority, and evidence where the merchant still owns them.",
       "src": ["2607.18347", "2607.19436"],
       "tags": ["an-ninh", "thuong-mai", "kien-truc"]
     },
@@ -1176,6 +1250,7 @@
       "vi": "Mô hình thế giới là một ranh giới an ninh",
       "def_en": "When an agent plans against a learned simulator, compromise of that simulator propagates from data, sensors, prompts, or feedback into physical or terminal action.",
       "def_vi": "Khi tác tử lập kế hoạch dựa trên một bộ mô phỏng đã học, việc bộ mô phỏng đó bị chiếm sẽ lan từ dữ liệu, cảm biến, câu lệnh, hoặc phản hồi ra tới hành động vật lý hoặc hành động trên máy. Hai nhóm cùng nêu trong tháng, một khảo sát vòng đời và một tìm lỗ hổng cụ thể.",
+      "say": "Treat the learned simulator as a security boundary, because whoever corrupts the world model gets to steer the physical action.",
       "src": ["2607.28226", "2607.23147"],
       "tags": ["an-ninh", "mo-hinh-the-gioi", "hien-than"]
     },
@@ -1185,6 +1260,7 @@
       "vi": "Bộ chuẩn quyết định có ràng buộc quy tắc",
       "def_en": "Testing whether physical evidence, protocol constraints, and action risk stay coupled at the moment of a critical decision, rather than testing perception and navigation separately.",
       "def_vi": "Kiểm xem bằng chứng vật lý, ràng buộc quy tắc, và rủi ro của hành động có còn dính với nhau tại đúng thời điểm ra quyết định then chốt hay không, thay vì kiểm riêng tri giác và dẫn đường. Mới một nhóm dựng bộ chuẩn cho tác tử bay đô thị.",
+      "say": "The drone benchmark checks whether evidence, protocol limits, and risk stay coupled at the decision, not whether it can navigate.",
       "src": ["2607.23870", "2607.17951"],
       "tags": ["an-ninh", "hien-than", "danh-gia"]
     },
@@ -1194,6 +1270,7 @@
       "vi": "Lệch nhịp thời gian thực khi điều khiển bằng tác tử",
       "def_en": "A host side agent loop tolerates slow iterations, but a physical vehicle does not, so a stale or unauthorised decision becomes an unsafe or untraceable manoeuvre.",
       "def_vi": "Vòng lặp tác tử chạy trên máy chấp nhận được các vòng chậm, còn phương tiện vật lý thì không, nên một quyết định cũ hoặc chưa được cấp phép sẽ thành thao tác không an toàn hoặc không truy vết được. Mới một nhóm tái cấu trúc hệ theo hướng này.",
+      "say": "A slow desktop loop is merely annoying, while the same real time mismatch on a moving vehicle becomes an unsafe manoeuvre.",
       "src": ["2607.17951", "2607.23870"],
       "tags": ["an-ninh", "hien-than", "kien-truc"]
     },
@@ -1213,6 +1290,7 @@
       "vi": "Mô hình vòng đời hướng an ninh",
       "def_en": "Mapping data provenance verification, artifact signing, permission control, and decommissioning onto explicit lifecycle stages, because efficiency oriented lifecycles leave these implicit.",
       "def_vi": "Gắn việc kiểm xuất xứ dữ liệu, ký hiện vật, kiểm soát quyền, và ngừng vận hành vào các giai đoạn vòng đời tường minh, vì các mô hình vòng đời thiên về hiệu quả bỏ ngỏ những việc này. Mới là đề xuất khung của một nhóm.",
+      "say": "A security oriented lifecycle names when provenance gets verified, when artifacts get signed, and when the agent is finally decommissioned.",
       "src": ["2608.03626", "2608.04033"],
       "tags": ["an-ninh", "quan-tri", "vong-doi"]
     },
@@ -1222,6 +1300,7 @@
       "vi": "Động lực rủi ro ở mức hệ thống",
       "def_en": "Organising risk by how it emerges, spreads, and is controlled, rather than by attack type or asset class, because agentic systems break assumptions of bounded behaviour and human paced decisions.",
       "def_vi": "Sắp xếp rủi ro theo cách nó nảy sinh, lan ra, và được khống chế, thay vì theo loại tấn công hay loại tài sản, vì hệ tác tử phá vỡ các giả định về hành vi có biên và về nhịp quyết định của con người. Đây là bài hệ thống hoá tri thức, không phải kết quả đo.",
+      "say": "Organise the register by system level risk dynamics, how risk emerges, spreads, and gets controlled, instead of by attack type.",
       "src": ["2608.04033", "2608.03626"],
       "tags": ["an-ninh", "ha-tang-trong-yeu", "khai-niem"]
     },
@@ -1241,6 +1320,7 @@
       "vi": "Mức nỗ lực suy luận và việc dùng công cụ trái phép",
       "def_en": "A prespecified equivalence study manipulating a reasoning effort parameter inside one model to ask whether an operator's cost setting also changes policy violation rates.",
       "def_vi": "Một nghiên cứu tương đương có đăng ký trước, thay đổi tham số mức nỗ lực suy luận bên trong cùng một mô hình để hỏi xem thiết lập chi phí của người vận hành có làm đổi tỉ lệ vi phạm chính sách hay không. Mới một nhóm làm, đáng khen ở chỗ giả thuyết được đăng ký trước.",
+      "say": "Turning the reasoning effort dial down looks like a cost decision, and it may quietly change how often policy gets violated.",
       "src": ["2608.03169", "2608.02670"],
       "tags": ["an-ninh", "danh-gia", "phuong-phap"]
     },
@@ -1250,6 +1330,7 @@
       "vi": "Ghép phòng thủ theo từng chặng",
       "def_en": "Representing heterogeneous safety designs as reusable components with explicit stage semantics, so memory, planning, and execution defences can be combined instead of chosen.",
       "def_vi": "Biểu diễn các thiết kế an toàn khác nhau thành những thành phần dùng lại được có ngữ nghĩa chặng rõ ràng, để phòng thủ cho bộ nhớ, cho lập kế hoạch, và cho thực thi có thể ghép lại thay vì phải chọn một. Mới là đề xuất trừu tượng của một nhóm.",
+      "say": "Stage specific safety composition lets us combine memory, planning, and execution defences, instead of arguing about which single one to adopt.",
       "src": ["2608.02683", "2608.01558"],
       "tags": ["an-ninh", "phong-thu", "kien-truc"]
     },
@@ -1289,6 +1370,7 @@
       "vi": "Truy hồi trên kho kỹ năng lớn",
       "def_en": "Loading a whole library into context is expensive and gives no ordering, so agents need either a ranker for on demand loading or a typed graph encoding prerequisites and data flow.",
       "def_vi": "Nạp cả kho vào ngữ cảnh thì đắt và không cho biết thứ tự, nên tác tử cần hoặc một bộ xếp hạng để nạp theo nhu cầu, hoặc một đồ thị có kiểu mã hoá điều kiện tiên quyết và luồng dữ liệu. Mới một nhóm so sánh hai lối, cả hai đều còn phần truy vấn không phục vụ được.",
+      "say": "Loading the whole skill library costs a fortune and orders nothing, so either rank on demand or encode prerequisites in a graph.",
       "src": ["2608.06196", "2608.05604"],
       "tags": ["ky-nang", "truy-hoi", "ngu-canh"]
     },
@@ -1298,6 +1380,7 @@
       "vi": "Nén kỹ năng nhưng giữ hợp đồng",
       "def_en": "Compressing a skill library while keeping procedural contracts intact and the compressed routines still executable and expandable, instead of compressing skills as plain text.",
       "def_vi": "Nén kho kỹ năng mà vẫn giữ nguyên các hợp đồng quy trình, và các thủ tục đã nén vẫn chạy được cũng như bung lại được, thay vì nén kỹ năng như văn bản thuần. Mới một nhóm đề xuất, họ chỉ ra sự lệch đơn vị giữa nạp, nén, và thực thi.",
+      "say": "Contract preserving compression shrinks the library while the routine still runs, because a skill is a procedure and not prose.",
       "src": ["2608.05604", "2608.06196"],
       "tags": ["ky-nang", "ngu-canh", "kien-truc"]
     },
@@ -1307,6 +1390,7 @@
       "vi": "Đồ thị quan hệ giữa kỹ năng",
       "def_en": "Modelling how skills relate to each other so evolution optimises compatibility and generalisation across the bank, rather than treating each update as a local edit.",
       "def_vi": "Mô hình hoá quan hệ giữa các kỹ năng để việc tiến hoá tối ưu cả tính tương thích lẫn tính khái quát trên toàn kho, thay vì coi mỗi lần cập nhật là một sửa đổi cục bộ. Nhiều nhóm cùng chuyển từ cập nhật cục bộ sang cập nhật có cấu trúc trong tháng này.",
+      "say": "Keep a skill relation graph, otherwise every update stays a local edit and nothing in the bank learns to fit together.",
       "src": ["2608.06153", "2608.05628"],
       "tags": ["ky-nang", "tu-tien-hoa", "do-thi"]
     },
@@ -1326,6 +1410,7 @@
       "vi": "Kỹ năng vượt ra ngoài tri thức sẵn có",
       "def_en": "Distilling skills only from the model's own trajectories bounds them by what the model already knows, so domain conventions must be brought in from outside.",
       "def_vi": "Chỉ chưng cất kỹ năng từ vết chạy của chính mô hình thì kỹ năng bị chặn bởi những gì mô hình đã biết, nên các quy ước chuyên ngành phải được đưa vào từ bên ngoài. Mới một nhóm đề xuất tìm kiếm để lấp khoảng trống năng lực.",
+      "say": "Distilling skills only from its own runs bounds the agent by what it already knew, so bring domain conventions in from outside.",
       "src": ["2608.05245", "2608.06153"],
       "tags": ["ky-nang", "tu-tien-hoa", "tim-kiem"]
     },
@@ -1345,6 +1430,7 @@
       "vi": "Khung điều phối tự tiến hoá",
       "def_en": "Iteratively proposing, evaluating, and improving the harness from historical trials, which yields persistent gains without touching model weights but is unstable across iterations.",
       "def_vi": "Lặp đi lặp lại việc đề xuất, đánh giá, và cải tiến khung điều phối dựa trên các lần thử trước, cách này cho cải thiện bền mà không đụng tới trọng số nhưng dao động mạnh giữa các vòng. Nhiều nhóm cùng làm và cùng báo cáo tính bất ổn này.",
+      "say": "Harness self evolution gave us real gains without touching a single weight, and the same loop was wildly unstable across iterations.",
       "src": ["2607.26722", "2607.26598", "2608.05446"],
       "tags": ["khung-dieu-phoi", "tu-tien-hoa", "toi-uu"]
     },
@@ -1364,6 +1450,7 @@
       "vi": "Điều khiển khung theo tình huống",
       "def_en": "Learning when to spend more orchestration effort instead of using a globally fixed policy, because a fixed policy wastes compute on easy states and under serves hard ones.",
       "def_vi": "Học khi nào nên bỏ thêm công sức điều phối thay vì dùng một chính sách cố định toàn cục, vì chính sách cố định vừa lãng phí tính toán ở trạng thái dễ vừa thiếu ở trạng thái khó. Nhiều nhóm cùng đi hướng chính sách khung học được.",
+      "say": "Adaptive harness control learns when to spend more orchestration, since a fixed policy burns compute on easy states and starves hard ones.",
       "src": ["2607.25825", "2608.05446"],
       "tags": ["khung-dieu-phoi", "chi-phi", "toi-uu"]
     },
@@ -1393,6 +1480,7 @@
       "vi": "Chuyển giao sổ tay hướng dẫn",
       "def_en": "Prompt side guidance distilled in one setting can improve a tool using agent without retraining, but its portability to other domains survives statistical correction only in a minority of routes.",
       "def_vi": "Hướng dẫn ở phía câu lệnh được chưng cất trong một bối cảnh có thể cải thiện tác tử dùng công cụ mà không cần huấn luyện lại, nhưng khả năng mang sang miền khác chỉ sống sót qua hiệu chỉnh thống kê ở một số ít tuyến. Mới một nhóm đo và họ tự nhận phần lớn kết quả chỉ là mô tả.",
+      "say": "Playbook transfer worked beautifully on the domain it was written for, and survived statistical correction on only a minority of other routes.",
       "src": ["2608.05778", "2608.06113"],
       "tags": ["khung-dieu-phoi", "danh-gia", "chuyen-giao"]
     },
@@ -1412,6 +1500,7 @@
       "vi": "Bộ nhớ đồ thị phân tầng",
       "def_en": "Flat graph memory makes evidence selection expensive as history accumulates and forces unit by unit rewriting, so localisation and rewrite move to the path level.",
       "def_vi": "Bộ nhớ đồ thị phẳng làm việc chọn bằng chứng ngày càng đắt khi lịch sử tích lại và buộc phải viết lại từng đơn vị một, nên việc định vị và viết lại được đưa lên mức đường đi. Mới một nhóm đề xuất, cùng hướng với các nỗ lực giảm chi phí bộ nhớ.",
+      "say": "Hierarchical graph memory moves localisation and rewriting up to the path level, because a flat graph edits unit by unit.",
       "src": ["2608.05095", "2608.04843"],
       "tags": ["bo-nho", "do-thi", "chi-phi"]
     },
@@ -1421,6 +1510,7 @@
       "vi": "Đánh đổi chi phí và hiệu năng của bộ nhớ",
       "def_en": "Memory pipelines built from heuristics and repeated model calls add redundant context and inference cost, so the pipeline itself becomes something to distil into a compact model.",
       "def_vi": "Các đường ống bộ nhớ dựng từ luật thủ công và nhiều lần gọi mô hình sẽ thêm ngữ cảnh thừa và chi phí suy luận, nên chính đường ống đó trở thành thứ đáng chưng cất vào một mô hình gọn. Mới một nhóm đề xuất, chi phí bộ nhớ đang nổi lên thành trục nghiên cứu riêng.",
+      "say": "Every heuristic and extra model call in the memory pipeline shows up as redundant context, so the pipeline itself needs distilling.",
       "src": ["2608.04843", "2608.05095"],
       "tags": ["bo-nho", "chi-phi", "kien-truc"]
     },
@@ -1430,6 +1520,7 @@
       "vi": "Bộ nhớ độ tin cậy của các tác tử bạn",
       "def_en": "Recording which peer agents have been competent under which conditions, instead of only preserving what was said, because a coordinator often cannot verify a plausible peer answer directly.",
       "def_vi": "Ghi lại tác tử bạn nào đã tỏ ra thạo việc trong điều kiện nào, thay vì chỉ giữ lại nội dung đã nói, vì bên điều phối thường không kiểm chứng trực tiếp được một câu trả lời nghe hợp lý. Mới một nhóm đề xuất, ý tưởng gần với các hệ danh tiếng cổ điển.",
+      "say": "Reliability memory records which peer was competent under which conditions, because a plausible answer is not something the coordinator can verify.",
       "src": ["2607.27958", "2607.24117"],
       "tags": ["bo-nho", "nhieu-tac-tu", "do-tin-cay"]
     },
@@ -1459,6 +1550,7 @@
       "vi": "Điền tham số là một loại lỗi riêng",
       "def_en": "Research has focused on picking the right tool and ordering calls, while filling arguments correctly is a separate skill that frontier models still fail often in specialised domains.",
       "def_vi": "Nghiên cứu lâu nay tập trung vào chọn đúng công cụ và sắp thứ tự lời gọi, trong khi điền đúng tham số là một kỹ năng riêng mà cả mô hình đầu bảng vẫn hỏng thường xuyên ở lĩnh vực chuyên biệt. Hai nhóm cùng cho thấy tín hiệu về lỗi này nằm trong trạng thái ẩn.",
+      "say": "Everyone studies which tool to call, while parameter filling is a separate skill that frontier models still fumble in specialised domains.",
       "src": ["2608.03071", "2608.00218"],
       "tags": ["cong-cu", "danh-gia", "lo-i"]
     },
@@ -1478,6 +1570,7 @@
       "vi": "Khám phá công cụ bằng hành vi",
       "def_en": "Stripping semantic names and documentation from tools forces an agent to infer behaviour through interaction, revealing that agents often search exhaustively even when their own notes point to the next step.",
       "def_vi": "Bỏ tên gợi nghĩa và tài liệu của công cụ buộc tác tử phải suy hành vi qua tương tác, và kết quả cho thấy tác tử vẫn dò vét cạn ngay cả khi ghi chú của chính nó đã chỉ ra bước kế tiếp. Mới một nhóm dựng môi trường này.",
+      "say": "Strip the names and the docs, and behavioural tool discovery shows the agent searching exhaustively while its own notes point ahead.",
       "src": ["2608.02358", "2608.04719"],
       "tags": ["cong-cu", "danh-gia", "kham-pha"]
     },
@@ -1507,6 +1600,7 @@
       "vi": "Đoán trước lời gọi công cụ",
       "def_en": "Predicting and pre executing the agent's next tool call to hide waiting time, with the observation that the target agent itself is the best available speculator.",
       "def_vi": "Dự đoán và chạy trước lời gọi công cụ kế tiếp của tác tử để che thời gian chờ, kèm nhận xét rằng chính tác tử đích là bộ đoán tốt nhất hiện có. Hai nhóm cùng đi hướng suy đoán để giảm độ trễ, một ở mức lời gọi và một ở mức từng ô tham số.",
+      "say": "Tool call speculation hides the waiting time, and the best predictor of the next call turned out to be the agent itself.",
       "src": ["2607.25816", "2608.00814"],
       "tags": ["cong-cu", "do-tre", "he-thong"]
     },
@@ -1526,6 +1620,7 @@
       "vi": "Điều khiển máy tính thuần thị giác",
       "def_en": "An agent that observes only screenshots and acts through keyboard and mouse, with no document tree, no accessibility metadata, and no task specific interface.",
       "def_vi": "Tác tử chỉ quan sát ảnh chụp màn hình và hành động qua bàn phím và chuột, không dùng cây tài liệu, không dùng siêu dữ liệu trợ năng, không dùng giao diện chuyên biệt cho nhiệm vụ. Mới một nhóm công bố mô hình lớn theo hướng này trong tháng.",
+      "say": "Native computer use means screenshots, a keyboard, and a mouse, with no accessibility tree to make the job easier.",
       "src": ["2608.02352", "2608.06171"],
       "tags": ["giao-dien", "kien-truc", "da-phuong-thuc"]
     },
@@ -1555,6 +1650,7 @@
       "vi": "Bằng chứng hậu nghiệm khi huấn luyện giao diện",
       "def_en": "Standard imitation discards the screen that appears after an action, yet that screen often carries the only evidence explaining why the action was correct.",
       "def_vi": "Bắt chước theo lối chuẩn vứt bỏ màn hình xuất hiện sau hành động, trong khi chính màn hình đó thường mang bằng chứng duy nhất giải thích vì sao hành động là đúng. Mới một nhóm khai thác điều này, cùng họ với hướng phản chiếu chuyển trạng thái có cấu trúc.",
+      "say": "Imitation throws away the screen that appears after the click, and that screen often holds the only evidence the click was right.",
       "src": ["2608.06065", "2608.05587"],
       "tags": ["giao-dien", "huan-luyen", "danh-gia"]
     },
@@ -1574,6 +1670,7 @@
       "vi": "Định vị lỗi then chốt",
       "def_en": "Finding the earliest step responsible for a final failure in a long trajectory, made hard because evidence is scattered and a failed run usually contains several local errors of unequal consequence.",
       "def_vi": "Tìm bước sớm nhất chịu trách nhiệm cho thất bại cuối cùng trong một quỹ đạo dài, việc này khó vì bằng chứng nằm rải rác và một lần chạy hỏng thường chứa nhiều lỗi cục bộ với hệ quả không như nhau. Nhiều nhóm cùng làm quy trách lỗi trong tháng.",
+      "say": "Critical error localisation means finding the earliest step that doomed the run, not the loudest mistake near the end.",
       "src": ["2608.06346", "2608.05263"],
       "tags": ["chan-doan", "quy-dao", "danh-gia"]
     },
@@ -1583,6 +1680,7 @@
       "vi": "Tự sửa một lần chạy nhiều tác tử",
       "def_en": "Attribution tells you which agent erred, and repair is the separate and much less studied problem of navigating the space of possible fixes to recover the run.",
       "def_vi": "Quy trách cho biết tác tử nào sai, còn sửa chữa là bài toán tách biệt và ít được nghiên cứu hơn nhiều, tức là dò trong không gian các cách sửa để cứu lại lần chạy. Mới một nhóm hình thức hoá việc sửa như một bài toán tìm kiếm.",
+      "say": "Attribution tells you which agent erred, while autonomous repair has to search the space of fixes and actually recover the run.",
       "src": ["2607.29055", "2608.06346"],
       "tags": ["nhieu-tac-tu", "phuc-hoi", "tim-kiem"]
     },
@@ -1592,6 +1690,7 @@
       "vi": "Giao thức nối công cụ khác giao thức nối tác tử",
       "def_en": "One protocol standardises how an agent reaches tools and resources, the other standardises how peer agents delegate and negotiate, and the same task can be built either way with different trade offs.",
       "def_vi": "Một giao thức chuẩn hoá cách tác tử với tới công cụ và tài nguyên, giao thức kia chuẩn hoá cách các tác tử ngang hàng uỷ thác và thương lượng, và cùng một nhiệm vụ dựng được theo cả hai lối với các đánh đổi khác nhau. Mới một nhóm so sánh có hiện thực, kết luận còn phụ thuộc bối cảnh.",
+      "say": "One protocol connects an agent to its tools, the other lets peer agents delegate, and the same task fits either shape.",
       "src": ["2607.23884", "2607.25914"],
       "tags": ["giao-thuc", "nhieu-tac-tu", "kien-truc"]
     },
@@ -1611,6 +1710,7 @@
       "vi": "Vô minh tập thể trong quần thể tác tử",
       "def_en": "A state where most agents privately reject a norm yet publicly conform, each believing it is alone in dissenting, reproduced robustly in populations of language model agents.",
       "def_vi": "Trạng thái mà đa số tác tử riêng tư bác bỏ một chuẩn mực nhưng công khai thì tuân theo, mỗi con đều tưởng chỉ mình bất đồng, hiện tượng này tái hiện ổn định trong quần thể tác tử ngôn ngữ. Hai nhóm cùng báo cáo các dạng lệch đồng thuận có cấu trúc.",
+      "say": "Pluralistic ignorance turned up in the agent population too, everyone privately disagreeing and everyone publicly going along with it.",
       "src": ["2608.02758", "2608.02827"],
       "tags": ["nhieu-tac-tu", "xa-hoi", "mo-phong"]
     },
@@ -1620,6 +1720,7 @@
       "vi": "Ráp sự thật tập thể hỏng khi có kẻ nói dối",
       "def_en": "When evidence is split across agents and one holder of key evidence deceives, the aggregation process derails, which is invisible if you only score the final answer.",
       "def_vi": "Khi bằng chứng bị chia cho nhiều tác tử và một bên nắm chứng cứ then chốt nói dối, quá trình tổng hợp trật đường ray, và điều này vô hình nếu chỉ chấm câu trả lời cuối. Mới một nhóm dựng khung ghép cặp trung thực và có gian dối để đo tiến trình.",
+      "say": "Split the evidence, let one holder deceive, and the group never recovers the fact, which the final answer alone would never show.",
       "src": ["2608.03421", "2607.21912"],
       "tags": ["nhieu-tac-tu", "do-tin-cay", "danh-gia"]
     },
@@ -1639,6 +1740,7 @@
       "vi": "Vắt kiệt tài nguyên dùng chung",
       "def_en": "Agents told to maximise their own continuity draw down a shared regenerating pool to the point where all of them do worse, a self defeating coordination failure.",
       "def_vi": "Các tác tử được bảo hãy tối đa hoá khả năng duy trì hoạt động của mình sẽ rút cạn một bể tài nguyên tự tái tạo dùng chung tới mức tất cả cùng thiệt, đây là hỏng hóc phối hợp tự chuốc lấy. Mới một nhóm đo trên ba họ mô hình, kết quả giống nhau ở cả ba.",
+      "say": "Told to secure their own continuity, the agents drew the shared pool down until every one of them ended up worse off.",
       "src": ["2607.22188", "2607.23982"],
       "tags": ["nhieu-tac-tu", "khuyen-khich", "mo-phong"]
     },
@@ -1648,6 +1750,7 @@
       "vi": "Cấu trúc liên lạc và trôi dạt ngữ nghĩa",
       "def_en": "Popular network topologies are assumed to be communication efficient, but structural bottlenecks can let meaning drift as messages circulate, which matters in safety critical settings.",
       "def_vi": "Các cấu trúc mạng phổ biến được mặc định là hiệu quả về liên lạc, nhưng các nút thắt cấu trúc có thể khiến nghĩa trôi dạt khi thông điệp luân chuyển, điều này đáng ngại ở bối cảnh liên quan tới an toàn. Mới một nhóm phân tích, kết quả mang tính lý thuyết.",
+      "say": "We chose that communication topology for message efficiency, and its bottleneck let meaning drift as the same claim circulated.",
       "src": ["2607.22758", "2607.21912"],
       "tags": ["nhieu-tac-tu", "topo", "do-tin-cay"]
     },
@@ -1687,6 +1790,7 @@
       "vi": "Điều khiển tắc nghẽn có tính tới bộ nhớ",
       "def_en": "In an agentic service network the service rate depends on contextual memory states such as cached prefixes, retrieved contexts, and verified tool outputs, so queueing control cannot treat them as passive caches.",
       "def_vi": "Trong mạng dịch vụ dạng tác tử, tốc độ phục vụ phụ thuộc vào các trạng thái bộ nhớ ngữ cảnh như tiền tố đã lưu, ngữ cảnh đã truy hồi, và đầu ra công cụ đã kiểm, nên điều khiển hàng đợi không thể coi chúng là bộ đệm thụ động. Mới một nhóm đề xuất, đây là chỗ giao giữa lý thuyết mạng và tác tử.",
+      "say": "Memory augmented backpressure treats cached prefixes and verified tool outputs as part of the service rate, not as passive storage.",
       "src": ["2608.00914", "2607.26953"],
       "tags": ["mang", "hang-doi", "he-thong"]
     },
@@ -1696,6 +1800,7 @@
       "vi": "Bản sao số dạng tổ hợp tự trị",
       "def_en": "A digital twin that acts rather than merely mirrors, proposed as the way a wireless network can orchestrate physical intelligence for robots and vehicles under real physical law.",
       "def_vi": "Bản sao số biết hành động chứ không chỉ phản chiếu, được đề xuất như cách để mạng vô tuyến điều phối trí tuệ vật lý cho robot và phương tiện dưới các quy luật vật lý thật. Mới là bài quan điểm của một nhóm, chưa có kiểm chứng triển khai.",
+      "say": "A holonic digital twin does not merely mirror the factory, it acts, and the network has to carry that responsibility.",
       "src": ["2608.06227", "2608.05792"],
       "tags": ["mang", "song-sinh-so", "vien-thong"]
     },
@@ -1705,6 +1810,7 @@
       "vi": "Cảm nhận và truyền thông tích hợp dạng tác tử",
       "def_en": "Recasting integrated sensing and communication as a goal driven closed loop of observation, contextualisation, reasoning, planning, execution, and feedback, rather than a physical layer function.",
       "def_vi": "Diễn giải lại cảm nhận và truyền thông tích hợp thành một vòng kín hướng mục tiêu gồm quan sát, đặt ngữ cảnh, lập luận, lập kế hoạch, thực thi, và phản hồi, thay vì coi đó là một chức năng lớp vật lý. Đây là bài tổng quan hợp nhất nhiều nhánh vốn phát triển riêng rẽ.",
+      "say": "Agentic integrated sensing and communication turns a physical layer function into a closed loop of observing, reasoning, acting, and feedback.",
       "src": ["2608.05792", "2608.06227"],
       "tags": ["mang", "vien-thong", "khao-sat"]
     },
@@ -1724,6 +1830,7 @@
       "vi": "Kiểm chứng trên dữ liệu vận hành",
       "def_en": "Verifying an agent plus its tool orchestration against business requirements that govern both workflow execution and how the underlying data may evolve, not just the agent interface.",
       "def_vi": "Kiểm chứng một tác tử cùng khung điều phối công cụ của nó theo các yêu cầu nghiệp vụ chi phối cả cách chạy quy trình lẫn cách dữ liệu nền được phép biến đổi, chứ không chỉ ở mức giao diện của tác tử. Mới một nhóm hình thức hoá, phạm vi còn hẹp là một mô hình và một khung.",
+      "say": "Verification over operational data means checking the agent, its tool orchestration, and how the underlying records are allowed to evolve.",
       "src": ["2608.03609", "2607.22947"],
       "tags": ["kiem-chung", "kien-truc", "du-lieu"]
     },
@@ -1743,6 +1850,7 @@
       "vi": "Bộ chuẩn không phải là kiểm định",
       "def_en": "A benchmark score is model centric evidence, while a deployed system spans retrieval, proprietary data, orchestration, monitoring, and human escalation, each needing its own validation evidence.",
       "def_vi": "Điểm trên bộ chuẩn là bằng chứng lấy mô hình làm trung tâm, trong khi một hệ đã triển khai trải qua truy hồi, dữ liệu nội bộ, điều phối, giám sát, và đường chuyển cho con người, mỗi khâu cần bằng chứng kiểm định riêng. Nhiều nhóm cùng lập luận theo hướng này.",
+      "say": "Benchmarks are not validation, and the deployed system also includes retrieval, orchestration, monitoring, and whoever picks up an escalation.",
       "src": ["2607.28840", "2607.27677"],
       "tags": ["danh-gia", "kiem-dinh", "he-thong"]
     },
@@ -1772,6 +1880,7 @@
       "vi": "Đổi hạt giống là chưa đủ",
       "def_en": "Coordination algorithms should ideally be evaluated across multiple independent implementations of the same specification, since seed variation within one codebase does not capture how independent parties would build it.",
       "def_vi": "Thuật toán phối hợp lý tưởng nhất là được đánh giá trên nhiều bản hiện thực độc lập của cùng một đặc tả, vì đổi hạt giống trong cùng một mã nguồn không nắm bắt được cách các bên độc lập sẽ dựng nó. Hai nhóm cùng chạm tới cùng một vấn đề tái lập.",
+      "say": "Inter seed variation is not enough, because two independent teams building from one specification would disagree far more than seeds do.",
       "src": ["2608.03644", "2607.26587"],
       "tags": ["danh-gia", "tai-lap", "phuong-phap"]
     },
@@ -1821,6 +1930,7 @@
       "vi": "Chấm bài chạy có kèm kỹ năng",
       "def_en": "Verifying a long execution requires the procedural knowledge in the task time skill, because that knowledge says what evidence to inspect and which failures are task critical.",
       "def_vi": "Kiểm chứng một lần chạy dài đòi hỏi phần tri thức quy trình nằm trong kỹ năng được nạp lúc làm nhiệm vụ, vì chính tri thức đó cho biết cần soi bằng chứng nào và hỏng hóc nào là then chốt. Mới một nhóm dựng bộ chuẩn cho bộ chấm, không phải cho tác tử.",
+      "say": "Judging a skill augmented run needs the skill itself, since the procedure says which evidence matters and which failure is fatal.",
       "src": ["2608.05573", "2607.27484"],
       "tags": ["danh-gia", "ky-nang", "mo-hinh-cham"]
     },
@@ -1830,6 +1940,7 @@
       "vi": "Đạt chuẩn không đồng nghĩa khái quát được",
       "def_en": "A benchmark can support qualifying a specific agentic configuration for the tasks it was tuned on while giving little assurance about unseen tasks in the same domain.",
       "def_vi": "Một bộ chuẩn có thể đủ để chứng nhận một cấu hình tác tử cụ thể cho đúng những nhiệm vụ nó đã được tinh chỉnh, mà bảo đảm rất ít về các nhiệm vụ chưa gặp trong cùng lĩnh vực. Mới một nhóm báo cáo, ở bối cảnh điều khiển thiết bị khoa học.",
+      "say": "Qualification is not generalisation, so that score licenses this configuration on these tasks and promises nothing about the next ones.",
       "src": ["2608.05266", "2607.26587"],
       "tags": ["danh-gia", "khai-quat", "khoa-hoc"]
     },
@@ -1849,6 +1960,7 @@
       "vi": "Ước độ khó mà không cần chạy thử",
       "def_en": "Estimating how likely an agent is to succeed from the task description alone, so benchmark designers can calibrate suites and build curricula without paying for stateful simulations.",
       "def_vi": "Ước lượng khả năng tác tử thành công chỉ từ mô tả nhiệm vụ, để người thiết kế bộ chuẩn hiệu chỉnh được bộ đề và dựng được lộ trình học mà không phải trả giá cho các mô phỏng có trạng thái. Mới một nhóm mở rộng ra ngoài nhiệm vụ tĩnh, kết quả còn sớm.",
+      "say": "Predicting difficulty from the task description alone lets us calibrate a suite without paying for a single stateful rollout.",
       "src": ["2608.05797", "2608.06362"],
       "tags": ["danh-gia", "chi-phi", "moi-truong"]
     },
@@ -1868,6 +1980,7 @@
       "vi": "Ngân sách là một phần của nhiệm vụ",
       "def_en": "Pricing each action and giving the agent an explicit budget turns choosing between a local lookup, a broad search, a stronger model, and human escalation into the thing being measured.",
       "def_vi": "Gán giá cho từng hành động và cấp cho tác tử một ngân sách tường minh biến việc chọn giữa tra cứu tại chỗ, tìm kiếm rộng, mô hình mạnh hơn, và chuyển cho người thành chính thứ được đo. Nhiều nhóm cùng đẩy chi phí thành trục đánh giá bậc nhất.",
+      "say": "Price every action and make the budget part of the task, then choosing between a lookup and a human becomes measurable.",
       "src": ["2608.05519", "2608.02876"],
       "tags": ["chi-phi", "danh-gia", "quyet-dinh"]
     },
@@ -1887,6 +2000,7 @@
       "vi": "Nén ngữ cảnh điều khiển",
       "def_en": "Persistent system side instructions specifying tools, policies, protocols, and recovery can be compressed to save tokens, but prompt compression evaluations do not show whether control stays reliable.",
       "def_vi": "Các chỉ dẫn thường trực phía hệ thống quy định công cụ, chính sách, giao thức, và cách phục hồi có thể nén lại để tiết kiệm token, nhưng các phép đánh giá nén câu lệnh không cho biết phần điều khiển có còn đáng tin hay không. Mới một nhóm dựng bộ chuẩn có kiểm bằng môi trường.",
+      "say": "Control context compression saves tokens happily, and no prompt compression benchmark tells you whether the recovery instructions still work.",
       "src": ["2608.01056", "2607.25398"],
       "tags": ["ngu-canh", "chi-phi", "do-tin-cay"]
     },
@@ -1906,6 +2020,7 @@
       "vi": "Tác tử lập trình như một tải hệ thống",
       "def_en": "Production traces show coding sessions are sparse user turns that each unfold into an autonomous loop of many model calls coupled with tool executions, a shape unlike chat serving.",
       "def_vi": "Vết chạy trong môi trường thật cho thấy phiên lập trình gồm những lượt người dùng thưa thớt, mỗi lượt bung ra thành một vòng tự trị gồm nhiều lời gọi mô hình kèm thực thi công cụ, hình dạng khác hẳn phục vụ trò chuyện. Mới một nhóm công bố ở quy mô sản xuất.",
+      "say": "Agentic coding is not chat serving, it is one sparse user turn unfolding into hundreds of model calls and tool executions.",
       "src": ["2608.00101", "2608.01347"],
       "tags": ["he-thong", "tac-tu-ma", "do-luong"]
     },
@@ -1925,6 +2040,7 @@
       "vi": "Kiểm toán theo phần dư đổi mới",
       "def_en": "Auditing an autonomous analysis by learning from analyses known to be sound and flagging operations that depart from what that model predicts, where the choice of score decides whether an error is localisable at all.",
       "def_vi": "Kiểm toán một phân tích tự động bằng cách học từ những phân tích đã biết là đúng rồi đánh dấu các thao tác lệch khỏi dự đoán của mô hình đó, ở đây chính cách chọn điểm số quyết định xem sai sót có định vị được hay không. Mới một nhóm phân tích giới hạn của phương pháp này.",
+      "say": "Innovation residual auditing learns what sound analyses look like and flags the step that departs, so choose the score carefully.",
       "src": ["2608.05490", "2608.06346"],
       "tags": ["kiem-toan", "chan-doan", "thong-ke"]
     },
@@ -1954,6 +2070,7 @@
       "vi": "Hướng dẫn dùng công cụ rút từ kinh nghiệm",
       "def_en": "Building and refining explicit notes about each tool's capability boundary and best practice, on the view that the bottleneck has moved from model capability to execution robustness.",
       "def_vi": "Dựng và tinh chỉnh những ghi chú tường minh về biên năng lực và cách dùng tốt nhất của từng công cụ, dựa trên nhận định rằng nút thắt đã chuyển từ năng lực mô hình sang độ bền của quá trình thực thi. Nhiều nhóm cùng chuyển trọng tâm sang khâu thực thi trong tháng.",
+      "say": "Experience driven tool guidance is just written notes about each tool's limits, and the bottleneck has moved from capability to execution.",
       "src": ["2608.03403", "2608.03468"],
       "tags": ["cong-cu", "ky-nang", "do-tin-cay"]
     },
@@ -1963,6 +2080,7 @@
       "vi": "Trừu tượng quy trình ở mức chức năng",
       "def_en": "Graphs built directly from tool level traces stay tied to specific tools, while analogous tasks often share a function level workflow that transfers across tool sets.",
       "def_vi": "Đồ thị dựng thẳng từ vết ở mức công cụ vẫn dính chặt vào những công cụ cụ thể, trong khi các nhiệm vụ tương tự thường dùng chung một quy trình ở mức chức năng và quy trình đó chuyển được sang bộ công cụ khác. Mới một nhóm đề xuất phép nâng mức trừu tượng này.",
+      "say": "Traces tied to specific tools do not travel, while a function level workflow abstraction survives when the tool set changes.",
       "src": ["2608.03468", "2608.03403"],
       "tags": ["cong-cu", "lap-ke-hoach", "chuyen-giao"]
     },
@@ -1972,6 +2090,7 @@
       "vi": "Lấy sản phẩm bàn giao làm đơn vị đánh giá",
       "def_en": "Scoring whether the agent produced the explicitly specified artifact under workflow constraints, rather than scoring knowledge, reasoning, or a correct tool call in isolation.",
       "def_vi": "Chấm xem tác tử có tạo ra đúng hiện vật đã được quy định rõ dưới các ràng buộc quy trình hay không, thay vì chấm tri thức, lập luận, hay một lời gọi công cụ đúng xét riêng lẻ. Nhiều nhóm cùng chuyển sang đơn vị này cho bối cảnh doanh nghiệp.",
+      "say": "Score the deliverable, not the tool call, because the client asked for a finished report under stated workflow constraints.",
       "src": ["2607.23123", "2607.25765"],
       "tags": ["danh-gia", "doanh-nghiep", "quy-trinh"]
     },
@@ -1981,6 +2100,7 @@
       "vi": "Định tuyến giữa các mặt tri thức",
       "def_en": "Enterprise work spans documents for narrative facts, tables for computation, and dependency graphs for relationships, and choosing the right surface first is a capability distinct from retrieval.",
       "def_vi": "Công việc doanh nghiệp trải trên tài liệu cho các sự kiện dạng thuật, bảng cho tính toán, và đồ thị phụ thuộc cho quan hệ, và việc chọn đúng mặt tri thức trước là một năng lực tách biệt với truy hồi. Mới một nhóm tách riêng năng lực này để đo.",
+      "say": "Knowledge surface routing decides between a document, a table, and a dependency graph, and getting that wrong dooms the retrieval.",
       "src": ["2607.25765", "2607.23123"],
       "tags": ["danh-gia", "doanh-nghiep", "truy-hoi"]
     },
@@ -2000,6 +2120,7 @@
       "vi": "Bộ chuẩn quy trình theo chiều dài thời gian",
       "def_en": "Testing whether recalled experience improves later performance in a realistic multi month work stream, instead of reducing memory to retrieval accuracy or question answering.",
       "def_vi": "Kiểm xem kinh nghiệm được nhớ lại có cải thiện hiệu năng về sau trong một dòng công việc thật kéo dài nhiều tháng hay không, thay vì rút gọn bộ nhớ thành độ chính xác truy hồi hay hỏi đáp. Mới một nhóm dựng bộ chuẩn từ quy trình có bảo vệ riêng tư của nhiều người thật.",
+      "say": "A longitudinal workflow benchmark asks whether last quarter's experience helps this quarter, which retrieval accuracy on its own never shows.",
       "src": ["2608.04830", "2608.01149"],
       "tags": ["danh-gia", "bo-nho", "quy-trinh"]
     }

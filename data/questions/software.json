@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "software",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qsw-1",
@@ -250,7 +250,7 @@
       "choices": [
         "Adding people to a late project makes the project even later than before",
         "The system's interfaces will mirror how the building teams communicate",
-        "Complexity grows quadratically with the number of modules in a codebase",
+        "Complexity grows quadratically with the number of modules",
         "The cost of fixing a defect rises with each phase it survives undetected"
       ],
       "answer": 1,
@@ -384,7 +384,7 @@
       "q_vi": "Quy tắc quyết định một giảng viên có được phân công hay không xuất hiện ở ba hàm xử lý tuyến đường với khác biệt nhỏ. Nước đi đúng là",
       "choices": [
         "Copy the strictest version into the other two handlers to align them",
-        "Add a shared middleware that runs before each of the three handlers",
+        "Add a shared middleware that runs before all three handlers",
         "Enforce it with a database trigger so no handler can bypass the rule",
         "Move the decision into one domain function the handlers all call"
       ],
@@ -443,7 +443,7 @@
       "q": "Cursor pagination still returns unstable pages. The most likely remaining mistake is",
       "q_vi": "Phân trang bằng con trỏ vẫn trả về các trang không ổn định. Sai sót còn lại khả dĩ nhất là",
       "choices": [
-        "The page size is too large for the database to return in one round trip",
+        "The page size is too large to return in one round trip",
         "The cursor is sent in the body instead of being sent as a query parameter",
         "The cursor is not encoded, so clients can read the underlying identifier",
         "The sort key is not unique, so rows with equal values can be skipped"
@@ -714,7 +714,7 @@
       "q_vi": "Khi một máy khách vượt giới hạn tốc độ, phản hồi hữu ích nhất là",
       "choices": [
         "A too many requests status together with how long to wait",
-        "A forbidden status so the client stops retrying the endpoint",
+        "A forbidden status so the client stops retrying",
         "A server error status so the failure appears on the service dashboard",
         "A redirect to a queue page that refreshes itself every few seconds"
       ],
@@ -865,7 +865,7 @@
       "choices": [
         "The compiler can optimise smaller files more aggressively than one large file",
         "The visitor downloads only the code the current route actually needs",
-        "The browser caches every chunk permanently after the first navigation",
+        "The browser caches every chunk permanently after first load",
         "The server can compress many small files better than one combined file"
       ],
       "answer": 1,
@@ -926,7 +926,7 @@
         "Correctness, because the same component can produce two different trees",
         "The delay before any real content appears on a slow device or network",
         "Security, since the business rules must now be shipped to every visitor",
-        "Memory, because the whole document tree is duplicated during the render"
+        "Memory, because the whole document tree is duplicated"
       ],
       "answer": 1,
       "why": "Nothing meaningful is on screen until the script has arrived and run. That penalty falls hardest on the users with the weakest devices and connections.",
@@ -1194,7 +1194,7 @@
       "q_vi": "Một truy vấn thời khoá biểu đã nhớ đệm bỏ sót tham số học kỳ trong khoá. Triệu chứng nhìn thấy là",
       "choices": [
         "Switching semester keeps showing the schedule of the previous one",
-        "Every semester change triggers a full refetch of the entire dataset",
+        "Every semester change triggers a full refetch of the dataset",
         "The cache grows without bound because each request creates a new entry",
         "The request fails validation because the parameter never reaches the server"
       ],
@@ -1240,7 +1240,7 @@
       "choices": [
         "Dropped a column that the previous version of the code still reads",
         "Was applied twice, leaving two copies of the same table in the schema",
-        "Ran inside a transaction that the rollback procedure could not undo",
+        "Ran inside a transaction the rollback could not undo",
         "Changed the migration version number that the old code checks at startup"
       ],
       "answer": 0,
@@ -1465,7 +1465,7 @@
       "choices": [
         "Slow feedback and failures that do not point to the broken component",
         "Faster feedback but weaker guarantees about the behaviour of the browser",
-        "Better isolation, since each test drives only one component at a time",
+        "Better isolation, since each test drives one component only",
         "Lower maintenance, because the interface changes less often than the code"
       ],
       "answer": 0,
@@ -1494,7 +1494,7 @@
       "q_vi": "Tình huống nào thật sự là nợ kỹ thuật chứ không đơn giản là làm ẩu?",
       "choices": [
         "A module nobody understands because its author left without documenting it",
-        "A copy of the same validation rule sitting in four different files",
+        "A copy of the same validation rule sitting in four files",
         "A shortcut taken knowingly, written down, with a plan to repay it",
         "A dependency left three major versions behind because upgrading looks risky"
       ],
@@ -1541,7 +1541,7 @@
         "High coupling to its callers and low cohesion in its internal parts",
         "High cohesion inside and loose coupling to the rest of the system",
         "Low cohesion inside and low coupling, since both should be minimised",
-        "High cohesion and high coupling, so related modules evolve together"
+        "High cohesion and high coupling, so modules evolve together"
       ],
       "answer": 1,
       "why": "Things that belong together live together, and what crosses the boundary is kept thin. Minimising both is impossible, because a module with nothing inside it has nothing to be cohesive about.",
@@ -1556,7 +1556,7 @@
         "One restating the loop condition in words for readers new to the language",
         "One listing the author and the date on which the function was created",
         "One explaining why the value is rounded up, citing the regulation",
-        "One describing each parameter using the same words as its own name"
+        "One describing each parameter in the same words as its name"
       ],
       "answer": 2,
       "why": "The code already says what happens. The reason and its source cannot be recovered from the code, and that is exactly what the next reader will need.",
@@ -1658,7 +1658,7 @@
       "q": "A correlation identifier is generated at the edge so that",
       "q_vi": "Định danh liên kết yêu cầu được sinh ở biên để",
       "choices": [
-        "The load balancer can route the follow up calls to the same instance",
+        "The load balancer can route later calls to the same instance",
         "Every log line produced by one user action can be gathered together",
         "The client can retry safely because the server recognises the repeat",
         "Each request gets a unique cache key that avoids collisions between users"
@@ -1688,7 +1688,7 @@
       "q": "Average response time looks stable while complaints increase. The measurement mistake is",
       "q_vi": "Thời gian phản hồi trung bình trông ổn định trong khi lời phàn nàn tăng lên. Sai lầm trong đo đạc là",
       "choices": [
-        "The mean is computed over a window that is too short to be stable",
+        "The mean is computed over a window that is too short",
         "The mean is dominated by the fast majority and hides a slow tail",
         "The mean includes failed requests, which finish faster than successful ones",
         "The mean is measured on the server and excludes the network round trip"
@@ -1765,7 +1765,7 @@
       "choices": [
         "The design rationale of the service and the history of its architecture",
         "What this alert actually means and which checks to run first on it",
-        "The full list of every alert the service is currently able to produce",
+        "The full list of every alert the service can produce",
         "The contact details of everyone who has ever worked on the component"
       ],
       "answer": 1,

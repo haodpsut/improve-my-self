@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "limits",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "lim-fluency-is-not-accuracy",
@@ -24,6 +24,7 @@
       "src": [
         "2607.18360"
       ],
+      "say": "Every citation looks perfectly formed, yet three of them are fabricated references pointing at papers nobody ever wrote.",
       "tags": [
         "ao-giac",
         "trich-dan"
@@ -50,6 +51,7 @@
       "src": [
         "2608.04570"
       ],
+      "say": "Ask it to personalise and it invents a user profile, then reasons confidently on attributes nobody ever gave it.",
       "tags": [
         "ao-giac",
         "ca-nhan-hoa"
@@ -76,6 +78,7 @@
       "src": [
         "2608.04286"
       ],
+      "say": "Separate intrinsic from extrinsic fabrication in the report, because contradicting the source and inventing beyond it need different fixes.",
       "tags": [
         "ao-giac",
         "phan-loai"
@@ -102,6 +105,7 @@
       "vi": "Dẫn nguồn không cứu được thứ chưa hề truy hồi",
       "def_en": "Attribution only covers the material that reached the context, so a claim built on a document the retriever missed still looks fully sourced.",
       "def_vi": "Việc gắn nguồn chỉ phủ được phần tài liệu đã vào ngữ cảnh, nên khẳng định dựng trên một tài liệu mà bộ truy hồi bỏ sót vẫn trông như có nguồn đầy đủ.",
+      "say": "Grounding cannot fix what the retriever never found, so a claim missing its key document still reads as fully sourced.",
       "tags": [
         "ao-giac",
         "gioi-han-cua-bu"
@@ -131,6 +135,7 @@
       "src": [
         "2608.04899"
       ],
+      "say": "The confidence estimate clusters on a handful of round values, so it looks calibrated in aggregate and helps nobody per item.",
       "tags": [
         "ao-giac",
         "do-tin-cay"
@@ -160,6 +165,7 @@
       "src": [
         "2608.04355"
       ],
+      "say": "That second pass only repaired the formatting, and we mistook tidier output for the model correcting its own error.",
       "tags": [
         "ao-giac",
         "gioi-han-cua-bu"
@@ -198,6 +204,7 @@
       "vi": "Giữ trạng thái qua nhiều bước",
       "def_en": "Holding a set of intermediate values that keep changing is where reasoning degrades fastest, because nothing in the architecture guarantees the values persist.",
       "def_vi": "Giữ một tập giá trị trung gian liên tục thay đổi là chỗ suy luận xuống cấp nhanh nhất, vì không có gì trong kiến trúc bảo đảm các giá trị đó còn nguyên.",
+      "say": "State tracking across many steps is where it falls apart, since nothing in the architecture promises those values survive.",
       "tags": [
         "suy-luan",
         "trang-thai"
@@ -212,6 +219,7 @@
       "src": [
         "2608.05254"
       ],
+      "say": "It satisfied the constraints we mentioned last and quietly dropped the rest, which is a fine answer to a different question.",
       "tags": [
         "suy-luan",
         "rang-buoc"
@@ -256,6 +264,7 @@
       "src": [
         "2607.28478"
       ],
+      "say": "Reasoning about the physical world is learned from text about the world, so estimates of time, distance and cost fail strangely.",
       "tags": [
         "suy-luan",
         "the-gioi-thuc"
@@ -285,6 +294,7 @@
       "src": [
         "2608.04646"
       ],
+      "say": "It passes the social reasoning items until we reword them slightly, which tells us surface cues were doing all the work.",
       "tags": [
         "suy-luan",
         "gion"
@@ -300,6 +310,7 @@
         "2608.03291",
         "2608.05660"
       ],
+      "say": "Find the first wrong step instead of scoring the final answer, because supervising that step is what actually improves anything.",
       "tags": [
         "suy-luan",
         "chan-doan"
@@ -353,6 +364,7 @@
       "src": [
         "2608.05097"
       ],
+      "say": "The solver only checks what we translated, so a wrong formalisation of the business rule sails through every proof.",
       "tags": [
         "suy-luan",
         "gioi-han-cua-bu"
@@ -409,6 +421,7 @@
       "vi": "Nhầm lẫn giữa các nguồn",
       "def_en": "When several documents in the window say similar things, the model blends them and attributes a sentence from one contract to another.",
       "def_vi": "Khi nhiều tài liệu trong cửa sổ nói những điều na ná nhau, mô hình trộn chúng lại và gán một câu của hợp đồng này sang hợp đồng kia.",
+      "say": "With several similar contracts in the window it blends them, and a sentence from one ends up attributed to another.",
       "tags": [
         "ngu-canh",
         "nguon"
@@ -450,6 +463,7 @@
       "src": [
         "2608.03297"
       ],
+      "say": "The advertised context and the effective context are two different numbers, and only the flattering one appears in the datasheet.",
       "tags": [
         "ngu-canh",
         "do-dai"
@@ -461,6 +475,7 @@
       "vi": "Truy hồi bù cho giới hạn cửa sổ",
       "def_en": "Selecting a small relevant slice keeps the useful material near the front of a short prompt instead of diluted across a very long one.",
       "def_vi": "Chọn ra một lát cắt nhỏ và liên quan sẽ giữ phần hữu ích nằm gần đầu một câu lệnh ngắn thay vì loãng ra trong một câu lệnh rất dài.",
+      "say": "Retrieve a small relevant slice rather than pouring the whole archive in, because material near the front of a short prompt survives.",
       "tags": [
         "ngu-canh",
         "bu"
@@ -490,6 +505,7 @@
       "src": [
         "2608.05095"
       ],
+      "say": "Put the decisions in an external memory store, so they outlive the session and somebody can edit and audit them.",
       "tags": [
         "ngu-canh",
         "bu"
@@ -535,6 +551,7 @@
       "src": [
         "2608.02843"
       ],
+      "say": "Make every memory write authorised and signed, then a poisoned entry has an author instead of appearing from nowhere.",
       "tags": [
         "ngu-canh",
         "bu"
@@ -549,6 +566,7 @@
       "src": [
         "2608.04569"
       ],
+      "say": "Compression kept the sentence and deleted the entity it pointed to, leaving a fluent line that now refers to nothing.",
       "tags": [
         "ngu-canh",
         "gioi-han-cua-bu"
@@ -560,6 +578,7 @@
       "vi": "Mốc kiến thức",
       "def_en": "Weights encode the world as it appeared in the training corpus, so anything after that date exists for the model only if a tool brings it in.",
       "def_vi": "Trọng số mã hoá thế giới đúng như nó hiện ra trong kho huấn luyện, nên mọi thứ sau mốc đó chỉ tồn tại với mô hình nếu có công cụ mang vào.",
+      "say": "Anything after the knowledge cutoff exists for the model only if a tool goes out and fetches it.",
       "tags": [
         "moc-kien-thuc",
         "co-che"
@@ -601,6 +620,7 @@
       "src": [
         "2608.06128"
       ],
+      "say": "Knowing what to search for is the hard part, since forming the query needs the very knowledge the search should supply.",
       "tags": [
         "moc-kien-thuc",
         "truy-van"
@@ -612,6 +632,7 @@
       "vi": "Truy hồi bù cho mốc kiến thức",
       "def_en": "Connecting search, a database or an interface turns a frozen snapshot into a system whose facts are as fresh as its sources.",
       "def_vi": "Nối tìm kiếm, cơ sở dữ liệu hoặc một giao diện sẽ biến bức ảnh đóng băng thành một hệ thống có dữ kiện tươi ngang với nguồn của nó.",
+      "say": "Wire it to search and a database, and a frozen snapshot becomes a system as fresh as the sources behind it.",
       "tags": [
         "moc-kien-thuc",
         "bu"
@@ -638,6 +659,7 @@
       "vi": "Chính sách bắt buộc truy hồi",
       "def_en": "Making retrieval mandatory for a class of questions removes the decision from the model and hands it to a rule you can read and test.",
       "def_vi": "Bắt buộc truy hồi cho một nhóm câu hỏi sẽ lấy quyết định ra khỏi tay mô hình và giao cho một luật mà bạn đọc được và kiểm được.",
+      "say": "Make retrieval mandatory for pricing questions, so the decision lives in a rule we can read and test rather than in the model.",
       "tags": [
         "moc-kien-thuc",
         "bu"
@@ -649,6 +671,7 @@
       "vi": "Bắt buộc truy hồi đổi độ trễ lấy độ tươi",
       "def_en": "A rule that always searches removes one failure mode and adds cost, delay and a new dependency that can itself be down.",
       "def_vi": "Một luật luôn luôn tìm sẽ xoá được một kiểu hỏng nhưng thêm chi phí, độ trễ và một phụ thuộc mới vốn cũng có thể chết.",
+      "say": "Mandatory retrieval buys freshness with latency, and it adds a dependency that will eventually be down exactly when we need it.",
       "tags": [
         "moc-kien-thuc",
         "gioi-han-cua-bu"
@@ -679,6 +702,7 @@
         "2608.02678",
         "2607.17535"
       ],
+      "say": "Corpus poisoning defeats any freshness guarantee, because an attacker who plants the document gets our pipeline to deliver it with authority.",
       "tags": [
         "moc-kien-thuc",
         "an-ninh"
@@ -693,6 +717,7 @@
       "src": [
         "2608.04366"
       ],
+      "say": "Tier the sources by trust, so an official register outranks a scraped page instead of every hit counting as equal evidence.",
       "tags": [
         "moc-kien-thuc",
         "bu"
@@ -764,6 +789,7 @@
       "src": [
         "2607.29254"
       ],
+      "say": "It picked the wrong tool because two descriptions read alike, so rename them until the difference is obvious from the wording.",
       "tags": [
         "tac-tu",
         "cong-cu"
@@ -790,6 +816,7 @@
       "vi": "Hiểu sai trạng thái môi trường",
       "def_en": "The agent acts on its belief about the system, and once that belief diverges from reality every subsequent correct-looking step is wrong.",
       "def_vi": "Tác tử hành động dựa trên niềm tin của nó về hệ thống, và khi niềm tin đó lệch khỏi thực tế thì mọi bước trông có vẻ đúng sau đó đều sai.",
+      "say": "Once the agent misreads the environment state, every later step is correct in form and wrong in fact.",
       "tags": [
         "tac-tu",
         "trang-thai"
@@ -804,6 +831,7 @@
       "src": [
         "2608.02358"
       ],
+      "say": "It kept repeating the same failing call until the budget ran out, because nothing remembered that we had already tried it.",
       "tags": [
         "tac-tu",
         "vong-lap"
@@ -845,6 +873,7 @@
       "vi": "Điểm kiểm và quay lui",
       "def_en": "Saving a known good state after each verified step lets the system return to it instead of carrying a corrupted state to the end.",
       "def_vi": "Lưu lại một trạng thái tốt đã biết sau mỗi bước đã kiểm cho phép hệ thống quay về đó thay vì mang trạng thái hỏng đi tới cuối.",
+      "say": "Checkpoint after each verified step, then a rollback costs us one step instead of carrying a corrupted state to the end.",
       "tags": [
         "tac-tu",
         "bu"
@@ -874,6 +903,7 @@
       "src": [
         "2608.02645"
       ],
+      "say": "The call half succeeded, so the world matches neither the before picture nor the after one, and agents reason terribly about that.",
       "tags": [
         "tac-tu",
         "cong-cu"
@@ -904,6 +934,7 @@
         "2608.05810",
         "2608.03874"
       ],
+      "say": "If the agent commits a flawed procedure to its skill library, every later task inherits that flaw as if it were experience.",
       "tags": [
         "tac-tu",
         "gioi-han-cua-bu"
@@ -933,6 +964,7 @@
       "src": [
         "2608.05823"
       ],
+      "say": "Split the paragraph into atomic claims before checking anything, since a whole paragraph maps to no single piece of evidence.",
       "tags": [
         "kiem-chung",
         "phuong-phap"
@@ -962,6 +994,7 @@
       "src": [
         "2607.24117"
       ],
+      "say": "Proving a source exists is not proving it is any good, so a blog copying another blog passes happily.",
       "tags": [
         "kiem-chung",
         "nguon"
@@ -991,6 +1024,7 @@
       "src": [
         "2608.05353"
       ],
+      "say": "The judge sees only one frozen rendering, so every improvement outside that frame is invisible to the score.",
       "tags": [
         "kiem-chung",
         "gioi-han-cua-bu"
@@ -1017,6 +1051,7 @@
       "src": [
         "2608.01388"
       ],
+      "say": "Ask what fraction of real failures this monitor covers, because it only catches the shapes somebody wrote it for.",
       "tags": [
         "kiem-chung",
         "gioi-han-cua-bu"
@@ -1043,6 +1078,7 @@
       "src": [
         "2607.24117"
       ],
+      "say": "Keep the provenance chain, so months later we can still answer where that wrong number entered and who transformed it.",
       "tags": [
         "kiem-chung",
         "bu"
@@ -1087,6 +1123,7 @@
       "src": [
         "2608.00877"
       ],
+      "say": "A verifier cannot see that we answered the wrong question, since a well grounded answer passes every check it runs.",
       "tags": [
         "kiem-chung",
         "gioi-han-cua-bu"
@@ -1113,6 +1150,7 @@
       "src": [
         "2608.00964"
       ],
+      "say": "The licence constraint now shrinks the usable pool faster than any technical limit does, so bring legal into the design early.",
       "tags": [
         "du-lieu",
         "phap-ly"
@@ -1124,6 +1162,7 @@
       "vi": "Dữ liệu trùng lặp gần",
       "def_en": "Web scale corpora repeat the same passage in many wrappers, which inflates the apparent size while adding almost no new signal.",
       "def_vi": "Kho dữ liệu quy mô mạng lặp lại cùng một đoạn văn trong nhiều lớp vỏ, làm phồng kích thước bề ngoài mà gần như không thêm tín hiệu mới.",
+      "say": "Near duplicate data inflates the apparent size of the corpus while adding almost no signal we did not already have.",
       "tags": [
         "du-lieu",
         "chat-luong"
@@ -1150,6 +1189,7 @@
       "src": [
         "2608.03219"
       ],
+      "say": "If the test items leaked into training, the score measures recall of the answer key rather than the ability we care about.",
       "tags": [
         "du-lieu",
         "chuan-do"
@@ -1161,6 +1201,7 @@
       "vi": "Kho dữ liệu thôi mô tả hiện tại",
       "def_en": "Even a clean corpus encodes practices, prices and institutions as they were, so a model can be perfectly trained on a world that no longer exists.",
       "def_vi": "Ngay cả một kho sạch cũng mã hoá tập quán, giá cả và thiết chế đúng như chúng từng là, nên mô hình có thể được huấn luyện hoàn hảo trên một thế giới không còn tồn tại.",
+      "say": "A perfectly clean corpus can still describe a world that no longer exists, with prices and institutions frozen as they were.",
       "tags": [
         "du-lieu",
         "thoi-gian"
@@ -1175,6 +1216,7 @@
       "src": [
         "2608.02052"
       ],
+      "say": "Rare strings such as keys and personal records are exactly what a model reproduces verbatim, so scrub them before training.",
       "tags": [
         "du-lieu",
         "rieng-tu"
@@ -1190,6 +1232,7 @@
         "2607.29250",
         "2608.05148"
       ],
+      "say": "Synthetic data covers the cases our real corpus never contained, at a volume nobody could ever label by hand.",
       "tags": [
         "du-lieu",
         "bu"
@@ -1219,6 +1262,7 @@
       "src": [
         "2608.05850"
       ],
+      "say": "Capability follows the text a language contributed, so the same model can be excellent in one language and unusable in another.",
       "tags": [
         "du-lieu",
         "ngon-ngu"
@@ -1242,6 +1286,7 @@
       "vi": "Bản ghi xuất xứ dữ liệu",
       "def_en": "Keeping the source, licence and collection date of every subset is what makes a later legal or scientific question answerable at all.",
       "def_vi": "Giữ lại nguồn, giấy phép và ngày thu thập của từng tập con là thứ khiến một câu hỏi pháp lý hay khoa học về sau còn trả lời được.",
+      "say": "Record the source, licence and collection date of every subset, because that is what makes a later legal question answerable.",
       "tags": [
         "du-lieu",
         "bu"
@@ -1256,6 +1301,7 @@
       "src": [
         "2608.03219"
       ],
+      "say": "A clean benchmark is perishable, since the day we publish it the test set begins flowing into the next crawl.",
       "tags": [
         "du-lieu",
         "gioi-han-cua-bu"
@@ -1285,6 +1331,7 @@
       "src": [
         "2608.01526"
       ],
+      "say": "Beyond the compute bill sit power draw, cooling and floor space, and any one of them can become the binding limit.",
       "tags": [
         "chi-phi",
         "ha-tang"
@@ -1323,6 +1370,7 @@
       "src": [
         "2608.05872"
       ],
+      "say": "Model routing sends easy requests to a small model, so we keep the ceiling on hard cases without paying for it everywhere.",
       "tags": [
         "chi-phi",
         "bu"
@@ -1337,6 +1385,7 @@
       "src": [
         "2608.06171"
       ],
+      "say": "Routing must judge difficulty before the answer exists, and that judgement is hardest for precisely the requests where routing matters.",
       "tags": [
         "chi-phi",
         "gioi-han-cua-bu"
@@ -1366,6 +1415,7 @@
       "src": [
         "2608.03854"
       ],
+      "say": "Quantisation leaves the average scores looking fine while breaking rare cases, so test the tail before shipping a smaller build.",
       "tags": [
         "chi-phi",
         "gioi-han-cua-bu"
@@ -1377,6 +1427,7 @@
       "vi": "Bộ đệm bù cho công việc lặp lại",
       "def_en": "Reusing a computed prefix or a previous answer removes cost from the common path, which is where most production traffic actually lives.",
       "def_vi": "Tái dùng một tiền tố đã tính hoặc một câu trả lời trước sẽ bỏ chi phí khỏi đường đi phổ biến, vốn là chỗ phần lớn lưu lượng thật đi qua.",
+      "say": "Caching the repeated prefix takes cost out of the common path, which is where most of our production traffic lives.",
       "tags": [
         "chi-phi",
         "bu"
@@ -1388,6 +1439,7 @@
       "vi": "Bộ đệm đổi độ tươi lấy chi phí",
       "def_en": "Every cached answer is a bet that the world did not change, and the invalidation rule, not the hit rate, decides whether the bet is safe.",
       "def_vi": "Mỗi câu trả lời nằm trong đệm là một canh bạc rằng thế giới chưa đổi, và luật vô hiệu hoá đệm, chứ không phải tỉ lệ trúng, mới quyết định canh bạc đó có an toàn hay không.",
+      "say": "Every cached answer bets that the world did not change, so the invalidation rule decides whether that bet is safe.",
       "tags": [
         "chi-phi",
         "gioi-han-cua-bu"
@@ -1461,6 +1513,7 @@
       "vi": "Độ chính xác theo nhiệm vụ và tỉ lệ thành công theo lượt chạy",
       "def_en": "Averaging over a task set hides the distribution over repeated attempts at one task, which is the quantity an operator actually experiences.",
       "def_vi": "Lấy trung bình trên một tập nhiệm vụ che mất phân bố khi lặp lại cùng một nhiệm vụ, mà đó mới là đại lượng người vận hành thật sự trải qua.",
+      "say": "Per task accuracy hides how often one task succeeds across repeated runs, and the second number is what an operator lives with.",
       "tags": [
         "chuan-do",
         "do-luong"
@@ -1472,6 +1525,7 @@
       "vi": "Hỏng ở đuôi phân bố",
       "def_en": "The rare case that the average hides is usually the expensive one, because rare in a benchmark and rare in production are different populations.",
       "def_vi": "Ca hiếm bị giá trị trung bình che đi thường là ca đắt tiền, vì hiếm trong chuẩn đo và hiếm trong vận hành là hai tổng thể khác nhau.",
+      "say": "The tail failure is the expensive one, because rare in a benchmark and rare in production are different populations.",
       "tags": [
         "chuan-do",
         "rui-ro"
@@ -1501,6 +1555,7 @@
       "src": [
         "2608.05086"
       ],
+      "say": "Once every system scores near the top, the benchmark measures quirks of the test set instead of separating anything.",
       "tags": [
         "chuan-do",
         "gioi-han"
@@ -1515,6 +1570,7 @@
       "src": [
         "2608.06329"
       ],
+      "say": "Construct validity is the awkward question, since an evaluation can be reproducible, well documented and still measure the wrong thing.",
       "tags": [
         "chuan-do",
         "hieu-luc"
@@ -1544,6 +1600,7 @@
       "src": [
         "2608.00181"
       ],
+      "say": "Our gains did not carry across to the other agent benchmark, which suggests we tuned the harness and not the system.",
       "tags": [
         "chuan-do",
         "tong-quat"
@@ -1570,6 +1627,7 @@
       "src": [
         "2608.01004"
       ],
+      "say": "Run the new configuration in shadow on live requests without acting on its output, and measure the traffic we truly serve.",
       "tags": [
         "chuan-do",
         "bu"
@@ -1581,6 +1639,7 @@
       "vi": "Đánh giá bóng vẫn cần đáp án đúng",
       "def_en": "Live traffic gives you the right inputs and no labels, so the bottleneck moves from collecting cases to deciding what the correct answer was.",
       "def_vi": "Lưu lượng thật cho bạn đầu vào đúng nhưng không có nhãn, nên nút thắt chuyển từ việc thu thập ca sang việc xác định đâu là câu trả lời đúng.",
+      "say": "Shadow evaluation hands us the right inputs and no labels, so the bottleneck becomes deciding what the correct answer was.",
       "tags": [
         "chuan-do",
         "gioi-han-cua-bu"
@@ -1610,6 +1669,7 @@
       "src": [
         "2608.06362"
       ],
+      "say": "Agree the stopping rule before we begin, otherwise we will keep running until the numbers happen to look favourable.",
       "tags": [
         "chuan-do",
         "bu"
@@ -1682,6 +1742,7 @@
       "src": [
         "2607.15434"
       ],
+      "say": "A system optimised while being watched can learn to behave differently exactly when the visible trace is what gets scored.",
       "tags": [
         "can-chinh",
         "che-giau"
@@ -1696,6 +1757,7 @@
       "src": [
         "2608.04735"
       ],
+      "say": "Monitoring the reasoning trace warns us that the plan is drifting long before the agent takes the damaging action.",
       "tags": [
         "can-chinh",
         "bu"
@@ -1711,6 +1773,7 @@
         "2608.02820",
         "2608.04928"
       ],
+      "say": "The trace is not the computation, so monitoring works only while what the system writes stays connected to what it does.",
       "tags": [
         "can-chinh",
         "gioi-han-cua-bu"
@@ -1740,6 +1803,7 @@
       "src": [
         "2608.04347"
       ],
+      "say": "Fine tuning for one narrow purpose moved behaviour on unrelated inputs, including safety behaviour nobody thought to retest.",
       "tags": [
         "can-chinh",
         "tac-dung-phu"
@@ -1770,6 +1834,7 @@
       "src": [
         "2608.05409"
       ],
+      "say": "The same request in another mood crossed a boundary the earlier wording respected, so that boundary was never in the meaning.",
       "tags": [
         "can-chinh",
         "gion"
@@ -1796,6 +1861,7 @@
       "src": [
         "2607.22188"
       ],
+      "say": "Each agent behaved sensibly, yet together they chased the same shared resource and produced an outcome nobody wanted.",
       "tags": [
         "can-chinh",
         "he-thong"
@@ -1822,6 +1888,7 @@
       "vi": "Tầng mô hình và công cụ",
       "def_en": "The bottom layer supplies capability, and tools compensate for what the weights cannot do, namely fresh facts, exact arithmetic and real actions.",
       "def_vi": "Tầng dưới cùng cung cấp năng lực, và công cụ bù cho những gì trọng số không làm được, tức dữ kiện tươi, phép tính chính xác và hành động thật.",
+      "say": "The model and tool layer supplies capability, with tools covering fresh facts, exact arithmetic and anything that touches the real world.",
       "tags": [
         "kien-truc",
         "tang-mo-hinh"
@@ -1833,6 +1900,7 @@
       "vi": "Tầng dưới cùng không hứa được điều gì",
       "def_en": "No amount of capability at the model layer turns a probabilistic output into a guarantee, which is why the layers above exist at all.",
       "def_vi": "Dù năng lực ở tầng mô hình có cao tới đâu cũng không biến một đầu ra xác suất thành một bảo đảm, và đó chính là lý do các tầng phía trên tồn tại.",
+      "say": "No amount of capability at the bottom layer turns a probabilistic output into a guarantee, which is why the upper layers exist.",
       "tags": [
         "kien-truc",
         "gioi-han-cua-bu"
@@ -1844,6 +1912,7 @@
       "vi": "Tầng kiểm chứng phủ được gì",
       "def_en": "It converts an unverified assertion into a checked one, so it compensates for fabrication, arithmetic slips and claims with no supporting evidence.",
       "def_vi": "Nó biến một lời khẳng định chưa kiểm thành một lời đã kiểm, nên nó bù cho việc bịa, sai số học và các khẳng định không có chứng cứ chống lưng.",
+      "say": "The verification layer turns an assertion into a checked claim, covering fabrication, arithmetic slips and statements with no evidence behind them.",
       "tags": [
         "kien-truc",
         "tang-kiem-chung"
@@ -1870,6 +1939,7 @@
       "src": [
         "2608.05695"
       ],
+      "say": "The guardrail layer bounds what may be attempted, so an agent wandering outside the intended envelope is stopped by design.",
       "tags": [
         "kien-truc",
         "tang-rao-chan"
@@ -1884,6 +1954,7 @@
       "src": [
         "2608.01388"
       ],
+      "say": "A guardrail blocks only the shapes it enumerates, so an action that is permitted and wrong in substance walks straight through.",
       "tags": [
         "kien-truc",
         "gioi-han-cua-bu"
@@ -1898,6 +1969,7 @@
       "src": [
         "2607.21268"
       ],
+      "say": "The human layer supplies judgement about goals, context and acceptable risk, which is precisely what no layer below can supply.",
       "tags": [
         "kien-truc",
         "tang-con-nguoi"
@@ -1924,6 +1996,7 @@
       "src": [
         "2607.23438"
       ],
+      "say": "Keep permission separate from capability, so autonomy can be raised or lowered without retraining anything at all.",
       "tags": [
         "kien-truc",
         "bu"
@@ -1969,6 +2042,7 @@
       "src": [
         "2608.02683"
       ],
+      "say": "Defence in depth for agents means arranging the layers so that no single blind spot lets a failure through all of them.",
       "tags": [
         "kien-truc",
         "tong-quan"
@@ -2013,6 +2087,7 @@
       "src": [
         "2607.23942"
       ],
+      "say": "The research shift runs away from sheer size and towards reasoning, tools, memory, verification and reliability, because that is where failures live.",
       "tags": [
         "chot",
         "huong-di"
@@ -2024,6 +2099,7 @@
       "vi": "Kỹ thuật độ tin cậy cho hệ AI",
       "def_en": "The useful discipline is the one used for any critical system, namely known failure modes, budgets, monitoring, recovery paths and post-incident review.",
       "def_vi": "Ngành hữu dụng ở đây chính là ngành dùng cho mọi hệ trọng yếu, tức là biết trước các kiểu hỏng, có ngân sách, có giám sát, có đường phục hồi và có rà soát sau sự cố.",
+      "say": "Treat this as reliability engineering, with known failure modes, error budgets, monitoring, recovery paths and a review after each incident.",
       "tags": [
         "chot",
         "phuong-phap"
@@ -2054,6 +2130,7 @@
         "2608.04033",
         "2607.22024"
       ],
+      "say": "System level security means the risk sits in the model plus its tools, its data paths and every action it can reach.",
       "tags": [
         "chot",
         "an-ninh"

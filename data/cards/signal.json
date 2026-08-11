@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "signal",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "sg-sampling",
@@ -79,6 +79,7 @@
       "vi": "Tần số gập",
       "def_en": "The frequency about which the spectrum mirrors itself when a signal is sampled, numerically the same as the Nyquist frequency.",
       "def_vi": "Tần số mà quanh nó phổ bị soi gương khi lấy mẫu, về trị số trùng với tần số Nyquist.",
+      "say": "Call it the folding frequency when you want people to picture the mirror rather than memorise a formula.",
       "tags": [
         "lay-mau"
       ]
@@ -124,6 +125,7 @@
       "vi": "Suy giảm do khẩu độ giữ mẫu",
       "def_en": "The gradual loss of high frequency amplitude caused by the sinc response of a zero-order hold, often corrected by an inverse sinc filter.",
       "def_vi": "Mức mất dần biên độ ở tần số cao do đáp ứng dạng sinc của khâu giữ bậc không, thường bù bằng bộ lọc sinc nghịch đảo.",
+      "say": "That gentle roll off at the band edge is aperture droop, not your filter, so compensate it digitally.",
       "tags": [
         "khoi-phuc",
         "bu"
@@ -135,6 +137,7 @@
       "vi": "Nội suy sinc",
       "def_en": "Ideal reconstruction that sums shifted sinc functions weighted by the samples, exact but not realisable in real time.",
       "def_vi": "Cách khôi phục lý tưởng, cộng các hàm sinc dịch chỗ có trọng số là các mẫu, chính xác nhưng không hiện thực được theo thời gian thực.",
+      "say": "Sinc interpolation is exact and infinitely long, which is why nobody has ever shipped it in real time.",
       "tags": [
         "khoi-phuc"
       ]
@@ -145,6 +148,7 @@
       "vi": "Bộ lọc khôi phục",
       "def_en": "The analogue lowpass filter after a converter that suppresses the spectral images created by sampling.",
       "def_vi": "Bộ lọc thông thấp tương tự đặt sau bộ chuyển đổi, nén các ảnh phổ do quá trình lấy mẫu sinh ra.",
+      "say": "If the images are leaking through, look at the reconstruction filter before you blame the converter.",
       "tags": [
         "khoi-phuc",
         "bo-loc"
@@ -240,6 +244,7 @@
       "vi": "Nén dãn biên độ",
       "def_en": "Compressing amplitude before quantisation and expanding it afterwards, so quiet parts get finer steps than loud parts.",
       "def_vi": "Nén biên độ trước khi lượng tử hoá rồi dãn lại sau đó, để phần tín hiệu nhỏ nhận bước lượng tử mịn hơn phần lớn.",
+      "say": "Companding gives the quiet passages finer steps, which is why speech survives so few bits per sample.",
       "tags": [
         "luong-tu",
         "thoai"
@@ -251,6 +256,7 @@
       "vi": "Mạch lấy và giữ mẫu",
       "def_en": "The circuit that freezes the input voltage during conversion so the converter sees a stable value.",
       "def_vi": "Mạch giữ đứng yên điện áp đầu vào trong lúc chuyển đổi, để bộ chuyển đổi thấy một giá trị ổn định.",
+      "say": "The sample and hold has to settle before conversion starts, otherwise you are digitising a moving target.",
       "tags": [
         "bo-chuyen-doi",
         "mach"
@@ -309,6 +315,7 @@
       "vi": "Phân chia theo thời gian cơ số hai",
       "def_en": "The classic fast Fourier transform structure that splits a length two to the n sequence into even and odd indexed halves at each stage.",
       "def_vi": "Cấu trúc biến đổi Fourier nhanh kinh điển, mỗi tầng tách dãy dài hai mũ n thành nửa chỉ số chẵn và nửa chỉ số lẻ.",
+      "say": "Radix two decimation in time wants a power of two length, so we pad the block and move on.",
       "tags": [
         "fourier",
         "thuat-toan"
@@ -320,6 +327,7 @@
       "vi": "Hệ số xoay",
       "def_en": "The complex exponential weight applied between butterfly stages of a fast Fourier transform.",
       "def_vi": "Trọng số hàm mũ phức nhân vào giữa các tầng bướm của biến đổi Fourier nhanh.",
+      "say": "Precompute the twiddle factors once at startup, because recomputing that exponential per butterfly is where the cycles go.",
       "tags": [
         "fourier",
         "thuat-toan"
@@ -354,6 +362,7 @@
       "vi": "Suy hao vỏ sò",
       "def_en": "The amplitude underestimate suffered by a tone sitting between two bin centres, worst for a rectangular window.",
       "def_vi": "Mức thiếu hụt biên độ đo được khi một âm nằm giữa hai tâm ngăn, nặng nhất với cửa sổ chữ nhật.",
+      "say": "The tone looks weak only because it fell between bins, that is scalloping loss and not a real dip.",
       "tags": [
         "fourier",
         "cua-so"
@@ -377,6 +386,7 @@
       "vi": "Cửa sổ chữ nhật",
       "def_en": "Simply truncating the data, which gives the narrowest main lobe but side lobes only about thirteen decibels down.",
       "def_vi": "Chỉ cắt cụt dữ liệu, cho búp chính hẹp nhất nhưng búp phụ chỉ thấp hơn khoảng mười ba đêxiben.",
+      "say": "A rectangular window is what you get when you forget to window, and the side lobes will tell you.",
       "tags": [
         "cua-so"
       ]
@@ -398,6 +408,7 @@
       "vi": "Cửa sổ Hamming",
       "def_en": "A raised cosine taper with a nonzero pedestal, tuned to cancel the first side lobe so the nearest side lobes sit about forty one decibels down.",
       "def_vi": "Hàm vuốt cosin nâng có bệ khác không, chỉnh để triệt búp phụ đầu tiên nên các búp phụ gần thấp khoảng bốn mươi mốt đêxiben.",
+      "say": "Use a Hamming window when you want the nearest side lobe crushed and can live with the wider main lobe.",
       "tags": [
         "cua-so"
       ]
@@ -419,6 +430,7 @@
       "vi": "Cửa sổ Kaiser",
       "def_en": "A window with a shape parameter beta that lets the designer dial the main lobe and side lobe trade off continuously.",
       "def_vi": "Cửa sổ có tham số dạng beta, cho phép người thiết kế chỉnh liên tục đánh đổi giữa búp chính và búp phụ.",
+      "say": "The Kaiser window is the one to reach for when the spec keeps changing, since beta dials the trade off.",
       "tags": [
         "cua-so",
         "thiet-ke"
@@ -430,6 +442,7 @@
       "vi": "Băng thông nhiễu tương đương",
       "def_en": "The width of an ideal rectangular filter that would pass the same white noise power as the window in use.",
       "def_vi": "Bề rộng của bộ lọc chữ nhật lý tưởng cho qua đúng lượng công suất nhiễu trắng bằng cửa sổ đang dùng.",
+      "say": "Divide by the equivalent noise bandwidth, otherwise your noise floor moves every time somebody changes the window.",
       "tags": [
         "cua-so",
         "chi-so"
@@ -477,6 +490,7 @@
       "vi": "Phổ công suất",
       "def_en": "The distribution of a signal's average power over frequency, expressed per unit bandwidth.",
       "def_vi": "Cách phân bố công suất trung bình của tín hiệu theo tần số, tính trên một đơn vị băng thông.",
+      "say": "Plot the power spectrum per unit bandwidth, or nobody can compare your figure against anybody else.",
       "tags": [
         "ngau-nhien",
         "pho"
@@ -535,6 +549,7 @@
       "vi": "Tích chập vòng",
       "def_en": "The convolution implied by multiplying two discrete Fourier transforms, in which the sequences wrap around the block boundary.",
       "def_vi": "Phép tích chập ngầm định khi nhân hai biến đổi Fourier rời rạc, trong đó dãy quấn vòng qua biên khối.",
+      "say": "Multiplying two transforms gives you circular convolution, and the wrap around is what corrupts the start of every block.",
       "tags": [
         "fourier",
         "tich-chap"
@@ -546,6 +561,7 @@
       "vi": "Chồng cộng",
       "def_en": "A block filtering scheme that pads each block, transforms, multiplies and then adds the overlapping tails so the result equals true linear convolution.",
       "def_vi": "Cách lọc theo khối, đệm mỗi khối rồi biến đổi, nhân, sau đó cộng phần đuôi chồng lấn để kết quả đúng bằng tích chập tuyến tính.",
+      "say": "We filter long streams with overlap add, so each block is padded, transformed and its tail added to the next.",
       "tags": [
         "fourier",
         "thuc-thi"
@@ -605,6 +621,7 @@
       "vi": "Hàm truyền",
       "def_en": "The ratio of output transform to input transform, a rational function of z for a discrete system.",
       "def_vi": "Tỉ số giữa biến đổi đầu ra và biến đổi đầu vào, là một hàm hữu tỉ của z với hệ rời rạc.",
+      "say": "Write the transfer function down first, then argue about the implementation form, not the other way round.",
       "tags": [
         "he-thong",
         "z"
@@ -616,6 +633,7 @@
       "vi": "Biến đổi Z",
       "def_en": "The transform that maps a sequence to a function of the complex variable z, turning difference equations into algebra.",
       "def_vi": "Phép biến đổi ánh xạ một dãy thành hàm của biến phức z, biến phương trình sai phân thành đại số.",
+      "say": "The z transform turns that ugly recursion into algebra, which is the only reason anyone tolerates it.",
       "tags": [
         "z",
         "co-ban"
@@ -638,6 +656,7 @@
       "vi": "Điểm cực",
       "def_en": "A value of z where the transfer function grows without bound, coming from the denominator and governing resonance and stability.",
       "def_vi": "Giá trị z làm hàm truyền tăng vô hạn, sinh từ mẫu số và chi phối cộng hưởng cùng tính ổn định.",
+      "say": "Push a pole too close to the unit circle and the filter rings for a very long time.",
       "tags": [
         "z",
         "cuc-khong"
@@ -649,6 +668,7 @@
       "vi": "Điểm không",
       "def_en": "A value of z where the transfer function vanishes, coming from the numerator and creating notches in the frequency response.",
       "def_vi": "Giá trị z làm hàm truyền triệt tiêu, sinh từ tử số và tạo ra các khe lõm trên đáp ứng tần số.",
+      "say": "Put a zero right on the interfering tone and the notch takes care of itself.",
       "tags": [
         "z",
         "cuc-khong"
@@ -683,6 +703,7 @@
       "vi": "Tính nhân quả",
       "def_en": "The property that the output at any instant depends only on present and past inputs, required for real time operation.",
       "def_vi": "Tính chất đầu ra tại mọi thời điểm chỉ phụ thuộc đầu vào hiện tại và quá khứ, điều kiện bắt buộc để chạy thời gian thực.",
+      "say": "Causality is what separates the design that runs live from the one that only works offline.",
       "tags": [
         "he-thong"
       ]
@@ -693,6 +714,7 @@
       "vi": "Phương trình sai phân",
       "def_en": "The recursion that expresses the current output from past outputs and current and past inputs, the direct implementation form of a filter.",
       "def_vi": "Công thức truy hồi biểu diễn đầu ra hiện tại từ các đầu ra quá khứ và các đầu vào hiện tại cùng quá khứ, chính là dạng thực thi trực tiếp của bộ lọc.",
+      "say": "Give me the difference equation and I can code the filter, the plots can wait until afterwards.",
       "tags": [
         "he-thong",
         "thuc-thi"
@@ -704,6 +726,7 @@
       "vi": "Đáp ứng tần số",
       "def_en": "How a system scales and phase shifts each sinusoid, obtained from the transfer function on the unit circle.",
       "def_vi": "Cách hệ khuếch đại và dịch pha từng thành phần sin, lấy từ hàm truyền trên đường tròn đơn vị.",
+      "say": "Walk the transfer function around the unit circle and the frequency response falls out, magnitude and phase together.",
       "tags": [
         "he-thong"
       ]
@@ -738,6 +761,7 @@
       "vi": "Trễ pha",
       "def_en": "The phase divided by frequency and negated, the delay experienced by a single sinusoid rather than by an envelope.",
       "def_vi": "Pha chia cho tần số rồi lấy dấu âm, là độ trễ mà một thành phần sin đơn lẻ chịu, khác với độ trễ của đường bao.",
+      "say": "Phase delay tells you what happens to one sinusoid, so stop quoting it when the question is about envelopes.",
       "tags": [
         "pha"
       ]
@@ -748,6 +772,7 @@
       "vi": "Pha cực tiểu",
       "def_en": "A system with all poles and all zeros inside the unit circle, giving the smallest possible phase lag and a stable causal inverse.",
       "def_vi": "Hệ có toàn bộ điểm cực và điểm không nằm trong đường tròn đơn vị, cho độ trễ pha nhỏ nhất và có nghịch đảo nhân quả ổn định.",
+      "say": "If you need a stable inverse, insist on a minimum phase design and keep every zero inside the circle.",
       "tags": [
         "pha",
         "z"
@@ -759,6 +784,7 @@
       "vi": "Bộ lọc toàn thông",
       "def_en": "A filter with flat magnitude at every frequency that changes only the phase, used to equalise group delay.",
       "def_vi": "Bộ lọc có biên độ phẳng ở mọi tần số và chỉ thay đổi pha, dùng để cân bằng trễ nhóm.",
+      "say": "Drop an all pass section in to flatten the group delay, the magnitude response will not even notice.",
       "tags": [
         "bo-loc",
         "pha"
@@ -794,6 +820,7 @@
       "vi": "Thiết kế bằng cửa sổ",
       "def_en": "Truncating the ideal infinite impulse response and tapering it with a window, simple but with equal ripple weight in both bands.",
       "def_vi": "Cắt cụt đáp ứng xung lý tưởng vô hạn rồi vuốt bằng một cửa sổ, cách làm đơn giản nhưng gợn sóng hai dải có trọng số như nhau.",
+      "say": "The window design method takes an afternoon, but it weights ripple equally in both bands whether you wanted that or not.",
       "tags": [
         "thiet-ke",
         "fir"
@@ -829,6 +856,7 @@
       "vi": "Gợn sóng đều",
       "def_en": "A response whose deviation from the ideal touches the same maximum many times across a band, the signature of a minimax optimal design.",
       "def_vi": "Đáp ứng có độ lệch so với lý tưởng chạm cùng một giá trị cực đại nhiều lần trên một dải, dấu hiệu của thiết kế tối ưu minimax.",
+      "say": "Count the ripples touching the bound, that even wobble is what tells you the design is equiripple optimal.",
       "tags": [
         "thiet-ke",
         "fir"
@@ -852,6 +880,7 @@
       "vi": "Bộ lọc Chebyshev loại một",
       "def_en": "A design that allows ripple in the passband and stays monotonic in the stopband, buying a steeper transition than Butterworth.",
       "def_vi": "Thiết kế cho phép gợn sóng ở dải thông và đơn điệu ở dải chặn, đổi lấy vùng chuyển tiếp dốc hơn Butterworth.",
+      "say": "Chebyshev type one buys a steeper skirt by letting the passband wobble, so check whether your application tolerates that.",
       "tags": [
         "iir",
         "thiet-ke"
@@ -863,6 +892,7 @@
       "vi": "Bộ lọc Chebyshev loại hai",
       "def_en": "A design with a flat passband and ripple confined to the stopband, useful when passband flatness matters more than stopband smoothness.",
       "def_vi": "Thiết kế có dải thông phẳng và gợn sóng chỉ nằm ở dải chặn, hợp khi độ phẳng dải thông quan trọng hơn độ mượt dải chặn.",
+      "say": "When passband flatness is sacred, go Chebyshev type two and push all the ripple into the stopband.",
       "tags": [
         "iir",
         "thiet-ke"
@@ -886,6 +916,7 @@
       "vi": "Gợn sóng dải thông",
       "def_en": "The allowed variation of gain across the band that is meant to be passed, usually specified in decibels peak to peak.",
       "def_vi": "Mức dao động độ lợi cho phép trên dải cần cho qua, thường ghi bằng đêxiben tính từ đỉnh tới đỉnh.",
+      "say": "Half a decibel of passband ripple sounds harmless until you cascade four of these filters in a row.",
       "tags": [
         "bo-loc",
         "chi-so"
@@ -921,6 +952,7 @@
       "vi": "Biến đổi song tuyến",
       "def_en": "A mapping from the analogue s plane to the z plane that preserves stability and maps the whole imaginary axis onto the unit circle.",
       "def_vi": "Phép ánh xạ từ mặt phẳng s tương tự sang mặt phẳng z, bảo toàn tính ổn định và đưa toàn bộ trục ảo lên đường tròn đơn vị.",
+      "say": "The bilinear transform keeps a stable analogue prototype stable, which is why we still start from analogue tables.",
       "tags": [
         "iir",
         "thiet-ke"
@@ -932,6 +964,7 @@
       "vi": "Cong tần số",
       "def_en": "The nonlinear compression of the frequency axis introduced by the bilinear transform, corrected by prewarping the critical frequencies.",
       "def_vi": "Sự nén phi tuyến của trục tần số do biến đổi song tuyến gây ra, khắc phục bằng cách làm cong trước các tần số then chốt.",
+      "say": "Your cutoff landed low because of frequency warping, so prewarp the critical frequencies and run the design again.",
       "tags": [
         "iir",
         "thiet-ke"
@@ -955,6 +988,7 @@
       "vi": "Lượng tử hoá hệ số",
       "def_en": "The error caused by storing filter coefficients in finite word length, which moves poles and can destabilise a direct form design.",
       "def_vi": "Sai số do lưu hệ số bộ lọc với độ dài từ hữu hạn, làm dịch điểm cực và có thể phá vỡ ổn định của thiết kế dạng trực tiếp.",
+      "say": "Coefficient quantisation moved the poles, which is why the direct form blew up and the cascade did not.",
       "tags": [
         "thuc-thi",
         "so-hoc"
@@ -966,6 +1000,7 @@
       "vi": "Chu trình giới hạn",
       "def_en": "A small self sustaining oscillation in a recursive filter caused by rounding inside the feedback loop, persisting even with zero input.",
       "def_vi": "Dao động nhỏ tự duy trì trong bộ lọc đệ quy do làm tròn bên trong vòng hồi tiếp, còn tồn tại ngay cả khi đầu vào bằng không.",
+      "say": "The filter hums quietly with no input at all, that is a limit cycle from rounding inside the loop.",
       "tags": [
         "iir",
         "so-hoc"
@@ -1000,6 +1035,7 @@
       "vi": "LMS chuẩn hoá",
       "def_en": "A variant that divides the step by the input power, so convergence no longer depends on the signal level.",
       "def_vi": "Biến thể chia bước cập nhật cho công suất đầu vào, nhờ đó tốc độ hội tụ không còn phụ thuộc mức tín hiệu.",
+      "say": "Switch to normalised LMS and you stop retuning the step every time the input level changes.",
       "tags": [
         "thich-nghi",
         "thuat-toan"
@@ -1023,6 +1059,7 @@
       "vi": "Độ lệch dư",
       "def_en": "The excess steady state error of an adaptive filter beyond the optimal solution, growing with the step size.",
       "def_vi": "Phần sai số dư ở trạng thái xác lập của bộ lọc thích nghi so với nghiệm tối ưu, tăng theo kích thước bước.",
+      "say": "You can have fast convergence or low misadjustment, and the step size is the knob that trades them.",
       "tags": [
         "thich-nghi",
         "chi-so"
@@ -1034,6 +1071,7 @@
       "vi": "Độ trải trị riêng",
       "def_en": "The ratio of largest to smallest eigenvalue of the input correlation matrix, the quantity that sets how slowly a gradient adaptive filter converges.",
       "def_vi": "Tỉ số giữa trị riêng lớn nhất và nhỏ nhất của ma trận tương quan đầu vào, đại lượng quyết định bộ lọc thích nghi kiểu gradient hội tụ chậm tới đâu.",
+      "say": "Before blaming the algorithm, measure the eigenvalue spread, because coloured input alone can make convergence look hopeless.",
       "tags": [
         "thich-nghi",
         "ly-thuyet"
@@ -1069,6 +1107,7 @@
       "vi": "Sai lệch đổi mới",
       "def_en": "The difference between the measurement and its prediction in a Kalman filter, white when the filter is correctly tuned.",
       "def_vi": "Hiệu giữa phép đo và giá trị dự báo trong bộ lọc Kalman, có tính trắng khi bộ lọc được chỉnh đúng.",
+      "say": "Plot the innovation sequence, and if it is not white your Kalman filter is badly tuned.",
       "tags": [
         "uoc-luong",
         "chan-doan"
@@ -1114,6 +1153,7 @@
       "vi": "Bộ lọc tích phân lược",
       "def_en": "A multiplier free decimation structure of cascaded integrators and combs, cheap in hardware but with noticeable passband droop.",
       "def_vi": "Cấu trúc giảm mẫu không cần bộ nhân, gồm các khâu tích phân và lược nối tầng, rẻ về phần cứng nhưng dải thông bị võng thấy rõ.",
+      "say": "A CIC filter costs no multipliers at all, so we pay for it later with a droop compensator.",
       "tags": [
         "da-toc-do",
         "thuc-thi"
@@ -1125,6 +1165,7 @@
       "vi": "Đổi tốc độ theo tỉ số hữu tỉ",
       "def_en": "Changing the rate by a factor L over M, done by upsampling first, then filtering once, then decimating.",
       "def_vi": "Đổi tốc độ theo tỉ số L trên M, thực hiện bằng cách tăng mẫu trước, lọc một lần, rồi giảm mẫu.",
+      "say": "For rational rate conversion, upsample first and decimate last, so one filter does both jobs.",
       "tags": [
         "da-toc-do"
       ]
@@ -1135,6 +1176,7 @@
       "vi": "Bộ lọc trễ phân số",
       "def_en": "A filter that shifts a sequence by a non integer number of samples, used for timing correction in receivers.",
       "def_vi": "Bộ lọc dịch một dãy đi số mẫu không nguyên, dùng để hiệu chỉnh thời điểm lấy mẫu trong máy thu.",
+      "say": "The receiver needs a fractional delay filter because the right sampling instant never lands on a sample.",
       "tags": [
         "da-toc-do",
         "dong-bo"
@@ -1158,6 +1200,7 @@
       "vi": "Bộ lọc gương vuông pha",
       "def_en": "A two channel filter pair designed so that the aliasing created by one branch cancels the aliasing of the other on reconstruction.",
       "def_vi": "Cặp bộ lọc hai kênh thiết kế sao cho chồng phổ do một nhánh sinh ra bị triệt bởi chồng phổ của nhánh kia khi ghép lại.",
+      "say": "In a quadrature mirror filter pair, one branch is designed so its aliasing cancels the aliasing of the other.",
       "tags": [
         "day-loc"
       ]
@@ -1168,6 +1211,7 @@
       "vi": "Khôi phục hoàn hảo",
       "def_en": "The property of an analysis and synthesis pair that returns the input exactly, apart from a delay and a constant scaling.",
       "def_vi": "Tính chất của cặp phân tích và tổng hợp cho lại đúng đầu vào, chỉ sai khác một độ trễ và một hệ số hằng.",
+      "say": "Perfect reconstruction means you get the input back apart from a delay and a scale, nothing more forgiving than that.",
       "tags": [
         "day-loc"
       ]
@@ -1190,6 +1234,7 @@
       "vi": "Phân tích đa phân giải",
       "def_en": "The framework in which a signal is described as a coarse approximation plus a series of detail layers at successively finer scales.",
       "def_vi": "Khung lý thuyết mô tả tín hiệu như một xấp xỉ thô cộng với chuỗi các lớp chi tiết ở thang ngày càng mịn.",
+      "say": "Multiresolution analysis lets you look at the coarse shape first and only fetch the detail layers you actually need.",
       "tags": [
         "wavelet"
       ]
@@ -1235,6 +1280,7 @@
       "vi": "Định lý Wiener Khinchin",
       "def_en": "The result that the power spectral density of a wide sense stationary process is the Fourier transform of its autocorrelation.",
       "def_vi": "Kết quả nói mật độ phổ công suất của quá trình dừng theo nghĩa rộng là biến đổi Fourier của hàm tự tương quan.",
+      "say": "By Wiener Khinchin we can go straight from the autocorrelation to the spectrum, so pick whichever side is cheaper.",
       "tags": [
         "ngau-nhien",
         "dinh-ly"
@@ -1246,6 +1292,7 @@
       "vi": "Dừng theo nghĩa rộng",
       "def_en": "A process whose mean is constant and whose autocorrelation depends only on the lag, not on absolute time.",
       "def_vi": "Quá trình có kỳ vọng không đổi và hàm tự tương quan chỉ phụ thuộc độ trễ, không phụ thuộc thời điểm tuyệt đối.",
+      "say": "Half the theory we are using assumes the process is wide sense stationary, and this channel plainly is not.",
       "tags": [
         "ngau-nhien"
       ]
@@ -1292,6 +1339,7 @@
       "vi": "Quá trình dừng chu kỳ",
       "def_en": "A process whose statistics vary periodically with time, a structure that modulated signals possess and that noise usually does not.",
       "def_vi": "Quá trình có thống kê biến thiên tuần hoàn theo thời gian, cấu trúc mà tín hiệu điều chế có còn nhiễu thường không có.",
+      "say": "A cyclostationary detector finds the signal under the noise floor because noise has no hidden period to exploit.",
       "tags": [
         "ngau-nhien",
         "vo-tuyen"
@@ -1314,6 +1362,7 @@
       "vi": "Ước lượng không chệch",
       "def_en": "An estimator whose expected value equals the true parameter, which says nothing on its own about how large its variance is.",
       "def_vi": "Ước lượng có kỳ vọng bằng đúng tham số thật, điều đó tự nó không nói gì về phương sai lớn hay nhỏ.",
+      "say": "Being an unbiased estimator is cheap comfort if the variance is so large that every run lands somewhere else.",
       "tags": [
         "uoc-luong"
       ]
@@ -1336,6 +1385,7 @@
       "vi": "Thông tin Fisher",
       "def_en": "A measure of how sharply the likelihood changes with the parameter, and therefore how much the data can say about it.",
       "def_vi": "Đại lượng đo hàm hợp lý thay đổi nhạy tới đâu theo tham số, tức dữ liệu nói được bao nhiêu về tham số đó.",
+      "say": "Compute the Fisher information before you promise accuracy, since it caps what any estimator can possibly deliver.",
       "tags": [
         "uoc-luong",
         "ly-thuyet"
@@ -1370,6 +1420,7 @@
       "vi": "Phép kiểm tỉ số hợp lý",
       "def_en": "Comparing the ratio of the two likelihoods against a threshold, the optimal form of detector for a simple binary decision.",
       "def_vi": "So tỉ số hai hàm hợp lý với một ngưỡng, dạng bộ phát hiện tối ưu cho bài toán quyết định nhị phân đơn giản.",
+      "say": "For a simple binary decision the likelihood ratio test is optimal, so anything fancier needs a reason.",
       "tags": [
         "phat-hien"
       ]
@@ -1380,6 +1431,7 @@
       "vi": "Đường cong hoạt động của bộ thu",
       "def_en": "A plot of detection probability against false alarm probability as the threshold sweeps, summarising a detector at every operating point.",
       "def_vi": "Đồ thị xác suất phát hiện theo xác suất báo động giả khi quét ngưỡng, tóm tắt bộ phát hiện ở mọi điểm làm việc.",
+      "say": "The ROC curve shows every operating point, so tell me which threshold we are actually shipping.",
       "tags": [
         "phat-hien",
         "chi-so"
@@ -1403,6 +1455,7 @@
       "vi": "Máy thu tương quan",
       "def_en": "A receiver that multiplies the input by each candidate waveform and integrates, mathematically equivalent to a bank of matched filters.",
       "def_vi": "Máy thu nhân đầu vào với từng dạng sóng ứng viên rồi tích phân, về mặt toán học tương đương một dãy bộ lọc phối hợp.",
+      "say": "A correlation receiver and a matched filter bank are the same maths, so build whichever one your hardware likes.",
       "tags": [
         "thu"
       ]
@@ -1413,6 +1466,7 @@
       "vi": "Bộ phát hiện hậu nghiệm cực đại",
       "def_en": "A detector that picks the hypothesis with the highest posterior probability, reducing to maximum likelihood when the priors are equal.",
       "def_vi": "Bộ phát hiện chọn giả thuyết có xác suất hậu nghiệm lớn nhất, quy về hợp lý cực đại khi các xác suất tiên nghiệm bằng nhau.",
+      "say": "Once the priors are equal, the MAP detector collapses to maximum likelihood and the extra machinery earns nothing.",
       "tags": [
         "phat-hien",
         "thu"
@@ -1436,6 +1490,7 @@
       "vi": "Cổng sớm muộn",
       "def_en": "A timing detector that compares correlations taken slightly before and slightly after the current sampling point and steers the difference to zero.",
       "def_vi": "Bộ dò thời điểm so sánh giá trị tương quan lấy hơi sớm và hơi muộn so với điểm lấy mẫu hiện tại, rồi đưa hiệu về không.",
+      "say": "The early late gate steers timing by comparing two correlations either side of the sample, driving the difference to zero.",
       "tags": [
         "dong-bo"
       ]
@@ -1482,6 +1537,7 @@
       "vi": "Trượt chu kỳ",
       "def_en": "A sudden jump of a tracking loop to a neighbouring stable phase, which corrupts the data until the loop is reacquired or differential coding hides it.",
       "def_vi": "Bước nhảy đột ngột của vòng bám sang một điểm pha ổn định kế bên, làm hỏng dữ liệu cho tới khi bám lại hoặc được mã vi sai che đi.",
+      "say": "We lost a whole burst to a cycle slip, so either fix the loop bandwidth or use differential coding.",
       "tags": [
         "dong-bo",
         "loi"
@@ -1505,6 +1561,7 @@
       "vi": "Thuật toán ESPRIT",
       "def_en": "A subspace method exploiting a shift invariant array or data structure to obtain frequencies in closed form without a search.",
       "def_vi": "Phương pháp không gian con khai thác tính bất biến dịch của mảng hoặc của dữ liệu để cho ra tần số ở dạng đóng, không cần dò quét.",
+      "say": "ESPRIT gives you the frequencies in closed form, which beats sweeping a search grid on an embedded processor.",
       "tags": [
         "pho",
         "mang-anten"
@@ -1516,6 +1573,7 @@
       "vi": "Không gian con tín hiệu",
       "def_en": "The span of the eigenvectors of the covariance matrix whose eigenvalues stand above the noise level, of dimension equal to the number of sources.",
       "def_vi": "Không gian sinh bởi các vectơ riêng của ma trận hiệp phương sai có trị riêng vượt lên trên mức nhiễu, số chiều bằng số nguồn.",
+      "say": "Count the eigenvalues standing above the noise floor and you have the dimension of the signal subspace.",
       "tags": [
         "pho",
         "ly-thuyet"
@@ -1538,6 +1596,7 @@
       "vi": "Vectơ lái",
       "def_en": "The vector of phase shifts across the array elements produced by a plane wave arriving from a given direction.",
       "def_vi": "Vectơ các lượng dịch pha trên các phần tử mảng do một sóng phẳng tới từ một hướng cho trước tạo ra.",
+      "say": "Get the steering vector wrong by a millimetre of element spacing and the whole direction estimate walks off.",
       "tags": [
         "mang-anten"
       ]
@@ -1572,6 +1631,7 @@
       "vi": "Cửa sổ không gian",
       "def_en": "A window applied across array elements to lower the side lobes of the beam pattern, widening the main beam in exchange.",
       "def_vi": "Cửa sổ áp lên các phần tử mảng để hạ búp phụ của giản đồ hướng, đổi lại búp chính rộng ra.",
+      "say": "Apply a spatial taper across the elements and the side lobes drop, though the main beam gets fatter.",
       "tags": [
         "mang-anten",
         "cua-so"
@@ -1583,6 +1643,7 @@
       "vi": "Bộ định dạng búp MVDR",
       "def_en": "A beamformer that minimises total output power while keeping unit gain towards the look direction, so it places nulls on interferers.",
       "def_vi": "Bộ định dạng búp cực tiểu hoá tổng công suất đầu ra trong khi giữ độ lợi đơn vị theo hướng nhìn, nhờ đó đặt điểm không lên nguồn gây nhiễu.",
+      "say": "The MVDR beamformer nulls the interferer by itself, provided you actually know the look direction.",
       "tags": [
         "mang-anten",
         "thich-nghi"
@@ -1617,6 +1678,7 @@
       "vi": "Dồn nén năng lượng",
       "def_en": "The tendency of a good transform to concentrate signal energy into a small number of coefficients, the reason compression works at all.",
       "def_vi": "Xu hướng của một phép biến đổi tốt là dồn năng lượng tín hiệu vào một số ít hệ số, chính là lý do nén hoạt động được.",
+      "say": "Compression works only because of energy compaction, so measure that before you argue about the entropy coder.",
       "tags": [
         "nen",
         "bien-doi"
@@ -1652,6 +1714,7 @@
       "vi": "Tính đẳng cự hạn chế",
       "def_en": "A condition on a measurement matrix that it nearly preserves the length of every sparse vector, which guarantees stable recovery.",
       "def_vi": "Điều kiện đặt lên ma trận đo, rằng nó gần như bảo toàn độ dài của mọi vectơ thưa, bảo đảm việc khôi phục ổn định.",
+      "say": "Nobody can check the restricted isometry property on a real matrix, which is why we lean on random constructions.",
       "tags": [
         "nen",
         "ly-thuyet"
@@ -1663,6 +1726,7 @@
       "vi": "Tín hiệu giải tích",
       "def_en": "A complex signal built from a real one by suppressing negative frequencies, giving direct access to envelope and instantaneous phase.",
       "def_vi": "Tín hiệu phức dựng từ tín hiệu thực bằng cách triệt các tần số âm, cho phép lấy trực tiếp đường bao và pha tức thời.",
+      "say": "Form the analytic signal and the envelope and instantaneous phase come out without any extra work.",
       "tags": [
         "bien-doi",
         "vo-tuyen"
@@ -1674,6 +1738,7 @@
       "vi": "Biến đổi Hilbert",
       "def_en": "An all pass operation that shifts every frequency component by ninety degrees, used to form the quadrature part of an analytic signal.",
       "def_vi": "Phép toán toàn thông dịch mọi thành phần tần số đi chín mươi độ, dùng để tạo phần vuông pha của tín hiệu giải tích.",
+      "say": "The Hilbert transform shifts every component by ninety degrees, and that is all it does, magnitudes stay put.",
       "tags": [
         "bien-doi"
       ]
@@ -1696,6 +1761,7 @@
       "vi": "Đêxiben",
       "def_en": "A logarithmic ratio unit, ten times the base ten logarithm for power and twenty times for amplitude.",
       "def_vi": "Đơn vị tỉ số theo thang lôgarit, mười lần lôgarit cơ số mười với công suất và hai mươi lần với biên độ.",
+      "say": "Somebody has doubled the decibel figure again, so check whether that number is power or amplitude.",
       "tags": [
         "chi-so",
         "co-ban"

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "database",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "db-relation",
@@ -18,6 +18,7 @@
       "vi": "Bộ, tức một dòng dữ liệu",
       "def_en": "One element of a relation, holding a single value for every attribute of that relation.",
       "def_vi": "Một phần tử của quan hệ, mang đúng một giá trị cho mỗi thuộc tính của quan hệ đó.",
+      "say": "Every tuple in that relation carries a value for each attribute, even when some of those values are null.",
       "tags": ["relational"]
     },
     {
@@ -26,6 +27,7 @@
       "vi": "Thuộc tính, tức một cột",
       "def_en": "A named component of a relation with a declared data type and an optional set of constraints.",
       "def_vi": "Thành phần có tên của quan hệ, được khai báo kiểu dữ liệu và có thể kèm ràng buộc.",
+      "say": "Adding an attribute is cheap today, but changing its declared type once the table is huge is another matter.",
       "tags": ["relational"]
     },
     {
@@ -34,6 +36,7 @@
       "vi": "Miền giá trị",
       "def_en": "The set of values an attribute is allowed to take, narrowed further by type and constraints.",
       "def_vi": "Tập giá trị mà một thuộc tính được phép nhận, thu hẹp thêm bởi kiểu dữ liệu và ràng buộc.",
+      "say": "Constrain the domain to the codes we actually issue, otherwise the column will collect typing mistakes for years.",
       "tags": ["relational"]
     },
     {
@@ -60,6 +63,7 @@
       "vi": "Khoá dự tuyển",
       "def_en": "Any minimal set of attributes that uniquely identifies a row, so removing any attribute breaks uniqueness.",
       "def_vi": "Tập thuộc tính tối thiểu định danh duy nhất một dòng, bỏ bớt thuộc tính nào cũng mất tính duy nhất.",
+      "say": "There are two candidate keys here, so pick one as primary and put a unique constraint on the other.",
       "tags": ["keys"]
     },
     {
@@ -86,6 +90,7 @@
       "vi": "Khoá tự nhiên",
       "def_en": "A key drawn from real world data such as a citizen number or a course code.",
       "def_vi": "Khoá lấy từ dữ liệu thực tế như số căn cước hay mã học phần.",
+      "say": "The natural key looks tempting until the ministry reissues those course codes and every foreign key has to follow.",
       "tags": ["keys"]
     },
     {
@@ -103,6 +108,7 @@
       "vi": "Phụ thuộc hàm",
       "def_en": "A rule saying that one set of attributes determines another, written X determines Y.",
       "def_vi": "Quy tắc nói rằng một tập thuộc tính xác định tập khác, viết là X xác định Y.",
+      "say": "The functional dependency we missed is that the postcode determines the district, which is exactly why this table smells.",
       "tags": ["normalization"]
     },
     {
@@ -111,6 +117,7 @@
       "vi": "Phụ thuộc bắc cầu",
       "def_en": "A non key attribute that depends on another non key attribute rather than on the key itself.",
       "def_vi": "Thuộc tính không khoá phụ thuộc vào một thuộc tính không khoá khác thay vì phụ thuộc vào chính khoá.",
+      "say": "Department name hangs off department code instead of the key, and that transitive dependency is what we should remove.",
       "tags": ["normalization"]
     },
     {
@@ -119,6 +126,7 @@
       "vi": "Phụ thuộc bộ phận",
       "def_en": "A non key attribute that depends on only part of a composite key instead of the whole key.",
       "def_vi": "Thuộc tính không khoá chỉ phụ thuộc vào một phần của khoá ghép chứ không vào toàn bộ khoá.",
+      "say": "The title depends only on the course half of the composite key, so this partial dependency has to go.",
       "tags": ["normalization"]
     },
     {
@@ -136,6 +144,7 @@
       "vi": "Dạng chuẩn hai",
       "def_en": "In first normal form and free of partial dependencies on a composite key.",
       "def_vi": "Đã ở dạng chuẩn một và không còn phụ thuộc bộ phận vào khoá ghép.",
+      "say": "We reach second normal form once nothing depends on merely part of that composite key.",
       "tags": ["normalization"]
     },
     {
@@ -153,6 +162,7 @@
       "vi": "Dạng chuẩn Boyce Codd",
       "def_en": "A stricter form where the left side of every non trivial functional dependency is a superkey.",
       "def_vi": "Dạng chặt hơn, trong đó vế trái của mọi phụ thuộc hàm không tầm thường đều là siêu khoá.",
+      "say": "Boyce Codd normal form is stricter, because the left side of every real dependency has to be a superkey.",
       "tags": ["normalization"]
     },
     {
@@ -170,6 +180,7 @@
       "vi": "Dị thường khi cập nhật",
       "def_en": "A fact stored in many rows so an update that misses one copy leaves the database contradicting itself.",
       "def_vi": "Một sự kiện lưu ở nhiều dòng, chỉ cần cập nhật sót một bản sao là cơ sở dữ liệu tự mâu thuẫn.",
+      "say": "We hit an update anomaly since the supervisor name sits in every row and somebody edited only half of them.",
       "tags": ["normalization"]
     },
     {
@@ -187,6 +198,7 @@
       "vi": "Quan hệ nhiều nhiều",
       "def_en": "Rows on both sides may reference many rows on the other side, which no single foreign key can express.",
       "def_vi": "Hai phía đều có thể tham chiếu nhiều dòng của phía kia, một khoá ngoại đơn lẻ không diễn tả nổi.",
+      "say": "Students and courses are many to many, so we need a junction table rather than a column on either side.",
       "tags": ["relational"]
     },
     {
@@ -222,6 +234,7 @@
       "vi": "Chặn xoá khi còn tham chiếu",
       "def_en": "A foreign key action that refuses to delete the parent while any child row still references it.",
       "def_vi": "Hành vi khoá ngoại từ chối xoá dòng cha khi vẫn còn dòng con tham chiếu tới nó.",
+      "say": "Leave the foreign key on delete restrict, so nobody can remove a class while enrolments still point at it.",
       "tags": ["constraints"]
     },
     {
@@ -230,6 +243,7 @@
       "vi": "Đặt rỗng khi cha bị xoá",
       "def_en": "A foreign key action that clears the reference in the child rows instead of deleting or blocking them.",
       "def_vi": "Hành vi khoá ngoại xoá trắng tham chiếu ở dòng con thay vì xoá dòng con hay chặn thao tác.",
+      "say": "On delete set null keeps the child rows alive, which is right when the link is optional rather than essential.",
       "tags": ["constraints"]
     },
     {
@@ -256,6 +270,7 @@
       "vi": "Ràng buộc duy nhất",
       "def_en": "A rule that no two rows may share the same value in the listed columns, backed by an index.",
       "def_vi": "Quy tắc không cho hai dòng trùng giá trị ở các cột đã liệt kê, được hỗ trợ bằng chỉ mục.",
+      "say": "Put a unique constraint on the email column now, before support starts merging duplicate accounts by hand every week.",
       "tags": ["constraints"]
     },
     {
@@ -264,6 +279,7 @@
       "vi": "Ràng buộc không rỗng",
       "def_en": "A declaration that a column must always carry a value, so absence becomes impossible rather than merely unlikely.",
       "def_vi": "Khai báo buộc cột luôn phải có giá trị, khiến chuyện thiếu dữ liệu là bất khả thi chứ không chỉ hiếm gặp.",
+      "say": "Make the column not null with a sensible default, so absence becomes impossible instead of merely unlikely.",
       "tags": ["constraints"]
     },
     {
@@ -290,6 +306,7 @@
       "vi": "Phép so sánh coi rỗng là một giá trị",
       "def_en": "A comparison that treats null as a comparable value, so two nulls count as equal and never yield unknown.",
       "def_vi": "Phép so sánh coi rỗng như một giá trị so được, hai giá trị rỗng được xem là bằng nhau và không trả về chưa biết.",
+      "say": "Use is distinct from in that comparison, otherwise the rows where both sides are null quietly disappear.",
       "tags": ["sql"]
     },
     {
@@ -298,6 +315,7 @@
       "vi": "Sơ đồ thực thể quan hệ",
       "def_en": "A picture of entities, their attributes and the cardinality of the links between them.",
       "def_vi": "Hình vẽ các thực thể, thuộc tính của chúng và số lượng liên kết giữa chúng.",
+      "say": "Bring the entity relationship diagram to the meeting, because arguing about cardinality in plain words never ends well.",
       "tags": ["relational"]
     },
     {
@@ -306,6 +324,7 @@
       "vi": "Phép nối trong",
       "def_en": "Returns only the pairs of rows that satisfy the join condition on both sides.",
       "def_vi": "Chỉ trả về các cặp dòng thoả điều kiện nối ở cả hai phía.",
+      "say": "An inner join silently drops the students who have no enrolment yet, which is how the report lost them.",
       "tags": ["joins"]
     },
     {
@@ -323,6 +342,7 @@
       "vi": "Phép nối ngoài phải",
       "def_en": "Keeps every row of the right table, the mirror image of a left join and usually rewritten as one.",
       "def_vi": "Giữ mọi dòng của bảng phải, là ảnh gương của nối trái và thường được viết lại thành nối trái.",
+      "say": "Nobody reads a right outer join comfortably, so flip the tables and write the whole thing as a left join.",
       "tags": ["joins"]
     },
     {
@@ -340,6 +360,7 @@
       "vi": "Phép nối tích Descartes",
       "def_en": "Pairs every row of one table with every row of the other, producing the product of both row counts.",
       "def_vi": "Ghép mọi dòng của bảng này với mọi dòng của bảng kia, cho ra tích số dòng của cả hai.",
+      "say": "The missing join condition turned it into a cross join, and the result set exploded across the entire afternoon.",
       "tags": ["joins"]
     },
     {
@@ -357,6 +378,7 @@
       "vi": "Nối phủ định",
       "def_en": "Returns rows of the left table that have no match on the right, typically written with not exists.",
       "def_vi": "Trả về các dòng bảng trái không có dòng nào khớp ở bảng phải, thường viết bằng mệnh đề not exists.",
+      "say": "Write it as an anti join with not exists, since what we want is the classes nobody enrolled in.",
       "tags": ["joins"]
     },
     {
@@ -374,6 +396,7 @@
       "vi": "Nối ngang theo từng dòng",
       "def_en": "A join whose right side may reference columns of the left row, useful for taking the top few per group.",
       "def_vi": "Phép nối cho phép vế phải tham chiếu cột của dòng bên trái, tiện khi lấy vài bản ghi đầu của mỗi nhóm.",
+      "say": "A lateral join gives us the latest attempts per student, because its right side can see the outer row.",
       "tags": ["joins"]
     },
     {
@@ -391,6 +414,7 @@
       "vi": "Gộp nhóm",
       "def_en": "Collapses rows sharing the grouping expressions into one output row per group.",
       "def_vi": "Gom các dòng có cùng biểu thức nhóm thành một dòng kết quả cho mỗi nhóm.",
+      "say": "Every column outside an aggregate has to appear in the group by, and the planner will remind you loudly.",
       "tags": ["sql"]
     },
     {
@@ -408,6 +432,7 @@
       "vi": "Hàm tổng hợp gặp giá trị rỗng",
       "def_en": "Aggregates skip nulls, so an average over a column with missing values divides by fewer rows than expected.",
       "def_vi": "Hàm tổng hợp bỏ qua giá trị rỗng, nên trung bình trên cột thiếu dữ liệu chia cho ít dòng hơn ta tưởng.",
+      "say": "The average looked far too high because aggregates skip nulls, so it divided by fewer rows than we assumed.",
       "tags": ["sql"]
     },
     {
@@ -434,6 +459,7 @@
       "vi": "Chia khung cho hàm cửa sổ",
       "def_en": "Splits the rows into independent windows so the function restarts for each group.",
       "def_vi": "Chia các dòng thành những khung độc lập để hàm cửa sổ tính lại từ đầu ở mỗi nhóm.",
+      "say": "Add a partition by clause so the running total restarts for each faculty instead of flowing across all of them.",
       "tags": ["sql"]
     },
     {
@@ -442,6 +468,7 @@
       "vi": "Đánh số và xếp hạng trong cửa sổ",
       "def_en": "Row number always gives distinct positions while rank repeats a position for ties and then skips.",
       "def_vi": "Row number luôn cho vị trí khác nhau, còn rank lặp vị trí khi bằng điểm rồi nhảy cách.",
+      "say": "Row number gives every row a distinct position while rank repeats a position for ties and then skips ahead.",
       "tags": ["sql"]
     },
     {
@@ -486,6 +513,7 @@
       "vi": "Phép hiệu và phép giao tập",
       "def_en": "Set operators returning rows present in the first query only, or present in both.",
       "def_vi": "Toán tử tập hợp trả về dòng chỉ có ở truy vấn đầu, hoặc dòng có mặt ở cả hai.",
+      "say": "Run the two queries with except to see which student codes exist in the old system and not in ours.",
       "tags": ["sql"]
     },
     {
@@ -503,6 +531,7 @@
       "vi": "Phân trang bằng bước nhảy",
       "def_en": "Skipping rows with an offset, which still reads and discards everything before the requested page.",
       "def_vi": "Bỏ qua các dòng bằng offset, nhưng vẫn phải đọc rồi vứt bỏ toàn bộ phần trước trang cần lấy.",
+      "say": "Offset pagination gets slower the deeper you go, since the engine still reads and discards everything before that page.",
       "tags": ["perf"]
     },
     {
@@ -538,6 +567,7 @@
       "vi": "Khung nhìn",
       "def_en": "A stored query that behaves like a table and is executed fresh every time it is referenced.",
       "def_vi": "Truy vấn được lưu lại, dùng như một bảng và được chạy lại mỗi lần được tham chiếu.",
+      "say": "Wrap the query in a view so the reporting team stops copying those same joins into every dashboard.",
       "tags": ["sql"]
     },
     {
@@ -555,6 +585,7 @@
       "vi": "Cột sinh tự động",
       "def_en": "A column whose value is computed from other columns by the engine rather than supplied by the client.",
       "def_vi": "Cột có giá trị do hệ thống tính từ các cột khác thay vì do ứng dụng gửi lên.",
+      "say": "Let a generated column hold the full name, so nobody can forget to update it in one of the writers.",
       "tags": ["sql"]
     },
     {
@@ -572,6 +603,7 @@
       "vi": "Chỉ mục băm",
       "def_en": "An index that supports equality only, since hashing destroys the ordering of the key.",
       "def_vi": "Chỉ mục chỉ hỗ trợ so bằng, vì phép băm phá bỏ thứ tự của khoá.",
+      "say": "A hash index answers equality and nothing else, so any range filter on that column will ignore it completely.",
       "tags": ["index"]
     },
     {
@@ -607,6 +639,7 @@
       "vi": "Chỉ mục phủ",
       "def_en": "An index carrying every column the query needs, so the engine never has to fetch the table row.",
       "def_vi": "Chỉ mục chứa đủ mọi cột mà truy vấn cần, nhờ đó hệ thống không phải đọc thêm dòng trong bảng.",
+      "say": "Make it a covering index carrying the two extra columns, and the engine never has to touch the table.",
       "tags": ["index"]
     },
     {
@@ -615,6 +648,7 @@
       "vi": "Quét chỉ trong chỉ mục",
       "def_en": "A plan that answers entirely from the index, in Postgres only when the visibility map says the pages are clean.",
       "def_vi": "Kế hoạch trả lời hoàn toàn từ chỉ mục, trong Postgres chỉ xảy ra khi bản đồ khả kiến cho biết trang đã sạch.",
+      "say": "We only get an index only scan when the visibility map says those pages are clean, so vacuum matters here.",
       "tags": ["perf"]
     },
     {
@@ -623,6 +657,7 @@
       "vi": "Chỉ mục ngược cho giá trị nhiều thành phần",
       "def_en": "An inverted index for values containing many items, such as text search vectors, arrays and JSON documents.",
       "def_vi": "Chỉ mục ngược cho các giá trị chứa nhiều thành phần như vector tìm kiếm, mảng và tài liệu JSON.",
+      "say": "Put a GIN index on the tags array, because an inverted index is what searching inside values really needs.",
       "tags": ["index"]
     },
     {
@@ -658,6 +693,7 @@
       "vi": "Quét theo chỉ mục",
       "def_en": "Walking the index to find matching keys, then fetching each row from the heap.",
       "def_vi": "Đi trong chỉ mục để tìm khoá khớp rồi lấy từng dòng tương ứng ở vùng dữ liệu.",
+      "say": "The plan shows an index scan, so it walks the index and then fetches each matching row from the heap.",
       "tags": ["perf"]
     },
     {
@@ -666,6 +702,7 @@
       "vi": "Quét theo bản đồ bit",
       "def_en": "Collecting matching row locations into a bitmap first, then reading the heap pages in physical order.",
       "def_vi": "Gom vị trí các dòng khớp vào một bản đồ bit trước, rồi đọc các trang dữ liệu theo thứ tự vật lý.",
+      "say": "A bitmap heap scan gathers the row locations first, then reads pages in physical order rather than jumping about.",
       "tags": ["perf"]
     },
     {
@@ -674,6 +711,7 @@
       "vi": "Nối lồng vòng lặp",
       "def_en": "For each row of the outer side, probe the inner side, excellent for few outer rows and disastrous for many.",
       "def_vi": "Với mỗi dòng bên ngoài lại dò bên trong, rất tốt khi ít dòng ngoài và thảm hoạ khi nhiều dòng ngoài.",
+      "say": "A nested loop join is fine while the outer side stays tiny, and it turns disastrous the moment that side grows.",
       "tags": ["perf"]
     },
     {
@@ -682,6 +720,7 @@
       "vi": "Nối bằng bảng băm",
       "def_en": "Builds a hash table on the smaller input then probes it once per row of the larger input.",
       "def_vi": "Dựng bảng băm từ đầu vào nhỏ rồi dò một lần cho mỗi dòng của đầu vào lớn.",
+      "say": "The planner chose a hash join, building on the smaller input and probing it once for every larger row.",
       "tags": ["perf"]
     },
     {
@@ -690,6 +729,7 @@
       "vi": "Nối trộn hai dòng đã sắp",
       "def_en": "Joins two inputs already sorted on the join key by walking both in step.",
       "def_vi": "Nối hai đầu vào đã sắp theo khoá nối bằng cách đi song song trên cả hai.",
+      "say": "A merge join is cheap here because both inputs already arrive sorted on the join key.",
       "tags": ["perf"]
     },
     {
@@ -716,6 +756,7 @@
       "vi": "Điều kiện dùng được chỉ mục",
       "def_en": "A condition written so the engine can seek in an index, with the column left bare on one side.",
       "def_vi": "Điều kiện viết sao cho hệ thống tìm được trong chỉ mục, với cột đứng trần ở một vế.",
+      "say": "Keep the predicate sargable by leaving the column bare, since wrapping it in a function hides the index from the planner.",
       "tags": ["perf"]
     },
     {
@@ -742,6 +783,7 @@
       "vi": "Bảng phồng do bản cũ",
       "def_en": "Dead row versions still occupying pages after updates and deletes, making scans read more than they need.",
       "def_vi": "Các phiên bản dòng đã chết vẫn chiếm chỗ trong trang sau khi cập nhật và xoá, khiến việc quét đọc thừa.",
+      "say": "Table bloat explains why the scan reads so many pages, as dead row versions still sit there after the deletes.",
       "tags": ["ops"]
     },
     {
@@ -759,6 +801,7 @@
       "vi": "Giao dịch",
       "def_en": "A group of statements that either all take effect or none do, seen by others as a single step.",
       "def_vi": "Nhóm câu lệnh hoặc có hiệu lực toàn bộ hoặc không câu nào, người khác nhìn vào chỉ thấy một bước.",
+      "say": "Wrap both statements in one transaction, so the money never leaves one account without arriving in the other.",
       "tags": ["txn"]
     },
     {
@@ -767,6 +810,7 @@
       "vi": "Tính nguyên tử",
       "def_en": "The all or nothing property, so a failure halfway leaves no partial change behind.",
       "def_vi": "Tính chất hoặc tất cả hoặc không gì, hỏng giữa chừng thì không để lại thay đổi dở dang.",
+      "say": "Atomicity is what saves us when the process dies halfway, because no partial change survives the failure.",
       "tags": ["txn"]
     },
     {
@@ -775,6 +819,7 @@
       "vi": "Tính nhất quán",
       "def_en": "Every committed transaction moves the database from one state that satisfies all constraints to another.",
       "def_vi": "Mỗi giao dịch đã xác nhận đưa cơ sở dữ liệu từ một trạng thái thoả mọi ràng buộc sang trạng thái cũng thoả.",
+      "say": "Consistency only means each committed transaction leaves every constraint satisfied, not that the data is somehow true.",
       "tags": ["txn"]
     },
     {
@@ -783,6 +828,7 @@
       "vi": "Tính cô lập",
       "def_en": "How much concurrent transactions are allowed to see of each other, chosen per level rather than absolute.",
       "def_vi": "Mức độ các giao dịch chạy song song được phép nhìn thấy nhau, chọn theo từng mức chứ không tuyệt đối.",
+      "say": "Isolation is a dial rather than a switch, so decide per workload how much transactions may see of each other.",
       "tags": ["txn"]
     },
     {
@@ -791,6 +837,7 @@
       "vi": "Tính bền vững",
       "def_en": "Once a commit is acknowledged the change survives a crash, which is what the write ahead log guarantees.",
       "def_vi": "Khi đã báo xác nhận thì thay đổi sống sót qua sự cố, đó chính là điều nhật ký ghi trước bảo đảm.",
+      "say": "Once a commit is acknowledged, durability is the write ahead log promising that the change survives the next crash.",
       "tags": ["txn"]
     },
     {
@@ -808,6 +855,7 @@
       "vi": "Mức đọc chưa xác nhận",
       "def_en": "The weakest level in the standard, allowing dirty reads, although Postgres treats it as read committed.",
       "def_vi": "Mức yếu nhất trong chuẩn, cho phép đọc bẩn, tuy nhiên Postgres coi mức này như đọc đã xác nhận.",
+      "say": "Asking for read uncommitted in Postgres changes nothing, since the engine quietly hands you read committed anyway.",
       "tags": ["isolation"]
     },
     {
@@ -825,6 +873,7 @@
       "vi": "Mức đọc lặp lại được",
       "def_en": "All statements share one snapshot from the transaction start, so repeated reads agree with each other.",
       "def_vi": "Mọi câu lệnh dùng chung một ảnh chụp lấy từ lúc mở giao dịch, nên các lần đọc lặp lại đều khớp nhau.",
+      "say": "Under repeatable read every statement shares one snapshot, so the long report cannot shift underneath us halfway through.",
       "tags": ["isolation"]
     },
     {
@@ -842,6 +891,7 @@
       "vi": "Đọc bẩn",
       "def_en": "Reading a value written by a transaction that has not committed and may still roll back.",
       "def_vi": "Đọc phải giá trị do một giao dịch chưa xác nhận ghi ra và có thể còn bị huỷ.",
+      "say": "A dirty read hands you a value that may still roll back, which is rarely a trade worth making.",
       "tags": ["isolation"]
     },
     {
@@ -850,6 +900,7 @@
       "vi": "Đọc không lặp lại",
       "def_en": "Reading the same row twice in one transaction and getting different values because someone committed in between.",
       "def_vi": "Đọc cùng một dòng hai lần trong một giao dịch mà ra giá trị khác, vì có người xác nhận thay đổi ở giữa.",
+      "say": "The same row gave two different values inside one transaction, and that non repeatable read is why the totals disagreed.",
       "tags": ["isolation"]
     },
     {
@@ -858,6 +909,7 @@
       "vi": "Đọc ảo",
       "def_en": "Re running the same range query and finding new rows that another transaction inserted and committed.",
       "def_vi": "Chạy lại đúng truy vấn khoảng đó và thấy thêm dòng mới do giao dịch khác chèn vào rồi xác nhận.",
+      "say": "A phantom read shows up when we run the range query again and new committed rows have appeared inside it.",
       "tags": ["isolation"]
     },
     {
@@ -893,6 +945,7 @@
       "vi": "Khoá mức dòng",
       "def_en": "An exclusive hold on specific rows taken by an update or an explicit select for update.",
       "def_vi": "Quyền giữ độc quyền trên những dòng cụ thể, do lệnh cập nhật hoặc lệnh select for update tạo ra.",
+      "say": "Take a row level lock with select for update, so two clerks cannot hand out the same seat.",
       "tags": ["txn"]
     },
     {
@@ -937,6 +990,7 @@
       "vi": "Điểm lưu trong giao dịch",
       "def_en": "A marker inside a transaction allowing a partial rollback without discarding everything done so far.",
       "def_vi": "Mốc đánh dấu bên trong giao dịch, cho phép quay lui một phần mà không bỏ hết những gì đã làm.",
+      "say": "Set a savepoint before the risky step, then roll back to it without throwing away the whole transaction.",
       "tags": ["txn"]
     },
     {
@@ -954,6 +1008,7 @@
       "vi": "Bản chính và bản sao",
       "def_en": "One node accepts writes and ships its log to followers that serve reads.",
       "def_vi": "Một nút nhận ghi và chuyển nhật ký sang các nút theo sau để phục vụ đọc.",
+      "say": "Writes go to the primary while the replica serves heavy reads, which keeps reporting load away from the users.",
       "tags": ["replication"]
     },
     {
@@ -980,6 +1035,7 @@
       "vi": "Nhân rộng đồng bộ",
       "def_en": "The primary waits for a replica to confirm the log before acknowledging the commit, trading latency for safety.",
       "def_vi": "Bản chính chờ bản sao xác nhận đã nhận nhật ký rồi mới báo xác nhận, đánh đổi độ trễ lấy an toàn.",
+      "say": "Synchronous replication buys safety at the price of latency, since the primary waits for a replica before acknowledging anything.",
       "tags": ["replication"]
     },
     {
@@ -988,6 +1044,7 @@
       "vi": "Chuyển vai khi sự cố",
       "def_en": "Promoting a replica to primary after a failure, which can lose recent commits if replication was asynchronous.",
       "def_vi": "Nâng một bản sao lên làm bản chính sau sự cố, có thể mất các xác nhận gần nhất nếu nhân rộng là bất đồng bộ.",
+      "say": "If failover happens while replication is asynchronous, we lose whatever commits had not yet reached the replica.",
       "tags": ["replication"]
     },
     {
@@ -1005,6 +1062,7 @@
       "vi": "Khoá phân mảnh",
       "def_en": "The column deciding which shard a row lives on, hard to change later and easy to choose badly.",
       "def_vi": "Cột quyết định dòng nằm ở mảnh nào, rất khó đổi về sau và rất dễ chọn sai.",
+      "say": "Choose the shard key carefully, because changing it later means moving every single row in the system.",
       "tags": ["scaling"]
     },
     {
@@ -1013,6 +1071,7 @@
       "vi": "Mảnh quá tải",
       "def_en": "One shard taking a disproportionate share of traffic because the key distributes the load unevenly.",
       "def_vi": "Một mảnh gánh phần lưu lượng lớn bất thường vì khoá phân mảnh chia tải không đều.",
+      "say": "One hot shard is taking most of the traffic, so the key is clearly not spreading load evenly.",
       "tags": ["scaling"]
     },
     {
@@ -1030,6 +1089,7 @@
       "vi": "Cắt bớt vùng không cần đọc",
       "def_en": "The planner skipping partitions that cannot contain matching rows, which only works if the key is in the filter.",
       "def_vi": "Bộ lập kế hoạch bỏ qua các vùng chắc chắn không chứa dòng khớp, chỉ hiệu quả khi khoá chia vùng nằm trong điều kiện lọc.",
+      "say": "Partition pruning only helps when the partition key appears in the filter, so keep that date predicate on the bare column.",
       "tags": ["scaling"]
     },
     {
@@ -1047,6 +1107,7 @@
       "vi": "Di trú lược đồ",
       "def_en": "A versioned, ordered script that changes the schema, kept in the repository next to the code it serves.",
       "def_vi": "Kịch bản có đánh phiên bản và thứ tự để đổi lược đồ, lưu trong kho mã nguồn cạnh phần mã mà nó phục vụ.",
+      "say": "Every schema migration lives in the repository beside the code, ordered and versioned so each environment reaches the same state.",
       "tags": ["ops"]
     },
     {
@@ -1073,6 +1134,7 @@
       "vi": "Nạp bù dữ liệu cũ",
       "def_en": "Filling a new column for existing rows in batches, so one huge update does not lock the table for minutes.",
       "def_vi": "Điền dữ liệu cho cột mới trên các dòng cũ theo từng lô, để một lệnh cập nhật khổng lồ không khoá bảng hàng phút.",
+      "say": "Backfill the new column in batches overnight, because one enormous update would hold the table for several minutes.",
       "tags": ["ops"]
     },
     {
@@ -1090,6 +1152,7 @@
       "vi": "Tạo chỉ mục không khoá ghi",
       "def_en": "Building an index without blocking writes, at the cost of two table passes and a possible invalid index on failure.",
       "def_vi": "Dựng chỉ mục mà không chặn ghi, đổi lại phải quét bảng hai lượt và có thể để lại chỉ mục hỏng nếu thất bại.",
+      "say": "Build it with create index concurrently on production, then check afterwards that the index did not end up invalid.",
       "tags": ["ops"]
     },
     {
@@ -1116,6 +1179,7 @@
       "vi": "Mốc mất dữ liệu và thời gian khôi phục",
       "def_en": "How much data you can afford to lose and how long you can afford to be down, two separate targets.",
       "def_vi": "Bạn chịu được mất bao nhiêu dữ liệu và chịu được ngừng bao lâu, đó là hai mục tiêu tách biệt.",
+      "say": "Recovery point and recovery time are separate promises, so agree how much data we may lose and how long we may be down.",
       "tags": ["backup"]
     },
     {
@@ -1124,6 +1188,7 @@
       "vi": "Diễn tập khôi phục",
       "def_en": "Periodically restoring a backup into a scratch environment and checking the row counts and a few known records.",
       "def_vi": "Định kỳ khôi phục bản sao vào môi trường tạm rồi kiểm số dòng và vài bản ghi đã biết trước.",
+      "say": "Run a restore drill this quarter, because a backup nobody has ever restored is only a rumour of a backup.",
       "tags": ["backup"]
     },
     {
@@ -1141,6 +1206,7 @@
       "vi": "Dữ liệu cá nhân",
       "def_en": "Information identifying a living person, which brings retention limits and deletion duties into the schema design.",
       "def_vi": "Thông tin định danh một người còn sống, kéo theo giới hạn lưu trữ và nghĩa vụ xoá phải tính ngay khi thiết kế lược đồ.",
+      "say": "Once the table holds personal data, retention limits and deletion duties become part of the schema design itself.",
       "tags": ["ops"]
     },
     {
@@ -1158,6 +1224,7 @@
       "vi": "Bảng nhật ký kiểm toán",
       "def_en": "An append only record of who changed what and when, written by triggers or by the application layer.",
       "def_vi": "Bản ghi chỉ thêm, lưu ai đã đổi gì và vào lúc nào, viết bằng trigger hoặc bằng tầng ứng dụng.",
+      "say": "Write every change into an audit log table, so we can always answer who touched that record and when.",
       "tags": ["ops"]
     },
     {
@@ -1166,6 +1233,7 @@
       "vi": "Kho tài liệu",
       "def_en": "A database keeping self contained documents, good when the whole object is read together and rarely joined.",
       "def_vi": "Cơ sở dữ liệu lưu các tài liệu khép kín, hợp khi cả đối tượng luôn được đọc cùng lúc và hiếm khi phải nối.",
+      "say": "A document store fits when the whole object is read together, and it starts hurting the moment we need joins.",
       "tags": ["nosql"]
     },
     {
@@ -1174,6 +1242,7 @@
       "vi": "Kho khoá giá trị",
       "def_en": "A store offering lookup by key only, extremely fast and unable to answer any question you did not key for.",
       "def_vi": "Kho chỉ cho tra theo khoá, cực nhanh và không trả lời nổi bất kỳ câu hỏi nào bạn chưa đánh khoá sẵn.",
+      "say": "A key value store answers by key at enormous speed, and cannot answer any question you did not key for.",
       "tags": ["nosql"]
     },
     {
@@ -1182,6 +1251,7 @@
       "vi": "Cơ sở dữ liệu chuỗi thời gian",
       "def_en": "A store tuned for append heavy timestamped measurements, with downsampling and retention built in.",
       "def_vi": "Kho tối ưu cho phép ghi thêm liên tục các số đo có mốc thời gian, có sẵn hạ mẫu và chính sách lưu giữ.",
+      "say": "Push the sensor readings into a time series database, which already knows about downsampling and retention windows.",
       "tags": ["nosql"]
     },
     {
@@ -1217,6 +1287,7 @@
       "vi": "Nhất quán cuối cùng",
       "def_en": "Replicas converge given enough quiet time, so a read right after a write may return the older value.",
       "def_vi": "Các bản sao rồi sẽ hội tụ nếu có đủ thời gian yên tĩnh, nên đọc ngay sau khi ghi có thể ra giá trị cũ.",
+      "say": "Under eventual consistency a read straight after a write may still show the older value, so the interface must expect that.",
       "tags": ["nosql"]
     },
     {
@@ -1225,6 +1296,7 @@
       "vi": "Trích xuất, biến đổi rồi nạp",
       "def_en": "Cleaning and reshaping data before it lands in the warehouse, so only the modelled form is stored.",
       "def_vi": "Làm sạch và định hình lại dữ liệu trước khi đưa vào kho, nên chỉ dạng đã mô hình hoá được lưu lại.",
+      "say": "The extract transform load job cleans and reshapes everything beforehand, so the warehouse stores only the modelled form.",
       "tags": ["dataeng"]
     },
     {
@@ -1242,6 +1314,7 @@
       "vi": "Kho dữ liệu phân tích",
       "def_en": "A separate analytical store modelled for reporting, so heavy queries never touch the operational database.",
       "def_vi": "Kho phân tích riêng, mô hình hoá cho báo cáo, để những truy vấn nặng không đụng tới cơ sở dữ liệu vận hành.",
+      "say": "Move the heavy reporting into the data warehouse, so analysts stop competing with the enrolment system for resources.",
       "tags": ["dataeng"]
     },
     {
@@ -1250,6 +1323,7 @@
       "vi": "Lược đồ hình sao",
       "def_en": "One central fact table referencing several denormalized dimension tables, optimised for readable analytics.",
       "def_vi": "Một bảng sự kiện trung tâm tham chiếu vài bảng chiều đã phi chuẩn hoá, tối ưu cho phân tích dễ đọc.",
+      "say": "In the star schema the fact table sits in the middle and every dimension hangs directly off it.",
       "tags": ["dataeng"]
     },
     {
@@ -1267,6 +1341,7 @@
       "vi": "Bảng chiều",
       "def_en": "The descriptive table you slice facts by, holding attributes such as programme, faculty and term.",
       "def_vi": "Bảng mô tả dùng để cắt lát dữ liệu sự kiện, chứa các thuộc tính như chương trình, khoa và học kỳ.",
+      "say": "Slice the facts by the dimension table, which holds programme, faculty and term as readable attributes.",
       "tags": ["dataeng"]
     },
     {
@@ -1284,6 +1359,7 @@
       "vi": "Bắt thay đổi dữ liệu",
       "def_en": "Streaming inserts, updates and deletes out of the log so downstream systems follow without polling.",
       "def_vi": "Đẩy các thao tác chèn, cập nhật, xoá ra từ nhật ký để hệ thống phía sau theo kịp mà không phải hỏi liên tục.",
+      "say": "Change data capture streams inserts and updates out of the log, so downstream systems follow along without polling.",
       "tags": ["dataeng"]
     },
     {
@@ -1301,6 +1377,7 @@
       "vi": "Khử bản ghi trùng",
       "def_en": "Collapsing rows that represent the same thing, which needs a survivorship rule saying which value wins.",
       "def_vi": "Gộp các dòng cùng chỉ một đối tượng, việc này cần quy tắc chọn giá trị nào được giữ lại.",
+      "say": "Before any deduplication we need a survivorship rule, otherwise nobody can say which of the conflicting values wins.",
       "tags": ["dataeng"]
     },
     {
@@ -1327,6 +1404,7 @@
       "vi": "Chữ hỏng do sai bảng mã",
       "def_en": "Garbled text produced by decoding bytes with the wrong encoding, sometimes recoverable by re decoding correctly.",
       "def_vi": "Văn bản hỏng do giải mã byte bằng bảng mã sai, đôi khi cứu được bằng cách giải mã lại cho đúng.",
+      "say": "Those question marks are mojibake from decoding the bytes with the wrong encoding, and re decoding may still rescue them.",
       "tags": ["dataeng"]
     },
     {

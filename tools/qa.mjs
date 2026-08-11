@@ -168,6 +168,65 @@ for (const quiz of manifest.quizzes || []) {
   if (maxRank > 40) fail.push(`${quiz.id}: đáp án dồn về một hạng độ dài, ${maxRank} phần trăm, đoán theo độ dài là ăn điểm`);
   if (pct(ties, n) > 25) warn.push(`${quiz.id}: ${pct(ties, n)} phần trăm số câu có hai lựa chọn dài bằng nhau, phép đo hạng kém tin cậy`);
 
+  /* ---------- May doan ngu ----------
+     Hai thuoc tren do VI TRI va HANG DO DAI. Ca hai deu la thuoc THU TU, nen
+     chung mu truoc moi kenh ro ri khac. Da xay ra that: bo 6g-security tung co
+     vi tri 25/24/26/25 va hang 25/25/25/25, dep tren ca hai, trong khi 28 phan
+     tram dap an dung chua lien tu phu con phuong an sai chi 5 phan tram. Nguoi
+     hoc chi can nho meo "chon phuong an co neu ly do" la an 39 phan tram.
+
+     Cach do dung dan la thu DOAN bang nhung meo be mat roi xem an bao nhieu.
+     Doan mo la 25 phan tram; chien luoc nao an hon han muc do la cau hoi con
+     doan duoc ma khong can hieu gi. */
+
+  if (qs.length >= 40) {
+    const words = (s) => String(s || '').toLowerCase().match(/[\p{L}\p{N}]+/gu) || [];
+    const CONJ = /\b(?:because|so that|which|when|while|unless|whereas|since|even if|rather than)\b/gi;
+    // Cham theo KY VONG chu khong lay o dau tien trong nhom hoa. Bo cum tu co
+    // toi mot phan ba so cau ma hai lua chon dai bang nhau; lay o dau tien la
+    // gan cho meo mot loi the ma nguoi hoc that khong co, vi ho phai bốc giua
+    // may phuong an bang diem. Da kiem: o kho nay hai cach cho ket qua gan nhu
+    // nhau, nen ro ri la that chu khong phai do cach pha hoa.
+    const diem = {
+      'chọn dài nhất': (q) => q.choices.map((c) => String(c).length),
+      'chọn ngắn nhất': (q) => q.choices.map((c) => -String(c).length),
+      'chọn câu lặp đề nhiều nhất': (q) => {
+        const d = new Set(words(q.q));
+        return q.choices.map((c) => words(c).filter((w) => d.has(w)).length);
+      },
+      'chọn câu nêu lý do': (q) => q.choices.map((c) => (String(c).match(CONJ) || []).length)
+    };
+    for (const [ten, cham] of Object.entries(diem)) {
+      let dung = 0;
+      for (const q of qs) {
+        const v = cham(q);
+        const cao = Math.max(...v);
+        const nhom = v.filter((x) => x === cao).length;
+        if (v[q.answer] === cao) dung += 1 / nhom;
+      }
+      const an = pct(dung, qs.length);
+      if (an >= 38) fail.push(`${quiz.id}: mẹo bề mặt "${ten}" ăn ${an} phần trăm, đoán mò chỉ 25, câu hỏi đoán được mà không cần hiểu`);
+      else if (an >= 33) warn.push(`${quiz.id}: mẹo bề mặt "${ten}" ăn ${an} phần trăm, hơi cao so với mức 25 của đoán mò`);
+    }
+
+    // Do them ty le CO liên tu giua dap an dung va phuong an sai. Meo o tren chi
+    // bat duoc khi ro ri du manh de thang ca ba phuong an kia; ty le nay bat som hon.
+    let dungCo = 0, saiCo = 0, saiTong = 0;
+    for (const q of qs) {
+      q.choices.forEach((c, i) => {
+        const co = new RegExp(CONJ.source, 'i').test(String(c));
+        if (i === q.answer) { if (co) dungCo += 1; }
+        else { saiTong += 1; if (co) saiCo += 1; }
+      });
+    }
+    const chenh = pct(dungCo, qs.length) - pct(saiCo, saiTong);
+    if (chenh >= 15) {
+      fail.push(`${quiz.id}: ${pct(dungCo, qs.length)} phần trăm đáp án đúng có liên từ phụ nhưng phương án sai chỉ ${pct(saiCo, saiTong)}, đáp án đúng là câu duy nhất chịu nêu lý do`);
+    } else if (chenh >= 10) {
+      warn.push(`${quiz.id}: đáp án đúng nêu lý do nhiều hơn phương án sai ${chenh} điểm phần trăm`);
+    }
+  }
+
   qRows.push({ id: quiz.deck, n: qs.length, pos: posPct.join('/'), rank: rankPct.join('/'), maxPos, maxRank });
 }
 

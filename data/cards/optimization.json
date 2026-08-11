@@ -18,6 +18,7 @@
       "vi": "Ràng buộc",
       "def_en": "A condition every admissible solution must satisfy.",
       "def_vi": "Điều kiện mà mọi nghiệm chấp nhận được đều phải thoả.",
+      "say": "Write the power budget as a hard constraint, otherwise the solver will hand you a design nobody can build.",
       "tags": ["basic"]
     },
     {
@@ -35,6 +36,7 @@
       "vi": "Tối ưu lồi",
       "def_en": "A problem with a convex objective over a convex set, where any local minimum is global.",
       "def_vi": "Bài toán có hàm mục tiêu lồi trên tập lồi, mọi cực tiểu địa phương đều là toàn cục.",
+      "say": "Once we cast it as a convex optimisation the local solution is global, so the seed stops mattering.",
       "tags": ["class"]
     },
     {
@@ -43,6 +45,7 @@
       "vi": "Bài toán không lồi",
       "def_en": "A problem with several local optima, so the starting point and the solver both matter.",
       "def_vi": "Bài toán có nhiều cực trị địa phương, nên cả điểm xuất phát lẫn bộ giải đều quan trọng.",
+      "say": "This is a non convex problem, so report the seed and the initialisation or the result cannot be reproduced.",
       "tags": ["class"]
     },
     {
@@ -51,6 +54,7 @@
       "vi": "Quy hoạch tuyến tính",
       "def_en": "Optimising a linear objective subject to linear constraints, solvable in polynomial time.",
       "def_vi": "Tối ưu hàm mục tiêu tuyến tính với ràng buộc tuyến tính, giải được trong thời gian đa thức.",
+      "say": "Start with a linear programming version to get a bound, then add integrality only where it truly matters.",
       "tags": ["class"]
     },
     {
@@ -68,6 +72,7 @@
       "vi": "Nới lỏng ràng buộc",
       "def_en": "Dropping or softening a constraint to get an easier problem whose optimum bounds the original.",
       "def_vi": "Bỏ hoặc làm nhẹ một ràng buộc để có bài toán dễ hơn, nghiệm của nó chặn nghiệm bài gốc.",
+      "say": "The relaxation gives us a bound worth quoting, though the rounded solution still has to be checked for feasibility.",
       "tags": ["technique"]
     },
     {
@@ -76,6 +81,7 @@
       "vi": "Đối ngẫu",
       "def_en": "Every optimisation problem has a dual whose value bounds the primal, with the gap closing under convexity.",
       "def_vi": "Mỗi bài toán tối ưu có bài đối ngẫu, giá trị của nó chặn bài gốc, và khoảng cách khép lại khi bài toán lồi.",
+      "say": "Use duality to certify the answer, because a bound from the dual convinces reviewers far better than a plot.",
       "tags": ["theory"]
     },
     {
@@ -84,6 +90,7 @@
       "vi": "Nhân tử Lagrange",
       "def_en": "A price attached to a constraint, turning a constrained problem into an unconstrained one.",
       "def_vi": "Giá gán cho một ràng buộc, biến bài toán có ràng buộc thành bài toán không ràng buộc.",
+      "say": "Read the Lagrangian multiplier as a price, and suddenly the whole allocation policy becomes easy to explain upstairs.",
       "tags": ["technique"]
     },
     {
@@ -92,6 +99,7 @@
       "vi": "Điều kiện KKT",
       "def_en": "The first order conditions a constrained optimum must satisfy, generalising the zero gradient rule.",
       "def_vi": "Các điều kiện bậc nhất mà nghiệm tối ưu có ràng buộc phải thoả, tổng quát hoá quy tắc gradient bằng không.",
+      "say": "Check the KKT conditions at the reported point before claiming optimality, since the solver may have stalled early.",
       "tags": ["theory"]
     },
     {
@@ -109,6 +117,7 @@
       "vi": "Phép quy dẫn",
       "def_en": "Transforming one problem into another in polynomial time, which is how hardness proofs are built.",
       "def_vi": "Biến bài toán này thành bài toán kia trong thời gian đa thức, cách dựng nên các chứng minh độ khó.",
+      "say": "Our hardness argument is a reduction from a known hard problem, so please read that mapping very carefully.",
       "tags": ["complexity"]
     },
     {
@@ -117,6 +126,7 @@
       "vi": "Độ phức tạp tính toán",
       "def_en": "How the running time or memory grows with the size of the input.",
       "def_vi": "Cách thời gian chạy hoặc bộ nhớ tăng theo kích thước đầu vào.",
+      "say": "What is the computational complexity in the number of users, because the demo only had a handful of them.",
       "tags": ["complexity"]
     },
     {
@@ -125,6 +135,7 @@
       "vi": "Thuật giải kinh nghiệm",
       "def_en": "A rule that finds a good solution quickly with no guarantee of optimality.",
       "def_vi": "Quy tắc tìm nhanh một nghiệm tốt, không bảo đảm tối ưu.",
+      "say": "A heuristic is fine for the product, provided the paper never pretends it carries an optimality guarantee.",
       "tags": ["method"]
     },
     {
@@ -133,6 +144,7 @@
       "vi": "Siêu thuật giải",
       "def_en": "A general search strategy such as a genetic algorithm or particle swarm, applied on top of a problem specific evaluation.",
       "def_vi": "Chiến lược tìm kiếm tổng quát như giải thuật di truyền hay bầy hạt, đặt trên một hàm đánh giá riêng của bài toán.",
+      "say": "Any metaheuristic will beat a badly tuned baseline, so match the evaluation budget before you compare them.",
       "tags": ["method"]
     },
     {
@@ -141,6 +153,7 @@
       "vi": "Giải thuật di truyền",
       "def_en": "A population search using selection, crossover and mutation to improve candidate solutions.",
       "def_vi": "Tìm kiếm theo quần thể, dùng chọn lọc, lai ghép và đột biến để cải thiện các nghiệm ứng viên.",
+      "say": "The genetic algorithm converged far too early because the mutation rate was tiny for a landscape this rugged.",
       "tags": ["method"]
     },
     {
@@ -149,6 +162,7 @@
       "vi": "Tối ưu bầy hạt",
       "def_en": "A population method where each candidate moves according to its own best and the swarm's best.",
       "def_vi": "Phương pháp quần thể, mỗi ứng viên di chuyển theo điểm tốt nhất của nó và của cả bầy.",
+      "say": "Particle swarm optimisation looked superb until we discovered the initialiser alone explained most of the reported gain.",
       "tags": ["method"]
     },
     {
@@ -166,6 +180,7 @@
       "vi": "Sự hội tụ",
       "def_en": "The iterates settling towards a fixed point, with a rate that says how fast.",
       "def_vi": "Dãy lặp tiến dần về một điểm cố định, kèm tốc độ cho biết nhanh chậm.",
+      "say": "Show the convergence curve on a logarithmic axis, since a flat tail on a linear axis hides everything.",
       "tags": ["analysis"]
     },
     {
@@ -183,6 +198,7 @@
       "vi": "Lý thuyết hàng đợi",
       "def_en": "The mathematics of waiting lines, relating arrival rate, service rate and delay.",
       "def_vi": "Toán học về hàng chờ, liên hệ tốc độ đến, tốc độ phục vụ và độ trễ.",
+      "say": "Queueing theory tells us the delay explodes near full utilisation, so plan the capacity well below that point.",
       "tags": ["stochastic"]
     },
     {
@@ -191,6 +207,7 @@
       "vi": "Định luật Little",
       "def_en": "In steady state the average number in a system equals arrival rate times average time in system.",
       "def_vi": "Ở trạng thái dừng, số phần tử trung bình trong hệ bằng tốc độ đến nhân thời gian trung bình trong hệ.",
+      "say": "Apply Little's law as a sanity check, because measured backlog, arrival rate and delay must agree with each other.",
       "tags": ["stochastic"]
     },
     {
@@ -199,6 +216,7 @@
       "vi": "Quá trình quyết định Markov",
       "def_en": "A model of sequential decisions where the next state depends only on the current state and action.",
       "def_vi": "Mô hình ra quyết định tuần tự, trạng thái kế tiếp chỉ phụ thuộc trạng thái và hành động hiện tại.",
+      "say": "Model it as a Markov decision process only if the state really carries everything the policy will need.",
       "tags": ["stochastic"]
     },
     {
@@ -225,6 +243,7 @@
       "vi": "Ý nghĩa thống kê",
       "def_en": "Evidence that an observed difference is unlikely to come from chance alone.",
       "def_vi": "Bằng chứng cho thấy khác biệt quan sát được khó có thể chỉ do ngẫu nhiên.",
+      "say": "Statistical significance on a huge sample can still describe a difference nobody would ever notice in the field.",
       "tags": ["statistics"]
     },
     {
@@ -251,6 +270,7 @@
       "vi": "Phân tích độ nhạy",
       "def_en": "Varying each assumption to see how much the conclusion depends on it.",
       "def_vi": "Thay đổi từng giả định để xem kết luận phụ thuộc vào nó nhiều tới mức nào.",
+      "say": "Run a sensitivity analysis over the arrival rate, otherwise reviewers assume the conclusion rests on one lucky setting.",
       "tags": ["analysis"]
     },
     {
@@ -259,6 +279,7 @@
       "vi": "Chặn trên",
       "def_en": "A value the quantity provably cannot exceed, useful for judging how far a heuristic is from optimal.",
       "def_vi": "Giá trị mà đại lượng chắc chắn không vượt qua, dùng để ước lượng thuật giải cách tối ưu bao xa.",
+      "say": "Give me an upper bound on the achievable gain, so we know whether further tuning is worth the effort.",
       "tags": ["analysis"]
     },
     {
@@ -276,6 +297,7 @@
       "vi": "Hàm lồi",
       "def_en": "A function whose graph never rises above the chord joining two points, equivalently one that lies above every tangent.",
       "def_vi": "Hàm có đồ thị không bao giờ nằm trên dây cung nối hai điểm, tương đương với việc nằm trên mọi tiếp tuyến.",
+      "say": "Since the objective is a convex function every tangent lies below it, which is what makes those cuts valid.",
       "tags": ["convex"]
     },
     {
@@ -311,6 +333,7 @@
       "vi": "Hàm liên hợp",
       "def_en": "The transform taking the supremum of a linear form minus the function, always convex even when the original is not.",
       "def_vi": "Phép biến đổi lấy cận trên của dạng tuyến tính trừ đi hàm, luôn lồi ngay cả khi hàm gốc không lồi.",
+      "say": "The Fenchel conjugate turns that awkward penalty into something the proximal step can handle in closed form.",
       "tags": ["convex", "theory"]
     },
     {
@@ -319,6 +342,7 @@
       "vi": "Quả cầu chuẩn",
       "def_en": "The set of points whose norm is at most a given radius, a convex set for every valid norm.",
       "def_vi": "Tập các điểm có chuẩn không vượt quá một bán kính cho trước, là tập lồi với mọi chuẩn hợp lệ.",
+      "say": "Constrain the perturbation to a norm ball, then the worst case inner problem stays convex and quite tractable.",
       "tags": ["convex"]
     },
     {
@@ -336,6 +360,7 @@
       "vi": "Tính lồi mạnh",
       "def_en": "Convexity with a quadratic margin, which forces a unique minimiser and gives gradient methods a linear rate.",
       "def_vi": "Tính lồi kèm một biên bậc hai, buộc nghiệm cực tiểu là duy nhất và cho phương pháp gradient tốc độ tuyến tính.",
+      "say": "Strong convexity is what buys us the linear rate, so do not claim it without the quadratic margin.",
       "tags": ["convex", "analysis"]
     },
     {
@@ -353,6 +378,7 @@
       "vi": "Quy hoạch bậc hai",
       "def_en": "Optimising a quadratic objective under linear constraints, convex exactly when the quadratic matrix is positive semidefinite.",
       "def_vi": "Tối ưu hàm mục tiêu bậc hai với ràng buộc tuyến tính, lồi đúng khi ma trận bậc hai nửa xác định dương.",
+      "say": "The scheduling model reduces to quadratic programming, and it stays convex while that matrix is positive semidefinite.",
       "tags": ["class"]
     },
     {
@@ -370,6 +396,7 @@
       "vi": "Quy hoạch nửa xác định",
       "def_en": "Optimising a linear objective over matrix variables constrained to be positive semidefinite.",
       "def_vi": "Tối ưu hàm tuyến tính trên biến ma trận bị ràng buộc nửa xác định dương.",
+      "say": "Semidefinite programming solves the small instances beautifully and then falls over the moment the matrix dimension grows.",
       "tags": ["class"]
     },
     {
@@ -387,6 +414,7 @@
       "vi": "Quy hoạch hình học",
       "def_en": "A class of posynomial problems that becomes convex after taking logarithms of both the variables and the objective.",
       "def_vi": "Lớp bài toán posynomial trở thành lồi sau khi lấy logarit của cả biến lẫn hàm mục tiêu.",
+      "say": "Take logarithms and the power control model becomes geometric programming, which the standard solver handles without complaint.",
       "tags": ["class"]
     },
     {
@@ -413,6 +441,7 @@
       "vi": "Quy hoạch ngẫu nhiên",
       "def_en": "Optimisation where part of the data is random, often written as a first stage decision plus a recourse taken after the uncertainty is revealed.",
       "def_vi": "Tối ưu với một phần dữ liệu ngẫu nhiên, thường viết thành quyết định giai đoạn đầu cộng hành động điều chỉnh sau khi biết bất định.",
+      "say": "Stochastic programming fits here because we decide the deployment first and only later learn what the demand became.",
       "tags": ["class", "stochastic"]
     },
     {
@@ -430,6 +459,7 @@
       "vi": "Tối ưu bền vững",
       "def_en": "Optimising against the worst case over an uncertainty set instead of against a single nominal value.",
       "def_vi": "Tối ưu theo trường hợp xấu nhất trên một tập bất định thay vì theo một giá trị danh định duy nhất.",
+      "say": "Robust optimisation protects against the worst case in the set, so define that set honestly rather than conveniently.",
       "tags": ["class"]
     },
     {
@@ -456,6 +486,7 @@
       "vi": "Phương pháp đơn hình",
       "def_en": "An algorithm that walks from vertex to vertex of the feasible polyhedron, fast in practice yet exponential in the worst case.",
       "def_vi": "Thuật toán đi từ đỉnh này sang đỉnh khác của khối đa diện khả thi, nhanh trong thực tế nhưng mũ ở trường hợp xấu nhất.",
+      "say": "The simplex method walks the vertices and usually finishes fast, whatever the worst case theory keeps warning about.",
       "tags": ["algorithm"]
     },
     {
@@ -473,6 +504,7 @@
       "vi": "Phương pháp gradient chiếu",
       "def_en": "Taking a gradient step and then projecting back onto the feasible set, practical only when that projection is cheap.",
       "def_vi": "Đi một bước gradient rồi chiếu ngược về tập khả thi, chỉ thực dụng khi phép chiếu đó rẻ.",
+      "say": "Use the projected gradient method only where projecting onto the feasible set costs less than solving the whole thing.",
       "tags": ["algorithm"]
     },
     {
@@ -490,6 +522,7 @@
       "vi": "Phương pháp ADMM",
       "def_en": "Splitting a problem into blocks solved in turn and coupled by a multiplier update, useful when each block alone is easy.",
       "def_vi": "Tách bài toán thành các khối giải luân phiên, nối với nhau qua bước cập nhật nhân tử, hữu ích khi mỗi khối riêng lẻ đều dễ.",
+      "say": "The alternating direction method of multipliers suits us because each block is easy once the other is frozen.",
       "tags": ["algorithm"]
     },
     {
@@ -498,6 +531,7 @@
       "vi": "Phân rã Benders",
       "def_en": "Moving the complicating variables into a master problem and feeding it cuts generated by the subproblem.",
       "def_vi": "Đưa các biến gây khó vào bài toán chủ rồi nạp cho nó những lát cắt sinh ra từ bài toán con.",
+      "say": "Benders decomposition pushes the nasty coupling variables upstairs and lets the subproblem send cuts back down.",
       "tags": ["algorithm"]
     },
     {
@@ -515,6 +549,7 @@
       "vi": "Nhánh cận",
       "def_en": "Exhaustive search that prunes a subtree as soon as its bound cannot beat the incumbent solution.",
       "def_vi": "Tìm kiếm vét cạn có cắt tỉa, bỏ một nhánh ngay khi chặn của nó không thể thắng nghiệm hiện có.",
+      "say": "Branch and bound prunes the moment a bound loses to the incumbent, so a good first solution pays for itself.",
       "tags": ["algorithm"]
     },
     {
@@ -532,6 +567,7 @@
       "vi": "Nhánh cắt",
       "def_en": "Branch and bound strengthened by generating cutting planes at the nodes of the search tree.",
       "def_vi": "Nhánh cận được tăng cường bằng cách sinh mặt cắt ngay tại các nút của cây tìm kiếm.",
+      "say": "Branch and cut kept the tree small because the cuts tightened every node before the search went any deeper.",
       "tags": ["algorithm"]
     },
     {
@@ -549,6 +585,7 @@
       "vi": "Xấp xỉ lồi trong",
       "def_en": "Optimising over a convex subset of the true feasible set, so every iterate stays feasible for the original problem.",
       "def_vi": "Tối ưu trên một tập con lồi của tập khả thi thật, nhờ đó mọi bước lặp đều khả thi với bài toán gốc.",
+      "say": "With inner convex approximation each iterate stays feasible, which matters when we must stop the solver at any moment.",
       "tags": ["technique"]
     },
     {
@@ -566,6 +603,7 @@
       "vi": "Lớp P",
       "def_en": "Decision problems that a deterministic algorithm can solve in polynomial time.",
       "def_vi": "Các bài toán quyết định mà thuật toán tất định giải được trong thời gian đa thức.",
+      "say": "Anything in class P is comfortable here, so the argument only becomes interesting once we leave that territory.",
       "tags": ["complexity"]
     },
     {
@@ -574,6 +612,7 @@
       "vi": "Lớp NP",
       "def_en": "Decision problems whose yes instances carry a certificate that can be checked in polynomial time.",
       "def_vi": "Các bài toán quyết định mà mọi trường hợp trả lời có đều mang theo chứng chỉ kiểm được trong thời gian đa thức.",
+      "say": "Membership in class NP just means the answer can be checked quickly, not that it can be found quickly.",
       "tags": ["complexity"]
     },
     {
@@ -582,6 +621,7 @@
       "vi": "NP đầy đủ",
       "def_en": "Problems that are both in NP and NP-hard, the hardest problems sitting inside NP.",
       "def_vi": "Bài toán vừa thuộc NP vừa khó NP, tức là khó nhất trong số các bài toán nằm trong NP.",
+      "say": "Calling the allocation NP complete requires membership as well as hardness, so please show both halves of that proof.",
       "tags": ["complexity"]
     },
     {
@@ -590,6 +630,7 @@
       "vi": "Đồng NP",
       "def_en": "Problems whose no instances carry a short verifiable certificate, the complement class of NP.",
       "def_vi": "Bài toán mà mọi trường hợp trả lời không đều mang chứng chỉ ngắn kiểm được, lớp bù của NP.",
+      "say": "The complement question sits in co NP, which is why nobody has produced a short certificate for the negative case.",
       "tags": ["complexity"]
     },
     {
@@ -607,6 +648,7 @@
       "vi": "Tính không xấp xỉ được",
       "def_en": "A proof that no polynomial algorithm can reach a stated ratio unless P equals NP.",
       "def_vi": "Chứng minh rằng không thuật toán đa thức nào đạt được một tỉ số đã nêu, trừ khi P bằng NP.",
+      "say": "An inapproximability result closes the door on tuning, so stop promising a ratio the theory has already forbidden.",
       "tags": ["complexity"]
     },
     {
@@ -615,6 +657,7 @@
       "vi": "Thuật toán ngẫu nhiên",
       "def_en": "An algorithm that uses random choices, either always correct with random running time or fast with a bounded error probability.",
       "def_vi": "Thuật toán dùng lựa chọn ngẫu nhiên, hoặc luôn đúng với thời gian chạy ngẫu nhiên, hoặc chạy nhanh với xác suất sai bị chặn.",
+      "say": "A randomised algorithm is acceptable provided you report the failure probability alongside the running time.",
       "tags": ["complexity", "method"]
     },
     {
@@ -641,6 +684,7 @@
       "vi": "Cân bằng Nash",
       "def_en": "A profile of strategies in which no player gains by deviating alone.",
       "def_vi": "Bộ chiến lược mà không người chơi nào có lợi khi một mình đổi ý.",
+      "say": "At the Nash equilibrium nobody gains by moving alone, which is exactly why the outcome can stay collectively awful.",
       "tags": ["game"]
     },
     {
@@ -658,6 +702,7 @@
       "vi": "Đấu giá",
       "def_en": "A mechanism that allocates goods from submitted bids, with rules that shape how honestly bidders behave.",
       "def_vi": "Cơ chế phân bổ hàng hoá dựa trên giá đặt, luật chơi định hình mức trung thực của người đặt giá.",
+      "say": "Design the auction so that bidding honestly is the easiest strategy, otherwise the reported valuations mean nothing.",
       "tags": ["game"]
     },
     {
@@ -675,6 +720,7 @@
       "vi": "Giá của sự vô chính phủ",
       "def_en": "The ratio between the social cost of the worst equilibrium and the cost of the centrally optimal outcome.",
       "def_vi": "Tỉ số giữa chi phí xã hội của cân bằng tệ nhất và chi phí của phương án tối ưu tập trung.",
+      "say": "Quote the price of anarchy, so the board understands what decentralisation costs against a centrally planned outcome.",
       "tags": ["game"]
     },
     {
@@ -683,6 +729,7 @@
       "vi": "Xích Markov",
       "def_en": "A random process in which the next state depends only on the present state.",
       "def_vi": "Quá trình ngẫu nhiên mà trạng thái kế tiếp chỉ phụ thuộc trạng thái hiện tại.",
+      "say": "Model the buffer as a Markov chain first, because the memoryless assumption is either defensible or it is not.",
       "tags": ["stochastic"]
     },
     {
@@ -691,6 +738,7 @@
       "vi": "Phân bố dừng",
       "def_en": "A distribution left unchanged by one step of the chain, reached from any start when the chain is irreducible and aperiodic.",
       "def_vi": "Phân bố không đổi sau một bước của xích, đạt được từ mọi điểm xuất phát khi xích tối giản và không tuần hoàn.",
+      "say": "The stationary distribution exists here since the chain is irreducible and aperiodic, so long run averages remain meaningful.",
       "tags": ["stochastic"]
     },
     {
@@ -708,6 +756,7 @@
       "vi": "Tính chất PASTA",
       "def_en": "Poisson arrivals see time averages, so an arriving customer observes the stationary state of the system.",
       "def_vi": "Khách đến theo Poisson nhìn thấy trung bình theo thời gian, nên quan sát đúng trạng thái dừng của hệ.",
+      "say": "By the PASTA property a Poisson arrival sees the time average, which saves us a separate observer analysis.",
       "tags": ["stochastic"]
     },
     {
@@ -743,6 +792,7 @@
       "vi": "Cường độ tải",
       "def_en": "The offered load divided by the total service capacity, which must stay below one for stability.",
       "def_vi": "Tải đưa vào chia cho tổng năng lực phục vụ, phải nhỏ hơn một thì hệ mới ổn định.",
+      "say": "Keep traffic intensity comfortably below one, because the queue length grows without bound as you approach that edge.",
       "tags": ["stochastic"]
     },
     {
@@ -760,6 +810,7 @@
       "vi": "Lý thuyết đổi mới",
       "def_en": "The study of processes that restart statistically at each event, giving long run rates as a ratio of expectations.",
       "def_vi": "Nghiên cứu các quá trình khởi động lại về mặt thống kê tại mỗi sự kiện, cho tốc độ dài hạn dưới dạng tỉ số của các kỳ vọng.",
+      "say": "Renewal theory gives the long run rate as a ratio of expectations, which beats simulating the whole thing.",
       "tags": ["stochastic"]
     },
     {
@@ -768,6 +819,7 @@
       "vi": "Mô phỏng sự kiện rời rạc",
       "def_en": "Advancing a simulated clock from one event to the next instead of in fixed time steps.",
       "def_vi": "Đẩy đồng hồ mô phỏng nhảy từ sự kiện này sang sự kiện kế tiếp thay vì theo bước thời gian cố định.",
+      "say": "Discrete event simulation jumps from event to event, so a fixed time step model will never match its resolution.",
       "tags": ["stochastic", "method"]
     },
     {
@@ -785,6 +837,7 @@
       "vi": "Giả thuyết không",
       "def_en": "The default claim of no effect that a statistical test tries to reject.",
       "def_vi": "Khẳng định mặc định rằng không có hiệu ứng, thứ mà phép kiểm định tìm cách bác bỏ.",
+      "say": "State the null hypothesis before the run, because choosing it afterwards turns the whole test into pure decoration.",
       "tags": ["statistics"]
     },
     {
@@ -811,6 +864,7 @@
       "vi": "Cỡ hiệu ứng",
       "def_en": "How large a difference is in practical units, reported independently of the sample size.",
       "def_vi": "Độ lớn của khác biệt tính theo đơn vị thực tế, báo cáo độc lập với cỡ mẫu.",
+      "say": "Report the effect size in milliseconds as well, since a significant result can still be operationally irrelevant.",
       "tags": ["statistics"]
     },
     {
@@ -837,6 +891,7 @@
       "vi": "Phương pháp bootstrap",
       "def_en": "Estimating uncertainty by resampling the observed data with replacement many times.",
       "def_vi": "Ước lượng độ bất định bằng cách lấy mẫu lại có hoàn lại từ dữ liệu quan sát rất nhiều lần.",
+      "say": "Bootstrap the interval when the distribution looks ugly, and say clearly how many resamples you actually drew.",
       "tags": ["statistics"]
     },
     {
@@ -845,6 +900,7 @@
       "vi": "Khoảng dự báo",
       "def_en": "A range for a single future observation, always wider than a confidence interval for the mean.",
       "def_vi": "Khoảng dành cho một quan sát tương lai đơn lẻ, luôn rộng hơn khoảng tin cậy của giá trị trung bình.",
+      "say": "A prediction interval covers one future run, so do not hand the customer a confidence interval instead.",
       "tags": ["statistics"]
     },
     {
@@ -871,6 +927,7 @@
       "vi": "Tiền đăng ký",
       "def_en": "Fixing the hypotheses, metrics and analysis plan before seeing any result.",
       "def_vi": "Chốt giả thuyết, chỉ số và kế hoạch phân tích trước khi nhìn thấy bất kỳ kết quả nào.",
+      "say": "Preregistration of the metrics would have saved this study, because the outcome was chosen after the plots appeared.",
       "tags": ["statistics"]
     },
     {
@@ -879,6 +936,7 @@
       "vi": "Đối ngẫu yếu",
       "def_en": "The dual optimal value always bounds the primal one, whether or not the problem is convex.",
       "def_vi": "Giá trị tối ưu của bài đối ngẫu luôn chặn giá trị của bài gốc, bất kể bài toán có lồi hay không.",
+      "say": "Weak duality holds without any convexity, so that bound is safe even on this thoroughly nasty problem.",
       "tags": ["theory"]
     },
     {
@@ -887,6 +945,7 @@
       "vi": "Điều kiện Slater",
       "def_en": "The existence of a strictly feasible point in a convex problem, which is enough to guarantee a zero duality gap.",
       "def_vi": "Sự tồn tại một điểm khả thi chặt trong bài toán lồi, đủ để bảo đảm khe đối ngẫu bằng không.",
+      "say": "Slater's condition holds because we can exhibit a strictly feasible point, therefore the duality gap simply vanishes.",
       "tags": ["theory"]
     },
     {
@@ -904,6 +963,7 @@
       "vi": "Bù trừ lỏng chặt",
       "def_en": "At an optimum, each inequality constraint is either active or carries a zero multiplier.",
       "def_vi": "Tại nghiệm tối ưu, mỗi ràng buộc bất đẳng thức hoặc đang hoạt động, hoặc mang nhân tử bằng không.",
+      "say": "Complementary slackness tells us which constraints actually bind, and that is usually the most useful output of a run.",
       "tags": ["theory"]
     },
     {
@@ -921,6 +981,7 @@
       "vi": "Bao McCormick",
       "def_en": "The tightest linear relaxation of a bilinear term over a box, a bound rather than an exact reformulation.",
       "def_vi": "Nới lỏng tuyến tính chặt nhất của một số hạng song tuyến trên một hộp, là chặn chứ không phải cách viết lại tương đương.",
+      "say": "The McCormick envelope bounds the bilinear term, so treat the answer as a relaxation and never as an equivalent.",
       "tags": ["technique"]
     },
     {
@@ -974,6 +1035,7 @@
       "vi": "Khả thi đối ngẫu",
       "def_en": "The requirement that multipliers on inequality constraints stay nonnegative, which is exactly what makes the dual function a valid bound.",
       "def_vi": "Yêu cầu nhân tử của các ràng buộc bất đẳng thức phải không âm, chính điều đó khiến hàm đối ngẫu là một chặn hợp lệ.",
+      "say": "Dual feasibility requires nonnegative multipliers, and a negative one in your output means the solver did not converge.",
       "tags": ["theory"]
     },
     {
@@ -991,6 +1053,7 @@
       "vi": "Điểm yên ngựa của hàm Lagrange",
       "def_en": "A pair minimising the Lagrangian over the primal variable and maximising it over the multiplier, which exists exactly when the duality gap is zero.",
       "def_vi": "Cặp điểm cực tiểu hàm Lagrange theo biến gốc và cực đại theo nhân tử, tồn tại đúng khi khe đối ngẫu bằng không.",
+      "say": "A saddle point of the Lagrangian exists precisely when the gap vanishes, so look for one before assuming strong duality.",
       "tags": ["theory"]
     },
     {
@@ -1035,6 +1098,7 @@
       "vi": "Khe nguyên",
       "def_en": "The worst case ratio between the integer optimum and its relaxation value, which caps how good any rounding built on that relaxation can be.",
       "def_vi": "Tỉ số xấu nhất giữa nghiệm nguyên tối ưu và giá trị bài nới lỏng, nó chặn luôn mức tốt nhất mà mọi cách làm tròn dựa trên bài nới lỏng đó đạt được.",
+      "say": "The integrality gap caps every rounding scheme built on that relaxation, so a cleverer rounding will not rescue you.",
       "tags": ["complexity", "technique"]
     },
     {
@@ -1052,6 +1116,7 @@
       "vi": "Bao lồi của hàm",
       "def_en": "The largest convex function lying below a given function on a set, the tightest convex underestimator any relaxation can use.",
       "def_vi": "Hàm lồi lớn nhất nằm dưới một hàm cho trước trên một tập, tức là cận dưới lồi chặt nhất mà mọi bài nới lỏng có thể dùng.",
+      "say": "The convex envelope is the tightest underestimator available, so nothing convex will ever bound the function more sharply.",
       "tags": ["convex", "technique"]
     },
     {
@@ -1087,6 +1152,7 @@
       "vi": "Điểm cực biên",
       "def_en": "A point of a convex set that is not the midpoint of any segment inside the set, where a linear objective attains its optimum.",
       "def_vi": "Điểm của tập lồi không phải trung điểm của bất kỳ đoạn thẳng nào nằm trong tập, nơi hàm mục tiêu tuyến tính đạt tối ưu.",
+      "say": "A linear objective attains its optimum at an extreme point, which is why the solver keeps returning vertex solutions.",
       "tags": ["convex"]
     },
     {
@@ -1113,6 +1179,7 @@
       "vi": "Bài toán xếp thùng",
       "def_en": "Packing items into the fewest bins of fixed size, the model sitting behind slot consolidation and server consolidation alike.",
       "def_vi": "Xếp các món vào ít thùng nhất với thùng có kích thước cố định, mô hình đứng sau cả việc gom khe lẫn việc gom máy chủ.",
+      "say": "Server consolidation is bin packing wearing a different hat, so borrow the approximation results rather than inventing new ones.",
       "tags": ["complexity"]
     },
     {
@@ -1121,6 +1188,7 @@
       "vi": "Bài toán người bán hàng",
       "def_en": "Finding a shortest tour that visits every city once, the standard hard target used inside reduction proofs.",
       "def_vi": "Tìm hành trình ngắn nhất đi qua mỗi thành phố đúng một lần, đích khó tiêu chuẩn dùng trong các chứng minh quy dẫn.",
+      "say": "We reduce from the travelling salesman problem, so the hardness argument rests on ground everybody already accepts.",
       "tags": ["complexity"]
     },
     {
@@ -1147,6 +1215,7 @@
       "vi": "Cấu trúc matroit",
       "def_en": "An abstraction of independence under which the greedy algorithm is exactly optimal, and outside which it usually is not.",
       "def_vi": "Sự trừu tượng hoá tính độc lập, dưới cấu trúc này thuật toán tham lam đúng là tối ưu, còn ra ngoài nó thì thường không.",
+      "say": "If the structure forms a matroid then greedy is exactly optimal, and otherwise greedy is merely a hopeful guess.",
       "tags": ["theory"]
     },
     {
@@ -1164,6 +1233,7 @@
       "vi": "Quy hoạch động",
       "def_en": "Building a solution from solved overlapping subproblems, which is valid only when the problem has optimal substructure.",
       "def_vi": "Dựng nghiệm từ các bài con chồng lấn đã giải, chỉ hợp lệ khi bài toán có tính chất cấu trúc con tối ưu.",
+      "say": "Dynamic programming applies here only because the subproblems overlap and optimal substructure genuinely holds in this model.",
       "tags": ["method"]
     },
     {
@@ -1172,6 +1242,7 @@
       "vi": "Lời nguyền số chiều",
       "def_en": "The state or grid size growing exponentially with the number of variables, which is what kills exact dynamic programming on real systems.",
       "def_vi": "Kích thước không gian trạng thái hay lưới tăng theo hàm mũ với số biến, chính điều đó giết chết quy hoạch động chính xác trên hệ thật.",
+      "say": "The curse of dimensionality kills the exact solver once we add a third resource, so we approximate instead.",
       "tags": ["complexity"]
     },
     {
@@ -1189,6 +1260,7 @@
       "vi": "Khó NP mạnh",
       "def_en": "Hard even when every number in the input is small, which rules out any pseudo-polynomial algorithm unless P equals NP.",
       "def_vi": "Khó ngay cả khi mọi con số trong đầu vào đều nhỏ, điều đó loại trừ mọi thuật toán giả đa thức trừ khi P bằng NP.",
+      "say": "Being strongly NP hard rules out a pseudo polynomial trick, so shrinking the numbers will not help at all.",
       "tags": ["complexity"]
     },
     {
@@ -1206,6 +1278,7 @@
       "vi": "Lược đồ xấp xỉ hoàn toàn đa thức",
       "def_en": "A family of algorithms reaching any accuracy you name, in time polynomial in both the input size and the inverse of that accuracy.",
       "def_vi": "Họ thuật toán đạt được độ chính xác tuỳ ý bạn nêu, với thời gian đa thức theo cả kích thước đầu vào lẫn nghịch đảo của độ chính xác đó.",
+      "say": "A fully polynomial time approximation scheme lets you name the accuracy and pay for it in running time.",
       "tags": ["complexity"]
     },
     {
@@ -1223,6 +1296,7 @@
       "vi": "Tìm kiếm cấm",
       "def_en": "Local search that forbids recently used moves for a while, so the trajectory climbs out of a basin instead of cycling inside it.",
       "def_vi": "Tìm kiếm cục bộ cấm dùng lại các bước vừa đi trong một khoảng, nhờ đó quỹ đạo trèo ra khỏi lòng chảo thay vì lặp vòng trong đó.",
+      "say": "Tabu search forbids the moves it just made, which is how the trajectory escapes a basin instead of cycling.",
       "tags": ["method"]
     },
     {
@@ -1231,6 +1305,7 @@
       "vi": "Tiến hoá vi phân",
       "def_en": "A population method whose mutation adds a scaled difference of two members, so the step adapts to how spread the population is.",
       "def_vi": "Phương pháp quần thể có bước đột biến cộng thêm hiệu số đã nhân hệ số của hai cá thể, nhờ đó bước đi tự thích nghi theo mức phân tán của quần thể.",
+      "say": "Differential evolution adapts its step to the spread of the population, so a collapsed population stops making progress.",
       "tags": ["method"]
     },
     {
@@ -1239,6 +1314,7 @@
       "vi": "Tối ưu đàn kiến",
       "def_en": "A construction method where a pheromone table biases the next solution towards edges that already worked well.",
       "def_vi": "Phương pháp dựng nghiệm trong đó bảng mùi làm lệch nghiệm kế tiếp về phía những cạnh đã từng hiệu quả.",
+      "say": "Ant colony optimisation builds the tour from a pheromone table, so the evaporation rate decides how fast it forgets.",
       "tags": ["method"]
     },
     {
@@ -1247,6 +1323,7 @@
       "vi": "Cảnh quan thích nghi",
       "def_en": "The surface an objective traces over the search space together with a neighbourhood, whose ruggedness explains why one operator beats another.",
       "def_vi": "Bề mặt mà hàm mục tiêu vẽ ra trên không gian tìm kiếm cùng với một lân cận, độ gồ ghề của nó giải thích vì sao toán tử này thắng toán tử kia.",
+      "say": "Describe the fitness landscape before defending the operator, because ruggedness explains most of what people call algorithm magic.",
       "tags": ["method", "analysis"]
     },
     {
@@ -1282,6 +1359,7 @@
       "vi": "Cơ chế giữ cá thể ưu tú",
       "def_en": "Carrying the best members unchanged into the next generation, which makes the best fitness monotone yet speeds up the loss of diversity.",
       "def_vi": "Mang nguyên các cá thể tốt nhất sang thế hệ sau, khiến giá trị tốt nhất không bao giờ xấu đi nhưng làm mất đa dạng nhanh hơn.",
+      "say": "Elitism makes the best fitness curve look monotone and quietly drains the diversity you needed for the late search.",
       "tags": ["method"]
     },
     {
@@ -1290,6 +1368,7 @@
       "vi": "Chiến lược khởi động lại",
       "def_en": "Abandoning a stalled run and starting again from a fresh point, often worth more than one longer run on a rugged landscape.",
       "def_vi": "Bỏ một lần chạy đang giậm chân và bắt đầu lại từ điểm mới, trên cảnh quan gồ ghề việc đó thường đáng giá hơn một lần chạy dài.",
+      "say": "A restart strategy often beats one long run, so budget several short attempts from fresh starting points.",
       "tags": ["method"]
     },
     {
@@ -1298,6 +1377,7 @@
       "vi": "Biểu đồ hiệu năng tích luỹ",
       "def_en": "A curve giving the fraction of instances a solver handles within a factor of the best time, comparing solvers over a whole set at once.",
       "def_vi": "Đường cong cho biết tỉ lệ trường hợp mà một bộ giải xử lý được trong một bội số của thời gian tốt nhất, so sánh các bộ giải trên cả tập cùng lúc.",
+      "say": "Show a performance profile over the whole instance set, since a table of best times flatters whichever solver you prefer.",
       "tags": ["analysis", "statistics"]
     },
     {
@@ -1333,6 +1413,7 @@
       "vi": "Bài toán nhiều cần gạt",
       "def_en": "Repeatedly choosing among options with unknown payoffs, the cleanest setting in which exploration has to be paid for.",
       "def_vi": "Chọn đi chọn lại giữa các phương án chưa biết lợi ích, khung cảnh sạch sẽ nhất cho thấy việc khám phá phải trả giá.",
+      "say": "Treat the beam selection as a multi armed bandit, and then exploration cost becomes something you can actually budget.",
       "tags": ["stochastic"]
     },
     {
@@ -1350,6 +1431,7 @@
       "vi": "Độ trôi Lyapunov",
       "def_en": "The expected one step change of a queue energy function, kept negative whenever the backlog is large in order to prove stability.",
       "def_vi": "Mức thay đổi kỳ vọng sau một bước của hàm năng lượng hàng đợi, được giữ âm mỗi khi tồn đọng lớn để chứng minh tính ổn định.",
+      "say": "Bound the Lyapunov drift and the stability proof follows, provided the penalty term is handled with equal care.",
       "tags": ["stochastic", "theory"]
     },
     {
@@ -1367,6 +1449,7 @@
       "vi": "Giá trị chịu rủi ro có điều kiện",
       "def_en": "The average loss in the worst tail of the distribution, a risk measure that stays convex and therefore fits inside an optimisation model.",
       "def_vi": "Mất mát trung bình ở phần đuôi xấu nhất của phân bố, một thước rủi ro vẫn lồi nên nhét được vào mô hình tối ưu.",
+      "say": "Optimising conditional value at risk keeps the model convex while still punishing the ugly tail of the loss.",
       "tags": ["stochastic", "class"]
     },
     {
@@ -1375,6 +1458,7 @@
       "vi": "Cây kịch bản",
       "def_en": "A branching picture of how uncertainty unfolds across stages, whose sheer size is what makes multistage models expensive.",
       "def_vi": "Bức tranh phân nhánh về cách bất định lộ dần qua các giai đoạn, chính kích thước của nó làm mô hình nhiều giai đoạn trở nên đắt đỏ.",
+      "say": "The scenario tree doubles at every stage, so the model becomes unsolvable long before the horizon you wanted.",
       "tags": ["stochastic"]
     },
     {
@@ -1392,6 +1476,7 @@
       "vi": "Tỉ số cạnh tranh",
       "def_en": "The worst case ratio between what an online algorithm achieves without seeing the future and what an offline optimum achieves.",
       "def_vi": "Tỉ số xấu nhất giữa kết quả của thuật toán trực tuyến không nhìn thấy tương lai và kết quả của nghiệm tối ưu ngoại tuyến.",
+      "say": "Report the competitive ratio, because an online policy must be judged against what an offline optimum could have done.",
       "tags": ["complexity", "analysis"]
     },
     {
@@ -1409,6 +1494,7 @@
       "vi": "Độ phức tạp theo số vòng lặp",
       "def_en": "The number of iterations needed to reach a stated accuracy, a figure that misleads when one iteration is far dearer than another.",
       "def_vi": "Số vòng lặp cần để đạt một độ chính xác đã nêu, con số này gây hiểu lầm khi một vòng lặp bên này đắt hơn hẳn bên kia.",
+      "say": "Iteration complexity flatters any method whose single iteration is enormous, so give me wall clock time as well.",
       "tags": ["complexity", "analysis"]
     },
     {
@@ -1417,6 +1503,7 @@
       "vi": "Độ phức tạp theo số lần truy vấn",
       "def_en": "The count of queries to a gradient or value routine that a method needs, a machine independent way to compare first order algorithms.",
       "def_vi": "Số lần một phương pháp phải hỏi thủ tục tính gradient hay giá trị hàm, cách so sánh thuật toán bậc nhất không phụ thuộc vào máy.",
+      "say": "Oracle complexity compares first order methods without dragging the machine into it, which makes the comparison genuinely portable.",
       "tags": ["complexity", "analysis"]
     },
     {
@@ -1425,6 +1512,7 @@
       "vi": "Giả thuyết thời gian mũ",
       "def_en": "The conjecture that satisfiability needs genuinely exponential time, which is what lets people rule out even subexponential algorithms.",
       "def_vi": "Giả thuyết rằng bài toán thoả được cần thời gian mũ thực sự, nhờ đó người ta loại trừ được cả những thuật toán dưới mũ.",
+      "say": "Under the exponential time hypothesis even a subexponential algorithm is out of reach, so stop hunting for one.",
       "tags": ["complexity"]
     },
     {
@@ -1460,6 +1548,7 @@
       "vi": "Khởi động nóng",
       "def_en": "Seeding a solver with an earlier solution to cut its time, which makes reported runtimes incomparable unless every method gets it.",
       "def_vi": "Nạp cho bộ giải một nghiệm cũ để rút ngắn thời gian, việc này khiến thời gian chạy báo cáo không so sánh được trừ khi mọi phương pháp đều được nạp.",
+      "say": "If one solver gets a warm start then every solver must, otherwise the timing table is simply not comparable.",
       "tags": ["method"]
     },
     {
@@ -1468,6 +1557,7 @@
       "vi": "Phương pháp ràng buộc epsilon",
       "def_en": "Optimising one objective while bounding the others, which unlike a weighted sum can reach the nonconvex parts of the Pareto front.",
       "def_vi": "Tối ưu một mục tiêu và chặn các mục tiêu còn lại, khác với tổng có trọng số, cách này chạm được cả phần không lồi của biên Pareto.",
+      "say": "The epsilon constraint method reaches the nonconvex parts of the front, which a weighted sum can never touch.",
       "tags": ["multiobjective", "technique"]
     },
     {
@@ -1485,6 +1575,7 @@
       "vi": "Phương pháp miền tin cậy",
       "def_en": "Minimising a local model only within a radius that is grown or shrunk according to how well the model predicted the real change.",
       "def_vi": "Chỉ cực tiểu mô hình địa phương trong một bán kính, bán kính đó được nới hay thu tuỳ theo mô hình dự đoán đúng mức thay đổi thật tới đâu.",
+      "say": "A trust region method shrinks the radius whenever the model lies, which is why it survives badly scaled problems.",
       "tags": ["algorithm"]
     },
     {

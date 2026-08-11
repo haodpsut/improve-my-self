@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "software",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "cards": [
     {
       "id": "sw-layered-architecture",
@@ -27,6 +27,7 @@
       "vi": "Cổng và bộ chuyển tiếp",
       "def_en": "A port is an interface the core owns; an adapter is the concrete code that speaks to a real database, queue or HTTP client.",
       "def_vi": "Cổng là giao diện do lõi sở hữu, bộ chuyển tiếp là mã cụ thể nói chuyện với cơ sở dữ liệu, hàng đợi hoặc máy khách HTTP thật.",
+      "say": "Define the port first and let whoever writes the adapter worry about which vendor we sign with.",
       "tags": ["kien-truc"]
     },
     {
@@ -44,6 +45,7 @@
       "vi": "Đảo ngược phụ thuộc",
       "def_en": "High level policy declares the interface it needs and low level detail implements it, so the detail depends on the policy.",
       "def_vi": "Tầng chính sách khai báo giao diện nó cần, tầng chi tiết hiện thực giao diện đó, nhờ vậy chi tiết phụ thuộc vào chính sách.",
+      "say": "Dependency inversion is why we swapped the mail provider without opening a single file in the domain.",
       "tags": ["kien-truc"]
     },
     {
@@ -61,6 +63,7 @@
       "vi": "Mô hình miền rỗng ruột",
       "def_en": "Objects that carry only fields while all the rules live in service classes, which spreads one rule across many files.",
       "def_vi": "Đối tượng chỉ mang trường dữ liệu còn quy tắc nằm hết trong lớp dịch vụ, khiến một quy tắc bị rải ra nhiều tệp.",
+      "say": "Our student object went anemic, and now the same eligibility rule sits in four different service classes.",
       "tags": ["kien-truc", "chat-luong"]
     },
     {
@@ -87,6 +90,7 @@
       "vi": "Dịch vụ nhỏ",
       "def_en": "A separately deployed service owning its own data and released on its own schedule, at the cost of network and operational complexity.",
       "def_vi": "Dịch vụ triển khai riêng, tự sở hữu dữ liệu và phát hành theo lịch riêng, đổi lại là phức tạp về mạng và vận hành.",
+      "say": "Ask whether grading really needs its own microservice before we sign up for another deployment pipeline.",
       "tags": ["kien-truc"]
     },
     {
@@ -104,6 +108,7 @@
       "vi": "Ngữ cảnh có ranh giới",
       "def_en": "A boundary inside which one term has exactly one meaning, so admissions and accreditation may each define a student differently.",
       "def_vi": "Ranh giới mà bên trong nó một thuật ngữ chỉ có một nghĩa, nên tuyển sinh và kiểm định có thể định nghĩa sinh viên khác nhau.",
+      "say": "Inside the admissions bounded context a student is an applicant, and accreditation uses that word quite differently.",
       "tags": ["kien-truc", "nghiep-vu"]
     },
     {
@@ -130,6 +135,7 @@
       "vi": "Chuỗi bù trừ",
       "def_en": "A sequence of local transactions where each step has a compensating action, used when one atomic transaction is impossible.",
       "def_vi": "Chuỗi giao dịch cục bộ mà mỗi bước có một hành động bù trừ, dùng khi không thể có một giao dịch nguyên tử duy nhất.",
+      "say": "If the payment clears and enrolment fails, the saga must compensate with a refund rather than retry forever.",
       "tags": ["kien-truc", "du-lieu"]
     },
     {
@@ -138,6 +144,7 @@
       "vi": "Xác nhận hai pha",
       "def_en": "A protocol where a coordinator asks every participant to prepare and then to commit; it blocks when the coordinator dies.",
       "def_vi": "Giao thức trong đó một bộ điều phối yêu cầu mọi bên chuẩn bị rồi mới xác nhận, nó bị treo khi bộ điều phối chết giữa chừng.",
+      "say": "Two phase commit looks tidy on the whiteboard until the coordinator dies and every participant sits there blocked.",
       "tags": ["kien-truc", "du-lieu"]
     },
     {
@@ -155,6 +162,7 @@
       "vi": "Kiến trúc hướng sự kiện",
       "def_en": "Components publish facts about what happened and other components react, which decouples senders from receivers in time.",
       "def_vi": "Các thành phần công bố sự việc đã xảy ra và thành phần khác phản ứng, cách này tách người gửi khỏi người nhận về mặt thời gian.",
+      "say": "Going event driven fixed the coupling and made every debugging session roughly twice as long as before.",
       "tags": ["kien-truc", "su-kien"]
     },
     {
@@ -172,6 +180,7 @@
       "vi": "Hàng đợi thư chết",
       "def_en": "A side queue that collects messages which failed after all retries, so a poison message cannot block the main queue forever.",
       "def_vi": "Hàng đợi phụ gom các thông điệp thất bại sau mọi lần thử lại, để một thông điệp độc không chặn hàng đợi chính mãi mãi.",
+      "say": "Check the dead letter queue before blaming the network, because one poison message stalled the entire run.",
       "tags": ["su-kien", "van-hanh"]
     },
     {
@@ -198,6 +207,7 @@
       "vi": "Giao ít nhất một lần",
       "def_en": "The broker keeps retrying until it sees an acknowledgement, so a message can arrive more than once.",
       "def_vi": "Bộ môi giới cứ thử lại cho tới khi thấy tín hiệu xác nhận, vì vậy một thông điệp có thể tới nhiều hơn một lần.",
+      "say": "The broker only promises at least once delivery, so plan for duplicates instead of pretending they never arrive.",
       "tags": ["su-kien"]
     },
     {
@@ -215,6 +225,7 @@
       "vi": "Hộp thư đi trong giao dịch",
       "def_en": "Writing the event into the same database transaction as the state change, then publishing it from that table by a separate worker.",
       "def_vi": "Ghi sự kiện vào cùng giao dịch cơ sở dữ liệu với thay đổi trạng thái, rồi để một tiến trình riêng công bố sự kiện từ bảng đó.",
+      "say": "Write the event into the outbox table inside the same transaction and let a separate worker publish it.",
       "tags": ["su-kien", "du-lieu"]
     },
     {
@@ -223,6 +234,7 @@
       "vi": "Tách đường ghi khỏi đường đọc",
       "def_en": "Using one model for writes and a different, often denormalised model for reads, when the two workloads pull in opposite directions.",
       "def_vi": "Dùng một mô hình cho ghi và một mô hình khác, thường phi chuẩn hoá, cho đọc, khi hai loại tải kéo về hai hướng ngược nhau.",
+      "say": "We adopted command query responsibility segregation after the reporting joins started slowing down every enrolment write.",
       "tags": ["kien-truc", "du-lieu"]
     },
     {
@@ -249,6 +261,7 @@
       "vi": "Định luật Conway",
       "def_en": "A system's structure mirrors the communication structure of the teams that build it.",
       "def_vi": "Cấu trúc hệ thống phản chiếu cấu trúc trao đổi của các nhóm xây dựng nó.",
+      "say": "Conway's law caught up with us again, since the ugliest seam sits exactly where two teams stopped talking.",
       "tags": ["kien-truc", "to-chuc"]
     },
     {
@@ -257,6 +270,7 @@
       "vi": "Lớp chống nhiễm mô hình",
       "def_en": "A translation layer that converts a legacy or vendor model into your own terms so their concepts do not spread through your code.",
       "def_vi": "Lớp phiên dịch chuyển mô hình của hệ cũ hoặc của nhà cung cấp sang thuật ngữ của bạn, để khái niệm của họ không lan vào mã của bạn.",
+      "say": "Put an anti corruption layer around the vendor client so their strange status codes never reach our domain.",
       "tags": ["kien-truc"]
     },
     {
@@ -265,6 +279,7 @@
       "vi": "Kiến trúc REST",
       "def_en": "An architectural style where addressable resources are manipulated through a uniform set of HTTP methods and representations.",
       "def_vi": "Phong cách kiến trúc trong đó tài nguyên có địa chỉ được thao tác qua một tập phương thức và biểu diễn HTTP thống nhất.",
+      "say": "Their interface calls itself REST, yet every operation is a post to one endpoint named process.",
       "tags": ["web"]
     },
     {
@@ -291,6 +306,7 @@
       "vi": "Phương thức an toàn",
       "def_en": "A method that does not change server state, such as GET or HEAD, which is why proxies may cache and prefetch it freely.",
       "def_vi": "Phương thức không làm đổi trạng thái máy chủ, ví dụ GET hoặc HEAD, vì vậy máy chủ trung gian được phép nhớ đệm và nạp trước thoải mái.",
+      "say": "A safe method must not change anything, so stop hiding a deletion behind a plain get request.",
       "tags": ["web"]
     },
     {
@@ -308,6 +324,7 @@
       "vi": "Phân trang bằng số trang",
       "def_en": "Skipping a count of rows to reach a page; it is simple but drifts when rows are inserted and gets slow at deep offsets.",
       "def_vi": "Bỏ qua một số dòng để tới trang cần lấy, cách này đơn giản nhưng lệch khi có dòng chèn thêm và chậm dần khi trang ở sâu.",
+      "say": "Offset pagination began timing out once the audit log grew past a few million rows.",
       "tags": ["web", "du-lieu"]
     },
     {
@@ -325,6 +342,7 @@
       "vi": "Đánh phiên bản giao diện lập trình",
       "def_en": "Publishing a new contract alongside the old one so existing clients keep working while new clients adopt the change.",
       "def_vi": "Công bố hợp đồng mới song song với hợp đồng cũ để máy khách hiện có vẫn chạy trong khi máy khách mới dùng thay đổi.",
+      "say": "Let us agree on the API versioning story before the mobile team ships, not during the incident afterwards.",
       "tags": ["web"]
     },
     {
@@ -351,6 +369,7 @@
       "vi": "Yêu cầu thăm dò",
       "def_en": "An OPTIONS call the browser sends before a non simple cross origin request to ask which methods and headers are allowed.",
       "def_vi": "Lượt gọi OPTIONS mà trình duyệt gửi trước một yêu cầu khác nguồn không đơn giản, để hỏi phương thức và tiêu đề nào được phép.",
+      "say": "The browser fires a preflight request first, so your custom header has to be allowed there too.",
       "tags": ["web"]
     },
     {
@@ -359,6 +378,7 @@
       "vi": "Cookie phiên",
       "def_en": "An opaque identifier the browser sends back automatically, with the real session state kept on the server where it can be revoked.",
       "def_vi": "Một định danh không mang nghĩa mà trình duyệt tự gửi lại, còn trạng thái phiên thật nằm trên máy chủ nên có thể thu hồi được.",
+      "say": "Killing the session cookie logs the user out at once, which is exactly why we avoided a bearer token.",
       "tags": ["web", "bao-mat"]
     },
     {
@@ -367,6 +387,7 @@
       "vi": "Thuộc tính SameSite",
       "def_en": "A cookie flag controlling whether the browser attaches the cookie to requests started by another site, which blunts cross site forgery.",
       "def_vi": "Cờ của cookie quyết định trình duyệt có gắn cookie vào yêu cầu do trang khác khởi tạo hay không, giúp giảm tấn công giả mạo yêu cầu chéo.",
+      "say": "Set the same site attribute to strict and half of our forgery worries quietly disappear.",
       "tags": ["web", "bao-mat"]
     },
     {
@@ -393,6 +414,7 @@
       "vi": "Thu hồi thẻ truy cập",
       "def_en": "Invalidating a credential before it expires, which requires server side state such as a deny list or a short lifetime plus refresh.",
       "def_vi": "Vô hiệu một chứng chỉ trước khi nó hết hạn, việc này đòi hỏi trạng thái phía máy chủ như danh sách chặn, hoặc hạn rất ngắn kèm cơ chế làm mới.",
+      "say": "Without token revocation a stolen credential stays valid until it expires and nobody on call can stop it.",
       "tags": ["web", "bao-mat"]
     },
     {
@@ -401,6 +423,7 @@
       "vi": "Thẻ làm mới",
       "def_en": "A long lived credential stored safely and exchanged for short lived access tokens, so a stolen access token expires quickly.",
       "def_vi": "Chứng chỉ sống lâu được cất giữ an toàn và đem đổi lấy thẻ truy cập sống ngắn, nhờ vậy thẻ truy cập bị đánh cắp cũng mau hết hạn.",
+      "say": "Store the refresh token where page scripts cannot read it, otherwise short lifetimes buy you nothing at all.",
       "tags": ["web", "bao-mat"]
     },
     {
@@ -418,6 +441,7 @@
       "vi": "Lớp định danh trên OAuth",
       "def_en": "An identity layer on top of OAuth that adds an identity token describing who signed in and when.",
       "def_vi": "Lớp định danh đặt trên OAuth, bổ sung một thẻ định danh mô tả ai đã đăng nhập và vào lúc nào.",
+      "say": "OAuth told us what the app could do, so we added OpenID Connect to learn who actually signed in.",
       "tags": ["bao-mat", "web"]
     },
     {
@@ -435,6 +459,7 @@
       "vi": "Giới hạn tốc độ",
       "def_en": "Capping how many requests a caller may make in a window, to protect capacity and to make brute force expensive.",
       "def_vi": "Giới hạn số yêu cầu mà một bên gọi được phép gửi trong một khoảng thời gian, để bảo vệ năng lực xử lý và làm cho dò quét trở nên tốn kém.",
+      "say": "Rate limiting on the login route turned a brute force attempt into a very boring afternoon.",
       "tags": ["web", "van-hanh"]
     },
     {
@@ -443,6 +468,7 @@
       "vi": "Thùng thẻ",
       "def_en": "A limiter that refills allowances at a steady rate and lets unused allowance accumulate, so short bursts pass but the average holds.",
       "def_vi": "Bộ giới hạn nạp lượt cho phép theo tốc độ đều và cho phép tích luỹ lượt chưa dùng, nhờ vậy đợt dồn ngắn vẫn lọt mà mức trung bình vẫn giữ.",
+      "say": "The token bucket refills steadily, so a short burst sails through while the hourly average still holds.",
       "tags": ["web", "van-hanh"]
     },
     {
@@ -451,6 +477,7 @@
       "vi": "Nhãn phiên bản tài nguyên",
       "def_en": "A version marker returned with a resource so the client can ask for it only if it changed, or write only if nobody else did.",
       "def_vi": "Dấu phiên bản trả kèm tài nguyên, để máy khách chỉ tải lại khi tài nguyên đổi, hoặc chỉ ghi khi chưa ai ghi trước.",
+      "say": "Send the ETag back in an if match header and the second editor gets a conflict instead of a silent overwrite.",
       "tags": ["web", "du-lieu"]
     },
     {
@@ -468,6 +495,7 @@
       "vi": "Móc gọi ngược",
       "def_en": "An outbound HTTP call a system makes when something happens, which the receiver must treat as possibly duplicated and out of order.",
       "def_vi": "Lượt gọi HTTP đi ra khi có sự việc xảy ra, bên nhận phải coi nó có thể trùng lặp và sai thứ tự.",
+      "say": "Treat every webhook as possibly duplicated and out of order, because the sender will happily deliver it twice.",
       "tags": ["web", "su-kien"]
     },
     {
@@ -476,6 +504,7 @@
       "vi": "Máy chủ phục vụ riêng cho giao diện",
       "def_en": "A thin server layer shaped for one client, which lets the page fetch one composed payload instead of five separate calls.",
       "def_vi": "Lớp máy chủ mỏng đo ni cho một loại máy khách, giúp trang chỉ tải một khối dữ liệu đã ghép thay vì gọi năm lần riêng lẻ.",
+      "say": "The mobile team asked for a backend for frontend so one composed call replaces five separate round trips.",
       "tags": ["web", "kien-truc"]
     },
     {
@@ -484,6 +513,7 @@
       "vi": "Đặc tả OpenAPI",
       "def_en": "A machine readable description of an HTTP contract, used to generate clients, validate requests and detect breaking changes.",
       "def_vi": "Bản mô tả hợp đồng HTTP mà máy đọc được, dùng để sinh mã máy khách, kiểm tra yêu cầu và phát hiện thay đổi phá vỡ tương thích.",
+      "say": "Generate the client from the OpenAPI specification instead of hand writing another wrapper that nobody keeps updated.",
       "tags": ["web", "cong-cu"]
     },
     {
@@ -501,6 +531,7 @@
       "vi": "Kết xuất phía máy khách",
       "def_en": "Shipping a mostly empty document plus JavaScript that fetches data and builds the page in the browser.",
       "def_vi": "Gửi một tài liệu gần như rỗng kèm JavaScript, mã này tải dữ liệu và dựng trang ngay trong trình duyệt.",
+      "say": "Client side rendering ships an almost empty document first, which is why the crawler sees nothing useful there.",
       "tags": ["ket-xuat"]
     },
     {
@@ -518,6 +549,7 @@
       "vi": "Sinh lại trang tĩnh theo yêu cầu",
       "def_en": "Serving a cached static page while rebuilding it in the background after a chosen interval, mixing static speed with periodic freshness.",
       "def_vi": "Phục vụ trang tĩnh đã nhớ đệm rồi dựng lại ở nền sau một khoảng thời gian chọn trước, kết hợp tốc độ tĩnh với độ tươi định kỳ.",
+      "say": "Incremental static regeneration keeps the curriculum page fast and still picks up an edit within the hour.",
       "tags": ["ket-xuat"]
     },
     {
@@ -535,6 +567,7 @@
       "vi": "Lệch nội dung khi gắn tương tác",
       "def_en": "An error where the browser rebuilds different markup than the server sent, typically because the render used time, randomness or window state.",
       "def_vi": "Lỗi khi trình duyệt dựng ra nội dung khác với nội dung máy chủ gửi, thường vì lúc kết xuất có dùng thời gian, số ngẫu nhiên hoặc trạng thái cửa sổ.",
+      "say": "That hydration mismatch came from rendering the current time on the server and rendering it again in the browser.",
       "tags": ["ket-xuat", "loi"]
     },
     {
@@ -543,6 +576,7 @@
       "vi": "Gắn tương tác từng mảnh",
       "def_en": "Hydrating only the interactive parts of a page and leaving the rest as plain HTML, which cuts the JavaScript the browser must run.",
       "def_vi": "Chỉ gắn tương tác cho những phần cần tương tác và để phần còn lại là HTML thuần, cách này giảm lượng JavaScript trình duyệt phải chạy.",
+      "say": "With partial hydration only the enrolment widget ships JavaScript and the rest of the page stays plain markup.",
       "tags": ["ket-xuat"]
     },
     {
@@ -569,6 +603,7 @@
       "vi": "Thành phần chạy trên máy chủ",
       "def_en": "A component that runs only on the server, may read the database directly and sends no code for itself to the browser.",
       "def_vi": "Thành phần chỉ chạy trên máy chủ, có thể đọc thẳng cơ sở dữ liệu và không gửi mã của chính nó xuống trình duyệt.",
+      "say": "Move the query into a server component and the browser never downloads that code at all.",
       "tags": ["ket-xuat"]
     },
     {
@@ -577,6 +612,7 @@
       "vi": "Chia nhỏ gói mã",
       "def_en": "Breaking the bundle so a route downloads only the code it needs, instead of paying for every screen on the first visit.",
       "def_vi": "Chia nhỏ gói mã để một tuyến đường chỉ tải phần mã nó cần, thay vì trả giá cho mọi màn hình ngay lần vào đầu tiên.",
+      "say": "After code splitting the first visit stopped paying for admin screens that most students never open.",
       "tags": ["ket-xuat", "hieu-nang"]
     },
     {
@@ -585,6 +621,7 @@
       "vi": "Thời gian tới byte đầu tiên",
       "def_en": "How long the browser waits before the first byte of the response arrives, dominated by server and network work.",
       "def_vi": "Khoảng thời gian trình duyệt chờ trước khi byte đầu tiên của phản hồi tới nơi, chủ yếu do công việc của máy chủ và mạng.",
+      "say": "Our time to first byte doubled after the migration, and for once the database was entirely innocent.",
       "tags": ["hieu-nang"]
     },
     {
@@ -602,6 +639,7 @@
       "vi": "Độ xô lệch bố cục tích luỹ",
       "def_en": "A score for how much visible content jumps during load, usually caused by images or fonts without reserved space.",
       "def_vi": "Điểm số đo mức nội dung nhảy chỗ trong lúc tải, thường do ảnh hoặc phông chữ chưa được chừa sẵn chỗ.",
+      "say": "Reserve the banner height in advance, otherwise cumulative layout shift will punish us on every phone.",
       "tags": ["hieu-nang"]
     },
     {
@@ -610,6 +648,7 @@
       "vi": "Độ trễ từ thao tác tới khung hình kế",
       "def_en": "How long the page takes to show a visual response after a user interaction, which exposes a blocked main thread.",
       "def_vi": "Thời gian trang hiện phản hồi thị giác sau một thao tác của người dùng, chỉ số này phơi bày luồng chính bị chặn.",
+      "say": "Interaction to next paint got worse because one handler blocks the main thread while sorting the whole list.",
       "tags": ["hieu-nang"]
     },
     {
@@ -618,6 +657,7 @@
       "vi": "Bộ nhớ đệm phía máy khách",
       "def_en": "A store of already fetched server data in the browser, keyed so several components can share one request.",
       "def_vi": "Kho lưu dữ liệu máy chủ đã tải sẵn trong trình duyệt, có khoá để nhiều thành phần dùng chung một lượt gọi.",
+      "say": "The client side cache is still serving yesterday's grades, so invalidate that key right after the write succeeds.",
       "tags": ["trang-thai"]
     },
     {
@@ -644,6 +684,7 @@
       "vi": "Vô hiệu bộ nhớ đệm",
       "def_en": "Deciding when a cached value stops being trustworthy, which is hard because the cache cannot see writes it did not make.",
       "def_vi": "Quyết định khi nào giá trị đã nhớ đệm hết đáng tin, việc này khó vì bộ nhớ đệm không thấy được các lượt ghi không do nó tạo ra.",
+      "say": "Cache invalidation is the part nobody volunteers to own, and it is exactly where our stale grades came from.",
       "tags": ["trang-thai"]
     },
     {
@@ -661,6 +702,7 @@
       "vi": "Khoá bi quan",
       "def_en": "Taking a lock before editing so nobody else can touch the row, trading throughput and deadlock risk for certainty.",
       "def_vi": "Giữ khoá trước khi sửa để không ai khác đụng vào dòng đó, đánh đổi thông lượng và rủi ro kẹt khoá lấy sự chắc chắn.",
+      "say": "Use pessimistic locking on seat allocation, because two people paying for one seat costs more than lost throughput.",
       "tags": ["du-lieu", "trang-thai"]
     },
     {
@@ -678,6 +720,7 @@
       "vi": "Kẹt khoá vòng tròn",
       "def_en": "Two transactions each holding a lock the other needs, so neither can proceed until the database aborts one of them.",
       "def_vi": "Hai giao dịch mỗi bên giữ một khoá mà bên kia cần, không bên nào đi tiếp được cho tới khi cơ sở dữ liệu huỷ một bên.",
+      "say": "The database aborted one transaction to break the deadlock, and the retry went through without anyone noticing.",
       "tags": ["du-lieu", "loi"]
     },
     {
@@ -686,6 +729,7 @@
       "vi": "Mức cô lập giao dịch",
       "def_en": "How much concurrent transactions may see of each other, from read committed up to serialisable, trading anomalies against throughput.",
       "def_vi": "Mức mà các giao dịch đồng thời được phép nhìn thấy nhau, từ đọc đã xác nhận cho tới tuần tự hoá, đánh đổi hiện tượng bất thường với thông lượng.",
+      "say": "Raising the transaction isolation level killed the phantom read and halved throughput on our busiest table.",
       "tags": ["du-lieu"]
     },
     {
@@ -712,6 +756,7 @@
       "vi": "Chỉ mục cơ sở dữ liệu",
       "def_en": "A secondary structure that speeds up matching rows at the cost of slower writes and more storage.",
       "def_vi": "Cấu trúc phụ giúp tìm dòng khớp nhanh hơn, đổi lại ghi chậm hơn và tốn thêm dung lượng.",
+      "say": "Add a database index for the enrolment date before that report runs, and expect the writes to slow slightly.",
       "tags": ["du-lieu", "hieu-nang"]
     },
     {
@@ -720,6 +765,7 @@
       "vi": "Công việc nền",
       "def_en": "Work moved out of the request path so a slow export or email does not hold the user's connection open.",
       "def_vi": "Công việc được đưa ra khỏi đường xử lý yêu cầu, để một lượt xuất báo cáo hay gửi thư chậm không giữ kết nối của người dùng.",
+      "say": "Push the transcript export into a background job so nobody sits watching a spinner for half a minute.",
       "tags": ["van-hanh", "su-kien"]
     },
     {
@@ -728,6 +774,7 @@
       "vi": "Công việc theo lịch",
       "def_en": "A task run on a timer, which needs a guard because two instances can fire at the same minute after a redeploy.",
       "def_vi": "Tác vụ chạy theo hẹn giờ, cần có chốt bảo vệ vì hai thực thể có thể cùng nổ vào một phút sau khi triển khai lại.",
+      "say": "Guard the scheduled job with a lock, or a rolling deploy will fire it twice in the same minute.",
       "tags": ["van-hanh"]
     },
     {
@@ -745,6 +792,7 @@
       "vi": "Bão thử lại",
       "def_en": "A failure amplified when every client retries at once, turning a brief hiccup into a sustained outage.",
       "def_vi": "Sự cố bị khuếch đại khi mọi máy khách cùng thử lại một lúc, biến một trục trặc ngắn thành gián đoạn kéo dài.",
+      "say": "The outage lasted an hour because every client retried at once and turned a brief hiccup into a retry storm.",
       "tags": ["van-hanh", "loi"]
     },
     {
@@ -753,6 +801,7 @@
       "vi": "Cầu dao ngắt mạch",
       "def_en": "A guard that stops calling a failing dependency for a while, so the caller fails fast instead of piling up timeouts.",
       "def_vi": "Chốt bảo vệ tạm ngừng gọi một phụ thuộc đang hỏng, để bên gọi hỏng nhanh thay vì chất đống các lượt chờ hết giờ.",
+      "say": "Once the circuit breaker opened we failed fast, and the queue stopped filling up with hopeless timeouts.",
       "tags": ["van-hanh"]
     },
     {
@@ -761,6 +810,7 @@
       "vi": "Kim tự tháp kiểm thử",
       "def_en": "A mix with many fast unit tests, fewer integration tests and a thin layer of end to end tests, chosen by cost and stability.",
       "def_vi": "Cách phối trộn gồm nhiều bài kiểm đơn vị chạy nhanh, ít bài kiểm tích hợp hơn và một lớp mỏng kiểm đầu cuối, chọn theo chi phí và độ ổn định.",
+      "say": "Our test pyramid is upside down, since almost everything runs through a browser and hardly anything runs quickly.",
       "tags": ["kiem-thu"]
     },
     {
@@ -769,6 +819,7 @@
       "vi": "Kiểm thử đơn vị",
       "def_en": "A test of one piece of logic in isolation, fast enough to run on every save but blind to wiring between parts.",
       "def_vi": "Bài kiểm một mảnh logic tách riêng, đủ nhanh để chạy mỗi lần lưu tệp nhưng mù trước cách các mảnh nối với nhau.",
+      "say": "A unit test proves the rule is right and says nothing about whether the wiring was ever connected.",
       "tags": ["kiem-thu"]
     },
     {
@@ -786,6 +837,7 @@
       "vi": "Kiểm thử đầu cuối",
       "def_en": "A test driving the real user flow through a browser, the most faithful and the slowest and flakiest of the levels.",
       "def_vi": "Bài kiểm điều khiển luồng người dùng thật qua trình duyệt, trung thực nhất nhưng cũng chậm và chập chờn nhất.",
+      "say": "Keep the end to end test for the enrolment flow only, since each extra one costs us a flaky morning.",
       "tags": ["kiem-thu"]
     },
     {
@@ -794,6 +846,7 @@
       "vi": "Bản thế thân",
       "def_en": "Any stand in for a real dependency during a test, including stubs, fakes and mocks, each with a different purpose.",
       "def_vi": "Bất kỳ vật thay thế nào cho một phụ thuộc thật trong lúc kiểm thử, gồm bản trả lời sẵn, bản mô phỏng và bản giả lập, mỗi loại một mục đích.",
+      "say": "Pick the right test double, because a stub and a mock answer completely different questions about your code.",
       "tags": ["kiem-thu"]
     },
     {
@@ -802,6 +855,7 @@
       "vi": "Bản trả lời sẵn",
       "def_en": "A double that returns canned answers so the test can reach a chosen branch, without asserting on how it was called.",
       "def_vi": "Vật thay thế trả về câu trả lời dọn sẵn để bài kiểm đi tới nhánh mong muốn, không khẳng định gì về cách nó bị gọi.",
+      "say": "Just stub the payment client so the test can reach the refund branch without touching anybody's card.",
       "tags": ["kiem-thu"]
     },
     {
@@ -819,6 +873,7 @@
       "vi": "Bản mô phỏng chạy được",
       "def_en": "A working but simplified implementation, such as an in memory repository, which behaves like the real thing for most cases.",
       "def_vi": "Bản hiện thực chạy được nhưng đơn giản hoá, ví dụ kho dữ liệu trong bộ nhớ, hành xử giống thật trong phần lớn tình huống.",
+      "say": "We wrote an in memory fake for the repository and the whole suite now finishes before the kettle boils.",
       "tags": ["kiem-thu"]
     },
     {
@@ -854,6 +909,7 @@
       "vi": "Kiểm thử theo tính chất",
       "def_en": "Stating an invariant and letting the tool generate many inputs to break it, then shrinking any failure to a minimal case.",
       "def_vi": "Phát biểu một bất biến rồi để công cụ sinh nhiều đầu vào nhằm phá nó, sau đó rút gọn ca thất bại về dạng nhỏ nhất.",
+      "say": "A property based test found the ordering bug that our carefully chosen examples had walked straight past.",
       "tags": ["kiem-thu"]
     },
     {
@@ -862,6 +918,7 @@
       "vi": "Dữ liệu mẫu cho kiểm thử",
       "def_en": "The known starting data a test builds on; shared mutable fixtures are a common source of order dependent failures.",
       "def_vi": "Dữ liệu khởi đầu đã biết mà bài kiểm dựa vào, dữ liệu mẫu dùng chung và sửa được là nguồn gây lỗi phụ thuộc thứ tự rất hay gặp.",
+      "say": "Two tests share one mutable fixture, which is exactly why they pass alone and fail together.",
       "tags": ["kiem-thu"]
     },
     {
@@ -879,6 +936,7 @@
       "vi": "Kiểm thử hợp đồng",
       "def_en": "A test run on both sides of an interface to check that the provider still satisfies what the consumer relies on.",
       "def_vi": "Bài kiểm chạy ở cả hai phía của một giao diện, để kiểm bên cung cấp còn thoả mãn những gì bên tiêu thụ dựa vào.",
+      "say": "Run the contract test on both sides, otherwise the provider renames a field and nobody notices until release day.",
       "tags": ["kiem-thu", "web"]
     },
     {
@@ -896,6 +954,7 @@
       "vi": "Tái cấu trúc mã",
       "def_en": "Changing internal structure without changing observable behaviour, which is only safe when tests pin that behaviour down.",
       "def_vi": "Thay đổi cấu trúc bên trong mà không đổi hành vi quan sát được, việc này chỉ an toàn khi có bài kiểm ghim chặt hành vi đó.",
+      "say": "Refactoring without tests is not refactoring at all, it is rewriting and quietly hoping for the best.",
       "tags": ["chat-luong"]
     },
     {
@@ -904,6 +963,7 @@
       "vi": "Nguyên tắc trách nhiệm đơn",
       "def_en": "A module should have one reason to change, meaning one group of stakeholders whose requests can force it to be rewritten.",
       "def_vi": "Một mô đun chỉ nên có một lý do để thay đổi, tức chỉ một nhóm bên liên quan mà yêu cầu của họ buộc nó phải viết lại.",
+      "say": "The single responsibility principle asks who can force this file to change, not how many methods it holds.",
       "tags": ["chat-luong"]
     },
     {
@@ -912,6 +972,7 @@
       "vi": "Mức ghép nối",
       "def_en": "How strongly one module depends on the details of another; tight coupling makes small changes ripple across files.",
       "def_vi": "Mức một mô đun phụ thuộc vào chi tiết của mô đun khác, ghép nối chặt làm cho thay đổi nhỏ lan ra nhiều tệp.",
+      "say": "The coupling between billing and timetable got so tight that a colour change needed a database migration.",
       "tags": ["chat-luong"]
     },
     {
@@ -929,6 +990,7 @@
       "vi": "Tên nói rõ ý định",
       "def_en": "A name stating what the value means in the business, so the reader does not need to trace the code to understand it.",
       "def_vi": "Tên nói rõ giá trị đó nghĩa là gì trong nghiệp vụ, để người đọc không phải lần theo mã mới hiểu.",
+      "say": "Give it an intention revealing name, because nobody should read the query to learn what that flag means.",
       "tags": ["chat-luong"]
     },
     {
@@ -946,6 +1008,7 @@
       "vi": "Đọc và duyệt mã",
       "def_en": "A reading of proposed changes for correctness, clarity and risk, most useful when the change is small enough to hold in the head.",
       "def_vi": "Việc đọc các thay đổi đề xuất để xét tính đúng, tính rõ ràng và rủi ro, hiệu quả nhất khi thay đổi đủ nhỏ để nắm hết trong đầu.",
+      "say": "Send a smaller change if you want a real code review rather than a polite approval within seconds.",
       "tags": ["chat-luong", "quy-trinh"]
     },
     {
@@ -963,6 +1026,7 @@
       "vi": "Mã chết",
       "def_en": "Code no execution path reaches, which still costs review time, misleads readers and shows up in search results.",
       "def_vi": "Đoạn mã không đường thực thi nào chạm tới, nó vẫn tốn thời gian duyệt, làm người đọc hiểu sai và vẫn hiện ra khi tìm kiếm.",
+      "say": "Delete the dead code instead of commenting it out, since version history remembers everything for you anyway.",
       "tags": ["chat-luong"]
     },
     {
@@ -971,6 +1035,7 @@
       "vi": "Tích hợp liên tục",
       "def_en": "Merging work into the shared branch often and proving it with an automated build and test run each time.",
       "def_vi": "Gộp công việc vào nhánh chung thường xuyên và mỗi lần đều chứng minh bằng một lượt dựng bản và chạy kiểm tự động.",
+      "say": "Continuous integration only helps when we merge daily, not when a branch sits open for three weeks.",
       "tags": ["van-hanh", "quy-trinh"]
     },
     {
@@ -979,6 +1044,7 @@
       "vi": "Chuyển giao liên tục",
       "def_en": "Keeping the main branch always releasable so shipping becomes a business decision rather than an engineering event.",
       "def_vi": "Giữ nhánh chính luôn ở trạng thái phát hành được, để việc ra bản trở thành quyết định nghiệp vụ chứ không phải một sự kiện kỹ thuật.",
+      "say": "With continuous delivery shipping becomes a business decision, and Friday afternoon stops being a frightening phrase.",
       "tags": ["van-hanh", "quy-trinh"]
     },
     {
@@ -987,6 +1053,7 @@
       "vi": "Triển khai xanh đỏ",
       "def_en": "Running two full environments and switching traffic in one step, which makes rollback a switch back rather than a redeploy.",
       "def_vi": "Chạy hai môi trường đầy đủ rồi chuyển lưu lượng trong một bước, nhờ vậy quay lui chỉ là gạt về chứ không phải triển khai lại.",
+      "say": "In a blue green deployment the rollback is a traffic switch, not a frantic redeploy near midnight.",
       "tags": ["van-hanh"]
     },
     {
@@ -1013,6 +1080,7 @@
       "vi": "Quay lui bản phát hành",
       "def_en": "Returning to the previous known good version; it only works if the database change shipped with it is still compatible.",
       "def_vi": "Quay về phiên bản tốt đã biết trước đó, việc này chỉ chạy được nếu thay đổi cơ sở dữ liệu đi kèm vẫn còn tương thích.",
+      "say": "The rollback failed because the migration shipped alongside it had already dropped that column for good.",
       "tags": ["van-hanh"]
     },
     {
@@ -1021,6 +1089,7 @@
       "vi": "Di trú cơ sở dữ liệu",
       "def_en": "A versioned, ordered change to the schema kept in the repository so every environment reaches the same shape.",
       "def_vi": "Thay đổi lược đồ có đánh phiên bản và có thứ tự, giữ trong kho mã để mọi môi trường đều tới cùng một hình dạng.",
+      "say": "Every database migration lives in the repository, so staging and production always end up at the same shape.",
       "tags": ["du-lieu", "van-hanh"]
     },
     {
@@ -1038,6 +1107,7 @@
       "vi": "Thay đổi lược đồ tương thích ngược",
       "def_en": "A change the previous application version still runs against, which is what lets you roll back code without restoring data.",
       "def_vi": "Thay đổi mà phiên bản ứng dụng trước đó vẫn chạy được, chính điều này cho phép quay lui mã mà không phải phục hồi dữ liệu.",
+      "say": "Ship the backward compatible schema change first and the code second, and you keep the option to roll back.",
       "tags": ["du-lieu", "van-hanh"]
     },
     {
@@ -1055,6 +1125,7 @@
       "vi": "Nhật ký có cấu trúc",
       "def_en": "Emitting log lines as key and value records rather than prose, so they can be filtered and aggregated instead of grepped.",
       "def_vi": "Ghi nhật ký dạng bản ghi khoá và giá trị thay vì câu văn, nhờ vậy lọc và tổng hợp được chứ không phải dò bằng tìm chuỗi.",
+      "say": "Structured logging turned an afternoon of grepping into a single filter on the correlation field.",
       "tags": ["van-hanh"]
     },
     {
@@ -1063,6 +1134,7 @@
       "vi": "Chỉ số đo",
       "def_en": "A numeric time series aggregated over many events, cheap to keep for a long time but unable to explain a single request.",
       "def_vi": "Chuỗi số theo thời gian, tổng hợp từ nhiều sự kiện, rẻ để lưu lâu nhưng không giải thích được một yêu cầu cụ thể.",
+      "say": "A metric tells you the error rate rose and never tells you which particular request broke.",
       "tags": ["van-hanh"]
     },
     {
@@ -1080,6 +1152,7 @@
       "vi": "Đoạn truy vết",
       "def_en": "One timed unit of work inside a trace, carrying a parent link and attributes such as the route or the query name.",
       "def_vi": "Một đơn vị công việc có mốc thời gian trong một truy vết, mang liên kết tới đoạn cha và các thuộc tính như tuyến đường hay tên truy vấn.",
+      "say": "Open a span around the external call so we can prove how much of the latency belongs to them.",
       "tags": ["van-hanh"]
     },
     {
@@ -1088,6 +1161,7 @@
       "vi": "Định danh liên kết yêu cầu",
       "def_en": "An identifier attached at the edge and passed along, so every log line from one user action can be gathered later.",
       "def_vi": "Định danh gắn ở biên rồi truyền đi khắp nơi, nhờ vậy về sau gom được mọi dòng nhật ký sinh ra từ một thao tác của người dùng.",
+      "say": "Attach a correlation identifier at the edge and every log line from that one click gathers itself.",
       "tags": ["van-hanh"]
     },
     {
@@ -1114,6 +1188,7 @@
       "vi": "Mục tiêu mức dịch vụ",
       "def_en": "A target for a reliability indicator over a window, agreed in advance so arguments about good enough happen before the incident.",
       "def_vi": "Mục tiêu đặt cho một chỉ báo độ tin cậy trong một khoảng thời gian, thống nhất từ trước để tranh luận thế nào là đủ tốt diễn ra trước sự cố.",
+      "say": "Agree the service level objective now, because arguing about good enough during an incident helps absolutely nobody.",
       "tags": ["van-hanh"]
     },
     {
@@ -1122,6 +1197,7 @@
       "vi": "Chỉ báo mức dịch vụ",
       "def_en": "The measured quantity behind an objective, such as the share of requests served under three hundred milliseconds.",
       "def_vi": "Đại lượng đo được đứng sau một mục tiêu, ví dụ tỷ lệ yêu cầu được phục vụ dưới ba trăm mili giây.",
+      "say": "Pick a service level indicator you can actually measure, not one that sounds impressive in the slide deck.",
       "tags": ["van-hanh"]
     },
     {
@@ -1139,6 +1215,7 @@
       "vi": "Điểm kiểm tình trạng",
       "def_en": "An endpoint the platform polls to decide whether an instance should receive traffic; a shallow one can report healthy while broken.",
       "def_vi": "Điểm cuối mà nền tảng gọi để quyết định một thực thể có nên nhận lưu lượng hay không, kiểm hời hợt có thể báo khoẻ trong khi đã hỏng.",
+      "say": "The health check kept reporting green while every query timed out, so it never touched the database.",
       "tags": ["van-hanh"]
     },
     {
@@ -1147,6 +1224,7 @@
       "vi": "Tắt êm",
       "def_en": "Stopping new work, finishing in flight requests and closing connections before the process exits, so a deploy drops no request.",
       "def_vi": "Ngừng nhận việc mới, làm nốt các yêu cầu đang chạy và đóng kết nối trước khi tiến trình thoát, để một lượt triển khai không đánh rơi yêu cầu nào.",
+      "say": "Without graceful shutdown each deploy quietly drops whatever requests were still in flight at that moment.",
       "tags": ["van-hanh"]
     },
     {
@@ -1155,6 +1233,7 @@
       "vi": "Sổ tay xử lý sự cố",
       "def_en": "A short document telling whoever is on call what to check and what to do for a specific alert.",
       "def_vi": "Tài liệu ngắn chỉ cho người trực biết phải kiểm gì và làm gì với một cảnh báo cụ thể.",
+      "say": "Write the runbook while the incident is fresh, because next time someone else will be woken up.",
       "tags": ["van-hanh", "quy-trinh"]
     },
     {
@@ -1163,6 +1242,7 @@
       "vi": "Rà soát sự cố không quy tội",
       "def_en": "A written review of an incident focused on the conditions that made the mistake likely, not on who typed the command.",
       "def_vi": "Bản rà soát sự cố tập trung vào những điều kiện khiến sai lầm dễ xảy ra, chứ không nhắm vào ai đã gõ lệnh.",
+      "say": "A blameless postmortem asks what made the mistake easy, never who typed the command that night.",
       "tags": ["van-hanh", "quy-trinh"]
     },
     {
@@ -1180,6 +1260,7 @@
       "vi": "Xoay vòng bí mật",
       "def_en": "Replacing credentials on a schedule and after any exposure, which requires the system to accept two valid keys during the change.",
       "def_vi": "Thay chứng chỉ theo lịch và sau mỗi lần lộ, việc này đòi hỏi hệ thống chấp nhận hai khoá hợp lệ trong lúc chuyển đổi.",
+      "say": "Secret rotation only works when the system accepts both keys during the change, so build that first.",
       "tags": ["bao-mat", "van-hanh"]
     },
     {
@@ -1197,6 +1278,7 @@
       "vi": "Kiểm đầu vào phía máy khách",
       "def_en": "Checks in the browser that improve the user experience but provide no security, because a caller can skip the page entirely.",
       "def_vi": "Các phép kiểm trong trình duyệt giúp trải nghiệm tốt hơn nhưng không có giá trị an ninh, vì bên gọi có thể bỏ qua hẳn trang web.",
+      "say": "Client side validation is a courtesy to the user and no protection whatsoever against a scripted caller.",
       "tags": ["bao-mat", "niem-tin-sai"]
     },
     {
@@ -1205,6 +1287,7 @@
       "vi": "Quyền tối thiểu",
       "def_en": "Giving each account and service only the access it needs, so one leaked credential exposes a small blast radius.",
       "def_vi": "Chỉ cấp cho mỗi tài khoản và dịch vụ đúng quyền nó cần, để một chứng chỉ bị lộ chỉ mở ra một phạm vi thiệt hại nhỏ.",
+      "say": "Least privilege means the export worker reads students and cannot touch payroll, whatever happens to its credentials.",
       "tags": ["bao-mat"]
     },
     {
@@ -1222,6 +1305,7 @@
       "vi": "Tiêm mã kịch bản vào trang",
       "def_en": "Injecting script that runs in another user's page, usually because untrusted text was inserted as markup rather than as text.",
       "def_vi": "Tiêm mã kịch bản chạy trong trang của người dùng khác, thường vì văn bản không tin cậy bị chèn vào dưới dạng mã đánh dấu thay vì dạng văn bản.",
+      "say": "That cross site scripting hole appeared the moment somebody rendered a comment as markup instead of text.",
       "tags": ["bao-mat"]
     },
     {
@@ -1239,6 +1323,7 @@
       "vi": "Tệp khoá phiên bản",
       "def_en": "A record of the exact dependency versions resolved once, so every machine and every build installs the same tree.",
       "def_vi": "Bản ghi các phiên bản phụ thuộc chính xác đã giải một lần, để mọi máy và mọi lượt dựng đều cài cùng một cây phụ thuộc.",
+      "say": "Commit the lockfile, otherwise the build machine resolves a slightly different tree than anyone tested locally.",
       "tags": ["bao-mat", "cong-cu"]
     },
     {
@@ -1256,6 +1341,7 @@
       "vi": "Bảo mật ở mức dòng",
       "def_en": "Enforcing in the database which rows an identity may see, so a forgotten filter in application code cannot leak data.",
       "def_vi": "Cưỡng chế ngay trong cơ sở dữ liệu việc một danh tính được thấy dòng nào, để một bộ lọc bị quên trong mã ứng dụng không làm lộ dữ liệu.",
+      "say": "Row level security saved us when a forgotten filter would otherwise have shown one faculty another faculty's records.",
       "tags": ["bao-mat", "du-lieu"]
     },
     {
@@ -1264,6 +1350,7 @@
       "vi": "Phòng thủ nhiều lớp",
       "def_en": "Placing independent controls so that one failed check is not the only thing standing between an attacker and the data.",
       "def_vi": "Đặt nhiều lớp kiểm soát độc lập, để một phép kiểm hỏng không phải là thứ duy nhất chắn giữa kẻ tấn công và dữ liệu.",
+      "say": "Defence in depth means the missing permission check was embarrassing rather than a breach worth reporting.",
       "tags": ["bao-mat"]
     }
   ]

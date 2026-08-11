@@ -18,6 +18,7 @@
       "vi": "Chồng giao thức TCP/IP",
       "def_en": "The four layer model actually used on the internet: link, internet, transport and application.",
       "def_vi": "Mô hình bốn tầng dùng thực tế trên internet: liên kết, liên mạng, giao vận và ứng dụng.",
+      "say": "Everything on this network runs the TCP/IP stack, so map your problem onto its four layers before arguing about OSI.",
       "tags": ["model"]
     },
     {
@@ -26,6 +27,7 @@
       "vi": "Đóng gói dữ liệu",
       "def_en": "Wrapping the data of one layer inside the header and payload of the layer below.",
       "def_vi": "Bọc dữ liệu của một tầng vào phần tiêu đề và tải của tầng dưới.",
+      "say": "Encapsulation is why the capture looks like an onion, peel one header off and the next protocol is sitting underneath.",
       "tags": ["model"]
     },
     {
@@ -34,6 +36,7 @@
       "vi": "Gói tin",
       "def_en": "A formatted unit of data carried by a packet switched network.",
       "def_vi": "Đơn vị dữ liệu có định dạng, được mạng chuyển mạch gói vận chuyển.",
+      "say": "Every packet is routed on its own, which is why two of them can take completely different paths to the same host.",
       "tags": ["basic"]
     },
     {
@@ -42,6 +45,7 @@
       "vi": "Khung dữ liệu",
       "def_en": "The data unit at the link layer, carrying a packet plus link level addressing and checks.",
       "def_vi": "Đơn vị dữ liệu ở tầng liên kết, chở một gói tin kèm địa chỉ và mã kiểm tra mức liên kết.",
+      "say": "The frame never leaves the local segment, the router strips it and builds a fresh one for the next hop.",
       "tags": ["basic"]
     },
     {
@@ -68,6 +72,7 @@
       "vi": "Giao thức gói dữ liệu người dùng",
       "def_en": "A connectionless transport protocol with no delivery guarantee, preferred when latency matters more than loss.",
       "def_vi": "Giao thức giao vận phi kết nối, không bảo đảm tới nơi, ưu tiên khi độ trễ quan trọng hơn mất gói.",
+      "say": "We moved the telemetry to UDP, losing a sample matters far less than waiting for a retransmission nobody will use.",
       "tags": ["transport"]
     },
     {
@@ -85,6 +90,7 @@
       "vi": "Bắt tay ba bước",
       "def_en": "The SYN, SYN-ACK, ACK exchange that opens a TCP connection.",
       "def_vi": "Chuỗi trao đổi SYN, SYN-ACK, ACK để mở một kết nối TCP.",
+      "say": "The three-way handshake never completed, so the firewall is dropping the reply, not the application refusing the connection.",
       "tags": ["transport"]
     },
     {
@@ -102,6 +108,7 @@
       "vi": "Điều khiển luồng",
       "def_en": "Stopping a fast sender from overwhelming a slow receiver.",
       "def_vi": "Ngăn phía phát nhanh làm ngập phía thu chậm.",
+      "say": "Flow control is about the receiver's buffer, so when the window goes to zero, blame the slow consumer.",
       "tags": ["transport"]
     },
     {
@@ -110,6 +117,7 @@
       "vi": "Nghẽn đầu hàng đợi",
       "def_en": "One stalled item at the front of a queue holding back everything behind it.",
       "def_vi": "Một phần tử kẹt ở đầu hàng đợi chặn hết những phần tử phía sau.",
+      "say": "Head-of-line blocking is exactly what streams were invented to remove, one stalled object should not freeze the whole page.",
       "tags": ["transport"]
     },
     {
@@ -118,6 +126,7 @@
       "vi": "Địa chỉ IP",
       "def_en": "The numeric identifier of an interface on an IP network, in version four or version six format.",
       "def_vi": "Định danh dạng số của một giao diện trên mạng IP, theo định dạng phiên bản bốn hoặc sáu.",
+      "say": "Hand me the IP address of the interface, not of the machine, because this box has three of them.",
       "tags": ["network"]
     },
     {
@@ -126,6 +135,7 @@
       "vi": "Mặt nạ mạng con",
       "def_en": "The bit pattern that splits an IP address into its network part and host part.",
       "def_vi": "Chuỗi bit chia địa chỉ IP thành phần mạng và phần máy trạm.",
+      "say": "A wrong subnet mask is the classic ghost fault, some hosts answer and everything outside the segment simply disappears.",
       "tags": ["network"]
     },
     {
@@ -134,6 +144,7 @@
       "vi": "Định tuyến liên miền không phân lớp",
       "def_en": "Writing an address block as a prefix and a length, such as slash twenty four, instead of fixed classes.",
       "def_vi": "Viết khối địa chỉ dưới dạng tiền tố kèm độ dài, ví dụ chéo hai bốn, thay cho các lớp cố định.",
+      "say": "Write it in CIDR notation on the ticket, a prefix and a length leave nothing for anyone to misread.",
       "tags": ["network"]
     },
     {
@@ -142,6 +153,7 @@
       "vi": "Biên dịch địa chỉ mạng",
       "def_en": "Rewriting addresses at a boundary so many private hosts share one public address.",
       "def_vi": "Viết lại địa chỉ tại điểm biên để nhiều máy trong mạng riêng dùng chung một địa chỉ công cộng.",
+      "say": "Behind NAT the logs all show one address, so we cannot tell which subscriber did it without the port and the timestamp.",
       "tags": ["network"]
     },
     {
@@ -150,6 +162,7 @@
       "vi": "Giao thức cấp phát địa chỉ động",
       "def_en": "A protocol that hands out IP addresses and network settings automatically.",
       "def_vi": "Giao thức tự động cấp địa chỉ IP và các tham số mạng cho máy trạm.",
+      "say": "Two DHCP servers on the same segment is how half the office ends up on a network nobody configured.",
       "tags": ["network"]
     },
     {
@@ -167,6 +180,7 @@
       "vi": "Giao thức phân giải địa chỉ",
       "def_en": "The protocol that maps an IP address to a link layer hardware address on the same segment.",
       "def_vi": "Giao thức ánh xạ địa chỉ IP sang địa chỉ phần cứng tầng liên kết trong cùng phân đoạn mạng.",
+      "say": "Check the ARP entry before you blame routing, the address may be resolving to a device that left the building.",
       "tags": ["link"]
     },
     {
@@ -175,6 +189,7 @@
       "vi": "Địa chỉ vật lý",
       "def_en": "The hardware identifier burned into a network interface.",
       "def_vi": "Định danh phần cứng gán sẵn cho card mạng.",
+      "say": "The MAC address only means something on this segment, so quoting it to the upstream provider will not help.",
       "tags": ["link"]
     },
     {
@@ -183,6 +198,7 @@
       "vi": "Bộ chuyển mạch",
       "def_en": "A link layer device that forwards frames only towards the port where the destination lives.",
       "def_vi": "Thiết bị tầng liên kết, chỉ chuyển khung ra cổng có máy đích.",
+      "say": "A switch learns where things live, which is why the very first frame to a quiet host still goes everywhere.",
       "tags": ["device"]
     },
     {
@@ -191,6 +207,7 @@
       "vi": "Bộ định tuyến",
       "def_en": "A network layer device that chooses the next hop for a packet between different networks.",
       "def_vi": "Thiết bị tầng mạng, chọn chặng kế tiếp cho gói tin đi giữa các mạng khác nhau.",
+      "say": "Ask the router what it thinks the next hop is, because what it thinks and what you configured may differ.",
       "tags": ["device"]
     },
     {
@@ -199,6 +216,7 @@
       "vi": "Mạng cục bộ ảo",
       "def_en": "A logical partition of one physical switch fabric into separate broadcast domains.",
       "def_vi": "Chia một hạ tầng chuyển mạch vật lý thành nhiều miền quảng bá tách biệt về mặt logic.",
+      "say": "Put the cameras in their own VLAN, they do not need to see the office broadcast traffic at all.",
       "tags": ["link"]
     },
     {
@@ -216,6 +234,7 @@
       "vi": "Giao thức định tuyến trạng thái liên kết",
       "def_en": "A link state interior routing protocol that builds a full topology map and runs shortest path first.",
       "def_vi": "Giao thức định tuyến nội miền theo trạng thái liên kết, dựng bản đồ tô-pô đầy đủ rồi chạy đường ngắn nhất.",
+      "say": "OSPF reconverged in under a second, so whatever the users felt for the next minute came from somewhere else.",
       "tags": ["routing"]
     },
     {
@@ -224,6 +243,7 @@
       "vi": "Bảng định tuyến",
       "def_en": "The per device table mapping destination prefixes to next hops.",
       "def_vi": "Bảng trên mỗi thiết bị, ánh xạ tiền tố đích sang chặng kế tiếp.",
+      "say": "Read the routing table on the box itself, the intended design and the installed prefixes drift apart surprisingly often.",
       "tags": ["routing"]
     },
     {
@@ -241,6 +261,7 @@
       "vi": "Ảo hoá chức năng mạng",
       "def_en": "Running network functions such as firewalls or gateways as software on standard servers.",
       "def_vi": "Chạy các chức năng mạng như tường lửa hay cổng kết nối dưới dạng phần mềm trên máy chủ phổ thông.",
+      "say": "NFV moved the firewall onto a server, which made it easy to deploy and much harder to reason about performance.",
       "tags": ["architecture"]
     },
     {
@@ -249,6 +270,7 @@
       "vi": "Chất lượng dịch vụ",
       "def_en": "Mechanisms that give some traffic classes better delay, loss or rate than others.",
       "def_vi": "Các cơ chế cho một số lớp lưu lượng được ưu tiên hơn về trễ, mất gói hoặc tốc độ.",
+      "say": "QoS does not create bandwidth, it only decides who suffers first when the link is already full.",
       "tags": ["qos"]
     },
     {
@@ -257,6 +279,7 @@
       "vi": "Cân bằng tải",
       "def_en": "Spreading traffic or work across several paths or servers to avoid a hotspot.",
       "def_vi": "Trải lưu lượng hoặc công việc ra nhiều đường hoặc nhiều máy chủ để tránh điểm nóng.",
+      "say": "Load balancing hides a dying backend beautifully, right up to the moment the healthy ones cannot take the extra share.",
       "tags": ["qos"]
     },
     {
@@ -265,6 +288,7 @@
       "vi": "Mạng phân phối nội dung",
       "def_en": "A network of caches placed near users so content travels a short distance.",
       "def_vi": "Mạng các máy chủ đệm đặt gần người dùng, để nội dung chỉ phải đi quãng ngắn.",
+      "say": "Once the assets sat on a CDN the complaints from the far region stopped, distance was the whole story.",
       "tags": ["application"]
     },
     {
@@ -273,6 +297,7 @@
       "vi": "Máy chủ trung gian",
       "def_en": "An intermediary that forwards requests on behalf of a client or a server.",
       "def_vi": "Máy trung gian, chuyển tiếp yêu cầu thay cho máy khách hoặc máy chủ.",
+      "say": "Every request goes through the proxy, so if it is not in the proxy log it never left the building.",
       "tags": ["application"]
     },
     {
@@ -281,6 +306,7 @@
       "vi": "Bảo mật tầng giao vận",
       "def_en": "The protocol that authenticates a server and encrypts the traffic above the transport layer.",
       "def_vi": "Giao thức xác thực máy chủ và mã hoá lưu lượng phía trên tầng giao vận.",
+      "say": "Terminate TLS at the edge if you must, but then be honest that the traffic inside the datacentre is plain.",
       "tags": ["security"]
     },
     {
@@ -289,6 +315,7 @@
       "vi": "Các phiên bản HTTP mới",
       "def_en": "Newer versions of the web protocol adding multiplexed streams, header compression and, in version three, a QUIC transport.",
       "def_vi": "Các phiên bản mới của giao thức web, thêm luồng ghép kênh, nén tiêu đề, và ở phiên bản ba là nền giao vận QUIC.",
+      "say": "Moving to the newer HTTP versions gave us multiplexed streams, so one slow response no longer holds up the rest.",
       "tags": ["application"]
     },
     {
@@ -297,6 +324,7 @@
       "vi": "Kênh hai chiều thời gian thực",
       "def_en": "A protocol upgrading an HTTP connection into a persistent two way channel.",
       "def_vi": "Giao thức nâng một kết nối HTTP thành kênh hai chiều duy trì liên tục.",
+      "say": "The dashboard uses a WebSocket, so a proxy that buffers responses will make it look frozen even though nothing crashed.",
       "tags": ["application"]
     },
     {
@@ -305,6 +333,7 @@
       "vi": "Phình bộ đệm",
       "def_en": "Excessively large queues that add delay instead of preventing loss.",
       "def_vi": "Hàng đợi quá lớn, làm tăng trễ thay vì tránh được mất gói.",
+      "say": "Bufferbloat is why the video call breaks whenever someone uploads, the queue swallows a second of delay before dropping anything.",
       "tags": ["qos"]
     },
     {
@@ -313,6 +342,7 @@
       "vi": "Lệnh dò đường đi gói tin",
       "def_en": "A diagnostic that reveals the sequence of hops a packet takes towards a destination.",
       "def_vi": "Công cụ chẩn đoán, cho thấy dãy các chặng mà gói tin đi qua để tới đích.",
+      "say": "Traceroute shows you the forward path only, so a hop that looks slow may simply be busy answering your probe.",
       "tags": ["tooling"]
     },
     {
@@ -321,6 +351,7 @@
       "vi": "Mạng ngang hàng",
       "def_en": "An architecture where every node acts as both client and server, with no central point.",
       "def_vi": "Kiến trúc mà mọi nút vừa là máy khách vừa là máy chủ, không có điểm trung tâm.",
+      "say": "In a peer-to-peer design there is nobody to take down, which is the selling point and the operational nightmare.",
       "tags": ["architecture"]
     },
     {
@@ -329,6 +360,7 @@
       "vi": "Mạng phủ",
       "def_en": "A logical network built on top of another network, with its own addressing and paths.",
       "def_vi": "Mạng logic dựng trên nền một mạng khác, có cách đánh địa chỉ và đường đi riêng.",
+      "say": "The overlay network hides the physical path, so a link failure underneath shows up as latency you cannot explain from above.",
       "tags": ["architecture"]
     },
     {
@@ -364,6 +396,7 @@
       "vi": "Bảng địa chỉ vật lý của switch",
       "def_en": "The table a switch builds by learning source addresses, mapping each hardware address to the port where it was last seen.",
       "def_vi": "Bảng mà switch tự học từ địa chỉ nguồn, ánh xạ mỗi địa chỉ phần cứng sang cổng vừa nhìn thấy nó gần nhất.",
+      "say": "Dump the MAC address table and you will see which port that device was last heard on, which usually ends the search.",
       "tags": ["link", "switching"]
     },
     {
@@ -399,6 +432,7 @@
       "vi": "Tự cấu hình địa chỉ không trạng thái",
       "def_en": "The IPv6 mechanism where a host forms its own address from a prefix advertised by the router, without a server keeping state.",
       "def_vi": "Cơ chế của IPv6 cho phép máy trạm tự tạo địa chỉ từ tiền tố mà bộ định tuyến quảng bá, không cần máy chủ giữ trạng thái.",
+      "say": "With SLAAC the host builds its own address from the router advertisement, so there is no lease anyone can look up.",
       "tags": ["network", "ipv6"]
     },
     {
@@ -416,6 +450,7 @@
       "vi": "Cầu nối IPv6 sang IPv4",
       "def_en": "A translation pair letting an IPv6 only client reach an IPv4 only server, with DNS64 synthesising an IPv6 answer that NAT64 then translates.",
       "def_vi": "Cặp cơ chế biên dịch giúp máy chỉ có IPv6 truy cập máy chủ chỉ có IPv4, DNS64 tổng hợp câu trả lời IPv6 rồi NAT64 biên dịch lưu lượng.",
+      "say": "Our address family translation relies on NAT and a synthesising DNS, so a client with no legacy address still reaches legacy servers.",
       "tags": ["network", "ipv6"]
     },
     {
@@ -433,6 +468,7 @@
       "vi": "Số chặng còn sống của gói tin",
       "def_en": "A hop counter in the IP header, decremented by each router, that discards a packet when it reaches zero to kill routing loops.",
       "def_vi": "Bộ đếm chặng trong tiêu đề IP, mỗi bộ định tuyến trừ đi một, gói bị huỷ khi về không để triệt vòng lặp định tuyến.",
+      "say": "The TTL was already low when the packet reached us, so the loop is upstream and not inside our fabric.",
       "tags": ["network"]
     },
     {
@@ -441,6 +477,7 @@
       "vi": "Phân mảnh gói IP",
       "def_en": "Splitting a packet that exceeds a link MTU into smaller pieces reassembled only at the destination, which costs efficiency and loses everything if one fragment is dropped.",
       "def_vi": "Chia gói lớn hơn MTU của liên kết thành các mảnh nhỏ, chỉ ghép lại tại đích, cách này kém hiệu quả và mất một mảnh là hỏng cả gói.",
+      "say": "Avoid IP fragmentation if you can, losing one fragment throws away the entire packet and the sender never learns why.",
       "tags": ["network"]
     },
     {
@@ -476,6 +513,7 @@
       "vi": "Thuật toán tắc nghẽn dựa trên mất gói",
       "def_en": "The default loss based congestion control on Linux, growing the window along a cubic curve of time since the last reduction.",
       "def_vi": "Thuật toán điều khiển tắc nghẽn mặc định trên Linux, dựa vào mất gói, tăng cửa sổ theo đường cong bậc ba tính từ lần giảm gần nhất.",
+      "say": "CUBIC only backs off when it loses a packet, so on a deeply buffered link it keeps the queue permanently full.",
       "tags": ["transport", "congestion"]
     },
     {
@@ -502,6 +540,7 @@
       "vi": "Thời hạn chờ trước khi truyền lại",
       "def_en": "The timer, derived from the smoothed round trip time and its variance, after which TCP assumes a segment is lost and resends it.",
       "def_vi": "Bộ định thời tính từ trễ khứ hồi làm trơn và độ biến động của nó, hết hạn thì TCP coi như đoạn đã mất và gửi lại.",
+      "say": "When the retransmission timeout fires you lose a full round of progress, which is why fast recovery matters so much.",
       "tags": ["transport"]
     },
     {
@@ -519,6 +558,7 @@
       "vi": "Trạng thái chờ sau khi đóng kết nối",
       "def_en": "The state the side closing a TCP connection first holds for twice the maximum segment lifetime, so late duplicates cannot confuse a new connection on the same port pair.",
       "def_vi": "Trạng thái mà bên chủ động đóng kết nối TCP giữ trong hai lần tuổi thọ đoạn tối đa, để gói đến muộn không làm lẫn với kết nối mới trên cùng cặp cổng.",
+      "say": "All those sockets in the TIME_WAIT state are not a leak, they are the protocol protecting the next connection.",
       "tags": ["transport"]
     },
     {
@@ -536,6 +576,7 @@
       "vi": "Các loại bản ghi DNS",
       "def_en": "The typed entries in a zone, including A and AAAA for addresses, CNAME for aliases, MX for mail routing and TXT for arbitrary text such as policy records.",
       "def_vi": "Các mục có kiểu trong vùng tên miền, gồm A và AAAA cho địa chỉ, CNAME cho bí danh, MX cho định tuyến thư và TXT cho văn bản tuỳ ý như bản ghi chính sách.",
+      "say": "Learn the DNS record types properly, half the migration incidents I have seen were an alias where an address record belonged.",
       "tags": ["dns", "application"]
     },
     {
@@ -562,6 +603,7 @@
       "vi": "DNS qua HTTPS và qua TLS",
       "def_en": "Two ways of carrying DNS inside an encrypted channel, one over HTTPS on the web port and one over TLS on its own port, hiding queries from the path.",
       "def_vi": "Hai cách chở DNS trong kênh mã hoá, một chạy trên HTTPS ở cổng web và một chạy trên TLS ở cổng riêng, giấu truy vấn khỏi những nút trên đường.",
+      "say": "Once the browser enabled DoH our resolver logs went quiet, and the security team lost a view they relied on.",
       "tags": ["dns", "security"]
     },
     {
@@ -570,6 +612,7 @@
       "vi": "Đầu độc bộ đệm DNS",
       "def_en": "Injecting a forged answer into a resolver's cache so later clients are sent to an attacker controlled address.",
       "def_vi": "Chèn câu trả lời giả vào bộ đệm của máy phân giải, khiến các máy khách sau đó bị dẫn tới địa chỉ do kẻ tấn công kiểm soát.",
+      "say": "DNS cache poisoning is why we validate answers, a forged reply that lands first will serve every client behind that resolver.",
       "tags": ["dns", "security"]
     },
     {
@@ -587,6 +630,7 @@
       "vi": "Phương thức HTTP và tính lặp lại an toàn",
       "def_en": "Verbs such as GET, PUT, POST and DELETE, where safe methods change nothing and idempotent methods give the same result when repeated.",
       "def_vi": "Các động từ như GET, PUT, POST và DELETE, trong đó phương thức an toàn không thay đổi gì còn phương thức lặp lại được cho cùng kết quả khi gọi nhiều lần.",
+      "say": "Whoever wrote that retry logic ignored HTTP methods and idempotence, so a repeated post created the order twice.",
       "tags": ["http", "application"]
     },
     {
@@ -595,6 +639,7 @@
       "vi": "Mẩu dữ liệu phiên lưu ở trình duyệt",
       "def_en": "A small piece of state a server asks the browser to store and return on later requests, carrying attributes such as domain, path, secure and same site.",
       "def_vi": "Mẩu trạng thái nhỏ mà máy chủ nhờ trình duyệt lưu rồi gửi lại ở các yêu cầu sau, kèm các thuộc tính như miền, đường dẫn, chỉ gửi qua kênh an toàn và phạm vi cùng trang.",
+      "say": "Set the cookie with the secure and same site attributes, otherwise you are trusting the browser to guess your intent.",
       "tags": ["http", "application"]
     },
     {
@@ -612,6 +657,7 @@
       "vi": "Giữ kết nối để dùng lại",
       "def_en": "Holding a TCP connection open across several HTTP requests so later requests skip the handshake and the slow start ramp.",
       "def_vi": "Giữ một kết nối TCP mở qua nhiều yêu cầu HTTP, nhờ đó các yêu cầu sau không phải bắt tay lại và không phải leo lại từ pha khởi động chậm.",
+      "say": "Keep-alive and connection reuse are free latency, every request that skips the handshake also skips the slow start ramp.",
       "tags": ["http", "transport"]
     },
     {
@@ -638,6 +684,7 @@
       "vi": "Giao thức định tuyến vector khoảng cách",
       "def_en": "An early distance vector protocol using hop count as its only metric, limited to fifteen hops and slow to converge after a failure.",
       "def_vi": "Giao thức vector khoảng cách đời đầu, chỉ dùng số chặng làm độ đo, giới hạn mười lăm chặng và hội tụ chậm sau sự cố.",
+      "say": "Nobody runs RIP on purpose any more, but you will still find it alive in a forgotten corner of the estate.",
       "tags": ["routing"]
     },
     {
@@ -646,6 +693,7 @@
       "vi": "Giao thức trạng thái liên kết chạy trực tiếp trên tầng liên kết",
       "def_en": "A link state interior gateway protocol similar in spirit to OSPF but carried directly over the link layer, which makes it address family agnostic.",
       "def_vi": "Giao thức định tuyến nội miền theo trạng thái liên kết, tinh thần giống OSPF nhưng chạy thẳng trên tầng liên kết nên không phụ thuộc họ địa chỉ.",
+      "say": "The carrier runs IS-IS rather than OSPF, mostly because it rides on the link layer and ignores which address family you use.",
       "tags": ["routing"]
     },
     {
@@ -663,6 +711,7 @@
       "vi": "Hệ tự trị",
       "def_en": "A set of prefixes under one routing policy, identified by an AS number, which is the unit BGP reasons about.",
       "def_vi": "Tập các tiền tố nằm dưới cùng một chính sách định tuyến, được nhận diện bằng số hiệu hệ tự trị, đây là đơn vị mà BGP làm việc.",
+      "say": "Which autonomous system announced that prefix? Until we know, we are arguing about a route nobody in this room controls.",
       "tags": ["routing"]
     },
     {
@@ -689,6 +738,7 @@
       "vi": "Biên dịch địa chỉ ở quy mô nhà mạng",
       "def_en": "A second layer of address translation inside the operator network so many subscribers share one public address, which breaks inbound reachability and complicates abuse tracing.",
       "def_vi": "Lớp biên dịch địa chỉ thứ hai đặt trong mạng nhà cung cấp, nhiều thuê bao dùng chung một địa chỉ công cộng, khiến kết nối đi vào không còn khả thi và việc truy vết lạm dụng khó hơn.",
+      "say": "Carrier grade NAT is why the abuse report was useless, thousands of subscribers shared that address at the same moment.",
       "tags": ["network", "nat"]
     },
     {
@@ -697,6 +747,7 @@
       "vi": "Các kiểu ánh xạ của NAT",
       "def_en": "How a translator reuses a mapping, from endpoint independent, which lets any external host reply, to address and port dependent, often called symmetric, which defeats simple hole punching.",
       "def_vi": "Cách một bộ biên dịch dùng lại ánh xạ, từ kiểu không phụ thuộc điểm cuối, cho phép mọi máy ngoài trả lời, tới kiểu phụ thuộc cả địa chỉ và cổng, thường gọi là đối xứng, làm hỏng kỹ thuật đục lỗ đơn giản.",
+      "say": "The NAT mapping behaviour here is symmetric, which is exactly why hole punching failed and every call fell back to a relay.",
       "tags": ["network", "nat"]
     },
     {
@@ -714,6 +765,7 @@
       "vi": "Bộ giao thức bảo mật tầng mạng",
       "def_en": "A suite that authenticates and encrypts IP packets, in transport mode for host to host and tunnel mode for gateway to gateway.",
       "def_vi": "Bộ giao thức xác thực và mã hoá gói IP, chế độ giao vận dùng giữa hai máy trạm và chế độ đường hầm dùng giữa hai cổng biên.",
+      "say": "We run IPsec in tunnel mode between the gateways, so the branch office never has to configure anything per host.",
       "tags": ["security", "network"]
     },
     {
@@ -740,6 +792,7 @@
       "vi": "Phát hiện sớm ngẫu nhiên",
       "def_en": "An active queue management scheme that drops or marks packets probabilistically as the average queue grows, before the buffer is full.",
       "def_vi": "Cơ chế quản lý hàng đợi chủ động, huỷ hoặc đánh dấu gói theo xác suất khi hàng đợi trung bình tăng lên, trước lúc bộ đệm đầy.",
+      "say": "Turn on RED and the queue starts signalling early, which beats waiting for the buffer to overflow and punish everyone at once.",
       "tags": ["qos", "aqm"]
     },
     {
@@ -757,6 +810,7 @@
       "vi": "Hàng đợi công bằng theo luồng",
       "def_en": "Giving each flow its own queue and serving them in turn so one bulk transfer cannot starve interactive traffic.",
       "def_vi": "Cấp cho mỗi luồng một hàng đợi riêng và phục vụ luân phiên, nhờ vậy một phiên tải lớn không bỏ đói lưu lượng tương tác.",
+      "say": "Fair queueing was enough on its own, the bulk backup stopped starving the terminal sessions without anybody classifying traffic.",
       "tags": ["qos", "aqm"]
     },
     {
@@ -774,6 +828,7 @@
       "vi": "Giao thức điều khiển bảng luồng",
       "def_en": "The southbound protocol letting a controller install match and action rules in the flow tables of a switch.",
       "def_vi": "Giao thức hướng nam, cho phép bộ điều khiển cài các luật so khớp và hành động vào bảng luồng của thiết bị chuyển mạch.",
+      "say": "OpenFlow gave the controller direct access to the flow tables, and it also made the controller a single point of failure.",
       "tags": ["sdn", "architecture"]
     },
     {
@@ -800,6 +855,7 @@
       "vi": "Hiện tượng dồn về một nút thu",
       "def_en": "A datacentre collapse pattern where many servers answer one request at once, the top of rack buffer overflows and throughput falls to almost nothing during timeouts.",
       "def_vi": "Kiểu sụp đổ trong trung tâm dữ liệu, nhiều máy chủ cùng trả lời một yêu cầu, bộ đệm switch đầu tủ tràn và thông lượng tụt gần bằng không trong lúc chờ hết thời hạn truyền lại.",
+      "say": "TCP incast hits when every server answers at once, the top of rack buffer overflows and throughput collapses during the timeouts.",
       "tags": ["datacenter", "transport"]
     },
     {
@@ -826,6 +882,7 @@
       "vi": "Gọi thủ tục từ xa trên nền HTTP/2",
       "def_en": "A remote procedure call framework over HTTP/2 using binary schemas, with unary and streaming calls multiplexed on one connection.",
       "def_vi": "Khung gọi thủ tục từ xa chạy trên HTTP/2, dùng lược đồ nhị phân, các lời gọi đơn và lời gọi luồng được ghép kênh trên cùng một kết nối.",
+      "say": "We expose gRPC internally and a plain web interface at the edge, because the partners cannot handle binary schemas.",
       "tags": ["application"]
     },
     {
@@ -834,6 +891,7 @@
       "vi": "Giao thức đồng bộ thời gian mạng",
       "def_en": "A protocol that keeps clocks aligned by exchanging timestamps and estimating the offset, typically reaching a few milliseconds over the internet.",
       "def_vi": "Giao thức giữ đồng hồ khớp nhau bằng cách trao đổi nhãn thời gian rồi ước lượng độ lệch, trên internet thường đạt sai số vài mili giây.",
+      "say": "If NTP drifts, the correlation across logs falls apart and every incident timeline you build afterwards is fiction.",
       "tags": ["timing", "application"]
     },
     {
@@ -851,6 +909,7 @@
       "vi": "Lệnh đo thông và trễ khứ hồi",
       "def_en": "A tool that sends ICMP echo requests to measure reachability and round trip time, though many devices deprioritise or block the replies.",
       "def_vi": "Công cụ gửi yêu cầu vọng ICMP để đo khả năng tới được và trễ khứ hồi, tuy nhiên nhiều thiết bị hạ ưu tiên hoặc chặn hẳn phản hồi.",
+      "say": "Ping said the host was down, but the host was fine and simply configured to ignore echo requests.",
       "tags": ["tooling", "diagnostics"]
     },
     {
@@ -877,6 +936,7 @@
       "vi": "Bản ghi luồng lưu lượng",
       "def_en": "Per flow summaries exported by routers, giving volumes and endpoints over time without storing packet payloads.",
       "def_vi": "Bản tóm tắt theo từng luồng do bộ định tuyến xuất ra, cho biết khối lượng và các điểm cuối theo thời gian mà không phải lưu nội dung gói.",
+      "say": "Flow records tell us who talked to whom and how much, without keeping a single byte of anyone's payload.",
       "tags": ["tooling", "measurement"]
     },
     {
@@ -921,6 +981,7 @@
       "vi": "Mức tin cậy của nguồn tuyến",
       "def_en": "A local preference number deciding which protocol wins when two of them offer the same prefix, applied before any protocol metric is looked at.",
       "def_vi": "Con số ưu tiên cục bộ, quyết định giao thức nào thắng khi hai giao thức cùng đưa ra một tiền tố, xét trước khi nhìn tới bất kỳ độ đo nào của giao thức.",
+      "say": "The static route won on administrative distance, so the routing protocol never got a chance to offer its own answer.",
       "tags": ["routing"]
     },
     {
@@ -938,6 +999,7 @@
       "vi": "Bộ phản chiếu tuyến trong BGP",
       "def_en": "A router allowed to pass routes between internal peers so an autonomous system avoids a full mesh, at the price of clients seeing only the paths the reflector liked.",
       "def_vi": "Bộ định tuyến được phép chuyển tiếp tuyến giữa các phía nội bộ, giúp hệ tự trị khỏi phải nối lưới đầy đủ, cái giá là các máy khách chỉ thấy những đường mà bộ phản chiếu đã chọn.",
+      "say": "A BGP route reflector saved us from a full mesh, and it also means the clients only ever see the paths it preferred.",
       "tags": ["routing"]
     },
     {
@@ -955,6 +1017,7 @@
       "vi": "Kiểm chứng nguồn phát sinh của tuyến",
       "def_en": "Signed objects stating which autonomous system may originate a prefix, letting a router mark an announcement invalid, though they say nothing about the rest of the path.",
       "def_vi": "Các đối tượng có chữ ký cho biết hệ tự trị nào được phép phát sinh một tiền tố, nhờ đó bộ định tuyến đánh dấu quảng bá không hợp lệ, tuy nhiên chúng không nói gì về phần còn lại của đường đi.",
+      "say": "RPKI origin validation would have caught that hijack, though it says nothing about the rest of the path.",
       "tags": ["routing", "security"]
     },
     {
@@ -990,6 +1053,7 @@
       "vi": "Đường hầm tầng hai chạy trên nền tầng ba",
       "def_en": "Wrapping an Ethernet frame inside a UDP packet so a link layer segment can stretch across a routed fabric, with a wider identifier than the twelve bit VLAN tag.",
       "def_vi": "Bọc khung Ethernet vào một gói UDP để phân đoạn tầng liên kết trải được trên hạ tầng đã định tuyến, dùng định danh rộng hơn nhãn VLAN mười hai bit.",
+      "say": "VXLAN lets the segment stretch across the routed fabric, which is convenient until you have to troubleshoot two headers at once.",
       "tags": ["datacenter", "overlay"]
     },
     {
@@ -1007,6 +1071,7 @@
       "vi": "Ghim lại kích thước đoạn tại thiết bị trung gian",
       "def_en": "A middlebox rewriting the segment size announced in the handshake so both ends choose packets that fit a tunnel, which is the practical repair when control messages are filtered.",
       "def_vi": "Thiết bị trung gian viết lại kích thước đoạn được báo lúc bắt tay, để hai đầu chọn gói vừa với đường hầm, đây là cách chữa thực tế khi thông điệp điều khiển bị chặn.",
+      "say": "MSS clamping on the tunnel interface fixed it in one line, after two days of chasing a path discovery ghost.",
       "tags": ["transport", "tunnel"]
     },
     {
@@ -1015,6 +1080,7 @@
       "vi": "Gửi dữ liệu ngay trong gói mở kết nối",
       "def_en": "Carrying application data in the very first packet using a cookie earned on an earlier connection, which saves a round trip and makes that data replayable.",
       "def_vi": "Chở dữ liệu ứng dụng ngay trong gói đầu tiên nhờ một cookie có được từ lần kết nối trước, cách này tiết kiệm một vòng khứ hồi và khiến dữ liệu đó có thể bị phát lại.",
+      "say": "TCP Fast Open saves a round trip, but ask the security team first, because that early data can be replayed.",
       "tags": ["transport"]
     },
     {
@@ -1023,6 +1089,7 @@
       "vi": "Trì hoãn báo nhận để ghép chung",
       "def_en": "A receiver holding an acknowledgement back for a short timer hoping to piggyback it on outgoing data, which saves packets and occasionally deadlocks with a waiting sender.",
       "def_vi": "Bên nhận giữ báo nhận lại trong một khoảng định thời ngắn với hy vọng ghép chung vào dữ liệu gửi đi, cách này tiết kiệm gói nhưng đôi khi kẹt cứng với một bên gửi cũng đang chờ.",
+      "say": "The stall came from delayed acknowledgement meeting a sender that was waiting for more data, and neither side would move.",
       "tags": ["transport"]
     },
     {
@@ -1049,6 +1116,7 @@
       "vi": "Khung dữ liệu cỡ lớn",
       "def_en": "Frames carrying about six times the standard payload, which lifts efficiency only when every device on the segment agrees, otherwise oversized frames are discarded without a word.",
       "def_vi": "Khung chở tải lớn gấp khoảng sáu lần mức chuẩn, chỉ tăng hiệu quả khi mọi thiết bị trong phân đoạn cùng thống nhất, nếu không khung quá cỡ sẽ bị bỏ mà không báo gì.",
+      "say": "Jumbo frames only pay off when every device on the segment agrees, otherwise oversized frames vanish without a single log line.",
       "tags": ["link"]
     },
     {
@@ -1066,6 +1134,7 @@
       "vi": "Chuyển mạch cắt xuyên",
       "def_en": "Starting to forward a frame as soon as the destination address has been read, which cuts latency and also forwards corrupted frames that a store and forward switch would have dropped.",
       "def_vi": "Bắt đầu chuyển tiếp khung ngay khi đọc xong địa chỉ đích, cách này giảm độ trễ và cũng đẩy đi cả những khung đã hỏng mà kiểu lưu rồi chuyển sẽ loại bỏ.",
+      "say": "Cut-through switching shaves microseconds and happily forwards corrupted frames, so weigh that against what your workload actually needs.",
       "tags": ["link", "switching"]
     },
     {
@@ -1083,6 +1152,7 @@
       "vi": "Bộ đệm chống rung pha ở phía nhận",
       "def_en": "A small store at the receiver holding arriving media briefly so uneven arrival times become an even playout, trading added delay for fewer gaps in the sound.",
       "def_vi": "Kho nhỏ ở phía nhận, giữ lại dữ liệu vừa tới trong chốc lát để thời điểm tới không đều trở thành nhịp phát đều, đánh đổi thêm trễ lấy bớt chỗ hụt tiếng.",
+      "say": "Grow the jitter buffer and the gaps disappear, but the conversation starts feeling like a radio interview from another continent.",
       "tags": ["realtime"]
     },
     {
@@ -1091,6 +1161,7 @@
       "vi": "Thông lượng thực sự có ích",
       "def_en": "The rate of useful application bytes actually delivered, which always sits below the raw link rate once headers, gaps and retransmissions are taken out.",
       "def_vi": "Tốc độ số byte thực sự có ích cho ứng dụng, luôn thấp hơn tốc độ thô của đường truyền sau khi trừ tiêu đề, các khoảng nghỉ và phần truyền lại.",
+      "say": "Quote goodput, not link rate, because the customer only ever feels the useful bytes that actually arrived.",
       "tags": ["measurement"]
     },
     {
@@ -1108,6 +1179,7 @@
       "vi": "Hàng đợi ưu tiên tuyệt đối",
       "def_en": "Always serving the high priority queue first, which gives that class the lowest possible delay and starves everything below it if the class itself is not rate limited.",
       "def_vi": "Luôn phục vụ hàng đợi ưu tiên cao trước, cách này cho lớp đó độ trễ thấp nhất có thể và bỏ đói mọi lớp phía dưới nếu chính lớp đó không bị giới hạn tốc độ.",
+      "say": "Strict priority queueing gives that class the lowest delay and starves everything below it unless you rate limit the class itself.",
       "tags": ["qos"]
     },
     {
@@ -1116,6 +1188,7 @@
       "vi": "Rải gói đều theo thời gian",
       "def_en": "Spreading a window of packets evenly across the round trip instead of releasing them in one burst, which keeps queues shallow and is a precondition for rate based congestion control.",
       "def_vi": "Rải một cửa sổ gói đều ra suốt vòng khứ hồi thay vì tung hết trong một cụm, cách này giữ hàng đợi nông và là điều kiện cần cho điều khiển tắc nghẽn theo tốc độ.",
+      "say": "Packet pacing keeps the queue shallow by spreading the window across the round trip instead of firing it as one burst.",
       "tags": ["transport", "qos"]
     },
     {
@@ -1142,6 +1215,7 @@
       "vi": "Cổng ra mặc định của máy trạm",
       "def_en": "The next hop a host uses for every destination its own mask calls remote, which is why a host with a wrong mask can reach a few neighbours and nothing beyond them.",
       "def_vi": "Chặng kế tiếp mà máy trạm dùng cho mọi đích bị mặt nạ của chính nó coi là ở xa, vì vậy một máy đặt sai mặt nạ có thể tới được vài láng giềng mà không tới được gì xa hơn.",
+      "say": "The host had a wrong mask, so it reached its neighbours and never once asked the default gateway for anything else.",
       "tags": ["network"]
     },
     {
@@ -1150,6 +1224,7 @@
       "vi": "Trả lời hộ yêu cầu phân giải địa chỉ",
       "def_en": "A router answering an address resolution request on behalf of a host on another segment, which papers over a wrong subnet mask and hides the real configuration error.",
       "def_vi": "Bộ định tuyến trả lời thay cho một máy ở phân đoạn khác trong yêu cầu phân giải địa chỉ, cách này che đi việc đặt sai mặt nạ mạng và giấu luôn lỗi cấu hình thật.",
+      "say": "Proxy ARP made the broken subnet mask look harmless, which is exactly why the real fault survived three rounds of troubleshooting.",
       "tags": ["link"]
     },
     {
@@ -1158,6 +1233,7 @@
       "vi": "Thông báo ánh xạ địa chỉ mà không ai hỏi",
       "def_en": "An unsolicited announcement of an address binding, used to refresh neighbour caches after a failover and just as useful to an attacker who wants to steal that binding.",
       "def_vi": "Thông báo về ánh xạ địa chỉ mà không ai yêu cầu, dùng để làm mới bộ đệm láng giềng sau khi chuyển dự phòng, và cũng hữu ích y như vậy cho kẻ muốn cướp ánh xạ đó.",
+      "say": "The failover sent a gratuitous ARP and traffic moved instantly, which is also how an attacker steals a binding.",
       "tags": ["link", "security"]
     },
     {
@@ -1175,6 +1251,7 @@
       "vi": "Trung chuyển yêu cầu cấp địa chỉ",
       "def_en": "A router turning a client's broadcast request into a unicast towards a server on another subnet, adding the receiving interface so the server can pick the right pool.",
       "def_vi": "Bộ định tuyến biến yêu cầu quảng bá của máy khách thành gói đơn hướng gửi tới máy chủ ở mạng con khác, kèm thông tin giao diện nhận để máy chủ chọn đúng dải địa chỉ.",
+      "say": "The DHCP relay agent stamps the receiving interface, which is how the server knows which pool this client belongs in.",
       "tags": ["network"]
     },
     {
@@ -1183,6 +1260,7 @@
       "vi": "Chặn máy chủ cấp địa chỉ giả mạo",
       "def_en": "A switch feature marking ports as trusted or not and dropping server style replies arriving on untrusted ports, which also builds the binding table address inspection relies on.",
       "def_vi": "Tính năng của switch, đánh dấu cổng là tin cậy hay không rồi huỷ các phản hồi kiểu máy chủ tới từ cổng không tin cậy, đồng thời dựng nên bảng ánh xạ mà cơ chế soi địa chỉ dựa vào.",
+      "say": "Enable DHCP snooping on the access ports, it stops the rogue server and it builds the binding table we need later.",
       "tags": ["link", "security"]
     },
     {
@@ -1200,6 +1278,7 @@
       "vi": "Hai hàng đợi của socket đang lắng nghe",
       "def_en": "A listening socket keeps half open connections in one queue and completed ones in another, so a slow application fills the second while a flood fills the first.",
       "def_vi": "Một socket đang lắng nghe giữ các kết nối mở dở ở một hàng đợi và các kết nối đã hoàn tất ở hàng đợi khác, nên ứng dụng chậm làm đầy hàng thứ hai còn một đợt tấn công làm đầy hàng thứ nhất.",
+      "say": "Watch both the SYN queue and the accept queue, a flood fills one and a lazy application fills the other.",
       "tags": ["transport"]
     },
     {
@@ -1208,6 +1287,7 @@
       "vi": "Nhét trạng thái vào số thứ tự khởi đầu",
       "def_en": "Encoding the connection state into the initial sequence number so a server stores nothing until the final acknowledgement comes back, surviving a flood at the cost of dropping some options.",
       "def_vi": "Mã hoá trạng thái kết nối vào số thứ tự khởi đầu, máy chủ không lưu gì cho tới khi báo nhận cuối trở về, nhờ vậy chịu được đợt tấn công nhưng phải bỏ một số tuỳ chọn.",
+      "say": "We turned on SYN cookies and rode out the flood, at the cost of losing a few options on those connections.",
       "tags": ["transport", "security"]
     },
     {
@@ -1216,6 +1296,7 @@
       "vi": "Nối lại phiên TLS đã thiết lập trước",
       "def_en": "Reusing a previously negotiated secret through a ticket or an identifier, so a repeat visit skips the certificate exchange and most of the handshake cost.",
       "def_vi": "Dùng lại bí mật đã thoả thuận trước đó qua một vé hoặc một định danh, nhờ vậy lần ghé sau bỏ qua bước trao chứng thư và phần lớn chi phí bắt tay.",
+      "say": "TLS session resumption is where most of the mobile latency win came from, a repeat visit skips the certificate exchange entirely.",
       "tags": ["security", "tls"]
     },
     {
@@ -1233,6 +1314,7 @@
       "vi": "Bắt buộc dùng kênh mã hoá cho một tên miền",
       "def_en": "A response header telling the browser to refuse plain connections to this name for a stated period, which still leaves the very first visit exposed unless the name ships inside the browser.",
       "def_vi": "Tiêu đề phản hồi bảo trình duyệt từ chối mọi kết nối không mã hoá tới tên này trong một khoảng đã nêu, lần ghé đầu tiên vẫn hở trừ khi tên đó được cài sẵn trong trình duyệt.",
+      "say": "HSTS protects every visit except the first one, so get the name onto the preload list before you call it done.",
       "tags": ["security", "http"]
     },
     {
@@ -1241,6 +1323,7 @@
       "vi": "Máy trung gian đứng trước máy chủ",
       "def_en": "An intermediary that looks to clients like the server itself, terminating the connection and choosing a backend, unlike a forward proxy which acts on behalf of the client.",
       "def_vi": "Máy trung gian mà máy khách tưởng là chính máy chủ, nó kết thúc kết nối rồi chọn máy phục vụ phía sau, khác với máy trung gian thuận vốn hành động thay cho máy khách.",
+      "say": "The reverse proxy looks like the server to the client, so all your access logs now describe one address.",
       "tags": ["application", "architecture"]
     },
     {
@@ -1249,6 +1332,7 @@
       "vi": "Ghim phiên vào một máy phục vụ",
       "def_en": "Pinning a client to the same backend across requests, which rescues an application keeping state in memory and immediately unbalances the pool it was meant to balance.",
       "def_vi": "Ghim một máy khách vào cùng một máy phục vụ qua nhiều yêu cầu, cách này cứu được ứng dụng giữ trạng thái trong bộ nhớ và lập tức làm mất cân bằng chính nhóm máy mà nó định cân bằng.",
+      "say": "Session affinity rescued the legacy app and immediately unbalanced the pool, which is the trade nobody writes down.",
       "tags": ["architecture", "qos"]
     },
     {
@@ -1284,6 +1368,7 @@
       "vi": "Nghe bản tin đăng ký nhóm để lọc lưu lượng nhóm",
       "def_en": "A switch reading group membership messages so a multicast stream reaches only the ports that asked for it, without which the stream floods the segment like a broadcast.",
       "def_vi": "Switch đọc các bản tin đăng ký nhóm để một luồng nhóm chỉ tới những cổng đã xin nhận, nếu không có nó thì luồng đó tràn khắp phân đoạn y như quảng bá.",
+      "say": "Without IGMP snooping the video stream floods every port, and the segment falls over the moment someone starts a broadcast.",
       "tags": ["link", "multicast"]
     },
     {
@@ -1292,6 +1377,7 @@
       "vi": "Kiểm đường về của địa chỉ nguồn",
       "def_en": "Dropping a packet whose source address would not be routed back out of the interface it arrived on, a cheap filter against spoofing that also breaks legitimate asymmetric paths.",
       "def_vi": "Huỷ gói có địa chỉ nguồn mà tuyến về không đi ra chính giao diện đã nhận gói đó, đây là bộ lọc rẻ tiền chống giả mạo nhưng cũng làm hỏng những đường bất đối xứng hợp lệ.",
+      "say": "The reverse path forwarding check is cheap anti spoofing, just remember it will also drop perfectly legitimate asymmetric traffic.",
       "tags": ["security", "routing"]
     },
     {
@@ -1309,6 +1395,7 @@
       "vi": "Quay đầu lưu lượng tại thiết bị biên dịch",
       "def_en": "An inside host reaching another inside host through the public address, which works only if the translator recognises the traffic and turns it around instead of sending it out.",
       "def_vi": "Một máy bên trong truy cập máy bên trong khác thông qua địa chỉ công cộng, việc này chỉ chạy nếu bộ biên dịch nhận ra lưu lượng đó và bẻ ngược lại thay vì đẩy ra ngoài.",
+      "say": "NAT hairpinning is why the office cannot reach its own web server through the public name, and the fix sits on the router.",
       "tags": ["network", "nat"]
     },
     {
@@ -1317,6 +1404,7 @@
       "vi": "Thu thập các ứng viên đường đi",
       "def_en": "Collecting every plausible address a peer might be reached on, local, reflexive and relayed, then actually testing the pairs in priority order until one of them works.",
       "def_vi": "Thu thập mọi địa chỉ khả dĩ có thể tới được một bên, gồm địa chỉ cục bộ, địa chỉ phản chiếu và địa chỉ trung chuyển, rồi thử thật từng cặp theo thứ tự ưu tiên cho tới khi có cặp chạy được.",
+      "say": "ICE candidate gathering takes a moment, so if setup feels slow, look at how many candidate pairs we are testing.",
       "tags": ["realtime"]
     },
     {
@@ -1325,6 +1413,7 @@
       "vi": "TCP chạy đồng thời trên nhiều đường",
       "def_en": "Splitting one connection into subflows over different interfaces while presenting a single byte stream to the application, even when the paths differ sharply in delay.",
       "def_vi": "Tách một kết nối thành nhiều luồng con chạy trên các giao diện khác nhau nhưng vẫn đưa cho ứng dụng một dòng byte duy nhất, kể cả khi các đường chênh nhau rất nhiều về trễ.",
+      "say": "Multipath TCP kept the session alive as the train left the station, the phone simply moved the traffic onto cellular.",
       "tags": ["transport"]
     },
     {
@@ -1333,6 +1422,7 @@
       "vi": "Tạm dừng lưu lượng theo lớp ưu tiên",
       "def_en": "Pausing one traffic class on a link so a lossless fabric never drops, at the risk of the pause propagating backwards and spreading the congestion across the fabric.",
       "def_vi": "Tạm dừng một lớp lưu lượng trên liên kết để hạ tầng không mất gói, rủi ro là lệnh tạm dừng lan ngược về phía sau và kéo tắc nghẽn ra khắp hạ tầng.",
+      "say": "Priority flow control keeps the fabric lossless, and it can push the congestion backwards until a distant switch starts pausing too.",
       "tags": ["datacenter", "qos"]
     },
     {
@@ -1341,6 +1431,7 @@
       "vi": "Cạn cổng tạm ở phía máy khách",
       "def_en": "A client running out of source ports towards one destination, because the connection tuple must stay unique and closed connections keep holding their port through the waiting state.",
       "def_vi": "Máy khách hết cổng nguồn khi nói với cùng một đích, vì bộ giá trị định danh kết nối phải luôn duy nhất và các kết nối đã đóng vẫn giữ cổng suốt trạng thái chờ.",
+      "say": "That was ephemeral port exhaustion, the client kept opening short connections to one destination and the closed ones held their ports.",
       "tags": ["transport"]
     },
     {
@@ -1349,6 +1440,7 @@
       "vi": "Bảng theo dõi kết nối của thiết bị có trạng thái",
       "def_en": "The per flow state table a stateful device keeps, whose size and timeout decide how many connections survive, and whose overflow kills new flows while old ones look healthy.",
       "def_vi": "Bảng trạng thái theo từng luồng mà thiết bị có trạng thái phải giữ, kích thước và thời hạn của nó quyết định bao nhiêu kết nối sống được, khi tràn thì luồng mới chết trong khi luồng cũ vẫn trông khoẻ mạnh.",
+      "say": "The connection tracking table filled up, so new flows died while every existing session looked perfectly healthy on the dashboard.",
       "tags": ["security", "network"]
     },
     {
@@ -1357,6 +1449,7 @@
       "vi": "Giới hạn lưu lượng đẩy lên bộ xử lý điều khiển",
       "def_en": "Rate limiting the traffic punted up to a router's own processor, so a flood of routing or diagnostic packets cannot take down a device whose forwarding path is perfectly healthy.",
       "def_vi": "Giới hạn tốc độ lưu lượng bị đẩy lên bộ xử lý của chính bộ định tuyến, để một đợt gói định tuyến hay gói chẩn đoán không hạ được thiết bị vốn có đường chuyển tiếp hoàn toàn khoẻ mạnh.",
+      "say": "Control plane policing is what keeps a diagnostic flood from taking down a router whose forwarding path is completely fine.",
       "tags": ["security", "routing"]
     },
     {
@@ -1365,6 +1458,7 @@
       "vi": "Địa chỉ chỉ có nghĩa trong một liên kết",
       "def_en": "An address valid on one link only and never routed, which every IPv6 interface configures by itself and which neighbour discovery and routing protocols use as their source.",
       "def_vi": "Địa chỉ chỉ có giá trị trong phạm vi một liên kết và không bao giờ được định tuyến, mọi giao diện IPv6 tự cấu hình lấy một cái, và cơ chế dò láng giềng cùng các giao thức định tuyến dùng nó làm địa chỉ nguồn.",
+      "say": "The routing session comes up on the link-local address, so do not be surprised that the global one is not involved.",
       "tags": ["network", "ipv6"]
     },
     {
@@ -1373,6 +1467,7 @@
       "vi": "Dò trùng địa chỉ trước khi đem dùng",
       "def_en": "A host asking the link whether the address it has just formed is already taken, before it starts using it, which is what makes configuration without a server safe.",
       "def_vi": "Máy trạm hỏi cả liên kết xem địa chỉ nó vừa tạo đã có ai dùng chưa, trước khi bắt đầu dùng, chính bước này làm cho việc tự cấu hình không cần máy chủ vẫn an toàn.",
+      "say": "Duplicate address detection is what makes configuring without a server safe, the host asks the link before it starts using the address.",
       "tags": ["network", "ipv6"]
     },
     {
@@ -1381,6 +1476,7 @@
       "vi": "Làm tràn bảng địa chỉ của switch",
       "def_en": "Filling the address table with forged sources until the switch has no room left to learn, after which it floods unknown traffic to every port and behaves like a hub.",
       "def_vi": "Nhồi bảng địa chỉ bằng các nguồn giả cho tới khi switch không còn chỗ để học, từ đó nó tràn lưu lượng lạ ra mọi cổng và hoạt động y hệt một bộ chia.",
+      "say": "MAC flooding turns your switch back into a hub, and from there the attacker simply reads everything on the segment.",
       "tags": ["link", "security"]
     },
     {
@@ -1389,6 +1485,7 @@
       "vi": "VLAN gốc trên cổng trung kế",
       "def_en": "The one VLAN whose frames cross a trunk with no tag at all, so a mismatch between the two ends quietly welds two different segments into one.",
       "def_vi": "VLAN duy nhất có khung đi qua cổng trung kế mà không mang nhãn nào, nên hai đầu đặt lệch nhau sẽ lặng lẽ hàn hai phân đoạn khác nhau thành một.",
+      "say": "A mismatched native VLAN on the trunk silently welds two segments together, and nothing in the interface counters will tell you.",
       "tags": ["link"]
     }
   ]

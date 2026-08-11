@@ -45,6 +45,7 @@
       "vi": "Lược đồ công cụ",
       "def_en": "The typed declaration of a tool's name, purpose and parameters that the model reads to decide when and how to call it.",
       "def_vi": "Phần khai báo có kiểu về tên, mục đích và tham số của công cụ, mà mô hình đọc để quyết định khi nào và gọi ra sao.",
+      "say": "Write the tool schema like documentation, the model has nothing else to go on when it decides to call it.",
       "tags": ["tools"]
     },
     {
@@ -80,6 +81,7 @@
       "vi": "Mẫu suy luận xen hành động",
       "def_en": "Interleaving a reasoning step with an action step, so the model thinks, acts, sees the result and thinks again.",
       "def_vi": "Đan xen bước lập luận với bước hành động, mô hình nghĩ, làm, nhìn kết quả rồi nghĩ tiếp.",
+      "say": "The ReAct pattern is really just think, act, look at what came back, then think again with that in hand.",
       "tags": ["loop", "pattern"]
     },
     {
@@ -97,6 +99,7 @@
       "vi": "Phân rã nhiệm vụ",
       "def_en": "Splitting a goal into subtasks small enough that each fits one context window and one clear success test.",
       "def_vi": "Chia mục tiêu thành các nhiệm vụ con đủ nhỏ để mỗi cái vừa một cửa sổ ngữ cảnh và có một phép kiểm thành công rõ ràng.",
+      "say": "Good task decomposition means every subtask fits one context window and carries a success test you can check.",
       "tags": ["planning"]
     },
     {
@@ -123,6 +126,7 @@
       "vi": "Cửa sổ ngữ cảnh",
       "def_en": "The maximum number of tokens the model can attend to at once, which is the hard budget every agent design has to live inside.",
       "def_vi": "Số token tối đa mô hình xét được cùng lúc, là ngân sách cứng mà mọi thiết kế tác tử phải sống bên trong.",
+      "say": "The context window is a hard budget, and most of the design work is deciding what you refuse to put in it.",
       "tags": ["context"]
     },
     {
@@ -140,6 +144,7 @@
       "vi": "Nén hội thoại",
       "def_en": "Summarising earlier turns so a long run keeps going after the window fills, at the cost of losing detail that was not summarised.",
       "def_vi": "Tóm tắt các lượt cũ để phiên dài chạy tiếp được sau khi cửa sổ đầy, đổi lại mất những chi tiết không được đưa vào bản tóm.",
+      "say": "Compaction keeps the run alive and quietly discards the detail nobody thought to summarise.",
       "tags": ["context"]
     },
     {
@@ -157,6 +162,7 @@
       "vi": "Vùng nháp",
       "def_en": "A working area, often a file on disk, where the agent offloads intermediate state instead of carrying it in context.",
       "def_vi": "Vùng làm việc, thường là một tập tin trên đĩa, nơi tác tử đẩy trạng thái trung gian ra thay vì gánh trong ngữ cảnh.",
+      "say": "Push the intermediate state out to a scratchpad file, the window is far too expensive to use as memory.",
       "tags": ["memory", "context"]
     },
     {
@@ -183,6 +189,7 @@
       "vi": "Điều phối và thợ",
       "def_en": "A pattern where one agent splits the work and several workers run in parallel, each on its own slice.",
       "def_vi": "Mẫu thiết kế trong đó một tác tử chia việc và nhiều tác tử thợ chạy song song, mỗi cái một phần.",
+      "say": "The orchestrator splits the work and the workers never see each other, so the slices must not overlap.",
       "tags": ["multiagent", "pattern"]
     },
     {
@@ -191,6 +198,7 @@
       "vi": "Bộ định tuyến yêu cầu",
       "def_en": "A cheap first step that classifies the request and sends it to the right specialist path or model.",
       "def_vi": "Bước đầu tiên rẻ tiền, phân loại yêu cầu rồi đẩy sang đúng nhánh chuyên biệt hoặc đúng mô hình.",
+      "say": "Put a cheap router in front, because most requests never need the expensive path at all.",
       "tags": ["multiagent", "pattern"]
     },
     {
@@ -199,6 +207,7 @@
       "vi": "Bàn giao giữa tác tử",
       "def_en": "Transferring control and the relevant state from one agent to another, where whatever is not passed along is simply lost.",
       "def_vi": "Chuyển quyền điều khiển cùng phần trạng thái liên quan từ tác tử này sang tác tử khác, và thứ gì không được chuyển thì coi như mất.",
+      "say": "Whatever you leave out of the handoff is gone, the next agent cannot see the conversation you just had.",
       "tags": ["multiagent"]
     },
     {
@@ -216,6 +225,7 @@
       "vi": "Điều khiển máy tính",
       "def_en": "An agent operating a graphical interface by reading the screen and issuing clicks and keystrokes, used when no API exists.",
       "def_vi": "Tác tử điều khiển giao diện đồ hoạ bằng cách đọc màn hình rồi phát ra thao tác bấm và gõ, dùng khi không có API nào.",
+      "say": "We fall back on computer use only where no API exists, since driving a screen is slow and brittle.",
       "tags": ["capability"]
     },
     {
@@ -233,6 +243,7 @@
       "vi": "Môi trường cách ly",
       "def_en": "An isolated environment where generated code and tool calls run without reaching the real filesystem, network or credentials.",
       "def_vi": "Môi trường tách biệt để mã sinh ra và lời gọi công cụ chạy mà không chạm tới hệ tập tin, mạng hay thông tin đăng nhập thật.",
+      "say": "Run it in a sandbox with no credentials, then the worst case is a wasted run rather than a leak.",
       "tags": ["security", "ops"]
     },
     {
@@ -259,6 +270,7 @@
       "vi": "Trao quyền tối thiểu",
       "def_en": "Giving the agent the narrowest set of tools and permissions that still completes the job, the agent version of least privilege.",
       "def_vi": "Chỉ trao cho tác tử tập công cụ và quyền hẹp nhất mà vẫn làm xong việc, chính là phiên bản đặc quyền tối thiểu cho tác tử.",
+      "say": "Least agency means asking what the agent can do without, not what else we could hand it.",
       "tags": ["security", "design"]
     },
     {
@@ -303,6 +315,7 @@
       "vi": "Rào chắn",
       "def_en": "A check placed around the model, on the input or the output, that blocks or rewrites what violates a policy.",
       "def_vi": "Phép kiểm đặt bao quanh mô hình, ở đầu vào hoặc đầu ra, chặn hoặc viết lại những gì vi phạm chính sách.",
+      "say": "A guardrail catches the obvious cases, and it will never be the thing that stops a determined attacker.",
       "tags": ["security", "quality"]
     },
     {
@@ -320,6 +333,7 @@
       "vi": "Truy vết",
       "def_en": "Logging every step with its inputs, outputs, latency and cost, so a failure can be located instead of guessed at.",
       "def_vi": "Ghi lại từng bước kèm đầu vào, đầu ra, độ trễ và chi phí, để định vị được chỗ hỏng thay vì đoán mò.",
+      "say": "Without tracing you are guessing, with tracing you can point at the exact turn where the run went wrong.",
       "tags": ["ops"]
     },
     {
@@ -337,6 +351,7 @@
       "vi": "Tỉ lệ hoàn thành",
       "def_en": "The fraction of runs that reach the goal. Because agents are stochastic, a single run is an anecdote rather than a measurement.",
       "def_vi": "Tỉ lệ số lần chạy đạt được mục tiêu. Vì tác tử mang tính ngẫu nhiên, một lần chạy chỉ là giai thoại chứ không phải phép đo.",
+      "say": "Give me the pass rate over many runs, one successful demo tells me almost nothing about this agent.",
       "tags": ["eval"]
     },
     {
@@ -354,6 +369,7 @@
       "vi": "Khả năng chạy lại giống hệt",
       "def_en": "Whether the same input gives the same trajectory. Agents are rarely reproducible, so tests must assert on outcomes, not on exact steps.",
       "def_vi": "Việc cùng một đầu vào có cho ra cùng quỹ đạo hay không. Tác tử hiếm khi lặp lại giống hệt, nên bài kiểm phải khẳng định trên kết quả chứ không trên từng bước.",
+      "say": "Stop asserting on exact steps, reproducibility of a run is not something these systems are going to give you.",
       "tags": ["eval", "ops"]
     },
     {
@@ -371,6 +387,7 @@
       "vi": "Đệm phần nhắc lặp lại",
       "def_en": "Reusing the computation for an unchanged prefix of the prompt across calls, which cuts cost and latency in long agent runs.",
       "def_vi": "Tái dùng phần tính toán cho đoạn đầu câu nhắc không đổi giữa các lần gọi, giúp giảm chi phí và độ trễ trong phiên tác tử dài.",
+      "say": "Keep the stable instructions at the very front so prompt caching actually hits on every later turn.",
       "tags": ["ops"]
     },
     {
@@ -379,6 +396,7 @@
       "vi": "Ngân sách độ trễ",
       "def_en": "The time a user will tolerate before the agent must show progress or hand back control.",
       "def_vi": "Khoảng thời gian người dùng chịu đựng được trước khi tác tử phải báo tiến độ hoặc trả lại quyền điều khiển.",
+      "say": "Our latency budget is short, so show partial progress early instead of making the user stare at nothing.",
       "tags": ["ops", "design"]
     },
     {
@@ -405,6 +423,7 @@
       "vi": "Câu nhắc hệ thống",
       "def_en": "The standing instructions that frame every turn, defining role, constraints and how the agent should behave when unsure.",
       "def_vi": "Phần chỉ dẫn thường trực khung cho mọi lượt, xác định vai trò, ràng buộc và cách hành xử khi tác tử không chắc.",
+      "say": "If the agent keeps guessing when it should ask, that belongs in the system prompt, not in every task description.",
       "tags": ["design"]
     },
     {
@@ -422,6 +441,7 @@
       "vi": "Điểm lưu và chạy tiếp",
       "def_en": "Saving progress so a long run can continue after a crash or an edit, instead of starting the whole task again.",
       "def_vi": "Lưu lại tiến độ để phiên dài chạy tiếp được sau sự cố hoặc sau khi sửa, thay vì làm lại toàn bộ nhiệm vụ.",
+      "say": "Add checkpoint and resume before the runs get long, restarting from scratch after a crash is what really costs money.",
       "tags": ["ops"]
     },
     {
@@ -442,6 +462,7 @@
       "vi": "Phân nhánh có điều kiện",
       "def_en": "Letting a cheap classification decide which path the run takes, so the expensive path opens only for the cases that need it.",
       "def_vi": "Dùng một bước phân loại rẻ để quyết định luồng chạy đi nhánh nào, nhánh đắt chỉ mở cho những ca thật sự cần.",
+      "say": "Conditional branching lets a cheap classifier open the expensive path only for the cases that genuinely need it.",
       "tags": [
         "pattern",
         "design"
@@ -465,6 +486,7 @@
       "vi": "Tranh luận giữa nhiều tác tử",
       "def_en": "Running several agents that argue opposing positions before a final answer is chosen. It surfaces disagreement, multiplies cost, and can still converge on a shared error.",
       "def_vi": "Cho nhiều tác tử tranh luận các lập trường đối nghịch trước khi chọn câu trả lời cuối. Cách này làm lộ chỗ bất đồng, nhân chi phí lên, và vẫn có thể cùng hội tụ về một cái sai chung.",
+      "say": "Multi-agent debate surfaced the disagreement and then both sides settled comfortably on the same wrong answer.",
       "tags": [
         "multiagent",
         "pattern"
@@ -476,6 +498,7 @@
       "vi": "Hội đồng giám khảo",
       "def_en": "Scoring one output with several judges, ideally different models or different rubrics, then aggregating. It cuts the variance of a single judge but not a bias they all share.",
       "def_vi": "Chấm một đầu ra bằng nhiều giám khảo, tốt nhất là khác mô hình hoặc khác thang chấm, rồi tổng hợp lại. Cách này giảm độ dao động của một giám khảo đơn lẻ nhưng không giảm thiên lệch mà cả hội đồng cùng mắc.",
+      "say": "A judge panel cuts the variance of a single judge, and it does nothing about a bias they all share.",
       "tags": [
         "eval",
         "pattern"
@@ -487,6 +510,7 @@
       "vi": "Cây suy nghĩ",
       "def_en": "Exploring several candidate reasoning branches, scoring them and backtracking out of dead ends instead of committing to the first line of thought.",
       "def_vi": "Mở ra nhiều nhánh lập luận ứng viên, chấm điểm rồi quay lui khỏi ngõ cụt thay vì bám luôn mạch nghĩ đầu tiên.",
+      "say": "Tree of thoughts pays off when branches are cheap to score, otherwise you are funding a blind search.",
       "tags": [
         "pattern",
         "planning"
@@ -510,6 +534,7 @@
       "vi": "Lập kế hoạch rồi thi hành",
       "def_en": "Writing the whole plan first, then running the steps, so a human can approve or edit the plan before any action happens.",
       "def_vi": "Viết trọn kế hoạch trước rồi mới chạy từng bước, để người dùng duyệt hoặc sửa kế hoạch trước khi có bất kỳ hành động nào.",
+      "say": "With plan and execute a person can edit the plan before anything runs, which is the entire point of the split.",
       "tags": [
         "planning",
         "pattern"
@@ -532,6 +557,7 @@
       "vi": "Điều kiện dừng",
       "def_en": "The explicit rule that ends the loop, whether a success test, a step cap or a spend limit. Without one an agent stops only when something breaks.",
       "def_vi": "Quy tắc tường minh kết thúc vòng lặp, có thể là phép kiểm thành công, trần số bước hoặc hạn mức chi. Không có nó thì tác tử chỉ dừng khi có thứ gì đó hỏng.",
+      "say": "Every loop needs a stop condition somebody wrote down, otherwise the agent halts only when something breaks.",
       "tags": [
         "loop",
         "ops"
@@ -566,6 +592,7 @@
       "vi": "Cách ly ngữ cảnh",
       "def_en": "Keeping unrelated work in separate windows so noise from one task cannot bleed into another, usually by giving each task its own agent.",
       "def_vi": "Giữ các phần việc không liên quan ở những cửa sổ riêng để nhiễu của việc này không lan sang việc kia, thường bằng cách cho mỗi việc một tác tử riêng.",
+      "say": "Give the noisy subtask its own window, context isolation is why the parent stays readable at turn forty.",
       "tags": [
         "context",
         "design"
@@ -588,6 +615,7 @@
       "vi": "Đẩy trạng thái ra ngoài",
       "def_en": "Writing progress and findings to a file or store so the window carries a pointer instead of the whole history.",
       "def_vi": "Ghi tiến độ và phát hiện ra tập tin hoặc kho, để cửa sổ chỉ mang con trỏ thay vì toàn bộ lịch sử.",
+      "say": "State offloading means the window holds a pointer to the findings file, never the findings themselves.",
       "tags": [
         "context",
         "memory"
@@ -599,6 +627,7 @@
       "vi": "Ngân sách ngữ cảnh theo từng phần",
       "def_en": "Giving each part of the prompt, such as instructions, memory and tool results, a fixed share of the window so no single part can crowd out the rest.",
       "def_vi": "Chia cho mỗi phần của câu nhắc, ví dụ chỉ dẫn, bộ nhớ và kết quả công cụ, một phần cửa sổ cố định, để không phần nào chèn ép hết các phần còn lại.",
+      "say": "Set a context budget per component, or tool results will happily crowd out the instructions you care about.",
       "tags": [
         "context",
         "ops"
@@ -621,6 +650,7 @@
       "vi": "Bộc lộ dần",
       "def_en": "Exposing a short summary of a resource first and the full body only if the agent asks for it, which keeps the base context small.",
       "def_vi": "Đưa ra bản tóm ngắn của một tài nguyên trước, phần đầy đủ chỉ hiện khi tác tử hỏi tới, nhờ vậy ngữ cảnh nền vẫn nhỏ.",
+      "say": "Progressive disclosure keeps the base prompt small, show a summary and let the agent ask for the full body.",
       "tags": [
         "context",
         "design"
@@ -643,6 +673,7 @@
       "vi": "Bộ nhớ ngữ nghĩa",
       "def_en": "Durable facts about the domain and the user that stay true across runs, such as naming conventions or a preferred output format.",
       "def_vi": "Những sự kiện bền về lĩnh vực và về người dùng, vẫn đúng qua nhiều phiên, ví dụ quy ước đặt tên hay định dạng đầu ra ưa dùng.",
+      "say": "Naming conventions and the preferred output format belong in semantic memory, they stay true across every run.",
       "tags": [
         "memory"
       ]
@@ -653,6 +684,7 @@
       "vi": "Bộ nhớ quy trình",
       "def_en": "Stored know how about how to do a recurring task, written as instructions the agent reloads rather than facts it recalls.",
       "def_vi": "Phần bí quyết đã lưu về cách làm một việc lặp lại, viết dưới dạng chỉ dẫn để tác tử nạp lại, chứ không phải sự kiện để nhớ.",
+      "say": "Procedural memory is written as instructions the agent reloads, not as facts it happens to remember.",
       "tags": [
         "memory"
       ]
@@ -663,6 +695,7 @@
       "vi": "Kho vector",
       "def_en": "A database indexing text by embedding, so a query returns passages that are close in meaning rather than equal in wording.",
       "def_vi": "Cơ sở dữ liệu đánh chỉ mục văn bản theo vector nhúng, nhờ đó truy vấn trả về những đoạn gần về nghĩa chứ không phải trùng mặt chữ.",
+      "say": "The vector store returns passages close in meaning, which is exactly wrong when somebody searches for an identifier.",
       "tags": [
         "memory",
         "retrieval"
@@ -686,6 +719,7 @@
       "vi": "Truy hồi lai",
       "def_en": "Combining keyword search with vector search, because exact identifiers and rare terms are found by the first and paraphrases by the second.",
       "def_vi": "Kết hợp tìm theo từ khoá với tìm theo vector, vì mã định danh chính xác và từ hiếm do cách đầu tìm ra, còn cách diễn đạt khác đi thì do cách sau.",
+      "say": "Switch to hybrid retrieval, keyword search finds the rare identifiers and the embedding side catches the paraphrases.",
       "tags": [
         "memory",
         "retrieval"
@@ -697,6 +731,7 @@
       "vi": "Sắp xếp lại kết quả",
       "def_en": "A second, more expensive model scoring the shortlist that cheap retrieval returned, so the few passages reaching the context are the right ones.",
       "def_vi": "Một mô hình thứ hai đắt hơn chấm lại danh sách ngắn do bước truy hồi rẻ trả về, để vài đoạn lọt vào ngữ cảnh là đúng đoạn cần.",
+      "say": "Add reranking before those passages reach the context, cheap retrieval is decent at recall and careless about order.",
       "tags": [
         "memory",
         "retrieval"
@@ -708,6 +743,7 @@
       "vi": "Đồ thị tri thức",
       "def_en": "Storing entities and the relations between them, which answers questions about connections that flat passage retrieval cannot reach.",
       "def_vi": "Lưu các thực thể cùng quan hệ giữa chúng, nhờ vậy trả lời được câu hỏi về mối liên hệ mà truy hồi đoạn văn phẳng không với tới.",
+      "say": "A knowledge graph answers questions about relations, which flat passage retrieval keeps failing however we tune it.",
       "tags": [
         "memory",
         "retrieval"
@@ -767,6 +803,7 @@
       "vi": "Thử lại có lùi",
       "def_en": "Retrying a failed call after a growing delay, which handles transient faults without hammering a service that is already struggling.",
       "def_vi": "Thử lại lời gọi hỏng sau một khoảng chờ tăng dần, xử được sự cố thoáng qua mà không đập liên tục vào một dịch vụ vốn đang đuối.",
+      "say": "Use retry with backoff so we survive a blip without hammering a service that is already struggling.",
       "tags": [
         "tools",
         "ops"
@@ -778,6 +815,7 @@
       "vi": "Thời gian chờ tối đa",
       "def_en": "A hard limit on how long a call may block. Without it, one slow dependency freezes the whole run and the user sees nothing at all.",
       "def_vi": "Giới hạn cứng cho thời gian một lời gọi được phép treo. Không có nó thì một phụ thuộc chậm sẽ đóng băng cả phiên chạy và người dùng chẳng thấy gì.",
+      "say": "Put a timeout on every outbound call, one slow dependency should never be able to freeze the whole run.",
       "tags": [
         "tools",
         "ops"
@@ -801,6 +839,7 @@
       "vi": "Phân trang kết quả",
       "def_en": "Returning tool output in pages with a cursor, so a large result set does not fill the window in a single call.",
       "def_vi": "Trả kết quả công cụ theo từng trang kèm con trỏ, để một tập kết quả lớn không lấp đầy cửa sổ chỉ trong một lời gọi.",
+      "say": "Turn on result pagination for that tool, one call currently fills the window with rows nobody will read.",
       "tags": [
         "tools",
         "context"
@@ -824,6 +863,7 @@
       "vi": "Chạy thử không tác động",
       "def_en": "Executing an action in a mode that reports what would change without changing it, so a human approves a concrete diff instead of a promise.",
       "def_vi": "Chạy một hành động ở chế độ chỉ báo cáo thứ sẽ thay đổi mà không thay đổi thật, để người duyệt nhìn thấy thay đổi cụ thể chứ không phải một lời hứa.",
+      "say": "Show me a dry run first, I would rather approve a concrete diff than a promise about what changes.",
       "tags": [
         "tools",
         "security"
@@ -835,6 +875,7 @@
       "vi": "Máy chủ MCP",
       "def_en": "The process exposing tools, resources and prompt templates over the protocol. It holds the credentials, so what it declines to expose is what the agent cannot do.",
       "def_vi": "Tiến trình bày ra công cụ, tài nguyên và câu nhắc mẫu qua giao thức. Nó nắm thông tin đăng nhập, nên thứ nó không bày ra chính là thứ tác tử không làm được.",
+      "say": "The MCP server holds the credentials, so whatever it declines to expose is simply not available to the agent.",
       "tags": [
         "protocol"
       ]
@@ -845,6 +886,7 @@
       "vi": "Máy khách MCP",
       "def_en": "The side inside the host application that connects to servers, lists what they offer and forwards the model's calls.",
       "def_vi": "Phía nằm trong ứng dụng chủ, nối tới các máy chủ, liệt kê thứ chúng cung cấp và chuyển tiếp lời gọi của mô hình.",
+      "say": "The MCP client lists what each server offers and forwards the calls, the model never touches the connection.",
       "tags": [
         "protocol"
       ]
@@ -855,6 +897,7 @@
       "vi": "Tài nguyên MCP",
       "def_en": "Read only content a server exposes by identifier, meant to be pulled into context as data rather than invoked as an action.",
       "def_vi": "Nội dung chỉ đọc mà máy chủ bày ra theo mã định danh, dùng để kéo vào ngữ cảnh như dữ liệu chứ không phải để gọi như một hành động.",
+      "say": "Expose that as an MCP resource, it is content to read into context and not an action to invoke.",
       "tags": [
         "protocol",
         "context"
@@ -866,6 +909,7 @@
       "vi": "Câu nhắc mẫu của MCP",
       "def_en": "A parameterised prompt the server publishes, so a client can offer a ready made workflow instead of asking the user to phrase it.",
       "def_vi": "Câu nhắc có tham số do máy chủ công bố, để máy khách chào sẵn một quy trình thay vì bắt người dùng tự diễn đạt.",
+      "say": "Publish an MCP prompt template so the user gets a ready made workflow instead of guessing at the phrasing.",
       "tags": [
         "protocol"
       ]
@@ -876,6 +920,7 @@
       "vi": "Kênh truyền tải",
       "def_en": "How client and server exchange messages, typically a local process over standard input and output, or a remote connection over HTTP. The choice sets the trust boundary.",
       "def_vi": "Cách máy khách và máy chủ trao đổi thông điệp, thường là tiến trình cục bộ qua đầu vào đầu ra chuẩn, hoặc kết nối từ xa qua HTTP. Lựa chọn này đặt ra ranh giới tin cậy.",
+      "say": "Which transport are we on, because a local process and a remote connection draw the trust boundary differently?",
       "tags": [
         "protocol",
         "security"
@@ -887,6 +932,7 @@
       "vi": "Sổ đăng ký công cụ",
       "def_en": "The catalogue the host keeps of available tools and where each came from, which is what lets you answer who added this capability and when.",
       "def_vi": "Danh mục mà ứng dụng chủ giữ về các công cụ sẵn có và nguồn gốc của từng cái, chính là thứ giúp bạn trả lời được ai đã thêm năng lực này vào và thêm lúc nào.",
+      "say": "Check the tool registry when something new shows up, it should say who added the capability and when.",
       "tags": [
         "protocol",
         "ops"
@@ -898,6 +944,7 @@
       "vi": "Phát hiện dịch vụ",
       "def_en": "Finding out at run time which servers and tools exist. It is convenient, and it is also the point where an untrusted server can slip into the tool list.",
       "def_vi": "Việc tìm ra lúc chạy xem có những máy chủ và công cụ nào. Rất tiện, nhưng cũng là chỗ mà một máy chủ không đáng tin có thể lọt vào danh sách công cụ.",
+      "say": "Service discovery is convenient, and it is also where an untrusted server quietly joins your tool list.",
       "tags": [
         "protocol",
         "security"
@@ -909,6 +956,7 @@
       "vi": "Cách ly bằng vùng làm việc",
       "def_en": "Giving a run its own directory or container so its writes cannot touch anything outside, which also makes discarding a bad run trivial.",
       "def_vi": "Cấp cho mỗi phiên chạy một thư mục hoặc vùng chứa riêng, để phần ghi của nó không chạm ra ngoài được, và nhờ đó vứt bỏ một phiên hỏng cũng thành chuyện nhẹ nhàng.",
+      "say": "Workspace isolation gives each run its own directory, and throwing away a bad run becomes a single delete.",
       "tags": [
         "security",
         "ops"
@@ -920,6 +968,7 @@
       "vi": "Mô hình mối đe dọa cho tác tử",
       "def_en": "Writing down who might attack, through which input, and what they could reach. For agents the attacker usually arrives inside content the agent itself fetched.",
       "def_vi": "Viết ra kẻ nào có thể tấn công, qua đầu vào nào, và chạm tới được cái gì. Với tác tử thì kẻ tấn công thường đến ngay trong nội dung mà chính tác tử đi lấy về.",
+      "say": "In an agent threat model the attacker usually arrives inside content the agent itself went and fetched.",
       "tags": [
         "security"
       ]
@@ -964,6 +1013,7 @@
       "vi": "Cách ly quyền",
       "def_en": "Splitting an agent so the part that reads untrusted content holds no credentials, and the part that holds credentials never reads untrusted content.",
       "def_vi": "Tách tác tử ra sao cho phần đọc nội dung không tin cậy thì không giữ thông tin đăng nhập, còn phần giữ thông tin đăng nhập thì không bao giờ đọc nội dung không tin cậy.",
+      "say": "Keep the reading half well away from the credentials, privilege separation is the part of this design I insist on.",
       "tags": [
         "security",
         "design"
@@ -975,6 +1025,7 @@
       "vi": "Đánh dấu dữ liệu nhiễm",
       "def_en": "Labelling any value that came from untrusted content and refusing to let a labelled value reach a sensitive parameter. Standard in program analysis, still early in agent stacks.",
       "def_vi": "Gắn nhãn cho mọi giá trị đến từ nội dung không tin cậy, rồi chặn không cho giá trị có nhãn đi vào một tham số nhạy cảm. Kỹ thuật này là chuẩn mực trong phân tích chương trình, còn trong hệ tác tử thì mới ở bước đầu.",
+      "say": "Taint tracking would help here, label anything that came from fetched content and keep it out of sensitive parameters.",
       "tags": [
         "security"
       ]
@@ -985,6 +1036,7 @@
       "vi": "Nhật ký kiểm toán",
       "def_en": "An append only record of every action an agent took, with the actor, the arguments and the authority used, kept so an incident can be reconstructed.",
       "def_vi": "Bản ghi chỉ thêm về mọi hành động tác tử đã làm, kèm chủ thể, tham số và quyền đã dùng, giữ lại để dựng lại được một sự cố.",
+      "say": "The audit log has to record the authority used, not just the action, or the incident review goes nowhere.",
       "tags": [
         "security",
         "ops"
@@ -1007,6 +1059,7 @@
       "vi": "Tin đầu ra công cụ",
       "def_en": "Treating whatever a tool returns as fact. The result is just another untrusted string, and whoever controls the source controls the agent's next step.",
       "def_vi": "Coi thứ công cụ trả về là sự thật. Kết quả đó cũng chỉ là một chuỗi không đáng tin, và ai kiểm soát được nguồn thì kiểm soát luôn bước kế tiếp của tác tử.",
+      "say": "Stop trusting tool output, whoever controls that source is effectively writing the agent's next instruction.",
       "tags": [
         "security",
         "tools"
@@ -1018,6 +1071,7 @@
       "vi": "Chống lạm dụng",
       "def_en": "Limits that stop an agent, or a user driving it, from being used as free compute or as a relay for spam and mass scraping.",
       "def_vi": "Các giới hạn ngăn tác tử, hoặc người điều khiển nó, bị dùng như tài nguyên tính toán miễn phí hay như trạm trung chuyển để phát tán thư rác và cào dữ liệu hàng loạt.",
+      "say": "Abuse prevention stops being optional the day the agent goes public, someone will try to use it as free compute.",
       "tags": [
         "security",
         "ops"
@@ -1029,6 +1083,7 @@
       "vi": "Lọc chỉ là biện pháp hạn chế",
       "def_en": "Classifier based filters catch the injection phrasings they were shown and miss rephrased ones, so filtering lowers the attack rate but is not a boundary you can rely on.",
       "def_vi": "Bộ lọc dựa trên phân loại bắt được những cách diễn đạt tiêm câu lệnh mà nó từng thấy và trượt các cách viết lại, nên lọc chỉ giảm tần suất tấn công chứ không phải một ranh giới đáng dựa vào.",
+      "say": "Treat filtering as best effort, it lowers the attack rate and it is not a boundary you can lean on.",
       "tags": [
         "security",
         "eval"
@@ -1040,6 +1095,7 @@
       "vi": "Bộ nhiệm vụ chuẩn",
       "def_en": "A fixed set of tasks with automatic success tests, kept stable so today's number can be compared with last week's.",
       "def_vi": "Tập nhiệm vụ cố định kèm phép kiểm thành công tự động, giữ ổn định để con số hôm nay so được với con số tuần trước.",
+      "say": "Freeze the task suite before you start tuning, otherwise this week's number cannot be compared with last week's.",
       "tags": [
         "eval"
       ]
@@ -1061,6 +1117,7 @@
       "vi": "Độ dao động giữa các lần chạy",
       "def_en": "The spread of results when the same task is run repeatedly. It has to be reported next to the mean, or the mean says very little.",
       "def_vi": "Độ tản mát của kết quả khi chạy đi chạy lại cùng một nhiệm vụ. Phải báo cáo nó cạnh giá trị trung bình, nếu không thì trung bình gần như không nói lên gì.",
+      "say": "Report run to run variance beside the mean, one average from a stochastic system hides most of the story.",
       "tags": [
         "eval"
       ]
@@ -1082,6 +1139,7 @@
       "vi": "Nhiễm dữ liệu chuẩn đo",
       "def_en": "A public benchmark appearing in training data, so a high score partly measures memorisation. It is the main reason a private held out set is worth building.",
       "def_vi": "Bộ chuẩn đo công khai lọt vào dữ liệu huấn luyện, khiến điểm cao một phần chỉ đo khả năng thuộc lòng. Đây là lý do chính để tự dựng một tập giữ riêng.",
+      "say": "If the benchmark is public, assume benchmark contamination and build a private held out set you never publish.",
       "tags": [
         "eval"
       ]
@@ -1092,6 +1150,7 @@
       "vi": "Ghi lại và phát lại",
       "def_en": "Storing real tool responses once and replaying them in tests, which makes agent tests fast and deterministic at the cost of drifting from the live service.",
       "def_vi": "Lưu lại phản hồi thật của công cụ một lần rồi phát lại trong bài kiểm, cách này giúp kiểm nhanh và tất định, đổi lại dần lệch khỏi dịch vụ thật.",
+      "say": "Record and replay makes the tests fast and deterministic, and it slowly drifts away from the live service.",
       "tags": [
         "eval",
         "ops"
@@ -1114,6 +1173,7 @@
       "vi": "Độ trễ đuôi",
       "def_en": "The slow end of the distribution, such as the ninety ninth percentile. Agents chain many calls, so each step's tail compounds into the delay users actually feel.",
       "def_vi": "Phần chậm của phân bố, ví dụ phân vị thứ chín mươi chín. Tác tử nối nhiều lời gọi, nên phần đuôi của từng bước cộng dồn thành cái chậm mà người dùng thật sự cảm thấy.",
+      "say": "Watch the tail latency, an agent chains many calls so every slow step compounds into what the user feels.",
       "tags": [
         "ops"
       ]
@@ -1124,6 +1184,7 @@
       "vi": "Giới hạn tốc độ",
       "def_en": "A cap on calls per interval, imposed by a provider or by you. A parallel fan out will hit it long before a single agent does.",
       "def_vi": "Trần số lời gọi trong một khoảng thời gian, do nhà cung cấp hoặc do chính bạn đặt ra. Một pha toả nhánh song song sẽ chạm trần sớm hơn nhiều so với một tác tử đơn lẻ.",
+      "say": "The rate limit bites on a parallel fan out long before a single agent ever comes close to it.",
       "tags": [
         "ops"
       ]
@@ -1134,6 +1195,7 @@
       "vi": "Hàng đợi công việc",
       "def_en": "Putting tasks in a durable queue so bursts are smoothed, retries are possible, and a crash does not lose the request.",
       "def_vi": "Đưa nhiệm vụ vào hàng đợi bền để san bằng các đợt dồn, cho phép thử lại, và một sự cố không làm mất yêu cầu.",
+      "say": "Put the tasks on a durable work queue, then a crash costs us a retry instead of the whole request.",
       "tags": [
         "ops"
       ]
@@ -1144,6 +1206,7 @@
       "vi": "Chạy nền",
       "def_en": "Detaching a long task so the user is not blocked, which requires somewhere to store progress and a way to tell them it finished.",
       "def_vi": "Tách một nhiệm vụ dài ra chạy riêng để người dùng không bị chặn, kéo theo nhu cầu có chỗ lưu tiến độ và một cách báo cho họ biết đã xong.",
+      "say": "Make it a background run so nobody sits waiting, and store the progress somewhere the user can look at.",
       "tags": [
         "ops",
         "design"
@@ -1155,6 +1218,7 @@
       "vi": "Thông báo hoàn tất",
       "def_en": "Telling the user a background task finished or needs a decision. Without it, long running agents are simply forgotten.",
       "def_vi": "Báo cho người dùng biết nhiệm vụ chạy nền đã xong hoặc đang cần một quyết định. Thiếu nó thì tác tử chạy dài đơn giản là bị quên.",
+      "say": "Send a completion notification when it finishes or needs a decision, otherwise the long task is simply forgotten.",
       "tags": [
         "ops",
         "design"
@@ -1178,6 +1242,7 @@
       "vi": "Hiện tiến độ",
       "def_en": "Showing what the agent is doing right now, which makes a long run tolerable and lets the user stop it before it goes further wrong.",
       "def_vi": "Cho thấy tác tử đang làm gì ngay lúc này, nhờ vậy một phiên chạy dài trở nên chịu được và người dùng dừng được nó trước khi nó đi sai xa hơn.",
+      "say": "Progress visibility is what makes a long run tolerable, people stop it early once they can see it drifting.",
       "tags": [
         "ux",
         "design"
@@ -1189,6 +1254,7 @@
       "vi": "Nút dừng",
       "def_en": "A control that halts the agent mid run and leaves the partial work inspectable. Users need this far more often than they need a faster agent.",
       "def_vi": "Một nút chặn tác tử ngay giữa phiên và để lại phần việc dở soi được. Người dùng cần thứ này thường xuyên hơn nhiều so với một tác tử chạy nhanh hơn.",
+      "say": "Users ask for a stop control far more often than for a faster agent, and the partial work must stay inspectable.",
       "tags": [
         "ux",
         "design"
@@ -1200,6 +1266,7 @@
       "vi": "Sửa kế hoạch",
       "def_en": "Letting the user change the proposed steps before execution, which is a much cheaper correction point than reviewing the result afterwards.",
       "def_vi": "Cho người dùng sửa các bước dự kiến trước khi thi hành, đây là điểm sửa rẻ hơn nhiều so với ngồi soát kết quả về sau.",
+      "say": "Plan editing is the cheap correction point, fixing the proposal beats reviewing whatever the run produced afterwards.",
       "tags": [
         "ux",
         "design"
@@ -1211,6 +1278,7 @@
       "vi": "Tín hiệu độ tin",
       "def_en": "Reporting how sure the agent is. It is useful only if the reported number tracks the real error rate, since an uncalibrated score invites misplaced trust.",
       "def_vi": "Báo ra mức chắc chắn của tác tử. Chỉ hữu ích khi con số báo ra bám sát tỉ lệ sai thật, vì một điểm số chưa hiệu chuẩn chỉ mời gọi niềm tin đặt sai chỗ.",
+      "say": "A confidence signal earns its place only if the number tracks the real error rate, otherwise it invites misplaced trust.",
       "tags": [
         "ux",
         "eval"

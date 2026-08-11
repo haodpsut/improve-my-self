@@ -20,6 +20,7 @@
       "vi": "Thuật toán trung bình liên kết",
       "def_en": "The baseline algorithm that averages client weight updates in proportion to their data size.",
       "def_vi": "Thuật toán nền, lấy trung bình cập nhật trọng số của các máy khách theo tỉ lệ lượng dữ liệu.",
+      "say": "We kept plain FedAvg as the baseline, because anything we propose has to beat it on the same budget.",
       "tags": [
         "algorithm"
       ]
@@ -30,6 +31,7 @@
       "vi": "Tổng hợp mô hình",
       "def_en": "Combining client updates on the server to form the next global model.",
       "def_vi": "Gộp cập nhật từ các máy khách tại máy chủ để tạo mô hình toàn cục kế tiếp.",
+      "say": "Ask whoever owns the server how model aggregation weights each update, because that choice decides who the model listens to.",
       "tags": [
         "algorithm"
       ]
@@ -62,6 +64,7 @@
       "vi": "Trôi mô hình cục bộ",
       "def_en": "Local models diverging from the global one because each trains on its own skewed data.",
       "def_vi": "Mô hình cục bộ lệch dần khỏi mô hình toàn cục do mỗi máy huấn luyện trên dữ liệu lệch của riêng nó.",
+      "say": "Client drift showed up as soon as we let each site run five local epochs instead of one.",
       "tags": [
         "challenge"
       ]
@@ -72,6 +75,7 @@
       "vi": "Máy khách chậm trễ",
       "def_en": "A slow or unreliable client that holds back a synchronous round.",
       "def_vi": "Máy khách chậm hoặc không ổn định, làm chậm cả một vòng đồng bộ.",
+      "say": "One straggler on a metered link can stretch a synchronous round from minutes into most of an afternoon.",
       "tags": [
         "challenge"
       ]
@@ -82,6 +86,7 @@
       "vi": "Học liên kết theo chiều ngang",
       "def_en": "Clients share the same feature space but hold different samples.",
       "def_vi": "Các máy khách có cùng không gian đặc trưng nhưng nắm các mẫu khác nhau.",
+      "say": "Both branches log the same fields for different customers, so this is horizontal federated learning, not the vertical kind.",
       "tags": [
         "taxonomy"
       ]
@@ -92,6 +97,7 @@
       "vi": "Học liên kết theo chiều dọc",
       "def_en": "Clients hold different features about the same set of samples.",
       "def_vi": "Các máy khách nắm các đặc trưng khác nhau về cùng một tập mẫu.",
+      "say": "In vertical federated learning the bank and the retailer describe the same people, so alignment comes before any training.",
       "tags": [
         "taxonomy"
       ]
@@ -102,6 +108,7 @@
       "vi": "Tổng hợp an toàn",
       "def_en": "A cryptographic protocol letting the server learn the sum of updates without seeing any single one.",
       "def_vi": "Giao thức mật mã cho phép máy chủ biết tổng các cập nhật mà không thấy được cập nhật riêng lẻ nào.",
+      "say": "With secure aggregation the server sees the sum and nothing else, which is exactly the promise our legal team wanted.",
       "tags": [
         "privacy"
       ]
@@ -123,6 +130,7 @@
       "vi": "Ngân sách riêng tư",
       "def_en": "The parameter epsilon bounding how much total information a mechanism may leak.",
       "def_vi": "Tham số epsilon giới hạn tổng lượng thông tin mà cơ chế được phép rò rỉ.",
+      "say": "How much of the privacy budget did that ablation spend? Nobody logged it, so we assume the worst.",
       "tags": [
         "privacy"
       ]
@@ -133,6 +141,7 @@
       "vi": "Tấn công đảo ngược gradient",
       "def_en": "Reconstructing a client's private input from the gradients it uploaded.",
       "def_vi": "Dựng lại dữ liệu riêng của máy khách từ chính gradient mà nó tải lên.",
+      "say": "A gradient inversion attack recovered a readable face from one client update, and that ended the argument about raw gradients.",
       "tags": [
         "attack"
       ]
@@ -143,6 +152,7 @@
       "vi": "Đầu độc mô hình",
       "def_en": "A malicious client submitting crafted updates to corrupt the global model.",
       "def_vi": "Máy khách xấu gửi lên cập nhật đã dàn dựng để làm hỏng mô hình toàn cục.",
+      "say": "Treat model poisoning as an insider problem, since the attacker is a registered client with a perfectly valid update format.",
       "tags": [
         "attack"
       ]
@@ -153,6 +163,7 @@
       "vi": "Cá nhân hoá mô hình",
       "def_en": "Adapting the shared model to each client instead of forcing one model on everyone.",
       "def_vi": "Điều chỉnh mô hình chung cho từng máy khách, thay vì ép một mô hình duy nhất cho tất cả.",
+      "say": "Personalisation stopped the complaints from the two odd sites without dragging the shared model towards their habits.",
       "tags": [
         "method"
       ]
@@ -163,6 +174,7 @@
       "vi": "Học chia tầng",
       "def_en": "Cutting the network at a layer so the client runs the first part and the server the rest.",
       "def_vi": "Cắt mạng tại một tầng, máy khách chạy phần đầu còn máy chủ chạy phần còn lại.",
+      "say": "Split learning let the phone run the first few layers, but the cut activations still travel, so measure that link.",
       "tags": [
         "method"
       ]
@@ -184,6 +196,7 @@
       "vi": "Chi phí truyền thông",
       "def_en": "The total bytes exchanged between clients and server, often the true limit in federated settings.",
       "def_vi": "Tổng số byte trao đổi giữa máy khách và máy chủ, thường là giới hạn thật của bài toán liên kết.",
+      "say": "Before tuning accuracy, plot communication cost against rounds, because on this deployment the uplink bill is what people notice.",
       "tags": [
         "system"
       ]
@@ -194,6 +207,7 @@
       "vi": "Lượng tử hoá cập nhật",
       "def_en": "Sending updates at lower numeric precision to cut the uplink volume.",
       "def_vi": "Gửi cập nhật ở độ chính xác số thấp hơn để giảm dung lượng đường lên.",
+      "say": "We pushed update quantisation down to four bits and the curve barely moved, so the extra precision was earning nothing.",
       "tags": [
         "system"
       ]
@@ -204,6 +218,7 @@
       "vi": "Thưa hoá gradient",
       "def_en": "Uploading only the largest gradient entries and dropping the rest.",
       "def_vi": "Chỉ tải lên các phần tử gradient lớn nhất và bỏ phần còn lại.",
+      "say": "If you turn on gradient sparsification, turn on error feedback in the same commit, otherwise the dropped entries never return.",
       "tags": [
         "system"
       ]
@@ -226,6 +241,7 @@
       "vi": "Số hạng gần",
       "def_en": "A penalty on the squared distance between the local weights and the global weights, added to the local loss.",
       "def_vi": "Phần phạt theo bình phương khoảng cách giữa trọng số cục bộ và trọng số toàn cục, cộng vào hàm mất mát cục bộ.",
+      "say": "Raise the proximal term and the clients stay near the global weights, but they also stop learning anything local.",
       "tags": [
         "algorithm",
         "non-iid"
@@ -249,6 +265,7 @@
       "vi": "Biến kiểm soát",
       "def_en": "A stored estimate of the difference between a client's gradient direction and the global one, subtracted during local steps.",
       "def_vi": "Ước lượng được lưu lại về chênh lệch giữa hướng gradient của một máy khách và hướng toàn cục, được trừ đi trong các bước cục bộ.",
+      "say": "Each control variate has to be stored and shipped, so the memory footprint on small devices doubles overnight.",
       "tags": [
         "algorithm",
         "theory"
@@ -272,6 +289,7 @@
       "vi": "Lệch hàm mục tiêu",
       "def_en": "When clients take different numbers of local steps, plain averaging converges to a point that optimises a different objective than intended.",
       "def_vi": "Khi các máy khách chạy số bước cục bộ khác nhau, lấy trung bình thuần sẽ hội tụ về điểm tối ưu cho một hàm mục tiêu khác với hàm ta muốn.",
+      "say": "Objective inconsistency is why the run looked stable and still converged to something none of us actually asked for.",
       "tags": [
         "theory",
         "non-iid"
@@ -283,6 +301,7 @@
       "vi": "Họ thuật toán FedOpt",
       "def_en": "A family that treats the averaged client delta as a pseudo gradient and feeds it to a server side optimiser.",
       "def_vi": "Họ thuật toán coi phần chênh lệch trung bình từ máy khách như một gradient giả, rồi đưa vào bộ tối ưu phía máy chủ.",
+      "say": "Anything in the FedOpt family is a cheap experiment, since only the server side optimiser changes and the clients stay untouched.",
       "tags": [
         "algorithm"
       ]
@@ -304,6 +323,7 @@
       "vi": "Quán tính phía máy chủ",
       "def_en": "Accumulating past aggregated updates at the server to smooth the trajectory across rounds.",
       "def_vi": "Tích luỹ các cập nhật đã tổng hợp ở những vòng trước tại máy chủ để làm mượt quỹ đạo qua các vòng.",
+      "say": "Server momentum smoothed the round to round wobble, though it also made a bad learning rate take longer to show.",
       "tags": [
         "algorithm"
       ]
@@ -314,6 +334,7 @@
       "vi": "Tổng hợp có trọng số",
       "def_en": "Averaging client updates with weights, usually proportional to local sample counts.",
       "def_vi": "Lấy trung bình cập nhật của các máy khách kèm trọng số, thường tỉ lệ với số mẫu cục bộ.",
+      "say": "Under weighted aggregation the largest hospital effectively votes for everyone, which is fine until you look at the smaller sites.",
       "tags": [
         "algorithm"
       ]
@@ -336,6 +357,7 @@
       "vi": "Học liên kết theo cụm",
       "def_en": "Grouping clients with similar distributions and training one model per group instead of a single global model.",
       "def_vi": "Gom các máy khách có phân bố giống nhau thành nhóm và huấn luyện một mô hình cho mỗi nhóm thay vì một mô hình toàn cục duy nhất.",
+      "say": "Clustered federated learning found three natural groups in the fleet, and each group model beat the single global one.",
       "tags": [
         "algorithm",
         "personalisation"
@@ -359,6 +381,7 @@
       "vi": "Học liên kết phi tập trung",
       "def_en": "Training with no central server, clients exchanging models directly over a communication graph.",
       "def_vi": "Huấn luyện không có máy chủ trung tâm, các máy khách trao đổi mô hình trực tiếp trên một đồ thị liên lạc.",
+      "say": "Nobody wanted to host the coordinator, so we went decentralised and let the partners exchange models over the graph directly.",
       "tags": [
         "algorithm",
         "system"
@@ -370,6 +393,7 @@
       "vi": "Trung bình theo kiểu lan truyền",
       "def_en": "Peers repeatedly average models with a few randomly chosen neighbours until the network agrees.",
       "def_vi": "Các nút ngang hàng lặp lại việc lấy trung bình mô hình với vài hàng xóm chọn ngẫu nhiên cho tới khi cả mạng đồng thuận.",
+      "say": "Gossip averaging converges eventually, but on a sparse graph eventually can mean far more rounds than anyone budgeted.",
       "tags": [
         "algorithm",
         "system"
@@ -393,6 +417,7 @@
       "vi": "Học liên kết bất đồng bộ",
       "def_en": "The server applies each update as it arrives rather than waiting for the whole cohort.",
       "def_vi": "Máy chủ áp dụng từng cập nhật ngay khi nó tới, thay vì chờ đủ cả nhóm.",
+      "say": "Asynchronous federated learning removed the waiting, and then handed us a whole new problem called staleness.",
       "tags": [
         "algorithm",
         "system"
@@ -416,6 +441,7 @@
       "vi": "Tham gia một phần",
       "def_en": "Only a sampled subset of clients joins each round, which adds variance to the aggregate.",
       "def_vi": "Mỗi vòng chỉ một tập con máy khách được lấy mẫu tham gia, điều này làm tăng phương sai của kết quả tổng hợp.",
+      "say": "With partial participation the variance across rounds jumps, so judge a run by its trend and never by one round.",
       "tags": [
         "theory",
         "system"
@@ -439,6 +465,7 @@
       "vi": "Điều kiện hội tụ",
       "def_en": "The assumptions such as smoothness, bounded variance and bounded dissimilarity under which a federated bound holds.",
       "def_vi": "Các giả thiết như trơn, phương sai bị chặn và độ bất tương đồng bị chặn, để một cận hội tụ liên kết còn đúng.",
+      "say": "Check the convergence conditions before quoting that bound, because bounded dissimilarity almost never holds on our real client mix.",
       "tags": [
         "theory"
       ]
@@ -461,6 +488,7 @@
       "vi": "Lệch nhãn",
       "def_en": "Clients hold very different class proportions, the most common form of heterogeneity in benchmarks.",
       "def_vi": "Các máy khách nắm tỉ lệ lớp rất khác nhau, đây là dạng không đồng nhất hay gặp nhất trong các bộ chuẩn.",
+      "say": "Label skew is the easy part to simulate and the part reviewers question least, which should make us suspicious.",
       "tags": [
         "non-iid"
       ]
@@ -471,6 +499,7 @@
       "vi": "Lệch đặc trưng",
       "def_en": "The same label looks different across clients, for example scans from different machines.",
       "def_vi": "Cùng một nhãn nhưng biểu hiện khác nhau giữa các máy khách, ví dụ ảnh chụp từ các máy khác nhau.",
+      "say": "The scanner brand changed at one site and feature skew did the rest, no labels were wrong at all.",
       "tags": [
         "non-iid"
       ]
@@ -481,6 +510,7 @@
       "vi": "Lệch số lượng",
       "def_en": "Clients hold wildly different amounts of data, so a few large clients can dominate the weighted average.",
       "def_vi": "Lượng dữ liệu giữa các máy khách chênh nhau rất lớn, nên vài máy khách lớn có thể lấn át trung bình có trọng số.",
+      "say": "Quantity skew means a single large client can outvote a hundred small ones, so report the per client spread too.",
       "tags": [
         "non-iid"
       ]
@@ -502,6 +532,7 @@
       "vi": "Lệch thống kê chuẩn hoá theo lô",
       "def_en": "Averaging batch normalisation statistics across clients with different input distributions corrupts them.",
       "def_vi": "Lấy trung bình thống kê chuẩn hoá theo lô giữa các máy khách có phân bố đầu vào khác nhau sẽ làm hỏng chính các thống kê đó.",
+      "say": "The batch normalisation mismatch was hiding in plain sight, running statistics were averaged across completely different input distributions.",
       "tags": [
         "non-iid",
         "practice"
@@ -524,6 +555,7 @@
       "vi": "Riêng tư vi phân trung tâm",
       "def_en": "A trusted aggregator collects raw updates and adds noise once to the aggregate, giving far better utility than local noise.",
       "def_vi": "Một bộ tổng hợp đáng tin thu cập nhật thô rồi thêm nhiễu một lần vào kết quả tổng hợp, cho độ hữu dụng tốt hơn hẳn so với nhiễu cục bộ.",
+      "say": "Central differential privacy buys much better utility, but only if everyone accepts that the aggregator is genuinely trusted.",
       "tags": [
         "privacy"
       ]
@@ -534,6 +566,7 @@
       "vi": "Cơ chế Gauss",
       "def_en": "Adding Gaussian noise scaled to the query sensitivity, giving an approximate privacy guarantee with a delta term.",
       "def_vi": "Thêm nhiễu Gauss tỉ lệ với độ nhạy của truy vấn, cho bảo đảm riêng tư xấp xỉ kèm số hạng delta.",
+      "say": "We use the Gaussian mechanism here, so remember that the guarantee carries a delta and is not the pure kind.",
       "tags": [
         "privacy"
       ]
@@ -544,6 +577,7 @@
       "vi": "Cơ chế Laplace",
       "def_en": "Adding Laplace noise proportional to the first norm sensitivity, giving pure privacy with delta equal to zero.",
       "def_vi": "Thêm nhiễu Laplace tỉ lệ với độ nhạy theo chuẩn bậc một, cho bảo đảm riêng tư thuần với delta bằng không.",
+      "say": "For a simple count query the Laplace mechanism is still the cleanest thing to explain to an auditor.",
       "tags": [
         "privacy"
       ]
@@ -565,6 +599,7 @@
       "vi": "Cắt chuẩn gradient",
       "def_en": "Rescaling each per example or per client gradient to a fixed norm so its influence is bounded.",
       "def_vi": "Co lại từng gradient theo mẫu hoặc theo máy khách về một chuẩn cố định để giới hạn ảnh hưởng của nó.",
+      "say": "Gradient norm clipping is doing two jobs here, it bounds sensitivity for privacy and it quietly stabilises training.",
       "tags": [
         "privacy",
         "defence"
@@ -576,6 +611,7 @@
       "vi": "Thuật toán DP-SGD",
       "def_en": "Stochastic gradient descent with per example clipping followed by calibrated noise on every step.",
       "def_vi": "Hạ gradient ngẫu nhiên có cắt chuẩn theo từng mẫu, sau đó thêm nhiễu hiệu chỉnh ở mỗi bước.",
+      "say": "We swapped the optimiser for DP-SGD, which means every step now pays for clipping and noise, not just the last one.",
       "tags": [
         "privacy"
       ]
@@ -598,6 +634,7 @@
       "vi": "Ghép nối riêng tư",
       "def_en": "The rule for how privacy loss accumulates when the same data is queried repeatedly.",
       "def_vi": "Quy tắc mô tả mất mát riêng tư tích luỹ ra sao khi cùng một dữ liệu bị truy vấn nhiều lần.",
+      "say": "Composition is the part people forget, every extra query on the same data eats into what you have left.",
       "tags": [
         "privacy",
         "theory"
@@ -609,6 +646,7 @@
       "vi": "Riêng tư vi phân Renyi",
       "def_en": "A relaxation stated with Renyi divergence that composes cleanly and converts back to the usual epsilon and delta.",
       "def_vi": "Dạng nới lỏng phát biểu bằng phân kỳ Renyi, ghép nối gọn gàng và chuyển ngược được về epsilon và delta thông thường.",
+      "say": "Track the accounting in Renyi differential privacy and convert only at the end, otherwise you lose ground at every step.",
       "tags": [
         "privacy",
         "theory"
@@ -632,6 +670,7 @@
       "vi": "Mô hình xáo trộn",
       "def_en": "A trusted shuffler strips the link between messages and senders, sitting between local and central privacy in strength.",
       "def_vi": "Một bộ xáo trộn đáng tin cắt đứt mối liên hệ giữa thông điệp và người gửi, sức mạnh nằm giữa riêng tư cục bộ và trung tâm.",
+      "say": "The shuffle model sits between the two extremes, you trust a shuffler with linkage but never with the raw values.",
       "tags": [
         "privacy"
       ]
@@ -642,6 +681,7 @@
       "vi": "Ẩn danh k",
       "def_en": "A syntactic guarantee that every released record is indistinguishable from at least k minus one others on the quasi identifiers.",
       "def_vi": "Bảo đảm mang tính cú pháp rằng mỗi bản ghi công bố không phân biệt được với ít nhất k trừ một bản ghi khác trên các thuộc tính bán định danh.",
+      "say": "Do not offer k-anonymity as a privacy guarantee in that meeting, it is syntactic and an auxiliary table breaks it.",
       "tags": [
         "privacy"
       ]
@@ -652,6 +692,7 @@
       "vi": "Tính toán nhiều bên an toàn",
       "def_en": "Protocols letting several parties compute a joint function while each keeps its own input secret.",
       "def_vi": "Các giao thức cho nhiều bên cùng tính một hàm chung trong khi mỗi bên giữ kín đầu vào của mình.",
+      "say": "Secure multiparty computation sounds heavy until you realise we only need it for the sum, not for the whole training loop.",
       "tags": [
         "privacy",
         "crypto"
@@ -675,6 +716,7 @@
       "vi": "Môi trường thực thi tin cậy",
       "def_en": "A hardware enclave that isolates computation from the host, shifting trust from software onto the chip vendor.",
       "def_vi": "Vùng cách ly bằng phần cứng, tách tính toán khỏi máy chủ, chuyển niềm tin từ phần mềm sang nhà sản xuất chip.",
+      "say": "Running inside a trusted execution environment moves the question from do you trust the operator to do you trust the chip vendor.",
       "tags": [
         "privacy",
         "system"
@@ -698,6 +740,7 @@
       "vi": "Riêng tư ở mức máy khách",
       "def_en": "The neighbouring relation is one whole client added or removed, a much stronger and noisier setting than one example.",
       "def_vi": "Quan hệ kề nhau được định nghĩa là thêm hoặc bớt trọn một máy khách, mức này mạnh hơn và ồn hơn nhiều so với mức một mẫu.",
+      "say": "If the regulator asks about one hospital rather than one patient, you owe them client level privacy, which costs far more noise.",
       "tags": [
         "privacy"
       ]
@@ -720,6 +763,7 @@
       "vi": "Tấn công suy luận thuộc tính",
       "def_en": "Learning a statistical property of a client's dataset, such as its gender balance, without identifying any record.",
       "def_vi": "Suy ra một tính chất thống kê của tập dữ liệu ở một máy khách, chẳng hạn tỉ lệ giới tính, mà không cần nhận diện bản ghi nào.",
+      "say": "A property inference attack told us the ratio of night shifts at one clinic, without naming a single patient.",
       "tags": [
         "attack",
         "privacy"
@@ -731,6 +775,7 @@
       "vi": "Đảo ngược mô hình",
       "def_en": "Reconstructing a representative input for a class or an individual by optimising against the trained model.",
       "def_vi": "Dựng lại một đầu vào đại diện cho một lớp hoặc một cá nhân bằng cách tối ưu ngược lại mô hình đã huấn luyện.",
+      "say": "Model inversion produced a blurred but recognisable average face per class, which was enough to worry the ethics board.",
       "tags": [
         "attack",
         "privacy"
@@ -753,6 +798,7 @@
       "vi": "Tấn công Sybil",
       "def_en": "One adversary registers many fake clients so it controls a large share of the votes in aggregation.",
       "def_vi": "Một kẻ tấn công đăng ký nhiều máy khách giả để nắm phần lớn số phiếu trong khâu tổng hợp.",
+      "say": "Registration was free, so a sybil attack was trivial, one laptop pretended to be an entire neighbourhood of clients.",
       "tags": [
         "attack"
       ]
@@ -763,6 +809,7 @@
       "vi": "Máy khách Byzantine",
       "def_en": "A participant that may send arbitrary, even coordinated and adaptive, values rather than merely failing.",
       "def_vi": "Bên tham gia có thể gửi giá trị tuỳ ý, thậm chí có phối hợp và thích nghi, chứ không chỉ đơn thuần là hỏng.",
+      "say": "Stop calling it a faulty node, a Byzantine client can adapt to your defence and coordinate with others.",
       "tags": [
         "attack",
         "theory"
@@ -774,6 +821,7 @@
       "vi": "Tổng hợp bền vững",
       "def_en": "Replacing the mean with an estimator that a minority of arbitrary updates cannot move far.",
       "def_vi": "Thay phép lấy trung bình bằng một ước lượng mà một thiểu số cập nhật tuỳ ý không thể kéo đi xa.",
+      "say": "Robust aggregation is insurance, it costs accuracy on a clean fleet and saves you on the day someone misbehaves.",
       "tags": [
         "defence"
       ]
@@ -784,6 +832,7 @@
       "vi": "Trung vị theo toạ độ",
       "def_en": "Taking the median independently in each parameter dimension instead of the mean.",
       "def_vi": "Lấy trung vị độc lập trên từng chiều tham số thay vì lấy trung bình.",
+      "say": "The coordinate wise median throws away magnitude information, so on a well behaved round it converges slower than plain averaging.",
       "tags": [
         "defence"
       ]
@@ -805,6 +854,7 @@
       "vi": "Trung bình cắt tỉa",
       "def_en": "Discarding a fixed fraction of the highest and lowest values per coordinate before averaging the rest.",
       "def_vi": "Loại bỏ một tỉ lệ cố định các giá trị cao nhất và thấp nhất trên mỗi toạ độ rồi mới lấy trung bình phần còn lại.",
+      "say": "Set the trimmed mean fraction above the share of clients you actually expect to misbehave, or the defence does nothing.",
       "tags": [
         "defence"
       ]
@@ -815,6 +865,7 @@
       "vi": "Phòng thủ giới hạn chuẩn",
       "def_en": "Clipping every uploaded update to a maximum norm so no single client can push the model far in one round.",
       "def_vi": "Cắt mọi cập nhật tải lên về một chuẩn tối đa để không máy khách nào đẩy mô hình đi xa trong một vòng.",
+      "say": "The norm bounding defence caps how far any one client can push us in a round, and it costs almost nothing.",
       "tags": [
         "defence"
       ]
@@ -836,6 +887,7 @@
       "vi": "Ngưỡng sụp đổ",
       "def_en": "The fraction of corrupted inputs an estimator can absorb before its output becomes unbounded.",
       "def_vi": "Tỉ lệ đầu vào bị bóp méo mà một ước lượng còn chịu được trước khi đầu ra của nó vượt mọi giới hạn.",
+      "say": "What is the breakdown point of that estimator? If it sits below the fraction we expect corrupted, the defence is decorative.",
       "tags": [
         "defence",
         "theory"
@@ -847,6 +899,7 @@
       "vi": "Bên hưởng lợi không đóng góp",
       "def_en": "A client that submits noise or an unchanged model to collect the global model without spending compute or data.",
       "def_vi": "Máy khách gửi lên nhiễu hoặc mô hình y nguyên để nhận mô hình toàn cục mà không tốn tính toán hay dữ liệu.",
+      "say": "A free rider sends back nearly the model we handed out, so the update norm alone is enough to spot them.",
       "tags": [
         "attack",
         "incentive"
@@ -870,6 +923,7 @@
       "vi": "Học liên kết chéo thiết bị",
       "def_en": "Millions of unreliable, resource limited clients, each with little data and mostly never seen twice.",
       "def_vi": "Hàng triệu máy khách không tin cậy và hạn chế tài nguyên, mỗi máy ít dữ liệu và phần lớn không gặp lại lần thứ hai.",
+      "say": "This is cross device federated learning, so assume most clients appear once, drop out midway and never come back.",
       "tags": [
         "taxonomy",
         "system"
@@ -881,6 +935,7 @@
       "vi": "Học liên kết chéo tổ chức",
       "def_en": "A handful of organisations with reliable infrastructure, stable identities and legal contracts between them.",
       "def_vi": "Một số ít tổ chức có hạ tầng ổn định, danh tính cố định và hợp đồng pháp lý ràng buộc với nhau.",
+      "say": "In cross silo federated learning the hard part is the contract between the partners, not the training code.",
       "tags": [
         "taxonomy",
         "system"
@@ -892,6 +947,7 @@
       "vi": "Ràng buộc trên thiết bị",
       "def_en": "Battery, thermal limits, memory and metered data caps that decide whether local training may run at all.",
       "def_vi": "Pin, giới hạn nhiệt, bộ nhớ và hạn mức dữ liệu tính cước, những thứ quyết định huấn luyện cục bộ có được chạy hay không.",
+      "say": "On device constraints killed the plan before privacy did, the phone throttles long before the battery ever runs flat.",
       "tags": [
         "system"
       ]
@@ -902,6 +958,7 @@
       "vi": "Quản lý phiên bản mô hình",
       "def_en": "Tagging each broadcast model so the server can tell which version an arriving update was computed from.",
       "def_vi": "Gắn nhãn cho từng mô hình được phát đi để máy chủ biết cập nhật vừa tới được tính từ phiên bản nào.",
+      "say": "Without model versioning we could not tell a stale update from a fresh one, and the logs were useless.",
       "tags": [
         "system"
       ]
@@ -948,6 +1005,7 @@
       "vi": "Bất đối xứng đường lên và đường xuống",
       "def_en": "Home and mobile links upload far slower than they download, so uplink compression matters more.",
       "def_vi": "Đường truyền gia đình và di động tải lên chậm hơn tải xuống rất nhiều, nên nén đường lên quan trọng hơn.",
+      "say": "Remember the uplink and downlink asymmetry, compressing the broadcast helps far less than compressing what the phones send back.",
       "tags": [
         "system",
         "communication"
@@ -959,6 +1017,7 @@
       "vi": "Học liên kết trong y tế",
       "def_en": "A classic cross silo case where hospitals cannot pool records but want a model trained on all of them.",
       "def_vi": "Ca chéo tổ chức kinh điển, các bệnh viện không được gộp hồ sơ nhưng vẫn muốn có mô hình học từ toàn bộ.",
+      "say": "Federated learning in healthcare succeeds or fails on the data agreement, the architecture is honestly the least contested part.",
       "tags": [
         "application"
       ]
@@ -969,6 +1028,7 @@
       "vi": "Học liên kết trong tài chính",
       "def_en": "Banks jointly train fraud or credit models without exposing customer level transactions to each other.",
       "def_vi": "Các ngân hàng cùng huấn luyện mô hình gian lận hoặc tín dụng mà không lộ giao dịch ở mức khách hàng cho nhau.",
+      "say": "Federated learning in finance appeals to the banks because fraud patterns are shared but customer ledgers absolutely are not.",
       "tags": [
         "application"
       ]
@@ -991,6 +1051,7 @@
       "vi": "Quy định GDPR",
       "def_en": "The European data protection regulation, which governs processing of personal data wherever it happens.",
       "def_vi": "Quy định bảo vệ dữ liệu của châu Âu, điều chỉnh việc xử lý dữ liệu cá nhân ở bất kỳ nơi nào nó diễn ra.",
+      "say": "GDPR follows the data, so hosting the server abroad does not move the obligation anywhere at all.",
       "tags": [
         "regulation"
       ]
@@ -1001,6 +1062,7 @@
       "vi": "Tối thiểu hoá dữ liệu",
       "def_en": "The principle of collecting and keeping only what the stated purpose actually requires.",
       "def_vi": "Nguyên tắc chỉ thu thập và giữ đúng phần mà mục đích đã nêu thật sự cần.",
+      "say": "Data minimisation is the argument that actually persuades a privacy officer, we never collect the raw records in the first place.",
       "tags": [
         "regulation",
         "privacy"
@@ -1012,6 +1074,7 @@
       "vi": "Quyền được xoá dữ liệu",
       "def_en": "A data subject may demand deletion of their data, which raises the question of what to do with a model trained on it.",
       "def_vi": "Chủ thể dữ liệu có quyền yêu cầu xoá dữ liệu của mình, điều này đặt ra câu hỏi phải làm gì với mô hình đã học từ dữ liệu đó.",
+      "say": "Someone exercised the right to erasure last week, and now we have to decide what that means for the trained weights.",
       "tags": [
         "regulation",
         "unlearning"
@@ -1035,6 +1098,7 @@
       "vi": "Gỡ học liên kết",
       "def_en": "Undoing one client's contribution to a global model, complicated by the fact that every later round mixed it in.",
       "def_vi": "Gỡ bỏ phần đóng góp của một máy khách khỏi mô hình toàn cục, việc này khó vì mọi vòng sau đó đã trộn nó vào.",
+      "say": "Federated unlearning is hard precisely because every round after that client joined has already mixed its contribution into everyone else.",
       "tags": [
         "unlearning"
       ]
@@ -1045,6 +1109,7 @@
       "vi": "Quay lui về điểm lưu",
       "def_en": "Restarting from a saved global model that predates a client's first contribution, then replaying the remaining rounds.",
       "def_vi": "Khởi động lại từ mô hình toàn cục đã lưu trước lần đóng góp đầu tiên của một máy khách, rồi chạy lại các vòng còn lại.",
+      "say": "Checkpoint rollback works, it just means replaying months of rounds, so keep the checkpoints dense enough to make that affordable.",
       "tags": [
         "unlearning",
         "system"
@@ -1068,6 +1133,7 @@
       "vi": "Độ chính xác của máy khách tệ nhất",
       "def_en": "The score of the weakest participant, the metric a deployment decision usually turns on.",
       "def_vi": "Điểm số của bên tham gia yếu nhất, đây thường là chỉ số mà quyết định triển khai dựa vào.",
+      "say": "Show me the worst case client accuracy, because that is the number the pilot site will feel every day.",
       "tags": [
         "evaluation",
         "fairness"
@@ -1102,6 +1168,7 @@
       "vi": "Thiên lệch do tham gia",
       "def_en": "The trained model reflects the clients that could join, not the population the system serves.",
       "def_vi": "Mô hình học được phản ánh những máy khách có thể tham gia, không phản ánh quần thể mà hệ thống phục vụ.",
+      "say": "Participation bias crept in quietly, we trained on whoever had good wifi and then claimed the model served everyone.",
       "tags": [
         "evaluation",
         "fairness"
@@ -1113,6 +1180,7 @@
       "vi": "Khớp thực thể",
       "def_en": "Finding which records at two parties refer to the same subject, the prerequisite step in vertical federated learning.",
       "def_vi": "Tìm xem bản ghi nào ở hai bên cùng chỉ về một chủ thể, đây là bước tiên quyết trong học liên kết theo chiều dọc.",
+      "say": "Entity alignment comes first, if the two parties disagree about who is who, the joint model learns pure noise.",
       "tags": [
         "taxonomy",
         "method"
@@ -1124,6 +1192,7 @@
       "vi": "Giao tập riêng tư",
       "def_en": "A protocol that reveals only the identifiers two parties have in common and nothing about the rest.",
       "def_vi": "Giao thức chỉ tiết lộ những định danh mà hai bên cùng có, không lộ gì về phần còn lại.",
+      "say": "We ran private set intersection on the identifiers, so each side learned the overlap and nothing about the rest.",
       "tags": [
         "crypto",
         "privacy"
@@ -1135,6 +1204,7 @@
       "vi": "Cơ chế khuyến khích",
       "def_en": "Rules for rewarding contribution so that participating beats free riding for a rational client.",
       "def_vi": "Các quy tắc thưởng theo đóng góp, sao cho tham gia có lợi hơn hưởng không cho một máy khách duy lý.",
+      "say": "Design the incentive mechanism early, because a rational hospital will happily take the global model and contribute nothing back.",
       "tags": [
         "incentive"
       ]
@@ -1145,6 +1215,7 @@
       "vi": "Đo đóng góp",
       "def_en": "Estimating how much each client improved the global model, often with Shapley style leave one out accounting.",
       "def_vi": "Ước lượng mỗi máy khách đã cải thiện mô hình toàn cục bao nhiêu, thường bằng cách bỏ ra từng bên theo kiểu Shapley.",
+      "say": "Contribution measurement turned political the moment it started deciding money, so we published the method before running it.",
       "tags": [
         "incentive",
         "evaluation"
@@ -1168,6 +1239,7 @@
       "vi": "Chia nhãn kiểu cực đoan",
       "def_en": "A harsher split where each client is handed only a fixed handful of classes, used as a worst case stress test.",
       "def_vi": "Kiểu chia khắc nghiệt hơn, mỗi máy khách chỉ nhận một số lớp cố định, dùng làm phép thử ở tình huống xấu nhất.",
+      "say": "The pathological label partition is a stress test, not a deployment, so do not tune your defaults on it.",
       "tags": [
         "non-iid",
         "evaluation"
@@ -1191,6 +1263,7 @@
       "vi": "Không đồng nhất về năng lực hệ thống",
       "def_en": "Differences in compute, memory, battery and link quality across clients, which decide who can finish a round at all.",
       "def_vi": "Khác biệt về năng lực tính toán, bộ nhớ, pin và chất lượng đường truyền giữa các máy khách, quyết định ai kịp hoàn thành một vòng.",
+      "say": "System heterogeneity decides who finishes the round, and it correlates with income, which is how the fairness problem sneaks in.",
       "tags": [
         "system",
         "challenge"
@@ -1214,6 +1287,7 @@
       "vi": "Đổi lớp chuẩn hoá",
       "def_en": "Replacing batch normalisation with group or layer normalisation so no statistic depends on the local batch composition.",
       "def_vi": "Thay chuẩn hoá theo lô bằng chuẩn hoá theo nhóm hoặc theo lớp, để không thống kê nào phụ thuộc vào thành phần lô cục bộ.",
+      "say": "A normalisation layer swap to group normalisation fixed the whole thing, and it took one line in the model file.",
       "tags": [
         "method",
         "non-iid"
@@ -1225,6 +1299,7 @@
       "vi": "Thuật toán FedDyn",
       "def_en": "A method adding a client specific linear correction term so the local optima line up with the global one over rounds.",
       "def_vi": "Phương pháp thêm số hạng hiệu chỉnh tuyến tính riêng cho từng máy khách, để các nghiệm cục bộ dần trùng với nghiệm toàn cục qua các vòng.",
+      "say": "FedDyn keeps a per client correction term, which helps over many rounds but means the server has to remember every client.",
       "tags": [
         "algorithm",
         "non-iid"
@@ -1236,6 +1311,7 @@
       "vi": "Học liên kết đối chiếu biểu diễn",
       "def_en": "Regularising the local representation to stay near the global model representation and away from the previous local one.",
       "def_vi": "Ràng buộc biểu diễn cục bộ ở gần biểu diễn của mô hình toàn cục và tránh xa biểu diễn cục bộ ở vòng trước.",
+      "say": "Model contrastive federated learning pulls the local representation back towards the global one, which helps most when the skew is severe.",
       "tags": [
         "algorithm",
         "non-iid"
@@ -1271,6 +1347,7 @@
       "vi": "Tập khởi động dùng chung",
       "def_en": "A small public dataset used to initialise or regularise the global model, trading a little openness for stability under skew.",
       "def_vi": "Tập dữ liệu công khai nhỏ dùng để khởi tạo hoặc ràng buộc mô hình toàn cục, đánh đổi một chút tính mở lấy sự ổn định khi dữ liệu lệch.",
+      "say": "Do we have a globally shared warm up set we are legally allowed to use? That question decides the whole design.",
       "tags": [
         "method",
         "non-iid"
@@ -1294,6 +1371,7 @@
       "vi": "Sơ đồ nén QSGD",
       "def_en": "A gradient compression scheme that sends a quantised direction together with a norm, with a tunable number of levels.",
       "def_vi": "Sơ đồ nén gradient gửi đi hướng đã lượng tử hoá kèm theo chuẩn, với số mức có thể điều chỉnh.",
+      "say": "QSGD lets you dial the number of levels, so you can trade uplink bytes against variance without touching the model.",
       "tags": [
         "communication",
         "algorithm"
@@ -1317,6 +1395,7 @@
       "vi": "Tỉa theo k giá trị lớn nhất",
       "def_en": "Sending only the largest magnitude coordinates of an update and zeroing the rest, a biased step that needs memory to correct.",
       "def_vi": "Chỉ gửi các toạ độ có độ lớn lớn nhất trong bản cập nhật và cho phần còn lại về không, bước này bị chệch nên cần bộ nhớ để bù.",
+      "say": "Top-k sparsification is biased, so pair it with a residual buffer or the small consistent gradients vanish forever.",
       "tags": [
         "communication",
         "method"
@@ -1328,6 +1407,7 @@
       "vi": "Phân rã hạng thấp bản cập nhật",
       "def_en": "Writing the update as a product of two thin matrices so only the factors travel over the link.",
       "def_vi": "Viết bản cập nhật thành tích của hai ma trận hẹp, để chỉ các thừa số phải đi qua đường truyền.",
+      "say": "Low rank update factorisation cut the payload beautifully until the rank was too small and the model stopped improving.",
       "tags": [
         "communication",
         "method"
@@ -1351,6 +1431,7 @@
       "vi": "Nén hai chiều",
       "def_en": "Compressing the broadcast model as well as the uploaded update, which needs care because errors from both directions accumulate.",
       "def_vi": "Nén cả mô hình phát xuống lẫn bản cập nhật tải lên, cần thận trọng vì sai số từ hai chiều cùng tích luỹ.",
+      "say": "If you compress both directions, watch the errors compound, bidirectional compression is not simply two schemes applied independently.",
       "tags": [
         "communication",
         "system"
@@ -1362,6 +1443,7 @@
       "vi": "Toán tử nén không chệch",
       "def_en": "A compression operator whose expectation equals its input, so it adds variance to the update but no systematic shift.",
       "def_vi": "Toán tử nén có kỳ vọng bằng chính đầu vào, nên chỉ thêm phương sai cho bản cập nhật chứ không gây lệch hệ thống.",
+      "say": "An unbiased compressor adds variance but no systematic tilt, which is why the convergence proof survives it and the biased one does not.",
       "tags": [
         "theory",
         "communication"
@@ -1373,6 +1455,7 @@
       "vi": "Bỏ bớt lượt tải lên",
       "def_en": "Letting a client skip its upload entirely when the new update differs little from the one the server already holds.",
       "def_vi": "Cho phép máy khách bỏ hẳn lượt tải lên khi bản cập nhật mới khác rất ít so với bản mà máy chủ đang giữ.",
+      "say": "Lazy update transmission saved a third of the traffic, because on quiet days most phones had nothing new to say.",
       "tags": [
         "communication",
         "system"
@@ -1384,6 +1467,7 @@
       "vi": "Tỉa mô hình con theo máy khách",
       "def_en": "Sending each client a randomly thinned submodel so weak devices train and upload only a fraction of the parameters.",
       "def_vi": "Gửi cho mỗi máy khách một mô hình con được tỉa ngẫu nhiên, để thiết bị yếu chỉ huấn luyện và tải lên một phần tham số.",
+      "say": "Federated dropout let the old handsets stay in the cohort, they train a thinner slice and still upload something useful.",
       "tags": [
         "system",
         "communication"
@@ -1395,6 +1479,7 @@
       "vi": "Huấn luyện mô hình con lồng nhau",
       "def_en": "Nesting submodels so a small device trains a prefix of the channels while a strong device trains the whole width.",
       "def_vi": "Lồng các mô hình con vào nhau, thiết bị nhỏ huấn luyện phần đầu của các kênh còn thiết bị mạnh huấn luyện toàn bộ bề rộng.",
+      "say": "With ordered submodel training the weak device trains a prefix of the channels while the workstation trains the full width.",
       "tags": [
         "system",
         "method"
@@ -1418,6 +1503,7 @@
       "vi": "Chia sẻ bí mật theo ngưỡng",
       "def_en": "Splitting a secret into shares so any large enough subset reconstructs it while any smaller subset learns nothing.",
       "def_vi": "Chia một bí mật thành các mảnh, sao cho tập con đủ lớn khôi phục được còn tập con nhỏ hơn không biết gì.",
+      "say": "Threshold secret sharing is what makes dropouts survivable, any large enough subset can still reconstruct what the missing clients masked.",
       "tags": [
         "crypto",
         "privacy"
@@ -1441,6 +1527,7 @@
       "vi": "Máy chủ trung thực nhưng tò mò",
       "def_en": "A server that follows the protocol exactly but tries to infer whatever it can from the messages it legitimately receives.",
       "def_vi": "Máy chủ tuân thủ đúng giao thức nhưng cố suy ra mọi thứ có thể từ những thông điệp nó nhận được một cách hợp lệ.",
+      "say": "Our threat model assumes an honest but curious server, and the reviewer will ask why we think that assumption holds.",
       "tags": [
         "privacy",
         "attack"
@@ -1452,6 +1539,7 @@
       "vi": "Tổng hợp kiểm chứng được",
       "def_en": "Letting clients check that the published global model really is the sum of the submitted updates, not a value the server picked.",
       "def_vi": "Cho phép máy khách kiểm chứng rằng mô hình toàn cục công bố đúng là tổng các cập nhật đã nộp, không phải giá trị do máy chủ tự chọn.",
+      "say": "Verifiable aggregation lets a client check the published model really is the sum, rather than whatever the server felt like publishing.",
       "tags": [
         "crypto",
         "defence"
@@ -1474,6 +1562,7 @@
       "vi": "Tỉ lệ lấy mẫu máy khách",
       "def_en": "The expected fraction of the population touched each round, which enters privacy accounting as directly as the noise does.",
       "def_vi": "Tỉ lệ kỳ vọng của tổng thể được chạm tới mỗi vòng, đại lượng này đi vào phép tính riêng tư trực tiếp không kém gì nhiễu.",
+      "say": "Halve the client sampling rate and the privacy accounting improves as much as adding noise would, for free.",
       "tags": [
         "privacy",
         "system"
@@ -1485,6 +1574,7 @@
       "vi": "Riêng tư vi phân tập trung không",
       "def_en": "A relaxation stated through a single curvature parameter, which composes cleanly and converts to the usual pair afterwards.",
       "def_vi": "Dạng nới lỏng phát biểu qua một tham số độ cong duy nhất, ghép nối gọn gàng rồi mới quy đổi về cặp tham số quen thuộc.",
+      "say": "State it in zero concentrated differential privacy while you compose, then convert once at the end for the report.",
       "tags": [
         "privacy",
         "theory"
@@ -1520,6 +1610,7 @@
       "vi": "Cắt chuẩn thích nghi",
       "def_en": "Tracking a quantile of the update norms and moving the clipping threshold towards it, instead of fixing the bound by hand.",
       "def_vi": "Theo dõi một phân vị của chuẩn các bản cập nhật rồi dịch ngưỡng cắt về phía đó, thay vì ấn định ngưỡng bằng tay.",
+      "say": "Adaptive clipping tracks a quantile of the update norms, so nobody has to guess the threshold before the run starts.",
       "tags": [
         "privacy",
         "method"
@@ -1543,6 +1634,7 @@
       "vi": "Cài bản ghi mồi",
       "def_en": "Planting a unique made up record and later measuring how strongly the trained model prefers it, as a memorisation probe.",
       "def_vi": "Cài một bản ghi bịa duy nhất rồi đo xem mô hình đã huấn luyện thiên vị nó mạnh đến đâu, dùng làm phép dò ghi nhớ.",
+      "say": "We used canary insertion as a smoke test, plant a unique fake record and see whether the model remembers it.",
       "tags": [
         "privacy",
         "evaluation"
@@ -1578,6 +1670,7 @@
       "vi": "Tấn công theo ngưỡng mất mát",
       "def_en": "The simplest membership test, declaring a sample a member when its loss under the model falls below a chosen cut.",
       "def_vi": "Phép thử thành viên đơn giản nhất, kết luận một mẫu là thành viên khi mất mát của nó dưới một ngưỡng đã chọn.",
+      "say": "Even the crude loss threshold attack worked here, which tells you the model was memorising rather than generalising.",
       "tags": [
         "attack",
         "privacy"
@@ -1589,6 +1682,7 @@
       "vi": "Tấn công dùng mô hình bóng",
       "def_en": "Training many models on data the attacker controls, so the attacker learns what a member output distribution looks like.",
       "def_vi": "Huấn luyện nhiều mô hình trên dữ liệu do kẻ tấn công kiểm soát, nhờ đó học được phân bố đầu ra của một mẫu là thành viên trông ra sao.",
+      "say": "A shadow model attack needs compute but no insider access, so treat it as the realistic baseline, not the exotic case.",
       "tags": [
         "attack",
         "privacy"
@@ -1612,6 +1706,7 @@
       "vi": "Tỉ lệ dương tính thật ở vùng ít báo động giả",
       "def_en": "The membership attack metric that matters, because confidently exposing a few people is worse than guessing slightly better than chance.",
       "def_vi": "Thước đo đáng quan tâm của tấn công thành viên, vì lộ chắc chắn vài người còn tệ hơn việc đoán tốt hơn ngẫu nhiên một chút.",
+      "say": "Report the true positive rate at low false positive rate, because average accuracy hides the handful of people confidently exposed.",
       "tags": [
         "attack",
         "evaluation"
@@ -1623,6 +1718,7 @@
       "vi": "Khoảng chênh khái quát hoá như dấu hiệu rò rỉ",
       "def_en": "The observation that a wider train and test gap makes membership easier, though a small gap is no proof of safety.",
       "def_vi": "Nhận xét rằng khoảng chênh giữa tập huấn luyện và tập kiểm tra càng rộng thì suy luận thành viên càng dễ, tuy khoảng chênh nhỏ không chứng minh được là an toàn.",
+      "say": "A widening generalisation gap is a leakage signal worth watching, though closing it proves nothing about safety on its own.",
       "tags": [
         "attack",
         "evaluation"
@@ -1646,6 +1742,7 @@
       "vi": "Rò rỉ sâu từ gradient",
       "def_en": "Recovering inputs by optimising a dummy batch until its gradient matches the observed one, which works best on small batches.",
       "def_vi": "Khôi phục đầu vào bằng cách tối ưu một lô giả cho tới khi gradient của nó khớp gradient quan sát được, hiệu quả nhất với lô nhỏ.",
+      "say": "Deep leakage from gradients works frighteningly well on tiny batches, and almost not at all once you average enough samples.",
       "tags": [
         "attack",
         "privacy"
@@ -1669,6 +1766,7 @@
       "vi": "Cỡ lô như rào cản rò rỉ",
       "def_en": "The empirical fact that averaging many samples into one gradient makes reconstruction far harder, though it is not a guarantee.",
       "def_vi": "Thực tế quan sát được là gộp nhiều mẫu vào một gradient khiến việc tái dựng khó hơn nhiều, tuy đó không phải bảo đảm.",
+      "say": "Treat batch size as a leakage barrier if you like, but write down that it is empirical and not a guarantee.",
       "tags": [
         "privacy",
         "defence"
@@ -1680,6 +1778,7 @@
       "vi": "Trọng số bẫy",
       "def_en": "Malicious initial parameters chosen so individual examples land in separate neurons and can be read back one by one.",
       "def_vi": "Tham số khởi tạo độc hại được chọn sao cho từng mẫu rơi vào các nơ ron riêng biệt và có thể đọc lại từng mẫu một.",
+      "say": "Trap weights are the reason we now verify the initial parameters the server hands out, not just the aggregation protocol.",
       "tags": [
         "attack",
         "privacy"
@@ -1703,6 +1802,7 @@
       "vi": "Khởi tạo theo lối siêu học",
       "def_en": "Training the global model so it adapts well after a few local steps, rather than so it performs well as it stands.",
       "def_vi": "Huấn luyện mô hình toàn cục sao cho nó thích nghi tốt sau vài bước cục bộ, thay vì để nó tự chạy tốt ngay.",
+      "say": "We are not shipping a finished model, we are shipping a meta learned initialisation that each site fine tunes locally.",
       "tags": [
         "personalisation",
         "algorithm"
@@ -1714,6 +1814,7 @@
       "vi": "Mô hình riêng có neo toàn cục",
       "def_en": "Keeping a private per client model penalised for straying too far from the shared one, tuning the pull with a single weight.",
       "def_vi": "Giữ một mô hình riêng cho từng máy khách, bị phạt nếu đi quá xa mô hình chung, mức níu kéo điều chỉnh bằng một trọng số duy nhất.",
+      "say": "Each site keeps its own model with a global anchor, and one weight decides how far it may drift.",
       "tags": [
         "personalisation",
         "algorithm"
@@ -1725,6 +1826,7 @@
       "vi": "Nội suy giữa hai mô hình",
       "def_en": "Mixing the global and local weights with a coefficient chosen per client, which gives a whole curve of intermediate models.",
       "def_vi": "Trộn trọng số toàn cục và cục bộ với hệ số chọn riêng cho từng máy khách, cho ra cả một đường cong các mô hình trung gian.",
+      "say": "Model interpolation gives you a whole curve, so let each client pick the coefficient that works on its own validation split.",
       "tags": [
         "personalisation",
         "method"
@@ -1748,6 +1850,7 @@
       "vi": "Học liên kết đa tác vụ",
       "def_en": "Treating each client as a related but distinct task and learning the relationships between them instead of forcing one model.",
       "def_vi": "Xem mỗi máy khách là một tác vụ khác nhau nhưng có liên hệ, rồi học chính mối liên hệ đó thay vì ép về một mô hình duy nhất.",
+      "say": "Federated multi task learning fits our case better, the sites are related but nobody pretends they solve the same problem.",
       "tags": [
         "personalisation",
         "taxonomy"
@@ -1771,6 +1874,7 @@
       "vi": "Cá nhân hoá bằng mạng sinh trọng số",
       "def_en": "A server side network mapping a client embedding to that client weights, so only the embedding and the generator are shared.",
       "def_vi": "Mạng phía máy chủ ánh xạ một vectơ mô tả máy khách thành trọng số của chính máy khách đó, nên chỉ vectơ mô tả và bộ sinh được chia sẻ.",
+      "say": "With hypernetwork personalisation only the client embedding travels, and the server generates the weights from it on the fly.",
       "tags": [
         "personalisation",
         "algorithm"
@@ -1782,6 +1886,7 @@
       "vi": "Trọng số theo độ cũ",
       "def_en": "Discounting an asynchronous update by a decreasing function of how many versions old the model it was computed from is.",
       "def_vi": "Giảm trọng số một bản cập nhật bất đồng bộ theo hàm giảm dần của số phiên bản mà mô hình gốc của nó đã lạc hậu.",
+      "say": "Turn on staleness weighting before anyone asks, an update computed from a model two versions old should not count fully.",
       "tags": [
         "algorithm",
         "system"
@@ -1805,6 +1910,7 @@
       "vi": "Vòng chạy theo hạn chót",
       "def_en": "Fixing a wall clock cut off and aggregating whatever arrived, trading a biased cohort for a predictable round time.",
       "def_vi": "Ấn định một mốc thời gian rồi tổng hợp những gì đã tới, đánh đổi việc nhóm bị lệch lấy thời lượng vòng dự đoán được.",
+      "say": "We moved to a deadline based round, which made the schedule predictable and quietly biased the cohort towards fast devices.",
       "tags": [
         "system",
         "method"
@@ -1816,6 +1922,7 @@
       "vi": "Ma trận trộn",
       "def_en": "The doubly stochastic matrix of weights each peer applies to the models of its neighbours when there is no central server.",
       "def_vi": "Ma trận trọng số song ngẫu nhiên mà mỗi nút áp cho mô hình của các nút lân cận khi không có máy chủ trung tâm.",
+      "say": "The mixing matrix has to be doubly stochastic, otherwise the peers converge to something that is not the average at all.",
       "tags": [
         "theory",
         "algorithm"
@@ -1839,6 +1946,7 @@
       "vi": "Khoảng cách đồng thuận",
       "def_en": "The average disagreement between peer models at a given step, the decentralised counterpart of client drift.",
       "def_vi": "Mức bất đồng trung bình giữa các mô hình của các nút tại một bước, tương ứng phi tập trung của hiện tượng trôi mô hình cục bộ.",
+      "say": "Plot the consensus distance every step, if it is not shrinking the peers are simply training separate models over one graph.",
       "tags": [
         "theory",
         "evaluation"
@@ -1886,6 +1994,7 @@
       "vi": "Kết nối chập chờn",
       "def_en": "Links appearing and vanishing on a schedule or at random, making participation a property of the network rather than a design choice.",
       "def_vi": "Đường truyền xuất hiện rồi biến mất theo lịch hoặc ngẫu nhiên, khiến việc tham gia trở thành đặc tính của mạng chứ không phải lựa chọn thiết kế.",
+      "say": "Under intermittent connectivity participation becomes a property of the network, so stop treating the client list as something you choose.",
       "tags": [
         "system",
         "challenge"
@@ -1909,6 +2018,7 @@
       "vi": "Cân bằng bằng nghịch đảo kênh",
       "def_en": "Pre scaling each transmission by the inverse of its channel gain so the superposed signals carry the intended weights.",
       "def_vi": "Nhân trước mỗi lần phát với nghịch đảo độ lợi kênh, để các tín hiệu chồng lấn mang đúng trọng số mong muốn.",
+      "say": "Channel inversion alignment only works while the deeply faded users can still afford the transmit power it demands.",
       "tags": [
         "communication",
         "application"
@@ -1920,6 +2030,7 @@
       "vi": "Ngân sách năng lượng mỗi vòng",
       "def_en": "The energy a device may spend on local computation and transmission, often a harder constraint than accuracy on battery powered nodes.",
       "def_vi": "Lượng năng lượng thiết bị được phép tiêu cho tính toán cục bộ và truyền tin, ràng buộc này thường khó hơn cả yêu cầu độ chính xác trên nút chạy pin.",
+      "say": "On battery powered nodes the energy budget per round binds long before accuracy does, so optimise against it directly.",
       "tags": [
         "system",
         "application"
@@ -1931,6 +2042,7 @@
       "vi": "Lập lịch và cấp băng thông đồng thời",
       "def_en": "Deciding who trains and how much spectrum each gets in one optimisation, since selecting a client is worthless without a link to carry it.",
       "def_vi": "Quyết định ai huấn luyện và mỗi bên được bao nhiêu băng thông trong cùng một bài toán tối ưu, vì chọn máy khách mà không có đường truyền là vô nghĩa.",
+      "say": "Do joint scheduling and bandwidth allocation together, picking a client is worthless if there is no link to carry its update.",
       "tags": [
         "system",
         "application"
@@ -1954,6 +2066,7 @@
       "vi": "Đánh giá theo lối liên kết",
       "def_en": "Computing metrics by shipping the model out and returning only aggregated statistics, so the test data stays with its owner too.",
       "def_vi": "Tính các chỉ số bằng cách gửi mô hình đi rồi chỉ nhận về thống kê đã tổng hợp, để dữ liệu kiểm tra cũng ở lại với chủ của nó.",
+      "say": "Federated evaluation matters as much as federated training, otherwise the test set quietly becomes the one dataset you did centralise.",
       "tags": [
         "evaluation",
         "system"
@@ -1976,6 +2089,7 @@
       "vi": "Dò siêu tham số dưới ràng buộc riêng tư",
       "def_en": "The often ignored fact that every configuration tried on the real data spends budget, so the reported epsilon is optimistic.",
       "def_vi": "Điều thường bị bỏ qua là mỗi cấu hình đem thử trên dữ liệu thật đều tiêu ngân sách, nên epsilon được báo cáo là lạc quan.",
+      "say": "Nobody accounts for private hyperparameter tuning, so every reported epsilon in this literature is optimistic by an unknown margin.",
       "tags": [
         "privacy",
         "evaluation"
