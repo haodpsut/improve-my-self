@@ -8,9 +8,9 @@
       "q": "An operator says its core is zero trust because every interface between network functions is encrypted. The gap in that claim is",
       "q_vi": "Một nhà mạng nói mạng lõi của mình đã theo tin cậy bằng không vì mọi giao diện giữa các hàm mạng đều được mã hoá. Chỗ hổng của khẳng định đó là",
       "choices": [
-        "Encryption adds delay that real time procedures cannot absorb",
+        "Encryption slows the path, since each hop decrypts and re-encrypts",
         "Encrypted interfaces cannot be inspected by a detection system",
-        "Holding a valid channel still lets a peer request any operation, because confidentiality decides nothing about permission",
+        "Holding a valid channel still lets a peer request any operation at all",
         "Zero trust requires removing the perimeter firewall first"
       ],
       "answer": 2,
@@ -23,8 +23,8 @@
       "q": "Mutual authentication between core functions stops helping when",
       "q_vi": "Xác thực hai chiều giữa các hàm mạng lõi hết tác dụng khi",
       "choices": [
-        "certificates are issued per host rather than per function instance",
-        "the interface between the two functions runs over a shared transport segment",
+        "certificates are issued per host instead of per function instance",
+        "the interface between the two functions runs over a shared transport segment which both tenants use",
         "both functions came from the same equipment vendor originally",
         "the payload is already encrypted"
       ],
@@ -56,7 +56,7 @@
         "web protocols use weaker cryptography than telecom protocols did",
         "the count of separately reachable endpoints grows far beyond what a monolithic node exposed",
         "service calls cannot be logged with anything like the detail that the older point to point interfaces allowed",
-        "signalling now traverses the public internet by design"
+        "signalling now traverses the public internet, since operators share transit"
       ],
       "answer": 1,
       "why": "The transport is not the weak part. Every function becomes an addressable service, so discovery, error handling and field validation become telecom concerns at a scale the older nodes never presented.",
@@ -70,8 +70,8 @@
       "choices": [
         "the directory service itself becomes noticeably slower at answering the queries other functions send it",
         "every existing session has to be re established once the contents of the registry have been changed",
-        "later sessions are steered to attacker software while every link stays correctly protected",
-        "the registry loses track of which functions are healthy and still able to accept new work"
+        "later sessions are steered to attacker software with every link still correctly protected",
+        "the registry loses track of which functions are healthy and able to accept work"
       ],
       "answer": 2,
       "why": "Discovery is trusted far more than it is authenticated. Once the lookup returns the wrong address, each hop authenticates and encrypts perfectly toward a destination that should never have been in the answer.",
@@ -83,7 +83,7 @@
       "q": "At the roaming edge, protection applied to the message itself matters more than protection applied to the transport because",
       "q_vi": "Ở cửa chuyển vùng, bảo vệ ngay trên bản tin quan trọng hơn bảo vệ ở lớp truyền tải vì",
       "choices": [
-        "transport protection is computationally more expensive at high signalling rates",
+        "transport protection costs far more computation when the signalling rate is high",
         "the interconnect provider between the two operators is legally the responsible party",
         "message protection removes the need to authenticate the roaming partner at all",
         "an intermediary terminating the transport can then read and rewrite fields"
@@ -116,7 +116,7 @@
         "the quote uses a hash function that is no longer recommended",
         "the quote was produced at boot and nothing checks it again afterwards",
         "the verifier runs on hardware from a different silicon vendor",
-        "attestation was performed before the network interfaces were configured"
+        "attestation was performed by the vendor which also supplied the platform"
       ],
       "answer": 1,
       "why": "An attestation statement describes the state of a machine at the instant it was produced. Without freshness and repeated verification, it proves only what was true at some point in the past.",
@@ -131,7 +131,7 @@
         "the host administrator being able to read the memory of the running process directly from the hypervisor",
         "an unauthorised copy of the virtual machine image being started somewhere else in the provider estate",
         "traffic analysis and disruption on the input output path the provider still controls",
-        "tampering with the code before it is loaded"
+        "tampering with the code before it is loaded, since the image is unsigned"
       ],
       "answer": 2,
       "why": "The enclave protects memory contents. Everything entering and leaving still crosses infrastructure the provider operates, so timing, volume and availability remain visible and controllable there.",
@@ -143,7 +143,7 @@
       "q": "A third party application on an edge platform cannot read operator data, yet it still learns useful information. The mechanism is",
       "q_vi": "Một ứng dụng của bên thứ ba trên nền tảng biên không đọc được dữ liệu của nhà mạng nhưng vẫn biết được nhiều thứ hữu ích. Cơ chế ở đây là",
       "choices": [
-        "an unencrypted management interface left reachable from the tenant network segment",
+        "an unencrypted management interface which the tenant network can reach",
         "a misconfigured access control list on the shared storage volume used by both tenants",
         "credentials left in an environment variable by the operator during the last upgrade window",
         "inference from timing and load it observes while sharing the platform"
@@ -158,7 +158,7 @@
       "q": "Moving compute from a guarded data centre into cabinets at cell sites changes the threat model chiefly by",
       "q_vi": "Việc đưa máy tính từ trung tâm dữ liệu có canh gác ra các tủ đặt tại trạm phát sóng làm đổi mô hình đe doạ chủ yếu ở chỗ",
       "choices": [
-        "raising the failure rate of the cooling equipment",
+        "raising cooling failures when ambient temperature rises",
         "admitting an adversary who has brief physical access to the hardware",
         "increasing the latency between the radio units and the functions that serve them",
         "requiring a different operating system on the platform than the data centre once used"
@@ -173,7 +173,7 @@
       "q": "When a core is hosted on a cloud provider, security gaps most often appear",
       "q_vi": "Khi mạng lõi đặt trên nhà cung cấp đám mây, khoảng hở an ninh thường xuất hiện nhất ở",
       "choices": [
-        "in the encryption of traffic between availability zones",
+        "in the encryption of traffic between zones, which the provider manages itself",
         "in the hypervisor that separates one customer from another",
         "where each party assumed the other was covering logging, key custody or evidence",
         "in the physical security of the provider facility"
@@ -188,7 +188,7 @@
       "q": "A credential was built into a container image for a network function. Deleting the running instance does not resolve the exposure because",
       "q_vi": "Một thông tin đăng nhập đã được đưa thẳng vào ảnh vùng chứa của một hàm mạng. Xoá thực thể đang chạy không giải quyết được việc lộ vì",
       "choices": [
-        "the process may still be running on a standby node in the same cluster",
+        "the deletion only removes the network route, since storage is detached separately",
         "the image already sits in every registry and cache it reached",
         "container runtimes keep a copy of process memory after termination",
         "the credential is also written into the audit log of the platform"
@@ -219,7 +219,7 @@
       "q_vi": "Một mô hình đe doạ mà không đồng nghiệp nào bác lại được là điều đáng lo vì",
       "choices": [
         "it takes longer to write than a concrete one",
-        "regulators require a specific document format for it",
+        "regulators require a specific format, since they compare models across operators",
         "it will not survive review by an external auditor",
         "it states no falsifiable claim about the adversary, so it cannot guide any engineering decision"
       ],
@@ -234,7 +234,7 @@
       "q_vi": "Khẳng định hai lát mạng đã cách ly chỉ trở nên kiểm chứng được khi nó nêu thêm",
       "choices": [
         "which vendor supplied the orchestrator",
-        "the layer the isolation applies to, since separation in the radio, the transport, the compute and the management plane are four different claims",
+        "the layer the isolation applies to, out of four separate layers",
         "the total number of subscribers in each slice",
         "whether both slices carry the same traffic class"
       ],
@@ -249,7 +249,7 @@
       "q_vi": "Cách diễn đạt nào về cách ly lát mạng thực sự có thể trượt một phép thử",
       "choices": [
         "the worst case delay a neighbouring slice can add",
-        "a statement that the slices are logically separated from each other at all times",
+        "a statement that the slices are logically separated, which the vendor confirms",
         "the name of the standard the orchestration platform was built to follow",
         "confirmation that each slice has its own identifier in the service catalogue"
       ],
@@ -263,7 +263,7 @@
       "q": "A tenant degrades a neighbouring slice while violating no access rule at all. The mechanism is",
       "q_vi": "Một bên thuê làm giảm chất lượng lát hàng xóm mà không vi phạm luật truy nhập nào. Cơ chế ở đây là",
       "choices": [
-        "packets leaking quietly across the boundary between the two slice contexts and back again",
+        "packets leaking across the boundary between the two slice contexts, since filters are shared",
         "an orchestration error that merged the two slice definitions into one",
         "a shared management account used by both tenants during maintenance",
         "consuming the shared resource pool so aggressively that the neighbour misses its target"
@@ -278,7 +278,7 @@
       "q": "Auditing a slice against its contract means",
       "q_vi": "Kiểm toán một lát mạng theo hợp đồng của nó nghĩa là",
       "choices": [
-        "asking the orchestrator to report whether the slice remains compliant with its terms",
+        "asking the orchestrator to report compliance, since it holds the slice definition",
         "checking that the slice identifier still appears in the service catalogue correctly",
         "measuring the running slice and comparing it with what was sold",
         "reviewing the monitoring dashboards of the tenant"
@@ -294,7 +294,7 @@
       "q_vi": "Cho bên thứ ba thuê một lát mạng đẩy câu hỏi an ninh trọng tâm sang",
       "choices": [
         "how much bandwidth the tenant may consume during the busy hour",
-        "which operational controls the tenant can now reach",
+        "the operational controls the tenant can now reach",
         "whether the tenant may resell capacity to its own customers",
         "how the tenant will be billed for the resources that it reserved"
       ],
@@ -308,10 +308,10 @@
       "q": "A slice has been removed from the catalogue and a risk remains. The most likely cause is",
       "q_vi": "Một lát mạng đã bị gỡ khỏi danh mục mà rủi ro vẫn còn. Nguyên nhân khả dĩ nhất là",
       "choices": [
-        "forwarding rules, cached subscriber context and unrevoked credentials that outlive the deletion, because tear down is exercised far less often than creation",
+        "forwarding rules, cached subscriber context and unrevoked credentials that outlive the deletion",
         "the identifier being reused by a later tenant",
         "an incomplete billing record for the final month",
-        "the tenant keeping a copy of its own configuration"
+        "the tenant keeping a copy of its own configuration, since nothing forbids it"
       ],
       "answer": 0,
       "why": "Creation paths are tested on every deployment while deletion paths are tested rarely, and the resources that survive a deletion are inherited by whoever lands on them next.",
@@ -323,7 +323,7 @@
       "q": "A tenant learns about a neighbour's load without receiving any of its data. This is possible because",
       "q_vi": "Một bên thuê biết được mức tải của hàng xóm mà không nhận bất kỳ dữ liệu nào của họ. Điều này xảy ra được vì",
       "choices": [
-        "the two slices were assigned overlapping address ranges by an orchestration mistake",
+        "the two slices were given overlapping address ranges, since the orchestrator erred",
         "the management interface exposes per tenant counters to everyone",
         "a shared scheduler makes the neighbour's demand visible in its own grant delay",
         "the neighbour's traffic is broadcast on a common control channel by design"
@@ -338,7 +338,7 @@
       "q": "The clearest signature of slice admission abuse is",
       "q_vi": "Dấu hiệu rõ nhất của việc lạm dụng bộ kết nạp lát mạng là",
       "choices": [
-        "a rise in the number of failed authentication attempts at the edge",
+        "a rise in failed authentication attempts, since the attacker probes the edge",
         "a sudden increase in the average packet size across all slices",
         "repeated edits to the slice template held in the catalogue",
         "high reserved capacity paired with low carried traffic"
@@ -353,8 +353,8 @@
       "q": "Slice selection information deserves protection because",
       "q_vi": "Thông tin chọn lát mạng đáng được bảo vệ vì",
       "choices": [
-        "it is used to compute the session key",
-        "it can travel before a security context exists and reveals which industry the device serves, for example a utility or a hospital",
+        "it is used to compute the session key when the device attaches",
+        "it can travel before a security context exists and reveals the industry served",
         "it determines the charging record for the session",
         "it is required for lawful interception to work"
       ],
@@ -386,7 +386,7 @@
         "proves that the vendor followed a secure development process",
         "allows the operator to renegotiate licence terms with the vendor",
         "answers within hours whether a newly published flaw is present in your network",
-        "guarantees that no component in the build carries any vulnerability that is publicly known"
+        "guarantees that no component carries a vulnerability, since the vendor scans the build"
       ],
       "answer": 2,
       "why": "The list does not make the software safer. It shortens the time between a disclosure and a defensible answer about exposure, which is the answer a regulator asks for first.",
@@ -399,7 +399,7 @@
       "q_vi": "Kiểm chữ ký của một ứng dụng trên bộ điều khiển trả lời được câu hỏi",
       "choices": [
         "whether the application will respect the resource limits it was given",
-        "whether the application conflicts with another one already running there",
+        "whether the application conflicts with another one, which the controller checks",
         "whether the application will change scheduling in an acceptable way",
         "who built it, and nothing about what it will do"
       ],
@@ -413,7 +413,7 @@
       "q": "Two controller applications each pursue a legitimate objective and the cell becomes unstable. The accurate description is",
       "q_vi": "Hai ứng dụng trên bộ điều khiển cùng theo đuổi mục tiêu hợp lệ và ô phát trở nên mất ổn định. Cách mô tả đúng là",
       "choices": [
-        "an authentication failure between the applications",
+        "an authentication failure which occurs between the two applications",
         "a policy conflict, which becomes an attack the moment a hostile application learns to trigger it deliberately",
         "a hardware fault in the radio unit serving the cell",
         "an overload of the interface carrying the measurements"
@@ -443,7 +443,7 @@
       "q": "The fronthaul segment is frequently left unprotected because",
       "q_vi": "Đoạn truyền dẫn tới khối vô tuyến thường bị bỏ trống không bảo vệ vì",
       "choices": [
-        "the samples it carries are not considered subscriber information at all",
+        "the samples it carries are not subscriber information, since they are unprocessed",
         "the segment is physically inaccessible in almost every deployment",
         "encryption adds delay the timing budget cannot absorb",
         "no standard defines protection for that interface"
@@ -459,7 +459,7 @@
       "q_vi": "Một nghiên cứu báo cáo tốc độ bí mật mà không nói kẻ nghe lén đứng ở đâu. Vấn đề là",
       "choices": [
         "the quantity is conditional on an assumed eavesdropper channel, so the number cannot be compared with any other result",
-        "secrecy rates are always negative in practice",
+        "secrecy rates are always negative in practice, since noise dominates",
         "the receiver noise figure was probably wrong",
         "the result depends on the modulation used"
       ],
@@ -564,7 +564,7 @@
       "q_vi": "Một tham số ô đáng ngờ chưa đủ để kết luận có trạm gốc giả vì",
       "choices": [
         "each indicator alone has innocent explanations, so detection has to combine several weak signals",
-        "cell parameters are encrypted and cannot be read by the device",
+        "cell parameters are encrypted, since the device reads them after attach",
         "the device is not permitted to report cell parameters back to the operator without explicit user consent",
         "the operator does not keep a record of its own configuration"
       ],
@@ -579,13 +579,13 @@
       "q_vi": "Coi một búp sóng sóng milimet hẹp là kín đáo thì bỏ qua",
       "choices": [
         "the higher path loss at those frequencies",
-        "sidelobes, reflections from ordinary surfaces, and a listener standing between transmitter and receiver inside the main lobe",
+        "sidelobes, reflections, and a listener inside the main lobe",
         "the need for line of sight to close the link",
         "the cost of the antenna array involved"
       ],
       "answer": 1,
-      "why": "Directionality raises the price of eavesdropping and does not remove the possibility, and the listener who pays nothing extra is the one standing in the path.",
-      "why_vi": "Tính định hướng làm việc nghe lén tốn kém hơn chứ không xoá bỏ khả năng đó, và người nghe không phải trả thêm gì chính là người đứng ngay trên đường truyền.",
+      "why": "Energy escapes the main cone through sidelobes and bounces off ordinary surfaces, so directionality raises the price of eavesdropping without removing the possibility. The listener who pays nothing extra is the one standing between transmitter and receiver, inside the main lobe.",
+      "why_vi": "Năng lượng thoát khỏi hình nón chính qua các búp phụ và dội lại từ những bề mặt bình thường, nên tính định hướng làm việc nghe lén tốn kém hơn chứ không xoá bỏ khả năng đó. Người nghe không phải trả thêm gì chính là người đứng giữa máy phát và máy thu, ngay trong búp chính.",
       "level": 2
     },
     {
@@ -595,7 +595,7 @@
       "choices": [
         "the coherence time of the channel is longer than the measurement window used",
         "the calibration between transmit and receive chains has drifted apart",
-        "the failure appears as a key mismatch rather than an alarm",
+        "the failure appears as a key mismatch and not an alarm",
         "the two ends use different sampling rates for their measurements"
       ],
       "answer": 2,
@@ -624,7 +624,7 @@
       "q_vi": "Việc cấp cho mạng các số đo nhiễu sai lệch có tác dụng vì",
       "choices": [
         "the power control loop was built to tolerate measurement error and has no notion of a party that supplies wrong measurements on purpose",
-        "interference reports are not carried over the air interface",
+        "interference reports never cross the air interface, since they stay internal",
         "power control operates on a timescale of minutes",
         "the loop ignores reports from devices at the cell edge"
       ],
@@ -686,7 +686,7 @@
         "sensing data is stored in a different database",
         "the waveform is shared with the data channel",
         "operators must obtain a licence for radar use",
-        "the measured person may have no account and no device, and therefore no place in any consent record the operator holds"
+        "the measured person may have no account and no device"
       ],
       "answer": 3,
       "why": "Notice and consent assume a person who can be linked to an identity. When there is nobody to notify, data minimisation and retention limits are the only controls left.",
@@ -699,7 +699,7 @@
       "q_vi": "Làm giả tiếng vọng ra đa đánh vào một hệ cảm biến tích hợp thì cần",
       "choices": [
         "hearing the waveform and retransmitting it with a delay",
-        "recovering the private key used to protect the sensing frame",
+        "recovering the private key, since the sensing frame is protected by it",
         "physical access to the antenna array of the base station itself",
         "a transmitter more powerful than the base station being attacked"
       ],
@@ -789,7 +789,7 @@
       "q_vi": "Trên thực tế ranh giới đồng ý cho việc cảm biến môi trường được vạch bởi",
       "choices": [
         "the sensitivity of the receiver front end",
-        "what the network chooses to store and to share, because the antenna always hears far more than the service itself needs",
+        "what the network chooses to store and to share",
         "the regulatory limit on transmit power",
         "the beam width used during the measurement"
       ],
@@ -804,7 +804,7 @@
       "q_vi": "Đầu độc một mô hình huấn luyện lại bằng số liệu đo trực tiếp buộc kẻ tấn công phải",
       "choices": [
         "shape traffic in the production network",
-        "obtain write access to the training dataset store",
+        "obtain write access to the dataset store, since it holds the samples",
         "substitute the model weights during a deployment window",
         "compromise the pipeline that labels the collected samples"
       ],
@@ -863,7 +863,7 @@
       "q": "Without a record of which model version ran where, an incident investigation cannot",
       "q_vi": "Thiếu bản ghi cho biết phiên bản mô hình nào chạy ở đâu, một cuộc điều tra sự cố sẽ không thể",
       "choices": [
-        "establish which model made the decision",
+        "establish the model that made the decision",
         "recover the traffic that was carried at that time",
         "determine which vendor supplied the equipment involved",
         "reconstruct the configuration applied to the radio units"
@@ -909,7 +909,7 @@
       "q_vi": "Khi một phiên đi qua chặng vệ tinh, câu hỏi an ninh chuyển từ độ mạnh mã hoá sang",
       "choices": [
         "who can lawfully compel the relay operator to hand over the traffic and the metadata that accompanied it",
-        "whether the ground station uses the same cipher suite",
+        "whether the ground station uses the same cipher suite, since both must agree",
         "how much delay the additional hop introduces",
         "the elevation angle of the satellite at the time"
       ],
@@ -1088,14 +1088,14 @@
       "q": "An energy depletion attack evades rate limiting because",
       "q_vi": "Tấn công vắt kiệt năng lượng né được bộ hạn chế tốc độ vì",
       "choices": [
-        "it never exceeds any traffic threshold, since all it does is prevent the device from ever going to sleep",
+        "it never exceeds any traffic threshold at any point",
         "it uses a protocol the limiter does not parse",
         "it targets the base station rather than the device",
         "it operates only during the night hours"
       ],
       "answer": 0,
-      "why": "Denial of service is achieved over days rather than seconds. The device is never flooded, so no volume based control is ever triggered by the behaviour.",
-      "why_vi": "Việc chặn dịch vụ diễn ra trong nhiều ngày chứ không trong vài giây. Thiết bị không hề bị dội lưu lượng, nên không biện pháp nào dựa trên khối lượng bị kích hoạt bởi hành vi này.",
+      "why": "The attack forces the device to wake, listen and retransmit rather than sleep, so denial of service accumulates over days instead of seconds. The device is never flooded, and no volume based control is ever triggered by the behaviour.",
+      "why_vi": "Cuộc tấn công ép thiết bị phải thức dậy, lắng nghe và phát lại thay vì được ngủ, nên việc chặn dịch vụ tích lại trong nhiều ngày chứ không trong vài giây. Thiết bị không hề bị dội lưu lượng, và không biện pháp nào dựa trên khối lượng bị kích hoạt bởi hành vi này.",
       "level": 3
     },
     {
@@ -1104,7 +1104,7 @@
       "q_vi": "Việc che giấu định danh phải được đánh giá theo trường hợp xấu nhất vì",
       "choices": [
         "the concealment function uses a public key of the home network",
-        "an attacker can force the fallback in which it fails",
+        "an attacker can force the fallback that fails",
         "the identifier is also used for charging and roaming records",
         "concealment costs latency"
       ],
@@ -1135,7 +1135,7 @@
       "choices": [
         "selecting the replacement algorithm",
         "upgrading the certificate authority first",
-        "an inventory of every algorithm, key length and certificate in the running network, together with the product that holds each one",
+        "an inventory of every algorithm, key length and certificate in use",
         "informing the regulator of the timeline"
       ],
       "answer": 2,
@@ -1253,7 +1253,7 @@
       "q": "Assurance differs from compliance in that assurance",
       "q_vi": "Bảo đảm khác tuân thủ ở chỗ bảo đảm",
       "choices": [
-        "rests on evidence that the control works in your network today, which decays as soon as the network changes and nobody tests it again",
+        "rests on evidence that the control works in your network today",
         "is required by a larger number of regulators",
         "is performed by an external party each year",
         "covers a wider set of controls in total"
@@ -1361,7 +1361,7 @@
         "a proprietary interface and no interface at all",
         "an insecure design and a secure design",
         "a single vendor and multiple vendors",
-        "an audited public interface and an unaudited proprietary one, since opening an interface makes it both inspectable and reachable"
+        "an audited public interface and an unaudited proprietary one"
       ],
       "answer": 3,
       "why": "Opening an interface helps defenders and attackers at the same time. Which effect dominates depends on whether anybody actually inspects it, not on the fact that it is published.",
@@ -1451,7 +1451,7 @@
         "the frequency band they share",
         "the vendor supplying them both",
         "the physical site that they occupy",
-        "a single operations account through which both are configured, which is the fourth layer nobody wrote down"
+        "a single operations account used to configure both"
       ],
       "answer": 3,
       "why": "Isolation has to be stated separately for the radio, the transport, the compute and the management plane, and the management plane is the layer most often omitted from the claim.",
