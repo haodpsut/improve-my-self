@@ -194,6 +194,16 @@ for (const quiz of manifest.quizzes || []) {
         const d = new Set(words(q.q));
         return q.choices.map((c) => words(c).filter((w) => d.has(w)).length);
       },
+      // Phai do CA HAI CHIEU. Do dai da co cap dai nhat va ngan nhat, nhung lap
+      // de thi luc dau chi do mot chieu, va cai gia phai tra thay ngay: khi sua
+      // loi "dap an lap de nhieu nhat" bang cach dien dat dap an bang tu dong
+      // nghia, bo exam-english bat sang loi doi xung, dap an thanh phuong an lap
+      // de IT nhat o ba muoi tam phan tram so cau. Mot chieu thi bit, chieu kia
+      // mo toang, va cong khong he keu.
+      'chọn câu lặp đề ít nhất': (q) => {
+        const d = new Set(words(q.q));
+        return q.choices.map((c) => -words(c).filter((w) => d.has(w)).length);
+      },
       'chọn câu nêu lý do': (q) => q.choices.map((c) => (String(c).match(CONJ) || []).length)
     };
     for (const [ten, cham] of Object.entries(diem)) {

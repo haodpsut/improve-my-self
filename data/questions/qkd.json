@@ -1742,6 +1742,846 @@
       "why": "A properly built combiner is at least as strong as its stronger input, so the security objection does not hold. The real objection is economic, and answering it means stating which specific threat justifies carrying two systems instead of one.",
       "why_vi": "Một bộ trộn được xây đúng cách thì mạnh ít nhất bằng đầu vào mạnh hơn, nên phản đối về mặt an toàn không đứng vững. Phản đối thật sự là về kinh tế, và trả lời nó nghĩa là phải nêu rõ mối đe doạ cụ thể nào biện minh cho việc gánh hai hệ thống thay vì một.",
       "level": 3
+    },
+    {
+      "id": "qqkd2-001",
+      "q": "A colleague proposes to defeat the loss of a satellite uplink by teleporting each encoded qubit up to the spacecraft instead of sending it through the atmosphere. What is wrong with the proposal?",
+      "q_vi": "Một đồng nghiệp đề xuất khắc phục suy hao của đường lên vệ tinh bằng cách viễn tải từng qubit đã mã hoá lên tàu vũ trụ thay vì bắn qua khí quyển. Đề xuất này sai ở đâu?",
+      "choices": [
+        "Teleportation consumes an entangled pair that somebody had to distribute across that same lossy path beforehand",
+        "Teleportation destroys the qubit at the sending end, so the encoded bit is gone before the spacecraft can measure it",
+        "Teleportation moves the state faster than light, and no security proof written for a key protocol would allow that",
+        "Teleportation acts only on orthogonal states, whereas key distribution needs states drawn from two mutually conjugate bases"
+      ],
+      "answer": 0,
+      "why": "Teleportation relocates a state using a shared entangled pair plus two classical bits. The entanglement has to be distributed over the physical channel first, so the loss reappears one step earlier rather than disappearing.",
+      "why_vi": "Viễn tải dời một trạng thái nhờ một cặp rối chia sẻ cộng hai bit cổ điển. Cặp rối vẫn phải được phân phối qua kênh vật lý trước đã, nên suy hao chỉ lùi lại một bước chứ không biến mất.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-002",
+      "q": "A ground station shortens its detection gate from two nanoseconds down to two hundred picoseconds. Background counts fall almost proportionally, but the genuine detection rate also drops by about a third. What does that tell you?",
+      "q_vi": "Một trạm mặt đất rút cửa sổ thu nhận từ hai nanô giây xuống hai trăm picô giây. Số đếm nền giảm gần như tỉ lệ, nhưng tốc độ thu tín hiệu thật cũng tụt chừng một phần ba. Điều đó cho biết gì?",
+      "choices": [
+        "The combined timing jitter of the detectors and of the synchronisation link is now comparable to the width of the gate itself",
+        "The detectors have entered a saturation regime, since a shorter gate lifts the instantaneous count rate above the dead time limit",
+        "Sky background is no longer the dominant noise term, so the remaining counts must come from afterpulses",
+        "The source is emitting photons outside the nominal wavelength window and the spectral filter rejects them"
+      ],
+      "answer": 0,
+      "why": "A gate can only be narrowed until it approaches the spread of arrival times. Once jitter and synchronisation error fill the window, further narrowing removes signal and noise together, which is exactly the pattern observed.",
+      "why_vi": "Cửa sổ thu chỉ hẹp được tới khi chạm mức tản mát thời điểm tới. Khi trôi thời gian của đầu dò và sai số đồng bộ đã lấp kín cửa sổ, hẹp thêm sẽ cắt cả tín hiệu lẫn nhiễu, đúng như dấu hiệu quan sát được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-003",
+      "q": "Logs from a downlink show a scintillation index approaching unity on low elevation passes. What does that imply for the way the secret key rate should be computed?",
+      "q_vi": "Nhật ký của một đường xuống cho thấy chỉ số nhấp nháy tiến gần tới một ở các lượt bay góc ngẩng thấp. Điều đó kéo theo gì cho cách tính tốc độ khoá bí mật?",
+      "choices": [
+        "The atmosphere is adding a fixed extra attenuation on those passes, so the link budget simply needs one more constant loss term",
+        "Transmittance fluctuates as strongly as its own mean, which makes a rate from the average transmittance optimistic",
+        "Photon arrival times spread out, and the postprocessing must widen its acceptance window",
+        "Polarisation is being scrambled along the long slanted path, and that shows up directly as a higher measured error rate"
+      ],
+      "answer": 1,
+      "why": "A scintillation index near one describes deep fading of the channel. Key rate is a concave function of transmittance for most protocols, so averaging the transmittance before computing the rate gives a number the link never achieves.",
+      "why_vi": "Chỉ số nhấp nháy gần một mô tả kênh pha đinh sâu. Với hầu hết giao thức, tốc độ khoá là hàm lõm của độ truyền qua, nên lấy trung bình độ truyền qua rồi mới tính sẽ cho con số đường truyền không bao giờ đạt.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-004",
+      "q": "Free space experiments consistently report a much worse link budget on the uplink than on the downlink of the same orbit. What is the structural reason?",
+      "q_vi": "Các thí nghiệm không gian tự do đều báo ngân sách đường truyền của đường lên tệ hơn hẳn đường xuống trên cùng quỹ đạo. Lý do mang tính cấu trúc là gì?",
+      "choices": [
+        "The spacecraft carries a smaller aperture than the ground telescope, and aperture is what sets the collected fraction of the beam",
+        "Atmospheric absorption is stronger for a beam travelling upward, because the air column is denser at the transmitter end of the path",
+        "Sky background enters an orbital receiver from every direction at once, whereas a ground receiver sees background only near the horizon",
+        "Turbulence sits at the start of the uplink, so the distorted wavefront has the whole range left to spread"
+      ],
+      "answer": 3,
+      "why": "On the downlink the beam is already wide when it meets the turbulent layer, so the induced tilt and spreading act over a short remaining distance. On the uplink the same distortion is imposed while the beam is narrow and then propagates for hundreds of kilometres.",
+      "why_vi": "Ở đường xuống, chùm tia đã rộng khi gặp lớp nhiễu loạn nên độ nghiêng và độ loe sinh ra chỉ tác động trên quãng còn lại rất ngắn. Ở đường lên, cùng méo dạng đó áp lên chùm tia lúc còn hẹp rồi lan tiếp hàng trăm kilômét.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-005",
+      "q": "The Micius mission is often cited as proof that intercontinental quantum key distribution already works. Which reading of the published results is accurate?",
+      "q_vi": "Sứ mệnh Micius thường được dẫn ra như bằng chứng rằng phân phối khoá lượng tử liên lục địa đã hoạt động. Cách đọc nào đúng với kết quả đã công bố?",
+      "choices": [
+        "The intercontinental exchange used the spacecraft as a trusted relay, while the entanglement distribution over a comparable span produced no usable key rate",
+        "The intercontinental exchange was carried by entangled pairs shared directly between the two continents, with the spacecraft never holding any key",
+        "The spacecraft demonstrated a quantum repeater in orbit, since it stored entanglement in a memory until both ground stations were visible",
+        "The mission reached a device independent key rate, since the reported Bell violation was seen with detectors on separated platforms"
+      ],
+      "answer": 0,
+      "why": "The two results are separate. Entanglement was distributed over about twelve hundred kilometres and violated a Bell inequality, but at a pair rate far below what key distillation needs, and the intercontinental key call relied on the satellite holding both link keys.",
+      "why_vi": "Đây là hai kết quả tách rời. Rối được phân phối qua chừng một nghìn hai trăm kilômét và vi phạm bất đẳng thức Bell, nhưng tốc độ cặp thấp hơn nhiều so với mức chưng cất khoá cần, còn cuộc gọi liên lục địa dựa vào việc vệ tinh giữ cả hai khoá chặng.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-006",
+      "q": "A plug and play system sends bright pulses out from the receiver side, lets them reflect at the far end and return along the same fibre. Which consequence does that architecture carry?",
+      "q_vi": "Một hệ cắm là chạy phát xung sáng đi từ phía máy thu, cho phản xạ ở đầu xa rồi quay lại theo đúng sợi quang đó. Kiến trúc này kéo theo hệ quả nào?",
+      "choices": [
+        "Polarisation drift is no longer compensated automatically, and an active tracking loop has to run at both ends of the fibre",
+        "Detector dead time doubles, since each detector must stay armed for both the outgoing and the returning half of the cycle",
+        "An eavesdropper can send her own bright light into the sending unit under the cover of the legitimate pulse train",
+        "The scheme becomes measurement device independent, as the detectors and the source now sit in one enclosure"
+      ],
+      "answer": 2,
+      "why": "The autocompensating loop is bought at the price of an open optical door into the encoder. Bright light already arrives there by design, so probe pulses are hard to distinguish and an intensity monitor plus an isolator become mandatory.",
+      "why_vi": "Vòng tự bù trôi được đổi bằng một cửa quang mở thẳng vào khối mã hoá. Ánh sáng mạnh vốn đã đi vào đó theo thiết kế, nên xung dò rất khó phân biệt, và bộ giám sát cường độ cùng bộ cách ly trở thành bắt buộc.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-007",
+      "q": "A designer wants to lower the sifting loss of a prepare and measure scheme by choosing two encoding bases separated by only thirty degrees instead of the usual conjugate pair. What is the real effect?",
+      "q_vi": "Một người thiết kế muốn giảm hao hụt sàng lọc của sơ đồ chuẩn bị và đo bằng cách chọn hai cơ sở mã hoá lệch nhau chỉ ba mươi độ thay vì cặp liên hợp thường dùng. Tác dụng thật là gì?",
+      "choices": [
+        "Sifting improves while security is unchanged, since the proof depends only on the number of bases and not on the angle separating them",
+        "The receiver can no longer decide which basis was used, and the sifting step therefore has to be abandoned entirely",
+        "An eavesdropper now learns more per unit of disturbance, which drops the tolerable error rate far below the usual threshold",
+        "The scheme turns into a distributed phase reference protocol and inherits the security proofs written for that family"
+      ],
+      "answer": 2,
+      "why": "Complementarity is what converts an intrusion into visible errors. States that are nearly parallel are nearly distinguishable in one measurement, so the same information gain costs the attacker far less disturbance and the key vanishes at a much lower error rate.",
+      "why_vi": "Tính bù trừ mới là thứ biến việc xâm nhập thành lỗi nhìn thấy được. Các trạng thái gần song song thì gần như phân biệt được bằng một phép đo, nên cùng lượng thông tin thu về mà kẻ tấn công phải trả ít nhiễu loạn hơn nhiều, và khoá tắt ở ngưỡng lỗi thấp hơn hẳn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-008",
+      "q": "A security proof is written for qubits, yet the receiver in the laboratory is a pair of threshold detectors fed by an optical mode that may contain any photon number. What closes that gap?",
+      "q_vi": "Một chứng minh an toàn viết cho qubit, trong khi máy thu trong phòng thí nghiệm là cặp đầu dò ngưỡng nhận một mode quang có thể chứa số photon bất kỳ. Cái gì lấp khoảng cách đó?",
+      "choices": [
+        "A decoy state analysis, which bounds the yield and the error rate of the single photon component of the incoming signal",
+        "A finite key correction, since the discrepancy comes from the limited number of rounds that a real run can collect",
+        "A privacy amplification step sized by the smooth min entropy of the raw key",
+        "A squashing map, whose existence licenses treating the detection outcome as a qubit measurement"
+      ],
+      "answer": 3,
+      "why": "The mismatch is about the dimension of the measured system, not about statistics. One must exhibit a map from the optical mode onto a qubit that reproduces the observed click pattern, and where none exists the double clicks have to be assigned at random for the proof to hold.",
+      "why_vi": "Sai lệch nằm ở số chiều của hệ được đo chứ không ở thống kê. Phải chỉ ra một ánh xạ từ mode quang xuống qubit tái tạo đúng mẫu nhấp, và ở đâu không có ánh xạ đó thì các lần nhấp kép phải gán ngẫu nhiên thì chứng minh mới đứng vững.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-009",
+      "q": "A satellite link replaces Cascade by a one way reconciliation code. The reconciliation efficiency measured over a full pass turns out worse than the value quoted for the code. What explains the shortfall?",
+      "q_vi": "Một đường truyền vệ tinh thay Cascade bằng mã hoà hợp một chiều. Hiệu suất hoà hợp đo trên trọn một lượt bay lại kém hơn giá trị công bố của mã. Điều gì giải thích phần thiếu hụt?",
+      "choices": [
+        "The code rate is fixed in advance while the error rate swings with elevation, so most blocks run at a mismatched rate",
+        "One way codes leak the whole syndrome instead of the parities that an interactive protocol would exchange",
+        "Latency to orbit forces a larger block size, which raises the residual error floor of any belief propagation decoder",
+        "Sifting throws away half the detections, so only half the raw string reaches the reconciliation stage"
+      ],
+      "answer": 0,
+      "why": "A one way code buys immunity to round trip delay at the price of committing to a rate before the data are seen. Over a pass the error rate climbs with slant range, so a rate chosen for the best moment is wasteful at the worst, and rate adaptive or blind variants exist precisely to recover that loss.",
+      "why_vi": "Mã một chiều đổi khả năng miễn nhiễm với trễ khứ hồi bằng việc phải chốt tỉ lệ mã trước khi thấy dữ liệu. Suốt một lượt bay, tỉ lệ lỗi tăng theo cự ly nghiêng, nên tỉ lệ chọn cho thời điểm tốt nhất sẽ lãng phí ở thời điểm xấu nhất, và các biến thể thích ứng tỉ lệ hay hoà hợp mù ra đời đúng để lấy lại phần mất đó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-010",
+      "q": "An auditor asks how the very first authenticated exchange on a brand new link is protected. What is the honest answer?",
+      "q_vi": "Một kiểm toán viên hỏi lần trao đổi có xác thực đầu tiên trên một đường truyền hoàn toàn mới được bảo vệ ra sao. Câu trả lời trung thực là gì?",
+      "choices": [
+        "The quantum channel authenticates itself, since any tampering with the states would raise the error rate at once",
+        "No authentication is needed for the first block, because an attacker cannot yet know which bases are going to be announced",
+        "A short secret has to be installed in both devices by other means, and the system then expands it rather than creating it",
+        "The classical channel is protected by a public key signature, which the eventual quantum key later replaces"
+      ],
+      "answer": 2,
+      "why": "Without an authenticated classical channel the sifting and reconciliation traffic can be impersonated, which defeats the whole run. That first secret must arrive by courier or by installation, so the system is properly described as a key expander.",
+      "why_vi": "Không có kênh cổ điển được xác thực thì lưu lượng sàng lọc và hoà hợp có thể bị mạo danh, làm hỏng cả phiên. Bí mật đầu tiên đó phải tới bằng người chuyển hoặc bằng khâu cài đặt, nên hệ thống đúng ra là bộ mở rộng khoá.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-011",
+      "q": "Continuous variable systems reconcile Gaussian correlated real numbers rather than bits. Why does the multidimensional scheme map blocks of samples onto a sphere before applying a binary code?",
+      "q_vi": "Hệ biến liên tục hoà hợp các số thực tương quan Gauss chứ không phải bit. Vì sao sơ đồ đa chiều lại chiếu từng khối mẫu lên mặt cầu trước khi dùng mã nhị phân?",
+      "choices": [
+        "It strips away the excess noise contributed by the transmitter, so only the shot noise contribution is left to correct",
+        "The rotation turns a real channel of very low signal to noise ratio into a binary one that a modern code can decode",
+        "It compresses eight samples into one, which is what keeps the postprocessing throughput ahead of the symbol rate",
+        "The sphere restores a Gaussian modulation, which is precisely what the security proof of the protocol assumes at the source"
+      ],
+      "answer": 1,
+      "why": "At long distance the per sample signal to noise ratio falls below one, where direct slicing wastes most of the mutual information. Rotating a block by a random orthogonal transform on the unit sphere produces an equivalent binary input channel, so codes designed near capacity can be reused.",
+      "why_vi": "Ở cự ly xa, tỉ số tín hiệu trên nhiễu của từng mẫu tụt dưới một, nơi việc cắt lát trực tiếp phí gần hết lượng tin tương hỗ. Xoay cả khối bằng một phép biến đổi trực giao ngẫu nhiên trên mặt cầu đơn vị cho ra kênh đầu vào nhị phân tương đương, nên tái dùng được các mã bám sát dung lượng.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-012",
+      "q": "During reconciliation the two parties exchange syndrome bits that are not the key itself and cannot be inverted to recover it. Why are those bits still subtracted from the final key length?",
+      "q_vi": "Trong lúc hoà hợp, hai bên trao đổi các bit hội chứng vốn không phải chính khoá và không thể nghịch đảo để lấy lại khoá. Vì sao vẫn phải trừ số bit đó khỏi độ dài khoá cuối?",
+      "choices": [
+        "Because the same bits are reused as the seed of the hash function that performs the privacy amplification step",
+        "Because a decoder that fails silently would otherwise leave the two parties holding different strings after correction",
+        "Because they travel on the classical channel, and each classical message consumes authentication key at the same rate",
+        "Because they narrow the set of strings consistent with what the adversary saw"
+      ],
+      "answer": 3,
+      "why": "Leakage is measured by how much uncertainty the adversary loses, not by whether a message is directly invertible. Every published parity constrains the candidate set, so the entropy budget shrinks by the number of disclosed bits before hashing.",
+      "why_vi": "Rò rỉ được đo bằng lượng bất định mà kẻ nghe lén mất đi, không phải bằng việc thông điệp có nghịch đảo được hay không. Mỗi bit chẵn lẻ công bố đều thu hẹp tập ứng viên, nên ngân sách entropy giảm đúng bằng số bit đã lộ trước khi băm.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-013",
+      "q": "A team upgrades a heralded source built on parametric down conversion by raising the pump power, hoping for a higher key rate. The error rate rises instead. What went wrong?",
+      "q_vi": "Một nhóm nâng cấp nguồn có báo hiệu dựng trên biến đổi hạ tần tham số bằng cách tăng công suất bơm, mong tốc độ khoá cao hơn. Tỉ lệ lỗi lại tăng. Sai ở đâu?",
+      "choices": [
+        "The crystal heats up, and the phase matching condition then shifts away from the wavelength that the filters accept",
+        "Stronger pumping raises the chance of two pairs in one window, and the herald cannot tell that case from a single pair",
+        "Heralding efficiency falls with pump power, so fewer of the announced photons ever reach the far detector",
+        "The pump laser linewidth broadens, which destroys the indistinguishability needed at the interference stage"
+      ],
+      "answer": 1,
+      "why": "Pair creation is probabilistic and the herald is a threshold click. Multipair events grow quadratically with pump power while single pairs grow linearly, so the multiphoton fraction and with it the error rate climb once the source is pushed hard.",
+      "why_vi": "Việc sinh cặp mang tính xác suất còn tín hiệu báo là một lần nhấp ngưỡng. Sự kiện nhiều cặp tăng theo bình phương công suất bơm trong khi cặp đơn chỉ tăng tuyến tính, nên tỉ lệ đa photon và kéo theo là tỉ lệ lỗi đều đi lên khi ép nguồn quá mạnh.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-014",
+      "q": "A source is characterised in a Hanbury Brown and Twiss setup and reports a second order correlation of zero point one at zero delay. How should that number be used in a key rate claim?",
+      "q_vi": "Một nguồn được đặc trưng bằng bố trí Hanbury Brown và Twiss, cho tương quan bậc hai bằng không phẩy một tại độ trễ không. Nên dùng con số đó thế nào trong một khẳng định về tốc độ khoá?",
+      "choices": [
+        "It certifies a true single photon source, so the decoy state machinery can be dropped from the transmitter",
+        "It is a measure of the timing jitter of the source and belongs in the gate width budget rather than in the key rate",
+        "It says multiphoton emission is suppressed to a tenth of the Poissonian level but not removed, which the analysis must carry",
+        "It bounds the dark count probability of the heralding detector and therefore fixes the maximum tolerable distance"
+      ],
+      "answer": 2,
+      "why": "The quantity compares the source with a coherent state of the same mean photon number. A tenth of the Poissonian multiphoton weight is a real improvement, yet a photon number splitting analysis still applies and the residual weight has to enter the bound.",
+      "why_vi": "Đại lượng này so nguồn với trạng thái kết hợp cùng số photon trung bình. Còn một phần mười trọng số đa photon kiểu Poisson là cải thiện thật, nhưng phân tích tách số photon vẫn áp dụng và phần dư đó vẫn phải đi vào cận.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-015",
+      "q": "On a low orbit downlink the key rate falls considerably faster than the inverse square of slant range as the satellite moves away from the zenith. What accounts for the extra loss?",
+      "q_vi": "Trên một đường xuống quỹ đạo thấp, tốc độ khoá giảm nhanh hơn hẳn nghịch đảo bình phương cự ly nghiêng khi vệ tinh rời khỏi thiên đỉnh. Phần suy hao thêm đến từ đâu?",
+      "choices": [
+        "The relative velocity between spacecraft and station grows away from the zenith, and the resulting Doppler shift walks the signal out of the receiver filter",
+        "The satellite has to reduce its optical output power at low elevation in order to respect eye safety limits on the ground below the beam",
+        "A longer air column is crossed, so absorption and turbulence spreading grow with zenith angle",
+        "Sky background is brightest overhead, which means the noise term is at its worst exactly when the range is at its shortest"
+      ],
+      "answer": 2,
+      "why": "Geometry alone would give an inverse square law. Air mass rises roughly as the secant of the zenith angle, so molecular and aerosol extinction climb and the coherence length of turbulence shrinks, and both effects multiply the pure range term.",
+      "why_vi": "Chỉ riêng hình học thì cho quy luật nghịch đảo bình phương. Khối khí tăng gần theo hàm sec của góc thiên đỉnh, nên hấp thụ phân tử và sol khí đều tăng còn độ dài kết hợp của nhiễu loạn thì co lại, cả hai nhân thêm vào số hạng cự ly thuần tuý.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-016",
+      "q": "A ground station doubles the diameter of its receiving telescope. Which pair of consequences follows for a daylight downlink?",
+      "q_vi": "Một trạm mặt đất tăng gấp đôi đường kính kính thu. Cặp hệ quả nào theo sau cho một đường xuống ban ngày?",
+      "choices": [
+        "Four times more signal is collected, while the sky background admitted through the same field of view also rises fourfold",
+        "Four times more signal is collected, and the sky background stays fixed because it is set by the spectral filter width alone",
+        "Twice as much signal is collected, and the diffraction limited field of view widens in exactly the same proportion",
+        "Signal grows fourfold and background falls, since a larger aperture narrows the diffraction limited field of view"
+      ],
+      "answer": 0,
+      "why": "Collected power scales with area for both the beam and the diffuse sky. The gain is real but it is not free, so the background rejection has to come from the filter bandwidth, the gate width and a field of view kept as small as tracking allows.",
+      "why_vi": "Công suất thu được tỉ lệ với diện tích, đúng cho cả chùm tia lẫn nền trời khuếch tán. Cái lợi là thật nhưng không miễn phí, nên việc loại nền phải nhờ vào bề rộng bộ lọc, độ hẹp cửa sổ thời gian và trường nhìn giữ nhỏ hết mức mà khâu bám còn cho phép.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-017",
+      "q": "An adaptive optics loop for an optical ground station is specified by its Greenwood frequency. What does that number actually constrain?",
+      "q_vi": "Một vòng quang thích nghi cho trạm quang mặt đất được đặc tả bằng tần số Greenwood. Con số đó ràng buộc điều gì?",
+      "choices": [
+        "The closed loop bandwidth the correction must reach, since it measures how fast the turbulent wavefront changes rather than how strong it is",
+        "The number of actuators the deformable mirror needs, which follows from the ratio of aperture to coherence length",
+        "The largest zenith angle at which the loop can still lock on to the beacon",
+        "The residual wavefront error left after correction, expressed in radians"
+      ],
+      "answer": 0,
+      "why": "Spatial and temporal demands are separate. Actuator count follows from the coherence length compared with the aperture, whereas the Greenwood frequency sets how many times a second the loop has to close before the atmosphere has already moved on.",
+      "why_vi": "Yêu cầu không gian và yêu cầu thời gian là hai chuyện khác nhau. Số bộ tác động suy ra từ độ dài kết hợp so với khẩu độ, còn tần số Greenwood quy định mỗi giây vòng phải đóng bao nhiêu lần trước khi khí quyển đã kịp đổi.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-018",
+      "q": "A spacecraft aims its downlink beam not at the current position of the ground station but at a slightly different direction. Why is that offset unavoidable?",
+      "q_vi": "Một tàu vũ trụ chĩa chùm tia đường xuống không vào vị trí hiện thời của trạm mặt đất mà lệch đi một chút. Vì sao độ lệch đó không thể tránh?",
+      "choices": [
+        "Aiming slightly off axis keeps the brightest part of the beam away from the tracking sensor, which would otherwise saturate",
+        "Light takes time to travel down, so the station moves across the beam during the transit",
+        "The atmosphere refracts the beam downward, and the offset compensates for that apparent displacement of the station",
+        "Pointing at the exact geometric position would place the ground station in a null of the far field pattern of the transmitter"
+      ],
+      "answer": 1,
+      "why": "The transverse velocity of the terminals divided by the speed of light gives an angle of tens of microradians, which is comparable to the whole beam divergence. Refraction is a separate and much smaller correction that is handled in the pointing model.",
+      "why_vi": "Vận tốc ngang của hai đầu cuối chia cho tốc độ ánh sáng cho một góc cỡ vài chục micrôradian, sánh được với cả độ loe của chùm tia. Khúc xạ là hiệu chỉnh riêng và nhỏ hơn nhiều, được xử lý trong mô hình chỉ hướng.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-019",
+      "q": "A beacon laser is used at both ends of a free space link. Why is it usually placed at a wavelength well away from the quantum signal?",
+      "q_vi": "Laser dẫn đường được dùng ở cả hai đầu của tuyến không gian tự do. Vì sao nó thường đặt ở bước sóng cách xa hẳn tín hiệu lượng tử?",
+      "choices": [
+        "Because the tracking sensors are built from silicon, which responds only in the visible part of the spectrum",
+        "Because a beacon at the signal wavelength would be attenuated by the same atmospheric absorption line as the quantum channel",
+        "Because it is many orders of magnitude brighter, and only a spectral filter can keep it out of the single photon detectors",
+        "Because the point ahead angle differs between the two wavelengths, and that difference is what the tracking loop measures"
+      ],
+      "answer": 2,
+      "why": "The beacon must be strong enough for a quadrant sensor while the quantum channel counts single photons, so the two differ by many orders of magnitude in power. Separating them in wavelength lets a narrow filter in front of the detectors reject the beacon.",
+      "why_vi": "Đèn dẫn đường phải đủ mạnh cho cảm biến bốn phần tư trong khi kênh lượng tử đếm từng photon, nên hai bên chênh nhau nhiều bậc độ lớn về công suất. Tách chúng theo bước sóng cho phép một bộ lọc hẹp đặt trước đầu dò loại được đèn dẫn đường.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-020",
+      "q": "An operator plans a satellite key service for a region where thin cloud blocks the optical path on roughly half of all nights. What is the sound design response?",
+      "q_vi": "Một nhà khai thác lập kế hoạch dịch vụ khoá vệ tinh cho vùng mà mây mỏng chắn đường quang khoảng một nửa số đêm. Hướng thiết kế đúng đắn là gì?",
+      "choices": [
+        "Raise the transmit power on cloudy nights, since attenuation by thin cloud is a fixed number of decibels that extra power can overcome",
+        "Build several stations far enough apart to decorrelate the weather and size the key buffer for the longest expected outage",
+        "Switch to an uplink geometry on cloudy nights, because a beam travelling upward suffers less from cloud than one travelling down",
+        "Move the service to a geostationary satellite, which stays in view and therefore removes the dependence on weather"
+      ],
+      "answer": 1,
+      "why": "Cloud attenuation is far too deep for any realistic power margin, so availability has to be bought geometrically and in storage. Station separation of a few hundred kilometres decorrelates cloud fields, and the buffer covers the residual gaps.",
+      "why_vi": "Suy hao do mây sâu hơn mọi biên công suất thực tế, nên độ khả dụng phải mua bằng hình học và bằng bộ đệm. Các trạm cách nhau vài trăm kilômét làm mất tương quan trường mây, còn bộ đệm phủ nốt các khoảng trống còn lại.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-021",
+      "q": "A continuous variable receiver is changed from homodyne to heterodyne detection. What is the honest summary of the trade?",
+      "q_vi": "Một máy thu biến liên tục đổi từ tách sóng đồng bộ sang tách sóng ngoại sai. Tóm tắt trung thực về sự đánh đổi là gì?",
+      "choices": [
+        "Both quadratures are measured at once, which removes the basis sifting step but adds a vacuum unit of noise to each quadrature",
+        "Both quadratures are measured at once, and the shot noise level is unchanged because the same local oscillator power is used",
+        "Only one quadrature is measured, but the choice is made after detection rather than before it",
+        "Sensitivity improves by three decibels, so the reach of the link grows accordingly"
+      ],
+      "answer": 0,
+      "why": "Simultaneous measurement of two conjugate quadratures cannot be noiseless. The gain in sifting efficiency is paid for by an extra unit of vacuum noise, so which detection wins depends on the distance and on the excess noise of the channel.",
+      "why_vi": "Đo đồng thời hai thành phần vuông pha liên hợp thì không thể không thêm nhiễu. Cái lợi về hiệu suất sàng lọc phải trả bằng một đơn vị nhiễu chân không, nên kiểu tách sóng nào thắng còn tuỳ cự ly và tuỳ nhiễu dư của kênh.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-022",
+      "q": "In a phase remapping attack the adversary shifts the timing of the pulses that enter the phase modulator of the transmitter. Why does that help her?",
+      "q_vi": "Trong tấn công ánh xạ lại pha, kẻ tấn công dịch thời điểm của các xung đi vào bộ điều pha của máy phát. Vì sao việc đó có lợi cho cô ta?",
+      "choices": [
+        "Timing shifts desynchronise the receiver, so the sifting step discards the rounds in which she would have been detected",
+        "The modulator drive is not flat in time, so pulses on its rising edge acquire phases that are closer together than intended",
+        "It raises the mean photon number of the pulses, so the photon number splitting attack becomes available on a larger fraction",
+        "The transmitter is forced to emit in a single basis, and the protocol then reduces to a scheme with no complementarity at all"
+      ],
+      "answer": 1,
+      "why": "The drive waveform has finite rise and fall times, so the encoded states are compressed towards each other rather than sitting at the four intended points. Nearly parallel states are easier to distinguish for the same disturbance, which is what the attacker gains.",
+      "why_vi": "Dạng sóng điều khiển có thời gian lên và xuống hữu hạn, nên các trạng thái mã hoá bị nén lại gần nhau chứ không nằm đúng bốn điểm dự kiến. Trạng thái gần song song thì dễ phân biệt hơn với cùng mức nhiễu loạn, và đó là phần kẻ tấn công thu được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-023",
+      "q": "A commissioning procedure calibrates the arrival time of the two detectors so that both are gated at their optimum. Why is that step itself a security relevant surface?",
+      "q_vi": "Quy trình đưa vào vận hành hiệu chuẩn thời điểm tới của hai đầu dò sao cho cả hai được mở cửa ở điểm tối ưu. Vì sao chính bước đó lại là bề mặt liên quan tới an toàn?",
+      "choices": [
+        "Calibration is done with bright light, so an attacker who is present at that moment can also read off the mean photon number",
+        "An adversary who biases the calibration leaves the two detectors optimal at different instants, which she can then exploit",
+        "The calibration file is stored unencrypted on the control computer and can be read by any process on that machine",
+        "Recalibration interrupts key production, and the resulting gap in the key stream is what an attacker wants"
+      ],
+      "answer": 1,
+      "why": "Security proofs assume the two detectors are equally sensitive to whatever arrives. If calibration is nudged so that their efficiency peaks are separated in time, an attacker can pick arrival times that favour one outcome without raising the observed error rate much.",
+      "why_vi": "Các chứng minh an toàn giả định hai đầu dò nhạy như nhau với thứ đi tới. Nếu khâu hiệu chuẩn bị nắn cho hai đỉnh hiệu suất lệch nhau về thời gian, kẻ tấn công có thể chọn thời điểm tới thiên vị một kết quả mà tỉ lệ lỗi quan sát được không tăng bao nhiêu.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-024",
+      "q": "A faked state attack differs from a plain intercept and resend attack in one decisive respect. Which?",
+      "q_vi": "Tấn công trạng thái giả khác tấn công chặn rồi phát lại thông thường ở một điểm quyết định. Điểm nào?",
+      "choices": [
+        "The attacker only listens on the classical channel and never touches the quantum states, so no disturbance can possibly be measured",
+        "The attacker replaces the source rather than the channel, which means the countermeasure has to live at the transmitter",
+        "The attacker delays each pulse until the gate has closed, and the receiver then records nothing at all",
+        "The attacker sends tailored classical light that forces the intended click, so her measurement result is reproduced without the usual error penalty"
+      ],
+      "answer": 3,
+      "why": "Plain intercept and resend imposes a quarter error rate on the sifted key. By exploiting detectors driven outside their single photon regime, the attacker can compel a specific detector to fire, so the receiver reproduces her outcomes and the error rate stays low.",
+      "why_vi": "Chặn rồi phát lại thuần tuý áp một phần tư tỉ lệ lỗi lên khoá đã sàng. Bằng cách khai thác đầu dò bị đẩy ra ngoài chế độ đơn photon, kẻ tấn công ép đúng một đầu dò nhấp, nên máy thu tái tạo kết quả của cô ta và tỉ lệ lỗi vẫn thấp.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-025",
+      "q": "Some receivers add a watchdog detector that monitors the total optical power arriving at the receiver enclosure. What class of attack does it target, and what is its limitation?",
+      "q_vi": "Một số máy thu gắn thêm đầu dò canh chừng để giám sát tổng công suất quang đi tới khối thu. Nó nhắm vào lớp tấn công nào và hạn chế của nó là gì?",
+      "choices": [
+        "It targets photon number splitting, but it cannot see the multiphoton pulses that the transmitter itself emits into the fibre",
+        "It targets Trojan horse probing, although an attacker who probes below its threshold or between its samples still passes",
+        "It targets timing attacks, yet it has no way of measuring the arrival time of anything it detects",
+        "It targets blinding by bright light, though an attacker can defeat it by keeping the injected power under its threshold"
+      ],
+      "answer": 3,
+      "why": "The monitor is aimed at the illumination that drives detectors out of Geiger mode. It is a useful sanity check rather than a proof, since blinding thresholds vary between devices and an attacker who stays just below the alarm level is not seen.",
+      "why_vi": "Bộ giám sát nhắm vào luồng sáng đẩy đầu dò ra khỏi chế độ Geiger. Nó là phép kiểm tra sức khoẻ hữu ích chứ không phải một chứng minh, vì ngưỡng làm mù khác nhau giữa các thiết bị và kẻ tấn công giữ ngay dưới mức báo động thì không bị thấy.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-026",
+      "q": "A laboratory records the electromagnetic emissions of the driver electronics of a transmitter and recovers a large part of the basis choices. What does that result say about the security proof of the protocol?",
+      "q_vi": "Một phòng thí nghiệm ghi lại bức xạ điện từ của khối điện tử điều khiển máy phát và khôi phục được phần lớn các lựa chọn cơ sở. Kết quả đó nói gì về chứng minh an toàn của giao thức?",
+      "choices": [
+        "The proof is refuted, since it claims that no information about the basis choice can leave the transmitter by any route",
+        "The proof is unaffected, because side channel emissions are a matter of physical security rather than of cryptography",
+        "The proof still holds on its own terms, while the device violates the assumption that only the optical mode leaves the sender",
+        "The proof becomes conditional, and it can be repaired by lowering the mean photon number until the emissions fall below the noise"
+      ],
+      "answer": 2,
+      "why": "Every proof carries an assumption that the transmitter emits nothing beyond the prepared optical state. Radiated emissions break that assumption in the device, which is why implementation security evaluation sits beside the mathematics rather than inside it.",
+      "why_vi": "Mọi chứng minh đều mang giả định rằng máy phát không phát ra gì ngoài trạng thái quang đã chuẩn bị. Bức xạ điện từ phá vỡ giả định đó ngay trong thiết bị, và đó là lý do việc đánh giá an toàn triển khai đứng cạnh phần toán học chứ không nằm trong nó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-027",
+      "q": "Twin field systems lock the two transmitter lasers to a common optical reference. What breaks if that lock drifts by a few kilohertz?",
+      "q_vi": "Hệ trường song sinh khoá hai laser phát vào một tham chiếu quang chung. Cái gì hỏng nếu khoá đó trôi vài kilôhéc?",
+      "choices": [
+        "The mean photon numbers of the two arms diverge, and the decoy state estimate for the single photon yield stops being valid",
+        "The two pulses no longer overlap in time at the central node, and the coincidence gate rejects almost every event",
+        "The polarisation reference between the two arms rotates, which the compensation loop cannot follow at that rate",
+        "The relative phase drifts within a pulse pair, so the interference visibility at the middle node collapses"
+      ],
+      "answer": 3,
+      "why": "The scheme extracts its advantage from single photon interference between fields that never met before. That requires a stable relative optical phase over the interference window, and a kilohertz frequency offset sweeps the phase through many cycles during the measurement.",
+      "why_vi": "Sơ đồ này lấy ưu thế từ giao thoa đơn photon giữa hai trường chưa từng gặp nhau. Điều đó đòi hỏi pha quang tương đối ổn định trong cửa sổ giao thoa, mà lệch tần cỡ kilôhéc sẽ quét pha qua rất nhiều chu kỳ ngay trong phép đo.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-028",
+      "q": "A time bin system running over a hundred kilometres of standard fibre sees its error rate climb when the pulse pair separation is reduced. What is the most likely mechanism?",
+      "q_vi": "Một hệ khe thời gian chạy trên một trăm kilômét sợi quang tiêu chuẩn thấy tỉ lệ lỗi tăng khi rút ngắn khoảng cách giữa hai xung trong cặp. Cơ chế nào có khả năng nhất?",
+      "choices": [
+        "Afterpulsing in the detectors links the two bins, since the second gate opens before the trap population from the first has decayed",
+        "Raman scattering from the classical channel grows when the bins move closer, because the scattered light is broadband in time",
+        "Polarisation mode dispersion splits each pulse into two components that arrive in different bins and register as errors",
+        "Chromatic dispersion broadens each pulse until neighbouring bins overlap"
+      ],
+      "answer": 3,
+      "why": "A source of finite spectral width is stretched in time by dispersion in proportion to fibre length. Once the broadened pulse is comparable with the bin separation, energy leaks into the neighbouring slot and appears as an error, which is why compensation is fitted on long spans.",
+      "why_vi": "Nguồn có bề rộng phổ hữu hạn bị tán sắc kéo dãn theo thời gian tỉ lệ với chiều dài sợi. Khi xung đã dãn tới mức sánh được với khoảng cách khe, năng lượng rò sang khe bên cạnh và hiện ra thành lỗi, đó là lý do các tuyến dài đều lắp bộ bù.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-029",
+      "q": "An operator wants the quantum channel to share a fibre with a live ten gigabit per second classical wavelength. Measurements show the error rate rises sharply even though the two wavelengths are separated by twenty nanometres. What is the mechanism?",
+      "q_vi": "Một nhà khai thác muốn kênh lượng tử dùng chung sợi quang với một bước sóng cổ điển mười gigabit mỗi giây đang chạy. Đo đạc cho thấy tỉ lệ lỗi tăng mạnh dù hai bước sóng cách nhau hai mươi nanômét. Cơ chế là gì?",
+      "choices": [
+        "Spontaneous Raman scattering of the strong channel spreads a broad noise pedestal which reaches the quantum wavelength however far apart the two are placed",
+        "Chromatic dispersion drags the classical pulses into the detection gate of the quantum channel",
+        "Four wave mixing generates a new tone exactly at the quantum wavelength, which the narrow filter then passes",
+        "The classical transmitter drifts in wavelength during the day and eventually crosses into the passband of the quantum receiver"
+      ],
+      "answer": 0,
+      "why": "Raman scattering is broadband and its power scales with the launched classical power and the fibre length. Wavelength separation and narrow filtering help, but the practical fixes are lowering the launch power, filtering hard and gating tightly rather than moving the channels further apart.",
+      "why_vi": "Tán xạ Raman có phổ rộng và công suất của nó tỉ lệ với công suất cổ điển phóng vào cùng chiều dài sợi. Tách bước sóng và lọc hẹp đều giúp ích, nhưng cách chữa thực tế là hạ công suất phóng, lọc mạnh và mở cửa sổ thời gian thật hẹp chứ không phải đẩy hai kênh ra xa nhau thêm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-030",
+      "q": "A tender document insists on a dedicated dark fibre for the quantum channel of every link. When is that requirement genuinely justified rather than merely conservative?",
+      "q_vi": "Một hồ sơ mời thầu bắt buộc mỗi tuyến phải có sợi tối riêng cho kênh lượng tử. Khi nào yêu cầu đó thực sự chính đáng chứ không chỉ là thận trọng thừa?",
+      "choices": [
+        "Whenever the link is longer than ten kilometres, since scattered noise always dominates beyond that point",
+        "When the link is long and the classical launch power is high, so the scattered noise floor would swamp the detector",
+        "Whenever the operator cannot guarantee that the fibre route is physically inaccessible along its whole length",
+        "When the protocol is measurement device independent, because interference at the middle node demands a fibre with no other traffic"
+      ],
+      "answer": 1,
+      "why": "Coexistence is a noise budget question, not a matter of principle. Short metropolitan spans with modest launch powers coexist happily, while a long span carrying full line rate traffic will not, and physical inaccessibility is not something a security argument may rely on.",
+      "why_vi": "Dùng chung sợi là bài toán ngân sách nhiễu chứ không phải chuyện nguyên tắc. Các tuyến đô thị ngắn với công suất phóng vừa phải vẫn sống chung tốt, còn tuyến dài chở lưu lượng đầy tốc độ thì không, và tính không thể tiếp cận vật lý là thứ mà lập luận an toàn không được phép dựa vào.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-031",
+      "q": "A key management layer buffers distilled key in a pool. An engineer proposes to size the pool at exactly the mean consumption of one day. What is wrong with that rule?",
+      "q_vi": "Lớp quản lý khoá đệm khoá đã chưng cất trong một bể. Một kỹ sư đề xuất lấy dung lượng bể đúng bằng mức tiêu thụ trung bình của một ngày. Quy tắc đó sai ở đâu?",
+      "choices": [
+        "A pool that large would exceed the storage that certified key devices are permitted to hold under the usual protection profiles",
+        "Mean consumption is the wrong unit, since a pool has to be measured in seconds of traffic rather than in bits of key",
+        "The pool must cover the worst outage, not the average, or the link fails exactly when weather is bad",
+        "Buffered key ages, and any key older than a day has to be discarded before it can be used by an application"
+      ],
+      "answer": 2,
+      "why": "Supply is bursty and correlated with weather or maintenance while demand is roughly steady. Sizing on the mean guarantees depletion during the first long outage, so the pool has to be set from the tail of the outage distribution and from the refresh policy it must sustain.",
+      "why_vi": "Nguồn cung tới theo cụm và tương quan với thời tiết hoặc bảo trì, còn nhu cầu thì gần như đều. Lấy theo trung bình là bảo đảm cạn bể ngay lần gián đoạn dài đầu tiên, nên dung lượng phải đặt theo đuôi phân bố thời gian gián đoạn và theo chính sách làm mới khoá cần duy trì.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-032",
+      "q": "A metropolitan key network is built as a ring of trusted nodes rather than a chain. What does the ring buy, and what does it not buy?",
+      "q_vi": "Một mạng khoá đô thị được dựng thành vòng các nút tin cậy thay vì thành chuỗi. Cấu hình vòng mang lại gì và không mang lại gì?",
+      "choices": [
+        "It buys a second path around a cut fibre, and it also removes the need to trust the intermediate nodes on that path",
+        "It buys higher key rate on every link, although the latency of a relayed key grows with the number of hops",
+        "It buys nothing beyond the chain, since a relayed key still has to traverse the same total fibre length either way",
+        "It buys a second path around a cut, but every node on it still holds the key in the clear"
+      ],
+      "answer": 3,
+      "why": "Redundant routing is a genuine availability gain and is the usual reason for the topology. The trust model is untouched, because each relay decrypts and re encrypts, so a longer alternative path simply enlarges the set of nodes that must be trusted.",
+      "why_vi": "Định tuyến dự phòng là cái lợi thật về độ khả dụng và là lý do thường thấy của kiến trúc này. Mô hình tin cậy không đổi, vì mỗi trạm chuyển tiếp đều giải mã rồi mã hoá lại, nên đường vòng dài hơn chỉ làm tập các nút phải tin cậy rộng thêm.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-033",
+      "q": "A network carries two applications: one asks for a fresh key every second, the other asks for a large block once an hour. Why does provisioning by peak demand alone misdesign the system?",
+      "q_vi": "Một mạng phục vụ hai ứng dụng: một bên xin khoá mới mỗi giây, bên kia xin một khối lớn mỗi giờ. Vì sao chỉ cấp phát theo nhu cầu đỉnh lại là thiết kế sai?",
+      "choices": [
+        "The two demand shapes load the pool in different ways, which means the same peak figure can be met by a small buffer or demand a very large one",
+        "Peak demand is impossible to measure on a live network, and only the mean can be logged by the key management layer",
+        "Provisioning by peak forces the link to run continuously, which shortens the operating life of the single photon detectors",
+        "A block request cannot be served from a pool at all, because it has to be produced by a dedicated run of the protocol"
+      ],
+      "answer": 0,
+      "why": "What the pool actually sees is the integral of demand minus supply over time. A steady trickle drains it smoothly while an hourly block draws a deep notch, so provisioning has to model the arrival pattern and the outage statistics together rather than a single peak number.",
+      "why_vi": "Thứ mà bể khoá thực sự chịu là tích phân của nhu cầu trừ nguồn cung theo thời gian. Dòng chảy đều rút bể một cách êm còn khối theo giờ khoét một hõm sâu, nên việc cấp phát phải mô hình hoá cả dạng đến của yêu cầu lẫn thống kê gián đoạn chứ không phải một con số đỉnh.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-034",
+      "q": "An operator shortens the rekey interval of a link encryptor from one hour to one second, arguing that more frequent refresh is always safer. What does that change actually do?",
+      "q_vi": "Một nhà khai thác rút chu kỳ làm mới khoá của bộ mã hoá tuyến từ một giờ xuống một giây, lập luận rằng làm mới càng dày thì càng an toàn. Thay đổi đó thực sự gây ra gì?",
+      "choices": [
+        "It weakens the cipher, since a block cipher needs a minimum amount of traffic under each key before its security argument applies",
+        "It multiplies key consumption by a factor of thousands and can drain the pool faster than the link refills it",
+        "It has no effect on security or on cost, since the encryptor derives its session keys from a single master key",
+        "It removes the need to authenticate the classical channel, as a one second key cannot be replayed later"
+      ],
+      "answer": 1,
+      "why": "Frequent refresh does limit the traffic exposed under any one key, which is a real if modest benefit. The dominant effect is on the budget, since the demand curve scales directly with the refresh rate and can easily exceed what the link delivers on a bad night.",
+      "why_vi": "Làm mới dày đúng là giới hạn lượng lưu lượng phơi ra dưới mỗi khoá, một lợi ích thật nhưng khiêm tốn. Tác động chính lại nằm ở ngân sách, vì đường nhu cầu tỉ lệ thẳng với tần suất làm mới và rất dễ vượt quá thứ mà đường truyền cấp được trong một đêm xấu.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-035",
+      "q": "A quantum access network puts one expensive detector unit at the exchange and shares it among many subscribers through a passive splitter. Which limitation is intrinsic to that arrangement?",
+      "q_vi": "Mạng truy nhập lượng tử đặt một khối đầu dò đắt tiền ở tổng đài và chia sẻ cho nhiều thuê bao qua bộ chia thụ động. Hạn chế nào là cố hữu của cách bố trí đó?",
+      "choices": [
+        "Every subscriber must run the same protocol, since a shared receiver cannot switch between encodings from one time slot to the next",
+        "The splitter is a passive component, so it introduces an unmonitored path by which one subscriber could read the key of another",
+        "The splitting loss is paid by every subscriber, and the shared receiver serves only one of them at a time",
+        "Subscribers close to the exchange saturate the shared detectors, which raises the error rate seen by the more distant ones"
+      ],
+      "answer": 2,
+      "why": "The architecture trades rate for cost. Splitting attenuates each branch and the detectors can serve one user per slot, so the aggregate key rate of the shared unit is divided among the subscribers rather than replicated for each of them.",
+      "why_vi": "Kiến trúc này đổi tốc độ lấy chi phí. Bộ chia làm suy hao từng nhánh và khối đầu dò chỉ phục vụ được một người dùng mỗi khe, nên tốc độ khoá tổng của khối dùng chung bị chia cho các thuê bao chứ không nhân bản cho từng người.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-036",
+      "q": "A layer two encryptor is fitted with an interface that pulls key material from the key management system. Which property of that interface matters most for operations?",
+      "q_vi": "Một bộ mã hoá lớp hai được gắn giao diện lấy vật liệu khoá từ hệ quản lý khoá. Thuộc tính nào của giao diện đó quan trọng nhất cho vận hành?",
+      "choices": [
+        "That it can deliver a key at line rate, since the encryptor consumes key material at exactly the same speed as the traffic it protects",
+        "That it exposes the raw sifted string, so the encryptor can carry out its own privacy amplification with its own parameters",
+        "That both ends receive the same key under the same identifier, and that the encryptor degrades predictably when the pool runs dry",
+        "That it is implemented over a public network, because the key itself is protected by the security of the underlying protocol"
+      ],
+      "answer": 2,
+      "why": "The two ends must agree on which key is in use, and identifier loss produces an outage. Equally important is the documented behaviour when supply fails, since falling back silently to a locally generated key would hide the very failure the deployment was meant to avoid.",
+      "why_vi": "Hai đầu phải thống nhất đang dùng khoá nào, và mất định danh khoá thì gây gián đoạn. Quan trọng ngang thế là hành vi đã ghi rõ khi nguồn cấp hụt, vì lặng lẽ quay về khoá sinh tại chỗ sẽ che đúng cái sự cố mà việc triển khai muốn tránh.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-037",
+      "q": "A satellite acting as a trusted node keeps the link keys of both ground stations in an onboard store. What is the security consequence of that design that no protocol choice can remove?",
+      "q_vi": "Một vệ tinh đóng vai nút tin cậy giữ khoá chặng của cả hai trạm mặt đất trong bộ nhớ trên tàu. Hệ quả an toàn nào của thiết kế đó mà không lựa chọn giao thức nào xoá được?",
+      "choices": [
+        "The spacecraft becomes a single point of compromise, since its physical protection and key erasure policy carry the whole security of the exchange",
+        "The stored key ages while the spacecraft is out of contact, so its security parameter decays with the time since it was distilled",
+        "Radiation upsets in the onboard memory raise the error rate of the relayed key beyond what reconciliation can repair",
+        "The satellite has to publish the sum of the two keys, which lets any listener recover both once one of them leaks"
+      ],
+      "answer": 0,
+      "why": "Trusted node relaying places plaintext key inside the relay by construction. The mathematics of the protocol says nothing about that node, so the argument moves entirely to tamper resistance, erasure on command and the assumption that nobody has access to the platform.",
+      "why_vi": "Chuyển tiếp qua nút tin cậy đặt khoá dạng rõ bên trong nút đó theo đúng cấu tạo. Toán học của giao thức không nói gì về nút này, nên lập luận chuyển hết sang khả năng chống can thiệp, khả năng xoá theo lệnh và giả định không ai tiếp cận được nền tảng đó.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-038",
+      "q": "An adversary who cannot break the protocol simply injects bright light into the fibre whenever a key session starts. Why is that attack worth taking seriously in a service design?",
+      "q_vi": "Một kẻ tấn công không phá được giao thức chỉ cần bơm ánh sáng mạnh vào sợi quang mỗi khi một phiên khoá bắt đầu. Vì sao vẫn phải xem trọng tấn công đó khi thiết kế dịch vụ?",
+      "choices": [
+        "Because the injected light is indistinguishable from a legitimate signal, so the receiver accepts it and the resulting key is under her control",
+        "Because it forces the error rate above threshold, and a link that produces no key at all can starve everything that depends on it",
+        "Because it damages the single photon detectors permanently, which turns a temporary disturbance into a lasting site outage",
+        "Because the security proof assumes a passive eavesdropper, and an active adversary voids the guarantee entirely"
+      ],
+      "answer": 1,
+      "why": "Confidentiality survives such an attack, since the parties abort rather than accept a compromised key. Availability does not, so any design that treats the link as the sole source of key must keep a pool and a documented fallback for the period when jamming succeeds.",
+      "why_vi": "Tính bí mật vẫn sống sót trước tấn công kiểu này, vì hai bên huỷ phiên chứ không nhận khoá đã hỏng. Tính khả dụng thì không, nên mọi thiết kế xem đường truyền là nguồn khoá duy nhất đều phải giữ bể đệm và một phương án dự phòng ghi rõ cho quãng thời gian bị gây nhiễu.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-039",
+      "q": "Two vendors quote very different costs per secret key bit. Before comparing the numbers, which question decides whether the comparison means anything?",
+      "q_vi": "Hai nhà cung cấp báo chi phí trên mỗi bit khoá bí mật rất khác nhau. Trước khi so hai con số, câu hỏi nào quyết định việc so sánh có ý nghĩa hay không?",
+      "choices": [
+        "Whether the detectors are superconducting or semiconducting, since that dominates the capital cost of any system deployed today",
+        "Whether the fibre is owned or leased, because the recurring cost of the medium usually dwarfs the cost of all the equipment",
+        "Whether the quoted rate was measured in a laboratory or on a fielded link, as laboratory numbers are always higher",
+        "Whether the quoted figure is the asymptotic rate or a composable finite key rate at a stated security parameter and distance"
+      ],
+      "answer": 3,
+      "why": "Rates differ by orders of magnitude between an asymptotic figure, a finite key figure and a figure quoted at a specific loss. Fixing the security parameter, the block size and the channel loss is what turns two quotations into comparable engineering numbers.",
+      "why_vi": "Tốc độ chênh nhau nhiều bậc độ lớn giữa con số tiệm cận, con số khoá hữu hạn và con số báo tại một mức suy hao cụ thể. Chốt tham số an toàn, cỡ khối và suy hao kênh mới biến hai bản chào thành các con số kỹ thuật so được với nhau.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-040",
+      "q": "A referee asks that a reported key rate be reproducible. Which set of items has to accompany the number for that request to be met?",
+      "q_vi": "Một phản biện yêu cầu tốc độ khoá công bố phải tái lập được. Bộ thông tin nào phải đi kèm con số đó thì yêu cầu mới được đáp ứng?",
+      "choices": [
+        "The make and model of the detectors, the length of the fibre spool and the ambient temperature of the laboratory during the run",
+        "The number of independent runs, the standard deviation across them and the confidence interval of the fitted key rate curve",
+        "The wall clock duration of the experiment and the total volume of key delivered to the application in that period",
+        "The mean photon numbers of each setting, the block size, the security parameter and the raw detection and error counts"
+      ],
+      "answer": 3,
+      "why": "A key rate is the output of a formula whose inputs are the intensities, the observed yields and errors, the finite block size and the chosen failure probability. Publishing those inputs lets a reader recompute the number, which repeated runs and equipment lists on their own do not.",
+      "why_vi": "Tốc độ khoá là đầu ra của một công thức mà đầu vào là các mức cường độ, hiệu suất và lỗi quan sát được, cỡ khối hữu hạn và xác suất thất bại đã chọn. Công bố các đầu vào đó cho phép người đọc tính lại con số, điều mà chỉ liệt kê số lần chạy hay danh mục thiết bị không làm được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-041",
+      "q": "A security team is asked to write down the trust assumptions of a deployed link. Which entry belongs on that list even though it is often left off?",
+      "q_vi": "Một nhóm an toàn được yêu cầu viết ra các giả định tin cậy của một tuyến đã triển khai. Mục nào phải nằm trong danh sách đó dù thường bị bỏ quên?",
+      "choices": [
+        "That the fibre route is not shared with any classical traffic, since coexistence would otherwise break the security argument",
+        "That the random number generators, the calibration procedure and the firmware update path of both endpoints are honest and uncompromised",
+        "That the adversary is limited to attacks that have already appeared in the published literature on implementation security",
+        "That the two endpoints are separated by less than the maximum distance quoted in the specification of the equipment"
+      ],
+      "answer": 1,
+      "why": "Discussion usually stops at the channel, yet the proof also assumes trusted laboratories at both ends. Basis choice randomness, calibration integrity and the software supply chain are assumptions of exactly the same standing as the no cloning argument.",
+      "why_vi": "Người ta thường bàn tới kênh truyền rồi dừng, trong khi chứng minh còn giả định hai đầu là phòng thí nghiệm đáng tin. Tính ngẫu nhiên của lựa chọn cơ sở, tính toàn vẹn của khâu hiệu chuẩn và chuỗi cung ứng phần mềm đều là giả định ngang hàng với lập luận không sao chép.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-042",
+      "q": "An operator inserts an optical switch so that one transmitter can serve several receivers in turn. What does the switch change about the security argument?",
+      "q_vi": "Một nhà khai thác chèn bộ chuyển mạch quang để một máy phát lần lượt phục vụ nhiều máy thu. Bộ chuyển mạch làm thay đổi gì trong lập luận an toàn?",
+      "choices": [
+        "Nothing, provided the switch is inside the trusted transmitter enclosure and each destination gets its own authenticated session",
+        "It voids the proof, because any component in the quantum path that the two parties have not characterised is by definition untrusted",
+        "It makes the whole arrangement measurement device independent, since no single receiver in the group now sees the entire key stream",
+        "It forces the mean photon number down, as the insertion loss of the switch has to be absorbed by the transmitter"
+      ],
+      "answer": 0,
+      "why": "A passive or switched element in the quantum path is treated as part of the channel and its loss simply enters the budget. What matters is that the switch is not a place where an adversary can steer light between users, and that each pairing runs its own authenticated protocol instance.",
+      "why_vi": "Một phần tử thụ động hay chuyển mạch nằm trên đường quang được xem như một phần của kênh và suy hao của nó chỉ đi vào ngân sách. Điều quan trọng là bộ chuyển mạch không phải chỗ để kẻ tấn công lái ánh sáng giữa các người dùng, và mỗi cặp kết nối chạy phiên giao thức có xác thực riêng.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-043",
+      "q": "A link is upgraded from a ten megahertz to a one gigahertz clock. The sifted key rate rises by far less than a hundredfold, and the error rate creeps up. Which detector property explains both observations together?",
+      "q_vi": "Một tuyến được nâng xung nhịp từ mười mêgahéc lên một gigahéc. Tốc độ khoá đã sàng tăng ít hơn nhiều so với một trăm lần, còn tỉ lệ lỗi thì nhích lên. Thuộc tính nào của đầu dò giải thích cả hai quan sát cùng lúc?",
+      "choices": [
+        "Dead time caps the achievable count rate, and the afterpulses that follow each avalanche now land inside the next gate rather than between gates",
+        "Detection efficiency falls with clock rate, since the bias voltage has less time to settle",
+        "Dark counts scale with the clock rate, so the noise per gate stays fixed while the signal per gate drops",
+        "Timing jitter grows with the clock rate, which widens the arrival distribution beyond the gate"
+      ],
+      "answer": 0,
+      "why": "Two effects appear together once the gate spacing approaches the recovery time of the diode. The device cannot count faster than its recovery allows, and trapped carriers released after one avalanche fire during a later gate, which registers as an error rather than as a lost count.",
+      "why_vi": "Hai hiệu ứng xuất hiện cùng lúc khi khoảng cách giữa các cửa sổ tiến gần thời gian hồi phục của điốt. Linh kiện không đếm nhanh hơn mức hồi phục cho phép, còn các hạt tải bị bẫy giải phóng sau một lần thác lại nổ trong cửa sổ sau, và điều đó ghi thành lỗi chứ không phải mất đếm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-044",
+      "q": "A time bin system uses detectors with one hundred picoseconds of timing jitter. Which design number does that figure constrain most directly?",
+      "q_vi": "Một hệ khe thời gian dùng đầu dò có trôi thời gian một trăm picô giây. Con số đó ràng buộc trực tiếp nhất tham số thiết kế nào?",
+      "choices": [
+        "The mean photon number, since a broader arrival distribution has to be compensated by brighter pulses at the transmitter",
+        "The shortest usable separation between the two bins, and with it the highest clock the encoding can support",
+        "The maximum fibre length, because dispersion and jitter add in quadrature over the span",
+        "The efficiency of the reconciliation code that follows"
+      ],
+      "answer": 1,
+      "why": "Jitter smears the arrival time, so two bins closer together than the smear cannot be told apart and the cross talk shows up as an error. Everything else on the list is affected only indirectly, through the clock rate that jitter permits.",
+      "why_vi": "Trôi thời gian làm nhoè thời điểm tới, nên hai khe gần nhau hơn mức nhoè thì không phân biệt được và phần xuyên nhiễu hiện ra thành lỗi. Mọi thứ còn lại chỉ chịu ảnh hưởng gián tiếp, thông qua xung nhịp mà mức trôi cho phép.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-045",
+      "q": "A transmitter is fitted with a high isolation optical isolator on its output port. Which threat does that component address, and what does it not address?",
+      "q_vi": "Một máy phát được lắp bộ cách ly quang có độ cách ly cao ở cổng ra. Linh kiện đó xử lý mối đe doạ nào và không xử lý mối nào?",
+      "choices": [
+        "It blocks the reflection of the transmitted pulses from connectors along the fibre, which would otherwise return and interfere with later pulses in the train",
+        "It removes the multiphoton component of the emitted pulses, although the decoy state analysis is still needed for the residual part of the distribution",
+        "It blocks probe light sent back into the encoder, while saying nothing about what the encoder itself radiates outward",
+        "It stabilises the polarisation of the outgoing light, yet it cannot compensate the slow drift accumulated along the fibre span"
+      ],
+      "answer": 2,
+      "why": "Isolation is the standard countermeasure against Trojan horse probing of the modulators. It is one directional by construction, so correlations imprinted on the outgoing pulses, such as intensity memory between neighbours or a wavelength dependent side channel, pass straight through it.",
+      "why_vi": "Cách ly là biện pháp chuẩn chống việc dò kiểu ngựa gỗ vào các bộ điều biến. Theo cấu tạo nó chỉ chặn một chiều, nên các tương quan in lên xung đi ra, chẳng hạn trí nhớ cường độ giữa hai xung liền kề hay kênh phụ phụ thuộc bước sóng, đi thẳng qua nó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-046",
+      "q": "Four laser diodes, one per encoded state, are found to differ slightly in centre wavelength. Why does a narrow filter placed at the transmitter output matter for security rather than merely for performance?",
+      "q_vi": "Bốn điốt laser, mỗi cái cho một trạng thái mã hoá, được phát hiện lệch nhau chút ít về bước sóng trung tâm. Vì sao bộ lọc hẹp đặt ở đầu ra máy phát lại liên quan tới an toàn chứ không chỉ tới hiệu năng?",
+      "choices": [
+        "Because a spread of wavelengths broadens the pulse through chromatic dispersion and eventually causes bins to overlap at the far end of the span",
+        "Because the receiver filter is narrow, and light outside its passband is lost, which shows up directly as a lower detection efficiency",
+        "Because the decoy state estimate assumes all intensity settings share one spectrum, and a spread invalidates the bound on the single photon yield",
+        "Because the wavelength then labels the state, and the labelling leaves the sender"
+      ],
+      "answer": 3,
+      "why": "A proof assumes the four prepared states differ only in the encoded degree of freedom. If they are distinguishable in wavelength as well, an adversary can read the encoding without touching the polarisation or phase, so filtering to a common spectrum restores the assumption.",
+      "why_vi": "Chứng minh giả định bốn trạng thái đã chuẩn bị chỉ khác nhau ở bậc tự do dùng để mã hoá. Nếu chúng còn phân biệt được theo bước sóng thì kẻ tấn công đọc được mã mà không cần chạm tới phân cực hay pha, nên lọc về một phổ chung sẽ khôi phục giả định đó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-047",
+      "q": "A protocol is modified so that one basis is chosen ninety per cent of the time. What is gained and what has to be watched?",
+      "q_vi": "Một giao thức được sửa để chín mươi phần trăm số lần chọn cùng một cơ sở. Được gì và phải canh chừng điều gì?",
+      "choices": [
+        "Sifting keeps most of the detections instead of half of them, while the rare basis must still deliver enough samples to bound the phase error",
+        "The key rate doubles and nothing else changes, since the two bases are symmetric in the security proof",
+        "Sifting is unaffected, although the error estimate becomes noisier in the rarely chosen basis",
+        "The protocol loses complementarity, so the tolerable error rate falls"
+      ],
+      "answer": 0,
+      "why": "Biasing the choice recovers most of the loss of the sifting step, which is why it is standard in high rate systems. The rarely chosen basis is what bounds the leakage, so the bias has to be set against the block size or the finite key penalty eats the gain.",
+      "why_vi": "Làm lệch xác suất chọn cơ sở lấy lại gần hết phần mất ở bước sàng lọc, nên nó là cách làm chuẩn trong các hệ tốc độ cao. Cơ sở ít được chọn mới là thứ chặn phần rò rỉ, nên mức lệch phải đặt cân với cỡ khối, không thì phần phạt do khoá hữu hạn ăn hết cái lợi.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-048",
+      "q": "Privacy amplification hashes the corrected string with a function drawn from a two universal family. Why must the choice of function be made after the raw data exist rather than fixed once at installation?",
+      "q_vi": "Khuếch đại riêng tư băm chuỗi đã sửa lỗi bằng một hàm lấy từ họ hai phổ dụng. Vì sao phải chọn hàm sau khi có dữ liệu thô chứ không chốt một lần lúc lắp đặt?",
+      "choices": [
+        "Because a fixed function would have to be stored in both devices, and any stored secret can be extracted by an attacker with physical access to them",
+        "Because the output length changes from block to block, and a function fixed in advance cannot produce keys of different lengths",
+        "Because the bound holds on average over the family, so a fixed member can be one an adversary has already tailored her attack to",
+        "Because two universal families are only defined for inputs of one fixed size, and the raw block length varies with the channel"
+      ],
+      "answer": 2,
+      "why": "The leftover hash lemma bounds the distance from uniform when the function is drawn at random and its index is public. Fixing one member removes the averaging that the bound relies on, which is why a fresh public seed accompanies every block.",
+      "why_vi": "Bổ đề băm dư chặn khoảng cách tới phân bố đều khi hàm được rút ngẫu nhiên và chỉ số của nó là công khai. Cố định một phần tử là bỏ mất phép lấy trung bình mà cận đó dựa vào, nên mỗi khối đều đi kèm một hạt giống công khai mới.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-049",
+      "q": "A datasheet states that the final key is within a trace distance of ten to the minus ten of an ideal uniform key that is independent of the adversary. What does that formulation buy compared with a statement about mutual information?",
+      "q_vi": "Một bản đặc tả nêu khoá cuối cách khoá đều lý tưởng và độc lập với kẻ nghe lén một khoảng cách vết bằng mười mũ trừ mười. Cách phát biểu đó lợi hơn gì so với một phát biểu về lượng tin tương hỗ?",
+      "choices": [
+        "It is a stronger numerical claim, because trace distance is always smaller than the mutual information for the same pair of states",
+        "It removes the need for a finite key analysis, since the distance already accounts for the limited number of rounds collected",
+        "It applies to continuous variable systems as well, whereas a mutual information criterion is defined only for discrete encodings",
+        "It bounds the probability that any later use of the key behaves differently from an ideal key"
+      ],
+      "answer": 3,
+      "why": "A small trace distance means no procedure whatsoever can tell the delivered key from an ideal one with more than that probability. That is what makes the guarantee composable, so the key may be fed into a cipher without redoing the analysis for each use.",
+      "why_vi": "Khoảng cách vết nhỏ nghĩa là không thủ tục nào phân biệt được khoá đã giao với khoá lý tưởng vượt quá xác suất đó. Chính điều này làm cho bảo đảm có tính ghép được, nên khoá có thể đưa thẳng vào một hệ mật mà không phải làm lại phân tích cho từng lần dùng.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-050",
+      "q": "Security proofs are often built first against collective attacks and only then extended to general coherent attacks. What is the status of the collective attack result on its own?",
+      "q_vi": "Các chứng minh an toàn thường dựng trước cho tấn công tập thể rồi mới mở rộng sang tấn công kết hợp tổng quát. Riêng kết quả cho tấn công tập thể có vị thế thế nào?",
+      "choices": [
+        "It is the final result, since a coherent attack can always be decomposed into a sequence of independent collective attacks on separate rounds",
+        "It is a lower bound on the key that is valid only if the adversary is assumed to act identically and independently on each round",
+        "It is a heuristic, because no theorem is known that connects the two classes of attack in any direction whatsoever",
+        "It is an upper bound, so the true key rate against a general adversary is necessarily higher than the collective figure"
+      ],
+      "answer": 1,
+      "why": "Restricting the adversary to identical independent action per round is a genuine assumption and not a free one. Tools such as de Finetti reductions, postselection or entropy accumulation are what lift the result to a general adversary, usually at the cost of a looser finite key term.",
+      "why_vi": "Hạn chế kẻ tấn công phải tác động giống nhau và độc lập ở mỗi vòng là một giả định thật chứ không miễn phí. Các công cụ như quy giản de Finetti, hậu chọn hay tích luỹ entropy mới nâng kết quả lên cho kẻ tấn công tổng quát, thường phải trả bằng số hạng khoá hữu hạn lỏng hơn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-051",
+      "q": "A continuous variable system reports excess noise of zero point zero five shot noise units. What has to be true about the calibration for that number to mean anything?",
+      "q_vi": "Một hệ biến liên tục báo nhiễu dư bằng không phẩy không năm đơn vị nhiễu bắn. Khâu hiệu chuẩn phải đúng điều gì thì con số đó mới có nghĩa?",
+      "choices": [
+        "The shot noise level must be measured against the same detector and local oscillator power which produced the reported measurement itself",
+        "The excess noise must be measured with the quantum channel disconnected, so that only the detector contributes",
+        "The detector must be cooled, since thermal noise otherwise dominates the shot noise term",
+        "The modulation must be Gaussian, or the unit itself is undefined"
+      ],
+      "answer": 0,
+      "why": "Everything in the analysis is expressed in units of the vacuum fluctuation, so an error in the reference scales every noise term at once. Local oscillator power drifts and detector gain drifts both move the reference, which is why the calibration is repeated alongside the measurement.",
+      "why_vi": "Mọi đại lượng trong phân tích đều tính theo đơn vị thăng giáng chân không, nên sai ở mốc quy chiếu sẽ kéo lệch toàn bộ các số hạng nhiễu cùng lúc. Công suất dao động nội trôi và độ lợi đầu dò trôi đều làm dịch mốc đó, vì thế khâu hiệu chuẩn phải chạy kèm ngay bên phép đo.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-052",
+      "q": "A proposal argues that adding a quantum memory to each ground station would remove the need for trusted satellites. What does a memory actually have to achieve for that claim to hold?",
+      "q_vi": "Một đề xuất lập luận rằng thêm bộ nhớ lượng tử ở mỗi trạm mặt đất sẽ xoá bỏ nhu cầu về vệ tinh tin cậy. Bộ nhớ phải đạt được gì thì khẳng định đó mới đứng vững?",
+      "choices": [
+        "It must store the distilled key securely between passes, so that no plaintext key ever resides on the spacecraft itself",
+        "It must hold one half of an entangled pair at high fidelity while the second link is being attempted",
+        "It must convert the stored photon to the telecom band without disturbing the polarisation state that carries the encoding",
+        "It must buffer detection events until the classical channel is available"
+      ],
+      "answer": 1,
+      "why": "Removing the trusted relay requires end to end entanglement between the two ground stations, which in turn requires storing one arm while waiting for the second link to succeed. Storage time measured against the pass schedule, not merely against the coherence of a single photon, is the demanding figure.",
+      "why_vi": "Bỏ được nút chuyển tiếp tin cậy đòi hỏi rối đầu cuối giữa hai trạm mặt đất, mà muốn vậy phải giữ một nhánh trong lúc chờ chặng thứ hai thành công. Thời gian lưu đo theo lịch bay chứ không chỉ theo độ kết hợp của một photon mới là chỉ tiêu khắc nghiệt.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-053",
+      "q": "An inter satellite optical link between two spacecraft in the same constellation is compared with a downlink to the ground. Which comparison is correct?",
+      "q_vi": "Một tuyến quang giữa hai vệ tinh trong cùng chòm được đem so với tuyến xuống mặt đất. So sánh nào đúng?",
+      "choices": [
+        "The inter satellite link is easier in every respect, since neither turbulence nor background light nor pointing accuracy limits it in orbit",
+        "The inter satellite link is harder, because the relative velocity between two spacecraft is far greater than between a spacecraft and a station",
+        "The inter satellite link meets no turbulence, since there is no air, yet it still needs microradian pointing over a longer range",
+        "The inter satellite link removes the need for trusted relaying, as both endpoints belong to the same operator and platform"
+      ],
+      "answer": 2,
+      "why": "Removing the atmosphere removes scintillation, beam wander and most background, which is a real advantage. Diffraction and pointing remain, and a link across a constellation can be several thousand kilometres, so the free space loss term is not automatically smaller.",
+      "why_vi": "Bỏ khí quyển là bỏ được nhấp nháy, trôi chùm tia và phần lớn ánh sáng nền, đó là lợi thế thật. Nhiễu xạ và độ chính xác chỉ hướng vẫn còn, và một tuyến vắt qua chòm vệ tinh có thể dài vài nghìn kilômét, nên số hạng suy hao không gian tự do không nghiễm nhiên nhỏ hơn.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-054",
+      "q": "An operator compares a five hundred kilometre orbit with a fifteen hundred kilometre orbit for a key service. Which trade dominates?",
+      "q_vi": "Một nhà khai thác so quỹ đạo năm trăm kilômét với quỹ đạo một nghìn năm trăm kilômét cho dịch vụ khoá. Đánh đổi nào là chính?",
+      "choices": [
+        "The lower orbit suffers more atmospheric drag, which shortens the mission and therefore raises the cost of every bit of key it ever delivers",
+        "The higher orbit is preferable in every respect, since a longer contact time always outweighs the extra loss along the slant path to the station",
+        "The lower orbit gives a longer contact time per pass, because the satellite spends more of its period above the station horizon",
+        "The higher orbit gives longer but rarer passes at a worse link budget, so key per pass and key per day move in opposite directions"
+      ],
+      "answer": 3,
+      "why": "Contact time grows with altitude while received power falls roughly as the inverse square of range, and the two work against each other. Which orbit wins depends on the aperture and the detector noise, so the comparison has to be made on delivered key per day rather than on either figure alone.",
+      "why_vi": "Thời gian liên lạc tăng theo độ cao trong khi công suất thu giảm gần theo nghịch đảo bình phương cự ly, và hai yếu tố này chống nhau. Quỹ đạo nào thắng còn tuỳ khẩu độ và nhiễu đầu dò, nên phải so trên lượng khoá giao được mỗi ngày chứ không phải một trong hai con số.",
+      "level": 2
+    },
+    {
+      "id": "qqkd2-055",
+      "q": "Photon arrival times on a satellite pass are predicted from an orbital model, and the residuals show a systematic drift of a few nanoseconds over the pass. Which correction is being omitted?",
+      "q_vi": "Thời điểm photon tới trong một lượt bay được dự đoán từ mô hình quỹ đạo, và phần dư cho thấy độ trôi hệ thống vài nanô giây suốt lượt. Hiệu chỉnh nào đang bị bỏ sót?",
+      "choices": [
+        "The group delay of the receiver electronics, which changes with temperature as the enclosure warms during the pass",
+        "The dead time of the detectors, since a rising count rate delays the recorded timestamps by a growing amount",
+        "The difference in the tick rate between the clock on the spacecraft and the clock at the station on the ground",
+        "The propagation delay through the atmosphere, which grows as the elevation of the satellite falls towards the horizon"
+      ],
+      "answer": 2,
+      "why": "Velocity and gravitational potential both make an orbiting clock run at a different rate from one on the ground, and the accumulated offset over a pass is far larger than the picosecond gates used for coincidence. Instrumental and atmospheric delays exist but do not produce that particular signature.",
+      "why_vi": "Cả vận tốc lẫn thế hấp dẫn đều làm đồng hồ trên quỹ đạo chạy khác đồng hồ dưới đất, và độ lệch tích luỹ suốt một lượt lớn hơn nhiều so với cửa sổ trùng phùng cỡ picô giây. Trễ do thiết bị và do khí quyển vẫn có nhưng không tạo ra đúng dấu hiệu đó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd2-056",
+      "q": "A design team halves the divergence of the transmitted beam by doubling the transmit aperture, and then widens the receiver field of view to keep tracking easy. What happens to the daylight key rate?",
+      "q_vi": "Một nhóm thiết kế giảm một nửa độ loe của chùm phát bằng cách tăng gấp đôi khẩu độ phát, rồi mở rộng trường nhìn máy thu cho việc bám dễ hơn. Tốc độ khoá ban ngày thay đổi ra sao?",
+      "choices": [
+        "It improves by the full factor of four, since the signal gain from the narrower beam is independent of the field of view of the receiver",
+        "It is unchanged, because widening the field of view collects exactly the fraction of the beam that the narrower divergence had concentrated",
+        "It falls, as a narrower beam is harder to hold on target and the pointing loss more than cancels the gain in on axis intensity",
+        "Part of the signal gain is given back, because background scales with the solid angle admitted"
+      ],
+      "answer": 3,
+      "why": "Narrowing the beam raises the on axis irradiance by roughly the square of the aperture ratio, which is a real gain. Sky background enters in proportion to the accepted solid angle, so relaxing the field of view to ease tracking hands part of that gain straight back to the noise term.",
+      "why_vi": "Thu hẹp chùm tia làm tăng cường độ trên trục gần theo bình phương tỉ số khẩu độ, đó là cái lợi thật. Nền trời đi vào tỉ lệ với góc khối được chấp nhận, nên nới trường nhìn cho dễ bám là trả lại ngay một phần cái lợi đó cho số hạng nhiễu.",
+      "level": 3
     }
   ]
 }

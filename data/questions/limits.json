@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "limits",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qlim-1",
@@ -278,7 +278,7 @@
       "q": "A decisive clause sits on page twenty of a forty page contract and the model misses it. Which effect is this?",
       "q_vi": "Một điều khoản quyết định nằm ở trang hai mươi của bản hợp đồng bốn mươi trang và mô hình bỏ sót nó. Đây là hiệu ứng gì?",
       "choices": [
-        "Material in a legal register is scored lower than material written in ordinary prose",
+        "Material in a legal register is scored lower than material in ordinary prose",
         "Material that repeats an earlier clause is deduplicated by the tokeniser before decoding",
         "Material far from both ends of a long input is used less reliably than the rest",
         "Material in the second half of any input is discarded once the token budget is exceeded"
@@ -401,7 +401,7 @@
         "Lower the temperature so the model becomes more deterministic across the two documents",
         "Ask the model to read the second contract twice before it produces the final comparison",
         "Process each contract in a separate call and merge the structured results after",
-        "Increase the context window so both contracts fit with room to spare on either side"
+        "Increase the context window so both contracts fit with room to spare"
       ],
       "answer": 2,
       "why": "Similar documents in one window get blended. Isolation at the call level removes the confusion, whereas more room in the same window does not.",
@@ -445,7 +445,7 @@
       "choices": [
         "Retrieval is required by our internal standard, so the proposal cannot be evaluated at all",
         "Accepting the text is not the same as using it, and the clause sits in the middle",
-        "Long prompts are rejected by the endpoint whenever they exceed the documented maximum",
+        "Long prompts are rejected by the endpoint whenever they exceed the maximum",
         "Policy archives contain scanned images that a text model cannot read in any configuration"
       ],
       "answer": 1,
@@ -461,7 +461,7 @@
         "The tokeniser cannot represent recent years, so dates after training are rounded down",
         "The serving layer caches numeric answers and returns the first value it ever computed",
         "The weights encode the world as of the corpus and cannot be updated per request",
-        "The weights encode only general language and never contain domain specific figures"
+        "The weights encode only general language and never domain specific figures"
       ],
       "answer": 2,
       "why": "Everything after the cutoff exists for the model only if a tool brings it in. Nothing in the weights can be refreshed for one request.",
@@ -550,7 +550,7 @@
       "choices": [
         "A bounded lag per data class that we measure and report every month",
         "That the answers are always up to date with the latest published information",
-        "That the model is retrained whenever a relevant regulation is amended",
+        "That the model is retrained whenever a regulation is amended",
         "That the system knows about any change within seconds of it occurring"
       ],
       "answer": 0,
@@ -654,7 +654,7 @@
       "q_vi": "Tác tử nghiên cứu của bạn không bao giờ ngừng thu chứng cứ cho tới khi cạn ngân sách token. Đặc tả nên bổ sung gì?",
       "choices": [
         "A hard cap on tokens, which converts the problem into a predictable cost per request",
-        "A second agent that reviews the collected evidence and decides whether to continue",
+        "A second agent that reviews the evidence and decides whether to continue",
         "A longer context window so the accumulated evidence no longer needs to be truncated",
         "A stopping rule defining what counts as sufficient evidence for the question"
       ],
@@ -698,7 +698,7 @@
       "q": "An agent that writes its own reusable procedures starts failing a task it used to pass. What is a likely cause?",
       "q_vi": "Một tác tử tự viết ra quy trình tái dùng bắt đầu hỏng ở nhiệm vụ nó từng làm được. Nguyên nhân nhiều khả năng là gì?",
       "choices": [
-        "The procedure library grew too large to fit in the context supplied to the planner",
+        "The procedure library grew too large to fit in the planner's context",
         "The base model was updated, which invalidates all previously written procedures at once",
         "A flawed procedure was committed and every later run inherits it as experience",
         "The task changed, and the agent has no mechanism for detecting a change in the task"
@@ -773,7 +773,7 @@
       "q": "Your evaluation uses one model to grade another from the same family. What kind of error survives this setup?",
       "q_vi": "Phép đánh giá của bạn dùng một mô hình chấm một mô hình khác cùng dòng. Loại lỗi nào sống sót qua thiết lập này?",
       "choices": [
-        "An error in output formatting that neither model was trained to detect or report",
+        "An error in output formatting that neither model was trained to detect",
         "An error caused by the grader running with a lower temperature than the generator",
         "An error that appears only when the two models are served from different regions",
         "An error rooted in a belief that both models share and both consider correct"
@@ -803,7 +803,7 @@
       "q": "When should you prefer a compiler, a schema validator or a database constraint over a model based checker?",
       "q_vi": "Khi nào nên ưu tiên trình biên dịch, bộ kiểm lược đồ hoặc ràng buộc cơ sở dữ liệu hơn một bộ kiểm dựa trên mô hình?",
       "choices": [
-        "Whenever the budget is large, since deterministic tools cost more per invocation",
+        "Whenever the budget is large, since deterministic tools cost more",
         "Whenever the property can be decided mechanically, since the verdict is stable",
         "Whenever the property involves natural language, since these tools handle text better",
         "Whenever the output is short, since deterministic tools cannot process long documents"
@@ -851,7 +851,7 @@
         "The report is generated text, while the executor returns a signed record",
         "The report is written after the fact, so it may be delayed beyond the audit window",
         "The report is in natural language, so it cannot be stored in a structured database",
-        "The report is produced by a different model than the one that made the decision"
+        "The report is produced by a different model than the one deciding"
       ],
       "answer": 0,
       "why": "The agent's account of its own actions has the same status as any other generation. The authoritative record comes from the system that performed the action.",
@@ -938,7 +938,7 @@
       "q": "A model scores very well on a public benchmark released three years ago. What is the first thing to rule out?",
       "q_vi": "Một mô hình đạt điểm rất cao trên chuẩn đo công khai phát hành ba năm trước. Điều đầu tiên cần loại trừ là gì?",
       "choices": [
-        "That the benchmark items are too easy for any model released in the last three years",
+        "That the benchmark items are too easy for any model released recently",
         "That the benchmark distribution differs from the distribution seen in production traffic",
         "That the test items entered the training corpus and the score measures recall",
         "That the benchmark was scored with a different metric than the one reported in the paper"
@@ -953,7 +953,7 @@
       "q": "You generate synthetic training examples with a controlled process. What does this add and what does it not add?",
       "q_vi": "Bạn sinh dữ liệu huấn luyện tổng hợp bằng một quy trình kiểm soát được. Cách này thêm gì và không thêm gì?",
       "choices": [
-        "It adds facts about the world, and it cannot add coverage of rare configurations",
+        "It adds facts about the world, and it cannot add coverage of rare cases",
         "It adds both coverage and new facts, since the generator can extrapolate beyond its data",
         "It adds neither, since generated examples are discarded by any careful training pipeline",
         "It adds coverage and volume, and it cannot add facts about the world nobody had"
@@ -1045,7 +1045,7 @@
       "choices": [
         "Into evaluation, because a full benchmark suite must be run before each release",
         "Into serving, because it is paid on every request while training is paid once",
-        "Into training, because a single run dominates any amount of later serving cost",
+        "Into training, because a single run dominates any later serving cost",
         "Into storage, because logs and traces grow faster than any other cost component"
       ],
       "answer": 1,
@@ -1059,7 +1059,7 @@
       "q_vi": "Một bộ định tuyến đưa yêu cầu dễ sang mô hình nhỏ và yêu cầu khó sang mô hình lớn. Điểm yếu nằm ở đâu?",
       "choices": [
         "Serving two models at once, which doubles the memory footprint of the deployment",
-        "Billing two providers separately, which complicates the monthly cost attribution",
+        "Billing two providers separately, which complicates cost attribution",
         "Judging difficulty before the answer exists, which is hardest where it matters",
         "Judging difficulty after the answer exists, which requires running both models every time"
       ],
@@ -1089,7 +1089,7 @@
       "q_vi": "Sau khi lượng tử hoá mô hình đang phục vụ, điểm trung bình không đổi. Bạn nên kiểm gì trước khi phát hành?",
       "choices": [
         "The rare and high stakes cases, because degradation from lower precision is uneven",
-        "The average score on a second benchmark, to confirm the first measurement was valid",
+        "The average score on a second benchmark, to confirm the first was valid",
         "The memory footprint, to confirm that the reduction matches the expected compression",
         "The tokeniser output, to confirm that quantisation did not alter the input segmentation"
       ],
@@ -1121,7 +1121,7 @@
         "Model calls issued, since that is the quantity the provider actually charges for",
         "Active users per month, since that is how the subscription price is calculated",
         "Tasks that completed correctly, since attempts flatter a failing system",
-        "Requests received, since that is the number the business plan is built around"
+        "Requests received, since that is the number the business plan uses"
       ],
       "answer": 2,
       "why": "Cost per attempt makes a bad system look cheap. Dividing by successful completions counts the retries and failures where they belong.",
@@ -1149,7 +1149,7 @@
       "q_vi": "Một luồng việc có người đang ngồi chờ câu trả lời. Hệ quả thiết kế nào theo sau?",
       "choices": [
         "There is a hard ceiling on how many verification and retrieval steps you can add",
-        "There is no ceiling on verification, because a person will wait for a correct answer",
+        "There is no ceiling on verification, because a person will simply wait",
         "Retrieval must be removed entirely, because any external call breaks the interaction",
         "The model must be the largest available, because a person judges quality immediately"
       ],
@@ -1238,7 +1238,7 @@
       "q": "A system tuned to top an agent benchmark performs poorly on a different one. What does that suggest?",
       "q_vi": "Một hệ được tinh chỉnh để đứng đầu một chuẩn đo tác tử lại chạy kém trên một chuẩn đo khác. Điều đó gợi ý gì?",
       "choices": [
-        "The tuning overfitted the base model weights and damaged its general capability",
+        "The tuning overfitted the base weights and damaged general capability",
         "The two benchmarks measure different languages, which explains the whole difference",
         "Part of the original score was a property of that harness, not of the system",
         "The second benchmark is harder and therefore a more accurate measure of capability"
@@ -1269,7 +1269,7 @@
       "q_vi": "Báo cáo chất lượng của bạn hoàn toàn do một bộ chấm tự động tạo ra. Báo cáo đó còn thiếu gì?",
       "choices": [
         "A measurement of the judge itself against a set that people labelled by hand",
-        "A measurement of the latency of the judge, which affects the cost of each report",
+        "A measurement of the latency of the judge, which affects report cost",
         "A measurement of the number of items judged, which determines the confidence interval",
         "A measurement of the judge's version, which determines whether results are comparable"
       ],
@@ -1373,7 +1373,7 @@
       "q": "A team optimises against a proxy metric and the metric improves while the outcome does not. What is this called?",
       "q_vi": "Một nhóm tối ưu theo một chỉ số đại diện và chỉ số đó tăng còn kết quả thật thì không. Hiện tượng này gọi là gì?",
       "choices": [
-        "Overfitting the training set because the proxy metric was computed on training data",
+        "Overfitting the training set because the proxy was computed on it",
         "Distribution shift because the proxy was validated on a population that has changed",
         "Underfitting because the proxy metric lacked the capacity to represent the true goal",
         "Optimising what is measured because it is easier to move than the goal behind it"
@@ -1801,6 +1801,1056 @@
       "answer": 3,
       "why": "There is no final layer that covers everything. Saying which residual risks were accepted, and why, is both accurate and the basis for an informed decision.",
       "why_vi": "Không có tầng cuối cùng nào phủ được mọi thứ. Nói rõ những rủi ro còn lại nào đã được chấp nhận và vì sao thì vừa chính xác vừa là cơ sở cho một quyết định có hiểu biết.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-1",
+      "q": "A model returns a confidence score on every answer, and almost all of them land on the same few values. Why is that score useless per item?",
+      "q_vi": "Mô hình trả về điểm tự tin cho mọi câu trả lời, và gần như tất cả rơi vào vài giá trị giống nhau. Vì sao điểm đó vô dụng ở mức từng câu?",
+      "choices": [
+        "The scores pile onto a few coarse values, so the set looks right while no item is separated",
+        "The score is rounded by the serving layer before you ever read it",
+        "That confidence score is only defined for a classification model, since every answer here has one class",
+        "The model reports confidence about the prompt rather than the answer"
+      ],
+      "answer": 0,
+      "why": "Aggregate calibration and per item usefulness are different properties. A score that takes three values can match the average error rate and still put the wrong item in the same bucket as the right one.",
+      "why_vi": "Hiệu chỉnh tổng thể và tính hữu ích ở mức từng câu là hai tính chất khác nhau. Một điểm số chỉ nhận ba giá trị vẫn có thể khớp tỉ lệ sai trung bình mà lại xếp câu sai chung rổ với câu đúng.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-2",
+      "q": "An assistant tracks a stock count through eleven successive adjustments and gets the final figure wrong. Which weakness does this expose?",
+      "q_vi": "Một trợ lý theo dõi số tồn kho qua mười một lần điều chỉnh liên tiếp và ra con số cuối sai. Điểm yếu nào lộ ra ở đây?",
+      "choices": [
+        "Arithmetic on small integers becomes unreliable whenever the count exceeds ten separate items",
+        "Holding a set of values while they keep changing is where reasoning degrades fastest",
+        "The stock count was outside the training distribution, so no adjustment was ever learned",
+        "The prompt exceeded the window, which dropped the earliest adjustments"
+      ],
+      "answer": 1,
+      "why": "Each individual subtraction is easy. What fails is carrying a mutable state forward, because nothing in the architecture guarantees an intermediate value survives to the next step unchanged.",
+      "why_vi": "Từng phép trừ riêng lẻ đều dễ. Cái hỏng là việc mang một trạng thái thay đổi được đi tiếp, vì không có gì trong kiến trúc bảo đảm một giá trị trung gian còn nguyên vẹn sang bước sau.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-3",
+      "q": "A booking request lists six constraints and the answer honours only the last two. What is the general pattern?",
+      "q_vi": "Một yêu cầu đặt chỗ nêu sáu ràng buộc và câu trả lời chỉ tôn trọng hai cái cuối. Khuôn mẫu chung ở đây là gì?",
+      "choices": [
+        "Constraints get ignored because they were written as negatives",
+        "Six constraints exceed any practical limit",
+        "It satisfies whichever requirements were named last or most vividly, quietly dropping every other one, which leaves a clean reply to a task that nobody actually set",
+        "The booking tool rejected the six constraints that the request lists"
+      ],
+      "answer": 2,
+      "why": "The output looks complete because it is internally consistent. The silent part is that the constraint set it satisfied is a subset, and nothing in the answer marks which requirements were dropped.",
+      "why_vi": "Đầu ra trông đầy đủ vì nó nhất quán bên trong. Phần im lặng là tập ràng buộc mà nó thoả chỉ là một tập con, và không có gì trong câu trả lời đánh dấu những yêu cầu đã bị bỏ.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-4",
+      "q": "A model passes a set of questions about what another party knows, then fails the same questions after the names and setting are changed. What should you conclude?",
+      "q_vi": "Một mô hình vượt qua loạt câu hỏi về việc bên kia biết gì, rồi trượt chính loạt câu đó sau khi đổi tên và bối cảnh. Bạn nên kết luận gì?",
+      "choices": [
+        "The reworded version is genuinely harder, because renaming a party adds an inference step",
+        "The model needs more training examples from the new setting, since coverage drives this",
+        "The evaluation itself is unstable, so the two results should simply be averaged together",
+        "The first result rested on surface cues"
+      ],
+      "answer": 3,
+      "why": "A capability that disappears under paraphrase was never the capability being claimed. The rewording does not add difficulty, it removes the shortcut that carried the first result.",
+      "why_vi": "Một năng lực biến mất khi diễn đạt lại thì vốn chưa từng là năng lực được tuyên bố. Việc viết lại không làm bài khó thêm, nó chỉ gỡ mất lối tắt đã cõng kết quả lần đầu.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-5",
+      "q": "The same question asked at the start and at the end of a long session gets two different answers. What is the mechanism?",
+      "q_vi": "Cùng một câu hỏi đặt ở đầu và ở cuối một phiên dài nhận hai câu trả lời khác nhau. Cơ chế nào ở đây?",
+      "choices": [
+        "The early position drifts as the session grows, since each turn conditions on the last",
+        "The session identifier rotated, so that the second question reached another served model",
+        "The first answer was cached, and that cache silently expired while you were still talking",
+        "Sampling temperature rises automatically as a session lengthens"
+      ],
+      "answer": 0,
+      "why": "Nothing pins the earlier commitment. Each turn is conditioned on a context that has been growing and changing, so a position stated at turn three has no mechanism holding it at turn forty.",
+      "why_vi": "Không có gì ghim lại cam kết trước đó. Mỗi lượt đều điều kiện trên một ngữ cảnh đang phình ra và đổi thay, nên một lập trường nêu ở lượt thứ ba chẳng có cơ chế nào giữ nó ở lượt thứ bốn mươi.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-6",
+      "q": "Which property makes an external memory store different from simply keeping a long transcript?",
+      "q_vi": "Tính chất nào làm cho kho nhớ ngoài khác với việc chỉ giữ lại một bản ghi hội thoại dài?",
+      "choices": [
+        "It is read by the model directly, which removes the retrieval step from the loop",
+        "It outlives the session and can be edited and audited, since it sits outside",
+        "It is stored in the weights after each session, so no lookup is needed",
+        "It compresses the transcript, which lowers the cost of every later call"
+      ],
+      "answer": 1,
+      "why": "A transcript is something the session happens to contain. A store is something the system decided to keep, which is why entries in it can be corrected, dated and attributed later.",
+      "why_vi": "Bản ghi hội thoại là thứ tình cờ nằm trong phiên. Kho nhớ là thứ hệ thống chủ động quyết định giữ lại, và chính vì vậy các mục trong đó có thể được sửa, ghi ngày và quy trách nhiệm về sau.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-7",
+      "q": "Your agent writes to a shared memory that several workflows later read. Which change makes a bad entry attributable?",
+      "q_vi": "Tác tử của bạn ghi vào một bộ nhớ dùng chung mà nhiều luồng công việc sau đó đọc. Thay đổi nào làm cho một mục sai có thể quy trách nhiệm?",
+      "choices": [
+        "Encrypt each memory entry at rest, which stops an attacker reading what the agent wrote",
+        "Cap the memory at a fixed size, which forces the oldest entries out on every single write",
+        "Make it an append only log which names its writer and signs each entry",
+        "Have a second model review each entry before the memory accepts it"
+      ],
+      "answer": 2,
+      "why": "Attribution is a property of the write path, not of the content. Once entries cannot be overwritten and each carries a signed author, a poisoned record stops being anonymous.",
+      "why_vi": "Quy trách nhiệm là tính chất của đường ghi chứ không phải của nội dung. Một khi các mục không thể bị ghi đè và mỗi mục mang chữ ký tác giả, một bản ghi bị đầu độc thôi ẩn danh.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-8",
+      "q": "An agent believes a file was already deleted when it was not, and every later step is internally consistent. What went wrong?",
+      "q_vi": "Một tác tử tin rằng tệp đã bị xoá trong khi thực ra chưa, và mọi bước sau đều nhất quán bên trong. Cái gì đã hỏng?",
+      "choices": [
+        "The deletion tool returned an error code the agent had no handler for",
+        "The plan was wrong from the start, so consistency of the later steps proves nothing",
+        "The agent lacked permission, which the environment reported as success",
+        "Its belief about the environment diverged from reality, so later steps are wrong"
+      ],
+      "answer": 3,
+      "why": "The reasoning after the divergence can be flawless and still produce damage, because it is operating on a world model that no longer matches the system it is acting on.",
+      "why_vi": "Phần suy luận sau khi lệch có thể hoàn hảo mà vẫn gây hại, vì nó đang chạy trên một mô hình thế giới không còn khớp với hệ thống mà nó tác động vào.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-9",
+      "q": "A migration agent hits an impossible state at step nine and keeps producing plausible next steps until the budget runs out. What is missing?",
+      "q_vi": "Một tác tử di trú gặp trạng thái bất khả ở bước chín rồi vẫn tiếp tục sinh các bước tiếp theo nghe hợp lý cho đến khi cạn ngân sách. Cái gì đang thiếu?",
+      "choices": [
+        "Nothing in the loop rewards noticing that the plan has become impossible, so the agent keeps extending a dead branch because continuing is always the locally fluent move",
+        "A larger step budget, since nine steps is too few for a migration agent that keeps going",
+        "A stronger model, because the impossible state was hard to spot",
+        "A retry rule that repeats step nine until the state clears"
+      ],
+      "answer": 0,
+      "why": "Abandoning a plan is a decision the loop never asks for. Generation is rewarded for producing a next step, and no part of that objective is served by declaring the branch dead.",
+      "why_vi": "Từ bỏ một kế hoạch là quyết định mà vòng lặp không bao giờ yêu cầu. Việc sinh ra được thưởng vì tạo tiếp một bước, và không phần nào của mục tiêu đó được lợi khi tuyên bố nhánh này đã chết.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-10",
+      "q": "Your checker confirms that every source behind a claim resolves to a live page. Which weakness remains?",
+      "q_vi": "Bộ kiểm của bạn xác nhận mọi nguồn đứng sau một khẳng định đều dẫn tới trang còn sống. Điểm yếu nào vẫn còn?",
+      "choices": [
+        "A page can be moved after the check, so the link may rot before the reader clicks it",
+        "A source can exist while still being a weak page copying an error from another page",
+        "A live page may sit behind a paywall, which stops the reader from confirming the claim",
+        "The checker only sees the first source when several back the same claim"
+      ],
+      "answer": 1,
+      "why": "Existence is the cheap half of the question. Quality is the expensive half, and a chain of pages repeating one another satisfies every existence test while supporting nothing.",
+      "why_vi": "Sự tồn tại là nửa dễ của câu hỏi. Chất lượng mới là nửa đắt, và một chuỗi trang chép lại nhau vẫn qua mọi phép kiểm tồn tại trong khi chẳng chống đỡ được gì.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-11",
+      "q": "Months after a report shipped, a customer asks where one wrong number came from. What makes that answerable?",
+      "q_vi": "Nhiều tháng sau khi báo cáo phát hành, khách hàng hỏi con số sai đó từ đâu ra. Cái gì làm cho câu hỏi đó trả lời được?",
+      "choices": [
+        "A cached copy of the report, so the wrong number can be reproduced",
+        "A stored transcript of the session, since the model explained its own steps while answering",
+        "A record showing where each fact entered and which step transformed it later",
+        "A snapshot of the model version, because behaviour changes per release"
+      ],
+      "answer": 2,
+      "why": "Reproducing the output tells you what was said. Only a chain from entry point through each transformation tells you which step introduced the error and which downstream figures inherit it.",
+      "why_vi": "Tái tạo đầu ra chỉ cho biết đã nói gì. Chỉ một chuỗi từ điểm nhập qua từng phép biến đổi mới cho biết bước nào đưa lỗi vào và những con số nào phía sau thừa hưởng nó.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-12",
+      "q": "A verifier confirms an answer is fully supported by the evidence it was given. Which failure does that verdict not touch?",
+      "q_vi": "Một bộ thẩm định xác nhận câu trả lời được bằng chứng đưa cho nó chống đỡ đầy đủ. Phán quyết đó không chạm tới thất bại nào?",
+      "choices": [
+        "An arithmetic slip inside the answer, which the evidence would have contradicted",
+        "A claim with no supporting passage anywhere in the evidence which was retrieved",
+        "A quotation attributed to the wrong document among those that were retrieved",
+        "A well grounded answer to a question which was never the right one"
+      ],
+      "answer": 3,
+      "why": "Verification bounds the output against the evidence in front of it. Whether that evidence answers the question the user actually had is a judgement made outside the checking loop.",
+      "why_vi": "Thẩm định chỉ ràng đầu ra vào bằng chứng đang có trước mặt. Việc bằng chứng đó có trả lời đúng câu hỏi mà người dùng thực sự cần hay không là phán đoán nằm ngoài vòng kiểm.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-13",
+      "q": "Your legal team removes a large corpus from the training plan. Why is that now a design constraint rather than a footnote?",
+      "q_vi": "Bộ phận pháp lý gạt một khối ngữ liệu lớn khỏi kế hoạch huấn luyện. Vì sao đó giờ là ràng buộc thiết kế chứ không phải chú thích?",
+      "choices": [
+        "Whether a corpus may lawfully be used can shrink the usable pool faster than compute does",
+        "Removing a corpus lowers the token count, so the training run finishes sooner than planned",
+        "Licence terms change the tokeniser, which forces the whole corpus to be rebuilt",
+        "A removed corpus must be replaced by synthetic text of the same size and shape"
+      ],
+      "answer": 0,
+      "why": "The binding limit has moved. When the technical ceiling on data is far above the lawful ceiling, licence status decides the size of the corpus you can actually train on.",
+      "why_vi": "Giới hạn ràng buộc đã đổi chỗ. Khi trần kỹ thuật về dữ liệu cao hơn hẳn trần pháp lý, chính tình trạng giấy phép quyết định cỡ ngữ liệu mà bạn thật sự huấn luyện được.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-14",
+      "q": "A crawl reports twice the volume of last year while the model trained on it barely improves. What should you suspect first?",
+      "q_vi": "Một đợt thu thập báo khối lượng gấp đôi năm ngoái trong khi mô hình huấn luyện trên đó gần như không khá hơn. Bạn nên nghi điều gì trước?",
+      "choices": [
+        "The learning rate was not retuned, so the larger corpus was consumed at the old schedule",
+        "The same passages repeat inside many wrappers, which inflates volume and adds no signal",
+        "The crawl reported bytes rather than tokens, since markup counts towards the byte total here",
+        "The evaluation set saturated, so genuine gains are no longer visible in the score"
+      ],
+      "answer": 1,
+      "why": "Volume and information are not the same quantity. Web scale collection multiplies wrappers around identical text, so a doubling in size can carry almost no new content.",
+      "why_vi": "Khối lượng và lượng thông tin không phải một đại lượng. Thu thập ở quy mô web nhân bản các lớp vỏ quanh cùng một đoạn văn, nên gấp đôi kích thước có thể gần như không mang thêm nội dung mới.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-15",
+      "q": "A corpus was assembled carefully, deduplicated and licence checked. Which problem does that still leave?",
+      "q_vi": "Một khối ngữ liệu được gom cẩn thận, khử trùng lặp và kiểm giấy phép. Vấn đề nào vẫn còn lại?",
+      "choices": [
+        "It may contain machine written text, which the deduplication step cannot separate out",
+        "It may under represent the languages your product serves, since the web is not balanced",
+        "It encodes prices, practices and institutions as they were at collection time",
+        "It may still carry rare personal records that deduplication keeps"
+      ],
+      "answer": 2,
+      "why": "Cleanliness is about the sampling, not about the date. A corpus with no duplicates and no legal problems can still describe a world whose practices and prices have since moved on.",
+      "why_vi": "Sạch là chuyện lấy mẫu chứ không phải chuyện thời điểm. Một khối ngữ liệu không trùng lặp và không vướng pháp lý vẫn có thể mô tả một thế giới mà tập quán và giá cả đã đổi từ lâu.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-16",
+      "q": "A model estimates that a lorry can cross a bridge in four minutes and the figure is physically impossible. Which limitation is this?",
+      "q_vi": "Một mô hình ước lượng xe tải qua cầu mất bốn phút và con số đó là bất khả về mặt vật lý. Đây là giới hạn nào?",
+      "choices": [
+        "Judgements about time and distance are learned from text rather than from the world",
+        "The bridge length fell outside the training range, which makes any estimate unreliable",
+        "The unit conversion ran in the wrong direction because that step was fixed",
+        "The question needed a tool call and no tool was attached here"
+      ],
+      "answer": 0,
+      "why": "Physical plausibility is not learned from physics. It is inherited from how people happened to write about journeys, and nobody writes down the crossings that were obviously absurd.",
+      "why_vi": "Tính hợp lý vật lý không được học từ vật lý. Nó được thừa hưởng từ cách người ta tình cờ viết về các chuyến đi, mà chẳng ai ghi lại những lần qua cầu rõ ràng phi lý.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-17",
+      "q": "Why can a retrieved fact be dated and audited while a fact living in the weights cannot?",
+      "q_vi": "Vì sao một sự kiện được truy hồi có thể ghi ngày và soát xét được, còn sự kiện nằm trong trọng số thì không?",
+      "choices": [
+        "Retrieved text carries a source record, while a fact in the weights can be dated only by guess",
+        "The retrieved copy arrives in the prompt, which can be swapped per request",
+        "Retrieved text is checked by the search provider because it reaches the model raw",
+        "Weights are encrypted at rest, and no auditor may inspect them"
+      ],
+      "answer": 1,
+      "why": "The difference is where the fact lives. Anything in the prompt is an object the system controls and can replace for one call, whereas the weights are a single artifact shared by every request.",
+      "why_vi": "Khác biệt nằm ở chỗ sự kiện đó cư trú ở đâu. Bất cứ thứ gì trong câu lệnh đều là đối tượng mà hệ thống nắm và có thể thay cho riêng một lần gọi, còn trọng số là một hiện vật duy nhất dùng chung cho mọi yêu cầu.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-18",
+      "q": "Your capacity plan counts only the compute bill for a new serving cluster. What else can become the binding limit?",
+      "q_vi": "Kế hoạch năng lực của bạn chỉ tính hoá đơn tính toán cho một cụm phục vụ mới. Cái gì khác có thể trở thành giới hạn ràng buộc?",
+      "choices": [
+        "The size of the model file, since a new cluster can only load it so fast",
+        "The number of concurrent users, which the load balancer already caps",
+        "Power draw, heat removal, interconnect bandwidth and physical floor space, any one of which can bind before the compute budget does",
+        "The licence cost per seat, and seats are billed each month"
+      ],
+      "answer": 2,
+      "why": "A datacentre is a physical object. You can afford the chips and still be unable to power them, cool them, connect them or find room for them, and each of those is a separate ceiling.",
+      "why_vi": "Trung tâm dữ liệu là một vật thể vật lý. Bạn có thể đủ tiền mua chip mà vẫn không cấp đủ điện, không giải nhiệt nổi, không nối đủ băng thông hoặc không có chỗ đặt, và mỗi thứ đó là một trần riêng.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-19",
+      "q": "A team keeps asking which model is smartest. How should the design question be posed instead?",
+      "q_vi": "Một nhóm cứ hỏi mô hình nào thông minh nhất. Câu hỏi thiết kế nên đặt lại thế nào?",
+      "choices": [
+        "Which model wins the most benchmarks in this workflow category",
+        "Which vendor offers the best price for the volume this workflow is expected to reach",
+        "Which model the engineering team already knows, since familiarity lowers delivery risk",
+        "How to balance capability, cost, latency and reliability when the workflow is fixed"
+      ],
+      "answer": 3,
+      "why": "Every deployment sits somewhere on four axes at once, and a choice that maximises one of them usually pays for it on another, so the question only becomes answerable per workflow.",
+      "why_vi": "Mọi triển khai đều nằm đồng thời trên bốn trục, và một lựa chọn tối đa hoá một trục thường phải trả giá ở trục khác, nên câu hỏi chỉ trả lời được khi gắn với từng luồng công việc.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-20",
+      "q": "Most of your production traffic repeats a small set of requests. Which mechanism helps most and what does it put at risk?",
+      "q_vi": "Phần lớn lưu lượng sản xuất của bạn lặp lại một tập nhỏ các yêu cầu. Cơ chế nào giúp nhiều nhất và nó đặt cái gì vào rủi ro?",
+      "choices": [
+        "Reusing a computed prefix or a stored answer, which bets the world has not moved",
+        "Routing repeated production requests to a smaller model, which drops quality on that path",
+        "Batching repeated requests together, because a larger batch raises tail latency",
+        "Precomputing every likely answer overnight, and the spend shifts to idle hours"
+      ],
+      "answer": 0,
+      "why": "Caching pays exactly where the traffic actually lives. The exposure it creates is not cost but staleness, and the invalidation rule rather than the hit rate decides whether that is safe.",
+      "why_vi": "Bộ nhớ đệm sinh lợi đúng nơi lưu lượng thật sự tập trung. Rủi ro nó tạo ra không phải chi phí mà là dữ liệu cũ, và chính quy tắc làm mất hiệu lực chứ không phải tỉ lệ trúng mới quyết định điều đó có an toàn hay không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-21",
+      "q": "Your suite reports eighty percent accuracy across two hundred tasks. Which number does an operator actually feel?",
+      "q_vi": "Bộ thử của bạn báo tám mươi phần trăm độ chính xác trên hai trăm nhiệm vụ. Con số nào mới là thứ người vận hành thực sự cảm nhận?",
+      "choices": [
+        "The share of tasks that were solved at least once when the suite was run repeatedly",
+        "How often one task they care about comes out right when the run is repeated",
+        "The mean accuracy weighted by how often each task appears while traffic is live",
+        "The accuracy of the hardest task, and that one sets the worst case"
+      ],
+      "answer": 1,
+      "why": "Averaging across a task set hides the distribution over repeated attempts at the same task, and it is that per task distribution the operator meets every day.",
+      "why_vi": "Lấy trung bình trên một tập nhiệm vụ che mất phân bố của nhiều lần thử cùng một nhiệm vụ, mà chính phân bố theo từng nhiệm vụ đó mới là thứ người vận hành gặp mỗi ngày.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-22",
+      "q": "A system behaves well whenever its trace is being scored and differently when it is not. What has the optimisation produced?",
+      "q_vi": "Một hệ thống cư xử tốt mỗi khi vết của nó bị chấm điểm và cư xử khác khi không bị chấm. Việc tối ưu đã tạo ra cái gì?",
+      "choices": [
+        "A calibration problem, since the scored runs and the unscored runs use quite different prompts",
+        "A sampling artefact, because the scored runs are drawn from a much smaller population",
+        "Behaviour conditioned on being observed, which is what optimising a watched signal rewards",
+        "A logging defect, so the unscored runs were never recorded in enough detail"
+      ],
+      "answer": 2,
+      "why": "If the observable trace is the thing being scored, then looking right on the trace is a cheaper way to score well than being right, and nothing in the objective distinguishes the two.",
+      "why_vi": "Nếu vết quan sát được chính là thứ bị chấm, thì trông có vẻ đúng trên vết là cách ăn điểm rẻ hơn so với thật sự đúng, và không có gì trong hàm mục tiêu phân biệt hai điều đó.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-23",
+      "q": "Twenty pricing agents each follow a sensible local rule and the shared market ends up worse for everyone. What is this?",
+      "q_vi": "Hai mươi tác tử định giá mỗi con đều theo một quy tắc cục bộ hợp lý và thị trường chung cuối cùng tệ đi cho tất cả. Đây là gì?",
+      "choices": [
+        "A bug in the shared rule, since sensible behaviour cannot aggregate badly",
+        "A model quality problem that a stronger model would remove",
+        "A monitoring gap, because nobody watched the market level outcome",
+        "Collective misbehaviour, where individually reasonable agents converge on the same locally correct strategy and jointly degrade the resource which all of them depend on"
+      ],
+      "answer": 3,
+      "why": "Nothing is wrong with any single decision. The failure lives in the aggregate, which is why it cannot be found by auditing one agent's reasoning however carefully you read it.",
+      "why_vi": "Không quyết định đơn lẻ nào sai cả. Cái hỏng nằm ở mức tổng hợp, nên không thể tìm ra bằng cách soát lập luận của một tác tử dù bạn đọc kỹ đến đâu.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-24",
+      "q": "Which failure classes does the verification layer of a stacked system actually remove?",
+      "q_vi": "Tầng thẩm định trong một hệ thống xếp lớp thực sự loại bỏ những nhóm thất bại nào?",
+      "choices": [
+        "Fabrication, arithmetic slips and claims which no retrieved evidence supports",
+        "Wrong goals, missing items and evidence which an attacker planted",
+        "Cost overruns, latency spikes and requests that keep arriving because the queue grew",
+        "Refusals, tone problems and answers that a reviewer would consider impolite"
+      ],
+      "answer": 0,
+      "why": "The layer converts an unverified assertion into a checked one. That covers what can be tested against evidence, and it says nothing about whether the right thing was attempted.",
+      "why_vi": "Tầng này biến một khẳng định chưa kiểm thành một khẳng định đã kiểm. Nó phủ được phần có thể đối chiếu với bằng chứng, và không nói gì về việc có làm đúng việc cần làm hay không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-25",
+      "q": "A guardrail sits above verification in the stack. What is the specific job it does that verification cannot?",
+      "q_vi": "Một lớp chắn nằm trên tầng thẩm định trong ngăn xếp. Nhiệm vụ cụ thể nào nó làm được mà thẩm định không làm được?",
+      "choices": [
+        "It rewrites the answer whenever the wording might embarrass the whole organisation",
+        "It bounds what may be attempted, since the agent may act outside the envelope",
+        "It does the verification job, so that an unsupported claim never reaches a user",
+        "It records who approved each action, which makes the run reproducible later"
+      ],
+      "answer": 1,
+      "why": "Verification asks whether an output is supported. A guardrail asks whether an action was ever inside the intended envelope, which is a question about the attempt rather than the answer.",
+      "why_vi": "Thẩm định hỏi đầu ra có được chống đỡ hay không. Lớp chắn hỏi hành động đó có từng nằm trong phạm vi dự kiến hay không, tức là câu hỏi về ý định hành động chứ không về câu trả lời.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-26",
+      "q": "Every automated layer is in place and a person still sits at the top of the stack. What does that person supply?",
+      "q_vi": "Mọi tầng tự động đã đủ và vẫn có một con người ngồi trên đỉnh ngăn xếp. Người đó cung cấp thứ gì?",
+      "choices": [
+        "A faster review path, because a person can approve a batch more quickly than a checker",
+        "A legal signature, since regulation requires a named individual on every decision",
+        "Judgement about goals, context and acceptable risk",
+        "A second opinion on the wording, which raises the quality of what the customer reads"
+      ],
+      "answer": 2,
+      "why": "Each layer below bounds a class of technical failure. What none of them can supply is a decision about what should be attempted at all and how much harm is tolerable here.",
+      "why_vi": "Mỗi tầng bên dưới đều chặn một nhóm hỏng hóc kỹ thuật. Thứ không tầng nào cấp được là quyết định xem có nên làm việc đó hay không và mức thiệt hại nào chấp nhận được ở đây.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-27",
+      "q": "Which existing discipline is the closest fit for running an AI system in production?",
+      "q_vi": "Ngành nghề sẵn có nào gần nhất với việc vận hành một hệ thống AI trong sản xuất?",
+      "choices": [
+        "Software testing, since a good test suite is what separates a demo from a product",
+        "Data science, because the failures are statistical and belong with the people who model them",
+        "Academic peer review, which is the established way to challenge an unverified claim",
+        "Reliability engineering, with known failure modes, budgets, monitoring and recovery paths"
+      ],
+      "answer": 3,
+      "why": "The system is probabilistic and occasionally wrong, which is the ordinary condition of any critical system, and that field already owns the vocabulary for budgets and post incident review.",
+      "why_vi": "Hệ thống mang tính xác suất và thỉnh thoảng sai, vốn là tình trạng bình thường của mọi hệ thống trọng yếu, và ngành đó đã sẵn có bộ từ vựng về ngân sách lỗi và rà soát sau sự cố.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-28",
+      "q": "You must justify keeping a retrieval step even though the model already knows the answer most of the time. What is the argument?",
+      "q_vi": "Bạn phải biện minh cho việc giữ lại bước truy hồi dù mô hình đã biết câu trả lời trong phần lớn trường hợp. Lập luận là gì?",
+      "choices": [
+        "A retrieved answer can be dated and swapped, whereas the weights cannot",
+        "A retrieval step lowers the token count, since the model no longer writes from memory",
+        "Retrieval improves the wording of the answer, because retrieved text is edited prose",
+        "Most of the time is not good enough for a contract"
+      ],
+      "answer": 0,
+      "why": "The value is not average accuracy but controllability. A fact you can point at, date and replace is a fact you can promise something about, and a parametric one is not.",
+      "why_vi": "Giá trị không nằm ở độ chính xác trung bình mà ở khả năng kiểm soát. Một sự kiện bạn chỉ được, ghi ngày được và thay được là sự kiện bạn dám hứa điều gì đó, còn sự kiện trong trọng số thì không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-29",
+      "q": "A single wrong figure in a quarterly pack costs a renegotiation, while a late pack costs an apology. What follows for the design?",
+      "q_vi": "Một con số sai trong tập báo cáo quý làm mất công đàm phán lại, còn nộp muộn chỉ tốn một lời xin lỗi. Điều gì suy ra cho thiết kế?",
+      "choices": [
+        "The average score should be raised until wrong figures become rare, because that is cheaper",
+        "The threshold for abstaining should be set by that asymmetry rather than by the average",
+        "The pack should be produced twice, because both are compared before sending",
+        "The model should be replaced by a stronger one on the figures that matter most"
+      ],
+      "answer": 1,
+      "why": "Two failure modes with very different prices should not share one decision rule. The cheap failure is the one the system should prefer, which means abstaining earlier than a balanced score suggests.",
+      "why_vi": "Hai kiểu hỏng có giá rất khác nhau thì không nên dùng chung một quy tắc quyết định. Kiểu hỏng rẻ mới là thứ hệ thống nên chọn, tức là phải từ chối trả lời sớm hơn mức mà điểm cân bằng gợi ý.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-30",
+      "q": "An agent stores a supplier discount agreed last year and still quotes it today with full confidence. What is the failure?",
+      "q_vi": "Một tác tử lưu mức chiết khấu nhà cung cấp thoả thuận năm ngoái và hôm nay vẫn báo giá đó với đầy đủ tự tin. Thất bại ở đây là gì?",
+      "choices": [
+        "The memory write was never authorised, which let the discount enter anonymously",
+        "The retrieval ranked the discount above a fresher record saying otherwise",
+        "A stored fact stays retrievable with full confidence while the world moves on",
+        "The discount was fabricated, since no supplier ever agreed it and the agent still stores it"
+      ],
+      "answer": 2,
+      "why": "The entry was true when it was written, which is what makes it dangerous. Nothing in the store marks a fact as perishable, so age never lowers the confidence attached to it.",
+      "why_vi": "Mục đó đúng vào lúc được ghi, và chính điều ấy làm nó nguy hiểm. Không có gì trong kho đánh dấu một sự kiện là dễ hỏng, nên tuổi tác không bao giờ làm giảm mức tự tin gắn với nó.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-31",
+      "q": "A summary of a supplier contract adds a termination clause that the contract never contained. Which kind of fabrication is that?",
+      "q_vi": "Bản tóm tắt một hợp đồng nhà cung cấp thêm vào điều khoản chấm dứt mà hợp đồng không hề có. Đó là kiểu bịa nào?",
+      "choices": [
+        "Extrinsic fabrication, since new material was invented rather than merely misstated, and that is a different defect from a summary that merely disagrees with its source",
+        "Intrinsic fabrication, because the summary of that supplier contract contradicts a clause which the contract did contain when it was signed",
+        "A retrieval failure, since the clause came from a different contract",
+        "A formatting failure, because the clause is in the wrong section"
+      ],
+      "answer": 0,
+      "why": "The two kinds need different checks. Contradiction can be caught by comparing against the source, whereas added material needs a test that asks whether every statement has a home in the document.",
+      "why_vi": "Hai kiểu này cần hai phép kiểm khác nhau. Mâu thuẫn bắt được bằng cách đối chiếu với nguồn, còn nội dung thêm vào cần một phép kiểm hỏi xem mỗi câu có chỗ đứng trong tài liệu hay không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-32",
+      "q": "A support assistant invents a refund policy rather than saying the policy is not in its material. Which default is at work?",
+      "q_vi": "Một trợ lý hỗ trợ bịa ra chính sách hoàn tiền thay vì nói rằng chính sách đó không có trong tài liệu của nó. Mặc định nào đang chi phối?",
+      "choices": [
+        "The retrieval step failed silently, so the assistant answered from memory",
+        "Producing an answer is the default, so missing knowledge appears as a confident claim",
+        "The refund policy was in the corpus but ranked below the cut",
+        "The assistant was tuned for brevity, and a refusal is longer than a short invented rule"
+      ],
+      "answer": 1,
+      "why": "Abstention is a behaviour that has to be built and rewarded. Left alone, the system fills the gap because filling gaps is what it was optimised to do.",
+      "why_vi": "Việc từ chối trả lời là hành vi phải được xây và được thưởng. Cứ để nguyên, hệ thống sẽ lấp chỗ trống, vì lấp chỗ trống chính là thứ nó được tối ưu để làm.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-33",
+      "q": "Why does forcing every sentence to attach to a retrieved span narrow the problem rather than solve it?",
+      "q_vi": "Vì sao buộc mọi câu phải gắn vào một đoạn đã truy hồi chỉ thu hẹp bài toán chứ không giải xong nó?",
+      "choices": [
+        "It converts open generation into copy and summarise, and the remaining risk moves to selection",
+        "It slows generation, because each sentence now waits for a lookup before it can be written",
+        "It turns an open problem into a copying one",
+        "It shortens the answer, since only material with a matching span survives into the final text"
+      ],
+      "answer": 2,
+      "why": "Copying from a chosen passage is a much easier task than composing from the weights, but the correctness of the whole answer now rests on whether the right passage was chosen.",
+      "why_vi": "Chép lại từ một đoạn đã chọn là việc dễ hơn nhiều so với soạn ra từ trọng số, nhưng độ đúng của cả câu trả lời giờ đây phụ thuộc vào việc đoạn được chọn có đúng hay không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-34",
+      "q": "You add a second model from the same family to review the first model's answers. What has that ensemble bought you?",
+      "q_vi": "Bạn thêm một mô hình thứ hai cùng dòng để soát lại câu trả lời của mô hình thứ nhất. Bộ đôi đó mua được gì cho bạn?",
+      "choices": [
+        "Nothing at all, because two models cannot disagree",
+        "A halving of the error rate, since the second model from the same family draws errors which are independent",
+        "A slower pipeline and no measurable gain",
+        "Coverage of careless slips, while the errors that both models share are exactly the ones that will survive, and the shared priors that produced the mistake also produce the approval"
+      ],
+      "answer": 3,
+      "why": "Two systems trained on similar data fail in correlated ways. The check is genuinely useful for sloppiness and genuinely blind at the point where you most wanted a second opinion.",
+      "why_vi": "Hai hệ thống huấn luyện trên dữ liệu tương tự sẽ sai theo cách tương quan nhau. Phép kiểm này thật sự hữu ích với những lỗi cẩu thả và thật sự mù đúng ở chỗ bạn cần ý kiến thứ hai nhất.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-35",
+      "q": "A model writes a flawless twelve stage release checklist and then derails at stage seven while carrying it out. What does this separate?",
+      "q_vi": "Một mô hình viết ra bản kiểm mười hai chặng cho đợt phát hành không chê vào đâu được rồi trật bánh ở chặng bảy khi thực thi. Điều này tách bạch cái gì?",
+      "choices": [
+        "Writing a plan from carrying it out, since the second degrades with the number of steps",
+        "Knowledge of the domain from knowledge of the tools, because the tools were unfamiliar here",
+        "A good checklist from a bad one, which only becomes visible when someone runs it",
+        "Reasoning from retrieval, since stage seven needed a fact the model had not been given"
+      ],
+      "answer": 0,
+      "why": "Producing the plan is one pass of generation. Executing it is a long chain of dependent actions, and reliability falls with length no matter how good the plan reads.",
+      "why_vi": "Viết ra kế hoạch chỉ là một lượt sinh. Thực thi nó là một chuỗi dài các hành động phụ thuộc nhau, và độ tin cậy giảm theo chiều dài bất kể kế hoạch đọc lên hay đến đâu.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-36",
+      "q": "Splitting one long analysis into six short sub tasks with checked handoffs raises reliability more than upgrading the model. Why?",
+      "q_vi": "Chia một phân tích dài thành sáu việc nhỏ có bàn giao được kiểm làm độ tin cậy tăng nhiều hơn nâng cấp mô hình. Vì sao?",
+      "choices": [
+        "Because a smaller task fits in the window, so no material is dropped from the context",
+        "Because every chain the model must hold is now short",
+        "Because six calls can run in parallel, which cuts the wall clock time for the analysis",
+        "Because each sub task can use a cheaper model, which lowers cost per run"
+      ],
+      "answer": 1,
+      "why": "The dominant failure is compounding over steps, so cutting the length of each dependent chain attacks the mechanism directly, which raw capability does not.",
+      "why_vi": "Kiểu hỏng chi phối là tích luỹ lỗi qua từng bước, nên rút ngắn từng chuỗi phụ thuộc là đánh thẳng vào cơ chế, điều mà năng lực thô không làm được.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-37",
+      "q": "A scheduling problem is handed to a constraint solver and the solver proves the result optimal. Where can the error still be?",
+      "q_vi": "Một bài xếp lịch được giao cho bộ giải ràng buộc và bộ giải chứng minh kết quả là tối ưu. Sai sót vẫn có thể nằm ở đâu?",
+      "choices": [
+        "In the solver implementation, which may contain a defect that no proof about the scheduling problem can show",
+        "In the objective weights, because they were chosen by hand",
+        "In the translation from the business problem into constraints, since the proof covers only the formalisation and an omitted or misstated rule passes through it untouched",
+        "In the reporting layer, which may round the published figures"
+      ],
+      "answer": 2,
+      "why": "Formal tooling verifies the model you gave it. Everything decided before that boundary, including which rules were written down at all, sits outside the guarantee.",
+      "why_vi": "Công cụ hình thức chỉ thẩm định đúng mô hình bạn đưa vào. Mọi thứ được quyết trước ranh giới đó, kể cả việc quy tắc nào được viết ra, đều nằm ngoài bảo đảm.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-38",
+      "q": "A step fails and the harness resamples the identical prompt four more times. Which failures does that actually clear?",
+      "q_vi": "Một bước hỏng và bộ khung lấy mẫu lại đúng câu lệnh đó thêm bốn lần nữa. Cách này thực sự dọn được kiểu hỏng nào?",
+      "choices": [
+        "Failures caused by a tool that was briefly unavailable, since the tool may recover",
+        "Failures caused by a context that was too long, because a fresh sample truncates it",
+        "Failures caused by a missing permission, which the retry path escalates automatically to a human",
+        "Only noise, since a systematic misreading of the task is sampled again from the same place"
+      ],
+      "answer": 3,
+      "why": "Resampling explores the same distribution. If the task was misunderstood rather than unluckily sampled, every retry draws the same misunderstanding at full cost.",
+      "why_vi": "Lấy mẫu lại vẫn duyệt đúng phân bố cũ. Nếu nhiệm vụ bị hiểu sai chứ không phải xui khi lấy mẫu, thì mỗi lần thử lại đều rút ra đúng cái hiểu sai đó với đầy đủ chi phí.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-39",
+      "q": "A colleague says the session history is the system's memory. What is wrong with that description?",
+      "q_vi": "Một đồng nghiệp nói lịch sử phiên chính là bộ nhớ của hệ thống. Mô tả đó sai ở đâu?",
+      "choices": [
+        "History is re supplied on every call and disappears when the session ends, whereas memory is something the system chose to keep, index and retrieve on a later day",
+        "History is stored on the client, so the system which says that history is its memory cannot read it when asked",
+        "History is compressed because the window is finite, which makes its contents inexact",
+        "History is written by the user, so it cannot be trusted"
+      ],
+      "answer": 0,
+      "why": "The distinction is about a decision, not about capacity. Something becomes memory when the system commits to retaining it, which also makes it editable and auditable.",
+      "why_vi": "Khác biệt nằm ở một quyết định chứ không ở dung lượng. Một thứ trở thành bộ nhớ khi hệ thống cam kết giữ nó lại, và điều đó cũng làm nó sửa được và soát xét được.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-40",
+      "q": "Three tenancy agreements sit in one prompt and the answer credits a rent review clause to the wrong property. Which effect is this?",
+      "q_vi": "Ba hợp đồng thuê nằm trong cùng một câu lệnh và câu trả lời gán điều khoản xét lại tiền thuê cho sai bất động sản. Đây là hiệu ứng nào?",
+      "choices": [
+        "Recency interference, since the last agreement in the prompt overrides the earlier ones",
+        "Source confusion, because similar documents in one window get blended together",
+        "Middle of context loss, since the clause sat far from either end",
+        "Compression damage, because the prompt was summarised before the model saw it"
+      ],
+      "answer": 1,
+      "why": "Similar wording is exactly what makes the boundary between documents hard to hold, so the sentence is reproduced correctly while its owner is not.",
+      "why_vi": "Cách hành văn giống nhau chính là thứ làm ranh giới giữa các tài liệu khó giữ, nên câu chữ được tái hiện đúng còn chủ nhân của nó thì không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-41",
+      "q": "A context summary keeps the sentence about a penalty but drops the party the penalty applied to. What is the resulting document?",
+      "q_vi": "Bản tóm tắt ngữ cảnh giữ lại câu về khoản phạt nhưng bỏ mất bên chịu khoản phạt đó. Tài liệu thu được là gì?",
+      "choices": [
+        "A shorter document that is still faithful, since nothing was altered",
+        "A document with a contradiction, because the penalty now applies to every party at once",
+        "A fluent statement whose referent is gone, which no correctness check will flag",
+        "A document that fails schema validation, since the party field is now empty in the record"
+      ],
+      "answer": 2,
+      "why": "Nothing false was written and nothing was contradicted. The sentence simply no longer points at anything, which is why the damage survives a check that only reads for correctness.",
+      "why_vi": "Không câu nào sai và cũng không có mâu thuẫn nào. Câu đó chỉ đơn giản là không còn trỏ vào cái gì nữa, và vì thế thiệt hại sống sót qua phép kiểm chỉ đọc tìm chỗ sai.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-42",
+      "q": "A model answers a question about a regulation amended two months ago and gets the old version. Which limitation is the root cause?",
+      "q_vi": "Một mô hình trả lời câu hỏi về một quy định vừa sửa hai tháng trước và đưa ra bản cũ. Giới hạn nào là căn nguyên?",
+      "choices": [
+        "The retrieval index was rebuilt after the amendment, so the text was missed",
+        "The regulation is written in a register that the model handles poorly when it is amended",
+        "The answer was cached before the amendment, and the invalidation rule never fired",
+        "The weights encode the corpus as it stood, so anything later exists only through a tool"
+      ],
+      "answer": 3,
+      "why": "The other explanations describe pipeline defects that could be fixed. The cutoff is a property of the artifact itself, and no configuration of the weights makes them current.",
+      "why_vi": "Các cách giải thích còn lại đều mô tả những lỗi đường ống có thể sửa. Mốc dữ liệu là tính chất của chính hiện vật đó, và không cấu hình nào của trọng số làm chúng cập nhật được.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-43",
+      "q": "Your agent decides to search but writes a query that misses the whole point of the request. Which difficulty is this?",
+      "q_vi": "Tác tử của bạn quyết định đi tìm nhưng viết ra một truy vấn trượt hoàn toàn trọng tâm yêu cầu. Đây là khó khăn nào?",
+      "choices": [
+        "Forming a good query often needs the very knowledge it was meant to supply, so choosing to look things up is easy while naming what to look for is not",
+        "The search tool ranks poorly on a query of that length, which misses the request because it is short",
+        "The agent searched too early in the reasoning process",
+        "The index does not cover the domain the request came from"
+      ],
+      "answer": 0,
+      "why": "Wiring in a tool and calling it at the right moment are both solved problems compared with naming the thing you do not yet know enough to name.",
+      "why_vi": "Nối công cụ vào và gọi nó đúng lúc đều là những bài đã giải xong, so với việc gọi tên đúng thứ mà bạn còn chưa biết đủ để gọi tên.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-44",
+      "q": "An attacker publishes a page engineered to rank first for your agent's most common query. What has your freshest pipeline become?",
+      "q_vi": "Kẻ tấn công đăng một trang được thiết kế để đứng đầu cho truy vấn phổ biến nhất của tác tử. Đường ống mới nhất của bạn giờ thành cái gì?",
+      "choices": [
+        "A slower pipeline, because the ranker now has one more candidate document to score",
+        "A delivery channel that hands the attacker's content to your user with full authority",
+        "A pipeline with a coverage gap, since the genuine page for that common query dropped out",
+        "An unchanged pipeline, because a generative model rewrites whatever it retrieves anyway"
+      ],
+      "answer": 1,
+      "why": "Freshness guarantees only that the content is recent. If placement is what decides which document is read, controlling placement is enough to control the answer.",
+      "why_vi": "Độ tươi chỉ bảo đảm nội dung là mới. Nếu vị trí xếp hạng là thứ quyết định tài liệu nào được đọc, thì nắm được vị trí là đủ để nắm luôn câu trả lời.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-45",
+      "q": "Two retrieved circulars give different notice periods and the answer states a single figure without comment. What should the system have done?",
+      "q_vi": "Hai công văn được truy hồi đưa ra hai thời hạn báo trước khác nhau và câu trả lời nêu một con số duy nhất mà không bình luận gì. Lẽ ra hệ thống nên làm gì?",
+      "choices": [
+        "Chosen the more recent circular silently, because recency is the usual tie breaking rule here",
+        "Averaged the two notice periods, since neither source can be shown to be authoritative",
+        "Surfaced the disagreement, because a hidden conflict is what turns into the later dispute",
+        "Refused to answer entirely, since a conflict means the retrieved evidence is unusable"
+      ],
+      "answer": 2,
+      "why": "Smoothing a conflict destroys the most useful thing the retrieval found. The user needs to know that the sources disagree, which is information the single figure deletes.",
+      "why_vi": "Làm mượt một xung đột là phá bỏ thứ hữu ích nhất mà khâu truy hồi tìm được. Người dùng cần biết các nguồn không thống nhất, và đó chính là thông tin mà con số duy nhất kia xoá đi.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-46",
+      "q": "A market report states that adoption reached thirty one percent, and no survey behind that figure exists. What produced it?",
+      "q_vi": "Một báo cáo thị trường nói rằng mức chấp nhận đạt ba mươi mốt phần trăm, và không có khảo sát nào đứng sau con số ấy. Cái gì đã tạo ra nó?",
+      "choices": [
+        "A number of that magnitude simply fitted the sentence, since nothing measured it",
+        "A rounding step in the reporting layer, which changed a real figure into a wrong one",
+        "An arithmetic slip, because the model divided by the wrong denominator here",
+        "A retrieval hit on a survey which was later withdrawn by its publisher"
+      ],
+      "answer": 0,
+      "why": "Fabricated quantities are generated the same way as fabricated names. The sentence has a slot of a certain shape, and a plausible filler for that slot is what appears.",
+      "why_vi": "Con số bịa được sinh ra y hệt cách tên riêng bịa được sinh ra. Câu văn có một chỗ trống mang hình dạng nhất định, và thứ hiện ra là một vật lấp hợp lý cho chỗ trống đó.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-47",
+      "q": "After a revision pass the report is better organised, better worded and still recommends the wrong supplier. What did the pass do?",
+      "q_vi": "Sau một lượt chỉnh sửa, báo cáo được sắp xếp tốt hơn, câu chữ hay hơn và vẫn khuyến nghị sai nhà cung cấp. Lượt đó đã làm gì?",
+      "choices": [
+        "It corrected the reasoning, since the wording improved while the structure held",
+        "It repaired only surface form, and every measurable score rose while a substantive error travelled through untouched, and no comparison against evidence happened at any point",
+        "It introduced the error, because rewriting changes meaning",
+        "It removed the evidence, since a short report cites less"
+      ],
+      "answer": 1,
+      "why": "Cleaning up structure is a different operation from checking a claim, and it is the one that moves every metric you happen to be watching.",
+      "why_vi": "Dọn dẹp cấu trúc là thao tác khác với kiểm tra một khẳng định, và nó lại đúng là thao tác làm mọi chỉ số bạn đang theo dõi đi lên.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-48",
+      "q": "You have a budget to label one thing in a failed reasoning chain. Which label buys the most?",
+      "q_vi": "Bạn có ngân sách để gán nhãn cho một thứ trong chuỗi suy luận bị hỏng. Nhãn nào mang lại nhiều nhất?",
+      "choices": [
+        "The final answer, since that is what the user sees and what the contract is written about",
+        "The length of the chain, since long chains degrade",
+        "The first wrong step, since everything after it inherits the mistake",
+        "The confidence the model stated about its answer"
+      ],
+      "answer": 2,
+      "why": "Marking the endpoint says only that something went wrong. Marking the first departure localises the fault, and every later step is then explained rather than separately diagnosed.",
+      "why_vi": "Đánh dấu ở đầu cuối chỉ nói rằng có gì đó sai. Đánh dấu chỗ đi chệch đầu tiên khu trú được lỗi, và mọi bước sau đó được giải thích chứ không phải chẩn đoán riêng.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-49",
+      "q": "Six sub agents each pass their own acceptance test and the assembled report is still unusable. Where did the design fail?",
+      "q_vi": "Sáu tác tử con đều qua bài kiểm nhận riêng của mình và bản báo cáo ghép lại vẫn không dùng được. Thiết kế hỏng ở đâu?",
+      "choices": [
+        "In the sub agents, since a passing acceptance test does not mean the work was correct",
+        "In the acceptance tests, because each of them was written by the team that would pass it",
+        "In the aggregation prompt, which had no instruction about how to merge conflicting sections",
+        "In the decomposition, at the seams which join the parts"
+      ],
+      "answer": 3,
+      "why": "A wrong split produces sub tasks that are each done perfectly and jointly useless, so the interfaces between the parts are where correctness now lives.",
+      "why_vi": "Một cách chia sai sinh ra những việc con làm hoàn hảo từng cái mà gộp lại thì vô dụng, nên độ đúng giờ đây cư trú ở các mối nối giữa các phần.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-50",
+      "q": "A team moves the decisive paragraph to the top of a long prompt and accuracy improves noticeably. Which effect did they work around?",
+      "q_vi": "Một nhóm chuyển đoạn văn quyết định lên đầu một câu lệnh dài và độ chính xác tăng rõ rệt. Họ đã lách được hiệu ứng nào?",
+      "choices": [
+        "Attention is not uniform over a long input, so material far from either end is less likely to be used, which makes position change the answer without changing the content",
+        "The tokeniser splits long inputs at fixed offsets",
+        "A long prompt is truncated by the endpoint, so that the paragraph they moved is gone because it sat at the top",
+        "The model reads only the first and last tokens"
+      ],
+      "answer": 0,
+      "why": "Nothing was added or removed. Moving the same words changed how likely they were to be used, which is what makes placement an engineering decision rather than a formatting one.",
+      "why_vi": "Không có gì được thêm vào hay bỏ đi. Việc dời đúng những chữ đó đã đổi khả năng chúng được dùng, và chính vì thế vị trí là quyết định kỹ thuật chứ không phải chuyện định dạng.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-51",
+      "q": "A vendor advertises a very long window and your own tests show quality falling well before that length. Which two numbers are you comparing?",
+      "q_vi": "Một nhà cung cấp quảng cáo cửa sổ rất dài còn bài thử của bạn cho thấy chất lượng tụt từ rất sớm trước độ dài đó. Bạn đang so hai con số nào?",
+      "choices": [
+        "The billed length against the length which the endpoint accepts before it refuses anything",
+        "The length it accepts against the length over which it still uses information reliably",
+        "The training length against the length that the position encoding was extended to",
+        "The prompt length against the completion length, budgeted from one pool"
+      ],
+      "answer": 1,
+      "why": "Only the first number appears in the datasheet, and it is a capacity claim rather than a reliability claim, so the second has to be measured on your own material.",
+      "why_vi": "Chỉ con số thứ nhất xuất hiện trong bảng thông số, và nó là tuyên bố về dung lượng chứ không phải về độ tin cậy, nên con số thứ hai phải tự đo trên chính tài liệu của bạn.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-52",
+      "q": "Switching from a very long prompt to a retrieval step made the system better and moved the risk. Where does the risk now sit?",
+      "q_vi": "Chuyển từ câu lệnh rất dài sang một bước truy hồi làm hệ thống tốt lên và dời chỗ rủi ro. Rủi ro giờ nằm ở đâu?",
+      "choices": [
+        "In the embedding model, because a poor embedding makes every downstream comparison noisy",
+        "In the generator, which now has less material and must fill the gaps from its weights",
+        "In the selector, since anything ranked below the cut is invisible",
+        "In the chunking rule, because a bad boundary splits a clause"
+      ],
+      "answer": 2,
+      "why": "The reading problem became a ranking problem. However capable the model is, it can only be right about material that the selector decided to show it.",
+      "why_vi": "Bài toán đọc đã thành bài toán xếp hạng. Mô hình giỏi đến đâu thì cũng chỉ có thể đúng về phần tài liệu mà bộ chọn quyết định đưa cho nó xem.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-53",
+      "q": "Your agent can write to its own memory and one false entry has been accepted. What is the shape of the damage?",
+      "q_vi": "Tác tử của bạn ghi được vào bộ nhớ của chính nó và một mục sai đã được chấp nhận. Thiệt hại có hình dạng thế nào?",
+      "choices": [
+        "It affects only the session that wrote it",
+        "It is corrected the next time your agent writes to its own memory",
+        "It is bounded by the retention window, because that window is what decides when an entry expires",
+        "The entry becomes a durable premise that every later run treats as established, so the damage is not one wrong answer but a standing assumption which sits underneath many correct looking ones"
+      ],
+      "answer": 3,
+      "why": "Read only memory limits the blast radius to whatever a person put there. A writable store lets the system manufacture its own false premises and then reason faithfully from them.",
+      "why_vi": "Bộ nhớ chỉ đọc giới hạn bán kính thiệt hại trong những gì con người đã đặt vào. Một kho ghi được cho phép hệ thống tự chế ra tiền đề sai của chính nó rồi suy luận trung thành từ đó.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-54",
+      "q": "Your assistant has a search tool and still answers a pricing question from memory. Which capability is actually missing?",
+      "q_vi": "Trợ lý của bạn có công cụ tìm kiếm mà vẫn trả lời câu hỏi về giá từ trí nhớ. Năng lực nào thực sự đang thiếu?",
+      "choices": [
+        "Judging that what it already knows is not good enough, since today differs",
+        "The permission to reach the pricing index, which the deployment never granted to the tool",
+        "A tool description precise enough to match the question",
+        "A retry path, because the first search call failed"
+      ],
+      "answer": 0,
+      "why": "Connecting the tool is the easy part. The system has to notice that its own answer has an expiry date, and nothing in the generation objective rewards that noticing.",
+      "why_vi": "Nối công cụ vào là phần dễ. Hệ thống phải nhận ra rằng câu trả lời của chính nó có hạn dùng, mà không có gì trong hàm mục tiêu sinh văn bản thưởng cho việc nhận ra đó.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-55",
+      "q": "You make retrieval compulsory for every question about a regulated product. What did that rule remove and what did it add?",
+      "q_vi": "Bạn buộc phải truy hồi cho mọi câu hỏi về một sản phẩm thuộc diện quản lý. Quy tắc đó gỡ đi cái gì và thêm vào cái gì?",
+      "choices": [
+        "It removed the decision from a rule which you can read, and it added a judgement you cannot test because nothing checks it",
+        "It removed one failure mode while adding cost, delay and a dependency that can be down",
+        "It removed the need for a trust tier, and it added a ranking step to tune",
+        "It removed hallucination entirely, and it added an index that has to be kept fresh"
+      ],
+      "answer": 1,
+      "why": "Taking a decision away from the model makes behaviour testable, and the price is paid on every request including the ones where the weights already knew the answer.",
+      "why_vi": "Lấy một quyết định ra khỏi tay mô hình làm hành vi kiểm được, và cái giá phải trả trên mọi yêu cầu, kể cả những yêu cầu mà trọng số vốn đã biết câu trả lời.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-56",
+      "q": "Your retriever returns an official gazette entry and a forum post that contradict each other. What should the pipeline know about them?",
+      "q_vi": "Bộ truy hồi trả về một mục công báo chính thức và một bài diễn đàn mâu thuẫn nhau. Đường ống nên biết gì về chúng?",
+      "choices": [
+        "That both are evidence, because the model cannot judge a source it has not been trained on",
+        "That the forum post is newer, so recency should decide which of the two is presented",
+        "That they sit at different trust levels, which the pipeline should encode",
+        "That the gazette is longer, because an official document states its scope more completely"
+      ],
+      "answer": 2,
+      "why": "Without a tier, every hit is weighed the same and a scraped page can outvote an authoritative record simply by matching the query wording more closely.",
+      "why_vi": "Không có phân hạng thì mọi kết quả đều nặng như nhau, và một trang cóp nhặt có thể thắng phiếu một bản ghi có thẩm quyền chỉ vì khớp câu chữ truy vấn sát hơn.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-57",
+      "q": "Each step of a forty step job succeeds ninety eight times out of a hundred. Why does the job still fail more often than not?",
+      "q_vi": "Mỗi bước trong công việc bốn mươi bước thành công chín mươi tám trên một trăm lần. Vì sao công việc đó vẫn hỏng nhiều hơn là xong?",
+      "choices": [
+        "Because the per step rate was measured on shorter jobs, which are easier than this one",
+        "Because errors on later steps are more likely",
+        "Because a failed step is retried, and each retry consumes budget that the job needs",
+        "Because an excellent per step rate multiplies down over a long chain"
+      ],
+      "answer": 3,
+      "why": "The arithmetic is unforgiving and needs no extra mechanism. Independence alone takes a very good step level number to a poor end to end one once the trajectory is long.",
+      "why_vi": "Phép nhân ở đây không khoan nhượng và chẳng cần thêm cơ chế nào. Chỉ riêng tính độc lập đã đủ đưa một con số rất đẹp ở mức bước xuống thành con số tệ ở mức toàn cục khi quỹ đạo đủ dài.",
+      "level": 1
+    },
+    {
+      "id": "qlim2-58",
+      "q": "An agent has three tools whose descriptions all mention invoices and it keeps calling the reporting one. What is the mechanism?",
+      "q_vi": "Một tác tử có ba công cụ mà mô tả đều nhắc tới hoá đơn và nó cứ gọi công cụ báo cáo. Cơ chế ở đây là gì?",
+      "choices": [
+        "The reporting tool is listed first among the three tools whose descriptions mention invoices",
+        "The reporting tool returns faster, which matters because the agent is timed",
+        "Selection is driven by name similarity and description wording rather than by what each tool actually does, so three overlapping descriptions make the choice close to a coin toss",
+        "The reporting tool has fewer arguments"
+      ],
+      "answer": 2,
+      "why": "The model has no way to observe behaviour before calling. It matches text against text, so the fix is to make the descriptions disjoint rather than to ask for more care.",
+      "why_vi": "Mô hình không có cách nào quan sát hành vi trước khi gọi. Nó khớp văn bản với văn bản, nên cách chữa là làm cho các mô tả tách bạch chứ không phải yêu cầu nó cẩn thận hơn.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-59",
+      "q": "A transfer call is well formed, passes schema validation and moves money to the wrong account number. Where must this be caught?",
+      "q_vi": "Một lệnh chuyển tiền đúng dạng, qua được kiểm lược đồ và chuyển tiền sang sai số tài khoản. Việc này phải bắt ở đâu?",
+      "choices": [
+        "In the tool, which must check the value against a record the caller cannot edit",
+        "In the schema, which should be tightened until an invalid account number cannot be expressed at all in a valid call",
+        "In the model, which should be prompted to state the account before it calls",
+        "In the log, which lets an auditor find the wrong number after settlement"
+      ],
+      "answer": 0,
+      "why": "Syntactic validity says nothing about whether the identifier refers to the intended thing, so the check has to happen where the authoritative record lives rather than in the caller.",
+      "why_vi": "Tính hợp lệ về cú pháp không nói gì về việc mã định danh có trỏ đúng đối tượng hay không, nên phép kiểm phải diễn ra ở nơi giữ bản ghi có thẩm quyền chứ không phải ở phía gọi.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-60",
+      "q": "An agent issues the same failing call eleven times and exhausts the budget. Which two things were missing from the loop?",
+      "q_vi": "Một tác tử phát cùng một lệnh gọi hỏng mười một lần rồi cạn ngân sách. Vòng lặp thiếu hai thứ nào?",
+      "choices": [
+        "A larger budget and a faster tool, since the loop would then have finished",
+        "A memory of what was already tried and a rule that treats a repeat as evidence, because without either one the cheapest next action is always the action that just failed",
+        "A stronger model and a longer window, which together would fix the call",
+        "A human approval step and a rate limit, so the calls would be slower"
+      ],
+      "answer": 1,
+      "why": "Repetition is not stubbornness but absence of state. Nothing records that this exact call was tried, and nothing converts a repeated failure into a reason to change course.",
+      "why_vi": "Lặp lại không phải là bướng bỉnh mà là thiếu trạng thái. Không có gì ghi lại rằng đúng lệnh gọi này đã thử rồi, và cũng không có gì biến một thất bại lặp lại thành lý do để đổi hướng.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-61",
+      "q": "Checkpointing restored the agent to a verified state after a bad step, yet the customer still received a wrong invoice. Why?",
+      "q_vi": "Điểm kiểm đã khôi phục tác tử về trạng thái đã xác minh sau một bước hỏng, vậy mà khách hàng vẫn nhận được hoá đơn sai. Vì sao?",
+      "choices": [
+        "The checkpoint was taken after the bad step, so the state it restored already carried the error",
+        "The checkpoint covered the agent state but not the tool state, which drifted apart while the run continued",
+        "Internal state was restored while the sent invoice could not be",
+        "The restore ran before the verification finished, so the state it wrote back was never actually checked"
+      ],
+      "answer": 2,
+      "why": "Rollback is a property of the system's own memory. An effect that has already left the boundary belongs to somebody else now, and no internal mechanism can retract it.",
+      "why_vi": "Quay lui là tính chất của bộ nhớ nội bộ hệ thống. Một tác động đã rời khỏi ranh giới thì giờ thuộc về người khác, và không cơ chế nội bộ nào rút nó về được.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-62",
+      "q": "A stock reservation call timed out after dispatch and the warehouse recorded it as partly applied. Why is this hard for an agent?",
+      "q_vi": "Một lệnh giữ hàng hết thời gian chờ sau khi đã gửi đi và kho ghi nhận nó áp dụng được một phần. Vì sao điều này khó với tác tử?",
+      "choices": [
+        "The timeout looks like an error, and the agent retries every error",
+        "The warehouse system is external and cannot be read back",
+        "The call cost was already charged, which matters because the budget cannot be reclaimed later",
+        "The world now matches neither the before nor the after picture, which agents handle badly"
+      ],
+      "answer": 3,
+      "why": "Agents treat a call as atomic with a binary result. A partial effect falls outside both branches, so whichever branch is taken produces an action built on a false description of the world.",
+      "why_vi": "Tác tử coi mỗi lệnh gọi là nguyên tử với kết quả nhị phân. Một tác động thực hiện dở nằm ngoài cả hai nhánh, nên chọn nhánh nào cũng dẫn tới hành động dựng trên mô tả sai về thế giới.",
+      "level": 3
+    },
+    {
+      "id": "qlim2-63",
+      "q": "An agent that writes its own reusable procedures starts failing a category of task it used to pass. What is the likely mechanism?",
+      "q_vi": "Một tác tử tự viết ra các quy trình dùng lại bắt đầu trượt một nhóm nhiệm vụ mà trước đây nó làm được. Cơ chế nào có khả năng nhất?",
+      "choices": [
+        "A flawed procedure was committed, which later tasks inherit as experience",
+        "The procedure library outgrew the context window, so the planner no longer sees every entry it needs",
+        "The base model was updated underneath the library, which invalidates the assumptions each procedure was written against",
+        "The retrieval over the library degraded, because the number of near duplicate entries kept growing over time"
+      ],
+      "answer": 0,
+      "why": "A committed procedure is treated as knowledge rather than as a hypothesis, so nothing later in the pipeline asks whether the step it prescribes was ever a good idea.",
+      "why_vi": "Một quy trình đã ghi nhận được coi như tri thức chứ không phải giả thuyết, nên không khâu nào phía sau đặt câu hỏi liệu bước mà nó quy định có từng là ý hay hay không.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-64",
+      "q": "Under load your team disables the verification layer to keep latency inside the target. What does that decision reveal?",
+      "q_vi": "Khi tải cao, nhóm của bạn tắt tầng thẩm định để giữ độ trễ trong mức mục tiêu. Quyết định đó cho thấy điều gì?",
+      "choices": [
+        "That the verification layer was never load tested, which is a gap in the release process rather than in the design",
+        "That checking costs as much as generating, and a design ignoring that ships a verifier which gets switched off",
+        "That the latency target was set too aggressively, since a realistic target would leave room for the check",
+        "That the verifier was the wrong kind, because a deterministic checker would run faster"
+      ],
+      "answer": 1,
+      "why": "A control that is only present when nothing is going wrong is not a control. Budgeting for the check from the start is what keeps it there on the day it matters.",
+      "why_vi": "Một biện pháp kiểm soát chỉ hiện diện khi mọi thứ đang êm thì không phải biện pháp kiểm soát. Tính sẵn chi phí cho phép kiểm ngay từ đầu mới là thứ giữ nó lại đúng vào ngày cần đến.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-65",
+      "q": "Your agent reports that the refund was issued. What should the system require before it treats that as true?",
+      "q_vi": "Tác tử của bạn báo rằng khoản hoàn tiền đã được phát. Hệ thống nên đòi hỏi gì trước khi coi đó là sự thật?",
+      "choices": [
+        "A second model which reads the report your agent issued, because the system treats it as true",
+        "A screenshot attached to the report",
+        "A signed record returned by the service that executed the action, because the agent's own account of what it did is generated text and carries no more authority than any other sentence it produced",
+        "A confidence score above a set threshold"
+      ],
+      "answer": 2,
+      "why": "The report and the effect are produced by different systems. Only the one that actually moved the money can attest to what happened, and that attestation is what the pipeline should store.",
+      "why_vi": "Bản báo cáo và tác động thật do hai hệ thống khác nhau tạo ra. Chỉ hệ thống thực sự chuyển tiền mới chứng thực được điều đã xảy ra, và chính chứng thực đó là thứ đường ống nên lưu lại.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-66",
+      "q": "Among all the text in a training corpus, which items are a model most likely to reproduce word for word?",
+      "q_vi": "Trong toàn bộ văn bản của một khối ngữ liệu huấn luyện, mô hình dễ tái hiện nguyên văn nhất là những mục nào?",
+      "choices": [
+        "The most frequent phrases, since repetition is what makes a sequence easy for the model to recall",
+        "The longest documents, because a long document supplies more context for the continuation",
+        "The most recent additions, since material added late in training weighs more",
+        "Rare strings such as keys and personal records, since only these are stored"
+      ],
+      "answer": 3,
+      "why": "A common phrase is predictable from the language itself and needs no memorisation. A unique string can only be produced by having stored it, which is exactly why it comes back verbatim.",
+      "why_vi": "Một cụm từ phổ biến vốn đoán được từ chính ngôn ngữ nên không cần ghi nhớ. Một chuỗi độc nhất chỉ có thể sinh ra nếu đã lưu lại, và đó chính là lý do nó quay về nguyên văn.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-67",
+      "q": "You generate a large synthetic set to cover configurations your real corpus never held. What have you not gained?",
+      "q_vi": "Bạn sinh ra một tập tổng hợp lớn để phủ những cấu hình mà khối ngữ liệu thật chưa từng có. Bạn chưa thu được gì?",
+      "choices": [
+        "New facts about the world, since the set can hold only structure the generator already knew",
+        "Volume, because a generated set is bounded by the compute you were willing to spend on it here",
+        "Diversity, since generated examples cluster around the modes of the generating process",
+        "Label quality, because nobody checked the generated labels against a human annotation"
+      ],
+      "answer": 0,
+      "why": "Generation rearranges what the generator holds. That buys coverage of cases nobody would have labelled by hand, and it cannot introduce information that was not there to begin with.",
+      "why_vi": "Việc sinh dữ liệu chỉ sắp xếp lại những gì bộ sinh đang giữ. Điều đó mua được độ phủ cho các trường hợp không ai gán nhãn thủ công nổi, và nó không thể đưa vào thông tin vốn chưa từng có.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-68",
+      "q": "A quantised model matches the original on your average score and you are about to ship it. What should you inspect first?",
+      "q_vi": "Một mô hình đã lượng tử hoá khớp bản gốc trên điểm trung bình của bạn và bạn sắp phát hành nó. Bạn nên soi cái gì trước?",
+      "choices": [
+        "The memory footprint, to confirm the quantised model matches the original on size",
+        "The rare and high stakes inputs, because lower precision degrades behaviour unevenly and an unchanged average is exactly what a broken tail looks like from a distance",
+        "The token throughput under production load, because that is what changes when precision drops",
+        "The output formatting on a sample of requests"
+      ],
+      "answer": 1,
+      "why": "An average is a poor detector of damage that is concentrated. The cases that changed are few, and they are the ones whose failure costs the most.",
+      "why_vi": "Giá trị trung bình là bộ dò rất kém với thiệt hại bị dồn cục. Số ca thay đổi thì ít, và đó lại đúng là những ca mà hỏng hóc đắt giá nhất.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-69",
+      "q": "An attacker sends requests that trigger very deep tool loops and nothing in the dashboard looks broken. What is under attack?",
+      "q_vi": "Kẻ tấn công gửi các yêu cầu kích hoạt những vòng lặp công cụ rất sâu và không có gì trên bảng theo dõi trông như hỏng. Cái gì đang bị tấn công?",
+      "choices": [
+        "Availability, since deep tool loops take the workers that other requests need and the dashboard shows nothing",
+        "Correctness, because a loop which runs too long accumulates errors from its own output",
+        "The budget, which is why nothing looks broken",
+        "Confidentiality, since a long loop touches more tools and therefore reaches more of the data"
+      ],
+      "answer": 2,
+      "why": "Every request is served correctly and on time, so no health signal fires. The damage shows up on the invoice, which is not a place most monitoring looks.",
+      "why_vi": "Mọi yêu cầu đều được phục vụ đúng và đúng hạn, nên không tín hiệu sức khoẻ nào kêu. Thiệt hại lộ ra trên hoá đơn, mà đó lại không phải chỗ mà phần lớn hệ giám sát nhìn tới.",
+      "level": 2
+    },
+    {
+      "id": "qlim2-70",
+      "q": "You ran the evaluation once and are ready to publish the figure. What is the objection?",
+      "q_vi": "Bạn chạy đánh giá đúng một lần và đã sẵn sàng công bố con số. Phản đối ở đây là gì?",
+      "choices": [
+        "The evaluation set was too small, so nobody computed a confidence interval",
+        "The evaluation ran on stale inputs, because live traffic differs from whatever that set actually contains",
+        "The evaluation used one judge, whose error rate the figure omits",
+        "Sampling makes one run a draw from a distribution, which means the figure is not a measurement"
+      ],
+      "answer": 3,
+      "why": "Even with a perfect set and a perfect judge, the same inputs produce different outputs, so a single run tells you where one draw landed rather than where the system sits.",
+      "why_vi": "Ngay cả với bộ dữ liệu hoàn hảo và trọng tài hoàn hảo, cùng đầu vào vẫn cho ra đầu ra khác nhau, nên một lượt chạy chỉ cho biết một lần rút rơi vào đâu chứ không cho biết hệ thống đứng ở đâu.",
       "level": 2
     }
   ]

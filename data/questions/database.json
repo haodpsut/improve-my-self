@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "database",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qdb-1",
@@ -10,7 +10,7 @@
       "choices": [
         "A junction table holding one row for each student and section pair",
         "A column on the student table listing every section code, separated by commas",
-        "A foreign key on the section table pointing at exactly one student row",
+        "A foreign key on the section table pointing at one student row",
         "Two parallel tables, one keyed by student and one keyed by section code"
       ],
       "answer": 0,
@@ -41,7 +41,7 @@
         "It still contains a repeating group, which both of these forms forbid",
         "A determinant that is not a superkey determines part of a candidate key",
         "Every non key attribute depends on the whole key and on nothing else",
-        "The primary key was chosen as a surrogate instead of a business code"
+        "The primary key is a surrogate instead of a business code"
       ],
       "answer": 1,
       "why": "Third normal form tolerates a dependency whose right side is a prime attribute. Boyce Codd removes that exception and demands a superkey on the left of every dependency.",
@@ -54,7 +54,7 @@
       "q_vi": "Khoá dự tuyển được mô tả đúng nhất là",
       "choices": [
         "Any column that the application happens to filter on most often",
-        "The column the engine uses to order rows physically on the disk",
+        "The column the engine uses to order rows on the disk",
         "A minimal set of columns whose values identify each row uniquely",
         "A set of columns that references the primary key of another table"
       ],
@@ -68,10 +68,10 @@
       "q": "An enrolment table keyed by student id and course id also stores the course title. The problem is",
       "q_vi": "Bảng đăng ký học có khoá là mã sinh viên và mã học phần lại lưu thêm tên học phần. Vấn đề là",
       "choices": [
-        "The title makes the row too wide for the engine to keep it stored inline",
+        "The title makes the row too wide for the engine to store inline",
         "The title cannot be indexed while it sits beside a composite primary key",
         "The title depends on course id alone, so it repeats for every student",
-        "A composite primary key may never coexist with plain descriptive columns"
+        "A composite primary key may not coexist with descriptive columns"
       ],
       "answer": 2,
       "why": "This is a partial dependency on half of the key, which second normal form forbids. Renaming a course would then mean touching one row per enrolled student.",
@@ -85,7 +85,7 @@
       "choices": [
         "Business codes change, and a changing key drags every referencing row",
         "Surrogate keys make joins correct, while natural keys can match wrongly",
-        "Natural keys cannot be indexed efficiently by a balanced tree structure",
+        "Natural keys cannot be indexed efficiently by any balanced tree structure",
         "Generated integers are unique while business codes are never unique"
       ],
       "answer": 0,
@@ -99,8 +99,8 @@
       "q_vi": "Cột khoá ngoại cho phép rỗng ở bảng con có nghĩa là",
       "choices": [
         "The referenced parent row may be absent, and the engine creates it later",
-        "Referential integrity is switched off for that column until it is filled",
-        "Any value is now accepted, because the null makes the engine skip checks",
+        "Referential integrity is switched off for that column until it is set",
+        "Any value is accepted, because the null makes the engine skip checks",
         "The relationship is optional, but a non null value must still match a parent"
       ],
       "answer": 3,
@@ -113,7 +113,7 @@
       "q": "The practical risk of on delete cascade across a deep tree of tables is that",
       "q_vi": "Rủi ro thực tế của xoá dây chuyền trên một cây bảng nhiều tầng là",
       "choices": [
-        "The engine refuses the delete when more than one child table is involved",
+        "The engine refuses the delete when a second child table is involved",
         "One delete at the top quietly removes a very large amount of data below",
         "Cascaded deletes run outside the transaction, so they cannot be rolled back",
         "Child rows survive but their foreign key values are silently set to null"
@@ -128,9 +128,9 @@
       "q": "Declaring on delete restrict on a foreign key makes the engine",
       "q_vi": "Khai báo chặn xoá trên một khoá ngoại khiến hệ thống",
       "choices": [
-        "Delete the parent row and leave child rows pointing at a missing key",
+        "Delete the parent row and leave child rows pointing at nothing",
         "Refuse to delete the parent while any child row still references it",
-        "Delete the parent row first and then remove every child row that matched",
+        "Delete the parent row first, then remove the matching child rows",
         "Accept the delete and mark the referencing child rows as logically removed"
       ],
       "answer": 1,
@@ -143,10 +143,10 @@
       "q": "A column named phone_numbers stores several numbers separated by commas. This breaks",
       "q_vi": "Một cột tên phone_numbers lưu nhiều số điện thoại ngăn cách bằng dấu phẩy. Điều này vi phạm",
       "choices": [
-        "Referential integrity, since the column no longer matches a parent table",
+        "Referential integrity, since the column matches no parent table",
         "Boyce Codd normal form, since this column determines the rest of the row",
         "First normal form, since the column no longer holds one atomic value",
-        "Second normal form, since part of the key determines this list of numbers"
+        "Second normal form, since part of the key fixes the whole list"
       ],
       "answer": 2,
       "why": "Once a list lives in one column, you cannot index a single number, constrain its format or join on it. Every query degenerates into pattern matching over text.",
@@ -160,7 +160,7 @@
       "choices": [
         "The report must show the name as it stood then, not as it stands now",
         "The join is complicated and the team prefers not to write it each time",
-        "The programme table is small, so the join would have been nearly free",
+        "The programme table is small, so the join costs almost nothing",
         "The application already caches the name, so the extra copy costs nothing"
       ],
       "answer": 0,
@@ -234,8 +234,8 @@
       "q_vi": "Ràng buộc duy nhất trên một cột cho phép rỗng sẽ cho phép",
       "choices": [
         "Many rows holding null, because two nulls are not considered equal",
-        "Exactly one row holding null, since null counts as one ordinary value",
-        "No row holding null at all, because unique implies not null everywhere",
+        "Exactly one row holding null, since null counts as a value",
+        "No row holding null, because unique implies not null",
         "Any duplicate values, as long as the rows are written in one transaction"
       ],
       "answer": 0,
@@ -249,7 +249,7 @@
       "q_vi": "Bảng đăng ký có khoá thay thế nhưng không có ràng buộc duy nhất trên sinh viên và học phần. Hệ quả là",
       "choices": [
         "The same student can be enrolled twice in one course without any error",
-        "The table cannot be joined back to the student table without duplicates",
+        "The table cannot be joined back to students without duplicates",
         "The engine will refuse to create a foreign key from this table to courses",
         "Aggregates over this table will silently ignore any of the duplicated rows"
       ],
@@ -264,7 +264,7 @@
       "q_vi": "Bảng người dùng dùng xoá mềm và có chỉ mục duy nhất trên email. Đăng ký lại một email đã xoá bị lỗi vì",
       "choices": [
         "Soft deleted rows are moved into a second table that enforces the rule",
-        "The unique index is rebuilt on delete and no longer matches new values",
+        "The unique index is rebuilt on delete and no longer matches new rows",
         "Email columns are compared without case sensitivity once a row is removed",
         "The deleted row is still physically present, so the index still holds that email"
       ],
@@ -281,7 +281,7 @@
         "The query is rejected, because outer joins forbid filters on the right side",
         "The unmatched rows are removed, so the query behaves like an inner join",
         "The condition runs before the join, so a larger result comes back instead",
-        "Null padded rows are kept, and the condition applies to matched rows only"
+        "Null padded rows are kept and the condition applies only to matches"
       ],
       "answer": 1,
       "why": "The padded rows carry null in that column, and the filter evaluates to unknown, so they are discarded. Conditions meant for the outer side belong in the join clause.",
@@ -294,7 +294,7 @@
       "q_vi": "Bạn cần liệt kê mọi giảng viên, kể cả người không có lớp nào trong học kỳ này. Bạn nên dùng",
       "choices": [
         "An inner join, then add a condition that keeps the empty right side too",
-        "A cross join, so that every lecturer is paired with every open section",
+        "A cross join, so that every lecturer is paired with every section",
         "A left outer join from lecturers to sections, keeping unmatched ones",
         "A right outer join from lecturers to sections, keeping unmatched sections"
       ],
@@ -309,7 +309,7 @@
       "q_vi": "Truy vấn dùng not in với một truy vấn con bỗng không trả về dòng nào. Lý do khả dĩ là",
       "choices": [
         "The subquery returns more rows than the engine allows inside one list",
-        "Not in is defined for numeric columns only and fails silently on text",
+        "Not in is defined for numeric columns only and fails silently",
         "One row of the subquery is null, so the condition is never true at all",
         "The planner turned the whole condition into an anti join by rewriting it"
       ],
@@ -326,7 +326,7 @@
         "Replace the join with an exists clause, so each order is tested only once",
         "Add distinct to the outer query so that the duplicated rows collapse again",
         "Group by every selected column and then take the first payment of each",
-        "Add a limit of one row so that only the first matching payment is returned"
+        "Add a limit of one row so that only the very first matching payment is returned"
       ],
       "answer": 0,
       "why": "You asked an existence question, not a pairing question. A semi join answers it once per order, while distinct only hides duplicates after paying to produce them.",
@@ -355,8 +355,8 @@
       "choices": [
         "The same number, because counting star also skips rows containing null",
         "A smaller number, because counting a column ignores the null entries",
-        "A larger number, because the column counts each null as its own group",
-        "An error, since counting a nullable column requires an explicit filter"
+        "A larger number, because each null counts as a group",
+        "An error, since a nullable column needs an explicit filter"
       ],
       "answer": 1,
       "why": "Counting star counts rows, counting a column counts non null values in it. That difference is a convenient way to measure how complete a column actually is.",
@@ -383,8 +383,8 @@
       "q": "You need every enrolment row plus the class average beside it. The right tool is",
       "q_vi": "Bạn cần từng dòng đăng ký kèm điểm trung bình của lớp đặt bên cạnh. Công cụ đúng là",
       "choices": [
-        "A group by on class id, which returns one row for each class average",
-        "A correlated subquery placed in the where clause of the same query",
+        "A group by on class id, which returns one row for each class",
+        "A correlated subquery placed inside the where clause",
         "A window function averaging over a partition by class, row by row",
         "A having clause comparing each score against the average of its class"
       ],
@@ -400,7 +400,7 @@
       "choices": [
         "Give them two different positions, hiding the fact that they are tied",
         "Give both of them one position and then continue with the next integer",
-        "Fail with an error, because the ordering expression is not unique here",
+        "Fail with an error, because the ordering expression is not unique in this case",
         "Give both of them one position and then skip a position afterwards"
       ],
       "answer": 0,
@@ -415,7 +415,7 @@
       "choices": [
         "A join written once per level, with as many levels as we expect to need",
         "A window function partitioned by course, walking upward through levels",
-        "A group by on the prerequisite table with a having clause on the depth",
+        "A group by on the prerequisite table, with a having clause on the total depth",
         "A recursive common table expression that feeds its own output back in"
       ],
       "answer": 3,
@@ -429,8 +429,8 @@
       "q_vi": "Union all khác union ở chỗ union all",
       "choices": [
         "Requires that both sides come from the same physical table structure",
-        "Sorts the combined output while union leaves the ordering untouched",
-        "Removes duplicate rows first and is therefore the cheaper operator",
+        "Sorts the output while union leaves the ordering alone",
+        "Removes duplicate rows and is therefore cheaper",
         "Keeps duplicate rows and so avoids the cost of removing them"
       ],
       "answer": 3,
@@ -458,7 +458,7 @@
       "q": "Pages of a list ordered only by created date sometimes repeat or skip rows. The cause is",
       "q_vi": "Các trang của một danh sách chỉ sắp theo ngày tạo thỉnh thoảng lặp dòng hoặc bỏ sót dòng. Nguyên nhân là",
       "choices": [
-        "The offset is computed on the client, so it drifts as new rows arrive",
+        "The offset is computed on the client, so it drifts as rows arrive",
         "The index on the created date is not unique and cannot be used to sort",
         "Rows sharing one date have no defined order between separate queries",
         "The engine caches the first page and serves it again for the later pages"
@@ -476,7 +476,7 @@
         "Seeks straight to the last key that was seen instead of counting past rows",
         "Caches every earlier page, so the later pages are served out of memory",
         "Reads the table backwards, which is cheaper than reading it forwards",
-        "Limits the total number of rows that the query is allowed to examine"
+        "Limits the number of rows that the query is allowed to examine"
       ],
       "answer": 0,
       "why": "The condition becomes a range seek in the index, so the cost is the page size and not the page number. It needs a stable unique sort key to work correctly.",
@@ -521,7 +521,7 @@
         "Appears in the from clause and is given an alias by the outer query",
         "References a column of the outer query, so it depends on each row",
         "Returns exactly one value that the outer query then compares against",
-        "Reads the same table as the outer query, creating a self reference"
+        "Reads the same table as the outer query, a plain self reference"
       ],
       "answer": 1,
       "why": "The dependency on the outer row is what defines it. Planners often flatten such a subquery into a join, but the semantics you wrote are still per row.",
@@ -578,9 +578,9 @@
       "q": "Counting sections per lecturer with a left join and count star gives one for lecturers with none, because",
       "q_vi": "Đếm số lớp của mỗi giảng viên bằng nối trái và đếm dấu sao lại ra một với giảng viên không có lớp, vì",
       "choices": [
-        "Count star ignores the join type and always counts the left table rows",
+        "Count star ignores the join type and counts left table rows",
         "The left join produced a genuine section row filled with default values",
-        "Count star counts distinct values, and the null side collapses into one",
+        "Count star counts distinct values, so the null side collapses",
         "The null padded row is still a row, and counting star counts rows"
       ],
       "answer": 3,
@@ -610,7 +610,7 @@
       "choices": [
         "Distinct cannot be combined with an order by on a column from a join",
         "It hides a join producing wrong row counts instead of repairing it",
-        "Distinct forces a sequential scan on every table named in the query",
+        "Distinct forces a sequential scan on every table in the query",
         "The duplicated rows will come back as soon as an index is added later"
       ],
       "answer": 1,
@@ -653,8 +653,8 @@
       "q": "Two queries can be combined with union only if they",
       "q_vi": "Hai truy vấn chỉ gộp được bằng union nếu chúng",
       "choices": [
-        "Read from tables sharing at least one foreign key relationship",
-        "Both carry an order by clause using the very same sort expression",
+        "Read from tables sharing one foreign key",
+        "Both carry an order by clause on the same expression",
         "Return the same rows in the same physical order on both of the sides",
         "Return the same number of columns with compatible data types"
       ],
@@ -669,7 +669,7 @@
       "q_vi": "Điều kiện lọc viết dạng lower của cột email làm chỉ mục trên email bị bỏ qua. Lý do là",
       "choices": [
         "The index stores values in upper case, so it never matches lower case",
-        "Text indexes support prefix matching only and not equality comparison",
+        "Text indexes support prefix matching only, not equality",
         "The planner refuses any index when the where clause contains a function",
         "The index holds the raw column values, not the values after the function"
       ],
@@ -686,7 +686,7 @@
         "Like is always executed on the client after the rows have been fetched",
         "The tree is ordered by the start of the string, which is unknown here",
         "B tree indexes cannot store text values longer than a few hundred bytes",
-        "The percent sign is escaped by the parser and the pattern never matches"
+        "The percent sign is escaped by the parser and so the pattern never matches"
       ],
       "answer": 1,
       "why": "An ordered tree is searched by prefix, and a leading wildcard removes the prefix. Trigram indexing or a proper full text index is the usual answer for infix search.",
@@ -699,7 +699,7 @@
       "q_vi": "Chỉ mục trên mã học kỳ và mã sinh viên không được dùng cho truy vấn chỉ lọc theo mã sinh viên, vì",
       "choices": [
         "Two column indexes only serve queries that filter on both of the columns",
-        "The engine needs the columns listed in the same order as in the select",
+        "The engine needs the columns listed in the order of the select",
         "An ordered tree can only be searched from its leading column onwards",
         "Student id is the more selective column and therefore must be listed first"
       ],
@@ -714,8 +714,8 @@
       "q_vi": "Chỉ hai phần trăm công việc còn ở trạng thái chờ và truy vấn hàng đợi luôn lọc theo trạng thái đó. Chỉ mục một phần",
       "choices": [
         "Covers just those rows, so it stays small and cheap to keep updated",
-        "Copies the pending rows into a second table kept in step by a trigger",
-        "Indexes every row but marks the finished ones so they are skipped later",
+        "Copies pending rows into a second table kept by a trigger",
+        "Indexes every row but marks finished ones to be skipped",
         "Helps only when the pending flag is also declared as a unique constraint"
       ],
       "answer": 0,
@@ -761,7 +761,7 @@
         "Whether the query returns columns that the index does not yet cover",
         "Whether the table statistics are stale after a recent bulk data load",
         "Whether the isolation level of the session was raised to serializable",
-        "Whether the connection pool is too small for the traffic at that hour"
+        "Whether the connection pool is too small for the traffic seen at that hour"
       ],
       "answer": 1,
       "why": "Every join method and order downstream is chosen from that estimate. Refresh the statistics first, and only then consider correlated columns or extended statistics.",
@@ -805,7 +805,7 @@
       "choices": [
         "A tree index on that column already returns the rows in the right order",
         "The engine sorts the table on disk whenever it contains a date column",
-        "Sorting is skipped when the result set fits inside the working memory",
+        "Sorting is skipped when the result fits inside the working memory",
         "The order by was rewritten into a group by, which sorts free of charge"
       ],
       "answer": 0,
@@ -819,7 +819,7 @@
       "q_vi": "Một trang phát ra bốn trăm truy vấn gần như giống hệt nhau ngay sau một truy vấn danh sách. Kiểu này là",
       "choices": [
         "Connection churn, cured by raising the size of the connection pool",
-        "Write amplification, caused by having far too many indexes present",
+        "Write amplification, caused by having far too many indexes",
         "A deadlock storm, caused by locking rows in an inconsistent order",
         "The N plus one problem, cured by loading the related rows in one query"
       ],
@@ -970,7 +970,7 @@
       "choices": [
         "Ships unused wide columns and can also defeat an index only scan",
         "Forces the engine to lock every column of the table while reading",
-        "Prevents the query from using any index on the primary key column",
+        "Prevents the query from using any index on the primary key column at all",
         "Makes the result unordered even when an order by clause is present"
       ],
       "answer": 0,
@@ -985,7 +985,7 @@
       "choices": [
         "Fail immediately if any other session is writing into that table",
         "Run without taking any lock, since building an index only reads rows",
-        "Take a lock that blocks reads while still letting the writes through",
+        "Take a lock that blocks the reads while still letting the writes through",
         "Block writes until it finishes, unless it is built with the concurrent form"
       ],
       "answer": 3,
@@ -1075,7 +1075,7 @@
       "choices": [
         "Wrap the two statements in a transaction at the read committed level",
         "Lock the row while reading it with select for update in the transaction",
-        "Retry the write until the value read matches the value found on disk",
+        "Retry the write until the value read matches the value on disk",
         "Add a unique constraint so that the second write is rejected outright"
       ],
       "answer": 1,
@@ -1104,7 +1104,7 @@
       "q_vi": "Hai tác vụ cập nhật cùng hai dòng theo thứ tự ngược nhau và gây khoá chết. Cách chữa chuẩn là",
       "choices": [
         "Raise the isolation level so that the engine serializes the two jobs",
-        "Increase the lock timeout so the losing job waits long enough to win",
+        "Increase the lock timeout so the losing job waits long enough",
         "Always take the locks in the same agreed order inside both of the jobs",
         "Split each job into single statements running outside any transaction"
       ],
@@ -1149,8 +1149,8 @@
       "q_vi": "Tính nguyên tử bảo đảm rằng nếu giao dịch hỏng giữa chừng thì",
       "choices": [
         "The finished statements remain and the rest are attempted once more",
-        "The engine keeps the writes but marks them as needing manual review",
-        "The changes stay visible to the writer only until that session ends",
+        "The engine keeps the writes but marks them as needing a manual review",
+        "The changes stay visible to the writer only until the session ends",
         "None of its changes remain, exactly as if it had never run at all"
       ],
       "answer": 3,
@@ -1166,7 +1166,7 @@
         "The data pages being flushed to disk before the commit returns",
         "The log record being flushed to durable storage before the reply",
         "The replica confirming that it applied the change to its own copy",
-        "The operating system cache holding the change until the next sync"
+        "The operating system cache holding the change until the next sync happens"
       ],
       "answer": 1,
       "why": "Writing one sequential log record is far cheaper than writing scattered data pages. Recovery replays that log, which is also what streaming replication consumes.",
@@ -1181,7 +1181,7 @@
         "Commit part of the work while leaving the rest of it still open",
         "Persist the current state so another session can read it early",
         "Roll back to a marker without discarding the earlier work",
-        "Extend the transaction timeout by restarting its internal clock"
+        "Extend the transaction timeout, restarting its internal clock"
       ],
       "answer": 2,
       "why": "It is a partial undo inside one transaction, nothing more. Until the outer commit runs, no other session can see any of the work, including the part you kept.",
@@ -1256,7 +1256,7 @@
         "The engine closes it automatically and rolls back without any warning",
         "The snapshot grows newer over time and the form data becomes stale",
         "Locks and an old snapshot are held for as long as the user is thinking",
-        "Form input cannot be validated by constraints until the commit is run"
+        "Form input cannot be validated by constraints before the commit"
       ],
       "answer": 2,
       "why": "Human time is thousands of times longer than transaction time. Read the row, let the user think, then write with a version check so a concurrent change is detected.",
@@ -1300,7 +1300,7 @@
       "choices": [
         "Storage, since the replica has to keep a second copy of the whole log",
         "Read throughput, since replicas stop serving queries while they sync",
-        "Consistency, since the replica may confirm before it has written data",
+        "Consistency, since the replica may confirm before it has written the data",
         "Write latency, since every commit waits for the replica to confirm"
       ],
       "answer": 3,
@@ -1802,6 +1802,846 @@
       "why": "A row can be stamped at ten and become visible at ten past, so a poller that already passed ten never sees it. The log carries changes in commit order, which closes that gap.",
       "why_vi": "Một dòng có thể được đóng dấu lúc mười giờ nhưng tới mười giờ mười mới hiện ra, nên trình hỏi định kỳ đã đi qua mốc mười giờ sẽ không bao giờ thấy nó. Nhật ký mang các thay đổi theo thứ tự xác nhận nên bịt được khe hở đó.",
       "level": 3
+    },
+    {
+      "id": "qdb2-1",
+      "q": "The domain of an attribute in the relational model is",
+      "q_vi": "Miền của một thuộc tính trong mô hình quan hệ là",
+      "choices": [
+        "the set of values that column is allowed to hold",
+        "the table the column belongs to inside the schema",
+        "the name space keeping two column names apart",
+        "the range of rows a query over that column returns"
+      ],
+      "answer": 0,
+      "why": "A domain is a type together with the constraints laid on it. Declaring it narrowly is the cheapest guard there is, because the engine refuses a bad row before any application code runs.",
+      "why_vi": "Miền là kiểu dữ liệu cộng với các ràng buộc đặt lên kiểu đó. Khai báo miền hẹp là lớp chắn rẻ nhất, vì máy từ chối dòng sai trước khi mã ứng dụng kịp chạy.",
+      "level": 1
+    },
+    {
+      "id": "qdb2-2",
+      "q": "A composite primary key is the right choice when",
+      "q_vi": "Khoá chính tổ hợp là lựa chọn đúng khi",
+      "choices": [
+        "the table has grown past a few million rows",
+        "no single column identifies a row but two together do",
+        "two columns happen to carry the same data type",
+        "the application wants to sort on several columns"
+      ],
+      "answer": 1,
+      "why": "The key is chosen by what identifies a row, not by size or by sorting needs. Sorting is the job of an index and an order by clause.",
+      "why_vi": "Khoá được chọn theo cái gì định danh một dòng, không theo kích thước bảng hay nhu cầu sắp xếp. Sắp xếp là việc của chỉ mục và mệnh đề order by.",
+      "level": 1
+    },
+    {
+      "id": "qdb2-3",
+      "q": "An order table stores order id as key, plus customer city and the postcode of that city. The postcode depends on the key",
+      "q_vi": "Bảng đơn hàng có khoá là mã đơn, kèm thành phố của khách và mã bưu chính của thành phố đó. Mã bưu chính phụ thuộc vào khoá theo kiểu",
+      "choices": [
+        "partially, because the postcode depends on half of the key",
+        "trivially, because the postcode is already inside the key",
+        "transitively, because it runs through the city rather than the key",
+        "in a multivalued way, because one order reaches several postcodes"
+      ],
+      "answer": 2,
+      "why": "The key fixes the city and the city fixes the postcode, so the postcode reaches the key only through a second step. Third normal form is the rule that removes exactly this chain.",
+      "why_vi": "Khoá xác định thành phố, thành phố xác định mã bưu chính, nên mã bưu chính chỉ chạm tới khoá qua một bước trung gian. Chuẩn ba là quy tắc dọn đúng chuỗi này.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-4",
+      "q": "On delete set null is the sensible rule for a foreign key when",
+      "q_vi": "Quy tắc on delete set null hợp lý cho một khoá ngoại khi",
+      "choices": [
+        "the child rows must always disappear together with their parent",
+        "the parent row is almost never deleted in practice anyway",
+        "the referencing column is part of the key of that table",
+        "the child row still means something once its parent is gone"
+      ],
+      "answer": 3,
+      "why": "An invoice line keeps its meaning when a discount campaign is removed, so the link is dropped and the row stays. A column inside the primary key cannot be emptied, so the rule is refused there.",
+      "why_vi": "Một dòng hoá đơn vẫn có nghĩa khi chương trình khuyến mại bị xoá, nên chỉ bỏ liên kết còn dòng thì giữ lại. Cột nằm trong khoá chính không thể để trống nên quy tắc này bị từ chối ở đó.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-5",
+      "q": "Comparing two nullable columns with is distinct from instead of the inequality operator gives",
+      "q_vi": "So sánh hai cột cho phép rỗng bằng is distinct from thay cho toán tử khác gì cho ra",
+      "choices": [
+        "a true or false answer in every case, with two nulls counted as equal",
+        "a faster comparison, since the engine skips its usual null check",
+        "an error as soon as one of the two sides turns out to be null",
+        "a result usable only inside a where clause of a select"
+      ],
+      "answer": 0,
+      "why": "The ordinary operator yields unknown whenever a side is null, and unknown fails the filter silently. This form is total, which is what change detection between two versions of a row needs.",
+      "why_vi": "Toán tử thường cho ra giá trị không xác định khi một vế rỗng, và giá trị đó âm thầm trượt bộ lọc. Dạng này luôn cho ra đúng hoặc sai, đúng thứ mà việc dò thay đổi giữa hai bản của một dòng cần.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-6",
+      "q": "Two exports must be reconciled and each side may hold rows the other lacks. One query does it with",
+      "q_vi": "Cần đối chiếu hai tệp xuất, mỗi bên đều có thể chứa dòng bên kia không có. Một truy vấn làm được việc đó bằng",
+      "choices": [
+        "an inner join, which is enough once both files are sorted",
+        "a full outer join, which keeps the unmatched rows of both sides",
+        "a cross join that is filtered afterwards on the matching key",
+        "a left outer join, since the missing rows will simply show up as null"
+      ],
+      "answer": 1,
+      "why": "Only the full form preserves both kinds of orphan at once, and the null side then tells you which export the row is missing from. An inner join hides exactly the rows the reconciliation is about.",
+      "why_vi": "Chỉ dạng đầy đủ giữ được cả hai loại dòng lẻ cùng lúc, và phía rỗng cho biết dòng đó thiếu ở tệp nào. Phép nối trong che đi đúng những dòng mà việc đối chiếu cần nhìn.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-7",
+      "q": "Listing students who have never paid a single invoice is expressed most safely by",
+      "q_vi": "Liệt kê sinh viên chưa từng nộp một hoá đơn nào được diễn đạt an toàn nhất bằng",
+      "choices": [
+        "not in with a subquery selecting the identifiers of the payers",
+        "a left join to payments with no further condition on the result",
+        "not exists with a correlated subquery over the payment rows",
+        "a group by student and a having clause counting the payments"
+      ],
+      "answer": 2,
+      "why": "This form is immune to a null in the payer column, which silently empties the not in version. Grouping cannot help either, because a student with no payment row never enters the group at all.",
+      "why_vi": "Dạng này miễn nhiễm với giá trị rỗng ở cột người nộp, thứ âm thầm làm rỗng kết quả của dạng not in. Gom nhóm cũng không cứu được, vì sinh viên không có dòng nộp nào thì không bao giờ vào nhóm.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-8",
+      "q": "You need every order that has at least one payment, and each order must appear exactly once. Prefer",
+      "q_vi": "Cần mọi đơn hàng có ít nhất một lần thanh toán, và mỗi đơn chỉ được xuất hiện một lần. Nên chọn",
+      "choices": [
+        "an inner join, because the duplicate rows can be removed later",
+        "a cross join carrying a filter on the payment identifier",
+        "a left join, because unmatched orders are dropped in any case",
+        "exists, because it stops at the first payment row it finds"
+      ],
+      "answer": 3,
+      "why": "The test asks only whether a match exists, so the order is never multiplied by the number of payments. The join version needs a distinct afterwards, which costs a sort and hides the fan out.",
+      "why_vi": "Phép thử chỉ hỏi có tồn tại dòng khớp hay không, nên đơn hàng không bị nhân lên theo số lần thanh toán. Bản dùng phép nối phải thêm distinct, vừa tốn một lần sắp xếp vừa che mất chỗ nhân dòng.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-9",
+      "q": "The intersect operator placed between two queries returns",
+      "q_vi": "Toán tử intersect đặt giữa hai truy vấn trả về",
+      "choices": [
+        "rows present in both results, with the duplicates collapsed",
+        "rows present in either result, with the duplicates collapsed",
+        "rows of the first result that the second result does not hold",
+        "rows of both results placed one after the other as written"
+      ],
+      "answer": 0,
+      "why": "It is the set intersection, and like union it removes duplicates unless the all variant is written. Reading it as an inner join is fair only while both sides already hold unique rows.",
+      "why_vi": "Đây là phép giao tập hợp, và giống union nó bỏ dòng trùng trừ khi viết thêm biến thể all. Hiểu nó như phép nối trong chỉ đúng khi cả hai vế vốn đã không có dòng trùng.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-10",
+      "q": "Two students tie for second place in a ranking. Dense rank differs from rank because dense rank",
+      "q_vi": "Hai sinh viên đồng hạng nhì trong một bảng xếp hạng. Dense rank khác rank ở chỗ dense rank",
+      "choices": [
+        "breaks the tie using the order in which the rows were inserted",
+        "gives the next student third place rather than fourth place",
+        "refuses to run whenever the ordering column contains a tie",
+        "hands the two tied students different numbers anyway"
+      ],
+      "answer": 1,
+      "why": "Plain rank leaves a gap the size of the tie, dense rank does not. Choosing between them is a reporting decision, and row number is a third answer that hides the tie completely.",
+      "why_vi": "Rank thường để lại một khoảng trống bằng độ lớn của nhóm đồng hạng, dense rank thì không. Chọn cái nào là quyết định của báo cáo, còn row number là câu trả lời thứ ba, nó giấu hẳn chuyện đồng hạng.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-11",
+      "q": "A running total that must cover every row from the start of the partition up to the current one needs the frame",
+      "q_vi": "Tổng luỹ kế phải gộp mọi dòng từ đầu phân vùng tới dòng hiện tại cần khung",
+      "choices": [
+        "rows between the current row and unbounded following",
+        "range between one row preceding and one row following",
+        "rows between unbounded preceding and current row",
+        "rows between unbounded preceding and unbounded following"
+      ],
+      "answer": 2,
+      "why": "The last of these covers the whole partition and yields the same total on every row, which is a common silent mistake. The frame is what turns a window aggregate into a cumulative one.",
+      "why_vi": "Khung phủ cả phân vùng sẽ cho cùng một tổng ở mọi dòng, đây là lỗi âm thầm rất hay gặp. Chính khung mới biến một hàm tổng hợp cửa sổ thành tổng luỹ kế.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-12",
+      "q": "A recursive common table expression walking a prerequisite graph never finishes. The first suspect is",
+      "q_vi": "Một biểu thức bảng chung đệ quy đi trên đồ thị môn tiên quyết chạy mãi không dừng. Nghi can đầu tiên là",
+      "choices": [
+        "a missing index, since every level rescans the whole table",
+        "the recursive branch selecting too few columns to join on",
+        "the anchor query returning more than one starting row",
+        "a cycle in the data, since the recursion then has nothing to stop it"
+      ],
+      "answer": 3,
+      "why": "Course A requiring B while B requires A sends the walk round for ever. The cure is to carry the visited path in the recursion and refuse any node already on it.",
+      "why_vi": "Môn A cần B trong khi B lại cần A sẽ khiến vòng đi quay mãi. Cách chữa là mang theo đường đã đi trong phần đệ quy và từ chối mọi đỉnh đã nằm trên đường đó.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-13",
+      "q": "Insert on conflict do update is preferred over deleting the row and inserting it again because it",
+      "q_vi": "Insert on conflict do update được ưa dùng hơn cách xoá dòng rồi chèn lại vì nó",
+      "choices": [
+        "keeps the row identity, so references and history stay intact",
+        "avoids writing anything at all to the write ahead log while it runs",
+        "needs no lock at all on the row it collides with",
+        "hands the caller back the earlier version of that row"
+      ],
+      "answer": 0,
+      "why": "Deleting and inserting produces a new row, so child rows lose their parent and any audit trail on that identifier breaks. The upsert also closes the race between the check and the write.",
+      "why_vi": "Xoá rồi chèn lại tạo ra một dòng mới, nên các dòng con mất cha và mọi vết theo dõi trên định danh đó bị đứt. Cách gộp này còn bịt luôn khe chạy đua giữa bước kiểm và bước ghi.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-14",
+      "q": "A generated column earns its place when a value",
+      "q_vi": "Cột sinh tự động xứng đáng có mặt khi một giá trị",
+      "choices": [
+        "changes on a schedule that the application alone decides",
+        "is always derived from other columns of the same row",
+        "has to be filled in by hand for each of the older rows",
+        "comes from a lookup in a second table at the time of reading"
+      ],
+      "answer": 1,
+      "why": "The engine then keeps the derived value in step with its inputs and no code path can forget it. A value depending on another table cannot be generated, because it would go stale unnoticed.",
+      "why_vi": "Khi đó máy tự giữ giá trị dẫn xuất khớp với đầu vào của nó và không nhánh mã nào quên được. Giá trị phụ thuộc bảng khác thì không sinh được, vì nó sẽ cũ đi mà không ai hay.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-15",
+      "q": "Reports filter on the year extracted from a timestamp column and stay slow. The fitting index is",
+      "q_vi": "Báo cáo lọc theo năm bóc ra từ một cột thời điểm mà vẫn chậm. Chỉ mục phù hợp là",
+      "choices": [
+        "an index on the timestamp column with a smaller fill factor",
+        "a hash index built over the same timestamp column",
+        "an index on the very expression that extracts the year",
+        "a partial index covering the rows of the current year only"
+      ],
+      "answer": 2,
+      "why": "A predicate wrapping the column in a function cannot use an index on the bare column, so the index must be built on the same expression. Rewriting the filter as a range over the year is usually better still.",
+      "why_vi": "Điều kiện bọc cột trong một hàm thì không dùng được chỉ mục trên cột trần, nên phải xây chỉ mục trên chính biểu thức đó. Viết lại bộ lọc thành một khoảng thời gian thường còn tốt hơn nữa.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-16",
+      "q": "Listing the selected columns in an index as included columns is done so that",
+      "q_vi": "Đưa các cột được chọn vào chỉ mục dưới dạng cột kèm theo là để",
+      "choices": [
+        "the whole query can be answered from the index without visiting the table at all",
+        "the included columns join the search key of the tree",
+        "the index shrinks, because included columns are stored compressed",
+        "the planner is obliged to prefer this index over the others"
+      ],
+      "answer": 0,
+      "why": "Included columns ride along in the leaf pages without widening the search key, so an ordered lookup can still finish inside the index. The saving is one random visit to the table for every row returned.",
+      "why_vi": "Cột kèm theo nằm ở trang lá mà không làm khoá tìm kiếm phình ra, nên một lần tra có thứ tự vẫn kết thúc ngay trong chỉ mục. Cái tiết kiệm được là một lần nhảy ngẫu nhiên vào bảng cho mỗi dòng trả về.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-17",
+      "q": "A predicate is called highly selective when it",
+      "q_vi": "Một điều kiện lọc được gọi là có tính chọn lọc cao khi nó",
+      "choices": [
+        "keeps most of the rows of the table it is applied to",
+        "keeps only a small fraction of the rows of that table",
+        "is written against a column carrying a unique constraint on it",
+        "can be evaluated without reading the statistics"
+      ],
+      "answer": 1,
+      "why": "Selectivity is the share of rows that survive, and only a small share makes an index worth its random reads. This is why an index on a column with two possible values rarely pays for itself.",
+      "why_vi": "Tính chọn lọc là tỉ lệ dòng sống sót, và chỉ khi tỉ lệ đó nhỏ thì chỉ mục mới đáng với các lần đọc ngẫu nhiên của nó. Vì vậy chỉ mục trên cột chỉ có hai giá trị hiếm khi hoàn vốn.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-18",
+      "q": "A nightly bulk load is followed by very bad plans until somebody intervenes. The missing step is",
+      "q_vi": "Sau mỗi lần nạp khối lượng lớn ban đêm là những kế hoạch thực thi rất tệ cho tới khi có người can thiệp. Bước bị thiếu là",
+      "choices": [
+        "rebuilding all the indexes on the table that was just filled",
+        "raising the isolation level of the queries that run afterwards",
+        "collecting fresh statistics on the table right after the load",
+        "clearing the plan cache so the queries are parsed again"
+      ],
+      "answer": 2,
+      "why": "The planner reasons from row counts and value distributions, and after a large load those numbers describe yesterday. Its estimates then miss by orders of magnitude and it picks the wrong join.",
+      "why_vi": "Bộ lập kế hoạch suy luận từ số dòng và phân bố giá trị, mà sau một lần nạp lớn thì các con số đó đang mô tả ngày hôm qua. Ước lượng lệch đi hàng bậc và nó chọn nhầm kiểu nối.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-19",
+      "q": "A bitmap heap scan turns up in a plan when the engine",
+      "q_vi": "Bitmap heap scan xuất hiện trong kế hoạch khi máy",
+      "choices": [
+        "has no index at all and must read the table from end to end",
+        "joins two tables that both arrive sorted on the key",
+        "needs a lock on every row that the filter will return",
+        "gathers the matching row locations first and then walks the table pages in physical order"
+      ],
+      "answer": 3,
+      "why": "Ordering the visits turns thousands of random reads into something close to a sequential sweep. It is the shape the planner reaches for when a filter matches too many rows for a plain index scan.",
+      "why_vi": "Sắp xếp lại thứ tự truy cập biến hàng nghìn lần đọc ngẫu nhiên thành gần như một lượt quét tuần tự. Đây là hình dạng bộ lập kế hoạch chọn khi bộ lọc khớp quá nhiều dòng so với một lần quét chỉ mục thường.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-20",
+      "q": "A merge join is available to the planner only when",
+      "q_vi": "Phép nối trộn chỉ khả dụng với bộ lập kế hoạch khi",
+      "choices": [
+        "both inputs arrive sorted on the joining columns",
+        "both inputs fit in the memory granted to the query and one of them is small",
+        "the join condition uses equality on one column",
+        "one input is read through a unique index"
+      ],
+      "answer": 0,
+      "why": "The method walks two ordered streams side by side, so the ordering is the precondition and everything else is a matter of cost. An index that already delivers the order is what usually makes it cheap.",
+      "why_vi": "Cách làm này đi song song hai luồng đã có thứ tự, nên thứ tự là điều kiện tiên quyết còn lại chỉ là chuyện chi phí. Một chỉ mục sẵn cho ra thứ tự đó thường là thứ làm nó rẻ.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-21",
+      "q": "A nested loop join is the good choice when",
+      "q_vi": "Phép nối vòng lặp lồng nhau là lựa chọn tốt khi",
+      "choices": [
+        "both sides are large and neither of them carries a usable index",
+        "the outer side yields few rows and the inner side has an index",
+        "the two sides already arrive sorted on the very same joining column",
+        "the join condition is an inequality over a wide range"
+      ],
+      "answer": 1,
+      "why": "The cost is the outer row count multiplied by one indexed lookup, which stays small only while the outer count stays small. A wrong estimate on that count is the classic way a fast query turns into a slow one.",
+      "why_vi": "Chi phí bằng số dòng phía ngoài nhân với một lần tra chỉ mục, và chỉ nhỏ chừng nào số dòng đó còn nhỏ. Ước lượng sai đúng con số này là cách kinh điển khiến một truy vấn nhanh hoá chậm.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-22",
+      "q": "Changes are written to the log before they reach the data files so that",
+      "q_vi": "Thay đổi được ghi vào nhật ký trước khi tới tệp dữ liệu là để",
+      "choices": [
+        "the data files never have to be written to disk at all",
+        "readers can be served straight out of the log file",
+        "a crash is repaired by replaying the log over the last consistent image of the files",
+        "the engine can skip the checksum on every data page"
+      ],
+      "answer": 2,
+      "why": "One sequential write to the log is enough to make a commit durable, while the scattered data pages are written later at leisure. The same log then feeds replicas and recovery to a chosen point in time.",
+      "why_vi": "Một lần ghi tuần tự vào nhật ký đã đủ để một lần xác nhận trở nên bền, còn các trang dữ liệu rải rác được ghi sau lúc rảnh. Chính nhật ký đó sau này nuôi bản sao và việc phục hồi tới một thời điểm chọn trước.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-23",
+      "q": "At the read committed level, one query run twice inside a single transaction can give different results because",
+      "q_vi": "Ở mức read committed, một truy vấn chạy hai lần trong cùng một giao dịch có thể cho kết quả khác nhau vì",
+      "choices": [
+        "the engine may reorder the two statements in order to reduce the locking",
+        "the second run is served from a cache that nobody refreshed",
+        "the second run reads through an index while the first read the table itself",
+        "each statement takes a fresh snapshot, so commits in between show up"
+      ],
+      "answer": 3,
+      "why": "The snapshot is per statement here, not per transaction. A report made of several statements therefore needs a stricter level, or it can mix two different states of the world.",
+      "why_vi": "Ở mức này ảnh chụp được lấy theo từng câu lệnh chứ không theo giao dịch. Một báo cáo gồm nhiều câu lệnh vì thế cần mức nghiêm hơn, nếu không nó có thể trộn hai trạng thái khác nhau của dữ liệu.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-24",
+      "q": "A transaction reads one row twice and the second read shows a changed value. This anomaly is",
+      "q_vi": "Một giao dịch đọc cùng một dòng hai lần và lần đọc sau cho giá trị đã đổi. Hiện tượng bất thường này là",
+      "choices": [
+        "a non repeatable read, which repeatable read isolation removes",
+        "a dirty read, since the second value had not been committed yet",
+        "a phantom read, since the set of matching rows is what has changed",
+        "a lost update, since one of the writes has been overwritten"
+      ],
+      "answer": 0,
+      "why": "The row existed in both reads and only its content moved, which is what separates this from a phantom. Naming the anomaly correctly is what tells you which isolation level to ask for.",
+      "why_vi": "Dòng đó có mặt ở cả hai lần đọc và chỉ nội dung của nó thay đổi, đây là điểm phân biệt với hiện tượng bóng ma. Gọi đúng tên hiện tượng chính là thứ cho biết cần yêu cầu mức cô lập nào.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-25",
+      "q": "A phantom read is told apart from a non repeatable read because the phantom concerns",
+      "q_vi": "Đọc bóng ma khác đọc không lặp lại được ở chỗ hiện tượng bóng ma liên quan tới",
+      "choices": [
+        "a value inside a row that another transaction has just modified",
+        "the set of rows a condition matches, not one row",
+        "a row that was read before the other transaction committed it",
+        "two transactions writing the same row in the opposite order"
+      ],
+      "answer": 1,
+      "why": "New rows entering or leaving the range are the phantom, which is why a row lock cannot prevent it and a range lock or true serialisability is needed instead.",
+      "why_vi": "Các dòng mới đi vào hoặc rời khỏi khoảng lọc mới là hiện tượng bóng ma, vì thế khoá dòng không chặn được mà phải khoá khoảng hoặc dùng mức tuần tự thật.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-26",
+      "q": "Several workers pull jobs from one queue table. Adding skip locked to the select for update makes each worker",
+      "q_vi": "Nhiều tiến trình cùng lấy việc từ một bảng hàng đợi. Thêm skip locked vào select for update khiến mỗi tiến trình",
+      "choices": [
+        "wait for the row that another worker is already holding",
+        "read the rows without taking any lock on them at all",
+        "step over the rows another worker holds and take the next free ones instead",
+        "retry the statement when the other worker commits"
+      ],
+      "answer": 2,
+      "why": "Without it the workers queue up behind one another and the extra processes buy nothing. With it the table behaves like a queue with several consumers, at the price of no guaranteed order of service.",
+      "why_vi": "Không có nó thì các tiến trình xếp hàng sau nhau và việc thêm tiến trình chẳng mua được gì. Có nó thì bảng cư xử như một hàng đợi nhiều bên tiêu thụ, đổi lại không còn bảo đảm thứ tự phục vụ.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-27",
+      "q": "Building an index concurrently on a live table costs you",
+      "q_vi": "Xây chỉ mục theo kiểu concurrently trên một bảng đang chạy phải trả giá bằng",
+      "choices": [
+        "the right to query that table while the build is running",
+        "a full rewrite of the table into a new file, which doubles the disk it needs",
+        "the statistics on that table, which have to be gathered again",
+        "a longer build and an invalid index left behind on failure"
+      ],
+      "answer": 3,
+      "why": "It trades time for availability by making two passes over the table and waiting for the open transactions. A failed run leaves a half built index that must be dropped by hand before trying again.",
+      "why_vi": "Nó đổi thời gian lấy tính sẵn sàng bằng cách quét bảng hai lượt và chờ các giao dịch đang mở. Một lần chạy hỏng để lại chỉ mục dựng dở, phải xoá bằng tay trước khi làm lại.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-28",
+      "q": "A user saves a profile and the next page, served by a replica, still shows the old values. The targeted fix is",
+      "q_vi": "Người dùng lưu hồ sơ và trang kế tiếp, do bản sao phục vụ, vẫn hiện giá trị cũ. Cách sửa nhắm trúng vấn đề là",
+      "choices": [
+        "routing that user to the primary for a short while after a write",
+        "raising the isolation level of the write transaction to serializable",
+        "adding a second replica so that the load on the first one falls",
+        "caching the page in the browser so the old values stay hidden"
+      ],
+      "answer": 0,
+      "why": "The replica is behind by design, so the answer is to send the reads of that one user where the write landed. A stricter isolation level changes nothing, because the two reads happen on different machines.",
+      "why_vi": "Bản sao chậm hơn là do thiết kế, nên câu trả lời là đưa các lần đọc của riêng người đó về nơi đã ghi. Nâng mức cô lập không đổi được gì, vì hai lần đọc diễn ra trên hai máy khác nhau.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-29",
+      "q": "A good shard key for a student records system is one that",
+      "q_vi": "Một khoá phân mảnh tốt cho hệ thống hồ sơ sinh viên là khoá",
+      "choices": [
+        "groups the newest records together so that recent queries stay local",
+        "spreads the load evenly and keeps related rows together",
+        "changes rarely enough for the rows never to move between shards",
+        "carries a small number of distinct values across the whole table"
+      ],
+      "answer": 1,
+      "why": "Even spread stops one machine becoming the bottleneck, and locality stops ordinary queries turning into cross machine work. Few distinct values guarantee the first property fails.",
+      "why_vi": "Rải đều giúp không máy nào thành nút thắt, còn tính cục bộ giúp truy vấn thường không biến thành việc liên máy. Ít giá trị phân biệt thì cầm chắc tính chất thứ nhất bị hỏng.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-30",
+      "q": "Raising the size of a connection pool far above the number of processor cores usually",
+      "q_vi": "Nâng kích thước bể kết nối lên cao hơn hẳn số nhân xử lý thường",
+      "choices": [
+        "raises the throughput roughly in proportion to the sessions added",
+        "removes any need to close idle sessions after a silent period",
+        "hurts, since the sessions then fight over the same cores",
+        "shifts the memory cost from the database onto the application side"
+      ],
+      "answer": 2,
+      "why": "Beyond the point where the cores are busy, more sessions add context switching and lock contention rather than work done. The queue belongs in the pool, where waiting is cheap.",
+      "why_vi": "Qua mốc các nhân đã bận, thêm phiên chỉ thêm việc chuyển ngữ cảnh và tranh khoá chứ không thêm việc hoàn thành. Chỗ để xếp hàng là ở bể kết nối, nơi việc chờ rẻ hơn nhiều.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-31",
+      "q": "In a warehouse, the name and the address of a faculty belong in",
+      "q_vi": "Trong kho dữ liệu, tên và địa chỉ của một khoa thuộc về",
+      "choices": [
+        "a dimension table, where one row describes one faculty",
+        "the fact table itself, so that no join is needed at report time",
+        "a staging table that the warehouse reloads every single night",
+        "a materialized view built over the fact table alone"
+      ],
+      "answer": 0,
+      "why": "Descriptive attributes belong beside the entity they describe, while the fact table carries measurements and keys. Copying them into the fact table freezes them at load time and destroys any history.",
+      "why_vi": "Thuộc tính mô tả nằm cạnh thực thể mà nó mô tả, còn bảng sự kiện mang số đo và khoá. Chép chúng vào bảng sự kiện là đóng băng chúng lúc nạp và xoá sạch lịch sử.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-32",
+      "q": "A dimension handled as slowly changing of the second type answers the question",
+      "q_vi": "Một chiều xử lý theo kiểu thay đổi chậm loại hai trả lời được câu hỏi",
+      "choices": [
+        "which value is the correct one for that entity right now",
+        "what the value was on the date of the fact",
+        "how many times the value has been changed since the start",
+        "who made the change and from which application it came"
+      ],
+      "answer": 1,
+      "why": "A new row is opened for every change and the old one is closed with an end date, so each fact joins to the version in force at its own moment. Overwriting the row would silently rewrite last year reports.",
+      "why_vi": "Mỗi lần thay đổi mở một dòng mới và đóng dòng cũ bằng ngày kết thúc, nên mỗi sự kiện nối tới đúng phiên bản đang có hiệu lực ở thời điểm của nó. Ghi đè lên dòng cũ sẽ âm thầm viết lại báo cáo năm ngoái.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-33",
+      "q": "An audit table is kept strictly append only, with no update and no delete, because",
+      "q_vi": "Bảng nhật ký kiểm toán chỉ cho ghi thêm, không sửa và không xoá, vì",
+      "choices": [
+        "the engine refuses to index a table that accepts updates",
+        "appending rows is the only operation a replica can do",
+        "a record that anyone can edit afterwards proves nothing about what really happened",
+        "the table would otherwise need a primary key of its own"
+      ],
+      "answer": 2,
+      "why": "The value of the trail rests entirely on the fact that nobody can go back and tidy it. That is why the write privilege on such a table is granted narrowly and the corrections are appended as new rows.",
+      "why_vi": "Giá trị của vết kiểm toán nằm hoàn toàn ở chỗ không ai quay lại dọn dẹp được. Vì vậy quyền ghi lên bảng đó được cấp rất hẹp và các đính chính được ghi thêm thành dòng mới.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-34",
+      "q": "An erasure request collides with an audit table that must not be altered. The workable line is",
+      "q_vi": "Yêu cầu xoá dữ liệu cá nhân va vào một bảng kiểm toán không được phép sửa. Hướng khả thi là",
+      "choices": [
+        "deleting the audit rows as well, since the request outranks every other duty",
+        "refusing the request outright, because the audit obligation came first in time",
+        "copying the audit table elsewhere before the deletion takes place",
+        "stripping the identifying fields and keeping the event under a token"
+      ],
+      "answer": 3,
+      "why": "The event that something happened is what the trail needs, and the name of the person usually is not. Replacing the identifiers with an irreversible token keeps the counts honest while the person disappears.",
+      "why_vi": "Cái mà vết kiểm toán cần là việc đã xảy ra chuyện gì, còn tên người thì thường không cần. Thay định danh bằng một mã không thể đảo ngược giúp các con số vẫn trung thực trong khi con người thì biến mất.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-35",
+      "q": "Of the two recovery targets, the recovery point objective is the one that states",
+      "q_vi": "Trong hai mốc phục hồi, mốc điểm phục hồi là mốc phát biểu",
+      "choices": [
+        "how long the restore may take, counting from the moment of the first alarm",
+        "how much recent work the organisation agrees to lose, measured in time",
+        "how often the backup job is scheduled to run each night",
+        "how many copies of the backup are kept in another location"
+      ],
+      "answer": 1,
+      "why": "One number bounds the data you are willing to lose, the other bounds how long you may be down. They drive different spending, since one buys more frequent copies and the other buys a faster path back.",
+      "why_vi": "Một con số chặn lượng dữ liệu bạn chấp nhận mất, con số kia chặn thời gian được phép ngừng hoạt động. Hai mốc dẫn tới hai khoản chi khác nhau, một bên mua bản sao dày hơn, một bên mua đường quay lại nhanh hơn.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-36",
+      "q": "A table partitioned by month has to carry the month column inside its primary key because",
+      "q_vi": "Bảng phân mảnh theo tháng buộc phải có cột tháng nằm trong khoá chính vì",
+      "choices": [
+        "uniqueness is enforced per partition, so the key must name the partition",
+        "the engine keeps the partitions sorted by the primary key of the parent",
+        "a partitioned table is otherwise refused any unique constraint at all",
+        "the month column is what the planner uses when it builds statistics"
+      ],
+      "answer": 0,
+      "why": "Each partition owns its own index, and no cheap way exists to check a value against every partition at once. The partition column therefore has to be part of any key the engine is asked to enforce.",
+      "why_vi": "Mỗi mảnh có chỉ mục riêng, và không có cách rẻ nào để kiểm một giá trị trên toàn bộ các mảnh cùng lúc. Vì vậy cột phân mảnh buộc phải nằm trong mọi khoá mà máy được yêu cầu bảo đảm.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-37",
+      "q": "Refreshing a materialized view concurrently rather than in the plain way requires",
+      "q_vi": "Làm mới khung nhìn vật chất hoá theo kiểu concurrently thay vì kiểu thường đòi hỏi",
+      "choices": [
+        "the view to be defined over exactly one base table",
+        "the refresh to run inside an explicit transaction block",
+        "the view to hold fewer rows than the memory granted to the query, which is the harder condition",
+        "a unique index on the view, and it costs a longer refresh"
+      ],
+      "answer": 3,
+      "why": "The unique index is what lets the engine compute the difference and apply it in place, so readers are never blocked. The price is a refresh that writes more and takes longer than a full rebuild.",
+      "why_vi": "Chính chỉ mục duy nhất cho phép máy tính ra phần chênh lệch và áp tại chỗ, nhờ vậy bên đọc không bị chặn. Cái giá là một lần làm mới ghi nhiều hơn và lâu hơn so với dựng lại toàn bộ.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-38",
+      "q": "Deleting a single parent row takes minutes on a system with a very large child table. The usual cause is",
+      "q_vi": "Xoá một dòng cha mất vài phút trên hệ thống có bảng con rất lớn. Nguyên nhân thường gặp là",
+      "choices": [
+        "the parent table carrying far too many indexes of its own",
+        "the isolation level of that session being higher than read committed",
+        "no index on the child side of the key",
+        "the delete running outside an explicit transaction block"
+      ],
+      "answer": 2,
+      "why": "Every delete of a parent makes the engine look for referencing rows, and without an index that search is a full scan of the child table. Declaring the key does not create the index on the child side for you.",
+      "why_vi": "Mỗi lần xoá dòng cha, máy phải đi tìm các dòng tham chiếu, và không có chỉ mục thì lần tìm đó là một lượt quét toàn bộ bảng con. Khai báo khoá ngoại không tự tạo chỉ mục ở phía bảng con.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-39",
+      "q": "Taking a random universally unique identifier as the clustered key of a very large table tends to",
+      "q_vi": "Lấy một định danh duy nhất toàn cục sinh ngẫu nhiên làm khoá gom cụm cho bảng rất lớn thường",
+      "choices": [
+        "make the key smaller than an ordinary integer counter would ever be",
+        "remove the need for any index on the identifier column at all",
+        "scatter the inserts across the tree, so the cache stops helping",
+        "stop two rows colliding, which no other key design can offer"
+      ],
+      "answer": 2,
+      "why": "A counter appends to one hot leaf page that stays in memory, while random values touch a different page each time. Ordered variants of the identifier exist precisely to keep the uniqueness and recover the locality.",
+      "why_vi": "Bộ đếm ghi nối vào một trang lá nóng luôn nằm trong bộ nhớ, còn giá trị ngẫu nhiên mỗi lần chạm một trang khác. Các biến thể có thứ tự của định danh sinh ra đúng để giữ tính duy nhất mà lấy lại tính cục bộ.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-40",
+      "q": "Holding an amount of money in a binary floating point column leads to",
+      "q_vi": "Giữ số tiền trong một cột dấu chấm động nhị phân dẫn tới",
+      "choices": [
+        "arithmetic slower than a decimal type would give you",
+        "a hard limit of two digits after the decimal point",
+        "rounding that the engine performs on every write",
+        "totals that disagree with the same sum computed row by row, because the values are not represented exactly"
+      ],
+      "answer": 3,
+      "why": "A value such as one tenth has no finite binary form, so the error accumulates differently depending on the order of addition. A decimal or integer type counting the smallest unit removes the question entirely.",
+      "why_vi": "Một giá trị như một phần mười không có dạng nhị phân hữu hạn, nên sai số tích luỹ khác nhau tuỳ thứ tự cộng. Kiểu thập phân hoặc kiểu nguyên đếm theo đơn vị nhỏ nhất xoá hẳn vấn đề này.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-41",
+      "q": "A timestamp with time zone column in Postgres actually stores",
+      "q_vi": "Cột timestamp with time zone trong Postgres thực chất lưu",
+      "choices": [
+        "one instant, normalised to a single reference",
+        "the local wall clock reading together with the name of the zone",
+        "the offset from the reference in minutes beside the local reading",
+        "the local reading only, with the zone kept in the session settings"
+      ],
+      "answer": 0,
+      "why": "The zone is used on the way in and on the way out but is never kept, so two clients in two countries see the same instant differently and agree on the ordering. Storing the zone of the event needs a separate column.",
+      "why_vi": "Múi giờ được dùng lúc ghi vào và lúc đọc ra nhưng không được lưu lại, nên hai máy khách ở hai nước nhìn cùng một thời điểm theo hai cách mà vẫn thống nhất về thứ tự. Muốn giữ múi giờ của sự kiện thì phải có cột riêng.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-42",
+      "q": "Two accounts get created for one address written in different letter cases. The clean guard is",
+      "q_vi": "Hai tài khoản được tạo cho cùng một địa chỉ viết khác kiểu chữ hoa chữ thường. Lớp chắn sạch sẽ là",
+      "choices": [
+        "trimming and lowering the address inside the application before every insert",
+        "a unique index on the lowered form of the address column",
+        "a check constraint refusing any capital letter in that column",
+        "a nightly job that merges the duplicate accounts"
+      ],
+      "answer": 1,
+      "why": "Only the engine sees every writer, so a rule enforced in one application is a rule that some import script will bypass. The same index also serves the case insensitive lookup the login page performs.",
+      "why_vi": "Chỉ có máy mới nhìn thấy mọi bên ghi, nên quy tắc đặt trong một ứng dụng là quy tắc mà một kịch bản nhập liệu nào đó sẽ đi vòng qua. Chính chỉ mục ấy còn phục vụ luôn lần tra không phân biệt hoa thường của trang đăng nhập.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-43",
+      "q": "Identifiers produced by a sequence show gaps after a busy day. The correct reading is",
+      "q_vi": "Các định danh do một chuỗi sinh ra có khoảng trống sau một ngày bận rộn. Cách hiểu đúng là",
+      "choices": [
+        "that this is normal, since a rolled back transaction never gives its number back",
+        "that the table has lost rows and needs to be restored",
+        "that the sequence is misconfigured and should be reset",
+        "that two sessions were granted the same number twice"
+      ],
+      "answer": 0,
+      "why": "A sequence is deliberately outside the transaction, otherwise every writer would queue behind the counter. Anything that must be gapless, such as an invoice number, needs its own counter and its own contention.",
+      "why_vi": "Chuỗi sinh số được đặt cố ý ra ngoài giao dịch, nếu không mọi bên ghi sẽ phải xếp hàng sau bộ đếm. Thứ gì bắt buộc liên tục, ví dụ số hoá đơn, phải có bộ đếm riêng và chấp nhận sự tranh chấp riêng của nó.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-44",
+      "q": "A status column with a fixed set of values is better held in a lookup table than in an enumerated type when",
+      "q_vi": "Cột trạng thái có tập giá trị cố định nên đặt trong bảng tra cứu thay vì kiểu liệt kê khi",
+      "choices": [
+        "the set is small enough for the engine to keep the whole of it in cache",
+        "the application already validates the value before it writes anything",
+        "the set changes over time and each value carries a label of its own",
+        "the column belongs to the primary key of that same table"
+      ],
+      "answer": 2,
+      "why": "A lookup row can be added, renamed or given a description without touching the type definition or holding a lock on the table. An enumerated type is the better answer only when the set is genuinely fixed.",
+      "why_vi": "Một dòng tra cứu có thể được thêm, đổi tên hay gắn mô tả mà không phải động vào định nghĩa kiểu hay giữ khoá trên bảng. Kiểu liệt kê chỉ là câu trả lời tốt hơn khi tập giá trị thực sự cố định.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-45",
+      "q": "Placing a rule inside a trigger rather than in the application is justified when",
+      "q_vi": "Đặt một quy tắc vào trigger thay vì trong ứng dụng là hợp lý khi",
+      "choices": [
+        "the rule involves a call to a service outside the database itself",
+        "several applications write the table and all must obey the rule",
+        "the rule is expensive and should run once a night in a batch",
+        "the rule changes often and the team wants to deploy it quickly"
+      ],
+      "answer": 1,
+      "why": "A rule that must hold for every writer belongs where every writer passes. Triggers pay for that with logic hidden from anyone reading the application code, so they suit invariants rather than business flow.",
+      "why_vi": "Quy tắc phải đúng với mọi bên ghi thì nên đặt ở nơi mọi bên ghi đi qua. Cái giá của trigger là phần logic bị giấu khỏi người đọc mã ứng dụng, nên nó hợp với ràng buộc bất biến hơn là với luồng nghiệp vụ.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-46",
+      "q": "Beyond reclaiming space, routine vacuuming matters because it also",
+      "q_vi": "Ngoài việc thu hồi dung lượng, việc dọn dẹp định kỳ còn quan trọng vì nó",
+      "choices": [
+        "rewrites the table so that the rows sit in key order",
+        "rebuilds any index that has grown larger than it should",
+        "compresses the older rows to save room on the disk",
+        "marks pages as fully visible and freezes ancient row versions, which keeps reads cheap and the counter safe"
+      ],
+      "answer": 3,
+      "why": "The visibility map is what allows a scan to stay inside the index, and freezing is what stops the transaction counter wrapping round. A table nobody vacuums slowly loses both properties without any error appearing.",
+      "why_vi": "Bản đồ hiển thị là thứ cho phép một lượt quét ở lại trong chỉ mục, còn việc đóng băng là thứ ngăn bộ đếm giao dịch quay vòng. Bảng không được dọn sẽ từ từ mất cả hai tính chất mà không hiện ra lỗi nào.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-47",
+      "q": "One index has grown far larger than its table justifies while the table itself is healthy. The tool for this is",
+      "q_vi": "Một chỉ mục phình to hơn nhiều so với mức bảng của nó cần, trong khi bảng vẫn bình thường. Công cụ cho việc này là",
+      "choices": [
+        "rebuilding that index, since vacuum never compacts it",
+        "raising the fill factor of the table so its pages leave free room",
+        "collecting fresh statistics so the planner stops choosing it",
+        "raising the autovacuum threshold so that this work runs less often"
+      ],
+      "answer": 0,
+      "why": "Ordinary vacuum returns space for reuse inside the index but never gives the pages back or restores the packing. Doing the rebuild concurrently keeps the table readable while it happens.",
+      "why_vi": "Việc dọn thông thường trả lại chỗ trống để dùng lại bên trong chỉ mục nhưng không trả lại trang và không phục hồi độ nén. Dựng lại theo kiểu concurrently giữ cho bảng vẫn đọc được trong lúc làm.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-48",
+      "q": "A store described as eventually consistent promises that",
+      "q_vi": "Một kho dữ liệu được mô tả là nhất quán cuối cùng hứa rằng",
+      "choices": [
+        "every reader sees the newest write as soon as it is acknowledged",
+        "writes are never lost once the client has a confirmation, and the reads always agree with each other",
+        "the replicas are compared and repaired on a fixed schedule each night",
+        "readers converge on the last write once the updates stop arriving"
+      ],
+      "answer": 3,
+      "why": "The guarantee is about where the replicas end up, not about what any single read returns now. A screen built on such a store has to be designed for a value that may still be a few seconds behind.",
+      "why_vi": "Điều được bảo đảm là các bản sao rồi sẽ dừng ở đâu, chứ không phải một lần đọc bây giờ trả về cái gì. Màn hình dựng trên kho như vậy phải được thiết kế cho một giá trị có thể còn chậm vài giây.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-49",
+      "q": "Filters using the containment operator over a JSONB column stay slow. The index to reach for is",
+      "q_vi": "Bộ lọc dùng toán tử chứa trên một cột JSONB vẫn chậm. Loại chỉ mục cần dùng là",
+      "choices": [
+        "a B tree index built over the whole JSONB column at once",
+        "a GIN index on that column",
+        "a hash index on the key that the filter mentions most often",
+        "a partial index restricted to the rows that hold that key"
+      ],
+      "answer": 1,
+      "why": "This kind of index stores one entry per key and value inside the document, which is what a containment test can look up. A tree over the whole document can only answer a comparison of two entire documents.",
+      "why_vi": "Loại chỉ mục này lưu một mục cho mỗi khoá và giá trị bên trong tài liệu, đúng thứ mà phép thử chứa có thể tra. Cây dựng trên cả tài liệu chỉ trả lời được phép so sánh giữa hai tài liệu nguyên vẹn.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-50",
+      "q": "Deleting readings older than a year from a huge time series table row by row is a poor plan because",
+      "q_vi": "Xoá từng dòng các số đo cũ hơn một năm khỏi bảng chuỗi thời gian rất lớn là kế hoạch tồi vì",
+      "choices": [
+        "the engine refuses any delete that touches more than a million rows",
+        "a delete of that size cannot be placed inside a single transaction",
+        "the indexes would all have to be rebuilt by hand once the delete finished",
+        "it leaves dead rows and bloat, while dropping a partition is instant"
+      ],
+      "answer": 3,
+      "why": "A delete writes as much as an insert and leaves the space to be reclaimed afterwards, so the table stays large and the load lasts hours. Time based partitioning turns the same job into a metadata change.",
+      "why_vi": "Một lệnh xoá ghi nhiều ngang một lệnh chèn và để lại phần dung lượng phải thu hồi sau, nên bảng vẫn to và tải kéo dài hàng giờ. Phân mảnh theo thời gian biến đúng việc đó thành một thay đổi siêu dữ liệu.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-51",
+      "q": "An advisory lock taken at the level of the session rather than the transaction",
+      "q_vi": "Khoá tư vấn lấy ở mức phiên làm việc thay vì mức giao dịch thì",
+      "choices": [
+        "is released the moment the surrounding transaction commits or rolls back",
+        "is enforced by the engine on every table the session touches afterwards",
+        "stays held until it is released or the session ends",
+        "can be taken only once per database across all of the open sessions"
+      ],
+      "answer": 2,
+      "why": "That is convenient for a long job and dangerous with a connection pool, because a returned connection can carry the lock to the next borrower. Releasing it explicitly is not optional in that setting.",
+      "why_vi": "Điều đó tiện cho một công việc dài nhưng nguy hiểm khi có bể kết nối, vì một kết nối trả về có thể mang khoá sang cho người mượn kế tiếp. Trong hoàn cảnh đó, giải phóng khoá tường minh là việc bắt buộc.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-52",
+      "q": "Setting a statement timeout on a reporting role is worth doing because",
+      "q_vi": "Đặt giới hạn thời gian cho câu lệnh trên vai trò làm báo cáo là đáng làm vì",
+      "choices": [
+        "one runaway query then dies instead of holding resources for hours",
+        "the planner will choose a cheaper plan once it knows the limit it has to meet",
+        "the engine can then run that report on a replica unchanged",
+        "the queries below the limit get a higher scheduling priority"
+      ],
+      "answer": 0,
+      "why": "The damage of an accidental report is rarely the report itself but the transaction it holds open and the vacuuming it blocks. A limit converts a silent outage into an error message that somebody sees.",
+      "why_vi": "Thiệt hại của một truy vấn báo cáo lỡ tay hiếm khi nằm ở chính nó mà ở giao dịch nó giữ mở và việc dọn dẹp nó chặn lại. Một giới hạn biến sự cố âm thầm thành một thông báo lỗi có người nhìn thấy.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-53",
+      "q": "When the engine detects a deadlock between two sessions it",
+      "q_vi": "Khi máy phát hiện tình trạng kẹt khoá giữa hai phiên, nó",
+      "choices": [
+        "waits until one of the two sessions gives up on its own",
+        "aborts one session with an error and lets the other finish, so the application is the one that must retry",
+        "rolls back both sessions and restarts them in a fixed order",
+        "escalates the row locks into a single lock over the table"
+      ],
+      "answer": 1,
+      "why": "Detection is automatic, recovery is not. Code that writes to several tables therefore needs a retry path, and a fixed order of access is what keeps the situation rare in the first place.",
+      "why_vi": "Việc phát hiện là tự động, việc phục hồi thì không. Mã ghi vào nhiều bảng vì thế cần một nhánh thử lại, còn một thứ tự truy cập cố định mới là thứ giữ cho tình huống này hiếm xảy ra.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-54",
+      "q": "A backfill over twelve million rows should record its progress in a table so that",
+      "q_vi": "Việc điền bù cho mười hai triệu dòng nên ghi lại tiến độ vào một bảng để",
+      "choices": [
+        "the planner can use that table to estimate how much work is left",
+        "the operation can be audited afterwards by whoever asks for it",
+        "each batch commits and the batch after it sees the previous one",
+        "an interrupted run picks up where it stopped"
+      ],
+      "answer": 3,
+      "why": "A job of that length will be interrupted at some point, and starting again from the first row is how a one night task becomes a one week task. The marker also lets you slow the job down without losing it.",
+      "why_vi": "Một công việc dài như vậy sẽ có lúc bị ngắt, và bắt đầu lại từ dòng đầu tiên chính là cách biến việc một đêm thành việc một tuần. Cái mốc đó còn cho phép giảm tốc công việc mà không mất phần đã làm.",
+      "level": 2
+    },
+    {
+      "id": "qdb2-55",
+      "q": "A column that no code reads any more is still dropped in a later release because",
+      "q_vi": "Một cột không còn mã nào đọc tới vẫn được xoá ở lần phát hành sau vì",
+      "choices": [
+        "the engine needs a full rewrite of the table to reclaim that space",
+        "the drop takes an exclusive lock for as long as that table is large",
+        "an older instance may still be running and writing that column",
+        "the column may be named in a view that nobody has checked yet"
+      ],
+      "answer": 2,
+      "why": "During a rolling deployment the old and the new code run side by side, so the schema has to satisfy both. Removing what the previous version still writes is what turns a routine release into an incident.",
+      "why_vi": "Trong một lần triển khai cuốn chiếu, mã cũ và mã mới chạy song song, nên lược đồ phải làm hài lòng cả hai. Xoá đi thứ mà bản trước vẫn còn ghi chính là cách biến một lần phát hành thường lệ thành một sự cố.",
+      "level": 3
+    },
+    {
+      "id": "qdb2-56",
+      "q": "A report returns forty million rows out of two tables holding six thousand rows each. Look first for",
+      "q_vi": "Một báo cáo trả về bốn mươi triệu dòng từ hai bảng mỗi bảng sáu nghìn dòng. Việc đầu tiên cần tìm là",
+      "choices": [
+        "a duplicate row in one of the two tables that were joined",
+        "an aggregate written without the group by clause that it needs",
+        "a filter written on the wrong side of an outer join clause",
+        "a join with no condition between them"
+      ],
+      "answer": 3,
+      "why": "Six thousand multiplied by six thousand is thirty six million, which is the signature of a missing join condition. Reading the plan for a cross join node settles it in seconds.",
+      "why_vi": "Sáu nghìn nhân sáu nghìn là ba mươi sáu triệu, đó là dấu vân tay của một điều kiện nối bị thiếu. Đọc kế hoạch để tìm nút nối chéo là xong trong vài giây.",
+      "level": 2
     }
   ]
 }

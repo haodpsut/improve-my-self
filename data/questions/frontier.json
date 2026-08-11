@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "frontier",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qfr-1",
@@ -9,7 +9,7 @@
       "q_vi": "Điểm của mô hình phần thưởng tăng đều suốt quá trình huấn luyện trong khi người chấm ẩn danh cho các điểm lưu đó lại đạt đỉnh sớm rồi tụt. Nguyên nhân khả dĩ nhất là",
       "choices": [
         "The policy is exploiting the gap between the learned proxy and the goal the proxy was meant to stand for",
-        "The human raters became progressively less careful as the study went on and stopped reading the answers",
+        "The human raters became progressively less careful as the study went on and stopped reading the answers closely",
         "The reward model was undertrained and needs a much larger preference dataset before it can be used",
         "The learning rate schedule decayed too slowly and the policy never settled into a usable optimum"
       ],
@@ -24,7 +24,7 @@
       "q_vi": "Tính chất khiến phần thưởng kiểm chứng được đáng tin hơn phần thưởng do mô hình chấm là",
       "choices": [
         "It can be applied to any task including open-ended writing, whereas a judge model works only on code",
-        "It produces a much denser signal per step and therefore trains far faster than any alternative scheme",
+        "It produces a much denser signal per step and therefore trains far faster than any alternative scheme available",
         "Its verdict comes from code whose behaviour does not shift as the policy learns to sound more convincing",
         "It requires no training data at all and therefore avoids every form of annotation bias completely"
       ],
@@ -189,7 +189,7 @@
       "q_vi": "Có người báo rằng tác tử của họ đạt điểm cao hơn nhiều khi báo tỉ lệ đúng trong mười lần thay vì một mẫu. Cách đọc đúng khoảng chênh đó là",
       "choices": [
         "The system is more capable than a single run suggests and the higher figure is the fair one to quote",
-        "The evaluation set is contaminated, since a clean set would show no difference between the two figures",
+        "The evaluation set is contaminated, since a clean set would show no difference between the two reported figures",
         "The sampler can reach the answer but nothing in the deployed system can pick it, so only one figure ships",
         "The model is poorly calibrated and recalibrating its probabilities would close most of the observed gap"
       ],
@@ -251,7 +251,7 @@
         "Reasoning tokens that are generated and billed but never returned to the caller in the response",
         "Prompt caching being applied in reverse, which charges a premium for every repeated prefix",
         "The tokeniser splitting your output into more pieces than the character count would suggest",
-        "Retries triggered by rate limits, which are billed twice under most standard pricing schemes"
+        "Retries triggered by rate limits, which are billed twice under most standard pricing schemes today"
       ],
       "answer": 0,
       "why": "Hidden reasoning is generated, counted and charged even when it is not shown. Any cost model built by counting the characters in the visible answer will be wrong by whatever the thinking budget was.",
@@ -263,7 +263,7 @@
       "q": "Experiments show a hidden hint changes a model's answer while never appearing in its written reasoning. For a security paper the important implication is",
       "q_vi": "Thí nghiệm cho thấy một gợi ý ẩn làm đổi đáp án của mô hình trong khi không hề xuất hiện trong phần lý lẽ nó viết ra. Với một bài báo an ninh, hệ quả quan trọng là",
       "choices": [
-        "Reasoning traces should be removed from logs entirely because they leak information about the prompt",
+        "Reasoning traces should be removed from logs entirely because they leak information about the prompt text",
         "The trace is a plausible narrative, so an oversight scheme that only reads it can be misled by design",
         "Chain of thought prompting should be avoided since it demonstrably lowers accuracy on hinted items",
         "Hidden hints must be filtered from inputs, after which the written trace becomes trustworthy"
@@ -338,7 +338,7 @@
       "q": "The main reason a majority vote over samples fails on open-ended writing tasks is",
       "q_vi": "Lý do chính khiến bỏ phiếu đa số trên các mẫu thất bại với nhiệm vụ viết mở là",
       "choices": [
-        "Open tasks require more reasoning tokens, so the sampling budget is exhausted before voting can occur",
+        "Open tasks require more reasoning tokens, so the sampling budget is exhausted before any voting step can occur",
         "Two good answers rarely coincide exactly, so there is no repeated candidate for votes to accumulate on",
         "Writing tasks are usually served at a temperature of zero, which makes all the samples identical",
         "Judge models refuse to score creative text, which removes the mechanism that counts the votes"
@@ -356,7 +356,7 @@
         "Lowering the sampling temperature so that the chain follows a single line of argument to the end",
         "Increasing the budget so the loop has room to work its way past the repeated section on its own",
         "Adding an action that brings in outside information, so the loop can end on something it did not know",
-        "Instructing it in the system prompt not to repeat itself and to be concise in its intermediate steps"
+        "Instructing it in the system prompt not to repeat itself and to be concise in its intermediate steps and summaries"
       ],
       "answer": 2,
       "why": "A degenerate loop cannot terminate on internal state alone, because nothing in the context changes. Only a step that introduces new evidence gives the chain something to resolve against.",
@@ -536,7 +536,7 @@
         "Reduces the number of matrix multiplications, which is the dominant cost during token generation",
         "Cuts the size of the key and value cache, which is what limits how many long sessions fit in memory",
         "Improves quality over standard multi-head attention on tasks that require long range dependencies",
-        "Allows the attention computation to be split across devices without any communication between them"
+        "Allows the attention computation to be split across devices without any communication between them at all"
       ],
       "answer": 1,
       "why": "During generation the binding constraint is usually the cache rather than arithmetic. Sharing key and value projections across a group of heads shrinks the cache directly, which raises concurrency.",
@@ -549,7 +549,7 @@
       "q_vi": "Bạn được báo rằng một bản tự vận hành chỉ hết bộ nhớ với các phiên dài, dù trọng số nằm gọn thoải mái. Nguyên nhân gần như chắc chắn là",
       "choices": [
         "Memory fragmentation from repeated allocation, which a restart of the process would clear",
-        "The tokeniser retaining every intermediate string, which grows without bound across the session",
+        "The tokeniser retaining every intermediate string, which grows without bound across the whole session",
         "Key and value cache growing with length, sessions and layers until it exceeds the remaining memory",
         "Gradient buffers being allocated by mistake because the model was not put into inference mode"
       ],
@@ -638,7 +638,7 @@
       "q": "Someone adds the current timestamp to the top of a shared system prompt. The operational consequence is",
       "q_vi": "Có người thêm dấu thời gian hiện tại lên đầu một câu nhắc hệ thống dùng chung. Hậu quả vận hành là",
       "choices": [
-        "Nothing measurable, since the timestamp is a handful of tokens against a much longer prompt",
+        "Nothing measurable, since the timestamp is a handful of tokens against a much longer prompt body",
         "A slow drift in behaviour as the model begins conditioning its answers on the current date",
         "Every prefix cache hit is destroyed, so cost and time to first token rise across all traffic",
         "Requests are grouped by timestamp for batching, which increases the average queue wait"
@@ -790,7 +790,7 @@
       "choices": [
         "The repetition doubles the instruction tokens, which is significant on a prompt this size",
         "It conflicts with placing stable text first, so it can reduce how much of the prompt is cacheable",
-        "Repeated instructions are down-weighted by the model, so the second copy is effectively ignored",
+        "Repeated instructions are down-weighted by the model, so the second copy is effectively ignored outright",
         "It moves retrieved passages further from the end, which is where they are used most reliably"
       ],
       "answer": 1,
@@ -923,7 +923,7 @@
       "q": "Coding agents work better than most other agent categories mainly because",
       "q_vi": "Tác tử lập trình chạy tốt hơn phần lớn các loại tác tử khác chủ yếu vì",
       "choices": [
-        "Source code is heavily represented in pretraining data, so the base capability is simply stronger",
+        "Source code is heavily represented in pretraining data, so the base capability there is simply stronger",
         "Programming tasks decompose naturally into independent subtasks that can be solved in parallel",
         "A test run is a cheap external checker that tells the truth about whether the step actually worked",
         "Code has a formal grammar, so constrained decoding removes most of the errors before they occur"
@@ -953,7 +953,7 @@
       "q": "You enable parallel tool calls and start seeing results that look complete but are computed against stale state. The root cause is",
       "q_vi": "Bạn bật gọi công cụ song song và bắt đầu thấy kết quả trông đầy đủ nhưng được tính trên trạng thái đã cũ. Nguyên nhân gốc là",
       "choices": [
-        "The provider does not guarantee ordering, so results are returned to the model in a shuffled sequence",
+        "The provider does not guarantee ordering, so results are returned to the model in a shuffled sequence each time",
         "Calls with a real dependency were issued together, so the later one never saw the earlier one's effect",
         "The context window filled up, so earlier results were evicted before the model could combine them",
         "Rate limiting delayed some calls until after the model had already committed to its final answer"
@@ -983,7 +983,7 @@
       "q": "A subagent returns a technically correct result that misses the point of the task. The most likely cause is",
       "q_vi": "Một tác tử con trả về kết quả đúng về mặt kỹ thuật nhưng lệch trọng tâm nhiệm vụ. Nguyên nhân khả dĩ nhất là",
       "choices": [
-        "The subagent used a weaker model than the orchestrator and lacked the capability for the task",
+        "The subagent used a weaker model than the orchestrator and lacked the raw capability needed for the task",
         "Context isolation dropped information the orchestrator had, and the brief did not carry it across",
         "The subagent's tool set was too broad, so it explored options outside the intended scope",
         "The result was truncated on return, so the orchestrator received only part of what was produced"
@@ -1029,7 +1029,7 @@
       "q_vi": "Hai bài báo báo cáo điểm khác nhau cho cùng một tác tử trên cùng một bộ chuẩn đo công khai. Ngoài chuyện nhiễm dữ liệu, giải thích phổ biến nhất là",
       "choices": [
         "One team used a fine-tuned variant while claiming to evaluate the released base model",
-        "The scoring script contained an arithmetic error that inflated one of the two reported figures",
+        "The scoring script contained an arithmetic error that inflated one of the two reported figures upward",
         "The environment moved underneath them, since live sites, packages and services change over time",
         "One team reported the best of several runs while the other reported the mean of runs"
       ],
@@ -1480,7 +1480,7 @@
       "choices": [
         "Evaluating both presentation orders and averaging, which removes the effect of where each answer sits",
         "Raising the judge's sampling temperature so that its verdicts are less deterministic and less biased",
-        "Using a larger judge model, since bigger judges have been shown to be free of this particular tendency",
+        "Using a larger judge model, since bigger judges have been shown to be free of this particular tendency entirely",
         "Controlling for length explicitly, either by matching lengths or by scoring length as a separate factor"
       ],
       "answer": 3,
@@ -1540,7 +1540,7 @@
       "choices": [
         "The questions are usually drawn from public sources that appear in pretraining data verbatim",
         "Scoring is automatic, which removes the human judgement needed to catch a subtly wrong answer",
-        "Distractors are written by people, so they carry surface cues that a careful reader can exploit",
+        "Distractors are written by people, so they carry surface cues that a careful reader can often exploit",
         "Recognising the right option among four is easier than producing the answer with no options given"
       ],
       "answer": 3,
@@ -1748,7 +1748,7 @@
       "q": "An agent framework advertises that its tools return strictly typed structured results. The security property this does not provide is",
       "q_vi": "Một khung tác tử quảng cáo rằng công cụ của nó trả về kết quả có cấu trúc và định kiểu chặt. Tính chất an ninh mà điều đó không mang lại là",
       "choices": [
-        "Protection against malformed results crashing the client library that deserialises the response",
+        "Protection against malformed results crashing the client library that deserialises the response payload",
         "Assurance that the tool server implements the schema version the agent expects to receive",
         "Guarantees that fields required by the schema are present in every result the agent receives",
         "Any assurance that the string values inside those fields are not attacker controlled instructions"
@@ -1802,6 +1802,1056 @@
       "why": "Verifiable rewards, test running agents, external checkers, egress control and task based evaluation are all the same move. Each one places a judgement the model cannot argue with at the point where something is committed.",
       "why_vi": "Phần thưởng kiểm chứng được, tác tử chạy kiểm thử, bộ kiểm bên ngoài, kiểm soát chiều ra và đánh giá theo nhiệm vụ thật đều là cùng một nước đi. Mỗi thứ đặt một phán quyết mà mô hình không cãi được vào đúng chỗ có gì đó được chốt lại.",
       "level": 3
+    },
+    {
+      "id": "qfr2-1",
+      "q": "During post-training, the term that penalises drift away from a frozen earlier copy of the model mainly protects against",
+      "q_vi": "Trong hậu huấn luyện, thành phần phạt việc trôi xa khỏi bản sao đóng băng của chính mô hình chủ yếu bảo vệ trước điều gì",
+      "choices": [
+        "The policy wandering into degenerate text that scores well and reads badly",
+        "The reward model being silently overwritten by gradients from the policy update",
+        "The evaluation set leaking into the reinforcement learning stage",
+        "The learning rate collapsing before the policy improves"
+      ],
+      "answer": 0,
+      "why": "The penalty is a leash back to behaviour the model already had, bought at the price of some exploration.",
+      "why_vi": "Thành phần phạt là sợi dây kéo mô hình về hành vi nó vốn đã có, và cái giá phải trả là bớt đi phần khám phá.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-2",
+      "q": "Keeping a frozen copy of the model throughout post-training is what makes it possible to",
+      "q_vi": "Giữ một bản sao đóng băng của mô hình suốt quá trình hậu huấn luyện là điều cho phép",
+      "choices": [
+        "Restart training from the earlier checkpoint after a run fails partway through",
+        "Measure how far the policy has moved, which is what the drift penalty needs",
+        "Serve the older version to customers while the newer one is still being evaluated",
+        "Cut the memory needed to hold optimiser state"
+      ],
+      "answer": 1,
+      "why": "The frozen copy is the fixed point the drift term is measured against, not a spare model kept for other purposes.",
+      "why_vi": "Bản sao đóng băng là điểm mốc cố định để đo độ trôi, không phải bản dự phòng giữ lại cho việc khác.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-3",
+      "q": "Sampling many answers, keeping only the ones a checker passes, then running ordinary supervised training on the survivors is best called",
+      "q_vi": "Sinh nhiều câu trả lời, chỉ giữ những câu vượt qua bộ kiểm rồi huấn luyện có giám sát thông thường trên phần còn lại, cách làm này nên gọi là",
+      "choices": [
+        "A form of reinforcement learning with a learned value network attached",
+        "A distillation method that needs a stronger teacher model to be available",
+        "A cheap way to turn a verifier into training data",
+        "A data augmentation trick that adds no fresh signal at all"
+      ],
+      "answer": 2,
+      "why": "No policy gradient is involved. The checker filters the model own samples and what follows is plain supervised training.",
+      "why_vi": "Không có gradient chính sách nào ở đây. Bộ kiểm lọc chính các mẫu của mô hình, phần sau đó là huấn luyện có giám sát thông thường.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-4",
+      "q": "Handing part of the labelling work to a model that judges outputs against a written policy scales annotation, and the price paid is that",
+      "q_vi": "Giao một phần việc gán nhãn cho mô hình chấm theo một văn bản chính sách giúp mở rộng quy mô, và cái giá phải trả là",
+      "choices": [
+        "It spreads the blind spots of one policy author, which no amount of extra labelling removes",
+        "It removes the need for a reference model during the update step, so drift is no longer possible",
+        "It makes the reward verifiable because a program computes the final verdict",
+        "It stops the policy from ever producing an answer outside the training distribution entirely"
+      ],
+      "answer": 0,
+      "why": "The judge applies one written document, so every gap in that document is applied uniformly and at scale.",
+      "why_vi": "Bộ chấm áp dụng đúng một văn bản, nên mọi lỗ hổng trong văn bản đó được nhân lên đồng loạt và trên diện rộng.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-5",
+      "q": "Models trained on preferences write longer answers than the base models they came from. The mechanism behind that is",
+      "q_vi": "Mô hình huấn luyện theo sở thích viết câu trả lời dài hơn mô hình gốc của nó. Cơ chế đứng sau là",
+      "choices": [
+        "A longer answer covers more ground, which raises the chance of a factual hit",
+        "Raters and judges mildly prefer length, and the optimiser amplifies any mild preference into a strong habit",
+        "Longer outputs are cheaper to generate once the prompt has already been processed",
+        "The training data was filtered so that short responses became rare in the corpus"
+      ],
+      "answer": 1,
+      "why": "The bias is small in the labels and large in the trained model, since optimisation pushes hard on any consistent direction.",
+      "why_vi": "Thiên lệch trong nhãn thì nhỏ nhưng trong mô hình đã huấn luyện thì lớn, vì tối ưu hoá đẩy rất mạnh theo bất kỳ hướng nào nhất quán.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-6",
+      "q": "What a collection of instruction and response pairs changes about a raw pretrained model is",
+      "q_vi": "Điều mà một tập các cặp chỉ dẫn và phản hồi thay đổi ở mô hình tiền huấn luyện thô là",
+      "choices": [
+        "The amount of world knowledge it has stored in its weights from pretraining",
+        "The maximum sequence length that the attention layers are able to handle",
+        "The numerical precision used to store and serve the weights",
+        "That it answers a request instead of continuing the text"
+      ],
+      "answer": 3,
+      "why": "Pretraining produces a text continuer. Instruction pairs turn it into something that treats the input as a request.",
+      "why_vi": "Tiền huấn luyện cho ra bộ tiếp nối văn bản. Các cặp chỉ dẫn biến nó thành thứ coi đầu vào là một yêu cầu.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-7",
+      "q": "The repeated finding about training corpora that surprises people building their first data pipeline is that",
+      "q_vi": "Phát hiện lặp đi lặp lại về kho dữ liệu huấn luyện làm người lần đầu dựng đường ống dữ liệu bất ngờ là",
+      "choices": [
+        "Discarding weak examples beats adding volume, which reverses the usual instinct",
+        "Deduplication has no measurable effect once the corpus passes a certain size threshold",
+        "Raw volume dominates when the filter is cheap enough to run at scale",
+        "The tokeniser choice outweighs every decision made about the data mixture itself"
+      ],
+      "answer": 0,
+      "why": "Scoring and dropping examples repeatedly turns out to matter more than adding more raw text.",
+      "why_vi": "Chấm điểm rồi loại bỏ ví dụ kém liên tục cho thấy quan trọng hơn việc thêm văn bản thô.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-8",
+      "q": "Two labs train models of the same size on the same total token count and end up with very different characters. The most likely lever is",
+      "q_vi": "Hai phòng thí nghiệm huấn luyện mô hình cùng cỡ trên cùng tổng số token nhưng cho ra hai tính cách rất khác nhau. Đòn bẩy khả dĩ nhất là",
+      "choices": [
+        "The random seed used to initialise the embedding matrices",
+        "The exact number of attention heads inside each transformer block",
+        "The proportions assigned to each data source in the mixture",
+        "The order the optimiser used to walk the data shards"
+      ],
+      "answer": 2,
+      "why": "Mixture weights shape the resulting model at least as much as architecture choices do at a fixed size.",
+      "why_vi": "Tỉ lệ trộn dữ liệu định hình mô hình ít nhất ngang với các lựa chọn kiến trúc khi cùng một cỡ.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-9",
+      "q": "A safety and preference pass leaves your model slightly weaker on two unrelated capability benchmarks. The right way to describe that in writing is",
+      "q_vi": "Một vòng huấn luyện an toàn và sở thích làm mô hình yếu đi đôi chút ở hai bộ đo năng lực không liên quan. Cách mô tả đúng khi viết ra là",
+      "choices": [
+        "A defect in the preference dataset that a larger annotation budget would remove entirely",
+        "An alignment tax, which can usually be reduced and rarely reaches zero",
+        "Ordinary evaluation noise, since two benchmarks cannot support any conclusion at all",
+        "Proof that safety and capability are fundamentally in conflict"
+      ],
+      "answer": 1,
+      "why": "The cost is real and usually shrinkable, and calling it either a plain bug or a law of nature overstates the evidence.",
+      "why_vi": "Cái giá đó là thật và thường thu nhỏ được, gọi nó là lỗi thuần tuý hay là quy luật tự nhiên đều nói quá so với chứng cứ.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-10",
+      "q": "After a refusal pass your assistant starts declining a harmless question about how to store medicine. That outcome is best described as",
+      "q_vi": "Sau một vòng huấn luyện từ chối, trợ lý của bạn bắt đầu từ chối câu hỏi vô hại về cách bảo quản thuốc. Kết cục đó nên được mô tả là",
+      "choices": [
+        "The expected tail of refusal training, a benign request that resembles the shape of a harmful one",
+        "A tokenisation fault, since the medical terms were split in an unusual way",
+        "Evidence that the safety data was mislabelled, which a second pass would fix",
+        "A sign that the model lacks knowledge in this domain"
+      ],
+      "answer": 0,
+      "why": "Refusal training buys real safety and always leaves a tail of unnecessary refusals on benign look-alikes.",
+      "why_vi": "Huấn luyện từ chối mang lại an toàn thật và luôn để lại một cái đuôi từ chối không cần thiết với những câu trông giống.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-11",
+      "q": "A fine-tuned open weights model performs far worse in your own serving stack than it did in the published demo. The first thing to check is",
+      "q_vi": "Một mô hình mở trọng số đã tinh chỉnh chạy trong hệ phục vụ của bạn kém hơn hẳn so với bản trình diễn đã công bố. Thứ cần kiểm tra đầu tiên là",
+      "choices": [
+        "Whether the sampling temperature was left at its provider default value",
+        "Whether the accelerator is running in a lower numerical precision mode",
+        "Whether the stop sequences were copied across from the original demo",
+        "Whether the turn formatting matches what the model was tuned on"
+      ],
+      "answer": 3,
+      "why": "A tuned model depends on the exact token formatting of roles, and a mismatch degrades quality without raising any error.",
+      "why_vi": "Mô hình đã tinh chỉnh phụ thuộc vào đúng cách định dạng token cho từng vai, lệch một chút là chất lượng tụt mà không báo lỗi nào.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-12",
+      "q": "Special tokens that mark who is speaking in a conversation give the model",
+      "q_vi": "Các token đặc biệt đánh dấu ai đang nói trong hội thoại mang lại cho mô hình",
+      "choices": [
+        "A weak structural cue, which no attacker is obliged to respect",
+        "A hard boundary that content from a tool result cannot cross at run time",
+        "A guarantee of ordering between the system text and the user text",
+        "A separate parameter set for each role, since the roles are embedded apart"
+      ],
+      "answer": 0,
+      "why": "Role markers are a formatting convention the model was trained on, not an enforcement mechanism.",
+      "why_vi": "Dấu vai chỉ là quy ước định dạng mà mô hình được huấn luyện theo, không phải cơ chế cưỡng chế.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-13",
+      "q": "As agent trajectories grow longer, the part of reinforcement learning that degrades fastest is",
+      "q_vi": "Khi quỹ đạo của tác tử dài ra, phần xuống cấp nhanh nhất trong học tăng cường là",
+      "choices": [
+        "The stability of the value head under a discounted return target across the whole run",
+        "Deciding which step earned the reward, a problem that grows with every added step",
+        "The wall clock time needed to sample a batch, since every rollout runs longer",
+        "The size of the reward model needed to score a finished trajectory from end to end"
+      ],
+      "answer": 1,
+      "why": "Outcome reward says the run succeeded and says nothing about where along the run it was won or lost.",
+      "why_vi": "Phần thưởng theo kết quả chỉ nói lượt chạy thành công, không nói thắng thua xảy ra ở đâu dọc theo lượt chạy đó.",
+      "level": 3
+    },
+    {
+      "id": "qfr2-14",
+      "q": "Behaviour shifts between two releases although the architecture, the data mixture and the recipe were all unchanged. A frequently missed cause is",
+      "q_vi": "Hành vi thay đổi giữa hai bản phát hành dù kiến trúc, tỉ lệ trộn dữ liệu và quy trình đều giữ nguyên. Một nguyên nhân hay bị bỏ sót là",
+      "choices": [
+        "A silent change in the numerical library used by the training cluster",
+        "An undetected duplicate shard that doubled part of the pretraining corpus",
+        "Labellers slowly reinterpreting the same written guideline",
+        "A different random seed at the preference stage"
+      ],
+      "answer": 2,
+      "why": "What labellers actually reward drifts even when the document does not, and it surfaces later as unexplained behaviour.",
+      "why_vi": "Cái mà người gán nhãn thực sự thưởng bị trôi ngay cả khi văn bản hướng dẫn không đổi, và nó lộ ra sau đó thành hành vi khó giải thích.",
+      "level": 3
+    },
+    {
+      "id": "qfr2-15",
+      "q": "An explicit cap on how many reasoning tokens one request may spend is valuable mainly because it turns",
+      "q_vi": "Việc đặt hạn mức tường minh cho số token suy luận mà một yêu cầu được dùng có giá trị chủ yếu vì nó biến",
+      "choices": [
+        "A fixed property of the model into a dial you set per request and per route",
+        "A quality problem into a cost problem, which the finance team then owns",
+        "A latency problem into a throughput problem when the batch is large",
+        "A serving decision into a training decision"
+      ],
+      "answer": 0,
+      "why": "The budget makes accuracy against latency and cost a per-request choice instead of something fixed at model selection.",
+      "why_vi": "Hạn mức đó biến đánh đổi giữa độ chính xác với độ trễ và chi phí thành lựa chọn theo từng yêu cầu, thay cho thứ cố định lúc chọn mô hình.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-16",
+      "q": "The property of a task that decides whether sampling many answers and picking one will pay off is",
+      "q_vi": "Tính chất của bài toán quyết định việc sinh nhiều câu trả lời rồi chọn một có đáng hay không là",
+      "choices": [
+        "Whether the task has a single correct answer that can be written down briefly enough",
+        "Whether checking an answer is easier than producing one, which is not always true",
+        "Whether the model saw similar material during pretraining, since coverage then follows",
+        "Whether the sampler can be run in parallel across several devices at once"
+      ],
+      "answer": 1,
+      "why": "Selection only helps where a verifier, human or program, tells good from bad more cheaply than a generator produces it.",
+      "why_vi": "Chọn lọc chỉ giúp ở chỗ mà bộ kiểm, dù là người hay chương trình, phân biệt tốt xấu rẻ hơn so với việc sinh ra câu trả lời.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-17",
+      "q": "Cutting a reasoning chain short as soon as an agreement signal fires saves latency and carries one specific risk",
+      "q_vi": "Cắt ngắn chuỗi suy luận ngay khi tín hiệu đồng thuận bật lên giúp tiết kiệm độ trễ và mang theo đúng một rủi ro",
+      "choices": [
+        "Producing an answer in a format the downstream parser was not built to accept",
+        "Losing the ability to bill the request accurately, since the token count varies",
+        "Losing the one step which would have fixed the answer",
+        "Raising the variance of response time across otherwise identical requests"
+      ],
+      "answer": 2,
+      "why": "Agreement across samples is a proxy for correctness, and that proxy is confidently wrong exactly where the model is consistently wrong.",
+      "why_vi": "Sự đồng thuận giữa các mẫu chỉ là bản thay cho tính đúng, và bản thay đó sai một cách tự tin đúng ở chỗ mô hình sai một cách nhất quán.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-18",
+      "q": "For a service whose reasoning length varies from request to request, an average latency figure is nearly useless for",
+      "q_vi": "Với một dịch vụ mà độ dài suy luận thay đổi theo từng yêu cầu, con số độ trễ trung bình gần như vô dụng cho việc",
+      "choices": [
+        "Capacity planning, where the tail of the distribution decides how much hardware you buy",
+        "Billing, which is computed from token counts rather than from elapsed time",
+        "Regression testing, since a fixed task suite is replayed on every change",
+        "Choosing between two providers on price"
+      ],
+      "answer": 0,
+      "why": "Bursts of long reasoning set the peak, so sizing to the mean leaves the service short exactly when it is busiest.",
+      "why_vi": "Những đợt suy luận dài quyết định đỉnh tải, nên tính theo giá trị trung bình sẽ thiếu năng lực đúng vào lúc bận nhất.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-19",
+      "q": "Teams increasingly train a separate scorer whose only job is to say whether a candidate solution is right. The reason is that",
+      "q_vi": "Nhiều nhóm ngày càng huấn luyện một bộ chấm riêng chỉ để nói lời giải ứng viên đúng hay sai. Lý do là",
+      "choices": [
+        "Judging is a narrower task, which a smaller and cheaper model can be trained to do well",
+        "The generator would otherwise need a much longer reasoning budget for every single request",
+        "A scorer can be applied before generation, so bad prompts are rejected early",
+        "Any second model raises accuracy, since two independent errors rarely land on the same answer"
+      ],
+      "answer": 0,
+      "why": "Scoring is a smaller problem than solving, and a generator asked to grade itself is a conflicted measurement.",
+      "why_vi": "Chấm điểm là bài toán nhỏ hơn giải bài, còn bắt bộ sinh tự chấm mình là phép đo có xung đột lợi ích.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-20",
+      "q": "Placing different experts of a sparse model on different devices cuts memory per device and adds",
+      "q_vi": "Đặt các chuyên gia của mô hình thưa lên những thiết bị khác nhau giúp giảm bộ nhớ trên mỗi thiết bị và thêm vào",
+      "choices": [
+        "A second copy of the router that has to stay synchronised across the fleet",
+        "A communication step on every token",
+        "A requirement for the batch size to be a multiple of the expert count",
+        "A separate optimiser state for each device holding a set of experts"
+      ],
+      "answer": 1,
+      "why": "Tokens must travel to wherever their experts live and the results must come back, on every layer of every step.",
+      "why_vi": "Token phải đi tới nơi chuyên gia của nó nằm rồi kết quả phải quay về, ở mọi tầng của mọi bước.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-21",
+      "q": "A sequence layer that carries a fixed-size state forward differs from attention in that its cost",
+      "q_vi": "Tầng chuỗi mang một trạng thái cỡ cố định đi tới khác với chú ý ở chỗ chi phí của nó",
+      "choices": [
+        "Grows with the square of the sequence but uses far less memory in total than attention",
+        "Stays constant regardless of how many tokens the layer has already had to consume",
+        "Grows linearly with length, which is what makes very long inputs affordable",
+        "Depends only on batch size, since the state is shared across all positions"
+      ],
+      "answer": 2,
+      "why": "Constant memory per step and a cost that scales with length rather than with length squared is the point of the design.",
+      "why_vi": "Bộ nhớ hằng số cho mỗi bước và chi phí tăng theo độ dài chứ không theo bình phương độ dài chính là điểm cốt lõi của thiết kế này.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-22",
+      "q": "The change that closed much of the gap between state space layers and attention was letting the recurrence",
+      "q_vi": "Thay đổi khép lại phần lớn khoảng cách giữa tầng không gian trạng thái và chú ý là cho phép hồi quy",
+      "choices": [
+        "Decide from the current token what to keep and what to drop",
+        "Run its updates in both directions across the whole sequence",
+        "Share its parameters with the attention layers above it",
+        "Store an explicit copy of every token it has already seen"
+      ],
+      "answer": 0,
+      "why": "A fixed update rule forgets the same way for every input. Making the gate depend on the token is what recovered selectivity.",
+      "why_vi": "Quy tắc cập nhật cố định thì quên giống nhau với mọi đầu vào. Cho cổng phụ thuộc vào token chính là thứ lấy lại được tính chọn lọc.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-23",
+      "q": "The task that most reliably exposes the limit of a constant-size recurrent state is",
+      "q_vi": "Nhiệm vụ bộc lộ rõ nhất giới hạn của một trạng thái hồi quy cỡ cố định là",
+      "choices": [
+        "Producing a fluent summary of a document several thousand tokens long",
+        "Recalling one rare token exactly, which the state had no room for",
+        "Continuing a piece of text in the same register as the opening paragraph",
+        "Answering a question whose answer appears in the last sentence, since recency helps"
+      ],
+      "answer": 1,
+      "why": "Fluent continuation survives a blurred state. Exact recall of one item does not, because the state has to compress everything.",
+      "why_vi": "Việc viết tiếp trôi chảy vẫn sống sót với trạng thái bị làm mờ. Nhớ chính xác một mục thì không, vì trạng thái buộc phải nén mọi thứ lại.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-24",
+      "q": "Restricting each token to attend only inside a nearby window bounds the cost per layer and still reaches distant positions",
+      "q_vi": "Giới hạn mỗi token chỉ chú ý trong một cửa sổ lân cận giúp chặn chi phí mỗi tầng mà vẫn với tới được các vị trí ở xa",
+      "choices": [
+        "By adding one full attention layer at the very top of the stack",
+        "By caching the keys of distant tokens at a lower precision",
+        "By letting the window slide forward faster than the sequence grows",
+        "By stacking many layers so information hops"
+      ],
+      "answer": 3,
+      "why": "Each layer moves information one window further, so depth buys a reach that a single layer never had.",
+      "why_vi": "Mỗi tầng đẩy thông tin đi thêm một cửa sổ, nên chiều sâu mua được tầm với mà một tầng đơn lẻ không bao giờ có.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-25",
+      "q": "Alternating cheap windowed layers with a few full attention layers is the chosen design because it",
+      "q_vi": "Xen kẽ các tầng cửa sổ rẻ với vài tầng chú ý đầy đủ là thiết kế được chọn vì nó",
+      "choices": [
+        "Keeps long range recall while cutting most of the cache and compute",
+        "Removes any need for position encoding when the window is fixed",
+        "Makes every layer identical, so the kernel can be compiled once and reused",
+        "Lets the model be trained at one length and served at another without change"
+      ],
+      "answer": 0,
+      "why": "A few global layers carry the long range work and the rest of the stack pays only windowed cost.",
+      "why_vi": "Vài tầng toàn cục gánh phần việc tầm xa, phần còn lại của chồng tầng chỉ trả chi phí theo cửa sổ.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-26",
+      "q": "Sharing one single key and value projection across every attention head shrinks the cache dramatically and costs",
+      "q_vi": "Dùng chung đúng một phép chiếu khoá và giá trị cho mọi đầu chú ý làm bộ đệm nhỏ đi rất nhiều và phải trả giá bằng",
+      "choices": [
+        "A large increase in the number of matrix multiplications per token",
+        "Compatibility with rotary position encoding at longer inputs",
+        "Some quality, partly recovered by group sharing",
+        "The ability to run the attention step in a single fused kernel"
+      ],
+      "answer": 2,
+      "why": "The middle point that shares within groups of heads exists precisely because full sharing gave up too much.",
+      "why_vi": "Điểm trung gian chia sẻ trong từng nhóm đầu chú ý tồn tại chính vì việc chia sẻ toàn bộ đánh mất quá nhiều.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-27",
+      "q": "Encoding position by rotating query and key vectors through an angle proportional to index makes attention depend on",
+      "q_vi": "Mã hoá vị trí bằng cách quay vectơ truy vấn và khoá một góc tỉ lệ với chỉ số làm cho chú ý phụ thuộc vào",
+      "choices": [
+        "The absolute index of each token, counted from the start of the whole document",
+        "Relative distance, which is why it extends past training length gracefully",
+        "A learned table of offsets that has to be resized for every longer window that is served",
+        "The layer depth, since deeper layers rotate vectors by a larger angle"
+      ],
+      "answer": 1,
+      "why": "Rotation makes the score a function of the gap between positions, not of where the pair sits in the sequence.",
+      "why_vi": "Phép quay làm điểm chú ý thành hàm của khoảng cách giữa hai vị trí, không phải của chỗ cặp đó nằm trong chuỗi.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-28",
+      "q": "Changing the frequency base of the rotary embedding, usually with a short continued training run, is done in order to",
+      "q_vi": "Đổi cơ số tần số của phép nhúng quay, thường kèm một đợt huấn luyện tiếp ngắn, được làm nhằm",
+      "choices": [
+        "Serve inputs far longer than the model was ever trained on, at a modest extra training cost",
+        "Reduce the size of the cache, which grows with the number of positions stored",
+        "Fix numerical overflow when the sequence passes a certain length",
+        "Remove the position encoding entirely from the attention computation"
+      ],
+      "answer": 0,
+      "why": "The change stretches the range of angles the model has already learned to read, far more cheaply than pretraining long.",
+      "why_vi": "Thay đổi này kéo giãn dải góc mà mô hình đã học được cách đọc, rẻ hơn nhiều so với tiền huấn luyện ở độ dài lớn.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-29",
+      "q": "Squeezing position indices so a longer sequence falls inside the range seen during training extends usable length at the cost of",
+      "q_vi": "Ép chỉ số vị trí để một chuỗi dài hơn rơi vào dải đã thấy khi huấn luyện giúp kéo dài phần dùng được, đổi lại là mất",
+      "choices": [
+        "The ability to reuse any cache computed before the compression was applied",
+        "A large slowdown in the attention kernel at every layer of the stack",
+        "Compatibility with the tokeniser used by the original base model",
+        "Fine positional resolution"
+      ],
+      "answer": 3,
+      "why": "Packing more positions into the same angular range makes neighbouring positions harder to tell apart.",
+      "why_vi": "Nhồi nhiều vị trí hơn vào cùng một dải góc làm các vị trí kề nhau khó phân biệt hơn.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-30",
+      "q": "Running a model on sequences longer than anything it saw during training usually",
+      "q_vi": "Chạy mô hình trên chuỗi dài hơn mọi thứ nó từng thấy khi huấn luyện thường sẽ",
+      "choices": [
+        "Degrades smoothly, which means the usable limit must be measured",
+        "Fails outright with an error as soon as the trained maximum has been exceeded",
+        "Improves recall of early tokens, since attention spreads over more positions",
+        "Produces identical quality at any length"
+      ],
+      "answer": 0,
+      "why": "Nothing breaks at the boundary, so the number you can trust comes from a measurement rather than from a specification sheet.",
+      "why_vi": "Không có gì gãy ngay tại mốc đó, nên con số đáng tin phải đến từ phép đo chứ không từ bảng thông số.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-31",
+      "q": "Allocating the cache in fixed blocks the way an operating system allocates memory pages removes fragmentation and additionally",
+      "q_vi": "Cấp phát bộ đệm theo khối cố định giống cách hệ điều hành cấp phát trang nhớ giúp xoá phân mảnh và ngoài ra còn",
+      "choices": [
+        "Cuts the arithmetic needed for each attention score computation at every layer",
+        "Lets many concurrent requests share one common prefix physically",
+        "Removes any need to evict entries under memory pressure",
+        "Halves the precision used to store keys and values"
+      ],
+      "answer": 1,
+      "why": "Blocks that can be mapped independently let two requests point at the same physical pages for a shared prefix.",
+      "why_vi": "Các khối ánh xạ độc lập cho phép hai yêu cầu trỏ vào cùng những trang vật lý cho phần tiền tố dùng chung.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-32",
+      "q": "Letting new requests join a batch already in flight, rather than waiting for the whole batch to finish, raises throughput and",
+      "q_vi": "Cho yêu cầu mới nhập vào lô đang chạy, thay vì đợi cả lô kết thúc, làm tăng thông lượng và",
+      "choices": [
+        "Removes the dependence of decoding speed on bandwidth when batches are large",
+        "Guarantees that a batch finishes all at once",
+        "Costs something in worst case latency, since a request can wait",
+        "Requires every request in the batch to share an identical prompt prefix"
+      ],
+      "answer": 2,
+      "why": "Slots free up as soon as a sequence ends, and a newly arrived request may still queue behind a very long one.",
+      "why_vi": "Chỗ trống được giải phóng ngay khi một chuỗi kết thúc, và yêu cầu vừa tới vẫn có thể phải xếp sau một chuỗi rất dài.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-33",
+      "q": "The single number that tells you whether more compute or more memory bandwidth would speed up a kernel is",
+      "q_vi": "Con số duy nhất cho biết thêm năng lực tính toán hay thêm băng thông bộ nhớ sẽ làm nhân chạy nhanh hơn là",
+      "choices": [
+        "The ratio of arithmetic performed to bytes moved between memory and the processor",
+        "The batch size at which the kernel saturates, which a profiler reports directly",
+        "The fraction of weights that are zero, since sparsity decides the work done",
+        "The number of layers the model has"
+      ],
+      "answer": 0,
+      "why": "A kernel low on that ratio is waiting on memory, so buying more arithmetic throughput changes nothing.",
+      "why_vi": "Nhân nào có tỉ số đó thấp là đang chờ bộ nhớ, nên mua thêm năng lực tính toán cũng không thay đổi gì.",
+      "level": 3
+    },
+    {
+      "id": "qfr2-34",
+      "q": "Computing attention in tiles that stay inside fast on-chip memory produces exactly the same result much faster. The saving comes from",
+      "q_vi": "Tính chú ý theo ô nhỏ nằm gọn trong bộ nhớ nhanh trên chip cho ra đúng cùng một kết quả nhưng nhanh hơn nhiều. Phần tiết kiệm đến từ",
+      "choices": [
+        "Skipping the scores that fall below a threshold set for each attention head",
+        "Never writing the full score matrix out, which is where the traffic went",
+        "Using a lower precision for the values, since they matter less than the keys",
+        "Reordering the sequence to put nearby tokens in the same tile"
+      ],
+      "answer": 1,
+      "why": "The quadratic intermediate never touches slow memory, and the arithmetic actually performed is unchanged.",
+      "why_vi": "Ma trận trung gian cỡ bình phương không bao giờ chạm vào bộ nhớ chậm, còn phần tính toán thực sự thì không đổi.",
+      "level": 3
+    },
+    {
+      "id": "qfr2-35",
+      "q": "For a team that must fit a model into less memory with the least risk to quality, the safe default is",
+      "q_vi": "Với một nhóm cần nhét mô hình vào ít bộ nhớ hơn mà ít rủi ro chất lượng nhất, lựa chọn mặc định an toàn là",
+      "choices": [
+        "Four bit weights with per-group scales, which most models tolerate",
+        "Pruning individual weights until the target size is reached",
+        "Eight bits, close to lossless on most models and boring in the best sense",
+        "Dropping whole layers, since the deeper ones are known to be redundant"
+      ],
+      "answer": 2,
+      "why": "Eight bit storage is the option that almost never surprises you, and everything more aggressive needs its own testing.",
+      "why_vi": "Lưu ở tám bit là lựa chọn gần như không bao giờ gây bất ngờ, còn mọi mức mạnh tay hơn đều cần kiểm thử riêng.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-36",
+      "q": "Compressing the stored weights while still computing in higher precision is attractive mainly in that it",
+      "q_vi": "Nén trọng số lưu trữ nhưng vẫn tính ở độ chính xác cao hấp dẫn chủ yếu ở chỗ nó",
+      "choices": [
+        "Cuts memory and bandwidth without touching numerical stability",
+        "Removes the need for calibration data, since nothing is measured at run time",
+        "Speeds up the kernels themselves, which is where most of the time goes",
+        "Allows the same checkpoint to serve at several precisions at once"
+      ],
+      "answer": 0,
+      "why": "The maths still runs at the higher precision, so only storage and traffic shrink and the fragile part is untouched.",
+      "why_vi": "Phép tính vẫn chạy ở độ chính xác cao, nên chỉ phần lưu trữ và băng thông nhỏ lại, phần dễ vỡ không bị đụng tới.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-37",
+      "q": "Uniform quantisation of activations collapses quality on many models, and the reason found in practice is that",
+      "q_vi": "Lượng tử hoá đều các giá trị kích hoạt làm sập chất lượng ở nhiều mô hình, và nguyên nhân tìm ra trong thực tế là",
+      "choices": [
+        "A few dimensions carry far larger magnitudes, which stretches the range for the rest",
+        "Activations are stored in a different memory layout from the weights of the same layer",
+        "The calibration set is too small to estimate a distribution",
+        "Quantisation error accumulates across layers, since each layer feeds the next one directly"
+      ],
+      "answer": 0,
+      "why": "The range has to cover the extremes, so most channels end up sharing very few levels.",
+      "why_vi": "Dải lượng tử phải phủ được các giá trị cực trị, nên phần lớn các kênh chỉ còn rất ít mức để dùng chung.",
+      "level": 3
+    },
+    {
+      "id": "qfr2-38",
+      "q": "Simulating low precision during training, set against compressing a finished model with a small calibration set, is honestly summarised as",
+      "q_vi": "Mô phỏng độ chính xác thấp ngay trong lúc huấn luyện, đặt cạnh việc nén một mô hình đã xong bằng tập hiệu chuẩn nhỏ, tóm tắt trung thực là",
+      "choices": [
+        "It is strictly worse at every bit width that anyone actually deploys",
+        "It costs far more and recovers more of the lost quality",
+        "It needs no data at all, unlike calibration",
+        "It applies only to weights and never to activations"
+      ],
+      "answer": 1,
+      "why": "The expensive route buys back quality that a calibration pass leaves on the floor, and the cost is the reason it is not the default.",
+      "why_vi": "Lối tốn kém lấy lại được phần chất lượng mà lối hiệu chuẩn bỏ lại, và chính chi phí là lý do nó không phải mặc định.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-39",
+      "q": "The capability that suffers first when whole transformer blocks are removed and the model is healed with brief further training is",
+      "q_vi": "Năng lực chịu thiệt đầu tiên khi bỏ hẳn một số khối biến áp rồi chữa lành bằng một đợt huấn luyện ngắn là",
+      "choices": [
+        "Fluency of the surface text, which becomes noticeably rougher to read",
+        "Recall of facts memorised during pretraining across every domain tested",
+        "Multi-step reasoning, which needs the depth",
+        "The ability to follow a formatting instruction in the system text"
+      ],
+      "answer": 2,
+      "why": "Depth is what carries a chain of dependent steps, so short answers survive the cut and long ones do not.",
+      "why_vi": "Chiều sâu là thứ gánh chuỗi các bước phụ thuộc nhau, nên câu trả lời ngắn sống sót qua lần cắt còn câu dài thì không.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-40",
+      "q": "Treating the difference between fine-tuned weights and base weights as an object in its own right is useful mainly in that the object",
+      "q_vi": "Coi hiệu số giữa trọng số đã tinh chỉnh và trọng số gốc như một đối tượng riêng có ích chủ yếu ở chỗ đối tượng đó",
+      "choices": [
+        "Can be added to another checkpoint or subtracted from it",
+        "Contains the full training data used to produce the fine-tune",
+        "Is much smaller than a low rank adapter for the same task",
+        "Can be applied without knowing the base model it came from"
+      ],
+      "answer": 0,
+      "why": "Portability is the point. The difference behaves like a direction in weight space that can be moved between checkpoints.",
+      "why_vi": "Tính di chuyển được chính là điểm mấu chốt. Hiệu số đó hành xử như một hướng trong không gian trọng số, có thể mang từ điểm lưu này sang điểm lưu khác.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-41",
+      "q": "Freezing a quantised base model and training only small adapter matrices at higher precision matters mostly in that it",
+      "q_vi": "Đóng băng mô hình gốc đã lượng tử hoá và chỉ huấn luyện vài ma trận bộ chuyển nhỏ ở độ chính xác cao quan trọng chủ yếu ở chỗ nó",
+      "choices": [
+        "Removes the quality gap between adapter tuning and updating every single weight in the model",
+        "Puts fine-tuning of large models on modest hardware, which widens who can do it",
+        "Lets the adapters be merged into the base without a further calibration step",
+        "Makes the base model itself smaller when it is finally served, since it stays quantised"
+      ],
+      "answer": 1,
+      "why": "The base stays compressed and frozen while a few high precision matrices carry the update, and that is what fits on one modest device.",
+      "why_vi": "Phần gốc vẫn nén và đóng băng trong khi vài ma trận độ chính xác cao gánh phần cập nhật, đó là thứ vừa với một máy khiêm tốn.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-42",
+      "q": "Dropping the fixed tokeniser and learning directly over bytes or learned patches repairs several known artefacts, and yet",
+      "q_vi": "Bỏ bộ tách token cố định để học thẳng trên byte hoặc trên mảnh học được sửa được vài khiếm khuyết đã biết, vậy mà",
+      "choices": [
+        "It is banned by the licences of most open weights model families",
+        "It cannot represent any language that uses a non latin script",
+        "It removes the ability to use rotary position encoding",
+        "It is still not the mainstream choice"
+      ],
+      "answer": 3,
+      "why": "The artefacts are real and the switch costs sequence length and compute, so the field has mostly stayed with tokenisers.",
+      "why_vi": "Những khiếm khuyết đó là thật nhưng đổi sang cách này lại tốn thêm độ dài chuỗi và tính toán, nên mảng này phần lớn vẫn giữ bộ tách token.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-43",
+      "q": "The measured pattern that should change how you order a long prompt is that a fact is used most reliably when it sits",
+      "q_vi": "Quy luật đo được đáng để thay đổi cách bạn sắp xếp một câu nhắc dài là một dữ kiện được dùng đáng tin nhất khi nó nằm",
+      "choices": [
+        "Near the start or near the end, with a measurable dip for anything buried between them",
+        "In the exact centre, which is where attention mass concentrates in practice",
+        "Immediately after a heading, since headings act as retrieval anchors",
+        "Anywhere at all inside the advertised window"
+      ],
+      "answer": 0,
+      "why": "The dip in the middle is the whole finding, and it is why placement is a design decision rather than a detail.",
+      "why_vi": "Chỗ tụt ở giữa chính là phát hiện cốt lõi, và đó là lý do vị trí đặt thông tin là quyết định thiết kế chứ không phải chi tiết vụn.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-44",
+      "q": "A cue the model followed reliably in a short prompt is ignored once the prompt grows to many thousands of tokens. The mechanism is",
+      "q_vi": "Một chỉ dẫn mà mô hình tuân thủ đáng tin trong câu nhắc ngắn bị bỏ qua khi câu nhắc phình lên hàng nghìn token. Cơ chế ở đây là",
+      "choices": [
+        "The tokeniser splitting the cue differently once the surrounding text changes",
+        "The cue falling outside the trained maximum length",
+        "Attention mass spread thinner, which leaves the cue weak and not absent",
+        "The serving stack truncating the prompt from the front, since the tail matters more"
+      ],
+      "answer": 2,
+      "why": "Nothing was removed. The same signal simply competes with far more tokens for a fixed amount of attention.",
+      "why_vi": "Không có gì bị bỏ đi cả. Cùng tín hiệu đó chỉ đang phải cạnh tranh với rất nhiều token khác trong một lượng chú ý cố định.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-45",
+      "q": "The cost of an image is counted in tokens rather than in pixels because a picture is first",
+      "q_vi": "Chi phí của một ảnh được tính bằng token chứ không bằng điểm ảnh vì bức ảnh trước hết bị",
+      "choices": [
+        "Compressed by a codec into a short binary string for the model",
+        "Cut into fixed-size pieces that are each encoded separately",
+        "Rendered as text by a recognition stage first",
+        "Downscaled to one fixed resolution the encoder expects"
+      ],
+      "answer": 1,
+      "why": "Resolution turns into patch count, so a bigger picture draws more from the same budget the text is using.",
+      "why_vi": "Độ phân giải biến thành số mảnh, nên ảnh lớn hơn rút nhiều hơn từ chính hạn mức mà phần chữ đang dùng.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-46",
+      "q": "The standard two-part design for feeding pictures into a language model consists of",
+      "q_vi": "Thiết kế hai phần chuẩn để đưa hình ảnh vào mô hình ngôn ngữ gồm có",
+      "choices": [
+        "An image encoder and a small trained layer, which maps features into token space",
+        "A recognition stage and a rewriting stage that turns the page into plain prose",
+        "Two language models, one reading the picture and one writing the final answer text",
+        "A diffusion model and a scorer, since generation and understanding share one whole stack"
+      ],
+      "answer": 0,
+      "why": "The encoder produces features and the projector puts them where the language model can read them like ordinary tokens.",
+      "why_vi": "Bộ mã hoá tạo ra đặc trưng còn lớp chiếu đặt chúng vào chỗ mà mô hình ngôn ngữ đọc được như token thường.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-47",
+      "q": "Splitting a large picture into tiles that are encoded separately, plus one downscaled overview, is done in order to",
+      "q_vi": "Chia một bức ảnh lớn thành các ô mã hoá riêng, kèm một bản thu nhỏ toàn cảnh, được làm nhằm",
+      "choices": [
+        "Cut the token cost, which falls once the picture is divided",
+        "Avoid the encoder, since tiles can be read without one",
+        "Preserve small text, at a token cost that climbs with the area covered",
+        "Keep the aspect ratio unchanged for every input"
+      ],
+      "answer": 2,
+      "why": "Tiles preserve the fine detail that a single downscale destroys, and the bill grows with how much area you tile.",
+      "why_vi": "Các ô nhỏ giữ được chi tiết mảnh mà việc thu nhỏ một lần làm mất, còn hoá đơn thì tăng theo diện tích được chia ô.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-48",
+      "q": "Using position on the page and not only reading order is what allows a parser to treat a table as",
+      "q_vi": "Dùng vị trí trên trang chứ không chỉ thứ tự đọc là điều cho phép bộ phân tích coi một bảng là",
+      "choices": [
+        "A picture that can be passed straight through to the answer without any change",
+        "Structure, which a flat reading order would have destroyed on the way in",
+        "A single cell containing the whole page, since the borders are decorative",
+        "Plain prose the language model can rewrite into a list of sentences"
+      ],
+      "answer": 1,
+      "why": "Rows and columns exist only geometrically, so flattening the page loses the relation the table was there to express.",
+      "why_vi": "Hàng và cột chỉ tồn tại về mặt hình học, nên làm phẳng trang là mất đúng cái quan hệ mà bảng sinh ra để diễn đạt.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-49",
+      "q": "Discrete units produced by an audio codec matter because they let speech be modelled",
+      "q_vi": "Các đơn vị rời rạc do bộ mã âm thanh tạo ra quan trọng vì chúng cho phép mô hình hoá tiếng nói",
+      "choices": [
+        "By a separate network that never shares parameters with the text stack",
+        "Only after a recognition stage has produced a transcript first",
+        "At a fixed sample rate that the decoder is required to match exactly",
+        "In the same autoregressive way as text"
+      ],
+      "answer": 3,
+      "why": "Once audio is a sequence of discrete units, the same next-unit machinery applies and the text bottleneck disappears.",
+      "why_vi": "Khi âm thanh đã là một chuỗi đơn vị rời rạc thì cùng bộ máy đoán đơn vị kế tiếp áp dụng được, và nút thắt qua chữ biến mất.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-50",
+      "q": "Iterative denoising of a whole picture and predicting discrete tokens in order differ most practically in",
+      "q_vi": "Khử nhiễu lặp trên cả bức ảnh và dự đoán token rời rạc theo thứ tự khác nhau rõ nhất trên thực tế ở",
+      "choices": [
+        "How easily each follows a detailed written instruction and how each is steered",
+        "Whether the finished output can be saved in a lossless file format after generation",
+        "The number of colour channels the generator is able to produce in one pass",
+        "Whether a text encoder is needed anywhere in the pipeline at all"
+      ],
+      "answer": 0,
+      "why": "The two families take instruction differently and offer different handles for control, and that is what decides the choice in a product.",
+      "why_vi": "Hai họ mô hình tiếp nhận chỉ dẫn theo cách khác nhau và cho những tay nắm điều khiển khác nhau, đó là thứ quyết định lựa chọn trong sản phẩm.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-51",
+      "q": "The weakness that still shows most visibly in generated video is",
+      "q_vi": "Điểm yếu vẫn lộ ra rõ nhất trong video được sinh ra là",
+      "choices": [
+        "The resolution ceiling, which no released system has pushed past",
+        "Objects losing their identity and their physics from one frame to the next",
+        "The absence of sound, since audio is generated by a separate model",
+        "Colour drift across the clip"
+      ],
+      "answer": 1,
+      "why": "Each frame can look right on its own while the sequence fails to keep the same object being the same object.",
+      "why_vi": "Từng khung hình riêng lẻ trông vẫn ổn trong khi cả chuỗi không giữ được cùng một vật thể vẫn là vật thể đó.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-52",
+      "q": "The capability that moved screen control from a demonstration into something usable was the ability to",
+      "q_vi": "Năng lực đưa việc điều khiển màn hình từ một bản trình diễn thành thứ dùng được là khả năng",
+      "choices": [
+        "Name where a control sits, which is what a click needs before it can be issued",
+        "Read the text on the screen at a resolution high enough for small fonts to survive",
+        "Plan a sequence of actions before touching the application, since replanning is costly",
+        "Recognise the application that is in the foreground"
+      ],
+      "answer": 0,
+      "why": "Everything else was already possible. Turning an intention into a specific location on screen was the missing step.",
+      "why_vi": "Mọi thứ khác vốn đã làm được. Biến ý định thành một vị trí cụ thể trên màn hình mới là bước còn thiếu.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-53",
+      "q": "Feeding an agent the structured element tree of an application instead of a screenshot is cheaper and more precise, and its limitation is",
+      "q_vi": "Đưa cho tác tử cây phần tử có cấu trúc của ứng dụng thay vì ảnh chụp màn hình thì rẻ hơn và chính xác hơn, còn giới hạn của nó là",
+      "choices": [
+        "It cannot express the text of a label, which has to be read visually",
+        "It grows faster than a screenshot when the window is resized",
+        "Many real applications do not expose one that is complete enough to act on",
+        "It only works for applications written in one language"
+      ],
+      "answer": 2,
+      "why": "Where the tree exists it beats pixels, and the agent still has to fall back to the screen everywhere it does not.",
+      "why_vi": "Ở đâu có cây phần tử thì nó hơn hẳn điểm ảnh, còn tác tử vẫn phải quay về đọc màn hình ở mọi chỗ không có.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-54",
+      "q": "Measuring progress by how long a task a system can finish, instead of by scores on single questions, fits agents better and",
+      "q_vi": "Đo tiến bộ bằng độ dài nhiệm vụ mà hệ thống hoàn thành được, thay vì bằng điểm trên từng câu hỏi lẻ, hợp với tác tử hơn và",
+      "choices": [
+        "Is still young as a methodology, which reviewers are right to press on",
+        "Removes the need to report variance across repeated runs",
+        "Only applies to coding tasks, since other domains have no clock to measure",
+        "Has replaced every other capability measure in the published literature already"
+      ],
+      "answer": 0,
+      "why": "The measure matches what agents are asked to do, and the scales, the task sources and the scoring are all still argued over.",
+      "why_vi": "Thước đo này khớp với thứ người ta yêu cầu tác tử làm, còn thang đo, nguồn nhiệm vụ và cách chấm thì vẫn đang tranh cãi.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-55",
+      "q": "Agreeing on one protocol for describing and calling tools mainly moves the hard part of the work",
+      "q_vi": "Thống nhất một giao thức để mô tả và gọi công cụ chủ yếu dời phần khó của công việc",
+      "choices": [
+        "From the model provider onto the team that hosts the tool server",
+        "From plumbing to permissions",
+        "From the prompt into the fine-tuning stage of the model itself",
+        "From integration testing into the design of the schema"
+      ],
+      "answer": 1,
+      "why": "Once every integration is written once, what remains is deciding who may call what, and that part gets no easier.",
+      "why_vi": "Khi mỗi tích hợp chỉ phải viết một lần thì phần còn lại là quyết định ai được gọi cái gì, và phần đó không hề dễ đi.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-56",
+      "q": "Constraining output to a formal grammar rather than only to a data schema becomes necessary when the target is",
+      "q_vi": "Ràng buộc đầu ra theo một văn phạm hình thức chứ không chỉ theo lược đồ dữ liệu trở nên cần thiết khi đích đến là",
+      "choices": [
+        "A response that has to arrive within a fixed latency budget on every single request",
+        "Any output at all, since a schema cannot describe deeply nested objects properly",
+        "A query language or code, which a schema is not expressive enough to cover",
+        "A conversation turn addressed to a person"
+      ],
+      "answer": 2,
+      "why": "Schemas describe shape. Grammars describe languages, and query syntax and source code need the second kind of description.",
+      "why_vi": "Lược đồ mô tả hình dạng. Văn phạm mô tả ngôn ngữ, và cú pháp truy vấn hay mã nguồn cần loại mô tả thứ hai.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-57",
+      "q": "Embedding a unique marker inside a benchmark so its presence in training data can be detected later is a useful check and",
+      "q_vi": "Nhúng một dấu hiệu duy nhất vào bộ đo để sau này phát hiện được nó có mặt trong dữ liệu huấn luyện là phép kiểm hữu ích và",
+      "choices": [
+        "Requires the benchmark to be republished each time a new model appears",
+        "Only works for benchmarks that are distributed as a single plain file",
+        "Proves that the benchmark was not used once the marker is missing",
+        "Is defeated by any filtering step"
+      ],
+      "answer": 3,
+      "why": "Anyone who strips the marker before training keeps the data and loses the evidence, so a clean check proves very little.",
+      "why_vi": "Ai gỡ dấu hiệu trước khi huấn luyện thì vẫn giữ được dữ liệu mà làm mất chứng cứ, nên một phép kiểm sạch chứng minh được rất ít.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-58",
+      "q": "Replacing test items regularly with newly written ones kept private is the only practical answer to contamination, and the price of it is",
+      "q_vi": "Thay câu hỏi trong bộ đo định kỳ bằng câu mới viết và giữ kín là lời đáp khả thi duy nhất cho nhiễm dữ liệu, và cái giá của nó là",
+      "choices": [
+        "Real ongoing effort by people who have to keep writing and vetting fresh items",
+        "A licence fee, which the benchmark owner charges for each evaluation run",
+        "A drop in difficulty, since fresh items are always easier to solve",
+        "The loss of any historical comparison"
+      ],
+      "answer": 0,
+      "why": "Freshness is bought with labour, and there is no version of the idea in which the items write themselves.",
+      "why_vi": "Tính mới mua bằng công sức, và không có phiên bản nào của ý tưởng này mà các câu tự viết ra được.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-59",
+      "q": "A judge model that prefers whichever candidate it reads first is corrected most cheaply by",
+      "q_vi": "Mô hình chấm nghiêng về phương án nó đọc trước được sửa rẻ nhất bằng cách",
+      "choices": [
+        "Fine-tuning the judge on a balanced set of labelled comparisons from people",
+        "Evaluating both orders and averaging, which cancels the effect directly",
+        "Raising the temperature so verdicts stop being deterministic",
+        "Presenting one candidate at a time, since order cannot matter with a single one"
+      ],
+      "answer": 1,
+      "why": "Swapping the order and averaging removes the bias without training anything, and that is why it became the standard protocol.",
+      "why_vi": "Đảo thứ tự rồi lấy trung bình khử được thiên lệch mà không phải huấn luyện gì, và vì thế nó thành quy trình chuẩn.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-60",
+      "q": "Asking which of two outputs is better instead of scoring each one alone is far more reliable and gives you",
+      "q_vi": "Hỏi trong hai đầu ra cái nào tốt hơn thay vì chấm điểm từng cái đáng tin hơn nhiều và cho bạn",
+      "choices": [
+        "An absolute quality number that can be compared across two studies",
+        "A calibrated probability that the answer is factually correct overall",
+        "A guarantee that the same judge would repeat the same verdict later",
+        "Only a relative ordering"
+      ],
+      "answer": 3,
+      "why": "People and judge models compare far better than they score, and what comes back is a ranking rather than a level.",
+      "why_vi": "Con người và mô hình chấm so sánh tốt hơn hẳn so với cho điểm, và thứ nhận lại là một thứ hạng chứ không phải một mức.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-61",
+      "q": "The gap between what raters enjoy reading and what actually solves the problem widens most on",
+      "q_vi": "Khoảng cách giữa thứ người chấm thích đọc và thứ thực sự giải quyết được vấn đề nới rộng nhất ở",
+      "choices": [
+        "Technical work, where a rater cannot check the answer unless they redo it",
+        "Casual conversation, since there is no correct answer to diverge from at all",
+        "Short factual questions with a single answer that anyone can look up in seconds",
+        "Creative writing"
+      ],
+      "answer": 0,
+      "why": "Approval tracks correctness only where the rater can tell, and on specialist work they usually cannot.",
+      "why_vi": "Sự tán thành bám theo tính đúng chỉ ở nơi người chấm phân biệt được, mà với việc chuyên sâu thì họ thường không.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-62",
+      "q": "Reporting the uncertainty implied by a finite test set and a stochastic decoder is routinely skipped, and reporting it would",
+      "q_vi": "Việc báo cáo độ bất định do tập kiểm hữu hạn và bộ giải mã ngẫu nhiên gây ra thường bị bỏ qua, và nếu báo cáo thì nó sẽ",
+      "choices": [
+        "Raise every score, since the interval extends upward as well as downward",
+        "Require a much larger test set, which few groups can afford to build",
+        "Erase most of the differences that papers currently claim between systems",
+        "Make the leaderboard impossible to sort"
+      ],
+      "answer": 2,
+      "why": "Most reported gaps are smaller than the interval around them, so the honest reading is that the systems are not separated.",
+      "why_vi": "Phần lớn khoảng cách được báo cáo còn nhỏ hơn khoảng tin cậy quanh nó, nên cách đọc trung thực là các hệ chưa tách bạch được.",
+      "level": 3
+    },
+    {
+      "id": "qfr2-63",
+      "q": "Raising the batch size in a serving stack buys tokens per second for the fleet and charges",
+      "q_vi": "Tăng cỡ lô trong hệ phục vụ mua được số token mỗi giây cho cả cụm máy và tính phí bằng",
+      "choices": [
+        "A permanent increase in the memory used by the model weights themselves",
+        "A longer wait for each individual request inside the batch",
+        "A loss of numerical determinism across runs",
+        "A drop in quality on every request"
+      ],
+      "answer": 1,
+      "why": "The trade is direct. More requests share the same step, so each one waits for the batch to advance.",
+      "why_vi": "Đánh đổi này rất trực tiếp. Nhiều yêu cầu cùng chia một bước tính, nên mỗi yêu cầu phải chờ cả lô nhích lên.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-64",
+      "q": "For sending confidential material to an external provider, the contractual mode usually treated as the precondition is",
+      "q_vi": "Khi gửi tài liệu mật cho nhà cung cấp bên ngoài, điều khoản thường được coi là điều kiện tiên quyết là",
+      "choices": [
+        "A commitment that the traffic stays inside one named jurisdiction",
+        "A commitment that the model version behind the alias will not change",
+        "A commitment that the provider will publish its evaluation results",
+        "A commitment not to store the input"
+      ],
+      "answer": 3,
+      "why": "Residency and version pinning matter too, and neither of them stops the content from being kept.",
+      "why_vi": "Vấn đề nơi lưu trữ và ghim phiên bản cũng quan trọng, nhưng không cái nào ngăn được việc nội dung bị giữ lại.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-65",
+      "q": "Whether the content you submit may be used to improve a provider models is something that",
+      "q_vi": "Việc nội dung bạn gửi lên có được dùng để cải thiện mô hình của nhà cung cấp hay không là điều mà",
+      "choices": [
+        "Differs by tier and by contract, which the default plan does not tell you",
+        "Is fixed by law in every jurisdiction that regulates data processing at all",
+        "Applies only to inputs and never to the outputs returned to you",
+        "Cannot be changed after an account is opened, since the terms are standard"
+      ],
+      "answer": 0,
+      "why": "The answer sits in the contract and in the tier, and reading a marketing page instead is where teams get caught.",
+      "why_vi": "Câu trả lời nằm trong hợp đồng và trong hạng dịch vụ, đọc trang giới thiệu thay cho hợp đồng là chỗ các nhóm bị hớ.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-66",
+      "q": "Signed metadata about how a file was produced and edited proves origin as long as the chain holds, and once that metadata is stripped it proves",
+      "q_vi": "Siêu dữ liệu có ký về cách một tệp được tạo ra và chỉnh sửa chứng minh được nguồn gốc chừng nào chuỗi còn nguyên, còn khi siêu dữ liệu bị gỡ thì nó chứng minh",
+      "choices": [
+        "That the file was produced by a person and not by a model",
+        "That an edit happened at some point after the file was created",
+        "Nothing at all",
+        "That the signing key was revoked before the file was shared"
+      ],
+      "answer": 2,
+      "why": "Provenance is a positive claim carried by intact metadata. Absence of metadata carries no claim in either direction.",
+      "why_vi": "Nguồn gốc là một khẳng định dương do siêu dữ liệu còn nguyên mang theo. Thiếu siêu dữ liệu thì không mang khẳng định nào theo chiều nào cả.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-67",
+      "q": "A written argument with evidence that a system is safe enough to deploy for a stated use is borrowed from regulated engineering and",
+      "q_vi": "Một lập luận viết ra kèm chứng cứ rằng hệ thống đủ an toàn để triển khai cho một mục đích đã nêu là thứ mượn từ ngành kỹ thuật có quản lý và",
+      "choices": [
+        "Is not yet a mature instrument in this particular setting",
+        "Is required by law before any model may be released publicly",
+        "Replaces both the model card and the system card",
+        "Applies only above a compute threshold"
+      ],
+      "answer": 0,
+      "why": "The form is right and the practice is young, so such a document today is a structured argument rather than a settled standard.",
+      "why_vi": "Hình thức thì đúng nhưng thực hành còn non, nên tài liệu kiểu này hiện nay là một lập luận có cấu trúc chứ chưa phải chuẩn đã định hình.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-68",
+      "q": "The difference between the two standard disclosure documents is that the broader one covers",
+      "q_vi": "Khác biệt giữa hai tài liệu công bố chuẩn là ở chỗ tài liệu rộng hơn bao quát",
+      "choices": [
+        "Only the training data sources and nothing at all about how the model behaves",
+        "The deployed system, which includes the mitigations and the residual risks",
+        "The benchmark scores, since numbers are the part procurement actually reads",
+        "The licence terms and the pricing tiers offered to enterprise buyers"
+      ],
+      "answer": 1,
+      "why": "One document describes a model. The other describes what was actually shipped, including what was accepted as remaining risk.",
+      "why_vi": "Một tài liệu mô tả mô hình. Tài liệu kia mô tả thứ thực sự được đưa ra, gồm cả phần rủi ro còn lại đã chấp nhận.",
+      "level": 1
+    },
+    {
+      "id": "qfr2-69",
+      "q": "Hardening the boundary of the isolated environment an agent runs code in matters because an escape turns",
+      "q_vi": "Gia cố ranh giới của môi trường cách ly nơi tác tử chạy mã là quan trọng vì một lần thoát ra sẽ biến",
+      "choices": [
+        "A slow run into a fast one, since the host has more memory available",
+        "A local error into a logged warning, which the operator can review later",
+        "A parse failure into a retry",
+        "A contained mistake into a general compromise of everything the host can reach"
+      ],
+      "answer": 3,
+      "why": "Inside the box a bad command costs a run. Outside it the same command costs whatever the host can touch.",
+      "why_vi": "Trong hộp cách ly, một lệnh sai chỉ tốn một lượt chạy. Ra ngoài hộp, cũng lệnh đó tốn đúng mọi thứ mà máy chủ chạm tới được.",
+      "level": 2
+    },
+    {
+      "id": "qfr2-70",
+      "q": "Structured testing for whether a model can meaningfully help in a high-harm domain is run before release in order to decide",
+      "q_vi": "Việc kiểm thử có cấu trúc xem mô hình có thể trợ giúp đáng kể trong một lĩnh vực nguy hại cao hay không được chạy trước khi phát hành nhằm quyết định",
+      "choices": [
+        "Which mitigations must ship alongside it, which is a release decision and not a research one",
+        "Whether the paper describing it can be published, since disclosure carries risk",
+        "How the model should be priced relative to the previous generation",
+        "Whether the evaluation suite itself needs to be rewritten"
+      ],
+      "answer": 0,
+      "why": "The evaluation feeds a shipping decision about which controls travel with the model, not an academic finding.",
+      "why_vi": "Phép đánh giá này phục vụ quyết định phát hành về việc những biện pháp kiểm soát nào đi kèm mô hình, không phải một phát hiện học thuật.",
+      "level": 2
     }
   ]
 }

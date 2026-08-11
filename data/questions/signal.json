@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "id": "signal",
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "questions": [
     {
       "id": "qsg-1",
@@ -1622,6 +1622,846 @@
       "why": "Phase detectors are driven by decisions or by matched filter outputs, and both are noisy and biased when the sampling instant is far from the eye centre. There is no rule that the carrier offset is smaller, and in fact a large frequency offset is common at acquisition.",
       "why_vi": "Bộ tách pha được nuôi bằng các quyết định hoặc bằng đầu ra bộ lọc phối hợp, cả hai đều nhiễu và lệch khi thời điểm lấy mẫu còn xa tâm mắt tín hiệu. Không có quy luật nào nói lệch sóng mang nhỏ hơn, thực tế lệch tần lớn là chuyện thường lúc mới bắt tín hiệu.",
       "level": 3
+    },
+    {
+      "id": "qsg2-001",
+      "q": "A band occupies twenty to twenty eight megahertz and an engineer wants to sample it at eighteen megasamples per second. The rate exceeds twice the bandwidth, yet the sampled band comes out folded on itself. What condition was violated?",
+      "q_vi": "Một băng chiếm từ hai mươi đến hai mươi tám mêgahéc và một kỹ sư muốn lấy mẫu ở mười tám mêgamẫu mỗi giây. Tốc độ đó lớn hơn hai lần bề rộng băng, nhưng băng sau lấy mẫu vẫn gập lên chính nó. Điều kiện nào đã bị vi phạm?",
+      "choices": [
+        "Twice the bandwidth is necessary but not sufficient, since the whole band must also fall inside a single Nyquist zone of the chosen rate",
+        "The rate has to exceed twice the highest frequency present, and no other choice can ever be made to work",
+        "The sample and hold circuit needs an aperture shorter than the reciprocal of the highest frequency",
+        "The anti-aliasing filter must be a bandpass rather than a lowpass filter"
+      ],
+      "answer": 0,
+      "why": "Undersampling works only when the signal sits entirely between two consecutive multiples of half the sampling rate. Here the band straddles a boundary at twenty seven megahertz, so its two halves land on top of each other after folding.",
+      "why_vi": "Lấy mẫu dưới ngưỡng chỉ chạy được khi tín hiệu nằm trọn giữa hai bội liên tiếp của nửa tốc độ lấy mẫu. Ở đây băng vắt qua ranh giới hai mươi bảy mêgahéc, nên hai nửa của nó chồng lên nhau sau khi gập.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-002",
+      "q": "A colleague says that the discrete Fourier transform of a finite record is the spectrum of the signal. What is the precise relationship?",
+      "q_vi": "Một đồng nghiệp nói biến đổi Fourier rời rạc của một bản ghi hữu hạn chính là phổ của tín hiệu. Quan hệ chính xác là gì?",
+      "choices": [
+        "It is the discrete time transform of the windowed signal, sampled at equally spaced points on the unit circle",
+        "The transform is exact whenever the record contains a whole number of periods of every component present in the signal",
+        "It is the continuous time transform of the signal, scaled by the sampling interval and truncated to the Nyquist band",
+        "It is an estimate whose variance falls as the record grows, so a long enough record makes the two coincide"
+      ],
+      "answer": 0,
+      "why": "Two distinct operations are involved. Truncation convolves the true spectrum with the transform of the window, and the transform then reads that continuous result only at the bin frequencies, which is why leakage and scalloping are separate effects.",
+      "why_vi": "Có hai phép tác động khác nhau. Việc cắt ngắn tích chập phổ thật với biến đổi của cửa sổ, rồi phép biến đổi chỉ đọc kết quả liên tục đó tại các tần số vạch, và đó là lý do rò rỉ phổ và tổn hao vỏ sò là hai hiện tượng riêng.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-003",
+      "q": "A radix two decimation in time transform takes its input in bit reversed order and returns the output in natural order. What does that ordering actually serve?",
+      "q_vi": "Một biến đổi cơ số hai phân chia theo thời gian nhận đầu vào theo thứ tự đảo bit và trả đầu ra theo thứ tự tự nhiên. Cách sắp xếp đó phục vụ điều gì?",
+      "choices": [
+        "It reduces the number of complex multiplications, because the twiddle factors are then encountered in ascending order of angle",
+        "It keeps the two inputs of every butterfly adjacent in memory, which lets the whole transform run in place",
+        "It avoids the need to compute a separate inverse transform, since a bit reversed input already carries the conjugate symmetry",
+        "It halves the arithmetic precision needed, as the intermediate results then stay bounded by the input magnitude"
+      ],
+      "answer": 1,
+      "why": "The permutation is a bookkeeping device rather than an arithmetic saving. With it, each butterfly overwrites the pair it read, so the algorithm needs no second buffer, and the operation count is set by the factorisation rather than by the ordering.",
+      "why_vi": "Phép hoán vị này là thủ thuật sắp xếp bộ nhớ chứ không phải cách tiết kiệm phép tính. Nhờ nó, mỗi phép bướm ghi đè lên chính cặp vừa đọc nên thuật toán không cần bộ đệm thứ hai, còn số phép tính do cách phân tích thừa số quyết định chứ không do thứ tự.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-004",
+      "q": "In a fixed point transform of length four thousand ninety six, the twiddle factors are stored in a table with the same word length as the data. Which error does that choice introduce?",
+      "q_vi": "Trong một biến đổi số nguyên độ dài bốn nghìn không trăm chín mươi sáu, các hệ số xoay được lưu trong bảng cùng độ dài từ với dữ liệu. Lựa chọn đó gây ra loại sai số nào?",
+      "choices": [
+        "A frequency dependent gain error, since the tabulated angles are unevenly spaced across the unit circle in a fixed point representation",
+        "A deterministic bias in the mean of the output, because rounding a sine table always rounds towards zero on average",
+        "A noise floor that grows with the number of stages, and that limits the dynamic range of the spectrum",
+        "An overflow at the final stage, which appears as a wrapped sign in the largest output bin"
+      ],
+      "answer": 2,
+      "why": "Every stage multiplies by a slightly wrong coefficient, and the errors accumulate as the data pass through the logarithm of the length in stages. The result is a broadband floor that sets how far below the strongest bin a weak component can still be seen.",
+      "why_vi": "Mỗi tầng nhân với một hệ số lệch đi chút ít, và các sai số tích luỹ khi dữ liệu đi qua số tầng bằng lôgarit của độ dài. Kết quả là một nền nhiễu băng rộng, quy định một thành phần yếu còn nhìn thấy được ở mức thấp hơn vạch mạnh nhất bao nhiêu.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-005",
+      "q": "A spectrum is estimated by averaging periodograms from segments of a fixed total record. Halving the segment length doubles the number of segments. What is the net effect?",
+      "q_vi": "Một phổ được ước lượng bằng cách lấy trung bình các chu kỳ đồ từ các đoạn của một bản ghi có tổng độ dài cố định. Rút một nửa độ dài đoạn thì số đoạn tăng gấp đôi. Hiệu ứng ròng là gì?",
+      "choices": [
+        "Both the variance and the resolution improve, since a larger number of segments is averaged over the same amount of data",
+        "Nothing changes, because the total number of samples entering the estimate has stayed exactly the same",
+        "The variance is unchanged and only the bias improves, as shorter windows have lower side lobes",
+        "The variance of the estimate falls while the resolution coarsens, so the choice depends on what the measurement is for"
+      ],
+      "answer": 3,
+      "why": "Averaging independent segments divides the variance by their number, which is the whole point of the method. Each segment is shorter, so its transform has wider bins, and a fixed record therefore buys stability only by giving up the ability to separate close tones.",
+      "why_vi": "Lấy trung bình các đoạn độc lập chia phương sai cho số đoạn, đó chính là mục đích của phương pháp. Mỗi đoạn ngắn hơn nên biến đổi của nó có vạch rộng hơn, và với bản ghi cố định thì độ ổn định chỉ mua được bằng cách bỏ bớt khả năng tách hai âm gần nhau.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-006",
+      "q": "A short time transform is used for analysis and then inverted to resynthesise the signal. Why does the hop size have to be chosen together with the window rather than independently?",
+      "q_vi": "Một biến đổi thời gian ngắn được dùng để phân tích rồi nghịch đảo để tổng hợp lại tín hiệu. Vì sao bước nhảy phải chọn cùng với cửa sổ chứ không chọn riêng?",
+      "choices": [
+        "Because the hop size sets the frequency resolution of the analysis, and the window then has to be long enough to match it",
+        "Because a hop larger than the window leaves gaps in time, and the missing samples cannot be recovered by any interpolation",
+        "Because the shifted windows must sum to a constant, or the output is modulated at the frame rate",
+        "Because the transform is only invertible when the hop divides the transform length exactly, whatever window is used"
+      ],
+      "answer": 2,
+      "why": "Overlap add resynthesis reproduces the input only if the analysis windows placed at the hop spacing add up to a flat envelope. When they do not, the reconstruction carries a periodic amplitude ripple that shows up as sidebands around every component.",
+      "why_vi": "Tổng hợp kiểu chồng và cộng chỉ tái tạo đúng đầu vào nếu các cửa sổ phân tích đặt cách nhau đúng bước nhảy cộng lại thành bao hình phẳng. Khi không được vậy, tín hiệu tái tạo mang gợn biên độ tuần hoàn, hiện ra thành các dải bên quanh mọi thành phần.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-007",
+      "q": "A system has an impulse response that decays as one over n for large n. Is it stable in the bounded input bounded output sense?",
+      "q_vi": "Một hệ có đáp ứng xung suy giảm theo một trên n khi n lớn. Hệ đó có ổn định theo nghĩa đầu vào chặn thì đầu ra chặn không?",
+      "choices": [
+        "Yes, because the impulse response tends to zero and any response that decays to zero cannot produce an unbounded output",
+        "Yes, provided the input is also absolutely summable, which is the case for every signal of practical interest",
+        "No, since a response decaying that slowly cannot be causal and stability is defined only for causal systems",
+        "No, because that sequence is not absolutely summable"
+      ],
+      "answer": 3,
+      "why": "The test is on the sum of the magnitudes, not on the limit of the terms. A harmonic decay tends to zero yet its sum diverges, so an input matching the sign pattern of the response drives the output beyond any bound.",
+      "why_vi": "Phép kiểm đặt trên tổng các giá trị tuyệt đối chứ không đặt trên giới hạn của từng số hạng. Suy giảm kiểu điều hoà tiến về không nhưng tổng của nó phân kỳ, nên một đầu vào khớp mẫu dấu của đáp ứng sẽ đẩy đầu ra vượt mọi cận.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-008",
+      "q": "A recursive filter is specified by a difference equation alone. A colleague claims that this fixes the transfer function and therefore the system. What is missing?",
+      "q_vi": "Một bộ lọc đệ quy chỉ được đặc tả bằng phương trình sai phân. Một đồng nghiệp cho rằng như thế là đã chốt hàm truyền và do đó chốt luôn cả hệ. Cái gì còn thiếu?",
+      "choices": [
+        "The region of convergence, since the same coefficients describe a causal unstable system and a stable anticausal one",
+        "The sampling rate, without which the coefficients cannot be converted into frequencies",
+        "The word length of the arithmetic, because coefficient quantisation changes the pole positions",
+        "The initial conditions, which set the transient but not the steady state response"
+      ],
+      "answer": 0,
+      "why": "A rational transfer function corresponds to several impulse responses, one for each annulus between pole radii. Choosing which one applies is what decides causality and stability, and the difference equation on its own does not make that choice.",
+      "why_vi": "Một hàm truyền hữu tỉ ứng với nhiều đáp ứng xung khác nhau, mỗi vành giữa các bán kính cực cho một đáp ứng. Chọn vành nào mới là thứ quyết định tính nhân quả và tính ổn định, và riêng phương trình sai phân thì không đưa ra lựa chọn đó.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-009",
+      "q": "A design needs a sharp transition and can tolerate ripple, but the passband must stay flat because the signal amplitude will be measured in it. Which classical response fits?",
+      "q_vi": "Một thiết kế cần dải chuyển tiếp hẹp và chấp nhận gợn, nhưng dải thông phải phẳng vì biên độ tín hiệu sẽ được đo trong đó. Đáp ứng cổ điển nào phù hợp?",
+      "choices": [
+        "The type one Chebyshev response, whose equiripple passband gives the sharpest transition for a given order",
+        "The inverse Chebyshev response, which is flat in the passband and places its ripple in the stopband",
+        "The elliptic response, since it is the only family that can meet a sharp transition at a low order",
+        "The Butterworth response, since a maximally flat passband always implies a narrow transition band"
+      ],
+      "answer": 1,
+      "why": "Ripple has to go somewhere once flatness is given up, and the two Chebyshev families differ precisely in where it is placed. Putting it in the stopband keeps the measurement band flat while still buying a much sharper roll off than a maximally flat design.",
+      "why_vi": "Một khi đã bỏ tính phẳng thì gợn phải nằm ở đâu đó, và hai họ Chebyshev khác nhau đúng ở chỗ đặt gợn vào đâu. Đặt gợn vào dải chắn giữ cho dải đo được phẳng mà vẫn có độ dốc cắt hơn hẳn thiết kế phẳng tối đa.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-010",
+      "q": "An eighth order recursive filter is broken into four second order sections. Reordering the sections and rescaling between them changes the measured noise floor by twenty decibels. Why does the order matter at all?",
+      "q_vi": "Một bộ lọc đệ quy bậc tám được tách thành bốn khâu bậc hai. Đổi thứ tự các khâu và chỉnh lại hệ số tỉ lệ giữa chúng làm nền nhiễu đo được thay đổi hai mươi đêxiben. Vì sao thứ tự lại có ảnh hưởng?",
+      "choices": [
+        "The sections have different group delays, and cascading them in a different order would change the overall phase response of the whole filter",
+        "Rounding noise injected early is filtered by the sections that follow, so the pairing and the ordering set how much of it survives",
+        "Each section has its own limit cycle, and only one ordering makes the individual cycles cancel one another",
+        "Coefficient quantisation error depends on the ordering, because the poles of later sections are computed from the earlier ones"
+      ],
+      "answer": 1,
+      "why": "Arithmetically the cascade is the same product in any order, but the noise sources are not. Noise added at one point sees only the remaining sections, so a peaky section placed late amplifies everything before it while placing it early lets the rest attenuate its own noise.",
+      "why_vi": "Về mặt số học, chuỗi ghép cho cùng một tích ở mọi thứ tự, nhưng các nguồn nhiễu thì không. Nhiễu thêm vào tại một điểm chỉ đi qua các khâu còn lại, nên một khâu có đỉnh cộng hưởng đặt ở cuối sẽ khuếch đại mọi thứ trước nó, còn đặt ở đầu thì phần sau lại làm suy giảm chính nhiễu của nó.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-011",
+      "q": "An adaptive canceller with sixty four taps is replaced by one with five hundred and twelve taps at the same step size and the same input power. The residual error grows. What happened?",
+      "q_vi": "Một bộ khử thích nghi sáu mươi tư nhánh được thay bằng bộ năm trăm mười hai nhánh với cùng bước cập nhật và cùng công suất đầu vào. Sai số dư lại tăng lên. Chuyện gì đã xảy ra?",
+      "choices": [
+        "The longer filter has a larger eigenvalue spread, and its slowest mode now converges more slowly than the channel",
+        "The extra taps see only noise, and the algorithm becomes unstable once the number of taps exceeds the length of the true response",
+        "Misadjustment rises in proportion to the number of taps whenever the step size is held fixed, so the residual error grows",
+        "The gradient estimate becomes biased, since the longer regression vector no longer satisfies the independence assumption"
+      ],
+      "answer": 2,
+      "why": "The steady state excess error of a gradient update is set by the step size multiplied by the filter length and the input power. Lengthening the filter without reducing the step therefore buys modelling capability at the price of a noisier solution.",
+      "why_vi": "Sai số dư ở trạng thái dừng của phép cập nhật theo građiên bằng bước cập nhật nhân với chiều dài bộ lọc và công suất đầu vào. Kéo dài bộ lọc mà không giảm bước là đổi khả năng mô hình hoá lấy một nghiệm ồn hơn.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-012",
+      "q": "A rate change by a factor of one hundred and sixty over one hundred and forty seven is implemented as an interpolator followed by a decimator sharing one filter. What must the cutoff of that single filter be?",
+      "q_vi": "Một phép đổi tốc độ theo tỉ lệ một trăm sáu mươi trên một trăm bốn mươi bảy được thực hiện bằng bộ nội suy nối tiếp bộ giảm mẫu dùng chung một bộ lọc. Tần số cắt của bộ lọc chung đó phải là bao nhiêu?",
+      "choices": [
+        "The average of the two constraints, since the filter has to serve the interpolation and the decimation stages equally",
+        "The smaller of the two band edges, because it has to suppress the images and prevent aliasing at the same time",
+        "The larger of the two band edges, as the filter runs at the high intermediate rate where the wider band is available",
+        "The output band edge alone, given that only the final rate determines what has to be preserved"
+      ],
+      "answer": 1,
+      "why": "One filter is doing two jobs at the intermediate rate. Images from upsampling must be removed and the band must be narrow enough for the following downsampling, and only the tighter of those two requirements keeps both from failing.",
+      "why_vi": "Một bộ lọc đang làm hai việc ở tốc độ trung gian. Phải loại các ảnh sinh ra khi chèn mẫu và phải hẹp đủ cho phép giảm mẫu ngay sau đó, chỉ có yêu cầu chặt hơn trong hai mới giữ cho cả hai không hỏng.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-013",
+      "q": "A timing recovery loop needs a delay of a third of a sample. A colleague proposes to round to the nearest sample. What is lost?",
+      "q_vi": "Một vòng khôi phục định thời cần độ trễ bằng một phần ba mẫu. Một đồng nghiệp đề xuất làm tròn về mẫu gần nhất. Cái gì bị mất?",
+      "choices": [
+        "Nothing at all, since a delay of a whole number of samples is equivalent to a fractional one after the loop has converged",
+        "The loop bandwidth has to be widened by the same factor, and the tracking then becomes noisier than the design intended",
+        "The phase response stops being linear, so the symbol pulse is distorted in a way no equaliser can undo",
+        "The timing error is quantised to a whole sample, which leaves a residual offset that the loop cannot remove"
+      ],
+      "answer": 3,
+      "why": "A sampled sequence carries the underlying waveform at instants that are not aligned with the symbol timing, and only interpolation can produce the value in between. Rounding leaves a fixed sampling phase error that shows up as a permanent penalty in the eye.",
+      "why_vi": "Một dãy đã lấy mẫu mang dạng sóng gốc tại các thời điểm không trùng với định thời ký hiệu, và chỉ phép nội suy mới cho được giá trị nằm giữa. Làm tròn để lại sai số pha lấy mẫu cố định, hiện ra thành phần phạt vĩnh viễn trên biểu đồ mắt.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-014",
+      "q": "A multiresolution decomposition splits a signal into a coarse approximation and a sequence of detail bands. What is the defining property of that structure compared with a bank of bandpass filters of equal width?",
+      "q_vi": "Một phân tích đa phân giải tách tín hiệu thành xấp xỉ thô cộng một dãy dải chi tiết. Thuộc tính đặc trưng của cấu trúc đó so với một dàn lọc dải thông đều bề rộng là gì?",
+      "choices": [
+        "Each successive band is half as wide and is sampled half as often, so time resolution is traded for frequency resolution scale by scale",
+        "Each band carries the same number of samples, and the perfect reconstruction property follows from that equality",
+        "The bands do not overlap at all, which is what makes the decomposition invertible without any aliasing cancellation",
+        "The analysis is linear in time and shift invariant, unlike a bank of bandpass filters"
+      ],
+      "answer": 0,
+      "why": "The octave structure is what matches a transient at high frequency and a slow oscillation at low frequency with the same relative precision. Equal width bands force a single compromise on every component instead.",
+      "why_vi": "Cấu trúc theo quãng tám mới là thứ khớp được cả một đột biến ở tần số cao lẫn một dao động chậm ở tần số thấp với cùng độ chính xác tương đối. Các dải đều bề rộng thì áp một sự thoả hiệp duy nhất lên mọi thành phần.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-015",
+      "q": "A maximum likelihood estimate of a power is obtained by squaring the maximum likelihood estimate of the amplitude. A reviewer objects that the result must therefore be biased. How should that be answered?",
+      "q_vi": "Ước lượng hợp lý cực đại của một công suất được lấy bằng cách bình phương ước lượng hợp lý cực đại của biên độ. Một phản biện phản đối rằng như vậy kết quả tất phải chệch. Nên trả lời thế nào?",
+      "choices": [
+        "The construction is valid because the method is invariant under reparameterisation, and bias at finite sample size is a separate matter",
+        "The objection is wrong, since maximum likelihood estimates are unbiased whenever the likelihood is differentiable at the optimum",
+        "The reviewer is right and the construction is invalid, since a nonlinear function of an estimate is never an estimate of the function",
+        "The bias can be removed by dividing through by the Fisher information, which is exactly what the invariance property of the method guarantees"
+      ],
+      "answer": 0,
+      "why": "Invariance says that the maximiser of the likelihood in one parameterisation maps directly to the maximiser in another, so squaring is the correct construction. Unbiasedness was never promised by the method, and for a nonlinear map it generally fails at finite sample size while vanishing asymptotically.",
+      "why_vi": "Tính bất biến nói rằng điểm cực đại của hàm hợp lý trong một cách tham số hoá ánh xạ thẳng sang điểm cực đại trong cách khác, nên bình phương là cách dựng đúng. Phương pháp này chưa bao giờ hứa không chệch, và với ánh xạ phi tuyến thì nó thường chệch ở cỡ mẫu hữu hạn rồi mới tiêu biến khi mẫu lớn.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-016",
+      "q": "Doubling the observation time of a frequency estimator improves its variance bound by far more than a factor of two. Why does frequency behave differently from amplitude in this respect?",
+      "q_vi": "Tăng gấp đôi thời gian quan sát của một bộ ước lượng tần số cải thiện cận phương sai nhiều hơn hẳn hai lần. Vì sao tần số lại khác biên độ ở điểm này?",
+      "choices": [
+        "The information carried about frequency grows with the square of the elapsed time as well as with the number of samples, which makes the bound fall as the cube of the record length",
+        "The estimator becomes efficient only for long records, so the extra improvement is the gap to the bound closing rather than the bound itself moving",
+        "Frequency is a nonlinear parameter, and nonlinear parameters have bounds that fall faster than linear ones",
+        "Noise averages out faster at the higher frequencies that a longer record can resolve"
+      ],
+      "answer": 0,
+      "why": "The derivative of the signal with respect to frequency carries a factor of time, so each sample contributes information weighted by its time index squared. Summing that weight over the record produces the cubic law that makes long coherent observation so valuable.",
+      "why_vi": "Đạo hàm của tín hiệu theo tần số mang thêm một thừa số thời gian, nên mỗi mẫu góp lượng tin có trọng số bằng bình phương chỉ số thời gian của nó. Cộng trọng số đó trên cả bản ghi cho ra quy luật bậc ba, khiến quan sát kết hợp kéo dài trở nên rất đáng giá.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-017",
+      "q": "A detector must decide whether a pulse of unknown amplitude is present in noise of unknown power. Why can the Neyman Pearson recipe not be applied directly?",
+      "q_vi": "Một bộ tách phải quyết định xem có hay không một xung biên độ chưa biết nằm trong nhiễu công suất chưa biết. Vì sao không áp thẳng công thức Neyman Pearson được?",
+      "choices": [
+        "The criterion is defined only for Gaussian noise, and an unknown power makes the distribution non Gaussian",
+        "The criterion requires both hypotheses to be simple, whereas unknown parameters make them composite",
+        "The false alarm probability cannot be defined at all when a nuisance parameter is present in the model",
+        "The likelihood ratio is unbounded when the amplitude is free, so no finite threshold can be chosen"
+      ],
+      "answer": 1,
+      "why": "The optimality argument compares two fully specified distributions. With free parameters there is no single ratio to threshold, so practice substitutes the generalised ratio with parameters replaced by their estimates, and the constant false alarm behaviour then has to be established separately.",
+      "why_vi": "Lập luận tối ưu so sánh hai phân bố đã xác định hoàn toàn. Khi còn tham số tự do thì không có tỉ số duy nhất nào để đặt ngưỡng, nên thực tế dùng tỉ số tổng quát hoá với tham số thay bằng ước lượng của chúng, và tính giữ nguyên xác suất báo động giả phải chứng minh riêng.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-018",
+      "q": "A carrier tracking loop shows a small constant phase offset when the incoming carrier drifts at a steady rate. What does that observation identify?",
+      "q_vi": "Một vòng bám sóng mang cho độ lệch pha nhỏ không đổi khi sóng mang tới trôi tần với tốc độ đều. Quan sát đó nhận diện điều gì?",
+      "choices": [
+        "The loop bandwidth is too narrow for the drift rate, and widening it would remove the offset entirely",
+        "The phase detector has a nonlinear characteristic near its origin, which biases the loop away from the true lock point",
+        "The reference oscillator is drifting the other way, so the two errors partly cancel and leave a residue",
+        "The loop filter has too few integrators for that input"
+      ],
+      "answer": 3,
+      "why": "A ramp in phase is a step in frequency, and the steady state error to it is fixed by the number of poles at the origin in the open loop. Widening the bandwidth shrinks the offset without removing it, whereas adding an integrator drives it to zero.",
+      "why_vi": "Pha biến thiên tuyến tính là một bậc nhảy về tần số, và sai số xác lập với đầu vào đó do số cực tại gốc của vòng hở quyết định. Nới băng thông chỉ làm độ lệch nhỏ đi chứ không xoá được, còn thêm một khâu tích phân thì đưa nó về không.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-019",
+      "q": "An eight element array is expected to give nine decibels of array gain against noise, but a field trial measures only four. The noise is found to be dominated by a few strong interferers. What does that tell you?",
+      "q_vi": "Một dàn tám phần tử được kỳ vọng cho chín đêxiben độ lợi dàn chống nhiễu, nhưng thử nghiệm hiện trường chỉ đo được bốn. Nhiễu hoá ra do vài nguồn gây nhiễu mạnh chi phối. Điều đó cho biết gì?",
+      "choices": [
+        "The array elements are mismatched in gain and phase, so the coherent sum is incomplete and the shortfall equals the calibration error",
+        "The predicted gain assumes noise that is uncorrelated across the elements, which directional interference plainly is not",
+        "The interferers arrive from the direction of the main lobe, and a beamformer cannot separate a wanted signal from an unwanted one that shares its direction",
+        "The element spacing is below half a wavelength, and mutual coupling then reduces the effective aperture of the array"
+      ],
+      "answer": 1,
+      "why": "The familiar figure counts coherent signal addition against incoherent noise addition. A plane wave from an interferer adds coherently at the elements just as the wanted signal does, so rejecting it needs a null placed by the weights rather than the plain aperture gain.",
+      "why_vi": "Con số quen thuộc đó tính việc tín hiệu cộng đồng pha so với nhiễu cộng không đồng pha. Sóng phẳng từ nguồn gây nhiễu cũng cộng đồng pha ở các phần tử hệt như tín hiệu cần, nên muốn loại nó phải đặt điểm không bằng trọng số chứ không nhờ độ lợi khẩu độ thuần tuý.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-020",
+      "q": "A real bandpass recording is converted to its analytic form before the envelope is measured. What does that conversion actually do to the spectrum?",
+      "q_vi": "Một bản ghi dải thông thực được chuyển sang dạng giải tích trước khi đo bao hình. Phép chuyển đó thực chất làm gì với phổ?",
+      "choices": [
+        "It shifts the whole spectrum down to baseband, so that the envelope can be read directly from the magnitude of the result",
+        "It removes the carrier by differentiating the phase, which leaves the amplitude modulation untouched",
+        "It makes the spectrum symmetric about the carrier, which is the condition for the envelope to be single valued",
+        "It suppresses the negative frequency half of the spectrum and doubles the positive half, which leaves a complex signal"
+      ],
+      "answer": 3,
+      "why": "A real signal carries conjugate symmetric halves that both contribute to the magnitude, so the modulus of the real waveform oscillates at the carrier. Keeping one half leaves a complex signal whose modulus is the envelope and whose argument is the instantaneous phase.",
+      "why_vi": "Tín hiệu thực mang hai nửa đối xứng liên hợp, cả hai cùng góp vào biên độ, nên trị tuyệt đối của dạng sóng thực dao động theo sóng mang. Giữ lại một nửa thì còn một tín hiệu phức mà môđun chính là bao hình còn acgumen là pha tức thời.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-021",
+      "q": "A channel meets its magnitude mask but its group delay rises steeply at one band edge. An engineer proposes to cascade an all pass section. What is the cost of that repair?",
+      "q_vi": "Một kênh đạt mặt nạ biên độ nhưng trễ nhóm tăng dốc ở một mép băng. Một kỹ sư đề xuất ghép nối tiếp một khâu toàn thông. Cái giá của cách chữa đó là gì?",
+      "choices": [
+        "The magnitude response is disturbed slightly, and the mask has to be rechecked after the correction has been applied",
+        "The signal to noise ratio falls by the peak of the added delay expressed in decibels relative to the symbol period",
+        "The filter loses causality, since a section that cancels a delay peak has to respond before its input arrives",
+        "The section adds its own delay everywhere"
+      ],
+      "answer": 3,
+      "why": "An all pass section can only add delay, never subtract it, so equalisation works by raising the flat parts up to the peak. Latency therefore grows by roughly the delay spread being corrected, which matters in a loop or in a system with a deadline.",
+      "why_vi": "Khâu toàn thông chỉ có thể thêm trễ chứ không trừ được, nên việc cân bằng là nâng các phần phẳng lên ngang mức đỉnh. Do đó độ trễ tổng tăng thêm gần bằng phần chênh lệch đang được sửa, điều đáng kể trong một vòng kín hoặc trong hệ có hạn chót.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-022",
+      "q": "A minimum variance beamformer outperforms a conventional one in simulation but collapses on real data when the wanted signal is strong. What is the mechanism?",
+      "q_vi": "Một bộ tạo búp sóng phương sai cực tiểu vượt trội bộ thông thường trong mô phỏng nhưng sụp đổ trên dữ liệu thật khi tín hiệu cần lại mạnh. Cơ chế là gì?",
+      "choices": [
+        "The covariance matrix becomes singular when the signal is strong, so the inversion in the weight formula amplifies numerical noise without bound",
+        "The adaptive weights converge more slowly at high signal to noise ratio, so the beamformer never reaches its optimum during the record",
+        "Strong signals drive the receivers into compression, and the resulting harmonics appear as false sources spread across the whole angular range",
+        "A small error in the assumed look direction makes the optimiser treat the wanted signal as an interferer, which it then quietly nulls out"
+      ],
+      "answer": 3,
+      "why": "The criterion minimises output power subject to unit gain in the assumed look direction. If the true direction differs even slightly, the signal appears outside the constraint and the cheapest way to reduce output power is to cancel it, which is why diagonal loading or derivative constraints are added.",
+      "why_vi": "Tiêu chuẩn này cực tiểu hoá công suất đầu ra với ràng buộc độ lợi đơn vị theo hướng nhìn giả định. Nếu hướng thật lệch đi dù chỉ chút ít thì tín hiệu rơi ra ngoài ràng buộc, và cách rẻ nhất để giảm công suất đầu ra chính là khử nó, vì thế người ta thêm tải chéo hoặc ràng buộc đạo hàm.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-023",
+      "q": "A subspace direction finder works well on two independent sources but fails when the second source is a specular reflection of the first. Which repair is appropriate?",
+      "q_vi": "Một bộ định hướng theo không gian con chạy tốt với hai nguồn độc lập nhưng hỏng khi nguồn thứ hai là phản xạ gương của nguồn thứ nhất. Cách chữa nào phù hợp?",
+      "choices": [
+        "Lengthen the observation so that the sample covariance converges to its expected value, which restores the rank of the signal subspace",
+        "Increase the number of elements until it exceeds twice the number of sources present in the scene",
+        "Average the covariance over overlapping subarrays so that the coherent pair is decorrelated",
+        "Replace the subspace method by a conventional beamformer, since only the latter tolerates correlated arrivals in the scene"
+      ],
+      "answer": 2,
+      "why": "Fully correlated arrivals make the source covariance rank deficient, so the signal subspace collapses and no amount of extra data repairs it. Spatial smoothing rebuilds the rank by averaging shifted subarrays, at the price of a smaller effective aperture.",
+      "why_vi": "Các hướng tới tương quan hoàn toàn làm ma trận hiệp phương sai nguồn khuyết hạng, nên không gian con tín hiệu sụp và thêm bao nhiêu dữ liệu cũng không chữa được. Làm trơn không gian dựng lại hạng bằng cách lấy trung bình các mảng con dịch chuyển, đổi lại khẩu độ hiệu dụng nhỏ đi.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-024",
+      "q": "Two dither schemes are compared. One adds a random signal before quantisation, the other adds it and subtracts the identical sequence afterwards. What separates them?",
+      "q_vi": "Hai sơ đồ rung so với nhau. Một bên cộng một tín hiệu ngẫu nhiên trước khi lượng tử hoá, bên kia cộng vào rồi trừ đi đúng dãy đó sau khi lượng tử hoá. Khác nhau ở đâu?",
+      "choices": [
+        "Only the first works in practice, since subtracting a known sequence would reintroduce the correlation that the dither was added to break",
+        "Subtraction removes the added variance as well, so that the error becomes uniform and independent of the input",
+        "Subtraction halves the added noise power, and the remaining half is what decorrelates the quantisation error",
+        "They are equivalent for a busy input, and the difference only appears when the input is a constant"
+      ],
+      "answer": 1,
+      "why": "Adding dither decorrelates the error from the signal but leaves the dither power in the output. When the same sequence is available at the receiving end it can be removed, so the penalty in noise power is avoided while the statistical benefit is kept.",
+      "why_vi": "Cộng tín hiệu rung làm sai số hết tương quan với tín hiệu nhưng vẫn để lại công suất của nó ở đầu ra. Khi đầu nhận có sẵn đúng dãy đó thì trừ đi được, nên tránh được phần phạt về công suất nhiễu mà vẫn giữ lợi ích thống kê.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-025",
+      "q": "A second order noise shaping loop is replaced by a fourth order one at the same oversampling ratio. In band noise falls sharply. What is the accompanying cost?",
+      "q_vi": "Một vòng định dạng nhiễu bậc hai được thay bằng bậc bốn ở cùng tỉ số lấy mẫu vượt. Nhiễu trong băng giảm mạnh. Cái giá đi kèm là gì?",
+      "choices": [
+        "The converter now needs a wider input range, since the higher order loop amplifies the input too",
+        "The latency of the loop grows in proportion to its order, and that delay is what limits the achievable oversampling ratio",
+        "Out of band noise rises steeply, and the loop can go unstable at large inputs unless the modulator is scaled back",
+        "The in band signal to noise ratio becomes dependent on input frequency"
+      ],
+      "answer": 2,
+      "why": "Shaping redistributes rather than removes quantisation noise, so pushing more of it out of band makes the out of band floor much larger and puts a heavier burden on the decimation filter. High order loops also lose stability under large signals, which is why the modulator is scaled back.",
+      "why_vi": "Định dạng nhiễu chỉ phân bố lại chứ không xoá nhiễu lượng tử, nên đẩy thêm phần nhiễu ra ngoài băng sẽ làm nền ngoài băng lớn hơn nhiều và đè nặng lên bộ lọc giảm mẫu. Các vòng bậc cao còn mất ổn định khi tín hiệu lớn, vì thế bộ điều chế phải hạ tỉ lệ.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-026",
+      "q": "A converter sampling a two hundred megahertz input is limited to about forty decibels of signal to noise ratio no matter how many bits the part offers. The clock has one picosecond of rms jitter. What is the correct diagnosis?",
+      "q_vi": "Một bộ chuyển đổi lấy mẫu đầu vào hai trăm mêgahéc bị chặn ở khoảng bốn mươi đêxiben tỉ số tín hiệu trên nhiễu bất kể linh kiện có bao nhiêu bit. Xung nhịp có trôi hiệu dụng một picô giây. Chẩn đoán đúng là gì?",
+      "choices": [
+        "The input amplifier is compressing, and the harmonics set a floor that resolution cannot lower",
+        "The part is being run above its specified full power bandwidth, so the internal track and hold cannot follow the input",
+        "Clock jitter converts into an amplitude error which grows in proportion to the slew rate of the input signal",
+        "Quantisation noise is being folded back into the band, which happens whenever the input frequency approaches the Nyquist limit"
+      ],
+      "answer": 2,
+      "why": "An uncertainty in sampling instant produces an amplitude error equal to the slope of the waveform multiplied by that uncertainty. The slope grows with input frequency, so the resulting ceiling depends on the signal frequency and the clock quality alone and is untouched by extra bits.",
+      "why_vi": "Sai số về thời điểm lấy mẫu tạo ra sai số biên độ bằng độ dốc của dạng sóng nhân với sai số đó. Độ dốc tăng theo tần số đầu vào, nên trần này chỉ phụ thuộc tần số tín hiệu và chất lượng xung nhịp, thêm bit không thay đổi được.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-027",
+      "q": "A transform coder is redesigned so that its basis is derived from the measured covariance of the source rather than fixed in advance. What is gained and what is given up?",
+      "q_vi": "Một bộ mã hoá theo biến đổi được thiết kế lại sao cho cơ sở của nó suy ra từ hiệp phương sai đo được của nguồn thay vì cố định sẵn. Được gì và mất gì?",
+      "choices": [
+        "The basis becomes optimal for energy compaction on that source, but it has to be transmitted or re estimated and it loses the fast algorithm which a fixed basis enjoys",
+        "The coder gains a fast algorithm, since a data dependent basis can always be factorised into butterflies of the same form",
+        "Compression improves and nothing is lost, because the decoder can derive the same basis from the decoded data itself",
+        "Quantisation noise becomes uncorrelated across coefficients, which is the property that a fixed basis can never provide"
+      ],
+      "answer": 0,
+      "why": "A basis of eigenvectors of the covariance decorrelates the coefficients and packs the most energy into the fewest of them, which is exactly optimal. Practical coders keep a fixed basis because its transform costs a fraction as much and needs no side information, and for smooth sources the loss is small.",
+      "why_vi": "Cơ sở gồm các vectơ riêng của hiệp phương sai làm các hệ số hết tương quan và dồn nhiều năng lượng nhất vào ít hệ số nhất, đúng nghĩa tối ưu. Các bộ mã thực tế vẫn giữ cơ sở cố định vì phép biến đổi rẻ hơn nhiều lần và không cần thông tin phụ, còn với nguồn trơn thì phần thiệt là nhỏ.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-028",
+      "q": "A radar cannot maintain phase coherence over the full dwell, so it sums the magnitudes of many short coherent blocks instead. How does the gain compare with one long coherent integration?",
+      "q_vi": "Một rađa không giữ được kết hợp pha suốt cả khoảng lưu, nên nó cộng biên độ của nhiều khối kết hợp ngắn. Độ lợi so với một lần tích luỹ kết hợp dài thì thế nào?",
+      "choices": [
+        "It is the same, since the total energy collected is what determines the achievable signal to noise ratio in either case",
+        "It is higher, because summing magnitudes removes the phase noise that would otherwise degrade the coherent sum",
+        "It grows more slowly than the number of blocks",
+        "It is unpredictable, as the result then depends on the unknown phase relationship between the blocks being combined"
+      ],
+      "answer": 2,
+      "why": "Coherent addition makes amplitudes add while noise powers add, so the ratio improves in proportion to the number of samples. Discarding phase before summing loses that advantage, and the improvement follows roughly the square root of the block count with a further loss at low input ratio.",
+      "why_vi": "Cộng kết hợp làm biên độ cộng lại trong khi công suất nhiễu mới cộng, nên tỉ số cải thiện tỉ lệ với số mẫu. Bỏ pha trước khi cộng là mất lợi thế đó, và mức cải thiện chỉ còn gần theo căn bậc hai của số khối, kèm thêm phần thiệt khi tỉ số đầu vào thấp.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-029",
+      "q": "A Kaiser window is specified by a single shape parameter. An analyst raises it until the side lobes meet a ninety decibel requirement, and then complains that two close tones have merged. What is the correct account of that outcome?",
+      "q_vi": "Cửa sổ Kaiser được đặc tả bằng một tham số hình dạng duy nhất. Người phân tích tăng nó lên tới khi búp phụ đạt yêu cầu chín mươi đêxiben, rồi than rằng hai âm gần nhau đã dính vào nhau. Nên giải thích kết quả đó thế nào?",
+      "choices": [
+        "The parameter buys side lobe suppression by widening the main lobe, which means the requested dynamic range and the requested resolution were traded against each other",
+        "The parameter was raised past the point where the window is still positive, which lets the negative tail fold the two peaks together",
+        "The window has become longer than the record, which means the analysis is dominated by the zero padded tail",
+        "Side lobe level and main lobe width are independent in this family, so the merging must come from a different cause"
+      ],
+      "answer": 0,
+      "why": "One shape parameter controls a single trade. Deeper side lobes require a smoother taper, a smoother taper uses less of the record effectively, and the equivalent noise bandwidth grows, so the only way to have both is a longer record.",
+      "why_vi": "Một tham số hình dạng chỉ điều khiển được một sự đánh đổi. Búp phụ thấp hơn đòi hỏi vuốt mềm hơn, mà vuốt mềm hơn thì dùng được ít phần bản ghi hơn và bề rộng nhiễu tương đương tăng lên, nên muốn có cả hai thì chỉ còn cách kéo dài bản ghi.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-030",
+      "q": "Block filtering can be organised as overlap add or as overlap save. What distinguishes the two in what they discard?",
+      "q_vi": "Lọc theo khối có thể tổ chức kiểu chồng và cộng hoặc kiểu chồng và giữ. Hai cách khác nhau ở chỗ chúng bỏ đi cái gì?",
+      "choices": [
+        "Overlap add discards the first samples of each block, whereas overlap save keeps every output sample it computes",
+        "The two are identical in arithmetic and differ only in how the input blocks are indexed in memory",
+        "Overlap add zero pads each input block and sums the tails, while overlap save overlaps the input and throws away the wrapped samples",
+        "Overlap save needs a transform twice as long, since it has to hold two consecutive blocks at the same time"
+      ],
+      "answer": 2,
+      "why": "Both fight the same enemy, which is the circular wrap of a transform based product. One prevents the wrap by padding and then repairs the seam by addition, the other lets the wrap happen in a region it has decided in advance to throw away.",
+      "why_vi": "Cả hai cùng chống một đối thủ là phần gói vòng của tích tính qua biến đổi. Một bên ngăn gói vòng bằng cách chèn không rồi vá mối nối bằng phép cộng, bên kia để phần gói vòng xảy ra trong vùng đã định trước là sẽ bỏ đi.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-031",
+      "q": "A window is applied before a transform and the analyst wants both the amplitude of a discrete tone and the level of the broadband noise floor. Why do those two readings need different corrections?",
+      "q_vi": "Một cửa sổ được áp trước biến đổi và người phân tích muốn có cả biên độ của một âm rời rạc lẫn mức nền nhiễu băng rộng. Vì sao hai số đọc đó cần hai hiệu chỉnh khác nhau?",
+      "choices": [
+        "A tone is measured in one bin and noise in many, so the two differ by the number of bins occupied rather than by any property of the window",
+        "The window is applied in the time domain, so only the noise reading is affected by it",
+        "The corrections differ only for asymmetric windows, and any symmetric window scales the two readings by an identical factor",
+        "A tone is scaled by the coherent sum of the window samples, whereas noise is scaled by the sum of their squares"
+      ],
+      "answer": 3,
+      "why": "A coherent component adds in amplitude across the window samples while independent noise adds in power. The ratio of those two normalisations is the equivalent noise bandwidth, which is exactly the number a data sheet supplies for the purpose.",
+      "why_vi": "Một thành phần đồng pha cộng theo biên độ trên các mẫu của cửa sổ, còn nhiễu độc lập thì cộng theo công suất. Tỉ số giữa hai cách chuẩn hoá đó chính là bề rộng nhiễu tương đương, đúng con số mà bản đặc tả cung cấp cho việc này.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-032",
+      "q": "A wideband receiver splits its input into thirty two equally spaced channels using a polyphase filter bank rather than thirty two separate mixers and filters. Where does the saving come from?",
+      "q_vi": "Một máy thu băng rộng tách đầu vào thành ba mươi hai kênh cách đều bằng dàn lọc đa pha thay vì ba mươi hai bộ trộn và bộ lọc riêng. Phần tiết kiệm đến từ đâu?",
+      "choices": [
+        "Each channel filter is designed independently, and the resulting filters happen to share most of their coefficients when the spacing is uniform",
+        "The bank uses a lower sampling rate throughout, since the input is decimated before any filtering is carried out at all",
+        "One prototype filter runs at the decimated rate, while a single transform supplies all of the channel phases",
+        "The transform replaces the filters entirely, so no convolution is needed at all"
+      ],
+      "answer": 2,
+      "why": "Uniformly spaced channels are frequency shifted copies of one prototype response. Commuting the shift with the decimation lets each polyphase branch run at the output rate, and a transform across the branches performs all the shifts at once.",
+      "why_vi": "Các kênh cách đều nhau là những bản dịch tần của cùng một đáp ứng mẫu. Hoán vị phép dịch với phép giảm mẫu cho phép mỗi nhánh đa pha chạy ở tốc độ đầu ra, còn một phép biến đổi ngang các nhánh thực hiện toàn bộ các phép dịch cùng lúc.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-033",
+      "q": "A cascaded integrator comb decimator with three stages and a decimation factor of sixty four is implemented in fixed point. The integrators are allowed to overflow and wrap. Why is the output still correct?",
+      "q_vi": "Một bộ giảm mẫu tích phân lược ba tầng với hệ số giảm sáu mươi tư được hiện thực bằng số nguyên. Các khâu tích phân được phép tràn và cuộn vòng. Vì sao đầu ra vẫn đúng?",
+      "choices": [
+        "Because the comb sections subtract delayed copies in the same modular arithmetic, so the wraps cancel provided the registers are wide enough for the total gain",
+        "Because the decimation between the two halves discards the samples on which the overflow occurred, and the surviving samples never overflowed",
+        "Because the integrators are placed before the decimator, where the signal amplitude is still small enough to avoid any overflow",
+        "Because wrapping is harmless in any linear system, as the error it introduces is uncorrelated with the signal being processed"
+      ],
+      "answer": 0,
+      "why": "The structure is a difference of accumulations, and modular addition and subtraction commute with that difference. The register width has to accommodate the full pass band gain of the filter, and with that width the intermediate wraps cancel exactly.",
+      "why_vi": "Cấu trúc này là hiệu của các phép tích luỹ, mà phép cộng và trừ theo môđun giao hoán được với phép hiệu đó. Bề rộng thanh ghi phải chứa được toàn bộ độ lợi dải thông của bộ lọc, và với bề rộng đó thì các lần cuộn vòng trung gian triệt tiêu chính xác.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-034",
+      "q": "A two channel filter bank is verified to reconstruct perfectly. An engineer then applies a small gain to the high band before synthesis. What happens to the aliasing?",
+      "q_vi": "Một dàn lọc hai kênh được kiểm chứng là tái tạo hoàn hảo. Sau đó một kỹ sư đặt một độ lợi nhỏ vào dải cao trước khi tổng hợp. Chuyện gì xảy ra với thành phần chồng phổ?",
+      "choices": [
+        "Nothing changes, because a scalar gain commutes with every filter in the bank and therefore cannot affect the cancellation",
+        "The aliasing terms no longer cancel, since cancellation depended on a fixed relation between the two branches",
+        "The aliasing grows in proportion to the gain applied, and it can be removed again by applying the reciprocal gain in the low band",
+        "The bank becomes unstable, as the loop formed by analysis and synthesis now has a gain above unity"
+      ],
+      "answer": 1,
+      "why": "Perfect reconstruction is not the absence of aliasing in each branch but the exact cancellation of the two aliased contributions when they are summed. Any independent modification of one branch destroys the balance, which is why subband processing has to be designed inside the bank.",
+      "why_vi": "Tái tạo hoàn hảo không phải là không có chồng phổ trong từng nhánh mà là hai phần chồng phổ triệt tiêu đúng bằng nhau khi cộng lại. Mọi thay đổi độc lập ở một nhánh đều phá thế cân bằng đó, vì thế việc xử lý theo dải con phải được thiết kế ngay bên trong dàn lọc.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-035",
+      "q": "A spreading sequence is chosen for a system where several users transmit at once. Which property of its autocorrelation and cross-correlation actually matters, and why?",
+      "q_vi": "Một dãy trải phổ được chọn cho hệ có nhiều người dùng phát cùng lúc. Thuộc tính nào của tự tương quan và tương quan chéo mới thực sự quan trọng, và vì sao?",
+      "choices": [
+        "Only the peak of the autocorrelation matters, since the receiver correlates against its own sequence and ignores everything else",
+        "The sequences must be strictly orthogonal at every delay, which holds for any length that is a power of two",
+        "The autocorrelation must fall monotonically away from the peak, or the tracking loop will lock onto a secondary maximum instead",
+        "The cross-correlation must stay low at every possible shift, because the users arrive at delays nobody controls"
+      ],
+      "answer": 3,
+      "why": "Orthogonality holds only at perfect alignment, which no uplink can guarantee. What limits the system is the residual correlation between one user and the shifted copy of another, and that residue behaves as an extra noise floor rising with the number of active users.",
+      "why_vi": "Tính trực giao chỉ đúng khi căn chỉnh hoàn hảo, điều mà không đường lên nào bảo đảm được. Thứ giới hạn hệ thống là phần tương quan còn lại giữa một người dùng và bản dịch trễ của người khác, và phần dư đó hành xử như nền nhiễu phụ tăng theo số người đang phát.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-036",
+      "q": "A measured power spectral density shows a narrow spike at zero frequency sitting on a broad continuum. What does that structure say about the underlying process?",
+      "q_vi": "Một mật độ phổ công suất đo được cho thấy một gai hẹp tại tần số không nằm trên nền liên tục rộng. Cấu trúc đó nói gì về quá trình bên dưới?",
+      "choices": [
+        "The record is too short, and a longer observation would spread the spike out into the continuum around it",
+        "The process is not stationary, because a stationary process cannot have any energy concentrated at a single frequency",
+        "The process has a nonzero mean on top of a zero mean random part",
+        "The measurement chain has a direct current offset, which is an instrumentation fault rather than a property of the process itself"
+      ],
+      "answer": 2,
+      "why": "A constant is perfectly predictable and its autocorrelation never decays, so it transforms into a line rather than into a band. Splitting the estimate into a line part and a continuous part is the usual first step, and the two are then interpreted separately.",
+      "why_vi": "Một hằng số là hoàn toàn dự đoán được và hàm tự tương quan của nó không suy giảm, nên nó biến đổi thành một vạch chứ không thành một dải. Tách ước lượng thành phần vạch và phần liên tục là bước đầu thường làm, rồi hai phần được diễn giải riêng.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-037",
+      "q": "A linear frequency modulated pulse is compressed in a matched filter. A target with unknown radial velocity appears at a range that is slightly wrong but with almost no loss of peak amplitude. What is being observed?",
+      "q_vi": "Một xung điều tần tuyến tính được nén trong bộ lọc phối hợp. Một mục tiêu có vận tốc xuyên tâm chưa biết hiện ra ở cự ly hơi sai nhưng biên độ đỉnh gần như không giảm. Đang quan sát hiện tượng gì?",
+      "choices": [
+        "The Doppler shift has moved the echo outside the passband of the filter, which attenuates it and displaces the apparent peak",
+        "The chirp couples delay and frequency together, so that a Doppler shift shows up as an apparent shift in the range reading",
+        "The target is spread across several range cells, and the centroid of that spread has moved away from the true position",
+        "The sampling clock has drifted during the pulse, which stretches the compressed response and moves its centre of gravity"
+      ],
+      "answer": 1,
+      "why": "The ambiguity function of a linear chirp has a ridge tilted in the delay frequency plane, so a mismatched velocity slides the response along that ridge with very little loss. The convenience of tolerating Doppler is bought with a systematic range bias that has to be resolved by other means.",
+      "why_vi": "Hàm mơ hồ của xung điều tần tuyến tính có một sống nghiêng trong mặt phẳng trễ và tần số, nên vận tốc lệch làm đáp ứng trượt dọc sống đó mà hầu như không suy giảm. Cái tiện là chịu được Doppler được đổi bằng một sai lệch cự ly có hệ thống, phải giải quyết bằng cách khác.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-038",
+      "q": "A matched filter designed for a stationary target is used against an echo carrying a Doppler shift equal to a tenth of the signal bandwidth. What is the consequence?",
+      "q_vi": "Một bộ lọc phối hợp thiết kế cho mục tiêu đứng yên được dùng với tiếng vọng mang dịch tần Doppler bằng một phần mười bề rộng băng tín hiệu. Hệ quả là gì?",
+      "choices": [
+        "None, since a matched filter is derived from the magnitude spectrum and is therefore insensitive to a frequency offset",
+        "The output peak is reduced, because the reference waveform no longer matches the one that actually arrives at the receiver",
+        "The filter becomes unstable, as a mismatched reference makes the correlation grow without bound over a long integration",
+        "The peak stays at full height but moves to the edge of the observation window, where it can be mistaken for a sidelobe of another return"
+      ],
+      "answer": 1,
+      "why": "Optimality is a property of the pair of waveforms, not of the filter alone. A frequency offset makes the two drift apart in phase during the integration, and the resulting partial cancellation is why a bank of filters covering a set of Doppler hypotheses is used.",
+      "why_vi": "Tính tối ưu là thuộc tính của cặp dạng sóng chứ không phải của riêng bộ lọc. Độ lệch tần làm hai bên trôi pha khỏi nhau trong lúc tích luỹ, và phần triệt tiêu một phần sinh ra từ đó là lý do người ta dùng cả dàn lọc phủ một tập giả thuyết Doppler.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-039",
+      "q": "A demodulator is changed from hard decisions to soft outputs feeding the decoder. The channel and the code are otherwise unchanged. Where does the gain come from?",
+      "q_vi": "Một bộ giải điều chế được đổi từ quyết định cứng sang đầu ra mềm đưa vào bộ giải mã. Kênh và mã thì giữ nguyên. Độ lợi đến từ đâu?",
+      "choices": [
+        "The decoder now sees the reliability of each symbol, which slicing had thrown away",
+        "The soft outputs carry more bits per symbol, so the effective code rate falls and the decoder has more redundancy to work with",
+        "Slicing introduces a nonlinearity that correlates the errors, and removing it makes the errors independent as the decoder assumes",
+        "The demodulator can now correct some errors itself before the decoder runs, which reduces the burden on the decoding stage"
+      ],
+      "answer": 0,
+      "why": "A hard decision compresses a real valued observation into one bit and destroys the information about how close the sample was to the boundary. The decoder can use that margin to weigh evidence, and on a Gaussian channel recovering it is worth about two decibels.",
+      "why_vi": "Quyết định cứng nén một quan sát giá trị thực xuống một bit và xoá mất thông tin về việc mẫu đó gần ranh giới đến đâu. Bộ giải mã dùng được biên đó để cân nhắc bằng chứng, và trên kênh Gauss thì lấy lại phần đó đáng giá khoảng hai đêxiben.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-040",
+      "q": "A carrier phase estimator that uses the decisions of the demodulator converges faster than a blind one at high signal to noise ratio, but it occasionally settles onto a wrong constellation orientation. Why does that happen?",
+      "q_vi": "Một bộ ước lượng pha sóng mang dùng quyết định của bộ giải điều chế hội tụ nhanh hơn bộ ước lượng mù ở tỉ số tín hiệu trên nhiễu cao, nhưng thỉnh thoảng lại đứng yên ở một hướng chòm sao sai. Vì sao vậy?",
+      "choices": [
+        "The estimator is driven by an error signal which vanishes at every rotation that maps the constellation onto itself, so several stable points exist",
+        "The decisions are noisy at low signal to noise ratio, since the resulting bias accumulates until the estimate has drifted a whole symbol period out of step",
+        "The loop filter has too much gain, so the estimate overshoots and locks onto the first stable point which it meets afterwards",
+        "The estimator assumes a residual frequency offset of zero, and any offset rotates the constellation at a constant rate"
+      ],
+      "answer": 0,
+      "why": "Feeding decisions back makes the error signal invariant under the symmetry group of the constellation. Every such rotation is an equilibrium of the loop, so the ambiguity has to be broken outside the loop by a pilot, a unique word or differential encoding.",
+      "why_vi": "Đưa quyết định quay lại làm tín hiệu sai số bất biến dưới nhóm đối xứng của chòm sao. Mỗi phép quay như vậy là một điểm cân bằng của vòng, nên tính đa trị phải được phá từ bên ngoài vòng bằng tín hiệu dẫn đường, từ mã duy nhất hoặc mã hoá vi sai.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-041",
+      "q": "A suppressed carrier signal is to be tracked. A plain phase locked loop fails to acquire even at high signal to noise ratio. What is the reason, and what is the standard remedy?",
+      "q_vi": "Cần bám một tín hiệu có sóng mang bị nén. Một vòng khoá pha thông thường không bắt được ngay cả ở tỉ số tín hiệu trên nhiễu cao. Lý do và cách chữa chuẩn là gì?",
+      "choices": [
+        "The loop bandwidth is too wide for the modulation rate, and narrowing it until the data sidebands fall outside the loop restores acquisition",
+        "The signal has no spectral line at the carrier, so a nonlinearity has to create one",
+        "The phase detector saturates on a modulated input, and replacing it by a limiter and a multiplier removes that saturation entirely",
+        "The oscillator is running outside the pull in range of the loop, so a sweep across the uncertainty band has to be added before locking"
+      ],
+      "answer": 1,
+      "why": "A balanced modulation puts equal energy in both sidebands and nothing at the carrier itself, so there is no component for a linear loop to lock to. Squaring or the two arm Costas arrangement regenerates a usable line at the price of a squaring loss and a phase ambiguity.",
+      "why_vi": "Điều chế cân bằng đặt năng lượng bằng nhau vào hai dải bên và không để lại gì ở chính sóng mang, nên không có thành phần nào cho vòng tuyến tính bám vào. Bình phương hoặc bố trí Costas hai nhánh tái tạo được vạch dùng được, đổi lại là phần thiệt do bình phương và tính đa trị về pha.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-042",
+      "q": "A direct conversion receiver shows a strong artefact at the centre of the demodulated band that grows when the input signal is strong. Which two impairments produce that signature together?",
+      "q_vi": "Một máy thu đổi tần trực tiếp cho một hiện vật mạnh ở giữa băng đã giải điều chế, và nó lớn lên khi tín hiệu vào mạnh. Hai khiếm khuyết nào cùng tạo ra dấu hiệu đó?",
+      "choices": [
+        "Quantisation noise and clock jitter, both of which concentrate their energy near the centre of the converted band",
+        "Amplifier compression and antenna mismatch, which together fold the wanted signal back onto its own centre frequency",
+        "Phase noise and imbalance between the two branches, since both produce an image that appears mirrored about the middle of the band",
+        "A static offset in the baseband path and self mixing of the local oscillator leakage, which lands exactly at zero frequency"
+      ],
+      "answer": 3,
+      "why": "Zero frequency in this architecture is the centre of the wanted band rather than a harmless edge, so anything constant lands on top of the signal. Leakage that reflects and mixes with itself produces an offset that varies with the input level, which is what distinguishes it from a fixed circuit offset.",
+      "why_vi": "Trong kiến trúc này, tần số không nằm ngay giữa băng cần chứ không phải ở mép vô hại, nên mọi thành phần một chiều đều rơi đúng lên tín hiệu. Phần rò của dao động nội phản xạ rồi tự trộn tạo ra độ lệch thay đổi theo mức đầu vào, và đó là điểm phân biệt nó với độ lệch cố định của mạch.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-043",
+      "q": "A converter reconstructing at ninety six kilosamples per second is followed by an analogue filter. A designer argues that the hold response already suppresses the images, so the filter can be very gentle. What is wrong with that argument?",
+      "q_vi": "Một bộ chuyển đổi tái tạo ở chín mươi sáu kilômẫu mỗi giây được nối tiếp một bộ lọc tương tự. Người thiết kế lập luận rằng đáp ứng giữ mẫu đã dập ảnh phổ rồi nên bộ lọc có thể rất thoải. Lập luận đó sai ở đâu?",
+      "choices": [
+        "The hold puts its nulls at multiples of the sampling rate, whereas the nearest image begins one signal bandwidth below the first null and is barely attenuated there",
+        "The hold response has no effect on the images at all, since it acts only on the wanted band and leaves everything above it untouched",
+        "The hold suppresses only the odd numbered images, and the even ones need an analogue filter of the same order as before",
+        "The argument holds only for a signal at full scale, because the hold response depends on the amplitude of the samples being held"
+      ],
+      "answer": 0,
+      "why": "The zero order hold has a magnitude that falls to zero at the sampling rate and its multiples, so it does help. The image closest to the wanted band sits just above half the sampling rate, where the hold has given away only a few decibels, so the analogue filter still has to do the work.",
+      "why_vi": "Đáp ứng giữ bậc không có biên độ về không tại tốc độ lấy mẫu và các bội của nó, nên nó có giúp. Nhưng ảnh gần băng cần nhất lại nằm ngay trên nửa tốc độ lấy mẫu, nơi đáp ứng giữ mới bớt được vài đêxiben, nên bộ lọc tương tự vẫn phải gánh phần việc.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-044",
+      "q": "Any stable causal filter can be written as a minimum phase filter cascaded with an all pass section. What does that decomposition let you conclude at once?",
+      "q_vi": "Mọi bộ lọc nhân quả ổn định đều viết được thành bộ lọc pha cực tiểu ghép nối tiếp một khâu toàn thông. Phân tích đó cho phép kết luận ngay điều gì?",
+      "choices": [
+        "That the filter can always be inverted exactly, since the all pass factor is its own inverse for every transfer function of this particular kind",
+        "That any two filters sharing a magnitude response differ only in an all pass factor, so that the minimum phase one has the least group delay",
+        "That the group delay of the filter is constant, because an all pass section contributes a flat delay at every frequency",
+        "That the filter is stable for any coefficient rounding, as the minimum phase factor keeps every pole inside the unit circle"
+      ],
+      "answer": 1,
+      "why": "The all pass factor carries phase without changing magnitude, so the whole family of filters with a given magnitude is generated by it. Energy in the minimum phase member is concentrated as early as possible, which is exactly the statement that it delays least.",
+      "why_vi": "Nhân tử toàn thông mang phần pha mà không đổi biên độ, nên cả họ bộ lọc có cùng biên độ được sinh ra từ nó. Năng lượng của phần tử pha cực tiểu dồn về sớm nhất có thể, và đó chính là phát biểu rằng nó trễ ít nhất.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-045",
+      "q": "A spectrum shows a small tone exactly midway between two strong tones. How can you tell whether it is a real component or an intermodulation product of the analyser?",
+      "q_vi": "Một phổ cho thấy một âm nhỏ nằm đúng giữa hai âm mạnh. Làm sao biết đó là thành phần thật hay là sản phẩm điều chế giao thoa của chính máy phân tích?",
+      "choices": [
+        "Change the window, because a genuine component is unaffected by windowing while an artefact of the instrument moves with it",
+        "Increase the transform length, since a real tone occupies one bin while an intermodulation product always spreads over several",
+        "Reduce the input level and see whether it falls faster than the two strong tones",
+        "Compare the phase of the small tone with the phases of the two strong ones, since an artefact always has zero phase"
+      ],
+      "answer": 2,
+      "why": "A third order product grows three decibels for every decibel of input, so an attenuator in front of the instrument separates the two hypotheses immediately. Windowing and transform length change leakage and resolution, neither of which distinguishes a genuine tone from a nonlinearity.",
+      "why_vi": "Sản phẩm bậc ba tăng ba đêxiben cho mỗi đêxiben đầu vào, nên chỉ cần một bộ suy hao đặt trước máy là phân biệt được ngay hai giả thuyết. Đổi cửa sổ hay đổi độ dài biến đổi chỉ tác động tới rò rỉ phổ và độ phân giải, không thứ nào tách được âm thật với hiệu ứng phi tuyến.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-046",
+      "q": "A weak repeating waveform is buried in noise. One engineer averages a thousand time domain records aligned on the trigger, another averages a thousand power spectra. Why do the two give different answers?",
+      "q_vi": "Một dạng sóng lặp lại yếu chìm trong nhiễu. Một kỹ sư lấy trung bình một nghìn bản ghi miền thời gian căn theo xung kích, người kia lấy trung bình một nghìn phổ công suất. Vì sao hai cách cho kết quả khác nhau?",
+      "choices": [
+        "Time domain averaging is biased by any drift in the trigger, whereas spectral averaging is immune to timing errors of every kind",
+        "Spectral averaging discards half the samples through windowing, so it needs twice as many records to reach the same confidence",
+        "Time domain averaging keeps the phase, so that the signal adds in amplitude while the noise adds in power",
+        "Time domain averaging can only be used for periodic signals, while spectral averaging works for any waveform whatsoever"
+      ],
+      "answer": 2,
+      "why": "Aligning on the trigger makes the wanted waveform add coherently while independent noise adds incoherently, so the ratio improves in proportion to the number of records. Averaging magnitudes throws the phase away, which stabilises the estimate without lifting the signal out of the floor.",
+      "why_vi": "Căn theo xung kích làm dạng sóng cần cộng đồng pha còn nhiễu độc lập cộng không đồng pha, nên tỉ số cải thiện tỉ lệ với số bản ghi. Lấy trung bình biên độ thì vứt mất pha, nên ước lượng ổn định hơn nhưng không nhấc được tín hiệu lên khỏi nền.",
+      "level": 2
+    },
+    {
+      "id": "qsg2-047",
+      "q": "Segments in an averaged periodogram are overlapped by half rather than butted end to end. The number of segments doubles, yet the variance falls by clearly less than a factor of two. Why?",
+      "q_vi": "Các đoạn trong chu kỳ đồ lấy trung bình được chồng nhau một nửa thay vì nối đuôi nhau. Số đoạn tăng gấp đôi, nhưng phương sai giảm ít hơn hẳn hai lần. Vì sao?",
+      "choices": [
+        "The overlapped segments share samples, which correlates their periodograms and lowers the effective number of independent estimates",
+        "The window has to be renormalised when segments overlap, and the extra scaling term adds a variance contribution of its own to the result",
+        "Overlapping introduces a bias that grows with the overlap fraction, and the bias then dominates the total error of the estimate",
+        "The transform of an overlapped segment is no longer a valid periodogram, so half of the averaged terms contribute nothing at all"
+      ],
+      "answer": 0,
+      "why": "Variance falls in proportion to the number of independent averages, not the number of transforms computed. Halving the hop recovers the data that a tapered window had thrown away at the segment edges, and for a Hann window the net gain is worth roughly a further ten per cent rather than a factor of two.",
+      "why_vi": "Phương sai giảm tỉ lệ với số phép trung bình độc lập chứ không phải số lần biến đổi đã tính. Rút bước nhảy còn một nửa lấy lại phần dữ liệu mà cửa sổ vuốt đã bỏ ở hai mép đoạn, và với cửa sổ Hann thì phần lợi ròng chỉ chừng mười phần trăm chứ không phải gấp đôi.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-048",
+      "q": "Two waveforms carry the same energy and the same duration, but one occupies a wider band. Which is better for estimating a propagation delay, and what sets the answer?",
+      "q_vi": "Hai dạng sóng mang cùng năng lượng và cùng thời khoảng, nhưng một cái chiếm băng rộng hơn. Cái nào tốt hơn cho việc ước lượng độ trễ lan truyền, và điều gì quyết định?",
+      "choices": [
+        "The narrower one, since a narrow band signal has a longer correlation time and the peak is therefore easier to find in noise",
+        "Neither, because delay accuracy depends on the energy to noise ratio alone and both carry the same energy",
+        "The wider one, because the bound scales with the root mean square bandwidth measured about the centre frequency",
+        "The wider one, but only if its spectrum is flat, since a shaped spectrum makes the correlation peak asymmetric and biases the estimate"
+      ],
+      "answer": 2,
+      "why": "Sensitivity to delay comes from how fast the phase of each spectral component turns, and that rate is proportional to frequency offset. Squaring and averaging over the spectrum gives the root mean square bandwidth, which is why a spread waveform beats a tone of the same energy.",
+      "why_vi": "Độ nhạy với trễ đến từ tốc độ quay pha của từng thành phần phổ, mà tốc độ đó tỉ lệ với độ lệch tần. Bình phương rồi lấy trung bình trên phổ cho ra bề rộng băng hiệu dụng, và đó là lý do dạng sóng trải phổ thắng một âm đơn cùng năng lượng.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-049",
+      "q": "A narrowband interferer is removed by projecting the received vector onto the subspace orthogonal to its steering vector. What is the accompanying penalty?",
+      "q_vi": "Một nguồn gây nhiễu băng hẹp được loại bằng cách chiếu vectơ thu lên không gian con trực giao với vectơ chỉ hướng của nó. Phần thiệt kèm theo là gì?",
+      "choices": [
+        "The projection introduces a phase rotation on the wanted signal, and that rotation has to be estimated and undone before detection can proceed",
+        "The wanted signal loses whatever component lay along that direction",
+        "The noise becomes correlated across the remaining dimensions, so the detector can no longer treat it as white",
+        "The interferer reappears at the image frequency, since a projection in one domain always creates a mirrored term in the other"
+      ],
+      "answer": 1,
+      "why": "A projection removes a whole dimension regardless of what else lives in it. The closer the interferer is to the wanted direction, the more of the signal is discarded, which is why the loss grows sharply as the two become hard to separate.",
+      "why_vi": "Phép chiếu xoá cả một chiều bất kể trong đó còn gì. Nguồn nhiễu càng gần hướng của tín hiệu cần thì phần tín hiệu bị bỏ càng nhiều, nên phần thiệt tăng vọt khi hai hướng trở nên khó tách.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-050",
+      "q": "A receiver samples with its own free running clock, which differs from the transmitter clock by twenty parts per million. Why is a fixed interpolation filter not enough to fix that?",
+      "q_vi": "Một máy thu lấy mẫu bằng đồng hồ tự chạy của nó, lệch với đồng hồ máy phát hai mươi phần triệu. Vì sao một bộ lọc nội suy cố định lại không đủ để chữa?",
+      "choices": [
+        "A fixed filter cannot be linear phase at a fractional delay, so the pulse is distorted whatever is chosen",
+        "The offset changes the carrier frequency too, and only a carrier loop can correct that kind of error",
+        "Twenty parts per million exceeds the correction range of any interpolator, and the sampling clock itself has to be disciplined instead",
+        "The needed fractional delay drifts steadily, so that the interpolation phase has to be updated on every symbol"
+      ],
+      "answer": 3,
+      "why": "A rate offset means the sampling instants slide continuously with respect to the symbols and a whole sample is gained or lost every fifty thousand of them. The interpolator therefore needs a controlled fractional delay driven by the timing error detector rather than one fixed value.",
+      "why_vi": "Lệch tốc độ nghĩa là các thời điểm lấy mẫu trượt liên tục so với ký hiệu, cứ năm mươi nghìn ký hiệu lại thừa hoặc thiếu trọn một mẫu. Do đó bộ nội suy cần độ trễ phân số được điều khiển bởi bộ tách sai số định thời chứ không phải một giá trị cố định.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-051",
+      "q": "Instantaneous frequency is computed as the difference of successive unwrapped phase samples. The result is correct at low frequency but jumps wildly when the signal approaches the band edge. What is happening?",
+      "q_vi": "Tần số tức thời được tính bằng hiệu của các mẫu pha liên tiếp đã gỡ vòng. Kết quả đúng ở tần số thấp nhưng nhảy loạn khi tín hiệu tiến tới mép băng. Chuyện gì đang xảy ra?",
+      "choices": [
+        "The phase detector is saturating near the band edge, and the resulting clipping appears as a random jump in the computed difference",
+        "The unwrapping algorithm needs a longer window near the band edge, since the phase there varies more slowly than the algorithm assumes",
+        "Phase advances of more than half a turn per sample cannot be unwrapped, since the algorithm has no way to tell them apart",
+        "The signal has become nonanalytic at the band edge, so the concept of an instantaneous frequency is undefined there"
+      ],
+      "answer": 2,
+      "why": "Unwrapping rests on the assumption that the true increment is the one of smallest magnitude, which fails once the increment exceeds pi. Noise then pushes individual increments across that boundary and the correction adds a whole turn in the wrong direction.",
+      "why_vi": "Việc gỡ vòng dựa trên giả định rằng số gia thật là số gia nhỏ nhất về độ lớn, và giả định đó hỏng khi số gia vượt quá pi. Khi ấy nhiễu đẩy từng số gia qua ranh giới đó và phép hiệu chỉnh cộng trọn một vòng theo chiều sai.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-052",
+      "q": "A recording contains a signal plus a delayed and attenuated copy of itself. Why does taking the transform of the logarithm of the magnitude spectrum help to find the delay?",
+      "q_vi": "Một bản ghi chứa một tín hiệu cộng bản sao trễ và bị suy giảm của chính nó. Vì sao lấy biến đổi của lôgarit phổ biên độ lại giúp tìm ra độ trễ?",
+      "choices": [
+        "Because the logarithm compresses the dynamic range, which lets a weak echo be seen next to a strong direct arrival in the same display",
+        "Because the echo shows up as a slow amplitude modulation of the spectrum, and the logarithm converts it into a narrow peak",
+        "Because the delay appears as a linear phase term, and the logarithm converts a phase slope into a constant offset",
+        "Because the logarithm turns the convolution into a sum, and the periodic ripple then transforms into a spike at the delay"
+      ],
+      "answer": 3,
+      "why": "An echo multiplies the spectrum by a factor that ripples with a period set by the delay. Taking the logarithm turns the product into a sum, so the ripple becomes an additive periodic component whose own transform is a peak at the delay itself.",
+      "why_vi": "Tiếng vọng nhân phổ với một thừa số gợn sóng có chu kỳ do độ trễ quy định. Lấy lôgarit biến tích thành tổng, nên phần gợn trở thành một thành phần tuần hoàn cộng vào, và biến đổi của chính nó là một gai đúng tại độ trễ.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-053",
+      "q": "A time frequency distribution of a signal containing two chirps shows a third ridge lying exactly between them. What is that feature?",
+      "q_vi": "Một phân bố thời gian tần số của tín hiệu chứa hai xung điều tần cho thấy một sống thứ ba nằm đúng giữa hai sống kia. Đặc trưng đó là gì?",
+      "choices": [
+        "A real component created by the mixing of the two chirps in the front end of the receiver before any processing took place",
+        "A cross term of the quadratic distribution, which oscillates and can be suppressed by smoothing at the cost of resolution",
+        "An artefact of the analysis window, and it disappears as soon as a window with lower side lobes is substituted for the current one",
+        "The image of the two chirps about zero frequency, which appears whenever the input is real rather than analytic"
+      ],
+      "answer": 1,
+      "why": "A distribution built from a product of the signal with a shifted copy of itself is quadratic, so any pair of components generates an interference term halfway between them. The term oscillates rapidly, which is why smoothing kernels attenuate it while blurring the genuine ridges.",
+      "why_vi": "Một phân bố dựng từ tích của tín hiệu với bản sao dịch của chính nó là bậc hai, nên mọi cặp thành phần đều sinh ra một số hạng giao thoa nằm chính giữa. Số hạng đó dao động nhanh, vì thế các nhân làm trơn dập được nó nhưng đồng thời làm nhoè các sống thật.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-054",
+      "q": "A narrowband jammer inside the band of a spread spectrum receiver is removed by an adaptive notch before despreading. What does that cost the wanted signal?",
+      "q_vi": "Một nguồn gây nhiễu băng hẹp nằm trong băng của máy thu trải phổ được loại bằng bộ triệt hẹp thích nghi trước khi giải trải. Điều đó khiến tín hiệu cần mất gì?",
+      "choices": [
+        "Nothing at all, since the wanted signal is spread out and so has no energy at all at the one frequency which the notch removes from the band",
+        "Half of its energy, because a notch filter is symmetric and removes the mirror frequency too",
+        "Its phase coherence across the band, which makes the despreading correlation collapse regardless of how narrow the notch is",
+        "A fraction of its energy equal to the notch width over the spread bandwidth, plus a small correlation loss which the distorted spectrum brings"
+      ],
+      "answer": 3,
+      "why": "A spread waveform does have energy at every frequency in its band, so excising a slice removes a matching fraction of it. The loss is small when the notch is narrow, and the spectral hole also perturbs the correlation slightly, which is why the notch is kept as tight as the jammer allows.",
+      "why_vi": "Dạng sóng trải phổ có năng lượng ở mọi tần số trong băng của nó, nên cắt bỏ một lát là mất đúng phần tương ứng. Phần mất nhỏ khi khe triệt đủ hẹp, và lỗ hổng phổ cũng làm phép tương quan lệch đi chút ít, vì thế người ta giữ khe triệt hẹp hết mức mà nguồn nhiễu cho phép.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-055",
+      "q": "A fixed point accumulator in a filter can be configured to saturate or to wrap on overflow. A colleague argues that wrapping is preferable because the arithmetic then stays exact modulo the word length. When is that argument sound?",
+      "q_vi": "Bộ cộng dồn số nguyên trong một bộ lọc có thể cấu hình để bão hoà hoặc cuộn vòng khi tràn. Một đồng nghiệp lập luận rằng cuộn vòng tốt hơn vì phép tính khi đó vẫn chính xác theo môđun của độ dài từ. Khi nào lập luận đó đứng vững?",
+      "choices": [
+        "Only when the intermediate sums may overflow but the final result is known to fit, since the wraps then cancel in the modular arithmetic",
+        "Whenever the filter is nonrecursive, since a structure without feedback cannot propagate an overflow beyond the sample which caused it",
+        "Whenever the input is guaranteed to stay below half of full scale, as the accumulator can then never reach the point of wrapping",
+        "Always, because saturation is a nonlinearity and nonlinearity introduces harmonics a linear filter should avoid"
+      ],
+      "answer": 0,
+      "why": "Modular arithmetic is exact only for a computation whose true answer is representable, which is why the trick works in a comb decimator. In a recursive structure a wrapped state is fed back and the error persists, so saturation is the safe choice there even though it distorts.",
+      "why_vi": "Số học theo môđun chỉ chính xác với phép tính mà kết quả thật biểu diễn được, đó là lý do thủ thuật này chạy trong bộ giảm mẫu tích phân lược. Trong cấu trúc đệ quy, trạng thái đã cuộn vòng bị đưa ngược lại và sai số kéo dài, nên ở đó bão hoà mới là lựa chọn an toàn dù nó gây méo.",
+      "level": 3
+    },
+    {
+      "id": "qsg2-056",
+      "q": "A radiometer integrates the output of a filter whose three decibel bandwidth is one megahertz. The measured noise power is higher than the calculation predicts. Which bandwidth should have been used?",
+      "q_vi": "Một máy đo bức xạ tích luỹ đầu ra của bộ lọc có bề rộng băng ba đêxiben bằng một mêgahéc. Công suất nhiễu đo được cao hơn tính toán. Lẽ ra phải dùng bề rộng băng nào?",
+      "choices": [
+        "The bandwidth measured between the first nulls, since that is where the response of a practical filter genuinely reaches zero",
+        "The bandwidth at which the response has fallen by half a decibel, because that is the region the measurement actually relies on",
+        "The reciprocal of the integration time, as a radiometer averages over that interval and no finer resolution survives the averaging",
+        "The equivalent rectangular noise bandwidth"
+      ],
+      "answer": 3,
+      "why": "Noise enters through the whole response, including the skirts beyond the half power points. The correct figure is the width of an ideal brick wall filter passing the same noise power at the same peak gain, and it exceeds the three decibel width for every realisable response.",
+      "why_vi": "Nhiễu đi vào qua toàn bộ đáp ứng, kể cả phần sườn nằm ngoài hai điểm nửa công suất. Con số đúng là bề rộng của bộ lọc lý tưởng thành đứng cho qua cùng công suất nhiễu ở cùng độ lợi đỉnh, và nó lớn hơn bề rộng ba đêxiben với mọi đáp ứng khả thi.",
+      "level": 2
     }
   ]
 }
