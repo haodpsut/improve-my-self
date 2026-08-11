@@ -9,7 +9,7 @@
       "q_vi": "Một bản tổng quan tài liệu do máy sinh đọc rất mượt và trích một bài báo không hề tồn tại. Giới hạn nào đang lộ ra?",
       "choices": [
         "Fluency says almost nothing about whether the content is true",
-        "The context window overflowed and the bibliography section was silently dropped",
+        "The context window overflowed and the whole bibliography section was silently dropped",
         "The retrieval index was built correctly but ranked an irrelevant document first",
         "Numeric precision was reduced, which corrupted the formatting of the reference"
       ],
@@ -25,7 +25,7 @@
       "choices": [
         "It fixes nothing measurable, because attaching a source does not change the generated text",
         "It fixes invention from the weights but not a claim built on a document the retriever missed",
-        "It fixes both invention and retrieval coverage, since every claim now has a verified source",
+        "It fixes both invention and retrieval coverage, since each claim has a verified source",
         "It fixes retrieval coverage but leaves the model free to invent facts between the citations"
       ],
       "answer": 1,
@@ -143,7 +143,7 @@
       "q": "A model solves a difficult scheduling problem, then fails the same problem with the machine names swapped. What does this show?",
       "q_vi": "Mô hình giải được một bài xếp lịch khó, rồi hỏng ở đúng bài đó khi đổi tên các máy. Điều này cho thấy gì?",
       "choices": [
-        "The evaluation harness scored the second run with a different correctness criterion",
+        "The evaluation harness scored the second run against a different correctness criterion",
         "The success did not rest on a procedure that survives an irrelevant surface change",
         "The second instance is genuinely harder because renaming increases the search space",
         "The model ran out of context on the second attempt and truncated the constraints"
@@ -189,7 +189,7 @@
       "q_vi": "Người dùng hỏi tuyến rẻ nhất giữa hai thành phố mà không tuyến nào nối tới. Kiểu hỏng mặc định là gì?",
       "choices": [
         "The system answers cooperatively instead of challenging the premise inside the question",
-        "The system refuses, because an empty result always propagates as an explicit error",
+        "The system refuses, because an empty result propagates as an explicit error",
         "The system loops forever, because no stopping criterion can ever be satisfied here",
         "The system escalates to a human, because impossible inputs trigger the fallback path"
       ],
@@ -413,7 +413,7 @@
       "q": "A customer asks why you do not simply let the AI do the whole process. Which answer is both honest and useful?",
       "q_vi": "Khách hàng hỏi vì sao không để AI làm luôn cả quy trình. Câu trả lời nào vừa trung thực vừa hữu ích?",
       "choices": [
-        "Because current models are still fundamentally unable to perform professional office work",
+        "Because current models are still fundamentally unable to carry out professional office work",
         "Because our licence agreement forbids fully automated decisions in commercial deployments",
         "Because the technology will be ready next year and it is better to wait for that release",
         "Each step is usually right, and over a long chain the compounded error rate is what you would feel"
@@ -458,7 +458,7 @@
       "q": "A model gives last year's tax rate with full confidence. Which limitation is this, in its simplest form?",
       "q_vi": "Mô hình đọc ra mức thuế của năm ngoái với vẻ hoàn toàn chắc chắn. Ở dạng đơn giản nhất, đây là giới hạn nào?",
       "choices": [
-        "The tokeniser cannot represent recent years, so dates after training are rounded down",
+        "The tokeniser cannot represent the recent years, so dates after training are rounded down",
         "The serving layer caches numeric answers and returns the first value it ever computed",
         "The weights encode the world as of the corpus and cannot be updated per request",
         "The weights encode only general language and never domain specific figures"
@@ -609,7 +609,7 @@
       "q_vi": "Một tác tử có mười hai công cụ tên gọi chồng lấn và nó liên tục gọi nhầm. Thay đổi nào đánh vào nguyên nhân?",
       "choices": [
         "Rename the tools and remove the overlap, so selection stops depending on surface similarity",
-        "Increase the reasoning budget, so the model has more steps to consider each tool in turn",
+        "Increase the reasoning budget, so the model has more steps to weigh each tool in turn",
         "Add a thirteenth tool that dispatches to the correct one based on the user's original text",
         "Lower the temperature, so the same tool is selected consistently for the same input text"
       ],
@@ -683,7 +683,7 @@
       "q": "You add checkpoints so the agent can roll back to a verified state. Which failure does this not repair?",
       "q_vi": "Bạn thêm điểm kiểm để tác tử quay lui về trạng thái đã xác nhận. Kiểu hỏng nào cách này không sửa được?",
       "choices": [
-        "A cached intermediate result that no longer matches the current plan being executed",
+        "A cached intermediate result that no longer matches the current plan that is executing",
         "An effect that already left the system, such as a message already sent",
         "An internal variable that was overwritten during a step that later failed its check",
         "A working directory left in an inconsistent state after a partially applied change"
@@ -758,7 +758,7 @@
       "q": "A paragraph is passed to a fact checker as one unit and comes back marked correct. What is the design flaw?",
       "q_vi": "Một đoạn văn được đưa cho bộ kiểm sự thật như một khối và trở về với dấu là đúng. Sai sót thiết kế ở đâu?",
       "choices": [
-        "A paragraph contains formatting that confuses the checker's parsing of the sentences",
+        "A paragraph contains formatting that confuses the checker when it parses the sentences",
         "A paragraph cannot be assigned a confidence score, so the verdict is always binary",
         "A paragraph mixes several claims, so one verdict hides which was checked",
         "A paragraph is too long for the checker's context, so the last sentences are ignored"
@@ -805,7 +805,7 @@
       "choices": [
         "Whenever the budget is large, since deterministic tools cost more",
         "Whenever the property can be decided mechanically, since the verdict is stable",
-        "Whenever the property involves natural language, since these tools handle text better",
+        "Whenever the property involves natural language, since these tools handle prose far better",
         "Whenever the output is short, since deterministic tools cannot process long documents"
       ],
       "answer": 1,
@@ -833,7 +833,7 @@
       "q": "Which failure is hardest for a claim level verifier to catch?",
       "q_vi": "Kiểu hỏng nào khó bắt nhất đối với một bộ kiểm chứng ở mức khẳng định?",
       "choices": [
-        "A number that contradicts the source document that was supplied in the same request",
+        "A number that contradicts the source document that was supplied inside the same request",
         "A citation pointing to a document that cannot be resolved by any identifier service",
         "A sentence that repeats an earlier sentence with slightly different wording",
         "A required item that never appeared, because there is no wrong sentence to examine"
@@ -849,7 +849,7 @@
       "q_vi": "Một tác tử báo rằng nó đã hoàn tất một lệnh chuyển. Vì sao hệ thống không nên dựa vào báo cáo đó?",
       "choices": [
         "The report is generated text, while the executor returns a signed record",
-        "The report is written after the fact, so it may be delayed beyond the audit window",
+        "The report is written after the fact, so it may be delayed well beyond the audit window",
         "The report is in natural language, so it cannot be stored in a structured database",
         "The report is produced by a different model than the one deciding"
       ],
@@ -1823,7 +1823,7 @@
       "q": "An assistant tracks a stock count through eleven successive adjustments and gets the final figure wrong. Which weakness does this expose?",
       "q_vi": "Một trợ lý theo dõi số tồn kho qua mười một lần điều chỉnh liên tiếp và ra con số cuối sai. Điểm yếu nào lộ ra ở đây?",
       "choices": [
-        "Arithmetic on small integers becomes unreliable whenever the count exceeds ten separate items",
+        "Arithmetic on small integers becomes unreliable once running totals exceed ten separate items",
         "Holding a set of values while they keep changing is where reasoning degrades fastest",
         "The stock count was outside the training distribution, so no adjustment was ever learned",
         "The prompt exceeded the window, which dropped the earliest adjustments"
@@ -1853,7 +1853,7 @@
       "q": "A model passes a set of questions about what another party knows, then fails the same questions after the names and setting are changed. What should you conclude?",
       "q_vi": "Một mô hình vượt qua loạt câu hỏi về việc bên kia biết gì, rồi trượt chính loạt câu đó sau khi đổi tên và bối cảnh. Bạn nên kết luận gì?",
       "choices": [
-        "The reworded version is genuinely harder, because renaming a party adds an inference step",
+        "Rewording it made things genuinely harder, because renaming one side adds an inference step",
         "The model needs more training examples from the new setting, since coverage drives this",
         "The evaluation itself is unstable, so the two results should simply be averaged together",
         "The first result rested on surface cues"
@@ -1901,7 +1901,7 @@
         "Encrypt each memory entry at rest, which stops an attacker reading what the agent wrote",
         "Cap the memory at a fixed size, which forces the oldest entries out on every single write",
         "Make it an append only log which names its writer and signs each entry",
-        "Have a second model review each entry before the memory accepts it"
+        "Have one more model review each item before storage accepts it"
       ],
       "answer": 2,
       "why": "Attribution is a property of the write path, not of the content. Once entries cannot be overwritten and each carries a signed author, a poisoned record stops being anonymous.",
@@ -2036,7 +2036,7 @@
         "Judgements about time and distance are learned from text rather than from the world",
         "The bridge length fell outside the training range, which makes any estimate unreliable",
         "The unit conversion ran in the wrong direction because that step was fixed",
-        "The question needed a tool call and no tool was attached here"
+        "This needed a tool call, but none was attached here"
       ],
       "answer": 0,
       "why": "Physical plausibility is not learned from physics. It is inherited from how people happened to write about journeys, and nobody writes down the crossings that were obviously absurd.",
@@ -2109,8 +2109,8 @@
       "q_vi": "Bộ thử của bạn báo tám mươi phần trăm độ chính xác trên hai trăm nhiệm vụ. Con số nào mới là thứ người vận hành thực sự cảm nhận?",
       "choices": [
         "The share of tasks that were solved at least once when the suite was run repeatedly",
-        "How often one task they care about comes out right when the run is repeated",
-        "The mean accuracy weighted by how often each task appears while traffic is live",
+        "How often one task an operator cares about comes out right when the run repeats",
+        "The mean accuracy weighted by how often each task appears in live traffic",
         "The accuracy of the hardest task, and that one sets the worst case"
       ],
       "answer": 1,
@@ -2184,7 +2184,7 @@
       "q_vi": "Mọi tầng tự động đã đủ và vẫn có một con người ngồi trên đỉnh ngăn xếp. Người đó cung cấp thứ gì?",
       "choices": [
         "A faster review path, because a person can approve a batch more quickly than a checker",
-        "A legal signature, since regulation requires a named individual on every decision",
+        "Legal signature, since regulation requires one named individual per decision",
         "Judgement about goals, context and acceptable risk",
         "A second opinion on the wording, which raises the quality of what the customer reads"
       ],
@@ -2198,10 +2198,10 @@
       "q": "Which existing discipline is the closest fit for running an AI system in production?",
       "q_vi": "Ngành nghề sẵn có nào gần nhất với việc vận hành một hệ thống AI trong sản xuất?",
       "choices": [
-        "Software testing, since a good test suite is what separates a demo from a product",
+        "Software testing, since a good test suite separates a demo from any product",
         "Data science, because the failures are statistical and belong with the people who model them",
         "Academic peer review, which is the established way to challenge an unverified claim",
-        "Reliability engineering, with known failure modes, budgets, monitoring and recovery paths"
+        "Reliability engineering, which brings failure modes, budgets, monitoring and recovery paths"
       ],
       "answer": 3,
       "why": "The system is probabilistic and occasionally wrong, which is the ordinary condition of any critical system, and that field already owns the vocabulary for budgets and post incident review.",
@@ -2216,7 +2216,7 @@
         "A retrieved answer can be dated and swapped, whereas the weights cannot",
         "A retrieval step lowers the token count, since the model no longer writes from memory",
         "Retrieval improves the wording of the answer, because retrieved text is edited prose",
-        "Most of the time is not good enough for a contract"
+        "Good enough usually will not survive a contract"
       ],
       "answer": 0,
       "why": "The value is not average accuracy but controllability. A fact you can point at, date and replace is a fact you can promise something about, and a parametric one is not.",
@@ -2363,7 +2363,7 @@
       "q": "A step fails and the harness resamples the identical prompt four more times. Which failures does that actually clear?",
       "q_vi": "Một bước hỏng và bộ khung lấy mẫu lại đúng câu lệnh đó thêm bốn lần nữa. Cách này thực sự dọn được kiểu hỏng nào?",
       "choices": [
-        "Failures caused by a tool that was briefly unavailable, since the tool may recover",
+        "Breakage from one tool that was briefly unavailable, since it may recover",
         "Failures caused by a context that was too long, because a fresh sample truncates it",
         "Failures caused by a missing permission, which the retry path escalates automatically to a human",
         "Only noise, since a systematic misreading of the task is sampled again from the same place"
@@ -2408,7 +2408,7 @@
       "q": "A context summary keeps the sentence about a penalty but drops the party the penalty applied to. What is the resulting document?",
       "q_vi": "Bản tóm tắt ngữ cảnh giữ lại câu về khoản phạt nhưng bỏ mất bên chịu khoản phạt đó. Tài liệu thu được là gì?",
       "choices": [
-        "A shorter document that is still faithful, since nothing was altered",
+        "Something shorter that stays faithful, since nothing was altered",
         "A document with a contradiction, because the penalty now applies to every party at once",
         "A fluent statement whose referent is gone, which no correctness check will flag",
         "A document that fails schema validation, since the party field is now empty in the record"
@@ -2606,7 +2606,7 @@
         "Judging that what it already knows is not good enough, since today differs",
         "The permission to reach the pricing index, which the deployment never granted to the tool",
         "A tool description precise enough to match the question",
-        "A retry path, because the first search call failed"
+        "One retry path, because the first lookup call failed"
       ],
       "answer": 0,
       "why": "Connecting the tool is the easy part. The system has to notice that its own answer has an expiry date, and nothing in the generation objective rewards that noticing.",
@@ -2739,7 +2739,7 @@
       "q_vi": "Một tác tử tự viết ra các quy trình dùng lại bắt đầu trượt một nhóm nhiệm vụ mà trước đây nó làm được. Cơ chế nào có khả năng nhất?",
       "choices": [
         "A flawed procedure was committed, which later tasks inherit as experience",
-        "The procedure library outgrew the context window, so the planner no longer sees every entry it needs",
+        "Its procedure library outgrew one context window, so no planner sees every entry any more",
         "The base model was updated underneath the library, which invalidates the assumptions each procedure was written against",
         "The retrieval over the library degraded, because the number of near duplicate entries kept growing over time"
       ],
@@ -2756,7 +2756,7 @@
         "That the verification layer was never load tested, which is a gap in the release process rather than in the design",
         "That checking costs as much as generating, and a design ignoring that ships a verifier which gets switched off",
         "That the latency target was set too aggressively, since a realistic target would leave room for the check",
-        "That the verifier was the wrong kind, because a deterministic checker would run faster"
+        "Its verifier was of the wrong kind, because a deterministic checker would run faster"
       ],
       "answer": 1,
       "why": "A control that is only present when nothing is going wrong is not a control. Budgeting for the check from the start is what keeps it there on the day it matters.",
@@ -2783,7 +2783,7 @@
       "q": "Among all the text in a training corpus, which items are a model most likely to reproduce word for word?",
       "q_vi": "Trong toàn bộ văn bản của một khối ngữ liệu huấn luyện, mô hình dễ tái hiện nguyên văn nhất là những mục nào?",
       "choices": [
-        "The most frequent phrases, since repetition is what makes a sequence easy for the model to recall",
+        "Frequent phrases, since repetition makes such sequences easy enough that recall is cheap",
         "The longest documents, because a long document supplies more context for the continuation",
         "The most recent additions, since material added late in training weighs more",
         "Rare strings such as keys and personal records, since only these are stored"

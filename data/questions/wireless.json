@@ -2642,6 +2642,426 @@
       "why": "Splitting a bearer creates a single ordered stream carried over paths with different latencies, so packets arrive out of order and the receiver must hold the fast ones. Flow control that steers data in proportion to the delay and rate of each leg is what keeps the aggregation useful.",
       "why_vi": "Chia một kênh mang tạo ra một dòng có thứ tự duy nhất chạy trên các đường có độ trễ khác nhau, nên gói tới không đúng thứ tự và máy thu phải giữ lại các gói tới sớm. Điều khiển luồng phân phối dữ liệu theo độ trễ và tốc độ của từng nhánh mới là thứ giữ cho việc gộp còn có ích.",
       "level": 3
+    },
+    {
+      "id": "qw2-029",
+      "q": "Two coordination schemes are compared for a macro layer overlaying small cells. One partitions the frequency resources between layers, the other silences the macro during chosen subframes. Which comparison is correct?",
+      "q_vi": "Hai sơ đồ phối hợp được đem so cho lớp vĩ mô phủ trên các ô nhỏ. Một sơ đồ chia tài nguyên tần số giữa hai lớp, sơ đồ kia bắt lớp vĩ mô im lặng trong các khung con đã chọn. So sánh nào đúng?",
+      "choices": [
+        "Frequency partitioning protects data but not the control channels that occupy the whole band, whereas silencing whole subframes protects both at a heavier cost in macro capacity",
+        "Frequency partitioning is the more expensive of the two, since a partition is static while silencing can be adapted from one subframe to the next",
+        "The two are equivalent in capacity, because both remove the same fraction of the resource grid from the macro layer",
+        "Silencing works only when the two layers share a carrier, while frequency partitioning also works across separate carriers"
+      ],
+      "answer": 0,
+      "why": "Control information is spread across the carrier by design, so a device in an expanded region still receives macro control on every subcarrier it uses. Muting entire subframes is what clears that interference, which is why the heavier mechanism appeared once range expansion was pushed further.",
+      "why_vi": "Thông tin điều khiển vốn được trải trên cả sóng mang theo thiết kế, nên thiết bị ở vùng mở rộng vẫn nhận điều khiển của lớp vĩ mô trên mọi sóng mang con nó dùng. Tắt trọn khung con mới dọn được phần nhiễu đó, và đó là lý do cơ chế nặng tay hơn xuất hiện khi vùng mở rộng bị đẩy xa thêm.",
+      "level": 3
+    },
+    {
+      "id": "qw2-030",
+      "q": "In a heterogeneous deployment the best downlink comes from the macro site while the best uplink comes from a nearby small cell. What does that observation motivate?",
+      "q_vi": "Trong một triển khai không đồng nhất, đường xuống tốt nhất đến từ trạm vĩ mô còn đường lên tốt nhất đến từ ô nhỏ ở gần. Quan sát đó thúc đẩy điều gì?",
+      "choices": [
+        "Raising the transmit power of the small cell until its downlink matches the macro, which restores a single best serving node in both directions",
+        "Letting the two directions be served by different nodes, since the power asymmetry makes one best cell an artificial constraint",
+        "Reducing the macro transmit power, because a deployment can only work when every layer radiates at a comparable level",
+        "Handing the device over to the small cell whenever its uplink is better, given that uplink coverage is what usually limits a cell"
+      ],
+      "answer": 1,
+      "why": "The macro transmits far more power than the small cell while every device transmits about the same, so the downlink and uplink boundaries genuinely lie in different places. Decoupled association follows each direction to its own best node, at the price of extra coordination between the two.",
+      "why_vi": "Trạm vĩ mô phát công suất lớn hơn nhiều so với ô nhỏ trong khi mọi thiết bị phát gần như nhau, nên ranh giới đường xuống và đường lên thực sự nằm ở hai chỗ khác nhau. Việc gán tách rời cho mỗi chiều đi theo nút tốt nhất của nó, đổi lại là phải phối hợp thêm giữa hai nút.",
+      "level": 3
+    },
+    {
+      "id": "qw2-031",
+      "q": "A device holds a configured list of slices, asks for a subset at registration and receives a different subset in return. What do those three lists mean together?",
+      "q_vi": "Một thiết bị giữ danh sách lát cắt đã cấu hình, xin một tập con khi đăng ký và nhận về một tập con khác. Ba danh sách đó cùng nhau nghĩa là gì?",
+      "choices": [
+        "The configured list is what the device supports in hardware, the requested list is what the application asked for, and the allowed list is what the radio can currently carry",
+        "All three should be identical, and any difference between them indicates a provisioning error in the subscription record",
+        "The configured list is provisioned, the requested list is what the device wants now, and the allowed list is what this network grants while the device stays here",
+        "The configured list comes from the home network, the requested list from the visited network, and the allowed list is the intersection, which is fixed by definition"
+      ],
+      "answer": 2,
+      "why": "The three lists separate provisioning, intent and the decision of the serving network. The reply reflects subscription, roaming agreements and admission control together, and the device must then use only what it was granted rather than what it asked for.",
+      "why_vi": "Ba danh sách tách bạch việc cấp phát trước, ý định hiện thời và quyết định của mạng đang phục vụ. Câu trả lời phản ánh cùng lúc thuê bao, thoả thuận chuyển vùng và kiểm soát nạp vào, và thiết bị chỉ được dùng phần đã cấp chứ không phải phần nó xin.",
+      "level": 2
+    },
+    {
+      "id": "qw2-032",
+      "q": "An operator holds one hundred megahertz and considers running it as one carrier or as five carriers of twenty megahertz aggregated together. Which drawback does the second option carry?",
+      "q_vi": "Một nhà khai thác nắm một trăm mêgahéc và cân nhắc chạy thành một sóng mang hay thành năm sóng mang hai mươi mêgahéc gộp lại. Phương án thứ hai mang nhược điểm nào?",
+      "choices": [
+        "Aggregated carriers cannot be scheduled in the same slot, so the device receives on only one of them at any given instant",
+        "Each carrier needs its own guard band and control overhead, so usable spectrum is lost",
+        "Aggregation requires the carriers to be contiguous, and a hundred megahertz block cannot be divided into five contiguous parts",
+        "The device has to run five separate radio chains, and the resulting power consumption grows in proportion to the number of carriers"
+      ],
+      "answer": 1,
+      "why": "A single wide carrier pays the edge guard bands and the synchronisation and control structures once, while five narrow ones pay them five times. Aggregation still has its uses for spectrum spread across bands, but within one contiguous block the wide carrier is more efficient.",
+      "why_vi": "Một sóng mang rộng duy nhất chỉ trả phần băng bảo vệ ở hai mép cùng các cấu trúc đồng bộ và điều khiển một lần, còn năm sóng mang hẹp thì trả năm lần. Việc gộp sóng mang vẫn hữu ích khi phổ nằm rải ở nhiều băng, nhưng trong một khối liền mạch thì sóng mang rộng hiệu quả hơn.",
+      "level": 2
+    },
+    {
+      "id": "qw2-033",
+      "q": "A low orbit satellite serves a cell on the ground. The Doppler shift within the cell varies by tens of kilohertz between its near and far edges. Why does pre compensation at the satellite not solve the problem?",
+      "q_vi": "Một vệ tinh quỹ đạo thấp phục vụ một ô trên mặt đất. Dịch tần Doppler trong ô chênh nhau vài chục kilôhéc giữa mép gần và mép xa. Vì sao bù trước tại vệ tinh không giải quyết được vấn đề?",
+      "choices": [
+        "A single correction applied to the whole beam can only cancel the common part, since the residual spread across the footprint remains for each device to remove",
+        "Pre compensation would violate the frequency assignment, since shifting the carrier moves the emission outside the licensed block for part of the pass",
+        "The satellite cannot know its own velocity accurately enough, so any correction it applies is itself uncertain by a similar amount",
+        "Doppler on a satellite link changes sign during a pass, and a correction that is right at one moment is wrong a few seconds later"
+      ],
+      "answer": 0,
+      "why": "The shift depends on the angle between the velocity vector and each individual device, so it is different at every point in the footprint. Beam level pre compensation removes the mean and leaves a differential term, which the devices handle with wider subcarrier spacing and their own frequency tracking.",
+      "why_vi": "Độ dịch phụ thuộc góc giữa vectơ vận tốc và từng thiết bị cụ thể, nên nó khác nhau ở mọi điểm trong vùng phủ. Bù trước ở mức búp sóng chỉ xoá phần trung bình và để lại phần chênh lệch, mà các thiết bị xử lý bằng khoảng cách sóng mang con rộng hơn cùng vòng bám tần riêng.",
+      "level": 3
+    },
+    {
+      "id": "qw2-034",
+      "q": "A sector is down tilted by two degrees to reduce interference in neighbouring cells. Which method achieves that more cleanly, and why?",
+      "q_vi": "Một ô được hạ góc ngẩng hai độ để giảm nhiễu sang các ô lân cận. Cách nào đạt được điều đó gọn hơn, và vì sao?",
+      "choices": [
+        "Mechanical tilt, since physically pointing the antenna downward moves the whole pattern, which includes the side lobes, in one motion",
+        "Electrical tilt, because the pattern is lowered uniformly around the sector rather than only along the pointing direction",
+        "Either method, as the two produce identical patterns and differ only in whether a technician has to climb the mast",
+        "Mechanical tilt, given that an electrical adjustment changes the gain of the main lobe as well as its direction"
+      ],
+      "answer": 1,
+      "why": "Tipping the antenna lowers the beam ahead of it but raises the pattern behind and to the sides, so the interference it was meant to cure can reappear elsewhere. Phasing the elements lowers the beam in every azimuth of the sector, and it can also be changed remotely.",
+      "why_vi": "Nghiêng cả ăngten thì hạ búp phía trước nhưng lại nâng phần đồ thị phía sau và hai bên, nên phần nhiễu định chữa có thể hiện ra ở chỗ khác. Chỉnh pha các phần tử hạ búp đều ở mọi phương vị của ô, và còn thay đổi được từ xa.",
+      "level": 3
+    },
+    {
+      "id": "qw2-035",
+      "q": "A busy site can be upgraded either by splitting each sector into two narrower ones or by adding a second carrier. What separates the two options in practice?",
+      "q_vi": "Một trạm đang bận có thể nâng cấp bằng cách tách mỗi ô thành hai ô hẹp hơn hoặc bằng cách thêm một sóng mang thứ hai. Điều gì phân biệt hai lựa chọn trong thực tế?",
+      "choices": [
+        "Sector splitting doubles the coverage area of the site, whereas adding a carrier leaves the coverage unchanged and improves only the throughput per user",
+        "The two options are interchangeable, since the capacity of a site depends only on the total bandwidth it radiates",
+        "Sector splitting requires a new site search and planning permission, while a second carrier can always be added to the existing antenna",
+        "Sector splitting doubles the capacity of the site without any new spectrum, while adding a carrier doubles it without any new interference"
+      ],
+      "answer": 3,
+      "why": "Splitting reuses the same spectrum more times per site and costs nothing in licence fees, but the narrower sectors overlap and the interference between them eats part of the gain. A second carrier is clean spatially and costs spectrum, so the choice depends on which resource the operator is short of.",
+      "why_vi": "Tách ô là tái sử dụng cùng dải phổ nhiều lần hơn trên mỗi trạm và không tốn phí giấy phép, nhưng các ô hẹp chồng lấn nhau và phần nhiễu giữa chúng ăn mất một phần cái lợi. Thêm sóng mang thì sạch về mặt không gian và tốn phổ, nên chọn cách nào tuỳ nhà khai thác đang thiếu tài nguyên nào.",
+      "level": 2
+    },
+    {
+      "id": "qw2-036",
+      "q": "A handover procedure is redesigned so that the device keeps the old link until the new one is confirmed. What is the trade behind that change?",
+      "q_vi": "Thủ tục chuyển giao được thiết kế lại để thiết bị giữ tuyến cũ cho tới khi tuyến mới được xác nhận. Đánh đổi phía sau thay đổi đó là gì?",
+      "choices": [
+        "The interruption disappears at no cost, since the two cells simply exchange the context of the device before the switch is made",
+        "The interruption grows slightly, because confirming the new link takes longer than releasing the old one and reattaching",
+        "The interruption is unchanged, and the benefit lies entirely in the lower probability that the handover fails during the procedure",
+        "The interruption disappears, but the device has to hold resources at both cells for the overlap"
+      ],
+      "answer": 3,
+      "why": "Breaking before making leaves a gap of a few tens of milliseconds that real time traffic feels. Keeping both links removes the gap, and the cost is duplicated grants, a device able to transmit twice at once and a scheduler that reserves capacity it may not use.",
+      "why_vi": "Ngắt trước rồi nối để lại một khoảng trống vài chục mili giây mà lưu lượng thời gian thực cảm nhận rõ. Giữ cả hai tuyến xoá được khoảng trống đó, và cái giá là phải cấp phát trùng, thiết bị phải phát được hai nơi cùng lúc và bộ lập lịch phải giữ chỗ mà có thể không dùng tới.",
+      "level": 2
+    },
+    {
+      "id": "qw2-037",
+      "q": "A link adaptation algorithm averages the signal to interference ratio across the allocated subcarriers and picks a modulation from that mean. It performs badly on a frequency selective channel. What is the flaw?",
+      "q_vi": "Một thuật toán thích ứng đường truyền lấy trung bình tỉ số tín hiệu trên nhiễu qua các sóng mang con được cấp rồi chọn điều chế theo giá trị trung bình đó. Nó chạy tệ trên kênh chọn lọc tần số. Sai lầm ở đâu?",
+      "choices": [
+        "Throughput is a concave function of the ratio, so that the mean overstates what a set of unequal subcarriers can actually deliver together",
+        "The mean should be taken in decibels rather than in linear units, and the resulting bias is what produces the errors observed",
+        "The algorithm should track the worst subcarrier, since a single deep null is enough to make the whole transport block fail",
+        "Interference varies faster than the signal, so any average over frequency is dominated by the fluctuation of the interfering cells"
+      ],
+      "answer": 0,
+      "why": "The relation between quality and achievable rate saturates, so a mixture of very good and very poor subcarriers carries less than a uniform channel of the same average. Effective mapping methods compress the per subcarrier values through the coding curve before averaging, which is why they beat a plain mean.",
+      "why_vi": "Quan hệ giữa chất lượng và tốc độ đạt được bị bão hoà, nên hỗn hợp gồm sóng mang con rất tốt và rất kém chở được ít hơn một kênh đều có cùng giá trị trung bình. Các phương pháp ánh xạ hiệu dụng nén giá trị của từng sóng mang con qua đường cong mã hoá trước khi lấy trung bình, vì thế chúng thắng phép trung bình thuần tuý.",
+      "level": 3
+    },
+    {
+      "id": "qw2-038",
+      "q": "One distant client on a wireless local network drags the throughput of every other client down, although it carries very little traffic. What is the mechanism?",
+      "q_vi": "Một máy khách ở xa trên mạng cục bộ không dây kéo thông lượng của mọi máy khác xuống, dù nó chở rất ít lưu lượng. Cơ chế là gì?",
+      "choices": [
+        "Its retransmissions raise the noise floor at the access point, which lowers the quality of every other link in the network",
+        "It forces the access point down to its own modulation, since a shared medium can only run one rate at a time",
+        "It keeps the medium reserved with its handshake frames, and the reservation blocks the others for the whole duration it requested",
+        "It transmits at a low rate, so each of its frames occupies airtime that everybody else has to wait through"
+      ],
+      "answer": 3,
+      "why": "The medium is shared in time and a frame at the lowest rate can take twenty times longer than the same frame at the highest. Fairness rules that count transmissions rather than airtime therefore hand a disproportionate share of the medium to the slowest station.",
+      "why_vi": "Môi trường được chia sẻ theo thời gian, và một khung ở tốc độ thấp nhất có thể chiếm thời gian gấp hai mươi lần chính khung đó ở tốc độ cao nhất. Các quy tắc công bằng đếm số lần phát chứ không đếm thời gian phát vì thế trao phần môi trường lớn bất tương xứng cho trạm chậm nhất.",
+      "level": 2
+    },
+    {
+      "id": "qw2-039",
+      "q": "Two rollouts use the same equipment. One is dimensioned by the number of sites needed to reach an edge signal level, the other by the number needed to carry a traffic forecast. When does the second dominate?",
+      "q_vi": "Hai đợt triển khai dùng cùng thiết bị. Một đợt định cỡ theo số trạm cần để đạt mức tín hiệu ở biên, đợt kia theo số trạm cần để chở được dự báo lưu lượng. Khi nào tiêu chí thứ hai chiếm ưu thế?",
+      "choices": [
+        "In rural areas, since the long distances make the traffic per site larger than in a town",
+        "Whenever the operator holds a large block of spectrum, since more bandwidth raises the requirement",
+        "In dense areas, where the sites needed to carry the traffic outnumber the sites needed to reach the edge signal level",
+        "Whenever the carrier frequency is low, given that a lower frequency propagates further and therefore concentrates more users into each cell"
+      ],
+      "answer": 2,
+      "why": "Coverage planning fixes a minimum density from the link budget while capacity planning fixes one from offered load divided by site throughput. Whichever gives the larger number governs, and in a city centre the traffic figure is far larger, which is why sites there sit closer than propagation alone would require.",
+      "why_vi": "Quy hoạch vùng phủ ấn định mật độ tối thiểu từ ngân sách đường truyền, còn quy hoạch dung lượng ấn định mật độ từ tải chào chia cho thông lượng mỗi trạm. Con số nào lớn hơn thì con số đó chi phối, và ở trung tâm đô thị con số lưu lượng lớn hơn nhiều, vì thế các trạm ở đó gần nhau hơn mức mà riêng truyền sóng đòi hỏi.",
+      "level": 2
+    },
+    {
+      "id": "qw2-040",
+      "q": "A base station uses a pair of antennas slanted at plus and minus forty five degrees instead of two vertical antennas spaced several wavelengths apart. What is the main reason?",
+      "q_vi": "Một trạm gốc dùng cặp ăngten nghiêng cộng và trừ bốn mươi lăm độ thay vì hai ăngten thẳng đứng cách nhau vài bước sóng. Lý do chính là gì?",
+      "choices": [
+        "The slanted pair gives a higher gain in the horizontal plane, which is where the users are, and the diversity is a secondary benefit of the arrangement",
+        "The slanted pair is required by the standard for any deployment that supports spatial multiplexing on the downlink",
+        "It achieves the same decorrelation between the two branches while still fitting inside a single compact antenna housing",
+        "The slanted pair removes the need for a separate receive path, since the two polarisations can be combined in the antenna itself"
+      ],
+      "answer": 2,
+      "why": "Spatial separation needs several wavelengths to decorrelate the branches, which makes a bulky and wind loaded structure. Orthogonal polarisations decorrelate at the same physical point because the scattering environment couples them only partly, so the same diversity fits in one radome.",
+      "why_vi": "Tách theo không gian cần cách nhau vài bước sóng mới làm hai nhánh hết tương quan, dẫn tới kết cấu cồng kềnh và chịu tải gió lớn. Hai phân cực trực giao thì hết tương quan ngay tại cùng một điểm vì môi trường tán xạ chỉ ghép chúng một phần, nên cùng mức phân tập gói gọn trong một vỏ.",
+      "level": 2
+    },
+    {
+      "id": "qw2-041",
+      "q": "Uplink noise on a coastal sector rises sharply on still summer nights and returns to normal by morning. Equipment tests find nothing. What should be suspected?",
+      "q_vi": "Nhiễu đường lên trên một ô ven biển tăng vọt vào những đêm hè lặng gió rồi trở lại bình thường vào buổi sáng. Kiểm tra thiết bị không thấy gì. Nên nghi ngờ điều gì?",
+      "choices": [
+        "A temperature inversion is ducting signals from distant cells on the same frequency, which carries them far beyond the normal horizon into this receiver",
+        "Thermal noise in the receiver front end, which rises with the ambient temperature and is highest on a warm summer night",
+        "Salt deposits on the antenna, whose conductivity changes with humidity and therefore with the time of day",
+        "Solar activity, since the ionosphere is more disturbed at night and reflects more energy back towards the ground"
+      ],
+      "answer": 0,
+      "why": "A layer of warm air over cool water traps energy in a waveguide along the surface, so cells hundreds of kilometres away become visible. The pattern of nightly onset and morning clearing, with no equipment fault, is the signature, and the response is planning rather than repair.",
+      "why_vi": "Một lớp không khí ấm nằm trên mặt nước lạnh giam năng lượng trong một ống dẫn sóng dọc bề mặt, nên các ô cách hàng trăm kilômét trở nên nhìn thấy được. Dấu hiệu là hiện tượng khởi phát ban đêm rồi tan vào buổi sáng mà thiết bị không lỗi, và cách xử lý nằm ở quy hoạch chứ không phải sửa chữa.",
+      "level": 3
+    },
+    {
+      "id": "qw2-042",
+      "q": "An operator wants most devices to camp on a low band while idle but to use a high band once they have data to send. Which pair of mechanisms delivers that?",
+      "q_vi": "Một nhà khai thác muốn phần lớn thiết bị đậu ở băng thấp khi rỗi nhưng dùng băng cao khi có dữ liệu để gửi. Cặp cơ chế nào làm được điều đó?",
+      "choices": [
+        "A single reselection priority applied in both states, since the network cannot influence the band a connected device is using",
+        "Handover thresholds in both states, because camping is simply a handover the device has not completed",
+        "Reselection priorities broadcast for the idle state, together with network commanded moves while the device is connected",
+        "Access barring on the high band for idle devices and a blanket release of the barring as soon as any device requests a connection"
+      ],
+      "answer": 2,
+      "why": "An idle device chooses its own cell using the priorities the network broadcasts, which is what keeps paging and coverage on the robust layer. Once connected the network decides, so measurement reports and explicit commands move the device onto the capacity layer for the duration of the session.",
+      "why_vi": "Thiết bị rỗi tự chọn ô theo các mức ưu tiên mà mạng phát quảng bá, và đó là thứ giữ nhắn tin cùng vùng phủ ở lớp bền vững. Khi đã kết nối thì mạng quyết định, nên báo cáo đo đạc và lệnh tường minh sẽ đẩy thiết bị sang lớp dung lượng trong suốt phiên.",
+      "level": 2
+    },
+    {
+      "id": "qw2-043",
+      "q": "A sensor is expected to last ten years on a small cell. It sends one short message a day, yet the estimate falls short. Where does the budget usually go?",
+      "q_vi": "Một cảm biến được kỳ vọng chạy mười năm bằng một viên pin nhỏ. Nó gửi một bản tin ngắn mỗi ngày, nhưng ước tính vẫn hụt. Ngân sách năng lượng thường đi đâu?",
+      "choices": [
+        "Into the current drawn between messages, since a device that stays reachable must wake to check for paging and that recurring cost dwarfs one short transmission a day",
+        "Into the transmit amplifier, because a device at the edge of coverage runs it at full power for the whole message",
+        "Into the modem processor, which decodes the broadcast information continuously in order to stay synchronised",
+        "Into self discharge of the cell, which for a battery of that size exceeds the load current by a wide margin"
+      ],
+      "answer": 0,
+      "why": "One short transmission a day is a tiny amount of energy, so the answer lies in what the device does the rest of the time. Extended sleep with rare paging occasions, or a mode where the device is unreachable until it wakes itself, is what makes the target attainable.",
+      "why_vi": "Một lần phát ngắn mỗi ngày tiêu tốn rất ít năng lượng, nên câu trả lời nằm ở việc thiết bị làm gì trong thời gian còn lại. Ngủ dài với các dịp nhắn tin thưa thớt, hoặc chế độ mà thiết bị không thể liên lạc được cho tới khi tự thức, mới là thứ làm mục tiêu đó khả thi.",
+      "level": 2
+    },
+    {
+      "id": "qw2-044",
+      "q": "A real time stream is carried in a mode where lost segments are never retransmitted at the link layer. Why is that often the right choice?",
+      "q_vi": "Một luồng thời gian thực được chở ở chế độ mà các đoạn mất không bao giờ được phát lại ở lớp liên kết. Vì sao đó thường là lựa chọn đúng?",
+      "choices": [
+        "Retransmission at the link layer duplicates what the transport layer already does, and two independent recovery loops interfere with one another",
+        "A retransmitted segment arrives too late to be played out, since the delay it adds costs more than the loss it repairs",
+        "Acknowledged operation requires a return channel, which a broadcast stream does not have at its disposal",
+        "The codec has its own forward error correction, and adding link layer recovery on top of it would waste capacity for no gain"
+      ],
+      "answer": 1,
+      "why": "Media has a deadline, and a frame that misses it is discarded whether or not it was eventually delivered. Physical layer retransmission still runs underneath because it is fast, while the slower link layer loop is disabled so the buffer does not have to absorb its delay.",
+      "why_vi": "Truyền thông đa phương tiện có hạn chót, và một khung lỡ hạn thì bị bỏ dù cuối cùng có tới hay không. Việc phát lại ở lớp vật lý vẫn chạy bên dưới vì nó nhanh, còn vòng lặp chậm hơn ở lớp liên kết thì bị tắt để bộ đệm khỏi phải hấp thụ độ trễ của nó.",
+      "level": 3
+    },
+    {
+      "id": "qw2-045",
+      "q": "A network configures channel quality reports both periodically at a slow rate and on demand before a large allocation. Why does the second kind exist alongside the first?",
+      "q_vi": "Một mạng cấu hình báo cáo chất lượng kênh vừa theo chu kỳ với nhịp chậm vừa theo yêu cầu trước một lần cấp phát lớn. Vì sao loại thứ hai tồn tại bên cạnh loại thứ nhất?",
+      "choices": [
+        "The periodic report is unreliable, since it goes on a control channel with no retransmission",
+        "The periodic report covers the whole carrier while the on demand one covers a single subband, which makes them different quantities",
+        "A slow periodic report is cheap but stale, so that a fresh detailed one is requested only when the decision is an expensive one",
+        "The on demand report is required whenever the modulation order is raised, whatever the periodic report contained"
+      ],
+      "answer": 2,
+      "why": "Feedback costs uplink capacity, so reporting everything at high rate is wasteful when most devices are idle or steady. Keeping a cheap background estimate and paying for detail exactly when a large transport block is about to be chosen puts the cost where the value is.",
+      "why_vi": "Phản hồi tiêu tốn dung lượng đường lên, nên báo cáo mọi thứ với nhịp cao là lãng phí khi phần lớn thiết bị đang rỗi hoặc ổn định. Giữ một ước lượng nền rẻ tiền rồi trả giá cho chi tiết đúng lúc sắp chọn một khối truyền tải lớn là đặt chi phí vào đúng chỗ có giá trị.",
+      "level": 2
+    },
+    {
+      "id": "qw2-046",
+      "q": "An ultra narrowband system transmits at one hundred bits per second in a channel of one hundred hertz. What does that design buy, and what does it forbid?",
+      "q_vi": "Một hệ băng siêu hẹp phát ở một trăm bit mỗi giây trong kênh rộng một trăm héc. Thiết kế đó mua được gì và cấm điều gì?",
+      "choices": [
+        "It buys a very low noise floor in the receiver, but it forbids any form of frequency hopping because the channel is too narrow to hop within",
+        "It buys immunity to multipath, though it forbids indoor operation entirely",
+        "It buys an extreme link budget, while forbidding anything beyond tiny and infrequent messages from the device",
+        "It buys freedom from interference, but it forbids the use of any error correcting code because the redundancy would not fit in the channel"
+      ],
+      "answer": 2,
+      "why": "Noise power collected is proportional to bandwidth, so a hundred hertz channel receives about fifty decibels less noise than a ten megahertz one and the range becomes remarkable. The same choice caps the payload and forces duty cycle limits, so firmware updates and interactive traffic are out of reach.",
+      "why_vi": "Công suất nhiễu thu được tỉ lệ với bề rộng băng, nên kênh một trăm héc nhận ít hơn chừng năm mươi đêxiben so với kênh mười mêgahéc và cự ly trở nên rất ấn tượng. Cũng chính lựa chọn đó chặn kích thước tải tin và kéo theo giới hạn chu kỳ phát, nên cập nhật phần mềm hay lưu lượng tương tác nằm ngoài tầm với.",
+      "level": 2
+    },
+    {
+      "id": "qw2-047",
+      "q": "A simulation doubles the density of base stations in an interference limited network and finds the distribution of signal to interference ratio almost unchanged. Is the result plausible?",
+      "q_vi": "Một mô phỏng tăng gấp đôi mật độ trạm gốc trong mạng bị giới hạn bởi nhiễu và thấy phân bố tỉ số tín hiệu trên nhiễu gần như không đổi. Kết quả đó có hợp lý không?",
+      "choices": [
+        "Yes, because the wanted signal and the interference both grow with density in the same way, so the ratio is largely scale invariant while every cell still carries fewer users",
+        "No, because halving the distance to the serving site adds six decibels to the wanted signal while the interference comes from cells that are still far away",
+        "No, since more sites means more interferers and the ratio must therefore fall in proportion to the density",
+        "Yes, but only because the simulation has kept the transmit power fixed, and scaling the power down with density would restore the expected improvement"
+      ],
+      "answer": 0,
+      "why": "In a network limited by its own interference, moving every site closer improves the serving link and the interfering ones together. Capacity still rises because the same spectrum is reused more times per unit area, which is the real reason densification works.",
+      "why_vi": "Trong mạng bị chính nhiễu của nó giới hạn, kéo mọi trạm lại gần thì cải thiện cả tuyến phục vụ lẫn các tuyến gây nhiễu như nhau. Dung lượng vẫn tăng vì cùng dải phổ được tái sử dụng nhiều lần hơn trên mỗi đơn vị diện tích, và đó mới là lý do thật của việc làm dày mạng.",
+      "level": 3
+    },
+    {
+      "id": "qw2-048",
+      "q": "A carrier serves both a metering service and a service with a one millisecond deadline. Occasionally a metering transmission is already under way when the urgent packet arrives. What does the standard provide?",
+      "q_vi": "Một sóng mang phục vụ cả dịch vụ đọc chỉ số lẫn dịch vụ có hạn chót một mili giây. Đôi khi gói khẩn tới đúng lúc một lần phát đọc chỉ số đang diễn ra. Chuẩn cung cấp cơ chế gì?",
+      "choices": [
+        "A separate carrier for each service, since two traffic types with such different deadlines cannot share a single resource grid at all",
+        "The urgent packet is overwritten onto the ongoing allocation, and the interrupted device is told so that it can recover",
+        "A reservation of resources for the urgent service at all times, which guarantees the deadline whatever else is being carried",
+        "A shorter scheduling interval for both services, so that no transmission is ever long enough to block another one"
+      ],
+      "answer": 1,
+      "why": "Waiting for a long allocation to finish would break the deadline, and permanently reserving resources would waste them while no urgent traffic exists. Puncturing the ongoing transmission and signalling the affected region lets the interrupted device exclude the damaged symbols from its decoding.",
+      "why_vi": "Chờ một lần cấp phát dài kết thúc thì lỡ hạn chót, còn giữ chỗ thường trực thì lãng phí khi chưa có lưu lượng khẩn. Chèn đè lên lần phát đang diễn ra rồi báo lại vùng bị ảnh hưởng cho phép thiết bị bị ngắt loại các ký hiệu hỏng ra khỏi phần giải mã.",
+      "level": 3
+    },
+    {
+      "id": "qw2-049",
+      "q": "A device with one receive chain must measure a cell on another frequency. The network configures a gap in its schedule. What is the cost of that gap?",
+      "q_vi": "Một thiết bị chỉ có một nhánh thu phải đo một ô ở tần số khác. Mạng cấu hình một khoảng trống trong lịch của nó. Cái giá của khoảng trống đó là gì?",
+      "choices": [
+        "The device loses synchronisation with the serving cell and has to reacquire it after every gap, which is why the gaps are configured so rarely",
+        "The device drains its battery faster, because retuning the synthesiser twice per gap costs energy",
+        "The measurement is less accurate, given that a short observation cannot average enough samples",
+        "No data can be scheduled to the device while the gap lasts, so its throughput falls in proportion to the duty cycle of the gaps"
+      ],
+      "answer": 3,
+      "why": "A single chain cannot listen on two frequencies at once, so the gap is time taken from the serving link. Devices able to measure without a gap avoid the penalty entirely, which is why the capability is reported and used where it exists.",
+      "why_vi": "Một nhánh thu không nghe được hai tần số cùng lúc, nên khoảng trống chính là thời gian lấy từ tuyến đang phục vụ. Thiết bị đo được mà không cần khoảng trống thì tránh hẳn phần phạt này, vì thế khả năng đó được báo lên và được dùng ở nơi nào có.",
+      "level": 2
+    },
+    {
+      "id": "qw2-050",
+      "q": "A service is specified with a packet delay budget of ten milliseconds. An engineer plans to spend all ten in the radio access network. What has been forgotten?",
+      "q_vi": "Một dịch vụ được đặc tả với ngân sách trễ gói mười mili giây. Một kỹ sư dự định tiêu hết cả mười ở mạng truy nhập vô tuyến. Cái gì bị bỏ quên?",
+      "choices": [
+        "The budget is defined per direction, so a bidirectional service actually has twice as much delay available to it in total",
+        "The budget refers to the ninety ninth percentile rather than the mean, and planning to the mean already exceeds it in the tail",
+        "The budget applies only to the first transmission, and any packet that needs a retransmission is exempt from it by definition",
+        "The budget spans the path to the anchor, so the transport and core share it"
+      ],
+      "answer": 3,
+      "why": "The figure attached to a flow identifier covers the interval between the device and the user plane function, not the air interface alone. A standard split assigns a fixed part to the transport, and the radio has to meet the remainder together with its own reliability target.",
+      "why_vi": "Con số gắn với định danh luồng bao trọn quãng giữa thiết bị và chức năng mặt phẳng người dùng chứ không riêng giao diện vô tuyến. Cách chia chuẩn dành một phần cố định cho phần truyền tải, còn phần vô tuyến phải đáp ứng phần còn lại cùng với mục tiêu độ tin cậy của nó.",
+      "level": 3
+    },
+    {
+      "id": "qw2-051",
+      "q": "A device aggregates a carrier at seven hundred megahertz served from a macro site with a carrier at three and a half gigahertz served from a small cell nearby. Why can one timing advance value not serve both?",
+      "q_vi": "Một thiết bị gộp sóng mang bảy trăm mêgahéc phát từ trạm vĩ mô với sóng mang ba phẩy năm gigahéc phát từ một ô nhỏ ở gần. Vì sao một giá trị bù thời gian không phục vụ được cả hai?",
+      "choices": [
+        "The two carriers are transmitted from points at different distances, so that their round trip delays differ and each needs its own advance to arrive aligned at its own receiver",
+        "The propagation speed depends on frequency in the atmosphere, so that signals at the two carriers arrive at different times",
+        "The subcarrier spacing differs between the two bands, and the timing advance is expressed in units derived from that spacing",
+        "The small cell runs a different frame structure, which means its uplink boundaries never coincide with those of the macro site"
+      ],
+      "answer": 0,
+      "why": "Timing advance compensates the round trip to a specific receiving point, and two sites at different distances need different corrections. Cells reachable with the same advance are grouped together, and each group carries its own value and its own control procedure.",
+      "why_vi": "Bù thời gian bù cho quãng khứ hồi tới một điểm thu cụ thể, và hai trạm cách xa khác nhau thì cần lượng bù khác nhau. Các ô dùng chung được một lượng bù thì được gom thành nhóm, và mỗi nhóm mang giá trị riêng cùng thủ tục điều khiển riêng.",
+      "level": 3
+    },
+    {
+      "id": "qw2-052",
+      "q": "A millimetre wave device can find the best downlink beam but cannot assume the same beam is best for its own transmission. What property is missing, and what follows?",
+      "q_vi": "Một thiết bị sóng milimét tìm được búp đường xuống tốt nhất nhưng không thể coi búp đó là tốt nhất cho phần phát của chính nó. Thuộc tính nào đang thiếu, và kéo theo điều gì?",
+      "choices": [
+        "Channel reciprocity is missing, so the device has to feed back a full channel matrix instead of a simple beam index for the uplink",
+        "Frequency reciprocity is missing, because the uplink and the downlink of a millimetre wave carrier occupy different parts of the band",
+        "Polarisation matching is missing, so the device has to try both polarisations first",
+        "Beam correspondence is missing, so the uplink beam has to be found by a sweep of its own rather than inferred"
+      ],
+      "answer": 3,
+      "why": "The channel itself is reciprocal in this mode, but the antenna arrays and their calibration at the two ends need not be. Without that correspondence the device cannot infer its transmit weights from what it heard, so a separate uplink sweep with its own reference signals is required.",
+      "why_vi": "Bản thân kênh truyền vẫn thuận nghịch ở chế độ này, nhưng dàn ăngten và khâu hiệu chuẩn ở hai đầu thì chưa chắc. Thiếu sự tương ứng đó thì thiết bị không suy được trọng số phát từ thứ nó đã nghe, nên phải có một lượt quét đường lên riêng với tín hiệu tham chiếu của nó.",
+      "level": 3
+    },
+    {
+      "id": "qw2-053",
+      "q": "An amplify and forward repeater is installed to fill a coverage hole. Raising its gain beyond a certain point makes the link worse rather than better. What limits it?",
+      "q_vi": "Một bộ lặp khuếch đại và chuyển tiếp được lắp để lấp vùng lõm phủ sóng. Tăng độ lợi của nó quá một mức nhất định lại làm tuyến xấu đi chứ không tốt lên. Cái gì giới hạn nó?",
+      "choices": [
+        "The repeater begins to amplify its own output, so that the isolation between its two antennas caps the usable gain",
+        "The amplifier reaches compression, and the resulting distortion products fall inside the wanted band and raise the error rate",
+        "The repeater amplifies the noise of the donor link along with the signal, so the ratio at the output can never exceed the ratio at its input",
+        "The delay through the repeater exceeds the cyclic prefix, at which point the direct and repeated copies stop combining constructively"
+      ],
+      "answer": 0,
+      "why": "A repeater with insufficient isolation forms a loop, and once the loop gain approaches unity the device oscillates or its effective gain collapses. Noise amplification and compression are real effects too, yet the practical ceiling on any installation is set by the antenna separation.",
+      "why_vi": "Bộ lặp thiếu độ cách ly sẽ tạo thành một vòng kín, và khi độ lợi vòng tiến tới đơn vị thì thiết bị dao động hoặc độ lợi hữu dụng sụp đổ. Việc khuếch đại nhiễu và hiện tượng nén cũng có thật, nhưng trần thực tế của mọi lần lắp đặt là khoảng cách giữa hai ăngten.",
+      "level": 3
+    },
+    {
+      "id": "qw2-054",
+      "q": "An operator refarms half of a legacy band to a new technology while the old one keeps running in the other half. What has to be inserted between them, and why is it not free?",
+      "q_vi": "Một nhà khai thác chuyển đổi một nửa băng tần cũ sang công nghệ mới trong khi công nghệ cũ vẫn chạy ở nửa còn lại. Cái gì phải chèn vào giữa, và vì sao nó không miễn phí?",
+      "choices": [
+        "A separate antenna system for each technology, since two systems cannot share a radiating element",
+        "A time division arrangement, in which each technology transmits in alternate intervals across the whole band",
+        "A guard band, whose width is taken out of the spectrum which either of the two systems could otherwise have used",
+        "A synchronisation link between the two systems, so that their frames align and their transmissions never overlap in a way that raises interference"
+      ],
+      "answer": 2,
+      "why": "Neither transmitter has a brick wall spectrum, so adjacent leakage falls into the neighbour unless a gap absorbs it. That gap carries no traffic for anybody, which is why refarming in stages costs more spectral efficiency than either technology alone would show.",
+      "why_vi": "Không máy phát nào có phổ vuông thành sắc cạnh, nên phần rò kề bên rơi sang hàng xóm trừ khi có một khoảng trống hấp thụ. Khoảng trống đó không chở lưu lượng cho ai, vì thế chuyển đổi băng tần theo từng bước tốn hiệu suất phổ hơn so với riêng một công nghệ chạy độc lập.",
+      "level": 2
+    },
+    {
+      "id": "qw2-055",
+      "q": "A radio counter shows ninety megabits per second delivered to a device, while the file transfer running on it measures forty. Both figures are correct. How?",
+      "q_vi": "Bộ đếm vô tuyến cho thấy chín mươi mêgabit mỗi giây đã giao tới thiết bị, trong khi phép đo trên chính ứng dụng truyền tệp cho bốn mươi. Cả hai con số đều đúng. Bằng cách nào?",
+      "choices": [
+        "The radio counter measures the peak while the application measures the mean, and a bursty allocation makes the two differ by roughly that factor",
+        "The radio counter includes the downlink and the uplink together, whereas the application sees only the direction it is actually using",
+        "The radio counter is measured over the whole cell while the application figure belongs to one device, so the difference reflects the other users being served",
+        "The radio counter includes retransmissions and protocol overhead, since the transport layer adds its own limits on top"
+      ],
+      "answer": 3,
+      "why": "Radio counters record what crossed the air interface, including headers and every repeated attempt. Above that, a window based transport reacts to round trip time and loss, so buffering and reordering can hold the application well below what the radio actually delivered.",
+      "why_vi": "Các bộ đếm vô tuyến ghi lại thứ đã đi qua giao diện vô tuyến, kể cả tiêu đề và mọi lần phát lại. Bên trên đó, giao thức truyền tải theo cửa sổ phản ứng với thời gian khứ hồi và mất gói, nên việc đệm và sắp xếp lại có thể giữ ứng dụng ở mức thấp hơn hẳn thứ mà vô tuyến đã giao.",
+      "level": 2
+    },
+    {
+      "id": "qw2-056",
+      "q": "A device can receive one hundred megahertz either as a single carrier or as five aggregated ones. Which is better for its battery, and why?",
+      "q_vi": "Một thiết bị có thể thu một trăm mêgahéc dưới dạng một sóng mang duy nhất hoặc năm sóng mang gộp lại. Cách nào tốt hơn cho pin, và vì sao?",
+      "choices": [
+        "The aggregated form, since the device can switch off four of the five carriers whenever the traffic is light and reduce its consumption accordingly",
+        "Neither, given that receiver power is set by the total bandwidth processed and both process the same total",
+        "The aggregated form, as narrower carriers allow a lower sampling rate in each chain",
+        "The single wide carrier, because a single receive chain and one set of control decoding replace five chains and five separate sets"
+      ],
+      "answer": 3,
+      "why": "Aggregation is a way to stitch together spectrum that is not contiguous, and it duplicates control decoding, measurement and synchronisation on every carrier. When the spectrum is contiguous, one wide carrier delivers the same rate with less of that fixed cost, and secondary carriers are deactivated when idle precisely because they are expensive.",
+      "why_vi": "Việc gộp sóng mang là cách ghép lại phần phổ không liền mạch, và nó nhân bản khâu giải mã điều khiển, đo đạc và đồng bộ trên từng sóng mang. Khi phổ đã liền mạch thì một sóng mang rộng cho cùng tốc độ với ít chi phí cố định hơn, và các sóng mang thứ cấp bị tắt khi rỗi đúng vì chúng tốn kém.",
+      "level": 3
     }
   ]
 }

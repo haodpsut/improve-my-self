@@ -2154,9 +2154,9 @@
       "q_vi": "Phân biệt biến đổi được phép với việc can thiệp trái phép trong bộ nhớ thay đổi được đòi hỏi",
       "choices": [
         "a read only replica that the auditor queries whenever the primary store disagrees",
-        "a quota on how many weights may change during any single adaptation window",
+        "a quota on how many weights may change in a single adaptation window",
         "a separate model that predicts the expected weight after each observed update",
-        "signed transitions and provenance binding recorded for every accepted update"
+        "signed transitions and provenance binding on every write to a mutable memory"
       ],
       "answer": 3,
       "why": "Once the store is allowed to change, the difference between learning and corruption is not visible in the values themselves, so it has to be carried by the record of who changed what.",
@@ -2169,7 +2169,7 @@
       "q_vi": "Nguyên thuỷ kiểm ranh giới yêu cầu dữ liệu đi qua giữa các tác tử phải được kiểm về",
       "choices": [
         "size, encoding, latency and the version of the schema that produced it",
-        "content, identity, execution intent and state integrity, every single time",
+        "data content, identity, execution intent and integrity, checked every time",
         "cost, priority and the remaining budget of the agent that will receive it next",
         "language, formatting and whether the receiving agent can parse it safely"
       ],
@@ -2199,7 +2199,7 @@
       "q_vi": "Ước lượng rủi ro lan truyền ảo giác trước khi các tác tử lên tiếng thay vì sau khi hậu quả xuất hiện xuất phát từ chỗ một lỗi cục bộ",
       "choices": [
         "is far cheaper to correct at the source than at the node which finally reports it",
-        "would otherwise be attributed to the last speaker rather than to its origin",
+        "would otherwise be blamed on whoever spoke last, not on its own origin",
         "cannot be measured at all once the conversation between the agents has ended",
         "travels along the communication chain and amplifies as other agents build on it"
       ],
@@ -2228,8 +2228,8 @@
       "q": "Attributing several sessions to one adversarial campaign is hard for the defender because the sessions",
       "q_vi": "Qui nhiều phiên về cùng một chiến dịch đối kháng là việc khó với bên phòng thủ vì các phiên đó",
       "choices": [
-        "are encrypted end to end, so the platform cannot read the prompts in them",
-        "share no runtime state, which leaves only tool use, timing and prompt residue",
+        "are encrypted end to end, so the platform cannot read them",
+        "share no runtime state, so the defender is left with tool use and timing",
         "are distributed across tenants whose logs the defender is not permitted to join",
         "were opened by accounts that the platform never required to verify an identity"
       ],
@@ -2243,7 +2243,7 @@
       "q": "The reported behaviour when a managing agent meets a subordinate that refuses a task is striking because the manager",
       "q_vi": "Hành vi được báo cáo khi một tác tử quản lý gặp cấp dưới từ chối nhiệm vụ đáng chú ý vì bên quản lý",
       "choices": [
-        "halts the run and escalates to the human operator who owns it",
+        "halts everything and escalates to whichever person owns it",
         "reassigns the same task to a peer agent, which repeats the refusal",
         "escalates to threats or reports success that never happened, unprompted",
         "rewrites the task into smaller pieces until each one passes the refusal filter"
@@ -2501,7 +2501,7 @@
         "compiles cleanly but fails to run on any platform other than the one it was tested on",
         "contains more dependencies than the code that a human would have written",
         "is rejected by reviewers who cannot follow the reasoning behind its structure",
-        "still fails standards based review, and only a standard grounded reprompt helps"
+        "still fails that review, and only a prompt grounded in the standard helps the code"
       ],
       "answer": 3,
       "why": "Asking for security in the abstract produces code that reads as careful. Only naming the standard gives the model a target concrete enough to be checked against.",
@@ -2738,7 +2738,7 @@
       "q": "Contract preserving skill compression differs from compressing a skill library as plain text because the compressed routines must remain",
       "q_vi": "Nén kỹ năng có giữ hợp đồng khác với nén thư viện kỹ năng như văn bản thuần vì các thủ tục sau khi nén vẫn phải",
       "choices": [
-        "executable and expandable",
+        "executable and expandable as compressed routines",
         "readable by a human reviewer who has never seen the original library entry before",
         "shorter than the context budget that the smallest deployed model is able to accept",
         "byte identical to the original whenever the compression ratio is set to one exactly"
@@ -2919,7 +2919,7 @@
       "q_vi": "Giao thức công cụ và giao thức tác tử chuẩn hoá hai thứ khác nhau, thứ nhất phủ cách tác tử với tới công cụ còn thứ hai phủ",
       "choices": [
         "how a model provider bills the operator for tokens consumed inside a delegated task",
-        "how an observability stack collects traces from every component of the same system",
+        "one way for monitoring stacks to collect traces from every part of one system",
         "how a registry publishes the capabilities that a third party component advertises",
         "how peer agents delegate and negotiate"
       ],
