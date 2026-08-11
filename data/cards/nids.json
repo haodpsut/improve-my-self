@@ -1,0 +1,1293 @@
+{
+  "schema": 1,
+  "id": "nids",
+  "updated": "2026-08-09",
+  "cards": [
+    {
+      "id": "sec-ids",
+      "en": "IDS (Intrusion Detection System)",
+      "vi": "Hệ phát hiện xâm nhập",
+      "def_en": "A system that inspects traffic or host activity and raises alerts on suspected attacks.",
+      "def_vi": "Hệ thống soi lưu lượng hoặc hoạt động máy chủ và cảnh báo khi nghi có tấn công.",
+      "say": "The intrusion detection system flags it, the analyst decides what it means.",
+      "tags": [
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-ips",
+      "en": "IPS (Intrusion Prevention System)",
+      "vi": "Hệ ngăn chặn xâm nhập",
+      "def_en": "A detection system placed inline so it can block the offending traffic, not only report it.",
+      "def_vi": "Hệ phát hiện đặt trên đường truyền, có thể chặn luôn lưu lượng vi phạm chứ không chỉ báo cáo.",
+      "tags": [
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-signature",
+      "en": "Signature-based detection",
+      "vi": "Phát hiện theo dấu hiệu",
+      "def_en": "Matching traffic against known attack patterns, precise but blind to anything new.",
+      "def_vi": "Đối chiếu lưu lượng với mẫu tấn công đã biết, chính xác nhưng mù trước cái mới.",
+      "tags": [
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-anomaly",
+      "en": "Anomaly-based detection",
+      "vi": "Phát hiện theo bất thường",
+      "def_en": "Learning a baseline of normal behaviour and flagging deviations, which catches novelty but raises false alarms.",
+      "def_vi": "Học mức nền của hành vi bình thường rồi báo động khi lệch, bắt được cái mới nhưng hay báo động giả.",
+      "say": "Anomaly detection buys coverage and pays for it in false positives.",
+      "tags": [
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-false-positive",
+      "en": "False positive",
+      "vi": "Báo động giả",
+      "def_en": "A benign event wrongly flagged as an attack, the main reason analysts stop trusting an alert feed.",
+      "def_vi": "Sự kiện lành tính bị báo nhầm là tấn công, lý do chính khiến người phân tích mất tin vào luồng cảnh báo.",
+      "tags": [
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-roc",
+      "en": "ROC curve",
+      "vi": "Đường cong ROC",
+      "def_en": "A plot of detection rate against false alarm rate as the decision threshold moves.",
+      "def_vi": "Đồ thị tỉ lệ phát hiện theo tỉ lệ báo động giả khi ngưỡng quyết định thay đổi.",
+      "tags": [
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-siem",
+      "en": "SIEM",
+      "vi": "Hệ quản lý sự kiện an ninh",
+      "def_en": "A platform that collects logs from everywhere, correlates them and drives alerting.",
+      "def_vi": "Nền tảng thu nhật ký từ khắp nơi, đối chiếu chúng và điều khiển việc cảnh báo.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-attack-matrix",
+      "en": "MITRE ATT&CK",
+      "vi": "Ma trận kỹ thuật tấn công ATT&CK",
+      "def_en": "A public catalogue of tactics and techniques observed in real intrusions, used to describe behaviour and to map detection coverage.",
+      "def_vi": "Danh mục công khai các chiến thuật và kỹ thuật quan sát được trong những vụ xâm nhập thật, dùng để mô tả hành vi và để đối chiếu độ phủ phát hiện.",
+      "say": "We map every detection rule to a technique so the gaps become visible.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-kill-chain",
+      "en": "Kill chain",
+      "vi": "Chuỗi tiêu diệt",
+      "def_en": "A staged model of an intrusion from reconnaissance to action on objectives, used to argue that breaking any earlier stage is cheaper.",
+      "def_vi": "Mô hình chia giai đoạn của một vụ xâm nhập, từ thăm dò tới hành động trên mục tiêu, dùng để lập luận rằng chặn ở giai đoạn sớm thì rẻ hơn.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-ioc",
+      "en": "Indicator of compromise",
+      "vi": "Chỉ báo xâm phạm",
+      "def_en": "A concrete artefact such as a hash, domain or address that suggests a specific intrusion, cheap to share but easy for the attacker to change.",
+      "def_vi": "Dấu vết cụ thể như mã băm, tên miền hay địa chỉ, gợi ý một vụ xâm nhập nhất định, dễ chia sẻ nhưng kẻ tấn công cũng dễ thay.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-threat-hunting",
+      "en": "Threat hunting",
+      "vi": "Săn mối đe dọa",
+      "def_en": "Searching telemetry from a hypothesis rather than from an alert, meant to find intrusions the existing rules never fire on.",
+      "def_vi": "Lục tìm trong dữ liệu quan trắc xuất phát từ một giả thuyết chứ không từ một cảnh báo, nhằm tìm ra các vụ xâm nhập mà luật hiện có không bao giờ kêu.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-edr",
+      "en": "Endpoint detection and response",
+      "vi": "Phát hiện và ứng phó trên điểm cuối",
+      "def_en": "Agent based collection of process, file and network behaviour on hosts, with the ability to isolate a machine and roll back changes.",
+      "def_vi": "Thu thập hành vi tiến trình, tập tin và mạng ngay trên máy bằng tác tử, kèm khả năng cô lập máy và hoàn tác thay đổi.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "sec-triage-severity",
+      "en": "Severity triage",
+      "vi": "Phân loại mức nghiêm trọng",
+      "def_en": "Ranking alerts by likely impact and exposure so limited analyst time goes to the cases that matter.",
+      "def_vi": "Xếp hạng cảnh báo theo tác động khả dĩ và mức phơi nhiễm, để thời gian có hạn của người phân tích dồn vào ca đáng xử lý.",
+      "tags": [
+        "operations",
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-mttd",
+      "en": "Mean time to detect",
+      "vi": "Thời gian trung bình để phát hiện",
+      "def_en": "The average delay between an intrusion starting and the defenders noticing, the number that decides how much damage happened first.",
+      "def_vi": "Độ trễ trung bình từ lúc vụ xâm nhập bắt đầu tới lúc bên phòng thủ nhận ra, con số quyết định thiệt hại đã xảy ra bao nhiêu trước đó.",
+      "tags": [
+        "metric",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-base-rate-fallacy",
+      "en": "Base rate fallacy",
+      "vi": "Ngộ nhận tỉ lệ nền",
+      "def_en": "Reading a detection rate without accounting for how rare attacks are, which makes a seemingly excellent detector produce mostly false alerts.",
+      "def_vi": "Đọc tỉ lệ phát hiện mà bỏ qua việc tấn công vốn rất hiếm, khiến một bộ phát hiện trông rất giỏi vẫn cho ra phần lớn là cảnh báo sai.",
+      "say": "At a base rate of one in a million, ninety nine percent precision is a fantasy.",
+      "tags": [
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-precision-recall",
+      "en": "Precision and recall",
+      "vi": "Độ chuẩn xác và độ bao phủ",
+      "def_en": "Precision is the share of alerts that are real, recall the share of real attacks caught. Under heavy imbalance only the pair is informative.",
+      "def_vi": "Độ chuẩn xác là tỉ lệ cảnh báo đúng, độ bao phủ là tỉ lệ tấn công thật bắt được. Khi dữ liệu lệch nặng thì chỉ cặp số này mới nói lên điều gì.",
+      "tags": [
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-behaviour-baseline",
+      "en": "Behavioural baseline",
+      "vi": "Đường nền hành vi",
+      "def_en": "A statistical picture of what normal activity looks like for a host, account or link, against which deviation is measured.",
+      "def_vi": "Bức tranh thống kê về hoạt động bình thường của một máy, một tài khoản hay một đường truyền, dùng làm mốc để đo độ lệch.",
+      "say": "If the baseline is learned while the intruder is already active, their traffic becomes normal.",
+      "tags": [
+        "defence",
+        "metric"
+      ]
+    },
+    {
+      "id": "sec-ueba",
+      "en": "UEBA",
+      "vi": "Phân tích hành vi người dùng và thực thể",
+      "def_en": "Detection that scores accounts and devices against their own history and against comparable peers, rather than against fixed rules.",
+      "def_vi": "Cách phát hiện chấm điểm tài khoản và thiết bị dựa trên lịch sử của chính chúng và dựa trên nhóm tương đương, thay vì dựa vào luật cố định.",
+      "say": "Comparing an account with its peer group catches what comparing it with a global threshold misses.",
+      "tags": [
+        "defence",
+        "ai-security"
+      ]
+    },
+    {
+      "id": "sec-beaconing",
+      "en": "Beaconing",
+      "vi": "Nhịp gọi về máy điều khiển",
+      "def_en": "The regular check in traffic from an implanted agent to its controller, recognisable by its timing regularity rather than its content.",
+      "def_vi": "Lưu lượng gọi về đều đặn từ tác nhân đã được cài cắm tới máy điều khiển, nhận ra được nhờ tính đều đặn về thời gian chứ không nhờ nội dung.",
+      "say": "Encryption hides the payload but the interval between connections is still in plain view.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "sec-sigma-rule",
+      "en": "Sigma rule",
+      "vi": "Luật phát hiện dạng Sigma",
+      "def_en": "A vendor neutral way of writing a detection over log fields, which is then translated into the query language of whichever platform holds the data.",
+      "def_vi": "Cách viết một luật phát hiện trên các trường nhật ký mà không phụ thuộc nhà cung cấp, sau đó được dịch sang ngôn ngữ truy vấn của nền tảng đang chứa dữ liệu.",
+      "say": "Writing the logic once and translating it keeps detections from being locked to one platform.",
+      "tags": [
+        "defence",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-alert-fatigue",
+      "en": "Alert fatigue",
+      "vi": "Mệt mỏi vì cảnh báo",
+      "def_en": "The gradual loss of analyst attention caused by a queue in which almost every alert turns out to be harmless.",
+      "def_vi": "Sự suy giảm dần khả năng chú ý của người phân tích, do hàng đợi mà hầu như cảnh báo nào cũng hóa ra vô hại.",
+      "say": "A detector that is right one time in five hundred trains its own analysts to ignore it.",
+      "tags": [
+        "operations",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "sec-canary-token",
+      "en": "Canary token",
+      "vi": "Mồi báo động",
+      "def_en": "A credential, file or record that has no legitimate use, so any access to it is evidence of intrusion with essentially no false alarms.",
+      "def_vi": "Một thông tin đăng nhập, tệp hay bản ghi không có công dụng hợp lệ nào, nên mọi lần bị chạm tới đều là bằng chứng xâm nhập với gần như không có báo động giả.",
+      "say": "Nobody has a reason to open that file, which is exactly why opening it is a signal.",
+      "tags": [
+        "defence",
+        "operations"
+      ]
+    },
+    {
+      "id": "sec-purple-team",
+      "en": "Purple team exercise",
+      "vi": "Diễn tập phối hợp công và thủ",
+      "def_en": "An exercise in which the attacking and defending sides work together, executing known techniques to find out which ones the sensors actually see.",
+      "def_vi": "Buổi diễn tập trong đó bên tấn công và bên phòng thủ làm việc cùng nhau, thực hiện các kỹ thuật đã biết để tìm ra cảm biến thật sự thấy được kỹ thuật nào.",
+      "say": "The output is not a score, it is a list of techniques your sensors were blind to.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-netflow",
+      "en": "NetFlow export",
+      "vi": "Xuất bản ghi luồng NetFlow",
+      "def_en": "A router feature that summarises packets sharing the same five tuple into one record with counts, byte totals and timestamps, discarding payload entirely.",
+      "def_vi": "Tính năng của bộ định tuyến, gộp các gói cùng bộ năm trường thành một bản ghi kèm số gói, tổng byte và mốc thời gian, bỏ hẳn phần tải tin.",
+      "say": "A flow record tells you who talked to whom and for how long, never what they said.",
+      "tags": [
+        "network",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "nids-ipfix",
+      "en": "IPFIX",
+      "vi": "Chuẩn xuất luồng IPFIX",
+      "def_en": "The standardised successor to NetFlow, in which a template describes which fields a record carries so that vendors can add their own without breaking collectors.",
+      "def_vi": "Chuẩn kế thừa NetFlow, trong đó một khuôn mẫu mô tả bản ghi mang những trường nào, nhờ vậy nhà cung cấp thêm trường riêng mà không làm hỏng bộ thu.",
+      "say": "Because the template travels with the data, a collector can parse fields it was never taught.",
+      "tags": [
+        "network",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "nids-flow-timeout",
+      "en": "Active and idle flow timeout",
+      "vi": "Ngưỡng thời gian chủ động và nhàn rỗi của luồng",
+      "def_en": "The two rules that decide when an exporter closes a record: after a fixed lifetime, or after a gap with no packets. They cut long sessions into several records.",
+      "def_vi": "Hai quy tắc quyết định lúc bộ xuất đóng một bản ghi: sau một khoảng sống cố định, hoặc sau một quãng lặng không có gói nào. Chúng cắt phiên dài thành nhiều bản ghi.",
+      "say": "If you forget the timeout, one long download looks like a burst of separate sessions.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-biflow",
+      "en": "Biflow record",
+      "vi": "Bản ghi luồng hai chiều",
+      "def_en": "A record that pairs the forward and reverse directions of one conversation, which makes ratios such as bytes out over bytes in available without a join.",
+      "def_vi": "Bản ghi ghép cả chiều đi lẫn chiều về của một cuộc trao đổi, nhờ đó có ngay các tỉ số như byte ra trên byte vào mà không phải ghép bảng.",
+      "tags": [
+        "network",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "nids-span-port",
+      "en": "SPAN port",
+      "vi": "Cổng gương lưu lượng",
+      "def_en": "A switch feature that copies traffic from chosen ports to a monitor port. It is free and reconfigurable, but the copy is dropped first when the switch is busy.",
+      "def_vi": "Tính năng của bộ chuyển mạch, sao lưu lượng từ các cổng được chọn sang một cổng giám sát. Cách này miễn phí và đổi cấu hình được, nhưng bản sao bị bỏ trước tiên khi máy bận.",
+      "say": "The mirrored copy is the first thing a loaded switch decides it can live without.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-network-tap",
+      "en": "Network tap",
+      "vi": "Bộ trích tín hiệu trên đường truyền",
+      "def_en": "A passive device inserted in the cable that hands a full copy of both directions to a sensor without competing for switch resources.",
+      "def_vi": "Thiết bị thụ động cắm vào đường cáp, giao một bản sao đầy đủ của cả hai chiều cho cảm biến mà không tranh tài nguyên với bộ chuyển mạch.",
+      "say": "A tap costs money and a cable cut, and in exchange it never silently drops your evidence.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-packet-sampling",
+      "en": "Packet sampling in flow export",
+      "vi": "Lấy mẫu gói khi xuất luồng",
+      "def_en": "Exporting statistics from one packet in every N instead of all of them, which keeps the router fast but makes short conversations vanish entirely.",
+      "def_vi": "Chỉ lấy thống kê từ một gói trong mỗi N gói thay vì toàn bộ, giúp bộ định tuyến chạy nhanh nhưng khiến những cuộc trao đổi ngắn biến mất hoàn toàn.",
+      "say": "Sampling scales the counters and destroys the small flows, which is where scanning lives.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-sflow",
+      "en": "sFlow",
+      "vi": "Giao thức lấy mẫu sFlow",
+      "def_en": "A monitoring protocol that samples raw packet headers at a fixed rate and ships them immediately, so volume estimates are good and per flow completeness is not.",
+      "def_vi": "Giao thức giám sát lấy mẫu phần đầu gói thô theo tỉ lệ cố định rồi gửi đi ngay, nên ước lượng khối lượng thì tốt còn tính đầy đủ của từng luồng thì không.",
+      "tags": [
+        "network",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "nids-sensor-drop",
+      "en": "Sensor packet loss",
+      "vi": "Mất gói tại bộ cảm biến",
+      "def_en": "Packets discarded inside the capture stack because the sensor cannot keep up, producing silent blind spots that look exactly like an absence of attacks.",
+      "def_vi": "Gói bị bỏ ngay trong tầng bắt gói vì cảm biến theo không kịp, tạo ra vùng mù âm thầm trông y hệt như không có tấn công nào.",
+      "say": "Read the capture drop counter before you believe a quiet evening.",
+      "tags": [
+        "pitfall",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-full-capture",
+      "en": "Full packet capture retention",
+      "vi": "Thời gian lưu bản bắt gói đầy đủ",
+      "def_en": "How many days of complete traffic the storage can hold. It sets the hard limit on how far back an investigation can reconstruct what actually happened.",
+      "def_vi": "Số ngày lưu lượng đầy đủ mà kho lưu trữ giữ được. Nó đặt giới hạn cứng cho việc điều tra lùi lại được bao xa để dựng lại chuyện đã thật sự xảy ra.",
+      "say": "An intrusion found after your retention window ends is an intrusion you can only guess about.",
+      "tags": [
+        "operations",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-stream-reassembly",
+      "en": "Stream reassembly",
+      "vi": "Ghép lại dòng dữ liệu",
+      "def_en": "Rebuilding the ordered byte stream from packets before matching content, without which an attack split across packet boundaries matches no rule.",
+      "def_vi": "Dựng lại dòng byte đúng thứ tự từ các gói trước khi so khớp nội dung, thiếu bước này thì một tấn công bị cắt ngang ranh giới gói sẽ không khớp luật nào.",
+      "say": "Matching on single packets means the pattern only has to be split in two to disappear.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-vantage-point",
+      "en": "Sensor vantage point",
+      "vi": "Vị trí quan sát của cảm biến",
+      "def_en": "Where in the topology a sensor sits, which decides what it can ever see. Address translation, tunnels and asymmetric routing all change the answer.",
+      "def_vi": "Cảm biến nằm ở đâu trong sơ đồ mạng, điều này quyết định nó có thể thấy được gì. Việc dịch địa chỉ, đường hầm và định tuyến bất đối xứng đều làm đổi câu trả lời.",
+      "say": "No model recovers a conversation that never crossed the link you are watching.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-east-west",
+      "en": "East west traffic visibility",
+      "vi": "Khả năng thấy lưu lượng nội bộ",
+      "def_en": "Coverage of server to server traffic inside the perimeter, where lateral movement happens and where a gateway sensor sees nothing at all.",
+      "def_vi": "Độ phủ với lưu lượng giữa các máy chủ bên trong vành đai, nơi kẻ tấn công di chuyển ngang và cũng là nơi cảm biến đặt ở cổng ra không thấy gì cả.",
+      "say": "Watching only the gateway means watching the one link the intruder stops using after the first hour.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-community-id",
+      "en": "Community ID flow hash",
+      "vi": "Mã băm luồng dùng chung",
+      "def_en": "A deterministic identifier computed from the five tuple in a fixed order, so different tools name the same conversation identically and their records can be joined.",
+      "def_vi": "Định danh xác định tính từ bộ năm trường theo thứ tự cố định, nhờ đó các công cụ khác nhau gọi cùng một cuộc trao đổi bằng cùng một tên và ghép được bản ghi với nhau.",
+      "say": "Without a shared identifier, correlating two tools becomes an exercise in timestamp arithmetic.",
+      "tags": [
+        "operations",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "nids-encap-blindspot",
+      "en": "Encapsulation blind spot",
+      "vi": "Vùng mù do đóng gói lồng nhau",
+      "def_en": "A sensor that reads only the outer header of a tunnel records one conversation between two gateways and misses every session carried inside it.",
+      "def_vi": "Cảm biến chỉ đọc phần đầu ngoài của đường hầm sẽ ghi lại một cuộc trao đổi giữa hai cổng và bỏ sót mọi phiên chạy bên trong nó.",
+      "say": "One tunnel between two gateways can hide a thousand sessions from a sensor that never looks inside.",
+      "tags": [
+        "pitfall",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-clock-skew",
+      "en": "Clock skew between sensors",
+      "vi": "Lệch đồng hồ giữa các cảm biến",
+      "def_en": "Small differences in sensor clocks that scramble the order of events in a correlated timeline, which quietly breaks any rule reasoning about cause and effect.",
+      "def_vi": "Chênh lệch nhỏ giữa đồng hồ các cảm biến làm đảo lộn thứ tự sự kiện trong dòng thời gian đã đối chiếu, âm thầm phá mọi luật lập luận theo nhân và quả.",
+      "say": "Two seconds of drift is enough to make the response appear before the request.",
+      "tags": [
+        "pitfall",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-snort",
+      "en": "Snort",
+      "vi": "Bộ dò Snort",
+      "def_en": "The rule based engine that made packet inspection ordinary, matching each packet or reassembled stream against a text rule with a header filter and content options.",
+      "def_vi": "Bộ máy chạy theo luật đã biến việc soi gói thành chuyện thường ngày, đối chiếu từng gói hay dòng đã ghép với một luật dạng văn bản gồm bộ lọc phần đầu và các tùy chọn nội dung.",
+      "say": "Its rule language became the common tongue for describing a network attack.",
+      "tags": [
+        "defence",
+        "tool"
+      ]
+    },
+    {
+      "id": "nids-suricata",
+      "en": "Suricata",
+      "vi": "Bộ dò Suricata",
+      "def_en": "A multithreaded engine that keeps the familiar rule syntax but adds protocol parsers, file extraction and structured event output, so it detects and describes at once.",
+      "def_vi": "Bộ máy đa luồng giữ nguyên cú pháp luật quen thuộc nhưng thêm bộ phân tích giao thức, trích xuất tệp và đầu ra sự kiện có cấu trúc, nên vừa phát hiện vừa mô tả cùng lúc.",
+      "say": "Running several threads matters only if the traffic can be split without breaking the flows.",
+      "tags": [
+        "defence",
+        "tool"
+      ]
+    },
+    {
+      "id": "nids-zeek",
+      "en": "Zeek",
+      "vi": "Bộ phân tích Zeek",
+      "def_en": "A traffic analysis framework that writes a structured transcript of every session rather than alerts, leaving the question of what counts as bad to a script or a later query.",
+      "def_vi": "Khung phân tích lưu lượng ghi ra bản tường thuật có cấu trúc cho từng phiên thay vì ra cảnh báo, để dành câu hỏi thế nào là xấu cho một kịch bản hay một truy vấn về sau.",
+      "say": "It answers what happened on the wire, and leaves the judgement to you.",
+      "tags": [
+        "defence",
+        "tool"
+      ]
+    },
+    {
+      "id": "nids-conn-log",
+      "en": "Connection log",
+      "vi": "Nhật ký kết nối",
+      "def_en": "One line per session recording endpoints, service, duration, byte counts and how the connection ended, which is the cheapest useful record of network behaviour.",
+      "def_vi": "Mỗi phiên một dòng ghi hai đầu, dịch vụ, thời lượng, số byte và cách kết nối kết thúc, đây là bản ghi hành vi mạng rẻ nhất mà vẫn dùng được.",
+      "say": "Most hunting questions are answered from the connection log alone.",
+      "tags": [
+        "telemetry",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-protocol-anomaly",
+      "en": "Protocol anomaly detection",
+      "vi": "Phát hiện bất thường giao thức",
+      "def_en": "Flagging messages that violate what the protocol grammar permits, which catches novel abuse without any attack sample but also catches sloppy legitimate software.",
+      "def_vi": "Báo động những thông điệp vi phạm điều mà ngữ pháp giao thức cho phép, cách này bắt được lạm dụng mới mà không cần mẫu tấn công nào nhưng cũng bắt luôn phần mềm hợp lệ viết ẩu.",
+      "say": "Half of what breaks the standard is not an attacker, it is a printer.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-spec-based",
+      "en": "Specification based detection",
+      "vi": "Phát hiện dựa trên đặc tả",
+      "def_en": "Writing down what a system is allowed to do and alerting on anything outside it, which suits stable machines and fails on networks where normal keeps changing.",
+      "def_vi": "Viết ra những gì một hệ thống được phép làm rồi báo động với mọi thứ nằm ngoài, cách này hợp với máy móc ổn định và hỏng ở những mạng mà cái bình thường cứ thay đổi.",
+      "say": "On a control network the allowed behaviour fits on one page, which is why the approach works there.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-stateful-protocol",
+      "en": "Stateful protocol analysis",
+      "vi": "Phân tích trạng thái giao thức",
+      "def_en": "Tracking where a session sits in the protocol state machine so that a message can be judged wrong for arriving at the wrong moment, not only for its content.",
+      "def_vi": "Theo dõi phiên đang ở đâu trong máy trạng thái của giao thức, nhờ đó một thông điệp có thể bị coi là sai vì đến sai lúc chứ không chỉ vì nội dung của nó.",
+      "say": "A command that is harmless after login is an attack before it.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-correlation-rule",
+      "en": "Correlation rule",
+      "vi": "Luật đối chiếu nhiều sự kiện",
+      "def_en": "Logic that fires only when several weak events line up within a window, trading a little detection delay for a large drop in the false alarm rate.",
+      "def_vi": "Lô gích chỉ kêu khi vài sự kiện yếu xếp thẳng hàng trong một cửa sổ thời gian, đánh đổi chút độ trễ phát hiện lấy mức giảm lớn của tỉ lệ báo động giả.",
+      "say": "Three weak signals in the same minute are worth more than any of them alone.",
+      "tags": [
+        "defence",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-graph-detection",
+      "en": "Graph based detection",
+      "vi": "Phát hiện dựa trên đồ thị",
+      "def_en": "Treating hosts, accounts and processes as nodes and their interactions as edges, so that an intrusion shows up as an unusual path rather than an unusual packet.",
+      "def_vi": "Coi máy, tài khoản và tiến trình là các đỉnh còn tương tác giữa chúng là các cạnh, nhờ vậy một vụ xâm nhập hiện ra thành một đường đi lạ chứ không phải một gói tin lạ.",
+      "say": "The single step looks ordinary, the chain of steps does not.",
+      "tags": [
+        "defence",
+        "ai-security"
+      ]
+    },
+    {
+      "id": "nids-fast-pattern",
+      "en": "Fast pattern selection",
+      "vi": "Chọn mẫu lọc nhanh trong luật",
+      "def_en": "Picking the rarest fixed string in a rule as the cheap prefilter, so the expensive checks run only on the few packets that could possibly match.",
+      "def_vi": "Chọn chuỗi cố định hiếm gặp nhất trong một luật làm bộ lọc sơ bộ rẻ tiền, nhờ đó các phép kiểm tốn kém chỉ chạy trên số ít gói có khả năng khớp.",
+      "say": "Choosing a common word as the prefilter turns one rule into a load problem for all of them.",
+      "tags": [
+        "defence",
+        "tool"
+      ]
+    },
+    {
+      "id": "nids-rule-cost",
+      "en": "Rule evaluation cost",
+      "vi": "Chi phí chạy một luật",
+      "def_en": "The processing a rule demands per packet. A pattern that backtracks heavily can starve the whole engine and cause drops that look like an absence of attacks.",
+      "def_vi": "Mức xử lý mà một luật đòi hỏi trên mỗi gói. Một mẫu quay lui nhiều có thể bỏ đói cả bộ máy và gây ra mất gói trông giống như không có tấn công nào.",
+      "say": "One badly written pattern can blind every other rule on the sensor.",
+      "tags": [
+        "pitfall",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-detection-as-code",
+      "en": "Detection as code",
+      "vi": "Quản lý luật phát hiện như mã nguồn",
+      "def_en": "Keeping rules in version control with tests and review, so a detection can be traced to its author, replayed against known traffic and rolled back when it misfires.",
+      "def_vi": "Giữ luật trong hệ quản lý phiên bản kèm bài kiểm và khâu duyệt, nhờ đó một phép phát hiện truy được về tác giả, phát lại được trên lưu lượng đã biết và hoàn tác được khi nó kêu sai.",
+      "say": "A rule nobody can trace to a reason is a rule nobody dares to delete.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-insertion-evasion",
+      "en": "Insertion and evasion against a sensor",
+      "vi": "Chèn và né tránh nhắm vào cảm biến",
+      "def_en": "The classic mismatch in which the sensor and the destination host reassemble the same packets differently, so one of them sees an attack the other never receives.",
+      "def_vi": "Sai lệch kinh điển trong đó cảm biến và máy đích ghép cùng một dãy gói theo hai cách khác nhau, khiến một bên thấy tấn công còn bên kia không hề nhận được nó.",
+      "say": "If the sensor and the host disagree about what the bytes mean, the difference is where the attack hides.",
+      "tags": [
+        "pitfall",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-traffic-normaliser",
+      "en": "Traffic normaliser",
+      "vi": "Bộ chuẩn hóa lưu lượng",
+      "def_en": "An inline component that rewrites ambiguous traffic into one canonical form before inspection, removing the gap an evasion technique needs in order to work.",
+      "def_vi": "Thành phần đặt trên đường truyền, viết lại lưu lượng nhập nhằng về một dạng chuẩn duy nhất trước khi soi, xóa đi khoảng hở mà kỹ thuật né tránh cần để hoạt động.",
+      "say": "Remove the ambiguity and the evasion has nothing left to exploit.",
+      "tags": [
+        "defence",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-inline-vs-passive",
+      "en": "Inline versus passive deployment",
+      "vi": "Đặt trên đường truyền so với quan sát thụ động",
+      "def_en": "Inline sensors can block but become a failure point and a latency budget, passive sensors can only report but never take the network down when they crash.",
+      "def_vi": "Cảm biến đặt trên đường truyền chặn được nhưng thành điểm hỏng và thành một khoản độ trễ, cảm biến thụ động chỉ báo cáo được nhưng không bao giờ làm sập mạng khi nó chết.",
+      "say": "Ask what happens to the traffic when the box reboots, then decide.",
+      "tags": [
+        "network",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-hids",
+      "en": "Host based intrusion detection",
+      "vi": "Phát hiện xâm nhập trên máy chủ",
+      "def_en": "Detection from inside the machine using process, file and system call records, which sees the decrypted intent that the network sensor can only infer from the outside.",
+      "def_vi": "Phát hiện từ bên trong máy dựa trên bản ghi tiến trình, tệp và lời gọi hệ thống, nhìn thấy ý định đã giải mã mà cảm biến mạng chỉ có thể suy đoán từ bên ngoài.",
+      "say": "Whatever the tunnel hides on the wire is plain text by the time the process runs it.",
+      "tags": [
+        "defence",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "nids-accuracy-trap",
+      "en": "Accuracy under extreme imbalance",
+      "vi": "Độ chính xác khi dữ liệu lệch nặng",
+      "def_en": "When attacks are one event in a million, a detector that answers benign every single time scores almost perfectly, which is why the number carries no information here.",
+      "def_vi": "Khi tấn công chỉ là một sự kiện trong một triệu, bộ dò cứ trả lời lành tính mọi lần vẫn đạt điểm gần như hoàn hảo, vì thế con số này không mang thông tin gì ở đây.",
+      "say": "A model that never raises an alarm can still report a wonderful score, which tells you the score is wrong.",
+      "tags": [
+        "metric",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-pr-vs-roc",
+      "en": "Precision recall against ROC for rare attacks",
+      "vi": "So sánh precision recall với ROC khi tấn công hiếm",
+      "def_en": "The ROC axis divides false alerts by the huge benign count, which hides them. The precision axis divides by the alerts raised, so the analyst workload stays visible.",
+      "def_vi": "Trục của ROC chia số cảnh báo sai cho lượng lành tính khổng lồ nên giấu chúng đi. Trục precision chia cho số cảnh báo đã phát, nên khối việc của người phân tích vẫn hiện rõ.",
+      "say": "Change the mix of benign traffic and the ROC curve barely moves while precision collapses.",
+      "tags": [
+        "metric"
+      ]
+    },
+    {
+      "id": "nids-alarm-budget",
+      "en": "Detection rate at a fixed alarm budget",
+      "vi": "Tỉ lệ phát hiện dưới hạn mức báo động cố định",
+      "def_en": "The only comparison that matches operations: fix how many alerts a shift can process, then ask which detector catches the most real attacks within that ceiling.",
+      "def_vi": "Phép so sánh duy nhất khớp với vận hành: cố định số cảnh báo mà một ca trực xử lý nổi, rồi hỏi bộ dò nào bắt được nhiều tấn công thật nhất trong trần đó.",
+      "say": "Ask how much it catches when the team can read only a hundred alerts a day.",
+      "tags": [
+        "metric",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-auc-misread",
+      "en": "Area under the curve read as a single verdict",
+      "vi": "Đọc diện tích dưới đường cong như một phán quyết duy nhất",
+      "def_en": "A summary that averages over thresholds nobody would ever deploy, so two detectors can share a score while behaving completely differently in the region that matters.",
+      "def_vi": "Con số tóm tắt lấy trung bình trên cả những ngưỡng không ai đem dùng, nên hai bộ dò có thể cùng điểm mà hành xử hoàn toàn khác nhau ở vùng thật sự quan trọng.",
+      "say": "Report the curve at the operating point you would actually run, not the area under all of it.",
+      "tags": [
+        "metric",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-concept-drift",
+      "en": "Concept drift in a deployed detector",
+      "vi": "Trôi khái niệm ở bộ dò đang chạy",
+      "def_en": "Normal traffic changes as services, clients and working hours change, so a model trained last quarter slowly turns ordinary behaviour into alerts without anyone touching it.",
+      "def_vi": "Lưu lượng bình thường thay đổi theo dịch vụ, máy khách và giờ làm việc, nên mô hình huấn luyện từ quý trước dần biến hành vi thường ngày thành cảnh báo mà không ai đụng vào nó.",
+      "say": "The model did not get worse, the network moved out from under it.",
+      "tags": [
+        "ai-security",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-drift-monitor",
+      "en": "Drift monitoring on input features",
+      "vi": "Theo dõi trôi trên đặc trưng đầu vào",
+      "def_en": "Watching the distribution of what enters the model rather than its accuracy, because labels arrive late or never while a shift in the inputs is visible immediately.",
+      "def_vi": "Quan sát phân bố của thứ đi vào mô hình thay vì độ chính xác của nó, vì nhãn đến muộn hoặc không bao giờ đến còn thay đổi ở đầu vào thì thấy được ngay.",
+      "say": "You cannot measure accuracy today, but you can measure that today does not look like the training month.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-adversarial-evasion",
+      "en": "Adversarial evasion of a traffic classifier",
+      "vi": "Né tránh đối kháng với bộ phân loại lưu lượng",
+      "def_en": "Reshaping timing, padding or ordering so the feature vector lands on the benign side while the attack still functions, which the constraint of a working protocol makes harder than in vision.",
+      "def_vi": "Nắn lại nhịp, phần đệm hay thứ tự để véc tơ đặc trưng rơi về phía lành tính trong khi tấn công vẫn chạy được, ràng buộc phải giữ giao thức hoạt động khiến việc này khó hơn so với trong thị giác máy tính.",
+      "say": "The perturbation has to survive the protocol, which is the defender's one structural advantage.",
+      "tags": [
+        "ai-security",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-training-poisoning",
+      "en": "Poisoning the training traffic of a detector",
+      "vi": "Đầu độc dữ liệu huấn luyện của bộ dò",
+      "def_en": "Feeding the baseline slow, harmless looking traffic during the learning window so that the pattern later used for the real intrusion has already been accepted as normal.",
+      "def_vi": "Bơm vào đường nền thứ lưu lượng chậm và trông vô hại suốt cửa sổ học, để mẫu hành vi dùng cho vụ xâm nhập thật sau này đã được chấp nhận là bình thường từ trước.",
+      "say": "Retraining on unlabelled production traffic hands the attacker a vote on what normal means.",
+      "tags": [
+        "ai-security",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-label-cost",
+      "en": "Labelling cost for network data",
+      "vi": "Chi phí gán nhãn dữ liệu mạng",
+      "def_en": "Deciding whether one flow was hostile can take an analyst an hour of context gathering, which is why supervised methods run out of ground truth long before they run out of data.",
+      "def_vi": "Quyết định một luồng có thù địch hay không có thể ngốn của người phân tích cả giờ thu thập bối cảnh, vì thế phương pháp có giám sát cạn nhãn chuẩn từ rất lâu trước khi cạn dữ liệu.",
+      "say": "Storage is cheap, packets are cheap, the verdict on a single flow is not.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-active-learning",
+      "en": "Active learning from analyst verdicts",
+      "vi": "Học chủ động từ phán quyết của người phân tích",
+      "def_en": "Asking the analyst only about the cases where the model is least certain, so each expensive human judgement buys the most improvement per hour spent.",
+      "def_vi": "Chỉ hỏi người phân tích ở những ca mà mô hình ít chắc chắn nhất, nhờ đó mỗi phán quyết tốn kém của con người mua được nhiều cải thiện nhất trên mỗi giờ bỏ ra.",
+      "say": "The queue the analyst already works can be turned into the labelling budget.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-analyst-explanation",
+      "en": "Explanation an analyst can act on",
+      "vi": "Lời giải thích mà người phân tích dùng được",
+      "def_en": "An alert that names the evidence, the host and the deviation, so triage can be finished without rerunning the model. A ranked feature list is not yet this.",
+      "def_vi": "Cảnh báo nêu rõ bằng chứng, máy nào và lệch ở đâu, nhờ đó khâu phân loại kết thúc được mà không phải chạy lại mô hình. Một danh sách đặc trưng xếp hạng thì chưa phải là như vậy.",
+      "say": "If the analyst has to reconstruct the reasoning by hand, the explanation was decoration.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-artefact-leakage",
+      "en": "Leakage from capture artefacts",
+      "vi": "Rò rỉ từ dấu vết của quá trình thu thập",
+      "def_en": "A model that separates classes using a side effect of how the data was recorded, such as one address range or one time window, and collapses the moment either changes.",
+      "def_vi": "Mô hình tách được các lớp nhờ một hệ quả phụ của cách dữ liệu được ghi lại, chẳng hạn một dải địa chỉ hay một khung giờ, rồi sụp đổ ngay khi một trong hai thứ đó đổi.",
+      "say": "Check whether removing the address field costs you anything, because if it does not, that field was the model.",
+      "tags": [
+        "pitfall",
+        "ai-security"
+      ]
+    },
+    {
+      "id": "nids-autoencoder-score",
+      "en": "Reconstruction error as an anomaly score",
+      "vi": "Sai số tái dựng dùng làm điểm bất thường",
+      "def_en": "Training a compressor on normal traffic and treating whatever it rebuilds badly as suspicious, which flags every rare event equally whether it is hostile or merely unusual.",
+      "def_vi": "Huấn luyện bộ nén trên lưu lượng bình thường rồi coi thứ nó dựng lại kém là đáng ngờ, cách này báo mọi sự kiện hiếm như nhau bất kể chúng thù địch hay chỉ là khác thường.",
+      "say": "Rare and hostile are not the same word, and this score cannot tell them apart.",
+      "tags": [
+        "ai-security",
+        "metric"
+      ]
+    },
+    {
+      "id": "nids-one-class",
+      "en": "One class model of normal traffic",
+      "vi": "Mô hình một lớp cho lưu lượng bình thường",
+      "def_en": "Learning a boundary around benign behaviour alone, which avoids needing attack labels but makes the model only as trustworthy as the claim that training traffic was clean.",
+      "def_vi": "Học một biên bao quanh riêng hành vi lành tính, cách này khỏi cần nhãn tấn công nhưng khiến mô hình chỉ đáng tin ngang với khẳng định rằng lưu lượng huấn luyện đã sạch.",
+      "say": "Nobody proved the training month was free of intruders, they only assumed it.",
+      "tags": [
+        "ai-security",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-score-calibration",
+      "en": "Score calibration for triage",
+      "vi": "Hiệu chỉnh điểm số phục vụ phân loại",
+      "def_en": "Making a model score readable as a probability, so alerts from different detectors can be ranked against each other instead of each carrying its own private scale.",
+      "def_vi": "Làm cho điểm của mô hình đọc được như một xác suất, nhờ đó cảnh báo từ các bộ dò khác nhau xếp hạng được với nhau thay vì mỗi cái mang một thang riêng.",
+      "say": "Two engines both saying zero point nine can mean entirely different things until you calibrate them.",
+      "tags": [
+        "metric",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-cost-sensitive",
+      "en": "Cost sensitive evaluation",
+      "vi": "Đánh giá có tính đến chi phí",
+      "def_en": "Scoring a detector by what its mistakes cost rather than by how many it makes, since a missed intrusion and a wasted analyst hour are not the same unit.",
+      "def_vi": "Chấm điểm bộ dò theo cái giá của lỗi chứ không theo số lỗi, vì một vụ xâm nhập bị bỏ sót và một giờ công phân tích bị phí không cùng đơn vị đo.",
+      "tags": [
+        "metric",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-class-imbalance-data",
+      "en": "Class imbalance in intrusion data",
+      "vi": "Mất cân bằng lớp trong dữ liệu xâm nhập",
+      "def_en": "The ratio of benign to hostile records, often thousands to one, which drives the loss function to ignore the minority class unless the training procedure compensates.",
+      "def_vi": "Tỉ lệ giữa bản ghi lành tính và thù địch, thường hàng nghìn trên một, khiến hàm mất mát lờ đi lớp thiểu số trừ khi quy trình huấn luyện có bù lại.",
+      "say": "Balancing the training set changes the ratio the model expects, and production will not match it.",
+      "tags": [
+        "ai-security",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-kdd99",
+      "en": "KDD99 dataset",
+      "vi": "Bộ dữ liệu KDD99",
+      "def_en": "The intrusion benchmark built from a military exercise capture of the late nineties, still cited today although its traffic, its services and its attacks no longer exist anywhere.",
+      "def_vi": "Bộ chuẩn về xâm nhập dựng từ bản ghi một cuộc diễn tập quân sự cuối thập niên chín mươi, đến nay vẫn được trích dẫn dù lưu lượng, dịch vụ và các tấn công trong đó không còn tồn tại ở đâu nữa.",
+      "say": "Reporting a new record on it says something about the dataset, not about the network.",
+      "tags": [
+        "dataset",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-nsl-kdd",
+      "en": "NSL-KDD",
+      "vi": "Bộ dữ liệu NSL-KDD",
+      "def_en": "A cleaned redistribution of the older benchmark with duplicate records removed and the difficulty rebalanced, which fixes the counting problem but not the age of the traffic.",
+      "def_vi": "Bản phát hành lại đã làm sạch của bộ chuẩn cũ, bỏ các bản ghi trùng và cân lại độ khó, sửa được vấn đề đếm nhưng không sửa được tuổi của lưu lượng.",
+      "say": "Removing duplicates fixed the arithmetic and left the era untouched.",
+      "tags": [
+        "dataset"
+      ]
+    },
+    {
+      "id": "nids-cicids",
+      "en": "CICIDS style benchmark",
+      "vi": "Bộ chuẩn kiểu CICIDS",
+      "def_en": "A modern capture in which scripted profiles generate the benign traffic and each attack runs in its own labelled window, which is convenient and also exactly why the classes separate too easily.",
+      "def_vi": "Bản ghi hiện đại trong đó lưu lượng lành tính do các kịch bản mô phỏng sinh ra và mỗi tấn công chạy trong khung thời gian gán nhãn riêng, rất tiện và cũng chính vì thế mà các lớp tách nhau quá dễ.",
+      "say": "When each attack owns its own hour, the timestamp alone can win the classification.",
+      "tags": [
+        "dataset",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-unsw-nb15",
+      "en": "UNSW-NB15",
+      "vi": "Bộ dữ liệu UNSW-NB15",
+      "def_en": "A benchmark built with a traffic generator that mixes synthetic normal behaviour and contemporary attack families, published with flow features already extracted.",
+      "def_vi": "Bộ chuẩn dựng bằng máy sinh lưu lượng, trộn hành vi bình thường tổng hợp với các họ tấn công đương thời, phát hành kèm sẵn đặc trưng luồng đã trích xuất.",
+      "tags": [
+        "dataset"
+      ]
+    },
+    {
+      "id": "nids-dataset-label-leak",
+      "en": "Label leakage in an intrusion benchmark",
+      "vi": "Rò rỉ nhãn trong bộ chuẩn xâm nhập",
+      "def_en": "A field that encodes the answer rather than describing behaviour, such as a port used only by the attack tool, letting a trivial model reach a score no real sensor could.",
+      "def_vi": "Một trường mã hóa sẵn đáp án thay vì mô tả hành vi, chẳng hạn một cổng chỉ công cụ tấn công mới dùng, khiến mô hình tầm thường cũng đạt điểm mà không cảm biến thật nào với tới.",
+      "say": "If a single column reaches ninety nine percent by itself, you found the leak, not the method.",
+      "tags": [
+        "dataset",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-synthetic-attack",
+      "en": "Synthetic attack generation",
+      "vi": "Sinh tấn công tổng hợp",
+      "def_en": "Producing hostile samples with a script or a generative model to fill the minority class, which teaches the detector the habits of the generator alongside the habits of attackers.",
+      "def_vi": "Tạo mẫu thù địch bằng kịch bản hay mô hình sinh để lấp lớp thiểu số, cách này dạy bộ dò cả thói quen của máy sinh lẫn thói quen của kẻ tấn công.",
+      "say": "The model learns to recognise your generator, and the generator is not the one attacking you.",
+      "tags": [
+        "dataset",
+        "ai-security"
+      ]
+    },
+    {
+      "id": "nids-temporal-split",
+      "en": "Temporal split for evaluation",
+      "vi": "Chia tập theo thời gian khi đánh giá",
+      "def_en": "Training on earlier traffic and testing on later traffic, the only split that reproduces the operational fact that tomorrow is never drawn from the same distribution as today.",
+      "def_vi": "Huấn luyện trên lưu lượng sớm hơn và kiểm trên lưu lượng muộn hơn, đây là cách chia duy nhất tái hiện được sự thật vận hành rằng ngày mai không bao giờ rút ra từ cùng phân bố với hôm nay.",
+      "say": "Shuffling the rows before splitting lets the model read tomorrow before it predicts it.",
+      "tags": [
+        "dataset",
+        "metric"
+      ]
+    },
+    {
+      "id": "nids-benchmark-gap",
+      "en": "Benchmark score against operational value",
+      "vi": "Điểm trên bộ chuẩn so với giá trị vận hành",
+      "def_en": "The gap between a balanced offline test and a live link where hostile events are vanishingly rare, which is why a reported score rarely survives contact with production.",
+      "def_vi": "Khoảng cách giữa một bài kiểm ngoại tuyến đã cân bằng và một đường truyền thật nơi sự kiện thù địch hiếm đến mức gần như không có, vì thế điểm đã công bố hiếm khi sống sót khi gặp môi trường thật.",
+      "say": "The test set was balanced by hand, and nobody balances the wire for you.",
+      "tags": [
+        "metric",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-capture-ground-truth",
+      "en": "Ground truth in a captured trace",
+      "vi": "Nhãn chuẩn trong bản ghi lưu lượng đã bắt",
+      "def_en": "The record of which packets belonged to which attack, usually derived from the attacker side scripts. If it is derived from the detector, the evaluation is circular.",
+      "def_vi": "Bản ghi cho biết gói nào thuộc tấn công nào, thường suy ra từ kịch bản phía tấn công. Nếu nó suy ra từ chính bộ dò thì phép đánh giá là vòng tròn.",
+      "say": "Labels produced by the tool you are testing prove only that the tool agrees with itself.",
+      "tags": [
+        "dataset",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-encrypted-traffic-analysis",
+      "en": "Encrypted traffic analysis",
+      "vi": "Phân tích lưu lượng đã mã hóa",
+      "def_en": "Drawing conclusions from what encryption does not hide: the endpoints, the handshake parameters, the sizes and the timing of what passes on the link.",
+      "def_vi": "Rút ra kết luận từ những gì mã hóa không che được: hai đầu kết nối, tham số bắt tay, kích thước và nhịp thời gian của thứ chạy qua đường truyền.",
+      "say": "Encryption protects the content and leaves the shape of the conversation in the open.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-ja3",
+      "en": "JA3 fingerprint",
+      "vi": "Vân tay JA3",
+      "def_en": "A hash of the client handshake parameters in their offered order, which identifies the library that opened the session even though the session itself stays encrypted.",
+      "def_vi": "Mã băm của các tham số bắt tay phía máy khách theo đúng thứ tự chúng được chào, cho biết thư viện nào đã mở phiên dù bản thân phiên vẫn mã hóa.",
+      "say": "The client announces which library it is before a single secret byte is exchanged.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-ja4",
+      "en": "JA4 fingerprint family",
+      "vi": "Họ vân tay JA4",
+      "def_en": "The successor scheme that sorts the handshake fields before hashing and splits the result into readable parts, so shuffling the extension order no longer changes the fingerprint.",
+      "def_vi": "Cách làm kế nhiệm, sắp xếp các trường bắt tay trước khi băm rồi chia kết quả thành những phần đọc được, nhờ vậy đảo thứ tự phần mở rộng không còn làm đổi vân tay nữa.",
+      "say": "Sorting before hashing removes the cheapest way to escape the old fingerprint.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-sni-weak-label",
+      "en": "Server name as a weak label",
+      "vi": "Tên máy chủ dùng làm nhãn yếu",
+      "def_en": "The hostname sent in clear during the handshake, useful for attributing a session but written by the client, so it is a claim rather than an observation.",
+      "def_vi": "Tên máy được gửi rõ trong lúc bắt tay, hữu ích để quy một phiên về đâu nhưng do máy khách tự ghi, nên nó là lời khai chứ không phải quan sát.",
+      "say": "The client tells you where it thinks it is going, and nothing forces it to be honest.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-ech-loss",
+      "en": "Encrypted handshake and the loss of the hostname",
+      "vi": "Bắt tay mã hóa và việc mất tên máy chủ",
+      "def_en": "When the opening message is itself encrypted, the destination name disappears from the wire and detection falls back to addresses, certificates and behaviour.",
+      "def_vi": "Khi bản thân thông điệp mở đầu cũng được mã hóa, tên đích biến mất khỏi đường truyền và việc phát hiện phải quay về dựa vào địa chỉ, chứng thư và hành vi.",
+      "say": "Losing the hostname pushes the whole detection effort back onto behaviour.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-size-sequence",
+      "en": "Packet size sequence",
+      "vi": "Dãy kích thước gói",
+      "def_en": "The ordered list of message lengths in a session, which reflects the structure of the application protocol closely enough to identify it through encryption.",
+      "def_vi": "Danh sách có thứ tự các độ dài thông điệp trong một phiên, phản ánh cấu trúc của giao thức ứng dụng đủ sát để nhận ra nó xuyên qua lớp mã hóa.",
+      "say": "The first few message lengths often name the application without a single decrypted byte.",
+      "tags": [
+        "network",
+        "ai-security"
+      ]
+    },
+    {
+      "id": "nids-interarrival",
+      "en": "Inter arrival timing as a feature",
+      "vi": "Nhịp giãn cách giữa các gói làm đặc trưng",
+      "def_en": "The gaps between packets, which separate machine driven regularity from human irregularity and expose scheduled check in traffic that the payload no longer reveals.",
+      "def_vi": "Các khoảng trống giữa những gói tin, giúp tách tính đều đặn do máy sinh ra khỏi sự thất thường của con người và lộ ra lưu lượng gọi về theo lịch mà phần tải tin không còn cho thấy.",
+      "say": "People pause unevenly, schedulers do not, and that difference survives encryption.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-tls-interception",
+      "en": "Interception proxy for inspection",
+      "vi": "Máy trung gian giải mã để soi nội dung",
+      "def_en": "Terminating and re establishing sessions so content can be inspected, which restores visibility and concentrates every secret in one box while breaking pinning and privacy expectations.",
+      "def_vi": "Cắt phiên rồi thiết lập lại để soi được nội dung, cách này lấy lại tầm nhìn và dồn mọi bí mật vào một chỗ, đồng thời phá vỡ cơ chế ghim chứng thư và kỳ vọng riêng tư.",
+      "say": "Whoever runs the interception point holds every credential that crosses it.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-quic-visibility",
+      "en": "Visibility loss under QUIC",
+      "vi": "Mất tầm nhìn khi lưu lượng chạy trên QUIC",
+      "def_en": "Transport metadata that used to sit in clear headers moves inside the encrypted envelope, so sequence numbers, retransmission and stream structure stop being observable from the middle.",
+      "def_vi": "Siêu dữ liệu tầng vận chuyển vốn nằm ở phần đầu chưa mã hóa nay chuyển vào trong lớp bọc đã mã hóa, nên số thứ tự, việc truyền lại và cấu trúc dòng không còn quan sát được từ giữa đường.",
+      "say": "The transport layer went dark, and the rules that read its headers went with it.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-triage-workflow",
+      "en": "Triage workflow",
+      "vi": "Quy trình phân loại cảnh báo",
+      "def_en": "The fixed sequence an analyst follows on every alert: confirm the evidence, establish the scope, decide whether it escalates, and record the verdict so the next person can reuse it.",
+      "def_vi": "Chuỗi bước cố định mà người phân tích theo với mọi cảnh báo: xác nhận bằng chứng, xác định phạm vi, quyết định có leo thang hay không, và ghi lại phán quyết để người sau dùng lại được.",
+      "say": "Two analysts reading the same alert should reach the same verdict, otherwise the process is a personality.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-response-playbook",
+      "en": "Response playbook",
+      "vi": "Sổ tay xử lý sự cố",
+      "def_en": "A written procedure for one class of incident, naming the checks, the containment step and the authority needed, so decisions are made before the pressure and not during it.",
+      "def_vi": "Thủ tục viết sẵn cho một loại sự cố, nêu rõ cần kiểm gì, bước khoanh vùng nào và ai có thẩm quyền, để các quyết định được chốt trước lúc căng thẳng chứ không phải trong lúc đó.",
+      "say": "Nobody negotiates who may unplug a production server at three in the morning.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-mttr",
+      "en": "Mean time to respond",
+      "vi": "Thời gian trung bình để xử lý",
+      "def_en": "The average delay from a confirmed alert to containment, which measures the team and the process rather than the sensor and often dominates the total damage.",
+      "def_vi": "Độ trễ trung bình từ lúc xác nhận cảnh báo tới lúc khoanh vùng được, đo lường đội ngũ và quy trình chứ không phải cảm biến, và thường mới là thứ quyết định phần lớn thiệt hại.",
+      "say": "Detecting in a minute and reacting in a week is still a week of access.",
+      "tags": [
+        "metric",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-dwell-time",
+      "en": "Attacker dwell time",
+      "vi": "Thời gian kẻ tấn công trụ lại",
+      "def_en": "How long an intruder held access before removal, measured backwards from the earliest confirmed evidence, which is the number a board understands without translation.",
+      "def_vi": "Kẻ xâm nhập giữ được quyền truy cập bao lâu trước khi bị loại bỏ, tính ngược từ bằng chứng sớm nhất đã xác nhận, đây là con số mà ban lãnh đạo hiểu ngay không cần diễn giải.",
+      "say": "The clock starts at the first evidence you can prove, not at the day you noticed.",
+      "tags": [
+        "metric",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-hunt-hypothesis",
+      "en": "Hunting hypothesis",
+      "vi": "Giả thuyết khi săn lùng chủ động",
+      "def_en": "A falsifiable statement about how an adversary would behave here, written before the search so the hunt ends with an answer instead of an afternoon of browsing.",
+      "def_vi": "Một phát biểu có thể bác bỏ được về cách kẻ địch sẽ hành xử ở đây, viết ra trước khi tìm để buổi săn kết thúc bằng một câu trả lời chứ không phải một buổi chiều lướt dữ liệu.",
+      "say": "State what would prove you wrong before you open the query window.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-adversary-emulation",
+      "en": "Adversary emulation",
+      "vi": "Giả lập hành vi đối thủ",
+      "def_en": "Replaying documented techniques of a specific actor in your own environment to find out which of them your sensors record, which they log silently and which they miss.",
+      "def_vi": "Chạy lại các kỹ thuật đã ghi nhận của một nhóm đối thủ cụ thể ngay trong môi trường của mình, để biết cảm biến ghi nhận được kỹ thuật nào, âm thầm chỉ ghi nhật ký kỹ thuật nào và bỏ sót kỹ thuật nào.",
+      "say": "The valuable output is the list of techniques that produced no evidence at all.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-rule-validation",
+      "en": "Detection validation before enabling",
+      "vi": "Kiểm chứng luật trước khi bật",
+      "def_en": "Replaying a candidate rule against stored benign traffic and against a known hostile sample, so its alarm volume and its true catch are both known before it reaches the queue.",
+      "def_vi": "Phát lại luật ứng viên trên lưu lượng lành tính đã lưu và trên một mẫu thù địch đã biết, để biết trước cả lượng báo động lẫn khả năng bắt thật của nó trước khi nó vào hàng đợi.",
+      "say": "Run it against last week before you let it speak to the analysts.",
+      "tags": [
+        "operations",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-alert-dedup",
+      "en": "Alert deduplication",
+      "vi": "Gộp cảnh báo trùng lặp",
+      "def_en": "Collapsing repeats of the same finding into one case with a count, which shrinks the queue without discarding evidence, unlike simply turning the rule off.",
+      "def_vi": "Gộp các lần lặp của cùng một phát hiện thành một hồ sơ kèm số đếm, làm ngắn hàng đợi mà không vứt bỏ bằng chứng, khác hẳn với việc tắt hẳn luật đó đi.",
+      "say": "Counting the repeats keeps the evidence while removing the noise.",
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-suppression-expiry",
+      "en": "Suppression with an expiry date",
+      "vi": "Tạm tắt cảnh báo có hạn dùng",
+      "def_en": "Silencing a known benign source for a stated period rather than forever, so the exception is reviewed again instead of quietly becoming a permanent hole in coverage.",
+      "def_vi": "Làm im một nguồn lành tính đã biết trong một khoảng thời gian ghi rõ chứ không phải mãi mãi, để ngoại lệ đó được xem lại thay vì lặng lẽ trở thành lỗ hổng vĩnh viễn trong độ phủ.",
+      "say": "An exception with no end date is a decision nobody will ever revisit.",
+      "tags": [
+        "operations",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-shift-handover",
+      "en": "Shift handover record",
+      "vi": "Biên bản bàn giao ca trực",
+      "def_en": "The written state of open cases passed between shifts, without which a slow intrusion is rediscovered from scratch every morning and never accumulates into one story.",
+      "def_vi": "Bản ghi trạng thái các hồ sơ đang mở được chuyển giữa các ca, thiếu nó thì một vụ xâm nhập chậm cứ mỗi sáng lại bị phát hiện lại từ đầu và không bao giờ gom thành một câu chuyện.",
+      "say": "A slow intruder is invisible to a team that forgets every eight hours.",
+      "tags": [
+        "operations",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-coverage-map",
+      "en": "Detection coverage map",
+      "vi": "Bản đồ độ phủ phát hiện",
+      "def_en": "A matrix of techniques against the sensors that would notice them, which turns a vague sense of security into a specific list of what nobody is watching.",
+      "def_vi": "Ma trận đối chiếu các kỹ thuật với những cảm biến có thể nhận ra chúng, biến cảm giác an toàn mơ hồ thành danh sách cụ thể về những gì không ai đang canh.",
+      "say": "The useful column is the empty one.",
+      "tags": [
+        "operations",
+        "metric"
+      ]
+    },
+    {
+      "id": "nids-edge-sensor",
+      "en": "Sensor at the network edge",
+      "vi": "Cảm biến đặt tại biên mạng",
+      "def_en": "Detection placed close to where traffic originates, which cuts the volume shipped to the centre and keeps working when the link to the centre is the thing that fails.",
+      "def_vi": "Đặt việc phát hiện gần nơi lưu lượng phát sinh, cách này cắt bớt khối lượng phải chuyển về trung tâm và vẫn chạy khi chính đường về trung tâm là thứ bị hỏng.",
+      "say": "Deciding near the source means the verdict survives losing the uplink.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-distributed-detection",
+      "en": "Distributed detection",
+      "vi": "Phát hiện phân tán",
+      "def_en": "Splitting the decision across many sensors, each holding a partial view, so the design problem becomes what each one must forward for the whole to see the intrusion.",
+      "def_vi": "Chia quyết định cho nhiều cảm biến, mỗi cái giữ một góc nhìn cục bộ, nên bài toán thiết kế trở thành mỗi cái phải chuyển tiếp cái gì để tổng thể nhìn ra được vụ xâm nhập.",
+      "say": "Each node sees a fragment, and the design question is which fragments must travel.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-alert-aggregation",
+      "en": "Hierarchical alert aggregation",
+      "vi": "Gom cảnh báo theo tầng",
+      "def_en": "Summarising alerts at each level before passing them upward, which controls bandwidth and analyst load while quietly destroying the detail a rare case needed.",
+      "def_vi": "Tóm tắt cảnh báo ở từng tầng trước khi chuyển lên trên, cách này khống chế băng thông và tải cho người phân tích nhưng âm thầm phá mất chi tiết mà một ca hiếm cần đến.",
+      "say": "Summaries travel cheaply, and the one odd packet does not survive the summary.",
+      "tags": [
+        "network",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-federated-detection",
+      "en": "Federated detection across organisations",
+      "vi": "Phát hiện liên kết giữa nhiều tổ chức",
+      "def_en": "Training a shared detector while each participant keeps its traffic at home, which addresses the legal objection to sharing but not the fact that model updates still carry information.",
+      "def_vi": "Huấn luyện chung một bộ dò trong khi mỗi bên giữ lưu lượng ở nhà mình, cách này giải quyết được phản đối pháp lý về chia sẻ dữ liệu nhưng không xóa được việc bản cập nhật mô hình vẫn mang theo thông tin.",
+      "say": "Keeping the packets at home is not the same as revealing nothing about them.",
+      "tags": [
+        "ai-security",
+        "network"
+      ]
+    },
+    {
+      "id": "nids-sharing-privacy",
+      "en": "Privacy limits on sharing traffic",
+      "vi": "Giới hạn riêng tư khi chia sẻ lưu lượng",
+      "def_en": "Addresses and hostnames identify people as well as machines, so cross organisation sharing needs a rule about what may leave before it needs a protocol for sending it.",
+      "def_vi": "Địa chỉ và tên máy định danh cả con người chứ không riêng thiết bị, nên việc chia sẻ giữa các tổ chức cần trước hết một quy định về cái gì được phép rời đi, rồi mới cần giao thức để gửi.",
+      "say": "Decide what may leave the building before you build the pipe that carries it.",
+      "tags": [
+        "operations",
+        "pitfall"
+      ]
+    },
+    {
+      "id": "nids-satellite-detection",
+      "en": "Intrusion detection in a satellite network",
+      "vi": "Phát hiện xâm nhập trong mạng vệ tinh",
+      "def_en": "Detection under long delay, intermittent links and a moving topology, where a sensor on board has almost no compute and a sensor on the ground sees only part of the path.",
+      "def_vi": "Việc phát hiện dưới điều kiện trễ lớn, liên kết đứt quãng và cấu hình mạng luôn di chuyển, nơi cảm biến trên vệ tinh gần như không có tài nguyên tính toán còn cảm biến dưới mặt đất chỉ thấy một phần đường đi.",
+      "say": "By the time the evidence reaches the ground station, the topology that produced it has changed.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-mobile-core-detection",
+      "en": "Detection inside a mobile core network",
+      "vi": "Phát hiện bên trong mạng lõi di động",
+      "def_en": "Monitoring signalling and tunnelled user traffic between network functions, where the interesting abuse lives in the control plane rather than in the payload people expect.",
+      "def_vi": "Giám sát báo hiệu và lưu lượng người dùng chạy trong đường hầm giữa các chức năng mạng, nơi hành vi lạm dụng đáng chú ý nằm ở mặt phẳng điều khiển chứ không ở phần tải tin mà người ta hay nghĩ tới.",
+      "say": "In the core the attack is usually a signalling message, not a payload.",
+      "tags": [
+        "network",
+        "defence"
+      ]
+    },
+    {
+      "id": "nids-ics-detection",
+      "en": "Detection on an industrial control network",
+      "vi": "Phát hiện trên mạng điều khiển công nghiệp",
+      "def_en": "Monitoring a network whose traffic is repetitive and whose devices cannot be patched or agented, which makes passive baselines unusually accurate and any active probe unusually dangerous.",
+      "def_vi": "Giám sát một mạng có lưu lượng lặp đi lặp lại và có thiết bị không vá được cũng không cài được tác tử, điều này khiến đường nền thụ động chính xác khác thường còn mọi phép dò chủ động lại nguy hiểm khác thường.",
+      "say": "Here the baseline is genuinely stable, and here a scan can stop a production line.",
+      "tags": [
+        "network",
+        "operations"
+      ]
+    },
+    {
+      "id": "nids-cloud-flow-log",
+      "en": "Cloud virtual network flow log",
+      "vi": "Nhật ký luồng của mạng ảo trên đám mây",
+      "def_en": "The provider's record of accepted and rejected connections between virtual interfaces, which is often the only network evidence available because there is no cable to tap.",
+      "def_vi": "Bản ghi của nhà cung cấp về các kết nối được chấp nhận và bị từ chối giữa các giao diện ảo, thường là bằng chứng mạng duy nhất có được vì ở đó không có sợi cáp nào để cắm bộ trích.",
+      "say": "There is no cable to tap, so the provider's log is the whole of your evidence.",
+      "tags": [
+        "network",
+        "telemetry"
+      ]
+    }
+  ]
+}

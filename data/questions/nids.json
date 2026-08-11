@@ -1,0 +1,1507 @@
+{
+  "schema": 1,
+  "id": "nids",
+  "updated": "2026-08-09",
+  "questions": [
+    {
+      "id": "qnids-1",
+      "q": "A switch mirroring traffic to a monitor port starts discarding the copy when the switch is busy. For the sensor behind it, the consequence is",
+      "q_vi": "Một bộ chuyển mạch đang gương lưu lượng sang cổng giám sát bắt đầu bỏ bớt bản sao khi máy bận. Hậu quả với cảm biến phía sau là",
+      "choices": [
+        "A gap in visibility that looks exactly like a period with no attacks",
+        "Production forwarding slows while the copy is delivered in full",
+        "Duplicated frames that inflate the counters on every rule",
+        "A buffered copy that arrives late but stays complete"
+      ],
+      "answer": 0,
+      "why": "Mirroring is best effort. A starved mirror leaves the sensor running and reporting, so the blind spot arrives disguised as a quiet evening.",
+      "why_vi": "Việc gương lưu lượng chỉ ở mức cố gắng hết sức. Khi bị bỏ đói, cảm biến vẫn chạy và vẫn báo cáo, nên vùng mù hiện ra dưới lốt một buổi tối yên ả.",
+      "level": 3
+    },
+    {
+      "id": "qnids-2",
+      "q": "Flow export with one in a thousand packet sampling is enabled on the border router. The detection capability most damaged is",
+      "q_vi": "Bộ định tuyến biên bật xuất luồng với mức lấy mẫu một phần nghìn gói. Khả năng phát hiện bị tổn hại nhiều nhất là",
+      "choices": [
+        "Estimating which internal hosts carry the heaviest daily traffic volume",
+        "Ranking destinations by total bytes transferred over a week",
+        "Spotting slow scanning built from very short single packet flows",
+        "Measuring the balance between inbound and outbound byte volumes each day"
+      ],
+      "answer": 2,
+      "why": "Sampling preserves aggregates because heavy talkers get hit repeatedly. A flow of one or two packets is almost certain to be missed entirely, and reconnaissance is made of exactly those.",
+      "why_vi": "Lấy mẫu giữ được các số tổng vì nguồn nói nhiều thì bị trúng mẫu nhiều lần. Một luồng chỉ có một hai gói thì gần như chắc chắn bị bỏ sót, mà thăm dò lại làm bằng đúng những luồng như vậy.",
+      "level": 3
+    },
+    {
+      "id": "qnids-3",
+      "q": "A flow record ends after the active timeout although the transfer is still running. An analyst comparing session counts week over week should expect",
+      "q_vi": "Một bản ghi luồng kết thúc khi hết ngưỡng thời gian chủ động dù việc truyền vẫn đang diễn ra. Người phân tích so sánh số phiên giữa các tuần nên lường trước",
+      "choices": [
+        "Records that merge unrelated conversations that happen to share a single port number",
+        "Long transfers appearing as several records, so counts rise without new sessions",
+        "Byte totals counted twice for every connection that remains open across the window",
+        "Sessions quietly vanishing from the record whenever the exporting router restarts"
+      ],
+      "answer": 1,
+      "why": "The timeout cuts by the clock, not by the conversation. Any threshold on session count has to be read together with the exporter settings that produced it.",
+      "why_vi": "Ngưỡng thời gian cắt theo đồng hồ chứ không theo cuộc trao đổi. Mọi ngưỡng đặt trên số phiên đều phải đọc kèm với cấu hình bộ xuất đã sinh ra con số đó.",
+      "level": 3
+    },
+    {
+      "id": "qnids-4",
+      "q": "The strongest operational argument for a passive tap rather than a mirror port is that a tap",
+      "q_vi": "Lập luận vận hành mạnh nhất cho việc dùng bộ trích thụ động thay vì cổng gương là bộ trích",
+      "choices": [
+        "Can be reconfigured from the switch console at any time without touching the cabling",
+        "Removes the need to reassemble streams at the sensor",
+        "Decrypts sessions before handing them to the sensor",
+        "Does not compete for switching capacity, so it never drops the copy silently"
+      ],
+      "answer": 3,
+      "why": "A tap costs money and a cabling outage to install. What it buys is that the copy is not the first thing sacrificed when the switch is under pressure.",
+      "why_vi": "Bộ trích tốn tiền và tốn một lần cắt cáp để lắp. Đổi lại, bản sao không còn là thứ đầu tiên bị hy sinh khi bộ chuyển mạch chịu tải.",
+      "level": 2
+    },
+    {
+      "id": "qnids-5",
+      "q": "Two sensors report the same incident with timestamps two seconds apart. Before writing any correlation rule over them, the first thing to establish is",
+      "q_vi": "Hai cảm biến báo cùng một sự việc với mốc thời gian lệch nhau hai giây. Trước khi viết bất kỳ luật đối chiếu nào trên chúng, việc đầu tiên phải làm rõ là",
+      "choices": [
+        "Whether both sensors are running the same version of the rule set",
+        "Whether the clocks are disciplined to a common source",
+        "Whether the alerts share a severity label",
+        "Whether the storage layer preserves the arrival order of records"
+      ],
+      "answer": 1,
+      "why": "Any rule that reasons about one event following another is built on the assumption of a shared clock. Drift silently reverses cause and effect and the rule then fires on the wrong thing.",
+      "why_vi": "Mọi luật lập luận theo kiểu sự kiện này nối sau sự kiện kia đều dựa trên giả định có chung một đồng hồ. Lệch đồng hồ âm thầm đảo ngược nhân và quả, và luật sẽ kêu vào đúng chỗ sai.",
+      "level": 3
+    },
+    {
+      "id": "qnids-6",
+      "q": "A sensor watches a link carrying a tunnel between two gateways. Its connection log will most likely show",
+      "q_vi": "Một cảm biến canh đường truyền mang một đường hầm giữa hai cổng mạng. Nhật ký kết nối của nó nhiều khả năng sẽ cho thấy",
+      "choices": [
+        "Every inner session listed separately with its true endpoints",
+        "Nothing at all, because tunnelled traffic is never written to a log",
+        "One record for each inner protocol, aggregated by service name",
+        "One long conversation between the two gateway addresses"
+      ],
+      "answer": 3,
+      "why": "Without decapsulation the sensor describes the outer envelope. Hundreds of inner sessions collapse into a single heavy flow that no host based rule will ever match.",
+      "why_vi": "Không bóc lớp bọc thì cảm biến chỉ mô tả phần vỏ ngoài. Hàng trăm phiên bên trong dồn lại thành một luồng nặng duy nhất mà không luật nào theo máy trạm khớp được.",
+      "level": 2
+    },
+    {
+      "id": "qnids-7",
+      "q": "Why is the capture drop counter worth reading before concluding that a network was quiet overnight?",
+      "q_vi": "Vì sao nên đọc bộ đếm gói bị bỏ của khâu bắt gói trước khi kết luận rằng mạng yên tĩnh suốt đêm?",
+      "choices": [
+        "Silence can mean the sensor was overloaded rather than that nothing happened",
+        "It reports how many rules were disabled during the shift",
+        "It shows whether the storage array reached its retention limit",
+        "It counts the alerts that the analyst chose to suppress"
+      ],
+      "answer": 0,
+      "why": "An overloaded sensor keeps producing output, just less of it. The absence of alerts is evidence only when you can show the sensor was actually seeing the traffic.",
+      "why_vi": "Cảm biến quá tải vẫn tiếp tục cho ra kết quả, chỉ là ít đi. Việc vắng cảnh báo chỉ là bằng chứng khi bạn chứng minh được cảm biến thật sự đang nhìn thấy lưu lượng.",
+      "level": 2
+    },
+    {
+      "id": "qnids-8",
+      "q": "A team joins records from a flow collector and a traffic analysis framework using a deterministic hash of the five tuple. The property that makes this work is that the hash",
+      "q_vi": "Một đội ghép bản ghi từ bộ thu luồng với bản ghi từ khung phân tích lưu lượng bằng một mã băm xác định tính trên bộ năm trường. Tính chất khiến cách này chạy được là mã băm",
+      "choices": [
+        "Compresses each record so that the cost of long term storage falls sharply over time",
+        "Encrypts the addresses so that records can be shared outside the organisation",
+        "Orders the fields canonically, so both tools name one session identically",
+        "Guarantees that no two conversations ever collide"
+      ],
+      "answer": 2,
+      "why": "The value of a shared identifier is agreement, not secrecy or compression. Canonical ordering is what makes the two directions of one conversation land on the same name.",
+      "why_vi": "Giá trị của một định danh dùng chung nằm ở sự đồng thuận, không phải ở tính bí mật hay nén dữ liệu. Chính việc sắp thứ tự theo dạng chuẩn mới khiến hai chiều của một cuộc trao đổi rơi vào cùng một tên.",
+      "level": 3
+    },
+    {
+      "id": "qnids-9",
+      "q": "An engine matches rule content against individual packets without rebuilding the byte stream. The weakness this creates is that",
+      "q_vi": "Một bộ máy đối chiếu nội dung luật với từng gói riêng lẻ mà không dựng lại dòng byte. Điểm yếu sinh ra là",
+      "choices": [
+        "Encrypted sessions can no longer be fingerprinted at the handshake",
+        "Flow records lose their byte and packet counters entirely",
+        "A pattern split across two packets matches nothing",
+        "The engine can inspect only the opening packet of a session"
+      ],
+      "answer": 2,
+      "why": "Content matching assumes the ordered stream the destination will see. Without reassembly the boundary between packets becomes a place where any pattern can be broken in half.",
+      "why_vi": "So khớp nội dung giả định có dòng byte đúng thứ tự mà máy đích sẽ thấy. Không ghép lại thì ranh giới giữa các gói trở thành chỗ để bẻ đôi bất kỳ mẫu nào.",
+      "level": 2
+    },
+    {
+      "id": "qnids-10",
+      "q": "The difference between what a rule engine and a traffic analysis framework hand to the analyst is best described as",
+      "q_vi": "Khác biệt giữa thứ mà bộ máy chạy luật và khung phân tích lưu lượng đưa cho người phân tích được mô tả đúng nhất là",
+      "choices": [
+        "Alerts on matched conditions against a structured transcript of every session",
+        "Output that is encrypted at rest against output that is stored as plainly readable text",
+        "Host telemetry against network telemetry",
+        "Real time processing against overnight batch processing"
+      ],
+      "answer": 0,
+      "why": "One answers whether a stated condition occurred, the other answers what happened and leaves the judgement open. Most hunting work needs the transcript, most blocking work needs the verdict.",
+      "why_vi": "Một bên trả lời điều kiện đã nêu có xảy ra không, bên kia thuật lại chuyện gì đã diễn ra và để ngỏ phần phán quyết. Phần lớn việc săn lùng cần bản tường thuật, phần lớn việc chặn cần lời phán quyết.",
+      "level": 2
+    },
+    {
+      "id": "qnids-11",
+      "q": "Specification based detection works far better on an industrial control network than on an office network mainly because",
+      "q_vi": "Phát hiện dựa trên đặc tả chạy tốt hơn hẳn trên mạng điều khiển công nghiệp so với mạng văn phòng chủ yếu vì",
+      "choices": [
+        "Industrial control protocols are always encrypted from one end to the other",
+        "Control devices produce more log detail than office machines",
+        "Office networks have no perimeter to place a sensor on",
+        "The set of permitted behaviours is small and genuinely stable there"
+      ],
+      "answer": 3,
+      "why": "The method needs a description of allowed behaviour that stays true. A plant that runs the same cycle for years supplies that description, a network of laptops never does.",
+      "why_vi": "Phương pháp này cần một bản mô tả hành vi được phép mà vẫn đúng lâu dài. Một nhà máy chạy đi chạy lại cùng chu trình trong nhiều năm cho ta bản mô tả đó, còn một mạng đầy máy tính xách tay thì không bao giờ.",
+      "level": 3
+    },
+    {
+      "id": "qnids-12",
+      "q": "Stateful protocol analysis adds a capability that pure content matching lacks, namely the ability to",
+      "q_vi": "Phân tích trạng thái giao thức thêm được một khả năng mà so khớp nội dung thuần túy không có, đó là",
+      "choices": [
+        "Detect attack content inside payloads that the endpoints encrypted end to end",
+        "Judge a message as wrong for the point in the session at which it arrives",
+        "Reduce the storage a sensor needs for the packets it has captured since midnight",
+        "Match patterns faster than a literal string search"
+      ],
+      "answer": 1,
+      "why": "The engine tracks where the session sits in the protocol state machine. A command that is ordinary after authentication is an attack when it appears before it.",
+      "why_vi": "Bộ máy theo dõi phiên đang ở đâu trong máy trạng thái của giao thức. Một lệnh rất bình thường sau khi xác thực lại là tấn công khi nó xuất hiện trước lúc đó.",
+      "level": 2
+    },
+    {
+      "id": "qnids-13",
+      "q": "An engineer writes a rule whose only fixed string is a word that appears in most web requests. The predictable effect on the sensor is",
+      "q_vi": "Một kỹ sư viết luật mà chuỗi cố định duy nhất trong đó là một từ xuất hiện trong hầu hết yêu cầu web. Tác động dự đoán được lên cảm biến là",
+      "choices": [
+        "The rule silently disables itself after the first match",
+        "Alerts arrive with the wrong severity attached",
+        "The engine reassembles streams twice for each session",
+        "The prefilter stops excluding traffic, so expensive checks run constantly"
+      ],
+      "answer": 3,
+      "why": "The cheap fixed string exists to exclude almost everything before the costly work begins. Choosing a common word removes that filter and the cost lands on every rule sharing the sensor.",
+      "why_vi": "Chuỗi cố định rẻ tiền tồn tại để loại gần hết lưu lượng trước khi phần việc tốn kém bắt đầu. Chọn một từ phổ biến là bỏ mất bộ lọc đó, và cái giá đổ lên mọi luật đang dùng chung cảm biến.",
+      "level": 4
+    },
+    {
+      "id": "qnids-14",
+      "q": "Insertion and evasion techniques against a network sensor exploit which underlying situation?",
+      "q_vi": "Các kỹ thuật chèn và né tránh nhắm vào cảm biến mạng khai thác tình huống gốc nào?",
+      "choices": [
+        "The sensor holds fewer rules than the vendor ships",
+        "The sensor and the destination host interpret the same packets differently",
+        "The sensor is deployed passively rather than inline",
+        "The sensor logs to disk more slowly than traffic arrives"
+      ],
+      "answer": 1,
+      "why": "The attack lives in the disagreement itself. Whatever the host accepts and the sensor discards, or the reverse, is a message the defence never judged.",
+      "why_vi": "Tấn công nằm ngay trong chỗ bất đồng đó. Bất cứ thứ gì máy đích nhận mà cảm biến bỏ, hoặc ngược lại, đều là thông điệp mà bên phòng thủ chưa từng đánh giá.",
+      "level": 4
+    },
+    {
+      "id": "qnids-15",
+      "q": "A classifier reports ninety nine point nine percent accuracy on a link where one flow in a million is hostile. The correct reading of that figure is",
+      "q_vi": "Một bộ phân loại báo độ chính xác chín mươi chín phẩy chín phần trăm trên đường truyền mà một luồng trong một triệu là thù địch. Cách đọc đúng con số đó là",
+      "choices": [
+        "It proves the model generalises well beyond the training window it saw",
+        "It shows the alert queue will stay small enough to work through daily",
+        "It is compatible with a model that never flags anything at all",
+        "It means that roughly one attack in a thousand goes completely unnoticed"
+      ],
+      "answer": 2,
+      "why": "With that base rate, answering benign every time already scores above the reported figure. The number therefore separates nothing and should not be quoted at all.",
+      "why_vi": "Với tỉ lệ nền như vậy, cứ trả lời lành tính mọi lần đã đạt điểm cao hơn con số được báo. Vì thế con số này không phân biệt được gì và không nên đem ra trích dẫn.",
+      "level": 3
+    },
+    {
+      "id": "qnids-16",
+      "q": "A reviewer asks why a precision recall curve was reported instead of a receiver operating characteristic curve. The defensible answer is that the precision axis",
+      "q_vi": "Một người phản biện hỏi vì sao lại báo đường cong precision recall thay vì đường cong đặc trưng hoạt động của bộ thu. Câu trả lời bảo vệ được là trục precision",
+      "choices": [
+        "Divides by the alerts raised, so analyst workload stays visible",
+        "Is normalised so that curves from experiments with different class ratios can be averaged together",
+        "Removes the need to choose an operating threshold",
+        "Is insensitive to how rare the positive class happens to be"
+      ],
+      "answer": 0,
+      "why": "Dividing false alerts by an enormous benign count hides them. Dividing by the alerts actually raised keeps the cost the team pays in the picture.",
+      "why_vi": "Chia số cảnh báo sai cho lượng lành tính khổng lồ là giấu chúng đi. Chia cho số cảnh báo thật sự đã phát thì cái giá mà đội ngũ phải trả vẫn nằm trong bức tranh.",
+      "level": 4
+    },
+    {
+      "id": "qnids-17",
+      "q": "Two detectors are compared for deployment in a team that can process one hundred alerts per shift. The comparison that matches this constraint is",
+      "q_vi": "Hai bộ dò được so sánh để triển khai cho một đội xử lý được một trăm cảnh báo mỗi ca. Phép so sánh khớp với ràng buộc này là",
+      "choices": [
+        "How many real attacks each catches within that alert ceiling",
+        "The averaged area under each curve across every threshold either model can be configured with",
+        "The accuracy each one reaches on a balanced test set built by resampling the minority class",
+        "The training time each model needs on the same hardware"
+      ],
+      "answer": 0,
+      "why": "The shift capacity is the real operating point. Any summary that averages over thresholds nobody would deploy answers a question the team did not ask.",
+      "why_vi": "Sức chứa của một ca trực chính là điểm vận hành thật. Mọi con số tóm tắt lấy trung bình trên những ngưỡng không ai đem dùng đều trả lời một câu hỏi mà đội ngũ không hề đặt ra.",
+      "level": 4
+    },
+    {
+      "id": "qnids-18",
+      "q": "An anomaly model deployed a year ago now raises alerts on a backup job that has run nightly since spring. The most likely explanation is",
+      "q_vi": "Một mô hình bất thường triển khai từ một năm trước nay báo động với công việc sao lưu vẫn chạy hằng đêm từ mùa xuân. Giải thích khả dĩ nhất là",
+      "choices": [
+        "The model weights were corrupted during a routine restart of the sensor",
+        "The training set was too small for the number of features used",
+        "Normal behaviour moved while the learned baseline stayed put",
+        "The backup job is being used as a channel for stolen data"
+      ],
+      "answer": 2,
+      "why": "Nothing about the model changed. The environment acquired a new routine, and a baseline frozen a year ago has no way to know that it is now ordinary.",
+      "why_vi": "Không có gì trong mô hình thay đổi cả. Môi trường có thêm một nếp sinh hoạt mới, còn đường nền đóng băng từ một năm trước thì không có cách nào biết rằng nay nó đã là chuyện thường.",
+      "level": 3
+    },
+    {
+      "id": "qnids-19",
+      "q": "Labels for production traffic arrive weeks late, if at all. A practical way to notice that a deployed detector has gone stale is to",
+      "q_vi": "Nhãn cho lưu lượng thật đến muộn hàng tuần, nếu có. Một cách thực tế để nhận ra bộ dò đang chạy đã cũ đi là",
+      "choices": [
+        "Wait for the quarterly accuracy report",
+        "Watch the distribution of the input features and compare it with the training period",
+        "Increase the alert threshold every month",
+        "Retrain on the newest week of traffic automatically"
+      ],
+      "answer": 1,
+      "why": "Accuracy cannot be measured without labels, but the inputs are available immediately. A shift in what enters the model is the earliest evidence you can actually obtain.",
+      "why_vi": "Không có nhãn thì không đo được độ chính xác, nhưng đầu vào thì có ngay. Thay đổi ở thứ đi vào mô hình là bằng chứng sớm nhất mà bạn thật sự lấy được.",
+      "level": 3
+    },
+    {
+      "id": "qnids-20",
+      "q": "Why is adversarial evasion of a network traffic classifier structurally harder for the attacker than evasion in image classification?",
+      "q_vi": "Vì sao né tránh đối kháng với bộ phân loại lưu lượng mạng lại khó hơn về mặt cấu trúc so với né tránh trong phân loại ảnh?",
+      "choices": [
+        "Because network models are trained on far larger corpora than any of the models used for images",
+        "Because packet features are discrete and not continuous",
+        "Because sensors verify a signature on every packet header",
+        "Because the perturbed traffic must still work as a protocol"
+      ],
+      "answer": 3,
+      "why": "A modified image only has to look unchanged. A modified session has to remain a valid conversation that still delivers the attack, which removes most of the search space.",
+      "why_vi": "Một tấm ảnh bị chỉnh chỉ cần trông như không đổi. Một phiên bị chỉnh phải vẫn là cuộc trao đổi hợp lệ và vẫn chuyển được tấn công, điều đó cắt bỏ phần lớn không gian tìm kiếm.",
+      "level": 4
+    },
+    {
+      "id": "qnids-21",
+      "q": "A detector retrains itself each week on unlabelled production traffic. The specific risk this design creates is that an adversary can",
+      "q_vi": "Một bộ dò tự huấn luyện lại mỗi tuần trên lưu lượng thật không có nhãn. Rủi ro riêng mà thiết kế này tạo ra là kẻ địch có thể",
+      "choices": [
+        "Read the model weights directly from the traffic that the sensor exports to the collector",
+        "Make the pattern they intend to use later be accepted as normal",
+        "Force the sensor to drop packets by sending oversized frames repeatedly to it",
+        "Recover the training data from the alerts"
+      ],
+      "answer": 1,
+      "why": "Unlabelled retraining hands the attacker a vote on the definition of normal. Slow, harmless looking traffic during the learning window buys silence during the real operation.",
+      "why_vi": "Huấn luyện lại trên dữ liệu không nhãn là trao cho kẻ tấn công một lá phiếu về định nghĩa thế nào là bình thường. Lưu lượng chậm và trông vô hại trong cửa sổ học mua lấy sự im lặng cho lúc hành động thật.",
+      "level": 4
+    },
+    {
+      "id": "qnids-22",
+      "q": "A model separates attack from benign flows almost perfectly, but its accuracy collapses when the source address field is removed. The correct conclusion is",
+      "q_vi": "Một mô hình tách gần như hoàn hảo luồng tấn công khỏi luồng lành tính, nhưng độ chính xác sụp đổ khi bỏ trường địa chỉ nguồn. Kết luận đúng là",
+      "choices": [
+        "The model needs stronger regularisation to handle the features that remain",
+        "The remaining features were scaled incorrectly",
+        "Attack traffic really does come from a few hosts",
+        "The address field encodes the answer and nothing else was learned"
+      ],
+      "answer": 3,
+      "why": "In the capture, one address range ran the attack tool. The model found the recording artefact rather than the behaviour, and that artefact does not exist on your network.",
+      "why_vi": "Trong bản ghi đó, một dải địa chỉ đã chạy công cụ tấn công. Mô hình tìm ra dấu vết của quá trình thu thập chứ không phải hành vi, và dấu vết đó không tồn tại trên mạng của bạn.",
+      "level": 4
+    },
+    {
+      "id": "qnids-23",
+      "q": "An anomaly detector scores sessions by how badly a compressor trained on normal traffic rebuilds them. The limitation an operator must plan for is that the score",
+      "q_vi": "Một bộ dò bất thường chấm điểm phiên theo mức độ dựng lại kém của bộ nén đã học trên lưu lượng bình thường. Hạn chế mà người vận hành phải lường trước là điểm số đó",
+      "choices": [
+        "Ranks a rare but legitimate event exactly as it ranks a hostile one",
+        "Only works when the traffic is completely unencrypted",
+        "Cannot be computed without labelled attack examples",
+        "Grows without bound as the session gets longer"
+      ],
+      "answer": 0,
+      "why": "The model measures unfamiliarity, not hostility. A quarterly audit tool that appears once every three months is unfamiliar in exactly the way an intrusion is.",
+      "why_vi": "Mô hình đo mức xa lạ chứ không đo tính thù địch. Một công cụ kiểm toán chỉ xuất hiện ba tháng một lần thì xa lạ đúng theo kiểu mà một vụ xâm nhập cũng xa lạ.",
+      "level": 3
+    },
+    {
+      "id": "qnids-24",
+      "q": "A one class model of normal traffic is attractive because it needs no attack labels. The assumption it silently rests on is that",
+      "q_vi": "Mô hình một lớp cho lưu lượng bình thường hấp dẫn vì không cần nhãn tấn công. Giả định mà nó âm thầm dựa vào là",
+      "choices": [
+        "Every attack family is represented in the training data",
+        "Attack flows are longer than benign flows",
+        "The training period contained no intruder activity that anyone failed to notice at the time",
+        "The feature extractor is free of implementation bugs"
+      ],
+      "answer": 2,
+      "why": "Nobody proved the training month was clean, they assumed it. Any intruder already present during that month is now part of the definition of normal.",
+      "why_vi": "Không ai chứng minh tháng huấn luyện đó là sạch, người ta chỉ giả định vậy. Kẻ xâm nhập đã có mặt trong tháng đó nay trở thành một phần của định nghĩa bình thường.",
+      "level": 4
+    },
+    {
+      "id": "qnids-25",
+      "q": "The main reason supervised detection runs out of ground truth long before it runs out of data is that",
+      "q_vi": "Lý do chính khiến phát hiện có giám sát cạn nhãn chuẩn từ rất lâu trước khi cạn dữ liệu là",
+      "choices": [
+        "Storage for captured traffic is far more expensive than the compute needed to train a model",
+        "Public benchmarks forbid the redistribution of any labelled network capture",
+        "Deciding whether one flow was hostile can cost an analyst an hour",
+        "Flow records cannot be stored in a form a model reads"
+      ],
+      "answer": 2,
+      "why": "Packets are cheap and plentiful. The scarce resource is the human judgement that turns a flow into a label, and that cost does not fall with more traffic.",
+      "why_vi": "Gói tin thì rẻ và nhiều vô kể. Thứ khan hiếm là phán quyết của con người để biến một luồng thành một nhãn, và cái giá đó không giảm đi khi lưu lượng nhiều hơn.",
+      "level": 2
+    },
+    {
+      "id": "qnids-26",
+      "q": "Active learning is proposed to make the labelling budget go further. Its central idea is to",
+      "q_vi": "Học chủ động được đề xuất để ngân sách gán nhãn đi xa hơn. Ý tưởng trung tâm của nó là",
+      "choices": [
+        "Ask the analyst about the cases where the model is least certain",
+        "Label every alert that the sensor produced during the previous week",
+        "Generate additional attack samples with a scripted traffic generator",
+        "Copy labels from a public benchmark onto flows that resemble them"
+      ],
+      "answer": 0,
+      "why": "Confident cases teach the model almost nothing. Spending the scarce human hour on the uncertain region buys the most decision boundary per verdict.",
+      "why_vi": "Những ca mà mô hình đã chắc chắn thì gần như không dạy được gì. Dồn giờ công hiếm hoi của con người vào vùng còn phân vân sẽ mua được nhiều đường biên quyết định nhất trên mỗi phán quyết.",
+      "level": 3
+    },
+    {
+      "id": "qnids-27",
+      "q": "A vendor claims its detector is explainable because each alert ships with a ranked list of contributing features. For a triage analyst this is insufficient because it does not say",
+      "q_vi": "Một nhà cung cấp khẳng định bộ dò của họ giải thích được vì mỗi cảnh báo đều kèm danh sách đặc trưng đóng góp đã xếp hạng. Với người phân tích ở khâu sàng lọc thì thế là chưa đủ vì nó không cho biết",
+      "choices": [
+        "How many features the model was trained on in total",
+        "Which library was used to build and package the model",
+        "How long the model took to score each flow it saw",
+        "Which host and which deviation to examine now"
+      ],
+      "answer": 3,
+      "why": "Triage has to end in a verdict about a specific machine. A feature ranking leaves the analyst to rebuild the reasoning by hand, which is the work the explanation was supposed to save.",
+      "why_vi": "Khâu sàng lọc phải kết thúc bằng một phán quyết về một máy cụ thể. Bảng xếp hạng đặc trưng để mặc người phân tích tự dựng lại lập luận bằng tay, mà đó chính là phần việc mà lời giải thích lẽ ra phải tiết kiệm giúp.",
+      "level": 3
+    },
+    {
+      "id": "qnids-28",
+      "q": "Model scores from three different detectors are pooled into one queue and sorted. Before this ranking means anything, each detector must be",
+      "q_vi": "Điểm số của ba bộ dò khác nhau được gom vào một hàng đợi rồi sắp xếp. Trước khi thứ tự đó có ý nghĩa gì, mỗi bộ dò phải được",
+      "choices": [
+        "Retrained on a single shared corpus assembled from all three deployment environments",
+        "Calibrated so its score reads as a probability",
+        "Configured to emit the same number of alerts per hour as the other two engines",
+        "Rewritten to use the same feature extraction code"
+      ],
+      "answer": 1,
+      "why": "Each engine carries its own private scale, so a high number from one need not outrank a lower number from another. Calibration is what puts them on a common footing.",
+      "why_vi": "Mỗi bộ máy mang một thang riêng, nên con số cao ở cái này chưa chắc đứng trên con số thấp hơn ở cái kia. Việc hiệu chỉnh mới đưa chúng về cùng một mặt bằng.",
+      "level": 4
+    },
+    {
+      "id": "qnids-29",
+      "q": "A submitted paper reports a new best result on a benchmark captured from a military exercise in the late nineteen nineties. The reviewer's central objection should be that",
+      "q_vi": "Một bài nộp báo kết quả tốt nhất mới trên bộ chuẩn thu từ cuộc diễn tập quân sự cuối thập niên chín mươi. Phản đối trung tâm của người phản biện nên là",
+      "choices": [
+        "The dataset is too small to train a deep model",
+        "The evaluation used a fixed random seed",
+        "The features were extracted with an old library",
+        "The services, the traffic mix and the attacks no longer exist anywhere"
+      ],
+      "answer": 3,
+      "why": "The objection is not statistical but historical. A score on traffic from a vanished network predicts nothing about a sensor deployed this year.",
+      "why_vi": "Phản đối ở đây không thuộc về thống kê mà thuộc về lịch sử. Điểm số trên lưu lượng của một mạng đã biến mất không dự báo được gì cho một cảm biến triển khai năm nay.",
+      "level": 3
+    },
+    {
+      "id": "qnids-30",
+      "q": "The cleaned redistribution of that old benchmark removed duplicate records and rebalanced difficulty. What it could not repair is",
+      "q_vi": "Bản phát hành lại đã làm sạch của bộ chuẩn cũ đó đã bỏ bản ghi trùng và cân lại độ khó. Thứ nó không thể sửa được là",
+      "choices": [
+        "The imbalance between the training partition and the evaluation partition of the collection",
+        "The age of the traffic it describes",
+        "The presence of duplicate rows in the test partition",
+        "The inconsistent naming of the attack categories"
+      ],
+      "answer": 1,
+      "why": "Deduplication fixed an arithmetic problem: methods were being scored on how often they saw the same row. It left every protocol and every service exactly as old as before.",
+      "why_vi": "Việc bỏ trùng đã sửa một vấn đề số học: các phương pháp trước đó được chấm theo số lần gặp lại cùng một dòng. Nhưng mọi giao thức và mọi dịch vụ vẫn cũ y như trước.",
+      "level": 3
+    },
+    {
+      "id": "qnids-31",
+      "q": "In a modern benchmark each attack family was executed inside its own labelled hour while scripted profiles generated the background. The hidden shortcut this creates is that",
+      "q_vi": "Trong một bộ chuẩn hiện đại, mỗi họ tấn công được chạy trong khung giờ gán nhãn riêng của nó còn nền là lưu lượng do kịch bản sinh. Lối tắt ẩn mà điều này tạo ra là",
+      "choices": [
+        "The capture is too large to load into memory on a single analysis workstation",
+        "The attacks were run by a tool rather than by a person at a keyboard",
+        "The timestamp alone can separate the classes without any behavioural feature",
+        "The background profiles repeat"
+      ],
+      "answer": 2,
+      "why": "If hostile activity occupies distinct hours, the clock becomes a perfect label. A model reported as behavioural may have learned nothing but the schedule of the experiment.",
+      "why_vi": "Nếu hoạt động thù địch chiếm những giờ riêng biệt thì đồng hồ trở thành một nhãn hoàn hảo. Mô hình được báo là học hành vi có thể chẳng học gì ngoài lịch chạy của thí nghiệm.",
+      "level": 4
+    },
+    {
+      "id": "qnids-32",
+      "q": "A single column in a public intrusion dataset reaches almost perfect separation on its own. The first hypothesis to test is that the column",
+      "q_vi": "Một cột duy nhất trong bộ dữ liệu xâm nhập công khai tự nó đã tách được các lớp gần như hoàn hảo. Giả thuyết đầu tiên cần kiểm là cột đó",
+      "choices": [
+        "Records the answer rather than the behaviour",
+        "Was recorded by a sensor placed closer to the attacker than to the target",
+        "Contains values drawn from a heavier tailed distribution than the others",
+        "Was normalised on the whole collection before the split was made"
+      ],
+      "answer": 0,
+      "why": "A port used only by the attack tool, or a marker written by the labelling script, separates perfectly and teaches nothing. Leakage is the ordinary explanation for an extraordinary column.",
+      "why_vi": "Một cổng chỉ công cụ tấn công mới dùng, hay một dấu do chính kịch bản gán nhãn ghi vào, sẽ tách rất hoàn hảo mà chẳng dạy được gì. Rò rỉ là lời giải thích thông thường cho một cột phi thường.",
+      "level": 4
+    },
+    {
+      "id": "qnids-33",
+      "q": "A team fills the minority class with attack samples produced by a generative model. The subtle cost of this decision is that the detector learns",
+      "q_vi": "Một đội lấp lớp thiểu số bằng các mẫu tấn công do mô hình sinh tạo ra. Cái giá tinh vi của quyết định này là bộ dò sẽ học",
+      "choices": [
+        "The regularities of the generator alongside the behaviour of real attackers",
+        "To ignore the majority class entirely",
+        "A threshold that drifts every week",
+        "To rely on payload instead of timing"
+      ],
+      "answer": 0,
+      "why": "Whatever fingerprint the generator leaves becomes part of the target concept. The model then recognises your synthesis pipeline, which is not the thing attacking your network.",
+      "why_vi": "Bất cứ dấu vết nào máy sinh để lại đều trở thành một phần của khái niệm cần học. Mô hình khi đó nhận ra dây chuyền tổng hợp của bạn, mà thứ đó đâu phải cái đang tấn công mạng của bạn.",
+      "level": 4
+    },
+    {
+      "id": "qnids-34",
+      "q": "Rows from a week of captured traffic are shuffled and then split into training and test partitions. The result overstates performance because",
+      "q_vi": "Các dòng dữ liệu của một tuần lưu lượng đã bắt được xáo trộn rồi chia thành phần huấn luyện và phần kiểm. Kết quả bị thổi phồng vì",
+      "choices": [
+        "The test partition ends up containing fewer hostile records than the training partition does",
+        "Shuffling destroys the ordering of the byte counters",
+        "The model sees flows from the same session it must later classify",
+        "Random splits always favour the majority class"
+      ],
+      "answer": 2,
+      "why": "Operationally the model always predicts a future it has not seen. Shuffling lets neighbouring flows of one conversation sit on both sides of the split, so the test is partly a memory check.",
+      "why_vi": "Trong vận hành, mô hình luôn phải dự đoán một tương lai mà nó chưa từng thấy. Xáo trộn khiến các luồng liền kề của cùng một cuộc trao đổi nằm ở cả hai phía, nên bài kiểm phần nào chỉ là kiểm trí nhớ.",
+      "level": 3
+    },
+    {
+      "id": "qnids-35",
+      "q": "Ground truth for a captured trace was produced by running the same detector that is now being evaluated on it. This makes the evaluation",
+      "q_vi": "Nhãn chuẩn cho một bản ghi lưu lượng được tạo ra bằng cách chạy chính bộ dò nay đang được đánh giá trên đó. Điều này khiến phép đánh giá",
+      "choices": [
+        "Conservative, since the detector will be penalised for every disagreement it produces",
+        "Circular, since it measures only self consistency",
+        "Valid provided the detector version numbers are different between the two runs",
+        "Unbiased once the labels are reviewed by a second analyst"
+      ],
+      "answer": 1,
+      "why": "The labels and the predictions come from one source, so agreement is guaranteed by construction. Ground truth has to come from the attacker side record or from independent human review.",
+      "why_vi": "Nhãn và dự đoán cùng đến từ một nguồn, nên sự trùng khớp được bảo đảm ngay từ cách dựng. Nhãn chuẩn phải đến từ bản ghi phía tấn công hoặc từ khâu con người xem xét độc lập.",
+      "level": 3
+    },
+    {
+      "id": "qnids-36",
+      "q": "A model scoring extremely well on a balanced public benchmark performs poorly on a live link. The dominant reason is",
+      "q_vi": "Một mô hình đạt điểm rất cao trên bộ chuẩn công khai đã cân bằng lại chạy kém trên đường truyền thật. Nguyên nhân chính là",
+      "choices": [
+        "The benchmark was distributed with its features already extracted for you",
+        "The live sensor uses a different capture library from the one in the study",
+        "Public captures are compressed before they are published",
+        "Live traffic has a base rate the benchmark deliberately removed"
+      ],
+      "answer": 3,
+      "why": "Balancing the test set is a convenience for training, not a property of any network. Precision computed at an artificial ratio does not transfer to a link where hostile flows are one in a million.",
+      "why_vi": "Cân bằng tập kiểm là sự tiện lợi cho việc huấn luyện chứ không phải tính chất của mạng nào cả. Precision tính ở một tỉ lệ nhân tạo không chuyển được sang đường truyền mà luồng thù địch chỉ là một phần triệu.",
+      "level": 3
+    },
+    {
+      "id": "qnids-37",
+      "q": "Traffic on a monitored link is almost entirely encrypted. The observable that still supports detection with no decryption at all is",
+      "q_vi": "Lưu lượng trên đường truyền đang giám sát gần như đã mã hóa toàn bộ. Thứ quan sát được mà vẫn phục vụ việc phát hiện dù không giải mã gì cả là",
+      "choices": [
+        "The command executed on the target host",
+        "The endpoints, the handshake parameters, the message sizes and their timing",
+        "The credentials presented during login",
+        "The file names carried in the session"
+      ],
+      "answer": 1,
+      "why": "Encryption protects content and leaves the shape of the exchange in plain view. Who talks to whom, with which library, in messages of which sizes and rhythm, is all still on the wire.",
+      "why_vi": "Mã hóa bảo vệ nội dung và để lộ nguyên hình dạng của cuộc trao đổi. Ai nói với ai, bằng thư viện nào, qua những thông điệp kích thước và nhịp ra sao, tất cả vẫn nằm trên đường truyền.",
+      "level": 2
+    },
+    {
+      "id": "qnids-38",
+      "q": "A fingerprint computed from the ordered handshake parameters of a client identifies",
+      "q_vi": "Một vân tay tính từ các tham số bắt tay đã sắp thứ tự của máy khách cho biết",
+      "choices": [
+        "The identity of the person who is currently logged in at the originating workstation",
+        "The contents of the first application message",
+        "The certificate chain that the server presents",
+        "The software stack that opened the session"
+      ],
+      "answer": 3,
+      "why": "Different libraries and versions offer different options in different orders. That difference names the client software long before any secret has been exchanged.",
+      "why_vi": "Các thư viện và phiên bản khác nhau chào những tùy chọn khác nhau theo thứ tự khác nhau. Chính sự khác biệt đó gọi tên phần mềm máy khách từ rất lâu trước khi có bất kỳ bí mật nào được trao đổi.",
+      "level": 2
+    },
+    {
+      "id": "qnids-39",
+      "q": "The newer fingerprint scheme sorts the handshake fields before hashing them. The evasion this change specifically defeats is",
+      "q_vi": "Cách tính vân tay mới hơn sắp xếp các trường bắt tay trước khi băm. Kiểu né tránh mà thay đổi này nhắm vào chính là",
+      "choices": [
+        "Shuffling the order in which the extensions are offered",
+        "Sending the handshake inside a tunnel so that the sensor cannot observe it at all",
+        "Padding every record to a constant length before it leaves the client",
+        "Reusing a session ticket"
+      ],
+      "answer": 0,
+      "why": "The original hash covered the offered order, so permuting it changed the value without changing the client at all. Sorting first makes the fingerprint independent of that permutation.",
+      "why_vi": "Mã băm nguyên bản bao gồm cả thứ tự chào, nên hoán vị thứ tự là đổi được giá trị mà máy khách chẳng thay đổi gì. Sắp xếp trước khi băm làm vân tay không còn phụ thuộc vào phép hoán vị đó.",
+      "level": 4
+    },
+    {
+      "id": "qnids-40",
+      "q": "A detection rule blocks sessions whose declared destination hostname appears on a deny list. The weakness of relying on that field is that it",
+      "q_vi": "Một luật phát hiện chặn những phiên có tên máy đích khai báo nằm trong danh sách cấm. Điểm yếu của việc dựa vào trường này là nó",
+      "choices": [
+        "Cannot be read without terminating the session at a proxy first",
+        "Appears only after the first application message has been sent",
+        "Is written by the client, so it is a claim and not an observation",
+        "Changes whenever the server rotates its certificate chain"
+      ],
+      "answer": 2,
+      "why": "The field exists so a server hosting many sites knows which one is wanted. Nothing forces the client to state a name that matches where it actually intends to go.",
+      "why_vi": "Trường này tồn tại để một máy chủ chứa nhiều trang biết bên kia muốn vào trang nào. Không có gì buộc máy khách khai một cái tên khớp với nơi nó thật sự định tới.",
+      "level": 3
+    },
+    {
+      "id": "qnids-41",
+      "q": "When the opening handshake message is itself encrypted, detection on that link must fall back to",
+      "q_vi": "Khi bản thân thông điệp bắt tay mở đầu cũng được mã hóa, việc phát hiện trên đường truyền đó phải quay về dựa vào",
+      "choices": [
+        "The deny list of hostnames already in use",
+        "The plaintext of the first response",
+        "Addresses, certificates and the behaviour of the session over time",
+        "The reassembled payload of the application"
+      ],
+      "answer": 2,
+      "why": "The convenient label disappears and the remaining evidence is coarser. This is the recurring pattern in encrypted transport: each round of privacy improvement moves detection further towards behaviour.",
+      "why_vi": "Cái nhãn tiện lợi biến mất và bằng chứng còn lại thì thô hơn. Đây là quy luật lặp lại ở tầng vận chuyển mã hóa: mỗi vòng cải thiện riêng tư lại đẩy việc phát hiện tiến thêm về phía hành vi.",
+      "level": 3
+    },
+    {
+      "id": "qnids-42",
+      "q": "Migrating a service to a transport that encrypts its own control fields removes which capability from a passive sensor?",
+      "q_vi": "Chuyển một dịch vụ sang tầng vận chuyển tự mã hóa các trường điều khiển của nó sẽ lấy đi khả năng nào của cảm biến thụ động?",
+      "choices": [
+        "Observing sequence numbers, retransmission and stream structure",
+        "Counting the total number of bytes each endpoint sent during the whole conversation",
+        "Measuring the gaps between successive packets",
+        "Recording which addresses spoke to one another"
+      ],
+      "answer": 0,
+      "why": "Volume and timing survive because they are properties of what crosses the link. The transport state that used to sit in clear headers is now inside the encrypted envelope.",
+      "why_vi": "Khối lượng và nhịp thời gian vẫn còn vì chúng là tính chất của thứ đi qua đường truyền. Trạng thái tầng vận chuyển vốn nằm ở phần đầu chưa mã hóa nay đã nằm trong lớp bọc đã mã hóa.",
+      "level": 4
+    },
+    {
+      "id": "qnids-43",
+      "q": "Two analysts reach opposite verdicts on the same alert. Treated as a process problem rather than a competence problem, the missing element is",
+      "q_vi": "Hai người phân tích đưa ra hai phán quyết trái ngược trên cùng một cảnh báo. Nhìn đây là vấn đề quy trình chứ không phải vấn đề năng lực, thứ còn thiếu là",
+      "choices": [
+        "A faster search index",
+        "A larger rule set",
+        "A second sensor on the same link",
+        "A written sequence of checks that both were required to complete before deciding"
+      ],
+      "answer": 3,
+      "why": "Without a fixed sequence, a verdict reflects whichever evidence each person happened to look at first. Reproducibility is a property of the procedure, not of the individual.",
+      "why_vi": "Không có một chuỗi bước cố định thì phán quyết chỉ phản ánh bằng chứng mà mỗi người tình cờ xem trước. Tính lặp lại được là tính chất của thủ tục chứ không phải của cá nhân.",
+      "level": 3
+    },
+    {
+      "id": "qnids-44",
+      "q": "A response playbook is written before an incident rather than during one. The main thing this timing buys is that",
+      "q_vi": "Sổ tay xử lý được viết trước khi có sự cố chứ không phải trong lúc sự cố diễn ra. Điều mà thời điểm này mua được chủ yếu là",
+      "choices": [
+        "The organisation can advertise a shorter recovery objective to its customers and auditors",
+        "Who may disconnect a production system is already settled",
+        "The detection rules become more precise",
+        "Analysts no longer need to read the raw evidence"
+      ],
+      "answer": 1,
+      "why": "The expensive delay during an incident is rarely technical. It is the search for someone willing to authorise an action that interrupts a service.",
+      "why_vi": "Độ trễ tốn kém trong một sự cố hiếm khi thuộc về kỹ thuật. Nó nằm ở việc đi tìm người chịu phê duyệt một hành động làm gián đoạn dịch vụ.",
+      "level": 3
+    },
+    {
+      "id": "qnids-45",
+      "q": "An organisation detects intrusions within minutes but takes eleven days to contain them. The metric that exposes this gap is",
+      "q_vi": "Một tổ chức phát hiện xâm nhập trong vài phút nhưng mất mười một ngày mới khoanh vùng được. Thước đo phơi bày khoảng cách này là",
+      "choices": [
+        "The share of alerts that turned out to be harmless after a full investigation was completed",
+        "The number of rules mapped to each known technique",
+        "The volume of traffic captured per day",
+        "The average delay from a confirmed alert to containment"
+      ],
+      "answer": 3,
+      "why": "Detection speed measures the sensor while containment speed measures the organisation. An attacker who keeps access for eleven days is not troubled by how quickly they were noticed.",
+      "why_vi": "Tốc độ phát hiện đo cảm biến, còn tốc độ khoanh vùng đo tổ chức. Kẻ tấn công giữ được quyền truy cập mười một ngày thì chẳng bận tâm là mình bị nhận ra nhanh đến đâu.",
+      "level": 2
+    },
+    {
+      "id": "qnids-46",
+      "q": "An incident report states that dwell time was four days. The correct way to have measured this is from",
+      "q_vi": "Một báo cáo sự cố ghi rằng thời gian kẻ tấn công trụ lại là bốn ngày. Cách đo đúng cho con số này là tính từ",
+      "choices": [
+        "The moment the security team opened a case in the ticketing system",
+        "The earliest evidence of access that can be proved",
+        "The date the vulnerability behind the intrusion was originally published",
+        "The day the last affected system was rebuilt from a clean image"
+      ],
+      "answer": 1,
+      "why": "Counting from the day you noticed measures your reaction, not the intruder's stay. The honest figure starts at the first proven access, which is often weeks before the first alert.",
+      "why_vi": "Tính từ ngày bạn nhận ra là đo phản ứng của bạn chứ không đo thời gian kẻ xâm nhập ở lại. Con số trung thực bắt đầu từ lần truy cập đầu tiên chứng minh được, thường là nhiều tuần trước cảnh báo đầu tiên.",
+      "level": 3
+    },
+    {
+      "id": "qnids-47",
+      "q": "A hunt is judged productive even though it found no intrusion. The reason this judgement can be correct is that a good hunt",
+      "q_vi": "Một buổi săn lùng được đánh giá là có ích dù không tìm ra vụ xâm nhập nào. Lý do đánh giá đó có thể đúng là một buổi săn tốt",
+      "choices": [
+        "Always generates new rules",
+        "Replaces the need for alerting",
+        "Starts from a stated hypothesis, so a negative result narrows the space of what remains possible",
+        "Runs without touching production data"
+      ],
+      "answer": 2,
+      "why": "Browsing telemetry with no hypothesis cannot fail and cannot succeed. A falsifiable question makes the empty result informative and repeatable next quarter.",
+      "why_vi": "Lướt dữ liệu quan trắc mà không có giả thuyết thì không thể sai cũng không thể đúng. Một câu hỏi bác bỏ được làm cho kết quả rỗng vẫn mang thông tin và lặp lại được vào quý sau.",
+      "level": 3
+    },
+    {
+      "id": "qnids-48",
+      "q": "After an adversary emulation exercise, the most valuable artefact handed to the detection team is",
+      "q_vi": "Sau một buổi giả lập hành vi đối thủ, sản phẩm giá trị nhất giao cho đội phát hiện là",
+      "choices": [
+        "The list of techniques that produced no evidence at all",
+        "A score comparing this quarter with the previous quarter across all business units involved",
+        "The number of hosts the exercise reached",
+        "A recording of the exercise for training use"
+      ],
+      "answer": 0,
+      "why": "Techniques that alerted are already covered. The exercise pays for itself only through the ones that ran to completion while every sensor stayed silent.",
+      "why_vi": "Những kỹ thuật đã làm cảnh báo kêu thì vốn đã được phủ. Buổi diễn tập chỉ đáng đồng tiền nhờ những kỹ thuật chạy trọn vẹn trong khi mọi cảm biến vẫn im lặng.",
+      "level": 3
+    },
+    {
+      "id": "qnids-49",
+      "q": "Before a new rule is allowed into the live alert queue, the check that most reliably prevents a flood is to",
+      "q_vi": "Trước khi cho một luật mới vào hàng đợi cảnh báo thật, phép kiểm ngăn được cơn lũ cảnh báo một cách chắc chắn nhất là",
+      "choices": [
+        "Replay it against a stored week of ordinary traffic and count what it fires on",
+        "Ask a second engineer to read the rule and confirm that its logic matches the written intent",
+        "Give it a low severity for the first month of operation",
+        "Deploy it to one sensor first"
+      ],
+      "answer": 0,
+      "why": "Review catches logic errors but cannot predict volume. Only the replay tells you the rule will produce three alerts a week rather than three thousand.",
+      "why_vi": "Khâu duyệt bắt được lỗi lô gích nhưng không đoán được khối lượng. Chỉ có phép phát lại mới cho biết luật sẽ sinh ra ba cảnh báo mỗi tuần hay ba nghìn.",
+      "level": 3
+    },
+    {
+      "id": "qnids-50",
+      "q": "A rule fires four thousand times a day on one known benign backup server. Compared with disabling the rule, deduplicating its output preserves",
+      "q_vi": "Một luật kêu bốn nghìn lần mỗi ngày vì một máy chủ sao lưu đã biết là lành tính. So với việc tắt hẳn luật, việc gộp trùng đầu ra của nó giữ lại được",
+      "choices": [
+        "The processing capacity the sensor spends on evaluating the rule itself",
+        "The complete unaggregated record of every single match in the primary index",
+        "The ability to notice when that same rule fires somewhere unexpected",
+        "The severity ranking that the vendor originally assigned to this rule"
+      ],
+      "answer": 2,
+      "why": "Deduplication removes repetition, not coverage. Turning the rule off removes both, and the second host to trigger it is exactly the case you wanted.",
+      "why_vi": "Gộp trùng chỉ bỏ đi sự lặp lại chứ không bỏ độ phủ. Tắt hẳn luật thì mất cả hai, mà máy thứ hai làm luật đó kêu mới đúng là ca bạn cần.",
+      "level": 3
+    },
+    {
+      "id": "qnids-51",
+      "q": "A suppression entry is created with a review date attached rather than left permanent. The failure this practice is designed to prevent is",
+      "q_vi": "Một mục tạm tắt cảnh báo được tạo kèm ngày xem lại thay vì để vĩnh viễn. Kiểu hỏng mà cách làm này nhằm ngăn chặn là",
+      "choices": [
+        "The sensor running out of memory",
+        "An exception granted for one week quietly becoming a standing hole in coverage",
+        "Analysts disagreeing about severity",
+        "The rule file growing too large"
+      ],
+      "answer": 1,
+      "why": "Nobody reopens a decision that has no expiry. The dated review is the only mechanism that forces the team to ask whether the reason still holds.",
+      "why_vi": "Không ai mở lại một quyết định không có hạn dùng. Ngày xem lại là cơ chế duy nhất buộc đội ngũ phải hỏi lý do đó còn đúng nữa hay không.",
+      "level": 2
+    },
+    {
+      "id": "qnids-52",
+      "q": "A slow intrusion progresses over three weeks and is rediscovered from scratch by each shift. The organisational fix is",
+      "q_vi": "Một vụ xâm nhập chậm kéo dài ba tuần và cứ mỗi ca trực lại bị phát hiện lại từ đầu. Cách sửa ở cấp tổ chức là",
+      "choices": [
+        "Increasing the retention period of the packet capture appliance across every monitored segment",
+        "Lowering the alert threshold on the anomaly model",
+        "Adding another sensor at the perimeter",
+        "A written record of open cases passed between shifts"
+      ],
+      "answer": 3,
+      "why": "The evidence was collected every time and then discarded with the shift. A slow adversary is invisible to a team whose memory resets every eight hours.",
+      "why_vi": "Bằng chứng lần nào cũng được thu thập rồi lại bị bỏ đi cùng với ca trực. Kẻ địch đi chậm thì vô hình trước một đội mà trí nhớ cứ tám tiếng lại xóa sạch.",
+      "level": 3
+    },
+    {
+      "id": "qnids-53",
+      "q": "A coverage matrix maps documented techniques against the sensors that would record them. The most useful part of the finished matrix is",
+      "q_vi": "Một ma trận độ phủ đối chiếu các kỹ thuật đã ghi nhận với những cảm biến có thể ghi lại chúng. Phần hữu ích nhất của ma trận đã hoàn thành là",
+      "choices": [
+        "The count of rules that were written for each technique during the previous financial year",
+        "The techniques for which no sensor produces any evidence",
+        "The proportion of techniques with at least one rule",
+        "The colour scheme used in the report"
+      ],
+      "answer": 1,
+      "why": "The filled cells describe work already done. The empty ones are a specific, fundable list of what nobody in the organisation is currently able to see.",
+      "why_vi": "Những ô đã tô mô tả phần việc đã làm xong. Những ô trống mới là danh sách cụ thể và xin được kinh phí về những gì hiện không ai trong tổ chức nhìn thấy được.",
+      "level": 2
+    },
+    {
+      "id": "qnids-54",
+      "q": "A detector is correct once in every five hundred alerts. Beyond the wasted hours, the deeper operational harm is that",
+      "q_vi": "Một bộ dò đúng một lần trong mỗi năm trăm cảnh báo. Ngoài số giờ bị phí, tác hại vận hành sâu hơn là",
+      "choices": [
+        "The sensor consumes more memory than it was provisioned for at installation time",
+        "The rule file becomes harder for new engineers to read and maintain over time",
+        "The reporting dashboard takes noticeably longer to render the weekly summary",
+        "The team is trained to disbelieve it"
+      ],
+      "answer": 3,
+      "why": "Attention is the resource being spent. Once the queue has taught analysts that this source is noise, the one real case it eventually produces is dismissed with the rest.",
+      "why_vi": "Thứ đang bị tiêu tốn là sự chú ý. Một khi hàng đợi đã dạy người phân tích rằng nguồn này chỉ là nhiễu, ca thật duy nhất mà nó rốt cuộc sinh ra cũng bị gạt đi cùng với phần còn lại.",
+      "level": 3
+    },
+    {
+      "id": "qnids-55",
+      "q": "A file is placed on a server with no legitimate reason for anyone to open it, and any access raises an alert. The property that makes this cheap to operate is",
+      "q_vi": "Một tệp được đặt trên máy chủ mà không ai có lý do hợp lệ để mở, và mọi lần chạm tới đều sinh cảnh báo. Tính chất khiến cách này rẻ khi vận hành là",
+      "choices": [
+        "Its false positive rate is essentially zero by construction",
+        "It requires no agent to be installed on the machine that is hosting the monitored file",
+        "It detects attacks earlier than any network sensor",
+        "It works without any logging at all"
+      ],
+      "answer": 0,
+      "why": "The signal is defined by the absence of a legitimate use, so there is almost nothing benign left to misfire on. Coverage is narrow, but every alert it does raise deserves attention.",
+      "why_vi": "Tín hiệu ở đây được định nghĩa bằng chính việc không có công dụng hợp lệ nào, nên gần như chẳng còn thứ lành tính nào để kêu nhầm. Độ phủ thì hẹp, nhưng mọi cảnh báo nó phát ra đều đáng để ý.",
+      "level": 3
+    },
+    {
+      "id": "qnids-56",
+      "q": "Attack and defence work side by side, executing known techniques and checking the telemetry together. The output that distinguishes this from a penetration test is",
+      "q_vi": "Bên tấn công và bên phòng thủ làm việc cạnh nhau, thực hiện các kỹ thuật đã biết và cùng xem dữ liệu quan trắc. Sản phẩm phân biệt việc này với một cuộc kiểm thử xâm nhập là",
+      "choices": [
+        "A prioritised list of the vulnerabilities that were successfully exploited during the engagement",
+        "A statement that the network was breached in under a day",
+        "A per technique record of what the sensors did and did not record",
+        "A signed report for the audit file"
+      ],
+      "answer": 2,
+      "why": "A penetration test answers whether entry was possible. This exercise answers whether entry would have been seen, which is the question the detection team can act on.",
+      "why_vi": "Kiểm thử xâm nhập trả lời câu hỏi có vào được hay không. Buổi diễn tập này trả lời câu hỏi việc vào đó có bị nhìn thấy hay không, và đó mới là câu hỏi mà đội phát hiện xử lý được.",
+      "level": 4
+    },
+    {
+      "id": "qnids-57",
+      "q": "Detection logic is moved from the central platform onto sensors at each site. The operational advantage that matters most during an outage is that",
+      "q_vi": "Lô gích phát hiện được chuyển từ nền tảng trung tâm xuống các cảm biến ở từng chi nhánh. Ưu điểm vận hành quan trọng nhất lúc có sự cố đứt mạng là",
+      "choices": [
+        "Rules can be written in a simpler language",
+        "Storage costs move to the sites",
+        "The verdict is still produced when the link to the centre is the thing that failed",
+        "Analysts can work from any office"
+      ],
+      "answer": 2,
+      "why": "A central design assumes the transport works. Local decision keeps detection alive exactly when the network problem might itself be the intrusion.",
+      "why_vi": "Thiết kế tập trung giả định đường truyền vẫn chạy. Quyết định tại chỗ giữ cho việc phát hiện còn sống đúng vào lúc mà sự cố mạng có thể chính là vụ xâm nhập.",
+      "level": 3
+    },
+    {
+      "id": "qnids-58",
+      "q": "In a distributed design each sensor holds only a partial view of the traffic. The central design question therefore becomes",
+      "q_vi": "Trong thiết kế phân tán, mỗi cảm biến chỉ giữ một góc nhìn cục bộ về lưu lượng. Vì thế câu hỏi thiết kế trung tâm trở thành",
+      "choices": [
+        "What each sensor must forward for the whole to see the intrusion",
+        "Which vendor supplies the appliance that will be installed at each of the monitored locations",
+        "How many rules each sensor is able to hold in memory",
+        "Where the analysts should physically sit"
+      ],
+      "answer": 0,
+      "why": "Nothing local is wrong, but an intrusion spread across sites appears nowhere in full. The design lives or dies on which fragments travel and which stay home.",
+      "why_vi": "Không có gì sai ở từng chỗ cả, nhưng một vụ xâm nhập trải trên nhiều chi nhánh thì không hiện đầy đủ ở đâu. Thiết kế sống hay chết là ở chỗ mảnh nào được gửi đi và mảnh nào ở lại.",
+      "level": 3
+    },
+    {
+      "id": "qnids-59",
+      "q": "Alerts are summarised at each tier before being passed upward to save bandwidth. The cost this design quietly imposes is that",
+      "q_vi": "Cảnh báo được tóm tắt ở từng tầng trước khi chuyển lên trên để tiết kiệm băng thông. Cái giá mà thiết kế này âm thầm bắt trả là",
+      "choices": [
+        "The upper tier receives its input later than the tier immediately below it does",
+        "Rules must be duplicated at every level of the hierarchy that performs summarisation",
+        "Sensors need more storage",
+        "The detail a rare case depended on does not survive the summary"
+      ],
+      "answer": 3,
+      "why": "Aggregation is tuned on common events, which are the ones worth compressing. The single odd record is precisely what a summary is designed to discard.",
+      "why_vi": "Việc gom tóm được chỉnh theo các sự kiện phổ biến, vốn là thứ đáng nén lại. Bản ghi lẻ loi khác thường lại đúng là thứ mà một bản tóm tắt sinh ra để loại bỏ.",
+      "level": 4
+    },
+    {
+      "id": "qnids-60",
+      "q": "Several organisations train a shared detector while each keeps its own traffic locally. The claim that this design leaks nothing is",
+      "q_vi": "Vài tổ chức cùng huấn luyện một bộ dò chung trong khi mỗi bên giữ lưu lượng ở nhà mình. Khẳng định rằng thiết kế này không rò rỉ gì là",
+      "choices": [
+        "Correct, because the raw packets themselves are never transmitted between the participants",
+        "Too strong, because the model updates carry information about the data",
+        "Correct, provided the aggregation server is operated by a neutral third party",
+        "Irrelevant, since regulators do not examine model training"
+      ],
+      "answer": 1,
+      "why": "Keeping packets at home is not the same as revealing nothing about them. Gradients and weight deltas encode properties of the local traffic and have to be treated as disclosure.",
+      "why_vi": "Giữ gói tin ở nhà không đồng nghĩa với không tiết lộ gì về chúng. Gradient và phần chênh trọng số mã hóa các tính chất của lưu lượng cục bộ và phải được coi là một dạng tiết lộ.",
+      "level": 4
+    },
+    {
+      "id": "qnids-61",
+      "q": "Before building a pipeline to exchange traffic records with a partner institution, the first thing to settle is",
+      "q_vi": "Trước khi dựng đường ống trao đổi bản ghi lưu lượng với một đơn vị đối tác, việc đầu tiên phải chốt là",
+      "choices": [
+        "The serialisation format for the records",
+        "The bandwidth of the shared link",
+        "The retention period at the far end",
+        "A written rule on which fields are permitted to leave the organisation at all"
+      ],
+      "answer": 3,
+      "why": "Addresses and hostnames identify people as well as machines. A transport built before that policy exists will be used, and the decision then gets made by whoever wrote the schema.",
+      "why_vi": "Địa chỉ và tên máy định danh cả con người chứ không riêng thiết bị. Một đường truyền dựng xong trước khi có chính sách thì vẫn sẽ được dùng, và khi đó người viết lược đồ dữ liệu là người ra quyết định.",
+      "level": 3
+    },
+    {
+      "id": "qnids-62",
+      "q": "Intrusion detection for a low orbit satellite constellation faces a constraint absent from terrestrial networks, namely that",
+      "q_vi": "Phát hiện xâm nhập cho chòm vệ tinh quỹ đạo thấp gặp một ràng buộc mà mạng mặt đất không có, đó là",
+      "choices": [
+        "The signal is attenuated more heavily than on any comparable terrestrial radio link",
+        "The topology that produced the evidence has changed before it reaches the ground",
+        "Cryptographic keys cannot be distributed to nodes that are moving at orbital velocity",
+        "Packets are never dropped"
+      ],
+      "answer": 1,
+      "why": "Links appear and disappear on a schedule set by orbital mechanics. A rule correlating events across hops has to account for a path that no longer exists by the time it is evaluated.",
+      "why_vi": "Các liên kết xuất hiện rồi biến mất theo lịch do cơ học quỹ đạo quy định. Một luật đối chiếu sự kiện qua nhiều chặng phải tính đến việc đường đi đó không còn tồn tại vào lúc luật được xét.",
+      "level": 4
+    },
+    {
+      "id": "qnids-63",
+      "q": "An operator monitoring a mobile core network should expect the most consequential abuse to appear in",
+      "q_vi": "Nhà khai thác giám sát mạng lõi di động nên lường trước rằng hành vi lạm dụng nghiêm trọng nhất sẽ xuất hiện ở",
+      "choices": [
+        "The subscriber payload carried inside the user plane tunnels between network functions",
+        "The radio frames between handset and base station before any decoding is attempted",
+        "The signalling exchanged between network functions",
+        "The billing records"
+      ],
+      "answer": 2,
+      "why": "The user plane is mostly encrypted traffic the operator merely transports. The control plane is where sessions are created, redirected and interrogated, so that is where the leverage is.",
+      "why_vi": "Mặt phẳng người dùng phần lớn là lưu lượng đã mã hóa mà nhà mạng chỉ chuyển tiếp. Mặt phẳng điều khiển mới là nơi phiên được tạo ra, bị chuyển hướng và bị dò hỏi, nên đòn bẩy nằm ở đó.",
+      "level": 4
+    },
+    {
+      "id": "qnids-64",
+      "q": "Passive baselines are unusually accurate on an industrial control network. The matching hazard on the same network is that",
+      "q_vi": "Đường nền thụ động chính xác khác thường trên mạng điều khiển công nghiệp. Nguy cơ đi kèm trên chính mạng đó là",
+      "choices": [
+        "An active scan can halt the process",
+        "Baselines have to be relearned every few hours as production schedules change",
+        "The protocols in use are undocumented and cannot be parsed by any available tool",
+        "Traffic volumes are far too high for a single passive sensor to keep up with"
+      ],
+      "answer": 0,
+      "why": "The same determinism that makes normal easy to describe also means the devices were never built to tolerate unexpected input. Reconnaissance that is harmless in an office can stop a line here.",
+      "why_vi": "Chính tính tất định làm cho cái bình thường dễ mô tả cũng có nghĩa là các thiết bị chưa bao giờ được làm ra để chịu đựng đầu vào lạ. Phép dò vô hại ở văn phòng có thể làm dừng cả dây chuyền ở đây.",
+      "level": 3
+    },
+    {
+      "id": "qnids-65",
+      "q": "A workload runs entirely on virtual machines in a public cloud with no physical network to instrument. The primary network evidence available is",
+      "q_vi": "Một hệ thống chạy hoàn toàn trên máy ảo ở đám mây công cộng, không có mạng vật lý nào để gắn thiết bị đo. Bằng chứng mạng chính có được là",
+      "choices": [
+        "The provider record of accepted and rejected connections between virtual interfaces",
+        "A mirror of the hypervisor backplane",
+        "The physical switch counters",
+        "A tap on the provider backbone"
+      ],
+      "answer": 0,
+      "why": "There is no cable to tap, so what the provider chooses to log is the whole of the network evidence. Its field set and its sampling rate become a limit on what can ever be detected.",
+      "why_vi": "Không có sợi cáp nào để cắm bộ trích, nên thứ nhà cung cấp chọn ghi lại chính là toàn bộ bằng chứng mạng. Tập trường và mức lấy mẫu của nó trở thành giới hạn cho mọi thứ có thể phát hiện được.",
+      "level": 2
+    },
+    {
+      "id": "qnids-66",
+      "q": "A network sensor and an endpoint agent disagree about a session. The structural reason the endpoint often wins is that",
+      "q_vi": "Một cảm biến mạng và một tác tử trên điểm cuối bất đồng về cùng một phiên. Lý do mang tính cấu trúc khiến điểm cuối thường thắng là",
+      "choices": [
+        "Endpoint software is updated more frequently than the rule sets that network sensors use",
+        "Network sensors cannot record timestamps accurately",
+        "It observes the content after decryption, where the network sees only the envelope",
+        "The endpoint has a larger disk for logs"
+      ],
+      "answer": 2,
+      "why": "Whatever the transport hides is plaintext by the time the process acts on it. The network keeps the advantage of seeing hosts that carry no agent at all.",
+      "why_vi": "Bất cứ thứ gì tầng vận chuyển che giấu thì đến lúc tiến trình xử lý đều đã là văn bản rõ. Bù lại, phía mạng vẫn giữ lợi thế nhìn được cả những máy không hề cài tác tử nào.",
+      "level": 3
+    },
+    {
+      "id": "qnids-67",
+      "q": "An implant contacts its controller at a fixed interval through an encrypted channel. The feature that still exposes it is",
+      "q_vi": "Một mã cấy gọi về máy điều khiển theo chu kỳ cố định qua kênh đã mã hóa. Đặc trưng vẫn làm lộ nó là",
+      "choices": [
+        "The certificate that the controller presents at the beginning of every single connection",
+        "The regularity of the gaps between successive connections",
+        "The name of the process that opened the socket on the compromised host",
+        "The cipher suite in use"
+      ],
+      "answer": 1,
+      "why": "Encryption covers the payload and leaves the schedule untouched. Human driven traffic is irregular, so a machine keeping time is visible in the timing distribution alone.",
+      "why_vi": "Mã hóa che phần tải tin và để nguyên cái lịch. Lưu lượng do người tạo ra thì thất thường, nên một cỗ máy giữ nhịp lộ ra ngay chỉ qua phân bố thời gian.",
+      "level": 3
+    },
+    {
+      "id": "qnids-68",
+      "q": "Modelling hosts and accounts as nodes and their interactions as edges helps most when the intrusion consists of",
+      "q_vi": "Mô hình hóa máy và tài khoản thành đỉnh còn tương tác giữa chúng thành cạnh sẽ giúp ích nhất khi vụ xâm nhập gồm",
+      "choices": [
+        "A single packet carrying a well documented exploit for a known vulnerability",
+        "A very large transfer to an external address in the middle of the working day",
+        "Repeated failed logins against one account from the same source address",
+        "Steps that are each ordinary but unusual in sequence"
+      ],
+      "answer": 3,
+      "why": "Per event rules judge each step alone and find nothing to object to. The path from a workstation to an account to a server is the object that is actually anomalous.",
+      "why_vi": "Luật xét theo từng sự kiện đánh giá mỗi bước một cách riêng lẻ và không thấy gì đáng phàn nàn. Chính con đường đi từ máy trạm qua tài khoản tới máy chủ mới là đối tượng thật sự bất thường.",
+      "level": 4
+    },
+    {
+      "id": "qnids-69",
+      "q": "A correlation rule fires only when three weak indicators appear within the same short window. The trade this makes is",
+      "q_vi": "Một luật đối chiếu chỉ kêu khi ba chỉ báo yếu cùng xuất hiện trong một cửa sổ ngắn. Sự đánh đổi ở đây là",
+      "choices": [
+        "Higher storage requirements in exchange for a shorter investigation once an alert is raised",
+        "A short delay in exchange for far fewer false alarms",
+        "Coverage of encrypted sessions in exchange for the loss of any payload inspection at all",
+        "More rules in exchange for fewer sensors"
+      ],
+      "answer": 1,
+      "why": "The engine must wait for the window to close before it can judge. What it buys is that coincidence rarely produces three independent weak signals at once.",
+      "why_vi": "Bộ máy phải chờ cửa sổ thời gian khép lại mới phán quyết được. Đổi lại, sự trùng hợp ngẫu nhiên hiếm khi tạo ra ba tín hiệu yếu độc lập cùng một lúc.",
+      "level": 3
+    },
+    {
+      "id": "qnids-70",
+      "q": "An organisation deploys an interception proxy so that inspection can continue on encrypted traffic. The risk that must be written into the design is that",
+      "q_vi": "Một tổ chức triển khai máy trung gian giải mã để tiếp tục soi được lưu lượng đã mã hóa. Rủi ro phải ghi thẳng vào thiết kế là",
+      "choices": [
+        "Detection rules must be rewritten in a proprietary language supported only by that vendor",
+        "The proxy cannot reassemble streams that arrive out of order across multiple interfaces",
+        "Flow records stop being generated for the sessions that pass through the proxy device",
+        "Every secret that crosses it is concentrated in one place"
+      ],
+      "answer": 3,
+      "why": "Visibility is restored by making one box the endpoint for every session. That box becomes the most valuable target on the network and the strongest argument against the design.",
+      "why_vi": "Tầm nhìn được khôi phục bằng cách biến một chiếc hộp thành đầu cuối cho mọi phiên. Chiếc hộp đó trở thành mục tiêu giá trị nhất trong mạng và là lập luận mạnh nhất chống lại chính thiết kế này.",
+      "level": 3
+    },
+    {
+      "id": "qnids-71",
+      "q": "A collector correctly parses records containing a vendor specific field it was never programmed to expect. This is possible because the export standard",
+      "q_vi": "Một bộ thu phân tích đúng những bản ghi chứa trường riêng của nhà cung cấp mà nó chưa từng được lập trình để lường trước. Việc này khả thi vì chuẩn xuất dữ liệu",
+      "choices": [
+        "Sends a template describing the layout ahead of the records",
+        "Requires every exporter to register its extensions with a central authority before shipping",
+        "Compresses each record so that unknown fields occupy no space at all in the stream",
+        "Forbids fields outside the standard set"
+      ],
+      "answer": 0,
+      "why": "The layout travels with the data rather than being compiled into the collector. That is what allows the record format to grow without a coordinated upgrade on both sides.",
+      "why_vi": "Bố cục dữ liệu đi cùng với dữ liệu chứ không được biên dịch cứng vào bộ thu. Chính điều đó cho phép định dạng bản ghi mở rộng mà không cần nâng cấp đồng thời ở cả hai phía.",
+      "level": 3
+    },
+    {
+      "id": "qnids-72",
+      "q": "An exporter emits one record covering both directions of a conversation. The analysis this most directly enables is",
+      "q_vi": "Một bộ xuất phát ra một bản ghi bao cả hai chiều của cuộc trao đổi. Phép phân tích mà điều này trực tiếp mở ra nhất là",
+      "choices": [
+        "Recovery of the application payload from the summarised counters in the record",
+        "Precise reconstruction of the order in which the individual packets were transmitted",
+        "Ratios such as bytes sent against bytes received",
+        "Identification of the software library that opened the encrypted session"
+      ],
+      "answer": 2,
+      "why": "A host that receives little and sends a great deal looks different from one that browses. Pairing the directions in one record makes that comparison a field lookup rather than a join.",
+      "why_vi": "Một máy nhận rất ít mà gửi rất nhiều trông khác hẳn một máy đang lướt web. Ghép hai chiều vào một bản ghi biến phép so sánh đó thành việc tra một trường thay vì phải ghép bảng.",
+      "level": 2
+    },
+    {
+      "id": "qnids-73",
+      "q": "An intrusion is confirmed sixty days after it began, but the packet store holds thirty days. The consequence for the investigation is that",
+      "q_vi": "Một vụ xâm nhập được xác nhận sáu mươi ngày sau khi bắt đầu, nhưng kho lưu gói chỉ giữ ba mươi ngày. Hậu quả với cuộc điều tra là",
+      "choices": [
+        "The alerts from that period become unreliable",
+        "The affected hosts cannot be identified",
+        "The earliest access and the initial entry point can no longer be reconstructed",
+        "The detection rules must be rewritten"
+      ],
+      "answer": 2,
+      "why": "Retention is a hard boundary on how far back evidence exists at all. Everything before it becomes inference from host artefacts rather than observation of the traffic.",
+      "why_vi": "Thời gian lưu là biên cứng cho việc bằng chứng còn tồn tại tới đâu. Mọi thứ trước đó chỉ còn là suy luận từ dấu vết trên máy chứ không phải quan sát trực tiếp trên lưu lượng.",
+      "level": 2
+    },
+    {
+      "id": "qnids-74",
+      "q": "All sensors sit at the internet gateway. An intruder who obtains a foothold and then moves between internal servers is",
+      "q_vi": "Mọi cảm biến đều đặt ở cổng ra internet. Kẻ xâm nhập đã có chỗ đứng rồi di chuyển giữa các máy chủ nội bộ sẽ",
+      "choices": [
+        "Invisible, because that traffic never crosses the monitored link",
+        "Detected reliably, because every internal session must eventually reach the gateway sensors",
+        "Detected only if the internal servers themselves forward their own logs to the platform",
+        "Detected with a delay of one polling interval"
+      ],
+      "answer": 0,
+      "why": "Server to server traffic inside the perimeter has no reason to pass the gateway. The place where lateral movement happens is precisely the place with no sensor in this design.",
+      "why_vi": "Lưu lượng giữa các máy chủ bên trong vành đai không có lý do gì phải đi qua cổng ra. Nơi việc di chuyển ngang diễn ra lại đúng là nơi không có cảm biến nào trong thiết kế này.",
+      "level": 3
+    },
+    {
+      "id": "qnids-75",
+      "q": "The question that most cleanly decides between an inline and a passive deployment is",
+      "q_vi": "Câu hỏi phân định gọn gàng nhất giữa triển khai trên đường truyền và triển khai thụ động là",
+      "choices": [
+        "Whether the security team or the network team will own the appliance after it is installed",
+        "How many rules the vendor ships by default",
+        "Whether the sensor can decrypt sessions",
+        "What happens to the traffic when the box reboots"
+      ],
+      "answer": 3,
+      "why": "Blocking requires sitting in the path, and sitting in the path makes the sensor a failure point and a latency budget. That trade is the whole decision.",
+      "why_vi": "Muốn chặn thì phải nằm trên đường đi, mà nằm trên đường đi thì cảm biến trở thành điểm hỏng và thành một khoản độ trễ. Sự đánh đổi đó chính là toàn bộ quyết định.",
+      "level": 2
+    },
+    {
+      "id": "qnids-76",
+      "q": "Detection rules are kept in version control with review and tests. The benefit that shows up during an incident is that a rule",
+      "q_vi": "Các luật phát hiện được giữ trong hệ quản lý phiên bản kèm khâu duyệt và bài kiểm. Lợi ích lộ ra trong lúc có sự cố là một luật",
+      "choices": [
+        "Executes faster because the engine can compile it ahead of the traffic it will inspect",
+        "Can be traced to an author and a reason, then rolled back",
+        "Applies automatically to every sensor in the estate without any further configuration work",
+        "Never produces false positives"
+      ],
+      "answer": 1,
+      "why": "Under pressure someone has to decide whether a noisy rule can be switched off. That decision is only safe when its origin and its intent are recorded somewhere.",
+      "why_vi": "Trong lúc căng thẳng, ai đó phải quyết định có tắt một luật đang gây ồn hay không. Quyết định ấy chỉ an toàn khi nguồn gốc và ý định của luật được ghi lại ở đâu đó.",
+      "level": 3
+    },
+    {
+      "id": "qnids-77",
+      "q": "An inline component rewrites ambiguous traffic into a single canonical form before it reaches the sensor. This removes",
+      "q_vi": "Một thành phần trên đường truyền viết lại lưu lượng nhập nhằng về một dạng chuẩn duy nhất trước khi nó tới cảm biến. Việc này loại bỏ",
+      "choices": [
+        "The requirement to keep the rule set updated against newly published attack techniques",
+        "The processing cost of matching rule content against every reassembled byte stream",
+        "The need for the sensor to record any flow level metadata about the session",
+        "The gap between sensor and host interpretation"
+      ],
+      "answer": 3,
+      "why": "Evasion needs two readings of one byte stream to disagree. If only one reading can survive the normaliser, that disagreement has nowhere left to live.",
+      "why_vi": "Né tránh cần hai cách đọc khác nhau trên cùng một dòng byte. Nếu chỉ một cách đọc sống sót qua bộ chuẩn hóa thì chỗ bất đồng đó không còn nơi nào để tồn tại.",
+      "level": 4
+    },
+    {
+      "id": "qnids-78",
+      "q": "A protocol anomaly detector is switched on and immediately produces a large volume of alerts. The most common explanation is",
+      "q_vi": "Một bộ dò bất thường giao thức được bật lên và lập tức sinh ra rất nhiều cảnh báo. Giải thích thường gặp nhất là",
+      "choices": [
+        "A widespread intrusion campaign happens to be under way across the monitored network",
+        "Legitimate software on the network does not follow the standard",
+        "The parser cannot handle the volume of traffic on the link at the moment it is enabled",
+        "The rules were written for a different version"
+      ],
+      "answer": 1,
+      "why": "Standards describe what implementations ought to do. Printers, embedded devices and old clients routinely violate them and generate the first wave of alerts on any new deployment.",
+      "why_vi": "Chuẩn mô tả điều mà các bản cài đặt lẽ ra phải làm. Máy in, thiết bị nhúng và máy khách cũ vi phạm chúng thường xuyên và tạo ra đợt cảnh báo đầu tiên ở mọi lần triển khai mới.",
+      "level": 3
+    },
+    {
+      "id": "qnids-79",
+      "q": "Alerts from a sensor placed outside the address translation boundary all name the same public address. The investigative limitation this creates is",
+      "q_vi": "Cảnh báo từ một cảm biến đặt ngoài ranh giới dịch địa chỉ đều nêu cùng một địa chỉ công cộng. Hạn chế điều tra mà việc này gây ra là",
+      "choices": [
+        "The alert timestamps become unreliable",
+        "The byte counters are halved",
+        "The internal host responsible cannot be identified without a translation log",
+        "Encrypted sessions cannot be fingerprinted"
+      ],
+      "answer": 2,
+      "why": "Where the sensor sits decides what identity it can ever record. Detection succeeds and attribution fails, which in practice means the case cannot be assigned to a machine.",
+      "why_vi": "Cảm biến nằm ở đâu quyết định nó ghi lại được danh tính nào. Việc phát hiện thì thành công còn việc quy trách nhiệm thì thất bại, tức là trên thực tế hồ sơ không gán được cho máy nào.",
+      "level": 3
+    },
+    {
+      "id": "qnids-80",
+      "q": "Two candidate detectors make the same total number of mistakes, but one misses more intrusions while the other raises more false alerts. Choosing between them requires",
+      "q_vi": "Hai bộ dò ứng viên mắc cùng tổng số lỗi, nhưng một cái bỏ sót nhiều vụ xâm nhập hơn còn cái kia phát nhiều cảnh báo sai hơn. Chọn giữa chúng đòi hỏi",
+      "choices": [
+        "An explicit statement of what each kind of error costs",
+        "A larger evaluation set so that the difference between the two becomes statistically significant",
+        "Retraining both on the same corpus",
+        "A longer observation window"
+      ],
+      "answer": 0,
+      "why": "Counting errors treats a missed intrusion and a wasted analyst hour as the same unit. They are not, and the ratio between them is an organisational decision rather than a modelling one.",
+      "why_vi": "Đếm lỗi là coi một vụ xâm nhập bị bỏ sót và một giờ công phân tích bị phí như cùng một đơn vị. Chúng không như nhau, và tỉ lệ giữa chúng là quyết định của tổ chức chứ không phải của người làm mô hình.",
+      "level": 3
+    },
+    {
+      "id": "qnids-81",
+      "q": "An application is identified through an encrypted tunnel using only the ordered lengths of its first few messages. This works because those lengths reflect",
+      "q_vi": "Một ứng dụng bị nhận diện xuyên qua đường hầm mã hóa chỉ nhờ độ dài có thứ tự của vài thông điệp đầu. Cách này chạy được vì các độ dài đó phản ánh",
+      "choices": [
+        "The structure of the protocol exchange",
+        "The strength of the cipher that both endpoints negotiated at the start of the session",
+        "The amount of memory the client process reserved before it opened the network socket",
+        "The distance in network hops between the client and the server it is talking to"
+      ],
+      "answer": 0,
+      "why": "Protocols open with a fixed conversation of greetings and parameters. Encryption changes the bytes but preserves the sizes, and the sizes are already close to a signature.",
+      "why_vi": "Các giao thức mở đầu bằng một cuộc trao đổi cố định gồm lời chào và tham số. Mã hóa làm đổi các byte nhưng giữ nguyên kích thước, mà kích thước thì đã gần như một dấu hiệu nhận dạng.",
+      "level": 3
+    },
+    {
+      "id": "qnids-82",
+      "q": "Server authentication logs are proposed as a detection source alongside network records. Their particular strength is that they show",
+      "q_vi": "Nhật ký xác thực trên máy chủ được đề xuất làm nguồn phát hiện bên cạnh bản ghi mạng. Điểm mạnh riêng của chúng là chúng cho thấy",
+      "choices": [
+        "Which packets were dropped by the network stack of the operating system on that machine",
+        "The full sequence of packet sizes exchanged during the whole authentication conversation",
+        "Which account the activity was performed under and whether it succeeded",
+        "The library the client used"
+      ],
+      "answer": 2,
+      "why": "The network can show that two machines exchanged an encrypted session. Only the host record names the identity that was used and says whether the attempt was accepted.",
+      "why_vi": "Phía mạng chỉ cho thấy hai máy đã trao đổi một phiên đã mã hóa. Chỉ bản ghi trên máy mới nêu tên danh tính được dùng và cho biết lần thử đó có được chấp nhận hay không.",
+      "level": 2
+    },
+    {
+      "id": "qnids-83",
+      "q": "A multithreaded sensor must distribute packets across worker threads. The constraint that governs how the split may be done is",
+      "q_vi": "Một cảm biến đa luồng phải chia gói cho các luồng xử lý. Ràng buộc chi phối cách chia đó là",
+      "choices": [
+        "Each thread must receive an equal number of bytes",
+        "All packets of one conversation must reach the same thread that holds its state",
+        "Threads must be pinned to physical cores",
+        "The split must be random for fairness"
+      ],
+      "answer": 1,
+      "why": "Reassembly and protocol state are per session. Splitting by packet rather than by flow scatters one conversation across threads and no thread can then see it whole.",
+      "why_vi": "Việc ghép dòng và trạng thái giao thức đều gắn với từng phiên. Chia theo gói thay vì theo luồng sẽ rải một cuộc trao đổi ra nhiều luồng xử lý, và khi đó không luồng nào nhìn được nó trọn vẹn.",
+      "level": 4
+    },
+    {
+      "id": "qnids-84",
+      "q": "Rather than fixing a score threshold once, a team sets it each week so the queue stays at what the shift can handle. The property this preserves is",
+      "q_vi": "Thay vì cố định ngưỡng điểm một lần, một đội đặt lại ngưỡng mỗi tuần để hàng đợi luôn ở mức mà ca trực xử lý nổi. Tính chất được giữ lại nhờ cách này là",
+      "choices": [
+        "The model no longer needs to be retrained when the traffic mix on the link changes",
+        "The recall of the detector rises steadily as more weeks of traffic accumulate",
+        "Comparisons with published benchmark figures remain valid from one week to the next",
+        "Every alert produced is actually looked at"
+      ],
+      "answer": 3,
+      "why": "A fixed threshold produces whatever volume the traffic happens to generate, and the excess is silently ignored. Tying the cut to capacity keeps the queue meaningful even as it changes what it means.",
+      "why_vi": "Ngưỡng cố định sinh ra khối lượng tùy theo lưu lượng ngày hôm đó, và phần dư bị lặng lẽ bỏ qua. Buộc điểm cắt vào sức chứa giữ cho hàng đợi còn ý nghĩa, dù chính ý nghĩa đó có thay đổi.",
+      "level": 4
+    },
+    {
+      "id": "qnids-85",
+      "q": "Clients on a network switch to resolving names inside an encrypted web session. The detection capability lost is",
+      "q_vi": "Máy khách trong mạng chuyển sang phân giải tên miền bên trong một phiên web đã mã hóa. Khả năng phát hiện bị mất là",
+      "choices": [
+        "The ability to count sessions",
+        "The record of which names each host asked to resolve",
+        "The byte totals per host",
+        "The list of open ports"
+      ],
+      "answer": 1,
+      "why": "Name resolution used to be a cheap and complete inventory of intent. Once it travels inside another encrypted session, that inventory disappears from the network view.",
+      "why_vi": "Việc phân giải tên miền vốn là bản kê khai rẻ tiền và đầy đủ về ý định. Khi nó chạy bên trong một phiên đã mã hóa khác, bản kê khai đó biến mất khỏi tầm nhìn của mạng.",
+      "level": 3
+    },
+    {
+      "id": "qnids-86",
+      "q": "A session presents a certificate that was issued hours ago, is valid for a very short period and carries a name seen nowhere else. Treating this as suspicious is justified because",
+      "q_vi": "Một phiên trình ra chứng thư mới cấp cách đây vài giờ, hạn dùng rất ngắn và mang một cái tên không thấy ở đâu khác. Coi đây là đáng ngờ là hợp lý vì",
+      "choices": [
+        "Short lifetimes are forbidden by the specification and always indicate forgery of the credential",
+        "Certificates cannot be issued automatically",
+        "The name must have been stolen",
+        "The combination is unusual for established services"
+      ],
+      "answer": 3,
+      "why": "None of the properties is illegitimate on its own, and automated issuance is now normal. The signal is the conjunction, which is why it belongs in a scoring rule rather than a blocking one.",
+      "why_vi": "Không tính chất nào trong đó tự nó là bất hợp pháp, và việc cấp tự động nay đã là chuyện thường. Tín hiệu nằm ở sự kết hợp, vì thế nó thuộc về một luật chấm điểm chứ không phải một luật chặn.",
+      "level": 4
+    },
+    {
+      "id": "qnids-87",
+      "q": "An implant adds random jitter to its check in interval to defeat timing detection. The countermeasure that still works is",
+      "q_vi": "Một mã cấy thêm nhiễu ngẫu nhiên vào chu kỳ gọi về để đánh bại phép phát hiện theo nhịp. Biện pháp đối phó vẫn còn hiệu lực là",
+      "choices": [
+        "Measuring the shape of the interval distribution over a long window",
+        "Blocking the destination address as soon as the first connection to it has been observed",
+        "Requiring every outbound session to be decrypted at a proxy before it leaves",
+        "Reducing the flow export sampling rate"
+      ],
+      "answer": 0,
+      "why": "Jitter widens the distribution but rarely makes it look human. Long observation recovers the underlying schedule because a person browsing produces bursts and silences, not a broad but centred spread.",
+      "why_vi": "Nhiễu ngẫu nhiên làm phân bố rộng ra nhưng hiếm khi khiến nó trông giống con người. Quan sát đủ lâu sẽ khôi phục được cái lịch ẩn phía sau, vì người lướt web tạo ra những đợt dồn và những quãng lặng chứ không phải một dải rộng có tâm.",
+      "level": 4
+    },
+    {
+      "id": "qnids-88",
+      "q": "A shared feed of hashes, domains and addresses is added to the detection stack. Its structural weakness compared with behavioural rules is that",
+      "q_vi": "Một luồng chia sẻ gồm mã băm, tên miền và địa chỉ được thêm vào hệ phát hiện. Điểm yếu mang tính cấu trúc của nó so với luật theo hành vi là",
+      "choices": [
+        "Such indicators cannot be distributed between organisations without a formal agreement in place",
+        "Matching them requires the sensor to reassemble every stream that crosses the monitored link",
+        "The attacker changes them cheaply",
+        "They can only be evaluated after the traffic has already been written to long term storage"
+      ],
+      "answer": 2,
+      "why": "An address or a hash costs nothing to replace, so the feed describes the last operation rather than the next one. Behaviour is expensive to change, which is why it ages more slowly.",
+      "why_vi": "Một địa chỉ hay một mã băm thì thay mới chẳng tốn gì, nên luồng dữ liệu đó mô tả chiến dịch vừa qua chứ không phải chiến dịch sắp tới. Hành vi thì tốn kém để thay đổi, vì thế nó cũ đi chậm hơn.",
+      "level": 3
+    },
+    {
+      "id": "qnids-89",
+      "q": "Detection logic is written once against log field names and then translated into each platform query language. The problem this solves is",
+      "q_vi": "Lô gích phát hiện được viết một lần trên tên các trường nhật ký rồi dịch sang ngôn ngữ truy vấn của từng nền tảng. Vấn đề mà cách này giải quyết là",
+      "choices": [
+        "The cost of storing raw logs",
+        "The latency of the search index",
+        "Detections becoming locked to whichever platform currently holds the data",
+        "The shortage of trained analysts"
+      ],
+      "answer": 2,
+      "why": "Migrating a platform normally means rewriting years of accumulated logic. Separating the statement of intent from the query dialect turns that migration into a translation step.",
+      "why_vi": "Chuyển nền tảng thường đồng nghĩa với viết lại lô gích tích lũy nhiều năm. Tách phần phát biểu ý định khỏi phương ngữ truy vấn biến việc chuyển đổi đó thành một bước dịch.",
+      "level": 3
+    },
+    {
+      "id": "qnids-90",
+      "q": "An account is scored against the behaviour of colleagues in the same role rather than against a global threshold. This helps mainly because",
+      "q_vi": "Một tài khoản được chấm điểm dựa trên hành vi của các đồng nghiệp cùng vai trò thay vì dựa trên một ngưỡng chung. Cách này giúp ích chủ yếu vì",
+      "choices": [
+        "A global threshold is either too loose for clerks or too tight for administrators",
+        "It eliminates the need to collect any authentication telemetry from the servers themselves",
+        "Peer groups are easier to compute than individual baselines",
+        "It removes the need for a labelled dataset"
+      ],
+      "answer": 0,
+      "why": "Roles differ by orders of magnitude in what is normal. One number for everyone either drowns the queue in administrator activity or lets unusual clerk behaviour pass unremarked.",
+      "why_vi": "Các vai trò khác nhau tới vài bậc độ lớn về thế nào là bình thường. Một con số dùng chung cho tất cả sẽ hoặc làm ngập hàng đợi bằng hoạt động của quản trị viên, hoặc để lọt hành vi bất thường của nhân viên nghiệp vụ.",
+      "level": 3
+    },
+    {
+      "id": "qnids-91",
+      "q": "Alerts are enriched with the business owner, the exposure and the criticality of the affected asset before reaching the queue. The main effect is that",
+      "q_vi": "Cảnh báo được bổ sung thông tin về bộ phận sở hữu, mức phơi nhiễm và mức trọng yếu của tài sản liên quan trước khi vào hàng đợi. Tác dụng chính là",
+      "choices": [
+        "The detection rules themselves become more accurate at separating hostile activity from benign",
+        "The sensor requires substantially less processing capacity to evaluate the same volume of traffic",
+        "False positives disappear",
+        "Ranking by likely impact becomes possible"
+      ],
+      "answer": 3,
+      "why": "Enrichment does not change what the rule detects. It changes which of the day's alerts a limited number of analyst hours should be spent on first.",
+      "why_vi": "Việc bổ sung thông tin không làm thay đổi thứ mà luật phát hiện được. Nó thay đổi việc số giờ công phân tích có hạn nên dồn trước vào cảnh báo nào trong ngày.",
+      "level": 2
+    },
+    {
+      "id": "qnids-92",
+      "q": "A purchased indicator feed produces many matches but analysts cannot act on them. The most likely deficiency is that each entry lacks",
+      "q_vi": "Một luồng chỉ báo mua về cho ra rất nhiều lần khớp nhưng người phân tích không xử lý được. Thiếu sót khả dĩ nhất là mỗi mục đều thiếu",
+      "choices": [
+        "A cryptographic signature proving that the publisher of the feed genuinely produced the entry",
+        "The context that says why it was listed",
+        "A translation into the query language used by the platform that currently stores the records",
+        "An estimate of how many other subscribing organisations have also matched on the same entry"
+      ],
+      "answer": 1,
+      "why": "A bare address cannot be triaged. Without the campaign, the observation date and the confidence, the analyst can only guess whether the match means anything here.",
+      "why_vi": "Một địa chỉ trần trụi thì không sàng lọc được. Không có chiến dịch nào, ngày quan sát nào và mức tin cậy nào thì người phân tích chỉ có thể đoán xem lần khớp đó có nghĩa gì ở đây hay không.",
+      "level": 3
+    },
+    {
+      "id": "qnids-93",
+      "q": "A team debates retraining its anomaly model nightly rather than quarterly. The argument against the nightly schedule is that it",
+      "q_vi": "Một đội tranh luận về việc huấn luyện lại mô hình bất thường hằng đêm thay vì hằng quý. Lập luận phản đối lịch hằng đêm là nó",
+      "choices": [
+        "Costs more in compute than the team can afford",
+        "Requires labels that arrive too late",
+        "Makes the model less accurate",
+        "Lets a slow intruder become part of the baseline within days"
+      ],
+      "answer": 3,
+      "why": "Frequent retraining tracks legitimate change well, and it tracks illegitimate change just as well. The faster the baseline adapts, the shorter the window in which patient activity looks strange.",
+      "why_vi": "Huấn luyện lại thường xuyên bám sát tốt các thay đổi hợp lệ, và cũng bám sát y như vậy những thay đổi bất hợp pháp. Đường nền càng thích nghi nhanh thì cửa sổ để hoạt động kiên nhẫn còn trông lạ mắt càng ngắn.",
+      "level": 4
+    },
+    {
+      "id": "qnids-94",
+      "q": "A comparison between two detectors is run once with a single random seed. The reviewer objection this invites is that the reported gap may be",
+      "q_vi": "Một phép so sánh giữa hai bộ dò chỉ chạy một lần với một hạt giống ngẫu nhiên duy nhất. Phản đối mà điều này mời gọi từ người phản biện là khoảng cách được báo có thể",
+      "choices": [
+        "Measured on a benchmark whose class ratio does not match any operational network at all",
+        "Smaller than the variation between runs of the same method",
+        "Computed with the wrong metric for a rare class",
+        "Reported without confidence intervals"
+      ],
+      "answer": 1,
+      "why": "Initialisation and data order alone move the result. Until the spread across seeds is shown, a difference between two systems cannot be separated from a difference between two runs.",
+      "why_vi": "Chỉ riêng cách khởi tạo và thứ tự dữ liệu đã làm kết quả xê dịch. Chừng nào chưa trình ra độ tản giữa các hạt giống thì chưa thể tách khác biệt giữa hai hệ thống khỏi khác biệt giữa hai lần chạy.",
+      "level": 4
+    },
+    {
+      "id": "qnids-95",
+      "q": "A group publishes a traffic dataset for research. The methodological detail most often omitted and most damaging to reuse is",
+      "q_vi": "Một nhóm công bố bộ dữ liệu lưu lượng cho nghiên cứu. Chi tiết phương pháp hay bị bỏ sót nhất và gây hại nhất cho việc dùng lại là",
+      "choices": [
+        "The name of the university department that funded the collection and processing of the capture",
+        "The compression format of the distributed archive files",
+        "The sampling and drop settings under which it was captured",
+        "The number of authors"
+      ],
+      "answer": 2,
+      "why": "Whether a flow is absent because it never happened or because the exporter skipped it changes every conclusion drawn from the data. That setting cannot be recovered afterwards.",
+      "why_vi": "Việc một luồng vắng mặt vì nó chưa từng xảy ra hay vì bộ xuất đã bỏ qua nó sẽ làm thay đổi mọi kết luận rút ra từ dữ liệu. Cấu hình đó không thể khôi phục lại về sau.",
+      "level": 4
+    },
+    {
+      "id": "qnids-96",
+      "q": "Staged models of an intrusion are used to argue that interrupting an earlier stage is preferable. The reason is that at an early stage the attacker has",
+      "q_vi": "Các mô hình chia giai đoạn của một vụ xâm nhập được dùng để lập luận rằng chặn ở giai đoạn sớm thì tốt hơn. Lý do là ở giai đoạn sớm kẻ tấn công",
+      "choices": [
+        "Not yet obtained anything of value",
+        "Fewer tools available for the remaining part of the operation than at any later point",
+        "Less knowledge of the network topology than the defenders themselves have at that moment",
+        "No presence on any host inside the perimeter that could later be used to regain access"
+      ],
+      "answer": 0,
+      "why": "The cost of an interruption to the defender rises with every stage completed. Stopping the operation before data or credentials are taken keeps the incident an inconvenience rather than a loss.",
+      "why_vi": "Cái giá của việc chặn muộn tăng theo từng giai đoạn đã hoàn thành. Dừng chiến dịch trước khi dữ liệu hay thông tin đăng nhập bị lấy đi sẽ giữ cho sự cố chỉ là phiền toái chứ không thành mất mát.",
+      "level": 2
+    },
+    {
+      "id": "qnids-97",
+      "q": "Analysts are asked to work the queue strictly in the order alerts arrive. The objection a detection lead should raise is that",
+      "q_vi": "Người phân tích được yêu cầu xử lý hàng đợi đúng theo thứ tự cảnh báo đến. Phản đối mà trưởng nhóm phát hiện nên nêu ra là",
+      "choices": [
+        "Arrival order has no relation to likely impact or exposure",
+        "The queue would grow without limit",
+        "Older alerts are harder to investigate",
+        "The platform cannot sort by time"
+      ],
+      "answer": 0,
+      "why": "A noisy rule can fill an hour of the queue while the one alert on an exposed server waits behind it. Ordering has to reflect consequence, not the accident of when a packet arrived.",
+      "why_vi": "Một luật ồn ào có thể lấp kín cả tiếng đồng hồ trong hàng đợi trong khi cảnh báo duy nhất về một máy chủ đang phơi ra phải chờ phía sau. Thứ tự phải phản ánh hậu quả chứ không phải sự tình cờ về thời điểm một gói tin đến.",
+      "level": 2
+    },
+    {
+      "id": "qnids-98",
+      "q": "A vendor states that its signature set covers every known attack. Even accepting the claim, the residual risk is that",
+      "q_vi": "Một nhà cung cấp tuyên bố bộ dấu hiệu của họ phủ mọi tấn công đã biết. Ngay cả khi chấp nhận tuyên bố đó, rủi ro còn lại là",
+      "choices": [
+        "Signature matching consumes more processing capacity than the equivalent behavioural analysis does",
+        "Signatures cannot be updated without restarting the sensor",
+        "Known attacks are the only ones the set can describe",
+        "The set may include rules for protocols not in use"
+      ],
+      "answer": 2,
+      "why": "Completeness over a catalogue says nothing about what is outside it. The claim is true and simultaneously offers no protection against the first use of anything new.",
+      "why_vi": "Đầy đủ trên một danh mục thì không nói được gì về những thứ nằm ngoài danh mục đó. Tuyên bố này vừa đúng vừa không che chắn được gì trước lần đầu tiên một thứ mới được đem ra dùng.",
+      "level": 2
+    },
+    {
+      "id": "qnids-99",
+      "q": "During containment an analyst wants to reboot a compromised server immediately. The reason to pause is that a reboot",
+      "q_vi": "Trong lúc khoanh vùng, một người phân tích muốn khởi động lại ngay máy chủ đã bị xâm phạm. Lý do nên dừng lại là việc khởi động lại",
+      "choices": [
+        "Notifies the intruder that their access to this particular machine has now been discovered",
+        "Destroys the memory resident evidence of how the intrusion worked",
+        "Invalidates the flow records that the collector already wrote to storage for that host",
+        "Requires approval"
+      ],
+      "answer": 1,
+      "why": "Containment and investigation compete for the same machine. Isolating it at the network layer stops the harm while preserving the state that explains what was running and how it got there.",
+      "why_vi": "Việc khoanh vùng và việc điều tra tranh nhau cùng một cỗ máy. Cô lập nó ở tầng mạng vừa chặn được thiệt hại vừa giữ lại trạng thái giải thích được cái gì đang chạy và nó đến đó bằng cách nào.",
+      "level": 4
+    },
+    {
+      "id": "qnids-100",
+      "q": "Flow logs from a cloud provider are sampled and omit several fields. Before building detections on them, the honest step is to",
+      "q_vi": "Nhật ký luồng từ nhà cung cấp đám mây được lấy mẫu và thiếu vài trường. Trước khi xây dựng phép phát hiện trên đó, bước trung thực cần làm là",
+      "choices": [
+        "Request that the provider disable sampling entirely for all of the monitored virtual networks",
+        "Assume the missing fields can be reconstructed from the records the provider supplies",
+        "Treat the sampled records as though they were a complete capture of the traffic",
+        "Write down which detections are impossible"
+      ],
+      "answer": 3,
+      "why": "The limitation is fixed by the platform, so the useful response is to make it explicit. A written list of what cannot be seen prevents a false sense of coverage later.",
+      "why_vi": "Hạn chế này do nền tảng quy định, nên cách phản ứng hữu ích là nói thẳng nó ra. Một danh sách viết rõ những gì không thể thấy sẽ ngăn cảm giác an tâm sai lầm về độ phủ sau này.",
+      "level": 3
+    }
+  ]
+}

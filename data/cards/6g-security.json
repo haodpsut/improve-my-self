@@ -1,0 +1,1183 @@
+{
+  "schema": 1,
+  "id": "6g-security",
+  "updated": "2026-08-09",
+  "cards": [
+    {
+      "id": "6gs-cross-slice",
+      "en": "Cross slice attack",
+      "vi": "Tấn công xuyên lát mạng",
+      "def_en": "Reaching one network slice from another because the slices share a physical resource that the isolation policy did not cover, most often a shared radio scheduler or a shared user plane function.",
+      "def_vi": "Từ một lát mạng chạm được sang lát khác vì hai lát dùng chung một tài nguyên vật lý mà chính sách cách ly bỏ sót, thường là bộ lập lịch vô tuyến hoặc một hàm mặt phẳng người dùng dùng chung.",
+      "say": "The slices were logically separated but they shared one scheduler, so the isolation was on paper only.",
+      "tags": [
+        "slicing",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs-open-ran-trust",
+      "en": "Open RAN trust model",
+      "vi": "Mô hình tin cậy của vô tuyến mở",
+      "def_en": "Opening the radio access network turns one vendor boundary into many, so every new interface between components becomes a place where authentication and integrity must be stated explicitly rather than assumed.",
+      "def_vi": "Mở mạng truy nhập vô tuyến biến một ranh giới nhà cung cấp thành nhiều ranh giới, nên mỗi giao diện mới giữa các thành phần trở thành một chỗ phải nêu rõ việc xác thực và toàn vẹn chứ không được mặc định là có.",
+      "say": "Disaggregation does not create risk by itself; it moves trust decisions into interfaces that used to be internal.",
+      "tags": [
+        "architecture",
+        "oran"
+      ]
+    },
+    {
+      "id": "6gs-rapp-supply",
+      "en": "Third party application on the controller",
+      "vi": "Ứng dụng bên thứ ba trên bộ điều khiển",
+      "def_en": "Code from an outside vendor running inside the radio controller with the power to change scheduling or handover, which makes the controller a supply chain target rather than only a performance component.",
+      "def_vi": "Mã của nhà cung cấp bên ngoài chạy ngay trong bộ điều khiển vô tuyến với quyền đổi việc lập lịch hoặc chuyển giao, khiến bộ điều khiển thành mục tiêu chuỗi cung ứng chứ không chỉ là một khối lo hiệu năng.",
+      "say": "An application that can change handover thresholds can degrade a competitor's slice without ever touching a packet.",
+      "tags": [
+        "oran",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs-isac-privacy",
+      "en": "Integrated sensing privacy",
+      "vi": "Riêng tư trong cảm biến tích hợp",
+      "def_en": "When the same waveform carries data and senses the environment, the network learns positions and movement of people who never subscribed to it, so consent no longer maps to a subscriber identity.",
+      "def_vi": "Khi cùng một dạng sóng vừa chở dữ liệu vừa cảm nhận môi trường, mạng biết vị trí và chuyển động của cả những người chưa từng thuê bao, nên sự đồng ý không còn gắn được vào một danh tính thuê bao nào.",
+      "say": "Sensing turns every base station into a radar whose subjects never agreed to be measured.",
+      "tags": [
+        "isac",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs-pilot-contamination",
+      "en": "Pilot contamination attack",
+      "vi": "Tấn công nhiễm bẩn tín hiệu dẫn đường",
+      "def_en": "An attacker transmits the same pilot sequence as a legitimate user during channel estimation, so the base station steers part of its beam energy toward the attacker instead of the user.",
+      "def_vi": "Kẻ tấn công phát đúng chuỗi dẫn đường của người dùng hợp lệ trong lúc ước lượng kênh, khiến trạm gốc chĩa một phần năng lượng búp sóng về phía kẻ tấn công thay vì về người dùng.",
+      "say": "The beam followed the contaminated estimate, so the attacker received energy the network believed it was sending to the user.",
+      "tags": [
+        "phy",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs-phy-key",
+      "en": "Physical layer key generation",
+      "vi": "Sinh khoá ở lớp vật lý",
+      "def_en": "Two ends derive a shared secret from reciprocal channel measurements rather than from a public key exchange, which removes a computational assumption but adds a strong assumption about how fast the channel decorrelates in space.",
+      "def_vi": "Hai đầu rút ra bí mật chung từ phép đo kênh có tính thuận nghịch thay vì từ trao đổi khoá công khai, cách này bỏ được một giả thiết về độ khó tính toán nhưng thêm vào một giả thiết mạnh về việc kênh mất tương quan nhanh đến đâu theo không gian.",
+      "say": "Channel based keying is only as strong as the claim that an eavesdropper half a wavelength away sees an independent channel.",
+      "tags": [
+        "phy",
+        "crypto"
+      ]
+    },
+    {
+      "id": "6gs-permanent-id-exposure",
+      "en": "Permanent identifier exposure",
+      "vi": "Lộ định danh cố định",
+      "def_en": "Any moment where the long term subscriber identifier travels without encryption, which is what passive catchers wait for, and which is why identifier concealment is judged by its worst case rather than its normal case.",
+      "def_vi": "Bất kỳ khoảnh khắc nào định danh thuê bao dài hạn đi qua mà không được mã hoá, đó chính là thứ các thiết bị bắt thụ động chờ đợi, và cũng là lý do việc che giấu định danh phải được đánh giá theo trường hợp xấu nhất chứ không theo trường hợp bình thường.",
+      "say": "Concealment that fails once during an emergency fallback is concealment that an attacker can force.",
+      "tags": [
+        "privacy",
+        "identity"
+      ]
+    },
+    {
+      "id": "6gs-energy-depletion",
+      "en": "Energy depletion attack",
+      "vi": "Tấn công vắt kiệt năng lượng",
+      "def_en": "Forcing a battery powered device to wake, listen or retransmit far more often than it needs to, which denies service over days without ever exceeding a traffic threshold that a rate limiter would catch.",
+      "def_vi": "Ép một thiết bị chạy pin phải thức dậy, lắng nghe hoặc phát lại nhiều hơn hẳn mức cần thiết, cách này chặn dịch vụ trong nhiều ngày mà không bao giờ vượt ngưỡng lưu lượng để bộ hạn chế tốc độ phát hiện.",
+      "say": "The device was never flooded; it was simply never allowed to sleep.",
+      "tags": [
+        "attack",
+        "iot"
+      ]
+    },
+    {
+      "id": "6gs-ntn-roaming-trust",
+      "en": "Trust across a satellite leg",
+      "vi": "Tin cậy khi đi qua chặng vệ tinh",
+      "def_en": "A session that crosses a non terrestrial hop passes through equipment under a different operator and a different jurisdiction, so the security question shifts from encryption strength to who can lawfully compel access to the relay.",
+      "def_vi": "Một phiên đi qua chặng phi mặt đất phải qua thiết bị thuộc nhà khai thác khác và thuộc quyền tài phán khác, nên câu hỏi an ninh chuyển từ độ mạnh mã hoá sang việc ai có quyền hợp pháp buộc bên trung chuyển mở dữ liệu.",
+      "say": "The link was encrypted end to end, but the metadata still transited a jurisdiction we had not considered.",
+      "tags": [
+        "ntn",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs-model-in-the-loop",
+      "en": "Learned component in the control loop",
+      "vi": "Khối học máy nằm trong vòng điều khiển",
+      "def_en": "A trained model that decides scheduling, beam selection or admission, whose failure mode is not a crash but a slow drift into decisions that look plausible and are consistently wrong for one group of users.",
+      "def_vi": "Một mô hình đã huấn luyện đứng ra quyết định việc lập lịch, chọn búp sóng hoặc kết nạp, mà kiểu hỏng của nó không phải là sập mà là trôi dần vào những quyết định trông hợp lý nhưng sai một cách nhất quán với một nhóm người dùng.",
+      "say": "Nothing alarmed, because a model that is wrong in a consistent direction still returns valid outputs.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs-jamming-resilience",
+      "en": "Jamming resilience budget",
+      "vi": "Dự trữ chống gây nhiễu",
+      "def_en": "How much interference power a link can absorb before the service target is missed, stated together with the assumed jammer position and antenna, because a resilience number without a threat geometry means nothing.",
+      "def_vi": "Mức công suất gây nhiễu mà tuyến còn chịu được trước khi trượt mục tiêu dịch vụ, phải nêu kèm vị trí và ăng-ten giả định của nguồn gây nhiễu, vì một con số chống chịu mà thiếu hình học đe dọa thì không nói lên điều gì.",
+      "say": "Quote the resilience figure with the jammer geometry, or the figure is not comparable to anyone else's.",
+      "tags": [
+        "phy",
+        "metric"
+      ]
+    },
+    {
+      "id": "6gs-post-quantum-migration-ran",
+      "en": "Migration pressure on long lived equipment",
+      "vi": "Sức ép chuyển đổi lên thiết bị đời dài",
+      "def_en": "Radio equipment stays in the field for a decade or more, so a cryptographic choice made today has to survive a standard change that has not happened yet, which is why upgrade paths matter more than current algorithm strength.",
+      "def_vi": "Thiết bị vô tuyến nằm ngoài hiện trường cả chục năm trở lên, nên một lựa chọn mật mã hôm nay phải sống qua một lần đổi chuẩn chưa xảy ra, vì vậy đường nâng cấp quan trọng hơn độ mạnh của thuật toán hiện tại.",
+      "say": "Ask how the box gets a new algorithm, not which algorithm it ships with.",
+      "tags": [
+        "crypto",
+        "lifecycle"
+      ]
+    },
+    {
+      "id": "6gs2-zt-core-plane",
+      "en": "Zero trust applied to the core control plane",
+      "vi": "Áp tin cậy bằng không cho mặt phẳng điều khiển của mạng lõi",
+      "def_en": "Requiring every control plane call between core functions to carry a freshly verified identity and an explicit authorisation decision, so that reaching the signalling network by any route grants nothing on its own. The usual misreading is that encrypting the interfaces already delivers this, because encryption hides the request while still letting any peer holding a valid channel ask for anything.",
+      "def_vi": "Yêu cầu mọi lời gọi điều khiển giữa các hàm mạng lõi đều mang một danh tính vừa được xác minh lại và một quyết định cấp quyền nêu rõ, để việc chạm được vào mạng báo hiệu bằng bất kỳ đường nào tự nó không cho thêm quyền gì. Chỗ hay hiểu sai là tưởng mã hoá giao diện đã đủ, vì mã hoá chỉ che nội dung lời gọi chứ vẫn để mọi bên có kênh hợp lệ hỏi bất cứ điều gì.",
+      "say": "Encrypting the signalling links tells you nobody is reading them, not that the caller was allowed to ask.",
+      "tags": [
+        "architecture",
+        "zero-trust"
+      ]
+    },
+    {
+      "id": "6gs2-nf-mutual-tls",
+      "en": "Mutual authentication between network functions",
+      "vi": "Xác thực chính chủ hai chiều giữa các hàm mạng",
+      "def_en": "Both ends of a core interface proving identity with certificates bound to a function instance rather than to a subnet or a host name, which makes an impersonated function fail during the handshake instead of failing later at an access list. It holds only if certificates are issued per instance and revoked when that instance is destroyed, otherwise a decommissioned function keeps a valid identity.",
+      "def_vi": "Hai đầu của một giao diện lõi cùng chứng minh danh tính bằng chứng thư gắn với một thực thể hàm cụ thể chứ không gắn với dải mạng hay tên máy, nhờ vậy một hàm giả danh sẽ trượt ngay ở bước bắt tay chứ không phải trượt muộn ở danh sách truy nhập. Điều này chỉ đúng nếu chứng thư cấp riêng cho từng thực thể và bị thu hồi khi thực thể bị xoá, nếu không thì một hàm đã gỡ bỏ vẫn giữ một danh tính hợp lệ.",
+      "say": "The certificate belonged to a function instance that we had already deleted, so the identity outlived the workload.",
+      "tags": [
+        "architecture",
+        "identity"
+      ]
+    },
+    {
+      "id": "6gs2-token-scope-creep",
+      "en": "Scope creep in a service access token",
+      "vi": "Phạm vi của thẻ truy nhập dịch vụ nới rộng dần",
+      "def_en": "A token issued for one operation gradually being accepted for many, because each service checks that the token is valid rather than checking that the scope written inside it covers the call being made. Nothing is forged and no alarm fires, so the authorisation model quietly stops constraining anything.",
+      "def_vi": "Một thẻ cấp cho một thao tác dần được chấp nhận cho nhiều thao tác khác, vì mỗi dịch vụ chỉ kiểm thẻ còn hợp lệ hay không chứ không kiểm phạm vi ghi trong thẻ có phủ lời gọi đang thực hiện hay không. Không có gì bị làm giả và không cảnh báo nào nổi lên, nên mô hình cấp quyền lặng lẽ thôi ràng buộc điều gì.",
+      "say": "Every service verified the signature and none of them verified the scope, so one token opened the whole core.",
+      "tags": [
+        "architecture",
+        "identity"
+      ]
+    },
+    {
+      "id": "6gs2-sbi-surface",
+      "en": "Attack surface of a service based interface",
+      "vi": "Bề mặt tấn công của giao diện theo hướng dịch vụ",
+      "def_en": "Rewriting core signalling as web style service calls turns each function into an addressable endpoint, so ordinary web weaknesses such as unauthenticated discovery, verbose error messages and unchecked field assignment become telecom problems. The point is not that the web stack is weaker, it is that the number of reachable endpoints grows to a scale that monolithic nodes never presented.",
+      "def_vi": "Viết lại báo hiệu lõi thành các lời gọi dịch vụ kiểu web biến mỗi hàm mạng thành một điểm cuối có địa chỉ, nên các điểm yếu web quen thuộc như tra cứu không xác thực, thông báo lỗi quá chi tiết và gán trường không kiểm soát trở thành vấn đề của viễn thông. Vấn đề không nằm ở chỗ ngăn xếp web yếu hơn, mà ở chỗ số điểm cuối chạm tới được tăng lên mức mà các nút nguyên khối trước đây chưa từng bày ra.",
+      "say": "A core that speaks over service interfaces inherits both the tooling and the bug classes of ordinary web services.",
+      "tags": [
+        "architecture",
+        "core"
+      ]
+    },
+    {
+      "id": "6gs2-nrf-poisoning",
+      "en": "Poisoning the network function registry",
+      "vi": "Đầu độc sổ đăng ký hàm mạng",
+      "def_en": "Registering a rogue endpoint, or quietly altering the profile of a real one, in the directory that core functions consult to find each other, so traffic is steered toward attacker controlled software without any single link being broken. Discovery is trusted far more than it is authenticated, which is why registration deserves the same scrutiny as the sessions that follow it.",
+      "def_vi": "Đăng ký một điểm cuối giả, hoặc lặng lẽ sửa hồ sơ của một điểm cuối thật, ngay trong danh bạ mà các hàm mạng lõi tra để tìm nhau, nhờ đó lưu lượng bị lái sang phần mềm do kẻ tấn công điều khiển mà không một liên kết nào bị bẻ gãy. Bước tra cứu được tin tưởng nhiều hơn hẳn mức nó được xác thực, nên việc đăng ký phải được soi kỹ ngang với các phiên diễn ra sau đó.",
+      "say": "Nobody attacked the session; they attacked the lookup that decided where the session would go.",
+      "tags": [
+        "core",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-sepp-boundary",
+      "en": "Security boundary at the roaming edge",
+      "vi": "Ranh giới an ninh ở cửa chuyển vùng",
+      "def_en": "The gateway where signalling leaves the home operator and enters an interconnect, the one place where the peer is genuinely outside your control and where protection applied to the message itself, not merely to the transport, decides what a partner may rewrite. Treating the partner as semi trusted is the usual error, because traffic actually arrives from whoever that partner in turn peers with.",
+      "def_vi": "Cổng nơi báo hiệu rời nhà khai thác chủ để đi vào mạng liên kết, đây là chỗ duy nhất mà bên kia thực sự nằm ngoài tầm kiểm soát của bạn, và là chỗ mà việc bảo vệ ngay trên bản tin chứ không chỉ trên lớp truyền tải mới quyết định được đối tác sửa được cái gì. Sai lầm quen thuộc là coi đối tác chuyển vùng như bên bán tin cậy, vì lưu lượng thật ra đến từ bất kỳ ai mà đối tác đó lại kết nối tiếp.",
+      "say": "The partner was trusted, but the message arrived from a network the partner never told us about.",
+      "tags": [
+        "core",
+        "roaming"
+      ]
+    },
+    {
+      "id": "6gs2-priv-separation",
+      "en": "Separation of privilege inside a network function",
+      "vi": "Phân tách quyền bên trong một hàm mạng",
+      "def_en": "Splitting a single function so the part that handles untrusted input cannot itself hold the private keys, the subscriber database handle or the right to write configuration, which turns a parsing bug into a contained failure instead of a full compromise. It costs latency and complexity, so a design is only convincing when it names the specific privilege each split removes.",
+      "def_vi": "Chẻ một hàm mạng ra sao cho phần xử lý dữ liệu vào không đáng tin không đồng thời giữ khoá riêng, không giữ kết nối tới cơ sở dữ liệu thuê bao và không có quyền ghi cấu hình, nhờ vậy một lỗi phân tích cú pháp chỉ thành sự cố bị khoanh vùng chứ không thành mất trắng. Cách này tốn thêm độ trễ và độ phức tạp, nên một thiết kế chỉ thuyết phục khi nêu đích danh quyền nào bị lấy đi ở mỗi lát chẻ.",
+      "say": "The parser crashed and the crash gave the attacker nothing, because the parser never held anything worth taking.",
+      "tags": [
+        "architecture",
+        "design"
+      ]
+    },
+    {
+      "id": "6gs2-remote-attestation-vnf",
+      "en": "Attesting the platform under a virtual network function",
+      "vi": "Chứng thực nền tảng bên dưới một hàm mạng ảo hoá",
+      "def_en": "Having the host prove with hardware rooted evidence which firmware, hypervisor and image it actually booted, before the function is handed keys or subscriber data. The value rests entirely on freshness and on who verifies the evidence, because a quote replayed from an earlier boot proves only what was true in the past.",
+      "def_vi": "Bắt máy chủ chứng minh bằng bằng chứng bắt rễ từ phần cứng rằng nó thực sự đã khởi động với phần sụn, trình siêu giám sát và ảnh máy nào, trước khi hàm mạng được trao khoá hoặc dữ liệu thuê bao. Giá trị của việc này nằm trọn ở độ tươi của bằng chứng và ở chỗ ai là bên kiểm bằng chứng, vì một bản chứng thực phát lại từ lần khởi động trước chỉ chứng minh được điều đã đúng trong quá khứ.",
+      "say": "Attestation answers what the machine booted, and only if you check it again after the machine has been running.",
+      "tags": [
+        "virtualisation",
+        "attestation"
+      ]
+    },
+    {
+      "id": "6gs2-confidential-compute-nf",
+      "en": "Confidential computing for a hosted network function",
+      "vi": "Điện toán bảo mật cho hàm mạng chạy nhờ",
+      "def_en": "Running core software inside a hardware protected enclave so the infrastructure operator can schedule the workload without being able to read its memory, which is what makes hosting core functions on somebody else's cloud a discussable option at all. It moves trust to the silicon vendor and leaves side channels and the input output path outside the guarantee.",
+      "def_vi": "Chạy phần mềm lõi trong một vùng được phần cứng bảo vệ để bên vận hành hạ tầng vẫn xếp lịch được tải công việc mà không đọc được bộ nhớ của nó, chính điều này mới khiến việc đặt hàm mạng lõi trên đám mây của người khác trở thành phương án bàn được. Cách này dời niềm tin sang nhà sản xuất chip, và để kênh phụ cùng đường vào ra nằm ngoài phạm vi bảo đảm.",
+      "say": "The memory was opaque to the host, yet every packet still crossed a network the host controlled.",
+      "tags": [
+        "cloud",
+        "virtualisation"
+      ]
+    },
+    {
+      "id": "6gs2-mec-tenancy",
+      "en": "Multi tenancy at the multi access edge",
+      "vi": "Nhiều bên cùng thuê tại biên đa truy nhập",
+      "def_en": "Third party applications running on the same edge platform as operator functions, close enough to the radio to observe timing, load and location signals that were never part of the exposed application interface. Isolation here has to be judged by what a neighbour can infer, not only by what a neighbour can read.",
+      "def_vi": "Ứng dụng của bên thứ ba chạy trên cùng nền tảng biên với các hàm của nhà mạng, đủ gần vô tuyến để quan sát được các tín hiệu về thời gian, tải và vị trí vốn chưa bao giờ nằm trong giao diện mở ra cho ứng dụng. Ở đây độ cách ly phải được đánh giá theo cái mà hàng xóm suy ra được, chứ không chỉ theo cái mà hàng xóm đọc được.",
+      "say": "The tenant could not read our data and still learned when each cell got busy.",
+      "tags": [
+        "edge",
+        "isolation"
+      ]
+    },
+    {
+      "id": "6gs2-mec-physical",
+      "en": "Physical exposure of an edge site",
+      "vi": "Phơi nhiễm vật lý của một điểm biên",
+      "def_en": "Compute placed in cabinets at cell sites and inside ordinary buildings sits outside a guarded data centre, so the threat model must include somebody with a key, a cable and an hour, which promotes disk encryption and key storage from good practice to load bearing controls.",
+      "def_vi": "Máy tính đặt trong tủ ở trạm phát sóng và trong các toà nhà thường nằm ngoài trung tâm dữ liệu có canh gác, nên mô hình đe doạ phải tính tới một người có chìa khoá, có sợi cáp và có một giờ đồng hồ, điều này nâng việc mã hoá ổ đĩa và cất giữ khoá từ mức nên làm lên mức chịu lực.",
+      "say": "A data centre threat model assumes nobody touches the box, and an edge cabinet breaks that assumption first.",
+      "tags": [
+        "edge",
+        "physical"
+      ]
+    },
+    {
+      "id": "6gs2-cloud-shared-responsibility",
+      "en": "Shared responsibility line for a cloud hosted core",
+      "vi": "Lằn ranh trách nhiệm cho mạng lõi đặt trên đám mây",
+      "def_en": "The written statement of which security duties belong to the cloud provider and which stay with the operator, whose practical value is that gaps appear exactly where both sides assumed the other was covering the work, most often in logging, key custody and the preservation of incident evidence.",
+      "def_vi": "Bản ghi rõ nghĩa vụ an ninh nào thuộc nhà cung cấp đám mây và nghĩa vụ nào vẫn thuộc nhà mạng, giá trị thực tế của nó là các khoảng hở hiện ra đúng ở chỗ cả hai bên đều tưởng bên kia đang lo, thường gặp nhất ở việc ghi nhật ký, giữ khoá và bảo toàn chứng cứ sự cố.",
+      "say": "Ask which party keeps the logs a regulator will demand, and the responsibility line stops being abstract.",
+      "tags": [
+        "cloud",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-secrets-in-cnf",
+      "en": "Secret material baked into a container image",
+      "vi": "Bí mật nướng sẵn trong ảnh vùng chứa",
+      "def_en": "Keys, credentials or certificates built into the image of a containerised network function, which then spread to every registry, cache and node the image reaches and survive long after the running instance is deleted. Rotation is the real difficulty, since an embedded secret can only be changed by rebuilding and redeploying.",
+      "def_vi": "Khoá, thông tin đăng nhập hoặc chứng thư được đưa thẳng vào ảnh của một hàm mạng đóng gói theo vùng chứa, sau đó chúng lan ra mọi kho ảnh, mọi bộ nhớ đệm và mọi nút mà ảnh đó đi tới, rồi sống dai hơn hẳn thực thể đang chạy đã bị xoá. Khó nhất là việc xoay vòng, vì một bí mật nhúng sẵn chỉ đổi được bằng cách dựng lại ảnh và triển khai lại.",
+      "say": "Deleting the running instance removed the process and left the key sitting in every copy of the image.",
+      "tags": [
+        "cloud",
+        "crypto"
+      ]
+    },
+    {
+      "id": "6gs2-lateral-movement-core",
+      "en": "Lateral movement inside a disaggregated core",
+      "vi": "Di chuyển ngang bên trong mạng lõi đã tách khối",
+      "def_en": "Moving from one compromised core function to the next along the legitimate service interfaces between them, which produces traffic that looks entirely normal because it is normal traffic sent by the wrong party. Detection therefore has to rest on which function is calling which, not on the shape of the call.",
+      "def_vi": "Đi từ một hàm mạng lõi đã bị chiếm sang hàm kế tiếp bằng chính các giao diện dịch vụ hợp lệ nối chúng với nhau, cách này sinh ra lưu lượng trông hoàn toàn bình thường vì nó đúng là lưu lượng bình thường, chỉ do bên sai gửi đi. Vì thế việc phát hiện phải dựa vào chuyện hàm nào đang gọi hàm nào, chứ không dựa vào hình dạng của lời gọi.",
+      "say": "Every call was well formed and permitted; only the caller was wrong.",
+      "tags": [
+        "core",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-slice-isolation-layers",
+      "en": "Isolation stated layer by layer",
+      "vi": "Cách ly nêu rõ theo từng lớp",
+      "def_en": "Writing down separately what is isolated in the radio, in the transport, in the compute and in the management plane, because a slice can be fully separated in three of them and share a single scheduler, hypervisor or operations account in the fourth. A single word such as isolated, without the layer it refers to, carries no information.",
+      "def_vi": "Ghi tách bạch cái gì được cách ly ở vô tuyến, ở truyền dẫn, ở tài nguyên tính toán và ở mặt phẳng quản trị, vì một lát mạng có thể tách hoàn toàn ở ba nơi mà vẫn dùng chung một bộ lập lịch, một trình siêu giám sát hoặc một tài khoản vận hành ở nơi còn lại. Chỉ một chữ đã cách ly, mà không nói ở lớp nào, thì không mang thông tin gì.",
+      "say": "Tell me which layer the isolation lives in, otherwise the word means nothing I can test.",
+      "tags": [
+        "slicing",
+        "architecture"
+      ]
+    },
+    {
+      "id": "6gs2-isolation-parameter",
+      "en": "Isolation expressed as a testable parameter",
+      "vi": "Cách ly diễn đạt thành tham số kiểm chứng được",
+      "def_en": "Replacing the claim that slices are isolated with a quantity somebody can measure, such as the worst case delay a neighbour can add, the share of radio resources it can seize, or the number of management interfaces the two slices share. The point of the number is that it can fail a test, which a qualitative claim never can.",
+      "def_vi": "Thay lời khẳng định các lát đã cách ly bằng một đại lượng ai cũng đo được, chẳng hạn độ trễ xấu nhất mà lát hàng xóm gây thêm được, tỉ lệ tài nguyên vô tuyến nó chiếm được, hoặc số giao diện quản trị mà hai lát dùng chung. Ý nghĩa của con số là ở chỗ nó có thể trượt một phép thử, còn lời khẳng định định tính thì không bao giờ trượt được.",
+      "say": "State the worst case delay a neighbouring slice can inject, and the isolation claim becomes something we can fail.",
+      "tags": [
+        "slicing",
+        "metric"
+      ]
+    },
+    {
+      "id": "6gs2-slice-resource-starvation",
+      "en": "Resource starvation between slices",
+      "vi": "Bỏ đói tài nguyên giữa các lát mạng",
+      "def_en": "A tenant consuming a shared pool so aggressively that a neighbouring slice misses its service target, without any packet crossing between them and without any access control being violated. It is a denial of service written entirely in legitimate requests, so the defence is an enforced floor for each slice rather than a filter.",
+      "def_vi": "Một bên thuê tiêu thụ bể tài nguyên dùng chung dữ dội tới mức lát hàng xóm trượt mục tiêu dịch vụ, dù không gói tin nào đi qua lại giữa hai bên và không luật truy nhập nào bị vi phạm. Đây là một kiểu chặn dịch vụ viết hoàn toàn bằng các yêu cầu hợp lệ, nên cách chống là bảo đảm một mức sàn cưỡng chế cho từng lát chứ không phải đặt bộ lọc.",
+      "say": "No rule was broken; one tenant simply asked for everything faster than the other could ask at all.",
+      "tags": [
+        "slicing",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-slice-audit",
+      "en": "Auditing a slice against its own contract",
+      "vi": "Kiểm toán một lát mạng theo đúng hợp đồng của nó",
+      "def_en": "Checking with independent evidence that the running slice still matches the isolation and performance terms it was sold with, rather than checking that the orchestrator believes it does. The distinction matters because the orchestrator is also the component whose misconfiguration is the most likely cause of a mismatch.",
+      "def_vi": "Dùng bằng chứng độc lập để kiểm rằng lát mạng đang chạy vẫn khớp với các điều khoản cách ly và hiệu năng lúc bán, thay vì chỉ kiểm rằng bộ điều phối tin là nó khớp. Phân biệt này quan trọng vì chính bộ điều phối lại là thành phần mà cấu hình sai của nó là nguyên nhân khả dĩ nhất gây ra sai lệch.",
+      "say": "Do not ask the orchestrator whether the slice is compliant; measure the slice and compare it with what was promised.",
+      "tags": [
+        "slicing",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-slice-lease-third-party",
+      "en": "Leasing a slice to a third party",
+      "vi": "Cho bên thứ ba thuê một lát mạng",
+      "def_en": "Handing a tenant partial control of scheduling, policy or exposure interfaces so it can run its own service, which turns a customer into a party that issues configuration into your network. The security question becomes which of your operational primitives the tenant can reach, and what the worst configuration it can submit would do.",
+      "def_vi": "Trao cho bên thuê một phần quyền điều khiển việc lập lịch, chính sách hoặc giao diện phơi bày để họ tự chạy dịch vụ riêng, việc này biến một khách hàng thành một bên phát cấu hình vào mạng của bạn. Câu hỏi an ninh chuyển thành bên thuê chạm được tới nguyên thuỷ vận hành nào của bạn, và cấu hình tệ nhất họ gửi lên sẽ gây ra chuyện gì.",
+      "say": "Once a tenant can submit policy, the tenant is part of your operations team whether the contract says so or not.",
+      "tags": [
+        "slicing",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-slice-lifecycle-residue",
+      "en": "Residue left when a slice is torn down",
+      "vi": "Cặn còn lại khi một lát mạng bị dỡ bỏ",
+      "def_en": "State that outlives deletion, such as cached subscriber context, storage volumes not wiped, forwarding rules still installed and credentials never revoked, which lets the next tenant on the same resources see or inherit what belonged to the previous one. Creation is tested far more often than deletion, and this is where that asymmetry is paid for.",
+      "def_vi": "Trạng thái sống lâu hơn lệnh xoá, chẳng hạn ngữ cảnh thuê bao còn trong bộ đệm, ổ lưu trữ chưa xoá sạch, luật chuyển tiếp vẫn còn cài và thông tin đăng nhập chưa thu hồi, khiến bên thuê kế tiếp trên cùng khối tài nguyên nhìn thấy hoặc thừa hưởng thứ thuộc về bên trước. Bước tạo lập được thử nghiệm nhiều hơn hẳn bước xoá bỏ, và đây chính là chỗ phải trả giá cho sự lệch đó.",
+      "say": "The slice was deleted from the catalogue and its forwarding rules were still in the switch a week later.",
+      "tags": [
+        "slicing",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-slice-side-channel-timing",
+      "en": "Timing side channel across a shared scheduler",
+      "vi": "Kênh phụ thời gian qua bộ lập lịch dùng chung",
+      "def_en": "Learning about a neighbouring slice by measuring how your own grants are delayed, since a shared scheduler makes one tenant's load visible in another tenant's latency. No data crosses the boundary, so access controls report nothing, and the leak scales with how tightly the two slices are packed together.",
+      "def_vi": "Biết được chuyện của lát hàng xóm bằng cách đo xem chính mình bị chậm cấp phát bao nhiêu, vì bộ lập lịch dùng chung làm cho tải của bên thuê này hiện lên trong độ trễ của bên thuê kia. Không dữ liệu nào vượt ranh giới nên các luật truy nhập không báo gì, và mức rò rỉ tăng theo mức hai lát bị xếp sát nhau.",
+      "say": "I never saw their traffic; I only saw how often my own grants arrived late.",
+      "tags": [
+        "slicing",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-slice-admission-abuse",
+      "en": "Abusing slice admission control",
+      "vi": "Lợi dụng bộ kết nạp lát mạng",
+      "def_en": "Requesting slice instances or capacity reservations faster than they are released, so the admission logic reserves resources for sessions that never carry traffic and refuses honest requests. The signature is a high reservation rate with low utilisation, which no per packet defence can see.",
+      "def_vi": "Xin cấp thực thể lát mạng hoặc đặt chỗ dung lượng nhanh hơn tốc độ trả lại, khiến logic kết nạp giữ tài nguyên cho những phiên không bao giờ chở lưu lượng và từ chối những yêu cầu thật thà. Dấu hiệu là tỉ lệ đặt chỗ cao đi cùng mức sử dụng thấp, thứ mà không phòng thủ theo từng gói tin nào nhìn thấy được.",
+      "say": "Watch the ratio of reserved capacity to carried traffic, because that gap is where the abuse lives.",
+      "tags": [
+        "slicing",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-nssai-exposure",
+      "en": "Exposure of slice selection information",
+      "vi": "Lộ thông tin chọn lát mạng",
+      "def_en": "The identifiers a device sends so the network can pick a slice, which can travel before a security context exists and can reveal which vertical the device belongs to, for instance a utility, a hospital or a defence user. Protecting the payload does not help if the selector that routes it is readable.",
+      "def_vi": "Các định danh mà thiết bị gửi lên để mạng chọn lát, chúng có thể đi trước khi có ngữ cảnh an ninh và có thể tiết lộ thiết bị thuộc lĩnh vực nào, ví dụ ngành điện, bệnh viện hay người dùng quốc phòng. Bảo vệ phần tải tin không giúp được gì nếu cái chỉ dấu dùng để định tuyến nó lại đọc được.",
+      "say": "The traffic was protected and the selector in front of it announced which industry the device served.",
+      "tags": [
+        "slicing",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs2-slice-sla-as-security",
+      "en": "Service level target read as a security claim",
+      "vi": "Đọc mục tiêu chất lượng dịch vụ như một cam kết an ninh",
+      "def_en": "The habit of treating a latency or throughput guarantee as though it also guaranteed isolation, when the guarantee only says what the network will deliver under expected load and says nothing about what a hostile neighbour can do. The two coincide in normal operation and diverge exactly when it matters.",
+      "def_vi": "Thói quen coi một cam kết về độ trễ hay thông lượng như thể nó cũng bảo đảm luôn tính cách ly, trong khi cam kết đó chỉ nói mạng sẽ cấp gì dưới mức tải dự kiến và không nói gì về việc một hàng xóm thù địch làm được gì. Hai thứ này trùng nhau khi vận hành bình thường và tách nhau ra đúng lúc điều đó trở nên quan trọng.",
+      "say": "A guarantee written for expected load says nothing about a neighbour who is trying to break it.",
+      "tags": [
+        "slicing",
+        "metric"
+      ]
+    },
+    {
+      "id": "6gs2-ric-software-bom",
+      "en": "Bill of materials for controller software",
+      "vi": "Danh mục thành phần của phần mềm bộ điều khiển",
+      "def_en": "A machine readable list of every component and version inside the radio controller and the applications loaded into it, whose purpose is to answer within hours whether a newly published flaw is present in your network. Without it the honest answer to that question is that nobody knows, which is the answer regulators are least willing to accept.",
+      "def_vi": "Bản kê máy đọc được liệt kê mọi thành phần và phiên bản nằm trong bộ điều khiển vô tuyến cùng các ứng dụng nạp vào đó, mục đích là trả lời trong vài giờ câu hỏi một lỗ hổng vừa công bố có mặt trong mạng của bạn hay không. Thiếu nó thì câu trả lời thành thật cho câu hỏi ấy là không ai biết, và đó là câu trả lời mà cơ quan quản lý ít chấp nhận nhất.",
+      "say": "The question is never whether the flaw exists, it is how many hours you need to answer whether you have it.",
+      "tags": [
+        "oran",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs2-xapp-vetting",
+      "en": "Vetting an application before it loads",
+      "vi": "Kiểm chứng ứng dụng trước khi nạp",
+      "def_en": "Checking signature, declared permissions, resource limits and behaviour in a test environment before an application is admitted to the controller, because once it is running it can already change scheduling decisions. Signature verification alone answers who wrote the code and never answers what the code will ask the network to do.",
+      "def_vi": "Kiểm chữ ký, các quyền mà ứng dụng khai báo, hạn mức tài nguyên và hành vi trong môi trường thử trước khi ứng dụng được nhận vào bộ điều khiển, vì một khi đã chạy thì nó đổi được ngay các quyết định lập lịch. Riêng việc kiểm chữ ký chỉ trả lời ai viết mã, và không bao giờ trả lời mã ấy sẽ bảo mạng làm gì.",
+      "say": "A valid signature tells you who built it, not what it will ask the scheduler to do at three in the morning.",
+      "tags": [
+        "oran",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs2-policy-conflict-two-apps",
+      "en": "Conflict between two control policies",
+      "vi": "Xung đột giữa hai chính sách điều khiển",
+      "def_en": "Two applications each pursuing a valid objective and issuing opposing actions on the same parameter, so the network oscillates or settles on a state neither intended. It is not an attack, yet the outcome resembles one, and it becomes an attack the moment a hostile application learns to trigger it deliberately.",
+      "def_vi": "Hai ứng dụng cùng theo đuổi một mục tiêu hợp lệ nhưng phát ra hành động ngược nhau trên cùng một tham số, khiến mạng dao động hoặc dừng lại ở một trạng thái không bên nào mong muốn. Đây không phải tấn công, nhưng hậu quả trông giống hệt, và nó trở thành tấn công ngay khi một ứng dụng thù địch học được cách cố tình kích hoạt tình huống ấy.",
+      "say": "Two correct applications with opposite objectives produce an outage that neither of them logged as an error.",
+      "tags": [
+        "oran",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-e2-integrity",
+      "en": "Integrity of control messages on the open interface",
+      "vi": "Toàn vẹn của bản tin điều khiển trên giao diện mở",
+      "def_en": "Guaranteeing that a control instruction reaching the radio unit is exactly the one the controller issued and is not a replay of an earlier valid instruction, which needs sequence binding and freshness rather than encryption alone. Replaying a legitimate handover command needs no key at all.",
+      "def_vi": "Bảo đảm rằng một lệnh điều khiển tới được khối vô tuyến đúng là lệnh mà bộ điều khiển đã phát ra chứ không phải bản phát lại của một lệnh hợp lệ trước đó, muốn vậy cần ràng buộc thứ tự và độ tươi chứ không chỉ cần mã hoá. Phát lại một lệnh chuyển giao hợp lệ thì không cần khoá nào cả.",
+      "say": "An attacker who cannot forge a command can still send yesterday's command again.",
+      "tags": [
+        "oran",
+        "phy"
+      ]
+    },
+    {
+      "id": "6gs2-fronthaul-exposure",
+      "en": "Exposure of the fronthaul segment",
+      "vi": "Phơi nhiễm của đoạn truyền dẫn tới khối vô tuyến",
+      "def_en": "The link between the distributed unit and the radio unit carrying timing critical samples, which is often left unprotected because encryption adds delay that the timing budget cannot absorb. The result is a segment where confidentiality was traded away for latency, and that trade should be recorded rather than forgotten.",
+      "def_vi": "Đoạn nối giữa khối phân tán và khối vô tuyến chở các mẫu tín hiệu ngặt về thời gian, đoạn này thường bị bỏ trống không bảo vệ vì mã hoá thêm độ trễ mà ngân sách thời gian không gánh nổi. Kết quả là có một đoạn mà tính bí mật đã bị đem đổi lấy độ trễ, và phép đổi ấy cần được ghi lại chứ đừng để quên.",
+      "say": "We did not decide the fronthaul was safe, we decided the timing budget mattered more, and then we forgot we decided it.",
+      "tags": [
+        "oran",
+        "transport"
+      ]
+    },
+    {
+      "id": "6gs2-oran-signing-chain",
+      "en": "Signing chain for radio software",
+      "vi": "Chuỗi ký cho phần mềm vô tuyến",
+      "def_en": "The path from the build system that produced an image to the radio node that will run it, with each step signing what it received and what it emitted, so a substituted artefact fails verification at the node rather than being discovered afterwards. The weak point is usually the build machine, since a key held there signs whatever that machine produces, including anything an intruder inserted into the build.",
+      "def_vi": "Đường đi từ hệ thống dựng ra một ảnh phần mềm cho tới nút vô tuyến sẽ chạy nó, mỗi chặng ký lên cái mình nhận và cái mình phát ra, nhờ vậy một sản phẩm bị tráo sẽ trượt bước kiểm ngay tại nút chứ không phải mãi sau mới bị phát hiện. Chỗ yếu thường là máy dựng, vì khoá đặt ở đó ký lên bất cứ thứ gì máy ấy tạo ra, kể cả thứ mà kẻ đột nhập đã chèn vào quá trình dựng.",
+      "say": "A signature proves the build machine produced it, which is a different claim from proving the source was clean.",
+      "tags": [
+        "oran",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs2-ric-latency-budget-attack",
+      "en": "Attacking a control loop through delay",
+      "vi": "Tấn công vòng điều khiển bằng cách gây trễ",
+      "def_en": "Slowing the path between measurement and decision just enough that the controller keeps acting on stale state, which produces wrong beam and handover choices while every component still reports itself healthy. Nothing is dropped and nothing is forged, so the only visible symptom is degraded service with clean logs everywhere.",
+      "def_vi": "Làm chậm đường đi từ phép đo tới quyết định vừa đủ để bộ điều khiển liên tục hành động trên trạng thái đã cũ, dẫn tới chọn sai búp sóng và chọn sai thời điểm chuyển giao trong khi mọi thành phần vẫn tự báo là khoẻ. Không gói tin nào bị mất và không thứ gì bị làm giả, nên triệu chứng duy nhất nhìn thấy là dịch vụ kém đi mà nhật ký ở đâu cũng sạch.",
+      "say": "Delay is the quietest attack on a control loop, because the loop keeps working and simply keeps being late.",
+      "tags": [
+        "oran",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-open-interface-tradeoff",
+      "en": "Openness weighed against attack surface",
+      "vi": "Cân độ mở với bề mặt tấn công",
+      "def_en": "The honest form of the argument about open radio interfaces, which is that opening an interface makes it inspectable by defenders and reachable by attackers at the same time, so the comparison is between an audited public interface and an unaudited proprietary one, not between insecure and secure.",
+      "def_vi": "Cách nói thành thật về tranh luận quanh giao diện vô tuyến mở, đó là mở một giao diện vừa khiến bên phòng thủ soi được nó vừa khiến kẻ tấn công chạm được tới nó, nên phép so sánh đúng là giữa một giao diện công khai có được kiểm với một giao diện độc quyền không ai kiểm, chứ không phải giữa mất an toàn và an toàn.",
+      "say": "Open interfaces are not less secure by nature; they are secure or not depending on who actually audits them.",
+      "tags": [
+        "oran",
+        "architecture"
+      ]
+    },
+    {
+      "id": "6gs2-oran-sandbox",
+      "en": "Sandboxing a controller application",
+      "vi": "Nhốt ứng dụng của bộ điều khiển vào hộp cát",
+      "def_en": "Confining a loaded application so it can only read the measurements and write the parameters its declared role requires, with a hard ceiling on how often and how far it may change them. The confinement has to cover rate and magnitude, because an application restricted to legal actions can still cause an outage by repeating one legal action.",
+      "def_vi": "Nhốt một ứng dụng đã nạp sao cho nó chỉ đọc được những phép đo và ghi được những tham số mà vai trò khai báo của nó cần, kèm một trần cứng về mức thay đổi và tần suất thay đổi. Sự nhốt phải phủ cả tốc độ lẫn biên độ, vì một ứng dụng chỉ được làm những hành động hợp lệ vẫn gây mất dịch vụ được bằng cách lặp lại một hành động hợp lệ.",
+      "say": "Bound how far and how often it may move the parameter, not only which parameter it may touch.",
+      "tags": [
+        "oran",
+        "design"
+      ]
+    },
+    {
+      "id": "6gs2-oran-shared-cell-abuse",
+      "en": "Abuse of shared cell control",
+      "vi": "Lạm dụng quyền điều khiển ô dùng chung",
+      "def_en": "One tenant of a shared radio site using its permitted control of power, tilt or scheduling weights to shape coverage in a way that quietly degrades a competitor sharing the same cell. Every action stays inside the agreed envelope, so the harm is only visible when you compare outcomes across tenants rather than checking each tenant separately.",
+      "def_vi": "Một bên thuê ở trạm vô tuyến dùng chung dùng đúng quyền được phép về công suất, góc ngẩng hoặc trọng số lập lịch để nắn vùng phủ theo hướng làm giảm chất lượng của đối thủ đang chia sẻ cùng ô. Mọi hành động vẫn nằm trong khuôn đã thoả thuận, nên thiệt hại chỉ lộ ra khi bạn so kết quả giữa các bên thuê chứ không phải khi kiểm riêng từng bên.",
+      "say": "Check the tenants against each other, because each of them alone will look perfectly compliant.",
+      "tags": [
+        "oran",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-secrecy-capacity",
+      "en": "Secrecy capacity as a design target",
+      "vi": "Dung lượng bí mật dùng làm mục tiêu thiết kế",
+      "def_en": "The rate at which a link can carry information that an eavesdropper provably cannot decode, which is positive only when the legitimate channel is better than the eavesdropper channel. Designing to it requires assuming where the eavesdropper stands and what antenna it uses, so the figure is conditional on a threat geometry that must be stated with it.",
+      "def_vi": "Tốc độ mà một tuyến chở được thông tin sao cho kẻ nghe lén chứng minh được là không giải mã nổi, đại lượng này chỉ dương khi kênh hợp lệ tốt hơn kênh của kẻ nghe lén. Thiết kế theo nó buộc phải giả định kẻ nghe lén đứng ở đâu và dùng ăng-ten gì, nên con số ấy phụ thuộc vào một hình học đe doạ và phải nêu kèm hình học đó.",
+      "say": "A secrecy rate without the assumed eavesdropper position is a number that cannot be compared with anyone else's.",
+      "tags": [
+        "phy",
+        "metric"
+      ]
+    },
+    {
+      "id": "6gs2-covert-comm",
+      "en": "Covert transmission under a detection constraint",
+      "vi": "Truyền tin ẩn dưới ràng buộc bị phát hiện",
+      "def_en": "Sending at a power and duty cycle low enough that a watcher cannot decide, better than by guessing, whether any transmission occurred at all, which is a stronger goal than hiding the content. The achievable rate falls roughly with the square root of the number of channel uses, so covertness is bought with throughput and never for free.",
+      "def_vi": "Phát ở mức công suất và chu kỳ hoạt động đủ thấp để người theo dõi không thể quyết định tốt hơn việc đoán bừa rằng có xảy ra truyền tin hay không, mục tiêu này mạnh hơn hẳn việc chỉ che nội dung. Tốc độ đạt được giảm cỡ căn bậc hai theo số lần dùng kênh, nên tính ẩn phải mua bằng thông lượng chứ không bao giờ có miễn phí.",
+      "say": "Hiding the content is one problem; hiding the fact that anything was sent is a much more expensive one.",
+      "tags": [
+        "phy",
+        "covert"
+      ]
+    },
+    {
+      "id": "6gs2-artificial-noise",
+      "en": "Artificial noise aimed away from the user",
+      "vi": "Nhiễu nhân tạo chĩa ra ngoài hướng người dùng",
+      "def_en": "Spending part of the transmit power on noise placed in the subspace orthogonal to the legitimate channel, so the intended receiver is unaffected while anyone elsewhere sees a degraded signal. It works only as far as the channel estimate is accurate, since an error in the estimate leaks noise into the user's own subspace and costs real throughput.",
+      "def_vi": "Dành một phần công suất phát để tạo nhiễu đặt trong không gian con vuông góc với kênh hợp lệ, nhờ vậy máy thu đúng địa chỉ không bị ảnh hưởng còn ai đứng chỗ khác thì nhận tín hiệu kém đi. Cách này chỉ hiệu quả trong giới hạn độ chính xác của ước lượng kênh, vì sai số ước lượng làm rò nhiễu vào chính không gian con của người dùng và ăn mất thông lượng thật.",
+      "say": "The noise is only harmless to the user while the channel estimate stays good enough to keep it out of their subspace.",
+      "tags": [
+        "phy",
+        "defence"
+      ]
+    },
+    {
+      "id": "6gs2-beam-null-eavesdropper",
+      "en": "Steering a null toward a listener",
+      "vi": "Chĩa điểm không về phía kẻ nghe",
+      "def_en": "Shaping the transmit pattern so that very little energy reaches a known or suspected eavesdropper position, which depends on knowing that position well enough that the null, which is narrow, actually lands on it. A null a few degrees off is no protection at all, so this defence needs localisation accuracy rather than array size.",
+      "def_vi": "Nắn giản đồ phát sao cho rất ít năng lượng tới được vị trí kẻ nghe lén đã biết hoặc bị nghi ngờ, cách này phụ thuộc vào việc biết vị trí đó đủ chính xác để điểm không, vốn rất hẹp, rơi đúng vào đó. Lệch vài độ là mất sạch tác dụng, nên phòng thủ kiểu này cần độ chính xác định vị chứ không cần kích thước dàn ăng-ten.",
+      "say": "The null is narrow, so this defence stands or falls on how precisely you located the listener.",
+      "tags": [
+        "phy",
+        "defence"
+      ]
+    },
+    {
+      "id": "6gs2-ris-defence",
+      "en": "Reflecting surface used as a shield",
+      "vi": "Bề mặt phản xạ dùng làm tấm chắn",
+      "def_en": "Tuning a reconfigurable surface so the reflected path adds constructively at the legitimate receiver and destructively where an eavesdropper is believed to be, which raises the secrecy rate without extra transmit power. It assumes the surface is under your control and that you know the eavesdropper channel, and the second assumption is far weaker than the first.",
+      "def_vi": "Chỉnh một bề mặt cấu hình lại được sao cho đường phản xạ cộng cùng pha tại máy thu hợp lệ và ngược pha tại chỗ tin là có kẻ nghe lén, nhờ đó nâng tốc độ bí mật mà không tốn thêm công suất phát. Cách này giả định bề mặt nằm trong quyền điều khiển của bạn và bạn biết kênh của kẻ nghe lén, giả định thứ hai yếu hơn hẳn giả định thứ nhất.",
+      "say": "The surface helps only while you both control it and know where the listener is standing.",
+      "tags": [
+        "phy",
+        "defence"
+      ]
+    },
+    {
+      "id": "6gs2-ris-attack",
+      "en": "Reflecting surface controlled by an attacker",
+      "vi": "Bề mặt phản xạ nằm trong tay kẻ tấn công",
+      "def_en": "The same hardware placed by a hostile party and tuned to redirect energy toward the attacker, to cancel the signal at a chosen victim or to make the channel appear reciprocal when it is not, all without transmitting anything the network can detect as a source. A passive surface radiates no signal of its own, so the usual transmitter hunting tools find nothing.",
+      "def_vi": "Cũng phần cứng đó nhưng do bên thù địch đặt và chỉnh để hắt năng lượng về phía kẻ tấn công, để triệt tín hiệu tại một nạn nhân được chọn, hoặc để làm kênh trông có tính thuận nghịch trong khi thực ra không phải, tất cả mà không phát đi thứ gì để mạng nhận ra là một nguồn phát. Bề mặt thụ động không tự bức xạ tín hiệu nào, nên các công cụ săn máy phát quen dùng sẽ không tìm thấy gì.",
+      "say": "There is no transmitter to locate, because the attacker only rearranged energy that we ourselves radiated.",
+      "tags": [
+        "phy",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-rf-fingerprint",
+      "en": "Radio fingerprint as an identity claim",
+      "vi": "Dấu vân vô tuyến dùng làm chứng cứ danh tính",
+      "def_en": "Identifying a transmitter from small hardware imperfections in its emitted waveform, which is attractive because it cannot be copied by cloning credentials, and fragile because the same features drift with temperature, ageing, power level and the propagation environment. It belongs beside cryptographic identity as a second signal, not in place of it.",
+      "def_vi": "Nhận dạng một máy phát dựa vào các khiếm khuyết phần cứng nhỏ trong dạng sóng nó phát ra, cách này hấp dẫn vì không sao chép được bằng việc nhân bản thông tin đăng nhập, và mong manh vì cũng chính các đặc trưng ấy trôi theo nhiệt độ, tuổi thiết bị, mức công suất và môi trường truyền sóng. Nó nên đứng cạnh danh tính mật mã như một tín hiệu thứ hai chứ không nên thay thế.",
+      "say": "Treat the fingerprint as a second opinion, since the same device gives a different one after an hour in the sun.",
+      "tags": [
+        "phy",
+        "identity"
+      ]
+    },
+    {
+      "id": "6gs2-fake-base-station-detect",
+      "en": "Detecting a false base station",
+      "vi": "Phát hiện trạm gốc giả",
+      "def_en": "Recognising a cell that broadcasts a plausible identity but does not behave like the real network, using evidence such as unexplained parameter values, a signal far stronger than the site plan allows, absence from the operator's own configuration, or refusal to complete mutual authentication. Any single indicator has innocent explanations, so detection is built from several weak signals rather than one strong one.",
+      "def_vi": "Nhận ra một ô phát quảng bá một danh tính nghe hợp lý nhưng hành xử không giống mạng thật, dựa vào các bằng chứng như giá trị tham số không giải thích được, tín hiệu mạnh hơn hẳn mức quy hoạch trạm cho phép, không có mặt trong cấu hình của chính nhà mạng, hoặc né việc hoàn tất xác thực hai chiều. Mỗi chỉ dấu đơn lẻ đều có cách giải thích vô hại, nên việc phát hiện phải dựng từ nhiều tín hiệu yếu chứ không từ một tín hiệu mạnh.",
+      "say": "One suspicious parameter proves nothing; four of them arriving together is what you actually act on.",
+      "tags": [
+        "phy",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-mmwave-blockage-security",
+      "en": "Narrow beams mistaken for confidentiality",
+      "vi": "Nhầm búp sóng hẹp thành tính bí mật",
+      "def_en": "The belief that a highly directional link is private because energy travels in a narrow cone, which ignores sidelobes, reflections from ordinary surfaces and the fact that an eavesdropper positioned between transmitter and receiver sits inside the main lobe. Directionality raises the cost of eavesdropping, it does not remove the possibility.",
+      "def_vi": "Niềm tin rằng một tuyến định hướng mạnh thì kín đáo vì năng lượng đi trong một hình nón hẹp, niềm tin này bỏ qua các búp phụ, bỏ qua phản xạ từ những bề mặt bình thường, và bỏ qua chuyện kẻ nghe lén đứng lọt giữa máy phát và máy thu thì nằm ngay trong búp chính. Tính định hướng làm việc nghe lén tốn kém hơn chứ không xoá bỏ khả năng nghe lén.",
+      "say": "A narrow beam raises the price of eavesdropping, and a listener standing in the path pays nothing extra.",
+      "tags": [
+        "phy",
+        "misconception"
+      ]
+    },
+    {
+      "id": "6gs2-channel-reciprocity-assumption",
+      "en": "Reciprocity assumed but never measured",
+      "vi": "Tính thuận nghịch được giả định mà không hề đo",
+      "def_en": "Schemes that derive keys or beam weights from the claim that both directions of a link see the same channel, without checking calibration error, hardware asymmetry or the possibility that a controlled surface is forging the symmetry. When the assumption is not tested, a failure appears as a mismatched key rather than as a security alarm.",
+      "def_vi": "Các phương án rút khoá hoặc rút trọng số búp sóng từ khẳng định rằng hai chiều của một tuyến nhìn thấy cùng một kênh, mà không kiểm sai số hiệu chuẩn, không kiểm bất đối xứng phần cứng và không kiểm khả năng một bề mặt bị điều khiển đang dựng nên sự đối xứng giả. Khi giả định ấy không được thử lại, lỗi hiện ra dưới dạng khoá không khớp chứ không dưới dạng một cảnh báo an ninh.",
+      "say": "When reciprocity quietly fails, the operator sees a key mismatch and never sees a security event.",
+      "tags": [
+        "phy",
+        "crypto"
+      ]
+    },
+    {
+      "id": "6gs2-secrecy-outage",
+      "en": "Outage probability for a secrecy target",
+      "vi": "Xác suất trượt mục tiêu bí mật",
+      "def_en": "The chance that the instantaneous channel leaves the secrecy rate below the level a service requires, which is the honest way to report physical layer security when the eavesdropper channel is known only statistically. An average secrecy rate hides exactly the rare moments in which the whole guarantee disappears.",
+      "def_vi": "Khả năng kênh tại một thời điểm làm tốc độ bí mật tụt xuống dưới mức mà dịch vụ đòi hỏi, đây là cách báo cáo an ninh lớp vật lý thành thật khi kênh của kẻ nghe lén chỉ biết được theo nghĩa thống kê. Một con số tốc độ bí mật trung bình che đi đúng những khoảnh khắc hiếm hoi mà toàn bộ bảo đảm biến mất.",
+      "say": "Report how often the guarantee fails, because the average is highest precisely when the rare failures matter most.",
+      "tags": [
+        "phy",
+        "metric"
+      ]
+    },
+    {
+      "id": "6gs2-spoofed-uplink-power",
+      "en": "Spoofing the power control loop",
+      "vi": "Đánh lừa vòng điều khiển công suất",
+      "def_en": "Feeding the network false evidence about received power or interference so it instructs honest devices to transmit lower or higher than they should, which drains batteries, raises interference or pushes a competitor's users into outage. The loop is designed for measurement error and not for a party that supplies deliberately wrong measurements.",
+      "def_vi": "Đưa cho mạng bằng chứng sai lệch về công suất thu hoặc mức nhiễu để mạng ra lệnh cho các thiết bị thật thà phát thấp hơn hoặc cao hơn mức đáng phát, việc này làm cạn pin, làm tăng nhiễu hoặc đẩy người dùng của đối thủ vào vùng mất dịch vụ. Vòng điều khiển được thiết kế để chịu sai số đo chứ không để chịu một bên cố tình cấp số đo sai.",
+      "say": "The loop tolerates measurement error and has no idea what to do with measurements that lie on purpose.",
+      "tags": [
+        "phy",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-spoof-echo",
+      "en": "Forging a radar echo",
+      "vi": "Làm giả tiếng vọng ra đa",
+      "def_en": "Transmitting a delayed and scaled copy of the network's own sensing waveform so the receiver computes a range and velocity for an object that is not there, or hides one that is. The attack needs no key material, only the ability to hear the waveform and retransmit it with a chosen delay.",
+      "def_vi": "Phát lại một bản sao của chính dạng sóng cảm biến của mạng, có làm trễ và đổi biên độ, để máy thu tính ra cự ly và vận tốc cho một vật thể không tồn tại, hoặc để giấu một vật thể có thật. Cuộc tấn công này không cần khoá nào, chỉ cần nghe được dạng sóng và phát lại nó với một độ trễ tự chọn.",
+      "say": "No key was broken; the attacker only echoed our own waveform back with a delay of his choosing.",
+      "tags": [
+        "isac",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-nonsubscriber",
+      "en": "The person who never joined the network",
+      "vi": "Người chưa hề tham gia mạng",
+      "def_en": "The subject of a sensing measurement who has no account, no device and therefore no place in any consent record, which breaks the assumption underlying subscriber privacy law that the person and the identity can be linked. Data minimisation and retention limits become the only available controls, because notice and consent have nobody to attach to.",
+      "def_vi": "Đối tượng của một phép đo cảm biến mà không có tài khoản, không có thiết bị và do đó không có chỗ trong bất kỳ hồ sơ đồng ý nào, điều này phá vỡ giả định nền của luật bảo vệ riêng tư thuê bao rằng con người và danh tính nối được với nhau. Giảm thiểu dữ liệu và giới hạn thời gian lưu trở thành các biện pháp duy nhất còn dùng được, vì việc thông báo và xin đồng ý không có ai để gắn vào.",
+      "say": "There is nobody to notify, so the only controls left are collecting less and keeping it for less time.",
+      "tags": [
+        "isac",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-comm-tradeoff",
+      "en": "Trade off between the sensing goal and the traffic goal",
+      "vi": "Đánh đổi giữa mục tiêu cảm biến và mục tiêu truyền tin",
+      "def_en": "Waveforms that resolve position well tend to be predictable and wideband, while waveforms that carry data efficiently tend to look random, so improving one objective usually costs the other and also changes the security picture. A more predictable sensing waveform is easier for an attacker to reproduce and replay.",
+      "def_vi": "Dạng sóng phân giải vị trí tốt thì thường dễ đoán và chiếm băng rộng, còn dạng sóng chở dữ liệu hiệu quả thì thường trông ngẫu nhiên, nên cải thiện một mục tiêu thường phải trả giá bằng mục tiêu kia và đồng thời làm đổi cả bức tranh an ninh. Dạng sóng cảm biến càng dễ đoán thì kẻ tấn công càng dễ tái tạo và phát lại.",
+      "say": "The waveform that senses best is also the waveform an attacker finds easiest to imitate.",
+      "tags": [
+        "isac",
+        "design"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-data-retention",
+      "en": "Retention of sensing measurements",
+      "vi": "Thời gian lưu các phép đo cảm biến",
+      "def_en": "How long raw or processed environment measurements are kept, which decides whether the archive can later be mined for movement patterns of individuals who were never the purpose of the collection. A short retention window is the strongest available control here, because it limits harm from a future decision that has not been made yet.",
+      "def_vi": "Thời gian giữ các phép đo môi trường ở dạng thô hay đã xử lý, con số này quyết định kho lưu trữ về sau có bị khai thác để dựng lại thói quen di chuyển của những cá nhân vốn không phải mục đích thu thập hay không. Cửa sổ lưu ngắn là biện pháp mạnh nhất còn dùng được ở đây, vì nó chặn trước thiệt hại từ một quyết định trong tương lai mà nay chưa ai ra.",
+      "say": "Keeping the measurements for a week instead of a year removes a decision that somebody else would make later.",
+      "tags": [
+        "isac",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-inference-leak",
+      "en": "Inference drawn from coarse sensing output",
+      "vi": "Suy diễn rút ra từ dữ liệu cảm biến thô sơ",
+      "def_en": "Deriving sensitive facts from measurements that individually look harmless, for instance inferring occupancy, sleep hours or the presence of a visitor from counts and coarse positions. Anonymisation of the records does not remove the leak, because the sensitive fact is in the pattern rather than in any identifier.",
+      "def_vi": "Rút ra những sự thật nhạy cảm từ các phép đo mà nhìn riêng thì vô hại, ví dụ suy ra có bao nhiêu người trong nhà, giờ ngủ, hay việc có khách tới thăm từ số đếm và vị trí thô. Việc ẩn danh bản ghi không xoá được rò rỉ này, vì sự thật nhạy cảm nằm trong quy luật chứ không nằm trong định danh nào.",
+      "say": "Removing the names changes nothing, because the sensitive fact was in the pattern all along.",
+      "tags": [
+        "isac",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs2-ghost-target",
+      "en": "Ghost target injected into a sensing map",
+      "vi": "Mục tiêu ma chèn vào bản đồ cảm biến",
+      "def_en": "A fabricated object that the network places in its environment model and then acts upon, for example by rerouting beams, raising an alarm or triggering an automated safety response. Because the downstream systems trust the map rather than the raw returns, one injected object propagates into decisions taken far from the radio.",
+      "def_vi": "Một vật thể bịa ra mà mạng đưa vào mô hình môi trường của mình rồi hành động theo, chẳng hạn định tuyến lại búp sóng, phát cảnh báo hoặc kích hoạt một phản ứng an toàn tự động. Vì các hệ thống phía sau tin vào bản đồ chứ không tin vào tín hiệu phản hồi thô, một vật thể bị chèn sẽ lan vào những quyết định diễn ra rất xa khối vô tuyến.",
+      "say": "The false object entered the map once and every system downstream treated it as ground truth.",
+      "tags": [
+        "isac",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-consent-boundary",
+      "en": "Consent boundary for environment sensing",
+      "vi": "Ranh giới đồng ý cho việc cảm biến môi trường",
+      "def_en": "The line between measuring the radio environment to serve a link and measuring people who happen to be in it, which in practice is drawn by what the network stores and shares rather than by what its receiver physically detects. Arguing from the physics is a common evasion, since the antenna always hears more than the service needs.",
+      "def_vi": "Lằn ranh giữa việc đo môi trường vô tuyến để phục vụ một tuyến truyền với việc đo những người tình cờ ở trong đó, trên thực tế lằn ranh này được vạch bởi thứ mà mạng lưu lại và chia sẻ chứ không phải bởi thứ mà máy thu cảm nhận được về mặt vật lý. Lấy vật lý ra biện hộ là một cách né quen thuộc, vì ăng-ten bao giờ cũng nghe được nhiều hơn mức dịch vụ cần.",
+      "say": "The receiver always hears more than the service needs, so the boundary has to be drawn at what we keep.",
+      "tags": [
+        "isac",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-sensing-resolution-privacy",
+      "en": "Resolution treated as a privacy dial",
+      "vi": "Coi độ phân giải như một núm chỉnh riêng tư",
+      "def_en": "Deliberately limiting range or angular resolution so the system can count and track without distinguishing individuals, which is a real control provided the limit is enforced where the data is produced. Applying it only in the presentation layer leaves the full resolution data in the pipeline, where the next feature will find it.",
+      "def_vi": "Cố ý hạn chế độ phân giải theo cự ly hoặc theo góc để hệ thống vẫn đếm và bám được mà không phân biệt được từng cá nhân, đây là một biện pháp thật miễn là giới hạn ấy được cưỡng chế ngay tại nơi sinh ra dữ liệu. Nếu chỉ áp ở lớp hiển thị thì dữ liệu đầy đủ vẫn nằm trong đường ống, và tính năng làm sau sẽ tìm thấy nó.",
+      "say": "Blur the data where it is produced, because blurring it at the screen leaves the sharp copy in the pipeline.",
+      "tags": [
+        "isac",
+        "design"
+      ]
+    },
+    {
+      "id": "6gs2-poisoning-live-telemetry",
+      "en": "Poisoning a model trained on live telemetry",
+      "vi": "Đầu độc mô hình huấn luyện bằng dữ liệu đo trực tiếp",
+      "def_en": "Shaping traffic in the production network so it becomes training data that teaches the model a rule the attacker chose, which is possible whenever retraining consumes operational measurements without a review step. Nothing is inserted into a dataset, since the network itself is the collection instrument.",
+      "def_vi": "Nắn lưu lượng ngay trên mạng đang khai thác để nó trở thành dữ liệu huấn luyện dạy cho mô hình một quy tắc do kẻ tấn công chọn, việc này khả thi bất cứ khi nào chu trình huấn luyện lại nuốt số liệu vận hành mà không có bước rà soát. Không có gì bị chèn vào một tập dữ liệu nào cả, vì chính mạng là công cụ thu thập.",
+      "say": "Nobody touched the dataset, because the network collected the poison for us and called it telemetry.",
+      "tags": [
+        "ai-security",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-adversarial-traffic-classifier",
+      "en": "Evading a traffic classifier",
+      "vi": "Né bộ phân loại lưu lượng",
+      "def_en": "Adjusting packet sizes, timing and flow structure so a learned classifier assigns the flow to the wrong class while the application still works, which is easier than evading a rule based filter because small feature changes can cross a decision boundary. The defence is not a better classifier alone but limiting what a wrong classification is allowed to do.",
+      "def_vi": "Chỉnh kích thước gói, thời điểm gửi và cấu trúc luồng sao cho bộ phân loại đã học xếp luồng vào sai lớp trong khi ứng dụng vẫn chạy được, việc này dễ hơn né một bộ lọc theo luật vì chỉ cần đổi nhẹ vài đặc trưng là vượt qua mặt phân định. Cách chống không chỉ là làm bộ phân loại tốt hơn mà là giới hạn hậu quả mà một lần phân loại sai được phép gây ra.",
+      "say": "Assume the classifier will be wrong sometimes, then decide how much damage a wrong label is allowed to cause.",
+      "tags": [
+        "ai-security",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-fl-across-operators",
+      "en": "Federated training across competing operators",
+      "vi": "Huấn luyện liên kết giữa các nhà mạng cạnh tranh",
+      "def_en": "Several networks improving a shared model without exchanging raw traffic, which is attractive for rare fault and rare attack patterns and is limited by the fact that model updates still carry information about the data that produced them. Commercial sensitivity, not only subscriber privacy, is what usually blocks it in practice.",
+      "def_vi": "Nhiều mạng cùng cải thiện một mô hình chung mà không trao đổi lưu lượng thô, cách này hấp dẫn cho các mẫu sự cố hiếm và mẫu tấn công hiếm, và bị giới hạn bởi việc bản cập nhật mô hình vẫn mang theo thông tin về dữ liệu sinh ra nó. Điều thường chặn nó trên thực tế là tính nhạy cảm thương mại chứ không chỉ là riêng tư của thuê bao.",
+      "say": "The blocker is rarely subscriber privacy; it is that the update tells a competitor where our network hurts.",
+      "tags": [
+        "ai-security",
+        "federated"
+      ]
+    },
+    {
+      "id": "6gs2-fl-gradient-leak-operator",
+      "en": "Leakage carried by a shared model update",
+      "vi": "Rò rỉ đi kèm bản cập nhật mô hình chia sẻ",
+      "def_en": "The fact that gradients or weight deltas can be inverted to recover properties of the local data, ranging from whether a particular record was present to coarse reconstructions of it, which is why federated training needs noise or aggregation guarantees rather than the mere absence of raw data transfer.",
+      "def_vi": "Việc gradient hoặc phần chênh lệch trọng số có thể bị đảo ngược để khôi phục các tính chất của dữ liệu cục bộ, từ chuyện một bản ghi cụ thể có mặt hay không cho tới việc dựng lại nó ở mức thô, đây chính là lý do huấn luyện liên kết cần thêm nhiễu hoặc cần bảo đảm về phép tổng hợp chứ không thể chỉ dựa vào chuyện không chuyển dữ liệu thô.",
+      "say": "Not sending the data is not the same as not sending information about the data.",
+      "tags": [
+        "ai-security",
+        "federated"
+      ]
+    },
+    {
+      "id": "6gs2-model-governance-network",
+      "en": "Governance of a model running inside the network",
+      "vi": "Quản trị một mô hình đang chạy trong mạng",
+      "def_en": "The record of which model version is live in which node, who approved it, what data trained it and how it is withdrawn, which turns a learned component into something an auditor can examine. Without that record an incident investigation cannot even establish which model made the decision under review.",
+      "def_vi": "Bản ghi cho biết phiên bản mô hình nào đang chạy ở nút nào, ai duyệt nó, dữ liệu nào huấn luyện nó và rút nó ra bằng cách nào, nhờ đó một khối học máy trở thành thứ mà kiểm toán viên soi được. Thiếu bản ghi ấy thì một cuộc điều tra sự cố thậm chí không xác định nổi mô hình nào đã ra quyết định đang bị xem xét.",
+      "say": "If you cannot name the model version that made the decision, you cannot investigate the incident at all.",
+      "tags": [
+        "ai-security",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-explainability-regulator",
+      "en": "Explanation owed to a regulator",
+      "vi": "Lời giải trình phải đưa cho cơ quan quản lý",
+      "def_en": "A record that lets an outside authority understand why a specific user was refused admission, throttled or handed to a different cell, which is a narrower requirement than explaining the model in general. It is met by logging the inputs and the decision path for individual cases, not by publishing a description of the architecture.",
+      "def_vi": "Một bản ghi cho phép cơ quan bên ngoài hiểu vì sao một người dùng cụ thể bị từ chối kết nạp, bị bóp băng thông hoặc bị đẩy sang ô khác, yêu cầu này hẹp hơn hẳn việc giải thích mô hình nói chung. Nó được đáp ứng bằng cách ghi lại dữ liệu vào và đường đi tới quyết định cho từng trường hợp, chứ không bằng cách công bố mô tả kiến trúc.",
+      "say": "The authority asks why this user was refused, not how the architecture works in general.",
+      "tags": [
+        "ai-security",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-model-rollback",
+      "en": "Rollback path for a deployed model",
+      "vi": "Đường lùi cho mô hình đã triển khai",
+      "def_en": "The ability to return to a previous model version quickly and to keep serving traffic while doing so, which is the practical difference between a bad update and an outage. It has to be exercised regularly, because a rollback path that has never been used is an assumption rather than a capability.",
+      "def_vi": "Khả năng quay về phiên bản mô hình trước đó thật nhanh và vẫn phục vụ được lưu lượng trong lúc quay về, đây chính là khác biệt thực tế giữa một bản cập nhật tồi và một sự cố mất dịch vụ. Đường lùi này phải được diễn tập đều đặn, vì một đường lùi chưa từng dùng chỉ là một giả định chứ chưa phải một năng lực.",
+      "say": "A rollback path that has never been exercised is a plan, and plans behave differently at three in the morning.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-drift-vs-attack",
+      "en": "Telling drift apart from attack",
+      "vi": "Phân biệt trôi dữ liệu với tấn công",
+      "def_en": "Deciding whether a model's falling accuracy comes from the network changing underneath it or from someone shaping inputs on purpose, which matters because the two call for opposite responses, retraining in one case and freezing the model in the other. Retraining on attacker shaped data is how a temporary problem becomes a permanent one.",
+      "def_vi": "Quyết định xem độ chính xác của mô hình giảm là do mạng bên dưới đã đổi hay do có người cố tình nắn dữ liệu vào, việc phân biệt này quan trọng vì hai nguyên nhân đòi hai phản ứng ngược nhau, một bên là huấn luyện lại còn bên kia là đóng băng mô hình. Huấn luyện lại trên dữ liệu do kẻ tấn công nắn chính là cách biến một vấn đề tạm thời thành vĩnh viễn.",
+      "say": "Retraining is the right reflex for drift and exactly the wrong reflex for a poisoning campaign.",
+      "tags": [
+        "ai-security",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-intent-injection-network",
+      "en": "Injecting intent into an automation loop",
+      "vi": "Chèn ý định vào vòng tự động hoá",
+      "def_en": "Getting a high level goal accepted by a network that translates goals into configuration, so the harmful change is produced by the operator's own tooling and arrives with valid credentials and a complete audit trail. Reviewing configuration diffs no longer suffices once the diffs are generated from an instruction nobody inspected.",
+      "def_vi": "Làm cho một mục tiêu ở mức cao được chấp nhận bởi một mạng vốn tự dịch mục tiêu thành cấu hình, nhờ đó thay đổi gây hại lại do chính công cụ của nhà mạng sinh ra, đến kèm thông tin đăng nhập hợp lệ và một vết kiểm toán đầy đủ. Rà soát phần chênh lệch cấu hình không còn đủ khi phần chênh lệch ấy được sinh ra từ một mệnh lệnh chưa ai soi.",
+      "say": "The change was generated by our own tooling from an instruction that nobody thought to review.",
+      "tags": [
+        "ai-security",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-model-supply-chain-weights",
+      "en": "Provenance of downloaded model weights",
+      "vi": "Nguồn gốc của bộ trọng số mô hình tải về",
+      "def_en": "Knowing who produced a set of weights, what it was trained on and whether the file you hold is the file they published, which matters because weights are opaque and a hidden behaviour cannot be found by reading them. A hash that matches the publisher proves the transfer was clean and proves nothing about the training.",
+      "def_vi": "Biết ai tạo ra một bộ trọng số, nó được huấn luyện trên dữ liệu gì và tệp bạn đang giữ có đúng là tệp họ công bố hay không, điều này quan trọng vì trọng số là thứ mờ đục và một hành vi ẩn không thể tìm ra bằng cách đọc chúng. Một mã băm khớp với bên công bố chỉ chứng minh việc truyền tệp sạch sẽ và không chứng minh gì về quá trình huấn luyện.",
+      "say": "Matching the publisher's hash proves the download was clean and says nothing about what the training taught it.",
+      "tags": [
+        "ai-security",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs2-direct-to-device-auth",
+      "en": "Authentication for a handset talking straight to a satellite",
+      "vi": "Xác thực cho máy cầm tay nối thẳng lên vệ tinh",
+      "def_en": "Running the subscriber authentication exchange when the serving node is in orbit, so each round trip costs tens of milliseconds and the visibility window may end before a slow procedure completes. The design pressure is to cut round trips, and cutting them by trusting a cached context is how the security property is quietly lost.",
+      "def_vi": "Chạy thủ tục xác thực thuê bao khi nút phục vụ đang ở trên quỹ đạo, mỗi lượt đi về tốn hàng chục mili giây và cửa sổ nhìn thấy vệ tinh có thể đóng trước khi một thủ tục chậm kịp xong. Sức ép thiết kế là giảm số lượt đi về, và giảm bằng cách tin vào ngữ cảnh còn lưu trong bộ đệm chính là cách tính chất an ninh lặng lẽ mất đi.",
+      "say": "Every round trip you remove from the procedure has to be replaced by evidence, not by an assumption.",
+      "tags": [
+        "ntn",
+        "identity"
+      ]
+    },
+    {
+      "id": "6gs2-ntn-jurisdiction-routing",
+      "en": "Routing chosen by jurisdiction",
+      "vi": "Định tuyến chọn theo quyền tài phán",
+      "def_en": "Constraining which ground stations and inter satellite paths a session may use so the traffic and its metadata stay under legal regimes the operator accepts, which turns a policy question into a routing constraint. It costs capacity and latency, and it fails silently if the constraint is expressed as a preference rather than as a rule.",
+      "def_vi": "Ràng buộc phiên chỉ được dùng những trạm mặt đất và những chặng liên vệ tinh nào để lưu lượng cùng dữ liệu đi kèm nằm trong các chế độ pháp lý mà nhà mạng chấp nhận, việc này biến một câu hỏi chính sách thành một ràng buộc định tuyến. Cách làm này tốn dung lượng và độ trễ, và nó hỏng một cách âm thầm nếu ràng buộc được viết thành một ưu tiên chứ không thành một luật.",
+      "say": "Write it as a hard constraint, because a routing preference is abandoned by the first congestion event.",
+      "tags": [
+        "ntn",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-gnss-spoof-network",
+      "en": "Position spoofing that misleads the network",
+      "vi": "Giả mạo vị trí để đánh lừa mạng",
+      "def_en": "Feeding false satellite navigation signals to a device so the network receives a wrong location and then acts on it, for example by applying the wrong regulatory policy, selecting the wrong beam or accepting a device into an area based service it is not in. The network trusts a position the device computed from an unauthenticated signal.",
+      "def_vi": "Cấp tín hiệu định vị vệ tinh giả cho một thiết bị để mạng nhận được vị trí sai rồi hành động theo, chẳng hạn áp nhầm chính sách pháp lý, chọn nhầm búp sóng, hoặc nhận thiết bị vào một dịch vụ theo vùng mà nó không hề đứng trong đó. Mạng đang tin vào một vị trí do thiết bị tự tính từ một tín hiệu không hề được xác thực.",
+      "say": "The device did not lie about where it was; it faithfully reported a position computed from a signal that lied.",
+      "tags": [
+        "ntn",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-isl-key-management",
+      "en": "Key management across inter satellite links",
+      "vi": "Quản lý khoá trên các tuyến liên vệ tinh",
+      "def_en": "Establishing and refreshing keys between spacecraft whose neighbours change as the constellation moves, where a key exchange must complete inside a contact window and a revoked key must reach nodes that are currently out of contact. Revocation, not establishment, is the part that terrestrial designs handle badly here.",
+      "def_vi": "Thiết lập và làm mới khoá giữa các vệ tinh mà hàng xóm của chúng thay đổi khi chòm sao di chuyển, ở đó một lần trao khoá phải xong trong cửa sổ liên lạc và một khoá bị thu hồi phải tới được cả những nút hiện không liên lạc được. Phần mà các thiết kế mặt đất làm dở ở đây là việc thu hồi chứ không phải việc thiết lập.",
+      "say": "Establishing the key is the easy half; reaching a node that is out of contact to revoke one is the hard half.",
+      "tags": [
+        "ntn",
+        "crypto"
+      ]
+    },
+    {
+      "id": "6gs2-ntn-long-rtt-auth",
+      "en": "Authentication under a long round trip",
+      "vi": "Xác thực khi thời gian đi về kéo dài",
+      "def_en": "The effect of propagation delay on protocols whose security rests on challenge and response, since a wider timing window makes replay and relay attacks easier to hide inside normal variation. Loosening the freshness window to accommodate the orbit is the change that quietly weakens the protocol.",
+      "def_vi": "Ảnh hưởng của trễ lan truyền lên những giao thức mà tính an toàn dựa vào hỏi và đáp, vì cửa sổ thời gian rộng ra khiến tấn công phát lại và tấn công trung chuyển dễ ẩn mình trong biến động bình thường. Việc nới lỏng cửa sổ độ tươi cho vừa với quỹ đạo chính là thay đổi làm yếu giao thức một cách âm thầm.",
+      "say": "Widening the freshness window to fit the orbit is exactly the room a relay attack needs.",
+      "tags": [
+        "ntn",
+        "crypto"
+      ]
+    },
+    {
+      "id": "6gs2-satellite-lawful-access",
+      "en": "Lawful access on an orbiting relay",
+      "vi": "Quyền truy cập hợp pháp tại trạm chuyển tiếp trên quỹ đạo",
+      "def_en": "The question of which state may compel an operator to hand over traffic or metadata that passed through a satellite, which depends on where the operator is registered, where the ground station sits and where the spacecraft was licensed, rather than on where the user was. Encryption narrows what can be handed over and does not decide who may ask.",
+      "def_vi": "Câu hỏi nhà nước nào có quyền buộc nhà khai thác giao nộp lưu lượng hoặc dữ liệu đi kèm đã đi qua một vệ tinh, điều này phụ thuộc vào nơi nhà khai thác đăng ký, nơi đặt trạm mặt đất và nơi cấp phép cho vệ tinh, chứ không phụ thuộc vào nơi người dùng đang đứng. Mã hoá thu hẹp thứ có thể bị giao nộp và không quyết định được ai có quyền yêu cầu.",
+      "say": "Encryption decides what can be handed over; the licence and the ground station decide who may demand it.",
+      "tags": [
+        "ntn",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-ntn-beam-footprint-privacy",
+      "en": "Location revealed by a beam footprint",
+      "vi": "Vị trí lộ ra qua vùng phủ của búp sóng",
+      "def_en": "The fact that being served by a particular satellite beam already places a device inside an area of known size, so beam assignment records form a coarse location history even when no positioning service was used. Wide beams leak less, which is one of the few cases where lower performance genuinely buys privacy.",
+      "def_vi": "Việc được phục vụ bởi một búp sóng vệ tinh cụ thể tự nó đã đặt thiết bị vào một vùng có kích thước biết trước, nên bản ghi gán búp sóng tạo thành một lịch sử vị trí ở mức thô ngay cả khi không dùng dịch vụ định vị nào. Búp sóng rộng thì rò rỉ ít hơn, đây là một trong số ít trường hợp mà hiệu năng thấp hơn thực sự mua được quyền riêng tư.",
+      "say": "Nobody positioned the device; the record of which beam served it was already a location history.",
+      "tags": [
+        "ntn",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs2-payload-firmware-update",
+      "en": "Updating firmware on an orbiting payload",
+      "vi": "Cập nhật phần sụn cho tải trọng trên quỹ đạo",
+      "def_en": "Delivering signed code to a spacecraft over a link with short contact windows and no possibility of physical recovery, which is why the update mechanism needs a verified fallback image and an authenticated command to select it. A failed update on the ground costs a site visit, and in orbit it costs the asset.",
+      "def_vi": "Đưa mã đã ký lên một vệ tinh qua đường truyền có cửa sổ liên lạc ngắn và không còn khả năng thu hồi vật lý, vì thế cơ chế cập nhật cần một ảnh dự phòng đã được kiểm và một lệnh chọn ảnh đó có xác thực. Một lần cập nhật hỏng dưới mặt đất tốn một chuyến đi hiện trường, còn trên quỹ đạo thì mất luôn tài sản.",
+      "say": "On the ground a failed update costs a site visit, and in orbit the same failure costs the spacecraft.",
+      "tags": [
+        "ntn",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs2-ntn-store-forward-privacy",
+      "en": "Metadata left by a store and forward hop",
+      "vi": "Dữ liệu đi kèm còn lại sau một chặng lưu rồi chuyển",
+      "def_en": "A satellite that holds a message until it reaches a ground station keeps that message, its timing and its addressing on board for a while, so a design that was described as a relay is in fact a temporary store under somebody else's control. The retention is short and it is not zero, and that difference is what a threat model has to record.",
+      "def_vi": "Một vệ tinh giữ bản tin lại cho tới khi bay qua trạm mặt đất thì trong khoảng thời gian đó nó lưu trên khoang cả bản tin, thời điểm và thông tin địa chỉ, nên một thiết kế được mô tả là chuyển tiếp thật ra là một kho lưu tạm nằm dưới quyền kiểm soát của bên khác. Thời gian lưu là ngắn nhưng không phải bằng không, và khác biệt đó chính là thứ mô hình đe doạ phải ghi lại.",
+      "say": "It was described as a relay, and for several minutes it was a storage system belonging to somebody else.",
+      "tags": [
+        "ntn",
+        "privacy"
+      ]
+    },
+    {
+      "id": "6gs2-ntn-terrestrial-fallback",
+      "en": "Falling back from a satellite leg to a ground leg",
+      "vi": "Rơi từ chặng vệ tinh về chặng mặt đất",
+      "def_en": "The moment a session moves between a satellite path and a terrestrial path, where the two legs may enforce different security capabilities and the weaker of the two decides the outcome for the whole session. Attackers therefore aim to force the transition rather than to break either leg.",
+      "def_vi": "Khoảnh khắc một phiên chuyển giữa đường vệ tinh và đường mặt đất, ở đó hai chặng có thể áp các năng lực an ninh khác nhau và chặng yếu hơn quyết định kết quả cho cả phiên. Vì vậy kẻ tấn công nhắm vào việc ép xảy ra chuyển đổi chứ không nhắm vào việc bẻ gãy một trong hai chặng.",
+      "say": "Nobody needs to break either path if they can make the session choose the weaker one.",
+      "tags": [
+        "ntn",
+        "attack"
+      ]
+    },
+    {
+      "id": "6gs2-crypto-inventory",
+      "en": "Inventory of the cryptography actually in use",
+      "vi": "Kiểm kê mật mã đang thực sự dùng",
+      "def_en": "A list of every algorithm, key length, protocol version and certificate in the running network, together with which product holds each one, which is the prerequisite for any migration because you cannot replace what you have not found. Most of the difficulty lies in embedded devices and vendor products whose internal choices are undocumented.",
+      "def_vi": "Bản kê mọi thuật toán, độ dài khoá, phiên bản giao thức và chứng thư đang có trong mạng đang chạy, kèm thông tin sản phẩm nào giữ cái nào, đây là điều kiện tiên quyết cho mọi cuộc chuyển đổi vì không thể thay thứ chưa tìm ra. Phần khó nhất nằm ở các thiết bị nhúng và các sản phẩm của nhà cung cấp mà lựa chọn bên trong không hề được ghi tài liệu.",
+      "say": "You cannot plan a migration for algorithms you have not yet found, and the hardest ones live inside vendor products.",
+      "tags": [
+        "crypto",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-pqc-migration-plan",
+      "en": "Migration plan rather than algorithm choice",
+      "vi": "Kế hoạch chuyển đổi thay vì chọn thuật toán",
+      "def_en": "Treating the move to quantum resistant cryptography as a programme with an inventory, a priority order by data lifetime, a dependency map of vendors and a rehearsed rollback, rather than as a decision about which algorithm to name in a specification. The algorithm question is settled by standards bodies; the programme question is settled by you.",
+      "def_vi": "Coi việc chuyển sang mật mã kháng lượng tử là một chương trình có kiểm kê, có thứ tự ưu tiên theo tuổi thọ dữ liệu, có bản đồ phụ thuộc nhà cung cấp và có diễn tập đường lùi, thay vì coi nó là quyết định nêu tên thuật toán nào trong một bản đặc tả. Câu hỏi về thuật toán do các tổ chức chuẩn hoá trả lời, còn câu hỏi về chương trình thì chỉ bạn trả lời được.",
+      "say": "The standards body chooses the algorithm, and you still own the inventory, the order and the rollback.",
+      "tags": [
+        "crypto",
+        "governance"
+      ]
+    },
+    {
+      "id": "6gs2-harvest-now-decrypt-later-ran",
+      "en": "Traffic captured today and read years later",
+      "vi": "Lưu lượng thu hôm nay đọc được nhiều năm sau",
+      "def_en": "The reason migration urgency depends on how long the data must stay confidential rather than on when a capable quantum computer appears, since an adversary can record ciphertext now and decrypt it once the capability exists. It reorders priorities toward long lived secrets such as subscriber keys and lawful interception material.",
+      "def_vi": "Lý do khiến mức cấp bách của việc chuyển đổi phụ thuộc vào thời gian dữ liệu cần giữ kín chứ không phụ thuộc vào lúc nào xuất hiện máy tính lượng tử đủ mạnh, vì đối phương có thể thu bản mã ngay bây giờ rồi giải mã khi năng lực ấy có. Điều này xếp lại thứ tự ưu tiên, đẩy các bí mật đời dài như khoá thuê bao và dữ liệu chặn thu hợp pháp lên trước.",
+      "say": "Ask how long this must stay secret, because that number sets the deadline, not the date of the machine.",
+      "tags": [
+        "crypto",
+        "lifecycle"
+      ]
+    },
+    {
+      "id": "6gs2-hybrid-key-exchange-deploy",
+      "en": "Running two key exchanges at once",
+      "vi": "Chạy đồng thời hai phép trao khoá",
+      "def_en": "Combining a classical and a quantum resistant exchange so the session key is safe if either one holds, which buys protection against both a future quantum attack and an implementation flaw in the newer scheme. The cost is larger handshakes, which matters most on constrained radio links and on the very devices hardest to upgrade later.",
+      "def_vi": "Ghép một phép trao khoá cổ điển với một phép kháng lượng tử để khoá phiên vẫn an toàn nếu một trong hai còn đứng vững, cách này mua được sự bảo vệ trước cả tấn công lượng tử tương lai lẫn lỗi cài đặt trong phương án mới. Cái giá là bản bắt tay lớn hơn, điều này nặng nhất trên các tuyến vô tuyến eo hẹp và đúng trên những thiết bị khó nâng cấp về sau nhất.",
+      "say": "Two exchanges cost bytes on every handshake and remove the need to bet on either one being right.",
+      "tags": [
+        "crypto",
+        "design"
+      ]
+    },
+    {
+      "id": "6gs2-crypto-agility-cost",
+      "en": "The cost of being able to change algorithm",
+      "vi": "Cái giá của việc đổi được thuật toán",
+      "def_en": "Building negotiation, versioning and update paths so a cryptographic primitive can be replaced without replacing the product, which is paid for in complexity and in the extra attack surface that negotiation itself creates. Downgrade protection is the part that is usually forgotten, and it is the part an attacker uses.",
+      "def_vi": "Xây sẵn cơ chế thương lượng, đánh số phiên bản và đường cập nhật để một nguyên thuỷ mật mã thay được mà không phải thay cả sản phẩm, cái này phải trả bằng độ phức tạp và bằng phần bề mặt tấn công mà chính việc thương lượng sinh ra. Phần hay bị quên là chống hạ cấp, và đó đúng là phần kẻ tấn công dùng tới.",
+      "say": "Negotiating the algorithm is what makes replacement possible, and it is also what a downgrade attack needs.",
+      "tags": [
+        "crypto",
+        "design"
+      ]
+    },
+    {
+      "id": "6gs2-responsibility-split-vendor",
+      "en": "Responsibility split between operator and vendor",
+      "vi": "Chia trách nhiệm giữa nhà mạng và nhà cung cấp",
+      "def_en": "The written division of who patches, who monitors, who holds the keys and who answers to the regulator, whose value shows up during an incident when both parties are otherwise free to describe the work as belonging to the other. The gaps are found by walking through a specific incident on paper rather than by reading the contract.",
+      "def_vi": "Bản phân chia thành văn về việc ai vá lỗi, ai giám sát, ai giữ khoá và ai trả lời cơ quan quản lý, giá trị của nó lộ ra lúc có sự cố, khi mà nếu không có bản này thì cả hai bên đều tự do mô tả phần việc đó là của bên kia. Muốn tìm khoảng hở thì hãy diễn lại một sự cố cụ thể trên giấy chứ đừng đọc hợp đồng.",
+      "say": "Walk one specific incident through the contract on paper, and the gaps appear within an hour.",
+      "tags": [
+        "governance",
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "6gs2-incident-reporting-clock",
+      "en": "The clock that starts when an incident is known",
+      "vi": "Đồng hồ bắt đầu chạy khi sự cố được biết tới",
+      "def_en": "The regulatory deadline for reporting, which usually begins at the moment of awareness rather than at the moment of compromise, so detection speed decides whether you report early with few facts or late with an explanation. Teams that wait for certainty before reporting are the ones that miss the deadline.",
+      "def_vi": "Thời hạn báo cáo theo quy định, thường tính từ lúc biết chứ không tính từ lúc bị xâm nhập, nên tốc độ phát hiện quyết định việc bạn báo sớm với ít dữ kiện hay báo muộn kèm một lời giải thích. Đội nào chờ chắc chắn rồi mới báo thì đúng là đội trễ hạn.",
+      "say": "The deadline runs from when you knew, so waiting for certainty is how teams miss it.",
+      "tags": [
+        "governance",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-equipment-certification",
+      "en": "Security certification for network equipment",
+      "vi": "Chứng nhận an ninh cho thiết bị mạng",
+      "def_en": "An assessment against a defined protection profile and a defined configuration, which says the product met a specification in a laboratory and says nothing about the version you deployed or the settings you chose. The certificate is a floor with a scope printed on it, and reading the scope is the whole skill.",
+      "def_vi": "Một cuộc đánh giá đối chiếu với một bộ yêu cầu bảo vệ và một cấu hình đã xác định, nó nói rằng sản phẩm đạt một bản đặc tả trong phòng thí nghiệm và không nói gì về phiên bản bạn đã triển khai hay các thiết lập bạn đã chọn. Chứng nhận là một mức sàn có in kèm phạm vi, và đọc được phạm vi ấy mới là toàn bộ kỹ năng.",
+      "say": "Read the scope on the certificate, because the tested configuration is rarely the one you are running.",
+      "tags": [
+        "governance",
+        "certification"
+      ]
+    },
+    {
+      "id": "6gs2-assurance-vs-compliance",
+      "en": "Assurance measured against compliance",
+      "vi": "Bảo đảm đo bằng bằng chứng so với tuân thủ",
+      "def_en": "The difference between evidence that a control works in your network today and a record that a control was declared present at audit time, which diverge as soon as the network changes and nobody re-tests. Compliance answers whether the paperwork is in order, and assurance answers whether an attacker would be stopped.",
+      "def_vi": "Khác biệt giữa bằng chứng cho thấy một biện pháp đang hoạt động trong mạng của bạn hôm nay với một bản ghi nói rằng biện pháp ấy được khai là có vào lúc kiểm toán, hai thứ này tách nhau ngay khi mạng thay đổi mà không ai thử lại. Tuân thủ trả lời hồ sơ có đủ hay không, còn bảo đảm trả lời kẻ tấn công có bị chặn hay không.",
+      "say": "One tells you the paperwork is in order, the other tells you the attacker would have been stopped.",
+      "tags": [
+        "governance",
+        "metric"
+      ]
+    },
+    {
+      "id": "6gs2-vuln-disclosure-operator",
+      "en": "Disclosure window seen from the operator side",
+      "vi": "Cửa sổ công bố lỗ hổng nhìn từ phía nhà mạng",
+      "def_en": "The interval between a flaw becoming public and the operator being able to install a vendor fix on every affected node, during which the only available protection is a compensating control such as blocking an interface or restricting an interface to known peers. Patch availability and patch deployment are different dates, and the second one is the one that matters.",
+      "def_vi": "Khoảng giữa lúc một lỗ hổng thành công khai và lúc nhà mạng cài được bản sửa của nhà cung cấp lên mọi nút bị ảnh hưởng, trong khoảng đó biện pháp duy nhất còn dùng được là một biện pháp bù, chẳng hạn chặn một giao diện hoặc giới hạn giao diện ấy chỉ cho các bên đã biết. Ngày có bản vá và ngày triển khai xong bản vá là hai ngày khác nhau, và ngày thứ hai mới là ngày quan trọng.",
+      "say": "The vendor published a fix on Tuesday and our last node received it five weeks later.",
+      "tags": [
+        "governance",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-security-by-default-config",
+      "en": "The configuration a product ships with",
+      "vi": "Cấu hình mà sản phẩm xuất xưởng kèm theo",
+      "def_en": "The settings that are active before anyone tunes the box, which decide the security of every site where deployment was rushed, and which is why a permissive default is a fleet wide weakness rather than a documentation problem. A hardening guide only protects the nodes whose installer read it.",
+      "def_vi": "Các thiết lập đang bật trước khi có ai chỉnh máy, chúng quyết định mức an ninh của mọi điểm triển khai vội, và đó là lý do một mặc định dễ dãi là điểm yếu trên toàn bộ đội thiết bị chứ không phải một vấn đề tài liệu. Một cẩm nang siết cấu hình chỉ bảo vệ được những nút mà người lắp đặt có đọc nó.",
+      "say": "A hardening guide protects only the sites where somebody had time to read it before the deadline.",
+      "tags": [
+        "governance",
+        "operations"
+      ]
+    },
+    {
+      "id": "6gs2-threat-model-written-down",
+      "en": "A threat model somebody can disagree with",
+      "vi": "Mô hình đe doạ mà người khác phản bác được",
+      "def_en": "A statement of who the adversary is, what they can reach, what they already know and what they are trying to achieve, written concretely enough that a colleague can point at one line and say it is wrong. A model nobody can contradict is a description of hopes rather than an engineering input.",
+      "def_vi": "Bản nêu rõ đối phương là ai, chạm được tới đâu, đã biết sẵn những gì và đang muốn đạt điều gì, viết cụ thể tới mức một đồng nghiệp chỉ được vào một dòng và nói dòng đó sai. Một mô hình mà không ai bác được thì là bản mô tả những điều mong muốn chứ không phải một dữ liệu đầu vào cho kỹ thuật.",
+      "say": "If no colleague can point at a line and call it wrong, you have written hopes rather than a threat model.",
+      "tags": [
+        "governance",
+        "design"
+      ]
+    }
+  ]
+}

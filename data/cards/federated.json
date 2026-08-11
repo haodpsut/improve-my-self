@@ -1980,6 +1980,582 @@
         "privacy",
         "evaluation"
       ]
+    },
+    {
+      "id": "f3-smoothness",
+      "en": "L-smooth objective",
+      "vi": "Hàm mục tiêu trơn với hằng số L",
+      "def_en": "A loss whose gradient changes no faster than a constant times the change in weights, which is what lets an analysis choose a safe step size.",
+      "def_vi": "Hàm mất mát có gradient biến thiên không nhanh hơn một hằng số nhân với mức thay đổi của trọng số, nhờ đó phần phân tích chọn được bước học an toàn.",
+      "say": "Nearly every convergence proof opens by assuming an L-smooth objective.",
+      "tags": [
+        "theory",
+        "convergence"
+      ]
+    },
+    {
+      "id": "f3-strong-convex",
+      "en": "Strongly convex objective",
+      "vi": "Hàm mục tiêu lồi mạnh",
+      "def_en": "A loss that curves upward at least as fast as a quadratic, giving a unique minimum and a linear rate, an assumption deep networks do not satisfy.",
+      "def_vi": "Hàm mất mát cong lên ít nhất nhanh bằng một hàm bậc hai, cho cực tiểu duy nhất và tốc độ tuyến tính, giả thiết mà mạng sâu không thoả.",
+      "say": "Strong convexity buys a clean rate that no deep network is entitled to.",
+      "tags": [
+        "theory",
+        "convergence"
+      ]
+    },
+    {
+      "id": "f3-bounded-variance",
+      "en": "Bounded gradient variance",
+      "vi": "Phương sai gradient bị chặn",
+      "def_en": "The assumption that a stochastic gradient stays within a fixed variance of the true local gradient, which sets how much noise the averaging must absorb.",
+      "def_vi": "Giả thiết rằng gradient ngẫu nhiên nằm trong một phương sai cố định quanh gradient cục bộ thật, quy định lượng nhiễu mà phép trung bình phải hấp thụ.",
+      "say": "Bounded variance is the knob that decides how large a local batch has to be.",
+      "tags": [
+        "theory",
+        "convergence"
+      ]
+    },
+    {
+      "id": "f3-bounded-dissimilarity",
+      "en": "Bounded heterogeneity assumption",
+      "vi": "Giả thiết bất đồng nhất bị chặn",
+      "def_en": "A ceiling placed on how far a client gradient may sit from the average gradient, without which most federated proofs say nothing at all.",
+      "def_vi": "Mức trần đặt lên khoảng cách giữa gradient của một máy khách và gradient trung bình, thiếu nó thì phần lớn chứng minh liên kết không nói được gì.",
+      "say": "Nobody has ever measured that heterogeneity ceiling on real client data.",
+      "tags": [
+        "theory",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f3-rounds-vs-steps",
+      "en": "Communication rounds versus local steps",
+      "vi": "Số vòng liên lạc so với số bước cục bộ",
+      "def_en": "The central trade in federated optimisation, since more local steps cut the number of rounds but let each client wander further from the shared objective.",
+      "def_vi": "Đánh đổi trung tâm của tối ưu liên kết, vì tăng số bước cục bộ thì giảm số vòng nhưng khiến mỗi máy khách đi xa hơn khỏi mục tiêu chung.",
+      "say": "Doubling the local steps almost never halves the rounds you really need.",
+      "tags": [
+        "theory",
+        "communication"
+      ]
+    },
+    {
+      "id": "f3-linear-speedup",
+      "en": "Linear speedup in the number of clients",
+      "vi": "Tăng tốc tuyến tính theo số máy khách",
+      "def_en": "A rate whose noise term shrinks in proportion to how many clients report each round, which holds only while the sampling stays unbiased.",
+      "def_vi": "Tốc độ mà thành phần nhiễu giảm tỉ lệ với số máy khách báo cáo mỗi vòng, chỉ đúng chừng nào phép lấy mẫu còn không chệch.",
+      "say": "Linear speedup vanishes the moment slow devices stop reporting at all.",
+      "tags": [
+        "theory",
+        "convergence"
+      ]
+    },
+    {
+      "id": "f3-drift-term",
+      "en": "Drift term in the error bound",
+      "vi": "Thành phần trôi trong chặn sai số",
+      "def_en": "The part of a convergence bound that does not vanish as rounds grow, standing for how far local solutions pull away from the global one.",
+      "def_vi": "Phần của chặn hội tụ không triệt tiêu khi số vòng tăng, đại diện cho mức mà nghiệm cục bộ kéo ra xa nghiệm toàn cục.",
+      "say": "A stubborn drift term is why the curve flattens well above the target.",
+      "tags": [
+        "theory",
+        "non-iid"
+      ]
+    },
+    {
+      "id": "f3-sampling-bias-objective",
+      "en": "Objective bias from uneven sampling",
+      "vi": "Độ lệch mục tiêu do lấy mẫu không đều",
+      "def_en": "When clients are drawn with probabilities that do not match their weight in the target loss, training quietly optimises a different objective.",
+      "def_vi": "Khi các máy khách được chọn với xác suất không khớp trọng số của họ trong hàm mất mát mục tiêu, quá trình huấn luyện âm thầm tối ưu một mục tiêu khác.",
+      "say": "Sampling whoever is charging optimises the loss of people who charge nightly.",
+      "tags": [
+        "theory",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f3-vacuous-bound",
+      "en": "Vacuous convergence guarantee",
+      "vi": "Bảo đảm hội tụ rỗng nghĩa",
+      "def_en": "A theorem that is true yet uninformative, because its constants cannot be measured or its bound is looser than the trivial one.",
+      "def_vi": "Một định lý đúng nhưng không cho thông tin, vì các hằng số không đo được hoặc chặn của nó còn lỏng hơn chặn tầm thường.",
+      "say": "A bound bigger than the starting loss tells you nothing about the run.",
+      "tags": [
+        "theory",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f3-stationary-point",
+      "en": "Stationary point criterion",
+      "vi": "Tiêu chí điểm dừng",
+      "def_en": "In the non-convex case convergence is stated as the expected squared gradient norm falling below a threshold, not as reaching any particular minimum.",
+      "def_vi": "Trong trường hợp không lồi, hội tụ được phát biểu là kỳ vọng bình phương chuẩn gradient tụt xuống dưới một ngưỡng, chứ không phải đạt tới một cực tiểu cụ thể nào.",
+      "say": "A small gradient norm says nothing about how good that point really is.",
+      "tags": [
+        "theory",
+        "convergence"
+      ]
+    },
+    {
+      "id": "f3-pl-condition",
+      "en": "Polyak Lojasiewicz condition",
+      "vi": "Điều kiện Polyak Lojasiewicz",
+      "def_en": "A weaker substitute for strong convexity that still yields a linear rate, requiring the gradient norm to grow with the gap to the optimal loss.",
+      "def_vi": "Một thay thế yếu hơn lồi mạnh nhưng vẫn cho tốc độ tuyến tính, đòi hỏi chuẩn gradient tăng theo khoảng cách tới giá trị mất mát tối ưu.",
+      "say": "The Polyak condition rescues the rate without demanding true convexity.",
+      "tags": [
+        "theory",
+        "convergence"
+      ]
+    },
+    {
+      "id": "f3-two-step-sizes",
+      "en": "Server and client step sizes",
+      "vi": "Bước học ở máy chủ và ở máy khách",
+      "def_en": "Two separate learning rates, one used inside local training and one applied to the aggregated update, which are tuned on different scales.",
+      "def_vi": "Hai bước học tách biệt, một dùng trong huấn luyện cục bộ và một áp lên bản cập nhật đã tổng hợp, được tinh chỉnh trên hai thang khác nhau.",
+      "say": "Shrinking the client rate while lifting the server rate often steadies a run.",
+      "tags": [
+        "theory",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f3-vfl-alignment",
+      "en": "Sample alignment in vertical federation",
+      "vi": "Ghép mẫu trong liên kết theo chiều dọc",
+      "def_en": "The step that finds which records two parties hold about the same person, so their different columns can be joined for training.",
+      "def_vi": "Bước tìm ra những bản ghi mà hai bên cùng nắm về một người, để các cột dữ liệu khác nhau của họ ghép được với nhau khi huấn luyện.",
+      "say": "Alignment has to reveal the overlap without revealing who sits outside it.",
+      "tags": [
+        "vertical",
+        "method"
+      ]
+    },
+    {
+      "id": "f3-label-owner",
+      "en": "Label owner party",
+      "vi": "Bên nắm nhãn",
+      "def_en": "In a vertical setup only one participant holds the target column, which makes that party the active one and the others feature providers.",
+      "def_vi": "Trong cấu hình theo chiều dọc chỉ một bên nắm cột nhãn, khiến bên đó thành bên chủ động còn các bên kia chỉ cung cấp đặc trưng.",
+      "say": "Whoever owns the labels ends up owning the whole training loop.",
+      "tags": [
+        "vertical",
+        "governance"
+      ]
+    },
+    {
+      "id": "f3-bottom-model",
+      "en": "Bottom model",
+      "vi": "Mô hình tầng dưới",
+      "def_en": "The lower layers a feature holding party runs on its own columns, producing an embedding that is the only thing it sends onward.",
+      "def_vi": "Các tầng dưới mà một bên nắm đặc trưng chạy trên cột dữ liệu của mình, sinh ra biểu diễn nhúng, thứ duy nhất bên đó gửi đi tiếp.",
+      "say": "The bottom model never leaves the party that owns those columns.",
+      "tags": [
+        "vertical",
+        "architecture"
+      ]
+    },
+    {
+      "id": "f3-cut-layer",
+      "en": "Cut layer",
+      "vi": "Tầng cắt",
+      "def_en": "The boundary where a split network is divided between parties, and the point whose activations decide how much a partner can infer.",
+      "def_vi": "Ranh giới nơi mạng bị chia giữa các bên, và cũng là điểm mà kích hoạt tại đó quyết định đối tác suy ra được bao nhiêu.",
+      "say": "Push the cut layer deeper and the partner sees a blurrier picture.",
+      "tags": [
+        "vertical",
+        "architecture"
+      ]
+    },
+    {
+      "id": "f3-top-model",
+      "en": "Top model",
+      "vi": "Mô hình tầng trên",
+      "def_en": "The upper part of a vertically split network, held by the label owner, which consumes the embeddings sent up by every feature party.",
+      "def_vi": "Phần trên của mạng bị chia theo chiều dọc, do bên nắm nhãn giữ, nhận các biểu diễn nhúng mà mọi bên đặc trưng gửi lên.",
+      "say": "The top model is where the loss is formed and where the gradients begin.",
+      "tags": [
+        "vertical",
+        "architecture"
+      ]
+    },
+    {
+      "id": "f3-rep-leak",
+      "en": "Leakage through intermediate representations",
+      "vi": "Rò rỉ qua biểu diễn trung gian",
+      "def_en": "Embeddings exchanged between parties are not raw data yet still carry enough signal to reconstruct attributes of the original record.",
+      "def_vi": "Biểu diễn nhúng trao đổi giữa các bên không phải dữ liệu thô nhưng vẫn mang đủ tín hiệu để tái dựng các thuộc tính của bản ghi gốc.",
+      "say": "An embedding is a compressed record, not an anonymous one.",
+      "tags": [
+        "vertical",
+        "attack"
+      ]
+    },
+    {
+      "id": "f3-label-inference-vfl",
+      "en": "Label inference in vertical federation",
+      "vi": "Suy luận nhãn trong liên kết theo chiều dọc",
+      "def_en": "A feature holding party recovers the hidden target column by reading the direction and size of the gradients it receives from the label owner.",
+      "def_vi": "Một bên nắm đặc trưng khôi phục lại cột nhãn bị giấu bằng cách đọc hướng và độ lớn của gradient nhận về từ bên nắm nhãn.",
+      "say": "The party that never sees a label can often guess it from the gradient sign.",
+      "tags": [
+        "vertical",
+        "attack"
+      ]
+    },
+    {
+      "id": "f3-transfer-fl",
+      "en": "Federated transfer learning",
+      "vi": "Học liên kết theo chuyển giao",
+      "def_en": "A setting where parties share neither the same users nor the same features, so a mapping is learned on the thin overlap and carried to the rest.",
+      "def_vi": "Tình huống mà các bên không chung người dùng cũng không chung đặc trưng, nên một ánh xạ được học trên phần giao mỏng rồi mang sang phần còn lại.",
+      "say": "With almost no overlap the mapping is learned on very few examples.",
+      "tags": [
+        "vertical",
+        "taxonomy"
+      ]
+    },
+    {
+      "id": "f3-fed-lora",
+      "en": "Federated low rank adaptation",
+      "vi": "Thích nghi hạng thấp trong môi trường liên kết",
+      "def_en": "Clients freeze the base model and train only a pair of small factor matrices, so the update that travels each round is a tiny fraction of the weights.",
+      "def_vi": "Máy khách đóng băng mô hình gốc và chỉ huấn luyện một cặp ma trận thừa số nhỏ, nên bản cập nhật di chuyển mỗi vòng chỉ bằng một phần rất nhỏ của trọng số.",
+      "say": "Freezing the base turns a heavy upload into a light one.",
+      "tags": [
+        "large-model",
+        "communication"
+      ]
+    },
+    {
+      "id": "f3-adapter-only",
+      "en": "Adapter only transmission",
+      "vi": "Chỉ truyền bộ điều hợp",
+      "def_en": "A protocol in which the frozen backbone is distributed once and every later round carries only the small adapter modules in both directions.",
+      "def_vi": "Giao thức mà phần thân đóng băng chỉ phân phối một lần, còn mọi vòng sau chỉ chuyển các mô đun điều hợp nhỏ theo cả hai chiều.",
+      "say": "Ship the backbone once and let only the adapters travel after that.",
+      "tags": [
+        "large-model",
+        "communication"
+      ]
+    },
+    {
+      "id": "f3-lora-averaging",
+      "en": "Averaging low rank factors",
+      "vi": "Trung bình hoá các thừa số hạng thấp",
+      "def_en": "Averaging the two factor matrices separately does not equal the average of their products, so naive aggregation of adapters distorts the update.",
+      "def_vi": "Trung bình riêng hai ma trận thừa số không bằng trung bình của tích chúng, nên tổng hợp bộ điều hợp một cách ngây thơ sẽ làm méo bản cập nhật.",
+      "say": "The product of averages is not the average of products.",
+      "tags": [
+        "large-model",
+        "aggregation"
+      ]
+    },
+    {
+      "id": "f3-fed-prompt-tuning",
+      "en": "Federated prompt tuning",
+      "vi": "Tinh chỉnh lời nhắc trong môi trường liên kết",
+      "def_en": "Only a short block of learned input vectors is trained and shared, leaving the model itself untouched on every device.",
+      "def_vi": "Chỉ một khối vectơ đầu vào học được là được huấn luyện và chia sẻ, còn bản thân mô hình giữ nguyên trên mọi thiết bị.",
+      "say": "Tuning a prompt moves kilobytes where tuning weights would move gigabytes.",
+      "tags": [
+        "large-model",
+        "method"
+      ]
+    },
+    {
+      "id": "f3-public-proxy",
+      "en": "Public proxy dataset",
+      "vi": "Tập dữ liệu công khai làm trung gian",
+      "def_en": "An unlabelled public set on which clients and server compare predictions, letting knowledge move between them without any weights being shared.",
+      "def_vi": "Một tập công khai không nhãn mà máy khách và máy chủ cùng đối chiếu dự đoán trên đó, để tri thức đi qua lại mà không phải chia sẻ trọng số nào.",
+      "say": "Two models can agree on a public set without either revealing its weights.",
+      "tags": [
+        "large-model",
+        "distillation"
+      ]
+    },
+    {
+      "id": "f3-logit-exchange",
+      "en": "Logit exchange",
+      "vi": "Trao đổi logit",
+      "def_en": "Clients upload their output scores on shared inputs instead of model updates, which decouples the payload size from the size of the model.",
+      "def_vi": "Máy khách tải lên điểm đầu ra trên các đầu vào dùng chung thay vì bản cập nhật mô hình, nhờ đó kích thước gói tin tách khỏi kích thước mô hình.",
+      "say": "Sending scores instead of weights keeps the payload the same whatever the model.",
+      "tags": [
+        "large-model",
+        "distillation"
+      ]
+    },
+    {
+      "id": "f3-activation-memory",
+      "en": "Activation memory on the client",
+      "vi": "Bộ nhớ kích hoạt ở máy khách",
+      "def_en": "The peak memory a backward pass needs to keep intermediate values alive, which is what stops a weak phone rather than the parameter count.",
+      "def_vi": "Đỉnh bộ nhớ mà lượt lan truyền ngược cần để giữ các giá trị trung gian, và đó mới là thứ chặn một chiếc điện thoại yếu chứ không phải số tham số.",
+      "say": "The phone runs out of memory on activations long before it runs out on weights.",
+      "tags": [
+        "large-model",
+        "system"
+      ]
+    },
+    {
+      "id": "f3-frozen-quantised-base",
+      "en": "Frozen quantised base model",
+      "vi": "Mô hình gốc đóng băng đã lượng tử hoá",
+      "def_en": "The untrained backbone is stored at low precision on the device while the small trainable part stays at full precision, cutting resident memory sharply.",
+      "def_vi": "Phần thân không huấn luyện được lưu ở độ chính xác thấp trên thiết bị, còn phần nhỏ huấn luyện được giữ độ chính xác đầy đủ, giúp cắt mạnh bộ nhớ thường trú.",
+      "say": "Store the frozen trunk cheaply and keep precision only where gradients flow.",
+      "tags": [
+        "large-model",
+        "system"
+      ]
+    },
+    {
+      "id": "f3-shapley",
+      "en": "Shapley value",
+      "vi": "Giá trị Shapley",
+      "def_en": "A way of splitting the credit for a joint result by averaging what each participant adds across every possible order of joining.",
+      "def_vi": "Cách chia công cho một kết quả chung bằng cách lấy trung bình phần mà mỗi bên đóng thêm trên mọi thứ tự tham gia có thể có.",
+      "say": "The Shapley value averages your marginal worth over every joining order.",
+      "tags": [
+        "incentive",
+        "fairness"
+      ]
+    },
+    {
+      "id": "f3-leave-one-out",
+      "en": "Leave one out contribution",
+      "vi": "Đóng góp theo phép bỏ một bên",
+      "def_en": "A cheap credit measure that retrains without a single client and reports the accuracy lost, which understates the worth of any redundant party.",
+      "def_vi": "Thước đo công đóng góp rẻ tiền, huấn luyện lại khi bỏ một máy khách rồi báo mức độ chính xác mất đi, thước này đánh giá thấp các bên có dữ liệu trùng lặp.",
+      "say": "Drop one client and the others quietly cover for it.",
+      "tags": [
+        "incentive",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f3-qffl",
+      "en": "Fair resource allocation objective",
+      "vi": "Mục tiêu phân bổ công bằng",
+      "def_en": "A reweighted loss that raises the exponent on each client term, pulling the solution toward the clients that are doing worst.",
+      "def_vi": "Hàm mất mát đánh trọng số lại bằng cách nâng số mũ trên phần của từng máy khách, kéo nghiệm về phía những máy khách đang kém nhất.",
+      "say": "Raise the exponent and the poorly served clients start to matter more.",
+      "tags": [
+        "fairness",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "f3-accuracy-variance",
+      "en": "Accuracy variance across clients",
+      "vi": "Phương sai độ chính xác giữa các máy khách",
+      "def_en": "The spread of per client accuracy around the mean, which is the quantity a fairness claim has to report alongside the headline number.",
+      "def_vi": "Độ phân tán của độ chính xác từng máy khách quanh giá trị trung bình, đại lượng mà một khẳng định về công bằng buộc phải báo cáo kèm con số tổng.",
+      "say": "A mean without a spread hides whoever the model serves worst.",
+      "tags": [
+        "fairness",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f3-misreported-size",
+      "en": "Misreporting dataset size",
+      "vi": "Khai man kích thước tập dữ liệu",
+      "def_en": "A client inflates the sample count it declares so that weighted aggregation gives its update more influence and its payout more weight.",
+      "def_vi": "Máy khách thổi phồng số mẫu mình khai báo để phép tổng hợp có trọng số cho bản cập nhật của nó nhiều ảnh hưởng hơn và phần thưởng lớn hơn.",
+      "say": "Nothing in the protocol forces a client to count its own records honestly.",
+      "tags": [
+        "incentive",
+        "attack"
+      ]
+    },
+    {
+      "id": "f3-truthful-mechanism",
+      "en": "Truthful reporting mechanism",
+      "vi": "Cơ chế khai báo trung thực",
+      "def_en": "A payment rule designed so that a participant maximises its own reward exactly when it declares its data and effort honestly.",
+      "def_vi": "Quy tắc chi trả được thiết kế sao cho một bên tham gia tối đa hoá phần thưởng của mình đúng lúc khai báo trung thực về dữ liệu và công sức.",
+      "say": "A good payment rule makes honesty the selfish choice.",
+      "tags": [
+        "incentive",
+        "mechanism"
+      ]
+    },
+    {
+      "id": "f3-recycled-update",
+      "en": "Recycled model update",
+      "vi": "Bản cập nhật xào lại",
+      "def_en": "A participant resubmits a lightly perturbed copy of an earlier update instead of training, collecting reward while contributing nothing new.",
+      "def_vi": "Một bên tham gia nộp lại bản sao đã nhiễu nhẹ của bản cập nhật trước thay vì huấn luyện, vẫn nhận thưởng mà không đóng góp gì mới.",
+      "say": "An update that barely moves may mean the client never trained at all.",
+      "tags": [
+        "incentive",
+        "attack"
+      ]
+    },
+    {
+      "id": "f3-collaboration-gain",
+      "en": "Collaboration gain",
+      "vi": "Mức lợi khi hợp tác",
+      "def_en": "The accuracy a participant obtains from the federation minus what it could reach alone, which is the only figure that justifies its joining.",
+      "def_vi": "Độ chính xác một bên nhận được từ liên kết trừ đi mức nó tự đạt được một mình, con số duy nhất biện minh cho việc bên đó tham gia.",
+      "say": "A data rich hospital joins only if the federation beats its own model.",
+      "tags": [
+        "incentive",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f3-blind-debugging",
+      "en": "Debugging without seeing data",
+      "vi": "Gỡ lỗi khi không nhìn thấy dữ liệu",
+      "def_en": "Diagnosing a training failure using only aggregate statistics and synthetic reproductions, because no engineer may open a client sample.",
+      "def_vi": "Chẩn đoán một lỗi huấn luyện chỉ bằng thống kê tổng hợp và bản tái dựng nhân tạo, vì không kỹ sư nào được phép mở một mẫu của máy khách.",
+      "say": "You cannot print the bad batch, so you have to infer it.",
+      "tags": [
+        "operations",
+        "challenge"
+      ]
+    },
+    {
+      "id": "f3-federated-analytics",
+      "en": "Federated analytics",
+      "vi": "Phân tích liên kết",
+      "def_en": "Running aggregate queries such as counts and quantiles across devices under the same privacy machinery as training, without training a model.",
+      "def_vi": "Chạy các truy vấn tổng hợp như đếm và phân vị trên nhiều thiết bị dưới cùng bộ máy riêng tư của huấn luyện, mà không huấn luyện mô hình nào.",
+      "say": "Sometimes you only need a histogram, not a model.",
+      "tags": [
+        "operations",
+        "method"
+      ]
+    },
+    {
+      "id": "f3-staged-rollout",
+      "en": "Staged model rollout",
+      "vi": "Phát hành mô hình theo giai đoạn",
+      "def_en": "A new model is served to a small slice of devices first, and the slice widens only after aggregate quality signals stay healthy.",
+      "def_vi": "Mô hình mới được phục vụ trước cho một lát nhỏ thiết bị, lát đó chỉ mở rộng khi các tín hiệu chất lượng tổng hợp còn tốt.",
+      "say": "Give the new model to a sliver of the fleet and watch before widening.",
+      "tags": [
+        "operations",
+        "deployment"
+      ]
+    },
+    {
+      "id": "f3-config-fanout",
+      "en": "Configuration fan out",
+      "vi": "Phát tán cấu hình",
+      "def_en": "Pushing a training configuration to a huge device population, where a single bad field can waste days of work before anyone notices.",
+      "def_vi": "Đẩy một cấu hình huấn luyện xuống lượng thiết bị rất lớn, nơi chỉ một trường sai cũng có thể phí nhiều ngày công trước khi ai đó nhận ra.",
+      "say": "One wrong field in the config reaches a million phones before lunch.",
+      "tags": [
+        "operations",
+        "system"
+      ]
+    },
+    {
+      "id": "f3-round-rollback",
+      "en": "Rolling back a bad round",
+      "vi": "Hoàn tác một vòng huấn luyện hỏng",
+      "def_en": "Restoring the previous global model after a round degraded it, which is only possible if every round is versioned and stored.",
+      "def_vi": "Khôi phục mô hình toàn cục trước đó sau khi một vòng làm nó tệ đi, việc chỉ làm được nếu mọi vòng đều được đánh phiên bản và lưu lại.",
+      "say": "Keep every checkpoint or you cannot undo the round that broke things.",
+      "tags": [
+        "operations",
+        "deployment"
+      ]
+    },
+    {
+      "id": "f3-client-version-skew",
+      "en": "Client library version skew",
+      "vi": "Lệch phiên bản thư viện ở máy khách",
+      "def_en": "Devices run different releases of the training code at the same time, so a single cohort can mix incompatible preprocessing or optimiser behaviour.",
+      "def_vi": "Các thiết bị chạy những bản phát hành khác nhau của mã huấn luyện cùng lúc, nên một nhóm có thể trộn lẫn các cách tiền xử lý hoặc hành vi tối ưu không tương thích.",
+      "say": "Half the fleet upgrades this week and the other half never will.",
+      "tags": [
+        "operations",
+        "system"
+      ]
+    },
+    {
+      "id": "f3-exact-unlearning",
+      "en": "Exact unlearning",
+      "vi": "Quên máy chính xác",
+      "def_en": "Producing a model identical in distribution to one trained without the removed records, which in general means retraining from scratch.",
+      "def_vi": "Tạo ra mô hình giống hệt về phân phối với mô hình huấn luyện không có các bản ghi bị xoá, việc nói chung đồng nghĩa với huấn luyện lại từ đầu.",
+      "say": "The only certain way to forget a record is to train again without it.",
+      "tags": [
+        "legal",
+        "unlearning"
+      ]
+    },
+    {
+      "id": "f3-approx-unlearning",
+      "en": "Approximate unlearning",
+      "vi": "Quên máy xấp xỉ",
+      "def_en": "Adjusting the trained weights so the result is statistically close to a model that never saw the data, trading certainty for cost.",
+      "def_vi": "Điều chỉnh trọng số đã huấn luyện sao cho kết quả gần về mặt thống kê với mô hình chưa từng thấy dữ liệu đó, đổi sự chắc chắn lấy chi phí thấp.",
+      "say": "Close enough to forgetting is a statistical claim, not a promise.",
+      "tags": [
+        "legal",
+        "unlearning"
+      ]
+    },
+    {
+      "id": "f3-sisa",
+      "en": "Sharded training for unlearning",
+      "vi": "Huấn luyện chia mảnh để quên máy",
+      "def_en": "Data is split into disjoint shards trained separately and combined at the end, so a deletion forces only one shard to be retrained.",
+      "def_vi": "Dữ liệu được chia thành các mảnh rời nhau, huấn luyện riêng rồi gộp ở cuối, nên một yêu cầu xoá chỉ buộc huấn luyện lại một mảnh.",
+      "say": "Sharding turns a full retrain into a small one.",
+      "tags": [
+        "legal",
+        "unlearning"
+      ]
+    },
+    {
+      "id": "f3-unlearning-audit",
+      "en": "Unlearning verification",
+      "vi": "Kiểm chứng việc quên máy",
+      "def_en": "Testing whether the removed records really left the model, usually by checking that a membership attack no longer distinguishes them.",
+      "def_vi": "Kiểm tra xem các bản ghi bị xoá có thực sự rời khỏi mô hình hay chưa, thường bằng cách xem tấn công suy luận thành viên còn phân biệt được chúng không.",
+      "say": "A deletion nobody tested is a deletion nobody can defend.",
+      "tags": [
+        "legal",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "f3-cross-border",
+      "en": "Cross border data transfer",
+      "vi": "Chuyển dữ liệu qua biên giới",
+      "def_en": "Moving personal data out of a jurisdiction, a step many regimes restrict and one that model updates can trigger even when raw records stay home.",
+      "def_vi": "Đưa dữ liệu cá nhân ra khỏi một tài phán, bước mà nhiều thể chế hạn chế, và bản cập nhật mô hình vẫn có thể kích hoạt nó dù bản ghi thô ở lại chỗ cũ.",
+      "say": "The records stayed home but their gradients crossed the border.",
+      "tags": [
+        "legal",
+        "compliance"
+      ]
+    },
+    {
+      "id": "f3-model-personal-data",
+      "en": "Model weights as personal data",
+      "vi": "Trọng số mô hình như dữ liệu cá nhân",
+      "def_en": "The position that a trained model can itself count as personal data when individuals remain identifiable from what it memorised.",
+      "def_vi": "Quan điểm cho rằng bản thân mô hình đã huấn luyện có thể được tính là dữ liệu cá nhân khi vẫn nhận ra được cá nhân từ những gì nó ghi nhớ.",
+      "say": "If the model can be made to recite a record, the model holds that record.",
+      "tags": [
+        "legal",
+        "compliance"
+      ]
     }
   ]
 }

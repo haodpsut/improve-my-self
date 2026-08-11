@@ -1,0 +1,1657 @@
+{
+  "schema": 1,
+  "id": "pqc",
+  "updated": "2026-08-09",
+  "questions": [
+    {
+      "id": "qq-6",
+      "q": "Post-quantum cryptography refers to",
+      "q_vi": "Mật mã hậu lượng tử là",
+      "choices": [
+        "Classical algorithms believed to resist attack by a quantum computer",
+        "Encryption carried out on a quantum computer rather than a classical one",
+        "Cryptography that can only exist once quantum computers arrive",
+        "Key distribution over entangled photon pairs on a dedicated fibre link"
+      ],
+      "answer": 0,
+      "why": "It runs on ordinary hardware today. The point is that its hardness assumptions, such as lattice problems, survive Shor's algorithm.",
+      "why_vi": "Nó chạy trên phần cứng thường ngay hôm nay. Điểm mấu chốt là các giả thiết độ khó của nó, ví dụ bài toán lưới, vẫn đứng vững trước thuật toán Shor.",
+      "level": 2
+    },
+    {
+      "id": "qq-23",
+      "q": "Which statement about quantum computers and encryption is accurate?",
+      "q_vi": "Phát biểu nào về máy tính lượng tử và mã hoá là chính xác?",
+      "choices": [
+        "Only quantum key distribution can protect data against them, so every link must be rebuilt with photonic hardware at both ends",
+        "Quantum computers have no bearing on cryptography, since Shor's algorithm has never run on a real device anywhere in the world",
+        "A large quantum computer breaks every known cipher, so all of today's encrypted traffic becomes readable the moment the first such machine is switched on",
+        "A large fault tolerant machine would break RSA and elliptic curve schemes, while symmetric ciphers with longer keys and post quantum schemes survive"
+      ],
+      "answer": 3,
+      "why": "Shor targets the specific number theoretic structure behind RSA and elliptic curves. Symmetric primitives and lattice or hash based schemes have no such structure to exploit.",
+      "why_vi": "Shor nhắm vào đúng cấu trúc số học nằm sau RSA và đường cong elliptic. Các nguyên thuỷ đối xứng cùng các hệ dựa trên lưới hay hàm băm không có cấu trúc đó để khai thác.",
+      "level": 2
+    },
+    {
+      "id": "qq-99",
+      "q": "Harvest now decrypt later is a concern for",
+      "q_vi": "Thu hoạch bây giờ, giải mã sau là mối lo với",
+      "choices": [
+        "Data that is already public, since an attacker gains nothing by recording it for later",
+        "Data that must stay secret for many years, since ciphertext recorded today can be decrypted later",
+        "Symmetric keys only, because Grover will halve their effective length as soon as such a machine exists",
+        "Quantum networks only, since ordinary fibre traffic cannot be recorded in bulk"
+      ],
+      "answer": 1,
+      "why": "The attacker needs no quantum computer today, only storage. The migration deadline is therefore set by the required secrecy lifetime, not by the arrival date of the machine.",
+      "why_vi": "Kẻ tấn công hôm nay không cần máy tính lượng tử, chỉ cần chỗ lưu trữ. Vì vậy hạn chót chuyển đổi được quyết định bởi thời hạn cần giữ bí mật, chứ không bởi ngày cỗ máy xuất hiện.",
+      "level": 1
+    },
+    {
+      "id": "qq-100",
+      "q": "The main NIST post quantum selections for key establishment rest on",
+      "q_vi": "Các lựa chọn hậu lượng tử chính của NIST cho thiết lập khoá dựa trên",
+      "choices": [
+        "Hard lattice problems such as learning with errors",
+        "The discrete logarithm taken over much larger groups",
+        "Integer factoring with far larger key sizes",
+        "Quantum key distribution hardware on every link"
+      ],
+      "answer": 0,
+      "why": "Lattice assumptions resist both classical and known quantum attacks while keeping keys small enough for protocols. Larger RSA or elliptic curve keys do not help, since Shor scales polynomially in key length.",
+      "why_vi": "Các giả thiết trên lưới chống được cả tấn công cổ điển lẫn tấn công lượng tử đã biết, mà khoá vẫn đủ nhỏ để dùng trong giao thức. Tăng độ dài khoá RSA hay đường cong elliptic thì vô ích, vì Shor có độ phức tạp đa thức theo độ dài khoá.",
+      "level": 2
+    },
+    {
+      "id": "qq-101",
+      "q": "Hash based signatures are attractive as a conservative option because",
+      "q_vi": "Chữ ký dựa trên hàm băm hấp dẫn ở vai trò lựa chọn thận trọng vì",
+      "choices": [
+        "They need no source of randomness, so a broken generator cannot compromise them later on",
+        "They are the fastest family to verify, which matters most for firmware signing on constrained devices",
+        "They produce by far the shortest signatures of any of the post quantum families now being standardised",
+        "Their security reduces to properties of the hash function alone, although many schemes must track state"
+      ],
+      "answer": 3,
+      "why": "The assumption is minimal and very well studied, which is why they are used for firmware signing. The cost is large signatures and, in stateful variants, the danger of reusing a one time key.",
+      "why_vi": "Giả thiết ở đây là tối thiểu và được nghiên cứu rất kỹ, vì thế chúng được dùng để ký firmware. Cái giá là chữ ký lớn, và với các biến thể có trạng thái là nguy cơ dùng lại khoá một lần.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-001",
+      "q": "An engineer proposes doubling every key length in the product because of Grover's algorithm. Which correction is right?",
+      "q_vi": "Một kỹ sư đề xuất nhân đôi mọi độ dài khoá trong sản phẩm vì thuật toán Grover. Đính chính nào là đúng?",
+      "choices": [
+        "Grover recovers a symmetric key in constant time once such a machine is switched on, so no key length is worth defending",
+        "The search gain is only quadratic, so 256 bit symmetric keys keep a wide margin",
+        "Enlarging the RSA modulus answers the threat, since Grover and Shor scale against key length in the same polynomial way",
+        "Symmetric ciphers are untouched and only hash functions are at risk"
+      ],
+      "answer": 1,
+      "why": "Grover halves the effective strength of a generic search, so the doubling reflex applies only where the symmetric margin was already thin. Public key schemes fall to Shor instead, and no practical key length rescues them.",
+      "why_vi": "Grover chỉ làm giảm một nửa số bit hiệu dụng của phép tìm kiếm tổng quát, nên phản xạ nhân đôi chỉ đáng bàn ở chỗ biên đối xứng vốn đã mỏng. Còn hệ khoá công khai thì gãy vì Shor, và không độ dài khoá thực tế nào cứu được chúng.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-002",
+      "q": "Suppose the error terms were stripped out of a learning with errors instance. What follows?",
+      "q_vi": "Giả sử bỏ hết các số hạng nhiễu khỏi một thể hiện của bài toán học có lỗi. Điều gì xảy ra?",
+      "choices": [
+        "Hardness is unaffected, since it comes from the size of the modulus",
+        "The instance gets harder, as the attacker loses a channel of information",
+        "The instance stays hard as long as the dimension is large enough",
+        "The secret drops out of a linear system by Gaussian elimination"
+      ],
+      "answer": 3,
+      "why": "Without noise the samples are plain linear equations over a finite ring and solving them is routine. The noise is what blocks elimination and turns the samples into a hard problem.",
+      "why_vi": "Không có nhiễu thì các mẫu chỉ là hệ phương trình tuyến tính trên một vành hữu hạn, giải ra là chuyện thường ngày. Chính nhiễu mới chặn phép khử và biến đám mẫu đó thành bài toán khó.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-003",
+      "q": "ML-KEM rests on module lattices rather than unstructured lattices. What is being traded?",
+      "q_vi": "ML-KEM dựa trên lưới dạng module chứ không phải lưới không cấu trúc. Ở đây đang đánh đổi cái gì?",
+      "choices": [
+        "Structure shrinks keys and speeds up arithmetic, at the cost of a stronger assumption",
+        "Structure raises the security level by itself, so the same margin holds at smaller parameters and nothing is given up",
+        "Modules remove any need for a noise term in the samples",
+        "Structure makes constant time implementation unnecessary"
+      ],
+      "answer": 0,
+      "why": "Polynomial rings allow fast transforms and compact representations, which is why the standard is usable in protocols. The price is a stronger assumption than plain lattices, since attacks could in principle exploit the ring.",
+      "why_vi": "Vành đa thức cho phép biến đổi nhanh và biểu diễn gọn, nhờ đó chuẩn này dùng được trong giao thức. Cái giá là một giả thiết mạnh hơn so với lưới trơn, vì về nguyên tắc kẻ tấn công có thể khai thác cấu trúc vành.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-004",
+      "q": "A lattice based KEM has a tiny but nonzero decryption failure probability. Why is it pushed far below any reachable number of queries?",
+      "q_vi": "Một KEM dựa trên lưới có xác suất giải mã hỏng rất nhỏ nhưng khác không. Vì sao người ta ép nó xuống thấp hơn hẳn mọi số lần truy vấn khả thi?",
+      "choices": [
+        "Because a failed decapsulation would crash the receiver",
+        "Because failures break interoperability test vectors",
+        "Each observed failure leaks a relation on the secret, so collecting failures becomes a key recovery attack",
+        "Because the standard forbids retransmission of a session"
+      ],
+      "answer": 2,
+      "why": "Ciphertexts that fail are not random, they cluster around the secret. An adversary able to find and count them recovers the key, which is why the failure rate is a security parameter and not a reliability figure.",
+      "why_vi": "Các bản mã gây hỏng không phân bố ngẫu nhiên mà tụ quanh khoá bí mật. Kẻ địch tìm và đếm được chúng thì khôi phục được khoá, nên tỷ lệ hỏng là một tham số an toàn chứ không phải chỉ số độ tin cậy.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-005",
+      "q": "What does the Fujisaki Okamoto style transform add to a lattice encryption scheme?",
+      "q_vi": "Phép biến đổi kiểu Fujisaki Okamoto thêm được gì cho một hệ mã hoá trên lưới?",
+      "choices": [
+        "It removes the noise term from the scheme and with it the chance of a decryption failure",
+        "It compresses the ciphertext so a whole key exchange fits inside one network packet",
+        "It replaces the random number generator with a deterministic one drawn from the message",
+        "Decapsulation re encrypts and rejects mismatches, which yields chosen ciphertext security"
+      ],
+      "answer": 3,
+      "why": "The receiver recovers the message, encrypts it again with the same derived randomness and compares. Any tampered ciphertext fails that check, so the decapsulation routine stops being a useful oracle.",
+      "why_vi": "Bên nhận khôi phục thông điệp, mã hoá lại bằng đúng phần ngẫu nhiên dẫn xuất rồi so sánh. Bản mã bị sửa sẽ trượt phép so đó, nên thủ tục giải đóng gói hết còn là một hộp thần trả lời hữu ích cho kẻ tấn công.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-006",
+      "q": "On a ciphertext that fails its internal check, ML-KEM returns a pseudorandom value derived from a stored seed instead of an error code. What is the purpose?",
+      "q_vi": "Với bản mã trượt phép kiểm nội bộ, ML-KEM trả về một giá trị giả ngẫu nhiên dẫn xuất từ hạt giống đã lưu thay vì mã lỗi. Mục đích là gì?",
+      "choices": [
+        "A visible rejection would turn decapsulation into an oracle",
+        "It keeps the output length uniform so buffers can be allocated in advance",
+        "It saves the cost of an extra hash call along the failure path",
+        "It lets the sender retry the exchange reusing its earlier randomness"
+      ],
+      "answer": 0,
+      "why": "Implicit rejection means a malformed ciphertext yields a key the attacker cannot tell from a real one. If the caller then reports a decryption failure at a higher layer, or the timing differs, that protection is undone.",
+      "why_vi": "Từ chối ngầm nghĩa là bản mã hỏng vẫn cho ra một khoá mà kẻ tấn công không phân biệt được với khoá thật. Nếu tầng trên lại báo lỗi giải mã, hoặc thời gian chạy khác đi, thì lớp bảo vệ đó bị vô hiệu.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-007",
+      "q": "How does a key encapsulation mechanism differ in shape from a Diffie Hellman exchange?",
+      "q_vi": "Cơ chế đóng gói khoá khác về hình dạng so với trao đổi Diffie Hellman ở chỗ nào?",
+      "choices": [
+        "Both sides must publish a fresh public value within the same round trip before any secret exists",
+        "The sender picks a fresh secret and wraps it under the peer's public key",
+        "The secret comes from raising the peer's value to a private exponent",
+        "There is no public key at all, only a shared password"
+      ],
+      "answer": 1,
+      "why": "Encapsulation is transport, not agreement. That asymmetry is why a KEM slots into protocols differently, and why the ciphertext must be bound into the key derivation rather than trusted on its own.",
+      "why_vi": "Đóng gói là vận chuyển chứ không phải thoả thuận. Chính tính bất đối xứng đó khiến KEM ghép vào giao thức theo cách khác, và khiến bản mã phải được buộc vào phép dẫn xuất khoá chứ không tự nó đáng tin.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-008",
+      "q": "Why does a KEM based handshake hash the public key and the ciphertext into the session key instead of using the raw shared secret?",
+      "q_vi": "Vì sao bắt tay dựa trên KEM lại băm cả khoá công khai và bản mã vào khoá phiên thay vì dùng thẳng bí mật chung?",
+      "choices": [
+        "To make the session key exactly the length the cipher expects",
+        "To let the two peers detect packet loss on the link",
+        "Binding the transcript stops an attacker from replaying a secret into a different session or parameter set",
+        "To keep the shared secret usable as a long term identity key"
+      ],
+      "answer": 2,
+      "why": "Contributory binding ties the key to what was actually exchanged. Without it, an attacker who can move a ciphertext between contexts may make two sessions agree on a key that means different things to each side.",
+      "why_vi": "Buộc bản ghi trao đổi vào khoá gắn khoá với đúng những gì đã thực sự trao. Thiếu bước này, kẻ tấn công dời được bản mã sang ngữ cảnh khác có thể khiến hai phiên đồng ý một khoá mà mỗi bên hiểu một nghĩa.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-009",
+      "q": "A gateway reuses a single long term ML-KEM key pair across millions of sessions. Which property makes that survivable?",
+      "q_vi": "Một cổng mạng dùng lại đúng một cặp khoá ML-KEM dài hạn cho hàng triệu phiên. Tính chất nào khiến việc đó chịu được?",
+      "choices": [
+        "Perfect forward secrecy, which the lattice problem is said to provide by itself",
+        "The absence of decryption failures at the parameters chosen for the standard",
+        "Semantic security against an eavesdropper who only observes traffic",
+        "Security against chosen ciphertext attack, since decapsulation is exposed"
+      ],
+      "answer": 3,
+      "why": "Static keys hand the adversary a decapsulation oracle for as long as the key lives. Only the stronger notion covers that, and even so reuse gives up forward secrecy for traffic protected by that key.",
+      "why_vi": "Khoá tĩnh trao cho kẻ địch một hộp giải đóng gói suốt vòng đời khoá. Chỉ khái niệm an toàn mạnh hơn mới bao được tình huống đó, mà dù vậy việc dùng lại vẫn đánh mất tính bí mật chuyển tiếp cho lưu lượng dưới khoá ấy.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-010",
+      "q": "Classic McEliece carries public keys around a megabyte yet ciphertexts under a hundred bytes. Which deployment fits that shape best?",
+      "q_vi": "Classic McEliece có khoá công khai cỡ một megabyte nhưng bản mã dưới một trăm byte. Kiểu triển khai nào hợp với hình dạng đó nhất?",
+      "choices": [
+        "A static key installed once, with the small ciphertext sent every session",
+        "A browser opening short lived connections to thousands of servers it has never met before",
+        "A broadcast protocol that must fit a whole key into one datagram",
+        "A smart card that keeps no key material between power cycles"
+      ],
+      "answer": 0,
+      "why": "The cost is paid once at provisioning and never again per session. Where keys must travel inside every handshake, that same profile is the worst possible fit.",
+      "why_vi": "Chi phí trả một lần lúc nạp khoá và không lặp lại theo từng phiên. Còn ở nơi khoá phải đi kèm trong mọi lượt bắt tay thì chính hình dạng đó lại là lựa chọn tệ nhất.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-011",
+      "q": "NIST standardised a lattice KEM yet kept a code based candidate moving forward as well. What is the reasoning?",
+      "q_vi": "NIST đã chuẩn hoá một KEM trên lưới nhưng vẫn tiếp tục một ứng viên dựa trên mã sửa lỗi. Lý do là gì?",
+      "choices": [
+        "Code based schemes are faster and will replace the lattice one in time",
+        "A backup resting on a different hard problem if lattices weaken",
+        "Export rules demand at least two approved algorithms per function",
+        "The code based scheme has smaller keys and suits constrained devices"
+      ],
+      "answer": 1,
+      "why": "The concern is correlated failure. Two schemes that share an assumption fall together, so diversity is bought at the price of maintaining a second, bulkier stack.",
+      "why_vi": "Nỗi lo ở đây là hỏng đồng thời. Hai hệ cùng chung một giả thiết thì đổ cùng lúc, nên tính đa dạng phải trả bằng chi phí duy trì thêm một ngăn xếp thứ hai cồng kềnh hơn.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-012",
+      "q": "SIKE reached a late round of the standardisation effort and was then broken on a laptop by a classical attack. What lesson does that carry for deployment?",
+      "q_vi": "SIKE đã vào tới vòng muộn của tiến trình chuẩn hoá rồi bị một tấn công cổ điển hạ gục trên máy tính xách tay. Bài học cho triển khai là gì?",
+      "choices": [
+        "Isogeny mathematics should be abandoned as a research direction",
+        "Any scheme not yet standardised is unsafe by definition",
+        "Confidence tracks years of scrutiny, so young assumptions deserve hedging even after a review body advances them",
+        "Standardisation processes cannot detect classical weaknesses at all"
+      ],
+      "answer": 2,
+      "why": "Review shortens the odds but does not remove them, and the break came from a structural result nobody had connected to the scheme. Hybrid deployment and the ability to swap algorithms are the practical response.",
+      "why_vi": "Quá trình rà soát làm giảm rủi ro chứ không xoá được nó, và cú gãy đến từ một kết quả cấu trúc mà chưa ai nối với hệ này. Đáp án thực tế là triển khai lai và giữ được khả năng thay thuật toán.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-013",
+      "q": "Multivariate signature schemes advertise very short signatures. What has repeatedly held them back?",
+      "q_vi": "Các hệ chữ ký đa thức nhiều biến quảng cáo chữ ký rất ngắn. Cái gì liên tục kéo chúng lại?",
+      "choices": [
+        "Signing requires a quantum random number generator",
+        "Verification is far slower than any lattice alternative",
+        "Public keys in the tens of kilobytes, plus a record of structural breaks",
+        "They cannot be made deterministic, so replay of a signature is unavoidable"
+      ],
+      "answer": 2,
+      "why": "The signature is small but the key that verifies it is not, and the trapdoor hides in an algebraic structure that attackers keep learning to peel apart. A prominent finalist fell that way during the competition.",
+      "why_vi": "Chữ ký thì nhỏ nhưng khoá dùng để kiểm thì không, và cửa sập nằm trong một cấu trúc đại số mà giới tấn công cứ dần bóc ra được. Một ứng viên chung kết nổi bật đã ngã theo đúng kiểu đó ngay trong kỳ tuyển chọn.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-014",
+      "q": "Security levels for lattice schemes are quoted from lattice reduction cost models. Which caveat should a reader keep in mind?",
+      "q_vi": "Mức an toàn của các hệ trên lưới được trích từ những mô hình chi phí rút gọn lưới. Người đọc nên nhớ lưu ý nào?",
+      "choices": [
+        "The figures are exact, since the cost of lattice reduction is settled theory",
+        "The number is a model estimate, so parameters carry deliberate margin",
+        "The figures cover classical attackers only and say nothing about quantum ones",
+        "The estimates come from measured attacks at full sized parameters"
+      ],
+      "answer": 1,
+      "why": "Nobody runs the attack at the real dimension, so the claim is an extrapolation from a cost model for block reduction. Published re examinations have moved estimates by meaningful amounts in both directions.",
+      "why_vi": "Không ai chạy nổi tấn công ở đúng số chiều thật, nên khẳng định đó là phép ngoại suy từ mô hình chi phí của phép rút gọn theo khối. Các bài xem xét lại đã công bố từng dịch chuyển ước lượng theo cả hai chiều với biên độ đáng kể.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-015",
+      "q": "A team argues that migrating signatures matters less urgently than migrating key establishment. Is the argument sound?",
+      "q_vi": "Một nhóm lập luận rằng chuyển đổi chữ ký ít cấp bách hơn chuyển đổi thiết lập khoá. Lập luận đó có vững không?",
+      "choices": [
+        "No, since a recorded handshake lets an attacker forge that session's signature years later",
+        "Yes, and it holds for every system, including devices already in the field",
+        "No, because signature algorithms take longer to standardise than key exchange",
+        "Largely yes, except where a root of trust cannot be updated"
+      ],
+      "answer": 3,
+      "why": "Authenticity is judged at the moment of verification, so an adversary gains nothing by forging a signature from years ago. The exception is anything that must still be trusted when the machine exists and cannot be reflashed by then.",
+      "why_vi": "Tính xác thực được phán xét ngay tại thời điểm kiểm, nên kẻ địch chẳng được gì khi giả mạo một chữ ký của nhiều năm trước. Ngoại lệ là mọi thứ vẫn phải được tin khi cỗ máy kia xuất hiện mà lúc đó không nạp lại firmware được nữa.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-016",
+      "q": "A firmware team weighs a stateful hash signature such as LMS against the stateless SLH-DSA. What is the decisive operational difference?",
+      "q_vi": "Một nhóm firmware cân nhắc chữ ký băm có trạng thái kiểu LMS với SLH-DSA không trạng thái. Khác biệt vận hành quyết định là gì?",
+      "choices": [
+        "LMS keeps a counter that must never move backwards, so a restored backup or a cloned signer reuses a one time key and the private key leaks",
+        "LMS rests on a different family of hash functions entirely",
+        "Only LMS is genuinely post quantum, the other is not",
+        "Only SLH-DSA can be verified without the public key"
+      ],
+      "answer": 0,
+      "why": "The stateful family is compact and fast, but its safety depends on infrastructure that never rewinds, never clones a signer and never restores an old image. Where those guarantees cannot be made, the stateless scheme pays for its larger signatures.",
+      "why_vi": "Họ có trạng thái thì gọn và nhanh, nhưng an toàn của nó phụ thuộc vào một hạ tầng không bao giờ quay ngược, không nhân bản bên ký và không phục hồi ảnh cũ. Nơi không cam kết nổi các điều đó thì hệ không trạng thái đáng để trả giá bằng chữ ký lớn hơn.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-017",
+      "q": "Why does signing two different messages with the same one time key destroy a hash based scheme?",
+      "q_vi": "Vì sao ký hai thông điệp khác nhau bằng cùng một khoá dùng một lần lại phá vỡ hệ dựa trên hàm băm?",
+      "choices": [
+        "Because the verifier caches the first signature and refuses the second one outright",
+        "The two signatures expose enough chain values to forge a third message",
+        "Because the hash function stops being collision resistant after reuse",
+        "Because the internal counter overflows and wraps to zero"
+      ],
+      "answer": 1,
+      "why": "A one time signature discloses selected preimages from hash chains, chosen by the message digest. Two disclosures under one key overlap enough that an attacker can assemble a valid signature on a message never signed.",
+      "why_vi": "Chữ ký dùng một lần công bố một số tiền ảnh chọn lọc trên các dây chuyền băm, việc chọn do bản tóm lược thông điệp quyết định. Hai lần công bố dưới cùng một khoá chồng lấn đủ để kẻ tấn công ghép ra chữ ký hợp lệ cho thông điệp chưa từng được ký.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-018",
+      "q": "SLH-DSA produces signatures of several kilobytes and signs slowly. Why was it standardised anyway?",
+      "q_vi": "SLH-DSA cho chữ ký nặng vài kilobyte và ký chậm. Vậy vì sao nó vẫn được chuẩn hoá?",
+      "choices": [
+        "Because it is the only scheme whose proof holds in the standard model without any oracle",
+        "Because its verification cost is lower than any lattice signature in wide use",
+        "Its security rests on hash properties alone, with no new assumption",
+        "Because its keys are the smallest of any signature scheme"
+      ],
+      "answer": 2,
+      "why": "It introduces no algebraic structure that a future result could unravel, so it serves as the conservative fallback if lattice assumptions ever move. The size and speed are the price paid for that narrow assumption.",
+      "why_vi": "Nó không đưa vào cấu trúc đại số nào để một kết quả tương lai có thể tháo ra, nên đóng vai lựa chọn thận trọng phòng khi giả thiết trên lưới lung lay. Kích thước và tốc độ chính là cái giá của giả thiết hẹp đó.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-019",
+      "q": "ML-DSA restarts the signing loop whenever a candidate signature falls outside a bound. What happens if that rejection step is skipped?",
+      "q_vi": "ML-DSA khởi động lại vòng ký mỗi khi chữ ký ứng viên rơi ra ngoài một cận. Điều gì xảy ra nếu bỏ bước từ chối đó?",
+      "choices": [
+        "Verification fails for a fraction of signatures and clients simply retry",
+        "The signature grows past the size stated in the standard",
+        "The scheme silently switches to a weaker hash",
+        "Signatures start leaking the secret key"
+      ],
+      "answer": 3,
+      "why": "Rejection sampling is what makes the published signature independent of the secret. Without it the distribution shifts with the key, and a few thousand signatures are enough to reconstruct it.",
+      "why_vi": "Lấy mẫu có từ chối chính là thứ làm cho chữ ký công bố ra độc lập với khoá bí mật. Bỏ nó đi thì phân phối lệch theo khoá, và vài nghìn chữ ký là đủ để dựng lại khoá.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-020",
+      "q": "Deterministic signing removes the risk of a weak random number generator. What risk does it introduce?",
+      "q_vi": "Ký tất định loại bỏ rủi ro bộ sinh số ngẫu nhiên yếu. Nhưng nó đưa vào rủi ro nào?",
+      "choices": [
+        "It makes each signature on the same message differ, which breaks response caching",
+        "A fault injected during one of two identical signing runs lets the attacker compare outputs and solve for the secret",
+        "It requires the message to be hashed twice before signing",
+        "It stops the verifier from checking a signature offline"
+      ],
+      "answer": 1,
+      "why": "Determinism hands the attacker a perfect repeat of the same computation, which is exactly what differential fault analysis needs. Hedged signing, which mixes in fresh randomness alongside the message, is the usual compromise.",
+      "why_vi": "Tính tất định trao cho kẻ tấn công một lần lặp lại y hệt của cùng phép tính, đúng thứ mà phân tích lỗi vi sai cần. Cách dung hoà thường dùng là ký có pha ngẫu nhiên, tức trộn thêm phần ngẫu nhiên tươi bên cạnh thông điệp.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-021",
+      "q": "FN-DSA gives the most compact signatures of the standardised set yet is treated as the hardest to implement. Why?",
+      "q_vi": "FN-DSA cho chữ ký gọn nhất trong nhóm đã chuẩn hoá nhưng lại bị coi là khó cài đặt nhất. Vì sao?",
+      "choices": [
+        "Its verification routine needs a hardware random number generator on every call",
+        "Its public key is too large for the flash memory of most embedded designs",
+        "Gaussian sampling over floating point is hard to make constant time",
+        "It has no reference implementation available to integrators"
+      ],
+      "answer": 2,
+      "why": "The sampler must draw from a discrete Gaussian without letting timing or rounding behaviour depend on the secret, and floating point units differ across platforms. That is why deployment guidance treats it as a specialist option rather than the default.",
+      "why_vi": "Bộ lấy mẫu phải rút từ một phân phối Gauss rời rạc mà không để thời gian chạy hay cách làm tròn phụ thuộc vào khoá, trong khi khối dấu phẩy động lại khác nhau giữa các nền tảng. Vì thế hướng dẫn triển khai xem nó là lựa chọn chuyên biệt chứ không phải mặc định.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-022",
+      "q": "A vendor advertises category 5 for its parameter set. What is being claimed?",
+      "q_vi": "Một nhà cung cấp quảng cáo bộ tham số của mình đạt hạng 5. Điều đang được khẳng định là gì?",
+      "choices": [
+        "Breaking it costs at least as much as a key search on AES-256",
+        "The scheme has passed five independent rounds of public cryptanalysis",
+        "It offers five times the security margin of a category 1 parameter set",
+        "It uses keys of at least 256 bytes"
+      ],
+      "answer": 0,
+      "why": "The categories are anchored to the cost of attacking well understood symmetric primitives, not to a bit count or a round number. That anchoring is what lets parameter sets from different families be compared at all.",
+      "why_vi": "Các hạng được neo vào chi phí tấn công những nguyên thuỷ đối xứng đã hiểu rõ, chứ không neo vào số bit hay số vòng tuyển chọn. Chính cách neo đó mới cho phép so sánh các bộ tham số thuộc những họ khác nhau.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-023",
+      "q": "Swapping an elliptic curve certificate chain for an ML-DSA chain in TLS costs mainly what?",
+      "q_vi": "Đổi chuỗi chứng thư đường cong elliptic sang chuỗi ML-DSA trong TLS tốn chủ yếu ở đâu?",
+      "choices": [
+        "Client processor time, since verification is far slower than signing here",
+        "A further round trip, because the exchange needs one more message",
+        "More entropy from the operating system on every connection",
+        "Bytes on the wire, several kilobytes per handshake"
+      ],
+      "answer": 3,
+      "why": "Lattice signature verification is cheap in cycles, so the pain shows up in transmitted volume and in the congestion window of the first flight. On lossy or long delay links that translates directly into handshake latency.",
+      "why_vi": "Kiểm chữ ký trên lưới tốn ít chu kỳ, nên chỗ đau nằm ở khối lượng truyền và ở cửa sổ tắc nghẽn của loạt gói đầu tiên. Trên đường truyền hay mất gói hoặc trễ lớn, điều đó quy thẳng ra độ trễ bắt tay.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-024",
+      "q": "A hybrid exchange runs X25519 alongside ML-KEM. What must the combiner guarantee?",
+      "q_vi": "Một trao đổi lai chạy X25519 song song với ML-KEM. Bộ kết hợp phải bảo đảm điều gì?",
+      "choices": [
+        "That the two secrets are concatenated in alphabetical order of algorithm name",
+        "That the classical part is discarded as soon as the new part validates",
+        "The session key stays secure while at least one of the two secrets is secure, which forces both to feed the derivation",
+        "That each secret is hashed separately and the two digests are exclusive ored"
+      ],
+      "answer": 2,
+      "why": "The whole point of running two schemes is that either one may fall. A combiner that lets one input determine the output on its own throws that away, which is why standard designs feed both secrets and the transcript into a single derivation.",
+      "why_vi": "Toàn bộ lý do chạy hai hệ là vì bất kỳ hệ nào cũng có thể đổ. Bộ kết hợp để một đầu vào tự nó quyết định đầu ra thì vứt bỏ chính điều đó, nên các thiết kế chuẩn đưa cả hai bí mật lẫn bản ghi trao đổi vào chung một phép dẫn xuất.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-025",
+      "q": "What is the argument for hybrid rather than pure post quantum key establishment right now?",
+      "q_vi": "Lập luận nào ủng hộ thiết lập khoá lai thay vì thuần hậu lượng tử ở thời điểm này?",
+      "choices": [
+        "It keeps a well studied fallback if the new scheme is broken",
+        "It halves the bytes on the wire, since the two ciphertexts can be interleaved",
+        "It removes the need for certificates during the exchange",
+        "It lets the server pick the faster algorithm"
+      ],
+      "answer": 0,
+      "why": "The new assumptions are young and one late round candidate already fell. Carrying the classical exchange costs a few hundred bytes and buys protection against a cryptanalytic surprise, while still defeating an attacker who only has a quantum machine.",
+      "why_vi": "Các giả thiết mới còn non và đã có một ứng viên vòng muộn gãy đổ. Mang thêm phần trao đổi cổ điển tốn vài trăm byte, đổi lại là lớp che trước một bất ngờ về phân tích mã, mà vẫn hạ được kẻ tấn công chỉ có máy lượng tử.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-026",
+      "q": "An operator enables a hybrid group and keeps a classical only group for compatibility. What has to be watched?",
+      "q_vi": "Một nhà khai thác bật nhóm lai nhưng vẫn giữ nhóm thuần cổ điển để tương thích ngược. Phải canh chừng điều gì?",
+      "choices": [
+        "The two groups may produce session keys of different lengths and confuse the record layer",
+        "An attacker who can influence negotiation may force the classical group",
+        "Certificates issued for one group are not valid for the other and must be reissued",
+        "The hybrid group costs more processor time and may exhaust the server"
+      ],
+      "answer": 1,
+      "why": "A fallback path is only as strong as what an active adversary can push the peers onto. Either the negotiation is authenticated so that tampering is detected, or the weak option is removed once the fleet is ready.",
+      "why_vi": "Đường lùi chỉ mạnh bằng đúng thứ mà kẻ địch chủ động có thể ép hai bên rơi vào. Hoặc là quá trình thương lượng được xác thực để phát hiện can thiệp, hoặc là gỡ hẳn lựa chọn yếu khi đội thiết bị đã sẵn sàng.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-027",
+      "q": "Field trials of post quantum handshakes saw failures at intermediate boxes rather than at either endpoint. What was the usual cause?",
+      "q_vi": "Thử nghiệm thực địa bắt tay hậu lượng tử ghi nhận lỗi ở các hộp trung gian chứ không ở hai đầu cuối. Nguyên nhân thường gặp là gì?",
+      "choices": [
+        "The intermediate box rejected the new algorithm identifiers as unknown extensions",
+        "The intermediate box could not verify a lattice signature and dropped the flow",
+        "The intermediate box demanded a certificate from one particular authority",
+        "The larger first message no longer fitted one packet"
+      ],
+      "answer": 3,
+      "why": "Implementations that had only ever seen a first flight inside a single segment mishandled it once it spanned several. The bug was latent for years and became visible only when the message grew past the usual limit.",
+      "why_vi": "Những bản cài chỉ từng thấy loạt gói đầu nằm gọn trong một phân đoạn đã xử lý sai khi nó trải ra nhiều phân đoạn. Lỗi nằm im nhiều năm và chỉ lộ ra khi thông điệp vượt quá giới hạn quen thuộc.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-028",
+      "q": "How should a network operator work out how urgent its migration is?",
+      "q_vi": "Nhà khai thác mạng nên tính mức độ cấp bách của việc chuyển đổi như thế nào?",
+      "choices": [
+        "By waiting for a supplier to ship an update and following it",
+        "By counting how many devices already support the new algorithms",
+        "By tracking the qubit count announced by hardware vendors each year",
+        "By comparing the secrecy lifetime of the data plus the time the migration will take against the time until a capable machine plausibly exists"
+      ],
+      "answer": 3,
+      "why": "The first two quantities are under the operator's control and the third is not, so the honest planning move is to shorten what can be shortened. Raw qubit counts say little, since error correction overhead dominates the resource estimate.",
+      "why_vi": "Hai đại lượng đầu nằm trong tầm kiểm soát của nhà khai thác còn đại lượng thứ ba thì không, nên nước đi lập kế hoạch trung thực là rút ngắn cái rút ngắn được. Số qubit thô nói lên rất ít, vì chi phí sửa lỗi mới chiếm phần lớn ước lượng tài nguyên.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-029",
+      "q": "Before any algorithm is swapped, what does a cryptographic inventory actually deliver?",
+      "q_vi": "Trước khi thay bất kỳ thuật toán nào, việc kiểm kê mật mã thực sự mang lại cái gì?",
+      "choices": [
+        "A map of where each key and algorithm is used, including inside vendor libraries",
+        "A signed statement that the estate complies with the new standards",
+        "A list of the certificates that expire within the next twelve months, ordered by expiry date",
+        "A benchmark of each candidate algorithm on the deployed hardware"
+      ],
+      "answer": 0,
+      "why": "Most of the exposure sits in places nobody owns, such as a pinned key inside a device image or a library that a supplier compiles in. What is not on the map does not get migrated and quietly becomes the weakest link.",
+      "why_vi": "Phần lớn rủi ro nằm ở những chỗ không ai đứng tên, chẳng hạn một khoá ghim trong ảnh thiết bị hay một thư viện do nhà cung cấp biên dịch sẵn vào. Cái không có trên bản đồ thì không được chuyển đổi và lặng lẽ trở thành mắt xích yếu nhất.",
+      "level": 1
+    },
+    {
+      "id": "qpqc-030",
+      "q": "Beyond a configuration flag, what does cryptographic agility demand in practice?",
+      "q_vi": "Ngoài một cờ cấu hình, tính linh hoạt mật mã đòi hỏi những gì trong thực tế?",
+      "choices": [
+        "One hard coded algorithm everywhere, so that behaviour stays predictable",
+        "Support for every algorithm in the standard, all enabled by default",
+        "Negotiation, versioned formats and a rollback path that has been tested",
+        "A hardware module that can be replaced in the field"
+      ],
+      "answer": 2,
+      "why": "Agility is a property of formats and protocols, not of a build option. If message layouts assume a fixed key size, or if there is no rehearsed way back after a bad rollout, the swap will stall at the first surprise.",
+      "why_vi": "Tính linh hoạt là thuộc tính của định dạng và giao thức, không phải của một tuỳ chọn biên dịch. Nếu bố cục thông điệp mặc định một kích thước khoá cố định, hoặc không có đường lùi đã tập dượt sau một lần triển khai hỏng, thì việc thay thế sẽ tắc ngay ở bất ngờ đầu tiên.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-031",
+      "q": "Two sites run quantum key distribution over a dedicated fibre. What must classical cryptography still supply?",
+      "q_vi": "Hai cơ sở chạy phân phối khoá lượng tử trên một sợi quang riêng. Mật mã cổ điển vẫn phải cung cấp thứ gì?",
+      "choices": [
+        "Detection of an eavesdropper on the quantum channel",
+        "Authentication of the public discussion channel, since without it the protocol runs happily against an impostor sitting in the middle",
+        "Generation of the raw key material at each end",
+        "Estimation of the error rate of the link"
+      ],
+      "answer": 1,
+      "why": "Sifting, error correction and privacy amplification all happen over an ordinary channel, and the physics gives no way to tell a legitimate peer from an intruder. That authentication rests on a pre shared key or on signatures, which is where the classical assumption re enters.",
+      "why_vi": "Sàng khoá, sửa lỗi và khuếch đại tính riêng tư đều diễn ra trên một kênh thường, mà vật lý thì không cho cách nào phân biệt đối tác hợp lệ với kẻ xâm nhập. Việc xác thực ấy dựa vào khoá chia sẻ trước hoặc chữ ký, và đó chính là chỗ giả thiết cổ điển quay trở lại.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-032",
+      "q": "Why does a national quantum key distribution backbone use relay sites rather than direct links between distant cities?",
+      "q_vi": "Vì sao mạng trục phân phối khoá lượng tử quốc gia phải dùng các trạm chuyển tiếp thay vì nối thẳng giữa các thành phố xa nhau?",
+      "choices": [
+        "Because the fibre has to be replaced every few hundred kilometres for maintenance reasons",
+        "Because each city needs its own random source",
+        "Loss grows with distance, so keys are handed over at trusted relays",
+        "Because regulation forbids a link crossing a provincial border"
+      ],
+      "answer": 2,
+      "why": "No quantum repeater is deployable yet, so the key is decrypted and re encrypted at every relay. Each of those sites sees the plaintext key, which means the end to end guarantee is only as strong as the physical security of the weakest relay.",
+      "why_vi": "Chưa có bộ lặp lượng tử nào triển khai được, nên khoá bị giải rồi mã lại tại từng trạm chuyển tiếp. Mỗi trạm như vậy nhìn thấy khoá dạng rõ, nghĩa là bảo đảm đầu cuối chỉ mạnh bằng đúng mức an ninh vật lý của trạm yếu nhất.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-033",
+      "q": "A supplier argues that installing quantum key distribution removes the need for post quantum algorithms. Where does that argument fail hardest?",
+      "q_vi": "Một nhà cung cấp lập luận rằng lắp phân phối khoá lượng tử là hết cần thuật toán hậu lượng tử. Lập luận đó hỏng nặng nhất ở đâu?",
+      "choices": [
+        "It fails because measured key rates are lower than what a fibre link could carry in principle",
+        "It fails because quantum key distribution has never been demonstrated over deployed fibre",
+        "It fails because the devices cost more than a software upgrade",
+        "It supplies no signatures, so authenticity still rests on classical algorithms"
+      ],
+      "answer": 3,
+      "why": "Key distribution is one function among several, and code signing, certificates and device identity are untouched by it. Rate and cost are real engineering limits but they are arguments about degree, not about what the technology can do at all.",
+      "why_vi": "Phân phối khoá chỉ là một chức năng trong nhiều chức năng, còn ký mã nguồn, chứng thư và định danh thiết bị thì nó không đụng tới. Tốc độ và chi phí là giới hạn kỹ thuật có thật, nhưng đó là tranh luận về mức độ chứ không phải về việc công nghệ này làm được gì.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-034",
+      "q": "Does the prospect of a quantum computer force a move away from a 256 bit hash function?",
+      "q_vi": "Viễn cảnh máy tính lượng tử có buộc phải rời bỏ hàm băm 256 bit không?",
+      "choices": [
+        "Not for collision resistance in practice",
+        "Yes, because a quantum collision search in the cube root of the space is decisive here",
+        "Yes, because Shor applies to any function with hidden structure, hashing included",
+        "No, because quantum algorithms cannot touch hash functions at all"
+      ],
+      "answer": 0,
+      "why": "The known quantum collision search buys little once the cost of the memory it needs is counted, so a 256 bit digest keeps roughly its classical margin. Preimage search gains a square root, which still leaves 128 bits of work.",
+      "why_vi": "Phép tìm va chạm lượng tử đã biết chẳng lời được bao nhiêu một khi tính cả chi phí bộ nhớ mà nó cần, nên bản tóm lược 256 bit giữ được gần như biên cổ điển của nó. Tìm tiền ảnh thì lời một căn bậc hai, mà như vậy vẫn còn 128 bit công việc.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-035",
+      "q": "Isogeny based signatures still attract work even after an isogeny key exchange collapsed. What is the attraction?",
+      "q_vi": "Chữ ký dựa trên isogeny vẫn được nghiên cứu dù một hệ trao đổi khoá isogeny đã sụp. Sức hút nằm ở đâu?",
+      "choices": [
+        "They sign and verify faster than any lattice scheme in the standard set",
+        "Keys and signatures far smaller than any other family",
+        "They need no hash function during signing",
+        "They rest on the very assumption that was broken"
+      ],
+      "answer": 1,
+      "why": "The combined footprint is close to what elliptic curves offered, which matters wherever bandwidth dominates. The cost is slow signing and an assumption with a much shorter track record than lattices or hashes.",
+      "why_vi": "Tổng dung lượng gần với mức mà đường cong elliptic từng cho, điều rất đáng giá ở nơi băng thông quyết định. Cái giá là ký chậm và một giả thiết có bề dày kiểm chứng ngắn hơn nhiều so với lưới hay hàm băm.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-036",
+      "q": "Oil and vinegar signature designs were revived for a later call for proposals. What remains the main deployment obstacle?",
+      "q_vi": "Các thiết kế chữ ký kiểu dầu và giấm được hồi sinh trong đợt kêu gọi đề xuất sau này. Trở ngại triển khai chính vẫn là gì?",
+      "choices": [
+        "Signing needs more memory than a typical microcontroller offers at run time",
+        "Verification requires the signer to remain online during the check",
+        "Public keys in the tens of kilobytes, though signatures stay tiny",
+        "Signatures grow with message length"
+      ],
+      "answer": 2,
+      "why": "The imbalance suits a setting where the verification key is installed once and signatures fly constantly, such as firmware verification. It is a poor fit wherever the public key travels inside every transaction.",
+      "why_vi": "Sự mất cân đối này hợp với tình huống khoá kiểm được nạp một lần còn chữ ký thì bay liên tục, chẳng hạn kiểm firmware. Nó lại rất dở ở nơi khoá công khai phải đi kèm trong từng giao dịch.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-037",
+      "q": "A proof written in the random oracle model is sometimes redone in the quantum random oracle model. What changes?",
+      "q_vi": "Một chứng minh viết trong mô hình hộp thần ngẫu nhiên đôi khi được làm lại trong mô hình hộp thần ngẫu nhiên lượng tử. Cái gì thay đổi?",
+      "choices": [
+        "The hash function is replaced by a quantum circuit inside the scheme",
+        "The proof now also covers implementations that leak timing",
+        "The scheme is proved secure without any hash function",
+        "The adversary may query the hash in superposition, so proof techniques that rewind or observe a single query stop working"
+      ],
+      "answer": 3,
+      "why": "An attacker with the code of the hash function can evaluate it coherently on many inputs at once. Several early proofs had to be rebuilt with different machinery, and a few schemes only gained a proof in that setting years later.",
+      "why_vi": "Kẻ tấn công có mã nguồn của hàm băm thì tính được nó một cách kết hợp trên nhiều đầu vào cùng lúc. Vài chứng minh thời đầu phải dựng lại bằng bộ công cụ khác, và một số hệ mãi nhiều năm sau mới có chứng minh trong bối cảnh đó.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-038",
+      "q": "A polynomial arithmetic routine indexes a lookup table with bits of the secret. Why is that fatal even though the results are numerically correct?",
+      "q_vi": "Một thủ tục số học đa thức lấy các bit của khoá bí mật làm chỉ số tra bảng. Vì sao điều đó chí mạng dù kết quả tính vẫn đúng về số học?",
+      "choices": [
+        "Cache behaviour reveals the index",
+        "The compiler may reorder the loop and produce a wrong answer on some platforms",
+        "The routine will be far slower than a branch free version",
+        "Lookup tables cannot be combined with the number theoretic transform"
+      ],
+      "answer": 0,
+      "why": "Whether a line was already cached changes the timing, and a process sharing the machine can measure that. Correct output is no defence, since the leak lives in the pattern of memory access rather than in the value returned.",
+      "why_vi": "Việc một dòng nhớ đã nằm sẵn trong bộ đệm hay chưa làm thời gian chạy khác đi, và một tiến trình dùng chung máy đo được điều đó. Kết quả đúng không phải là lá chắn, vì chỗ rò nằm trong dáng truy cập bộ nhớ chứ không nằm ở giá trị trả về.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-039",
+      "q": "An attacker feeds malformed ciphertexts to a smart card running a lattice KEM and records its power trace. What is the objective?",
+      "q_vi": "Kẻ tấn công đưa các bản mã dị dạng vào một thẻ thông minh chạy KEM trên lưới rồi ghi lại dấu vết công suất tiêu thụ. Mục tiêu là gì?",
+      "choices": [
+        "To drain the card's power supply and force a fallback",
+        "To learn whether the internal re encryption check passed, one bit per query, until the accumulated answers pin down the secret key",
+        "To overwrite the stored public key with a chosen value",
+        "To measure how long the card takes to reject a session request"
+      ],
+      "answer": 1,
+      "why": "Implicit rejection hides the verdict in the returned value, but it cannot hide it from a trace that shows the comparison itself. This is why the transform must be implemented so that the comparison and the failure path look identical from outside.",
+      "why_vi": "Từ chối ngầm giấu được phán quyết trong giá trị trả về, nhưng không giấu nổi trước một dấu vết cho thấy chính phép so sánh. Vì thế phép biến đổi phải được cài sao cho phép so và nhánh thất bại nhìn từ bên ngoài là như nhau.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-040",
+      "q": "Masking a lattice implementation against power analysis is known to be expensive. What drives the cost?",
+      "q_vi": "Che mặt nạ cho một bản cài trên lưới để chống phân tích công suất nổi tiếng là tốn kém. Cái gì đẩy chi phí lên?",
+      "choices": [
+        "Because every masked operation needs a random number generator certified to a national standard",
+        "Non linear steps such as noise sampling and the final comparison are costly to mask",
+        "Because masked code cannot be written portably",
+        "Because masking changes the ciphertext format"
+      ],
+      "answer": 1,
+      "why": "Linear operations split across shares almost for free, so the overhead concentrates where the computation is not linear. Reported factors of several times the unmasked cost come mostly from those few steps.",
+      "why_vi": "Các phép tuyến tính tách theo phần chia gần như không mất gì, nên phần đội chi phí dồn vào chỗ phép tính không tuyến tính. Các hệ số vài lần so với bản không che mà người ta báo cáo chủ yếu đến từ vài bước đó.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-041",
+      "q": "A signing library is advised to verify every signature before it leaves the module. What does that defend against?",
+      "q_vi": "Một thư viện ký được khuyến cáo tự kiểm lại mọi chữ ký trước khi cho ra khỏi mô đun. Việc đó phòng cái gì?",
+      "choices": [
+        "A verifier that rejects signatures produced by a different library version",
+        "A random number generator that repeats its output across two runs",
+        "A fault that corrupts the computation and leaks the key",
+        "An attacker replaying an old signature"
+      ],
+      "answer": 2,
+      "why": "A single injected glitch can turn a signature into an equation that exposes the private material, and the faulty output looks ordinary until someone checks it. Verifying before release turns a key compromise into a harmless failed operation.",
+      "why_vi": "Chỉ một cú gây lỗi cũng đủ biến chữ ký thành một phương trình để lộ tài liệu khoá, mà đầu ra hỏng đó trông vẫn bình thường cho tới khi có ai kiểm. Kiểm trước khi phát ra biến một vụ lộ khoá thành một thao tác thất bại vô hại.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-042",
+      "q": "A sensor node seeds its generator from uninitialised memory at boot. Which conclusion follows?",
+      "q_vi": "Một nút cảm biến gieo mầm bộ sinh ngẫu nhiên từ vùng nhớ chưa khởi tạo lúc khởi động. Kết luận nào đúng?",
+      "choices": [
+        "Its keys may repeat across devices",
+        "This is acceptable, since lattice schemes tolerate low quality randomness by design",
+        "Only signatures are affected, key establishment survives poor seeding",
+        "The problem disappears once a post quantum algorithm replaces the classical one"
+      ],
+      "answer": 0,
+      "why": "Identical hardware powering up in the same state gives the same seed, and colliding key pairs have been found in the field this way. Changing the algorithm changes nothing, since every scheme here consumes randomness at key generation.",
+      "why_vi": "Phần cứng giống nhau khởi động ở cùng một trạng thái thì cho cùng một mầm, và người ta đã tìm thấy các cặp khoá trùng nhau ngoài thực địa theo đúng con đường đó. Đổi thuật toán không giải quyết được gì, vì hệ nào ở đây cũng tiêu thụ ngẫu nhiên lúc sinh khoá.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-043",
+      "q": "An archive is encrypted with AES-256 under a data key wrapped by RSA-3072. Where is the exposure?",
+      "q_vi": "Một kho lưu trữ được mã hoá bằng AES-256, còn khoá dữ liệu thì bọc bằng RSA-3072. Chỗ hở nằm ở đâu?",
+      "choices": [
+        "The archive is safe, because the wrapping algorithm protects the data key",
+        "The wrapping falls to Shor, so the data key must be rewrapped",
+        "The symmetric layer is the weak point",
+        "Nothing changes, since archives are offline"
+      ],
+      "answer": 1,
+      "why": "Whoever copies the wrapped key today can open it once a capable machine exists, and the strong symmetric layer then protects nothing. Being offline only helps if the wrapped key never left the building.",
+      "why_vi": "Ai sao chép được khoá đã bọc ngay hôm nay thì mở được nó khi có cỗ máy đủ mạnh, và khi đó lớp đối xứng mạnh chẳng bảo vệ được gì. Việc để ngoại tuyến chỉ giúp ích nếu khoá đã bọc chưa từng rời khỏi toà nhà.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-044",
+      "q": "A team rewraps every archived data key under a new KEM but leaves the old wrapped copies inside backup sets. What is wrong?",
+      "q_vi": "Một nhóm bọc lại mọi khoá dữ liệu lưu trữ bằng KEM mới nhưng vẫn để nguyên các bản bọc cũ trong bộ sao lưu. Sai ở chỗ nào?",
+      "choices": [
+        "The new wrapping is slower to open at restore time",
+        "Backup media age faster than the migration schedule allows",
+        "Anyone holding a backup can still reach the same data key through the old wrapping, so the migration protects nothing",
+        "The archive index has to be rebuilt after rewrapping"
+      ],
+      "answer": 2,
+      "why": "Migration removes an exposure only when the old path is destroyed, not when a new path is added beside it. The same trap appears with escrowed keys, replicas and long lived snapshots.",
+      "why_vi": "Chuyển đổi chỉ xoá được chỗ hở khi đường cũ bị huỷ, chứ không phải khi ta thêm một đường mới bên cạnh nó. Cái bẫy y hệt xuất hiện với khoá gửi giữ, với bản sao và với các ảnh chụp giữ lâu dài.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-045",
+      "q": "Signed responses in the domain name system travel mostly over datagrams. What does a multi kilobyte signature do to that design?",
+      "q_vi": "Bản trả lời có chữ ký trong hệ thống tên miền chủ yếu đi bằng datagram. Chữ ký nặng vài kilobyte gây ra chuyện gì cho thiết kế đó?",
+      "choices": [
+        "It forces resolvers to validate signatures in hardware rather than software",
+        "It makes the zone file too large to load into memory at the server",
+        "It removes the need for a trust anchor",
+        "Responses exceed the usual limit and fall back to TCP"
+      ],
+      "answer": 3,
+      "why": "Fragmentation and connection setup both hurt a protocol tuned for a single small exchange, and some resolvers drop oversized answers outright. This is why compact signatures matter more here than raw signing speed.",
+      "why_vi": "Phân mảnh và thiết lập kết nối đều gây hại cho một giao thức vốn tinh chỉnh cho đúng một lượt trao đổi nhỏ, mà vài bộ phân giải còn vứt thẳng các bản trả lời quá khổ. Vì thế ở đây chữ ký gọn quan trọng hơn tốc độ ký thô.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-046",
+      "q": "Replacing an elliptic curve exchange with ML-KEM at the middle parameter set changes the material on the wire by roughly how much?",
+      "q_vi": "Thay một trao đổi đường cong elliptic bằng ML-KEM ở bộ tham số cỡ trung làm lượng dữ liệu trên đường truyền đổi khoảng bao nhiêu?",
+      "choices": [
+        "About a kilobyte more in each direction",
+        "About the same, since the ciphertext replaces the public value one for one",
+        "Roughly ten times more, since a lattice key runs to tens of kilobytes",
+        "Slightly fewer bytes, because the key is compressed before transmission"
+      ],
+      "answer": 0,
+      "why": "The public value and the ciphertext are each on the order of a thousand bytes against thirty two for a curve point. It is a real cost for a first flight budget yet nowhere near the megabyte scale of the code based option.",
+      "why_vi": "Giá trị công khai và bản mã mỗi thứ cỡ hơn nghìn byte, so với ba mươi hai byte của một điểm trên đường cong. Đó là chi phí thật cho ngân sách loạt gói đầu tiên, nhưng còn xa mới tới cỡ megabyte của phương án dựa trên mã sửa lỗi.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-047",
+      "q": "Benchmarks put ML-KEM operations at fewer processor cycles than an elliptic curve exchange on the same core. What does that imply for a busy server?",
+      "q_vi": "Kết quả đo cho thấy các thao tác ML-KEM tốn ít chu kỳ hơn trao đổi đường cong elliptic trên cùng một lõi. Điều đó hàm ý gì với một máy chủ tải cao?",
+      "choices": [
+        "Nothing at all, because cycle counts never reflect real server behaviour",
+        "Arithmetic stops being the bottleneck, but the extra bytes still cost",
+        "The classical half can be dropped, since cycles are what determine capacity",
+        "Handshake latency falls by the same ratio as the cycle count"
+      ],
+      "answer": 1,
+      "why": "Lattice arithmetic is genuinely cheap, so the migration is not a computation problem. What moves is the byte budget of the first flight, which shows up as latency on links with loss or long delay rather than as processor load.",
+      "why_vi": "Số học trên lưới rẻ thật, nên chuyển đổi không phải bài toán tính toán. Cái thay đổi là ngân sách byte của loạt gói đầu tiên, và nó hiện ra thành độ trễ trên đường truyền hay mất gói hoặc trễ lớn chứ không thành tải xử lý.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-048",
+      "q": "Authenticity cannot be attacked retroactively, yet one class of signing key is urgent all the same. Which one?",
+      "q_vi": "Tính xác thực không thể bị tấn công ngược về quá khứ, vậy mà vẫn có một loại khoá ký cấp bách. Loại nào?",
+      "choices": [
+        "A short lived session token issued by the login service",
+        "A code signing key that the build system rotates every quarter",
+        "A boot verification key burned into devices that will still be running when a capable machine exists and cannot be reprogrammed in the field",
+        "A certificate for a public web server renewed every ninety days"
+      ],
+      "answer": 2,
+      "why": "Anything rotated on a short cycle can simply be reissued under a new algorithm later. The exception is a trust anchor fixed in silicon or in a one time programmable region, since there the decision made today is the decision that holds for the life of the product.",
+      "why_vi": "Thứ gì xoay vòng theo chu kỳ ngắn thì sau này chỉ việc cấp lại dưới thuật toán mới. Ngoại lệ là neo tin cậy đặt cứng trong chip hoặc trong vùng chỉ ghi được một lần, vì ở đó quyết định hôm nay là quyết định giữ nguyên suốt vòng đời sản phẩm.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-049",
+      "q": "The IPsec key exchange needed extending before large post quantum payloads could be carried. What was added?",
+      "q_vi": "Trao đổi khoá của IPsec phải được mở rộng thì mới chở nổi tải trọng hậu lượng tử lớn. Người ta đã thêm gì?",
+      "choices": [
+        "A compression layer that shrinks key material before it leaves the initiator",
+        "A rule that the responder must authenticate before any key material is sent, which lengthens the exchange by a full round trip",
+        "A fresh cipher suite negotiation carried over the control plane",
+        "Fragmentation of the initial exchange and a way to run several key exchanges in sequence"
+      ],
+      "answer": 3,
+      "why": "Splitting the negotiation lets a classical and a post quantum exchange both contribute to the same key, which is how hybrid is expressed there. Fragmentation was needed because the original messages assumed they would fit a single datagram.",
+      "why_vi": "Tách quá trình thương lượng cho phép một trao đổi cổ điển và một trao đổi hậu lượng tử cùng góp vào một khoá, đó chính là cách diễn đạt chế độ lai ở đây. Còn phân mảnh là bắt buộc vì các thông điệp gốc mặc định chúng nằm gọn trong một datagram.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-050",
+      "q": "An operator cannot upgrade its tunnel software yet but wants recorded traffic protected now. What interim step exists?",
+      "q_vi": "Một nhà khai thác chưa nâng cấp được phần mềm đường hầm nhưng muốn bảo vệ lưu lượng bị ghi lại ngay từ bây giờ. Có bước tạm nào?",
+      "choices": [
+        "Mix a pre shared key into the derivation",
+        "Rotate the elliptic curve keys far more often than current policy requires",
+        "Increase the size of the classical group used during the negotiation",
+        "Turn off forward secrecy so that fewer keys are exposed at any one time"
+      ],
+      "answer": 0,
+      "why": "A secret that never crossed the wire cannot be recovered from a recording, whatever the attacker later builds, so folding it into the key derivation defeats passive collection. The cost is the usual burden of distributing and rotating shared secrets out of band.",
+      "why_vi": "Một bí mật chưa từng đi qua đường truyền thì không thể khôi phục từ bản ghi, dù sau này kẻ tấn công dựng được gì đi nữa, nên đưa nó vào phép dẫn xuất khoá là chặn được thu thập thụ động. Cái giá là gánh nặng quen thuộc của việc phân phối và xoay vòng bí mật chia sẻ ngoài băng.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-051",
+      "q": "A research line replaces handshake signatures with a key encapsulation used for authentication instead. What is the intended gain?",
+      "q_vi": "Một hướng nghiên cứu thay chữ ký trong bắt tay bằng chính cơ chế đóng gói khoá dùng để xác thực. Cái lợi nhắm tới là gì?",
+      "choices": [
+        "It removes the need for certificates in the handshake entirely",
+        "Fewer bytes, since a KEM ciphertext beats a large signature",
+        "It lets both peers skip verification of the certificate chain",
+        "It removes any need for a hash function"
+      ],
+      "answer": 1,
+      "why": "Lattice signatures are the bulkiest part of a migrated handshake, while a ciphertext is small, so proving possession of a key by decapsulating trades bytes for an extra round trip. Certificates are still needed, they simply carry a KEM key.",
+      "why_vi": "Chữ ký trên lưới là phần cồng kềnh nhất của một lượt bắt tay đã chuyển đổi, còn bản mã thì nhỏ, nên chứng minh sở hữu khoá bằng cách giải đóng gói là đổi byte lấy thêm một lượt khứ hồi. Chứng thư vẫn cần, chỉ là nó mang một khoá KEM.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-052",
+      "q": "An enterprise discovers that its hardware security modules cannot yet run the new algorithms. What follows in practice?",
+      "q_vi": "Một doanh nghiệp phát hiện các mô đun an ninh phần cứng của mình chưa chạy được thuật toán mới. Trong thực tế điều gì xảy ra?",
+      "choices": [
+        "Nothing, since the modules only store keys and never compute",
+        "The keys can be exported and used in software instead",
+        "Signing keys stay inside modules that speak only the old algorithms, so the migration waits on validated firmware and that queue is long",
+        "The modules can be reconfigured by a setting change"
+      ],
+      "answer": 2,
+      "why": "The module exists precisely so that private material never leaves it, so exporting the key defeats the control it provides. Validation of new firmware runs on its own timetable, which is why hardware bound keys are usually the slowest part of a plan.",
+      "why_vi": "Mô đun tồn tại chính là để tài liệu bí mật không bao giờ rời khỏi nó, nên xuất khoá ra là phá bỏ đúng cái kiểm soát mà nó mang lại. Việc thẩm định firmware mới chạy theo lịch riêng của nó, vì thế các khoá gắn với phần cứng thường là phần chậm nhất trong kế hoạch.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-053",
+      "q": "A satellite link with a tight frame budget must adopt post quantum key establishment. Which quantity should drive the choice?",
+      "q_vi": "Một tuyến vệ tinh với ngân sách khung rất chặt phải áp dụng thiết lập khoá hậu lượng tử. Đại lượng nào nên quyết định lựa chọn?",
+      "choices": [
+        "The processor cycles consumed by a decapsulation on board",
+        "The number of random bytes the algorithm draws per session",
+        "The size of the private key held in on board storage",
+        "The bytes sent per handshake"
+      ],
+      "answer": 3,
+      "why": "On a link where a handshake may span many frames and the round trip is long, every added byte turns into delay and into more chances of loss. Cycles and storage are usually the cheaper resources on such a payload.",
+      "why_vi": "Trên tuyến mà một lượt bắt tay có thể trải qua nhiều khung và thời gian khứ hồi thì dài, mỗi byte thêm vào đều biến thành độ trễ và thành thêm cơ hội mất gói. Chu kỳ xử lý và bộ nhớ thường là tài nguyên rẻ hơn trên tải trọng như vậy.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-054",
+      "q": "A deployment wants to hold down the growth of a migrated certificate chain. Which measure genuinely helps?",
+      "q_vi": "Một hệ thống muốn ghìm mức phình của chuỗi chứng thư sau chuyển đổi. Biện pháp nào thực sự có tác dụng?",
+      "choices": [
+        "Sending fewer certificates by letting the peer cache the intermediates",
+        "Issuing certificates with a longer validity period so that renewals happen less often",
+        "Compressing signatures with a general purpose compressor",
+        "Moving the chain onto a separate connection"
+      ],
+      "answer": 0,
+      "why": "The chain is repeated on every fresh handshake, so removing an element removes its cost every time. Signature bytes are close to random and do not compress, and a longer validity period changes how often a certificate is issued rather than how large it is.",
+      "why_vi": "Chuỗi được lặp lại ở mọi lượt bắt tay mới, nên bỏ bớt một mắt xích là bỏ được chi phí của nó mỗi lần. Byte chữ ký gần như ngẫu nhiên nên không nén được, còn kéo dài hiệu lực chỉ đổi tần suất cấp phát chứ không đổi kích thước.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-055",
+      "q": "What does a certificate carrying both a classical and a post quantum public key buy an operator?",
+      "q_vi": "Chứng thư mang cả khoá công khai cổ điển lẫn khoá hậu lượng tử mang lại gì cho nhà khai thác?",
+      "choices": [
+        "It halves the number of certificates that a relying party must store",
+        "It removes the need for the authority to sign anything twice",
+        "One object that verifies under either algorithm while parsers catch up",
+        "It shortens the chain by one level"
+      ],
+      "answer": 2,
+      "why": "A mixed estate has verifiers of both kinds and reissuing everything at once is rarely possible, so a single object that either kind accepts smooths the transition. The cost is a larger certificate and parsers that must ignore what they do not understand rather than reject it.",
+      "why_vi": "Một hệ thống pha tạp có cả hai loại bên kiểm mà cấp lại toàn bộ cùng lúc thì hiếm khi làm được, nên một đối tượng duy nhất mà cả hai loại đều chấp nhận sẽ làm quá trình chuyển đổi mượt hơn. Cái giá là chứng thư lớn hơn và bộ phân tích phải bỏ qua phần nó không hiểu thay vì từ chối.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-056",
+      "q": "National guidance now names target dates for retiring classical public key algorithms. How should an operator read those dates?",
+      "q_vi": "Hướng dẫn cấp quốc gia nay đã nêu mốc thời gian loại bỏ thuật toán khoá công khai cổ điển. Nhà khai thác nên hiểu các mốc đó ra sao?",
+      "choices": [
+        "As the date on which a capable quantum computer is expected to exist",
+        "As advisory only, since standards bodies cannot set procurement rules",
+        "As deadlines that bind procurement",
+        "As the date after which recorded traffic becomes safe again"
+      ],
+      "answer": 2,
+      "why": "The dates are policy instruments, not forecasts about hardware. They matter because equipment ordered today will still be in service then, so the requirement lands on purchasing decisions long before the deadline itself.",
+      "why_vi": "Các mốc đó là công cụ chính sách chứ không phải dự báo về phần cứng. Chúng quan trọng vì thiết bị đặt mua hôm nay vẫn còn phục vụ tới lúc ấy, nên yêu cầu rơi vào quyết định mua sắm từ rất lâu trước khi tới hạn.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-057",
+      "q": "A server offers resumption from a ticket that was established under a classical exchange. What does that mean for the resumed connection?",
+      "q_vi": "Một máy chủ cho phép nối lại phiên từ vé được lập dưới một trao đổi cổ điển. Điều đó có nghĩa gì với kết nối nối lại?",
+      "choices": [
+        "It is safe, because resumption uses only symmetric cryptography",
+        "It is safe once the ticket is rotated after the first hour",
+        "It fails, since the ticket format is not compatible",
+        "It inherits the weakness of the original exchange, because its keys descend from a secret that was recorded on the wire that day"
+      ],
+      "answer": 3,
+      "why": "Resumption is indeed symmetric, but the secret it starts from came out of the earlier handshake. Unless a fresh exchange is mixed in, an attacker who broke that first handshake follows the chain forward through every resumed session.",
+      "why_vi": "Việc nối lại đúng là chỉ dùng mật mã đối xứng, nhưng bí mật khởi đầu của nó lại sinh ra từ lượt bắt tay trước đó. Nếu không trộn thêm một trao đổi tươi, kẻ đã phá được lượt bắt tay đầu sẽ lần theo chuỗi đó đi tiếp qua mọi phiên nối lại.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-058",
+      "q": "Porting a lattice KEM to a small microcontroller, which resource usually binds first?",
+      "q_vi": "Khi chuyển một KEM trên lưới sang vi điều khiển nhỏ, tài nguyên nào thường chạm trần trước?",
+      "choices": [
+        "Peak working memory during polynomial operations",
+        "The instruction set, since the transform needs a wide multiplier that small cores lack entirely",
+        "Flash space for the public key",
+        "Interrupt latency"
+      ],
+      "answer": 0,
+      "why": "Several polynomials must be held at once during encapsulation, and naive ports overflow a few kilobytes of stack before anything else complains. Streaming variants trade cycles for memory precisely to get under that ceiling.",
+      "why_vi": "Phải giữ nhiều đa thức cùng lúc trong lúc đóng gói, và các bản chuyển ngây thơ làm tràn vài kilobyte ngăn xếp trước khi bất cứ thứ gì khác kịp kêu. Các biến thể xử lý theo dòng đổi chu kỳ lấy bộ nhớ chính là để chui xuống dưới cái trần đó.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-059",
+      "q": "Two products each claim support yet stop interoperating once the draft specification became a final standard. What is the usual explanation?",
+      "q_vi": "Hai sản phẩm đều tuyên bố có hỗ trợ nhưng hết bắt tay được với nhau khi bản dự thảo trở thành chuẩn chính thức. Giải thích thường gặp là gì?",
+      "choices": [
+        "The two use different elliptic curves for the classical half of the hybrid",
+        "One of them omits the certificate chain during the handshake",
+        "One still implements the draft, whose derivation differs",
+        "They disagree on the record cipher"
+      ],
+      "answer": 2,
+      "why": "The final version changed hashing and domain separation details, so two honest implementations derive different keys from the same exchange and fail authentication. This is why identifiers for draft and final versions must differ, and why test vectors are worth running.",
+      "why_vi": "Bản chính thức đã đổi chi tiết băm và tách miền, nên hai bản cài đều ngay thẳng vẫn dẫn ra hai khoá khác nhau từ cùng một lượt trao đổi và trượt xác thực. Vì thế mã định danh của bản dự thảo và bản chính thức phải khác nhau, và vì thế bộ véc tơ thử nghiệm rất đáng chạy.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-060",
+      "q": "Why is an in house construction for combining two shared secrets discouraged?",
+      "q_vi": "Vì sao người ta khuyên đừng tự chế cách kết hợp hai bí mật chung?",
+      "choices": [
+        "Because key derivation functions are patented in several jurisdictions",
+        "Because the published construction is faster on every processor tested so far",
+        "Because a combiner cannot be tested without a quantum computer",
+        "Subtle binding errors survive testing"
+      ],
+      "answer": 3,
+      "why": "A combiner that omits the transcript, or that lets one input decide the output, still passes every interoperability test, since both peers compute the same key. The defect appears only under an adversary who can manipulate one of the inputs.",
+      "why_vi": "Một bộ kết hợp bỏ quên bản ghi trao đổi, hoặc để một đầu vào tự quyết đầu ra, vẫn vượt qua mọi phép thử tương thích, vì hai bên tính ra cùng một khoá. Khuyết tật chỉ lộ ra khi có kẻ địch chi phối được một trong các đầu vào.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-061",
+      "q": "A press release announces a processor with a thousand physical qubits. What does that tell an operator about the threat to RSA-2048?",
+      "q_vi": "Một thông cáo báo chí giới thiệu bộ xử lý một nghìn qubit vật lý. Điều đó nói gì với nhà khai thác về mối đe doạ với RSA-2048?",
+      "choices": [
+        "Little, since error corrected estimates run to millions of physical qubits",
+        "That the threat has arrived, because a thousand qubits factor a two thousand bit number comfortably",
+        "That the scheme is safe for exactly as long as it takes qubit counts to double",
+        "Nothing, because the factoring algorithm needs no qubits"
+      ],
+      "answer": 0,
+      "why": "A useful logical qubit is assembled from many noisy physical ones, and the factoring circuit needs thousands of logical qubits held stable for a long computation. Raw counts on their own say nothing without the error rate and the code distance.",
+      "why_vi": "Một qubit lôgic dùng được phải ghép từ rất nhiều qubit vật lý đầy nhiễu, mà mạch phân tích thừa số cần hàng nghìn qubit lôgic giữ ổn định suốt một phép tính dài. Con số thô tự nó không nói lên gì nếu thiếu tỷ lệ lỗi và khoảng cách mã.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-062",
+      "q": "Why is unstructured quantum search a weaker practical threat than its asymptotic figure suggests?",
+      "q_vi": "Vì sao tìm kiếm lượng tử không cấu trúc là mối đe doạ thực tế yếu hơn nhiều so với con số tiệm cận của nó?",
+      "choices": [
+        "Because it needs a quantum memory as large as the search space itself, which nobody can build",
+        "Because it applies only to functions with a single satisfying input",
+        "It needs one long coherent run and parallel machines lose the gain",
+        "Because it cannot be applied to a block cipher"
+      ],
+      "answer": 2,
+      "why": "Splitting the search across many devices gives each a smaller space, and the square root gain then applies to each piece rather than to the whole. Since long coherent computation is the scarce resource, the practical margin is wider than the bare exponent implies.",
+      "why_vi": "Chia phép tìm ra nhiều thiết bị thì mỗi máy nhận một không gian nhỏ hơn, và cái lợi căn bậc hai khi đó chỉ áp cho từng mảnh chứ không cho toàn cục. Vì tài nguyên khan hiếm chính là thời gian tính toán kết hợp kéo dài, biên an toàn thực tế rộng hơn so với những gì số mũ trần trụi gợi ra.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-063",
+      "q": "At matched classical security, which family falls to a quantum machine with the smaller resource bill?",
+      "q_vi": "Ở cùng mức an toàn cổ điển, họ nào gãy trước một máy lượng tử với chi phí tài nguyên nhỏ hơn?",
+      "choices": [
+        "Factoring based schemes, since that problem is easier in every setting",
+        "Neither one, since both need an identical circuit and an identical running time",
+        "Elliptic curves, whose operands are much smaller",
+        "Whichever is paired with the shorter symmetric key"
+      ],
+      "answer": 2,
+      "why": "A 256 bit curve matches a 3072 bit modulus classically, yet the quantum circuit scales with the size of the numbers being manipulated. The curve therefore needs fewer logical qubits and a shorter computation, which is why it is usually named as the first to fall.",
+      "why_vi": "Một đường cong 256 bit tương đương một mô đun 3072 bit về mức an toàn cổ điển, nhưng mạch lượng tử lại co giãn theo độ lớn của các số được thao tác. Vì thế đường cong cần ít qubit lôgic hơn và một phép tính ngắn hơn, nên nó thường bị gọi tên là thứ gãy trước.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-064",
+      "q": "Lattice papers advertise a reduction from worst case problems to average case instances. What does that give a practitioner?",
+      "q_vi": "Các bài báo về lưới quảng cáo một phép quy dẫn từ bài toán trường hợp xấu nhất về thể hiện trung bình. Điều đó cho người triển khai được gì?",
+      "choices": [
+        "A guarantee that no attack can ever succeed against the scheme",
+        "A promise that key generation can never produce a weak key",
+        "Immunity from side channel analysis of the implementation code",
+        "Assurance that a freshly generated key is no weaker than the hardest example of its kind, though the parameters actually deployed usually fall outside the scope of the argument"
+      ],
+      "answer": 3,
+      "why": "The reduction rules out a large class of bad luck at key generation, which is a real advantage over schemes where weak keys must be screened out. It is not a security proof for the deployed parameter set, since the concrete numbers are chosen from attack estimates rather than from the reduction.",
+      "why_vi": "Phép quy dẫn loại trừ được cả một lớp rủi ro không may khi sinh khoá, đó là lợi thế thật so với những hệ phải sàng bỏ khoá yếu. Nhưng nó không phải chứng minh an toàn cho bộ tham số đang triển khai, vì các con số cụ thể được chọn từ ước lượng tấn công chứ không từ phép quy dẫn.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-065",
+      "q": "What separates the short integer solution problem from learning with errors as a design foundation?",
+      "q_vi": "Điều gì tách bài toán nghiệm nguyên ngắn khỏi bài toán học có lỗi khi làm nền cho thiết kế?",
+      "choices": [
+        "It is a decision problem while the other is a search problem, and only decision problems admit proofs",
+        "It underpins signatures, since finding a short preimage is the hard step",
+        "It requires a prime modulus while the other does not",
+        "It has no known quantum attack while the other does"
+      ],
+      "answer": 1,
+      "why": "One asks for a short combination that maps to zero, which is what a forger would have to produce, while the other hides a secret behind noise, which is what an encryption scheme needs. That is why signature and encryption designs in this family rest on different but related assumptions.",
+      "why_vi": "Một bài hỏi tìm tổ hợp ngắn ánh xạ về không, đúng thứ mà kẻ giả mạo phải tạo ra, còn bài kia giấu một bí mật sau lớp nhiễu, đúng thứ mà hệ mã hoá cần. Vì thế các thiết kế chữ ký và mã hoá trong họ này dựa trên hai giả thiết khác nhau nhưng có họ hàng.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-066",
+      "q": "A supplier claims its annealing machine can already break deployed public key cryptography. How should the claim be read?",
+      "q_vi": "Một nhà cung cấp tuyên bố máy ủ lượng tử của họ đã phá được mật mã khoá công khai đang dùng. Nên hiểu tuyên bố đó thế nào?",
+      "choices": [
+        "As accurate, since annealing solves factoring by minimising an energy function directly",
+        "As accurate only for elliptic curves, which map naturally onto such a machine",
+        "As unfounded, since annealers cannot run the relevant algorithm",
+        "As irrelevant, since annealers are classical devices"
+      ],
+      "answer": 2,
+      "why": "The algorithm that breaks these schemes needs coherent gate operations and a quantum transform, which an optimiser searching for a low energy state does not perform. Demonstrations of factoring small numbers this way encode the answer into the problem and do not scale.",
+      "why_vi": "Thuật toán phá các hệ này cần các phép cổng kết hợp và một biến đổi lượng tử, thứ mà một bộ tối ưu đi tìm trạng thái năng lượng thấp không hề thực hiện. Các màn phân tích thừa số cho số nhỏ theo lối đó đã gài sẵn đáp án vào bài toán và không mở rộng quy mô được.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-067",
+      "q": "A supplier markets a quantum random number generator as its answer to the quantum threat. What is absent from that answer?",
+      "q_vi": "Một nhà cung cấp chào bộ sinh số ngẫu nhiên lượng tử như câu trả lời cho mối đe doạ lượng tử. Câu trả lời đó thiếu cái gì?",
+      "choices": [
+        "Nothing, since good randomness is what defeats a quantum adversary in the end",
+        "Only a certification of the entropy source against a national scheme",
+        "The algorithms themselves",
+        "A faster interface to the host processor"
+      ],
+      "answer": 2,
+      "why": "Randomness quality was never what Shor attacks, so a better source leaves the exposed key exchange exactly as exposed. Good entropy remains necessary for the new schemes too, but it is a separate requirement rather than a substitute.",
+      "why_vi": "Chất lượng ngẫu nhiên chưa bao giờ là thứ mà Shor tấn công, nên nguồn tốt hơn vẫn để nguyên phần trao đổi khoá đang hở. Entropy tốt vẫn cần cho các hệ mới, nhưng đó là một yêu cầu riêng chứ không phải vật thay thế.",
+      "level": 1
+    },
+    {
+      "id": "qpqc-068",
+      "q": "Published attacks on fielded quantum key distribution equipment have mostly targeted what?",
+      "q_vi": "Các tấn công đã công bố nhắm vào thiết bị phân phối khoá lượng tử ngoài thực địa chủ yếu tấn công cái gì?",
+      "choices": [
+        "The mathematics of the underlying protocol",
+        "The classical post processing software",
+        "The physical laws that the protocol relies upon",
+        "Imperfections in the devices, such as detectors that can be blinded by bright light or sources that occasionally emit two photons"
+      ],
+      "answer": 3,
+      "why": "The security proof describes idealised components, and every real detector, source and modulator departs from that ideal in some measurable way. This is the same lesson as in classical cryptography, where the proof holds and the implementation leaks.",
+      "why_vi": "Chứng minh an toàn mô tả những linh kiện lý tưởng hoá, mà mọi bộ tách sóng, nguồn phát và bộ điều chế thật đều lệch khỏi lý tưởng đó theo cách đo được. Đây đúng là bài học của mật mã cổ điển, nơi chứng minh vẫn đứng còn bản cài thì rò rỉ.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-069",
+      "q": "Does a record layer running AES-256 in an authenticated mode need replacing for the post quantum era?",
+      "q_vi": "Tầng bản ghi chạy AES-256 ở chế độ có xác thực có cần thay cho thời hậu lượng tử không?",
+      "choices": [
+        "Yes, because block ciphers fall to the same algorithm as factoring",
+        "Yes, because the authentication tag must be doubled in length",
+        "No, though its key must arrive by a quantum safe exchange",
+        "No, and the key exchange needs no change either"
+      ],
+      "answer": 2,
+      "why": "The symmetric layer keeps a comfortable margin under a square root search, so the exposure sits entirely in how the key got there. Replacing the cipher while leaving a classical key exchange in place would move effort to the part that was never at risk.",
+      "why_vi": "Tầng đối xứng giữ được biên an toàn thoải mái trước phép tìm kiếm căn bậc hai, nên chỗ hở nằm trọn ở cách khoá đến được đó. Thay mã khối mà vẫn giữ nguyên trao đổi khoá cổ điển là dồn công sức vào đúng phần chưa từng gặp nguy.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-070",
+      "q": "Which of these needs no algorithm change on account of a quantum adversary?",
+      "q_vi": "Thành phần nào dưới đây không cần đổi thuật toán vì một kẻ địch lượng tử?",
+      "choices": [
+        "A signature covering a firmware image that must stay verifiable for years",
+        "A message authentication code built on a hash",
+        "A key transport step using RSA",
+        "An ephemeral curve exchange"
+      ],
+      "answer": 1,
+      "why": "Authentication tags derived from a hash keep their margin, since the best generic quantum attack is a square root search on the key. The other three all rest on structure that a period finding algorithm exposes, or must remain trustworthy past the point where that algorithm exists.",
+      "why_vi": "Nhãn xác thực dẫn xuất từ hàm băm giữ nguyên biên an toàn, vì tấn công lượng tử tổng quát tốt nhất chỉ là phép tìm căn bậc hai trên khoá. Ba thứ còn lại đều dựa vào cấu trúc mà thuật toán tìm chu kỳ bóc ra được, hoặc phải còn đáng tin qua cả thời điểm thuật toán đó tồn tại.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-071",
+      "q": "A datasheet says the device is quantum safe. Which single question settles whether the phrase means anything?",
+      "q_vi": "Một tờ thông số ghi rằng thiết bị an toàn trước lượng tử. Câu hỏi duy nhất nào quyết định cụm từ đó có ý nghĩa hay không?",
+      "choices": [
+        "Whether the vendor has tested it against a real quantum computer in a laboratory",
+        "Whether the device contains a quantum random number generator",
+        "Which algorithms and parameters it runs",
+        "Whether its key length exceeds four thousand bits"
+      ],
+      "answer": 2,
+      "why": "The phrase carries no definition on its own, so the only useful answer names a standardised algorithm at a stated parameter set. No laboratory test against current hardware could demonstrate anything, since no machine yet exists that would break the old schemes either.",
+      "why_vi": "Cụm từ đó tự nó không mang định nghĩa nào, nên câu trả lời hữu ích duy nhất phải gọi tên một thuật toán đã chuẩn hoá ở một bộ tham số cụ thể. Không phép thử nào trong phòng thí nghiệm với phần cứng hiện nay chứng minh được điều gì, vì cỗ máy phá nổi hệ cũ cũng chưa hề tồn tại.",
+      "level": 1
+    },
+    {
+      "id": "qpqc-072",
+      "q": "Resource estimates for factoring have fallen by orders of magnitude over the past decade. What does that trend mean for planning?",
+      "q_vi": "Ước lượng tài nguyên để phân tích thừa số đã giảm nhiều bậc trong mười năm qua. Xu hướng đó có ý nghĩa gì với việc lập kế hoạch?",
+      "choices": [
+        "The estimates will keep falling until the requirement reaches a single qubit",
+        "Published dates for a capable machine can be treated as fixed",
+        "Algorithmic progress can move the date, so plans need margin",
+        "Nothing, only hardware matters"
+      ],
+      "answer": 2,
+      "why": "Better circuits, cheaper error correction and smarter compilation have all cut the requirement without any hardware being built. A plan pinned to today's estimate has no room left when the next such paper appears.",
+      "why_vi": "Mạch tốt hơn, sửa lỗi rẻ hơn và biên dịch khôn hơn đều đã cắt giảm yêu cầu mà chẳng cần dựng thêm phần cứng nào. Một kế hoạch ghim vào ước lượng của hôm nay sẽ hết chỗ xoay xở khi bài báo tiếp theo kiểu đó xuất hiện.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-073",
+      "q": "Imagine a serious weakness in the standardised lattice KEM is announced tomorrow. What decides how badly a given operator is hurt?",
+      "q_vi": "Hãy hình dung ngày mai có công bố một điểm yếu nghiêm trọng của KEM trên lưới đã chuẩn hoá. Cái gì quyết định một nhà khai thác cụ thể thiệt hại đến đâu?",
+      "choices": [
+        "Whether algorithms can be swapped without replacing hardware, and whether a second exchange was already contributing to every session key",
+        "The number of certificates in the estate",
+        "How quickly the supplier publishes a statement",
+        "Whether the affected traffic used long keys"
+      ],
+      "answer": 0,
+      "why": "Hybrid deployment means such an announcement costs a configuration change rather than a breach, and agility decides how fast that change can be rolled out. Neither certificate counts nor vendor communication alters the exposure itself.",
+      "why_vi": "Triển khai lai khiến một công bố như vậy chỉ tốn một lần đổi cấu hình thay vì thành một vụ lộ dữ liệu, còn tính linh hoạt quyết định thay đổi ấy lăn ra hệ thống nhanh đến đâu. Số lượng chứng thư hay thông cáo của nhà cung cấp không làm thay đổi mức phơi nhiễm.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-074",
+      "q": "A message format reserves a fixed field of thirty two bytes for a public key. What does that tell you about the design?",
+      "q_vi": "Một định dạng thông điệp dành sẵn một trường cố định ba mươi hai byte cho khoá công khai. Điều đó nói gì về thiết kế?",
+      "choices": [
+        "That it was drawn up for maximum interoperability across vendors",
+        "That the field can simply be reinterpreted as a hash of the key",
+        "That it will need a faster processor to parse the larger field",
+        "It cannot carry the new keys without a format change"
+      ],
+      "answer": 3,
+      "why": "A field sized for one curve point cannot hold something a thousand bytes long, so the wire format itself has to be revised and both ends updated together. Formats with a length prefix or an extension mechanism avoid this trap by construction.",
+      "why_vi": "Trường được đo cho vừa một điểm trên đường cong thì không chứa nổi thứ dài cả nghìn byte, nên chính định dạng trên đường truyền phải sửa và hai đầu phải cập nhật cùng nhau. Các định dạng có tiền tố độ dài hoặc cơ chế mở rộng tránh được cái bẫy này ngay từ thiết kế.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-075",
+      "q": "What does passing the published known answer test vectors actually prove about an implementation?",
+      "q_vi": "Việc vượt qua bộ véc tơ thử nghiệm có đáp án công bố thực sự chứng minh điều gì về một bản cài đặt?",
+      "choices": [
+        "That the implementation resists timing attacks on the target platform",
+        "That it computes the specified function, nothing about leakage",
+        "That it will interoperate with any conforming product",
+        "That its random number generator is sound"
+      ],
+      "answer": 1,
+      "why": "The vectors fix inputs and expected outputs, so they catch a misread specification and nothing else. Constant time behaviour, entropy quality and protocol level binding each need their own testing, and a passing implementation can still fail all three.",
+      "why_vi": "Bộ véc tơ cố định đầu vào và đầu ra mong đợi, nên nó bắt được lỗi đọc sai đặc tả và chỉ vậy thôi. Hành vi hằng thời gian, chất lượng entropy và việc buộc ở tầng giao thức mỗi thứ cần phép thử riêng, và một bản cài vượt qua véc tơ vẫn có thể trượt cả ba.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-076",
+      "q": "NTRU predates the learning with errors line by roughly a decade. What kept serious interest in it alive?",
+      "q_vi": "NTRU ra đời trước dòng học có lỗi khoảng một thập kỷ. Điều gì giữ cho sự quan tâm nghiêm túc dành cho nó không tắt?",
+      "choices": [
+        "It withstood a quarter century of public cryptanalysis at its core parameters, while keeping key generation and encryption simple and quick",
+        "It carries no patent history of any kind",
+        "It is the only scheme with no decryption failures",
+        "It was the first scheme adopted by a national body"
+      ],
+      "answer": 0,
+      "why": "Longevity under attack is itself evidence, and few proposals in this area have been exposed for so long. The counterweight is that it lacks the worst case argument that the newer line advertises, so the two rest on somewhat different kinds of confidence.",
+      "why_vi": "Sống sót lâu dưới các đợt tấn công tự nó đã là bằng chứng, mà rất ít đề xuất trong lĩnh vực này chịu phơi mình lâu đến vậy. Đối trọng là nó thiếu lập luận trường hợp xấu nhất mà dòng mới quảng cáo, nên hai bên dựa trên hai kiểu niềm tin có phần khác nhau.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-077",
+      "q": "ML-KEM throws away low order bits of the ciphertext before it goes on the wire. What does that cost?",
+      "q_vi": "ML-KEM vứt bỏ các bit thấp của bản mã trước khi đưa lên đường truyền. Việc đó tốn gì?",
+      "choices": [
+        "Smaller ciphertexts at the price of a noticeably slower encapsulation on the sender",
+        "Smaller ciphertexts and a higher failure rate that the parameters must absorb",
+        "Smaller ciphertexts and stronger security, since less is revealed",
+        "Smaller ciphertexts with no effect at all"
+      ],
+      "answer": 1,
+      "why": "Dropping bits is deliberate extra noise, so the decryption margin shrinks and the parameters have to be widened to keep the failure probability negligible. Compression, noise budget and failure rate are one design knob rather than three.",
+      "why_vi": "Bỏ bớt bit chính là cố ý thêm nhiễu, nên biên giải mã hẹp lại và tham số phải nới ra để giữ xác suất hỏng ở mức không đáng kể. Nén, ngân sách nhiễu và tỷ lệ hỏng là một núm thiết kế duy nhất chứ không phải ba thứ riêng rẽ.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-078",
+      "q": "The recipient's public key is hashed into the encapsulated message rather than left out of it. Which attack does that frustrate?",
+      "q_vi": "Khoá công khai của bên nhận được băm vào thông điệp đóng gói chứ không bị bỏ ngoài. Việc đó chặn kiểu tấn công nào?",
+      "choices": [
+        "An attacker who tries to reuse a single ciphertext against many different public keys at once",
+        "An attacker who alters the ciphertext in transit and then watches for an error report",
+        "Amortising one expensive computation across many targets",
+        "An attacker measuring power"
+      ],
+      "answer": 2,
+      "why": "Without that binding, precomputation aimed at a whole population could be shared across every user. Tying each ciphertext to one specific key forces the attacker to start again for every target, which is what multi target security means in practice.",
+      "why_vi": "Không có phép buộc đó, phần tính toán chuẩn bị nhắm vào cả một quần thể có thể dùng chung cho mọi người dùng. Buộc từng bản mã vào đúng một khoá cụ thể bắt kẻ tấn công phải làm lại từ đầu với từng mục tiêu, và đó chính là ý nghĩa thực tế của an toàn nhiều mục tiêu.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-079",
+      "q": "In some encapsulation schemes two different key pairs can be made to open one ciphertext to the very same shared secret. Why does a protocol designer care?",
+      "q_vi": "Ở vài hệ đóng gói, hai cặp khoá khác nhau có thể cùng mở một bản mã ra đúng một bí mật chung. Vì sao người thiết kế giao thức phải quan tâm?",
+      "choices": [
+        "The key no longer identifies the peer",
+        "It doubles the amount of state each side must hold during the handshake",
+        "It makes the ciphertext larger than the specification allows",
+        "It stops the receiver from detecting a truncated message"
+      ],
+      "answer": 0,
+      "why": "Protocols often assume that holding the same session key means talking to the intended party, and that assumption quietly fails here. The repair is to bind the public key and the transcript into the derivation instead of trusting the secret by itself.",
+      "why_vi": "Giao thức thường mặc định rằng cùng giữ một khoá phiên nghĩa là đang nói chuyện với đúng đối tác, và giả định đó lặng lẽ sai ở đây. Cách sửa là buộc khoá công khai cùng bản ghi trao đổi vào phép dẫn xuất thay vì tin vào riêng bí mật chung.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-080",
+      "q": "A messaging service performs encapsulation against a million recipient keys every day. Which security property deserves attention beyond the single user case?",
+      "q_vi": "Một dịch vụ nhắn tin thực hiện đóng gói cho hàng triệu khoá người nhận mỗi ngày. Tính chất an toàn nào cần chú ý ngoài trường hợp một người dùng?",
+      "choices": [
+        "The time taken by a single decapsulation on the server",
+        "The cost of breaking any one key out of very many, since an adversary who only has to succeed somewhere pays far less than one aiming at a chosen victim",
+        "The size of the public key directory on disk",
+        "The number of ciphertexts each user stores"
+      ],
+      "answer": 1,
+      "why": "Attacks that amortise work across a population turn a comfortable single user margin into a thin one at scale. Modern designs answer this by binding each ciphertext to its recipient key so that nothing can be reused between targets.",
+      "why_vi": "Các tấn công chia đều công sức trên cả một quần thể biến biên an toàn thoải mái của một người dùng thành biên mỏng khi lên quy mô lớn. Thiết kế hiện đại đáp lại bằng cách buộc từng bản mã vào khoá của đúng người nhận để không có gì dùng lại được giữa các mục tiêu.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-081",
+      "q": "A boot read only memory has a few kilobytes of code space and must check one signature. Which property should drive the algorithm choice?",
+      "q_vi": "Một vùng nhớ chỉ đọc khi khởi động chỉ có vài kilobyte chỗ chứa mã và phải kiểm đúng một chữ ký. Tính chất nào nên quyết định việc chọn thuật toán?",
+      "choices": [
+        "A signing routine that runs without any random number generator on the device",
+        "A verifier small enough to fit, even if signing is expensive",
+        "The lowest possible key generation time",
+        "A signature under half a kilobyte"
+      ],
+      "answer": 1,
+      "why": "Signing happens once in a build system with generous resources, while verification happens on every boot inside a fixed and very small budget. Hash based verification is attractive here precisely because its code is short even though its signatures are not.",
+      "why_vi": "Việc ký diễn ra một lần trong hệ thống dựng bản với tài nguyên dư dả, còn việc kiểm diễn ra ở mọi lần khởi động trong một ngân sách cố định và rất nhỏ. Kiểm bằng hàm băm hấp dẫn ở đây chính vì phần mã của nó ngắn, dù chữ ký thì không.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-082",
+      "q": "An authority issues a self signed root with twenty years of validity. What does the migration timeline demand of that decision?",
+      "q_vi": "Một tổ chức cấp chứng thư phát hành gốc tự ký với hiệu lực hai mươi năm. Lộ trình chuyển đổi đòi hỏi gì ở quyết định đó?",
+      "choices": [
+        "That the root be reissued every year until the transition finishes everywhere",
+        "That the root key stay classical, since roots are verified offline anyway",
+        "A post quantum root now, since it must still be trusted at expiry",
+        "That relying parties be able to update their trust store"
+      ],
+      "answer": 2,
+      "why": "A root issued today will still be anchoring trust well inside the window where a capable machine is considered plausible. Distributing a new root into every trust store takes years on its own, which is why this is usually the first item on a plan rather than the last.",
+      "why_vi": "Một gốc phát hành hôm nay sẽ vẫn còn neo giữ niềm tin ở sâu trong khoảng thời gian mà người ta coi cỗ máy đủ mạnh là điều có thể. Riêng việc đưa một gốc mới vào mọi kho tin cậy đã mất nhiều năm, nên đây thường là mục đầu tiên chứ không phải mục cuối cùng của kế hoạch.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-083",
+      "q": "A low power wide area device receives firmware in small fragments over a duty cycled radio. What does a multi kilobyte signature cost there?",
+      "q_vi": "Một thiết bị diện rộng công suất thấp nhận firmware theo từng mảnh nhỏ qua sóng vô tuyến bị giới hạn chu kỳ phát. Chữ ký nặng vài kilobyte tốn gì ở đó?",
+      "choices": [
+        "Extra flash for the verification key held in the bootloader",
+        "Airtime, which is the scarce resource",
+        "Additional processor cycles during the verification step",
+        "A larger random seed for each update session"
+      ],
+      "answer": 1,
+      "why": "Regulation caps how long such a radio may transmit, so a few kilobytes can stretch an update across many transmission windows and multiply the chance of interruption. Compact signatures matter more here than either verification speed or code size.",
+      "why_vi": "Quy định giới hạn thời gian phát của loại sóng này, nên vài kilobyte có thể kéo một lần cập nhật trải qua nhiều cửa sổ phát và nhân lên nguy cơ đứt quãng. Ở đây chữ ký gọn quan trọng hơn cả tốc độ kiểm lẫn kích thước mã.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-084",
+      "q": "Both standardised lattice schemes call a fixed family of hash and extendable output functions internally. What does an operator give up by that?",
+      "q_vi": "Cả hai hệ trên lưới đã chuẩn hoá đều gọi một họ hàm băm và hàm đầu ra mở rộng cố định ở bên trong. Nhà khai thác mất gì vì điều đó?",
+      "choices": [
+        "Everything, because a weakness in that hash would leave no fallback in the design",
+        "Little now, since that choice can only change with a new standard",
+        "The ability to run the scheme with no hash function present",
+        "Nothing, since these schemes never call a hash function"
+      ],
+      "answer": 1,
+      "why": "The internal choice is deliberately conservative and is not a knob an integrator should touch, so agility here lives at the level of the whole scheme rather than its parts. Swapping the hash locally would only break interoperability while proving nothing.",
+      "why_vi": "Lựa chọn bên trong này cố tình thận trọng và không phải cái núm để người tích hợp vặn, nên tính linh hoạt ở đây nằm ở mức cả hệ chứ không ở từng bộ phận. Tự đổi hàm băm tại chỗ chỉ phá vỡ tính tương thích mà chẳng chứng minh được gì.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-085",
+      "q": "After the encapsulation step both peers send a value computed from the freshly derived key. What does that exchange establish?",
+      "q_vi": "Sau bước đóng gói, hai bên gửi cho nhau một giá trị tính từ khoá vừa dẫn xuất. Việc trao đổi đó xác lập điều gì?",
+      "choices": [
+        "That the link has enough bandwidth for the session",
+        "That neither side reused an old ciphertext",
+        "That the peer certificate has not been revoked",
+        "That the other side genuinely derived the same key, which converts a silent mismatch into an explicit failure at the moment it can still be handled"
+      ],
+      "answer": 3,
+      "why": "Without confirmation, a mismatch surfaces later as corrupted records or as an authentication failure far from its cause. It matters more with encapsulation than with a classical exchange, because implicit rejection means a wrong ciphertext still yields a well formed key.",
+      "why_vi": "Không có bước xác nhận, sự lệch khoá chỉ lộ ra về sau dưới dạng bản ghi hỏng hoặc lỗi xác thực ở rất xa nguyên nhân. Việc này quan trọng với đóng gói khoá hơn là với trao đổi cổ điển, vì từ chối ngầm khiến một bản mã sai vẫn cho ra khoá đúng dạng.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-086",
+      "q": "An implementation caches the randomness used during encapsulation so that later sessions can skip generating it. What breaks?",
+      "q_vi": "Một bản cài lưu lại phần ngẫu nhiên đã dùng khi đóng gói để các phiên sau khỏi phải sinh lại. Cái gì gãy?",
+      "choices": [
+        "Nothing, because the receiver key differs from session to session",
+        "Two sessions share a key, and one recording exposes both",
+        "The ciphertext becomes invalid on the second call",
+        "The failure probability rises above its bound"
+      ],
+      "answer": 1,
+      "why": "The encapsulated secret is a deterministic function of that randomness and the recipient key, so reuse against one recipient reproduces the same secret and the same ciphertext. Caching to save cycles here trades away the independence that separate sessions are supposed to have.",
+      "why_vi": "Bí mật được đóng gói là hàm tất định của phần ngẫu nhiên đó cùng khoá người nhận, nên dùng lại với cùng một người nhận sẽ tái tạo đúng bí mật ấy và đúng bản mã ấy. Lưu đệm để tiết kiệm chu kỳ ở đây là đem đánh đổi chính tính độc lập mà các phiên riêng biệt phải có.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-087",
+      "q": "Why do fresh algorithm identifiers matter as much as the algorithms themselves during a migration?",
+      "q_vi": "Vì sao trong quá trình chuyển đổi, các mã định danh thuật toán mới lại quan trọng ngang chính các thuật toán?",
+      "choices": [
+        "Peers must agree on names before they can agree on keys",
+        "Because an identifier determines the security level of the negotiated session",
+        "Because a registry entry is required before a scheme may be implemented",
+        "Because the identifier is mixed into the derivation as a secret input"
+      ],
+      "answer": 0,
+      "why": "A code point is how two implementations discover that they mean the same construction, including the exact version of it. Reusing an identifier across a draft and a final version is a known way to produce silent interoperability failures.",
+      "why_vi": "Điểm mã là cách để hai bản cài nhận ra rằng chúng đang nói về cùng một cấu trúc, kể cả đúng phiên bản của nó. Dùng lại một mã định danh cho cả bản dự thảo lẫn bản chính thức là con đường đã biết dẫn tới những lỗi tương thích âm thầm.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-088",
+      "q": "A programme reports that eighty percent of its servers now advertise the new exchange. Why is that a weak measure of progress?",
+      "q_vi": "Một chương trình báo cáo rằng tám mươi phần trăm máy chủ nay đã công bố hỗ trợ trao đổi mới. Vì sao đó là thước đo tiến độ yếu?",
+      "choices": [
+        "Because the figure has to be confirmed by an external auditor before it counts",
+        "Because eighty percent is below the threshold that the standard requires",
+        "Support is not use, and the old path still carries the traffic",
+        "Because the number changes daily"
+      ],
+      "answer": 2,
+      "why": "What protects data is the algorithm actually negotiated, and one legacy client is enough to keep the classical path alive for its sessions. The measure worth reporting is the share of connections that completed on the new exchange.",
+      "why_vi": "Cái bảo vệ dữ liệu là thuật toán thực sự được thương lượng, mà chỉ một máy khách cũ cũng đủ giữ cho đường cổ điển sống tiếp với các phiên của nó. Con số đáng báo cáo là tỷ lệ kết nối đã hoàn tất bằng trao đổi mới.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-089",
+      "q": "Which single fact sharpens a migration priority list the most?",
+      "q_vi": "Dữ kiện đơn lẻ nào làm sắc nét nhất một danh sách ưu tiên chuyển đổi?",
+      "choices": [
+        "How many processor cycles each candidate consumes on the current fleet",
+        "How long each data set has to stay confidential",
+        "Which teams have attended the training",
+        "How many vendors ship the new code"
+      ],
+      "answer": 1,
+      "why": "Secrecy lifetime is what converts a distant and uncertain threat into a date on this year's plan. A stream that matters for a week can wait, while one that must hold for twenty years is already late.",
+      "why_vi": "Thời hạn cần giữ bí mật chính là thứ biến một mối đe doạ xa xôi và bất định thành một mốc trong kế hoạch năm nay. Luồng dữ liệu chỉ quan trọng trong một tuần thì chờ được, còn luồng phải giữ kín hai mươi năm thì đã trễ rồi.",
+      "level": 1
+    },
+    {
+      "id": "qpqc-090",
+      "q": "Which traffic deserves the earliest protection against bulk recording?",
+      "q_vi": "Lưu lượng nào đáng được bảo vệ sớm nhất trước việc bị ghi lại hàng loạt?",
+      "choices": [
+        "Long lived secrets crossing links that an adversary can tap in bulk, such as backbone or satellite segments carrying archived material",
+        "Interactive sessions that end within a minute",
+        "Public content served from a cache",
+        "Telemetry that is discarded after a week"
+      ],
+      "answer": 0,
+      "why": "The threat needs two ingredients together, a channel that can be captured cheaply and content whose value outlives the wait. Short lived or public data fails the second test, which is why it sits lower on the list even when the volume is large.",
+      "why_vi": "Mối đe doạ này cần đủ hai thành phần cùng lúc, một kênh có thể thu gom rẻ tiền và nội dung có giá trị sống lâu hơn thời gian chờ đợi. Dữ liệu ngắn hạn hay dữ liệu công khai trượt điều kiện thứ hai, nên nó xếp thấp hơn trong danh sách dù khối lượng có lớn.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-091",
+      "q": "Could RSA be rescued by moving to keys of a million bits rather than adopting a different scheme?",
+      "q_vi": "Liệu có cứu được RSA bằng cách chuyển sang khoá một triệu bit thay vì đổi sang hệ khác không?",
+      "choices": [
+        "No, because the attack grows polynomially while honest use grows far faster",
+        "Yes, provided the key is regenerated at least once every calendar year for safety",
+        "Yes, because the quantum algorithm cannot handle numbers of that size",
+        "No, because such a key cannot be generated at all"
+      ],
+      "answer": 0,
+      "why": "Every classical operation on such a key becomes ruinous long before the quantum cost does, since the attack scales as a polynomial in the key length. The trade that once worked against classical factoring simply does not exist here.",
+      "why_vi": "Mọi thao tác cổ điển trên một khoá như vậy trở nên bất khả thi từ rất lâu trước khi chi phí lượng tử chạm ngưỡng, vì tấn công co giãn theo đa thức của độ dài khoá. Cái phép đánh đổi từng hiệu quả trước phân tích thừa số cổ điển ở đây đơn giản là không tồn tại.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-092",
+      "q": "An organisation proposes dropping public key cryptography altogether and running on pre shared symmetric keys. What is the honest assessment?",
+      "q_vi": "Một tổ chức đề xuất bỏ hẳn mật mã khoá công khai và chạy toàn bộ bằng khoá đối xứng chia sẻ trước. Đánh giá trung thực là gì?",
+      "choices": [
+        "It fails outright, because symmetric ciphers are themselves broken by a quantum machine",
+        "It fails because pre shared keys cannot provide confidentiality on their own",
+        "It works, and key management gets simpler",
+        "It works technically, but distribution and revocation do not scale"
+      ],
+      "answer": 3,
+      "why": "Shared secrets are genuinely safe from the quantum threat, which is why they appear in interim mitigations for small closed networks. The reason public key cryptography was invented remains, since the number of pairwise keys and the pain of revoking one grow badly with the size of the estate.",
+      "why_vi": "Bí mật chia sẻ đúng là an toàn trước mối đe doạ lượng tử, vì thế chúng xuất hiện trong các biện pháp tạm thời cho những mạng nhỏ và khép kín. Nhưng lý do khai sinh mật mã khoá công khai vẫn còn đó, vì số khoá theo từng cặp và nỗi khổ khi thu hồi một khoá đều phình rất xấu theo quy mô hệ thống.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-093",
+      "q": "A paper announced a far cheaper lattice attack and was later shown to rest on a flawed assumption. What should a reader take from that episode?",
+      "q_vi": "Một bài báo công bố tấn công lưới rẻ hơn hẳn rồi sau đó bị chỉ ra là dựa trên một giả định sai. Người đọc nên rút ra điều gì?",
+      "choices": [
+        "Estimates move in both directions",
+        "That published parameter sets should be discarded until the dispute is settled",
+        "That lattice schemes have no meaningful security analysis behind them at all",
+        "That peer review cannot catch errors in cryptanalysis"
+      ],
+      "answer": 0,
+      "why": "The claim was examined in public and corrected within months, which is the process working rather than failing. The lasting message is that concrete security numbers are live research results, so margin and the ability to change algorithm are both worth paying for.",
+      "why_vi": "Khẳng định đó đã được mổ xẻ công khai và chỉnh lại trong vài tháng, tức là quy trình đang chạy đúng chứ không phải đang hỏng. Thông điệp còn lại là các con số an toàn cụ thể vẫn là kết quả nghiên cứu đang sống, nên cả biên dự phòng lẫn khả năng đổi thuật toán đều đáng để trả giá.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-094",
+      "q": "A laboratory reports a sampling experiment that no classical computer can reproduce quickly. What does it mean for deployed cryptography?",
+      "q_vi": "Một phòng thí nghiệm công bố thí nghiệm lấy mẫu mà không máy tính cổ điển nào tái tạo nhanh được. Điều đó có nghĩa gì với mật mã đang triển khai?",
+      "choices": [
+        "It shows the machine can already run a general purpose algorithm on real input",
+        "It means a factoring machine is at most two years off",
+        "It means symmetric key lengths must be doubled at once",
+        "Nothing directly, since that task is not the algorithm that breaks keys"
+      ],
+      "answer": 3,
+      "why": "Such demonstrations run a shallow circuit chosen because it is hard to simulate, with no error correction and no useful output. The cryptographically relevant milestone is a long, error corrected computation, and that is a different engineering problem.",
+      "why_vi": "Những màn trình diễn kiểu đó chạy một mạch nông được chọn vì khó mô phỏng, không có sửa lỗi và không cho đầu ra hữu ích nào. Cột mốc thực sự liên quan tới mật mã là một phép tính dài có sửa lỗi, và đó là một bài toán kỹ thuật khác hẳn.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-095",
+      "q": "A team wants evidence that its implementation really is constant time. What supplies that evidence?",
+      "q_vi": "Một nhóm muốn bằng chứng rằng bản cài của mình thực sự hằng thời gian. Cái gì cung cấp bằng chứng đó?",
+      "choices": [
+        "Tooling that tracks secret values through the compiled binary",
+        "Running the code many times and confirming that the average time is stable",
+        "A statement from the library author that no branch depends on a secret",
+        "A benchmark on one machine"
+      ],
+      "answer": 0,
+      "why": "Averages hide exactly the rare timing differences an attacker collects over many samples, and a compiler can introduce a branch the source never had. Checking the emitted code, by dynamic tainting or by a verified compiler pass, is what turns the claim into a result.",
+      "why_vi": "Giá trị trung bình che đi đúng những khác biệt thời gian hiếm gặp mà kẻ tấn công gom góp qua rất nhiều mẫu, còn trình biên dịch thì có thể tự sinh ra một nhánh mà mã nguồn không hề có. Kiểm chính phần mã đã phát ra, bằng theo vết động hay bằng một pha biên dịch đã kiểm chứng, mới biến lời khẳng định thành kết quả.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-096",
+      "q": "Why do the maintainers of an experimental post quantum library warn against using it in production?",
+      "q_vi": "Vì sao người bảo trì một thư viện hậu lượng tử thử nghiệm lại cảnh báo đừng dùng nó cho hệ thống chạy thật?",
+      "choices": [
+        "Because the code is written in a language unsuitable for cryptography",
+        "Because performance has not yet been optimised for server workloads",
+        "Because the algorithms have not been standardised by any body",
+        "Hardening and long term support are not promised"
+      ],
+      "answer": 3,
+      "why": "Such libraries exist to let people experiment early, so they carry algorithms that may be withdrawn and code that has not been reviewed for leakage. Standardised algorithms are usually present, and the warning is about the surrounding engineering rather than the mathematics.",
+      "why_vi": "Những thư viện như vậy sinh ra để người ta thử nghiệm sớm, nên chúng chứa cả thuật toán có thể bị rút lại lẫn phần mã chưa được soi về rò rỉ. Thuật toán đã chuẩn hoá thường vẫn có mặt, và lời cảnh báo nhắm vào phần kỹ thuật xung quanh chứ không nhắm vào toán học.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-097",
+      "q": "Large scale browser experiments with a hybrid exchange reported which headline result?",
+      "q_vi": "Các thí nghiệm quy mô lớn trên trình duyệt với trao đổi lai đã cho kết quả nổi bật nào?",
+      "choices": [
+        "Most connections absorbed the extra bytes for a small latency cost, while a thin tail of clients and network devices failed outright and had to be chased down separately",
+        "Connections failed for the majority of users",
+        "The change was invisible to every client tested",
+        "Processor load at the servers rose sharply"
+      ],
+      "answer": 0,
+      "why": "The average case was undramatic because lattice arithmetic is cheap and the byte increase is modest. The work went into the tail, where old implementations mishandled a first flight that no longer fitted their expectations.",
+      "why_vi": "Trường hợp trung bình chẳng có gì kịch tính vì số học trên lưới rẻ và lượng byte tăng thêm ở mức vừa phải. Công sức dồn vào phần đuôi, nơi các bản cài cũ xử lý sai một loạt gói đầu tiên không còn vừa với những gì chúng trông đợi.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-098",
+      "q": "A transport caps how many bytes a server may send before the client address is validated. What does a large certificate chain do under that rule?",
+      "q_vi": "Một giao thức truyền tải giới hạn số byte máy chủ được gửi trước khi địa chỉ máy khách được xác nhận. Chuỗi chứng thư lớn gây ra chuyện gì dưới luật đó?",
+      "choices": [
+        "Nothing at all, since the limit applies only to the client's first message",
+        "It removes the need for address validation entirely",
+        "It forces the server to open a second connection",
+        "The server must wait for more from the client before it can finish its flight"
+      ],
+      "answer": 3,
+      "why": "The cap exists so that a spoofed address cannot be used to aim traffic at a victim, and it is expressed as a multiple of what the client has sent. A chain several kilobytes long crosses it, so the server stalls for an extra round trip that shows up as handshake latency.",
+      "why_vi": "Giới hạn này tồn tại để một địa chỉ giả mạo không thể bị lợi dụng để dội lưu lượng vào nạn nhân, và nó được tính theo bội số của lượng byte máy khách đã gửi. Chuỗi dài vài kilobyte vượt qua ngưỡng đó, nên máy chủ khựng lại thêm một lượt khứ hồi và điều này hiện ra thành độ trễ bắt tay.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-099",
+      "q": "A sensor network runs datagram security over a radio with a very small maximum payload. What does the migration force there?",
+      "q_vi": "Một mạng cảm biến chạy bảo mật kiểu datagram trên sóng vô tuyến có tải trọng tối đa rất nhỏ. Việc chuyển đổi buộc phải làm gì ở đó?",
+      "choices": [
+        "More fragments per handshake",
+        "A move away from datagram transport to a stream oriented protocol entirely",
+        "Replacement of the symmetric cipher that protects the payload",
+        "A larger certificate store on every sensor in the deployment"
+      ],
+      "answer": 0,
+      "why": "The handshake material no longer fits a few small frames, so it must be split and reassembled, and every lost fragment costs a retransmission of the whole flight. This is why raw byte count is the metric that decides algorithm choice on such links.",
+      "why_vi": "Tài liệu bắt tay không còn nằm gọn trong vài khung nhỏ nữa, nên phải cắt ra rồi ghép lại, và mỗi mảnh bị mất kéo theo việc phát lại cả loạt. Vì thế số byte thô mới là thước đo quyết định việc chọn thuật toán trên những tuyến như vậy.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-100",
+      "q": "Someone reports that their handshake is now hybrid because the certificate carries two public keys. Where is the confusion?",
+      "q_vi": "Có người báo rằng lượt bắt tay của họ đã lai vì chứng thư mang hai khoá công khai. Nhầm lẫn nằm ở đâu?",
+      "choices": [
+        "Hybrid refers to running two protocol versions rather than two algorithms",
+        "A certificate cannot hold two public keys under any published profile",
+        "That covers authenticity, not the exchange that protects the traffic",
+        "Nothing, the two mean the same thing"
+      ],
+      "answer": 2,
+      "why": "Two keys in a certificate strengthen how the peer is identified, which is not what an attacker recording today's session is after. Protection against that recording comes from the key establishment, so the two changes must be tracked as separate items.",
+      "why_vi": "Hai khoá trong chứng thư làm mạnh thêm cách định danh đối tác, mà đó không phải thứ kẻ đang ghi lại phiên hôm nay nhắm tới. Lớp che trước bản ghi đó đến từ bước thiết lập khoá, nên hai thay đổi này phải được theo dõi như hai hạng mục riêng.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-101",
+      "q": "A designer proposes compressing lattice public keys with a general purpose algorithm to save bytes. What is wrong with the idea?",
+      "q_vi": "Một người thiết kế đề xuất nén khoá công khai trên lưới bằng thuật toán nén thông dụng để tiết kiệm byte. Ý tưởng đó sai ở đâu?",
+      "choices": [
+        "Compression is forbidden by the standard for these formats",
+        "The bytes are close to uniform, so nothing compresses",
+        "The receiver cannot decompress",
+        "It would slow the handshake"
+      ],
+      "answer": 1,
+      "why": "The key is essentially a block of pseudorandom coefficients, and random data has no redundancy for a compressor to remove. Real savings come from the scheme itself, through coefficient truncation, or from sending fewer objects in the first place.",
+      "why_vi": "Khoá về bản chất là một khối hệ số giả ngẫu nhiên, mà dữ liệu ngẫu nhiên thì không có phần dư nào để bộ nén cắt bớt. Tiết kiệm thật đến từ chính bản thân hệ, qua việc cắt bớt hệ số, hoặc đến từ việc gửi ít đối tượng hơn ngay từ đầu.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-102",
+      "q": "An operator concludes that some of its past traffic has almost certainly been captured and stored. What can still be done for that traffic?",
+      "q_vi": "Một nhà khai thác kết luận rằng một phần lưu lượng quá khứ gần như chắc chắn đã bị thu và lưu lại. Còn làm được gì cho phần lưu lượng đó?",
+      "choices": [
+        "Re encrypt the recorded sessions under the new algorithms at the archive",
+        "Rotate the long term keys used at the time so the recordings become useless",
+        "Issue new certificates for the endpoints that carried those sessions",
+        "Nothing, so the effort belongs to future traffic"
+      ],
+      "answer": 3,
+      "why": "The ciphertext is in someone else's hands, so no action on your own systems reaches it, and rotating a key cannot unmake a session it already protected. This is why the deadline for migration is set by data that is still flowing rather than by data already lost.",
+      "why_vi": "Bản mã nằm trong tay người khác, nên không hành động nào trên hệ thống của bạn với tới được nó, và xoay vòng khoá cũng không xoá được một phiên mà nó đã bảo vệ xong. Vì thế hạn chót chuyển đổi được đặt theo dữ liệu còn đang chảy chứ không theo dữ liệu đã mất.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-103",
+      "q": "A procurement team assumes the change requires new cryptographic hardware across the estate. Is that assumption right?",
+      "q_vi": "Bộ phận mua sắm cho rằng thay đổi này đòi hỏi phần cứng mật mã mới trên toàn hệ thống. Giả định đó có đúng không?",
+      "choices": [
+        "Mostly no, since these algorithms run on ordinary processors, though modules that hold keys in silicon and devices with a fixed trust anchor are the genuine exceptions",
+        "Yes, because lattice arithmetic needs a dedicated accelerator",
+        "Yes, because the schemes require a quantum source of randomness",
+        "No, and every device in the estate can be updated purely by software"
+      ],
+      "answer": 0,
+      "why": "The whole point of this family is that it runs on the computers already in service, and the arithmetic is if anything cheaper than what it replaces. The exceptions are narrow but expensive, which is why an inventory has to identify them early.",
+      "why_vi": "Toàn bộ ý nghĩa của họ thuật toán này là nó chạy trên chính những máy đang phục vụ, mà phần số học thậm chí còn rẻ hơn thứ nó thay thế. Các ngoại lệ thì hẹp nhưng đắt, và vì thế việc kiểm kê phải chỉ ra chúng từ sớm.",
+      "level": 2
+    },
+    {
+      "id": "qpqc-104",
+      "q": "Security analyses often bound the depth of the quantum circuit an attacker is allowed to run. What does that bound do to a generic key search?",
+      "q_vi": "Các phân tích an toàn thường đặt cận trên độ sâu mạch lượng tử mà kẻ tấn công được phép chạy. Cận đó ảnh hưởng thế nào tới phép tìm khoá tổng quát?",
+      "choices": [
+        "It rules out the attack against any key longer than one hundred bits entirely",
+        "It weakens the gain further, since the search resists parallelising",
+        "It leaves the attack unchanged, since depth is not a resource that matters",
+        "It applies to hash functions only"
+      ],
+      "answer": 1,
+      "why": "A depth cap forces the attacker to split the space across many machines, and each machine then gets only the square root of its own smaller share. Under any realistic bound the effective margin of a 128 bit key is much better than the headline exponent suggests.",
+      "why_vi": "Cận độ sâu buộc kẻ tấn công phải chia không gian ra nhiều cỗ máy, và mỗi máy khi đó chỉ hưởng căn bậc hai trên phần nhỏ của riêng nó. Dưới bất kỳ cận thực tế nào, biên hiệu dụng của khoá 128 bit đều tốt hơn nhiều so với những gì số mũ trên tiêu đề gợi ra.",
+      "level": 3
+    },
+    {
+      "id": "qpqc-105",
+      "q": "By what standard should a migration programme judge itself finished?",
+      "q_vi": "Chương trình chuyển đổi nên lấy tiêu chuẩn nào để tự coi là đã hoàn thành?",
+      "choices": [
+        "When every product in the catalogue lists a post quantum algorithm as supported",
+        "When the last classical certificate in the estate has finally expired on its own",
+        "When the supplier of each component has confirmed compliance in writing",
+        "When sensitive traffic no longer has a classical path"
+      ],
+      "answer": 3,
+      "why": "Support, paperwork and expiry dates all describe the estate rather than the exposure, and a single reachable fallback keeps the exposure alive. The finish line is the moment an attacker can no longer negotiate the old path for anything that matters.",
+      "why_vi": "Hỗ trợ, giấy tờ và ngày hết hạn đều mô tả hệ thống chứ không mô tả mức phơi nhiễm, mà chỉ một đường lùi còn với tới được cũng đủ giữ cho mức phơi nhiễm đó sống. Vạch đích là thời điểm kẻ tấn công không còn thương lượng được đường cũ cho bất cứ thứ gì quan trọng.",
+      "level": 2
+    }
+  ]
+}

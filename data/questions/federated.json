@@ -2252,6 +2252,726 @@
       "why": "Each client can sit anywhere between fully global and fully local, and the best point differs by how much data that client has. Reporting one coefficient for the whole federation throws that away.",
       "why_vi": "Mỗi máy khách có thể nằm ở bất kỳ đâu giữa hoàn toàn toàn cục và hoàn toàn cục bộ, và điểm tốt nhất khác nhau tuỳ máy có bao nhiêu dữ liệu. Báo một hệ số duy nhất cho cả liên minh là vứt bỏ điều đó.",
       "level": 4
+    },
+    {
+      "id": "qf3-1",
+      "q": "A federated convergence proof assumes bounded heterogeneity across clients. What that assumption costs in practice is",
+      "q_vi": "Một chứng minh hội tụ liên kết giả thiết mức bất đồng nhất giữa các máy khách bị chặn. Cái giá của giả thiết đó trong thực tế là",
+      "choices": [
+        "The constant being bounded cannot be measured on real client data, so the theorem can never be checked against an actual deployment",
+        "It forces every client to hold exactly the same number of training samples",
+        "It only applies when the server aggregates by plain averaging",
+        "It rules out the use of momentum"
+      ],
+      "answer": 0,
+      "why": "The bound is stated over a quantity the operator never observes, since seeing it would require the raw gradients of the whole population. The theorem is therefore untestable rather than wrong.",
+      "why_vi": "Chặn được phát biểu trên một đại lượng mà người vận hành không bao giờ quan sát được, vì muốn thấy nó thì phải có gradient thô của toàn bộ dân số. Vậy nên định lý là không kiểm chứng được chứ không phải sai.",
+      "level": 3
+    },
+    {
+      "id": "qf3-2",
+      "q": "Assuming the loss is smooth with a fixed constant is what allows a federated analysis to",
+      "q_vi": "Giả thiết hàm mất mát trơn với một hằng số cố định là thứ cho phép phần phân tích liên kết",
+      "choices": [
+        "Prove that the global minimum is unique no matter what architecture the clients happen to be training on their devices",
+        "Bound how far the gradient can move over one step and so choose a step size that cannot overshoot",
+        "Drop any need for a bound on gradient noise",
+        "Guarantee that local training never overfits"
+      ],
+      "answer": 1,
+      "why": "Smoothness limits how fast the gradient can change, which converts a step into a predictable decrease in loss. Uniqueness of the minimum comes from convexity, not from smoothness.",
+      "why_vi": "Tính trơn giới hạn tốc độ thay đổi của gradient, nhờ đó một bước học chuyển thành mức giảm mất mát dự đoán được. Tính duy nhất của cực tiểu đến từ tính lồi chứ không từ tính trơn.",
+      "level": 2
+    },
+    {
+      "id": "qf3-3",
+      "q": "Rates proved under strong convexity are still quoted for deep federated models because",
+      "q_vi": "Các tốc độ chứng minh dưới giả thiết lồi mạnh vẫn được trích dẫn cho mô hình liên kết sâu là vì",
+      "choices": [
+        "Deep networks become strongly convex as soon as every normalisation block is taken out of the architecture",
+        "The condition holds exactly for any network that is trained with weight decay switched on",
+        "The assumption is convenient to analyse, not a description of the real surface",
+        "Deep losses are convex near the end of training"
+      ],
+      "answer": 2,
+      "why": "Such a rate is a sanity check on the algorithm rather than a statement about the network being trained. Presenting it as a property of the deep model is where the overclaim starts.",
+      "why_vi": "Tốc độ kiểu đó là phép kiểm tra tính hợp lý của thuật toán chứ không phải phát biểu về mạng đang huấn luyện. Trình bày nó như một tính chất của mô hình sâu chính là chỗ bắt đầu nói quá.",
+      "level": 3
+    },
+    {
+      "id": "qf3-4",
+      "q": "Raising the number of local steps per round cuts the round count only up to a point because",
+      "q_vi": "Tăng số bước cục bộ mỗi vòng chỉ giảm được số vòng tới một mức nào đó là vì",
+      "choices": [
+        "The server has to allocate proportionally more bandwidth to each participating device in that round",
+        "Local batch normalisation statistics grow stale after a fixed number of gradient steps have been taken",
+        "The aggregation step becomes numerically unstable once the updates grow large",
+        "Each client drifts toward its own optimum"
+      ],
+      "answer": 3,
+      "why": "Extra local work moves each model toward a local solution, so the average of those models sits further from the global one. Past a point the saved rounds are paid back as a higher error floor.",
+      "why_vi": "Thêm công việc cục bộ đẩy mỗi mô hình về phía nghiệm riêng của nó, nên trung bình của các mô hình đó nằm xa nghiệm toàn cục hơn. Quá một mức thì số vòng tiết kiệm được phải trả lại bằng sàn sai số cao hơn.",
+      "level": 2
+    },
+    {
+      "id": "qf3-5",
+      "q": "The linear speedup in the number of participating clients stops holding when",
+      "q_vi": "Mức tăng tốc tuyến tính theo số máy khách tham gia thôi đúng khi",
+      "choices": [
+        "The server switches from plain averaging to a weighted average",
+        "Participation is correlated with the data itself, so the clients that report each round are no longer a fair sample of the population",
+        "More than half of the population is enrolled in the cohort",
+        "Clients run different numbers of local epochs"
+      ],
+      "answer": 1,
+      "why": "The speedup rests on averaging independent noise from a representative draw. Correlated participation replaces noise reduction with bias, and bias does not shrink as the cohort grows.",
+      "why_vi": "Mức tăng tốc dựa trên việc trung bình hoá nhiễu độc lập từ một mẫu đại diện. Tham gia có tương quan thay việc giảm nhiễu bằng độ chệch, mà độ chệch không nhỏ đi khi nhóm lớn lên.",
+      "level": 3
+    },
+    {
+      "id": "qf3-6",
+      "q": "A term in the error bound that does not shrink as the round count grows tells you that",
+      "q_vi": "Một thành phần trong chặn sai số không nhỏ đi khi số vòng tăng cho bạn biết rằng",
+      "choices": [
+        "The proof must be wrong, because a correct bound always decays to zero once the round count grows without limit",
+        "Adding more clients to each cohort will remove the residual on its own",
+        "Training will flatten at a floor set by how different the clients are from each other",
+        "The step size was chosen far too small"
+      ],
+      "answer": 2,
+      "why": "A residual that survives the limit is the signature of heterogeneity rather than of slow optimisation. Running longer moves the curve along without lowering where it settles.",
+      "why_vi": "Phần dư còn lại ở giới hạn là dấu hiệu của bất đồng nhất chứ không phải của tối ưu chậm. Chạy lâu hơn chỉ kéo dài đường cong mà không hạ được mức nó dừng lại.",
+      "level": 3
+    },
+    {
+      "id": "qf3-7",
+      "q": "Training only on devices that are charging overnight changes the meaning of the trained model because",
+      "q_vi": "Chỉ huấn luyện trên các thiết bị đang sạc qua đêm làm thay đổi ý nghĩa của mô hình thu được là vì",
+      "choices": [
+        "Those devices upload their updates over a link whose latency profile differs from the rest of the fleet",
+        "Battery powered training introduces a numerical error into every gradient computed on the device",
+        "Charging devices run more local epochs",
+        "The objective actually optimised becomes the loss of the population that charges overnight"
+      ],
+      "answer": 3,
+      "why": "Selection probability enters the objective as a weight. Once it stops matching the intended weight, the run converges correctly to a target nobody chose.",
+      "why_vi": "Xác suất được chọn đi vào hàm mục tiêu như một trọng số. Khi nó không còn khớp trọng số dự định thì quá trình vẫn hội tụ đúng, chỉ là hội tụ về một mục tiêu không ai chọn.",
+      "level": 3
+    },
+    {
+      "id": "qf3-8",
+      "q": "A convergence bound that evaluates to a number larger than the loss at initialisation is",
+      "q_vi": "Một chặn hội tụ cho ra giá trị lớn hơn cả mất mát lúc khởi tạo thì",
+      "choices": [
+        "True but useless as evidence",
+        "A sign that the smoothness constant was estimated on the wrong dataset entirely",
+        "Proof that the algorithm diverges on the population being studied",
+        "Acceptable provided the experiments show a decreasing curve"
+      ],
+      "answer": 0,
+      "why": "The statement remains a theorem, yet it excludes nothing that the trivial observation about the starting loss did not already exclude. Reporting it as support for the method is the error.",
+      "why_vi": "Phát biểu vẫn là một định lý, nhưng nó không loại trừ được gì hơn nhận xét tầm thường về mất mát ban đầu. Sai lầm nằm ở chỗ đem nó ra làm chỗ dựa cho phương pháp.",
+      "level": 3
+    },
+    {
+      "id": "qf3-9",
+      "q": "Non-convex federated analyses report the expected squared gradient norm rather than the loss gap because",
+      "q_vi": "Các phân tích liên kết không lồi báo cáo kỳ vọng bình phương chuẩn gradient thay vì khoảng cách mất mát là vì",
+      "choices": [
+        "The gradient norm is cheaper for each client to compute locally",
+        "The loss gap cannot be defined for a network that uses skip connections",
+        "No proof can promise a global minimum on such a surface, so the target is weakened to reaching a point where the gradient is small",
+        "Gradient norms are less sensitive to the choice of random seed"
+      ],
+      "answer": 2,
+      "why": "The optimal loss is unknown and unreachable in general, so the criterion is relaxed to stationarity. A stationary point may still be a poor model, which is exactly what the theorem declines to address.",
+      "why_vi": "Giá trị mất mát tối ưu là không biết và nói chung không đạt tới được, nên tiêu chí bị nới thành điểm dừng. Một điểm dừng vẫn có thể là mô hình kém, và đó đúng là điều định lý từ chối bàn tới.",
+      "level": 3
+    },
+    {
+      "id": "qf3-10",
+      "q": "The Polyak Lojasiewicz condition is attractive in federated analysis because",
+      "q_vi": "Điều kiện Polyak Lojasiewicz hấp dẫn trong phân tích liên kết là vì",
+      "choices": [
+        "It removes the need to assume anything about how the gradient noise behaves across the client population",
+        "It is easy to verify numerically on a held out server dataset",
+        "It makes partial participation equivalent to full participation",
+        "It yields a linear rate while asking for something weaker than convexity"
+      ],
+      "answer": 3,
+      "why": "The condition ties the gradient norm to the distance from the optimal value, which is enough for a fast rate. It is still an assumption about the surface, and it is no easier to verify than convexity.",
+      "why_vi": "Điều kiện này ràng buộc chuẩn gradient với khoảng cách tới giá trị tối ưu, đủ để có tốc độ nhanh. Nó vẫn là một giả thiết về bề mặt, và cũng không dễ kiểm chứng hơn tính lồi.",
+      "level": 4
+    },
+    {
+      "id": "qf3-11",
+      "q": "Keeping the client learning rate separate from the server learning rate helps mainly because",
+      "q_vi": "Giữ bước học của máy khách tách rời bước học của máy chủ giúp ích chủ yếu vì",
+      "choices": [
+        "The two control different things, namely local progress and how boldly the average is applied",
+        "The server rate can be tuned offline, without ever running a single round of training on the devices",
+        "A single shared rate would make secure aggregation impossible to implement inside the protocol",
+        "It removes the drift caused by heterogeneity"
+      ],
+      "answer": 0,
+      "why": "A small local rate limits how far each client wanders, while the server rate decides how much of the aggregate to trust. Collapsing them into one number forces a single compromise on two separate problems.",
+      "why_vi": "Bước học cục bộ nhỏ hạn chế mức mỗi máy khách đi lạc, còn bước học ở máy chủ quyết định tin bao nhiêu vào phần tổng hợp. Gộp cả hai thành một con số buộc bạn phải thoả hiệp chung cho hai vấn đề tách biệt.",
+      "level": 3
+    },
+    {
+      "id": "qf3-12",
+      "q": "Most federated convergence theorems say nothing about the quality of the model that comes out because",
+      "q_vi": "Phần lớn định lý hội tụ liên kết không nói gì về chất lượng của mô hình thu được là vì",
+      "choices": [
+        "They are proved for a shallow surrogate rather than the network that is actually deployed",
+        "They bound optimisation error, not generalisation",
+        "They assume every client holds an identically distributed sample of the population",
+        "They are stated only for the case of full participation in every round"
+      ],
+      "answer": 1,
+      "why": "Reaching a low training objective and predicting well on unseen users are different claims. The proof addresses the first, while the deployment cares about the second.",
+      "why_vi": "Đạt mất mát huấn luyện thấp và dự báo tốt trên người dùng chưa gặp là hai khẳng định khác nhau. Chứng minh lo cái thứ nhất, còn khi triển khai người ta cần cái thứ hai.",
+      "level": 3
+    },
+    {
+      "id": "qf3-13",
+      "q": "The bounded variance assumption in a federated rate is what decides",
+      "q_vi": "Giả thiết phương sai bị chặn trong một tốc độ hội tụ liên kết là thứ quyết định",
+      "choices": [
+        "Whether the algorithm can be run without a central coordinator",
+        "How many local epochs each device is permitted",
+        "The privacy loss incurred per round",
+        "How much sampling noise the averaging across clients has to absorb, and therefore how large a local batch each device needs"
+      ],
+      "answer": 3,
+      "why": "That constant is the noise the aggregate has to cancel. A larger local batch cuts it directly, which is why batch size and cohort size appear together in these bounds.",
+      "why_vi": "Hằng số đó chính là lượng nhiễu mà phần tổng hợp phải khử. Lô cục bộ lớn hơn cắt nó đi trực tiếp, và đó là lý do kích thước lô và kích thước nhóm luôn xuất hiện cùng nhau trong các chặn này.",
+      "level": 3
+    },
+    {
+      "id": "qf3-14",
+      "q": "Aligning records across two parties before vertical training is delicate because",
+      "q_vi": "Ghép bản ghi giữa hai bên trước khi huấn luyện theo chiều dọc là việc tế nhị vì",
+      "choices": [
+        "The overlap has to be found without either side learning who lies outside it",
+        "Both parties must agree on a single loss function before any identifier can be compared at all",
+        "The identifiers are usually stored in different character encodings",
+        "Aligned records must be re-sorted after every round"
+      ],
+      "answer": 0,
+      "why": "Naively exchanging identifiers hands each side a list of the other party's customers, which is often more sensitive than the model itself. Private set intersection exists to return the overlap and nothing else.",
+      "why_vi": "Trao đổi định danh một cách ngây thơ là đưa cho mỗi bên danh sách khách hàng của bên kia, thứ nhiều khi còn nhạy cảm hơn cả mô hình. Giao tập riêng tư sinh ra để trả về đúng phần giao và không gì khác.",
+      "level": 2
+    },
+    {
+      "id": "qf3-15",
+      "q": "In a vertical federation the participant that holds the label column",
+      "q_vi": "Trong một liên kết theo chiều dọc, bên nắm cột nhãn",
+      "choices": [
+        "Must hand a copy of those labels to every feature holding partner before training begins",
+        "Drives the training loop, since the loss can only be formed where the labels live",
+        "Is the only participant that has to take part in the private set intersection step",
+        "Contributes no features"
+      ],
+      "answer": 1,
+      "why": "Gradients start at the loss, so the label holder computes them and passes them back down to the feature parties. That position also makes it the party with the most leverage in the arrangement.",
+      "why_vi": "Gradient bắt đầu từ hàm mất mát, nên bên nắm nhãn tính chúng rồi truyền ngược xuống các bên nắm đặc trưng. Vị trí đó cũng khiến bên này có nhiều quyền chi phối nhất trong thoả thuận.",
+      "level": 2
+    },
+    {
+      "id": "qf3-16",
+      "q": "Moving the cut layer deeper into the network changes the privacy picture by",
+      "q_vi": "Đẩy tầng cắt vào sâu hơn trong mạng làm thay đổi bức tranh riêng tư theo hướng",
+      "choices": [
+        "Removing the need for the feature party to compute any backward pass at all",
+        "Shifting the entire computation onto the party that owns the labels for the task",
+        "Sending a more abstract activation",
+        "Making the exchanged tensor larger in every practical architecture"
+      ],
+      "answer": 2,
+      "why": "Deeper activations have discarded more of the input, so reconstruction from them is harder. The cost is that the feature party now runs more of the network on its own hardware.",
+      "why_vi": "Kích hoạt ở tầng sâu đã bỏ đi nhiều thông tin đầu vào hơn, nên tái dựng từ chúng khó hơn. Cái giá là bên nắm đặc trưng phải chạy phần mạng lớn hơn trên phần cứng của mình.",
+      "level": 3
+    },
+    {
+      "id": "qf3-17",
+      "q": "A feature holding party in a vertical federation never sees the labels, yet can often recover them because",
+      "q_vi": "Một bên nắm đặc trưng trong liên kết theo chiều dọc không bao giờ thấy nhãn, nhưng thường vẫn khôi phục được chúng vì",
+      "choices": [
+        "The gradients sent back to it carry the sign and the magnitude of the error on each aligned record, which is close to reading the target column",
+        "The alignment protocol writes the labels into the shared identifier list",
+        "The label owner has to publish class counts before every round",
+        "Embeddings are exchanged in plain text"
+      ],
+      "answer": 0,
+      "why": "Backward signals are computed from the loss, so their direction depends directly on whether the record was positive or negative. Splitting the network hides the column but not its shadow in the gradient.",
+      "why_vi": "Tín hiệu lan truyền ngược được tính từ hàm mất mát, nên hướng của chúng phụ thuộc trực tiếp vào việc bản ghi thuộc lớp dương hay lớp âm. Chia mạng ra thì giấu được cột nhãn nhưng không giấu được cái bóng của nó trong gradient.",
+      "level": 4
+    },
+    {
+      "id": "qf3-18",
+      "q": "Calling an exchanged embedding privacy preserving because it is not raw data is unsafe because",
+      "q_vi": "Gọi một biểu diễn nhúng đem trao đổi là bảo toàn riêng tư chỉ vì nó không phải dữ liệu thô là không an toàn vì",
+      "choices": [
+        "An embedding is always larger than the record it was computed from, in every architecture used in practice",
+        "A partner can train a small decoder that maps those vectors back to attributes of the record",
+        "The receiving party stores every vector it is sent for auditing purposes",
+        "Embeddings cannot be encrypted in transit"
+      ],
+      "answer": 1,
+      "why": "The representation is a lossy function of the input, and lossy is not the same as uninformative. With a handful of paired examples an attacker learns the inverse well enough to recover sensitive fields.",
+      "why_vi": "Biểu diễn là một hàm mất mát thông tin của đầu vào, mà mất mát thông tin không đồng nghĩa với vô nghĩa. Chỉ cần vài cặp ví dụ là kẻ tấn công học được ánh xạ ngược đủ tốt để khôi phục các trường nhạy cảm.",
+      "level": 3
+    },
+    {
+      "id": "qf3-19",
+      "q": "Federated transfer learning is harder than the horizontal case mainly because",
+      "q_vi": "Học liên kết theo chuyển giao khó hơn trường hợp theo chiều ngang chủ yếu vì",
+      "choices": [
+        "Each participant has to keep a complete copy of every other participant's feature schema on hand",
+        "The parties involved can no longer make use of any secure aggregation protocol at all",
+        "The mapping between the two feature spaces is fitted on a very small overlap",
+        "Labels must be shared openly"
+      ],
+      "answer": 2,
+      "why": "Parties share neither users nor columns, so everything rests on the handful of records that appear on both sides. A mapping estimated from so few pairs generalises poorly to the rest.",
+      "why_vi": "Các bên không chung người dùng cũng không chung cột dữ liệu, nên mọi thứ đặt lên vài bản ghi xuất hiện ở cả hai phía. Ánh xạ ước lượng từ ít cặp như vậy tổng quát hoá rất kém sang phần còn lại.",
+      "level": 3
+    },
+    {
+      "id": "qf3-20",
+      "q": "Training only a low rank adapter while the backbone stays frozen changes the federated cost picture by",
+      "q_vi": "Chỉ huấn luyện bộ điều hợp hạng thấp trong khi phần thân giữ nguyên làm thay đổi bức tranh chi phí liên kết theo hướng",
+      "choices": [
+        "Removing the need for the client to run a forward pass through the frozen part of the network",
+        "Letting the server skip aggregation entirely, since the adapters are already small enough to store",
+        "Making the memory cost on the device independent of the depth of the backbone",
+        "Shrinking what is uploaded, not what is computed"
+      ],
+      "answer": 3,
+      "why": "The forward pass still runs through the whole backbone and the activations still have to be held for the backward pass. Only the payload gets smaller, which helps the network but not a memory bound device.",
+      "why_vi": "Lượt lan truyền xuôi vẫn chạy qua toàn bộ phần thân và các kích hoạt vẫn phải giữ lại cho lượt ngược. Chỉ gói tin nhỏ đi, điều đó giúp cho đường truyền chứ không giúp thiết bị đang cạn bộ nhớ.",
+      "level": 3
+    },
+    {
+      "id": "qf3-21",
+      "q": "Averaging the two low rank factor matrices across clients is not the same as averaging their updates because",
+      "q_vi": "Trung bình hai ma trận thừa số hạng thấp trên các máy khách không giống với trung bình các bản cập nhật của chúng vì",
+      "choices": [
+        "The factors are stored at a lower precision than the rest of the model",
+        "The update is the product of the two factors, and the mean of products differs from the product of the means once clients disagree",
+        "One of the two factors is initialised to zero on every device",
+        "Each client is free to pick its own rank"
+      ],
+      "answer": 1,
+      "why": "The reconstruction is bilinear, so averaging the pieces introduces cross terms that no client ever computed. Aggregating the reconstructed update, or fixing one factor, avoids the distortion.",
+      "why_vi": "Phép tái dựng có dạng song tuyến tính, nên trung bình từng phần sinh ra các số hạng chéo mà không máy khách nào từng tính. Tổng hợp trên bản cập nhật đã tái dựng, hoặc cố định một thừa số, sẽ tránh được méo mó đó.",
+      "level": 4
+    },
+    {
+      "id": "qf3-22",
+      "q": "Federated distillation over a public proxy set is attractive for large models because",
+      "q_vi": "Chưng cất liên kết qua một tập công khai trung gian hấp dẫn với mô hình lớn là vì",
+      "choices": [
+        "It removes any need for the participating organisations to agree on a common evaluation metric beforehand",
+        "It provides a formal privacy guarantee without any noise being added",
+        "The uploaded payload is a set of predictions, so its size no longer follows the parameter count",
+        "It lets each client keep its own labels private"
+      ],
+      "answer": 2,
+      "why": "Scores on a shared input set are the same size whether the local network has a million parameters or a billion. Clients may even run architectures of different sizes, which weight averaging cannot allow.",
+      "why_vi": "Điểm dự đoán trên một tập đầu vào dùng chung có kích thước như nhau dù mạng cục bộ có một triệu hay một tỉ tham số. Máy khách thậm chí có thể chạy kiến trúc khác cỡ nhau, điều mà trung bình trọng số không cho phép.",
+      "level": 3
+    },
+    {
+      "id": "qf3-23",
+      "q": "The usual weak point of distillation based federation is that",
+      "q_vi": "Điểm yếu thường gặp của lối liên kết dựa trên chưng cất là",
+      "choices": [
+        "The exchanged predictions are far larger than the model updates they replace in the protocol",
+        "It cannot be combined with any form of personalisation on the client side of the system",
+        "Clients must all share one architecture",
+        "A public set matching the private distribution has to exist"
+      ],
+      "answer": 3,
+      "why": "Knowledge only transfers where the proxy inputs resemble what clients actually see. In domains such as clinical notes or private messages that public stand in usually does not exist.",
+      "why_vi": "Tri thức chỉ chuyển được ở những chỗ mà đầu vào trung gian giống thứ máy khách thực sự gặp. Trong các miền như bệnh án hay tin nhắn riêng tư thì tập công khai thay thế đó thường không tồn tại.",
+      "level": 3
+    },
+    {
+      "id": "qf3-24",
+      "q": "A weak phone fails to fine tune a large model even after adapters cut the trainable parameters, usually because of",
+      "q_vi": "Một chiếc điện thoại yếu vẫn không tinh chỉnh nổi mô hình lớn dù bộ điều hợp đã cắt số tham số huấn luyện được, thường là vì",
+      "choices": [
+        "Activation memory",
+        "The cost of encrypting each adapter before it is uploaded to the server",
+        "The time needed to download the frozen backbone once at enrolment",
+        "Insufficient storage for the optimiser state of the adapter modules"
+      ],
+      "answer": 0,
+      "why": "The backward pass has to retain intermediate tensors through the whole frozen trunk, and that peak scales with depth and sequence length rather than with what is being trained.",
+      "why_vi": "Lượt lan truyền ngược phải giữ lại các tensor trung gian xuyên suốt phần thân đóng băng, và đỉnh đó tăng theo độ sâu và độ dài chuỗi chứ không theo phần đang được huấn luyện.",
+      "level": 3
+    },
+    {
+      "id": "qf3-25",
+      "q": "Keeping the frozen backbone at low precision while the adapter stays at full precision works because",
+      "q_vi": "Giữ phần thân đóng băng ở độ chính xác thấp trong khi bộ điều hợp giữ độ chính xác đầy đủ là cách làm được vì",
+      "choices": [
+        "Low precision arithmetic runs faster on every mobile accelerator",
+        "The quantisation error cancels out when the server averages the clients",
+        "No gradient is ever accumulated into the frozen part, so its rounding error is not amplified over steps, while the trained part keeps the range it needs",
+        "The adapter can absorb any error the backbone introduces"
+      ],
+      "answer": 2,
+      "why": "Precision matters most where small increments accumulate. The trunk only evaluates, so a coarse representation is tolerable, whereas the trained factors would stall if their updates rounded to zero.",
+      "why_vi": "Độ chính xác quan trọng nhất ở nơi các mức tăng nhỏ tích luỹ lại. Phần thân chỉ tính xuôi nên biểu diễn thô là chấp nhận được, còn các thừa số được huấn luyện sẽ đứng im nếu bản cập nhật của chúng bị làm tròn về không.",
+      "level": 4
+    },
+    {
+      "id": "qf3-26",
+      "q": "The Shapley value is used for contribution measurement in federations because it",
+      "q_vi": "Giá trị Shapley được dùng để đo đóng góp trong liên kết vì nó",
+      "choices": [
+        "Can be computed exactly for any number of participants at a cost that stays negligible however large the consortium grows",
+        "Requires only a single training run over the full set of participants",
+        "Guarantees that every participant receives an equal share of the reward",
+        "Averages each party's marginal gain over all joining orders, so redundant and complementary data are separated"
+      ],
+      "answer": 3,
+      "why": "Order averaging is what stops two parties with near identical data from each looking worthless when measured alone. The price is a number of retrainings that grows exponentially unless it is approximated.",
+      "why_vi": "Việc lấy trung bình trên mọi thứ tự tham gia là thứ ngăn hai bên có dữ liệu gần giống nhau cùng trông như vô giá trị khi đo riêng lẻ. Cái giá là số lần huấn luyện lại tăng theo hàm mũ nếu không xấp xỉ.",
+      "level": 4
+    },
+    {
+      "id": "qf3-27",
+      "q": "A consortium prices contributions by retraining without each member in turn. That measure misleads when",
+      "q_vi": "Một liên minh định giá đóng góp bằng cách lần lượt huấn luyện lại khi bỏ từng thành viên. Thước đo đó gây hiểu lầm khi",
+      "choices": [
+        "Two members hold similar data and each covers for the other",
+        "One member happens to hold far more records than any of the other participants in the group",
+        "The evaluation set is refreshed between one retraining run and the next one",
+        "Members join in different months"
+      ],
+      "answer": 0,
+      "why": "Removing either party alone changes nothing because the other supplies the same signal, so both are priced at zero while removing both would hurt. Order averaging is what repairs this.",
+      "why_vi": "Bỏ riêng bên nào cũng không đổi gì vì bên kia cung cấp đúng tín hiệu đó, nên cả hai bị định giá bằng không dù bỏ cả hai thì hỏng. Lấy trung bình trên các thứ tự tham gia mới sửa được chuyện này.",
+      "level": 4
+    },
+    {
+      "id": "qf3-28",
+      "q": "Raising the exponent on each client term in the federated objective has the effect of",
+      "q_vi": "Nâng số mũ trên phần của từng máy khách trong hàm mục tiêu liên kết có tác dụng",
+      "choices": [
+        "Speeding up convergence for the clients that already have the lowest loss values",
+        "Pulling the solution toward the worst served clients",
+        "Making the aggregation step robust against a minority of malicious participants",
+        "Reducing the number of communication rounds needed to reach a target accuracy"
+      ],
+      "answer": 1,
+      "why": "A larger exponent makes big losses dominate the sum, so the optimiser spends its effort where the model is failing. Mean accuracy usually falls a little while the spread narrows.",
+      "why_vi": "Số mũ lớn hơn khiến các giá trị mất mát lớn chiếm ưu thế trong tổng, nên bộ tối ưu dồn sức vào chỗ mô hình đang hỏng. Độ chính xác trung bình thường giảm chút ít trong khi độ phân tán hẹp lại.",
+      "level": 3
+    },
+    {
+      "id": "qf3-29",
+      "q": "A report gives mean client accuracy and calls the model fair. The missing evidence is",
+      "q_vi": "Một báo cáo đưa ra độ chính xác trung bình trên các máy khách rồi gọi mô hình là công bằng. Bằng chứng còn thiếu là",
+      "choices": [
+        "The total number of communication rounds that were run",
+        "The privacy budget that was spent",
+        "The architecture used by each client",
+        "The spread of accuracy across clients, and in particular how the lowest decile of the population is served"
+      ],
+      "answer": 3,
+      "why": "An average is compatible with a model that works well for most users and fails for a minority. Fairness claims live in the tail, so the distribution and its worst end have to be shown.",
+      "why_vi": "Một giá trị trung bình vẫn tương thích với mô hình chạy tốt cho đa số và hỏng với một nhóm nhỏ. Khẳng định về công bằng nằm ở phần đuôi, nên phải trình ra phân bố và đầu kém nhất của nó.",
+      "level": 2
+    },
+    {
+      "id": "qf3-30",
+      "q": "Approximating the Shapley value by sampling joining orders is standard practice because",
+      "q_vi": "Xấp xỉ giá trị Shapley bằng cách lấy mẫu các thứ tự tham gia là cách làm thông thường vì",
+      "choices": [
+        "The exact quantity needs a number of retrainings that doubles with each new member",
+        "Sampling makes the resulting payouts robust to participants who report false dataset sizes",
+        "The exact value is undefined once more than ten parties take part",
+        "Sampled orders give an unbiased result with no variance"
+      ],
+      "answer": 0,
+      "why": "Every subset of members would otherwise have to be evaluated, which is impossible beyond a handful of parties. Sampling trades an exact figure for one with a stated confidence interval.",
+      "why_vi": "Nếu không thì phải đánh giá mọi tập con thành viên, điều bất khả thi khi vượt quá vài bên. Lấy mẫu đổi con số chính xác lấy một con số kèm khoảng tin cậy được công bố.",
+      "level": 3
+    },
+    {
+      "id": "qf3-31",
+      "q": "In a vertical federation the top model and the bottom models differ in that",
+      "q_vi": "Trong liên kết theo chiều dọc, mô hình tầng trên và các mô hình tầng dưới khác nhau ở chỗ",
+      "choices": [
+        "Every bottom model is rebuilt from scratch at the start of each new communication round",
+        "Only the top model can form the loss, since it is the part that sees the target column",
+        "The top model is copied onto every participating party so that the run survives a node failure",
+        "Bottom models are always linear"
+      ],
+      "answer": 1,
+      "why": "Feature parties produce embeddings and send them up, and the label owner turns them into a prediction and an error. That asymmetry is what makes the label holder the coordinator of the whole run.",
+      "why_vi": "Các bên đặc trưng sinh ra biểu diễn nhúng rồi gửi lên, còn bên nắm nhãn biến chúng thành dự đoán và sai số. Chính sự bất đối xứng đó khiến bên nắm nhãn thành nơi điều phối cả quá trình.",
+      "level": 2
+    },
+    {
+      "id": "qf3-32",
+      "q": "Tuning a short block of learned input vectors instead of the weights suits federation because",
+      "q_vi": "Tinh chỉnh một khối vectơ đầu vào học được thay vì các trọng số hợp với môi trường liên kết vì",
+      "choices": [
+        "It guarantees that the base model cannot be recovered from what the clients upload",
+        "The clients no longer need to store the base model on their own hardware at all",
+        "What travels is tiny",
+        "It makes the federated objective convex in the parameters being trained"
+      ],
+      "answer": 2,
+      "why": "The trained block is a few thousand numbers regardless of how large the backbone is, so uplink stops being the constraint. Privacy is unaffected, because those vectors are still a function of local data.",
+      "why_vi": "Khối được huấn luyện chỉ vài nghìn con số bất kể phần thân lớn đến đâu, nên đường lên thôi làm nút thắt. Riêng tư thì không đổi, vì các vectơ đó vẫn là hàm của dữ liệu cục bộ.",
+      "level": 3
+    },
+    {
+      "id": "qf3-33",
+      "q": "Weighting each client update by the sample count it declares creates an opening because",
+      "q_vi": "Đánh trọng số bản cập nhật của mỗi máy khách theo số mẫu do chính nó khai báo tạo ra một kẽ hở vì",
+      "choices": [
+        "The count is self reported and never checked, so a participant can claim a larger dataset and buy more influence over the aggregate",
+        "Sample counts have to be sent before secure aggregation can begin",
+        "The server cannot store counts for more than one round",
+        "Weighted averaging is slower than plain averaging"
+      ],
+      "answer": 0,
+      "why": "Weighting is the one place where a client hands the server a number about itself. Cross checking against update statistics, or capping the weight, is what limits the gain from lying.",
+      "why_vi": "Đánh trọng số là chỗ duy nhất mà máy khách đưa cho máy chủ một con số về chính mình. Đối chiếu chéo với thống kê của bản cập nhật, hoặc đặt trần cho trọng số, mới hạn chế được cái lợi của việc nói dối.",
+      "level": 3
+    },
+    {
+      "id": "qf3-34",
+      "q": "A payment rule is called truthful when",
+      "q_vi": "Một quy tắc chi trả được gọi là trung thực khi",
+      "choices": [
+        "Every participant in the federation receives exactly the same amount at the end of each training campaign",
+        "A participant earns the most by declaring its data and its effort as they really are",
+        "Payments are settled only after the final model has been evaluated",
+        "The reward grows with the number of rounds joined"
+      ],
+      "answer": 1,
+      "why": "The point is to remove any profit from misreporting, so honesty stops being a matter of goodwill. Equal shares do the opposite by rewarding a token contribution as much as a real one.",
+      "why_vi": "Mục đích là triệt tiêu mọi cái lợi từ khai man, để trung thực thôi phụ thuộc vào thiện chí. Chia đều thì làm điều ngược lại, vì thưởng cho đóng góp lấy lệ ngang với đóng góp thật.",
+      "level": 3
+    },
+    {
+      "id": "qf3-35",
+      "q": "A client that resubmits a slightly perturbed copy of its previous update is hard to catch because",
+      "q_vi": "Một máy khách nộp lại bản sao đã nhiễu nhẹ của bản cập nhật lần trước thì khó bắt vì",
+      "choices": [
+        "Secure aggregation prevents the server from computing any statistic over the individual updates it receives",
+        "The perturbation makes the update indistinguishable from a genuine one under any statistical test whatsoever",
+        "Its update lands inside the range that honest clients also produce",
+        "The server discards update histories after each round"
+      ],
+      "answer": 2,
+      "why": "Genuine updates vary a great deal, so a recycled one sits comfortably in the crowd. Detection usually relies on repeated similarity across rounds rather than on any single submission.",
+      "why_vi": "Bản cập nhật thật vốn đã dao động rất mạnh, nên bản xào lại nằm lọt thỏm trong đám đông. Việc phát hiện thường dựa vào mức giống nhau lặp lại qua nhiều vòng chứ không dựa vào một lần nộp đơn lẻ.",
+      "level": 3
+    },
+    {
+      "id": "qf3-36",
+      "q": "The figure that decides whether a data rich hospital should join a federation at all is",
+      "q_vi": "Con số quyết định một bệnh viện giàu dữ liệu có nên tham gia liên kết hay không là",
+      "choices": [
+        "The average accuracy reported across all of the participating institutions in the consortium",
+        "The number of communication rounds the coordinating server intends to run in total",
+        "The size of the combined dataset held by all members together",
+        "Its own accuracy gain over training alone"
+      ],
+      "answer": 3,
+      "why": "A federation average can be lifted by weaker members while the strongest one loses out. Only the comparison against its own solo model tells that hospital whether joining pays.",
+      "why_vi": "Giá trị trung bình của liên kết có thể được nâng lên nhờ các thành viên yếu trong khi thành viên mạnh nhất lại thiệt. Chỉ phép so sánh với mô hình tự huấn luyện của chính nó mới cho bệnh viện đó biết tham gia có lợi hay không.",
+      "level": 3
+    },
+    {
+      "id": "qf3-37",
+      "q": "Accuracy collapses in one federated cohort and the engineer cannot inspect a single sample. The first useful move is",
+      "q_vi": "Độ chính xác sụp ở một nhóm liên kết và kỹ sư không thể xem một mẫu nào. Bước đầu tiên có ích là",
+      "choices": [
+        "Request a copy of a few failing examples under a temporary access exception",
+        "Collect aggregate statistics such as loss histograms, update norms and label counts, then reproduce the failure on synthetic data with the same shape",
+        "Roll the model back and stop investigating further",
+        "Increase the number of local epochs"
+      ],
+      "answer": 1,
+      "why": "The privacy machinery that hides the data still permits noisy aggregates, and those aggregates narrow the search enough to build a reproduction locally. Asking for an exception dissolves the property the system was built for.",
+      "why_vi": "Bộ máy riêng tư che dữ liệu vẫn cho phép lấy thống kê tổng hợp có nhiễu, và các thống kê đó thu hẹp phạm vi đủ để dựng lại lỗi ngay tại chỗ. Xin ngoại lệ truy cập là làm tan chính tính chất mà hệ thống sinh ra để giữ.",
+      "level": 3
+    },
+    {
+      "id": "qf3-38",
+      "q": "Federated analytics differs from federated learning in that",
+      "q_vi": "Phân tích liên kết khác học liên kết ở chỗ",
+      "choices": [
+        "It requires no privacy budget, since queries return aggregates rather than trained parameters",
+        "It runs only on servers inside a single jurisdiction at a time",
+        "It answers a query such as a count or a quantile, and no model is produced",
+        "It cannot be combined with secure aggregation"
+      ],
+      "answer": 2,
+      "why": "The transport and the privacy accounting are shared, but the output is a statistic rather than a set of weights. The budget still has to be paid, because a released aggregate leaks in the same way an update does.",
+      "why_vi": "Phần truyền tải và phần hạch toán riêng tư là chung, nhưng đầu ra là một thống kê chứ không phải bộ trọng số. Ngân sách vẫn phải trả, vì một giá trị tổng hợp công bố ra cũng rò rỉ y như một bản cập nhật.",
+      "level": 2
+    },
+    {
+      "id": "qf3-39",
+      "q": "Serving a new global model to a small slice of devices before the whole fleet is worth the delay because",
+      "q_vi": "Phục vụ mô hình toàn cục mới cho một lát nhỏ thiết bị trước khi phủ toàn bộ đáng để chờ vì",
+      "choices": [
+        "The devices in the first slice can be asked to send back raw examples for inspection",
+        "A partial deployment consumes less bandwidth in total than a full one over the campaign",
+        "Fewer devices means faster aggregation",
+        "A regression shows up on a population small enough to undo"
+      ],
+      "answer": 3,
+      "why": "Offline metrics miss failures that only appear against live traffic. Limiting exposure keeps the blast radius small and leaves a healthy previous version to fall back to.",
+      "why_vi": "Các chỉ số ngoại tuyến bỏ sót những lỗi chỉ lộ ra khi gặp lưu lượng thật. Giới hạn phạm vi tiếp xúc giữ cho bán kính thiệt hại nhỏ và vẫn còn một bản trước đó lành lặn để quay về.",
+      "level": 2
+    },
+    {
+      "id": "qf3-40",
+      "q": "A wrong field in a training configuration pushed to a million devices is costly mainly because",
+      "q_vi": "Một trường sai trong cấu hình huấn luyện đẩy xuống một triệu thiết bị gây tốn kém chủ yếu vì",
+      "choices": [
+        "The damage is invisible for days",
+        "The configuration file has to be signed again before it can be corrected and redistributed",
+        "Devices that already applied it will refuse any further configuration from the server",
+        "Each device stores a full history of every configuration it has ever received"
+      ],
+      "answer": 0,
+      "why": "Nothing crashes, so the only symptom is a metric drifting in the wrong direction across many rounds. By the time it is noticed the fleet has burned that much battery and uplink for nothing.",
+      "why_vi": "Không có gì sập, nên triệu chứng duy nhất là một chỉ số trôi sai hướng qua nhiều vòng. Đến lúc phát hiện thì cả đội thiết bị đã đốt chừng ấy pin và đường lên mà chẳng thu được gì.",
+      "level": 3
+    },
+    {
+      "id": "qf3-41",
+      "q": "Being able to undo a round that damaged the global model requires that",
+      "q_vi": "Muốn hoàn tác được một vòng đã làm hỏng mô hình toàn cục thì đòi hỏi",
+      "choices": [
+        "Clients keep their local data until the round has been confirmed as good",
+        "The server can identify which participants caused the damage",
+        "Each global version is stored with the configuration and the cohort that produced it, so an earlier version can be served again and the round rerun differently",
+        "The aggregation function is invertible"
+      ],
+      "answer": 2,
+      "why": "Aggregation destroys the information needed to subtract a contribution afterwards, so recovery means going back to a saved version rather than reversing anything. Keeping the provenance of each version is what makes that possible.",
+      "why_vi": "Phép tổng hợp phá huỷ thông tin cần để trừ ngược một đóng góp về sau, nên khắc phục là quay lại bản đã lưu chứ không phải đảo ngược điều gì. Giữ được xuất xứ của từng bản mới làm chuyện đó khả thi.",
+      "level": 3
+    },
+    {
+      "id": "qf3-42",
+      "q": "Mixing two releases of the client training library inside one cohort is dangerous because",
+      "q_vi": "Trộn hai bản phát hành của thư viện huấn luyện phía máy khách trong cùng một nhóm là nguy hiểm vì",
+      "choices": [
+        "The older release will simply refuse to accept the current global model whenever the coordinating server tries to send it out",
+        "Secure aggregation cannot mask updates produced by different code versions",
+        "The privacy budget has to be accounted separately for each release in use",
+        "A change in preprocessing or optimiser defaults makes the two groups compute different things and the average hides it"
+      ],
+      "answer": 3,
+      "why": "The updates still have the right shape, so nothing fails loudly and the mixture simply lands as extra heterogeneity. Pinning the library version per cohort is what keeps the comparison meaningful.",
+      "why_vi": "Bản cập nhật vẫn đúng hình dạng nên không có gì báo lỗi ầm ĩ, và hỗn hợp đó chỉ hiện ra như bất đồng nhất tăng thêm. Ghim phiên bản thư viện theo từng nhóm mới giữ cho phép so sánh còn ý nghĩa.",
+      "level": 3
+    },
+    {
+      "id": "qf3-43",
+      "q": "Honouring an erasure request after a model has been trained is hard because",
+      "q_vi": "Đáp ứng một yêu cầu xoá dữ liệu sau khi mô hình đã huấn luyện xong là việc khó vì",
+      "choices": [
+        "The record influenced weights that were then averaged with everyone else's",
+        "The identifier of the person is deliberately removed before any training round begins on the device",
+        "Deleting the record from the device is technically impossible once training has already started",
+        "Regulators require the federation to pause"
+      ],
+      "answer": 0,
+      "why": "Deletion from storage is the easy half. The trace left in the parameters survives, which is why the request turns into a question about unlearning rather than about databases.",
+      "why_vi": "Xoá khỏi kho lưu trữ mới là nửa dễ. Dấu vết để lại trong tham số vẫn còn, và vì thế yêu cầu đó biến thành câu hỏi về quên máy chứ không phải về cơ sở dữ liệu.",
+      "level": 3
+    },
+    {
+      "id": "qf3-44",
+      "q": "The only method that certainly removes a record's influence from a trained model is",
+      "q_vi": "Cách duy nhất chắc chắn xoá được ảnh hưởng của một bản ghi khỏi mô hình đã huấn luyện là",
+      "choices": [
+        "Applying a gradient ascent step on the record that has to be forgotten",
+        "Retraining without it",
+        "Fine tuning the model on the remaining data for a few additional epochs",
+        "Adding noise to the parameters until the record can no longer be detected"
+      ],
+      "answer": 1,
+      "why": "Everything cheaper leaves a residue and offers only a statistical claim of closeness. The engineering question is how to make that retraining small, which is what sharded designs are for.",
+      "why_vi": "Mọi cách rẻ hơn đều để lại dư lượng và chỉ đưa ra được khẳng định thống kê về mức gần. Câu hỏi kỹ thuật là làm sao cho lần huấn luyện lại đó nhỏ đi, và các thiết kế chia mảnh sinh ra vì thế.",
+      "level": 2
+    },
+    {
+      "id": "qf3-45",
+      "q": "Splitting the training data into disjoint shards trained separately helps with erasure because",
+      "q_vi": "Chia dữ liệu huấn luyện thành các mảnh rời nhau và huấn luyện riêng giúp ích cho việc xoá vì",
+      "choices": [
+        "Each shard can be assigned to a different legal jurisdiction",
+        "Shards can be trained with a smaller privacy budget each",
+        "Deletion requests arrive at a predictable rate",
+        "A deleted record touches one shard only, so the response is retraining that shard rather than the entire model from the beginning"
+      ],
+      "answer": 3,
+      "why": "The cost of compliance drops from a full retrain to a fraction of it. What is paid instead is some accuracy, because each constituent model sees less data than a single model would.",
+      "why_vi": "Chi phí tuân thủ tụt từ một lần huấn luyện lại toàn bộ xuống còn một phần nhỏ. Đổi lại phải trả bằng độ chính xác, vì mỗi mô hình thành phần nhìn thấy ít dữ liệu hơn một mô hình duy nhất.",
+      "level": 3
+    },
+    {
+      "id": "qf3-46",
+      "q": "Claiming that a record has been unlearned is only defensible if",
+      "q_vi": "Khẳng định một bản ghi đã được quên chỉ đứng vững được nếu",
+      "choices": [
+        "A membership attack on the updated model can no longer single that record out",
+        "The record was removed from every client device that ever held a copy of it locally",
+        "The model owner keeps a signed log of the deletion request",
+        "The retraining used a fresh random seed"
+      ],
+      "answer": 0,
+      "why": "Deleting the file and updating the weights are inputs to the claim, not evidence for it. The evidence has to be an attempt to detect the record that now fails.",
+      "why_vi": "Xoá tệp và cập nhật trọng số là đầu vào của khẳng định chứ không phải bằng chứng cho nó. Bằng chứng phải là một nỗ lực phát hiện bản ghi đó và nỗ lực ấy thất bại.",
+      "level": 4
+    },
+    {
+      "id": "qf3-47",
+      "q": "A federation whose clients sit in different countries can still raise a transfer problem because",
+      "q_vi": "Một liên kết có các máy khách nằm ở nhiều quốc gia vẫn có thể vướng vấn đề chuyển dữ liệu vì",
+      "choices": [
+        "Personal data is defined differently in each of the jurisdictions that the participating organisations operate in",
+        "The uploaded update is derived from local records and may carry recoverable personal information abroad",
+        "The coordinating server has to sit in a neutral third country that no participant has any commercial tie to",
+        "Encryption keys cannot be exported"
+      ],
+      "answer": 1,
+      "why": "The question a regulator asks is whether personal data left the territory, not whether files did. An update that can be inverted is treated as the data it came from.",
+      "why_vi": "Câu hỏi mà cơ quan quản lý đặt ra là dữ liệu cá nhân có rời lãnh thổ hay không, chứ không phải tệp tin có rời hay không. Một bản cập nhật có thể đảo ngược được thì bị coi như chính dữ liệu sinh ra nó.",
+      "level": 4
+    },
+    {
+      "id": "qf3-48",
+      "q": "Treating a set of trained weights as personal data rather than as a derived artefact matters because",
+      "q_vi": "Coi một bộ trọng số đã huấn luyện là dữ liệu cá nhân thay vì sản phẩm phái sinh có ý nghĩa vì",
+      "choices": [
+        "It obliges the operator to publish the architecture alongside the trained parameters",
+        "It prevents the model from being deployed outside the country where it was trained",
+        "Erasure and access rights then reach the model",
+        "It removes the need to keep a record of the legal basis for training"
+      ],
+      "answer": 2,
+      "why": "Once the parameters fall inside the definition, a subject request cannot be satisfied by cleaning a database. Whether they do fall inside depends on how much the model memorised, which makes measured memorisation a compliance question.",
+      "why_vi": "Khi các tham số lọt vào định nghĩa thì một yêu cầu của chủ thể dữ liệu không thể giải quyết bằng cách dọn cơ sở dữ liệu. Chúng có lọt vào hay không tuỳ vào mức mô hình đã ghi nhớ, nên đo mức ghi nhớ trở thành một câu hỏi tuân thủ.",
+      "level": 4
     }
   ]
 }

@@ -83,7 +83,7 @@ trên máy người dùng nữa, phải gỡ ra cài lại từ đầu bằng kh
 `#/today` chạy liền ba chặng trên cùng một trang, không đổi hash: lật thẻ, rồi trắc nghiệm **ra đề
 từ chính những thẻ vừa lật**, rồi nói thành tiếng. Chặng hai ra đề từ thẻ vừa học chứ không bốc lại
 từ toàn kho, nên vừa kiểm đúng phần vừa học vừa chỉ phải tải ngân hàng câu hỏi của vài bộ liên quan
-thay vì cả 23 bộ.
+thay vì cả 27 bộ.
 
 `#/plan` là nơi sửa: số thẻ, số câu, số lượt nói, bộ luyện nói, và chọn lấy thẻ từ bộ nào. Kế hoạch
 nằm trong `localStorage` dưới khoá `ims.v1`, trường `plan`. Chọn hết các bộ được lưu thành danh

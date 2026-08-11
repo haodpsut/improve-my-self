@@ -1,0 +1,1507 @@
+{
+  "schema": 1,
+  "id": "6g-security",
+  "updated": "2026-08-09",
+  "questions": [
+    {
+      "id": "q6gs-1",
+      "q": "An operator says its core is zero trust because every interface between network functions is encrypted. The gap in that claim is",
+      "q_vi": "Một nhà mạng nói mạng lõi của mình đã theo tin cậy bằng không vì mọi giao diện giữa các hàm mạng đều được mã hoá. Chỗ hổng của khẳng định đó là",
+      "choices": [
+        "Encryption adds delay that real time procedures cannot absorb",
+        "Encrypted interfaces cannot be inspected by a detection system",
+        "Holding a valid channel still lets a peer request any operation, because confidentiality decides nothing about permission",
+        "Zero trust requires removing the perimeter firewall first"
+      ],
+      "answer": 2,
+      "why": "Zero trust asks for a verified identity and an authorisation decision on every request. Confidentiality hides the request from outsiders and says nothing about what the caller is entitled to ask for.",
+      "why_vi": "Tin cậy bằng không đòi mỗi yêu cầu phải có danh tính đã xác minh và một quyết định cấp quyền. Tính bí mật chỉ che yêu cầu khỏi người ngoài chứ không nói gì về việc bên gọi được phép hỏi cái gì.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-2",
+      "q": "Mutual authentication between core functions stops helping when",
+      "q_vi": "Xác thực hai chiều giữa các hàm mạng lõi hết tác dụng khi",
+      "choices": [
+        "certificates are issued per host rather than per function instance",
+        "the interface between the two functions runs over a shared transport segment",
+        "both functions came from the same equipment vendor originally",
+        "the payload is already encrypted"
+      ],
+      "answer": 0,
+      "why": "An identity bound to a host is inherited by every workload sharing that host, so one compromised container can present a handshake that verifies correctly while impersonating its neighbour.",
+      "why_vi": "Một danh tính gắn với máy chủ sẽ được mọi tải công việc trên máy đó thừa hưởng, nên một vùng chứa bị chiếm vẫn trình ra được cái bắt tay kiểm đúng trong khi đang giả danh hàng xóm của nó.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-3",
+      "q": "Several services accept a token issued for one narrow operation and use it for many. The underlying mistake is that each service",
+      "q_vi": "Nhiều dịch vụ nhận một thẻ vốn cấp cho một thao tác hẹp rồi dùng nó cho nhiều thao tác khác. Sai lầm nền tảng là mỗi dịch vụ",
+      "choices": [
+        "verified that the token was signed and never verified that its scope covered the call",
+        "cached the token in local memory for reuse rather than requesting a fresh one from the authorisation server",
+        "accepted a token whose expiry time had been set far further ahead than the operation actually needed",
+        "used a symmetric algorithm to protect the token"
+      ],
+      "answer": 0,
+      "why": "Signature checking answers whether the token is genuine. Only a scope check answers whether this particular call was among the things the token was ever meant to permit.",
+      "why_vi": "Kiểm chữ ký trả lời câu hỏi thẻ có thật hay không. Chỉ việc kiểm phạm vi mới trả lời được lời gọi cụ thể này có nằm trong những thứ mà thẻ từng được phép cho hay không.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-4",
+      "q": "Rewriting core signalling as service based interfaces changes the security picture mainly because",
+      "q_vi": "Việc viết lại báo hiệu lõi thành giao diện theo hướng dịch vụ làm đổi bức tranh an ninh chủ yếu vì",
+      "choices": [
+        "web protocols use weaker cryptography than telecom protocols did",
+        "the count of separately reachable endpoints grows far beyond what a monolithic node exposed",
+        "service calls cannot be logged with anything like the detail that the older point to point interfaces allowed",
+        "signalling now traverses the public internet by design"
+      ],
+      "answer": 1,
+      "why": "The transport is not the weak part. Every function becomes an addressable service, so discovery, error handling and field validation become telecom concerns at a scale the older nodes never presented.",
+      "why_vi": "Lớp truyền tải không phải chỗ yếu. Mỗi hàm mạng trở thành một dịch vụ có địa chỉ, nên việc tra cứu, xử lý lỗi và kiểm tra trường dữ liệu thành mối lo của viễn thông ở quy mô mà các nút nguyên khối trước đây chưa từng bày ra.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-5",
+      "q": "An attacker registers a rogue endpoint in the directory that core functions use to discover each other. The most damaging consequence is that",
+      "q_vi": "Kẻ tấn công đăng ký một điểm cuối giả vào danh bạ mà các hàm mạng lõi dùng để tìm nhau. Hậu quả nặng nhất là",
+      "choices": [
+        "the directory service itself becomes noticeably slower at answering the queries other functions send it",
+        "every existing session has to be re established once the contents of the registry have been changed",
+        "later sessions are steered to attacker software while every link stays correctly protected",
+        "the registry loses track of which functions are healthy and still able to accept new work"
+      ],
+      "answer": 2,
+      "why": "Discovery is trusted far more than it is authenticated. Once the lookup returns the wrong address, each hop authenticates and encrypts perfectly toward a destination that should never have been in the answer.",
+      "why_vi": "Bước tra cứu được tin tưởng nhiều hơn hẳn mức nó được xác thực. Khi tra cứu trả về địa chỉ sai, mỗi chặng vẫn xác thực và mã hoá hoàn hảo tới một đích lẽ ra không bao giờ được có trong câu trả lời.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-6",
+      "q": "At the roaming edge, protection applied to the message itself matters more than protection applied to the transport because",
+      "q_vi": "Ở cửa chuyển vùng, bảo vệ ngay trên bản tin quan trọng hơn bảo vệ ở lớp truyền tải vì",
+      "choices": [
+        "transport protection is computationally more expensive at high signalling rates",
+        "the interconnect provider between the two operators is legally the responsible party",
+        "message protection removes the need to authenticate the roaming partner at all",
+        "an intermediary terminating the transport can then read and rewrite fields"
+      ],
+      "answer": 3,
+      "why": "Transport protection ends at whichever box terminates it. Only integrity bound to the message survives an intermediary, which matters because traffic arrives from whoever your partner in turn peers with.",
+      "why_vi": "Bảo vệ ở lớp truyền tải chấm dứt ngay tại thiết bị kết thúc nó. Chỉ tính toàn vẹn gắn vào bản tin mới sống sót qua một bên trung gian, điều này quan trọng vì lưu lượng đến từ bất kỳ ai mà đối tác của bạn lại kết nối tiếp.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-7",
+      "q": "A design splits a network function so the component parsing untrusted input holds no keys and cannot write configuration. The benefit claimed is best stated as",
+      "q_vi": "Một thiết kế chẻ hàm mạng ra để thành phần phân tích dữ liệu vào không đáng tin thì không giữ khoá và không ghi được cấu hình. Lợi ích của cách này nên được phát biểu là",
+      "choices": [
+        "a memory error in the parser yields an attacker nothing worth stealing, so a common bug class stops being a full compromise",
+        "the parser can then be written in a language without memory safety, since a crash in that component is now treated as acceptable",
+        "the function needs fewer certificates in total",
+        "input validation becomes unnecessary in the remaining components"
+      ],
+      "answer": 0,
+      "why": "Separation of privilege does not prevent the bug. It removes the reward, so the blast radius of a parsing flaw shrinks to the component that never held anything valuable.",
+      "why_vi": "Phân tách quyền không ngăn được lỗi. Nó lấy đi phần thưởng, nhờ vậy bán kính thiệt hại của một lỗi phân tích cú pháp co lại đúng bằng thành phần vốn chưa bao giờ giữ thứ gì đáng giá.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-8",
+      "q": "A platform sends a valid attestation quote, yet the deployment is still insecure. The most likely reason is that",
+      "q_vi": "Một nền tảng gửi lên bản chứng thực hợp lệ nhưng triển khai vẫn mất an toàn. Lý do khả dĩ nhất là",
+      "choices": [
+        "the quote uses a hash function that is no longer recommended",
+        "the quote was produced at boot and nothing checks it again afterwards",
+        "the verifier runs on hardware from a different silicon vendor",
+        "attestation was performed before the network interfaces were configured"
+      ],
+      "answer": 1,
+      "why": "An attestation statement describes the state of a machine at the instant it was produced. Without freshness and repeated verification, it proves only what was true at some point in the past.",
+      "why_vi": "Một bản chứng thực mô tả trạng thái máy đúng vào lúc nó được tạo ra. Thiếu độ tươi và thiếu việc kiểm lại nhiều lần, nó chỉ chứng minh được điều đã đúng ở một thời điểm nào đó trong quá khứ.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-9",
+      "q": "Running a core function inside a hardware enclave on a public cloud leaves which risk substantially untouched",
+      "q_vi": "Chạy một hàm mạng lõi trong vùng bảo vệ phần cứng trên đám mây công cộng để nguyên rủi ro nào",
+      "choices": [
+        "the host administrator being able to read the memory of the running process directly from the hypervisor",
+        "an unauthorised copy of the virtual machine image being started somewhere else in the provider estate",
+        "traffic analysis and disruption on the input output path the provider still controls",
+        "tampering with the code before it is loaded"
+      ],
+      "answer": 2,
+      "why": "The enclave protects memory contents. Everything entering and leaving still crosses infrastructure the provider operates, so timing, volume and availability remain visible and controllable there.",
+      "why_vi": "Vùng bảo vệ chỉ giữ kín nội dung bộ nhớ. Mọi thứ vào ra vẫn đi qua hạ tầng do nhà cung cấp vận hành, nên thời điểm, khối lượng và tính sẵn sàng vẫn nhìn thấy được và can thiệp được ở đó.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-10",
+      "q": "A third party application on an edge platform cannot read operator data, yet it still learns useful information. The mechanism is",
+      "q_vi": "Một ứng dụng của bên thứ ba trên nền tảng biên không đọc được dữ liệu của nhà mạng nhưng vẫn biết được nhiều thứ hữu ích. Cơ chế ở đây là",
+      "choices": [
+        "an unencrypted management interface left reachable from the tenant network segment",
+        "a misconfigured access control list on the shared storage volume used by both tenants",
+        "credentials left in an environment variable by the operator during the last upgrade window",
+        "inference from timing and load it observes while sharing the platform"
+      ],
+      "answer": 3,
+      "why": "Isolation at the edge has to be judged by what a neighbour can infer, not only by what it can read. Shared resources turn one tenant's activity into a measurable signal for another.",
+      "why_vi": "Cách ly ở biên phải được đánh giá theo cái mà hàng xóm suy ra được chứ không chỉ theo cái nó đọc được. Tài nguyên dùng chung biến hoạt động của bên thuê này thành một tín hiệu đo được đối với bên thuê kia.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-11",
+      "q": "Moving compute from a guarded data centre into cabinets at cell sites changes the threat model chiefly by",
+      "q_vi": "Việc đưa máy tính từ trung tâm dữ liệu có canh gác ra các tủ đặt tại trạm phát sóng làm đổi mô hình đe doạ chủ yếu ở chỗ",
+      "choices": [
+        "raising the failure rate of the cooling equipment",
+        "admitting an adversary who has brief physical access to the hardware",
+        "increasing the latency between the radio units and the functions that serve them",
+        "requiring a different operating system on the platform than the data centre once used"
+      ],
+      "answer": 1,
+      "why": "A data centre model quietly assumes nobody touches the box. An edge cabinet breaks that assumption first, and every control that depended on it has to be revisited.",
+      "why_vi": "Mô hình trung tâm dữ liệu ngầm giả định không ai sờ vào máy. Tủ đặt ở biên phá vỡ giả định ấy đầu tiên, và mọi biện pháp từng dựa vào nó đều phải xem lại.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-12",
+      "q": "When a core is hosted on a cloud provider, security gaps most often appear",
+      "q_vi": "Khi mạng lõi đặt trên nhà cung cấp đám mây, khoảng hở an ninh thường xuất hiện nhất ở",
+      "choices": [
+        "in the encryption of traffic between availability zones",
+        "in the hypervisor that separates one customer from another",
+        "where each party assumed the other was covering logging, key custody or evidence",
+        "in the physical security of the provider facility"
+      ],
+      "answer": 2,
+      "why": "The shared responsibility statement is useful precisely because both sides can otherwise describe a duty as belonging to the other. Gaps cluster in the tasks nobody explicitly claimed.",
+      "why_vi": "Bản chia trách nhiệm hữu ích chính vì nếu không có nó thì cả hai bên đều mô tả được một nghĩa vụ là của bên kia. Khoảng hở dồn vào những việc mà không ai nhận rõ ràng.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-13",
+      "q": "A credential was built into a container image for a network function. Deleting the running instance does not resolve the exposure because",
+      "q_vi": "Một thông tin đăng nhập đã được đưa thẳng vào ảnh vùng chứa của một hàm mạng. Xoá thực thể đang chạy không giải quyết được việc lộ vì",
+      "choices": [
+        "the process may still be running on a standby node in the same cluster",
+        "the image already sits in every registry and cache it reached",
+        "container runtimes keep a copy of process memory after termination",
+        "the credential is also written into the audit log of the platform"
+      ],
+      "answer": 1,
+      "why": "An embedded secret spreads with the artefact rather than with the workload. Rotation therefore means a rebuild and a redeployment, which is why this failure mode outlives the incident that revealed it.",
+      "why_vi": "Một bí mật nhúng sẵn lan theo sản phẩm chứ không lan theo tải công việc. Vì vậy xoay vòng nó đồng nghĩa với dựng lại và triển khai lại, đó là lý do kiểu hỏng này sống lâu hơn cả sự cố làm nó lộ ra.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-14",
+      "q": "Detecting lateral movement inside a disaggregated core is hard mainly because",
+      "q_vi": "Phát hiện di chuyển ngang bên trong mạng lõi đã tách khối là việc khó chủ yếu vì",
+      "choices": [
+        "the attacker uses legitimate service interfaces, so only the identity of the caller is wrong",
+        "core interfaces are encrypted end to end, so that traffic cannot be recorded anywhere in a usable form",
+        "the sheer volume of signalling traffic exceeds any storage budget an operator would realistically approve",
+        "core functions do not produce logs"
+      ],
+      "answer": 0,
+      "why": "The calls are well formed and permitted, which defeats inspection based on message shape. What has to be modelled is the expected pattern of which function calls which.",
+      "why_vi": "Các lời gọi đều đúng khuôn và đều được phép, điều này vô hiệu hoá việc soi theo hình dạng bản tin. Thứ cần được mô hình hoá là quy luật hàm nào thường gọi hàm nào.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-15",
+      "q": "A threat model that no colleague can contradict is a problem because",
+      "q_vi": "Một mô hình đe doạ mà không đồng nghiệp nào bác lại được là điều đáng lo vì",
+      "choices": [
+        "it takes longer to write than a concrete one",
+        "regulators require a specific document format for it",
+        "it will not survive review by an external auditor",
+        "it states no falsifiable claim about the adversary, so it cannot guide any engineering decision"
+      ],
+      "answer": 3,
+      "why": "A model earns its place by naming who the adversary is, what they can reach and what they want, concretely enough that one line can be shown to be wrong. Otherwise it records hopes.",
+      "why_vi": "Một mô hình chỉ đáng có mặt khi nêu rõ đối phương là ai, chạm được tới đâu và muốn gì, cụ thể tới mức chỉ ra được một dòng sai. Nếu không thì nó chỉ ghi lại những điều mong muốn.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-16",
+      "q": "The claim that two slices are isolated only becomes testable once it also states",
+      "q_vi": "Khẳng định hai lát mạng đã cách ly chỉ trở nên kiểm chứng được khi nó nêu thêm",
+      "choices": [
+        "which vendor supplied the orchestrator",
+        "the layer the isolation applies to, since separation in the radio, the transport, the compute and the management plane are four different claims",
+        "the total number of subscribers in each slice",
+        "whether both slices carry the same traffic class"
+      ],
+      "answer": 1,
+      "why": "A slice can be fully separated in three layers and share a scheduler, a hypervisor or an operations account in the fourth. The word isolated carries no information until the layer is named.",
+      "why_vi": "Một lát mạng có thể tách hoàn toàn ở ba lớp mà vẫn dùng chung bộ lập lịch, trình siêu giám sát hoặc tài khoản vận hành ở lớp còn lại. Chữ đã cách ly không mang thông tin gì cho tới khi nêu rõ lớp nào.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-17",
+      "q": "Which formulation of slice isolation can actually fail a test",
+      "q_vi": "Cách diễn đạt nào về cách ly lát mạng thực sự có thể trượt một phép thử",
+      "choices": [
+        "the worst case delay a neighbouring slice can add",
+        "a statement that the slices are logically separated from each other at all times",
+        "the name of the standard the orchestration platform was built to follow",
+        "confirmation that each slice has its own identifier in the service catalogue"
+      ],
+      "answer": 0,
+      "why": "A quantity can be measured and found wanting. A qualitative assurance cannot be contradicted by any measurement, which is precisely why it is comfortable to write.",
+      "why_vi": "Một đại lượng thì đo được và có thể bị phát hiện là không đạt. Một lời bảo đảm định tính thì không phép đo nào bác được, và đó chính là lý do người ta viết nó cho dễ.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-18",
+      "q": "A tenant degrades a neighbouring slice while violating no access rule at all. The mechanism is",
+      "q_vi": "Một bên thuê làm giảm chất lượng lát hàng xóm mà không vi phạm luật truy nhập nào. Cơ chế ở đây là",
+      "choices": [
+        "packets leaking quietly across the boundary between the two slice contexts and back again",
+        "an orchestration error that merged the two slice definitions into one",
+        "a shared management account used by both tenants during maintenance",
+        "consuming the shared resource pool so aggressively that the neighbour misses its target"
+      ],
+      "answer": 3,
+      "why": "This is denial of service written entirely in legitimate requests, so filtering finds nothing to reject. The countermeasure is an enforced floor for each slice rather than an inspection rule.",
+      "why_vi": "Đây là kiểu chặn dịch vụ viết hoàn toàn bằng các yêu cầu hợp lệ, nên bộ lọc không tìm ra thứ gì để loại. Cách chống là một mức sàn cưỡng chế cho từng lát chứ không phải một luật soi gói tin.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-19",
+      "q": "Auditing a slice against its contract means",
+      "q_vi": "Kiểm toán một lát mạng theo hợp đồng của nó nghĩa là",
+      "choices": [
+        "asking the orchestrator to report whether the slice remains compliant with its terms",
+        "checking that the slice identifier still appears in the service catalogue correctly",
+        "measuring the running slice and comparing it with what was sold",
+        "reviewing the monitoring dashboards of the tenant"
+      ],
+      "answer": 2,
+      "why": "The orchestrator is also the component whose misconfiguration is the most likely cause of a mismatch, so its own opinion cannot serve as the evidence that no mismatch exists.",
+      "why_vi": "Bộ điều phối đồng thời là thành phần mà cấu hình sai của nó là nguyên nhân khả dĩ nhất gây lệch, nên ý kiến của chính nó không dùng làm bằng chứng rằng không có lệch được.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-20",
+      "q": "Leasing a slice to a third party moves the central security question to",
+      "q_vi": "Cho bên thứ ba thuê một lát mạng đẩy câu hỏi an ninh trọng tâm sang",
+      "choices": [
+        "how much bandwidth the tenant may consume during the busy hour",
+        "which operational controls the tenant can now reach",
+        "whether the tenant may resell capacity to its own customers",
+        "how the tenant will be billed for the resources that it reserved"
+      ],
+      "answer": 1,
+      "why": "Once a tenant can submit policy, it is issuing configuration into your network. What matters is the worst configuration it can submit and what that configuration would do.",
+      "why_vi": "Một khi bên thuê gửi được chính sách lên, họ đang phát cấu hình vào mạng của bạn. Điều đáng quan tâm là cấu hình tệ nhất họ gửi được và cấu hình đó sẽ gây ra chuyện gì.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-21",
+      "q": "A slice has been removed from the catalogue and a risk remains. The most likely cause is",
+      "q_vi": "Một lát mạng đã bị gỡ khỏi danh mục mà rủi ro vẫn còn. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "forwarding rules, cached subscriber context and unrevoked credentials that outlive the deletion, because tear down is exercised far less often than creation",
+        "the identifier being reused by a later tenant",
+        "an incomplete billing record for the final month",
+        "the tenant keeping a copy of its own configuration"
+      ],
+      "answer": 0,
+      "why": "Creation paths are tested on every deployment while deletion paths are tested rarely, and the resources that survive a deletion are inherited by whoever lands on them next.",
+      "why_vi": "Đường tạo lập được thử ở mọi lần triển khai còn đường xoá bỏ thì rất ít khi được thử, và những tài nguyên sống sót qua lệnh xoá sẽ do bên đến sau thừa hưởng.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-22",
+      "q": "A tenant learns about a neighbour's load without receiving any of its data. This is possible because",
+      "q_vi": "Một bên thuê biết được mức tải của hàng xóm mà không nhận bất kỳ dữ liệu nào của họ. Điều này xảy ra được vì",
+      "choices": [
+        "the two slices were assigned overlapping address ranges by an orchestration mistake",
+        "the management interface exposes per tenant counters to everyone",
+        "a shared scheduler makes the neighbour's demand visible in its own grant delay",
+        "the neighbour's traffic is broadcast on a common control channel by design"
+      ],
+      "answer": 2,
+      "why": "Nothing crosses the boundary, so access control has nothing to report. The leak grows with how tightly the two slices are packed onto the same physical resource.",
+      "why_vi": "Không có gì vượt ranh giới nên các luật truy nhập chẳng có gì để báo. Mức rò rỉ tăng theo mức hai lát bị xếp sát nhau trên cùng một khối tài nguyên vật lý.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-23",
+      "q": "The clearest signature of slice admission abuse is",
+      "q_vi": "Dấu hiệu rõ nhất của việc lạm dụng bộ kết nạp lát mạng là",
+      "choices": [
+        "a rise in the number of failed authentication attempts at the edge",
+        "a sudden increase in the average packet size across all slices",
+        "repeated edits to the slice template held in the catalogue",
+        "high reserved capacity paired with low carried traffic"
+      ],
+      "answer": 3,
+      "why": "The attacker never sends much traffic. Resources are held by reservations for sessions that never carry anything, so only the ratio between reserved and used capacity shows it.",
+      "why_vi": "Kẻ tấn công không hề gửi nhiều lưu lượng. Tài nguyên bị giữ bởi các lệnh đặt chỗ cho những phiên không chở gì cả, nên chỉ tỉ lệ giữa dung lượng đã đặt và dung lượng dùng thật mới lộ ra điều đó.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-24",
+      "q": "Slice selection information deserves protection because",
+      "q_vi": "Thông tin chọn lát mạng đáng được bảo vệ vì",
+      "choices": [
+        "it is used to compute the session key",
+        "it can travel before a security context exists and reveals which industry the device serves, for example a utility or a hospital",
+        "it determines the charging record for the session",
+        "it is required for lawful interception to work"
+      ],
+      "answer": 1,
+      "why": "Protecting the payload does not help when the selector that routes it is readable, because the selector already discloses the class of customer behind the device.",
+      "why_vi": "Bảo vệ phần tải tin không giúp gì khi cái chỉ dấu dùng để định tuyến nó lại đọc được, vì chính chỉ dấu ấy đã tiết lộ nhóm khách hàng đứng sau thiết bị.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-25",
+      "q": "Reading a latency guarantee as evidence of isolation is wrong because",
+      "q_vi": "Đọc một cam kết về độ trễ như bằng chứng của tính cách ly là sai vì",
+      "choices": [
+        "the guarantee describes expected load, not a hostile neighbour",
+        "latency guarantees are only offered to enterprise customers in practice",
+        "the measurement interval for latency is defined by the tenant itself",
+        "latency is measured only at the transport layer"
+      ],
+      "answer": 0,
+      "why": "The two properties agree during normal operation and separate exactly when a neighbour is trying to break the assumptions the guarantee was written under.",
+      "why_vi": "Hai tính chất này trùng nhau lúc vận hành bình thường và tách nhau ra đúng khi có hàng xóm đang tìm cách phá vỡ các giả định mà cam kết được viết dựa trên đó.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-26",
+      "q": "A software bill of materials for the radio controller is valuable mainly because it",
+      "q_vi": "Danh mục thành phần phần mềm của bộ điều khiển vô tuyến có giá trị chủ yếu vì nó",
+      "choices": [
+        "proves that the vendor followed a secure development process",
+        "allows the operator to renegotiate licence terms with the vendor",
+        "answers within hours whether a newly published flaw is present in your network",
+        "guarantees that no component in the build carries any vulnerability that is publicly known"
+      ],
+      "answer": 2,
+      "why": "The list does not make the software safer. It shortens the time between a disclosure and a defensible answer about exposure, which is the answer a regulator asks for first.",
+      "why_vi": "Bản kê không làm phần mềm an toàn hơn. Nó rút ngắn thời gian từ lúc một lỗ hổng được công bố tới lúc bạn có câu trả lời vững về mức phơi nhiễm, và đó là câu cơ quan quản lý hỏi trước tiên.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-27",
+      "q": "Verifying the signature on a controller application answers",
+      "q_vi": "Kiểm chữ ký của một ứng dụng trên bộ điều khiển trả lời được câu hỏi",
+      "choices": [
+        "whether the application will respect the resource limits it was given",
+        "whether the application conflicts with another one already running there",
+        "whether the application will change scheduling in an acceptable way",
+        "who built it, and nothing about what it will do"
+      ],
+      "answer": 3,
+      "why": "Provenance and behaviour are separate questions. Behaviour has to be established in a test environment before admission, because after admission the application can already move scheduling decisions.",
+      "why_vi": "Nguồn gốc và hành vi là hai câu hỏi khác nhau. Hành vi phải được xác lập trong môi trường thử trước khi cho vào, vì sau khi vào rồi thì ứng dụng đã đổi được các quyết định lập lịch.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-28",
+      "q": "Two controller applications each pursue a legitimate objective and the cell becomes unstable. The accurate description is",
+      "q_vi": "Hai ứng dụng trên bộ điều khiển cùng theo đuổi mục tiêu hợp lệ và ô phát trở nên mất ổn định. Cách mô tả đúng là",
+      "choices": [
+        "an authentication failure between the applications",
+        "a policy conflict, which becomes an attack the moment a hostile application learns to trigger it deliberately",
+        "a hardware fault in the radio unit serving the cell",
+        "an overload of the interface carrying the measurements"
+      ],
+      "answer": 1,
+      "why": "Neither application logs an error, because from each one's own point of view it is working correctly. Only a view that spans both applications reveals the oscillation.",
+      "why_vi": "Không ứng dụng nào ghi lỗi, vì đứng từ góc nhìn riêng của mỗi bên thì nó đang chạy đúng. Chỉ một góc nhìn bao trùm cả hai ứng dụng mới thấy được sự dao động.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-29",
+      "q": "Replay protection is needed on the open control interface because",
+      "q_vi": "Cần chống phát lại trên giao diện điều khiển mở vì",
+      "choices": [
+        "resending a legitimate handover command requires no key at all",
+        "encryption of the interface costs more latency than the budget allows",
+        "the controller cannot store per node state",
+        "radio units have no clock of their own"
+      ],
+      "answer": 0,
+      "why": "Confidentiality does not bind a message to a moment. Freshness and sequence binding are what stop an old but perfectly valid instruction from being accepted again.",
+      "why_vi": "Tính bí mật không gắn một bản tin vào một thời điểm. Độ tươi và ràng buộc thứ tự mới là thứ chặn được một lệnh cũ nhưng hoàn toàn hợp lệ khỏi bị chấp nhận lần nữa.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-30",
+      "q": "The fronthaul segment is frequently left unprotected because",
+      "q_vi": "Đoạn truyền dẫn tới khối vô tuyến thường bị bỏ trống không bảo vệ vì",
+      "choices": [
+        "the samples it carries are not considered subscriber information at all",
+        "the segment is physically inaccessible in almost every deployment",
+        "encryption adds delay the timing budget cannot absorb",
+        "no standard defines protection for that interface"
+      ],
+      "answer": 2,
+      "why": "This is a deliberate trade of confidentiality for latency. The danger is that the trade is made once during design and then remembered as though the segment were inherently safe.",
+      "why_vi": "Đây là một phép đổi có chủ ý, đổi tính bí mật lấy độ trễ. Nguy hiểm nằm ở chỗ phép đổi ấy chỉ diễn ra một lần lúc thiết kế rồi về sau được nhớ như thể đoạn đó vốn dĩ an toàn.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-31",
+      "q": "A study reports a secrecy rate without saying where the eavesdropper stands. The problem is that",
+      "q_vi": "Một nghiên cứu báo cáo tốc độ bí mật mà không nói kẻ nghe lén đứng ở đâu. Vấn đề là",
+      "choices": [
+        "the quantity is conditional on an assumed eavesdropper channel, so the number cannot be compared with any other result",
+        "secrecy rates are always negative in practice",
+        "the receiver noise figure was probably wrong",
+        "the result depends on the modulation used"
+      ],
+      "answer": 0,
+      "why": "Secrecy capacity is positive only when the legitimate channel beats the eavesdropper channel, so the figure inherits every assumption made about where that eavesdropper is and what antenna it uses.",
+      "why_vi": "Dung lượng bí mật chỉ dương khi kênh hợp lệ thắng kênh của kẻ nghe lén, nên con số ấy thừa hưởng mọi giả định về việc kẻ nghe lén đứng ở đâu và dùng ăng-ten gì.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-32",
+      "q": "Covert transmission pursues a goal stronger than confidentiality, namely",
+      "q_vi": "Truyền tin ẩn theo đuổi một mục tiêu mạnh hơn tính bí mật, đó là",
+      "choices": [
+        "preventing the receiver from learning the identity of the transmitter",
+        "hiding that any transmission happened at all",
+        "keeping the content unreadable even after the key is disclosed",
+        "making the signal impossible to jam by a nearby adversary"
+      ],
+      "answer": 1,
+      "why": "The watcher must be unable to decide, better than by guessing, whether anything was sent. That is paid for in rate, which falls roughly with the square root of the number of channel uses.",
+      "why_vi": "Người theo dõi phải không quyết định nổi, tốt hơn việc đoán bừa, rằng có gì được gửi đi hay không. Cái đó phải trả bằng tốc độ, vốn giảm cỡ căn bậc hai theo số lần dùng kênh.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-33",
+      "q": "Artificial noise stops protecting the legitimate user when",
+      "q_vi": "Nhiễu nhân tạo thôi bảo vệ được người dùng hợp lệ khi",
+      "choices": [
+        "the eavesdropper moves closer to the transmitter than the legitimate user happens to be",
+        "the transmit power is raised beyond the regulatory limit",
+        "the channel estimate degrades, so noise leaks into the user's own subspace",
+        "the receiver applies a matched filter to the incoming signal"
+      ],
+      "answer": 2,
+      "why": "The scheme places noise in the subspace orthogonal to the legitimate channel. Accuracy of the estimate is what keeps that subspace orthogonal, and an error costs the user real throughput.",
+      "why_vi": "Phương án này đặt nhiễu vào không gian con vuông góc với kênh hợp lệ. Chính độ chính xác của ước lượng giữ cho không gian con ấy còn vuông góc, và sai số ăn mất thông lượng thật của người dùng.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-34",
+      "q": "Steering a null toward a suspected eavesdropper depends above all on",
+      "q_vi": "Việc chĩa điểm không về phía kẻ nghe lén bị nghi ngờ phụ thuộc trước hết vào",
+      "choices": [
+        "the total transmit power available at the base station",
+        "the bandwidth of the protected link",
+        "the coding rate chosen for the transmission",
+        "how precisely the listener was located"
+      ],
+      "answer": 3,
+      "why": "A null is narrow. If it lands a few degrees away from the listener it provides no protection at all, so localisation accuracy matters more than array size or transmit power.",
+      "why_vi": "Điểm không rất hẹp. Nếu nó rơi lệch vài độ so với người nghe thì không bảo vệ được gì, nên độ chính xác định vị quan trọng hơn kích thước dàn ăng-ten hay công suất phát.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-35",
+      "q": "A reflecting surface placed by an attacker is hard to locate because",
+      "q_vi": "Một bề mặt phản xạ do kẻ tấn công đặt rất khó định vị vì",
+      "choices": [
+        "it operates outside the licensed band",
+        "it radiates no signal of its own, since it only rearranges the energy that the network itself has already transmitted",
+        "it is usually smaller than a single wavelength",
+        "it changes its position several times per second"
+      ],
+      "answer": 1,
+      "why": "Tools that hunt for unauthorised transmitters look for emissions. A passive surface produces none, so the redirection of energy has to be inferred from the channel rather than found by direction finding.",
+      "why_vi": "Các công cụ săn máy phát trái phép đi tìm bức xạ. Bề mặt thụ động không sinh ra bức xạ nào, nên việc năng lượng bị hắt hướng phải suy ra từ kênh chứ không tìm được bằng cách định hướng nguồn phát.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-36",
+      "q": "In the argument that a reflecting surface raises secrecy, the weakest assumption is that",
+      "q_vi": "Trong lập luận bề mặt phản xạ nâng được tính bí mật, giả định yếu nhất là",
+      "choices": [
+        "the surface can be reconfigured quickly enough to follow the channel",
+        "the surface adds no thermal noise of its own to the reflected path",
+        "the eavesdropper channel is known",
+        "the reflected and direct paths can be combined coherently"
+      ],
+      "answer": 2,
+      "why": "Controlling the surface is realistic in your own deployment. Knowing the channel to a party that never cooperates with you is a much weaker claim, and the whole gain rests on it.",
+      "why_vi": "Việc bạn điều khiển được bề mặt trong hệ thống của mình là thực tế. Việc biết kênh tới một bên không bao giờ hợp tác với bạn là khẳng định yếu hơn hẳn, mà toàn bộ phần lợi lại dựa vào nó.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-37",
+      "q": "Radio fingerprinting is best deployed",
+      "q_vi": "Dấu vân vô tuyến nên được triển khai",
+      "choices": [
+        "as the only identity check performed during the initial attachment procedure",
+        "as a replacement for cryptographic identity on constrained devices",
+        "as a way to recover a lost session key",
+        "as a second signal beside cryptographic identity"
+      ],
+      "answer": 3,
+      "why": "The features cannot be cloned along with credentials, which is the attraction, and they drift with temperature, ageing, power level and environment, which is why they cannot carry the decision alone.",
+      "why_vi": "Các đặc trưng này không nhân bản được cùng với thông tin đăng nhập, đó là điểm hấp dẫn, và chúng trôi theo nhiệt độ, tuổi thiết bị, mức công suất và môi trường, nên chúng không gánh nổi quyết định một mình.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-38",
+      "q": "One suspicious cell parameter is not enough to declare a false base station because",
+      "q_vi": "Một tham số ô đáng ngờ chưa đủ để kết luận có trạm gốc giả vì",
+      "choices": [
+        "each indicator alone has innocent explanations, so detection has to combine several weak signals",
+        "cell parameters are encrypted and cannot be read by the device",
+        "the device is not permitted to report cell parameters back to the operator without explicit user consent",
+        "the operator does not keep a record of its own configuration"
+      ],
+      "answer": 0,
+      "why": "Unusual parameters, unexpected signal strength, absence from the site database and a refusal to complete mutual authentication are each explainable alone and convincing when they arrive together.",
+      "why_vi": "Tham số lạ, mức tín hiệu bất thường, không có trong cơ sở dữ liệu trạm và việc né hoàn tất xác thực hai chiều, mỗi dấu hiệu đứng riêng đều giải thích được và chúng chỉ thuyết phục khi cùng xuất hiện.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-39",
+      "q": "Treating a narrow millimetre wave beam as private overlooks",
+      "q_vi": "Coi một búp sóng sóng milimet hẹp là kín đáo thì bỏ qua",
+      "choices": [
+        "the higher path loss at those frequencies",
+        "sidelobes, reflections from ordinary surfaces, and a listener standing between transmitter and receiver inside the main lobe",
+        "the need for line of sight to close the link",
+        "the cost of the antenna array involved"
+      ],
+      "answer": 1,
+      "why": "Directionality raises the price of eavesdropping and does not remove the possibility, and the listener who pays nothing extra is the one standing in the path.",
+      "why_vi": "Tính định hướng làm việc nghe lén tốn kém hơn chứ không xoá bỏ khả năng đó, và người nghe không phải trả thêm gì chính là người đứng ngay trên đường truyền.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-40",
+      "q": "Key generation from channel reciprocity fails in a way that is easy to miss because",
+      "q_vi": "Việc sinh khoá từ tính thuận nghịch của kênh hỏng theo kiểu rất dễ bỏ sót vì",
+      "choices": [
+        "the coherence time of the channel is longer than the measurement window used",
+        "the calibration between transmit and receive chains has drifted apart",
+        "the failure appears as a key mismatch rather than an alarm",
+        "the two ends use different sampling rates for their measurements"
+      ],
+      "answer": 2,
+      "why": "Reciprocity is assumed rather than tested, so hardware asymmetry or a surface forging the symmetry shows up as an operational annoyance and never reaches the security team.",
+      "why_vi": "Tính thuận nghịch được giả định chứ không được kiểm, nên bất đối xứng phần cứng hoặc một bề mặt đang dựng nên sự đối xứng giả chỉ hiện ra như một phiền toái vận hành và không bao giờ tới tay đội an ninh.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-41",
+      "q": "Reporting only an average secrecy rate hides",
+      "q_vi": "Chỉ báo cáo tốc độ bí mật trung bình sẽ che mất",
+      "choices": [
+        "the bandwidth over which the average was taken in the first place",
+        "the modulation and coding scheme used during the measurement run",
+        "how often the guarantee actually fails",
+        "the antenna count at the receiver"
+      ],
+      "answer": 2,
+      "why": "When the eavesdropper channel is known only statistically, the honest figure is the probability that the instantaneous rate drops below what the service requires.",
+      "why_vi": "Khi kênh của kẻ nghe lén chỉ biết được theo nghĩa thống kê, con số thành thật là xác suất tốc độ tức thời tụt xuống dưới mức dịch vụ đòi hỏi.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-42",
+      "q": "Supplying the network with false interference measurements works because",
+      "q_vi": "Việc cấp cho mạng các số đo nhiễu sai lệch có tác dụng vì",
+      "choices": [
+        "the power control loop was built to tolerate measurement error and has no notion of a party that supplies wrong measurements on purpose",
+        "interference reports are not carried over the air interface",
+        "power control operates on a timescale of minutes",
+        "the loop ignores reports from devices at the cell edge"
+      ],
+      "answer": 0,
+      "why": "The loop then instructs honest devices to transmit too low or too high, which drains batteries, raises interference or pushes a competitor's users into outage without breaking any rule.",
+      "why_vi": "Sau đó vòng điều khiển ra lệnh cho các thiết bị thật thà phát quá thấp hoặc quá cao, làm cạn pin, làm tăng nhiễu hoặc đẩy người dùng của đối thủ vào vùng mất dịch vụ mà không phá luật nào.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-43",
+      "q": "A pilot contamination attack succeeds because the base station",
+      "q_vi": "Tấn công nhiễm bẩn tín hiệu dẫn đường thành công vì trạm gốc",
+      "choices": [
+        "cannot detect that two devices transmitted the same sequence at the same instant",
+        "steers beam energy according to a channel estimate the attacker helped produce",
+        "assigns pilot sequences without checking the identity of the device first",
+        "uses too few pilot symbols in each transmission frame"
+      ],
+      "answer": 1,
+      "why": "The estimate is corrupted before any decision is taken, so the array does exactly what it was designed to do and delivers energy toward the wrong position.",
+      "why_vi": "Ước lượng đã bị làm hỏng trước khi có quyết định nào, nên dàn ăng-ten làm đúng việc nó được thiết kế để làm và đưa năng lượng về sai vị trí.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-44",
+      "q": "A jamming resilience figure becomes comparable between studies only when it is quoted with",
+      "q_vi": "Một con số chống chịu gây nhiễu chỉ so sánh được giữa các nghiên cứu khi nó được nêu kèm",
+      "choices": [
+        "the manufacturer of the base station used in the experiment",
+        "the modulation and coding scheme on the protected link",
+        "the assumed jammer geometry",
+        "the duration of the measurement campaign in hours"
+      ],
+      "answer": 2,
+      "why": "How much interference power a link absorbs depends entirely on where the jammer sits and what antenna it uses, so a resilience number without that geometry describes nothing repeatable.",
+      "why_vi": "Mức công suất gây nhiễu mà một tuyến chịu được phụ thuộc hoàn toàn vào vị trí nguồn gây nhiễu và ăng-ten của nó, nên một con số chống chịu thiếu hình học ấy không mô tả điều gì lặp lại được.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-45",
+      "q": "Physical layer key generation drops a computational assumption and introduces the assumption that",
+      "q_vi": "Sinh khoá ở lớp vật lý bỏ đi một giả định về độ khó tính toán và đưa vào giả định rằng",
+      "choices": [
+        "the channel stays flat across the whole of the allocated bandwidth for the duration",
+        "both ends share a synchronised clock before the exchange even begins",
+        "the quantisation of the measurements is coarse enough",
+        "an eavesdropper half a wavelength away sees an independent channel"
+      ],
+      "answer": 3,
+      "why": "The security no longer rests on a hard problem, it rests on how fast the channel decorrelates in space, which is a physical claim about the deployment and not a mathematical one.",
+      "why_vi": "Tính an toàn không còn dựa vào một bài toán khó nữa mà dựa vào việc kênh mất tương quan nhanh đến đâu theo không gian, đó là một khẳng định vật lý về nơi triển khai chứ không phải khẳng định toán học.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-46",
+      "q": "Integrated sensing breaks the central assumption of subscriber privacy law because",
+      "q_vi": "Cảm biến tích hợp phá vỡ giả định nền của luật bảo vệ riêng tư thuê bao vì",
+      "choices": [
+        "sensing data is stored in a different database",
+        "the waveform is shared with the data channel",
+        "operators must obtain a licence for radar use",
+        "the measured person may have no account and no device, and therefore no place in any consent record the operator holds"
+      ],
+      "answer": 3,
+      "why": "Notice and consent assume a person who can be linked to an identity. When there is nobody to notify, data minimisation and retention limits are the only controls left.",
+      "why_vi": "Việc thông báo và xin đồng ý giả định có một con người nối được với một danh tính. Khi không có ai để thông báo, giảm thiểu dữ liệu và giới hạn thời gian lưu là các biện pháp duy nhất còn lại.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-47",
+      "q": "Forging a radar echo against an integrated sensing system requires",
+      "q_vi": "Làm giả tiếng vọng ra đa đánh vào một hệ cảm biến tích hợp thì cần",
+      "choices": [
+        "hearing the waveform and retransmitting it with a delay",
+        "recovering the private key used to protect the sensing frame",
+        "physical access to the antenna array of the base station itself",
+        "a transmitter more powerful than the base station being attacked"
+      ],
+      "answer": 0,
+      "why": "The attack is against the measurement rather than against a secret. A delayed and scaled copy of the network's own waveform produces a range and velocity for an object that is not there.",
+      "why_vi": "Cuộc tấn công nhắm vào phép đo chứ không nhắm vào một bí mật nào. Một bản sao có làm trễ và đổi biên độ của chính dạng sóng của mạng sẽ tạo ra cự ly và vận tốc cho một vật thể không hề tồn tại.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-48",
+      "q": "A ghost target injected into the sensing map is dangerous chiefly because",
+      "q_vi": "Một mục tiêu ma chèn vào bản đồ cảm biến nguy hiểm chủ yếu vì",
+      "choices": [
+        "the raw returns are discarded once the map has been produced from them",
+        "sensing receivers have a limited dynamic range in practice",
+        "the map refreshes too slowly to correct the error later",
+        "systems downstream act on the map and treat it as ground truth"
+      ],
+      "answer": 3,
+      "why": "One injected object propagates into beam decisions, alarms and automated safety responses taken far from the radio, none of which ever look at the returns that produced it.",
+      "why_vi": "Một vật thể bị chèn sẽ lan vào các quyết định chọn búp sóng, vào cảnh báo và vào phản ứng an toàn tự động diễn ra rất xa khối vô tuyến, mà không quyết định nào trong số đó nhìn lại tín hiệu phản hồi gốc.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-49",
+      "q": "Optimising a waveform for sensing resolution carries the security cost that",
+      "q_vi": "Tối ưu dạng sóng để đạt độ phân giải cảm biến kéo theo cái giá an ninh là",
+      "choices": [
+        "the link becomes more sensitive to Doppler spread in the channel",
+        "a more predictable waveform is easier to reproduce and replay",
+        "the receiver needs a longer integration time to detect targets",
+        "the data rate falls below what the service target requires"
+      ],
+      "answer": 1,
+      "why": "Waveforms that resolve position well tend to be regular and wideband, while waveforms that carry data efficiently look random. The property that helps sensing is the property an attacker imitates.",
+      "why_vi": "Dạng sóng phân giải vị trí tốt thì thường đều đặn và chiếm băng rộng, còn dạng sóng chở dữ liệu hiệu quả thì trông ngẫu nhiên. Chính tính chất giúp cảm biến lại là tính chất mà kẻ tấn công bắt chước.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-50",
+      "q": "The strongest control available over an archive of sensing measurements is",
+      "q_vi": "Biện pháp mạnh nhất còn dùng được với kho lưu các phép đo cảm biến là",
+      "choices": [
+        "a short retention window, because it limits the harm from a future decision that nobody has made yet",
+        "anonymising the records before they are stored",
+        "encrypting the archive at rest with a rotated key",
+        "restricting access to the archive by role"
+      ],
+      "answer": 0,
+      "why": "The other measures constrain who reads the archive today. Only a retention limit constrains what a different team, under different pressure, will be able to do with it in three years.",
+      "why_vi": "Các biện pháp kia chỉ ràng buộc ai đọc được kho lưu hôm nay. Chỉ giới hạn thời gian lưu mới ràng buộc được điều mà một đội khác, dưới sức ép khác, có thể làm với nó sau ba năm.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-51",
+      "q": "Anonymising sensing records does not stop occupancy from being inferred because",
+      "q_vi": "Ẩn danh bản ghi cảm biến không chặn được việc suy ra số người trong nhà vì",
+      "choices": [
+        "anonymisation is applied only after the records have been transmitted",
+        "the identifiers can be recovered from the timestamps that remain",
+        "the sensitive fact lives in the pattern",
+        "the operator retains a key that reverses the transformation"
+      ],
+      "answer": 2,
+      "why": "Counts and coarse positions over time reveal sleep hours, presence of a visitor and daily routine. Removing the names leaves every one of those facts intact.",
+      "why_vi": "Số đếm và vị trí thô theo thời gian tiết lộ giờ ngủ, việc có khách tới và nếp sinh hoạt hằng ngày. Bỏ đi tên người thì mọi sự thật đó vẫn còn nguyên.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-52",
+      "q": "Limiting sensing resolution protects privacy only when the limit is enforced",
+      "q_vi": "Hạn chế độ phân giải cảm biến chỉ bảo vệ được riêng tư khi giới hạn ấy được cưỡng chế",
+      "choices": [
+        "by the regulator through a periodic compliance inspection of every deployed sensing system in the estate",
+        "in the contract signed with the enterprise customer",
+        "at the point where results are shown to the operator",
+        "where the data is produced, since applying it later leaves the sharp copy in the pipeline"
+      ],
+      "answer": 3,
+      "why": "A limit applied in the presentation layer blurs the display and keeps the full resolution data available inside the system, where the next feature request will find it.",
+      "why_vi": "Giới hạn áp ở lớp hiển thị chỉ làm mờ màn hình và vẫn để dữ liệu đầy đủ nằm sẵn trong hệ thống, nơi mà yêu cầu tính năng tiếp theo sẽ tìm thấy nó.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-53",
+      "q": "In practice the consent boundary for environment sensing is drawn by",
+      "q_vi": "Trên thực tế ranh giới đồng ý cho việc cảm biến môi trường được vạch bởi",
+      "choices": [
+        "the sensitivity of the receiver front end",
+        "what the network chooses to store and to share, because the antenna always hears far more than the service itself needs",
+        "the regulatory limit on transmit power",
+        "the beam width used during the measurement"
+      ],
+      "answer": 1,
+      "why": "Arguing from what the receiver physically detects is an evasion, because the antenna hears more than the service requires no matter how the system is configured.",
+      "why_vi": "Lấy chuyện máy thu cảm nhận được gì về mặt vật lý ra biện hộ là một cách né, vì ăng-ten nghe được nhiều hơn mức dịch vụ cần bất kể hệ thống được cấu hình thế nào.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-54",
+      "q": "Poisoning a model that retrains on live network telemetry requires the attacker to",
+      "q_vi": "Đầu độc một mô hình huấn luyện lại bằng số liệu đo trực tiếp buộc kẻ tấn công phải",
+      "choices": [
+        "shape traffic in the production network",
+        "obtain write access to the training dataset store",
+        "substitute the model weights during a deployment window",
+        "compromise the pipeline that labels the collected samples"
+      ],
+      "answer": 0,
+      "why": "The network is the collection instrument, so no dataset has to be touched. Whatever the attacker makes the network observe becomes training data at the next retraining cycle.",
+      "why_vi": "Chính mạng là công cụ thu thập, nên không cần chạm vào tập dữ liệu nào. Bất cứ thứ gì kẻ tấn công khiến mạng quan sát thấy sẽ thành dữ liệu huấn luyện ở chu kỳ huấn luyện lại kế tiếp.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-55",
+      "q": "The practical defence against evasion of a learned traffic classifier is",
+      "q_vi": "Cách phòng thủ thực tế trước việc né bộ phân loại lưu lượng đã học là",
+      "choices": [
+        "retraining the classifier on adversarial examples every week",
+        "replacing the learned model with a rule based filter again",
+        "limiting what a wrong classification is allowed to do",
+        "raising the decision threshold"
+      ],
+      "answer": 2,
+      "why": "Small changes to packet size, timing and flow structure cross a decision boundary while the application keeps working, so the design has to assume some labels will be wrong.",
+      "why_vi": "Thay đổi nhỏ về kích thước gói, thời điểm gửi và cấu trúc luồng đủ để vượt qua mặt phân định trong khi ứng dụng vẫn chạy, nên thiết kế phải giả định sẽ có nhãn bị sai.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-56",
+      "q": "Federated training between competing operators is usually blocked by",
+      "q_vi": "Huấn luyện liên kết giữa các nhà mạng cạnh tranh thường bị chặn bởi",
+      "choices": [
+        "the absence of a common model architecture",
+        "the bandwidth needed to exchange model updates",
+        "the lack of a framework approved by the regulator",
+        "commercial sensitivity, because the shared update tells a competitor where your own network performs badly"
+      ],
+      "answer": 3,
+      "why": "Subscriber privacy is the reason usually given, and the update itself carries information about fault rates and coverage gaps that no operator wants a rival to read.",
+      "why_vi": "Riêng tư của thuê bao là lý do người ta hay nêu, còn bản cập nhật thì mang theo thông tin về tỉ lệ sự cố và các lỗ hổng vùng phủ mà không nhà mạng nào muốn đối thủ đọc được.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-57",
+      "q": "Federated learning does not remove privacy risk because",
+      "q_vi": "Học liên kết không xoá bỏ được rủi ro riêng tư vì",
+      "choices": [
+        "the aggregation server can be compromised by an insider at any point",
+        "gradients can be inverted to recover properties of the local data",
+        "participants may hold data with entirely different distributions",
+        "the final model is distributed to every participant afterwards"
+      ],
+      "answer": 1,
+      "why": "Not sending the data is not the same as not sending information about it. Recovery ranges from membership of a single record to a coarse reconstruction of it.",
+      "why_vi": "Không gửi dữ liệu không đồng nghĩa với không gửi thông tin về dữ liệu. Mức khôi phục trải từ việc biết một bản ghi có mặt hay không cho tới việc dựng lại nó ở mức thô.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-58",
+      "q": "Without a record of which model version ran where, an incident investigation cannot",
+      "q_vi": "Thiếu bản ghi cho biết phiên bản mô hình nào chạy ở đâu, một cuộc điều tra sự cố sẽ không thể",
+      "choices": [
+        "establish which model made the decision",
+        "recover the traffic that was carried at that time",
+        "determine which vendor supplied the equipment involved",
+        "reconstruct the configuration applied to the radio units"
+      ],
+      "answer": 0,
+      "why": "Governance turns a learned component into something an auditor can examine, and the first question in any review is which artefact produced the decision under scrutiny.",
+      "why_vi": "Quản trị biến một khối học máy thành thứ mà kiểm toán viên soi được, và câu hỏi đầu tiên trong mọi cuộc rà soát là sản phẩm nào đã sinh ra quyết định đang bị xem xét.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-59",
+      "q": "The explanation a regulator actually asks for is",
+      "q_vi": "Lời giải trình mà cơ quan quản lý thực sự đòi hỏi là",
+      "choices": [
+        "a published description of the model architecture and all its layers",
+        "the accuracy of the model measured on a held out dataset",
+        "the inputs and decision path for the individual case in question",
+        "the list of features ranked by global importance score"
+      ],
+      "answer": 2,
+      "why": "The requirement is narrower than explaining the model in general. It is met by logging inputs and the decision path per case, which is a design choice made before deployment.",
+      "why_vi": "Yêu cầu này hẹp hơn việc giải thích mô hình nói chung. Nó được đáp ứng bằng cách ghi lại dữ liệu vào và đường tới quyết định cho từng trường hợp, đó là lựa chọn thiết kế phải làm trước khi triển khai.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-60",
+      "q": "Retraining a model whose accuracy has fallen is the wrong reflex when",
+      "q_vi": "Huấn luyện lại một mô hình vừa tụt độ chính xác là phản xạ sai khi",
+      "choices": [
+        "the fall is caused by a change in the traffic mix on the network",
+        "the training data has been relabelled by a different team",
+        "the model serves fewer requests",
+        "someone is shaping the inputs on purpose"
+      ],
+      "answer": 3,
+      "why": "Drift and attack look alike on an accuracy chart and call for opposite responses. Retraining on attacker shaped data converts a temporary problem into a permanent one.",
+      "why_vi": "Trôi dữ liệu và tấn công trông giống nhau trên biểu đồ độ chính xác nhưng đòi hai phản ứng ngược nhau. Huấn luyện lại trên dữ liệu do kẻ tấn công nắn sẽ biến một vấn đề tạm thời thành vĩnh viễn.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-61",
+      "q": "When a session crosses a satellite hop, the security question shifts from encryption strength to",
+      "q_vi": "Khi một phiên đi qua chặng vệ tinh, câu hỏi an ninh chuyển từ độ mạnh mã hoá sang",
+      "choices": [
+        "who can lawfully compel the relay operator to hand over the traffic and the metadata that accompanied it",
+        "whether the ground station uses the same cipher suite",
+        "how much delay the additional hop introduces",
+        "the elevation angle of the satellite at the time"
+      ],
+      "answer": 0,
+      "why": "The hop passes through equipment belonging to another operator under another legal regime, so the exposure is decided by who may demand access rather than by the algorithm in use.",
+      "why_vi": "Chặng đó đi qua thiết bị của một nhà khai thác khác thuộc một chế độ pháp lý khác, nên mức phơi nhiễm do việc ai có quyền yêu cầu truy cập quyết định chứ không do thuật toán đang dùng.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-62",
+      "q": "Removing round trips from the attachment procedure of a direct to satellite handset is dangerous when the saving comes from",
+      "q_vi": "Việc bớt số lượt đi về trong thủ tục kết nối của máy cầm tay nối thẳng lên vệ tinh trở nên nguy hiểm khi phần tiết kiệm đến từ",
+      "choices": [
+        "reducing the size of each signalling message that is exchanged",
+        "trusting a cached security context",
+        "moving the authentication server closer to the ground station",
+        "batching several procedures into one transmission window"
+      ],
+      "answer": 1,
+      "why": "Each round trip removed has to be replaced by evidence rather than by an assumption. Reusing a context that was verified earlier is exactly how the freshness property disappears.",
+      "why_vi": "Mỗi lượt đi về bị bỏ đi phải được thay bằng bằng chứng chứ không phải bằng một giả định. Dùng lại một ngữ cảnh đã xác minh từ trước chính là cách tính chất tươi mới biến mất.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-63",
+      "q": "Widening the freshness window to accommodate orbital delay weakens the protocol because",
+      "q_vi": "Nới cửa sổ độ tươi cho vừa với trễ quỹ đạo làm yếu giao thức vì",
+      "choices": [
+        "the challenge value then has to be longer to remain unpredictable in every case",
+        "the device has to store more state between the two exchanges",
+        "the server must accept a wider range of sequence numbers",
+        "a relay attack now fits comfortably inside ordinary timing variation"
+      ],
+      "answer": 3,
+      "why": "Challenge and response derive their strength from a tight bound on how long an answer may take. Loosening that bound to fit the orbit gives a relay exactly the room it needs.",
+      "why_vi": "Cơ chế hỏi và đáp lấy sức mạnh từ một cận chặt về việc câu trả lời được phép tới muộn bao nhiêu. Nới cận ấy cho vừa quỹ đạo là trao cho kẻ trung chuyển đúng khoảng trống họ cần.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-64",
+      "q": "Satellite navigation spoofing misleads the network because",
+      "q_vi": "Giả mạo tín hiệu định vị vệ tinh đánh lừa được mạng vì",
+      "choices": [
+        "the network cannot measure the propagation delay to the device at all",
+        "location reports are sent without integrity protection over the air",
+        "the device computes its position from an unauthenticated signal",
+        "navigation receivers have poor accuracy indoors"
+      ],
+      "answer": 2,
+      "why": "The device reports faithfully what it calculated. The lie entered earlier, in a broadcast signal that carries no authentication, and the network then applies policy based on it.",
+      "why_vi": "Thiết bị báo cáo trung thực đúng thứ nó tính ra. Lời nói dối đã vào từ trước, trong một tín hiệu quảng bá không mang xác thực nào, rồi mạng áp chính sách dựa trên đó.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-65",
+      "q": "On inter satellite links, the part of key management that terrestrial designs handle worst is",
+      "q_vi": "Trên các tuyến liên vệ tinh, phần mà các thiết kế mặt đất làm dở nhất trong quản lý khoá là",
+      "choices": [
+        "reaching a node to revoke a key",
+        "generating enough entropy on board the spacecraft",
+        "negotiating a cipher suite between two satellites",
+        "storing the key material in radiation tolerant memory"
+      ],
+      "answer": 0,
+      "why": "Establishment fits inside a contact window. Withdrawal has to reach spacecraft that are currently out of contact, which no terrestrial revocation design was ever asked to do.",
+      "why_vi": "Việc thiết lập thì gói gọn trong một cửa sổ liên lạc. Việc rút lại phải với tới những vệ tinh hiện không liên lạc được, điều mà chưa thiết kế thu hồi nào ở mặt đất từng phải làm.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-66",
+      "q": "A jurisdiction aware routing policy fails silently when it is written as",
+      "q_vi": "Một chính sách định tuyến theo quyền tài phán hỏng một cách âm thầm khi được viết thành",
+      "choices": [
+        "a hard constraint in the path computation",
+        "a preference, because the first serious congestion event is the moment the path computation quietly abandons it",
+        "a filter applied at the ground station",
+        "a contractual clause with the partner"
+      ],
+      "answer": 1,
+      "why": "Constraining which ground stations and inter satellite paths a session may use costs capacity and latency, and anything expressed as a soft objective is traded away under load.",
+      "why_vi": "Ràng buộc phiên chỉ dùng những trạm mặt đất và chặng liên vệ tinh nào thì tốn dung lượng và độ trễ, mà thứ gì viết ra dưới dạng mục tiêu mềm đều bị đem đổi khi có tải.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-67",
+      "q": "Which factor decides who may lawfully compel access to traffic that crossed a satellite",
+      "q_vi": "Yếu tố nào quyết định ai có quyền hợp pháp buộc giao nộp lưu lượng đã đi qua một vệ tinh",
+      "choices": [
+        "the physical location of the subscriber at the moment the session was established",
+        "the strength of the cipher that protected the user plane traffic end to end",
+        "the orbital altitude",
+        "the registration of the operator, the ground station and the licence"
+      ],
+      "answer": 3,
+      "why": "Encryption narrows what can be handed over. It never decides who is entitled to ask, and that entitlement follows the registrations rather than the user.",
+      "why_vi": "Mã hoá thu hẹp thứ có thể bị giao nộp. Nó không bao giờ quyết định ai có quyền yêu cầu, và quyền ấy đi theo các đăng ký pháp lý chứ không đi theo người dùng.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-68",
+      "q": "A log of which satellite beam served each device amounts to",
+      "q_vi": "Nhật ký ghi búp sóng vệ tinh nào phục vụ thiết bị nào thực chất là",
+      "choices": [
+        "a record that must be retained for lawful interception purposes anyway",
+        "an accounting record with no privacy implications at all",
+        "a coarse location history, even when no positioning service was used",
+        "a measurement that can be discarded after the handover completes"
+      ],
+      "answer": 2,
+      "why": "Serving a device from a given beam already places it inside an area of known size, so the assignment log carries location information that nobody set out to collect.",
+      "why_vi": "Việc phục vụ một thiết bị bằng một búp sóng cụ thể đã đặt nó vào một vùng có kích thước biết trước, nên nhật ký gán búp sóng mang theo thông tin vị trí mà không ai chủ đích thu thập.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-69",
+      "q": "Firmware update on an orbiting payload needs a verified fallback image because",
+      "q_vi": "Cập nhật phần sụn cho tải trọng trên quỹ đạo cần một ảnh dự phòng đã kiểm vì",
+      "choices": [
+        "a failed update on the ground costs a site visit while the same failure in orbit costs the spacecraft itself",
+        "the uplink bandwidth is limited during a contact window",
+        "radiation can corrupt the stored image over time",
+        "the ground segment cannot sign large binaries"
+      ],
+      "answer": 0,
+      "why": "There is no physical recovery, so the update mechanism has to include a known good image and an authenticated command that selects it without human intervention on site.",
+      "why_vi": "Không còn khả năng thu hồi vật lý, nên cơ chế cập nhật phải kèm một ảnh biết chắc là tốt và một lệnh có xác thực để chọn ảnh đó mà không cần người can thiệp tại chỗ.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-70",
+      "q": "A satellite holding a message until it passes a ground station is, during that interval",
+      "q_vi": "Một vệ tinh giữ bản tin cho tới khi bay qua trạm mặt đất thì trong khoảng đó là",
+      "choices": [
+        "a router that has queued the message in its output buffer",
+        "a store under another party's control",
+        "a relay with no persistent state of any kind",
+        "an endpoint that has terminated the security association"
+      ],
+      "answer": 1,
+      "why": "The design is described as a relay and for several minutes it holds the message, its timing and its addressing on board, which is a retention that a threat model has to record.",
+      "why_vi": "Thiết kế được mô tả là chuyển tiếp, nhưng trong vài phút nó giữ trên khoang cả bản tin, thời điểm và thông tin địa chỉ, đó là một khoảng lưu trữ mà mô hình đe doạ phải ghi lại.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-71",
+      "q": "An attacker unable to break either the satellite leg or the terrestrial leg can still",
+      "q_vi": "Kẻ tấn công không bẻ nổi cả chặng vệ tinh lẫn chặng mặt đất thì vẫn có thể",
+      "choices": [
+        "read the traffic once it has been aggregated at the gateway node in the ground segment",
+        "recover the long term key from the subscriber module",
+        "modify the routing tables of the core network directly",
+        "force the session onto whichever leg enforces the weaker capabilities"
+      ],
+      "answer": 3,
+      "why": "When two paths enforce different security capabilities, the weaker one decides the outcome for the whole session, so provoking the transition is cheaper than attacking either path.",
+      "why_vi": "Khi hai đường áp các năng lực an ninh khác nhau, đường yếu hơn quyết định kết quả cho cả phiên, nên gây ra chuyển đổi rẻ hơn nhiều so với tấn công một trong hai đường.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-72",
+      "q": "The characteristic failure of a learned component inside a control loop is",
+      "q_vi": "Kiểu hỏng đặc trưng của một khối học máy nằm trong vòng điều khiển là",
+      "choices": [
+        "an exception which the surrounding software cannot handle in any way at all",
+        "a crash that removes the component from service immediately and visibly",
+        "a slow drift into decisions that are consistently wrong for one group",
+        "a rise in memory consumption"
+      ],
+      "answer": 2,
+      "why": "Nothing raises an alarm, because a model that errs in a consistent direction still returns well formed outputs that every downstream check accepts.",
+      "why_vi": "Không có cảnh báo nào nổi lên, vì một mô hình sai theo một hướng nhất quán vẫn trả về kết quả đúng khuôn mà mọi phép kiểm phía sau đều chấp nhận.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-73",
+      "q": "An energy depletion attack evades rate limiting because",
+      "q_vi": "Tấn công vắt kiệt năng lượng né được bộ hạn chế tốc độ vì",
+      "choices": [
+        "it never exceeds any traffic threshold, since all it does is prevent the device from ever going to sleep",
+        "it uses a protocol the limiter does not parse",
+        "it targets the base station rather than the device",
+        "it operates only during the night hours"
+      ],
+      "answer": 0,
+      "why": "Denial of service is achieved over days rather than seconds. The device is never flooded, so no volume based control is ever triggered by the behaviour.",
+      "why_vi": "Việc chặn dịch vụ diễn ra trong nhiều ngày chứ không trong vài giây. Thiết bị không hề bị dội lưu lượng, nên không biện pháp nào dựa trên khối lượng bị kích hoạt bởi hành vi này.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-74",
+      "q": "Identifier concealment must be judged by its worst case because",
+      "q_vi": "Việc che giấu định danh phải được đánh giá theo trường hợp xấu nhất vì",
+      "choices": [
+        "the concealment function uses a public key of the home network",
+        "an attacker can force the fallback in which it fails",
+        "the identifier is also used for charging and roaming records",
+        "concealment costs latency"
+      ],
+      "answer": 1,
+      "why": "Passive catchers wait for the single moment when the long term identifier travels unprotected, and a fallback that an attacker can provoke is not a rare accident.",
+      "why_vi": "Các thiết bị bắt thụ động chờ đúng khoảnh khắc duy nhất mà định danh dài hạn đi qua không được bảo vệ, và một đường lui mà kẻ tấn công gây ra được thì không phải tai nạn hiếm.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-75",
+      "q": "Disaggregating the radio access network changes risk because",
+      "q_vi": "Việc tách khối mạng truy nhập vô tuyến làm đổi rủi ro vì",
+      "choices": [
+        "components from different vendors cannot be made to use one common cryptographic library",
+        "the number of physical sites in the network increases substantially",
+        "software components are updated on different schedules",
+        "trust decisions that used to be internal now sit in interfaces between vendors"
+      ],
+      "answer": 3,
+      "why": "Disaggregation does not create risk on its own. It converts one vendor boundary into many, and every new interface has to state authentication and integrity explicitly.",
+      "why_vi": "Việc tách khối tự nó không sinh ra rủi ro. Nó biến một ranh giới nhà cung cấp thành nhiều ranh giới, và mỗi giao diện mới đều phải nêu rõ việc xác thực và toàn vẹn.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-76",
+      "q": "The first step of any cryptographic migration is",
+      "q_vi": "Bước đầu tiên của mọi cuộc chuyển đổi mật mã là",
+      "choices": [
+        "selecting the replacement algorithm",
+        "upgrading the certificate authority first",
+        "an inventory of every algorithm, key length and certificate in the running network, together with the product that holds each one",
+        "informing the regulator of the timeline"
+      ],
+      "answer": 2,
+      "why": "Nothing can be replaced until it has been found, and the hardest items to find live inside embedded devices and vendor products whose internal choices were never documented.",
+      "why_vi": "Không thể thay thứ chưa tìm ra, và những thứ khó tìm nhất nằm trong các thiết bị nhúng và sản phẩm của nhà cung cấp mà lựa chọn bên trong chưa bao giờ được ghi tài liệu.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-77",
+      "q": "Treating post quantum migration as a programme rather than a decision means owning",
+      "q_vi": "Coi việc chuyển sang mật mã hậu lượng tử là một chương trình chứ không phải một quyết định nghĩa là nhận lấy",
+      "choices": [
+        "the inventory, the priority order and the rollback",
+        "the mathematical security proof of the selected scheme",
+        "the standardisation process that selected the algorithm family",
+        "the reference implementation used by the vendor community"
+      ],
+      "answer": 0,
+      "why": "Standards bodies settle which algorithm is named in a specification. The dependency map, the order of work and the rehearsed retreat are entirely the operator's problem.",
+      "why_vi": "Các tổ chức chuẩn hoá lo việc nêu tên thuật toán nào trong bản đặc tả. Bản đồ phụ thuộc, thứ tự công việc và đường lùi đã diễn tập thì hoàn toàn là việc của nhà mạng.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-78",
+      "q": "The urgency of migrating a given interface is set by",
+      "q_vi": "Mức cấp bách của việc chuyển đổi một giao diện cụ thể được quyết định bởi",
+      "choices": [
+        "the date on which a capable quantum computer is expected to appear in a laboratory",
+        "the length of the key currently used on the interface",
+        "the processing budget available on the radio equipment",
+        "how long the data in question has to remain confidential"
+      ],
+      "answer": 3,
+      "why": "An adversary can record ciphertext now and decrypt it once the capability exists, so the deadline belongs to the data lifetime rather than to any predicted arrival date.",
+      "why_vi": "Đối phương có thể thu bản mã ngay bây giờ rồi giải mã khi năng lực ấy xuất hiện, nên thời hạn thuộc về tuổi thọ của dữ liệu chứ không thuộc về một ngày dự đoán nào.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-79",
+      "q": "Running a classical and a quantum resistant key exchange together costs",
+      "q_vi": "Chạy đồng thời một phép trao khoá cổ điển và một phép kháng lượng tử phải trả giá bằng",
+      "choices": [
+        "an additional certificate authority for the new algorithm family",
+        "larger handshakes, which hurt most on constrained links",
+        "a complete replacement of the transport protocol stack in use",
+        "a new key schedule"
+      ],
+      "answer": 1,
+      "why": "The session key survives if either exchange holds, which covers both a future quantum attack and an implementation flaw in the newer scheme. The extra bytes land on the links least able to carry them.",
+      "why_vi": "Khoá phiên vẫn an toàn nếu một trong hai phép trao khoá còn đứng vững, cách này phủ cả tấn công lượng tử tương lai lẫn lỗi cài đặt trong phương án mới. Phần byte thêm rơi vào đúng những tuyến khó gánh nhất.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-80",
+      "q": "The part of cryptographic agility that is most often forgotten is",
+      "q_vi": "Phần hay bị quên nhất của khả năng đổi thuật toán mật mã là",
+      "choices": [
+        "the need to keep the old algorithm available for legacy peers",
+        "the cost of testing every combination that can be negotiated",
+        "protection against downgrade",
+        "the storage required for multiple certificate chains"
+      ],
+      "answer": 2,
+      "why": "Negotiation is what makes replacement possible without replacing the product, and it is also the mechanism an attacker uses to push both ends onto the weakest option they share.",
+      "why_vi": "Cơ chế thương lượng là thứ cho phép thay thuật toán mà không phải thay cả sản phẩm, và nó cũng chính là cơ chế kẻ tấn công dùng để đẩy hai đầu về phương án yếu nhất mà cả hai cùng hỗ trợ.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-81",
+      "q": "The fastest way to find the gaps in a responsibility split is",
+      "q_vi": "Cách nhanh nhất để tìm khoảng hở trong bản chia trách nhiệm là",
+      "choices": [
+        "to walk one specific incident through the agreement on paper and see which task neither party claims",
+        "to compare the contract with an industry template",
+        "to ask the vendor for a compliance statement",
+        "to review the last audit report again"
+      ],
+      "answer": 0,
+      "why": "The value of the split appears during an incident, when both parties are otherwise free to describe the same duty as belonging to the other side. Rehearsal exposes that within an hour.",
+      "why_vi": "Giá trị của bản chia trách nhiệm lộ ra lúc có sự cố, khi mà nếu không có nó thì cả hai bên đều tự do mô tả cùng một nghĩa vụ là của bên kia. Diễn tập làm điều đó lộ ra trong vòng một giờ.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-82",
+      "q": "The regulatory clock for reporting an incident normally starts",
+      "q_vi": "Đồng hồ đếm hạn báo cáo sự cố theo quy định thường bắt đầu chạy",
+      "choices": [
+        "when the forensic investigation has been completed and signed off",
+        "at the moment of awareness rather than the moment of compromise",
+        "when the affected subscribers have been identified",
+        "when the vendor confirms the root cause"
+      ],
+      "answer": 1,
+      "why": "Detection speed therefore decides whether you report early with few facts or late with an explanation, and teams that wait for certainty are the ones that miss the deadline.",
+      "why_vi": "Vì vậy tốc độ phát hiện quyết định bạn báo sớm với ít dữ kiện hay báo muộn kèm một lời giải thích, và những đội chờ chắc chắn mới báo chính là những đội trễ hạn.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-83",
+      "q": "A security certificate for network equipment tells you",
+      "q_vi": "Chứng nhận an ninh cho thiết bị mạng cho bạn biết",
+      "choices": [
+        "that the deployed version has been assessed in your configuration",
+        "that the vendor operates a secure development lifecycle process",
+        "that no vulnerability will be discovered in the product later",
+        "that one configuration met one specification in a laboratory"
+      ],
+      "answer": 3,
+      "why": "The certificate is a floor with a scope printed on it. The tested configuration is rarely the one you are running, so reading the scope is the whole of the skill.",
+      "why_vi": "Chứng nhận là một mức sàn có in kèm phạm vi. Cấu hình được thử nghiệm hiếm khi là cấu hình bạn đang chạy, nên đọc được phạm vi ấy mới là toàn bộ kỹ năng.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-84",
+      "q": "Assurance differs from compliance in that assurance",
+      "q_vi": "Bảo đảm khác tuân thủ ở chỗ bảo đảm",
+      "choices": [
+        "rests on evidence that the control works in your network today, which decays as soon as the network changes and nobody tests it again",
+        "is required by a larger number of regulators",
+        "is performed by an external party each year",
+        "covers a wider set of controls in total"
+      ],
+      "answer": 0,
+      "why": "One answers whether the paperwork is in order at audit time. The other answers whether an attacker would actually be stopped, which is a claim with an expiry date.",
+      "why_vi": "Một bên trả lời hồ sơ có đủ vào lúc kiểm toán hay không. Bên kia trả lời kẻ tấn công có thực sự bị chặn hay không, và đó là một khẳng định có hạn sử dụng.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-85",
+      "q": "Between the disclosure of a flaw and the end of patching, the only real protection is",
+      "q_vi": "Giữa lúc lỗ hổng được công bố và lúc vá xong, biện pháp bảo vệ thật sự duy nhất là",
+      "choices": [
+        "an updated signature in the intrusion detection system deployed",
+        "an assurance from the vendor that exploitation is difficult",
+        "a compensating control such as restricting the interface",
+        "a faster patch cycle"
+      ],
+      "answer": 2,
+      "why": "Patch availability and patch deployment are different dates, and the interval between them is measured in weeks across a national footprint rather than in days.",
+      "why_vi": "Ngày có bản vá và ngày triển khai xong bản vá là hai ngày khác nhau, và khoảng giữa chúng trên phạm vi toàn quốc được đo bằng tuần chứ không bằng ngày.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-86",
+      "q": "A permissive default configuration is a weakness across the whole fleet because",
+      "q_vi": "Một cấu hình mặc định dễ dãi là điểm yếu trên toàn bộ đội thiết bị vì",
+      "choices": [
+        "the vendor rarely documents which settings are active on delivery day",
+        "regulators do not inspect it",
+        "it governs every site where the deployment was rushed",
+        "changing it later requires a maintenance window"
+      ],
+      "answer": 2,
+      "why": "A hardening guide protects only the nodes whose installer had time to read it, so the shipped settings decide the security of exactly the sites under the most schedule pressure.",
+      "why_vi": "Cẩm nang siết cấu hình chỉ bảo vệ được những nút mà người lắp đặt có thời gian đọc nó, nên các thiết lập xuất xưởng quyết định mức an ninh của đúng những điểm đang chịu sức ép tiến độ lớn nhất.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-87",
+      "q": "Confining a controller application must bound not only which parameter it may touch but also",
+      "q_vi": "Việc nhốt một ứng dụng của bộ điều khiển phải giới hạn không chỉ tham số nào nó được chạm tới mà còn",
+      "choices": [
+        "how far and how often",
+        "which measurement sources it reads from the network",
+        "the programming language the application was written in",
+        "the identity of the vendor that supplied the application"
+      ],
+      "answer": 0,
+      "why": "An application restricted to legal actions can still cause an outage by repeating one legal action, so rate and magnitude have to be capped alongside the permission itself.",
+      "why_vi": "Một ứng dụng chỉ được làm những hành động hợp lệ vẫn gây mất dịch vụ được bằng cách lặp lại một hành động hợp lệ, nên phải chặn trần cả tần suất và biên độ chứ không chỉ chặn quyền.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-88",
+      "q": "Abuse of shared cell control becomes visible only when you",
+      "q_vi": "Việc lạm dụng quyền điều khiển ô dùng chung chỉ lộ ra khi bạn",
+      "choices": [
+        "audit each tenant against its own agreed envelope",
+        "compare outcomes across tenants, because each tenant taken alone stays inside the agreed envelope",
+        "measure the total power radiated by the site",
+        "review the configuration change log daily"
+      ],
+      "answer": 1,
+      "why": "Permitted control of power, tilt or scheduling weights can shape coverage so a competitor on the same site degrades, and every individual action remains within the agreement.",
+      "why_vi": "Quyền được phép chỉnh công suất, góc ngẩng hoặc trọng số lập lịch đủ để nắn vùng phủ sao cho đối thủ trên cùng trạm bị kém đi, mà từng hành động riêng lẻ vẫn nằm trong thoả thuận.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-89",
+      "q": "Slowing the path between measurement and decision degrades the service while",
+      "q_vi": "Làm chậm đường từ phép đo tới quyết định khiến dịch vụ kém đi trong khi",
+      "choices": [
+        "the controller reports a rising error rate on its northbound interface",
+        "the affected cells drop out of the topology view entirely",
+        "every component still reports itself healthy",
+        "the radio units enter a protective shutdown"
+      ],
+      "answer": 2,
+      "why": "Nothing is dropped and nothing is forged. The loop keeps acting on stale state, so beam and handover choices are wrong while the logs stay clean everywhere.",
+      "why_vi": "Không gói tin nào bị mất và không thứ gì bị làm giả. Vòng điều khiển vẫn hành động trên trạng thái cũ, nên việc chọn búp sóng và chuyển giao bị sai trong khi nhật ký ở đâu cũng sạch.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-90",
+      "q": "The weakest point of a signing chain for radio software is usually",
+      "q_vi": "Điểm yếu nhất của chuỗi ký cho phần mềm vô tuyến thường là",
+      "choices": [
+        "the transport used to deliver the signed image out to the deployment site",
+        "the algorithm chosen to compute the signature itself",
+        "the schedule on which signing keys are rotated",
+        "the build machine, whose key signs whatever that machine produces"
+      ],
+      "answer": 3,
+      "why": "A valid signature proves that the build system emitted the artefact. It says nothing about whether the sources going into that build were what the vendor believed they were.",
+      "why_vi": "Một chữ ký hợp lệ chứng minh hệ thống dựng đã phát ra sản phẩm đó. Nó không nói gì về việc mã nguồn đi vào lần dựng ấy có đúng là thứ nhà cung cấp tin là mình đang dựng hay không.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-91",
+      "q": "The honest comparison when assessing open radio interfaces is between",
+      "q_vi": "Phép so sánh thành thật khi đánh giá giao diện vô tuyến mở là giữa",
+      "choices": [
+        "a proprietary interface and no interface at all",
+        "an insecure design and a secure design",
+        "a single vendor and multiple vendors",
+        "an audited public interface and an unaudited proprietary one, since opening an interface makes it both inspectable and reachable"
+      ],
+      "answer": 3,
+      "why": "Opening an interface helps defenders and attackers at the same time. Which effect dominates depends on whether anybody actually inspects it, not on the fact that it is published.",
+      "why_vi": "Mở một giao diện vừa giúp bên phòng thủ vừa giúp kẻ tấn công. Bên nào thắng thế phụ thuộc vào việc có ai thực sự soi nó hay không, chứ không phụ thuộc vào chuyện nó được công bố.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-92",
+      "q": "A rollback path for a deployed model that has never been exercised is",
+      "q_vi": "Một đường lùi cho mô hình đã triển khai mà chưa từng được diễn tập thì là",
+      "choices": [
+        "an acceptable substitute for staged deployment of the model",
+        "an assumption",
+        "sufficient evidence of operational maturity for an auditor",
+        "a requirement that applies only to safety critical systems"
+      ],
+      "answer": 1,
+      "why": "The difference between a bad update and an outage is the ability to return to the previous version quickly while still serving traffic, and that ability is only demonstrated by using it.",
+      "why_vi": "Khác biệt giữa một bản cập nhật tồi và một sự cố mất dịch vụ là khả năng quay về phiên bản trước thật nhanh mà vẫn phục vụ được lưu lượng, và khả năng ấy chỉ chứng minh được bằng cách dùng thật.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-93",
+      "q": "Reviewing configuration differences stops being sufficient once",
+      "q_vi": "Việc rà soát phần chênh lệch cấu hình thôi không còn đủ khi",
+      "choices": [
+        "the differences are generated from an instruction nobody inspected",
+        "the differences are applied automatically during a maintenance window",
+        "the number of managed nodes exceeds several thousand across the estate",
+        "the change log is stored off site"
+      ],
+      "answer": 0,
+      "why": "In an intent driven network the harmful change is produced by the operator's own tooling, arrives with valid credentials and leaves a complete audit trail, so the diff looks entirely ordinary.",
+      "why_vi": "Trong một mạng vận hành theo ý định, thay đổi gây hại do chính công cụ của nhà mạng sinh ra, đến kèm thông tin đăng nhập hợp lệ và để lại vết kiểm toán đầy đủ, nên phần chênh lệch trông hoàn toàn bình thường.",
+      "level": 4
+    },
+    {
+      "id": "q6gs-94",
+      "q": "A hash matching the publisher of a set of model weights proves",
+      "q_vi": "Một mã băm khớp với bên công bố bộ trọng số mô hình chứng minh được",
+      "choices": [
+        "that the training data was free of poisoned examples throughout the run",
+        "that the model will behave as its documentation describes",
+        "that the weights contain no hidden trigger behaviour",
+        "that the transfer was clean, and nothing about the training"
+      ],
+      "answer": 3,
+      "why": "Weights are opaque and a planted behaviour cannot be found by reading them, so provenance of the file and provenance of the training process are two separate questions.",
+      "why_vi": "Trọng số là thứ mờ đục và một hành vi cài sẵn không thể tìm ra bằng cách đọc chúng, nên nguồn gốc của tệp và nguồn gốc của quá trình huấn luyện là hai câu hỏi tách biệt.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-95",
+      "q": "Two slices are logically separated and one still reaches the other. The usual cause is",
+      "q_vi": "Hai lát mạng đã tách về mặt logic mà một lát vẫn chạm được sang lát kia. Nguyên nhân thường gặp là",
+      "choices": [
+        "an identifier collision inside the slice selection information used",
+        "a routing table that was copied between the two slice contexts",
+        "a shared physical resource the isolation policy did not cover",
+        "an expired certificate"
+      ],
+      "answer": 2,
+      "why": "The shared element is most often a radio scheduler or a user plane function that both slices depend on, which makes the separation real on the diagram and absent in the hardware.",
+      "why_vi": "Thành phần dùng chung thường là một bộ lập lịch vô tuyến hoặc một hàm mặt phẳng người dùng mà cả hai lát cùng dựa vào, khiến sự tách biệt có thật trên sơ đồ và không có trong phần cứng.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-96",
+      "q": "An application on the radio controller can damage a competitor's slice by",
+      "q_vi": "Một ứng dụng trên bộ điều khiển vô tuyến làm hại được lát mạng của đối thủ bằng cách",
+      "choices": [
+        "changing handover thresholds",
+        "reading the subscriber database of the other tenant directly",
+        "injecting packets into the user plane of that slice",
+        "disabling the authentication procedure for those users"
+      ],
+      "answer": 0,
+      "why": "The controller decides scheduling and mobility, so an application with legitimate write access degrades a neighbour without ever touching a packet or a credential.",
+      "why_vi": "Bộ điều khiển quyết định việc lập lịch và di động, nên một ứng dụng có quyền ghi hợp lệ làm giảm chất lượng của hàng xóm mà không hề chạm vào gói tin hay thông tin đăng nhập nào.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-97",
+      "q": "Two slices separated in the radio, the transport and the compute can still fail isolation through",
+      "q_vi": "Hai lát mạng đã tách ở vô tuyến, ở truyền dẫn và ở tài nguyên tính toán vẫn có thể trượt tính cách ly qua",
+      "choices": [
+        "the frequency band they share",
+        "the vendor supplying them both",
+        "the physical site that they occupy",
+        "a single operations account through which both are configured, which is the fourth layer nobody wrote down"
+      ],
+      "answer": 3,
+      "why": "Isolation has to be stated separately for the radio, the transport, the compute and the management plane, and the management plane is the layer most often omitted from the claim.",
+      "why_vi": "Tính cách ly phải được nêu riêng cho vô tuyến, truyền dẫn, tài nguyên tính toán và mặt phẳng quản trị, mà mặt phẳng quản trị là lớp hay bị bỏ sót nhất khỏi lời khẳng định.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-98",
+      "q": "Confidential computing for a hosted network function moves trust to",
+      "q_vi": "Điện toán bảo mật cho hàm mạng chạy nhờ dời niềm tin sang",
+      "choices": [
+        "the operator of the physical facility where the machine is installed",
+        "the auditor who signed the last assessment of the platform",
+        "the silicon vendor whose enclave design is being relied upon",
+        "the customer running the workload"
+      ],
+      "answer": 2,
+      "why": "Memory becomes opaque to the infrastructure operator, which is what makes hosting a core function elsewhere discussable, and the guarantee now rests on hardware somebody else designed.",
+      "why_vi": "Bộ nhớ trở nên mờ đục với bên vận hành hạ tầng, chính điều đó khiến việc đặt hàm mạng lõi ở nơi khác trở thành phương án bàn được, và bảo đảm ấy nay dựa vào phần cứng do người khác thiết kế.",
+      "level": 3
+    },
+    {
+      "id": "q6gs-99",
+      "q": "Placing compute at an unguarded site promotes which control into a load bearing one",
+      "q_vi": "Đặt máy tính ở một điểm không có canh gác nâng biện pháp nào lên thành biện pháp chịu lực",
+      "choices": [
+        "capacity planning for the busy hour at that particular location",
+        "encryption of the disk and protection of the key store",
+        "traffic engineering between the site and the core network",
+        "redundant power"
+      ],
+      "answer": 1,
+      "why": "The threat model now includes somebody with a key, a cable and an hour, so protections that assumed nobody could touch the machine are the ones that have to carry the weight.",
+      "why_vi": "Mô hình đe doạ nay bao gồm một người có chìa khoá, có sợi cáp và có một giờ đồng hồ, nên những biện pháp từng giả định không ai sờ được vào máy chính là những biện pháp phải gánh trọng lượng.",
+      "level": 2
+    },
+    {
+      "id": "q6gs-100",
+      "q": "When sensing measures people who cannot be notified, the controls that remain are",
+      "q_vi": "Khi cảm biến đo cả những người không thể thông báo tới, các biện pháp còn lại là",
+      "choices": [
+        "informed consent obtained through the terms of service document",
+        "pseudonymisation of the identifiers held in the archive",
+        "an opt out mechanism published on the operator website",
+        "collecting less and keeping it briefly"
+      ],
+      "answer": 3,
+      "why": "Notice and consent need a person who can be linked to an identity. Without that link, only limits on what is gathered and how long it is held constrain the outcome.",
+      "why_vi": "Việc thông báo và xin đồng ý cần một con người nối được với một danh tính. Không có mối nối ấy, chỉ còn giới hạn về thứ được thu và thời gian giữ lại mới ràng buộc được kết quả.",
+      "level": 3
+    }
+  ]
+}

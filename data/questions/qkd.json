@@ -1,0 +1,1747 @@
+{
+  "schema": 1,
+  "id": "qkd",
+  "updated": "2026-08-09",
+  "questions": [
+    {
+      "id": "qq-2",
+      "q": "The no-cloning theorem is what makes quantum key distribution secure because",
+      "q_vi": "Định lý không sao chép làm cho phân phối khoá lượng tử an toàn vì",
+      "choices": [
+        "Entangled photons travel faster than light, so an interceptor can never reach the key in time",
+        "The shared key is far longer than any classical key, so a brute force search cannot finish",
+        "Quantum states cannot be measured at all, so an interceptor has no way to learn anything",
+        "An eavesdropper cannot copy the state, so any measurement disturbs it detectably"
+      ],
+      "answer": 3,
+      "why": "Security rests on physics rather than on computational hardness. The legitimate parties detect the intrusion by comparing error rates on a public channel.",
+      "why_vi": "An toàn dựa vào vật lý chứ không dựa vào độ khó tính toán. Hai bên hợp lệ phát hiện kẻ nghe lén bằng cách so tỉ lệ lỗi qua kênh công khai.",
+      "level": 2
+    },
+    {
+      "id": "qq-91",
+      "q": "In BB84, the sifting step discards the rounds where",
+      "q_vi": "Trong BB84, bước sàng loại bỏ những vòng mà",
+      "choices": [
+        "The sender and the receiver happened to use different bases",
+        "The photon arrived later than the expected time window",
+        "The detector registered a click on both channels",
+        "The two retained bit values turned out to differ"
+      ],
+      "answer": 0,
+      "why": "Mismatched bases give uncorrelated results, so those rounds are useless and are announced publicly. Rounds where the bits differ in matched bases are kept and counted, since they measure the error rate.",
+      "why_vi": "Chọn lệch cơ sở thì kết quả không tương quan, nên những vòng đó vô dụng và được công bố công khai. Còn những vòng trùng cơ sở mà bit khác nhau thì vẫn giữ để đếm, vì chúng đo tỉ lệ lỗi.",
+      "level": 1
+    },
+    {
+      "id": "qq-92",
+      "q": "A rising quantum bit error rate on a QKD link means",
+      "q_vi": "Tỉ lệ lỗi bit lượng tử tăng lên trên một liên kết QKD nghĩa là",
+      "choices": [
+        "That the detectors are responding too quickly, so genuine clicks are being double counted as separate detection events",
+        "That the classical channel has been tampered with, since the quantum channel is error free by its very construction",
+        "That the sifted key came out longer than necessary, so more of it should have been discarded during the sifting step",
+        "Either eavesdropping or channel imperfection, and the protocol must attribute all of it to a possible eavesdropper"
+      ],
+      "answer": 3,
+      "why": "The two causes cannot be separated, so security requires assuming the worst case. That assumption is what makes privacy amplification shrink the key so aggressively.",
+      "why_vi": "Không thể tách hai nguyên nhân này ra, nên để an toàn phải giả thiết trường hợp xấu nhất. Chính giả thiết đó khiến bước chưng cất khoá riêng phải cắt khoá đi rất mạnh.",
+      "level": 3
+    },
+    {
+      "id": "qq-93",
+      "q": "Privacy amplification works by",
+      "q_vi": "Chưng cất khoá riêng hoạt động bằng cách",
+      "choices": [
+        "Sending the key twice over the quantum channel and comparing the two copies bit by bit to find the discrepancies",
+        "Hashing a longer partially exposed key down to a shorter key about which the eavesdropper knows almost nothing",
+        "Increasing the photon transmission rate so that the legitimate parties collect more key in the same time window",
+        "Encrypting the sifted key with a second key that was distributed in an earlier session"
+      ],
+      "answer": 1,
+      "why": "A universal hash spreads the adversary's partial knowledge so thin that it becomes negligible. The price is a shorter final key, set by the measured error rate.",
+      "why_vi": "Một hàm băm phổ quát làm phần hiểu biết một phần của đối thủ loãng đi tới mức không đáng kể. Cái giá là khoá cuối cùng ngắn hơn, độ ngắn do tỉ lệ lỗi đo được quyết định.",
+      "level": 2
+    },
+    {
+      "id": "qq-94",
+      "q": "QKD still needs a classical channel that is",
+      "q_vi": "QKD vẫn cần một kênh cổ điển có tính chất",
+      "choices": [
+        "Faster than light, otherwise the correction bits arrive after the key is used",
+        "Physically identical to the quantum channel, so one fibre carries both",
+        "Encrypted with RSA, so that the basis announcements stay hidden from anyone",
+        "Authenticated, otherwise a man in the middle can impersonate both parties"
+      ],
+      "answer": 3,
+      "why": "Physics stops copying but does not tell you who is on the other end. Authentication needs a pre shared secret or a signature scheme, which is why QKD does not remove the need for cryptography.",
+      "why_vi": "Vật lý ngăn được việc sao chép nhưng không cho biết ai đang ở đầu bên kia. Xác thực cần một bí mật chia sẻ trước hoặc một sơ đồ chữ ký, vì thế QKD không xoá bỏ nhu cầu dùng mật mã.",
+      "level": 3
+    },
+    {
+      "id": "qq-96",
+      "q": "Optical amplifiers cannot extend a quantum link because",
+      "q_vi": "Không thể dùng bộ khuếch đại quang để kéo dài liên kết lượng tử vì",
+      "choices": [
+        "Amplification implies copying an unknown state, which no cloning forbids, so entanglement swapping is used instead",
+        "The amplified signal would be far too strong for the single photon detectors, which would simply saturate at the far end",
+        "Optical amplifiers are too expensive to deploy at the spacing that a long fibre route would require",
+        "Single photons cannot physically enter an amplifier, because the doped fibre absorbs them entirely before they emerge"
+      ],
+      "answer": 0,
+      "why": "Any device that reliably strengthened an unknown state would be a cloner. Repeaters therefore work by distributing and joining entanglement rather than by boosting the signal.",
+      "why_vi": "Bất kỳ thiết bị nào làm mạnh lên một cách tin cậy một trạng thái chưa biết thì đều là máy sao chép. Vì vậy bộ lặp hoạt động bằng cách phân phối rồi nối rối, chứ không phải bằng cách khuếch đại tín hiệu.",
+      "level": 3
+    },
+    {
+      "id": "qq-97",
+      "q": "Entanglement swapping creates entanglement between two nodes that",
+      "q_vi": "Đổi chỗ rối tạo ra rối giữa hai nút mà",
+      "choices": [
+        "Have already exchanged photons directly, by repeating the exchange several times over the same fibre",
+        "Share a classical secret agreed in advance, which is converted into entanglement",
+        "Never interacted, by performing a Bell measurement on the two inner qubits of adjacent pairs",
+        "Are within a metre of each other, since the effect does not survive longer links"
+      ],
+      "answer": 2,
+      "why": "The Bell measurement in the middle projects the outer qubits into an entangled state. Chaining this is what lets repeaters cover distances no direct link can.",
+      "why_vi": "Phép đo Bell ở giữa chiếu hai qubit ngoài vào một trạng thái rối. Nối chuỗi thao tác này chính là cách bộ lặp phủ được khoảng cách mà liên kết trực tiếp không với tới.",
+      "level": 2
+    },
+    {
+      "id": "qq-98",
+      "q": "The repeaterless bound says that the secret key rate of a direct optical link",
+      "q_vi": "Giới hạn cho liên kết không bộ lặp nói rằng tốc độ khoá bí mật của một tuyến quang trực tiếp",
+      "choices": [
+        "Rises with distance, because dispersion spreads the pulses further apart and makes each one easier to detect",
+        "Can be pushed up without any limit simply by using a brighter source at the transmitter end of the link",
+        "Falls essentially in proportion to channel transmittance, so it decays exponentially with fibre length",
+        "Is independent of the distance covered, since loss only reduces the raw rate and never the fraction of it that survives"
+      ],
+      "answer": 2,
+      "why": "Fibre loss is exponential in length, and the key rate tracks the transmittance. This is exactly why long distance quantum networks need repeaters or satellites.",
+      "why_vi": "Suy hao trong sợi quang tăng theo hàm mũ của chiều dài, còn tốc độ khoá bám theo độ truyền qua. Đó chính là lý do mạng lượng tử cự ly xa cần bộ lặp hoặc vệ tinh.",
+      "level": 2
+    },
+    {
+      "id": "qq-102",
+      "q": "When choosing between QKD and post quantum cryptography, an engineer should note that",
+      "q_vi": "Khi chọn giữa QKD và mật mã hậu lượng tử, kỹ sư cần lưu ý rằng",
+      "choices": [
+        "Post quantum cryptography is a software change on existing networks, while QKD needs dedicated hardware and trusted relays over long distance",
+        "QKD scales more easily across the public internet, because an ordinary router can simply forward the photons on to the next hop without reading them",
+        "QKD removes the need for authentication, because the laws of physics already identify whoever is sitting at the other end of the link",
+        "Post quantum cryptography has been mathematically proven unbreakable, so once it is deployed the migration question is settled once and for all"
+      ],
+      "answer": 0,
+      "why": "Deployment cost is the deciding practical factor for most organisations. QKD gives a physics based guarantee on a link, but it still needs authentication and it does not route across the ordinary internet.",
+      "why_vi": "Chi phí triển khai là yếu tố thực tế quyết định với phần lớn tổ chức. QKD cho một bảo đảm dựa trên vật lý trên từng tuyến, nhưng vẫn cần xác thực và không định tuyến được qua internet thông thường.",
+      "level": 3
+    },
+    {
+      "id": "qq-128",
+      "q": "The decoy state method exists because practical key distribution transmitters",
+      "q_vi": "Phương pháp trạng thái mồi ra đời vì các máy phát phân phối khoá thực tế",
+      "choices": [
+        "Cannot be synchronised with the receiver closely enough to place every photon in its own time bin",
+        "Run at a clock rate too high for the detectors to resolve individual arrival events",
+        "Emit photons at the wrong wavelength for fibre",
+        "Use attenuated lasers that sometimes emit more than one photon"
+      ],
+      "answer": 3,
+      "why": "Varying the intensity lets the parties bound the yield and error rate of the single photon pulses from observed data. Without that bound the multi photon fraction has to be assumed lost to the eavesdropper.",
+      "why_vi": "Thay đổi cường độ giúp hai bên chặn được hiệu suất và tỉ lệ lỗi của các xung một photon từ dữ liệu quan sát. Không có chặn đó thì phải coi phần xung nhiều photon là đã mất vào tay kẻ nghe lén.",
+      "level": 3
+    },
+    {
+      "id": "qq-129",
+      "q": "A photon number splitting attack is dangerous specifically because",
+      "q_vi": "Tấn công tách số photon nguy hiểm chính ở chỗ",
+      "choices": [
+        "the attacker copies the quantum state exactly",
+        "it forces the parties to abort the protocol",
+        "the attacker keeps a copy from multi photon pulses and forwards the rest untouched, so no error appears in the sifted data",
+        "it works even against a true single photon source"
+      ],
+      "answer": 2,
+      "why": "Nothing is cloned, so the no cloning theorem is not violated. The pulse simply contained a spare photon, and taking it leaves no disturbance for the parties to detect.",
+      "why_vi": "Không có gì bị sao chép nên định lý không sao chép không bị vi phạm. Xung vốn đã chứa photon dư, lấy đi photon đó thì hai bên không thấy nhiễu loạn nào để phát hiện.",
+      "level": 3
+    },
+    {
+      "id": "qq-130",
+      "q": "On a very lossy link, the quantum bit error rate is usually pushed up by",
+      "q_vi": "Trên một tuyến suy hao rất lớn, tỉ lệ lỗi bit lượng tử thường bị đẩy lên bởi",
+      "choices": [
+        "The privacy amplification step, which compresses the sifted key and therefore magnifies any residual error",
+        "The finite speed of light over the path",
+        "The classical authentication channel",
+        "Detector dark counts, whose fixed rate stops shrinking while the signal keeps shrinking with loss"
+      ],
+      "answer": 3,
+      "why": "Signal counts fall with channel transmittance while spurious counts do not. Their ratio therefore sets the maximum loss at which any secret key survives.",
+      "why_vi": "Số đếm tín hiệu giảm theo độ truyền qua của kênh còn số đếm giả thì không. Tỉ số giữa chúng vì thế định ra mức suy hao lớn nhất mà khoá bí mật còn sống sót.",
+      "level": 3
+    },
+    {
+      "id": "qq-134",
+      "q": "Beam wandering caused by large turbulent eddies appears at the receiver as",
+      "q_vi": "Trôi lệch chùm tia do các xoáy khí quyển lớn gây ra hiện ra ở phía thu dưới dạng",
+      "choices": [
+        "Additive white noise on the detected signal, with a variance set by the strength of the turbulence",
+        "Slow fading as the beam centroid moves off the aperture",
+        "A permanent rise in the quantum bit error rate that no amount of postprocessing can remove",
+        "A shift of the optical wavelength"
+      ],
+      "answer": 1,
+      "why": "Eddies larger than the beam deflect it as a whole rather than distorting its profile. The channel therefore looks like a fading channel with correlated dropouts, not like added noise.",
+      "why_vi": "Xoáy lớn hơn chùm tia thì đẩy lệch cả chùm chứ không làm méo dạng chùm. Kênh vì thế giống kênh pha đinh có các quãng mất tín hiệu tương quan, không giống nhiễu cộng.",
+      "level": 3
+    },
+    {
+      "id": "qq-137",
+      "q": "A national key distribution network built from trusted node relays has which security property?",
+      "q_vi": "Mạng phân phối khoá quốc gia dựng từ các nút chuyển tiếp tin cậy có tính chất an toàn nào?",
+      "choices": [
+        "End to end security guaranteed by physics along the whole route, no matter how many hops it crosses",
+        "Each link is physically secure, but every relay node learns the key",
+        "Security equal to that of a single link, whatever the route length and whoever operates the nodes",
+        "No authentication is needed between endpoints"
+      ],
+      "answer": 1,
+      "why": "Each hop is a separate protocol run. The node decrypts the key from one link and re encrypts it for the next, so the physics based guarantee stops at the node boundary.",
+      "why_vi": "Mỗi chặng là một lần chạy giao thức riêng. Nút giải mã khoá từ chặng này rồi mã hoá lại cho chặng sau, nên bảo đảm dựa trên vật lý dừng lại ở ranh giới của nút.",
+      "level": 2
+    },
+    {
+      "id": "qq-138",
+      "q": "Measurement device independent key distribution removes which class of attack?",
+      "q_vi": "Phân phối khoá không phụ thuộc thiết bị đo loại bỏ nhóm tấn công nào?",
+      "choices": [
+        "Every attack that exploits imperfections of the detectors, since the measurement station is assumed untrusted from the start",
+        "All attacks on the source",
+        "Attacks on the classical authentication channel",
+        "Attacks based on factoring the public key"
+      ],
+      "answer": 0,
+      "why": "Both parties are transmitters and the middle station only announces successful joint detections. An adversary who fully controls that station still learns nothing about the key.",
+      "why_vi": "Cả hai bên đều là bên phát và trạm giữa chỉ công bố các lần đo chung thành công. Kẻ địch dù kiểm soát hoàn toàn trạm đó vẫn không biết gì về khoá.",
+      "level": 3
+    },
+    {
+      "id": "qq-139",
+      "q": "Twin field key distribution is notable because its secret key rate scales as",
+      "q_vi": "Phân phối khoá trường song sinh đáng chú ý vì tốc độ khoá bí mật của nó tỉ lệ theo",
+      "choices": [
+        "The square of the channel transmittance, which is the reason the protocol still needs a repeater at every node",
+        "The square root of the channel transmittance, which passes the repeaterless bound without using a repeater",
+        "The logarithm of the distance",
+        "A constant independent of loss"
+      ],
+      "answer": 1,
+      "why": "Interfering fields at a central node makes the rate depend on the amplitude rather than the intensity reaching that node. The price is single photon level phase stabilisation across both arms.",
+      "why_vi": "Cho hai trường giao thoa tại nút trung tâm khiến tốc độ phụ thuộc vào biên độ thay vì cường độ tới nút đó. Cái giá phải trả là ổn định pha ở mức một photon trên cả hai nhánh.",
+      "level": 3
+    },
+    {
+      "id": "qq-140",
+      "q": "Device independent key distribution has not been widely deployed because",
+      "q_vi": "Phân phối khoá không phụ thuộc thiết bị chưa được triển khai rộng vì",
+      "choices": [
+        "Its security proof was found to contain an error that has not yet been repaired by the community",
+        "It requires a loophole free Bell violation, which demands very high detection efficiency",
+        "It cannot be used over optical fibre",
+        "Each endpoint needs a small quantum computer to prepare the measurement settings"
+      ],
+      "answer": 1,
+      "why": "Certifying security from the observed correlations alone leaves no room to assume away lost photons. That pushes the required efficiency and the tolerable loss to levels that field systems do not yet meet.",
+      "why_vi": "Chứng nhận an toàn chỉ từ các tương quan quan sát được thì không còn chỗ để bỏ qua photon bị mất. Điều đó đẩy yêu cầu hiệu suất và mức suy hao chịu được tới ngưỡng mà hệ thống ngoài hiện trường chưa đạt.",
+      "level": 3
+    },
+    {
+      "id": "qq-141",
+      "q": "Finite key analysis matters most for satellite links because",
+      "q_vi": "Phân tích khoá hữu hạn quan trọng nhất với tuyến vệ tinh vì",
+      "choices": [
+        "Satellites use a different protocol from the one that ground links run, with different security parameters",
+        "The orbital motion changes the wavelength, so the intensity settings drift during the pass",
+        "The ground station clock cannot be synchronised well enough for time bin encoding",
+        "A pass yields only a short block of raw key"
+      ],
+      "answer": 3,
+      "why": "Security parameters must hold for the actual block collected, not for an infinitely long one. Quoting the asymptotic rate for a few minute pass overstates the usable key, sometimes by a wide margin.",
+      "why_vi": "Tham số an toàn phải đúng cho khối dữ liệu thực sự thu được chứ không phải khối dài vô hạn. Trích tốc độ tiệm cận cho một lượt bay vài phút là thổi phồng lượng khoá dùng được, đôi khi rất nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qq-142",
+      "q": "A detector blinding attack succeeds against a protocol with a valid security proof because",
+      "q_vi": "Tấn công làm mù bộ tách sóng thành công trước một giao thức đã có chứng minh an toàn hợp lệ vì",
+      "choices": [
+        "the proof was only valid for short distances",
+        "the attacker breaks the underlying mathematics",
+        "the parties forgot to run privacy amplification",
+        "the proof assumes detectors that behave as the model says, and bright light pushes them outside that model without raising the error rate"
+      ],
+      "answer": 3,
+      "why": "Security proofs are conditional on an implementation model. Forcing the avalanche diodes into linear response lets the attacker choose which clicks occur, so the sifted data looks perfectly clean.",
+      "why_vi": "Chứng minh an toàn luôn kèm điều kiện về mô hình cài đặt. Ép điốt thác lũ sang chế độ đáp ứng tuyến tính cho phép kẻ tấn công chọn thời điểm phát tín hiệu, nên dữ liệu sau sàng lọc trông sạch hoàn toàn.",
+      "level": 3
+    },
+    {
+      "id": "qq-143",
+      "q": "Continuous variable key distribution is attractive for metropolitan links because it",
+      "q_vi": "Phân phối khoá biến liên tục hấp dẫn với tuyến đô thị vì nó",
+      "choices": [
+        "It uses standard telecom modulators and homodyne detectors",
+        "It tolerates higher channel loss than any discrete variable scheme, which is why it reaches further",
+        "It needs no classical postprocessing, because the quadrature values are already correlated",
+        "It provides device independent security by construction, without any Bell test"
+      ],
+      "answer": 0,
+      "why": "Reusing coherent optical components lowers cost and eases integration with existing fibre plant. The trade off is high sensitivity to excess noise, which limits the reach compared with photon counting schemes.",
+      "why_vi": "Tái dùng linh kiện quang kết hợp giúp hạ giá và dễ tích hợp với hạ tầng sợi quang sẵn có. Đánh đổi là rất nhạy với nhiễu dư, làm tầm với ngắn hơn so với các sơ đồ đếm photon.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-001",
+      "q": "In the E91 protocol the security argument is built differently from BB84, in that",
+      "q_vi": "Trong giao thức E91, lập luận an toàn được dựng khác BB84 ở chỗ",
+      "choices": [
+        "A measured violation of a Bell inequality certifies that the observed correlations cannot come from any variable fixed before the measurement",
+        "The photons travel through two separate fibres, so there is no single point where an interception could take place",
+        "The parties never announce anything on the public channel, which is what removes the eavesdropper",
+        "Loss no longer costs anything, because the pairs are distributed symmetrically from the middle"
+      ],
+      "answer": 0,
+      "why": "The Bell test is a statement about the correlations themselves, not about the states one party believes it prepared. With ordinary trusted devices the analysis then collapses back to the same entropic bookkeeping as BBM92, so E91 by itself does not deliver device independence.",
+      "why_vi": "Phép kiểm Bell nói về chính các tương quan, chứ không nói về trạng thái mà một bên tin là mình đã chuẩn bị. Với thiết bị tin cậy thông thường thì phân tích lại quay về đúng cách tính entropy như BBM92, nên riêng E91 chưa mang lại tính không phụ thuộc thiết bị.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-002",
+      "q": "B92 encodes with only two non-orthogonal states, and its practical weakness on a lossy line is that",
+      "q_vi": "B92 mã hoá chỉ bằng hai trạng thái không trực giao, và điểm yếu thực tế của nó trên tuyến suy hao là",
+      "choices": [
+        "No sifting step exists at all, so the raw string has to be used as the final key without any public discussion",
+        "Unambiguous state discrimination lets an attacker forward only the rounds it read successfully and drop the rest",
+        "Weak coherent pulses at telecom wavelength cannot carry the encoding",
+        "Both states have to be exactly orthogonal for the receiver to tell them apart, and no real modulator ever reaches that"
+      ],
+      "answer": 1,
+      "why": "Unambiguous discrimination fails often but never lies when it succeeds. On a line whose loss is high enough, the attacker can hide the blocked rounds inside the loss budget, which is why the protocol needs a strong reference pulse or a careful accounting of the transmittance.",
+      "why_vi": "Phân biệt trạng thái không mập mờ thường thất bại nhưng khi thành công thì không bao giờ sai. Trên tuyến đủ suy hao, kẻ tấn công giấu được các vòng bị chặn vào ngay ngân sách suy hao, vì thế giao thức cần xung tham chiếu mạnh hoặc phải hạch toán độ truyền qua thật chặt.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-003",
+      "q": "The six-state protocol tolerates a higher error rate than BB84 because",
+      "q_vi": "Giao thức sáu trạng thái chịu được tỉ lệ lỗi cao hơn BB84 vì",
+      "choices": [
+        "Three photons go out in every round, so a majority vote across the three outcomes clears most errors before sifting starts",
+        "The detector is gated three times inside each pulse, which cuts the dark count share of the measured error rate",
+        "Probing three mutually unbiased bases pins down the eavesdropper's state far more tightly",
+        "Two thirds of the rounds survive the sifting step"
+      ],
+      "answer": 2,
+      "why": "More bases means a more complete tomographic constraint, which raises the threshold to roughly twelve and a half percent. The cost is that only one round in three has matching bases, so the raw rate drops by a factor that often outweighs the gain.",
+      "why_vi": "Nhiều cơ sở hơn nghĩa là ràng buộc chụp trạng thái đầy đủ hơn, đẩy ngưỡng lên khoảng mười hai phẩy năm phần trăm. Cái giá là chỉ một phần ba số vòng trùng cơ sở, nên tốc độ thô giảm mạnh, nhiều khi lấn át phần lợi thu được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-004",
+      "q": "SARG04 differs from BB84 mainly in that",
+      "q_vi": "SARG04 khác BB84 chủ yếu ở chỗ",
+      "choices": [
+        "It draws on a different set of four states, chosen so that a pulse holding several photons carries nothing usable",
+        "It swaps the quantum measurement for a classical challenge and response exchange between the two endpoints",
+        "It needs a true single photon source, and that is why it was never run on installed fibre",
+        "The classical sifting announces pairs of states instead of bases"
+      ],
+      "answer": 3,
+      "why": "The four states are the same as in BB84 and only the classical postprocessing changes. That change makes photon number splitting less effective, so the key rate falls more slowly with loss when a weak coherent source is used, although decoy states beat it comfortably.",
+      "why_vi": "Bốn trạng thái vẫn y hệt BB84, chỉ phần xử lý cổ điển là đổi. Thay đổi đó làm tấn công tách số photon kém hiệu quả, nên với nguồn laser suy giảm thì tốc độ khoá giảm chậm hơn theo suy hao, tuy vẫn thua trạng thái mồi khá xa.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-005",
+      "q": "It is often said that BBM92 removes the need to trust the source. The accurate version of that claim is that",
+      "q_vi": "Người ta hay nói BBM92 xoá bỏ nhu cầu tin cậy nguồn phát. Cách nói chính xác của khẳng định đó là",
+      "choices": [
+        "The source still has to be trusted, since no amount of measured data can confirm that a Bell state was really emitted",
+        "The parties bound the eavesdropper from the measured correlations alone, so an untrusted source in the middle is tolerable provided both measurement stations behave as modelled",
+        "Trust simply moves to the classical channel, which now has to be kept secret as well as authenticated",
+        "Neither the source nor the detectors need trusting, and that is precisely what makes the scheme device independent"
+      ],
+      "answer": 1,
+      "why": "Source independence follows because the analysis only uses what the two receivers observe. The detectors remain inside the trust boundary, which is exactly the gap that measurement device independent schemes were designed to close.",
+      "why_vi": "Tính độc lập với nguồn có được vì phân tích chỉ dùng những gì hai bên thu quan sát được. Bộ tách sóng vẫn nằm trong vòng tin cậy, và đó chính là khoảng trống mà các sơ đồ không phụ thuộc thiết bị đo sinh ra để bịt lại.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-006",
+      "q": "Distributed phase reference schemes such as coherent one way are experimentally simple, yet",
+      "q_vi": "Các sơ đồ tham chiếu pha phân tán như coherent one way rất gọn về thực nghiệm, nhưng",
+      "choices": [
+        "Their proofs cover only the case of a true single photon source, so every implementation built around a laser sits outside all of the existing security analysis",
+        "They cannot run on installed fibre, since a separate line is needed to carry the phase reference",
+        "Their proven rate against general attacks lies far below the rate that experiments report, and zero error attacks are already known",
+        "No error rate can be estimated from the data they produce"
+      ],
+      "answer": 2,
+      "why": "The proof machinery that works for BB84 does not transfer, because the signal states across successive pulses are not independent. Published attacks extract information without raising the monitored disturbance, so the honestly proven rate scales much worse than the headline numbers.",
+      "why_vi": "Bộ công cụ chứng minh dùng cho BB84 không chuyển sang được, vì trạng thái tín hiệu giữa các xung liên tiếp không độc lập nhau. Đã có tấn công công bố rút được thông tin mà không làm tăng độ nhiễu loạn được giám sát, nên tốc độ chứng minh trung thực kém xa con số quảng bá.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-007",
+      "q": "The round robin differential phase shift protocol drew attention because",
+      "q_vi": "Giao thức dịch pha vi sai vòng tròn được chú ý vì",
+      "choices": [
+        "Privacy amplification becomes unnecessary, since the measurement itself already drives the leaked information down to zero",
+        "It reaches key rates beyond the repeaterless bound without any interference taking place at a central node",
+        "No random number generator is needed at the sender",
+        "The leakage is bounded by the chosen setup rather than by the disturbance that was measured"
+      ],
+      "answer": 3,
+      "why": "The bound follows from the block length and the interferometer delay the receiver picks, so the extractable key does not collapse as the error rate climbs. The price is a modest rate and an optical setup that has to switch among many delays.",
+      "why_vi": "Chặn trên suy ra từ độ dài khối và độ trễ giao thoa kế mà bên thu chọn, nên lượng khoá rút được không sụp đổ khi tỉ lệ lỗi tăng. Cái giá là tốc độ khiêm tốn và hệ quang phải chuyển đổi giữa nhiều mức trễ.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-008",
+      "q": "The sending or not sending variant of twin field key distribution was introduced chiefly to",
+      "q_vi": "Biến thể gửi hoặc không gửi của phân phối khoá trường song sinh ra đời chủ yếu để",
+      "choices": [
+        "Relax how tightly the phases of the two arms must be aligned",
+        "Do away with decoy states, since the sending decision already randomises the intensity for free",
+        "Let a trusted operator run the central node without announcing any measurement result at all",
+        "Make the rate a quantity that no longer depends on loss, which is what opens up genuinely long links"
+      ],
+      "answer": 0,
+      "why": "Bit information is carried by the decision to send or not, so a misalignment of the encoded phase no longer maps directly into bit errors. Phase postselection is still required for the decoy analysis, and the announced rounds still have to be sorted carefully.",
+      "why_vi": "Thông tin bit nằm ở quyết định gửi hay không gửi, nên lệch pha của phần mã hoá không còn chuyển thẳng thành lỗi bit. Vẫn phải hậu chọn theo pha cho phần phân tích trạng thái mồi, và các vòng được công bố vẫn phải phân loại rất cẩn thận.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-009",
+      "q": "High dimensional encoding packs more than one bit into each detected photon. An honest assessment of what it buys is that",
+      "q_vi": "Mã hoá chiều cao nhét được hơn một bit vào mỗi photon thu được. Đánh giá trung thực về cái nó mang lại là",
+      "choices": [
+        "The loss penalty disappears, because a photon carrying a higher dimensional state survives attenuation better than a qubit",
+        "The error tolerance drops, since a larger alphabet simply opens more ways for a round to go wrong",
+        "Both the bits per detection and the tolerable error rate go up, yet the rate still falls with channel transmittance exactly as before",
+        "It works only in free space, since fibre cannot carry more than two orthogonal spatial modes"
+      ],
+      "answer": 2,
+      "why": "The gain is real when detectors saturate before the channel does, since each click is worth more. Nothing about the loss scaling changes, and the mode sorting optics usually add loss of their own, so the net benefit is confined to short and moderately lossy links.",
+      "why_vi": "Lợi ích là có thật khi bộ tách sóng bão hoà trước khi kênh bão hoà, vì mỗi lần đếm đáng giá hơn. Quy luật suy giảm theo suy hao không đổi chút nào, và bộ phân tách mode thường tự thêm suy hao, nên phần lợi thực chỉ nằm ở tuyến ngắn và suy hao vừa phải.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-010",
+      "q": "Conference key agreement built on multipartite entanglement can beat repeated pairwise runs when",
+      "q_vi": "Thoả thuận khoá hội nghị dựng trên rối đa bên có thể thắng cách chạy từng cặp lặp lại khi",
+      "choices": [
+        "The users sit so far apart that no pairwise link would close at all, since a multipartite state is immune to the loss that stops two party schemes",
+        "Only two of the users actually need a shared key and the others merely act as relays",
+        "All of the users share one room",
+        "Many users need one common key and the bottleneck is the number of protocol runs the network must complete"
+      ],
+      "answer": 3,
+      "why": "The saving comes from producing a common key in one shot instead of running pairwise sessions and combining the results. The advantage holds only in certain loss regimes, because generating and holding a genuine multipartite state is far more fragile than generating pairs.",
+      "why_vi": "Phần tiết kiệm đến từ việc tạo một khoá chung trong một lần thay vì chạy từng phiên đôi rồi ghép kết quả. Lợi thế chỉ đúng trong một số vùng suy hao nhất định, vì tạo và giữ được một trạng thái đa bên thật sự mong manh hơn tạo từng cặp rất nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-011",
+      "q": "Quantum digital signatures answer a need that key distribution does not address, namely",
+      "q_vi": "Chữ ký số lượng tử đáp ứng một nhu cầu mà phân phối khoá không giải quyết, cụ thể là",
+      "choices": [
+        "Transferability, so that a recipient can pass a message on and a third party will still accept it",
+        "Compression of the signed payload, so that even a very large document stays short once it goes on the wire",
+        "Delivery of one symmetric key to a large group at once, in a single run over a shared broadcast channel",
+        "Encryption of the message body"
+      ],
+      "answer": 0,
+      "why": "A shared symmetric key lets two parties authenticate to each other but gives no way for a third party to adjudicate a dispute. Signature schemes have to add transferability and non repudiation, which is a different security goal from confidentiality of a key.",
+      "why_vi": "Khoá đối xứng dùng chung cho phép hai bên xác thực lẫn nhau nhưng không cho bên thứ ba cách phân xử tranh chấp. Sơ đồ chữ ký phải thêm tính chuyển nhượng và tính chống chối bỏ, đó là mục tiêu an toàn khác với bảo mật của một khoá.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-012",
+      "q": "Set against Gaussian modulation, a discrete modulated continuous variable scheme",
+      "q_vi": "So với điều chế Gauss, sơ đồ biến liên tục điều chế rời rạc",
+      "choices": [
+        "Has no security analysis at all, so any rate it reports should be read as a raw detection statistic",
+        "Is simpler to build, but the proofs available for it give looser bounds",
+        "Delivers a higher rate at every distance, which is why field trials abandoned the Gaussian version",
+        "Removes the need for reverse reconciliation, since the constellation is discrete to begin with"
+      ],
+      "answer": 1,
+      "why": "A small constellation eases the transmitter electronics and makes reconciliation far more tractable. Proofs do exist, largely numerical ones based on semidefinite programming, but they are less tight than the Gaussian case, especially once finite block sizes are taken into account.",
+      "why_vi": "Chòm sao nhỏ giúp phần điện tử phía phát nhẹ đi và làm bước hoà hợp dễ xử lý hơn nhiều. Chứng minh vẫn có, phần lớn là chứng minh số dựa trên quy hoạch nửa xác định, nhưng lỏng hơn trường hợp Gauss, nhất là khi tính đến khối dữ liệu hữu hạn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-013",
+      "q": "In measurement device independent key distribution, the secret key rate as a function of link length",
+      "q_vi": "Trong phân phối khoá không phụ thuộc thiết bị đo, tốc độ khoá bí mật theo chiều dài tuyến",
+      "choices": [
+        "Does not depend on loss, since the detection happens at the midpoint of the link",
+        "Follows the square root of transmittance, matching what twin field schemes achieve",
+        "Beats direct BB84 at every distance",
+        "Falls with the product of the two arm transmittances, because a usable round needs a coincidence arriving from both sides"
+      ],
+      "answer": 3,
+      "why": "The Bell state measurement only succeeds when photons arrive together, so the rate tracks the end to end transmittance rather than the transmittance of one arm. What the scheme buys is immunity to detector attacks, not extra reach.",
+      "why_vi": "Phép đo trạng thái Bell chỉ thành công khi hai photon cùng tới, nên tốc độ bám theo độ truyền qua toàn tuyến chứ không phải của một nhánh. Cái mà sơ đồ này mua được là miễn nhiễm với tấn công vào bộ tách sóng, không phải tầm với xa hơn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-014",
+      "q": "The demanding detection efficiency of device independent key distribution traces back to the fact that",
+      "q_vi": "Yêu cầu hiệu suất tách sóng khắt khe của phân phối khoá không phụ thuộc thiết bị bắt nguồn từ chỗ",
+      "choices": [
+        "Every lost photon may be blamed on the adversary, so no fair sampling assumption is available",
+        "The inequality itself takes a different form for imperfect detectors, and no version of it survives below a fixed efficiency",
+        "Dark counts grow with the number of measurement settings used",
+        "The rate formula divides by the efficiency"
+      ],
+      "answer": 0,
+      "why": "Without fair sampling the statistics have to be computed over all trials, including the ones with no click, and undetected events dilute the observed violation. That is why the tolerable loss is small and why field demonstrations remain rare.",
+      "why_vi": "Không có giả thiết lấy mẫu công bằng thì thống kê phải tính trên toàn bộ lần thử, kể cả những lần không có tín hiệu, và các sự kiện không phát hiện được sẽ pha loãng mức vi phạm quan sát được. Vì thế mức suy hao chịu được rất nhỏ và các minh chứng ngoài hiện trường vẫn hiếm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-015",
+      "q": "Recasting a prepare and measure scheme as an entanglement based one is a standard proof move that is valid because",
+      "q_vi": "Diễn giải lại một sơ đồ chuẩn bị rồi đo thành sơ đồ dựa trên rối là một bước chứng minh quen thuộc, và nó hợp lệ vì",
+      "choices": [
+        "Any prepare and measure setup is physically built around an entangled source anyway, so the two descriptions are one experiment written down twice",
+        "The state available to the adversary is the same in both pictures",
+        "Entanglement based schemes are always the more secure of the two, so a bound proved there carries over to the weaker case",
+        "Both use the same detectors"
+      ],
+      "answer": 1,
+      "why": "Source replacement leaves the reduced state outside the sender's laboratory untouched, so any bound proved in the entangled picture applies unchanged. The equivalence is about what the adversary can access, not about what hardware is on the optical table.",
+      "why_vi": "Phép thay nguồn giữ nguyên trạng thái rút gọn bên ngoài phòng thí nghiệm của bên phát, nên mọi chặn chứng minh trong bức tranh rối đều áp dụng nguyên vẹn. Sự tương đương nói về cái mà kẻ địch tiếp cận được, không nói về phần cứng đặt trên bàn quang.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-016",
+      "q": "A proof that assumes phase randomised weak coherent pulses stops applying when the laser is driven so fast that",
+      "q_vi": "Chứng minh giả thiết xung laser suy giảm đã ngẫu nhiên hoá pha sẽ hết hiệu lực khi laser bị điều khiển nhanh tới mức",
+      "choices": [
+        "The pulse energy drifts, a case the decoy analysis already covers through its intensity bounds",
+        "The detector gates overlap and two neighbouring pulses land in one window",
+        "Consecutive pulses keep a fixed phase relation",
+        "The wavelength shifts a little, so the spectrum spreads past the filter bandwidth at the receiver"
+      ],
+      "answer": 2,
+      "why": "Full phase randomisation is what allows the pulse train to be treated as a mixture of photon number states, which is the starting point of the decoy calculation. Residual coherence between pulses hands the adversary a correlation to exploit that the accounting never charged for.",
+      "why_vi": "Ngẫu nhiên hoá pha hoàn toàn chính là điều cho phép coi chuỗi xung như một hỗn hợp các trạng thái số photon, và đó là điểm xuất phát của phép tính trạng thái mồi. Phần kết hợp pha còn sót lại giữa các xung trao cho kẻ địch một mối tương quan mà phép hạch toán chưa từng tính tới.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-017",
+      "q": "A system is advertised as delivering a key with security parameter ten to the minus nine. The correct reading of that number is that",
+      "q_vi": "Một hệ thống được quảng cáo là cấp khoá với tham số an toàn mười mũ trừ chín. Cách hiểu đúng con số đó là",
+      "choices": [
+        "The distance between the real output and an ideal uniform key held privately by the two parties is at most that value, taken over the key and everything the adversary holds",
+        "One bit in a billion of the delivered key will on average be known to an adversary",
+        "The protocol aborts on roughly one run in a billion",
+        "An attacker needs about a billion attempts to recover the key by brute force"
+      ],
+      "answer": 0,
+      "why": "The parameter is a trace distance to the ideal object, which is what makes it composable and lets the key be dropped into any larger protocol. Reading it per bit or as an abort probability understates or misplaces the guarantee.",
+      "why_vi": "Tham số này là khoảng cách vết tới đối tượng lý tưởng, chính điều đó làm nó có tính cấu thành và cho phép ghép khoá vào bất kỳ giao thức lớn hơn nào. Hiểu nó theo từng bit hoặc coi là xác suất huỷ phiên đều làm sai lệch bảo đảm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-018",
+      "q": "Composable security matters in practice because without it",
+      "q_vi": "An toàn cấu thành có ý nghĩa thực tế vì nếu thiếu nó thì",
+      "choices": [
+        "The protocol could not be proven secure against an adversary who attacks each round separately rather than jointly",
+        "A key proven fine on its own could still fail once it is fed into an encryption or authentication scheme",
+        "The classical channel would have to be kept confidential in addition to being authenticated at both ends of the link",
+        "Every session would need a fresh pair of devices, since the previous run leaves a trace inside the hardware"
+      ],
+      "answer": 1,
+      "why": "Non composable statements say only that some particular attack on the key fails, which does not survive when the key is used inside a larger system. The composable definition is what licenses treating the output as an ideal key everywhere downstream.",
+      "why_vi": "Phát biểu không cấu thành chỉ nói rằng một tấn công cụ thể nào đó lên khoá bị thất bại, và điều đó không còn đúng khi khoá được dùng bên trong một hệ lớn hơn. Định nghĩa cấu thành mới là thứ cho phép coi đầu ra như khoá lý tưởng ở mọi khâu phía sau.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-019",
+      "q": "In the Devetak Winter rate expression, the term that is subtracted from the conditional entropy of the raw string given the adversary is there to account for",
+      "q_vi": "Trong biểu thức tốc độ Devetak Winter, số hạng bị trừ khỏi entropy có điều kiện của chuỗi thô khi biết thông tin của kẻ địch là để tính đến",
+      "choices": [
+        "The number of rounds that were spent estimating the error rate and are therefore no longer usable as key material",
+        "The share of multi photon pulses",
+        "The information published while reconciling the two strings",
+        "The seed randomness that the hash function consumes"
+      ],
+      "answer": 2,
+      "why": "Every syndrome bit sent to correct errors is public, so it must be paid for out of the extractable entropy. That is why reconciliation efficiency directly moves the final key length, quite apart from any question about the eavesdropper.",
+      "why_vi": "Mọi bit syndrome gửi đi để sửa lỗi đều là công khai, nên phải trả bằng chính phần entropy rút được. Vì thế hiệu suất hoà hợp tác động trực tiếp lên độ dài khoá cuối, hoàn toàn tách biệt với câu chuyện về kẻ nghe lén.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-020",
+      "q": "Privacy amplification against a quantum adversary must be sized using the smooth min-entropy rather than the Shannon entropy because",
+      "q_vi": "Bước chưng cất khoá riêng chống kẻ địch lượng tử phải định cỡ theo entropy min làm trơn thay vì entropy Shannon vì",
+      "choices": [
+        "Shannon entropy cannot be computed for a state that the two legitimate parties never fully observe during the run",
+        "The hash family is universal",
+        "Shannon entropy is defined only for strings whose symbols are independent and identically distributed across rounds",
+        "The adversary holds a quantum memory, so an average measure would let a rare and highly informative case slip through unpriced"
+      ],
+      "answer": 3,
+      "why": "An averaged quantity can hide a small event in which almost the whole string leaks. The min-entropy prices the worst case and the smoothing allows a small failure probability, which together give the extractable length in the leftover hash lemma.",
+      "why_vi": "Một đại lượng lấy trung bình có thể che giấu một biến cố hiếm mà trong đó gần như toàn bộ chuỗi bị lộ. Entropy min tính theo trường hợp xấu nhất còn phép làm trơn cho phép một xác suất hỏng nhỏ, hai thứ cùng nhau cho ra độ dài rút được trong bổ đề băm dư.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-021",
+      "q": "Techniques such as de Finetti reductions, the postselection method and entropy accumulation all exist so that",
+      "q_vi": "Các kỹ thuật như quy giản de Finetti, phương pháp hậu chọn và tích luỹ entropy tồn tại là để",
+      "choices": [
+        "A finite block can be analysed with the tools that were originally written for an infinitely long one",
+        "A proof that holds when the adversary attacks each round in the same independent way can be lifted to an adversary who attacks the whole transmission at once",
+        "The error correcting code can be designed before the channel error rate is known",
+        "The intensity of the source can drift without invalidating the decoy state estimate"
+      ],
+      "answer": 1,
+      "why": "The natural proofs bound collective attacks, while a real adversary is free to entangle her probe across all rounds. These reduction techniques close that gap, each at some cost in the achievable rate or in the assumptions about protocol symmetry.",
+      "why_vi": "Các chứng minh tự nhiên chỉ chặn được tấn công tập thể, trong khi kẻ địch thật hoàn toàn có quyền rối đầu dò của mình xuyên qua mọi vòng. Những kỹ thuật quy giản này bịt khoảng trống đó, mỗi cái đều phải trả giá bằng tốc độ đạt được hoặc bằng giả thiết về tính đối xứng của giao thức.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-022",
+      "q": "In a finite-size analysis, rounds are deliberately sacrificed for parameter estimation, and the consequence is that",
+      "q_vi": "Trong phân tích cỡ hữu hạn, một số vòng bị hy sinh có chủ ý cho ước lượng tham số, và hệ quả là",
+      "choices": [
+        "The measured error rate becomes an exact figure, so no statistical correction term is needed anywhere in the calculation of the final length",
+        "The abort probability rises to one whenever the block is shorter than a few million rounds of raw detection",
+        "The bound used in the key length is a confidence interval, so the shorter the block the more pessimistic that bound has to be",
+        "The reconciliation code can be chosen after the fact"
+      ],
+      "answer": 2,
+      "why": "Estimation on a sample gives an interval rather than a number, and the interval only shrinks as the block grows. This is why a rate quoted in the asymptotic limit systematically overstates what a short session can actually deliver.",
+      "why_vi": "Ước lượng trên một mẫu chỉ cho một khoảng chứ không cho một con số, và khoảng đó chỉ hẹp lại khi khối dữ liệu dài ra. Vì thế tốc độ trích theo giới hạn tiệm cận luôn thổi phồng cái mà một phiên ngắn thật sự cấp được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-023",
+      "q": "Error verification by exchanging a short hash of the corrected string is not optional, because without it",
+      "q_vi": "Bước kiểm chứng sửa lỗi bằng cách trao đổi một giá trị băm ngắn của chuỗi đã sửa là bắt buộc, vì nếu thiếu nó thì",
+      "choices": [
+        "The reconciliation code could not be decoded, since the decoder needs the hash as a stopping criterion for its iterations",
+        "The error rate estimate would have to be taken from the discarded rounds instead of the retained ones",
+        "The two parties might hash mismatched strings into two different final keys and never find out",
+        "The adversary would learn the syndrome"
+      ],
+      "answer": 2,
+      "why": "A reconciliation failure is silent by nature, and privacy amplification turns a single residual difference into two unrelated keys. The hash check costs a few bits of entropy and converts a silent failure into an honest abort.",
+      "why_vi": "Hoà hợp thất bại thì im lặng theo đúng bản chất của nó, và bước chưng cất khoá riêng biến một khác biệt còn sót thành hai khoá không liên quan gì nhau. Phép kiểm băm tốn vài bit entropy nhưng đổi một hỏng hóc im lặng thành một lần huỷ phiên minh bạch.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-024",
+      "q": "Cascade is still used for reconciliation despite its many rounds of interaction, mainly because",
+      "q_vi": "Cascade vẫn được dùng để hoà hợp dù phải trao đổi qua lại nhiều vòng, chủ yếu vì",
+      "choices": [
+        "It comes close to the theoretical leakage limit without needing a code matched to the error rate",
+        "It leaks nothing at all, since only parities of randomly chosen subsets are ever exchanged between the two parties",
+        "It corrects any number of errors with certainty, which one-way block codes can never promise on a noisy line",
+        "It runs entirely on the quantum channel, so the classical link is left free for authentication traffic"
+      ],
+      "answer": 0,
+      "why": "Its efficiency stays good across a wide range of error rates with no code design work. The cost is latency and many round trips, which is why long haul and satellite systems tend to prefer one way codes even at slightly worse efficiency.",
+      "why_vi": "Hiệu suất của nó vẫn tốt trên một dải rộng tỉ lệ lỗi mà không phải thiết kế mã. Cái giá là độ trễ và rất nhiều lượt đi về, nên hệ thống đường dài và hệ vệ tinh thường chọn mã một chiều dù hiệu suất kém hơn đôi chút.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-025",
+      "q": "Reverse reconciliation is the standard choice in continuous variable systems because",
+      "q_vi": "Hoà hợp ngược là lựa chọn tiêu chuẩn trong hệ biến liên tục vì",
+      "choices": [
+        "The receiver holds more accurate data than the sender, so using it as the reference makes the correction step converge in fewer iterations of the decoder",
+        "It removes the need for a local oscillator, since the reference beam is regenerated from the corrected data at the receiving end",
+        "It lets the parties keep a positive key rate past the point where the adversary would otherwise hold a better copy of the sender's data",
+        "It makes the excess noise irrelevant"
+      ],
+      "answer": 2,
+      "why": "When the receiver's string is the reference, the adversary has to guess what the receiver measured rather than what the sender sent, and beam splitting attacks no longer give her an automatic advantage past three decibels of loss. The reach is still set by excess noise.",
+      "why_vi": "Khi chuỗi của bên thu làm chuẩn thì kẻ địch phải đoán cái bên thu đo được chứ không phải cái bên phát gửi đi, và tấn công tách chùm không còn tự động cho ưu thế khi suy hao vượt ba decibel. Tầm với vẫn do nhiễu dư quyết định.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-026",
+      "q": "The seed used by a Toeplitz hash in privacy amplification has the property that it",
+      "q_vi": "Hạt giống dùng cho hàm băm Toeplitz trong bước chưng cất khoá riêng có tính chất là",
+      "choices": [
+        "Must be kept as secret as the final key, since knowing it would let the adversary invert the compression and recover the input string",
+        "Has to be freshly random for each block, yet may be revealed publicly once it has been used",
+        "Can be a fixed constant burned into the firmware at manufacture",
+        "Must be at least as long as the raw string that goes into the compression stage of the postprocessing chain"
+      ],
+      "answer": 1,
+      "why": "The extraction argument only needs the function to be drawn at random from a two universal family, and the guarantee holds even when the choice is public. Reusing one seed across blocks breaks that independence, which is a cheap mistake with expensive consequences.",
+      "why_vi": "Lập luận rút khoá chỉ cần hàm được chọn ngẫu nhiên từ một họ hai phổ quát, và bảo đảm vẫn đúng ngay cả khi lựa chọn đó là công khai. Dùng lại một hạt giống cho nhiều khối làm hỏng tính độc lập đó, một sai sót rẻ tiền nhưng hậu quả đắt.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-027",
+      "q": "Wegman Carter authentication of the classical channel consumes secret key on every block, which means that",
+      "q_vi": "Xác thực Wegman Carter cho kênh cổ điển tiêu tốn khoá bí mật ở mỗi khối, điều đó nghĩa là",
+      "choices": [
+        "The system grows an existing secret rather than creating one from nothing",
+        "The authentication key has to be refreshed from a courier delivery before the start of every session on the link",
+        "The net key rate becomes negative on any link longer than about one hundred kilometres of standard fibre",
+        "Authentication can be dropped once the first block has been distilled, because both ends already share material"
+      ],
+      "answer": 0,
+      "why": "A short pre shared secret is needed to start, and part of each block pays for the next round of authentication. Calling the process key expansion is accurate, while calling it key creation out of nothing is not.",
+      "why_vi": "Phải có một bí mật chia sẻ trước rất ngắn để khởi động, và một phần của mỗi khối trả cho lượt xác thực kế tiếp. Gọi quá trình này là mở rộng khoá thì chính xác, còn gọi là tạo khoá từ hư không thì không đúng.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-028",
+      "q": "Using a computationally secure signature scheme for the authentication step, instead of a pre shared symmetric secret,",
+      "q_vi": "Dùng sơ đồ chữ ký an toàn theo nghĩa tính toán cho bước xác thực, thay vì bí mật đối xứng chia sẻ trước,",
+      "choices": [
+        "Voids the security proof completely, since the whole analysis assumes information theoretic authentication from the very first message",
+        "Improves the guarantee, since a signature can be verified by a third party while a symmetric tag cannot be verified that way",
+        "Makes no difference to any security claim, because authentication only touches the classical channel and never the quantum one",
+        "Still leaves the distilled key secure later on, as long as the signature holds during the session"
+      ],
+      "answer": 3,
+      "why": "An attacker who breaks the signature years later cannot go back and impersonate anyone during a session that has already closed. This is what makes hybrid designs sensible: post quantum authentication now, with the distilled key retaining its long term guarantee.",
+      "why_vi": "Kẻ tấn công phá được chữ ký sau nhiều năm cũng không thể quay lại giả mạo ai đó trong một phiên đã kết thúc. Chính điều này làm các thiết kế lai trở nên hợp lý: xác thực hậu lượng tử ở hiện tại, còn khoá chưng cất giữ nguyên bảo đảm dài hạn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-029",
+      "q": "The overall security parameter of a complete run is obtained from the parameters of the individual steps by",
+      "q_vi": "Tham số an toàn tổng của một lần chạy hoàn chỉnh được suy ra từ tham số của từng bước bằng cách",
+      "choices": [
+        "Taking whichever of them is the largest",
+        "Multiplying them together",
+        "Taking the value assigned to privacy amplification, since it is the last step",
+        "Adding them, so that estimation, reconciliation, verification and extraction each contribute to the total failure budget"
+      ],
+      "answer": 3,
+      "why": "Failure events are combined with a union bound, so the budget is a sum and not a product. Engineers who tune only the extraction parameter while leaving a loose estimation parameter end up quoting a number the system does not meet.",
+      "why_vi": "Các biến cố hỏng được gộp bằng chặn hợp, nên ngân sách là tổng chứ không phải tích. Kỹ sư chỉ chỉnh tham số của bước rút khoá mà để tham số ước lượng lỏng lẻo sẽ công bố một con số mà hệ thống không đạt được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-030",
+      "q": "A proof based on the entropic uncertainty relation differs from one based on channel tomography in that it",
+      "q_vi": "Chứng minh dựa trên hệ thức bất định entropy khác với chứng minh dựa trên chụp cắt lớp kênh ở chỗ nó",
+      "choices": [
+        "Bounds the adversary from the observed phase error rate directly, without first reconstructing the state that arrived",
+        "Applies only when the source emits exactly one photon per pulse, which no attenuated laser transmitter satisfies in practice",
+        "Requires the two parties to measure in three bases rather than two, and therefore lowers the sifting efficiency",
+        "Gives a bound that holds against collective attacks but says nothing about an adversary acting coherently on the block"
+      ],
+      "answer": 0,
+      "why": "The uncertainty relation ties the secrecy of the key basis to the predictability in the complementary basis, so an estimate of the phase error rate is enough. The route is shorter and extends cleanly to the finite size regime.",
+      "why_vi": "Hệ thức bất định buộc tính bí mật trong cơ sở tạo khoá với mức đoán trước được trong cơ sở bù, nên chỉ cần ước lượng tỉ lệ lỗi pha là đủ. Đường đi ngắn hơn và mở rộng gọn gàng sang chế độ cỡ hữu hạn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-031",
+      "q": "In a decoy state analysis, the quantity that ultimately controls the key length is",
+      "q_vi": "Trong phân tích trạng thái mồi, đại lượng cuối cùng chi phối độ dài khoá là",
+      "choices": [
+        "The total number of detections recorded across all of the intensity settings that were used during the session",
+        "The lower bound on single photon detections together with the upper bound on their phase error rate",
+        "The ratio between the signal intensity and the strongest decoy setting",
+        "The mean photon number of the signal state"
+      ],
+      "answer": 1,
+      "why": "Only the single photon contributions can yield secret key, so the analysis has to bound how many there were and how noisy they were. Adding more intensity settings tightens those two bounds but never changes which quantities matter.",
+      "why_vi": "Chỉ phần đóng góp một photon mới sinh được khoá bí mật, nên phân tích phải chặn được số lượng và mức nhiễu của chúng. Thêm nhiều mức cường độ giúp siết chặt hai chặn đó, nhưng không bao giờ đổi được đại lượng nào là đại lượng quan trọng.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-032",
+      "q": "A vendor reports a sifted key rate of one megabit per second and a final key rate of forty kilobits per second on the same link. The gap is explained by",
+      "q_vi": "Một nhà cung cấp báo tốc độ khoá sau sàng là một megabit trên giây và tốc độ khoá cuối là bốn mươi kilobit trên giây trên cùng tuyến đó. Khoảng cách này được giải thích bởi",
+      "choices": [
+        "A hardware fault in the detector array, since a healthy system loses only a few percent between the two figures that are reported",
+        "The time spent waiting for the classical channel, which is slower than the quantum channel on any deployed installation",
+        "Rounding in the key management interface",
+        "Reconciliation leakage and privacy amplification, both charged against the entropy that the measured error rate allows"
+      ],
+      "answer": 3,
+      "why": "Sifted and final rates are different quantities and a factor of tens between them is entirely normal. Comparing a sifted rate from one system against a final rate from another is a common way of making a link look better than it is.",
+      "why_vi": "Tốc độ sau sàng và tốc độ khoá cuối là hai đại lượng khác nhau, chênh nhau vài chục lần là hoàn toàn bình thường. Đem tốc độ sau sàng của hệ này so với tốc độ khoá cuối của hệ khác là một cách quen thuộc để tuyến trông đẹp hơn thực tế.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-033",
+      "q": "The time shift attack works without the attacker ever touching the quantum states, because",
+      "q_vi": "Tấn công dịch thời gian thành công mà kẻ tấn công không hề chạm vào trạng thái lượng tử, vì",
+      "choices": [
+        "Delaying the pulse slightly makes one of the two detectors far more likely to fire than the other",
+        "Shifting the arrival time destroys the interference in the receiver, which drives the error rate to the level of pure noise",
+        "The delay accumulates over the fibre until the pulse falls entirely outside the gate and the round is silently discarded by the receiver",
+        "A late pulse is read as a different bit value by the sender, so the sifted strings no longer agree with each other"
+      ],
+      "answer": 0,
+      "why": "Two gated diodes never have exactly the same efficiency profile across the gate window, so the arrival time carries information about which detector will click. The attacker only chooses the delay and then reads the public sifting announcements.",
+      "why_vi": "Hai điốt gating không bao giờ có đúng cùng một biên dạng hiệu suất trong cửa sổ mở, nên thời điểm tới mang thông tin về việc bộ nào sẽ phát tín hiệu. Kẻ tấn công chỉ cần chọn độ trễ rồi đọc các công bố sàng lọc công khai.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-034",
+      "q": "A Trojan horse attack against a transmitter proceeds by",
+      "q_vi": "Tấn công ngựa gỗ nhắm vào máy phát tiến hành bằng cách",
+      "choices": [
+        "Replacing the firmware of the device during a maintenance visit, so that the basis choices follow a sequence known in advance",
+        "Sending bright light in through the fibre and reading the setting of the modulator from what comes back out",
+        "Adding a second laser at a nearby wavelength that the receiver mistakes for the legitimate signal",
+        "Correlating the electrical power drawn by the transmitter with the bits it is encoding"
+      ],
+      "answer": 1,
+      "why": "The attack reads the classical setting of an optical component instead of the quantum state, so it leaves no disturbance in the sifted data. The countermeasures are optical, mainly isolators, narrow spectral filters and a watchdog detector that bounds the injected energy.",
+      "why_vi": "Tấn công này đọc trạng thái cổ điển của một linh kiện quang chứ không đọc trạng thái lượng tử, nên không để lại nhiễu loạn nào trong dữ liệu sau sàng. Biện pháp phòng vệ là các thành phần quang, chủ yếu là bộ cách ly, bộ lọc phổ hẹp và một bộ tách sóng canh chừng để chặn năng lượng bơm vào.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-035",
+      "q": "Laser damage attacks are treated as a distinct threat category because",
+      "q_vi": "Tấn công phá huỷ bằng laser được xếp thành một nhóm mối đe doạ riêng vì",
+      "choices": [
+        "They can only be mounted on free space links, where the beam is accessible outside any enclosure",
+        "They rely on a flaw in the security proof rather than on a flaw in the equipment that implements it",
+        "They permanently change a component, so a countermeasure that was verified at installation may no longer be present",
+        "They raise the error rate so sharply that the protocol aborts before any key is produced"
+      ],
+      "answer": 2,
+      "why": "High power light can burn out an isolator or shift the transmission of a filter, disabling the very defence that a later attack would have to defeat. Security therefore has to be argued for the device as it is now, not only as it was when it was tested.",
+      "why_vi": "Ánh sáng công suất cao có thể đốt hỏng bộ cách ly hoặc làm dịch đặc tuyến truyền của bộ lọc, tức là vô hiệu hoá đúng lớp phòng vệ mà tấn công sau đó phải vượt qua. Vì thế an toàn phải được lập luận cho thiết bị ở trạng thái hiện tại, không chỉ ở trạng thái lúc kiểm định.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-036",
+      "q": "After gate and dead time attacks both share the feature that the attacker",
+      "q_vi": "Tấn công sau cửa gating và tấn công thời gian chết đều có chung đặc điểm là kẻ tấn công",
+      "choices": [
+        "Injects a second photon into every pulse",
+        "Substitutes an entirely new receiver whose classical output is under her control",
+        "Reads the key from the classical channel by breaking the message authentication code protecting it",
+        "Determines which detector clicks by exploiting the interval when the device is not behaving as the model assumes"
+      ],
+      "answer": 3,
+      "why": "The proof models a detector as a device that reports the outcome of a fixed measurement, and both attacks work in the windows where that description fails. Fixing them one by one is why implementation security became a certification problem rather than a proof problem.",
+      "why_vi": "Chứng minh mô hình hoá bộ tách sóng như một thiết bị báo kết quả của một phép đo cố định, còn cả hai tấn công đều làm việc trong những khoảng mà mô tả đó sai. Việc phải vá từng lỗi một là lý do an toàn cài đặt trở thành bài toán chứng nhận chứ không còn là bài toán chứng minh.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-037",
+      "q": "A fibre beam splitter used as a passive basis chooser opens an attack because its splitting ratio",
+      "q_vi": "Bộ chia chùm sợi quang dùng làm bộ chọn cơ sở thụ động mở ra một hướng tấn công vì tỉ số chia của nó",
+      "choices": [
+        "Slowly drifts with temperature, so the two output arms are never balanced for very long at a time",
+        "Depends on wavelength, so light sent at a chosen colour is steered almost entirely into one arm",
+        "Changes when the input power rises, which the attacker exploits by sending a much brighter pulse",
+        "Is quoted in the datasheet only as a nominal figure, measured at one particular temperature and power level"
+      ],
+      "answer": 1,
+      "why": "A passive splitter is only a fair coin at its design wavelength, and the parties never check the colour of what arrives. The attacker therefore chooses the basis for the receiver while the receiver believes its choice was random.",
+      "why_vi": "Bộ chia thụ động chỉ là một đồng xu công bằng tại bước sóng thiết kế, còn hai bên thì không kiểm tra màu của thứ đi tới. Kẻ tấn công vì thế chọn cơ sở thay cho bên thu trong khi bên thu vẫn tin lựa chọn của mình là ngẫu nhiên.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-038",
+      "q": "Correlation between the intensities of consecutive pulses emitted by a modulated source is a security problem because",
+      "q_vi": "Tương quan giữa cường độ của các xung liên tiếp do nguồn điều chế phát ra là một vấn đề an toàn vì",
+      "choices": [
+        "The decoy analysis assumes each pulse carries an intensity drawn independently, and a memory in the modulator breaks that assumption",
+        "The average photon number rises above one, so most pulses now contain several photons that the attacker can take freely",
+        "The receiver cannot keep its gate aligned when the pulse energy changes from one round to the next",
+        "The error correcting code loses efficiency"
+      ],
+      "answer": 0,
+      "why": "If the setting used in one round leaks into the next, the observed yields no longer bound the single photon contribution the way the proof requires. The remedy is either hardware that settles fully between pulses or a proof that models the correlation explicitly.",
+      "why_vi": "Nếu mức cường độ dùng ở vòng này rò sang vòng sau thì các hiệu suất quan sát được không còn chặn được phần đóng góp một photon theo đúng cách chứng minh đòi hỏi. Cách khắc phục là phần cứng ổn định hẳn giữa hai xung, hoặc một chứng minh mô hình hoá tường minh mối tương quan đó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-039",
+      "q": "Sending the local oscillator down the same fibre as the quantum signal was abandoned in continuous variable systems because",
+      "q_vi": "Việc gửi bộ dao động nội trên cùng sợi quang với tín hiệu lượng tử đã bị bỏ trong hệ biến liên tục vì",
+      "choices": [
+        "Its optical power is high enough to saturate the homodyne detector at the far end of any deployed link",
+        "The two beams interfere with each other along the fibre and the shot noise reference is lost",
+        "An attacker who manipulates it can bias the shot noise calibration and hide her own excess noise",
+        "Standard fibre cannot carry two polarisation states at once over long spans"
+      ],
+      "answer": 2,
+      "why": "The shot noise unit is what converts raw quadrature variance into a noise figure, so whoever controls the reference controls the accounting. Generating the oscillator locally at the receiver and transmitting only a weak pilot tone removes that handle.",
+      "why_vi": "Đơn vị nhiễu bắn là thứ chuyển phương sai vuông pha thô thành con số nhiễu, nên ai điều khiển được tham chiếu thì điều khiển được toàn bộ phép hạch toán. Sinh bộ dao động ngay tại bên thu và chỉ truyền một tông dẫn đường yếu sẽ gỡ bỏ được đòn bẩy đó.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-040",
+      "q": "If the random number generator that picks the encoding basis is biased but the link is otherwise ideal, then",
+      "q_vi": "Nếu bộ sinh số ngẫu nhiên chọn cơ sở mã hoá bị lệch mà tuyến truyền thì hoàn hảo, khi đó",
+      "choices": [
+        "The measured error rate reveals the flaw at once, since a biased basis choice creates extra mismatched rounds",
+        "The final key remains secure, because privacy amplification removes any structure that the raw string still carries",
+        "Nothing is lost as long as the bias is smaller than the tolerable error rate of the protocol in use",
+        "The error rate stays clean while an attacker who knows the bias gets a head start on guessing the basis"
+      ],
+      "answer": 3,
+      "why": "Basis choices are announced anyway, but predictability of the choice before the pulse is sent is what an intercept and resend attacker needs. The disturbance signal that normally exposes such an attacker is much weaker when the guess is better than random.",
+      "why_vi": "Lựa chọn cơ sở dù sao cũng được công bố, nhưng cái mà kẻ tấn công chặn rồi gửi lại cần chính là khả năng đoán trước lựa chọn đó trước khi xung được phát. Tín hiệu nhiễu loạn vốn dùng để lộ diện kẻ tấn công sẽ yếu hơn nhiều khi phỏng đoán tốt hơn mức ngẫu nhiên.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-041",
+      "q": "Compared with patching each detector loophole as it is published, the measurement device independent approach is a structural fix because it",
+      "q_vi": "So với việc vá từng lỗ hổng của bộ tách sóng mỗi khi có công bố mới, cách tiếp cận không phụ thuộc thiết bị đo là một cách sửa từ gốc vì nó",
+      "choices": [
+        "Removes the detectors from the trust boundary entirely, so an unknown future detector flaw costs nothing",
+        "Doubles the number of detectors, which averages away the efficiency mismatch between any two of them",
+        "Moves the detectors into the sender's own laboratory, where physical access can be controlled properly",
+        "Replaces avalanche diodes with superconducting nanowires, whose response is far closer to the modelled behaviour"
+      ],
+      "answer": 0,
+      "why": "The measurement station may be built and run by the adversary without affecting the proof. What remains inside the trust boundary are the two sources, which is why source side channels are the active research front for this family of protocols.",
+      "why_vi": "Trạm đo có thể do chính kẻ địch dựng lên và vận hành mà không ảnh hưởng tới chứng minh. Phần còn lại trong vòng tin cậy là hai nguồn phát, và đó là lý do kênh phụ ở phía nguồn mới là mặt trận nghiên cứu sôi động của họ giao thức này.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-042",
+      "q": "A loss tolerant protocol addresses state preparation flaws by",
+      "q_vi": "Giao thức chịu được suy hao xử lý sai lệch trong khâu chuẩn bị trạng thái bằng cách",
+      "choices": [
+        "Requiring the transmitter to be recalibrated after each block, so that the encoding angles stay within tolerance",
+        "Attributing every deviation to the adversary and subtracting the corresponding entropy from the final key length that is claimed",
+        "Bounding the leakage using the measured statistics rather than assuming loss can amplify the flaw",
+        "Sending each state twice"
+      ],
+      "answer": 2,
+      "why": "Earlier analyses let channel loss magnify a small preparation error into a large security penalty, which made high loss links look far worse than they were. Tying the estimate to observed rates keeps a modest imperfection modest even at long distance.",
+      "why_vi": "Các phân tích trước cho phép suy hao của kênh khuếch đại một sai lệch chuẩn bị nhỏ thành một khoản phạt an toàn lớn, khiến tuyến suy hao cao trông tệ hơn thực tế rất nhiều. Gắn ước lượng với tốc độ quan sát được giúp một khiếm khuyết nhỏ vẫn nhỏ ngay cả ở cự ly xa.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-043",
+      "q": "Backflash light emitted by avalanche photodiodes is a concern because it",
+      "q_vi": "Ánh sáng phát ngược từ điốt quang thác lũ là mối lo vì nó",
+      "choices": [
+        "Heats the detector housing enough to shift the bias voltage away from the operating point that was set during calibration",
+        "Raises the dark count rate of the neighbouring detector, and with it the error rate that the parties measure",
+        "Interferes with the incoming signal and lowers the visibility of the receiver interferometer over long integration times",
+        "Travels back up the fibre and can reveal which detector fired"
+      ],
+      "answer": 3,
+      "why": "The emission is faint but its timing and spectrum are correlated with a specific diode, so an eavesdropper collecting it learns the outcome without disturbing the incoming photon. Isolators and spectral filters at the receiver input are the usual mitigation.",
+      "why_vi": "Phát xạ này rất yếu nhưng thời điểm và phổ của nó tương quan với một điốt cụ thể, nên kẻ nghe lén thu được nó là biết kết quả mà không làm nhiễu loạn photon đi tới. Biện pháp giảm nhẹ thông thường là bộ cách ly và bộ lọc phổ đặt ở lối vào bên thu.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-044",
+      "q": "Afterpulsing in a gated avalanche detector sets a practical ceiling on the clock rate because",
+      "q_vi": "Hiện tượng phát xung sau trong bộ tách sóng thác lũ có gating đặt ra trần thực tế cho tần số nhịp vì",
+      "choices": [
+        "The detector needs a fixed recovery interval, and gating it faster simply stops it responding at all until that interval has passed",
+        "The gate voltage cannot be switched quickly enough by the electronics that drive it in any commercial receiver",
+        "Carriers trapped by an earlier avalanche are released later and fire a click that has nothing to do with the incoming photon",
+        "Faster gating widens the timing jitter, which spreads the arrival histogram beyond the width of the acceptance window"
+      ],
+      "answer": 2,
+      "why": "Those spurious counts are uncorrelated with the sender's bit, so they enter the error rate exactly like dark counts. Pushing the repetition rate up therefore buys less key than the raw increase in pulses would suggest.",
+      "why_vi": "Những lần đếm giả đó không tương quan với bit của bên phát, nên chúng đi vào tỉ lệ lỗi y hệt số đếm tối. Đẩy tần số lặp lên vì thế mang lại ít khoá hơn mức mà số xung tăng thêm gợi ra.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-045",
+      "q": "Superconducting nanowire detectors improved achievable distances mainly because",
+      "q_vi": "Bộ tách sóng dây nano siêu dẫn cải thiện cự ly đạt được chủ yếu nhờ",
+      "choices": [
+        "Their dark count rate is orders of magnitude lower at comparable efficiency",
+        "They need no gating, so every photon that reaches the receiver during the session is recorded without any timing window",
+        "They can resolve the number of photons in a pulse, which lets the parties discard every multi photon event before sifting",
+        "They operate at room temperature"
+      ],
+      "answer": 0,
+      "why": "The maximum tolerable loss is set by where the signal counts sink to the level of the spurious ones, so cutting the noise floor pushes that point further out. The price is cryogenic operation and a recovery time that limits the count rate.",
+      "why_vi": "Mức suy hao chịu được lớn nhất được định ra ở chỗ số đếm tín hiệu tụt xuống ngang số đếm giả, nên hạ sàn nhiễu là đẩy điểm đó ra xa hơn. Cái giá là phải làm lạnh sâu và có thời gian hồi phục làm hạn chế tốc độ đếm.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-046",
+      "q": "The published countermeasure of randomly varying the detector efficiency is best described as",
+      "q_vi": "Biện pháp đối phó đã công bố là thay đổi ngẫu nhiên hiệu suất bộ tách sóng nên được mô tả đúng nhất là",
+      "choices": [
+        "A complete solution, since an attacker who cannot predict the efficiency cannot choose which detector will fire in a given round",
+        "A partial defence that raises the difficulty of one attack family while leaving the trust assumption on the detector in place",
+        "A measure that is only relevant for continuous variable systems, where the detection is homodyne rather than photon counting",
+        "A change that improves the key rate as well, because the average efficiency over the block turns out higher than the fixed setting"
+      ],
+      "answer": 1,
+      "why": "Randomisation lets the parties monitor for the statistical signature of a control attack, which is genuinely useful. It does not remove the detector from the trust boundary, so it belongs to the patching line of work rather than to the structural one.",
+      "why_vi": "Ngẫu nhiên hoá cho phép hai bên theo dõi dấu hiệu thống kê của một tấn công điều khiển, điều đó thật sự hữu ích. Nhưng nó không đưa bộ tách sóng ra khỏi vòng tin cậy, nên vẫn thuộc dòng vá lỗi chứ chưa phải cách sửa từ gốc.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-047",
+      "q": "The reason implementation attacks keep appearing against systems whose protocols are proven secure is that",
+      "q_vi": "Lý do các tấn công vào cài đặt liên tục xuất hiện trước những hệ thống có giao thức đã được chứng minh an toàn là",
+      "choices": [
+        "Quantum mechanics is only an approximation",
+        "The proofs contain algebraic mistakes that reviewers keep failing to notice before publication",
+        "The manufacturers do not run the postprocessing steps that the proofs assume",
+        "The proofs are written for an idealised device, and every real component differs from that model in ways nobody enumerated in advance"
+      ],
+      "answer": 3,
+      "why": "A proof is a conditional statement, and the conditions are assumptions about hardware. Closing the gap needs either device independence, which is expensive, or a testing regime that checks the assumptions on the physical unit that will be shipped.",
+      "why_vi": "Chứng minh là một mệnh đề có điều kiện, và các điều kiện đó là giả thiết về phần cứng. Bịt khoảng cách này cần hoặc tính không phụ thuộc thiết bị, vốn rất đắt, hoặc một quy trình kiểm thử xác minh các giả thiết ngay trên đúng thiết bị sẽ xuất xưởng.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-048",
+      "q": "During an intercept and resend attack on BB84 over an otherwise perfect channel, the error rate introduced in the sifted data is",
+      "q_vi": "Khi tấn công chặn rồi gửi lại lên BB84 trên một kênh hoàn hảo, tỉ lệ lỗi mà nó gây ra trong dữ liệu sau sàng là",
+      "choices": [
+        "Zero, because the attacker retransmits a legitimate state that the receiver measures in the normal way",
+        "Twenty five percent",
+        "Fifty percent, since the attacker guesses the basis correctly only half of the time and gets nothing in the other half",
+        "Eleven percent, which is exactly the threshold at which the protocol stops producing key"
+      ],
+      "answer": 1,
+      "why": "The attacker picks the wrong basis half the time, and each of those rounds gives a wrong bit half the time. The eleven percent figure is the security threshold from the key rate formula, not the disturbance caused by this particular attack.",
+      "why_vi": "Kẻ tấn công chọn sai cơ sở một nửa số lần, và mỗi lần như vậy lại cho bit sai với xác suất một nửa. Con số mười một phần trăm là ngưỡng an toàn suy ra từ công thức tốc độ khoá, không phải mức nhiễu loạn do tấn công này gây ra.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-049",
+      "q": "The application interface standardised in ETSI GS QKD 014 lets an application obtain key material by",
+      "q_vi": "Giao diện ứng dụng chuẩn hoá trong ETSI GS QKD 014 cho phép ứng dụng lấy vật liệu khoá bằng cách",
+      "choices": [
+        "Opening a direct optical connection to the quantum device and reading the sifted string as it is produced",
+        "Requesting it over a secured web interface and referring to it afterwards by an identifier",
+        "Running the postprocessing itself on raw detection data that the hardware exports in a vendor neutral file format",
+        "Deriving it locally from a seed that both endpoints agreed on when the tunnel was first established"
+      ],
+      "answer": 1,
+      "why": "Decoupling the consumer from the optical layer is the point, since the application only needs matching bytes at both ends and a name for them. The channel carrying those bytes has to be protected by conventional means, which is a boundary that deserves attention in any deployment.",
+      "why_vi": "Mục đích là tách bên tiêu thụ khỏi lớp quang, vì ứng dụng chỉ cần các byte trùng nhau ở hai đầu và một cái tên để gọi chúng. Kênh chuyển các byte đó phải được bảo vệ bằng biện pháp thông thường, và đây là ranh giới đáng chú ý trong mọi lần triển khai.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-050",
+      "q": "The difference between the ETSI interfaces numbered 004 and 014 is best summarised as",
+      "q_vi": "Khác biệt giữa hai giao diện ETSI mang số hiệu 004 và 014 có thể tóm tắt đúng nhất là",
+      "choices": [
+        "One is for discrete variable systems and the other for continuous variable systems",
+        "One is mandatory for certification while the other is an optional profile that vendors may skip entirely",
+        "One keeps a stream open with a negotiated quality of service, the other hands over a block of key on request",
+        "One serves the sender and the other serves the receiver"
+      ],
+      "answer": 2,
+      "why": "A long lived stream fits applications that consume key continuously and want to state a rate they need, while a request and response call fits software that just wants some bytes now. Neither says anything about the optics underneath.",
+      "why_vi": "Một luồng mở lâu dài hợp với ứng dụng tiêu thụ khoá liên tục và muốn nêu rõ tốc độ mình cần, còn kiểu gọi yêu cầu và trả về hợp với phần mềm chỉ cần vài byte ngay lúc đó. Cả hai đều không nói gì về phần quang bên dưới.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-051",
+      "q": "In a trusted node network, a relay node passes a key onward by publishing the sum modulo two of the two link keys it holds. The consequence is that",
+      "q_vi": "Trong mạng nút tin cậy, nút chuyển tiếp chuyển khoá đi bằng cách công bố tổng theo modulo hai của hai khoá liên kết mà nó nắm giữ. Hệ quả là",
+      "choices": [
+        "Anyone listening on the public channel can recover the end to end key from that announcement alone",
+        "The endpoints share a key that the relay also knows, so the route is only as trustworthy as its weakest node",
+        "The two link keys are consumed but the relay never learns anything about the resulting end to end key",
+        "The end to end key length shrinks with every hop, since each relay consumes part of it"
+      ],
+      "answer": 1,
+      "why": "The published value is useless without one of the link keys, so an outside listener learns nothing. The relay holds both keys and therefore holds the end to end key too, which is the structural limitation of this architecture rather than an implementation defect.",
+      "why_vi": "Giá trị được công bố là vô dụng nếu không có một trong hai khoá liên kết, nên người nghe bên ngoài không biết gì. Nhưng nút chuyển tiếp nắm cả hai khoá nên cũng nắm luôn khoá đầu cuối, đó là hạn chế mang tính kiến trúc chứ không phải lỗi cài đặt.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-052",
+      "q": "A key management system buffers distilled key because the link rate varies with weather and alignment, and the design question that follows is",
+      "q_vi": "Hệ quản lý khoá phải đệm khoá đã chưng cất vì tốc độ tuyến thay đổi theo thời tiết và độ chuẩn trực, và câu hỏi thiết kế đi kèm là",
+      "choices": [
+        "How to compress stored key so that the buffer holds more material in the same memory",
+        "Whether the buffer should sit on the sender side or the receiver side of the link",
+        "What the application should do when the pool runs dry",
+        "How often the buffer contents should be re randomised while they wait to be used"
+      ],
+      "answer": 2,
+      "why": "Falling back to a classical key exchange keeps the service alive but quietly drops the property the system was bought for, while blocking preserves the property and takes the service down. That decision belongs in a written policy, not in a default setting nobody reviewed.",
+      "why_vi": "Chuyển sang trao đổi khoá cổ điển thì dịch vụ vẫn sống nhưng lặng lẽ đánh mất đúng tính chất mà người ta bỏ tiền mua, còn chặn lại thì giữ được tính chất đó nhưng dịch vụ ngừng. Quyết định này phải nằm trong một chính sách được viết ra, không phải trong một giá trị mặc định chưa ai xem lại.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-053",
+      "q": "Using the distilled key as a one time pad for a ten gigabit per second link would require",
+      "q_vi": "Dùng khoá chưng cất làm khoá dùng một lần cho tuyến mười gigabit trên giây sẽ đòi hỏi",
+      "choices": [
+        "A key rate equal to the data rate, which no deployed system comes close to providing",
+        "A key rate equal to the square root of the data rate, which is within reach of current metropolitan systems",
+        "Only a fresh key for each session, since the pad may be reused as long as the message differs",
+        "A key of fixed length, because the pad is expanded by a stream cipher before being applied to the traffic"
+      ],
+      "answer": 0,
+      "why": "The pad has to be as long as the message and can never be reused, so the arithmetic rules this out by several orders of magnitude. Real deployments feed the key into a symmetric cipher instead, which gives up information theoretic secrecy for the traffic itself.",
+      "why_vi": "Miếng đệm phải dài bằng thông điệp và không bao giờ được dùng lại, nên phép tính loại bỏ phương án này với khoảng cách vài bậc độ lớn. Triển khai thực tế đưa khoá vào một mật mã đối xứng, tức là từ bỏ tính bí mật theo lý thuyết thông tin cho chính phần lưu lượng.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-054",
+      "q": "When a distilled key is used to rekey an AES session every few seconds, the honest description of what has been gained is that",
+      "q_vi": "Khi khoá chưng cất được dùng để đổi khoá cho một phiên AES sau mỗi vài giây, mô tả trung thực về cái thu được là",
+      "choices": [
+        "The traffic becomes information theoretically secure, since the key it uses came from a physical process",
+        "The cipher can now be run with a shorter key, since the frequent refresh compensates for the reduced key length",
+        "Nothing at all changes, because the cipher was already considered safe against a quantum adversary of any size",
+        "The confidentiality of the traffic now rests on AES, while the key exchange no longer rests on a computational assumption"
+      ],
+      "answer": 3,
+      "why": "The guarantee applies to the delivery of the key, not to the encryption that follows. That is a real change in the threat model for stored traffic, and it is also considerably narrower than the phrase unbreakable encryption suggests.",
+      "why_vi": "Bảo đảm áp cho khâu chuyển giao khoá, không áp cho phần mã hoá sau đó. Đó là một thay đổi thật sự trong mô hình đe doạ đối với lưu lượng bị lưu trữ, nhưng cũng hẹp hơn nhiều so với cụm từ mã hoá không thể phá.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-055",
+      "q": "A hybrid key combiner that mixes a distilled key with a key from a post quantum exchange is designed so that",
+      "q_vi": "Bộ trộn khoá lai kết hợp khoá chưng cất với khoá từ một lần trao đổi hậu lượng tử được thiết kế sao cho",
+      "choices": [
+        "The stronger of the two mechanisms is selected automatically at run time and the weaker one is discarded",
+        "The result stays secure as long as at least one of the two inputs was secure",
+        "The result is twice as long as either input, which doubles the search space facing any attacker",
+        "Both mechanisms must succeed, so an outage in either one stops the session"
+      ],
+      "answer": 1,
+      "why": "Feeding both inputs through a key derivation function means an undiscovered flaw in the lattice scheme or a compromised trusted node does not by itself break the session. This is the standard recommendation from several national agencies precisely because neither technology has to be trusted alone.",
+      "why_vi": "Đưa cả hai đầu vào qua một hàm dẫn xuất khoá nghĩa là một lỗ hổng chưa biết trong sơ đồ lưới hay một nút tin cậy bị chiếm cũng không tự nó phá được phiên làm việc. Đây là khuyến nghị tiêu chuẩn của nhiều cơ quan quốc gia, đúng vì không công nghệ nào phải được tin cậy một mình.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-056",
+      "q": "The route usually taken to feed distilled key into an existing virtual private network is to",
+      "q_vi": "Cách thường dùng để đưa khoá chưng cất vào một mạng riêng ảo sẵn có là",
+      "choices": [
+        "Replace the key exchange of the tunnel protocol with a direct optical link between the two gateways",
+        "Encrypt the tunnel twice, once with the classical key and again with the distilled key",
+        "Inject it as an additional pre shared secret that is mixed into the key derivation of the tunnel",
+        "Publish the key identifier in the routing protocol so that every gateway on the path can fetch the same key"
+      ],
+      "answer": 2,
+      "why": "Mixing an extra secret into the derivation is a small and reviewable change that leaves the rest of the protocol untouched, and it is already specified for the standard tunnel suite. Both gateways must fetch the same key by identifier, which makes key synchronisation the fragile part in practice.",
+      "why_vi": "Trộn thêm một bí mật vào bước dẫn xuất là thay đổi nhỏ và dễ soát xét, phần còn lại của giao thức giữ nguyên, và cách này đã được đặc tả sẵn cho bộ giao thức đường hầm tiêu chuẩn. Hai cổng phải lấy đúng cùng một khoá theo mã định danh, nên đồng bộ khoá mới là chỗ dễ hỏng trong thực tế.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-057",
+      "q": "Loss of key identifier synchronisation between the two ends of a link causes an outage rather than a security breach because",
+      "q_vi": "Mất đồng bộ mã định danh khoá giữa hai đầu tuyến gây gián đoạn dịch vụ chứ không phải sự cố an toàn vì",
+      "choices": [
+        "The two sides simply derive different keys and the session fails to establish",
+        "The key management system falls back to a classical exchange and raises an alarm that the operator has to acknowledge before traffic resumes",
+        "The link renegotiates automatically from the last identifier that both sides confirmed, so no traffic is ever lost during the recovery",
+        "The mismatched material is still secret, so the tunnel comes up with a lower assurance level but keeps carrying traffic"
+      ],
+      "answer": 0,
+      "why": "Mismatched key material produces authentication failures, not a weaker key, so the failure mode is loud and safe. It is nevertheless the most common source of downtime in field deployments, which makes identifier handling worth as much design attention as the optics.",
+      "why_vi": "Vật liệu khoá lệch nhau sinh ra lỗi xác thực chứ không sinh ra khoá yếu hơn, nên kiểu hỏng này ồn ào và an toàn. Dù vậy đây lại là nguyên nhân gián đoạn phổ biến nhất khi triển khai thực tế, nên xử lý mã định danh xứng đáng được đầu tư thiết kế ngang với phần quang.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-058",
+      "q": "Against an adversary willing to be noticed, the weakest property of a key distribution link is",
+      "q_vi": "Trước một kẻ địch chấp nhận bị phát hiện, tính chất yếu nhất của một tuyến phân phối khoá là",
+      "choices": [
+        "Confidentiality, since an attack sustained for long enough eventually recovers part of the key material",
+        "Freshness, since old key material could be replayed into the receiving buffer",
+        "Integrity, since the classical channel can be modified silently",
+        "Availability, because adding loss or noise to the channel stops key production entirely"
+      ],
+      "answer": 3,
+      "why": "The protocol is built to abort rather than to leak, so an attacker who merely wants to deny service always wins by making the channel worse. Any deployment therefore needs a fallback policy and physical protection of the fibre, neither of which the physics provides.",
+      "why_vi": "Giao thức được xây để huỷ phiên chứ không để rò rỉ, nên kẻ tấn công chỉ muốn từ chối dịch vụ luôn thắng bằng cách làm kênh xấu đi. Vì thế mọi lần triển khai đều cần chính sách dự phòng và bảo vệ vật lý cho sợi quang, hai thứ mà vật lý không cấp cho.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-059",
+      "q": "Path selection in a network of trusted nodes differs from ordinary routing because the metric has to include",
+      "q_vi": "Chọn đường trong mạng gồm các nút tin cậy khác với định tuyến thông thường vì thước đo phải tính thêm",
+      "choices": [
+        "The propagation delay of each hop, which dominates once the route crosses several administrative domains",
+        "The wavelength assigned to each span, so that two routes never share a channel",
+        "Who operates each intermediate node, since every one of them ends up holding the end to end key",
+        "The buffer occupancy at the destination node"
+      ],
+      "answer": 2,
+      "why": "A shorter path through a node under someone else's control can be worse than a longer path that stays inside the operator's own estate. Load and latency still matter, but they are secondary to the question of who is inside the trust boundary.",
+      "why_vi": "Một đường ngắn hơn nhưng đi qua nút do người khác kiểm soát có thể tệ hơn một đường dài hơn mà nằm trọn trong hạ tầng của chính nhà khai thác. Tải và độ trễ vẫn quan trọng, nhưng chỉ đứng sau câu hỏi ai đang nằm trong vòng tin cậy.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-060",
+      "q": "Once distilled key is written into the store of a node, its protection depends on",
+      "q_vi": "Khi khoá chưng cất đã được ghi vào kho của một nút, việc bảo vệ nó phụ thuộc vào",
+      "choices": [
+        "The same physics that protected it in transit, since the material itself carries the guarantee with it",
+        "The error rate that was measured during the session in which it was produced",
+        "The number of hops it travelled before arriving at that node",
+        "Conventional measures such as access control, tamper resistant storage and disciplined destruction"
+      ],
+      "answer": 3,
+      "why": "Stored key is ordinary classical data and can be copied like any other file. The physical guarantee covers the distribution step alone, so the security of the whole system falls back on the physical and procedural protection of the sites.",
+      "why_vi": "Khoá đã lưu là dữ liệu cổ điển bình thường và có thể sao chép như mọi tệp khác. Bảo đảm vật lý chỉ phủ bước phân phối, nên an toàn của cả hệ thống lại quay về dựa vào bảo vệ vật lý và quy trình tại các cơ sở.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-061",
+      "q": "The ITU-T recommendations in the Y three thousand eight hundred series cover mainly",
+      "q_vi": "Nhóm khuyến nghị ITU-T dãy Y ba nghìn tám trăm chủ yếu bao trùm",
+      "choices": [
+        "Network level architecture, key management and control of networks that include key distribution links",
+        "The optical specification of the transmitter, including the tolerance on the mean photon number of every intensity setting",
+        "A catalogue of known attacks together with the countermeasure that each vendor is required to implement",
+        "The mathematics of the security proofs that a protocol has to satisfy before it may be deployed"
+      ],
+      "answer": 0,
+      "why": "The series treats the link as a component and standardises how a network built from such components is described, managed and controlled. Device level security requirements and evaluation methods live in a separate line of work.",
+      "why_vi": "Nhóm khuyến nghị này coi tuyến truyền như một thành phần và chuẩn hoá cách mô tả, quản lý, điều khiển một mạng dựng từ những thành phần đó. Yêu cầu an toàn ở mức thiết bị và phương pháp đánh giá nằm ở một dòng công việc khác.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-062",
+      "q": "ISO/IEC 23837 was written in two parts, and the reason for splitting it that way is that",
+      "q_vi": "ISO/IEC 23837 được viết thành hai phần, và lý do chia như vậy là",
+      "choices": [
+        "One part covers fibre links while the other covers free space and satellite links",
+        "One part covers discrete variable protocols and the other covers continuous variable protocols",
+        "One part covers the transmitter and the other covers the receiver",
+        "Stating what a module must achieve is a separate task from stating how an evaluator is to test that it does"
+      ],
+      "answer": 3,
+      "why": "Requirements without test methods leave every laboratory to invent its own evidence, which makes certificates hard to compare. Splitting the two lets the security claims stay stable while the measurement procedures are refined.",
+      "why_vi": "Yêu cầu mà không có phương pháp kiểm thử thì mỗi phòng thí nghiệm tự nghĩ ra bằng chứng của riêng mình, khiến các chứng nhận khó so sánh với nhau. Tách hai phần giúp phần khẳng định an toàn giữ được ổn định trong khi quy trình đo đạc vẫn tiếp tục được hoàn thiện.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-063",
+      "q": "Certifying a key distribution module under a common criteria style scheme is difficult in a way that certifying a classical cryptographic module is not, because",
+      "q_vi": "Chứng nhận một mô đun phân phối khoá theo kiểu common criteria khó theo cách mà chứng nhận mô đun mật mã cổ điển không gặp phải, vì",
+      "choices": [
+        "The security target has to name optical assumptions that are hard to test exhaustively on a physical unit",
+        "The evaluator would have to reproduce the security proof from first principles before any laboratory testing could begin",
+        "No national scheme accepts submissions in this area, so no protection profile has ever been drafted for such modules",
+        "The module produces different output on every single run, which no methodology can accommodate"
+      ],
+      "answer": 0,
+      "why": "A classical module can be tested against known answer vectors, whereas an optical assumption such as bounded backreflection holds over a continuum of wavelengths and powers. Evaluation therefore samples that space and states the limits of what was covered.",
+      "why_vi": "Mô đun cổ điển có thể kiểm bằng các vectơ đáp án đã biết, còn một giả thiết quang như mức phản xạ ngược bị chặn thì phải đúng trên cả một dải liên tục bước sóng và công suất. Vì thế đánh giá chỉ lấy mẫu trong không gian đó và phải nêu rõ giới hạn của phần đã kiểm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-064",
+      "q": "Several national security agencies currently advise against relying on key distribution hardware for classified traffic. Their stated reasoning rests mostly on",
+      "q_vi": "Một số cơ quan an ninh quốc gia hiện khuyến cáo không nên dựa vào thiết bị phân phối khoá cho lưu lượng mật. Lập luận họ nêu ra chủ yếu dựa trên",
+      "choices": [
+        "Doubt about the physics itself, which they consider not yet settled enough to carry a guarantee at the national security level",
+        "The point to point nature of the links, the trust required in relays, and the immaturity of implementation certification",
+        "The belief that classical public key cryptography will remain safe against quantum computers for the foreseeable future",
+        "The absence of any published standard that a procurement office could reference in a tender document"
+      ],
+      "answer": 1,
+      "why": "The objections are about engineering and assurance rather than about whether the underlying physics is correct. Anyone arguing the other way has to answer those specific points instead of restating the theoretical guarantee.",
+      "why_vi": "Các phản đối nhắm vào kỹ thuật và mức bảo đảm chứ không nhắm vào việc vật lý nền tảng có đúng hay không. Ai muốn lập luận ngược lại thì phải trả lời đúng những điểm đó chứ không phải nhắc lại bảo đảm lý thuyết.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-065",
+      "q": "Satellite demonstrations favour a downlink over an uplink chiefly because",
+      "q_vi": "Các minh chứng vệ tinh thiên về tuyến xuống hơn tuyến lên chủ yếu vì",
+      "choices": [
+        "The turbulent layer sits near the ground, so a beam that has already spread by the time it reaches the atmosphere suffers far less extra divergence",
+        "The satellite can carry a much brighter source than any ground transmitter is permitted to operate",
+        "Detectors are easier to keep cold on the ground",
+        "The Doppler shift is smaller in that direction, so the receiver filter can be made narrower than it could be otherwise"
+      ],
+      "answer": 0,
+      "why": "Turbulence hurts most when it acts early in the path, since the deflection then has the whole remaining distance to grow into a displacement. Sending upward puts the disturbing layer right at the start and costs an order of magnitude in received power.",
+      "why_vi": "Nhiễu loạn gây hại nhiều nhất khi nó tác động ở đầu đường truyền, vì độ lệch khi đó có cả quãng đường còn lại để lớn thành một khoảng dịch chuyển. Phát ngược lên trên đặt lớp gây nhiễu ngay ở điểm xuất phát và làm mất khoảng một bậc độ lớn công suất thu.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-066",
+      "q": "A satellite link can beat a fibre of the same end to end length because free space loss grows",
+      "q_vi": "Tuyến vệ tinh có thể thắng sợi quang cùng chiều dài đầu cuối vì suy hao trong không gian tự do tăng theo",
+      "choices": [
+        "Linearly with distance, while fibre loss grows with the square of it",
+        "Only with the thickness of atmosphere crossed, so the vacuum part of the path is free of any penalty at all",
+        "Exponentially, but with a much smaller coefficient than fibre has",
+        "As the square of the distance, while fibre loss grows exponentially with length"
+      ],
+      "answer": 3,
+      "why": "Diffraction spreads a beam so that the collected fraction falls as a power law, whereas absorption and scattering in glass compound multiplicatively along the fibre. That difference in functional form, not any difference in constants, is what makes an orbital path competitive over thousands of kilometres.",
+      "why_vi": "Nhiễu xạ làm chùm tia loe ra nên phần thu được giảm theo luật luỹ thừa, còn hấp thụ và tán xạ trong thuỷ tinh thì nhân lên dồn dọc theo sợi. Chính sự khác nhau ở dạng hàm, chứ không phải khác nhau ở hằng số, mới làm cho đường bay quỹ đạo cạnh tranh được ở cự ly hàng nghìn kilômét.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-067",
+      "q": "Operating a free space link in daylight is possible because background photons are rejected",
+      "q_vi": "Vận hành tuyến không gian tự do ban ngày là khả thi vì photon nền bị loại bỏ",
+      "choices": [
+        "In three domains at once, by a narrow filter, a short gate and a small field of view",
+        "By subtracting an averaged background count measured in the intervals between the signal pulses",
+        "By one narrow interference filter placed directly in front of the detector, chosen at the signal wavelength",
+        "By polarisation alone, since scattered sunlight is completely unpolarised"
+      ],
+      "answer": 0,
+      "why": "Each domain removes only part of the flux, and the product of the three suppression factors is what brings the background under the signal. Daylight operation therefore constrains the telescope design and the timing system just as much as it constrains the filter.",
+      "why_vi": "Mỗi miền chỉ loại được một phần thông lượng, và chính tích của ba hệ số triệt đó mới kéo nền xuống dưới tín hiệu. Vì thế vận hành ban ngày ràng buộc thiết kế kính viễn vọng và hệ định thời không kém gì ràng buộc bộ lọc.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-068",
+      "q": "The pointing requirement for an orbital link is quoted in microradians because",
+      "q_vi": "Yêu cầu chỉ hướng cho tuyến quỹ đạo được nêu theo đơn vị micro radian vì",
+      "choices": [
+        "The atmosphere refracts the beam by about that angle, so the correction has to be applied at the same scale",
+        "Beam divergence is kept that small in order to limit the geometric loss, and any pointing error then throws the spot off the receiver",
+        "Detectors respond only to light arriving within that angular acceptance",
+        "The orbit is known only to that accuracy"
+      ],
+      "answer": 1,
+      "why": "The narrower the beam the more power lands on the aperture, and the less angular error the platform can afford. The two requirements pull in opposite directions, which is why acquisition and tracking dominates the engineering of these terminals.",
+      "why_vi": "Chùm càng hẹp thì công suất rơi vào khẩu độ càng nhiều, nhưng sai số góc mà thiết bị được phép mắc lại càng ít. Hai yêu cầu này kéo ngược chiều nhau, và đó là lý do khâu bắt bám và bám sát chiếm phần lớn công sức kỹ thuật của các đầu cuối này.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-069",
+      "q": "Polarisation encoding on a satellite pass needs active compensation because",
+      "q_vi": "Mã hoá phân cực trong một lượt bay vệ tinh cần bù trừ chủ động vì",
+      "choices": [
+        "The atmosphere rotates the polarisation by an amount that changes with the density of the air along the path",
+        "The reference frames of the two terminals rotate relative to each other as the satellite moves across the sky",
+        "Polarisation is not preserved in vacuum over such distances",
+        "The receiver telescope introduces a birefringence that grows with the elevation angle of the target"
+      ],
+      "answer": 1,
+      "why": "What one end calls horizontal is not what the other end calls horizontal once the geometry has changed, and the mismatch would show up directly as an error rate. The correction is computed from the known orbit and applied with a rotating wave plate or in software.",
+      "why_vi": "Cái mà một đầu gọi là phương ngang không còn là cái mà đầu kia gọi là phương ngang khi hình học đã đổi, và độ lệch đó hiện ra ngay thành tỉ lệ lỗi. Phép hiệu chỉnh được tính từ quỹ đạo đã biết rồi áp bằng bản sóng quay hoặc bằng phần mềm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-070",
+      "q": "Timing synchronisation during a pass is harder than on a fibre link because",
+      "q_vi": "Đồng bộ thời gian trong một lượt bay khó hơn trên tuyến sợi quang vì",
+      "choices": [
+        "The range changes continuously, so the delay to be compensated is a moving target throughout the pass",
+        "The clocks on board drift faster in orbit than they do in a ground station rack",
+        "The signal is too weak to carry a timing reference of any kind",
+        "Relativistic corrections change the length of the second measured on the satellite by an amount that matters at the gate width used"
+      ],
+      "answer": 0,
+      "why": "A gate a nanosecond wide has to follow a delay that shifts by microseconds over a few minutes, so the receiver must track a predicted ephemeris and refine it from the detected events. Getting this wrong shows up as loss rather than as error, which makes it easy to misdiagnose.",
+      "why_vi": "Một cửa gating rộng cỡ nano giây phải bám theo độ trễ dịch tới hàng micro giây trong vài phút, nên bên thu phải bám theo lịch quỹ đạo dự báo rồi tinh chỉnh từ chính các sự kiện thu được. Làm sai chỗ này thì hiện ra thành suy hao chứ không thành lỗi, nên rất dễ chẩn đoán nhầm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-071",
+      "q": "When a satellite establishes keys with two distant ground stations and then relays between them, the security architecture is",
+      "q_vi": "Khi một vệ tinh thiết lập khoá với hai trạm mặt đất ở xa nhau rồi chuyển tiếp giữa chúng, kiến trúc an toàn ở đây là",
+      "choices": [
+        "End to end, since the same photons are shared by both stations during the pass",
+        "Device independent, because the platform is out of reach of any physical tampering",
+        "Equivalent to a repeater chain, so no party other than the endpoints ever holds the material",
+        "That of a trusted node, with the spacecraft operator in possession of the key"
+      ],
+      "answer": 3,
+      "why": "Two separate sessions are run and combined on board, exactly as a ground relay would do. Distributing entangled pairs to both stations at once is the architecture that avoids this, and it pays for the property with a far lower rate.",
+      "why_vi": "Hai phiên riêng biệt được chạy rồi ghép lại ngay trên tàu, đúng như một nút chuyển tiếp mặt đất vẫn làm. Kiến trúc tránh được điều này là phân phối cặp rối tới cả hai trạm cùng lúc, và nó phải trả giá bằng tốc độ thấp hơn rất nhiều.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-072",
+      "q": "Distributing entangled pairs to two ground stations at once gives a rate that is much lower than a single downlink because",
+      "q_vi": "Phân phối cặp rối tới hai trạm mặt đất cùng lúc cho tốc độ thấp hơn nhiều so với một tuyến xuống đơn lẻ vì",
+      "choices": [
+        "The source has to be split between two telescopes, which halves the power available to each",
+        "Only coincidences count, so the two downlink transmittances multiply",
+        "Entangled photons are absorbed more strongly by the atmosphere than weak coherent pulses of the same wavelength",
+        "The two ground stations see the pass at different elevations, so only the overlapping window is usable"
+      ],
+      "answer": 1,
+      "why": "Each pair survives only if both halves arrive, so a loss of thirty decibels on each side becomes sixty in the coincidence rate. That is the honest price of removing the operator from the trust boundary.",
+      "why_vi": "Mỗi cặp chỉ sống sót nếu cả hai nửa cùng tới, nên suy hao ba mươi decibel mỗi phía trở thành sáu mươi trong tốc độ trùng phùng. Đó là cái giá trung thực của việc đưa nhà khai thác ra khỏi vòng tin cậy.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-073",
+      "q": "A low orbit pass yields a limited block of key, and the operational consequence for the ground segment is that",
+      "q_vi": "Một lượt bay quỹ đạo thấp chỉ cho một khối khoá hạn chế, và hệ quả vận hành cho phân hệ mặt đất là",
+      "choices": [
+        "The key has to be consumed during the pass, since material left over cannot be stored securely",
+        "The postprocessing has to run on board, because the ground station has no access to the raw detection record",
+        "Applications must be fed from a buffer that a pass tops up now and then, so the design problem is scheduling rather than throughput",
+        "The protocol must be switched to a continuous variable scheme, whose key rate does not depend on the length of the observation window"
+      ],
+      "answer": 2,
+      "why": "A few passes a day over one station give a modest and bursty supply, which suits refreshing symmetric keys rather than carrying bulk traffic. Claims about satellite key rates should always be checked against how many usable passes the site actually gets.",
+      "why_vi": "Vài lượt bay mỗi ngày trên một trạm chỉ cho nguồn cung khiêm tốn và giật cục, hợp với việc làm mới khoá đối xứng chứ không hợp với việc tải lưu lượng lớn. Mọi khẳng định về tốc độ khoá vệ tinh đều nên đối chiếu với số lượt bay dùng được thật sự của trạm đó.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-074",
+      "q": "Cloud cover shapes the design of a satellite key distribution service mainly by forcing",
+      "q_vi": "Mây che chi phối thiết kế dịch vụ phân phối khoá bằng vệ tinh chủ yếu bằng cách buộc phải",
+      "choices": [
+        "A move to a longer wavelength that passes through cloud without significant attenuation",
+        "The use of an adaptive optics system able to correct the wavefront distortion introduced by thin cloud layers",
+        "Continuous operation regardless of conditions, since the protocol tolerates any level of loss",
+        "A network of ground stations spread widely enough that their weather is not correlated"
+      ],
+      "answer": 3,
+      "why": "Optical links are simply blocked by cloud, and no filtering or coding recovers a photon that never arrived. Availability then becomes a question of site diversity and long term meteorological statistics rather than of optics.",
+      "why_vi": "Tuyến quang bị mây chặn hẳn, và không phép lọc hay mã hoá nào cứu lại được một photon chưa từng tới nơi. Khi đó độ khả dụng trở thành bài toán về sự phân tán vị trí trạm và thống kê khí tượng dài hạn, chứ không còn là bài toán quang học.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-075",
+      "q": "Adaptive optics helps a downlink most when the receiver",
+      "q_vi": "Quang học thích nghi giúp tuyến xuống nhiều nhất khi bên thu",
+      "choices": [
+        "Runs a continuous variable protocol needing the light coupled into a single mode fibre",
+        "Uses free running detectors with a wide field of view, since the correction then removes the need for a spatial filter",
+        "Operates at night, when turbulence is strongest",
+        "Is placed at sea level, where the whole depth of the atmosphere has to be crossed before the light arrives"
+      ],
+      "answer": 0,
+      "why": "Coupling a distorted wavefront into a single mode is the step that punishes turbulence hardest, so restoring the wavefront pays off directly there. A photon counting receiver with a multimode fibre and a large detector gains far less from the same correction.",
+      "why_vi": "Ghép một mặt sóng đã méo vào một mode đơn là bước bị nhiễu loạn phạt nặng nhất, nên khôi phục mặt sóng mang lại lợi ích trực tiếp đúng ở đó. Bên thu đếm photon dùng sợi đa mode và bộ tách sóng diện tích lớn thu được ít hơn nhiều từ cùng phép hiệu chỉnh ấy.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-076",
+      "q": "Geostationary rather than low orbit deployment trades",
+      "q_vi": "Triển khai ở quỹ đạo địa tĩnh thay vì quỹ đạo thấp là đánh đổi giữa",
+      "choices": [
+        "A simpler spacecraft against a more complicated ground segment",
+        "Continuous visibility against a much larger diffraction loss",
+        "Lower radiation exposure against a shorter mission lifetime",
+        "A wider choice of wavelength against a narrower choice of protocol, since only some encodings survive the longer path"
+      ],
+      "answer": 1,
+      "why": "A link roughly forty times longer costs on the order of thirty decibels more from beam spreading alone. What is bought is a terminal that never has to reacquire and a service that does not wait for the next pass.",
+      "why_vi": "Tuyến dài gấp khoảng bốn mươi lần phải trả thêm cỡ ba mươi decibel chỉ riêng vì chùm tia loe ra. Cái mua được là một đầu cuối không bao giờ phải bắt bám lại và một dịch vụ không phải chờ lượt bay kế tiếp.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-077",
+      "q": "Scintillation makes the transmittance of an atmospheric channel fluctuate, and the useful response in the postprocessing is to",
+      "q_vi": "Nhấp nháy khí quyển làm độ truyền qua của kênh dao động, và cách xử lý hữu ích ở khâu hậu xử lý là",
+      "choices": [
+        "Average the transmittance over the whole pass and use that single figure in the key rate formula",
+        "Increase the source intensity whenever the measured transmittance drops below its mean value",
+        "Sort the data by measured transmittance and treat the high transmittance intervals as a separate block",
+        "Discard every interval in which the transmittance departs from the mean, in either direction, by more than one standard deviation"
+      ],
+      "answer": 2,
+      "why": "Bad intervals carry mostly noise, and mixing them with good ones raises the error rate that the whole block must be charged with. Sorting has to be done from a monitored classical signal and declared in advance, or the selection itself becomes a channel the adversary can steer.",
+      "why_vi": "Các khoảng xấu chủ yếu mang nhiễu, và trộn chúng với khoảng tốt sẽ đẩy tỉ lệ lỗi mà cả khối phải gánh lên cao. Việc phân loại phải dựa vào một tín hiệu cổ điển được giám sát và phải khai báo trước, nếu không thì chính phép chọn lại thành một kênh mà kẻ địch điều khiển được.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-078",
+      "q": "Single photon detectors flown in orbit degrade over the mission because",
+      "q_vi": "Bộ tách sóng đơn photon bay trên quỹ đạo suy giảm dần trong suốt sứ mệnh vì",
+      "choices": [
+        "Vacuum operation slowly removes the passivation layer from the surface of the semiconductor",
+        "Thermal cycling across each orbit changes the breakdown voltage beyond the range the bias circuit can follow",
+        "Radiation creates defects in the semiconductor and the dark count rate climbs",
+        "The optical window darkens under ultraviolet exposure, which reduces the efficiency by a few percent per year of operation"
+      ],
+      "answer": 2,
+      "why": "A higher noise floor cuts the maximum tolerable loss, so the usable part of each pass shrinks as the mission ages. Cooling the device and annealing it periodically recovers part of the damage, which is why the thermal design is tied to the security budget.",
+      "why_vi": "Sàn nhiễu cao lên thì mức suy hao chịu được tối đa giảm xuống, nên phần dùng được của mỗi lượt bay hẹp dần theo tuổi của sứ mệnh. Làm lạnh thiết bị và ủ nhiệt định kỳ lấy lại được một phần hư hại, vì thế thiết kế nhiệt gắn chặt với ngân sách an toàn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-079",
+      "q": "Comparing quantum repeaters with satellites as routes to intercontinental distribution, the fair statement today is that",
+      "q_vi": "So sánh bộ lặp lượng tử với vệ tinh như hai con đường tới phân phối xuyên lục địa, phát biểu công bằng ở thời điểm hiện tại là",
+      "choices": [
+        "Repeaters are already deployed on submarine routes while satellites remain at the demonstration stage",
+        "Neither has ever produced a key over more than a few hundred kilometres",
+        "Both are equally mature, and the choice between them is decided purely by the cost of the ground infrastructure",
+        "Satellites have carried keys between continents, while repeater chains long enough to matter still need quantum memories that do not yet exist at the required performance"
+      ],
+      "answer": 3,
+      "why": "Orbital links exist and work, though with a trusted platform in most demonstrations and with a modest key volume per pass. Repeater based routes would remove the trusted node but depend on memories with lifetimes and efficiencies that laboratories are still working towards.",
+      "why_vi": "Tuyến quỹ đạo đã tồn tại và chạy được, dù phần lớn minh chứng vẫn dùng nền tảng tin cậy và lượng khoá mỗi lượt bay khá khiêm tốn. Tuyến dựa trên bộ lặp sẽ gỡ được nút tin cậy nhưng lại phụ thuộc vào bộ nhớ có thời gian sống và hiệu suất mà các phòng thí nghiệm vẫn đang hướng tới.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-080",
+      "q": "A ground station reports a raw detection rate that stays healthy while the error rate rises steeply near the horizon. The most likely cause is",
+      "q_vi": "Một trạm mặt đất báo tốc độ đếm thô vẫn tốt trong khi tỉ lệ lỗi tăng vọt lúc vệ tinh gần đường chân trời. Nguyên nhân khả dĩ nhất là",
+      "choices": [
+        "An eavesdropper who becomes active only when the satellite is at a low elevation angle above the horizon",
+        "A pointing error, which would show up first as a fall in the detected count",
+        "A longer atmospheric path bringing more background light into a signal that has itself become weaker",
+        "Degradation of the on board source, which would however affect the whole pass rather than just one part of it"
+      ],
+      "answer": 2,
+      "why": "Near the horizon the slant path through the atmosphere is several times longer, so scattered light rises while the signal falls, and the ratio between them is what the error rate reports. Reading the same symptom as evidence of an eavesdropper is the classic mistake in operating these links.",
+      "why_vi": "Gần đường chân trời thì đường xiên qua khí quyển dài gấp nhiều lần, nên ánh sáng tán xạ tăng trong khi tín hiệu giảm, và tỉ lệ lỗi chính là tỉ số giữa hai thứ đó. Đọc cùng triệu chứng ấy thành bằng chứng có kẻ nghe lén là sai lầm kinh điển khi vận hành các tuyến này.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-081",
+      "q": "Against the harvest now and decrypt later threat, the relevant difference between the two technologies is that",
+      "q_vi": "Trước mối đe doạ thu thập bây giờ rồi giải mã sau, khác biệt đáng kể giữa hai công nghệ là",
+      "choices": [
+        "Deploying either one protects traffic that an adversary recorded before the deployment took place",
+        "Neither addresses the threat, since a recorded ciphertext can always be attacked offline with unlimited time",
+        "Post quantum algorithms can be rolled out across an existing estate quickly, while a link based solution protects only the links that were built",
+        "Only a physical scheme helps, because a mathematical assumption may fall at any moment"
+      ],
+      "answer": 2,
+      "why": "Recorded traffic is beyond saving in both cases, so what matters is how fast and how widely the protection can be extended to future traffic. A software update reaches the whole estate while a new optical link reaches exactly two sites.",
+      "why_vi": "Lưu lượng đã bị ghi lại thì cả hai đều không cứu được, nên điều quan trọng là lớp bảo vệ mở rộng ra lưu lượng tương lai nhanh tới đâu và rộng tới đâu. Một bản cập nhật phần mềm với tới toàn bộ hạ tầng, còn một tuyến quang mới chỉ với tới đúng hai điểm.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-082",
+      "q": "For signing a firmware image that will be verified on thousands of devices, key distribution hardware is",
+      "q_vi": "Để ký một ảnh phần sụn sẽ được kiểm chứng trên hàng nghìn thiết bị, thiết bị phân phối khoá là",
+      "choices": [
+        "The wrong tool, since the problem needs a signature and what it produces is a shared secret",
+        "Suitable if the manufacturer runs a link to each device before shipping it out of the factory",
+        "Suitable, because a symmetric tag serves the same purpose as a signature does",
+        "Preferable, because a signature verified with a public key can be forged by a quantum computer while a physical key never can"
+      ],
+      "answer": 0,
+      "why": "Verification by many parties who do not share a secret with the signer is exactly what public key signatures are for. This is the clearest example of a task where the two technologies are not substitutes at all, and it is where post quantum algorithms are the only answer available.",
+      "why_vi": "Kiểm chứng bởi nhiều bên vốn không chia sẻ bí mật nào với bên ký chính là việc mà chữ ký khoá công khai sinh ra để làm. Đây là ví dụ rõ nhất cho một nhiệm vụ mà hai công nghệ không hề thay thế được cho nhau, và cũng là chỗ mà thuật toán hậu lượng tử là câu trả lời duy nhất.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-083",
+      "q": "The phrase unconditional security applied to a fielded key distribution product should be read as meaning",
+      "q_vi": "Cụm từ an toàn vô điều kiện gắn cho một sản phẩm phân phối khoá đã đưa vào sử dụng nên được hiểu là",
+      "choices": [
+        "No assumption of any kind is being made about the equipment involved",
+        "The security holds against an adversary with unlimited computing power, given that the devices behave as the model says",
+        "The system has been certified by a national authority against a recognised protection profile that covers this class of equipment",
+        "No attack has been published against this particular product since it was released"
+      ],
+      "answer": 1,
+      "why": "The phrase refers to the absence of a computational assumption, not to the absence of assumptions. Every implementation attack of the past two decades has worked by violating a physical assumption that the proof quietly relied on.",
+      "why_vi": "Cụm từ này nói tới việc không có giả thiết về độ khó tính toán, chứ không nói tới việc không có giả thiết nào cả. Mọi tấn công vào cài đặt trong hai chục năm qua đều thành công bằng cách phá vỡ một giả thiết vật lý mà chứng minh lặng lẽ dựa vào.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-084",
+      "q": "Connecting fifty sites so that any pair can communicate securely illustrates a scaling difference, because",
+      "q_vi": "Kết nối năm mươi điểm sao cho mọi cặp đều liên lạc an toàn cho thấy một khác biệt về quy mô, vì",
+      "choices": [
+        "A certificate scheme needs one credential per site, while links or relays must be built",
+        "The number of algorithms to be validated grows with the number of sites in the classical case",
+        "Both approaches need a connection between every pair of sites, so the cost is identical in the two cases",
+        "A physical network needs only one link, since the key can be forwarded by ordinary routers to whichever site asks for it"
+      ],
+      "answer": 0,
+      "why": "Public key methods reach an arbitrary peer through a shared trust anchor and existing routing. A link based network must either build the fibre or accept relays that hold the key, which is a cost and a trust question rather than a physics question.",
+      "why_vi": "Phương pháp khoá công khai với tới một đối tác bất kỳ thông qua một mỏ neo tin cậy chung và hạ tầng định tuyến sẵn có. Mạng dựa trên tuyến truyền thì hoặc phải kéo sợi quang, hoặc phải chấp nhận các nút chuyển tiếp nắm khoá, đó là câu chuyện chi phí và tin cậy chứ không phải câu chuyện vật lý.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-085",
+      "q": "The claim that a quantum link detects any eavesdropper needs qualifying, because what is actually detected is",
+      "q_vi": "Khẳng định rằng tuyến lượng tử phát hiện được mọi kẻ nghe lén cần được nói lại cho đúng, vì cái thật sự phát hiện được là",
+      "choices": [
+        "The identity of the attacking party, once the disturbance pattern has been matched against known attack signatures",
+        "The location along the fibre at which the interception took place, from the timing of the disturbed rounds",
+        "Any tampering at all, including tampering with the classical channel and with the equipment inside the two endpoints",
+        "A statistical disturbance that cannot be distinguished from ordinary channel noise"
+      ],
+      "answer": 3,
+      "why": "The protocol reacts by assuming the worst and shrinking or refusing the key, which is a safe response but not a diagnosis. It says nothing about who is present, where they are, or whether anyone is there at all.",
+      "why_vi": "Giao thức phản ứng bằng cách giả thiết trường hợp xấu nhất rồi cắt bớt hoặc từ chối cấp khoá, đó là phản ứng an toàn nhưng không phải một chẩn đoán. Nó không nói gì về việc ai đang ở đó, ở chỗ nào, hay thậm chí có ai ở đó hay không.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-086",
+      "q": "Both technologies need a root of trust, and the comparison is fair only when one notes that",
+      "q_vi": "Cả hai công nghệ đều cần một gốc tin cậy, và phép so sánh chỉ công bằng khi lưu ý rằng",
+      "choices": [
+        "One needs a certificate authority while the other needs a pre shared secret for the first authentication",
+        "Only the mathematical approach needs one, since physics identifies the party at the far end",
+        "Only the physical approach needs one, since certificates are self validating once they have been issued",
+        "The root of trust can be dispensed with entirely if the two endpoints happen to be inside the same building"
+      ],
+      "answer": 0,
+      "why": "Neither approach creates trust from nothing, and both start from something distributed by other means. The interesting question is which anchor an organisation can manage well, not which one exists.",
+      "why_vi": "Không cách nào tạo ra tin cậy từ hư không, cả hai đều xuất phát từ một thứ được phân phối bằng phương tiện khác. Câu hỏi đáng bàn là tổ chức quản lý tốt được mỏ neo nào, chứ không phải mỏ neo nào tồn tại.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-087",
+      "q": "The threat that a large quantum computer poses to symmetric ciphers such as AES with a two hundred and fifty six bit key is",
+      "q_vi": "Mối đe doạ mà một máy tính lượng tử lớn đặt ra cho các mật mã đối xứng như AES với khoá hai trăm năm mươi sáu bit là",
+      "choices": [
+        "Severe, since the same algorithm that factors integers also inverts a block cipher",
+        "Severe, because the key can be recovered from a single known plaintext in polynomial time",
+        "Modest, since the best known speedup only halves the effective key length",
+        "Nonexistent, because symmetric ciphers are provably secure against any adversary at all"
+      ],
+      "answer": 2,
+      "why": "A square root search still leaves an infeasible workload at this key length, and the speedup parallelises poorly. The urgent problem is public key exchange and signatures, which is where the migration effort is actually directed.",
+      "why_vi": "Tìm kiếm với tốc độ căn bậc hai vẫn để lại khối lượng công việc bất khả thi ở độ dài khoá này, và phần tăng tốc đó lại song song hoá rất kém. Vấn đề cấp bách là trao đổi khoá và chữ ký khoá công khai, và đó cũng chính là nơi công sức chuyển đổi đang thật sự đổ vào.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-088",
+      "q": "An organisation whose incidents have all involved stolen credentials and compromised endpoints should note that a quantum link",
+      "q_vi": "Một tổ chức mà mọi sự cố đều liên quan tới lộ thông tin đăng nhập và máy đầu cuối bị chiếm nên lưu ý rằng tuyến lượng tử",
+      "choices": [
+        "Would have prevented those incidents, since the attacker could not have read traffic in transit",
+        "Cannot be assessed against them until the error rate on the existing fibre routes has been measured",
+        "Would help indirectly, by forcing an attacker to work at the endpoints rather than on the wire",
+        "Addresses none of them, because it protects a channel and the failures were at the ends of it"
+      ],
+      "answer": 3,
+      "why": "Key distribution secures the transport of key material and nothing else. Spending a hardware budget on it while the recorded failure mode sits elsewhere is a misallocation, however sound the underlying physics may be.",
+      "why_vi": "Phân phối khoá bảo vệ khâu vận chuyển vật liệu khoá và không bảo vệ gì thêm. Dồn ngân sách phần cứng vào đó trong khi kiểu hỏng đã ghi nhận nằm ở chỗ khác là phân bổ sai nguồn lực, dù vật lý nền tảng có vững tới đâu.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-089",
+      "q": "Comparing a quoted secret key rate in kilobits per second against the handshake throughput of a post quantum library is a flawed comparison because",
+      "q_vi": "Đem tốc độ khoá bí mật tính bằng kilobit trên giây ra so với thông lượng bắt tay của một thư viện hậu lượng tử là phép so sánh sai vì",
+      "choices": [
+        "The library figure depends on the processor used, so it cannot be reproduced by anyone else",
+        "The two numbers measure different things, namely the supply of key material and the cost of establishing a session",
+        "Key rate is measured after privacy amplification while handshake throughput is measured before any compression takes place",
+        "One is measured on a link under test conditions and the other under a load that no deployment would ever generate"
+      ],
+      "answer": 1,
+      "why": "A handshake produces a session key in a few milliseconds on ordinary hardware, so the meaningful comparison is against how much key material each approach can supply for the intended usage pattern. Setting the two figures side by side without stating the usage is a common way to make either look better.",
+      "why_vi": "Một lần bắt tay tạo ra khoá phiên trong vài mili giây trên phần cứng thông thường, nên phép so sánh có ý nghĩa là so lượng vật liệu khoá mà mỗi cách cấp được cho đúng kiểu sử dụng dự kiến. Đặt hai con số cạnh nhau mà không nói rõ kiểu sử dụng là cách quen thuộc để bên nào cũng có thể trông đẹp hơn.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-090",
+      "q": "The property that a quantum link genuinely offers and a computational key exchange cannot is that",
+      "q_vi": "Tính chất mà tuyến lượng tử thật sự mang lại còn trao đổi khoá theo độ khó tính toán thì không có là",
+      "choices": [
+        "The two parties can be certain of each other's identity without any prior arrangement between them",
+        "The key is generated faster than any algorithm could generate one of the same length",
+        "No secret material has to be stored at either endpoint after the session closes",
+        "A future advance in cryptanalysis cannot retroactively expose a key that was distributed years earlier"
+      ],
+      "answer": 3,
+      "why": "This is the everlasting security argument and it is the strongest honest case for the technology. It applies to the key distribution step alone, and it survives only if the device assumptions held at the time the key was made.",
+      "why_vi": "Đây là lập luận an toàn vĩnh viễn và là lý lẽ trung thực mạnh nhất cho công nghệ này. Nó chỉ áp cho bước phân phối khoá, và chỉ đứng vững nếu các giả thiết về thiết bị đã đúng vào thời điểm khoá được tạo ra.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-091",
+      "q": "A quantum random number generator and a key distribution system are sometimes confused, but they differ in that",
+      "q_vi": "Bộ sinh số ngẫu nhiên lượng tử và hệ phân phối khoá đôi khi bị nhầm lẫn, nhưng chúng khác nhau ở chỗ",
+      "choices": [
+        "One produces unpredictable bits at a single location, while the other produces matching bits at two locations",
+        "One is a physical device and the other is implemented purely in software on ordinary hardware",
+        "One has been standardised internationally while the other has no published specification of any kind",
+        "One requires a dedicated fibre and the other requires only an ordinary network connection to work properly in practice"
+      ],
+      "answer": 0,
+      "why": "Correlation across a distance is the hard part and is what the link buys. A generator is a component inside such a system, since the basis and intensity choices have to be unpredictable, but on its own it distributes nothing.",
+      "why_vi": "Phần khó là tạo được tương quan qua khoảng cách, và đó chính là thứ tuyến truyền mang lại. Bộ sinh số ngẫu nhiên là một thành phần bên trong hệ đó, vì lựa chọn cơ sở và cường độ phải không đoán trước được, nhưng bản thân nó không phân phối gì cả.",
+      "level": 1
+    },
+    {
+      "id": "qqkd-092",
+      "q": "Mosca's inequality is used in migration planning to compare",
+      "q_vi": "Bất đẳng thức Mosca được dùng trong lập kế hoạch chuyển đổi để so sánh",
+      "choices": [
+        "The cost of a quantum link against the cost of a software upgrade, taken over the whole service life of the equipment",
+        "The key rate of a link against the total key consumption of all the applications that will eventually draw on it",
+        "How long data must stay secret, plus how long migration takes, against how long the threat takes to arrive",
+        "The error rate of a channel against the threshold of the protocol running on it"
+      ],
+      "answer": 2,
+      "why": "When the first two added together exceed the third, action is already overdue. The argument is about scheduling and it applies whichever protective technology is eventually chosen.",
+      "why_vi": "Khi tổng hai đại lượng đầu vượt quá đại lượng thứ ba thì đã muộn để bắt đầu hành động. Lập luận này bàn về tiến độ và nó đúng bất kể cuối cùng chọn công nghệ bảo vệ nào.",
+      "level": 2
+    },
+    {
+      "id": "qqkd-093",
+      "q": "The deployment case in which a quantum link is easiest to justify on its merits is",
+      "q_vi": "Trường hợp triển khai dễ biện minh nhất cho một tuyến lượng tử xét trên chính giá trị của nó là",
+      "choices": [
+        "A mobile workforce needing secure access from arbitrary networks around the world",
+        "A pair of sites under one operator, joined by dark fibre, exchanging data that must stay secret for decades",
+        "A public web service whose visitors arrive without any prior relationship with the operator",
+        "An embedded fleet in the field, where each unit has to verify updates it receives from the manufacturer"
+      ],
+      "answer": 1,
+      "why": "The requirements that suit the technology are a short controlled route, both endpoints under one authority, and a secrecy horizon long enough for the everlasting property to be worth paying for. The other cases need public key methods because there is no prior relationship or no fibre.",
+      "why_vi": "Những yêu cầu hợp với công nghệ này là tuyến ngắn và kiểm soát được, hai đầu cùng thuộc một chủ thể, và chân trời bí mật đủ dài để tính chất vĩnh viễn đáng đồng tiền. Các trường hợp còn lại phải dùng phương pháp khoá công khai vì không có quan hệ từ trước hoặc không có sợi quang.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-094",
+      "q": "In terms of certification maturity, the position today is that",
+      "q_vi": "Xét về độ chín của công tác chứng nhận, tình hình hiện nay là",
+      "choices": [
+        "Optical modules have a longer track record of formal evaluation, since they have been sold commercially for two decades",
+        "Neither field has any validation programme that a procurement office could point to in a tender",
+        "Selected post quantum algorithms have standards and a validation path, while evaluation of optical modules is newer",
+        "Both are equally mature, since the same laboratories evaluate cryptographic modules of either kind against one common methodology"
+      ],
+      "answer": 2,
+      "why": "An algorithm can be tested against fixed vectors by any laboratory, which is what makes a validation programme practical. Evaluating an optical module means checking physical assumptions on a specific unit, and the standards for doing so are recent and still gaining coverage.",
+      "why_vi": "Một thuật toán có thể được kiểm bằng các vectơ cố định ở bất kỳ phòng thí nghiệm nào, chính điều đó khiến chương trình hợp chuẩn khả thi. Đánh giá một mô đun quang lại là kiểm các giả thiết vật lý trên đúng một thiết bị cụ thể, và tiêu chuẩn cho việc đó mới ra đời và vẫn đang mở rộng phạm vi.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-095",
+      "q": "A vendor states that its system is immune to attack by quantum computers. The most useful follow up question is",
+      "q_vi": "Một nhà cung cấp tuyên bố hệ thống của họ miễn nhiễm với tấn công bằng máy tính lượng tử. Câu hỏi tiếp theo hữu ích nhất là",
+      "choices": [
+        "Whether the source is a true single photon emitter or an attenuated laser operated with decoy intensities",
+        "Whether the quantum channel uses polarisation encoding or time bin encoding for the transmitted states",
+        "How many kilometres of fibre the link has been demonstrated over during factory acceptance testing",
+        "Whether the claim covers the authentication of the classical channel and the protection of the key once it is stored"
+      ],
+      "answer": 3,
+      "why": "The claim is usually true of the key distribution step and silent about everything around it, which is where the deployed system actually stands or falls. The technical details are interesting but they do not test the boundary of the claim being made.",
+      "why_vi": "Khẳng định đó thường đúng cho bước phân phối khoá và im lặng về mọi thứ xung quanh, mà chính phần xung quanh mới quyết định hệ thống triển khai đứng hay đổ. Các chi tiết kỹ thuật thì thú vị nhưng không kiểm được ranh giới của chính khẳng định đang được đưa ra.",
+      "level": 3
+    },
+    {
+      "id": "qqkd-096",
+      "q": "Running a post quantum key exchange and a quantum link in parallel, then combining their outputs, is criticised on the ground that it",
+      "q_vi": "Chạy song song một lần trao đổi khoá hậu lượng tử với một tuyến lượng tử rồi trộn hai kết quả lại bị phê bình ở điểm là",
+      "choices": [
+        "Weakens both, since the combiner cannot be stronger than its weaker input",
+        "Adds cost and operational complexity for a benefit that is hard to quantify",
+        "Breaks the security proof of the quantum protocol, which assumes the key is used on its own",
+        "Doubles the key consumption of the applications that draw on the resulting material"
+      ],
+      "answer": 1,
+      "why": "A properly built combiner is at least as strong as its stronger input, so the security objection does not hold. The real objection is economic, and answering it means stating which specific threat justifies carrying two systems instead of one.",
+      "why_vi": "Một bộ trộn được xây đúng cách thì mạnh ít nhất bằng đầu vào mạnh hơn, nên phản đối về mặt an toàn không đứng vững. Phản đối thật sự là về kinh tế, và trả lời nó nghĩa là phải nêu rõ mối đe doạ cụ thể nào biện minh cho việc gánh hai hệ thống thay vì một.",
+      "level": 3
+    }
+  ]
+}

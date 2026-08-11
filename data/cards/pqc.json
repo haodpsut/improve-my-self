@@ -1,0 +1,1633 @@
+{
+  "schema": 1,
+  "id": "pqc",
+  "updated": "2026-08-09",
+  "cards": [
+    {
+      "id": "q-post-quantum",
+      "en": "Post-quantum cryptography",
+      "vi": "Mật mã hậu lượng tử",
+      "def_en": "Classical algorithms designed to stay secure even against an adversary with a quantum computer.",
+      "def_vi": "Các thuật toán cổ điển được thiết kế để vẫn an toàn trước đối thủ có máy tính lượng tử.",
+      "say": "Post quantum cryptography runs on today's hardware, it is not quantum itself.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-lattice-crypto",
+      "en": "Lattice based cryptography",
+      "vi": "Mật mã dựa trên lưới",
+      "def_en": "Post quantum schemes whose security rests on hard lattice problems such as learning with errors, the basis of the main NIST selections.",
+      "def_vi": "Các hệ hậu lượng tử dựa vào bài toán lưới khó như học có lỗi, nền tảng của những lựa chọn chính từ NIST.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-code-based-crypto",
+      "en": "Code based cryptography",
+      "vi": "Mật mã dựa trên mã sửa sai",
+      "def_en": "Post quantum encryption built on the hardness of decoding random linear codes, long studied and conservative but with very large keys.",
+      "def_vi": "Mật mã hậu lượng tử dựa trên độ khó của việc giải mã mã tuyến tính ngẫu nhiên, được nghiên cứu lâu và an toàn thận trọng nhưng khoá rất lớn.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-multivariate-crypto",
+      "en": "Multivariate cryptography",
+      "vi": "Mật mã đa biến",
+      "def_en": "Schemes based on solving systems of multivariate polynomial equations, giving short signatures but with a history of broken proposals.",
+      "def_vi": "Các hệ dựa trên việc giải hệ phương trình đa thức nhiều biến, cho chữ ký ngắn nhưng lịch sử có nhiều đề xuất bị phá.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-hash-based-signature",
+      "en": "Hash based signature",
+      "vi": "Chữ ký dựa trên hàm băm",
+      "def_en": "Signatures whose security reduces to properties of a hash function alone, the most conservative post quantum option though often stateful.",
+      "def_vi": "Chữ ký mà độ an toàn quy về tính chất của riêng một hàm băm, đây là lựa chọn hậu lượng tử thận trọng nhất dù nhiều sơ đồ phải giữ trạng thái.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-nist-pqc",
+      "en": "NIST post quantum standardisation",
+      "vi": "Chuẩn hoá hậu lượng tử của NIST",
+      "def_en": "The public process that selected and standardised post quantum key establishment and signature schemes for general use.",
+      "def_vi": "Quy trình công khai chọn và chuẩn hoá các sơ đồ thiết lập khoá và chữ ký hậu lượng tử cho sử dụng phổ thông.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "q-harvest-now",
+      "en": "Harvest now decrypt later",
+      "vi": "Thu hoạch bây giờ, giải mã sau",
+      "def_en": "The attack of recording encrypted traffic today so it can be decrypted once a capable quantum computer exists.",
+      "def_vi": "Kiểu tấn công ghi lại lưu lượng đã mã hoá từ hôm nay để giải mã khi có máy tính lượng tử đủ mạnh.",
+      "say": "Data with a ten year secrecy requirement is already at risk today.",
+      "tags": [
+        "security"
+      ]
+    },
+    {
+      "id": "pqc-shortest-vector",
+      "en": "Shortest vector problem",
+      "vi": "Bài toán vectơ ngắn nhất",
+      "def_en": "Given an arbitrary basis of a lattice, find a nonzero lattice point of minimum length; the basis you are handed is long and skewed, and no known algorithm recovers a short vector in polynomial time as the dimension grows, which is what lattice schemes lean on.",
+      "def_vi": "Cho một cơ sở tuỳ ý của lưới, hãy tìm điểm lưới khác không có độ dài nhỏ nhất. Cơ sở được đưa cho ta thường dài và méo, và chưa có thuật toán nào tìm được vectơ ngắn trong thời gian đa thức khi số chiều tăng, đó chính là chỗ dựa của các hệ mật dựa trên lưới.",
+      "say": "The shortest vector problem stays hard even when a short vector provably exists in the lattice.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-closest-vector",
+      "en": "Closest vector problem",
+      "vi": "Bài toán vectơ gần nhất",
+      "def_en": "Given a target point that sits off the lattice, find the lattice point nearest to it; decryption in lattice schemes is exactly an easy instance of this, solvable only because the holder of the secret key owns a short, nearly orthogonal basis.",
+      "def_vi": "Cho một điểm nằm lệch khỏi lưới, hãy tìm điểm lưới gần nó nhất. Việc giải mã trong các hệ dựa trên lưới đúng là một trường hợp dễ của bài toán này, giải được chỉ vì người giữ khoá bí mật có một cơ sở ngắn và gần trực giao.",
+      "say": "Decryption succeeds because the private basis turns the closest vector problem into simple rounding.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-basis-reduction",
+      "en": "Lattice basis reduction",
+      "vi": "Rút gọn cơ sở lưới",
+      "def_en": "The family of algorithms, from Lenstra Lenstra Lovasz up to block Korkine Zolotarev, that trade running time for basis quality; security estimates for lattice schemes are really estimates of how large a block size an attacker can afford.",
+      "def_vi": "Họ thuật toán, từ Lenstra Lenstra Lovasz đến block Korkine Zolotarev, đánh đổi thời gian chạy lấy chất lượng cơ sở. Ước lượng an ninh của các hệ dựa trên lưới thực chất là ước lượng xem kẻ tấn công đủ sức chạy với kích thước khối lớn đến đâu.",
+      "say": "Every lattice security claim is a bet on how far basis reduction will improve over the next decade.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-lwe",
+      "en": "Learning with errors",
+      "vi": "Học có lỗi",
+      "def_en": "You are shown many noisy linear equations over a modulus, each of the form inner product of a public vector with a hidden secret plus a small error; without the noise Gaussian elimination solves it instantly, so the whole hardness lives in the error term.",
+      "def_vi": "Bạn được cho nhiều phương trình tuyến tính có nhiễu trên một modulo, mỗi phương trình là tích trong của một vectơ công khai với bí mật ẩn cộng thêm một sai số nhỏ. Không có nhiễu thì phép khử Gauss giải ngay, nên toàn bộ độ khó nằm ở số hạng sai số.",
+      "say": "Strip the error term away and learning with errors collapses into linear algebra a student can do by hand.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-ring-lwe",
+      "en": "Ring learning with errors",
+      "vi": "Học có lỗi trên vành",
+      "def_en": "Learning with errors moved into a polynomial ring, so one ring element replaces a whole matrix row; keys shrink by a factor of the dimension and multiplication becomes a number theoretic transform, at the cost of assuming the added ring structure buys the attacker nothing.",
+      "def_vi": "Bài toán học có lỗi được chuyển sang vành đa thức, nên một phần tử vành thay cho cả một hàng ma trận. Khoá nhỏ đi theo bậc của số chiều và phép nhân trở thành biến đổi số học, đổi lại ta phải giả thiết rằng cấu trúc vành thêm vào không giúp gì cho kẻ tấn công.",
+      "say": "Ring learning with errors buys speed and small keys by adding structure that nobody has yet learned to exploit.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-module-lwe",
+      "en": "Module learning with errors",
+      "vi": "Học có lỗi trên môđun",
+      "def_en": "The middle setting between plain and ring learning with errors, where the secret is a short vector of ring elements; raising the security level means adding a row and a column to a small matrix rather than switching to a new ring, which is why the NIST lattice standards chose it.",
+      "def_vi": "Mức trung gian giữa học có lỗi thuần và học có lỗi trên vành, ở đó bí mật là một vectơ ngắn gồm các phần tử vành. Nâng mức an ninh chỉ cần thêm một hàng và một cột vào ma trận nhỏ chứ không phải đổi sang vành khác, đó là lý do các chuẩn lưới của NIST chọn cách này.",
+      "say": "Module learning with errors lets one implementation cover every security level by changing a single dimension parameter.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-noise-rate",
+      "en": "Noise to modulus ratio",
+      "vi": "Tỉ lệ nhiễu trên modulo",
+      "def_en": "The parameter that decides both security and correctness in a lattice scheme: more noise relative to the modulus makes the problem harder but raises the chance that decryption rounds to the wrong bit, so parameter sets are chosen to sit just inside an agreed failure probability.",
+      "def_vi": "Tham số quyết định cả an ninh lẫn tính đúng đắn trong một hệ dựa trên lưới. Nhiễu càng lớn so với modulo thì bài toán càng khó nhưng xác suất giải mã làm tròn sai bit càng cao, nên bộ tham số được chọn sao cho nằm vừa dưới một ngưỡng xác suất hỏng đã thống nhất.",
+      "say": "Pushing the noise higher for extra margin can quietly turn a correctness bound into a live failure rate.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "parameters"
+      ]
+    },
+    {
+      "id": "pqc-decryption-failure",
+      "en": "Decryption failure rate",
+      "vi": "Tỉ lệ giải mã hỏng",
+      "def_en": "The probability that accumulated noise pushes a ciphertext past the rounding boundary and the receiver recovers the wrong shared secret; it must be driven far below any reachable query count because collected failures leak information about the secret key.",
+      "def_vi": "Xác suất nhiễu tích luỹ đẩy bản mã vượt qua biên làm tròn khiến bên nhận phục hồi sai bí mật chung. Giá trị này phải được ép xuống thấp hơn hẳn mọi số lượt truy vấn khả thi, vì các lần hỏng thu thập được sẽ làm lộ thông tin về khoá bí mật.",
+      "say": "A failure rate that looks negligible per message becomes an attack surface once an adversary can send billions of them.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-sis",
+      "en": "Short integer solution problem",
+      "vi": "Bài toán nghiệm nguyên ngắn",
+      "def_en": "Given a wide random matrix over a modulus, find a short nonzero integer vector that the matrix maps to zero; solutions exist in abundance by counting, yet finding a short one is hard, and this is the collision resistance that lattice signatures are built on.",
+      "def_vi": "Cho một ma trận ngẫu nhiên rộng trên một modulo, hãy tìm vectơ nguyên khác không đủ ngắn để ma trận ánh xạ về không. Theo phép đếm thì nghiệm có rất nhiều, nhưng tìm được một nghiệm ngắn lại khó, và đây chính là tính kháng va chạm mà chữ ký dựa trên lưới dựa vào.",
+      "say": "The short integer solution problem gives a compressing function whose collisions are as hard as a lattice problem.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-isis",
+      "en": "Inhomogeneous short integer solution",
+      "vi": "Bài toán nghiệm nguyên ngắn không thuần nhất",
+      "def_en": "The variant where the matrix must map the short vector to a prescribed target rather than to zero; signing is exactly this, with the target derived from the message hash and the trapdoor making the short preimage findable.",
+      "def_vi": "Biến thể trong đó ma trận phải ánh xạ vectơ ngắn tới một đích cho trước thay vì tới không. Việc ký chính là bài toán này, với đích lấy từ giá trị băm của thông điệp và cửa sập giúp tìm được ảnh ngược ngắn.",
+      "say": "A signature is a short preimage of the message hash, and only the trapdoor holder can produce one.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-worst-case-reduction",
+      "en": "Worst case to average case reduction",
+      "vi": "Quy dẫn từ trường hợp xấu nhất về trường hợp trung bình",
+      "def_en": "The proof that breaking randomly generated lattice instances would also break the hardest instance of a lattice problem; it is the strongest structural argument lattice cryptography has, but it applies to asymptotic parameters, not to the concrete ones shipped in a standard.",
+      "def_vi": "Chứng minh rằng phá được các thể hiện lưới sinh ngẫu nhiên thì cũng phá được thể hiện khó nhất của bài toán lưới. Đây là lập luận cấu trúc mạnh nhất mà mật mã lưới có, nhưng nó áp cho tham số tiệm cận chứ không cho bộ tham số cụ thể đưa vào chuẩn.",
+      "say": "The reduction tells us the family is sound, it does not tell us the shipped parameters are safe.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-ntru-assumption",
+      "en": "NTRU assumption",
+      "vi": "Giả thiết NTRU",
+      "def_en": "The claim that given the quotient of two secret polynomials with small coefficients in a fixed ring, recovering either factor is infeasible; it predates learning with errors by years and has no worst case reduction, so confidence rests on survived cryptanalysis instead.",
+      "def_vi": "Khẳng định rằng khi cho thương của hai đa thức bí mật có hệ số nhỏ trong một vành cố định, việc phục hồi bất kỳ thừa số nào là bất khả thi. Giả thiết này ra đời trước học có lỗi nhiều năm và không có quy dẫn về trường hợp xấu nhất, nên niềm tin đặt vào việc nó đã trụ được trước phân tích mật mã.",
+      "say": "The NTRU assumption has survived longer in the open than any other structured lattice assumption.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "ntru"
+      ]
+    },
+    {
+      "id": "pqc-ntru-lattice",
+      "en": "NTRU lattice",
+      "vi": "Lưới NTRU",
+      "def_en": "The lattice generated by the public NTRU polynomial together with the modulus, in which the secret key pair appears as an unusually short vector; attacks proceed by reducing this lattice, and the gap between that short vector and the rest is what parameter sets must keep out of reach.",
+      "def_vi": "Lưới sinh bởi đa thức NTRU công khai cùng với modulo, trong đó cặp khoá bí mật xuất hiện như một vectơ ngắn bất thường. Tấn công tiến hành bằng cách rút gọn lưới này, và khoảng cách giữa vectơ ngắn đó với phần còn lại là thứ mà bộ tham số phải giữ ngoài tầm với.",
+      "say": "Breaking the key means finding one abnormally short vector hiding inside a lattice of high dimension.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "ntru"
+      ]
+    },
+    {
+      "id": "pqc-syndrome-decoding",
+      "en": "Syndrome decoding problem",
+      "vi": "Bài toán giải mã hội chứng",
+      "def_en": "Given a parity check matrix and a syndrome, find a low weight error vector that produces it; for a random linear code the best known attacks are information set decoding variants whose cost is exponential in the code length, and this is the oldest hardness assumption in post quantum use.",
+      "def_vi": "Cho ma trận kiểm tra chẵn lẻ và một hội chứng, hãy tìm vectơ lỗi trọng số thấp sinh ra hội chứng đó. Với mã tuyến tính ngẫu nhiên, các tấn công tốt nhất hiện biết là những biến thể giải mã theo tập thông tin với chi phí mũ theo độ dài mã, và đây là giả thiết độ khó lâu đời nhất còn dùng trong hậu lượng tử.",
+      "say": "Syndrome decoding has resisted serious attention since the late nineteen seventies, which is why code based schemes feel conservative.",
+      "tags": [
+        "pqc",
+        "code-based",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-information-set-decoding",
+      "en": "Information set decoding",
+      "vi": "Giải mã theo tập thông tin",
+      "def_en": "The main attack family against code based schemes: guess a set of coordinates you hope is error free, solve linear algebra on it, and repeat until the guess is right; quantum speedups here are only Grover like square root gains, so parameters grow modestly rather than doubling.",
+      "def_vi": "Họ tấn công chính nhắm vào các hệ dựa trên mã. Ta đoán một tập toạ độ hy vọng là không có lỗi, giải đại số tuyến tính trên tập đó rồi lặp lại cho tới khi đoán đúng. Tăng tốc lượng tử ở đây chỉ là mức căn bậc hai kiểu Grover, nên tham số chỉ phải nới ra vừa phải chứ không phải nhân đôi.",
+      "say": "Information set decoding sets the parameter sizes for every code based candidate on the table.",
+      "tags": [
+        "pqc",
+        "code-based",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-mceliece",
+      "en": "McEliece cryptosystem",
+      "vi": "Hệ mật McEliece",
+      "def_en": "Encryption that hides a structured decodable code inside a scrambled generator matrix and adds a fixed number of errors on purpose; the owner of the scrambling undoes it and decodes, while everyone else faces random syndrome decoding, at the price of a public key measured in hundreds of kilobytes.",
+      "def_vi": "Phép mã hoá giấu một mã có cấu trúc giải được bên trong ma trận sinh đã bị xáo trộn rồi cố tình thêm một số lỗi cố định. Người nắm phép xáo trộn gỡ ra và giải mã được, còn ai khác thì phải đối mặt với giải mã hội chứng ngẫu nhiên, cái giá là khoá công khai lớn cỡ hàng trăm kilôbai.",
+      "say": "McEliece has never been broken, but nobody wants to put a public key that large into a handshake.",
+      "tags": [
+        "pqc",
+        "code-based",
+        "kem"
+      ]
+    },
+    {
+      "id": "pqc-niederreiter",
+      "en": "Niederreiter variant",
+      "vi": "Biến thể Niederreiter",
+      "def_en": "The dual formulation of McEliece that works with the parity check matrix and sends a syndrome rather than a codeword, which shortens the ciphertext to a few dozen bytes while leaving the public key just as large.",
+      "def_vi": "Cách phát biểu đối ngẫu của McEliece, làm việc với ma trận kiểm tra chẵn lẻ và gửi đi một hội chứng thay vì một từ mã. Cách này rút bản mã xuống còn vài chục bai trong khi khoá công khai vẫn lớn y như cũ.",
+      "say": "The Niederreiter form is what modern code based submissions actually implement.",
+      "tags": [
+        "pqc",
+        "code-based",
+        "kem"
+      ]
+    },
+    {
+      "id": "pqc-goppa-code",
+      "en": "Binary Goppa code",
+      "vi": "Mã Goppa nhị phân",
+      "def_en": "The algebraic code family used inside classic McEliece, chosen because its structure is efficiently decodable yet has resisted every attempt to distinguish a scrambled Goppa generator matrix from a random one for over four decades.",
+      "def_vi": "Họ mã đại số dùng bên trong classic McEliece, được chọn vì cấu trúc của nó giải mã được hiệu quả nhưng đã chống lại mọi nỗ lực phân biệt ma trận sinh Goppa đã xáo trộn với ma trận ngẫu nhiên suốt hơn bốn thập niên.",
+      "say": "The security argument for binary Goppa codes is indistinguishability from random, and it has held up remarkably well.",
+      "tags": [
+        "pqc",
+        "code-based"
+      ]
+    },
+    {
+      "id": "pqc-quasi-cyclic",
+      "en": "Quasi cyclic code structure",
+      "vi": "Cấu trúc mã tựa tuần hoàn",
+      "def_en": "A layout in which the parity check matrix is built from circulant blocks, so the whole key is described by one row per block; this is what shrinks code based keys from hundreds of kilobytes to a few kilobytes, and it is also the extra structure an attacker might one day exploit.",
+      "def_vi": "Cách bố trí trong đó ma trận kiểm tra chẵn lẻ ghép từ các khối vòng, nên cả khoá chỉ cần mô tả bằng một hàng cho mỗi khối. Đây chính là thứ rút khoá của các hệ dựa trên mã từ hàng trăm kilôbai xuống còn vài kilôbai, và cũng là phần cấu trúc thừa mà kẻ tấn công một ngày nào đó có thể khai thác.",
+      "say": "Quasi cyclic structure is the same trade every family makes, smaller keys in exchange for a stronger assumption.",
+      "tags": [
+        "pqc",
+        "code-based"
+      ]
+    },
+    {
+      "id": "pqc-hqc",
+      "en": "Hamming quasi cyclic scheme",
+      "vi": "Sơ đồ Hamming tựa tuần hoàn",
+      "def_en": "The code based key encapsulation mechanism selected by NIST as a backup to the lattice standard, using random quasi cyclic codes with a decoding failure analysis that can be proved rather than estimated, at roughly ten times the ciphertext size of the lattice option.",
+      "def_vi": "Cơ chế đóng gói khoá dựa trên mã được NIST chọn làm phương án dự phòng cho chuẩn dựa trên lưới. Nó dùng mã tựa tuần hoàn ngẫu nhiên với phân tích xác suất giải mã hỏng chứng minh được chứ không phải ước lượng, đổi lại bản mã lớn hơn phương án lưới khoảng mười lần.",
+      "say": "The Hamming quasi cyclic scheme exists so that a break in lattices would not leave us with nothing.",
+      "tags": [
+        "pqc",
+        "code-based",
+        "nist"
+      ]
+    },
+    {
+      "id": "pqc-bike",
+      "en": "Bit flipping key encapsulation",
+      "vi": "Đóng gói khoá kiểu lật bit",
+      "def_en": "A code based candidate using moderate density parity check codes decoded by iterative bit flipping; it has the smallest keys in its family but its decoding failure rate can only be extrapolated, which is exactly why it did not reach the standard.",
+      "def_vi": "Một ứng viên dựa trên mã dùng mã kiểm tra chẵn lẻ mật độ vừa, giải mã bằng cách lật bit lặp. Nó có khoá nhỏ nhất trong họ nhưng tỉ lệ giải mã hỏng chỉ ngoại suy được, và đó đúng là lý do nó chưa vào chuẩn.",
+      "say": "Bit flipping decoders are fast, yet an unprovable failure rate is a hard thing to certify.",
+      "tags": [
+        "pqc",
+        "code-based",
+        "nist"
+      ]
+    },
+    {
+      "id": "pqc-mq-problem",
+      "en": "Multivariate quadratic problem",
+      "vi": "Bài toán bậc hai nhiều biến",
+      "def_en": "Solving a system of quadratic equations in many variables over a small finite field, which is nondeterministic polynomial time complete in general; the trapdoor is a system that looks random but was composed from an easily invertible core hidden by secret linear maps.",
+      "def_vi": "Giải một hệ phương trình bậc hai nhiều biến trên một trường hữu hạn nhỏ, bài toán này nói chung là đầy đủ trong lớp phi tất định thời gian đa thức. Cửa sập là một hệ trông ngẫu nhiên nhưng thực ra ghép từ một lõi dễ nghịch đảo được che bằng các ánh xạ tuyến tính bí mật.",
+      "say": "Every multivariate scheme lives or dies on whether the secret linear maps really hide the easy core.",
+      "tags": [
+        "pqc",
+        "multivariate",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-oil-vinegar",
+      "en": "Oil and vinegar trapdoor",
+      "vi": "Cửa sập dầu và giấm",
+      "def_en": "A signing trapdoor that splits variables into two groups so that no quadratic term multiplies two oil variables; the signer guesses the vinegar values at random, which makes the remaining system linear in the oil variables and solvable in one step.",
+      "def_vi": "Cửa sập để ký, chia biến thành hai nhóm sao cho không có số hạng bậc hai nào nhân hai biến dầu với nhau. Người ký gán ngẫu nhiên các biến giấm, nhờ đó hệ còn lại trở thành tuyến tính theo biến dầu và giải được trong một bước.",
+      "say": "Fixing the vinegar variables turns a quadratic system into a linear one, and that is the entire trick.",
+      "tags": [
+        "pqc",
+        "multivariate",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-uov",
+      "en": "Unbalanced oil and vinegar",
+      "vi": "Dầu và giấm mất cân bằng",
+      "def_en": "The surviving multivariate signature design in which vinegar variables far outnumber oil variables, defeating the original balanced attack; it gives very short signatures with a public key of the order of a hundred kilobytes, and it entered the additional NIST signature round.",
+      "def_vi": "Thiết kế chữ ký đa biến còn trụ được, trong đó số biến giấm nhiều hơn hẳn số biến dầu, nhờ vậy vô hiệu hoá tấn công vào bản cân bằng ban đầu. Nó cho chữ ký rất ngắn với khoá công khai cỡ trăm kilôbai và đã vào vòng chữ ký bổ sung của NIST.",
+      "say": "Unbalanced oil and vinegar inverts the usual trade, tiny signatures paid for with a huge public key.",
+      "tags": [
+        "pqc",
+        "multivariate",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-rainbow-break",
+      "en": "The Rainbow break",
+      "vi": "Vụ phá Rainbow",
+      "def_en": "The practical attack that recovered a Rainbow secret key over a weekend on a laptop during the final NIST round, exploiting the extra layer structure the design added on top of oil and vinegar; the lesson is that layering for efficiency added exactly the structure the attacker needed.",
+      "def_vi": "Tấn công thực tế phục hồi được khoá bí mật của Rainbow trong một cuối tuần trên máy tính xách tay ngay ở vòng cuối của NIST, khai thác lớp cấu trúc thêm mà thiết kế đắp lên trên sơ đồ dầu và giấm. Bài học là việc chia lớp để chạy nhanh hơn đã thêm đúng cái cấu trúc mà kẻ tấn công cần.",
+      "say": "Rainbow reached the final round and then fell to a laptop, which is why extra structure is treated with suspicion.",
+      "tags": [
+        "pqc",
+        "multivariate",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-minrank",
+      "en": "MinRank attack",
+      "vi": "Tấn công MinRank",
+      "def_en": "The technique of searching a space of matrix combinations for one of unusually low rank, which is how hidden structure in multivariate and rank metric schemes gets exposed; most multivariate breaks in the last decade reduce to solving a MinRank instance faster than expected.",
+      "def_vi": "Kỹ thuật tìm trong không gian các tổ hợp ma trận một tổ hợp có hạng thấp bất thường, đây là cách cấu trúc ẩn trong các hệ đa biến và hệ dùng mêtric hạng bị phơi ra. Phần lớn các vụ phá hệ đa biến trong mười năm qua đều quy về việc giải một thể hiện MinRank nhanh hơn dự kiến.",
+      "say": "If your trapdoor leaves a low rank matrix in the span, MinRank will eventually expose the whole secret.",
+      "tags": [
+        "pqc",
+        "multivariate",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-isogeny",
+      "en": "Isogeny between elliptic curves",
+      "vi": "Đẳng giống giữa các đường cong elliptic",
+      "def_en": "A structure preserving map from one elliptic curve to another; the hard problem is to recover the path when you are shown only the two endpoint curves, and because the walk is over a graph rather than a group, the standard quantum period finding attack does not apply.",
+      "def_vi": "Một ánh xạ bảo toàn cấu trúc từ đường cong elliptic này sang đường cong khác. Bài toán khó là phục hồi đường đi khi ta chỉ được cho hai đường cong ở hai đầu, và vì phép đi diễn ra trên đồ thị chứ không trên nhóm nên tấn công lượng tử tìm chu kỳ chuẩn không áp dụng được.",
+      "say": "Isogeny problems attract attention because they give the smallest keys of any post quantum family.",
+      "tags": [
+        "pqc",
+        "isogeny",
+        "hard-problem"
+      ]
+    },
+    {
+      "id": "pqc-sidh-break",
+      "en": "The supersingular isogeny break",
+      "vi": "Vụ phá đẳng giống siêu kỳ dị",
+      "def_en": "The attack that destroyed the supersingular isogeny key exchange in a matter of hours, using auxiliary torsion point images the protocol published for efficiency; the underlying isogeny path problem was never solved, only the extra data leaked by the protocol.",
+      "def_vi": "Tấn công phá tan sơ đồ trao đổi khoá đẳng giống siêu kỳ dị chỉ trong vài giờ, dựa vào ảnh của các điểm xoắn phụ mà giao thức công bố để chạy nhanh hơn. Bài toán đường đi đẳng giống bên dưới chưa hề bị giải, thứ bị khai thác chỉ là dữ liệu thừa mà giao thức để lộ.",
+      "say": "The scheme died but the hard problem survived, and that distinction matters when judging the family.",
+      "tags": [
+        "pqc",
+        "isogeny",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-csidh",
+      "en": "Commutative isogeny action",
+      "vi": "Tác động đẳng giống giao hoán",
+      "def_en": "An isogeny construction whose class group action commutes, so it supports a Diffie Hellman style key exchange with keys of only a few dozen bytes; the commutativity also exposes it to a subexponential quantum attack, so its security level is much harder to pin down than a lattice one.",
+      "def_vi": "Một cấu trúc đẳng giống có tác động của nhóm lớp giao hoán, nhờ đó hỗ trợ trao đổi khoá kiểu Diffie Hellman với khoá chỉ vài chục bai. Chính tính giao hoán lại làm nó hứng một tấn công lượng tử dưới mũ, nên mức an ninh của nó khó chốt hơn nhiều so với hệ dựa trên lưới.",
+      "say": "Commutative isogeny action gives beautifully small keys and an uncomfortably fuzzy security estimate.",
+      "tags": [
+        "pqc",
+        "isogeny"
+      ]
+    },
+    {
+      "id": "pqc-sqisign",
+      "en": "Isogeny based compact signature",
+      "vi": "Chữ ký gọn dựa trên đẳng giống",
+      "def_en": "A signature scheme built from quaternion orders and isogeny paths that produces the smallest combined key and signature of any post quantum candidate, roughly comparable to elliptic curve sizes, but costs orders of magnitude more time to sign and verify.",
+      "def_vi": "Sơ đồ chữ ký dựng từ các bậc quaternion và đường đi đẳng giống, cho tổng kích thước khoá cộng chữ ký nhỏ nhất trong mọi ứng viên hậu lượng tử, xấp xỉ mức của đường cong elliptic, nhưng thời gian ký và xác minh đắt hơn nhiều bậc.",
+      "say": "An isogeny based compact signature is the right answer when bandwidth is scarce and the processor is idle anyway.",
+      "tags": [
+        "pqc",
+        "isogeny",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-one-time-signature",
+      "en": "One time signature",
+      "vi": "Chữ ký dùng một lần",
+      "def_en": "A signature built by revealing selected preimages from a table of hash chains, secure only while each key is used for a single message; signing twice reveals overlapping preimages and lets anyone forge, so the whole hash based family is engineering around this limit.",
+      "def_vi": "Chữ ký tạo ra bằng cách tiết lộ một số ảnh ngược chọn lọc từ bảng các chuỗi băm, chỉ an toàn khi mỗi khoá dùng cho đúng một thông điệp. Ký hai lần sẽ lộ các ảnh ngược chồng nhau và ai cũng giả mạo được, nên cả họ chữ ký dựa trên băm thực chất là kỹ thuật xoay quanh giới hạn đó.",
+      "say": "A one time signature key that signs twice is not weakened, it is completely broken.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-winternitz",
+      "en": "Winternitz parameter",
+      "vi": "Tham số Winternitz",
+      "def_en": "The knob that sets how many message bits each hash chain covers, trading signature size against hashing work; doubling the coverage roughly halves the signature and roughly doubles the time to sign and verify, which is the main tuning dial in hash based schemes.",
+      "def_vi": "Núm điều chỉnh quyết định mỗi chuỗi băm gánh bao nhiêu bit thông điệp, đánh đổi kích thước chữ ký lấy công băm. Tăng gấp đôi phần gánh thì chữ ký ngắn đi khoảng một nửa còn thời gian ký và xác minh tăng khoảng gấp đôi, đây là núm chỉnh chính trong các sơ đồ dựa trên băm.",
+      "say": "Raising the Winternitz parameter is how you buy a smaller signature with processor time.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "parameters"
+      ]
+    },
+    {
+      "id": "pqc-merkle-signature-tree",
+      "en": "Merkle signature tree",
+      "vi": "Cây chữ ký Merkle",
+      "def_en": "The structure that turns many one time keys into one long lived public key by hashing their public values into a binary tree; the root is the only thing published, and every signature carries the authentication path proving its leaf hangs under that root.",
+      "def_vi": "Cấu trúc biến nhiều khoá dùng một lần thành một khoá công khai dùng lâu dài, bằng cách băm các giá trị công khai của chúng vào một cây nhị phân. Chỉ gốc cây được công bố, và mỗi chữ ký mang theo đường xác thực chứng minh lá của nó nằm dưới gốc đó.",
+      "say": "The Merkle signature tree is what lets thousands of one time keys share a single published root.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-stateful-signature",
+      "en": "Stateful hash based signature",
+      "vi": "Chữ ký dựa trên băm có trạng thái",
+      "def_en": "A scheme where the signer must persist a counter of which leaves have been consumed; it is efficient and provably conservative, but any backup restore, virtual machine snapshot or crash that rewinds the counter destroys security, so deployment is restricted to controlled devices such as firmware signers.",
+      "def_vi": "Sơ đồ trong đó bên ký phải lưu bền một bộ đếm cho biết những lá nào đã dùng. Nó hiệu quả và chứng minh được là thận trọng, nhưng bất kỳ lần khôi phục sao lưu, ảnh chụp máy ảo hay sự cố nào làm bộ đếm quay lui đều phá huỷ an ninh, nên chỉ triển khai trên thiết bị được kiểm soát chặt như bên ký phần sụn.",
+      "say": "A stateful signer must never be cloned, which rules out most virtualised deployments.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "deployment"
+      ]
+    },
+    {
+      "id": "pqc-state-rollback",
+      "en": "Signature state rollback",
+      "vi": "Quay lui trạng thái ký",
+      "def_en": "The failure mode where a restored snapshot makes a stateful signer reuse a leaf index it already spent, exposing two signatures under one time key material; it is a systems problem rather than a cryptographic one, which is why standards bodies warn about it so strongly.",
+      "def_vi": "Kiểu hỏng trong đó một ảnh chụp được khôi phục khiến bên ký có trạng thái dùng lại chỉ số lá đã tiêu, làm lộ hai chữ ký dưới cùng một khoá dùng một lần. Đây là vấn đề của hệ thống chứ không phải của mật mã, và đó là lý do các cơ quan chuẩn hoá cảnh báo rất gắt về nó.",
+      "say": "Signature state rollback turns a routine restore from backup into a silent key compromise.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "operations"
+      ]
+    },
+    {
+      "id": "pqc-xmss",
+      "en": "Extended Merkle signature scheme",
+      "vi": "Sơ đồ chữ ký Merkle mở rộng",
+      "def_en": "A stateful hash based standard that uses bitmask hashing so its proof needs only second preimage resistance rather than collision resistance, and that stacks trees in layers so the top tree signs the roots of the layer below instead of being generated in full.",
+      "def_vi": "Một chuẩn chữ ký dựa trên băm có trạng thái, dùng phép băm với mặt nạ bit nên chứng minh an ninh chỉ cần tính kháng tiền ảnh thứ hai chứ không cần kháng va chạm, và xếp các cây thành nhiều tầng để cây trên ký gốc của tầng dưới thay vì phải sinh trọn vẹn.",
+      "say": "The extended Merkle signature scheme layers trees so key generation does not have to build the whole structure at once.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "standard"
+      ]
+    },
+    {
+      "id": "pqc-lms",
+      "en": "Leighton Micali signature",
+      "vi": "Chữ ký Leighton Micali",
+      "def_en": "The other standardised stateful hash based scheme, simpler and faster to verify than its Merkle counterpart because it drops the bitmask construction; it is the option most firmware and secure boot chains adopted first because verification fits in a small bootloader.",
+      "def_vi": "Sơ đồ chữ ký dựa trên băm có trạng thái đã chuẩn hoá còn lại, đơn giản và xác minh nhanh hơn sơ đồ Merkle vì bỏ cấu trúc mặt nạ bit. Đây là phương án mà phần lớn chuỗi phần sụn và khởi động an toàn chọn trước, bởi phần xác minh vừa gọn trong một bộ nạp khởi động nhỏ.",
+      "say": "Leighton Micali signatures were the first post quantum scheme to reach production, quietly inside secure boot.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "standard"
+      ]
+    },
+    {
+      "id": "pqc-few-time-signature",
+      "en": "Few time signature",
+      "vi": "Chữ ký dùng vài lần",
+      "def_en": "A hash based construction that tolerates a small number of signatures under one key by using a forest of random subsets, degrading gracefully instead of collapsing; it is the component that lets a stateless scheme pick leaves at random without needing a counter.",
+      "def_vi": "Cấu trúc dựa trên băm chịu được một số ít lần ký dưới cùng một khoá nhờ dùng một rừng các tập con ngẫu nhiên, độ an toàn giảm dần chứ không sụp ngay. Đây là thành phần giúp một sơ đồ không trạng thái chọn lá ngẫu nhiên mà không cần bộ đếm.",
+      "say": "A few time signature degrades slowly enough that random leaf choice becomes safe in practice.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-slh-dsa",
+      "en": "Stateless hash based digital signature algorithm",
+      "vi": "Thuật toán chữ ký số dựa trên băm không trạng thái",
+      "def_en": "The NIST standard that removes the counter by choosing a leaf pseudorandomly from an enormous tree and signing with a few time scheme at the bottom; the price is a signature of several kilobytes and slow signing, and the reward is security resting on hash functions alone.",
+      "def_vi": "Chuẩn của NIST bỏ được bộ đếm bằng cách chọn lá theo cách giả ngẫu nhiên từ một cây khổng lồ rồi ký ở tầng đáy bằng sơ đồ dùng vài lần. Cái giá là chữ ký nặng vài kilôbai và ký chậm, phần thưởng là độ an toàn chỉ dựa vào riêng các hàm băm.",
+      "say": "The stateless hash based standard is the insurance policy you reach for if lattices ever fall.",
+      "tags": [
+        "pqc",
+        "hash-based",
+        "nist"
+      ]
+    },
+    {
+      "id": "pqc-ml-kem",
+      "en": "Module lattice key encapsulation standard",
+      "vi": "Chuẩn đóng gói khoá dựa trên lưới môđun",
+      "def_en": "The primary NIST key establishment standard, derived from Kyber, built on module learning with errors and hardened to chosen ciphertext security by a Fujisaki Okamoto style transform; its public key and ciphertext each sit near one kilobyte, small enough for ordinary handshakes.",
+      "def_vi": "Chuẩn thiết lập khoá chính của NIST, phát triển từ Kyber, dựa trên học có lỗi trên môđun và được gia cố lên mức an toàn trước bản mã chọn trước bằng một phép biến đổi kiểu Fujisaki Okamoto. Khoá công khai và bản mã của nó đều xấp xỉ một kilôbai, đủ nhỏ cho các phiên bắt tay thông thường.",
+      "say": "The module lattice key encapsulation standard is the default choice for anything that terminates a transport session.",
+      "tags": [
+        "pqc",
+        "nist",
+        "kem"
+      ]
+    },
+    {
+      "id": "pqc-ml-dsa",
+      "en": "Module lattice digital signature standard",
+      "vi": "Chuẩn chữ ký số dựa trên lưới môđun",
+      "def_en": "The primary NIST signature standard, derived from Dilithium, which signs by rejection sampling over uniform distributions so no floating point Gaussian sampler is needed; signatures run around two to four kilobytes depending on the security level.",
+      "def_vi": "Chuẩn chữ ký chính của NIST, phát triển từ Dilithium, ký bằng cách lấy mẫu từ chối trên phân phối đều nên không cần bộ lấy mẫu Gauss dấu phẩy động. Chữ ký nặng khoảng hai đến bốn kilôbai tuỳ mức an ninh.",
+      "say": "The module lattice signature standard avoids Gaussian sampling entirely, which makes constant time implementation far easier.",
+      "tags": [
+        "pqc",
+        "nist",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-fn-dsa",
+      "en": "Fast Fourier lattice signature standard",
+      "vi": "Chuẩn chữ ký lưới dùng biến đổi Fourier nhanh",
+      "def_en": "The compact NIST signature standard derived from Falcon, built on NTRU lattices with a Gaussian sampler over the fast Fourier tree; it gives signatures under a kilobyte but demands floating point arithmetic that is very hard to make constant time and reproducible across platforms.",
+      "def_vi": "Chuẩn chữ ký gọn của NIST phát triển từ Falcon, dựng trên lưới NTRU với bộ lấy mẫu Gauss trên cây Fourier nhanh. Nó cho chữ ký dưới một kilôbai nhưng đòi số học dấu phẩy động, thứ rất khó làm cho chạy hằng thời gian và cho kết quả giống nhau giữa các nền tảng.",
+      "say": "Choose the Fourier based standard when bytes on the wire matter more than implementation comfort.",
+      "tags": [
+        "pqc",
+        "nist",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-security-category",
+      "en": "NIST security category",
+      "vi": "Mức an ninh theo phân loại của NIST",
+      "def_en": "The five levels that define security by comparison rather than by bit count, each pegged to the cost of exhausting a specific symmetric primitive; level one matches a block cipher key search of one hundred twenty eight bits, and higher levels are anchored to hash collision or larger key searches.",
+      "def_vi": "Năm mức định nghĩa an ninh bằng cách so sánh chứ không bằng số bit, mỗi mức neo vào chi phí vét cạn một nguyên thuỷ đối xứng cụ thể. Mức một tương đương việc tìm khoá của mã khối một trăm hai tám bit, các mức cao hơn neo vào va chạm băm hoặc việc tìm khoá dài hơn.",
+      "say": "Security categories are defined by comparison to a known primitive, not by a raw bit count.",
+      "tags": [
+        "pqc",
+        "nist",
+        "parameters"
+      ]
+    },
+    {
+      "id": "pqc-additional-signature-round",
+      "en": "Additional signature round",
+      "vi": "Vòng bổ sung cho chữ ký",
+      "def_en": "The separate NIST call opened after the main selections, seeking signature schemes that are not lattice based and preferably have short signatures and fast verification; it exists because the standardised signature set would otherwise share a single mathematical failure mode.",
+      "def_vi": "Đợt kêu gọi riêng mà NIST mở sau các lựa chọn chính, nhằm tìm sơ đồ chữ ký không dựa trên lưới, tốt nhất là chữ ký ngắn và xác minh nhanh. Đợt này tồn tại vì nếu không thì cả bộ chữ ký đã chuẩn hoá sẽ chung một kiểu hỏng toán học duy nhất.",
+      "say": "The additional signature round is diversification, not dissatisfaction with what was already chosen.",
+      "tags": [
+        "pqc",
+        "nist",
+        "process"
+      ]
+    },
+    {
+      "id": "pqc-diversity-portfolio",
+      "en": "Assumption diversity in a standard portfolio",
+      "vi": "Đa dạng giả thiết trong danh mục chuẩn",
+      "def_en": "The deliberate policy of standardising schemes whose hardness assumptions are unrelated, so that a breakthrough in one area does not remove every option at once; it is why a code based key encapsulation and a hash based signature sit beside the lattice defaults.",
+      "def_vi": "Chính sách cố ý chuẩn hoá những sơ đồ có giả thiết độ khó không liên quan nhau, để một bước đột phá ở một hướng không xoá sạch mọi phương án cùng lúc. Đó là lý do một cơ chế đóng gói khoá dựa trên mã và một chữ ký dựa trên băm được đặt cạnh các lựa chọn lưới mặc định.",
+      "say": "Standardising two schemes from the same assumption family would give the illusion of a backup without the substance.",
+      "tags": [
+        "pqc",
+        "nist",
+        "policy"
+      ]
+    },
+    {
+      "id": "pqc-kem",
+      "en": "Key encapsulation mechanism",
+      "vi": "Cơ chế đóng gói khoá",
+      "def_en": "An interface with three operations that generates a key pair, produces a random shared secret together with a ciphertext carrying it, and recovers that secret from the ciphertext; it never encrypts a message the caller chose, which is why it avoids the padding pitfalls of general encryption.",
+      "def_vi": "Một giao diện gồm ba thao tác, sinh cặp khoá, tạo ra một bí mật chung ngẫu nhiên cùng bản mã chứa nó, rồi phục hồi bí mật đó từ bản mã. Nó không bao giờ mã hoá thông điệp do người gọi chọn, và nhờ vậy tránh được các cạm bẫy về đệm của mã hoá tổng quát.",
+      "say": "A key encapsulation mechanism gives you a shared secret, it never takes your plaintext as input.",
+      "tags": [
+        "pqc",
+        "kem",
+        "primitive"
+      ]
+    },
+    {
+      "id": "pqc-kem-vs-dh",
+      "en": "Encapsulation instead of a Diffie Hellman exchange",
+      "vi": "Đóng gói khoá thay cho trao đổi Diffie Hellman",
+      "def_en": "The structural difference that a post quantum key exchange is not symmetric: one side publishes a key and the other encapsulates against it, so protocols that assumed both peers contribute equally, or that reused a static share, need reworking rather than a drop in substitution.",
+      "def_vi": "Khác biệt về cấu trúc, ở chỗ trao đổi khoá hậu lượng tử không đối xứng. Một bên công bố khoá còn bên kia đóng gói dựa vào khoá đó, nên những giao thức từng giả định hai đầu đóng góp ngang nhau, hoặc từng dùng lại một phần chia tĩnh, phải sửa lại chứ không thể thay thẳng.",
+      "say": "You cannot swap a key encapsulation mechanism into a protocol that assumed a symmetric key agreement.",
+      "tags": [
+        "pqc",
+        "kem",
+        "migration"
+      ]
+    },
+    {
+      "id": "pqc-fo-transform",
+      "en": "Fujisaki Okamoto transform",
+      "vi": "Phép biến đổi Fujisaki Okamoto",
+      "def_en": "A generic construction that upgrades a scheme secure only against passive eavesdropping into one secure against active ciphertext manipulation, by deriving the encryption randomness from the message itself so the receiver can re encrypt and reject anything that does not reproduce the ciphertext exactly.",
+      "def_vi": "Một cấu trúc tổng quát nâng một sơ đồ chỉ an toàn trước kẻ nghe lén thụ động lên thành sơ đồ an toàn trước việc can thiệp chủ động vào bản mã. Cách làm là lấy tính ngẫu nhiên của phép mã hoá từ chính thông điệp, nhờ đó bên nhận mã hoá lại được và loại bỏ mọi bản mã không tái tạo đúng nguyên vẹn.",
+      "say": "Every standardised lattice key encapsulation wraps a passive scheme in this transform.",
+      "tags": [
+        "pqc",
+        "kem",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-ind-cpa",
+      "en": "Security against chosen plaintext attack",
+      "vi": "An toàn trước tấn công chọn bản rõ",
+      "def_en": "The baseline notion where an adversary who picks two messages cannot tell which one was encrypted, but is never allowed to ask for decryptions; it is enough against a passive recorder and badly insufficient wherever an attacker can send crafted ciphertexts and observe the reaction.",
+      "def_vi": "Khái niệm nền, trong đó kẻ tấn công chọn hai thông điệp nhưng không phân biệt được bản mã ứng với thông điệp nào, và không bao giờ được phép hỏi giải mã. Mức này đủ trước kẻ ghi lén thụ động và thiếu hẳn ở nơi kẻ tấn công gửi được bản mã cố ý rồi quan sát phản ứng.",
+      "say": "Passive security is enough only when the adversary can never send anything of its own choosing.",
+      "tags": [
+        "pqc",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-ind-cca",
+      "en": "Security against chosen ciphertext attack",
+      "vi": "An toàn trước tấn công chọn bản mã",
+      "def_en": "The strong notion where the adversary may submit ciphertexts of its choice and see how the receiver reacts, yet still learns nothing; any key that is reused across sessions must meet this level, because the attacker gets to probe the same secret many times.",
+      "def_vi": "Khái niệm mạnh, trong đó kẻ tấn công được gửi các bản mã tuỳ ý và xem bên nhận phản ứng ra sao mà vẫn không học được gì. Mọi khoá dùng lại qua nhiều phiên đều phải đạt mức này, vì kẻ tấn công có cơ hội dò cùng một bí mật rất nhiều lần.",
+      "say": "If a key survives more than one session, nothing weaker than chosen ciphertext security will do.",
+      "tags": [
+        "pqc",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-implicit-rejection",
+      "en": "Implicit rejection",
+      "vi": "Từ chối ngầm",
+      "def_en": "The design choice of returning a pseudorandom secret derived from a hidden per key value when a ciphertext fails the re encryption check, instead of returning an error; the caller sees a normal looking secret that simply will not match, so timing and error paths reveal nothing.",
+      "def_vi": "Lựa chọn thiết kế trả về một bí mật giả ngẫu nhiên dẫn xuất từ một giá trị ẩn gắn với khoá, khi bản mã không qua được phép kiểm tra mã hoá lại, thay vì trả về báo lỗi. Bên gọi thấy một bí mật trông bình thường nhưng đơn giản là không khớp, nên thời gian chạy và nhánh báo lỗi không tiết lộ gì.",
+      "say": "Implicit rejection removes the error branch that an attacker would otherwise time.",
+      "tags": [
+        "pqc",
+        "kem",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-reencryption-check",
+      "en": "Re encryption check",
+      "vi": "Kiểm tra bằng cách mã hoá lại",
+      "def_en": "The step inside decapsulation where the receiver, having recovered a candidate message, redoes the whole encryption deterministically and compares byte for byte with what arrived; it is the reason decapsulation costs roughly as much as encapsulation plus decryption together.",
+      "def_vi": "Bước bên trong quá trình mở gói, khi bên nhận đã phục hồi được thông điệp ứng viên thì làm lại toàn bộ phép mã hoá một cách tất định rồi so từng bai với thứ nhận được. Đây là lý do việc mở gói tốn xấp xỉ bằng đóng gói cộng giải mã gộp lại.",
+      "say": "Decapsulation is deliberately more expensive than decryption because it re encrypts to verify.",
+      "tags": [
+        "pqc",
+        "kem",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-ntt",
+      "en": "Number theoretic transform",
+      "vi": "Biến đổi số học trên trường hữu hạn",
+      "def_en": "A discrete Fourier transform carried out in a finite field with an exact root of unity, which turns polynomial multiplication from quadratic into near linear cost; the modulus in lattice standards is chosen precisely so that this transform exists, which is why you cannot change it freely.",
+      "def_vi": "Một phép biến đổi Fourier rời rạc thực hiện trong trường hữu hạn với căn của đơn vị đúng chính xác, biến phép nhân đa thức từ chi phí bậc hai thành gần tuyến tính. Modulo trong các chuẩn dựa trên lưới được chọn đúng để phép biến đổi này tồn tại, và đó là lý do bạn không thể đổi nó tuỳ ý.",
+      "say": "The modulus was not chosen for security alone, it was chosen so the transform would exist.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-centered-binomial",
+      "en": "Centred binomial noise",
+      "vi": "Nhiễu nhị thức đối xứng",
+      "def_en": "The noise distribution used in module lattice standards, produced by subtracting the population counts of two random bit strings; it approximates a Gaussian well enough for the security proof while being sampled with nothing but bit operations, so it is trivially constant time.",
+      "def_vi": "Phân phối nhiễu dùng trong các chuẩn lưới môđun, tạo ra bằng cách trừ số bit một của hai chuỗi bit ngẫu nhiên cho nhau. Nó xấp xỉ phân phối Gauss đủ tốt cho chứng minh an ninh mà chỉ cần các phép toán trên bit để lấy mẫu, nên hằng thời gian một cách hiển nhiên.",
+      "say": "Centred binomial noise was chosen because counting bits leaks nothing through timing.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-discrete-gaussian",
+      "en": "Discrete Gaussian sampling",
+      "vi": "Lấy mẫu Gauss rời rạc",
+      "def_en": "Drawing lattice points with probability falling off like a Gaussian, which is what makes a signature independent of the secret basis; the sampler must be exact and constant time, and a biased or leaky one lets an attacker learn the secret from a few thousand signatures.",
+      "def_vi": "Lấy các điểm lưới với xác suất giảm theo dạng Gauss, đây là thứ khiến chữ ký không phụ thuộc vào cơ sở bí mật. Bộ lấy mẫu phải chính xác và hằng thời gian, một bộ lệch hoặc rò rỉ sẽ cho kẻ tấn công học được bí mật chỉ từ vài nghìn chữ ký.",
+      "say": "Discrete Gaussian sampling is where most lattice signature implementations go wrong.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-rejection-sampling",
+      "en": "Rejection sampling in lattice signing",
+      "vi": "Lấy mẫu từ chối khi ký trên lưới",
+      "def_en": "Discarding and restarting whenever a candidate signature falls outside a fixed box, so that what is published follows a distribution independent of the secret; the restart rate is a design parameter, and signing time is therefore variable while remaining independent of the key.",
+      "def_vi": "Bỏ đi và làm lại mỗi khi chữ ký ứng viên rơi ra ngoài một hộp cố định, để thứ được công bố tuân theo phân phối không phụ thuộc bí mật. Tỉ lệ phải làm lại là một tham số thiết kế, nên thời gian ký thay đổi nhưng vẫn độc lập với khoá.",
+      "say": "Signing may take several attempts, yet the number of attempts tells an attacker nothing about the key.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-fiat-shamir-aborts",
+      "en": "Fiat Shamir with aborts",
+      "vi": "Fiat Shamir có bỏ dở",
+      "def_en": "The paradigm behind module lattice signatures: run an identification protocol, hash the commitment and message to derive the challenge, then abort and retry whenever the response would leak the secret; the abort step is what replaces the Gaussian sampler of the older approach.",
+      "def_vi": "Khuôn mẫu đứng sau chữ ký trên lưới môđun. Ta chạy một giao thức định danh, băm cam kết cùng thông điệp để lấy thách thức, rồi bỏ dở và thử lại mỗi khi câu trả lời có nguy cơ làm lộ bí mật. Chính bước bỏ dở này thay cho bộ lấy mẫu Gauss của cách tiếp cận cũ.",
+      "say": "Fiat Shamir with aborts trades a hard sampler for an occasional restart, which implementers greatly prefer.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-hint-vector",
+      "en": "Hint in a compressed lattice signature",
+      "vi": "Gợi ý trong chữ ký lưới đã nén",
+      "def_en": "A few extra bits shipped with a signature so the verifier can reconstruct the high order part of a value that was dropped to save space; the hint must be small enough not to reveal the secret and complete enough that verification never disagrees with signing.",
+      "def_vi": "Một ít bit gửi kèm chữ ký để bên xác minh dựng lại được phần bậc cao của một giá trị đã bị bỏ đi nhằm tiết kiệm chỗ. Phần gợi ý phải đủ nhỏ để không lộ bí mật và đủ đầy để việc xác minh không bao giờ mâu thuẫn với việc ký.",
+      "say": "The hint exists purely to let the verifier rebuild what compression threw away.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-domain-separation",
+      "en": "Domain separation in hash derivation",
+      "vi": "Tách miền khi dẫn xuất bằng hàm băm",
+      "def_en": "Prefixing every hash call with a distinct label so that values derived for different purposes can never collide, even though they come from the same extendable output function; standards fix these labels precisely, and an implementation that reorders or omits them is not interoperable and may not be secure.",
+      "def_vi": "Gắn thêm một nhãn riêng vào trước mỗi lần gọi hàm băm để các giá trị dẫn xuất cho mục đích khác nhau không bao giờ đụng nhau, dù cùng sinh ra từ một hàm sinh đầu ra mở rộng. Các chuẩn quy định những nhãn này rất chặt, và một cài đặt đảo thứ tự hoặc bỏ sót chúng thì vừa không liên thông vừa có thể mất an toàn.",
+      "say": "Two derivations from the same sponge must carry different labels or they are the same value waiting to happen.",
+      "tags": [
+        "pqc",
+        "implementation",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-deterministic-signing",
+      "en": "Deterministic versus hedged signing",
+      "vi": "Ký tất định so với ký có phòng hộ",
+      "def_en": "Deriving signing randomness purely from the key and message removes the need for a good generator but makes the signer repeatable, which is exactly what a fault injection attack wants; hedged signing mixes in fresh randomness so two runs differ, and standards now recommend it as the default.",
+      "def_vi": "Lấy tính ngẫu nhiên khi ký hoàn toàn từ khoá và thông điệp thì khỏi cần bộ sinh tốt, nhưng khiến bên ký lặp lại được, đây đúng là điều mà tấn công tiêm lỗi mong muốn. Cách ký có phòng hộ trộn thêm ngẫu nhiên tươi để hai lần chạy khác nhau, và các chuẩn nay khuyến nghị đó là mặc định.",
+      "say": "Fully deterministic signing hands a fault attacker two runs that should have been identical.",
+      "tags": [
+        "pqc",
+        "implementation",
+        "side-channel"
+      ]
+    },
+    {
+      "id": "pqc-timing-leak-decaps",
+      "en": "Timing leak in decapsulation",
+      "vi": "Rò rỉ thời gian khi mở gói khoá",
+      "def_en": "Any branch whose duration depends on the recovered message, most often in the comparison that ends the re encryption check; because the mechanism is meant to be chosen ciphertext secure, a single measurable difference converts into full key recovery over enough queries.",
+      "def_vi": "Bất kỳ nhánh nào có thời gian chạy phụ thuộc vào thông điệp vừa phục hồi, thường gặp nhất ở phép so sánh kết thúc bước mã hoá lại. Vì cơ chế này vốn phải an toàn trước bản mã chọn trước, chỉ một khác biệt đo được cũng chuyển thành phục hồi trọn khoá sau đủ số lượt truy vấn.",
+      "say": "One measurable branch inside decapsulation is enough to unwind the entire private key.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-plaintext-checking-oracle",
+      "en": "Plaintext checking oracle",
+      "vi": "Kẻ mách nước kiểm tra bản rõ",
+      "def_en": "Any observable that tells an attacker whether a crafted ciphertext decrypted to a guessed value; with such an oracle the attacker walks the secret coefficient by coefficient, so the number of queries needed is linear in the key size rather than exponential.",
+      "def_vi": "Bất kỳ dấu hiệu quan sát được nào cho kẻ tấn công biết một bản mã dựng sẵn có giải ra đúng giá trị đoán hay không. Có kẻ mách nước như vậy, kẻ tấn công dò bí mật theo từng hệ số, nên số lượt truy vấn cần dùng chỉ tuyến tính theo kích thước khoá chứ không phải theo hàm mũ.",
+      "say": "Give an attacker a plaintext checking oracle and the key falls in a few thousand queries.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-masking",
+      "en": "Masking a lattice implementation",
+      "vi": "Che mặt nạ cho cài đặt trên lưới",
+      "def_en": "Splitting every secret value into random shares that are processed separately, so no single measured trace correlates with the secret; linear steps such as the polynomial transform split cleanly, while nonlinear steps like compression and comparison are expensive and are where masked designs cost several times the unmasked speed.",
+      "def_vi": "Chia mỗi giá trị bí mật thành các phần ngẫu nhiên rồi xử lý riêng, nhờ đó không một vệt đo nào tương quan với bí mật. Các bước tuyến tính như phép biến đổi đa thức chia tách gọn gàng, còn các bước phi tuyến như nén và so sánh thì đắt, và đó là chỗ khiến thiết kế có mặt nạ chậm gấp mấy lần bản không mặt nạ.",
+      "say": "Masking is cheap for the linear parts and painful for everything nonlinear.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "countermeasure"
+      ]
+    },
+    {
+      "id": "pqc-shuffling",
+      "en": "Shuffling as a side channel countermeasure",
+      "vi": "Xáo thứ tự để chống kênh phụ",
+      "def_en": "Randomising the order in which independent coefficients are processed so an attacker cannot align many traces on the same operation; it is cheap and complements masking, but on its own it only raises the number of traces needed rather than removing the leak.",
+      "def_vi": "Ngẫu nhiên hoá thứ tự xử lý các hệ số độc lập để kẻ tấn công không căn được nhiều vệt đo về cùng một phép toán. Cách này rẻ và bổ trợ cho việc che mặt nạ, nhưng nếu dùng một mình thì chỉ làm tăng số vệt cần thu chứ không xoá được chỗ rò.",
+      "say": "Shuffling raises the cost of an attack, masking is what removes the correlation.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "countermeasure"
+      ]
+    },
+    {
+      "id": "pqc-fault-injection",
+      "en": "Fault injection against a lattice signature",
+      "vi": "Tiêm lỗi vào chữ ký trên lưới",
+      "def_en": "Glitching the clock or voltage so the signer skips the rejection check or corrupts one intermediate value, producing a signature that lies outside the safe distribution; a single such signature paired with a correct one over the same message can reveal part of the secret, so signers must verify their own output before releasing it.",
+      "def_vi": "Gây nhiễu xung nhịp hoặc điện áp để bên ký bỏ qua bước kiểm tra từ chối hoặc làm hỏng một giá trị trung gian, sinh ra chữ ký nằm ngoài phân phối an toàn. Chỉ một chữ ký như vậy ghép với một chữ ký đúng trên cùng thông điệp đã có thể làm lộ một phần bí mật, nên bên ký phải tự xác minh đầu ra trước khi phát hành.",
+      "say": "A signer that does not verify its own output before releasing it is one glitch away from leaking the key.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-constant-time-select",
+      "en": "Constant time conditional selection",
+      "vi": "Chọn có điều kiện theo hằng thời gian",
+      "def_en": "Replacing an if statement over secret data with arithmetic on a mask of all zero or all one bits, so both alternatives are always computed and only the result differs; this is the standard idiom for implicit rejection and for compressing coefficients without branching.",
+      "def_vi": "Thay câu lệnh rẽ nhánh trên dữ liệu bí mật bằng phép toán số học với một mặt nạ toàn bit không hoặc toàn bit một, nhờ đó cả hai khả năng luôn được tính và chỉ kết quả là khác nhau. Đây là lối viết chuẩn cho phần từ chối ngầm và cho việc nén hệ số mà không rẽ nhánh.",
+      "say": "Compute both branches and select with a mask, never let the secret decide which path runs.",
+      "tags": [
+        "pqc",
+        "implementation",
+        "countermeasure"
+      ]
+    },
+    {
+      "id": "pqc-secret-dependent-memory",
+      "en": "Secret dependent memory access",
+      "vi": "Truy cập bộ nhớ phụ thuộc bí mật",
+      "def_en": "Indexing a table with a value derived from the key, which leaks through the cache even when the code has no visible branch; classic offenders in post quantum code are precomputed sampler tables and any lookup used to speed up modular reduction.",
+      "def_vi": "Việc lấy chỉ số vào một bảng bằng giá trị dẫn xuất từ khoá, thứ này rò qua bộ nhớ đệm ngay cả khi mã nguồn không có nhánh nào nhìn thấy được. Thủ phạm quen thuộc trong mã hậu lượng tử là các bảng tra dựng sẵn cho bộ lấy mẫu và mọi bảng tra dùng để tăng tốc phép rút gọn theo modulo.",
+      "say": "A table lookup indexed by key material leaks through the cache with no branch in sight.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-compiler-reintroduced-leak",
+      "en": "Compiler reintroduced timing leak",
+      "vi": "Rò rỉ thời gian do trình biên dịch tái tạo",
+      "def_en": "The failure where source written branch free is turned back into a conditional jump by an optimiser that recognised the pattern; it means constant time behaviour cannot be certified from source alone and must be checked on the emitted machine code for each compiler and flag combination.",
+      "def_vi": "Kiểu hỏng trong đó mã nguồn viết không rẽ nhánh lại bị trình tối ưu nhận ra khuôn mẫu và biến trở lại thành lệnh nhảy có điều kiện. Điều này nghĩa là không thể chứng nhận tính hằng thời gian chỉ từ mã nguồn, mà phải kiểm trên mã máy sinh ra ứng với từng trình biên dịch và từng tổ hợp cờ biên dịch.",
+      "say": "Constant time is a property of the binary, never a property of the source file.",
+      "tags": [
+        "pqc",
+        "side-channel",
+        "implementation"
+      ]
+    },
+    {
+      "id": "pqc-grover-square-root",
+      "en": "Grover gives only a square root gain",
+      "vi": "Grover chỉ cho mức lợi căn bậc hai",
+      "def_en": "Quantum search reduces an exhaustive key hunt from the full space to its square root, and that bound is provably optimal for an unstructured search; it is a quadratic improvement rather than an exponential one, so it shifts symmetric parameters by a factor, not by a category.",
+      "def_vi": "Tìm kiếm lượng tử rút việc vét cạn khoá từ toàn không gian xuống còn căn bậc hai của không gian đó, và cận này đã chứng minh là tối ưu cho tìm kiếm không cấu trúc. Đây là cải thiện bậc hai chứ không phải theo hàm mũ, nên nó dịch tham số đối xứng đi một hệ số chứ không đổi cả hạng mục.",
+      "say": "Quantum search is quadratic, and quadratic is a very different threat from exponential.",
+      "tags": [
+        "pqc",
+        "misconception",
+        "quantum-threat"
+      ]
+    },
+    {
+      "id": "pqc-grover-no-speedup-in-parallel",
+      "en": "Grover resists parallel speedup",
+      "vi": "Grover không tăng tốc tốt khi chạy song song",
+      "def_en": "Splitting a quantum search across many machines returns only the square root of the number of machines, so a thousand devices give about thirty times the progress rather than a thousand; combined with the very long serial run required, this is why realistic estimates say the quadratic gain is far from free.",
+      "def_vi": "Chia một tìm kiếm lượng tử ra nhiều máy chỉ đem lại lợi ích bằng căn bậc hai của số máy, nên một nghìn thiết bị chỉ cho tiến độ gấp khoảng ba mươi lần chứ không phải một nghìn lần. Cộng với việc phải chạy nối tiếp rất lâu, đó là lý do các ước lượng thực tế cho rằng mức lợi bậc hai còn xa mới là miễn phí.",
+      "say": "A thousand quantum machines searching in parallel buy you roughly thirty times the progress.",
+      "tags": [
+        "pqc",
+        "misconception",
+        "quantum-threat"
+      ]
+    },
+    {
+      "id": "pqc-key-doubling-myth",
+      "en": "The symmetric key doubling myth",
+      "vi": "Ngộ nhận phải nhân đôi khoá đối xứng",
+      "def_en": "The widespread claim that quantum computers force every symmetric key to double in length; it comes from taking the quadratic search bound literally while ignoring that the attack needs an enormous serial quantum computation, so most agencies now judge a one hundred twenty eight bit block cipher acceptable and reserve the larger key for very long lived secrets.",
+      "def_vi": "Khẳng định lan rộng rằng máy tính lượng tử buộc mọi khoá đối xứng phải dài gấp đôi. Nó bắt nguồn từ việc hiểu cận tìm kiếm bậc hai theo nghĩa đen mà bỏ qua chuyện tấn công đòi một khối tính toán lượng tử nối tiếp khổng lồ, nên hiện nay phần lớn cơ quan quản lý coi mã khối một trăm hai tám bit là chấp nhận được và chỉ dành khoá dài hơn cho các bí mật sống rất lâu.",
+      "say": "The advice to double every symmetric key is a rule of thumb that most agencies no longer apply literally.",
+      "tags": [
+        "pqc",
+        "misconception",
+        "policy"
+      ]
+    },
+    {
+      "id": "pqc-asymmetric-is-the-break",
+      "en": "Why only the asymmetric layer breaks",
+      "vi": "Vì sao chỉ lớp bất đối xứng bị phá",
+      "def_en": "Factoring and discrete logarithms have hidden periodic structure that a quantum period finding algorithm exploits for an exponential gain, whereas a block cipher or hash offers no such structure and yields only search speedups; this asymmetry is why migration touches key exchange and signatures and largely leaves bulk encryption alone.",
+      "def_vi": "Bài toán phân tích thừa số và lôgarit rời rạc có cấu trúc tuần hoàn ẩn mà thuật toán tìm chu kỳ lượng tử khai thác được để đạt mức lợi theo hàm mũ, trong khi mã khối hay hàm băm không có cấu trúc như vậy nên chỉ chịu mức tăng tốc của tìm kiếm. Chính sự bất đối xứng này khiến việc chuyển đổi động tới trao đổi khoá và chữ ký, còn phần mã hoá dữ liệu khối lượng lớn thì gần như để nguyên.",
+      "say": "The quantum threat is aimed at structure, and only the asymmetric layer has the structure it needs.",
+      "tags": [
+        "pqc",
+        "quantum-threat",
+        "misconception"
+      ]
+    },
+    {
+      "id": "pqc-shor-resource-estimate",
+      "en": "Shor resource estimate",
+      "vi": "Ước lượng tài nguyên cho thuật toán Shor",
+      "def_en": "A calculation of how many physical qubits and how many hours a fault tolerant machine would need to factor a given modulus, obtained by compiling the algorithm into surface code operations; published estimates have fallen by more than an order of magnitude as circuit optimisations improved, which is why any single number should be read as provisional.",
+      "def_vi": "Phép tính xem một máy chịu lỗi cần bao nhiêu qubit vật lý và bao nhiêu giờ để phân tích một modulo cho trước, thu được bằng cách biên dịch thuật toán xuống các thao tác của mã bề mặt. Các ước lượng công bố đã giảm hơn một bậc độ lớn khi kỹ thuật tối ưu mạch tiến bộ, và đó là lý do mọi con số đơn lẻ chỉ nên đọc như một giá trị tạm.",
+      "say": "Resource estimates keep falling, so quoting one of them as a fixed deadline is a mistake.",
+      "tags": [
+        "pqc",
+        "quantum-threat",
+        "estimate"
+      ]
+    },
+    {
+      "id": "pqc-estimate-uncertainty",
+      "en": "Uncertainty in the qubit count",
+      "vi": "Độ bất định của con số qubit cần dùng",
+      "def_en": "The spread in published requirements, running from roughly twenty million noisy qubits down to under a million under more favourable error rates and better factoring circuits; the spread comes from assumptions about physical error rate, code distance and how long the machine may run, not from disagreement about the algorithm.",
+      "def_vi": "Khoảng dao động trong các yêu cầu đã công bố, chạy từ cỡ hai mươi triệu qubit nhiễu xuống dưới một triệu nếu tỉ lệ lỗi thuận lợi hơn và mạch phân tích thừa số tốt hơn. Khoảng này đến từ các giả định về tỉ lệ lỗi vật lý, khoảng cách mã và thời gian máy được phép chạy, chứ không phải từ bất đồng về bản thân thuật toán.",
+      "say": "The published range spans more than an order of magnitude, and the stated assumptions explain almost all of that spread.",
+      "tags": [
+        "pqc",
+        "quantum-threat",
+        "estimate"
+      ]
+    },
+    {
+      "id": "pqc-magic-state-cost",
+      "en": "Magic state factory cost",
+      "vi": "Chi phí xưởng sinh trạng thái ma thuật",
+      "def_en": "The dominant hardware cost in a fault tolerant factoring machine, because the non Clifford rotations Shor needs cannot be done directly in a surface code and must be distilled from many noisy copies; most of the projected qubit budget goes to these factories rather than to the arithmetic itself.",
+      "def_vi": "Khoản chi phần cứng chiếm phần lớn trong một máy chịu lỗi dùng để phân tích thừa số, vì các phép quay ngoài nhóm Clifford mà thuật toán Shor cần không thực hiện trực tiếp được trong mã bề mặt mà phải chưng cất từ rất nhiều bản sao nhiễu. Phần lớn ngân sách qubit dự kiến dồn vào các xưởng này chứ không phải vào phần số học.",
+      "say": "Most of the projected qubit budget is spent distilling states, not doing arithmetic.",
+      "tags": [
+        "pqc",
+        "quantum-threat",
+        "estimate"
+      ]
+    },
+    {
+      "id": "pqc-hybrid-key-exchange",
+      "en": "Hybrid key exchange",
+      "vi": "Trao đổi khoá lai",
+      "def_en": "Running a classical elliptic curve exchange and a post quantum encapsulation in the same handshake and mixing both outputs, so the session stays secure unless both are broken; it costs extra bytes and buys protection against a lattice break that has not been ruled out.",
+      "def_vi": "Chạy đồng thời một phép trao đổi trên đường cong elliptic cổ điển và một phép đóng gói khoá hậu lượng tử trong cùng một phiên bắt tay rồi trộn cả hai đầu ra, nhờ vậy phiên vẫn an toàn trừ khi cả hai cùng bị phá. Cách này tốn thêm bai và mua lấy sự bảo vệ trước khả năng hệ lưới bị phá, điều chưa ai loại trừ được.",
+      "say": "Hybrid mode is the honest admission that we trust the new schemes but not yet completely.",
+      "tags": [
+        "pqc",
+        "migration",
+        "hybrid"
+      ]
+    },
+    {
+      "id": "pqc-hybrid-combiner",
+      "en": "Key combiner in a hybrid handshake",
+      "vi": "Bộ trộn khoá trong bắt tay lai",
+      "def_en": "The function that folds two shared secrets into one session key, which must be proved secure when either input is adversarial; concatenating both secrets and the full transcript before hashing is the accepted construction, while exclusive or of the raw secrets is not.",
+      "def_vi": "Hàm gộp hai bí mật chung thành một khoá phiên, và hàm này phải chứng minh được là an toàn khi một trong hai đầu vào do đối phương kiểm soát. Cách được chấp nhận là nối cả hai bí mật cùng toàn bộ bản ghi phiên rồi mới băm, còn phép cộng loại trừ trên bí mật thô thì không đạt.",
+      "say": "Hash the concatenation of both secrets and the transcript, never simply combine the raw values.",
+      "tags": [
+        "pqc",
+        "migration",
+        "hybrid"
+      ]
+    },
+    {
+      "id": "pqc-hybrid-group",
+      "en": "Named hybrid group in a transport handshake",
+      "vi": "Nhóm lai có tên trong bắt tay tầng vận chuyển",
+      "def_en": "The registered identifier that lets a client offer a classical curve and a lattice encapsulation as one indivisible option, so a middlebox cannot accept half of it; deploying by adding a new group rather than a new extension is what made the rollout survive broken network equipment.",
+      "def_vi": "Mã định danh đã đăng ký cho phép bên khách chào một đường cong cổ điển cùng một phép đóng gói dựa trên lưới như một lựa chọn không tách rời, nên thiết bị trung gian không thể chấp nhận nửa vời. Việc triển khai bằng cách thêm một nhóm mới thay vì thêm một phần mở rộng mới chính là điều giúp đợt triển khai sống sót qua các thiết bị mạng hỏng.",
+      "say": "Offering the pair as a single named group stops a middlebox from negotiating away the quantum resistant half.",
+      "tags": [
+        "pqc",
+        "migration",
+        "hybrid"
+      ]
+    },
+    {
+      "id": "pqc-handshake-byte-cost",
+      "en": "Extra bytes on the handshake",
+      "vi": "Số bai phát sinh trong bắt tay",
+      "def_en": "The added transport cost of post quantum key establishment, roughly one to two kilobytes in each direction for a hybrid exchange; on a fast link it is invisible, and on a lossy or high latency path it is the difference between one round trip and several.",
+      "def_vi": "Phần chi phí truyền tăng thêm của việc thiết lập khoá hậu lượng tử, khoảng một đến hai kilôbai theo mỗi chiều với một phép trao đổi lai. Trên đường truyền nhanh thì không ai thấy, còn trên đường mất gói hoặc trễ cao thì đây là khác biệt giữa một lượt khứ hồi và nhiều lượt.",
+      "say": "The extra kilobyte is free on fibre and expensive on a satellite link.",
+      "tags": [
+        "pqc",
+        "migration",
+        "performance"
+      ]
+    },
+    {
+      "id": "pqc-first-flight-overflow",
+      "en": "First flight overflowing the congestion window",
+      "vi": "Loạt gói đầu vượt quá cửa sổ tắc nghẽn",
+      "def_en": "The effect where a post quantum client hello no longer fits inside the initial congestion window, so the server response is split and the client waits for an acknowledgement before the rest arrives; this adds a full round trip and is the main measured slowdown in real deployments.",
+      "def_vi": "Hiện tượng gói chào của bên khách trong chế độ hậu lượng tử không còn nằm vừa trong cửa sổ tắc nghẽn ban đầu, nên phản hồi của máy chủ bị cắt ra và bên khách phải chờ báo nhận rồi phần còn lại mới tới. Điều này cộng thêm trọn một lượt khứ hồi và là nguyên nhân chậm chính đo được trong triển khai thật.",
+      "say": "The slowdown people measure is almost never the mathematics, it is one extra round trip.",
+      "tags": [
+        "pqc",
+        "migration",
+        "performance"
+      ]
+    },
+    {
+      "id": "pqc-amplification-limit",
+      "en": "Amplification limit in a datagram handshake",
+      "vi": "Giới hạn khuếch đại trong bắt tay dùng gói dữ liệu",
+      "def_en": "The rule that a server may not send more than a small multiple of what it has received from an unvalidated address, which exists to stop reflection attacks; large post quantum server responses bump into this limit and force an extra address validation exchange before the handshake can continue.",
+      "def_vi": "Quy tắc buộc máy chủ không được gửi quá một bội số nhỏ của lượng đã nhận từ một địa chỉ chưa xác thực, đặt ra để chặn tấn công phản xạ. Phản hồi hậu lượng tử của máy chủ vốn lớn nên đụng phải giới hạn này và buộc phải có thêm một lượt xác thực địa chỉ trước khi bắt tay đi tiếp.",
+      "say": "The anti reflection rule was written when server responses were small, and post quantum responses broke that assumption.",
+      "tags": [
+        "pqc",
+        "migration",
+        "performance"
+      ]
+    },
+    {
+      "id": "pqc-udp-fragmentation",
+      "en": "Fragmentation of oversized handshake records",
+      "vi": "Phân mảnh bản ghi bắt tay quá khổ",
+      "def_en": "The breaking of a key exchange message across several network packets once it exceeds the path maximum transmission unit; over datagram transports this means loss of any fragment restarts the whole exchange, and older firewalls that drop fragments silently make the connection fail rather than slow down.",
+      "def_vi": "Việc cắt một thông điệp trao đổi khoá ra nhiều gói mạng khi nó vượt quá đơn vị truyền tối đa của tuyến. Trên các tầng vận chuyển dùng gói dữ liệu, mất bất kỳ mảnh nào cũng khiến phải làm lại cả cuộc trao đổi, còn những tường lửa cũ âm thầm bỏ mảnh sẽ làm kết nối hỏng hẳn chứ không phải chỉ chậm đi.",
+      "say": "A firewall that quietly drops fragments turns a slow handshake into a broken one.",
+      "tags": [
+        "pqc",
+        "migration",
+        "network"
+      ]
+    },
+    {
+      "id": "pqc-signature-heavier-than-key",
+      "en": "Why signatures cost more than key exchange",
+      "vi": "Vì sao chữ ký tốn hơn trao đổi khoá",
+      "def_en": "A handshake carries one encapsulation but several signatures and the public keys that verify them, so replacing a sixty four byte classical signature with a three kilobyte one multiplies across the whole certificate chain; this is why the signature side of migration is harder than the key exchange side.",
+      "def_vi": "Một phiên bắt tay chỉ mang một lần đóng gói khoá nhưng lại mang vài chữ ký cùng các khoá công khai để kiểm chúng, nên thay một chữ ký cổ điển sáu mươi tư bai bằng chữ ký ba kilôbai sẽ nhân lên trên cả chuỗi chứng thư. Đó là lý do phía chữ ký của việc chuyển đổi khó hơn phía trao đổi khoá.",
+      "say": "One encapsulation and five signatures is why the signature side dominates the byte budget.",
+      "tags": [
+        "pqc",
+        "migration",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-chain-inflation",
+      "en": "Certificate chain inflation",
+      "vi": "Phình to chuỗi chứng thư",
+      "def_en": "The multiplication of handshake size when every certificate in the path carries a post quantum signature and a post quantum public key; a chain that was two kilobytes becomes ten or more, which is why proposals to omit intermediate certificates or to move trust anchors closer are being taken seriously.",
+      "def_vi": "Sự nhân lên của kích thước bắt tay khi mọi chứng thư trên đường dẫn đều mang chữ ký hậu lượng tử và khoá công khai hậu lượng tử. Một chuỗi từng nặng hai kilôbai nay thành mười kilôbai hoặc hơn, và đó là lý do các đề xuất bỏ bớt chứng thư trung gian hoặc kéo neo tin cậy lại gần đang được xem xét nghiêm túc.",
+      "say": "Chain inflation is the reason people suddenly care about suppressing intermediate certificates.",
+      "tags": [
+        "pqc",
+        "migration",
+        "certificate"
+      ]
+    },
+    {
+      "id": "pqc-hybrid-certificate",
+      "en": "Hybrid certificate",
+      "vi": "Chứng thư lai",
+      "def_en": "A certificate that carries both a classical and a post quantum key or signature so that old and new verifiers can each use the part they understand; the difficulty is that a legacy verifier must ignore the extra material without treating it as a critical unknown extension.",
+      "def_vi": "Chứng thư mang cả khoá hoặc chữ ký cổ điển lẫn phần hậu lượng tử, để bên xác minh cũ và bên xác minh mới mỗi bên dùng phần mình hiểu. Cái khó là bên xác minh cũ phải bỏ qua phần thêm mà không coi nó như một phần mở rộng lạ ở mức bắt buộc.",
+      "say": "A hybrid certificate only works if the old verifier ignores what it cannot parse.",
+      "tags": [
+        "pqc",
+        "migration",
+        "certificate"
+      ]
+    },
+    {
+      "id": "pqc-composite-signature",
+      "en": "Composite signature",
+      "vi": "Chữ ký ghép",
+      "def_en": "Treating a classical and a post quantum signature as a single algorithm that verifies only when both parts verify, so no policy engine can be tricked into accepting half; it is heavier than a hybrid certificate but removes the ambiguity about what an acceptance actually proved.",
+      "def_vi": "Cách coi một chữ ký cổ điển cùng một chữ ký hậu lượng tử là một thuật toán duy nhất, chỉ hợp lệ khi cả hai phần đều hợp lệ, nên không bộ máy chính sách nào bị lừa để chấp nhận nửa vời. Cách này nặng hơn chứng thư lai nhưng xoá được sự mơ hồ về việc một lần chấp nhận thực sự chứng minh điều gì.",
+      "say": "With a composite signature there is no ambiguity about which half was actually checked.",
+      "tags": [
+        "pqc",
+        "migration",
+        "certificate"
+      ]
+    },
+    {
+      "id": "pqc-downgrade-to-classical",
+      "en": "Downgrade to the classical path",
+      "vi": "Hạ cấp xuống nhánh cổ điển",
+      "def_en": "An active attacker stripping the post quantum option from the offered list so the peers fall back to elliptic curve only, which the attacker can record for later; the defence is to bind the negotiated choice into the transcript that both sides authenticate, and to refuse the fallback by policy once migration is complete.",
+      "def_vi": "Kẻ tấn công chủ động gỡ phương án hậu lượng tử khỏi danh sách chào để hai đầu tụt về chỉ dùng đường cong elliptic, thứ mà kẻ tấn công ghi lại được để giải sau. Cách chống là ràng lựa chọn đã thoả thuận vào bản ghi phiên mà cả hai bên đều xác thực, và khi chuyển đổi xong thì đặt chính sách từ chối hẳn phương án tụt lui.",
+      "say": "A recorded downgrade today is a decrypted session tomorrow.",
+      "tags": [
+        "pqc",
+        "migration",
+        "attack"
+      ]
+    },
+    {
+      "id": "pqc-crypto-inventory",
+      "en": "Cryptographic asset inventory",
+      "vi": "Kiểm kê tài sản mật mã",
+      "def_en": "The systematic listing of where every key, certificate, algorithm and protocol version lives across an organisation, including firmware and third party components; without it a migration plan is guesswork, and in practice building the inventory takes longer than replacing the algorithms.",
+      "def_vi": "Việc liệt kê có hệ thống mọi khoá, chứng thư, thuật toán và phiên bản giao thức đang nằm ở đâu trong toàn tổ chức, kể cả phần sụn và các thành phần của bên thứ ba. Không có bản kiểm kê này thì kế hoạch chuyển đổi chỉ là đoán mò, và trên thực tế dựng được bản kiểm kê còn lâu hơn việc thay thuật toán.",
+      "say": "Most organisations discover they cannot answer where their keys are before they can answer anything else.",
+      "tags": [
+        "pqc",
+        "migration",
+        "governance"
+      ]
+    },
+    {
+      "id": "pqc-cbom",
+      "en": "Cryptographic bill of materials",
+      "vi": "Bảng kê thành phần mật mã",
+      "def_en": "A machine readable record listing the cryptographic primitives, key lengths and libraries a piece of software actually uses, produced during the build so it stays accurate; it turns the question of which products are affected by a broken algorithm from a survey into a query.",
+      "def_vi": "Bản ghi máy đọc được liệt kê các nguyên thuỷ mật mã, độ dài khoá và thư viện mà một phần mềm thực sự dùng, sinh ra ngay trong quá trình dựng bản nên luôn đúng thực tế. Nó biến câu hỏi sản phẩm nào chịu ảnh hưởng khi một thuật toán bị phá, từ một cuộc khảo sát thành một câu truy vấn.",
+      "say": "When an algorithm falls you want a query, not a survey sent to every product team.",
+      "tags": [
+        "pqc",
+        "migration",
+        "governance"
+      ]
+    },
+    {
+      "id": "pqc-agility-architecture",
+      "en": "Designing a system for algorithm replacement",
+      "vi": "Thiết kế hệ thống để thay được thuật toán",
+      "def_en": "Structuring code and protocols so the algorithm is a negotiated parameter rather than a hard coded assumption, including buffers sized by the algorithm rather than by a constant and identifiers carried in stored data; the migration ahead is not the last one, so this property matters more than the specific choice made now.",
+      "def_vi": "Cách tổ chức mã nguồn và giao thức sao cho thuật toán là một tham số thoả thuận được chứ không phải giả định gắn cứng, gồm cả việc cấp bộ đệm theo thuật toán thay vì theo hằng số và ghi kèm mã định danh trong dữ liệu đã lưu. Cuộc chuyển đổi sắp tới không phải là cuộc cuối cùng, nên tính chất này quan trọng hơn lựa chọn cụ thể của hôm nay.",
+      "say": "Hard coded key lengths are the single most common obstacle when a team tries to swap an algorithm.",
+      "tags": [
+        "pqc",
+        "migration",
+        "architecture"
+      ]
+    },
+    {
+      "id": "pqc-vs-qkd-scope",
+      "en": "What key distribution by physics actually solves",
+      "vi": "Phân phối khoá bằng vật lý thực sự giải quyết điều gì",
+      "def_en": "It provides a shared symmetric key between two endpoints on a dedicated optical link with security resting on physical assumptions rather than computational ones; it does not authenticate, does not sign, does not scale to arbitrary peers, and therefore does not replace public key infrastructure.",
+      "def_vi": "Nó cung cấp một khoá đối xứng chung giữa hai đầu cuối trên một tuyến quang riêng, với độ an toàn dựa vào các giả thiết vật lý thay vì giả thiết tính toán. Nó không xác thực, không ký, không mở rộng ra tới đối tác tuỳ ý, và vì vậy không thay thế được hạ tầng khoá công khai.",
+      "say": "The two technologies answer different questions, so calling one a replacement for the other confuses everyone.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "comparison"
+      ]
+    },
+    {
+      "id": "pqc-qkd-needs-authentication",
+      "en": "Authentication still rests on classical assumptions",
+      "vi": "Việc xác thực vẫn dựa trên giả thiết cổ điển",
+      "def_en": "A physical key distribution session must authenticate its classical control channel or an attacker simply sits in the middle; that authentication uses either a pre shared symmetric key that has to be delivered somehow, or a public key signature, which means the quantum layer inherits whatever assumption sits underneath.",
+      "def_vi": "Một phiên phân phối khoá bằng vật lý phải xác thực kênh điều khiển cổ điển của nó, nếu không kẻ tấn công chỉ việc ngồi ở giữa. Việc xác thực đó dùng hoặc một khoá đối xứng chia sẻ trước mà bằng cách nào đó phải chuyển tới nơi, hoặc một chữ ký khoá công khai, nghĩa là lớp lượng tử thừa hưởng đúng cái giả thiết nằm bên dưới.",
+      "say": "Unconditional key agreement still rests on an authenticated classical channel underneath.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "comparison"
+      ]
+    },
+    {
+      "id": "pqc-qkd-cannot-sign",
+      "en": "Physics gives no digital signature",
+      "vi": "Vật lý không cho ta chữ ký số",
+      "def_en": "Key distribution by physics produces a secret shared by exactly two parties, which cannot serve as a signature because a signature must be verifiable by a third party who was never involved; software distribution, certificates and legal non repudiation therefore stay entirely within the classical post quantum world.",
+      "def_vi": "Phân phối khoá bằng vật lý tạo ra một bí mật mà đúng hai bên cùng nắm, thứ này không dùng làm chữ ký được vì chữ ký phải kiểm chứng được bởi bên thứ ba chưa từng tham gia. Do đó việc phát hành phần mềm, chứng thư và tính chống chối bỏ về pháp lý vẫn nằm trọn trong thế giới hậu lượng tử cổ điển.",
+      "say": "A shared secret cannot prove anything to a third party who was not in the room.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "comparison"
+      ]
+    },
+    {
+      "id": "pqc-trusted-node-assumption",
+      "en": "Trust you must grant to intermediate relays",
+      "vi": "Niềm tin phải trao cho các trạm chuyển tiếp",
+      "def_en": "Extending physical key distribution beyond a few hundred kilometres today means chaining links through relays that decrypt and re encrypt the key, so every relay learns it; the end to end security claim then rests on physically protecting those sites, which is an operational assumption rather than a physical one.",
+      "def_vi": "Muốn kéo dài phân phối khoá bằng vật lý quá vài trăm kilômét vào lúc này thì phải nối các chặng qua những trạm giải mã rồi mã lại khoá, nên mỗi trạm đều biết khoá. Khẳng định an toàn đầu cuối khi ấy dựa vào việc bảo vệ vật lý các trạm đó, tức là một giả thiết vận hành chứ không phải giả thiết vật lý.",
+      "say": "Once relays learn the key, the security claim moves from physics to site security.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "comparison"
+      ]
+    },
+    {
+      "id": "pqc-implementation-vs-proof",
+      "en": "Gap between a security proof and a device",
+      "vi": "Khoảng cách giữa chứng minh an ninh và thiết bị thật",
+      "def_en": "Every published attack on physical key distribution targeted hardware behaviour outside the model, such as detector response or source imperfection, not the proof itself; the same failure mode appears in post quantum software as side channels, which is why both fields judge deployments by implementation review rather than by the theorem.",
+      "def_vi": "Mọi tấn công đã công bố nhắm vào phân phối khoá bằng vật lý đều đánh vào hành vi phần cứng nằm ngoài mô hình, chẳng hạn phản ứng của bộ tách sóng hay khiếm khuyết của nguồn, chứ không đánh vào bản chứng minh. Kiểu hỏng đó cũng xuất hiện trong phần mềm hậu lượng tử dưới dạng kênh phụ, và vì vậy cả hai lĩnh vực đều đánh giá triển khai bằng việc soát cài đặt chứ không bằng định lý.",
+      "say": "Both fields fail the same way, through the device rather than through the theorem.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "comparison"
+      ]
+    },
+    {
+      "id": "pqc-computational-vs-unconditional",
+      "en": "Computational security versus unconditional security",
+      "vi": "An toàn tính toán so với an toàn vô điều kiện",
+      "def_en": "Post quantum schemes assume certain problems stay hard, an assumption that could fail to a future algorithm; physical key distribution assumes instead that the devices behave as modelled and the channel obeys the stated physics, so the choice is not between assumption and no assumption but between two different kinds of assumption.",
+      "def_vi": "Các hệ hậu lượng tử giả định rằng một số bài toán vẫn khó, giả định này có thể sụp trước một thuật toán tương lai. Phân phối khoá bằng vật lý thì giả định các thiết bị hành xử đúng như mô hình và kênh truyền tuân theo phần vật lý đã nêu, nên lựa chọn ở đây không phải giữa có giả định và không giả định mà giữa hai loại giả định khác nhau.",
+      "say": "Neither option is assumption free, they simply put their trust in different places.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "comparison"
+      ]
+    },
+    {
+      "id": "pqc-agency-position-on-qkd",
+      "en": "Why several agencies decline to endorse physical key distribution",
+      "vi": "Vì sao nhiều cơ quan quản lý không khuyến nghị phân phối khoá bằng vật lý",
+      "def_en": "Their stated reasons are that it needs dedicated fibre or line of sight, cannot authenticate on its own, offers no signature, has no mature certification scheme, and adds a hardware attack surface; they therefore direct budgets to algorithm migration and treat the optical option as a research or niche investment.",
+      "def_vi": "Lý do họ nêu là công nghệ này cần sợi quang riêng hoặc tầm nhìn thẳng, tự nó không xác thực được, không cho chữ ký, chưa có chương trình chứng nhận đủ chín, và thêm một bề mặt tấn công ở phần cứng. Vì vậy họ dồn ngân sách cho việc chuyển đổi thuật toán và xem phương án quang là khoản đầu tư nghiên cứu hoặc cho thị trường ngách.",
+      "say": "The published objections are practical rather than theoretical, and they are worth quoting accurately.",
+      "tags": [
+        "pqc",
+        "qkd",
+        "policy"
+      ]
+    },
+    {
+      "id": "pqc-mosca-inequality",
+      "en": "Mosca inequality",
+      "vi": "Bất đẳng thức Mosca",
+      "def_en": "The planning rule that you are already late if the years your data must stay secret plus the years your migration will take exceed the years until a capable quantum computer arrives; it is useful precisely because it forces you to state all three estimates out loud.",
+      "def_vi": "Quy tắc lập kế hoạch nói rằng bạn đã trễ nếu số năm dữ liệu phải giữ bí mật cộng với số năm việc chuyển đổi sẽ tốn vượt quá số năm còn lại tới khi có máy tính lượng tử đủ mạnh. Nó hữu ích chính vì buộc bạn phải nói rõ cả ba ước lượng đó ra thành lời.",
+      "say": "The value of the inequality is that it makes you name the three numbers you were avoiding.",
+      "tags": [
+        "pqc",
+        "policy",
+        "planning"
+      ]
+    },
+    {
+      "id": "pqc-secrecy-lifetime",
+      "en": "Required secrecy lifetime of stored data",
+      "vi": "Thời hạn phải giữ bí mật của dữ liệu đã lưu",
+      "def_en": "The number of years a given record must remain confidential, which decides how urgent migration is for that record; medical files, national security material and genomic data have lifetimes measured in decades, while a session cookie has one measured in hours.",
+      "def_vi": "Số năm mà một hồ sơ cụ thể phải giữ được tính bảo mật, con số này quyết định việc chuyển đổi cấp bách tới đâu cho hồ sơ đó. Bệnh án, tài liệu an ninh quốc gia và dữ liệu hệ gen có thời hạn tính bằng nhiều thập niên, còn một tệp phiên trên trình duyệt chỉ tính bằng giờ.",
+      "say": "Sort your systems by secrecy lifetime and the migration order writes itself.",
+      "tags": [
+        "pqc",
+        "policy",
+        "planning"
+      ]
+    },
+    {
+      "id": "pqc-firmware-lead-time",
+      "en": "Long lead time of firmware verification keys",
+      "vi": "Thời gian chuẩn bị dài của khoá kiểm phần sụn",
+      "def_en": "A verification key burned into silicon or into a boot loader cannot be replaced in the field, so devices shipping now with a classical root will still be running when the threat matures; this is the one part of migration where the deadline is set by the product lifetime rather than by the software release cycle.",
+      "def_vi": "Khoá dùng để kiểm chứng đã nung vào chip hoặc vào bộ nạp khởi động thì không thay được ngoài hiện trường, nên các thiết bị xuất xưởng hôm nay với neo tin cậy cổ điển sẽ vẫn đang chạy khi mối đe doạ chín muồi. Đây là phần duy nhất của việc chuyển đổi mà hạn chót do vòng đời sản phẩm quyết định chứ không do chu kỳ phát hành phần mềm.",
+      "say": "A meter shipped this year with a classical root of trust will still be in service long after the threat arrives.",
+      "tags": [
+        "pqc",
+        "migration",
+        "firmware"
+      ]
+    },
+    {
+      "id": "pqc-root-of-trust-rollover",
+      "en": "Rolling over a hardware root of trust",
+      "vi": "Đổi neo tin cậy trong phần cứng",
+      "def_en": "The procedure of provisioning a second verification key alongside the first so a device can later accept images signed by either, then retiring the old one; it must be done before the fleet ships, because a device that trusts only one algorithm has no path forward once that algorithm is retired.",
+      "def_vi": "Quy trình nạp thêm một khoá kiểm chứng thứ hai bên cạnh khoá thứ nhất để về sau thiết bị chấp nhận được ảnh phần mềm ký bằng khoá nào cũng được, rồi mới cho khoá cũ nghỉ. Việc này phải làm trước khi lô hàng xuất xưởng, vì thiết bị chỉ tin đúng một thuật toán thì không còn đường đi tiếp khi thuật toán đó bị loại bỏ.",
+      "say": "Provision the second trust anchor while you still have physical access to the device.",
+      "tags": [
+        "pqc",
+        "migration",
+        "firmware"
+      ]
+    },
+    {
+      "id": "pqc-hsm-readiness",
+      "en": "Hardware security module readiness",
+      "vi": "Mức sẵn sàng của mô đun an ninh phần cứng",
+      "def_en": "Whether a key storage device can generate, store and use post quantum keys, which is limited by both firmware support and by internal buffer sizes designed around elliptic curve dimensions; a module that cannot be upgraded becomes the binding constraint on an otherwise ready system.",
+      "def_vi": "Việc một thiết bị lưu khoá có sinh, lưu và dùng được khoá hậu lượng tử hay không, điều này bị giới hạn cả bởi phần sụn lẫn bởi kích thước bộ đệm bên trong vốn thiết kế theo cỡ của đường cong elliptic. Một mô đun không nâng cấp được sẽ trở thành nút thắt của cả hệ thống vốn đã sẵn sàng ở mọi chỗ khác.",
+      "say": "The module in the rack is often the reason a migration plan slips by a hardware refresh cycle.",
+      "tags": [
+        "pqc",
+        "migration",
+        "hardware"
+      ]
+    },
+    {
+      "id": "pqc-certification-lag",
+      "en": "Certification lag behind a published standard",
+      "vi": "Độ trễ chứng nhận so với chuẩn đã công bố",
+      "def_en": "The gap of a year or more between a standard appearing and validated implementations being available for regulated use, because test vectors, validation programmes and evaluation laboratories all have to catch up; procurement rules that require certified modules therefore delay deployment well past the publication date.",
+      "def_vi": "Khoảng cách một năm hoặc hơn giữa lúc chuẩn ra đời và lúc có các cài đặt đã kiểm định dùng được cho môi trường bị quản lý, vì bộ vectơ thử, chương trình kiểm định và các phòng đánh giá đều phải đuổi theo sau. Do đó những quy định mua sắm đòi mô đun đã chứng nhận sẽ đẩy thời điểm triển khai lùi xa quá ngày công bố chuẩn.",
+      "say": "The standard being published is not the same event as a validated module being available for purchase.",
+      "tags": [
+        "pqc",
+        "migration",
+        "governance"
+      ]
+    },
+    {
+      "id": "pqc-approved-algorithm-list",
+      "en": "Approved algorithm list",
+      "vi": "Danh mục thuật toán được phép dùng",
+      "def_en": "The published set an organisation or regulator permits, together with dates after which older entries are forbidden; migration schedules in practice track these dates rather than any technical estimate, so knowing the list and its sunset clauses matters more than knowing the threat model.",
+      "def_vi": "Tập hợp đã công bố mà một tổ chức hoặc cơ quan quản lý cho phép dùng, kèm theo các mốc thời gian sau đó thì mục cũ bị cấm. Trên thực tế lịch chuyển đổi bám vào những mốc này chứ không bám vào ước lượng kỹ thuật nào, nên biết danh mục và các điều khoản hết hiệu lực của nó còn quan trọng hơn biết mô hình đe doạ.",
+      "say": "In practice the sunset date on an approved list drives the schedule more than any threat estimate.",
+      "tags": [
+        "pqc",
+        "policy",
+        "governance"
+      ]
+    },
+    {
+      "id": "pqc-migration-sequencing",
+      "en": "Sequencing key exchange before signatures",
+      "vi": "Chuyển trao đổi khoá trước, chữ ký sau",
+      "def_en": "The common plan of migrating key establishment first because recorded traffic is vulnerable today, while deferring signatures because a forgery only matters once the attacker actually has a quantum computer; the exception is any signature that authenticates something with a long life, such as firmware or a root certificate.",
+      "def_vi": "Kế hoạch phổ biến là chuyển phần thiết lập khoá trước vì lưu lượng bị ghi lại đang gặp rủi ro ngay hôm nay, còn phần chữ ký thì hoãn lại vì việc giả mạo chỉ có ý nghĩa khi kẻ tấn công thực sự có máy tính lượng tử. Ngoại lệ là mọi chữ ký xác thực cho thứ sống lâu, chẳng hạn phần sụn hay chứng thư gốc.",
+      "say": "Confidentiality is at risk today while forgery is a future risk, and that ordering shapes the whole plan.",
+      "tags": [
+        "pqc",
+        "migration",
+        "planning"
+      ]
+    },
+    {
+      "id": "pqc-primal-attack",
+      "en": "Primal attack on a lattice instance",
+      "vi": "Tấn công nguyên bản vào một thể hiện lưới",
+      "def_en": "Embedding the noisy samples into a lattice in which the secret appears as an unusually short vector, then running basis reduction until that vector is recovered; the cost is driven by the block size at which the short vector first pops out, which is what parameter tables actually tabulate.",
+      "def_vi": "Nhúng các mẫu có nhiễu vào một lưới mà trong đó bí mật hiện ra như một vectơ ngắn bất thường, rồi chạy rút gọn cơ sở cho tới khi lấy được vectơ đó. Chi phí do kích thước khối mà tại đó vectơ ngắn bật ra lần đầu quyết định, và đây chính là thứ mà các bảng tham số ghi lại.",
+      "say": "The primal attack asks how much reduction it takes before the secret vector simply appears.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-dual-attack",
+      "en": "Dual attack on a lattice instance",
+      "vi": "Tấn công đối ngẫu vào một thể hiện lưới",
+      "def_en": "Finding short vectors in the dual lattice and using them to distinguish noisy samples from uniform ones, rather than recovering the secret directly; recent refinements narrowed the gap with the primal approach, and the resulting arguments about which is cheaper are a live part of parameter selection.",
+      "def_vi": "Cách tìm các vectơ ngắn trong lưới đối ngẫu rồi dùng chúng để phân biệt mẫu có nhiễu với mẫu đều, thay vì phục hồi trực tiếp bí mật. Những cải tiến gần đây đã thu hẹp khoảng cách với cách nguyên bản, và cuộc tranh luận xem cách nào rẻ hơn vẫn đang là một phần sống động của việc chọn tham số.",
+      "say": "The dual attack does not recover the key, it only tells the samples apart, and that is already enough.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-core-svp-estimate",
+      "en": "Core hardness estimate for a parameter set",
+      "vi": "Ước lượng độ khó lõi cho một bộ tham số",
+      "def_en": "A deliberately conservative cost model that counts only one call to the underlying sieving subroutine at the required block size and ignores the polynomial number of repetitions; it undercounts the real attack cost on purpose, so it gives a lower bound on security rather than a prediction.",
+      "def_vi": "Mô hình chi phí cố ý thận trọng, chỉ đếm một lần gọi thủ tục sàng ở kích thước khối cần thiết và bỏ qua số lần lặp cỡ đa thức. Nó cố tình đếm thiếu chi phí tấn công thật, nên cho ta một cận dưới của độ an ninh chứ không phải một dự báo.",
+      "say": "The core estimate is a floor, quoting it as the expected attack cost overstates the danger.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "parameters"
+      ]
+    },
+    {
+      "id": "pqc-lattice-estimator",
+      "en": "Lattice estimator tool",
+      "vi": "Công cụ ước lượng cho hệ dựa trên lưới",
+      "def_en": "The open source script that takes a dimension, modulus and noise distribution and reports the cost of every known attack under several models; parameter proposals are expected to publish its output, and a scheme whose margin depends on which model you pick is treated as under specified.",
+      "def_vi": "Đoạn mã nguồn mở nhận vào số chiều, modulo và phân phối nhiễu rồi báo chi phí của mọi tấn công đã biết theo vài mô hình khác nhau. Người ta mong mỗi đề xuất tham số đều công bố kết quả chạy công cụ này, và một sơ đồ mà biên an toàn phụ thuộc vào việc bạn chọn mô hình nào thì bị coi là chưa đặc tả rõ.",
+      "say": "Publish the estimator output alongside the parameters, or reviewers will run it for you.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "tooling"
+      ]
+    },
+    {
+      "id": "pqc-quantum-sieving-memory",
+      "en": "Memory cost of quantum lattice sieving",
+      "vi": "Chi phí bộ nhớ của phép sàng lưới lượng tử",
+      "def_en": "The reason quantum speedups against lattices look smaller than expected: sieving needs exponentially many stored vectors with random access, and a quantum machine gains at most a modest factor on the search while inheriting the same memory wall; models that charge for memory access give almost no quantum advantage at all.",
+      "def_vi": "Lý do khiến mức tăng tốc lượng tử đối với hệ dựa trên lưới trông nhỏ hơn dự kiến. Phép sàng cần lưu số vectơ theo hàm mũ và truy cập ngẫu nhiên vào chúng, còn máy lượng tử chỉ được lợi một hệ số khiêm tốn ở phần tìm kiếm trong khi vẫn vướng đúng bức tường bộ nhớ đó. Những mô hình có tính phí truy cập bộ nhớ cho thấy gần như không còn lợi thế lượng tử nào.",
+      "say": "Sieving is bound by memory, and quantum hardware does nothing about memory.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "quantum-threat"
+      ]
+    },
+    {
+      "id": "pqc-sparse-secret-mitm",
+      "en": "Meet in the middle attack on a sparse secret",
+      "vi": "Tấn công gặp nhau ở giữa với bí mật thưa",
+      "def_en": "Splitting a secret that has few nonzero entries into two halves and matching candidates from each side, which trades memory for time; it is the reason schemes that use very sparse secrets for speed must count their security against this attack rather than against reduction alone.",
+      "def_vi": "Cách chia một bí mật có ít phần tử khác không thành hai nửa rồi ghép các ứng viên từ hai phía với nhau, tức là đánh đổi bộ nhớ lấy thời gian. Đây là lý do các sơ đồ dùng bí mật rất thưa để chạy nhanh phải tính độ an ninh của mình theo tấn công này chứ không chỉ theo phép rút gọn cơ sở.",
+      "say": "Sparse secrets make everything faster and open a second attack path the parameters must cover.",
+      "tags": [
+        "pqc",
+        "lattice",
+        "cryptanalysis"
+      ]
+    },
+    {
+      "id": "pqc-qrom",
+      "en": "Quantum accessible random oracle model",
+      "vi": "Mô hình tiên tri ngẫu nhiên truy vấn được bằng lượng tử",
+      "def_en": "A proof setting in which the adversary may query the idealised hash function in superposition, which invalidates classical proof techniques such as rewinding and recording queries; standardised transforms were reproved in this model, usually at the cost of a looser bound that parameter choices must absorb.",
+      "def_vi": "Khung chứng minh trong đó đối phương được truy vấn hàm băm lý tưởng ở dạng chồng chập, điều này làm hỏng các kỹ thuật chứng minh cổ điển như tua lại hoặc ghi nhật ký truy vấn. Các phép biến đổi đã chuẩn hoá được chứng minh lại trong mô hình này, thường phải chịu cận lỏng hơn và việc chọn tham số phải gánh phần chênh đó.",
+      "say": "A proof that only holds against classical queries is not a post quantum proof.",
+      "tags": [
+        "pqc",
+        "security-proof"
+      ]
+    },
+    {
+      "id": "pqc-remote-login-negotiation",
+      "en": "Post quantum negotiation in a remote login protocol",
+      "vi": "Thoả thuận hậu lượng tử trong giao thức đăng nhập từ xa",
+      "def_en": "The addition of hybrid key agreement to secure shell, deployed first because sessions are long lived, traffic is highly sensitive and both ends are usually managed by the same operator; server authentication stayed classical for much longer than the key exchange did.",
+      "def_vi": "Việc thêm thoả thuận khoá lai vào giao thức vỏ bảo mật, được triển khai sớm vì phiên làm việc kéo dài, lưu lượng rất nhạy cảm và hai đầu thường do cùng một đơn vị quản lý. Phần xác thực máy chủ vẫn dùng cổ điển lâu hơn hẳn so với phần trao đổi khoá.",
+      "say": "Administrative sessions were migrated first because the operator controls both ends.",
+      "tags": [
+        "pqc",
+        "migration",
+        "protocol"
+      ]
+    },
+    {
+      "id": "pqc-tunnel-intermediate-exchange",
+      "en": "Intermediate exchange in a tunnel negotiation",
+      "vi": "Trao đổi trung gian khi thiết lập đường hầm",
+      "def_en": "The mechanism added to internet key exchange that lets peers transfer a large post quantum key across several protected messages instead of one oversized datagram, which is how tunnel protocols avoid fragmentation without changing their transport.",
+      "def_vi": "Cơ chế thêm vào giao thức trao đổi khoá liên mạng, cho phép hai đầu chuyển một khoá hậu lượng tử lớn qua nhiều thông điệp đã được bảo vệ thay vì một gói dữ liệu quá khổ. Đây là cách các giao thức đường hầm tránh phân mảnh mà không phải đổi tầng vận chuyển.",
+      "say": "Splitting the key across several protected messages is how tunnels dodged the fragmentation problem.",
+      "tags": [
+        "pqc",
+        "migration",
+        "protocol"
+      ]
+    },
+    {
+      "id": "pqc-psk-interim",
+      "en": "Pre shared key as an interim defence",
+      "vi": "Khoá chia sẻ trước như biện pháp tạm thời",
+      "def_en": "Mixing a manually distributed symmetric secret into the session key derivation, which makes recorded traffic useless to a future quantum attacker without needing any new algorithm; it only works where the number of peer pairs is small enough for manual distribution to be manageable.",
+      "def_vi": "Cách trộn một bí mật đối xứng phân phát thủ công vào phần dẫn xuất khoá phiên, khiến lưu lượng bị ghi lại trở nên vô dụng với kẻ tấn công lượng tử tương lai mà không cần thuật toán mới nào. Cách này chỉ dùng được khi số cặp đối tác đủ nhỏ để việc phân phát thủ công còn quản được.",
+      "say": "For a handful of fixed links, a manually shared secret solves the recording problem today.",
+      "tags": [
+        "pqc",
+        "migration",
+        "interim"
+      ]
+    },
+    {
+      "id": "pqc-constrained-device",
+      "en": "Post quantum on a constrained device",
+      "vi": "Hậu lượng tử trên thiết bị hạn chế tài nguyên",
+      "def_en": "The problem that key generation and signing need working memory measured in tens of kilobytes, more than many microcontrollers have free; the practical answers are streaming implementations that recompute rather than store, or a design in which the small device only verifies and never signs.",
+      "def_vi": "Vấn đề ở chỗ việc sinh khoá và ký cần bộ nhớ làm việc cỡ hàng chục kilôbai, nhiều hơn phần trống mà nhiều vi điều khiển có. Câu trả lời thực tế là các cài đặt chạy theo dòng, tính lại thay vì lưu, hoặc một thiết kế trong đó thiết bị nhỏ chỉ xác minh chứ không bao giờ ký.",
+      "say": "On a small microcontroller the binding constraint is working memory, not processor speed.",
+      "tags": [
+        "pqc",
+        "deployment",
+        "embedded"
+      ]
+    },
+    {
+      "id": "pqc-satellite-handshake",
+      "en": "Post quantum handshake over a long delay link",
+      "vi": "Bắt tay hậu lượng tử trên tuyến trễ lớn",
+      "def_en": "The case where an extra round trip costs hundreds of milliseconds, so the byte growth of a hybrid exchange turns into a user visible delay; mitigation means session resumption, caching the server key material and avoiding any design that needs a second flight.",
+      "def_vi": "Trường hợp mà một lượt khứ hồi thêm vào tốn hàng trăm mili giây, nên phần phình bai của trao đổi lai biến thành độ trễ người dùng nhìn thấy được. Cách giảm nhẹ là nối lại phiên, lưu đệm phần khoá của máy chủ và tránh mọi thiết kế cần tới loạt gói thứ hai.",
+      "say": "On a long delay link the extra round trip matters far more than the extra kilobyte.",
+      "tags": [
+        "pqc",
+        "deployment",
+        "satellite"
+      ]
+    },
+    {
+      "id": "pqc-subscriber-identity-concealment",
+      "en": "Subscriber identifier concealment under a quantum threat",
+      "vi": "Che giấu định danh thuê bao trước mối đe doạ lượng tử",
+      "def_en": "The mobile network mechanism that encrypts the permanent subscriber identity to the operator public key before it crosses the radio interface; because a recorded concealed identifier can be decrypted later, this is one of the few mobile procedures that already needs a post quantum key today.",
+      "def_vi": "Cơ chế của mạng di động mã hoá định danh thuê bao cố định bằng khoá công khai của nhà mạng trước khi nó đi qua giao diện vô tuyến. Vì một định danh đã che giấu bị ghi lại có thể giải mã về sau, đây là một trong số ít thủ tục di động cần khoá hậu lượng tử ngay từ bây giờ.",
+      "say": "A concealed identifier captured today is an identified subscriber tomorrow.",
+      "tags": [
+        "pqc",
+        "migration",
+        "mobile"
+      ]
+    },
+    {
+      "id": "pqc-code-signing-migration",
+      "en": "Software update signing migration",
+      "vi": "Chuyển đổi chữ ký cho bản cập nhật phần mềm",
+      "def_en": "Moving an update channel to post quantum signatures, which requires that every deployed verifier already accepts the new algorithm before any publisher starts using it; the ordering is fixed and the transition window equals the time to reach the slowest updating device in the fleet.",
+      "def_vi": "Việc chuyển kênh cập nhật sang chữ ký hậu lượng tử, đòi hỏi mọi bên xác minh đã triển khai phải chấp nhận thuật toán mới trước khi bất kỳ bên phát hành nào bắt đầu dùng. Thứ tự này là bắt buộc và khoảng thời gian chuyển tiếp bằng đúng thời gian để chạm tới thiết bị cập nhật chậm nhất trong đội máy.",
+      "say": "Every verifier must accept the new algorithm long before any publisher starts signing that way.",
+      "tags": [
+        "pqc",
+        "migration",
+        "signature"
+      ]
+    },
+    {
+      "id": "pqc-long-term-archive",
+      "en": "Long term archival signature",
+      "vi": "Chữ ký cho lưu trữ dài hạn",
+      "def_en": "The practice of periodically re signing archived documents with the current strongest algorithm and a trusted timestamp, so a proof of integrity survives even when the original algorithm is retired; without it, breaking one signature scheme invalidates decades of records at once.",
+      "def_vi": "Cách làm định kỳ ký lại các tài liệu lưu trữ bằng thuật toán mạnh nhất hiện có kèm một dấu thời gian tin cậy, để bằng chứng toàn vẹn còn giá trị ngay cả khi thuật toán ban đầu bị loại bỏ. Không làm vậy thì việc phá được một sơ đồ chữ ký sẽ vô hiệu hoá hàng chục năm hồ sơ cùng lúc.",
+      "say": "Archives stay valid only if somebody keeps re signing them with the algorithm of the day.",
+      "tags": [
+        "pqc",
+        "migration",
+        "archive"
+      ]
+    }
+  ]
+}
