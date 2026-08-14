@@ -359,11 +359,19 @@ if (!Number.isInteger(count) || count < 1) die('--n phai la so nguyen duong');
 
 if (!DRY && (!TOKEN || !CHAT_ID)) die('thieu TELEGRAM_TOKEN hoac TELEGRAM_CHAT_ID trong bien moi truong');
 
+// The log is append-only across months, so every run stamps itself. Without
+// this there is no way to tell a cron run from someone testing by hand.
+function stamp() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+
 const deckIds = resolveDecks(deckSpec);
 const state = loadState();
 const chosen = pick(deckIds, count, state.recent ?? []);
 
-console.log(`gui ${chosen.length} cau tu ${deckIds.length} bo${slotName ? ` (khung "${slotName}")` : ''}`);
+console.log(`\n[${stamp()}] gui ${chosen.length} cau tu ${deckIds.length} bo${slotName ? ` (khung "${slotName}")` : ''}`);
 
 let sent = 0;
 for (const [i, q] of chosen.entries()) {
@@ -383,5 +391,5 @@ if (AVOID_LAST > 0) {
   saveState(state);
 }
 
-console.log(`xong: ${sent}/${chosen.length}`);
+console.log(`[${stamp()}] xong: ${sent}/${chosen.length}`);
 process.exit(sent === chosen.length ? 0 : 1);
