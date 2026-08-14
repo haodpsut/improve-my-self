@@ -145,8 +145,13 @@ node tools/tele-quiz.mjs --decks q-pqc,q-qkd --n 3 # bỏ qua config
 ```
 
 Khung giờ nằm trong `tools/tele-quiz.config.json`, mỗi khung là một danh sách bộ và một số câu.
-`"decks": ["*"]` là lấy toàn kho. Hai biến môi trường bắt buộc: `TELEGRAM_TOKEN` lấy từ @BotFather,
-và `TELEGRAM_CHAT_ID` là id của bạn. Lấy id bằng cách nhắn cho bot một câu bất kỳ rồi gọi:
+`"decks": ["*"]` là lấy toàn kho. Muốn chỉnh ngay trên máy chủ mà không đánh nhau với `git pull`
+thì chép nó thành `tools/tele-quiz.config.local.json`, tệp này không theo git và được ưu tiên hơn.
+Khi nó tồn tại, script in ra một dòng báo đang dùng nó, vì một tệp riêng bị bỏ quên mà lặng lẽ đè
+lên tệp chính là loại lỗi tìm rất lâu.
+
+Hai biến môi trường bắt buộc: `TELEGRAM_TOKEN` lấy từ @BotFather, và `TELEGRAM_CHAT_ID` là id của
+bạn. Lấy id bằng cách nhắn cho bot một câu bất kỳ rồi gọi:
 
 ```bash
 curl -s "https://api.telegram.org/bot$TELEGRAM_TOKEN/getUpdates" | grep -o '"chat":{"id":[-0-9]*'
@@ -156,10 +161,14 @@ Token đặt trong tệp `~/.tele-quiz.env` với quyền `chmod 600`, **không 
 Crontab trên VPS:
 
 ```cron
-0  8 * * * . $HOME/.tele-quiz.env; cd /srv/improve-my-self && node tools/tele-quiz.mjs --slot sang  >> /var/log/tele-quiz.log 2>&1
-0 15 * * * . $HOME/.tele-quiz.env; cd /srv/improve-my-self && node tools/tele-quiz.mjs --slot chieu >> /var/log/tele-quiz.log 2>&1
-0 21 * * * . $HOME/.tele-quiz.env; cd /srv/improve-my-self && node tools/tele-quiz.mjs --slot toi   >> /var/log/tele-quiz.log 2>&1
+0 7-10  * * * . $HOME/.tele-quiz.env; cd $HOME/improve-my-self && node tools/tele-quiz.mjs --slot sang  >> $HOME/logs/tele-quiz.log 2>&1
+0 11-14 * * * . $HOME/.tele-quiz.env; cd $HOME/improve-my-self && node tools/tele-quiz.mjs --slot trua  >> $HOME/logs/tele-quiz.log 2>&1
+0 15-18 * * * . $HOME/.tele-quiz.env; cd $HOME/improve-my-self && node tools/tele-quiz.mjs --slot chieu >> $HOME/logs/tele-quiz.log 2>&1
+0 19-22 * * * . $HOME/.tele-quiz.env; cd $HOME/improve-my-self && node tools/tele-quiz.mjs --slot toi   >> $HOME/logs/tele-quiz.log 2>&1
 ```
+
+Mỗi giờ một lượt hai câu, từ 7h tới 22h, và chủ đề trôi theo buổi thay vì bốc ngẫu nhiên cả kho.
+Không đặt lịch ban đêm: một thông báo lúc 3h sáng không dạy được gì, chỉ làm bạn tắt tiếng con bot.
 
 Cần Node 18 trở lên vì script dùng `fetch` có sẵn. Không có phụ thuộc nào, không cần `npm install`.
 Chạy trong Docker thì mount thư mục kho vào ảnh `node:22-alpine` rồi để cron của máy chủ gọi

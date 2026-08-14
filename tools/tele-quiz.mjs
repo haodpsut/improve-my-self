@@ -13,6 +13,8 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CONFIG_FILE = path.join(ROOT, 'tools', 'tele-quiz.config.json');
+// Tweaking slots on the server would otherwise collide with every git pull.
+const LOCAL_CONFIG_FILE = path.join(ROOT, 'tools', 'tele-quiz.config.local.json');
 const STATE_FILE = path.join(ROOT, 'tools', '.tele-quiz-state.json');
 
 // Telegram poll limits, Bot API.
@@ -49,7 +51,11 @@ function die(msg) {
 
 // ------------------------------------------------------------------- config
 
-const config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
+const usingLocal = fs.existsSync(LOCAL_CONFIG_FILE);
+const config = JSON.parse(fs.readFileSync(usingLocal ? LOCAL_CONFIG_FILE : CONFIG_FILE, 'utf8'));
+// Say so out loud: a forgotten local file silently overriding the tracked one
+// is the kind of thing you chase for an hour.
+if (usingLocal) console.log('dung cau hinh rieng: tools/tele-quiz.config.local.json');
 const GAP_MS = config.gapMs ?? 1200;
 const BILINGUAL = config.bilingual !== false;
 const FULL_EXPLANATION = config.fullExplanation !== false;
