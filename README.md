@@ -92,7 +92,7 @@ luôn, không phải vào sửa lại.
 
 Chặng nào đặt số 0 thì bị bỏ khỏi chuỗi.
 
-## Hai cổng kiểm, chạy trước khi đẩy lên
+## Ba cổng kiểm, chạy trước khi đẩy lên
 
 ```bash
 npm run qa        # chạy cả hai, hoặc chạy riêng từng cái bên dưới
@@ -113,9 +113,57 @@ gì. Nó chặn khi:
   chọn là lời giải thích thành sai.
 - Hai thẻ cùng mặt trước, hai câu cùng đề bài, hai lựa chọn cùng nội dung, lựa chọn kết thúc lửng.
 
-Cả hai cổng trả mã thoát khác 0 khi có lỗi. Cả hai đều đã được thử ngược bằng lỗi gieo sẵn: gieo
-sáu loại lỗi vào một bản sao thì `qa.mjs` bắt đủ sáu. Một cổng báo sạch mà chưa từng bị thử ngược
-thì không chứng minh được điều gì.
+**`node tools/tele-quiz.mjs --audit` bắt lỗi đóng gói tin nhắn Telegram**, xem mục dưới.
+
+Mọi cổng trả mã thoát khác 0 khi có lỗi, và đều đã được thử ngược bằng lỗi gieo sẵn: gieo sáu loại
+lỗi vào một bản sao thì `qa.mjs` bắt đủ sáu, gieo năm loại thì `--audit` bắt đủ năm. Một cổng báo
+sạch mà chưa từng bị thử ngược thì không chứng minh được điều gì.
+
+## Bắn câu hỏi về Telegram
+
+`tools/tele-quiz.mjs` bốc vài câu từ kho rồi gửi vào Telegram dưới dạng **quiz poll**: bấm một cái
+là hiện đúng sai kèm giải thích. Phần chấm nằm ở phía Telegram, nên script chỉ gửi đi và **không
+nhận gì cả**: không webhook, không dịch vụ chạy nền, không cổng nào mở ra ngoài. Chạy xong là thoát.
+
+Đổi lại, nó **không nhớ gì**. Đây là kênh gieo hạt xen kẽ trong ngày, còn lịch ôn Leitner vẫn nằm ở
+trang web. Thứ duy nhất được ghi lại là danh sách id vừa gửi, để không bốc trùng ngay, trong
+`tools/.tele-quiz-state.json` và không lên git.
+
+Giới hạn của Telegram là 300 ký tự cho đề bài, 100 cho mỗi lựa chọn, 200 cho giải thích. **3456 trên
+4491 câu lọt thẳng vào khuôn poll**, nút thắt duy nhất là lựa chọn quá dài. Số còn lại được gửi bằng
+tin nhắn thường với đáp án giấu trong spoiler, nên không câu nào bị bỏ. Tỉ lệ lọt lệch mạnh theo bộ:
+`en-phrases` và `ru-phrases` lọt hết, còn `qkd` chỉ 17 trên 172 vì mỗi phương án là một mệnh đề dài.
+Chạy `--list` để xem bảng đầy đủ. Giải thích dài quá 200 ký tự thì poll hiện bản cắt gọn, rồi một
+tin nhắn spoiler ngay sau đó chứa bản đầy đủ.
+
+```bash
+node tools/tele-quiz.mjs --list                    # bộ nào lọt bao nhiêu câu
+node tools/tele-quiz.mjs --slot sang --dry         # in payload, không gửi
+node tools/tele-quiz.mjs --probe                   # gửi một poll thử
+node tools/tele-quiz.mjs --slot sang               # gửi thật
+node tools/tele-quiz.mjs --decks q-pqc,q-qkd --n 3 # bỏ qua config
+```
+
+Khung giờ nằm trong `tools/tele-quiz.config.json`, mỗi khung là một danh sách bộ và một số câu.
+`"decks": ["*"]` là lấy toàn kho. Hai biến môi trường bắt buộc: `TELEGRAM_TOKEN` lấy từ @BotFather,
+và `TELEGRAM_CHAT_ID` là id của bạn. Lấy id bằng cách nhắn cho bot một câu bất kỳ rồi gọi:
+
+```bash
+curl -s "https://api.telegram.org/bot$TELEGRAM_TOKEN/getUpdates" | grep -o '"chat":{"id":[-0-9]*'
+```
+
+Token đặt trong tệp `~/.tele-quiz.env` với quyền `chmod 600`, **không bao giờ nằm trong kho mã**.
+Crontab trên VPS:
+
+```cron
+0  8 * * * . $HOME/.tele-quiz.env; cd /srv/improve-my-self && node tools/tele-quiz.mjs --slot sang  >> /var/log/tele-quiz.log 2>&1
+0 15 * * * . $HOME/.tele-quiz.env; cd /srv/improve-my-self && node tools/tele-quiz.mjs --slot chieu >> /var/log/tele-quiz.log 2>&1
+0 21 * * * . $HOME/.tele-quiz.env; cd /srv/improve-my-self && node tools/tele-quiz.mjs --slot toi   >> /var/log/tele-quiz.log 2>&1
+```
+
+Cần Node 18 trở lên vì script dùng `fetch` có sẵn. Không có phụ thuộc nào, không cần `npm install`.
+Chạy trong Docker thì mount thư mục kho vào ảnh `node:22-alpine` rồi để cron của máy chủ gọi
+`docker run --rm`, không cần container chạy thường trực.
 
 ## Cấu trúc dữ liệu
 
